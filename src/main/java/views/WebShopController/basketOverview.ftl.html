@@ -1,0 +1,24 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">    	
+
+	<h1>Basket</h1>
+	
+	<table class="table" table-bordered>
+		<#list basketProducts as product>
+		<tr>
+			<td><a href=/productDetail/${product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${product.imageURL} width="150"></img></a></td>
+			<td>${product.name}</td>
+			<td>${product.descriptionOverview}</td>
+			<td>${product.price}</td>
+		</tr>
+		</#list>
+	</table>
+	
+	<h3>Total price: ${totalPrice}$</h3>
+	
+	<form action="/checkout" method="post">
+      	<input type="hidden" id="basketId" name="basketId" value=${basketId}>
+      	<button class="btn"id="submit" name="submit" type="submit">Proceed to Checkout</button>
+    </form>
+
+</@layout.myLayout>

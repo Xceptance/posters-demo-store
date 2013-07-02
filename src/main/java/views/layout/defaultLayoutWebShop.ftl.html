@@ -1,0 +1,42 @@
+<#macro myLayout title="Layout example">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>${title}</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    	<style type="text/css">
+      		body {
+        		padding-top: 60px;
+        		padding-bottom: 40px;
+        		padding-left: 100px;
+        		padding-right: 100px;
+      		}
+      		.right-fix {
+      			position:fixed;
+      		}
+    	</style>
+    </head>
+    <body>
+		<div class="container-fluid">
+			<#include "headerWebShop.ftl.html"/>
+			<div class="row">
+				<div class="span10-fluid">
+					<p>
+					<#nested/>
+					</p>
+				</div>
+				<div class="span2-fluid pull-right">
+					<div class="right-fix">
+						<p><#include "basket.ftl.html"/></p>
+						<p><#include "registrationMainPage.ftl.html"/></p>
+					</div>
+				</div>
+			</div>
+			<#include "footerWebShop.ftl.html"/>
+		</div>
+		<script src="/assets/js/jquery-1.9.1.min.js"></script>
+    	<script src="/assets/js/bootstrap.min.js"></script>
+    </body>
+</html>
+</#macro>

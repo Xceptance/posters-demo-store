@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories>
+	<category>
+		<nameCategory>Flora and Fauna</nameCategory>
+		<subCategory>
+			<nameSubCategory>Animals</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Flowers</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Trees</nameSubCategory>
+		</subCategory>
+	</category>
+	<category>
+		<nameCategory>Food</nameCategory>
+		<subCategory>
+			<nameSubCategory>Cold Cuts</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Grillables</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Sweets</nameSubCategory>
+		</subCategory>
+	</category>
+	<category>
+		<nameCategory>Means of Transportation</nameCategory>
+		<subCategory>
+			<nameSubCategory>Airplanes</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Classic Cars</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Railways</nameSubCategory>
+		</subCategory>
+	</category>
+	<category>
+		<nameCategory>Panoramas</nameCategory>
+		<subCategory>
+			<nameSubCategory>Buildings</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Fireworks</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>Landscapes</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory>XXL</nameSubCategory>
+		</subCategory>
+	</category>
+</categories>

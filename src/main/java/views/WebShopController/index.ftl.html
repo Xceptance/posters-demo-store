@@ -1,0 +1,32 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">    	
+<div class="row">
+	<div class="span6 offset2">
+		<h4>Take a look at our new panorama posters!</h4>
+	</div>
+</div>
+<div class="row">
+	<div class="span12">
+		<div id="myCarousel" class="carousel slide">
+			<!-- Carousel slides -->
+			<div class="carousel-inner">
+				<#list carousel as caro>
+					<#if (caro_index == 0)>
+						<div class="active item">	
+      				<#else>
+      					<div class="item">
+      				</#if>
+						<img src=${caro.imageURL}>
+						<div class="carousel-caption">
+							<a href=/productDetail/${caro.url}>${caro.name}</a>
+						</div>
+					</div>
+				</#list>
+			</div>
+			<!-- Carousel nav -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
+			<a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
+		</div>
+	</div>
+</div>
+</@layout.myLayout>

@@ -1,0 +1,25 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">    	
+      	<#list products as pro>
+      	<#if (pro_index + 3) % 3 ==0>
+      	<div class="row">
+      		<ul class="thumbnails">
+      	</#if>
+      			<li class="span4">
+      				<div class="thumbnail">
+      					<a href=/productDetail/${pro.url}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
+      					<h3>${pro.name}</h3>
+      					<p>${pro.descriptionOverview}</p>
+      					<p>$ ${pro.price} </p>
+      				</div>
+      			</li>
+      	<#if (pro_index + 1) % 3 ==0>
+      		</ul>
+      	</div>
+      	</#if>
+      	<#if !pro_has_next && (pro_index + 1) % 3 !=0>
+      	    </ul>
+      	</div>
+      	</#if>
+      	</#list>
+</@layout.myLayout>
