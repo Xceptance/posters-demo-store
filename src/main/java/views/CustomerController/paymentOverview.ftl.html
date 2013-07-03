@@ -1,0 +1,33 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">    	
+
+	<h1>Payment overview</h1>
+	
+	<#list paymentOverview as payment>
+	<table class="table" table-bordered>
+		<tr>
+			<td>Name: ${payment.name}</td>
+			<td><a href="/">Change</a></td>
+		</tr>
+		<tr>
+			<td>Credit card: ${payment.number}</td>
+			<td>
+				<form action="/deletePayment" method="post">
+    				<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
+    				<button class="btn"id="submit" name="submit" type="submit">Delete</button>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>Valid to: ${payment.month} ${payment.year}</td>
+			<td></td>
+		</tr>
+	</table>
+	</#list>
+
+	
+	<div class="span2 offset6">
+		<a href="/addPaymentToCustomer">Add new credit card</a>
+	</div>
+
+</@layout.myLayout>
