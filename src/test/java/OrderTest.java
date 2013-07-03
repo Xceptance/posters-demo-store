@@ -33,5 +33,9 @@ public class OrderTest {
 			}
 		}
 	}
+	
+	public void orderProducts() {
+		
+	}
 
 }

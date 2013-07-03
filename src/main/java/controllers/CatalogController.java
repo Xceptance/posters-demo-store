@@ -16,7 +16,7 @@ public class CatalogController {
 			Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		// remember product for product detail site
 		ProductInformation.addProductDetailToMap(productUrl, data);
@@ -28,7 +28,7 @@ public class CatalogController {
 			Context context) {
 
 		final Map<String, Object> data = new HashMap<String, Object>();
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		// remember products for the given sub category
 		ProductInformation.addSubCategoryProductsToMap(subCategory, data);
 
@@ -38,7 +38,7 @@ public class CatalogController {
 	public Result topCategoryOverview(
 			@PathParam("topCategory") String topCategory, Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		// remember products for the given top category
 		ProductInformation.addTopCategoryProductsToMap(topCategory, data);
 

@@ -27,7 +27,7 @@ public class CheckoutController {
 	public Result checkout(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		String template = "";
 		Basket basket = BasketInformation.getBasketById(SessionHandling
@@ -74,7 +74,7 @@ public class CheckoutController {
 
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		// create delivery address
 
@@ -125,7 +125,7 @@ public class CheckoutController {
 			Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		BillingAddress billingAddress = new BillingAddress();
 		billingAddress.setName(name);
@@ -155,7 +155,7 @@ public class CheckoutController {
 			@Param("expirationDateYear") int year, Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		CreditCard creditCard = new CreditCard();
 
@@ -194,7 +194,7 @@ public class CheckoutController {
 		SessionHandling.setOrderId(context, -1);
 		// remove order, if a guest bought something
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		return Results.html().render(data);
 	}

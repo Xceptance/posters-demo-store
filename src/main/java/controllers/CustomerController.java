@@ -38,7 +38,7 @@ public class CustomerController {
 			// wrong email
 		}
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		CarouselInformation.getCarouselProducts(data);
 		return Results.html().render(data)
 				.template("views/WebShopController/index.ftl.html");
@@ -49,7 +49,7 @@ public class CustomerController {
 
 		SessionHandling.deleteCustomerId(context);
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		CarouselInformation.getCarouselProducts(data);
 		return Results.html().render(data)
 				.template("views/WebShopController/index.ftl.html");
@@ -58,7 +58,7 @@ public class CustomerController {
 	public Result registration(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		return Results.html().render(data);
 	}
@@ -82,7 +82,7 @@ public class CustomerController {
 		// put customer id to session
 		SessionHandling.setCustomerId(context, customer.getId());
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		return Results.html().render(data);
 	}
@@ -90,7 +90,7 @@ public class CustomerController {
 	public Result accountOverview(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		return Results.html().render(data);
 	}
 
@@ -99,7 +99,7 @@ public class CustomerController {
 
 		CustomerInformation.addOrderByCustomerToMap(context, data);
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		return Results.html().render(data);
 	}
 
@@ -108,7 +108,7 @@ public class CustomerController {
 
 		CustomerInformation.addPaymentByCustomerToMap(context, data);
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		return Results.html().render(data);
 	}
 	
@@ -117,7 +117,7 @@ public class CustomerController {
 
 		CustomerInformation.addCustomerToMap(context, data);
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		return Results.html().render(data);
 	}
 	
@@ -131,7 +131,7 @@ public class CustomerController {
 		Customer customer = CustomerInformation.getCustomerById(SessionHandling
 				.getCustomerId(context));
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		CreditCard creditCard = new CreditCard();
 
@@ -150,7 +150,7 @@ public class CustomerController {
 	public Result addPaymentToCustomer(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		
 		return Results.html().render(data);
 	}
@@ -165,7 +165,7 @@ public class CustomerController {
 		System.out.println("card name " + CreditCardInformation.getCreditCardById(cardId).getName());
 		Ebean.save(customer);
 		
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 		
 		return Results.html().render(data).template("views/info/savingComplete.ftl.html");
 	}

@@ -16,11 +16,18 @@ import util.session.SessionHandling;
 
 public class BasketController {
 
+	/**
+	 * Adds one product, given by the product id, to the basket
+	 * 
+	 * @param productId
+	 * @param context
+	 * @return
+	 */
 	public Result addToCart(@Param("productName") String productId,
 			Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		// get product by id
 		Product product = ProductInformation.getProductById(Integer
@@ -46,7 +53,7 @@ public class BasketController {
 	public Result basket(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
-		CommonInformation.setOverallData(data, context);
+		CommonInformation.setCommonData(data, context);
 
 		return Results.html().render(data)
 				.template("views/BasketController/basketOverview.ftl.html");
