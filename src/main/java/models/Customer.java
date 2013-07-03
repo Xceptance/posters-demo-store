@@ -106,4 +106,14 @@ public class Customer {
 	public void setOrder(List<Order> order) {
 		this.order = order;
 	}
+
+	public void addCreditCard(CreditCard creditCard) {
+		this.creditCard.add(creditCard);
+	}
+	
+	public void deleteCreditCard(CreditCard creditCard) {
+		this.creditCard.remove(creditCard);
+//		int index = this.creditCard.indexOf(creditCard);
+//		this.creditCard.remove(index);
+	}
 }
