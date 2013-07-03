@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +15,7 @@ public class Order {
 	@Id
 	private int id;
 	
-	private Date date;
+	private String date;
 	
 	@OneToOne
 	private Basket basket;
@@ -113,11 +111,11 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
