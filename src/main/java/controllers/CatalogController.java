@@ -7,6 +7,7 @@ import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.PathParam;
+import util.database.CategoryInformation;
 import util.database.CommonInformation;
 import util.database.ProductInformation;
 
@@ -43,9 +44,10 @@ public class CatalogController {
 
 		final Map<String, Object> data = new HashMap<String, Object>();
 		CommonInformation.setCommonData(data, context);
-		// put products for the given sub category to data map
+		// add products for the given sub category to data map
 		ProductInformation.addSubCategoryProductsToMap(subCategory, data);
-
+		// add sub category to data map
+		CategoryInformation.addSubCategoryToMap(subCategory, data);
 		return Results.html().render(data);
 	}
 
@@ -60,9 +62,11 @@ public class CatalogController {
 			@PathParam("topCategory") String topCategory, Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 		CommonInformation.setCommonData(data, context);
-		// put products for the given top category to data map
+		// add products for the given top category to data map
 		ProductInformation.addTopCategoryProductsToMap(topCategory, data);
-
+		// add top category to data map
+		CategoryInformation.addTopCategoryToMap(topCategory, data);
+		// return product overview page
 		return Results.html()
 				.template("views/CatalogController/productOverview.ftl.html")
 				.render(data);

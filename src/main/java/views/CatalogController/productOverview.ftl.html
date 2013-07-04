@@ -1,5 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
+      	<h1>${category.name}</h1>
       	<#list products as pro>
       	<#if (pro_index + 3) % 3 ==0>
       	<div class="row">
