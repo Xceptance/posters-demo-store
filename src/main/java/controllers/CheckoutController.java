@@ -219,6 +219,8 @@ public class CheckoutController {
 				.getOrderId(context));
 		// set credit card to order
 		order.setCreditCard(creditCard);
+		// add order to data map
+		OrderInformation.addOrderToMap(order, data);
 		// return page to get an overview of the checkout
 		String template = "views/CheckoutController/checkoutOverview.ftl.html";
 		// update order

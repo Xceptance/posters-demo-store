@@ -1,8 +1,96 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
-<form action="/checkoutCompleted" method="post">
-    <button class="btn"id="submit" name="submit" type="submit">Order with costs</button>
-</form>
+	<h1>Order overview</h1>
+	<h3>Products</h3>
+	<table class="table" table-bordered>
+		<#list order.basket.productIds as product>
+		<tr>
+			<td><a href=/productDetail/${product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${product.imageURL} width="150"></img></a></td>
+			<td>${product.name}</td>
+			<td>${product.descriptionOverview}</td>
+			<td>${product.price}</td>
+		</tr>
+		</#list>
+	</table>
+	<div class="row">
+		<div class="span4 offset8">
+			<h3>Total costs: ${order.totalCosts}$</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			<h3>Delivery address</h3>
+		</div>
+		<div class="span4 offset1">
+			<h3>Billing address</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			${order.deliveryAddress.name}
+		</div>
+		<div class="span4 offset1">
+			${order.billingAddress.name}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			${order.deliveryAddress.addressline1}
+		</div>
+		<div class="span4 offset1">
+			${order.billingAddress.addressline1}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			${order.deliveryAddress.addressline2}
+		</div>
+		<div class="span4 offset1">
+			${order.billingAddress.addressline2}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			${order.deliveryAddress.zip} ${order.deliveryAddress.city}
+		</div>
+		<div class="span4 offset1">
+			${order.billingAddress.zip} ${order.billingAddress.city}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			${order.deliveryAddress.state}
+		</div>
+		<div class="span4 offset1">
+			${order.billingAddress.state}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			${order.deliveryAddress.country}
+		</div>
+		<div class="span4 offset1">
+			${order.billingAddress.country}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			<h3>Payment information</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			<p>Name:   ${order.creditCard.name}</p>
+			<p>Number: ${order.creditCard.number}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4 offset8">
+			<form action="/checkoutCompleted" method="post">
+    			<button class="btn"id="submit" name="submit" type="submit">Order with costs</button>
+			</form>
+		</div>
+	</div>
 
 </@layout.myLayout>
