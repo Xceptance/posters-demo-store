@@ -183,7 +183,6 @@ public class CheckoutController
         String template = "views/CheckoutController/paymentMethod.ftl.html";
         // update order
         Ebean.save(order);
-
         return Results.html().render(data).template(template);
     }
 
@@ -215,13 +214,16 @@ public class CheckoutController
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set credit card to order
         order.setCreditCard(creditCard);
+        // set tax to order
+        order.setTax(0.06);
+        // calculate total costs
+        order.calculateTotalCosts();
         // add order to data map
         OrderInformation.addOrderToMap(order, data);
         // return page to get an overview of the checkout
         String template = "views/CheckoutController/checkoutOverview.ftl.html";
         // update order
         Ebean.save(order);
-
         return Results.html().render(data).template(template);
     }
 

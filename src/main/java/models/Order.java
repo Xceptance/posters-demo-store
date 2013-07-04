@@ -138,4 +138,9 @@ public class Order
         this.date = date;
     }
 
+    public void calculateTotalCosts()
+    {
+        this.totalCosts = this.basket.getTotalPrice() * this.tax + this.basket.getTotalPrice();
+    }
+
 }
