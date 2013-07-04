@@ -17,7 +17,7 @@ public class Order {
 	
 	private String date;
 	
-	@OneToOne
+	@OneToOne (cascade = CascadeType.ALL)
 	private Basket basket;
 	
 	@ManyToOne (cascade = CascadeType.ALL)
