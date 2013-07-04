@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +32,9 @@ public class Customer {
 	private List<DeliveryAddress> deliveryAddress;
 	
 	@OneToMany (cascade = CascadeType.ALL)
+	private List<BillingAddress> billingAddress;
+	
+	@OneToMany (cascade = CascadeType.ALL)
 	private List<CreditCard> creditCard;
 	
 	@OneToMany (cascade = CascadeType.ALL)
@@ -39,6 +43,7 @@ public class Customer {
 	
 	public Customer () {
 		this.deliveryAddress = new ArrayList<DeliveryAddress>();
+		this.billingAddress = new ArrayList<BillingAddress>();
 		this.creditCard = new ArrayList<CreditCard>();
 		this.order = new ArrayList<Order>();
 	}
@@ -81,6 +86,14 @@ public class Customer {
 
 	public void setDeliveryAddress(List<DeliveryAddress> deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+
+	public List<BillingAddress> getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(List<BillingAddress> billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
 	public int getId() {

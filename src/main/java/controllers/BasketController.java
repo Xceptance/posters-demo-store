@@ -17,11 +17,12 @@ import util.session.SessionHandling;
 public class BasketController {
 
 	/**
-	 * Adds one product, given by the product id, to the basket
+	 * Adds one product, given by the product id, to the basket.
+	 * The basket will be chosen by the session.
 	 * 
-	 * @param productId
+	 * @param productId The ID of the product.
 	 * @param context
-	 * @return
+	 * @return The basket overview page.
 	 */
 	public Result addToCart(@Param("productName") String productId,
 			Context context) {
@@ -37,24 +38,26 @@ public class BasketController {
 				.getBasketId(context));
 		// put basket id to session
 		SessionHandling.setBasketId(context, basket.getId());
-
+		// add product to basket
 		BasketInformation.addProductToBasket(basket, product);
-
-		// System.out.println("---- Count " + basket.getProductCount().keySet()
-		// + " ----");
-		// System.out.println("---- Count of product " +
-		// basket.getProductCount().values() + " ----");
+		// put basket to data map
 		BasketInformation.addBasketDetailToMap(basket, data);
-
+		// return basket overview page
 		return Results.html().render(data)
 				.template("views/BasketController/basketOverview.ftl.html");
 	}
 
+	/**
+	 * Returns the basket overview page.
+	 * 
+	 * @param context
+	 * @return The basket overview page.
+	 */
 	public Result basket(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
 		CommonInformation.setCommonData(data, context);
-
+		// return basket overview page
 		return Results.html().render(data)
 				.template("views/BasketController/basketOverview.ftl.html");
 	}

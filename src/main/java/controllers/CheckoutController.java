@@ -24,16 +24,25 @@ import com.avaje.ebean.Ebean;
 
 public class CheckoutController {
 
+	/**
+	 * Starts the checkout. Returns an error page, if the basket is empty,
+	 * otherwise the page to enter a delivery address.
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public Result checkout(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
 		CommonInformation.setCommonData(data, context);
 
 		String template = "";
+		// get basket by session id
 		Basket basket = BasketInformation.getBasketById(SessionHandling
 				.getBasketId(context));
 		// check, if the basket is empty
 		if (basket.getProductIds().size() == 0) {
+			// return error page
 			template = "views/error/emptyBasket.ftl.html";
 		}
 		// start checkout, if the basket is not empty
@@ -44,26 +53,40 @@ public class CheckoutController {
 			SessionHandling.setOrderId(context, order.getId());
 			// set basket to order
 			order.setBasket(basket);
-			// set delivery address information to data
-
+			// return page to enter delivery address
+			template = "views/CheckoutController/deliveryAddress.ftl.html";
 			// customer is logged
 			if (SessionHandling.isCustomerLogged(context)) {
+				// get customer by session id
 				Customer customer = CustomerInformation
 						.getCustomerById(SessionHandling.getCustomerId(context));
+				// set customer to order
 				order.setCustomer(customer);
-				template = "views/CheckoutController/deliveryAddress.ftl.html";
+				// put address information of customer to data map
+				CustomerInformation.addAddressOfCustomerToMap(context, data);
 			}
-			// guest
-			else {
-				template = "views/CheckoutController/deliveryAddress.ftl.html";
-			}
-			System.out.println("Order-ID: " + order.getId());
+			// save order
 			Ebean.save(order);
 		}
-
 		return Results.html().render(data).template(template);
 	}
 
+	/**
+	 * Creates a new delivery address. Returns the page to enter payment
+	 * information, if the billing address is equal to the delivery address,
+	 * otherwise the page to enter a billing address.
+	 * 
+	 * @param name
+	 * @param addressLine1
+	 * @param addressLine2
+	 * @param city
+	 * @param state
+	 * @param zip
+	 * @param country
+	 * @param billingEqualDelivery
+	 * @param context
+	 * @return
+	 */
 	public Result deliveryAddressCompleted(@Param("fullName") String name,
 			@Param("addressLine1") String addressLine1,
 			@Param("addressLine2") String addressLine2,
@@ -77,7 +100,6 @@ public class CheckoutController {
 		CommonInformation.setCommonData(data, context);
 
 		// create delivery address
-
 		DeliveryAddress deliveryAddress = new DeliveryAddress();
 		deliveryAddress.setName(name);
 		deliveryAddress.setAddressline1(addressLine1);
@@ -86,13 +108,14 @@ public class CheckoutController {
 		deliveryAddress.setState(state);
 		deliveryAddress.setZip(Integer.parseInt(zip));
 		deliveryAddress.setCountry(country);
-
+		// get order by session id
 		Order order = OrderInformation.getOrderById(SessionHandling
 				.getOrderId(context));
-
+		// set delivery address to order
 		order.setDeliveryAddress(deliveryAddress);
 
 		String template;
+
 		// billing address is equal to delivery address
 		if (billingEqualDelivery.equals("Yes")) {
 			// create billing address
@@ -104,19 +127,35 @@ public class CheckoutController {
 			billingAddress.setState(state);
 			billingAddress.setZip(Integer.parseInt(zip));
 			billingAddress.setCountry(country);
-
+			// set billing address to order
 			order.setBillingAddress(billingAddress);
-
+			// return page to enter payment information
 			template = "views/CheckoutController/paymentMethod.ftl.html";
-		} else {
+		}
+		// billing and delivery address are not equal
+		else {
+			// return page to enter billing address
 			template = "views/CheckoutController/billingAddress.ftl.html";
 		}
-
+		// update order
 		Ebean.save(order);
-
 		return Results.html().render(data).template(template);
 	}
 
+	/**
+	 * Creates a new billing address. Returns the page to enter payment
+	 * information.
+	 * 
+	 * @param name
+	 * @param addressLine1
+	 * @param addressLine2
+	 * @param city
+	 * @param state
+	 * @param zip
+	 * @param country
+	 * @param context
+	 * @return
+	 */
 	public Result billingAddressCompleted(@Param("fullName") String name,
 			@Param("addressLine1") String addressLine1,
 			@Param("addressLine2") String addressLine2,
@@ -127,6 +166,7 @@ public class CheckoutController {
 
 		CommonInformation.setCommonData(data, context);
 
+		// create new billing address
 		BillingAddress billingAddress = new BillingAddress();
 		billingAddress.setName(name);
 		billingAddress.setAddressline1(addressLine1);
@@ -135,19 +175,30 @@ public class CheckoutController {
 		billingAddress.setState(state);
 		billingAddress.setZip(Integer.parseInt(zip));
 		billingAddress.setCountry(country);
-
+		// get order by session id
 		Order order = OrderInformation.getOrderById(SessionHandling
 				.getOrderId(context));
-
+		// set billing address to order
 		order.setBillingAddress(billingAddress);
-
+		// return page to enter payment information
 		String template = "views/CheckoutController/paymentMethod.ftl.html";
-
+		// update order
 		Ebean.save(order);
 
 		return Results.html().render(data).template(template);
 	}
 
+	/**
+	 * Creates a new credit card. Returns the page to get an overview of the
+	 * checkout.
+	 * 
+	 * @param creditNumber
+	 * @param name
+	 * @param month
+	 * @param year
+	 * @param context
+	 * @return
+	 */
 	public Result paymentMethodCompleted(
 			@Param("creditCardNumber") int creditNumber,
 			@Param("name") String name,
@@ -157,42 +208,51 @@ public class CheckoutController {
 
 		CommonInformation.setCommonData(data, context);
 
+		// create new credit card
 		CreditCard creditCard = new CreditCard();
-
 		creditCard.setNumber(creditNumber);
 		creditCard.setName(name);
 		creditCard.setMonth(month);
 		creditCard.setYear(year);
-
+		// get order by session id
 		Order order = OrderInformation.getOrderById(SessionHandling
 				.getOrderId(context));
-
+		// set credit card to order
 		order.setCreditCard(creditCard);
-
+		// return page to get an overview of the checkout
 		String template = "views/CheckoutController/checkoutOverview.ftl.html";
-
+		// update order
 		Ebean.save(order);
 
 		return Results.html().render(data).template(template);
 	}
-	
+
+	/**
+	 * Removes the basket and the order from the session. Cleans the basket,
+	 * which means to delete all products in the basket. Returns the page, that
+	 * the order was successful.
+	 * 
+	 * @param context
+	 * @return
+	 */
 	public Result checkoutCompleted(Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
-		// set date to order
+		// get order by session id
 		Order order = OrderInformation.getOrderById(SessionHandling
 				.getOrderId(context));
+		// set date to order
 		order.setDate(DateUtils.getCurrentDate());
-		System.out.println("Order date:" + order.getDate());
+		// update order
 		Ebean.save(order);
-		// remove basket
+		// get basket by session id
 		Basket basket = BasketInformation.getBasketById(SessionHandling
 				.getBasketId(context));
+		// remove basket
 		BasketInformation.removeBasket(context, basket);
 		// remove basket from session
 		SessionHandling.setBasketId(context, -1);
 		// remove order from session
 		SessionHandling.setOrderId(context, -1);
-		// remove order, if a guest bought something
 
 		CommonInformation.setCommonData(data, context);
 

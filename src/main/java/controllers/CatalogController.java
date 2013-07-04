@@ -12,34 +12,55 @@ import util.database.ProductInformation;
 
 public class CatalogController {
 
+	/**
+	 * Returns a product detail page for the given product.
+	 * 
+	 * @param productUrl
+	 * @param context
+	 * @return
+	 */
 	public Result productDetail(@PathParam("product") String productUrl,
 			Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 
 		CommonInformation.setCommonData(data, context);
 
-		// remember product for product detail site
+		// put product to data map
 		ProductInformation.addProductDetailToMap(productUrl, data);
 
 		return Results.html().render(data);
 	}
 
+	/**
+	 * Returns a product overview page for the given sub category.
+	 * 
+	 * @param subCategory
+	 * @param context
+	 * @return
+	 */
 	public Result productOverview(@PathParam("subCategory") String subCategory,
 			Context context) {
 
 		final Map<String, Object> data = new HashMap<String, Object>();
 		CommonInformation.setCommonData(data, context);
-		// remember products for the given sub category
+		// put products for the given sub category to data map
 		ProductInformation.addSubCategoryProductsToMap(subCategory, data);
 
 		return Results.html().render(data);
 	}
 
+	/**
+	 * Returns a product overview page for the given top category.
+	 * 
+	 * @param topCategory
+	 * @param context
+	 * @return
+	 */
 	public Result topCategoryOverview(
 			@PathParam("topCategory") String topCategory, Context context) {
 		final Map<String, Object> data = new HashMap<String, Object>();
 		CommonInformation.setCommonData(data, context);
-		// remember products for the given top category
+		// put products for the given top category to data map
 		ProductInformation.addTopCategoryProductsToMap(topCategory, data);
 
 		return Results.html()
