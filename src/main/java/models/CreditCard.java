@@ -10,85 +10,100 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="creditCard")
-public class CreditCard {
+@Table(name = "creditCard")
+public class CreditCard
+{
 
-	@Id
-	private int id;
-	
-	private int number;
-	
-	private String name;
-	
-	private int month;
-	
-	private int year;
-	
-	@ManyToOne
-	private Customer customer;
-	
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<Order> order;
+    @Id
+    private int id;
 
-	
-	public CreditCard() {
-		order = new ArrayList<Order>();
-	}
-	public int getId() {
-		return id;
-	}
+    private int number;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String name;
 
-	public int getNumber() {
-		return number;
-	}
+    private int month;
 
-	public void setNumber(int number) {
-		this.number = number;
-	}
+    private int year;
 
-	public String getName() {
-		return name;
-	}
+    @ManyToOne
+    private Customer customer;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Order> order;
 
-	public int getMonth() {
-		return month;
-	}
+    public CreditCard()
+    {
+        order = new ArrayList<Order>();
+    }
 
-	public void setMonth(int month) {
-		this.month = month;
-	}
+    public int getId()
+    {
+        return id;
+    }
 
-	public int getYear() {
-		return year;
-	}
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
-	public void setYear(int year) {
-		this.year = year;
-	}
+    public int getNumber()
+    {
+        return number;
+    }
 
-	public Customer getCustomer() {
-		return customer;
-	}
+    public void setNumber(int number)
+    {
+        this.number = number;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public List<Order> getOrder() {
-		return order;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public void setOrder(List<Order> order) {
-		this.order = order;
-	}
+    public int getMonth()
+    {
+        return month;
+    }
+
+    public void setMonth(int month)
+    {
+        this.month = month;
+    }
+
+    public int getYear()
+    {
+        return year;
+    }
+
+    public void setYear(int year)
+    {
+        this.year = year;
+    }
+
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
+    }
+
+    public List<Order> getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(List<Order> order)
+    {
+        this.order = order;
+    }
 }

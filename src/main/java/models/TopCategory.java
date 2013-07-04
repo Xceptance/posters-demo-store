@@ -8,71 +8,77 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
- * A top category is a category, which has at least one {@link SubCategory}. The
- * top category itself has no products, just the referenced sub categories have
- * products.
+ * A top category is a category, which has at least one {@link SubCategory}. The top category itself has no products,
+ * just the referenced sub categories have products.
  * 
  * @author sebastianloob
- * 
  */
 @Entity
 @Table(name = "category")
-public class TopCategory {
+public class TopCategory
+{
 
-	/**
-	 * The ID of the category.
-	 */
-	@Id
-	private int id;
+    /**
+     * The ID of the category.
+     */
+    @Id
+    private int id;
 
-	/**
-	 * The name of the category.
-	 */
-	private String name;
-	
-	/**
-	 * The URL of the top category.
-	 */
-	private String url;
+    /**
+     * The name of the category.
+     */
+    private String name;
 
-	/**
-	 * The sub categories of the category.
-	 */
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
-	List<SubCategory> subCategories;
+    /**
+     * The URL of the top category.
+     */
+    private String url;
 
-	public int getId() {
-		return id;
-	}
+    /**
+     * The sub categories of the category.
+     */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
+    List<SubCategory> subCategories;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId()
+    {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public List<SubCategory> getSubCategories() {
-		return subCategories;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public void setSubCategories(List<SubCategory> subCategories) {
-		this.subCategories = subCategories;
-	}
+    public List<SubCategory> getSubCategories()
+    {
+        return subCategories;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setSubCategories(List<SubCategory> subCategories)
+    {
+        this.subCategories = subCategories;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getUrl()
+    {
+        return url;
+    }
+
+    public void setUrl(String url)
+    {
+        this.url = url;
+    }
 
 }

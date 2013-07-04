@@ -6,127 +6,144 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="customer")
-public class Customer {
+@Table(name = "customer")
+public class Customer
+{
 
-	@Id
-	private int id;
-	
-	private String email;
-	
-	private String password;
-	
-	private String name;
-	
-	private String firstName;
-	
-	
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<DeliveryAddress> deliveryAddress;
-	
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<BillingAddress> billingAddress;
-	
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<CreditCard> creditCard;
-	
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<Order> order;
-	
-	
-	public Customer () {
-		this.deliveryAddress = new ArrayList<DeliveryAddress>();
-		this.billingAddress = new ArrayList<BillingAddress>();
-		this.creditCard = new ArrayList<CreditCard>();
-		this.order = new ArrayList<Order>();
-	}
-	
-	public String getEmail() {
-		return email;
-	}
+    @Id
+    private int id;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    private String email;
 
-	public String getPassword() {
-		return password;
-	}
+    private String password;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private String firstName;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<DeliveryAddress> deliveryAddress;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<BillingAddress> billingAddress;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<CreditCard> creditCard;
 
-	public List<DeliveryAddress> getDeliveryAddress() {
-		return deliveryAddress;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Order> order;
 
-	public void setDeliveryAddress(List<DeliveryAddress> deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
+    public Customer()
+    {
+        this.deliveryAddress = new ArrayList<DeliveryAddress>();
+        this.billingAddress = new ArrayList<BillingAddress>();
+        this.creditCard = new ArrayList<CreditCard>();
+        this.order = new ArrayList<Order>();
+    }
 
-	public List<BillingAddress> getBillingAddress() {
-		return billingAddress;
-	}
+    public String getEmail()
+    {
+        return email;
+    }
 
-	public void setBillingAddress(List<BillingAddress> billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public String getPassword()
+    {
+        return password;
+    }
 
-	public void setId(int customerId) {
-		this.id = customerId;
-	}
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
 
-	public List<CreditCard> getCreditCard() {
-		return creditCard;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public void setCreditCard(List<CreditCard> creditCard) {
-		this.creditCard = creditCard;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public List<Order> getOrder() {
-		return order;
-	}
+    public String getFirstName()
+    {
+        return firstName;
+    }
 
-	public void setOrder(List<Order> order) {
-		this.order = order;
-	}
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
 
-	public void addCreditCard(CreditCard creditCard) {
-		this.creditCard.add(creditCard);
-	}
-	
-	public void deleteCreditCard(CreditCard creditCard) {
-		this.creditCard.remove(creditCard);
-//		int index = this.creditCard.indexOf(creditCard);
-//		this.creditCard.remove(index);
-	}
+    public List<DeliveryAddress> getDeliveryAddress()
+    {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(List<DeliveryAddress> deliveryAddress)
+    {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public List<BillingAddress> getBillingAddress()
+    {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(List<BillingAddress> billingAddress)
+    {
+        this.billingAddress = billingAddress;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int customerId)
+    {
+        this.id = customerId;
+    }
+
+    public List<CreditCard> getCreditCard()
+    {
+        return creditCard;
+    }
+
+    public void setCreditCard(List<CreditCard> creditCard)
+    {
+        this.creditCard = creditCard;
+    }
+
+    public List<Order> getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(List<Order> order)
+    {
+        this.order = order;
+    }
+
+    public void addCreditCard(CreditCard creditCard)
+    {
+        this.creditCard.add(creditCard);
+    }
+
+    public void deleteCreditCard(CreditCard creditCard)
+    {
+        this.creditCard.remove(creditCard);
+        // int index = this.creditCard.indexOf(creditCard);
+        // this.creditCard.remove(index);
+    }
 }

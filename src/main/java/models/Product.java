@@ -10,161 +10,179 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 /**
- * A product belongs to one sub category. It has different informations like
- * name, price and a description.
+ * A product belongs to one sub category. It has different informations like name, price and a description.
  * 
  * @author sebastianloob
- * 
  */
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product
+{
 
-	/**
-	 * The ID of the product.
-	 */
-	@Id
-	private int id;
+    /**
+     * The ID of the product.
+     */
+    @Id
+    private int id;
 
-	/**
-	 * The name of the product.
-	 */
-	private String name;
-	
-	/**
-	 * The URL of the product.
-	 */
-	private String url;
+    /**
+     * The name of the product.
+     */
+    private String name;
 
-	/**
-	 * The netto price of the product.
-	 */
-	private double price;
+    /**
+     * The URL of the product.
+     */
+    private String url;
 
-	/**
-	 * A detailed description of the product.
-	 */
-	private String descriptionDetail;
+    /**
+     * The netto price of the product.
+     */
+    private double price;
 
-	/**
-	 * A overview description of the product.
-	 */
-	private String descriptionOverview;
+    /**
+     * A detailed description of the product.
+     */
+    private String descriptionDetail;
 
-	/**
-	 * The url of the product image.
-	 */
-	private String imageURL;
+    /**
+     * A overview description of the product.
+     */
+    private String descriptionOverview;
 
-	/**
-	 * Defines, whether or not the product is shown in the carousel at the main
-	 * page.
-	 */
-	private boolean showInCarousel;
-	
-	/**
-	 * Defines, whether or not the product is shown in the top category overview.
-	 */
-	private boolean showInTopCategorie;
+    /**
+     * The url of the product image.
+     */
+    private String imageURL;
 
-	/**
-	 * The sub category, the product belongs to.
-	 */
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "subCategory_id")
-	private SubCategory subCategory;
-	
-	@ManyToMany
-	private List<Basket> basket;
+    /**
+     * Defines, whether or not the product is shown in the carousel at the main page.
+     */
+    private boolean showInCarousel;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Defines, whether or not the product is shown in the top category overview.
+     */
+    private boolean showInTopCategorie;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * The sub category, the product belongs to.
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "subCategory_id")
+    private SubCategory subCategory;
 
-	public String getDescriptionOverview() {
-		return descriptionOverview;
-	}
+    @ManyToMany
+    private List<Basket> basket;
 
-	public void setDescriptionOverview(String descriptionOverview) {
-		this.descriptionOverview = descriptionOverview;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public String getImageURL() {
-		return imageURL;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
-	}
+    public String getDescriptionOverview()
+    {
+        return descriptionOverview;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setDescriptionOverview(String descriptionOverview)
+    {
+        this.descriptionOverview = descriptionOverview;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getImageURL()
+    {
+        return imageURL;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public void setImageURL(String imageURL)
+    {
+        this.imageURL = imageURL;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public int getId()
+    {
+        return id;
+    }
 
-	public String getDescriptionDetail() {
-		return descriptionDetail;
-	}
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
-	public void setDescriptionDetail(String descriptionDetail) {
-		this.descriptionDetail = descriptionDetail;
-	}
+    public double getPrice()
+    {
+        return price;
+    }
 
-	public SubCategory getSubCategory() {
-		return subCategory;
-	}
+    public void setPrice(double price)
+    {
+        this.price = price;
+    }
 
-	public void setSubCategory(SubCategory subCategory) {
-		this.subCategory = subCategory;
-	}
+    public String getDescriptionDetail()
+    {
+        return descriptionDetail;
+    }
 
-	public boolean isShowInCarousel() {
-		return showInCarousel;
-	}
+    public void setDescriptionDetail(String descriptionDetail)
+    {
+        this.descriptionDetail = descriptionDetail;
+    }
 
-	public void setShowInCarousel(boolean showInCarousel) {
-		this.showInCarousel = showInCarousel;
-	}
+    public SubCategory getSubCategory()
+    {
+        return subCategory;
+    }
 
-	public boolean isShowInTopCategorie() {
-		return showInTopCategorie;
-	}
+    public void setSubCategory(SubCategory subCategory)
+    {
+        this.subCategory = subCategory;
+    }
 
-	public void setShowInTopCategorie(boolean showInTopCategorie) {
-		this.showInTopCategorie = showInTopCategorie;
-	}
+    public boolean isShowInCarousel()
+    {
+        return showInCarousel;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setShowInCarousel(boolean showInCarousel)
+    {
+        this.showInCarousel = showInCarousel;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public boolean isShowInTopCategorie()
+    {
+        return showInTopCategorie;
+    }
 
-	public List<Basket> getBasket() {
-		return basket;
-	}
+    public void setShowInTopCategorie(boolean showInTopCategorie)
+    {
+        this.showInTopCategorie = showInTopCategorie;
+    }
 
-	public void setBasket(List<Basket> basket) {
-		this.basket = basket;
-	}
+    public String getUrl()
+    {
+        return url;
+    }
+
+    public void setUrl(String url)
+    {
+        this.url = url;
+    }
+
+    public List<Basket> getBasket()
+    {
+        return basket;
+    }
+
+    public void setBasket(List<Basket> basket)
+    {
+        this.basket = basket;
+    }
 }

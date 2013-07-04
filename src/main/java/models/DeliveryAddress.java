@@ -9,113 +9,132 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="deliveryAddress")
-public class DeliveryAddress {
+@Table(name = "deliveryAddress")
+public class DeliveryAddress
+{
 
-	@Id
-	private int id;
-	
-	private String name;
-	
-	private String addressline1;
-	
-	private String addressline2;
-	
-	private String city;
-	
-	private String state;
-	
-	private String country;
-	
-	private int zip;
-	
-	@ManyToOne
-	private Customer customer;
-	
-	@OneToMany (cascade = CascadeType.ALL)
-	private List<Order> order;
+    @Id
+    private int id;
 
-	public int getId() {
-		return id;
-	}
+    private String name;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String addressline1;
 
-	public String getAddressline1() {
-		return addressline1;
-	}
+    private String addressline2;
 
-	public void setAddressline1(String street) {
-		this.addressline1 = street;
-	}
+    private String city;
 
-	public Customer getCustomer() {
-		return customer;
-	}
+    private String state;
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    private String country;
 
-	public String getName() {
-		return name;
-	}
+    private int zip;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @ManyToOne
+    private Customer customer;
 
-	public String getAddressline2() {
-		return addressline2;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Order> order;
 
-	public void setAddressline2(String addressline2) {
-		this.addressline2 = addressline2;
-	}
+    public int getId()
+    {
+        return id;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public String getAddressline1()
+    {
+        return addressline1;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public void setAddressline1(String street)
+    {
+        this.addressline1 = street;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public Customer getCustomer()
+    {
+        return customer;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public int getZip() {
-		return zip;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public void setZip(int zip) {
-		this.zip = zip;
-	}
+    public String getAddressline2()
+    {
+        return addressline2;
+    }
 
-	public List<Order> getOrder() {
-		return order;
-	}
+    public void setAddressline2(String addressline2)
+    {
+        this.addressline2 = addressline2;
+    }
 
-	public void setOrder(List<Order> order) {
-		this.order = order;
-	}
-	
+    public String getCity()
+    {
+        return city;
+    }
+
+    public void setCity(String city)
+    {
+        this.city = city;
+    }
+
+    public String getState()
+    {
+        return state;
+    }
+
+    public void setState(String state)
+    {
+        this.state = state;
+    }
+
+    public String getCountry()
+    {
+        return country;
+    }
+
+    public void setCountry(String country)
+    {
+        this.country = country;
+    }
+
+    public int getZip()
+    {
+        return zip;
+    }
+
+    public void setZip(int zip)
+    {
+        this.zip = zip;
+    }
+
+    public List<Order> getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(List<Order> order)
+    {
+        this.order = order;
+    }
+
 }
