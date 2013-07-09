@@ -111,6 +111,20 @@ public class SessionHandling
     }
 
     /**
+     * Deletes the order id from the session.
+     * 
+     * @param context
+     */
+    public static void deleteOrderId(Context context)
+    {
+        SessionCookie cookie = context.getSessionCookie();
+        if (cookie.get("order") != null)
+        {
+            cookie.remove("order");
+        }
+    }
+
+    /**
      * Adds the basket id to the session.
      * 
      * @param context
@@ -140,6 +154,20 @@ public class SessionHandling
             basketId = Integer.parseInt(cookie.get("basket"));
         }
         return basketId;
+    }
+
+    /**
+     * Deletes the basket id from the session.
+     * 
+     * @param context
+     */
+    public static void deleteBasketId(Context context)
+    {
+        SessionCookie cookie = context.getSessionCookie();
+        if (cookie.get("basket") != null)
+        {
+            cookie.remove("basket");
+        }
     }
 
     /**

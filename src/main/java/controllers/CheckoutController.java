@@ -140,7 +140,7 @@ public class CheckoutController
             template = "views/CheckoutController/billingAddress.ftl.html";
         }
         // update order
-        Ebean.save(order);
+        order.update();
         return Results.html().render(data).template(template);
     }
 
@@ -214,6 +214,8 @@ public class CheckoutController
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set credit card to order
         order.setCreditCard(creditCard);
+        // set shipping costs to order
+        order.setShippingCosts(6.99);
         // set tax to order
         order.setTax(0.06);
         // calculate total costs
@@ -221,6 +223,7 @@ public class CheckoutController
         order.addTaxToTotalCosts();
         // add order to data map
         OrderInformation.addOrderToMap(order, data);
+        OrderInformation.addProductsFromOrderToMap(order, data);
         // return page to get an overview of the checkout
         String template = "views/CheckoutController/checkoutOverview.ftl.html";
         // update order
@@ -247,11 +250,13 @@ public class CheckoutController
         // get basket by session id
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // remove basket
-        BasketInformation.removeBasket(context, basket);
+        BasketInformation.removeBasket(basket);
+        // remove order, if no customer is set
+        OrderInformation.removeOrder(order);
         // remove basket from session
-        SessionHandling.setBasketId(context, -1);
+        SessionHandling.deleteBasketId(context);
         // remove order from session
-        SessionHandling.setOrderId(context, -1);
+        SessionHandling.deleteOrderId(context);
 
         CommonInformation.setCommonData(data, context);
 

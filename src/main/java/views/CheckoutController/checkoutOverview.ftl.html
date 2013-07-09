@@ -4,18 +4,24 @@
 	<h1>Order overview</h1>
 	<h3>Products</h3>
 	<table class="table" table-bordered>
-		<#list order.basket.productIds as product>
+		<#list orderProducts as orderProduct>
 		<tr>
-			<td><a href=/productDetail/${product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${product.imageURL} width="150"></img></a></td>
-			<td>${product.name}</td>
-			<td>${product.descriptionOverview}</td>
-			<td>${product.price}</td>
+			<td><a href=/productDetail/${orderProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
+			<td>${orderProduct.product.name}</td>
+			<td>${orderProduct.product.descriptionOverview}</td>
+			<td>${orderProduct.product.price}</td>
+			<td>${orderProduct.countProduct}</td>
 		</tr>
 		</#list>
 	</table>
 	<div class="row">
 		<div class="span4 offset8">
 			<h3>Sales tax: ${order.tax*100}%</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4 offset8">
+			<h3>Shipping costs: ${order.shippingCosts}</h3>
 		</div>
 	</div>
 	<div class="row">
