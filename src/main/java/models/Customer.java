@@ -7,7 +7,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.avaje.ebean.Ebean;
 
 @Entity
 @Table(name = "customer")
@@ -36,6 +39,9 @@ public class Customer
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Order> order;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Basket basket;
 
     public Customer()
     {
@@ -135,6 +141,16 @@ public class Customer
         this.order = order;
     }
 
+    public Basket getBasket()
+    {
+        return basket;
+    }
+
+    public void setBasket(Basket basket)
+    {
+        this.basket = basket;
+    }
+
     public void addCreditCard(CreditCard creditCard)
     {
         this.creditCard.add(creditCard);
@@ -143,7 +159,15 @@ public class Customer
     public void deleteCreditCard(CreditCard creditCard)
     {
         this.creditCard.remove(creditCard);
-        // int index = this.creditCard.indexOf(creditCard);
-        // this.creditCard.remove(index);
+    }
+
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    public void save()
+    {
+        Ebean.save(this);
     }
 }

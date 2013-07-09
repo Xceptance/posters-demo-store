@@ -3,12 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.avaje.ebean.Ebean;
 
 @Entity
 @Table(name = "basket")
@@ -24,36 +25,23 @@ public class Basket
     /**
      * The customer of the basket.
      */
+    @OneToOne
     private Customer customer;
 
     /**
-     * The products, which are in the basket.
+     * The products of the basket.
      */
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Product> productIds;
-
-    /**
-     * product id : count of product in basket
-     */
-    // @ManyToMany (cascade = CascadeType.ALL)
-    // @JoinColumn(name="product_id")
-    // private Map<Product, Double> products;
+    @OneToMany(mappedBy = "basket")
+    private List<Basket_Product> products;
 
     /**
      * The total price of the basket.
      */
     private double totalPrice;
 
-    /**
-     * The order of the basket.
-     */
-    @OneToOne
-    private Order order;
-
     public Basket()
     {
-        // this.products = new HashMap<Product, Double>();
-        this.productIds = new ArrayList<Product>();
+        this.products = new ArrayList<Basket_Product>();
     }
 
     public int getId()
@@ -66,19 +54,8 @@ public class Basket
         this.id = id;
     }
 
-    public List<Product> getProductIds()
-    {
-        return productIds;
-    }
-
-    public void setProductIds(List<Product> products)
-    {
-        this.productIds = products;
-    }
-
     public double getTotalPrice()
     {
-        calculateTotalPrice();
         return totalPrice;
     }
 
@@ -97,46 +74,96 @@ public class Basket
         this.customer = customer;
     }
 
-    public void calculateTotalPrice()
+    public List<Basket_Product> getProducts()
     {
-        this.totalPrice = 0;
+        return products;
+    }
 
-        for (Product product : productIds)
+    public void setProducts(List<Basket_Product> products)
+    {
+        this.products = products;
+    }
+
+    public void addProduct(Product product)
+    {
+        Basket_Product basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", this)
+                                             .eq("product", product).findUnique();
+        // this product is not in the basket
+        if (basketProducts == null)
         {
-            // add for each product the price to the total price
-            this.totalPrice += product.getPrice();
+            // add product to basket
+            basketProducts = new Basket_Product();
+            basketProducts.setBasket(this);
+            basketProducts.setProduct(product);
+            // set product count to one
+            basketProducts.setCountProduct(1);
+            basketProducts.save();
+            products.add(basketProducts);
+
+        }
+        // this product is in the basket at least one time
+        else
+        {
+            // increment the count of this product
+            basketProducts.incCountProduct();
+            basketProducts.update();
+        }
+        // recalculate total price
+        this.totalPrice += product.getPrice();
+    }
+
+    public void deleteProduct(Product product)
+    {
+        Basket_Product basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", this)
+                                             .eq("product", product).findUnique();
+        // product is not in the basket
+        if (basketProducts == null)
+        {
+            // do nothing
+        }
+        else
+        {
+            // product is in the basket more than once
+            if (basketProducts.getCountProduct() > 1)
+            {
+                basketProducts.decrementProductCount();
+                basketProducts.update();
+            }
+            else
+            {
+                Ebean.delete(basketProducts);
+                this.products.remove(basketProducts);
+            }
+            // recalculate total price
+            this.totalPrice -= product.getPrice();
         }
     }
 
-    public void addProduct(Product productId)
+    public void update()
     {
-        productIds.add(productId);
+        Ebean.update(this);
     }
 
-    public Order getOrder()
+    public void save()
     {
-        return order;
+        Ebean.save(this);
     }
 
-    public void setOrder(Order order)
+    /**
+     * removes all products from the basket
+     */
+    public void clearProducts()
     {
-        this.order = order;
+        // get all products of the basket
+        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", this).findList();
+        // delete each product
+        for (Basket_Product basketProduct : basketProducts)
+        {
+            // delete all of this kind of product
+            for (int i = 0; i < basketProduct.getCountProduct(); i++)
+            {
+                this.deleteProduct(basketProduct.getProduct());
+            }
+        }
     }
-
-    // public Map<Product, Double> getProducts() {
-    // return products;
-    // }
-    //
-    // public void setProducts(Map<Product, Double> products) {
-    // this.products = products;
-    // }
-    //
-    // public void addProducts (Product product) {
-    // if(this.products.containsKey(product)) {
-    // this.products.put(product, this.products.get(product) + 1);
-    // }
-    // else {
-    // this.products.put(product, 1.0);
-    // }
-    // }
 }

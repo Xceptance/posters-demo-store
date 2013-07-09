@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.avaje.ebean.Ebean;
+
 @Entity
 @Table(name = "deliveryAddress")
 public class DeliveryAddress
@@ -137,4 +139,13 @@ public class DeliveryAddress
         this.order = order;
     }
 
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    public void save()
+    {
+        Ebean.save(this);
+    }
 }

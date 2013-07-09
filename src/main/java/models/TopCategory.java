@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.avaje.ebean.Ebean;
+
 /**
  * A top category is a category, which has at least one {@link SubCategory}. The top category itself has no products,
  * just the referenced sub categories have products.
@@ -81,4 +83,13 @@ public class TopCategory
         this.url = url;
     }
 
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    public void save()
+    {
+        Ebean.save(this);
+    }
 }

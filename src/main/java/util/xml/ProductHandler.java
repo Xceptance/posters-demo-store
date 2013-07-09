@@ -62,7 +62,6 @@ public class ProductHandler extends DefaultHandler
             {
                 subCategory = new SubCategory();
                 subCategory.setName(currentValue);
-                System.out.println("--Subcategory-- " + subCategory.getName());
             }
             product.setSubCategory(subCategory);
         }

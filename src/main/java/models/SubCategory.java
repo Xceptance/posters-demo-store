@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.avaje.ebean.Ebean;
+
 /**
  * The sub category belongs to one {@link TopCategory}. A sub category has different products.
  * 
@@ -97,5 +99,15 @@ public class SubCategory
     public void setUrl(String url)
     {
         this.url = url;
+    }
+
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    public void save()
+    {
+        Ebean.save(this);
     }
 }

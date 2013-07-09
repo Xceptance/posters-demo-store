@@ -1,11 +1,16 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.avaje.ebean.Ebean;
 
 @Entity
 @Table(name = "ordering")
@@ -16,9 +21,6 @@ public class Order
     private int id;
 
     private String date;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Basket basket;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private DeliveryAddress deliveryAddress;
@@ -38,6 +40,14 @@ public class Order
     @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
+    @OneToMany(mappedBy = "order")
+    private List<Order_Product> products;
+
+    public Order()
+    {
+        this.products = new ArrayList<Order_Product>();
+    }
+
     public int getId()
     {
         return id;
@@ -46,16 +56,6 @@ public class Order
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public Basket getBasket()
-    {
-        return basket;
-    }
-
-    public void setBasket(Basket basket)
-    {
-        this.basket = basket;
     }
 
     public DeliveryAddress getDeliveryAddress()
@@ -128,6 +128,16 @@ public class Order
         this.customer = customer;
     }
 
+    public List<Order_Product> getProducts()
+    {
+        return products;
+    }
+
+    public void setProducts(List<Order_Product> products)
+    {
+        this.products = products;
+    }
+
     public String getDate()
     {
         return date;
@@ -138,9 +148,66 @@ public class Order
         this.date = date;
     }
 
-    public void calculateTotalCosts()
+    public void update()
     {
-        this.totalCosts = this.basket.getTotalPrice() * this.tax + this.basket.getTotalPrice();
+        Ebean.update(this);
     }
 
+    public void save()
+    {
+        Ebean.save(this);
+    }
+
+    public void addTaxToTotalCosts()
+    {
+         this.setTotalCosts(this.getTotalCosts() * this.getTax() + this.getTotalCosts());
+    }
+    
+    public void addShippingCostsToTotalCosts()
+    {
+         this.setTotalCosts(this.getShippingCosts() + this.getTotalCosts());
+    }
+
+    private void addProduct(Product product)
+    {
+        Order_Product orderProducts = Ebean.find(Order_Product.class).where().eq("order", this).eq("product", product)
+                                           .findUnique();
+        // this product is not in the order
+        if (orderProducts == null)
+        {
+            // add product to order
+            orderProducts = new Order_Product();
+            orderProducts.setOrder(this);
+            orderProducts.setProduct(product);
+            // set product count to one
+            orderProducts.setCountProduct(1);
+            Ebean.save(orderProducts);
+            products.add(orderProducts);
+
+        }
+        // this product is in the order at least one time
+        else
+        {
+            // increment the count of this product
+            orderProducts.incCountProduct();
+            Ebean.update(orderProducts);
+        }
+        // recalculate total costs
+        this.totalCosts += product.getPrice();
+    }
+
+    public void addProductsFromBasket(Basket basket)
+    {
+        // get all products from basket
+        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
+        // for each product
+        for (Basket_Product orderProduct : basketProducts)
+        {
+            // add the product to the order
+            for (int i = 0; i < orderProduct.getCountProduct(); i++)
+            {
+                this.addProduct(orderProduct.getProduct());
+            }
+        }
+    }
 }

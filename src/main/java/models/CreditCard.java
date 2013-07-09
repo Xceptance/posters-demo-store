@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.avaje.ebean.Ebean;
+
 @Entity
 @Table(name = "creditCard")
 public class CreditCard
@@ -105,5 +107,15 @@ public class CreditCard
     public void setOrder(List<Order> order)
     {
         this.order = order;
+    }
+
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    public void save()
+    {
+        Ebean.save(this);
     }
 }

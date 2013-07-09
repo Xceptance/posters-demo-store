@@ -1,14 +1,17 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.avaje.ebean.Ebean;
 
 /**
  * A product belongs to one sub category. It has different informations like name, price and a description.
@@ -73,8 +76,16 @@ public class Product
     @JoinColumn(name = "subCategory_id")
     private SubCategory subCategory;
 
-    @ManyToMany
-    private List<Basket> basket;
+    @OneToMany(mappedBy = "product")
+    private List<Basket_Product> basket;
+
+    @OneToMany(mappedBy = "product")
+    private List<Order_Product> order;
+
+    public Product()
+    {
+        this.basket = new ArrayList<Basket_Product>();
+    }
 
     public String getName()
     {
@@ -176,13 +187,33 @@ public class Product
         this.url = url;
     }
 
-    public List<Basket> getBasket()
+    public List<Basket_Product> getBasket()
     {
         return basket;
     }
 
-    public void setBasket(List<Basket> basket)
+    public void setBasket(List<Basket_Product> basket)
     {
         this.basket = basket;
+    }
+
+    public List<Order_Product> getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(List<Order_Product> order)
+    {
+        this.order = order;
+    }
+
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    public void save()
+    {
+        Ebean.save(this);
     }
 }

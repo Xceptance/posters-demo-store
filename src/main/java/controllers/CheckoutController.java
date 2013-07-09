@@ -42,7 +42,7 @@ public class CheckoutController
         // get basket by session id
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // check, if the basket is empty
-        if (basket.getProductIds().size() == 0)
+        if (basket.getProducts().size() == 0)
         {
             // return error page
             template = "views/error/emptyBasket.ftl.html";
@@ -55,7 +55,7 @@ public class CheckoutController
             // put order id to session
             SessionHandling.setOrderId(context, order.getId());
             // set basket to order
-            order.setBasket(basket);
+            order.addProductsFromBasket(basket);
             // return page to enter delivery address
             template = "views/CheckoutController/deliveryAddress.ftl.html";
             // customer is logged
@@ -217,7 +217,8 @@ public class CheckoutController
         // set tax to order
         order.setTax(0.06);
         // calculate total costs
-        order.calculateTotalCosts();
+        order.addShippingCostsToTotalCosts();
+        order.addTaxToTotalCosts();
         // add order to data map
         OrderInformation.addOrderToMap(order, data);
         // return page to get an overview of the checkout
