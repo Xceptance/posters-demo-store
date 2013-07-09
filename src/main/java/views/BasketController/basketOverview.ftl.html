@@ -4,12 +4,14 @@
 	<h1>Basket</h1>
 	
 	<table class="table" table-bordered>
-		<#list basketProducts as product>
+		
+		<#list basketProducts as basketProduct>
 		<tr>
-			<td><a href=/productDetail/${product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${product.imageURL} width="150"></img></a></td>
-			<td>${product.name}</td>
-			<td>${product.descriptionOverview}</td>
-			<td>${product.price}</td>
+			<td><a href=/productDetail/${basketProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
+			<td>${basketProduct.product.name}</td>
+			<td>${basketProduct.product.descriptionOverview}</td>
+			<td>${basketProduct.product.price}</td>
+			<td>${basketProduct.countProduct}</td>
 		</tr>
 		</#list>
 	</table>
