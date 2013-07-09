@@ -56,7 +56,11 @@ public class Basket
 
     public double getTotalPrice()
     {
-        return totalPrice;
+        double temp = totalPrice;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return temp;
     }
 
     public void setTotalPrice(double totalPrice)
@@ -109,7 +113,7 @@ public class Basket
             basketProducts.update();
         }
         // recalculate total price
-        this.totalPrice += product.getPrice();
+        this.setTotalPrice(getTotalPrice() + product.getPrice());
     }
 
     public void deleteProduct(Product product)
@@ -135,7 +139,7 @@ public class Basket
                 this.products.remove(basketProducts);
             }
             // recalculate total price
-            this.totalPrice -= product.getPrice();
+            this.setTotalPrice(getTotalPrice() - product.getPrice());
         }
     }
 
@@ -147,6 +151,13 @@ public class Basket
     public void save()
     {
         Ebean.save(this);
+    }
+    
+    public void delete()
+    {
+        this.clearProducts();
+        Ebean.update(this);
+        Ebean.delete(this);
     }
 
     /**

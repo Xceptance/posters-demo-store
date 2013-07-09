@@ -40,7 +40,7 @@ public class Order
     @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<Order_Product> products;
 
     public Order()
@@ -80,7 +80,11 @@ public class Order
 
     public double getShippingCosts()
     {
-        return shippingCosts;
+        double temp = shippingCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return temp;
     }
 
     public void setShippingCosts(double shippingCosts)
@@ -100,7 +104,11 @@ public class Order
 
     public double getTotalCosts()
     {
-        return totalCosts;
+        double temp = totalCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return temp;
     }
 
     public void setTotalCosts(double totalCosts)
@@ -193,7 +201,7 @@ public class Order
             Ebean.update(orderProducts);
         }
         // recalculate total costs
-        this.totalCosts += product.getPrice();
+        this.setTotalCosts(getTotalCosts() + product.getPrice());
     }
 
     public void addProductsFromBasket(Basket basket)
