@@ -25,7 +25,7 @@ public class BasketController
      * @param context
      * @return The basket overview page.
      */
-    public Result addToCart(@Param("productName") String productId, Context context)
+    public Result addToBasket(@Param("productName") String productId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
