@@ -11,7 +11,19 @@
 			<td>${basketProduct.product.name}</td>
 			<td>${basketProduct.product.descriptionOverview}</td>
 			<td>${basketProduct.product.price}</td>
-			<td>${basketProduct.countProduct}</td>
+			<td>
+				<form action="/updateProductCount" method="post">
+      				<input type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
+      				<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
+      				<button class="btn"id="submit" name="submit" type="submit">Update quantity</button>
+      			</form>
+			</td>
+			<td>
+				<form action="/deleteFromBasket" method="post">
+      				<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
+      				<button class="btn"id="submit" name="submit" type="submit">Remove from basket</button>
+      			</form>
+			</td>
 		</tr>
 		</#list>
 	</table>
