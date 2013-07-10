@@ -15,6 +15,7 @@ import ninja.Results;
 import ninja.params.Param;
 import util.database.BasketInformation;
 import util.database.CommonInformation;
+import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
 import util.database.OrderInformation;
 import util.date.DateUtils;
@@ -130,6 +131,8 @@ public class CheckoutController
             billingAddress.setCountry(country);
             // set billing address to order
             order.setBillingAddress(billingAddress);
+            // add payment information to map
+            CustomerInformation.addPaymentOfCustomerToMap(context, data);
             // return page to enter payment information
             template = "views/CheckoutController/paymentMethod.ftl.html";
         }
@@ -210,6 +213,51 @@ public class CheckoutController
         creditCard.setName(name);
         creditCard.setMonth(month);
         creditCard.setYear(year);
+        // get order by session id
+        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        // set credit card to order
+        order.setCreditCard(creditCard);
+        // set new credit card to customer
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            CustomerInformation.addPaymentToCustomer(context, creditCard);
+        }
+        // save credit card
+        else
+        {
+            creditCard.save();
+        }
+        // set shipping costs to order
+        order.setShippingCosts(6.99);
+        // set tax to order
+        order.setTax(0.06);
+        // calculate total costs
+        order.addShippingCostsToTotalCosts();
+        order.addTaxToTotalCosts();
+        // add order to data map
+        OrderInformation.addOrderToMap(order, data);
+        OrderInformation.addProductsFromOrderToMap(order, data);
+        // return page to get an overview of the checkout
+        String template = "views/CheckoutController/checkoutOverview.ftl.html";
+        // update order
+        Ebean.save(order);
+        return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Adds the credit card to the order. Returns the page to get an overview of the checkout.
+     * 
+     * @param creditCardId
+     * @param context
+     * @return
+     */
+    public Result addPaymentToOrder(@Param("cardId") String creditCardId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+        // get credit card by id
+        CreditCard creditCard = CreditCardInformation.getCreditCardById(Integer.parseInt(creditCardId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set credit card to order

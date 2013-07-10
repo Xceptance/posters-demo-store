@@ -4,20 +4,22 @@
 	<h1>Order overview</h1>
 	
 	<#list orderOverview as order>
+	<div class="row">
 	<div class="span2">
-		
+		${order.date} <br>
 		${order.totalCosts}$
 	</div>
 	<div class="span8">
 		<table class="table" table-bordered>
-		<#list order.basket.productIds as product>
+		<#list order.products as orderProduct>
 		<tr>
-			<td><a href=/productDetail/${product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${product.imageURL} width="150"></img></a></td>
-			<td>${product.name}</td>
-			<td>${product.descriptionOverview}</td>
+			<td><a href=/productDetail/${orderProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
+			<td>${orderProduct.product.name}</td>
+			<td>${orderProduct.product.descriptionOverview}</td>
 		</tr>
 		</#list>
 		</table>
+	</div>
 	</div>
 	</#list>
 

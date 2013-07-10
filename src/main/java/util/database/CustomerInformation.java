@@ -3,6 +3,7 @@ package util.database;
 import java.util.List;
 import java.util.Map;
 
+import models.CreditCard;
 import models.Customer;
 import ninja.Context;
 import util.session.SessionHandling;
@@ -167,10 +168,14 @@ public abstract class CustomerInformation
      */
     public static void addPaymentOfCustomerToMap(Context context, Map<String, Object> data)
     {
-        // get customer by session
-        Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
-        // add payment information
-        data.put("paymentOverview", customer.getCreditCard());
+        // just add, if customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // get customer by session
+            Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
+            // add payment information
+            data.put("paymentOverview", customer.getCreditCard());
+        }
     }
 
     /**
@@ -186,5 +191,23 @@ public abstract class CustomerInformation
         data.put("deliveryAddresses", customer.getDeliveryAddress());
         // add all billing addresses
         data.put("billingAddresses", customer.getBillingAddress());
+    }
+
+    /**
+     * Adds the given credit card to the customer.
+     * 
+     * @param context
+     * @param creditCard
+     */
+    public static void addPaymentToCustomer(Context context, CreditCard creditCard)
+    {
+        // just add, if customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            Customer customer = getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addCreditCard(creditCard);
+            customer.update();
+        }
+
     }
 }

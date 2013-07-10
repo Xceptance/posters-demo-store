@@ -34,7 +34,7 @@ public class Order
 
     private double totalCosts;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private CreditCard creditCard;
 
     @ManyToOne(cascade = CascadeType.ALL)

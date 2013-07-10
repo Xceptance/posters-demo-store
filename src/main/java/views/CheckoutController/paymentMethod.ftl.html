@@ -1,11 +1,40 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
+<#if paymentOverview??>
+<h1>Select a credit card</h1>
+<#list paymentOverview as payment>
+	<#if (payment_index + 3) % 3 ==0>
+      	<div class="row">
+      		<ul class="thumbnails">
+    </#if>
+      			<li class="span4">
+      					<p>Name: ${payment.name}<p>
+      					<p>Credit card: ${payment.number}</p>
+      					<p>Valid to: ${payment.month} ${payment.year}</p>
+      					<p>
+      						<form action="/addPaymentToOrder" method="post">
+    							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
+    							<button class="btn"id="submit" name="submit" type="submit">Pay with this credit card</button>
+							</form>
+      					</p>
+      			</li>
+		<#if (payment_index + 1) % 3 ==0>
+      		</ul>
+      	</div>
+      	</#if>
+      	<#if !payment_has_next && (payment_index + 1) % 3 !=0>
+      	    </ul>
+      	</div>
+      	</#if>
+</#list>
+</#if>
+
 <form class="form-horizontal" action="/paymentMethodCompleted" method="post">
 <fieldset>
 
 <!-- Form Name -->
-<legend>Payment information</legend>
+<legend>Add new credit card</legend>
 
 <!-- Text input-->
 <div class="control-group">
