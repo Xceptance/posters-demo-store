@@ -22,10 +22,10 @@ public class Order
 
     private String date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private DeliveryAddress deliveryAddress;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private BillingAddress billingAddress;
 
     private double shippingCosts;

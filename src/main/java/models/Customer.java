@@ -100,6 +100,11 @@ public class Customer
     {
         this.deliveryAddress = deliveryAddress;
     }
+    
+    public void addDeliveryAddress(DeliveryAddress deliveryAddress)
+    {
+        this.deliveryAddress.add(deliveryAddress);
+    }
 
     public List<BillingAddress> getBillingAddress()
     {
@@ -109,6 +114,11 @@ public class Customer
     public void setBillingAddress(List<BillingAddress> billingAddress)
     {
         this.billingAddress = billingAddress;
+    }
+    
+    public void addBillingAddress(BillingAddress billingAddress)
+    {
+        this.billingAddress.add(billingAddress);
     }
 
     public int getId()

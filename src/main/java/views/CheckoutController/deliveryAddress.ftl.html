@@ -1,11 +1,42 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
 
+<#if deliveryAddresses??>
+<h3>Select a delivery address</h3>
+<#list deliveryAddresses as address>
+	<#if (address_index + 3) % 3 ==0>
+      	<div class="row">
+      		<ul class="thumbnails">
+    </#if>
+      			<li class="span4">
+      					<p>${address.name}<p>
+      					<p>${address.addressline1}</p>
+      					<p>${address.addressline2}</p>
+      					<p>${address.zip} ${address.city}</p>
+      					<p>${address.state} ${address.country}</p>
+      					<p>
+      						<form action="/addDeliveryAddressToOrder" method="post">
+    							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+    							<button class="btn"id="submit" name="submit" type="submit">Ship to this address</button>
+							</form>
+      					</p>
+      			</li>
+		<#if (address_index + 1) % 3 ==0>
+      		</ul>
+      	</div>
+      	</#if>
+      	<#if !address_has_next && (address_index + 1) % 3 !=0>
+      	    </ul>
+      	</div>
+      	</#if>
+</#list>
+</#if>
+
 <form class="form-horizontal" action="/deliveryAddressCompleted" method="post">
 <fieldset>
 
 <!-- Form Name -->
-<legend>Delivery address</legend>
+<legend>Add new delivery address</legend>
 
 <!-- Text input-->
 <div class="control-group">

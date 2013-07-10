@@ -13,6 +13,7 @@ import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
+import util.database.AddressInformation;
 import util.database.BasketInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
@@ -110,6 +111,16 @@ public class CheckoutController
         deliveryAddress.setState(state);
         deliveryAddress.setZip(Integer.parseInt(zip));
         deliveryAddress.setCountry(country);
+        // set new address to customer
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            CustomerInformation.addDeliveryAddressToCustomer(context, deliveryAddress);
+        }
+        // save delivery address
+        else
+        {
+            deliveryAddress.save();
+        }
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
@@ -129,6 +140,16 @@ public class CheckoutController
             billingAddress.setState(state);
             billingAddress.setZip(Integer.parseInt(zip));
             billingAddress.setCountry(country);
+            // set new address to customer
+            if (SessionHandling.isCustomerLogged(context))
+            {
+                CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+            }
+            // save billing address
+            else
+            {
+                billingAddress.save();
+            }
             // set billing address to order
             order.setBillingAddress(billingAddress);
             // add payment information to map
@@ -142,6 +163,34 @@ public class CheckoutController
             // return page to enter billing address
             template = "views/CheckoutController/billingAddress.ftl.html";
         }
+        // update order
+        order.update();
+        return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Adds the delivery address to the order. Returns the page to enter the billing address.
+     * 
+     * @param addressId
+     * @param context
+     * @return
+     */
+    public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
+    {
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        String template;
+
+        // get delivery address
+        DeliveryAddress deliveryAddress = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+        // get order by session id
+        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        // set delivery address to order
+        order.setDeliveryAddress(deliveryAddress);
+        template = "views/CheckoutController/billingAddress.ftl.html";
+        // put address information of customer to data map
+        CustomerInformation.addAddressOfCustomerToMap(context, data);
         // update order
         order.update();
         return Results.html().render(data).template(template);
@@ -178,14 +227,54 @@ public class CheckoutController
         billingAddress.setState(state);
         billingAddress.setZip(Integer.parseInt(zip));
         billingAddress.setCountry(country);
+        // set new address to customer
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+        }
+        // save billing address
+        else
+        {
+            billingAddress.save();
+        }
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set billing address to order
         order.setBillingAddress(billingAddress);
         // return page to enter payment information
         String template = "views/CheckoutController/paymentMethod.ftl.html";
+        // add payment information to map
+        CustomerInformation.addPaymentOfCustomerToMap(context, data);
         // update order
         Ebean.save(order);
+        return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Adds the billing address to the order. Returns the page to enter payment information.
+     * 
+     * @param addressId
+     * @param context
+     * @return
+     */
+    public Result addBillingAddressToOrder(@Param("addressId") String addressId, Context context)
+    {
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        String template;
+
+        // get billing address
+        BillingAddress billingAddress = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
+        // get order by session id
+        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        // set billing address to order
+        order.setBillingAddress(billingAddress);
+        template = "views/CheckoutController/paymentMethod.ftl.html";
+        // add payment information to map
+        CustomerInformation.addPaymentOfCustomerToMap(context, data);
+        // update order
+        order.update();
         return Results.html().render(data).template(template);
     }
 

@@ -3,8 +3,10 @@ package util.database;
 import java.util.List;
 import java.util.Map;
 
+import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
+import models.DeliveryAddress;
 import ninja.Context;
 import util.session.SessionHandling;
 
@@ -208,6 +210,27 @@ public abstract class CustomerInformation
             customer.addCreditCard(creditCard);
             customer.update();
         }
+    }
 
+    public static void addDeliveryAddressToCustomer(Context context, DeliveryAddress deliveryAddress)
+    {
+        // just add, if customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            Customer customer = getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addDeliveryAddress(deliveryAddress);
+            customer.update();
+        }
+    }
+
+    public static void addBillingAddressToCustomer(Context context, BillingAddress billingAddress)
+    {
+        // just add, if customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            Customer customer = getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addBillingAddress(billingAddress);
+            customer.update();
+        }
     }
 }
