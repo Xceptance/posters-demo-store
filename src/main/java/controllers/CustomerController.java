@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.avaje.ebean.Ebean;
 
+import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
+import models.DeliveryAddress;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
@@ -265,7 +267,7 @@ public class CustomerController
         // return info page
         return Results.html().render(data).template("views/info/savingComplete.ftl.html");
     }
-    
+
     /**
      * Returns an overview page of billing and delivery addresses of the customer.
      * 
@@ -281,7 +283,7 @@ public class CustomerController
         CommonInformation.setCommonData(data, context);
         return Results.html().render(data);
     }
-    
+
     /**
      * Removes a billing address of the customer.
      * 
@@ -300,7 +302,7 @@ public class CustomerController
         // return info page
         return Results.html().render(data).template("views/info/savingComplete.ftl.html");
     }
-    
+
     /**
      * Removes a delivery address of the customer.
      * 
@@ -316,6 +318,216 @@ public class CustomerController
         AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
 
         CommonInformation.setCommonData(data, context);
+        // return info page
+        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+    }
+
+    /**
+     * Returns the page to update a delivery address of the customer.
+     * 
+     * @param cardId
+     * @param context
+     * @return
+     */
+    public Result updateDeliveryAddress(@Param("addressId") int addressId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        AddressInformation.addDeliveryAddressToMap(AddressInformation.getDeliveryAddressById(addressId), data);
+
+        CommonInformation.setCommonData(data, context);
+        // return info page
+        return Results.html().render(data);
+    }
+
+    /**
+     * Updates a delivery address of the customer.
+     * 
+     * @param name
+     * @param addressLine1
+     * @param addressLine2
+     * @param city
+     * @param state
+     * @param zip
+     * @param country
+     * @param addressId
+     * @param context
+     * @return
+     */
+    public Result updateDeliveryAddressCompleted(@Param("fullName") String name,
+                                                 @Param("addressLine1") String addressLine1,
+                                                 @Param("addressLine2") String addressLine2,
+                                                 @Param("city") String city, @Param("state") String state,
+                                                 @Param("zip") String zip, @Param("country") String country,
+                                                 @Param("addressId") String addressId, Context context)
+    {
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+
+        DeliveryAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+
+        address.setName(name);
+        address.setAddressline1(addressLine1);
+        address.setAddressline2(addressLine2);
+        address.setCity(city);
+        address.setState(state);
+        address.setZip(Integer.parseInt(zip));
+        address.setCountry(country);
+
+        address.update();
+
+        // return info page
+        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+    }
+
+    /**
+     * Returns the page to update a billing address of the customer.
+     * 
+     * @param cardId
+     * @param context
+     * @return
+     */
+    public Result updateBillingAddress(@Param("addressId") int addressId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        AddressInformation.addBillingAddressToMap(AddressInformation.getBillingAddressById(addressId), data);
+
+        CommonInformation.setCommonData(data, context);
+        // return info page
+        return Results.html().render(data);
+    }
+
+    /**
+     * Updates a billing address of the customer.
+     * 
+     * @param name
+     * @param addressLine1
+     * @param addressLine2
+     * @param city
+     * @param state
+     * @param zip
+     * @param country
+     * @param addressId
+     * @param context
+     * @return
+     */
+    public Result updateBillingAddressCompleted(@Param("fullName") String name,
+                                                @Param("addressLine1") String addressLine1,
+                                                @Param("addressLine2") String addressLine2, @Param("city") String city,
+                                                @Param("state") String state, @Param("zip") String zip,
+                                                @Param("country") String country, @Param("addressId") String addressId,
+                                                Context context)
+    {
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+
+        BillingAddress address = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
+
+        address.setName(name);
+        address.setAddressline1(addressLine1);
+        address.setAddressline2(addressLine2);
+        address.setCity(city);
+        address.setState(state);
+        address.setZip(Integer.parseInt(zip));
+        address.setCountry(country);
+
+        address.update();
+
+        // return info page
+        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+    }
+
+    /**
+     * Returns a page to enter a new delivery address.
+     * 
+     * @param context
+     * @return
+     */
+    public Result addDeliveryAddressToCustomer(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+
+        return Results.html().render(data);
+    }
+
+    /**
+     * Returns a page to enter a new billing address.
+     * 
+     * @param context
+     * @return
+     */
+    public Result addBillingAddressToCustomer(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+
+        return Results.html().render(data);
+    }
+
+    public Result addDeliveryAddressToCustomerCompleted(@Param("fullName") String name,
+                                                        @Param("addressLine1") String addressLine1,
+                                                        @Param("addressLine2") String addressLine2,
+                                                        @Param("city") String city, @Param("state") String state,
+                                                        @Param("zip") String zip, @Param("country") String country,
+                                                        @Param("addressId") String addressId, Context context)
+    {
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+
+        DeliveryAddress address = new DeliveryAddress();
+
+        address.setName(name);
+        address.setAddressline1(addressLine1);
+        address.setAddressline2(addressLine2);
+        address.setCity(city);
+        address.setState(state);
+        address.setZip(Integer.parseInt(zip));
+        address.setCountry(country);
+        // add address to customer
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        customer.addDeliveryAddress(address);
+        customer.update();
+
+        // return info page
+        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+    }
+
+    public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
+                                                       @Param("addressLine1") String addressLine1,
+                                                       @Param("addressLine2") String addressLine2,
+                                                       @Param("city") String city, @Param("state") String state,
+                                                       @Param("zip") String zip, @Param("country") String country,
+                                                       @Param("addressId") String addressId, Context context)
+    {
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CommonInformation.setCommonData(data, context);
+
+        BillingAddress address = new BillingAddress();
+
+        address.setName(name);
+        address.setAddressline1(addressLine1);
+        address.setAddressline2(addressLine2);
+        address.setCity(city);
+        address.setState(state);
+        address.setZip(Integer.parseInt(zip));
+        address.setCountry(country);
+        // add address to customer
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        customer.addBillingAddress(address);
+        customer.update();
+
         // return info page
         return Results.html().render(data).template("views/info/savingComplete.ftl.html");
     }

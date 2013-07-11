@@ -17,11 +17,10 @@
       					<p>${address.zip} ${address.city}</p>
       					<p>${address.state} ${address.country}</p>
       					<p>
-      						<!-- <form action="/updateBillingAddress" method="post">
+      						<form action="/updateBillingAddress" method="post">
     							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     							<button class="btn"id="submit" name="submit" type="submit">Change detail</button>
 							</form>
-							 -->
       						<form action="/deleteBillingAddress" method="post">
     							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     							<button class="btn"id="submit" name="submit" type="submit">Delete</button>
@@ -39,8 +38,16 @@
 </#list>
 </#if>
 
+<div class="span4 offset6">
+	<a href="/addBillingAddressToCustomer">Add new billing address</a>
+</div>
+
 <#if deliveryAddresses??>
-<h3>Delivery address</h3>
+<div class="row">
+	<div class="span4">
+		<h3>Delivery address</h3>
+	</div>
+</div>
 <#list deliveryAddresses as address>
 	<#if (address_index + 3) % 3 ==0>
       	<div class="row">
@@ -53,11 +60,10 @@
       					<p>${address.zip} ${address.city}</p>
       					<p>${address.state} ${address.country}</p>
       					<p>
-      						<!-- <form action="/updateDeliveryAddress" method="post">
+      						<form action="/updateDeliveryAddress" method="post">
     							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     							<button class="btn"id="submit" name="submit" type="submit">Change detail</button>
 							</form>
-							 -->
       						<form action="/deleteDeliveryAddress" method="post">
     							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     							<button class="btn"id="submit" name="submit" type="submit">Delete</button>
@@ -74,5 +80,9 @@
       	</#if>
 </#list>
 </#if>
+
+<div class="span4 offset6">
+	<a href="/addDeliveryAddressToCustomer">Add new delivery address</a>
+</div>
 
 </@layout.myLayout>

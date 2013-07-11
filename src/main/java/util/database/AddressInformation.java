@@ -1,5 +1,7 @@
 package util.database;
 
+import java.util.Map;
+
 import com.avaje.ebean.Ebean;
 
 import models.BillingAddress;
@@ -30,5 +32,15 @@ public abstract class AddressInformation
         BillingAddress address = getBillingAddressById(id);
         address.setCustomer(null);
         address.update();
+    }
+
+    public static void addDeliveryAddressToMap(DeliveryAddress deliveryAddress, Map<String, Object> data)
+    {
+        data.put("deliveryAddress", deliveryAddress);
+    }
+
+    public static void addBillingAddressToMap(BillingAddress billingAddress, Map<String, Object> data)
+    {
+        data.put("billingAddress", billingAddress);
     }
 }
