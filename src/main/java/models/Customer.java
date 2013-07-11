@@ -100,7 +100,7 @@ public class Customer
     {
         this.deliveryAddress = deliveryAddress;
     }
-    
+
     public void addDeliveryAddress(DeliveryAddress deliveryAddress)
     {
         this.deliveryAddress.add(deliveryAddress);
@@ -115,7 +115,7 @@ public class Customer
     {
         this.billingAddress = billingAddress;
     }
-    
+
     public void addBillingAddress(BillingAddress billingAddress)
     {
         this.billingAddress.add(billingAddress);
@@ -164,11 +164,6 @@ public class Customer
     public void addCreditCard(CreditCard creditCard)
     {
         this.creditCard.add(creditCard);
-    }
-
-    public void deleteCreditCard(CreditCard creditCard)
-    {
-        this.creditCard.remove(creditCard);
     }
 
     public void update()
