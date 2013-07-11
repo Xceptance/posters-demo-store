@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.avaje.ebean.Ebean;
 
@@ -18,6 +20,9 @@ public class DeliveryAddress
 
     @Id
     private int id;
+    
+    @Version
+    private Timestamp lastUpdate;
 
     private String name;
 
@@ -36,7 +41,7 @@ public class DeliveryAddress
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Order> order;
 
     public int getId()
@@ -137,6 +142,16 @@ public class DeliveryAddress
     public void setOrder(List<Order> order)
     {
         this.order = order;
+    }
+
+    public Timestamp getLastUpdate()
+    {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate)
+    {
+        this.lastUpdate = lastUpdate;
     }
 
     public void update()

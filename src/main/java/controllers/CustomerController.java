@@ -11,6 +11,7 @@ import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
+import util.database.AddressInformation;
 import util.database.CarouselInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
@@ -257,12 +258,62 @@ public class CustomerController
     public Result deletePayment(@Param("cardId") int cardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        // get customer by session id
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // remove payment information
-        customer.deleteCreditCard(CreditCardInformation.getCreditCardById(cardId));
-        // update customer
-        Ebean.save(customer);
+
+        CreditCardInformation.deleteCreditCardFromCustomer(cardId);
+
+        CommonInformation.setCommonData(data, context);
+        // return info page
+        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+    }
+    
+    /**
+     * Returns an overview page of billing and delivery addresses of the customer.
+     * 
+     * @param context
+     * @return
+     */
+    public Result addressOverview(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        CustomerInformation.addAddressOfCustomerToMap(context, data);
+
+        CommonInformation.setCommonData(data, context);
+        return Results.html().render(data);
+    }
+    
+    /**
+     * Removes a billing address of the customer.
+     * 
+     * @param cardId
+     * @param context
+     * @return
+     */
+    public Result deleteBillingAddress(@Param("addressId") int addressId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        // remove billing address
+        AddressInformation.deleteBillingAddressFromCustomer(addressId);
+
+        CommonInformation.setCommonData(data, context);
+        // return info page
+        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+    }
+    
+    /**
+     * Removes a delivery address of the customer.
+     * 
+     * @param cardId
+     * @param context
+     * @return
+     */
+    public Result deleteDeliveryAddress(@Param("addressId") int addressId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        // remove delivery address
+        AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
 
         CommonInformation.setCommonData(data, context);
         // return info page

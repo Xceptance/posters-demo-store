@@ -36,7 +36,7 @@ public class BillingAddress
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Order> order;
 
     public int getId()

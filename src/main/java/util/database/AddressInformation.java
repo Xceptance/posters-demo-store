@@ -17,4 +17,18 @@ public abstract class AddressInformation
     {
         return Ebean.find(BillingAddress.class, id);
     }
+
+    public static void deleteDeliveryAddressFromCustomer(int id)
+    {
+        DeliveryAddress address = getDeliveryAddressById(id);
+        address.setCustomer(null);
+        address.update();
+    }
+
+    public static void deleteBillingAddressFromCustomer(int id)
+    {
+        BillingAddress address = getBillingAddressById(id);
+        address.setCustomer(null);
+        address.update();
+    }
 }
