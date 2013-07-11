@@ -6,7 +6,10 @@ import java.util.Map;
 
 import models.Basket;
 import models.Basket_Product;
+import models.Customer;
 import models.Product;
+import ninja.Context;
+import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
 
@@ -98,5 +101,18 @@ public abstract class BasketInformation
         // delete product from basket
         basket.deleteProduct(product);
         basket.update();
+    }
+
+    public static void setCustomerToBasket(Context context, Basket basket)
+    {
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            basket.setCustomer(customer);
+            basket.update();
+            
+            customer.setBasket(basket);
+            customer.update();
+        }
     }
 }

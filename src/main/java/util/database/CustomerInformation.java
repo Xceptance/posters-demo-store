@@ -3,6 +3,8 @@ package util.database;
 import java.util.List;
 import java.util.Map;
 
+import models.Basket;
+import models.Basket_Product;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
@@ -232,5 +234,27 @@ public abstract class CustomerInformation
             customer.addBillingAddress(billingAddress);
             customer.update();
         }
+    }
+
+    public static void mergeCurrentBasketAndCustomerBasket(Context context)
+    {
+        // get current basket
+        Basket currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        // get basket of customer
+        Basket customerBasket = BasketInformation.getBasketById(CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context))
+                                                                                   .getBasket().getId());
+        if (customerBasket == null)
+        {
+            customerBasket = new Basket();
+            customerBasket.save();
+        }
+        for (Basket_Product basket_Product : currentBasket.getProducts())
+        {
+            for (int i = 0; i < basket_Product.getCountProduct(); i++)
+            {
+                customerBasket.addProduct(basket_Product.getProduct());
+            }
+        }
+        customerBasket.update();
     }
 }

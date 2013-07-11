@@ -40,6 +40,8 @@ public class BasketController
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // put basket id to session
         SessionHandling.setBasketId(context, basket.getId());
+        // set customer to basket
+        BasketInformation.setCustomerToBasket(context, basket);
         // add product to basket
         BasketInformation.addProductToBasket(basket, product);
         // put basket to data map
@@ -73,7 +75,7 @@ public class BasketController
         // delete all of this products
         for (int i = 0; i < countProduct; i++)
         {
-            basket.deleteProduct(product);
+            BasketInformation.removeProductFromBasket(basket, product);
         }
         // put basket to data map
         BasketInformation.addBasketDetailToMap(basket, data);

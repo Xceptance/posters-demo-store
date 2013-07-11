@@ -48,6 +48,12 @@ public class CustomerController
             Customer customer = CustomerInformation.getCustomerByEmail(email);
             // put customer id to session
             SessionHandling.setCustomerId(context, customer.getId());
+            // add products of current basket to customer's basket
+            CustomerInformation.mergeCurrentBasketAndCustomerBasket(context);
+            // delete current basket
+            SessionHandling.deleteBasketId(context);
+            // put customer's basket id to session
+            SessionHandling.setBasketId(context, customer.getBasket().getId());
             // put products for carousel to data map
             CarouselInformation.getCarouselProducts(data);
             // return home page
