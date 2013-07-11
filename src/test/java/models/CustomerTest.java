@@ -1,0 +1,41 @@
+package models;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import util.database.AddressInformation;
+
+import com.avaje.ebean.Ebean;
+
+public class CustomerTest
+{
+
+    Customer customer;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        customer = new Customer();
+        customer.setEmail("email");
+        customer.setPassword("password");
+        customer.save();
+    }
+
+    @Test
+    public void testAddAndDeleteDeliveryAddress()
+    {
+        DeliveryAddress address = new DeliveryAddress();
+        address.setName("customer");
+        customer.addDeliveryAddress(address);
+        customer.update();
+
+        Assert.assertTrue(customer.getDeliveryAddress().contains(address));
+
+        DeliveryAddress addedAddress = AddressInformation.getDeliveryAddressById(address.getId());
+        AddressInformation.deleteDeliveryAddressFromCustomer(addedAddress.getId());
+        Customer newCustomer = Ebean.find(Customer.class, customer.getId());
+        Assert.assertEquals(0, newCustomer.getDeliveryAddress().size());
+    }
+
+}
