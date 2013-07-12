@@ -8,70 +8,7 @@
 <!-- Form Name -->
 <legend>Add new delivery address</legend>
 
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="fullName">Full name:</label>
-  <div class="controls">
-    <input id="fullName" name="fullName" placeholder="" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="addressLine1">Address Line 1:</label>
-  <div class="controls">
-    <input id="addressLine1" name="addressLine1" placeholder="Street address, company name" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="addressLine2">Address Line 2:</label>
-  <div class="controls">
-    <input id="addressLine2" name="addressLine2" placeholder="Apartment, suite, floor, etc." class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="city">City:</label>
-  <div class="controls">
-    <input id="city" name="city" placeholder="" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="state">State / Province / Region:</label>
-  <div class="controls">
-    <input id="state" name="state" placeholder="" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="zip">ZIP:</label>
-  <div class="controls">
-    <input id="zip" name="zip" placeholder="" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="control-group">
-  <label class="control-label" for="country">Country:</label>
-  <div class="controls">
-    <select id="country" name="country" class="input-xlarge">
-      <option>United States</option>
-      <option>Germany</option>
-    </select>
-  </div>
-</div>
+<#include "../form/addressForm.ftl.html"/>
 
 <!-- Button -->
 <div class="control-group">

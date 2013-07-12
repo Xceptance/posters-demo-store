@@ -345,7 +345,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        AddressInformation.addDeliveryAddressToMap(AddressInformation.getDeliveryAddressById(addressId), data);
+        data.put("address", AddressInformation.getDeliveryAddressById(addressId));
 
         CommonInformation.setCommonData(data, context);
         // return info page
@@ -405,7 +405,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        AddressInformation.addBillingAddressToMap(AddressInformation.getBillingAddressById(addressId), data);
+        data.put("address", AddressInformation.getBillingAddressById(addressId));
 
         CommonInformation.setCommonData(data, context);
         // return info page

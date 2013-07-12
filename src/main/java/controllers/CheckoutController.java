@@ -158,6 +158,8 @@ public class CheckoutController
         // billing and delivery address are not equal
         else
         {
+            // put address information of customer to data map
+            CustomerInformation.addAddressOfCustomerToMap(context, data);
             // return page to enter billing address
             template = "views/CheckoutController/billingAddress.ftl.html";
         }
