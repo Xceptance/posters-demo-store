@@ -20,6 +20,24 @@
     <body>
 		<div class="container-fluid">
 			<#include "headerWebShop.ftl.html"/>
+			<#if errorMessage??>
+				<div class="alert alert-error">  
+  					<a class="close" data-dismiss="alert">×</a>  
+  					<strong>${errorMessage}</strong>  
+				</div> 
+			</#if>
+			<#if successMessage??>
+				<div class="alert alert-success">  
+  					<a class="close" data-dismiss="alert">×</a>  
+  					<strong>${successMessage}</strong> 
+				</div> 
+			</#if>
+			<#if infoMessage??>
+				<div class="alert alert-info">  
+  					<a class="close" data-dismiss="alert">×</a>  
+  					<strong>${infoMessage}</strong>  
+				</div> 
+			</#if>
 			<div class="row">
 				<div class="span10-fluid">
 					<p>
