@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import models.Basket;
 import models.BillingAddress;
@@ -37,17 +38,17 @@ public class CheckoutController
     public Result checkout(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context);
+        String template;
 
-        String template = "";
         // get basket by session id
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // check, if the basket is empty
         if (basket.getProducts().size() == 0)
         {
-            // return error page
-            template = "views/error/emptyBasket.ftl.html";
+            // show info
+            data.put("infoMessage", "The basket is empty! Browse for some nice posters and put them in the basket.");
+            template = "views/BasketController/basketOverview.ftl.html";
         }
         // start checkout, if the basket is not empty
         else
@@ -97,74 +98,94 @@ public class CheckoutController
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context);
-
-        // create delivery address
-        DeliveryAddress deliveryAddress = new DeliveryAddress();
-        deliveryAddress.setName(name);
-        deliveryAddress.setAddressline1(addressLine1);
-        deliveryAddress.setAddressline2(addressLine2);
-        deliveryAddress.setCity(city);
-        deliveryAddress.setState(state);
-        deliveryAddress.setZip(Integer.parseInt(zip));
-        deliveryAddress.setCountry(country);
-        // set new address to customer
-        if (SessionHandling.isCustomerLogged(context))
-        {
-            CustomerInformation.addDeliveryAddressToCustomer(context, deliveryAddress);
-        }
-        // save delivery address
-        else
-        {
-            deliveryAddress.save();
-        }
-        // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
-        // set delivery address to order
-        order.setDeliveryAddress(deliveryAddress);
-
         String template;
 
-        // billing address is equal to delivery address
-        if (billingEqualDelivery.equals("Yes"))
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
         {
-            // create billing address
-            BillingAddress billingAddress = new BillingAddress();
-            billingAddress.setName(name);
-            billingAddress.setAddressline1(addressLine1);
-            billingAddress.setAddressline2(addressLine2);
-            billingAddress.setCity(city);
-            billingAddress.setState(state);
-            billingAddress.setZip(Integer.parseInt(zip));
-            billingAddress.setCountry(country);
+            // error message
+            data.put("errorMessage", "Wrong ZIP, please type again.");
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("name", name);
+            address.put("addressline1", addressLine1);
+            address.put("addressline2", addressLine2);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter delivery address again
+            template = "views/CheckoutController/deliveryAddress.ftl.html";
+        }
+        // all input fields might be correct
+        else
+        {
+            // create delivery address
+            DeliveryAddress deliveryAddress = new DeliveryAddress();
+            deliveryAddress.setName(name);
+            deliveryAddress.setAddressline1(addressLine1);
+            deliveryAddress.setAddressline2(addressLine2);
+            deliveryAddress.setCity(city);
+            deliveryAddress.setState(state);
+            deliveryAddress.setZip(Integer.parseInt(zip));
+            deliveryAddress.setCountry(country);
             // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
             {
-                CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+                CustomerInformation.addDeliveryAddressToCustomer(context, deliveryAddress);
             }
-            // save billing address
+            // save delivery address
             else
             {
-                billingAddress.save();
+                deliveryAddress.save();
             }
-            // set billing address to order
-            order.setBillingAddress(billingAddress);
-            // add payment information to map
-            CustomerInformation.addPaymentOfCustomerToMap(context, data);
-            // return page to enter payment information
-            template = "views/CheckoutController/paymentMethod.ftl.html";
+            // get order by session id
+            Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+            // set delivery address to order
+            order.setDeliveryAddress(deliveryAddress);
+
+            // billing address is equal to delivery address
+            if (billingEqualDelivery.equals("Yes"))
+            {
+                // create billing address
+                BillingAddress billingAddress = new BillingAddress();
+                billingAddress.setName(name);
+                billingAddress.setAddressline1(addressLine1);
+                billingAddress.setAddressline2(addressLine2);
+                billingAddress.setCity(city);
+                billingAddress.setState(state);
+                billingAddress.setZip(Integer.parseInt(zip));
+                billingAddress.setCountry(country);
+                // set new address to customer
+                if (SessionHandling.isCustomerLogged(context))
+                {
+                    CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+                }
+                // save billing address
+                else
+                {
+                    billingAddress.save();
+                }
+                // set billing address to order
+                order.setBillingAddress(billingAddress);
+                // add payment information to map
+                CustomerInformation.addPaymentOfCustomerToMap(context, data);
+                // return page to enter payment information
+                template = "views/CheckoutController/paymentMethod.ftl.html";
+            }
+            // billing and delivery address are not equal
+            else
+            {
+                // put address information of customer to data map
+                CustomerInformation.addAddressOfCustomerToMap(context, data);
+                // return page to enter billing address
+                template = "views/CheckoutController/billingAddress.ftl.html";
+            }
+            // update order
+            order.update();
         }
-        // billing and delivery address are not equal
-        else
-        {
-            // put address information of customer to data map
-            CustomerInformation.addAddressOfCustomerToMap(context, data);
-            // return page to enter billing address
-            template = "views/CheckoutController/billingAddress.ftl.html";
-        }
-        // update order
-        order.update();
         return Results.html().render(data).template(template);
     }
 
@@ -215,38 +236,60 @@ public class CheckoutController
                                           @Param("country") String country, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context);
+        String template;
 
-        // create new billing address
-        BillingAddress billingAddress = new BillingAddress();
-        billingAddress.setName(name);
-        billingAddress.setAddressline1(addressLine1);
-        billingAddress.setAddressline2(addressLine2);
-        billingAddress.setCity(city);
-        billingAddress.setState(state);
-        billingAddress.setZip(Integer.parseInt(zip));
-        billingAddress.setCountry(country);
-        // set new address to customer
-        if (SessionHandling.isCustomerLogged(context))
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
         {
-            CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+            // error message
+            data.put("errorMessage", "Wrong ZIP, please type again.");
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("name", name);
+            address.put("addressline1", addressLine1);
+            address.put("addressline2", addressLine2);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter billing address again
+            template = "views/CheckoutController/billingAddress.ftl.html";
         }
-        // save billing address
+        // all input fields might be correct
         else
         {
-            billingAddress.save();
+            // create new billing address
+            BillingAddress billingAddress = new BillingAddress();
+            billingAddress.setName(name);
+            billingAddress.setAddressline1(addressLine1);
+            billingAddress.setAddressline2(addressLine2);
+            billingAddress.setCity(city);
+            billingAddress.setState(state);
+            billingAddress.setZip(Integer.parseInt(zip));
+            billingAddress.setCountry(country);
+            // set new address to customer
+            if (SessionHandling.isCustomerLogged(context))
+            {
+                CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+            }
+            // save billing address
+            else
+            {
+                billingAddress.save();
+            }
+            // get order by session id
+            Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+            // set billing address to order
+            order.setBillingAddress(billingAddress);
+            // return page to enter payment information
+            template = "views/CheckoutController/paymentMethod.ftl.html";
+            // add payment information to map
+            CustomerInformation.addPaymentOfCustomerToMap(context, data);
+            // update order
+            Ebean.save(order);
         }
-        // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
-        // set billing address to order
-        order.setBillingAddress(billingAddress);
-        // return page to enter payment information
-        String template = "views/CheckoutController/paymentMethod.ftl.html";
-        // add payment information to map
-        CustomerInformation.addPaymentOfCustomerToMap(context, data);
-        // update order
-        Ebean.save(order);
         return Results.html().render(data).template(template);
     }
 
@@ -288,48 +331,66 @@ public class CheckoutController
      * @param context
      * @return
      */
-    public Result paymentMethodCompleted(@Param("creditCardNumber") int creditNumber, @Param("name") String name,
+    public Result paymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") String name,
                                          @Param("expirationDateMonth") int month,
                                          @Param("expirationDateYear") int year, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context);
-
-        // create new credit card
-        CreditCard creditCard = new CreditCard();
-        creditCard.setNumber(creditNumber);
-        creditCard.setName(name);
-        creditCard.setMonth(month);
-        creditCard.setYear(year);
-        // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
-        // set credit card to order
-        order.setCreditCard(creditCard);
-        // set new credit card to customer
-        if (SessionHandling.isCustomerLogged(context))
+        String template;
+        // replace spaces and dashes
+        creditNumber = creditNumber.replaceAll("[ -]+", "");
+        // check input
+        if (!Pattern.matches("4[0-9]{12}(?:[0-9]{3})?", creditNumber))
         {
-            CustomerInformation.addPaymentToCustomer(context, creditCard);
+            // error message
+            data.put("errorMessage", "Wrong credit card number, please type again.");
+            // show inserted values in form
+            Map<String, String> card = new HashMap<String, String>();
+            card.put("name", name);
+            card.put("number", creditNumber);
+            data.put("card", card);
+            // show page to enter delivery address again
+            template = "views/CheckoutController/paymentMethod.ftl.html";
         }
-        // save credit card
+        // all input fields might be correct
         else
         {
-            creditCard.save();
+            // create new credit card
+            CreditCard creditCard = new CreditCard();
+            creditCard.setNumber(Integer.parseInt(creditNumber));
+            creditCard.setName(name);
+            creditCard.setMonth(month);
+            creditCard.setYear(year);
+            // get order by session id
+            Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+            // set credit card to order
+            order.setCreditCard(creditCard);
+            // set new credit card to customer
+            if (SessionHandling.isCustomerLogged(context))
+            {
+                CustomerInformation.addPaymentToCustomer(context, creditCard);
+            }
+            // save credit card
+            else
+            {
+                creditCard.save();
+            }
+            // set shipping costs to order
+            order.setShippingCosts(6.99);
+            // set tax to order
+            order.setTax(0.06);
+            // calculate total costs
+            order.addShippingCostsToTotalCosts();
+            order.addTaxToTotalCosts();
+            // add order to data map
+            OrderInformation.addOrderToMap(order, data);
+            OrderInformation.addProductsFromOrderToMap(order, data);
+            // return page to get an overview of the checkout
+            template = "views/CheckoutController/checkoutOverview.ftl.html";
+            // update order
+            Ebean.save(order);
         }
-        // set shipping costs to order
-        order.setShippingCosts(6.99);
-        // set tax to order
-        order.setTax(0.06);
-        // calculate total costs
-        order.addShippingCostsToTotalCosts();
-        order.addTaxToTotalCosts();
-        // add order to data map
-        OrderInformation.addOrderToMap(order, data);
-        OrderInformation.addProductsFromOrderToMap(order, data);
-        // return page to get an overview of the checkout
-        String template = "views/CheckoutController/checkoutOverview.ftl.html";
-        // update order
-        Ebean.save(order);
         return Results.html().render(data).template(template);
     }
 
@@ -405,7 +466,8 @@ public class CheckoutController
         SessionHandling.deleteOrderId(context);
 
         CommonInformation.setCommonData(data, context);
-
-        return Results.html().render(data);
+        // show success message
+        data.put("successMessage", "Thank you for buying at XC-Poster!");
+        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
     }
 }
