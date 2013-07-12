@@ -223,7 +223,7 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") int creditNumber,
+    public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") String creditNumber,
                                                 @Param("name") String name, @Param("expirationDateMonth") int month,
                                                 @Param("expirationDateYear") int year, Context context)
     {

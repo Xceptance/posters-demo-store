@@ -3,7 +3,6 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,7 +19,7 @@ public class CreditCard
     @Id
     private int id;
 
-    private int number;
+    private String number;
 
     private String name;
 
@@ -49,12 +48,12 @@ public class CreditCard
         this.id = id;
     }
 
-    public int getNumber()
+    public String getNumber()
     {
         return number;
     }
 
-    public void setNumber(int number)
+    public void setNumber(String number)
     {
         this.number = number;
     }

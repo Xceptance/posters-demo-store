@@ -358,7 +358,7 @@ public class CheckoutController
         {
             // create new credit card
             CreditCard creditCard = new CreditCard();
-            creditCard.setNumber(Integer.parseInt(creditNumber));
+            creditCard.setNumber(creditNumber);
             creditCard.setName(name);
             creditCard.setMonth(month);
             creditCard.setYear(year);
