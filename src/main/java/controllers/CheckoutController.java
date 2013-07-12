@@ -54,7 +54,9 @@ public class CheckoutController
         {
             // create new order
             Order order = OrderInformation.createNewOrder();
-            // put order id to session
+            // delete old order from session
+            SessionHandling.deleteOrderId(context);
+            // put new order id to session
             SessionHandling.setOrderId(context, order.getId());
             // set basket to order
             order.addProductsFromBasket(basket);
@@ -63,10 +65,6 @@ public class CheckoutController
             // customer is logged
             if (SessionHandling.isCustomerLogged(context))
             {
-                // get customer by session id
-                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-                // set customer to order
-                order.setCustomer(customer);
                 // put address information of customer to data map
                 CustomerInformation.addAddressOfCustomerToMap(context, data);
             }
@@ -382,6 +380,15 @@ public class CheckoutController
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set date to order
         order.setDate(DateUtils.getCurrentDate());
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // get customer by session id
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // remove basket from customer
+            customer.setBasket(null);
+            // set customer to order
+            order.setCustomer(customer);
+        }
         // update order
         Ebean.save(order);
         // get basket by session id
