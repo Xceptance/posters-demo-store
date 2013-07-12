@@ -128,21 +128,27 @@ public class CustomerController
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        // create new customer
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setFirstName(firstName);
-        customer.setEmail(email);
-        customer.setPassword(password);
-        // save customer
-        Ebean.save(customer);
-        // put customer id to session
-        SessionHandling.setCustomerId(context, customer.getId());
-
+        String template;
+        if (password.equals(passwordAgain))
+        {
+            // create new customer
+            Customer customer = new Customer();
+            customer.setName(name);
+            customer.setFirstName(firstName);
+            customer.setEmail(email);
+            customer.hashPasswd(password);
+            // save customer
+            Ebean.save(customer);
+            // put customer id to session
+            SessionHandling.setCustomerId(context, customer.getId());
+            template = "views/CustomerController/registrationCompleted.ftl.html";
+        }
+        else
+        {
+            template = "views/error/mainError.ftl.html";
+        }
         CommonInformation.setCommonData(data, context);
-
-        return Results.html().render(data);
+        return Results.html().render(data).template(template);
     }
 
     /**

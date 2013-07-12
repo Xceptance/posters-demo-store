@@ -52,12 +52,12 @@ public abstract class CustomerInformation
     {
         boolean correctPassword = false;
         // get customer by email
-        Customer customerExist = Ebean.find(Customer.class).where().eq("email", email).findUnique();
+        Customer customer = Ebean.find(Customer.class).where().eq("email", email).findUnique();
         // customer exist
-        if (customerExist != null)
+        if (customer != null)
         {
             // the given password is equal to customer's password
-            if (customerExist.getPassword().equals(password))
+            if (customer.checkPasswd(password));
             {
                 correctPassword = true;
             }

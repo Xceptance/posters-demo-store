@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.avaje.ebean.Ebean;
 
 @Entity
@@ -164,6 +166,27 @@ public class Customer
     public void addCreditCard(CreditCard creditCard)
     {
         this.creditCard.add(creditCard);
+    }
+
+    /**
+     * Hashes the given password and sets to the current password.
+     * 
+     * @param password
+     */
+    public void hashPasswd(String password)
+    {
+        setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+    }
+
+    /**
+     * Returns true, if the given password is equal to the customer's password.
+     * 
+     * @param password
+     * @return
+     */
+    public boolean checkPasswd(String password)
+    {
+        return BCrypt.checkpw(password, this.password);
     }
 
     public void update()

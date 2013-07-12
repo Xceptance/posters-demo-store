@@ -23,6 +23,20 @@ public class CustomerTest
     }
 
     @Test
+    public void testCreateCustomer()
+    {
+        Customer customer = new Customer();
+        customer.setEmail("email");
+        customer.hashPasswd("password");
+        customer.save();
+
+        Customer savedCustomer = Ebean.find(Customer.class, customer.getId());
+        Assert.assertNotNull(savedCustomer);
+        Assert.assertNotSame("password", savedCustomer.getPassword());
+        Assert.assertTrue(savedCustomer.checkPasswd("password"));
+    }
+
+    @Test
     public void testAddAndDeleteDeliveryAddress()
     {
         DeliveryAddress address = new DeliveryAddress();
