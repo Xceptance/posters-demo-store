@@ -469,7 +469,7 @@ public class CustomerController
             address.setAddressline2(addressLine2);
             address.setCity(city);
             address.setState(state);
-            address.setZip(Integer.parseInt(zip));
+            address.setZip(zip);
             address.setCountry(country);
             address.update();
             // success message
@@ -552,7 +552,7 @@ public class CustomerController
             address.setAddressline2(addressLine2);
             address.setCity(city);
             address.setState(state);
-            address.setZip(Integer.parseInt(zip));
+            address.setZip(zip);
             address.setCountry(country);
             address.update();
             // success message
@@ -632,7 +632,7 @@ public class CustomerController
             address.setAddressline2(addressLine2);
             address.setCity(city);
             address.setState(state);
-            address.setZip(Integer.parseInt(zip));
+            address.setZip(zip);
             address.setCountry(country);
             // add address to customer
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
@@ -685,7 +685,7 @@ public class CustomerController
             address.setAddressline2(addressLine2);
             address.setCity(city);
             address.setState(state);
-            address.setZip(Integer.parseInt(zip));
+            address.setZip(zip);
             address.setCountry(country);
             // add address to customer
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));

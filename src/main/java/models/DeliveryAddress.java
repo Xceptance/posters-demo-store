@@ -3,7 +3,6 @@ package models;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,7 +19,7 @@ public class DeliveryAddress
 
     @Id
     private int id;
-    
+
     @Version
     private Timestamp lastUpdate;
 
@@ -36,7 +35,7 @@ public class DeliveryAddress
 
     private String country;
 
-    private int zip;
+    private String zip;
 
     @ManyToOne
     private Customer customer;
@@ -124,12 +123,12 @@ public class DeliveryAddress
         this.country = country;
     }
 
-    public int getZip()
+    public String getZip()
     {
         return zip;
     }
 
-    public void setZip(int zip)
+    public void setZip(String zip)
     {
         this.zip = zip;
     }

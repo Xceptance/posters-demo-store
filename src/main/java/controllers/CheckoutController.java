@@ -129,7 +129,7 @@ public class CheckoutController
             deliveryAddress.setAddressline2(addressLine2);
             deliveryAddress.setCity(city);
             deliveryAddress.setState(state);
-            deliveryAddress.setZip(Integer.parseInt(zip));
+            deliveryAddress.setZip(zip);
             deliveryAddress.setCountry(country);
             // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
@@ -156,7 +156,7 @@ public class CheckoutController
                 billingAddress.setAddressline2(addressLine2);
                 billingAddress.setCity(city);
                 billingAddress.setState(state);
-                billingAddress.setZip(Integer.parseInt(zip));
+                billingAddress.setZip(zip);
                 billingAddress.setCountry(country);
                 // set new address to customer
                 if (SessionHandling.isCustomerLogged(context))
@@ -267,7 +267,7 @@ public class CheckoutController
             billingAddress.setAddressline2(addressLine2);
             billingAddress.setCity(city);
             billingAddress.setState(state);
-            billingAddress.setZip(Integer.parseInt(zip));
+            billingAddress.setZip(zip);
             billingAddress.setCountry(country);
             // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
