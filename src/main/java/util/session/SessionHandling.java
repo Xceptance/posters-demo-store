@@ -57,20 +57,6 @@ public class SessionHandling
     }
 
     /**
-     * Sets user information to guest, if no user is registered in the session.
-     * 
-     * @param context
-     */
-    public static void setUnknownUser(Context context)
-    {
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("user") == null)
-        {
-            cookie.put("user", "guest");
-        }
-    }
-
-    /**
      * Overrides the user information in the session to guest.
      * 
      * @param context
@@ -78,7 +64,7 @@ public class SessionHandling
     public static void deleteCustomerId(Context context)
     {
         SessionCookie cookie = context.getSessionCookie();
-        cookie.put("user", "guest");
+        cookie.remove("user");
     }
 
     /**
@@ -118,10 +104,7 @@ public class SessionHandling
     public static void deleteOrderId(Context context)
     {
         SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("order") != null)
-        {
-            cookie.remove("order");
-        }
+        cookie.remove("order");
     }
 
     /**
@@ -164,10 +147,7 @@ public class SessionHandling
     public static void deleteBasketId(Context context)
     {
         SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("basket") != null)
-        {
-            cookie.remove("basket");
-        }
+        cookie.remove("basket");
     }
 
     /**
@@ -192,7 +172,7 @@ public class SessionHandling
     {
         boolean isLogged = true;
         SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("user") == null || cookie.get("user").equals("guest"))
+        if (cookie.get("user") == null)
         {
             isLogged = false;
         }

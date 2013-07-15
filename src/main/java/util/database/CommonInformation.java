@@ -20,12 +20,15 @@ public abstract class CommonInformation
     {
         // remember categories
         CategoryInformation.addCategoriesToMap(data);
-        // set session cookie
-        SessionHandling.setUnknownUser(context);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        // put basket id to session
-        SessionHandling.setBasketId(context, basket.getId());
+        if (basket == null)
+        {
+            basket = new Basket();
+            basket.save();
+            // put basket id to session
+            SessionHandling.setBasketId(context, basket.getId());
+        }
         // remember basket stuff
         BasketInformation.addBasketDetailToMap(basket, data);
         // remember logged customer

@@ -17,22 +17,14 @@ public abstract class BasketInformation
 {
 
     /**
-     * Returns the basket by the given id. Creates a new basket, if there is no basket with the given id.
+     * Returns the basket by the given id. Returns null, if no basket was found.
      * 
      * @param id
      * @return
      */
     public static Basket getBasketById(int id)
     {
-        Basket basket = Ebean.find(Basket.class, id);
-        // create new basket, if there is no basket with the given id
-        if (basket == null)
-        {
-            basket = new Basket();
-            // save basket
-            Ebean.save(basket);
-        }
-        return basket;
+        return Ebean.find(Basket.class, id);
     }
 
     /**
@@ -96,6 +88,12 @@ public abstract class BasketInformation
         basket.delete();
     }
 
+    /**
+     * Removes the given product from the given basket.
+     * 
+     * @param basket
+     * @param product
+     */
     public static void removeProductFromBasket(Basket basket, Product product)
     {
         // delete product from basket
@@ -103,14 +101,20 @@ public abstract class BasketInformation
         basket.update();
     }
 
+    /**
+     * Sets the customer to the basket, if no one is set and a customer is logged.
+     * 
+     * @param context
+     * @param basket
+     */
     public static void setCustomerToBasket(Context context, Basket basket)
     {
-        if (SessionHandling.isCustomerLogged(context))
+        if (SessionHandling.isCustomerLogged(context) && basket.getCustomer() == null)
         {
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             basket.setCustomer(customer);
             basket.update();
-            
+
             customer.setBasket(basket);
             customer.update();
         }
