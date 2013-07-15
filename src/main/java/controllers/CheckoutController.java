@@ -16,6 +16,7 @@ import ninja.Results;
 import ninja.params.Param;
 import util.database.AddressInformation;
 import util.database.BasketInformation;
+import util.database.CarouselInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
@@ -348,7 +349,7 @@ public class CheckoutController
             // show inserted values in form
             Map<String, String> card = new HashMap<String, String>();
             card.put("name", name);
-            card.put("number", creditNumber);
+            card.put("cardNumber", creditNumber);
             data.put("card", card);
             // show page to enter delivery address again
             template = "views/CheckoutController/paymentMethod.ftl.html";
@@ -358,7 +359,7 @@ public class CheckoutController
         {
             // create new credit card
             CreditCard creditCard = new CreditCard();
-            creditCard.setNumber(creditNumber);
+            creditCard.setCardNumber(creditNumber);
             creditCard.setName(name);
             creditCard.setMonth(month);
             creditCard.setYear(year);
@@ -442,7 +443,7 @@ public class CheckoutController
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set date to order
-        order.setDate(DateUtils.getCurrentDate());
+        order.setOrderDate(DateUtils.getCurrentDate());
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer by session id
@@ -468,6 +469,8 @@ public class CheckoutController
         CommonInformation.setCommonData(data, context);
         // show success message
         data.put("successMessage", "Thank you for buying at XC-Poster!");
+        // remember products for carousel
+        CarouselInformation.getCarouselProducts(data);
         return Results.html().render(data).template("views/WebShopController/index.ftl.html");
     }
 }

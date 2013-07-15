@@ -19,7 +19,7 @@ public class CreditCard
     @Id
     private int id;
 
-    private String number;
+    private String cardNumber;
 
     private String name;
 
@@ -48,14 +48,14 @@ public class CreditCard
         this.id = id;
     }
 
-    public String getNumber()
+    public String getCardNumber()
     {
-        return number;
+        return cardNumber;
     }
 
-    public void setNumber(String number)
+    public void setCardNumber(String cardNumber)
     {
-        this.number = number;
+        this.cardNumber = cardNumber;
     }
 
     public String getName()

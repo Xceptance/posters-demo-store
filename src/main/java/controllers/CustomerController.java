@@ -280,7 +280,7 @@ public class CustomerController
             // show inserted values in form
             Map<String, String> card = new HashMap<String, String>();
             card.put("name", name);
-            card.put("number", creditNumber);
+            card.put("cardNumber", creditNumber);
             data.put("card", card);
             // show page to enter delivery address again
             template = "views/CustomerController/addPaymentToCustomer.ftl.html";
@@ -292,7 +292,7 @@ public class CustomerController
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             // create new credit card
             CreditCard creditCard = new CreditCard();
-            creditCard.setNumber(creditNumber);
+            creditCard.setCardNumber(creditNumber);
             creditCard.setName(name);
             creditCard.setMonth(month);
             creditCard.setYear(year);

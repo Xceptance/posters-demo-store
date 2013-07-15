@@ -20,7 +20,7 @@ public class Order
     @Id
     private int id;
 
-    private String date;
+    private String orderDate;
 
     @ManyToOne
     private DeliveryAddress deliveryAddress;
@@ -146,14 +146,14 @@ public class Order
         this.products = products;
     }
 
-    public String getDate()
+    public String getOrderDate()
     {
-        return date;
+        return orderDate;
     }
 
-    public void setDate(String date)
+    public void setOrderDate(String date)
     {
-        this.date = date;
+        this.orderDate = date;
     }
 
     public void update()
@@ -168,12 +168,12 @@ public class Order
 
     public void addTaxToTotalCosts()
     {
-         this.setTotalCosts(this.getTotalCosts() * this.getTax() + this.getTotalCosts());
+        this.setTotalCosts(this.getTotalCosts() * this.getTax() + this.getTotalCosts());
     }
-    
+
     public void addShippingCostsToTotalCosts()
     {
-         this.setTotalCosts(this.getShippingCosts() + this.getTotalCosts());
+        this.setTotalCosts(this.getShippingCosts() + this.getTotalCosts());
     }
 
     private void addProduct(Product product)
