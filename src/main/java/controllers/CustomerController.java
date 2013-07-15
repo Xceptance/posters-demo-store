@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import com.avaje.ebean.Ebean;
 
@@ -34,47 +35,51 @@ public class CustomerController
      */
     public Result login(@Param("email") String email, @Param("password") String password, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
-        // exists the given email in the database
-        boolean emailExist = CustomerInformation.emailExist(email);
-        // is the password correct
-        boolean correctPassowrd = CustomerInformation.correctPassword(email, password);
-        String template;
-        // email and password are correct
-        if (emailExist && correctPassowrd)
+        // is email valid
+        if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
         {
-            // get customer by the given email
-            Customer customer = CustomerInformation.getCustomerByEmail(email);
-            // put customer id to session
-            SessionHandling.setCustomerId(context, customer.getId());
-            // add products of current basket to customer's basket
-            CustomerInformation.mergeCurrentBasketAndCustomerBasket(context);
-            // delete current basket
-            SessionHandling.deleteBasketId(context);
-            // put customer's basket id to session
-            SessionHandling.setBasketId(context, customer.getBasket().getId());
-            // put products for carousel to data map
-            CarouselInformation.getCarouselProducts(data);
-            // return home page
-            template = "views/WebShopController/index.ftl.html";
+            // error message
+            data.put("errorMessage", "Please enter a valid email address.");
         }
-        // user exist, wrong password
-        else if (emailExist && !correctPassowrd)
-        {
-            // show error page
-            template = "views/error/mainError.ftl.html";
-        }
-        // wrong email
         else
         {
-            // show error page
-            template = "views/error/mainError.ftl.html";
+            // exists the given email in the database
+            boolean emailExist = CustomerInformation.emailExist(email);
+            // is the password correct
+            boolean correctPassowrd = CustomerInformation.correctPassword(email, password);
+            // email and password are correct
+            if (emailExist && correctPassowrd)
+            {
+                // get customer by the given email
+                Customer customer = CustomerInformation.getCustomerByEmail(email);
+                // put customer id to session
+                SessionHandling.setCustomerId(context, customer.getId());
+                // add products of current basket to customer's basket
+                CustomerInformation.mergeCurrentBasketAndCustomerBasket(context);
+                // delete current basket
+                SessionHandling.deleteBasketId(context);
+                // put customer's basket id to session
+                Customer updatedCustomer = CustomerInformation.getCustomerByEmail(email);
+                SessionHandling.setBasketId(context, updatedCustomer.getBasket().getId());
+            }
+            // user exist, wrong password
+            else if (emailExist && !correctPassowrd)
+            {
+                // error message
+                data.put("errorMessage", "Incorrect password, please try again.");
+            }
+            // wrong email
+            else
+            {
+                // error message
+                data.put("errorMessage", "Your entered email address doesn't exist, please try again.");
+            }
         }
-
+        // put products for carousel to data map
+        CarouselInformation.getCarouselProducts(data);
         CommonInformation.setCommonData(data, context);
-
-        return Results.html().render(data).template(template);
+        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
     }
 
     /**
@@ -129,7 +134,44 @@ public class CustomerController
 
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
-        if (password.equals(passwordAgain))
+        // email must be unique
+        if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
+        {
+            // error message
+            data.put("errorMessage",
+                     "You indicated you are a new customer, but an account already exists with the e-mail.");
+            Map<String, String> registration = new HashMap<String, String>();
+            registration.put("name", name);
+            registration.put("firstName", firstName);
+            registration.put("email", email);
+            data.put("registration", registration);
+            template = "views/CustomerController/registration.ftl.html";
+        }
+        // is email valid
+        else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
+        {
+            // error message
+            data.put("errorMessage", "Please enter a valid email address.");
+            Map<String, String> registration = new HashMap<String, String>();
+            registration.put("name", name);
+            registration.put("firstName", firstName);
+            registration.put("email", email);
+            data.put("registration", registration);
+            template = "views/CustomerController/registration.ftl.html";
+        }
+        // passwords don't match
+        else if (!password.equals(passwordAgain))
+        {
+            // error message
+            data.put("errorMessage", "Please check that your passwords match and try again.");
+            Map<String, String> registration = new HashMap<String, String>();
+            registration.put("name", name);
+            registration.put("firstName", firstName);
+            registration.put("email", email);
+            data.put("registration", registration);
+            template = "views/CustomerController/registration.ftl.html";
+        }
+        else
         {
             // create new customer
             Customer customer = new Customer();
@@ -141,11 +183,9 @@ public class CustomerController
             Ebean.save(customer);
             // put customer id to session
             SessionHandling.setCustomerId(context, customer.getId());
-            template = "views/CustomerController/registrationCompleted.ftl.html";
-        }
-        else
-        {
-            template = "views/error/mainError.ftl.html";
+            // put products for carousel to data map
+            CarouselInformation.getCarouselProducts(data);
+            template = "views/WebShopController/index.ftl.html";
         }
         CommonInformation.setCommonData(data, context);
         return Results.html().render(data).template(template);
@@ -228,23 +268,43 @@ public class CustomerController
                                                 @Param("expirationDateYear") int year, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context);
-
-        // get customer by session id
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // create new credit card
-        CreditCard creditCard = new CreditCard();
-        creditCard.setNumber(creditNumber);
-        creditCard.setName(name);
-        creditCard.setMonth(month);
-        creditCard.setYear(year);
-        // add credit card to customer
-        customer.addCreditCard(creditCard);
-        // update customer
-        Ebean.save(customer);
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+        String template;
+        // replace spaces and dashes
+        creditNumber = creditNumber.replaceAll("[ -]+", "");
+        // check input
+        if (!Pattern.matches("4[0-9]{12}(?:[0-9]{3})?", creditNumber))
+        {
+            // error message
+            data.put("errorMessage", "Wrong credit card number, please type again.");
+            // show inserted values in form
+            Map<String, String> card = new HashMap<String, String>();
+            card.put("name", name);
+            card.put("number", creditNumber);
+            data.put("card", card);
+            // show page to enter delivery address again
+            template = "views/CustomerController/addPaymentToCustomer.ftl.html";
+        }
+        // all input fields might be correct
+        else
+        {
+            // get customer by session id
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // create new credit card
+            CreditCard creditCard = new CreditCard();
+            creditCard.setNumber(creditNumber);
+            creditCard.setName(name);
+            creditCard.setMonth(month);
+            creditCard.setYear(year);
+            // add credit card to customer
+            customer.addCreditCard(creditCard);
+            // update customer
+            customer.update();
+            // success message
+            data.put("successMessage", "Saving completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -276,8 +336,9 @@ public class CustomerController
         CreditCardInformation.deleteCreditCardFromCustomer(cardId);
 
         CommonInformation.setCommonData(data, context);
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+        // success message
+        data.put("successMessage", "Deleting completed.");
+        return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
     }
 
     /**
@@ -311,8 +372,9 @@ public class CustomerController
         AddressInformation.deleteBillingAddressFromCustomer(addressId);
 
         CommonInformation.setCommonData(data, context);
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+        // success message
+        data.put("successMessage", "Deleting completed.");
+        return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
     }
 
     /**
@@ -330,8 +392,9 @@ public class CustomerController
         AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
 
         CommonInformation.setCommonData(data, context);
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+        // success message
+        data.put("successMessage", "Deleting completed.");
+        return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
     }
 
     /**
@@ -348,7 +411,7 @@ public class CustomerController
         data.put("address", AddressInformation.getDeliveryAddressById(addressId));
 
         CommonInformation.setCommonData(data, context);
-        // return info page
+
         return Results.html().render(data);
     }
 
@@ -377,21 +440,43 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
 
         CommonInformation.setCommonData(data, context);
-
-        DeliveryAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
-
-        address.setName(name);
-        address.setAddressline1(addressLine1);
-        address.setAddressline2(addressLine2);
-        address.setCity(city);
-        address.setState(state);
-        address.setZip(Integer.parseInt(zip));
-        address.setCountry(country);
-
-        address.update();
-
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+        String template;
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
+        {
+            // error message
+            data.put("errorMessage", "Wrong ZIP, please type again.");
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("id", addressId);
+            address.put("name", name);
+            address.put("addressline1", addressLine1);
+            address.put("addressline2", addressLine2);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter delivery address again
+            template = "views/CustomerController/updateDeliveryAddress.ftl.html";
+        }
+        // all input fields might be correct
+        else
+        {
+            DeliveryAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+            address.setName(name);
+            address.setAddressline1(addressLine1);
+            address.setAddressline2(addressLine2);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(Integer.parseInt(zip));
+            address.setCountry(country);
+            address.update();
+            // success message
+            data.put("successMessage", "Updating completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -408,7 +493,7 @@ public class CustomerController
         data.put("address", AddressInformation.getBillingAddressById(addressId));
 
         CommonInformation.setCommonData(data, context);
-        // return info page
+
         return Results.html().render(data);
     }
 
@@ -437,21 +522,44 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
 
         CommonInformation.setCommonData(data, context);
+        String template;
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
+        {
+            // error message
+            data.put("errorMessage", "Wrong ZIP, please type again.");
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("id", addressId);
+            address.put("name", name);
+            address.put("addressline1", addressLine1);
+            address.put("addressline2", addressLine2);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter billing address again
+            template = "views/CustomerController/updateBillingAddress.ftl.html";
+        }
+        // all input fields might be correct
+        else
+        {
+            BillingAddress address = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
 
-        BillingAddress address = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
-
-        address.setName(name);
-        address.setAddressline1(addressLine1);
-        address.setAddressline2(addressLine2);
-        address.setCity(city);
-        address.setState(state);
-        address.setZip(Integer.parseInt(zip));
-        address.setCountry(country);
-
-        address.update();
-
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+            address.setName(name);
+            address.setAddressline1(addressLine1);
+            address.setAddressline2(addressLine2);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(Integer.parseInt(zip));
+            address.setCountry(country);
+            address.update();
+            // success message
+            data.put("successMessage", "Updating completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -495,23 +603,46 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
 
         CommonInformation.setCommonData(data, context);
+        String template;
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
+        {
+            // error message
+            data.put("errorMessage", "Wrong ZIP, please type again.");
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("name", name);
+            address.put("addressline1", addressLine1);
+            address.put("addressline2", addressLine2);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter delivery address again
+            template = "views/CustomerController/addDeliveryAddressToCustomer.ftl.html";
+        }
+        // all input fields might be correct
+        else
+        {
+            DeliveryAddress address = new DeliveryAddress();
 
-        DeliveryAddress address = new DeliveryAddress();
-
-        address.setName(name);
-        address.setAddressline1(addressLine1);
-        address.setAddressline2(addressLine2);
-        address.setCity(city);
-        address.setState(state);
-        address.setZip(Integer.parseInt(zip));
-        address.setCountry(country);
-        // add address to customer
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        customer.addDeliveryAddress(address);
-        customer.update();
-
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+            address.setName(name);
+            address.setAddressline1(addressLine1);
+            address.setAddressline2(addressLine2);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(Integer.parseInt(zip));
+            address.setCountry(country);
+            // add address to customer
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addDeliveryAddress(address);
+            customer.update();
+            // success message
+            data.put("successMessage", "Saving completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        return Results.html().render(data).template(template);
     }
 
     public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
@@ -525,22 +656,45 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
 
         CommonInformation.setCommonData(data, context);
+        String template;
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
+        {
+            // error message
+            data.put("errorMessage", "Wrong ZIP, please type again.");
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("name", name);
+            address.put("addressline1", addressLine1);
+            address.put("addressline2", addressLine2);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter billing address again
+            template = "views/CustomerController/addBillingAddressToCustomer.ftl.html";
+        }
+        // all input fields might be correct
+        else
+        {
+            BillingAddress address = new BillingAddress();
 
-        BillingAddress address = new BillingAddress();
-
-        address.setName(name);
-        address.setAddressline1(addressLine1);
-        address.setAddressline2(addressLine2);
-        address.setCity(city);
-        address.setState(state);
-        address.setZip(Integer.parseInt(zip));
-        address.setCountry(country);
-        // add address to customer
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        customer.addBillingAddress(address);
-        customer.update();
-
-        // return info page
-        return Results.html().render(data).template("views/info/savingComplete.ftl.html");
+            address.setName(name);
+            address.setAddressline1(addressLine1);
+            address.setAddressline2(addressLine2);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(Integer.parseInt(zip));
+            address.setCountry(country);
+            // add address to customer
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addBillingAddress(address);
+            customer.update();
+            // success message
+            data.put("successMessage", "Saving completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        return Results.html().render(data).template(template);
     }
 }
