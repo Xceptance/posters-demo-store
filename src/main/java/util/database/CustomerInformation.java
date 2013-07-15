@@ -57,7 +57,7 @@ public abstract class CustomerInformation
         if (customer != null)
         {
             // the given password is equal to customer's password
-            if (customer.checkPasswd(password));
+            if (customer.checkPasswd(password))
             {
                 correctPassword = true;
             }
@@ -241,8 +241,13 @@ public abstract class CustomerInformation
         // get current basket
         Basket currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // get basket of customer
-        Basket customerBasket = BasketInformation.getBasketById(CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context))
-                                                                                   .getBasket().getId());
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        if (customer.getBasket() == null)
+        {
+            customer.setBasket(new Basket());
+            customer.update();
+        }
+        Basket customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
         if (customerBasket == null)
         {
             customerBasket = new Basket();
