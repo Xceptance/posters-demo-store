@@ -1,9 +1,11 @@
 package util.database;
 
-import com.avaje.ebean.Ebean;
+import java.util.List;
 
 import models.CreditCard;
-import models.DeliveryAddress;
+import models.Customer;
+
+import com.avaje.ebean.Ebean;
 
 public abstract class CreditCardInformation
 {
@@ -26,5 +28,10 @@ public abstract class CreditCardInformation
         CreditCard card = getCreditCardById(id);
         card.setCustomer(null);
         card.update();
+    }
+
+    public static List<CreditCard> getAllCreditCardsOfCustomer(Customer customer)
+    {
+        return Ebean.find(CreditCard.class).where().eq("customer", customer).findList();
     }
 }

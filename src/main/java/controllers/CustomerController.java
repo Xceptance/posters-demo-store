@@ -1,15 +1,15 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import com.avaje.ebean.Ebean;
 
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
 import models.DeliveryAddress;
+import models.Order;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
@@ -19,7 +19,10 @@ import util.database.CarouselInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
+import util.database.OrderInformation;
 import util.session.SessionHandling;
+
+import com.avaje.ebean.Ebean;
 
 public class CustomerController
 {
@@ -592,6 +595,20 @@ public class CustomerController
         return Results.html().render(data);
     }
 
+    /**
+     * Adds a new delivery address to a customer.
+     * 
+     * @param name
+     * @param addressLine1
+     * @param addressLine2
+     * @param city
+     * @param state
+     * @param zip
+     * @param country
+     * @param addressId
+     * @param context
+     * @return
+     */
     public Result addDeliveryAddressToCustomerCompleted(@Param("fullName") String name,
                                                         @Param("addressLine1") String addressLine1,
                                                         @Param("addressLine2") String addressLine2,
@@ -645,6 +662,20 @@ public class CustomerController
         return Results.html().render(data).template(template);
     }
 
+    /**
+     * Adds a new billing address to a customer.
+     * 
+     * @param name
+     * @param addressLine1
+     * @param addressLine2
+     * @param city
+     * @param state
+     * @param zip
+     * @param country
+     * @param addressId
+     * @param context
+     * @return
+     */
     public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
                                                        @Param("addressLine1") String addressLine1,
                                                        @Param("addressLine2") String addressLine2,
@@ -696,5 +727,164 @@ public class CustomerController
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Returns a page to update the name and the email address of a customer.
+     * 
+     * @param customerId
+     * @param context
+     * @return
+     */
+    public Result changeNameOrEmail(@Param("customerId") String customerId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        Customer customer = CustomerInformation.getCustomerById(Integer.parseInt(customerId));
+        data.put("customer", customer);
+        return Results.html().render(data);
+    }
+
+    /**
+     * Updates the name and the email address of a customer.
+     * 
+     * @param name
+     * @param firstName
+     * @param email
+     * @param password
+     * @param context
+     * @return
+     */
+    public Result changeNameOrEmailCompleted(@Param("name") String name, @Param("firstName") String firstName,
+                                             @Param("eMail") String email, @Param("password") String password,
+                                             Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        String template;
+        boolean failure = false;
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // incorrect password
+        if (!CustomerInformation.correctPassword(customer.getEmail(), password))
+        {
+            // error message
+            data.put("errorMessage", "Incorrect password, please try again.");
+            failure = true;
+        }
+        else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
+        {
+            // error message
+            data.put("errorMessage", "Please enter a valid email address.");
+            failure = true;
+        }
+        if (failure)
+        {
+            Map<String, String> updatedCustomer = new HashMap<String, String>();
+            updatedCustomer.put("name", name);
+            updatedCustomer.put("firstName", firstName);
+            updatedCustomer.put("email", email);
+            data.put("customer", customer);
+            // show page to update name or email again
+            template = "views/CustomerController/changeNameOrEmail.ftl.html";
+        }
+        else
+        {
+            customer.setName(name);
+            customer.setFirstName(firstName);
+            customer.setEmail(email);
+            customer.update();
+            // success message
+            data.put("successMessage", "Updating completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        CommonInformation.setCommonData(data, context);
+        return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Returns a page to update the current password of a customer.
+     * 
+     * @param customerId
+     * @param context
+     * @return
+     */
+    public Result changePassword(@Param("customerId") String customerId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        return Results.html().render(data);
+    }
+
+    /**
+     * Updates the current password of a customer.
+     * 
+     * @param oldPassword
+     * @param password
+     * @param passwordAgain
+     * @param context
+     * @return
+     */
+    public Result changePasswordCompleted(@Param("oldPassword") String oldPassword, @Param("password") String password,
+                                          @Param("passwordAgain") String passwordAgain, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        boolean failure = false;
+        String template;
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // incorrect password
+        if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
+        {
+            // error message
+            data.put("errorMessage", "Incorrect password, please try again.");
+            failure = true;
+        }
+        // passwords don't match
+        else if (!password.equals(passwordAgain))
+        {
+            // error message
+            data.put("errorMessage", "Please check that your passwords match and try again.");
+            failure = true;
+        }
+        if (failure)
+        {
+            // show page to change password again
+            template = "views/CustomerController/changePassword.ftl.html";
+        }
+        else
+        {
+            customer.hashPasswd(password);
+            customer.update();
+            // success message
+            data.put("successMessage", "Updating completed.");
+            template = "views/CustomerController/accountOverview.ftl.html";
+        }
+        return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Deletes the current customer and all its addresses, orders and payment information.
+     * 
+     * @param customerId
+     * @param context
+     * @return
+     */
+    public Result deleteAccount(@Param("customerId") String customerId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // remove customer from session
+        SessionHandling.deleteCustomerId(context);
+        // remove basket from session
+        SessionHandling.deleteBasketId(context);
+        // remove customers orders, deletes also customer, deletes also addresses and payment information
+        List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
+        for (Order order : orders)
+        {
+            Ebean.delete(order);
+        }
+        // put products for carousel to data map
+        CarouselInformation.getCarouselProducts(data);
+        CommonInformation.setCommonData(data, context);
+        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
     }
 }

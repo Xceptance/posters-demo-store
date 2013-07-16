@@ -4,32 +4,31 @@
 	<h1>Settings overview</h1>
 	
 	<div class="row">
-		<div class="span3">
+		<div class="span5">
 			Name: ${customer.firstName} ${customer.name}
 		</div>
-		<div class="span3 offset1">
-			<form action="/" method="post">
+		<div class="span5 offset1">
+			<form action="/changeNameEmail" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">Change detail</button>
+    			<button class="btn"id="submit" name="submit" type="submit">Change name or email</button>
 			</form>
 		</div>
 	</div>
 	
 	<div class="row">
-		<div class="span3">
+		<div class="span5">
 			Email address: ${customer.email}
 		</div>
-	</div>
-	
-	<div class="row">
-		<div class="span3">
-			<form action="/" method="post">
+		<div class="span5 offset1">
+			<form action="/changePassword" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
     			<button class="btn"id="submit" name="submit" type="submit">Change password</button>
 			</form>
 		</div>
-		<div class="span3 offset1">
-			<form action="/" method="post">
+	</div>
+	<div class="row">
+		<div class="span5 offset6">
+			<form action="/deleteAccount" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
     			<button class="btn"id="submit" name="submit" type="submit">Delete account</button>
 			</form>

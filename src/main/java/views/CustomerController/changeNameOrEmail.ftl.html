@@ -1,0 +1,57 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">    	
+
+<form class="form-horizontal" action="/changeNameEmailCompleted" method="post">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Change customer detail</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">My name is:</label>
+  <div class="controls">
+    <input id="name" name="name" placeholder="name" class="input-xlarge" required="" type="text" value=${(customer.name)!}>
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">My first name is:</label>
+  <div class="controls">
+    <input id="firstName" name="firstName" placeholder="firstName" class="input-xlarge" required="" type="text" value=${(customer.firstName)!}>
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">My e-mail address is:</label>
+  <div class="controls">
+    <input id="eMail" name="eMail" placeholder="e-mail" class="input-xlarge" required="" type="text"  value=${(customer.email)!}>
+    
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="control-group">
+  <label class="control-label">Enter password to update settings:</label>
+  <div class="controls">
+    <input id="password" name="password" placeholder="password" class="input-xlarge" required="" type="password">
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="control-group">
+  <label class="control-label"></label>
+  <div class="controls">
+    <button id="submit" name="submit" class="btn btn-success" type="submit">Update Account</button>
+    <button id="clear" name="clear" class="btn btn-danger" type="reset">Clear</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</@layout.myLayout>

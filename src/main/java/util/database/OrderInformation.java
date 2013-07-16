@@ -3,6 +3,7 @@ package util.database;
 import java.util.List;
 import java.util.Map;
 
+import models.Customer;
 import models.Order;
 import models.Order_Product;
 
@@ -80,6 +81,11 @@ public abstract class OrderInformation
         {
             Ebean.delete(order);
         }
+    }
+
+    public static List<Order> getAllOrdersOfCustomer(Customer customer)
+    {
+        return Ebean.find(Order.class).where().eq("customer", customer).findList();
     }
 
 }

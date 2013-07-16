@@ -1,10 +1,12 @@
 package util.database;
 
+import java.util.List;
 import java.util.Map;
 
 import com.avaje.ebean.Ebean;
 
 import models.BillingAddress;
+import models.Customer;
 import models.DeliveryAddress;
 
 public abstract class AddressInformation
@@ -42,5 +44,15 @@ public abstract class AddressInformation
     public static void addBillingAddressToMap(BillingAddress billingAddress, Map<String, Object> data)
     {
         data.put("billingAddress", billingAddress);
+    }
+
+    public static List<DeliveryAddress> getAllDeliveryAddressesOfCustomer(Customer customer)
+    {
+        return Ebean.find(DeliveryAddress.class).where().eq("customer", customer).findList();
+    }
+
+    public static List<BillingAddress> getAllBillingAddressesOfCustomer(Customer customer)
+    {
+        return Ebean.find(BillingAddress.class).where().eq("customer", customer).findList();
     }
 }
