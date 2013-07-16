@@ -137,43 +137,40 @@ public class CustomerController
 
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
+        boolean failure = false;
         // email must be unique
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // error message
             data.put("errorMessage",
                      "You indicated you are a new customer, but an account already exists with the e-mail.");
-            Map<String, String> registration = new HashMap<String, String>();
-            registration.put("name", name);
-            registration.put("firstName", firstName);
-            registration.put("email", email);
-            data.put("registration", registration);
-            template = "views/CustomerController/registration.ftl.html";
+            failure = true;
         }
         // is email valid
         else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
         {
             // error message
             data.put("errorMessage", "Please enter a valid email address.");
-            Map<String, String> registration = new HashMap<String, String>();
-            registration.put("name", name);
-            registration.put("firstName", firstName);
-            registration.put("email", email);
-            data.put("registration", registration);
-            template = "views/CustomerController/registration.ftl.html";
+            failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
             // error message
             data.put("errorMessage", "Please check that your passwords match and try again.");
+            failure = true;
+        }
+        if (failure)
+        {
             Map<String, String> registration = new HashMap<String, String>();
             registration.put("name", name);
             registration.put("firstName", firstName);
             registration.put("email", email);
             data.put("registration", registration);
+            // show registration page again
             template = "views/CustomerController/registration.ftl.html";
         }
+        // all input fields might be correct
         else
         {
             // create new customer

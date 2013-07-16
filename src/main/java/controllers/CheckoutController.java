@@ -390,7 +390,7 @@ public class CheckoutController
             // return page to get an overview of the checkout
             template = "views/CheckoutController/checkoutOverview.ftl.html";
             // update order
-            Ebean.save(order);
+            order.update();
         }
         return Results.html().render(data).template(template);
     }
@@ -426,7 +426,7 @@ public class CheckoutController
         // return page to get an overview of the checkout
         String template = "views/CheckoutController/checkoutOverview.ftl.html";
         // update order
-        Ebean.save(order);
+        order.update();
         return Results.html().render(data).template(template);
     }
 
@@ -454,7 +454,7 @@ public class CheckoutController
             order.setCustomer(customer);
         }
         // update order
-        Ebean.save(order);
+        order.update();
         // get basket by session id
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // remove basket

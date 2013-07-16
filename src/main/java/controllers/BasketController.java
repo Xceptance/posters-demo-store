@@ -51,8 +51,7 @@ public class BasketController
     }
 
     /**
-     * Deletes the product from the basket. Decrements the product count, if the product is in the basket more than
-     * once.
+     * Deletes the product from the basket.
      * 
      * @param productId
      * @param context
