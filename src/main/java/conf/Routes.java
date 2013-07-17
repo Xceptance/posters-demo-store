@@ -53,6 +53,7 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/changePassword").with(CustomerController.class, "changePassword");
         router.POST().route("/changePasswordCompleted").with(CustomerController.class, "changePasswordCompleted");
         router.POST().route("/deleteAccount").with(CustomerController.class, "deleteAccount");
+        router.POST().route("/confirmDeletion").with(CustomerController.class, "confirmDeletion");
 
         // products and catalog
         router.GET().route("/productDetail/{product}").with(CatalogController.class, "productDetail");

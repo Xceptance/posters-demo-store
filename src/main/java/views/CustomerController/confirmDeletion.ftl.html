@@ -1,0 +1,28 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">
+
+
+<form class="form-horizontal" action="/deleteAccount" method="post">
+	<fieldset>
+		<!-- Form Name -->
+		<legend>Delete account</legend>
+		<!-- Password input-->
+		<div class="control-group">
+			<label class="control-label">Please enter your password:</label>
+			<div class="controls">
+				<input id="password" name="password" placeholder="password"
+					class="input-xlarge" required="" type="password">
+			</div>
+		</div>
+		<!-- Button (Double) -->
+		<div class="control-group">
+			<label class="control-label"></label>
+			<div class="controls">
+				<button id="deleteAccount" name="deleteAccount"
+					class="btn btn-danger" type="reset">Delete account</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
+
+</@layout.myLayout>

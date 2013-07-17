@@ -865,23 +865,48 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result deleteAccount(@Param("customerId") String customerId, Context context)
+    public Result deleteAccount(@Param("password") String password, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
+        String template;
         Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // remove customer from session
-        SessionHandling.deleteCustomerId(context);
-        // remove basket from session
-        SessionHandling.deleteBasketId(context);
-        // remove customers orders, deletes also customer, deletes also addresses and payment information
-        List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
-        for (Order order : orders)
+        // correct password
+        if (customer.checkPasswd(password))
         {
-            Ebean.delete(order);
+            // remove customer from session
+            SessionHandling.deleteCustomerId(context);
+            // remove basket from session
+            SessionHandling.deleteBasketId(context);
+            // remove customers orders, deletes also customer, deletes also addresses and payment information
+            List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
+            for (Order order : orders)
+            {
+                Ebean.delete(order);
+            }
+            // delete customer, if customer has no order
+            if (orders.isEmpty())
+            {
+                Ebean.delete(customer);
+            }
+            // put products for carousel to data map
+            CarouselInformation.getCarouselProducts(data);
+            template = "views/WebShopController/index.ftl.html";
+            data.put("successMessage", "Account was succesfully deleted");
         }
-        // put products for carousel to data map
-        CarouselInformation.getCarouselProducts(data);
+        // incorrect password
+        else
+        {
+            data.put("errorMessage", "Incorrect password, please try again");
+            template = "views/CustomerController/confirmDeletion";
+        }
         CommonInformation.setCommonData(data, context);
-        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
+        return Results.html().render(data).template(template);
+    }
+
+    public Result confirmDeletion(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        return Results.html().render(data);
     }
 }
