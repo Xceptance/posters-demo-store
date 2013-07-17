@@ -64,7 +64,7 @@
     <subCategory>Animals</subCategory>
   </product>
   <product>
-    <name>Cat 1</name>
+    <name>Squirrel</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -73,7 +73,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Cat 2</name>
+    <name>Cat 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -81,7 +81,7 @@
     <subCategory>Animals</subCategory>
   </product>
   <product>
-    <name>Cat 3</name>
+    <name>Cat 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -261,7 +261,7 @@
   <!--TopCategory Food-->
   <!--SubCategory Cold_Cuts-->
   <product>
-    <name>Cold Cuts 1</name>
+    <name>Tomato and mozzarella</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -270,7 +270,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Cold Cuts 2</name>
+    <name>Serrano</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -279,7 +279,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Cold Cuts 3</name>
+    <name>Cheese</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -288,7 +288,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Cold Cuts 4</name>
+    <name>Olive</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -297,7 +297,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Cold Cuts 5</name>
+    <name>Breakfast</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -305,7 +305,7 @@
     <subCategory>Cold Cuts</subCategory>
   </product>
   <product>
-    <name>Cold Cuts 6</name>
+    <name>Salad</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -313,7 +313,7 @@
     <subCategory>Cold Cuts</subCategory>
   </product>
   <product>
-    <name>Cold Cuts 7</name>
+    <name>Tatar</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -321,7 +321,7 @@
     <subCategory>Cold Cuts</subCategory>
   </product>
   <product>
-    <name>Cold Cuts 8</name>
+    <name>Sandwiches</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -329,7 +329,7 @@
     <subCategory>Cold Cuts</subCategory>
   </product>
   <product>
-    <name>Cold Cuts 9</name>
+    <name>Vegetables</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -337,7 +337,7 @@
     <subCategory>Cold Cuts</subCategory>
   </product>
   <product>
-    <name>Cold Cuts 10</name>
+    <name>Rise</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -389,7 +389,7 @@
     <subCategory>Grillables</subCategory>
   </product>
   <product>
-    <name>Grillables 6</name>
+    <name>Pizza</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -406,7 +406,7 @@
     <subCategory>Grillables</subCategory>
   </product>
   <product>
-    <name>Grillables 8</name>
+    <name>Burger 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -414,7 +414,7 @@
     <subCategory>Grillables</subCategory>
   </product>
   <product>
-    <name>Grillables 9</name>
+    <name>Burger 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -422,7 +422,7 @@
     <subCategory>Grillables</subCategory>
   </product>
   <product>
-    <name>Grillables 10</name>
+    <name>Burger 3</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -482,7 +482,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Sweets 7</name>
+    <name>Gummi bear</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -491,7 +491,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Sweets 8</name>
+    <name>Raspberry</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -499,7 +499,7 @@
     <subCategory>Sweets</subCategory>
   </product>
   <product>
-    <name>Sweets 9</name>
+    <name>Strawberry</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -507,7 +507,7 @@
     <subCategory>Sweets</subCategory>
   </product>
   <product>
-    <name>Sweets 10</name>
+    <name>Donuts</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -517,7 +517,7 @@
   <!--TopCategory Means_of_Transportation-->
   <!--SubCategory Airplanes-->
   <product>
-    <name>Airplanes 1</name>
+    <name>Swiss airline</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -525,7 +525,7 @@
     <subCategory>Airplanes</subCategory>
   </product>
   <product>
-    <name>Airplanes 2</name>
+    <name>fedEx plane</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -542,7 +542,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Airplanes 4</name>
+    <name>Red plane</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -550,7 +550,7 @@
     <subCategory>Airplanes</subCategory>
   </product>
   <product>
-    <name>Airplanes 5</name>
+    <name>Blue plane</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -558,7 +558,7 @@
     <subCategory>Airplanes</subCategory>
   </product>
   <product>
-    <name>Airplanes 6</name>
+    <name>US air force</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -567,7 +567,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Airplanes 7</name>
+    <name>Plane model 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -575,7 +575,7 @@
     <subCategory>Airplanes</subCategory>
   </product>
   <product>
-    <name>Airplanes 8</name>
+    <name>Plane model 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -584,7 +584,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Airplanes 9</name>
+    <name>Plane model 3</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -592,7 +592,7 @@
     <subCategory>Airplanes</subCategory>
   </product>
   <product>
-    <name>Airplanes 10</name>
+    <name>Plane model 4</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -601,7 +601,7 @@
   </product>
   <!--SubCategory Classic_Cars-->
   <product>
-    <name>Classic Cars 1</name>
+    <name>Trabant</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -668,7 +668,7 @@
     <subCategory>Classic Cars</subCategory>
   </product>
   <product>
-    <name>Classic Cars 9</name>
+    <name>Bus 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -676,7 +676,7 @@
     <subCategory>Classic Cars</subCategory>
   </product>
   <product>
-    <name>Classic Cars 10</name>
+    <name>Bus 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -686,7 +686,7 @@
   </product>
   <!--SubCategory Railways-->
   <product>
-    <name>Railways 1</name>
+    <name>Rail car 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -695,7 +695,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Railways 2</name>
+    <name>Rail car 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -703,7 +703,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railways 3</name>
+    <name>Railcar  3</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -712,7 +712,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Railways 4</name>
+    <name>Diesel-powered engine</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -720,7 +720,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railways 5</name>
+    <name>Steam engine 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -729,7 +729,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Railways 6</name>
+    <name>Steam engine 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -737,7 +737,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railways 7</name>
+    <name>Electro lokomotive</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -745,7 +745,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railways 8</name>
+    <name>Urban railway</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -753,7 +753,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railways 9</name>
+    <name>Old rail car</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -761,7 +761,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railways 10</name>
+    <name>Old urban railway</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -772,7 +772,7 @@
   <!--TopCategory Panoramas-->
   <!--SubCategory Buildings-->
   <product>
-    <name>Buildings 1</name>
+    <name>Ferris wheel</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -781,7 +781,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Buildings 2</name>
+    <name>House on water</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -790,7 +790,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Buildings 3</name>
+    <name>Castle 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -799,7 +799,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Buildings 4</name>
+    <name>Castle 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -808,7 +808,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Buildings 5</name>
+    <name>Rosebud</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -816,7 +816,7 @@
     <subCategory>Buildings</subCategory>
   </product>
   <product>
-    <name>Buildings 6</name>
+    <name>Old factory</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -824,7 +824,7 @@
     <subCategory>Buildings</subCategory>
   </product>
   <product>
-    <name>Buildings 7</name>
+    <name>Factory</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -832,7 +832,7 @@
     <subCategory>Buildings</subCategory>
   </product>
   <product>
-    <name>Buildings 8</name>
+    <name>Half-timbered house</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -891,7 +891,7 @@
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Fireworks 5</name>
+    <name>White firework</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -899,7 +899,7 @@
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Fireworks 6</name>
+    <name>Green firework</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -916,7 +916,7 @@
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Fireworks 8</name>
+    <name>Yellow firework</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -924,7 +924,7 @@
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Fireworks 9</name>
+    <name>Blue firework</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -933,7 +933,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Fireworks 10</name>
+    <name>Red firework</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -959,7 +959,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Landscapes 3</name>
+    <name>Waterfall 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -968,7 +968,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Landscapes 4</name>
+    <name>Waterfall 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -976,7 +976,7 @@
     <subCategory>Landscapes</subCategory>
   </product>
   <product>
-    <name>Landscapes 5</name>
+    <name>Park</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -985,7 +985,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Landscapes 6</name>
+    <name>Snowscape</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -994,7 +994,7 @@
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Landscapes 7</name>
+    <name>Ski lift</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -1002,7 +1002,7 @@
     <subCategory>Landscapes</subCategory>
   </product>
   <product>
-    <name>Landscapes 8</name>
+    <name>Skyscraper 1</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -1010,7 +1010,7 @@
     <subCategory>Landscapes</subCategory>
   </product>
   <product>
-    <name>Landscapes 9</name>
+    <name>Skyscraper 2</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
@@ -1018,7 +1018,7 @@
     <subCategory>Landscapes</subCategory>
   </product>
   <product>
-    <name>Landscapes 10</name>
+    <name>Water park</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
