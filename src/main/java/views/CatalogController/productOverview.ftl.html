@@ -1,6 +1,8 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-      	<h1>${category.name}</h1>
+      	<h1>${(category.name)!}</h1>
+      	<h1>${(searchText)!}</h1>
+      	<h1>${(noResults)!}</h1>
       	<#list products as pro>
       	<#if (pro_index + 3) % 3 ==0>
       	<div class="row">

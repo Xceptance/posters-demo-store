@@ -7,6 +7,7 @@ import controllers.BasketController;
 import controllers.CatalogController;
 import controllers.CheckoutController;
 import controllers.CustomerController;
+import controllers.SearchController;
 import controllers.WebShopController;
 
 public class Routes implements ApplicationRoutes
@@ -17,6 +18,9 @@ public class Routes implements ApplicationRoutes
     {
         // home page
         router.GET().route("/").with(WebShopController.class, "index");
+
+        // search
+        router.POST().route("/search").with(SearchController.class, "search");
 
         // Customer
         router.POST().route("/login").with(CustomerController.class, "login");
