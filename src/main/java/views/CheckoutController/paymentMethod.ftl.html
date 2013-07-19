@@ -2,20 +2,20 @@
 <@layout.myLayout "The ultimate webshop">
 
 <#if paymentOverview??>
-<h1>Select a credit card</h1>
+<h1>${i18n("paymentMethodTitleSelect")}</h1>
 <#list paymentOverview as payment>
 	<#if (payment_index + 3) % 3 ==0>
       	<div class="row">
       		<ul class="thumbnails">
     </#if>
       			<li class="span4">
-      					<p>Name: ${payment.name}<p>
-      					<p>Credit card: ${payment.cardNumber}</p>
-      					<p>Valid to: ${payment.month} ${payment.year}</p>
+      					<p>${i18n("titleName")}: ${payment.name}<p>
+      					<p>${i18n("titleCreditCard")}: ${payment.cardNumber}</p>
+      					<p>${i18n("titleValidTo")}: ${payment.month} ${payment.year}</p>
       					<p>
       						<form action="/addPaymentToOrder" method="post">
     							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">Pay with this credit card</button>
+    							<button class="btn"id="submit" name="submit" type="submit">${i18n("paymentMethodChoose")}</button>
 							</form>
       					</p>
       			</li>
@@ -34,7 +34,7 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Add new credit card</legend>
+<legend>${i18n("paymentMethodAddNew")}</legend>
 
 <#include "../form/paymentForm.ftl.html"/>
 
@@ -42,7 +42,7 @@
 <div class="control-group">
   <label class="control-label" for="continue"></label>
   <div class="controls">
-    <button id="continue" name="continue" class="btn btn-primary" type="submit">Continue</button>
+    <button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonContinue")}</button>
   </div>
 </div>
 

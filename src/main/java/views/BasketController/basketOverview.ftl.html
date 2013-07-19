@@ -1,7 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
 
-	<h1>Basket</h1>
+	<h1>${i18n("basketOverviewTitle")}</h1>
 	
 	<table class="table" table-bordered>
 		
@@ -15,24 +15,24 @@
 				<form action="/updateProductCount" method="post">
       				<input type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
       				<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">Update quantity</button>
+      				<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewUpdateQuantity")}</button>
       			</form>
 			</td>
 			<td>
 				<form action="/deleteFromBasket" method="post">
       				<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">Remove from basket</button>
+      				<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
       			</form>
 			</td>
 		</tr>
 		</#list>
 	</table>
 	
-	<h3>Total price: ${totalPrice}$</h3>
+	<h3>${i18n("basketOverviewTotalPrice")}: ${totalPrice}$</h3>
 	
 	<form action="/checkout" method="post">
       	<input type="hidden" id="basketId" name="basketId" value=${basketId}>
-      	<button class="btn"id="submit" name="submit" type="submit">Proceed to Checkout</button>
+      	<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewStartCheckout")}</button>
     </form>
 
 </@layout.myLayout>

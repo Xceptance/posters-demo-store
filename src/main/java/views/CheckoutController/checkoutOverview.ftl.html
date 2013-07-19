@@ -1,8 +1,8 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
-	<h1>Order overview</h1>
-	<h3>Products</h3>
+	<h1>${i18n("titleOrderOverview")}</h1>
+	<h3>${i18n("titleProducts")}</h3>
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
 		<tr>
@@ -16,25 +16,25 @@
 	</table>
 	<div class="row">
 		<div class="span4 offset8">
-			<h3>Sales tax: ${order.tax*100}%</h3>
+			<h3>${i18n("checkoutOverviewSalesTax")}: ${order.tax*100}%</h3>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span4 offset8">
-			<h3>Shipping costs: ${order.shippingCosts}</h3>
+			<h3>${i18n("checkoutOverviewShippingCosts")}: ${order.shippingCosts}</h3>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span4 offset8">
-			<h3>Total costs: ${order.totalCosts}$</h3>
+			<h3>${i18n("checkoutOverviewTotalCosts")}: ${order.totalCosts}$</h3>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span4">
-			<h3>Delivery address</h3>
+			<h3>${i18n("titleDeliveryAddress")}</h3>
 		</div>
 		<div class="span4 offset1">
-			<h3>Billing address</h3>
+			<h3>${i18n("titleBillingAddress")}</h3>
 		</div>
 	</div>
 	<div class="row">
@@ -87,19 +87,19 @@
 	</div>
 	<div class="row">
 		<div class="span4">
-			<h3>Payment information</h3>
+			<h3>${i18n("titlePaymentInformation")}</h3>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span4">
-			<p>Name:   ${order.creditCard.name}</p>
-			<p>Number: ${order.creditCard.cardNumber}</p>
+			<p>${i18n("titleName")}:   ${order.creditCard.name}</p>
+			<p>${i18n("titleNumber")}: ${order.creditCard.cardNumber}</p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span4 offset8">
 			<form action="/checkoutCompleted" method="post">
-    			<button class="btn"id="submit" name="submit" type="submit">Order with costs</button>
+    			<button class="btn"id="submit" name="submit" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
 			</form>
 		</div>
 	</div>

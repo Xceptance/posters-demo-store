@@ -12,11 +12,11 @@
       		<h4>${productDetail.descriptionDetail}</h4>
       	</div>
       	<div class="span3">
-      		<h3>$ ${productDetail.price}</h3>
+      		<h3>${productDetail.price}$</h3>
       		<p>
       			<form action="/addToBasket" method="post">
       				<input type="hidden" id="productName" name="productName" value=${productDetail.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">Add to basket</button>
+      				<button class="btn"id="submit" name="submit" type="submit">${i18n("productDetailAddToBasket")}</button>
       			</form>
       		</p>
       	</div>

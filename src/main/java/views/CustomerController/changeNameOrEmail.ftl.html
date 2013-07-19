@@ -5,11 +5,11 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Change customer detail</legend>
+<legend>${i18n("changeCustomerDetailTitle")}</legend>
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label">My name is:</label>
+  <label class="control-label">${i18n("labelMyName")}:</label>
   <div class="controls">
     <input id="name" name="name" placeholder="name" class="input-xlarge" required="" type="text" value=${(customer.name)!}>
     
@@ -18,7 +18,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label">My first name is:</label>
+  <label class="control-label">${i18n("labelMyFirstName")}:</label>
   <div class="controls">
     <input id="firstName" name="firstName" placeholder="firstName" class="input-xlarge" required="" type="text" value=${(customer.firstName)!}>
     
@@ -27,7 +27,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label">My e-mail address is:</label>
+  <label class="control-label">${i18n("labelMyEmail")}:</label>
   <div class="controls">
     <input id="eMail" name="eMail" placeholder="e-mail" class="input-xlarge" required="" type="text"  value=${(customer.email)!}>
     
@@ -36,7 +36,7 @@
 
 <!-- Password input-->
 <div class="control-group">
-  <label class="control-label">Enter password to update settings:</label>
+  <label class="control-label">${i18n("changeCustomerDetailEnterPassword")}:</label>
   <div class="controls">
     <input id="password" name="password" placeholder="password" class="input-xlarge" required="" type="password">
   </div>
@@ -46,8 +46,8 @@
 <div class="control-group">
   <label class="control-label"></label>
   <div class="controls">
-    <button id="submit" name="submit" class="btn btn-success" type="submit">Update Account</button>
-    <button id="clear" name="clear" class="btn btn-danger" type="reset">Clear</button>
+    <button id="submit" name="submit" class="btn btn-success" type="submit">${i18n("changeCustomerDetailUpdateAccount")}</button>
+    <button id="clear" name="clear" class="btn btn-danger" type="reset">${i18n("buttonClear")}</button>
   </div>
 </div>
 
