@@ -29,7 +29,7 @@
   </product>
   <product>
     <name>Wasp</name>
-    <shortDescription>This is flower 2 product 2!</shortDescription>
+    <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_4.jpg</imageURL>
@@ -703,7 +703,7 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Railcar  3</name>
+    <name>Rail car 3</name>
     <shortDescription>This is the short description for this product.</shortDescription>
     <longDescription>This is the long description for this product.</longDescription>
     <price>17.99</price>
