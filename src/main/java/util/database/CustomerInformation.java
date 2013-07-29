@@ -252,11 +252,6 @@ public abstract class CustomerInformation
             customer.update();
         }
         Basket customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
-        if (customerBasket == null)
-        {
-            customerBasket = new Basket();
-            customerBasket.save();
-        }
         for (Basket_Product basket_Product : currentBasket.getProducts())
         {
             for (int i = 0; i < basket_Product.getCountProduct(); i++)

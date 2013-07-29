@@ -109,6 +109,8 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         // remove customer from session
         SessionHandling.deleteCustomerId(context);
+        // remove basket from session
+        SessionHandling.deleteBasketId(context);
 
         CommonInformation.setCommonData(data, context);
         // put products for carousel to data map
