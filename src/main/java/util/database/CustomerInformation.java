@@ -240,6 +240,10 @@ public abstract class CustomerInformation
     {
         // get current basket
         Basket currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        if (currentBasket == null)
+        {
+            currentBasket = new Basket();
+        }
         // get basket of customer
         Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
         if (customer.getBasket() == null)
