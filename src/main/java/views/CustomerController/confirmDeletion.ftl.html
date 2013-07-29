@@ -5,10 +5,10 @@
 <form class="form-horizontal" action="/deleteAccount" method="post">
 	<fieldset>
 		<!-- Form Name -->
-		<legend>Delete account</legend>
+		<legend>${i18n("confirmDeletionTitle")}</legend>
 		<!-- Password input-->
 		<div class="control-group">
-			<label class="control-label">Please enter your password:</label>
+			<label class="control-label">${i18n("confirmDeletionPassword")}:</label>
 			<div class="controls">
 				<input id="password" name="password" placeholder="password"
 					class="input-xlarge" required="" type="password">
@@ -19,7 +19,7 @@
 			<label class="control-label"></label>
 			<div class="controls">
 				<button id="deleteAccount" name="deleteAccount"
-					class="btn btn-danger" type="reset">Delete account</button>
+					class="btn btn-danger" type="reset">${i18n("confirmDeletionTitle")}</button>
 			</div>
 		</div>
 	</fieldset>

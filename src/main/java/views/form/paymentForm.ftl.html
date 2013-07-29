@@ -1,6 +1,6 @@
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="creditCardNumber">Credit number:</label>
+  <label class="control-label" for="creditCardNumber">${i18n("titleNumber")}:</label>
   <div class="controls">
     <input id="creditCardNumber" name="creditCardNumber" placeholder="" class="input-xlarge" required="" type="text" value=${(card.cardNumber)!}>
     
@@ -9,7 +9,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="name">Cardholder's name:</label>
+  <label class="control-label" for="name">${i18n("paymentCardholderName")}:</label>
   <div class="controls">
     <input id="name" name="name" placeholder="" class="input-xlarge" required="" type="text" value=${(card.name)!}>
     
@@ -18,7 +18,7 @@
 
 <!-- Select Basic -->
 <div class="control-group">
-  <label class="control-label" for="expirationDate">Expiration Date:</label>
+  <label class="control-label" for="expirationDate">${i18n("paymentExpiration")}:</label>
   <div class="controls">
     <select id="expirationDateMonth" name="expirationDateMonth" class="input-xlarge">
       <option>01</option>

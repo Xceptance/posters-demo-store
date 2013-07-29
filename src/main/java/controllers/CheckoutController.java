@@ -13,6 +13,7 @@ import models.Order;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
+import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.AddressInformation;
 import util.database.BasketInformation;
@@ -25,9 +26,13 @@ import util.date.DateUtils;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
+import com.google.common.base.Optional;
+import com.google.inject.Inject;
 
 public class CheckoutController
 {
+    @Inject
+    Messages msg;
 
     /**
      * Starts the checkout. Returns an error page, if the basket is empty, otherwise the page to enter a delivery
@@ -48,7 +53,8 @@ public class CheckoutController
         if (basket.getProducts().size() == 0)
         {
             // show info
-            data.put("infoMessage", "The basket is empty! Browse for some nice posters and put them in the basket.");
+            Optional language = Optional.of("en");
+            data.put("infoMessage", msg.get("infoEmptyBasket", language).get());
             template = "views/BasketController/basketOverview.ftl.html";
         }
         // start checkout, if the basket is not empty
@@ -106,7 +112,8 @@ public class CheckoutController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            data.put("errorMessage", "Wrong ZIP, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -179,8 +186,11 @@ public class CheckoutController
             // billing and delivery address are not equal
             else
             {
-                // put address information of customer to data map
-                CustomerInformation.addAddressOfCustomerToMap(context, data);
+                if (SessionHandling.isCustomerLogged(context))
+                {
+                    // put address information of customer to data map
+                    CustomerInformation.addAddressOfCustomerToMap(context, data);
+                }
                 // return page to enter billing address
                 template = "views/CheckoutController/billingAddress.ftl.html";
             }
@@ -244,7 +254,8 @@ public class CheckoutController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            data.put("errorMessage", "Wrong ZIP, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -345,7 +356,8 @@ public class CheckoutController
         if (!Pattern.matches("4[0-9]{12}(?:[0-9]{3})?", creditNumber))
         {
             // error message
-            data.put("errorMessage", "Wrong credit card number, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
             // show inserted values in form
             Map<String, String> card = new HashMap<String, String>();
             card.put("name", name);
@@ -468,7 +480,8 @@ public class CheckoutController
 
         CommonInformation.setCommonData(data, context);
         // show success message
-        data.put("successMessage", "Thank you for buying at XC-Poster!");
+        Optional language = Optional.of("en");
+        data.put("successMessage", msg.get("checkoutCompleted", language).get());
         // remember products for carousel
         CarouselInformation.getCarouselProducts(data);
         return Results.html().render(data).template("views/WebShopController/index.ftl.html");

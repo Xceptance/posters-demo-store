@@ -1,6 +1,6 @@
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="fullName">Full name:</label>
+  <label class="control-label" for="fullName">${i18n("addressFullName")}:</label>
   <div class="controls">
     <input id="fullName" name="fullName" placeholder="" class="input-xlarge" required="" type="text" value=${(address.name)!}>
     
@@ -9,7 +9,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="addressLine1">Address Line 1:</label>
+  <label class="control-label" for="addressLine1">${i18n("addressLine1")}:</label>
   <div class="controls">
     <input id="addressLine1" name="addressLine1" placeholder="Street address, company name" class="input-xlarge" required="" type="text" value=${(address.addressline1)!}>
     
@@ -18,7 +18,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="adressLine2">Address Line 2:</label>
+  <label class="control-label" for="adressLine2">${i18n("addressLine2")}:</label>
   <div class="controls">
     <input id="addressLine2" name="addressLine2" placeholder="Apartment, suite, floor, etc." class="input-xlarge" required="" type="text" value=${(address.addressline2)!}>
     
@@ -27,7 +27,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="city">City:</label>
+  <label class="control-label" for="city">${i18n("addressCity")}:</label>
   <div class="controls">
     <input id="city" name="city" placeholder="" class="input-xlarge" required="" type="text" value=${(address.city)!}>
     
@@ -36,7 +36,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="state">State / Province / Region:</label>
+  <label class="control-label" for="state">${i18n("addressState")}:</label>
   <div class="controls">
     <input id="state" name="state" placeholder="" class="input-xlarge" required="" type="text" value=${(address.state)!}>
     
@@ -45,7 +45,7 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="zip">ZIP:</label>
+  <label class="control-label" for="zip">${i18n("addressZip")}:</label>
   <div class="controls">
     <input id="zip" name="zip" placeholder="" class="input-xlarge" required="" type="text" value=${(address.zip)!}>
     
@@ -54,11 +54,11 @@
 
 <!-- Select Basic -->
 <div class="control-group">
-  <label class="control-label" for="country">Country:</label>
+  <label class="control-label" for="country">${i18n("addressCountry")}:</label>
   <div class="controls">
     <select id="country" name="country" class="input-xlarge">
-      <option>United States</option>
-      <option>Germany</option>
+      <option>${i18n("countryUS")}</option>
+      <option>${i18n("countryGermany")}</option>
     </select>
   </div>
 </div>

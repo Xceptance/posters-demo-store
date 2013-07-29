@@ -10,14 +10,20 @@ import models.SubCategory;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
+import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CarouselInformation;
 import util.database.CommonInformation;
 
 import com.avaje.ebean.Ebean;
+import com.google.common.base.Optional;
+import com.google.inject.Inject;
 
 public class SearchController
 {
+
+    @Inject
+    Messages msg;
 
     public Result search(@Param("searchText") String searchText, Context context)
     {
@@ -28,7 +34,8 @@ public class SearchController
         if (searchText.isEmpty() || searchText.equals(" "))
         {
             template = "views/WebShopController/index.ftl.html";
-            data.put("infoMessage", "Found no search term, please try again.");
+            Optional language = Optional.of("en");
+            data.put("infoMessage", msg.get("infoNoSearchTerm", language).get());
             CarouselInformation.getCarouselProducts(data);
         }
         else
@@ -56,10 +63,16 @@ public class SearchController
                 }
             }
             data.put("products", products);
-            data.put("searchText", "The following products matches '" + searchText + "'");
+
             if (products.isEmpty())
             {
-                data.put("noResults", "Your search returned no results.");
+                Optional language = Optional.of("en");
+                data.put("noResults", msg.get("noSearchResults", language).get());
+            }
+            else
+            {
+                Optional language = Optional.of("en");
+                data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
             }
             template = "views/CatalogController/productOverview.ftl.html";
         }

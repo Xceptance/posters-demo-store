@@ -13,6 +13,7 @@ import models.Order;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
+import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.AddressInformation;
 import util.database.CarouselInformation;
@@ -23,9 +24,14 @@ import util.database.OrderInformation;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
+import com.google.common.base.Optional;
+import com.google.inject.Inject;
 
 public class CustomerController
 {
+
+    @Inject
+    Messages msg;
 
     /**
      * Logs on to the system with email and password. Returns the home page, if the email and the password are correct,
@@ -43,7 +49,8 @@ public class CustomerController
         if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
         {
             // error message
-            data.put("errorMessage", "Please enter a valid email address.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorValidEmail", language).get());
         }
         else
         {
@@ -70,13 +77,15 @@ public class CustomerController
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                data.put("errorMessage", "Incorrect password, please try again.");
+                Optional language = Optional.of("en");
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             }
             // wrong email
             else
             {
                 // error message
-                data.put("errorMessage", "Your entered email address doesn't exist, please try again.");
+                Optional language = Optional.of("en");
+                data.put("errorMessage", msg.get("errorEmailExist", language).get());
             }
         }
         // put products for carousel to data map
@@ -142,22 +151,24 @@ public class CustomerController
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // error message
-            data.put("errorMessage",
-                     "You indicated you are a new customer, but an account already exists with the e-mail.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorAccountExist", language).get());
             failure = true;
         }
         // is email valid
         else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
         {
             // error message
-            data.put("errorMessage", "Please enter a valid email address.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorValidEmail", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
             // error message
-            data.put("errorMessage", "Please check that your passwords match and try again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
         if (failure)
@@ -276,7 +287,8 @@ public class CustomerController
         if (!Pattern.matches("4[0-9]{12}(?:[0-9]{3})?", creditNumber))
         {
             // error message
-            data.put("errorMessage", "Wrong credit card number, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
             // show inserted values in form
             Map<String, String> card = new HashMap<String, String>();
             card.put("name", name);
@@ -301,7 +313,8 @@ public class CustomerController
             // update customer
             customer.update();
             // success message
-            data.put("successMessage", "Saving completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successSave", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
@@ -337,7 +350,8 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context);
         // success message
-        data.put("successMessage", "Deleting completed.");
+        Optional language = Optional.of("en");
+        data.put("successMessage", msg.get("successDelete", language).get());
         return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
     }
 
@@ -373,7 +387,8 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context);
         // success message
-        data.put("successMessage", "Deleting completed.");
+        Optional language = Optional.of("en");
+        data.put("successMessage", msg.get("successDelete", language).get());
         return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
     }
 
@@ -393,7 +408,8 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context);
         // success message
-        data.put("successMessage", "Deleting completed.");
+        Optional language = Optional.of("en");
+        data.put("successMessage", msg.get("successDelete", language).get());
         return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
     }
 
@@ -445,7 +461,8 @@ public class CustomerController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            data.put("errorMessage", "Wrong ZIP, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
@@ -473,7 +490,8 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // success message
-            data.put("successMessage", "Updating completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successUpdate", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
@@ -527,7 +545,8 @@ public class CustomerController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            data.put("errorMessage", "Wrong ZIP, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
@@ -556,7 +575,8 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // success message
-            data.put("successMessage", "Updating completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successUpdate", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
@@ -622,7 +642,8 @@ public class CustomerController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            data.put("errorMessage", "Wrong ZIP, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -653,7 +674,8 @@ public class CustomerController
             customer.addDeliveryAddress(address);
             customer.update();
             // success message
-            data.put("successMessage", "Saving completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successSave", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
@@ -689,7 +711,8 @@ public class CustomerController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            data.put("errorMessage", "Wrong ZIP, please type again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -720,7 +743,8 @@ public class CustomerController
             customer.addBillingAddress(address);
             customer.update();
             // success message
-            data.put("successMessage", "Saving completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successSave", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
@@ -764,13 +788,15 @@ public class CustomerController
         if (!CustomerInformation.correctPassword(customer.getEmail(), password))
         {
             // error message
-            data.put("errorMessage", "Incorrect password, please try again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             failure = true;
         }
         else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
         {
             // error message
-            data.put("errorMessage", "Please enter a valid email address.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorValidEmail", language).get());
             failure = true;
         }
         if (failure)
@@ -790,7 +816,8 @@ public class CustomerController
             customer.setEmail(email);
             customer.update();
             // success message
-            data.put("successMessage", "Updating completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successUpdate", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         CommonInformation.setCommonData(data, context);
@@ -832,14 +859,16 @@ public class CustomerController
         if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
         {
             // error message
-            data.put("errorMessage", "Incorrect password, please try again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
             // error message
-            data.put("errorMessage", "Please check that your passwords match and try again.");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
         if (failure)
@@ -852,7 +881,8 @@ public class CustomerController
             customer.hashPasswd(password);
             customer.update();
             // success message
-            data.put("successMessage", "Updating completed.");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successUpdate", language).get());
             template = "views/CustomerController/accountOverview.ftl.html";
         }
         return Results.html().render(data).template(template);
@@ -891,12 +921,14 @@ public class CustomerController
             // put products for carousel to data map
             CarouselInformation.getCarouselProducts(data);
             template = "views/WebShopController/index.ftl.html";
-            data.put("successMessage", "Account was succesfully deleted");
+            Optional language = Optional.of("en");
+            data.put("successMessage", msg.get("successDeleteAccount", language).get());
         }
         // incorrect password
         else
         {
-            data.put("errorMessage", "Incorrect password, please try again");
+            Optional language = Optional.of("en");
+            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             template = "views/CustomerController/confirmDeletion";
         }
         CommonInformation.setCommonData(data, context);

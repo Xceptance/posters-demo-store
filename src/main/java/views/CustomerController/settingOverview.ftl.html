@@ -1,35 +1,35 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
 
-	<h1>Settings overview</h1>
+	<h1>${i18n("titleSettings")}</h1>
 	
 	<div class="row">
 		<div class="span5">
-			Name: ${customer.firstName} ${customer.name}
+			${i18n("titleName")}: ${customer.firstName} ${customer.name}
 		</div>
 		<div class="span5 offset1">
 			<form action="/changeNameEmail" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">Change name or email</button>
+    			<button class="btn"id="submit" name="submit" type="submit">${i18n("settingsChange")}</button>
 			</form>
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="span5">
-			Email address: ${customer.email}
+			${i18n("titleEmail")}: ${customer.email}
 		</div>
 		<div class="span5 offset1">
 			<form action="/changePassword" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">Change password</button>
+    			<button class="btn"id="submit" name="submit" type="submit">${i18n("changePasswordTitle")}</button>
 			</form>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span5 offset6">
 			<form action="/confirmDeletion" method="post">
-    			<button class="btn"id="submit" name="submit" type="submit">Delete account</button>
+    			<button class="btn"id="submit" name="submit" type="submit">${i18n("confirmDeletionTitle")}</button>
 			</form>
 		</div>
 	</div>
