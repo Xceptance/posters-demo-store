@@ -1,5 +1,7 @@
 package models;
 
+import ninja.NinjaTest;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +10,7 @@ import util.database.AddressInformation;
 
 import com.avaje.ebean.Ebean;
 
-public class CustomerTest
+public class CustomerTest extends NinjaTest
 {
 
     Customer customer;
@@ -18,7 +20,7 @@ public class CustomerTest
     {
         customer = new Customer();
         customer.setEmail("email");
-        customer.setPassword("password");
+        customer.hashPasswd("password");
         customer.save();
     }
 
