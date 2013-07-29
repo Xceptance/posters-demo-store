@@ -29,10 +29,17 @@ import com.avaje.ebean.Ebean;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
+import conf.XCPosterConf;
+
 public class CheckoutController
 {
     @Inject
     Messages msg;
+
+    @Inject
+    XCPosterConf xcpConf;
+    
+    private Optional language = Optional.of("en");
 
     /**
      * Starts the checkout. Returns an error page, if the basket is empty, otherwise the page to enter a delivery
@@ -53,9 +60,8 @@ public class CheckoutController
         if (basket.getProducts().size() == 0)
         {
             // show info
-            Optional language = Optional.of("en");
             data.put("infoMessage", msg.get("infoEmptyBasket", language).get());
-            template = "views/BasketController/basketOverview.ftl.html";
+            template = xcpConf.templateBasketOverview;
         }
         // start checkout, if the basket is not empty
         else
@@ -69,7 +75,7 @@ public class CheckoutController
             // set basket to order
             order.addProductsFromBasket(basket);
             // return page to enter delivery address
-            template = "views/CheckoutController/deliveryAddress.ftl.html";
+            template = xcpConf.templateDeliveryAddress;
             // customer is logged
             if (SessionHandling.isCustomerLogged(context))
             {
@@ -109,10 +115,9 @@ public class CheckoutController
         String template;
 
         // check input
-        if (!Pattern.matches("[0-9]*", zip))
+        if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -125,7 +130,7 @@ public class CheckoutController
             address.put("country", country);
             data.put("address", address);
             // show page to enter delivery address again
-            template = "views/CheckoutController/deliveryAddress.ftl.html";
+            template = xcpConf.templateDeliveryAddress;
         }
         // all input fields might be correct
         else
@@ -181,7 +186,7 @@ public class CheckoutController
                 // add payment information to map
                 CustomerInformation.addPaymentOfCustomerToMap(context, data);
                 // return page to enter payment information
-                template = "views/CheckoutController/paymentMethod.ftl.html";
+                template = xcpConf.templatePaymentMethod;
             }
             // billing and delivery address are not equal
             else
@@ -192,7 +197,7 @@ public class CheckoutController
                     CustomerInformation.addAddressOfCustomerToMap(context, data);
                 }
                 // return page to enter billing address
-                template = "views/CheckoutController/billingAddress.ftl.html";
+                template = xcpConf.templateBillingAddress;
             }
             // update order
             order.update();
@@ -220,7 +225,7 @@ public class CheckoutController
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
         order.setDeliveryAddress(deliveryAddress);
-        template = "views/CheckoutController/billingAddress.ftl.html";
+        template = xcpConf.templateBillingAddress;
         // put address information of customer to data map
         CustomerInformation.addAddressOfCustomerToMap(context, data);
         // update order
@@ -251,10 +256,9 @@ public class CheckoutController
         String template;
 
         // check input
-        if (!Pattern.matches("[0-9]*", zip))
+        if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -267,7 +271,7 @@ public class CheckoutController
             address.put("country", country);
             data.put("address", address);
             // show page to enter billing address again
-            template = "views/CheckoutController/billingAddress.ftl.html";
+            template = xcpConf.templateBillingAddress;
         }
         // all input fields might be correct
         else
@@ -296,7 +300,7 @@ public class CheckoutController
             // set billing address to order
             order.setBillingAddress(billingAddress);
             // return page to enter payment information
-            template = "views/CheckoutController/paymentMethod.ftl.html";
+            template = xcpConf.templatePaymentMethod;
             // add payment information to map
             CustomerInformation.addPaymentOfCustomerToMap(context, data);
             // update order
@@ -325,7 +329,7 @@ public class CheckoutController
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set billing address to order
         order.setBillingAddress(billingAddress);
-        template = "views/CheckoutController/paymentMethod.ftl.html";
+        template = xcpConf.templatePaymentMethod;
         // add payment information to map
         CustomerInformation.addPaymentOfCustomerToMap(context, data);
         // update order
@@ -349,14 +353,56 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context);
-        String template;
+        String template = "";
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
+        boolean wrongCreditCard = true;
         // check input
-        if (!Pattern.matches("4[0-9]{12}(?:[0-9]{3})?", creditNumber))
+        for (String regExCreditCard : xcpConf.regexCreditCard)
+        {
+            // credit card number is correct
+            if (Pattern.matches(regExCreditCard, creditNumber))
+            {
+                wrongCreditCard = false;
+                // create new credit card
+                CreditCard creditCard = new CreditCard();
+                creditCard.setCardNumber(creditNumber);
+                creditCard.setName(name);
+                creditCard.setMonth(month);
+                creditCard.setYear(year);
+                // get order by session id
+                Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+                // set credit card to order
+                order.setCreditCard(creditCard);
+                // set new credit card to customer
+                if (SessionHandling.isCustomerLogged(context))
+                {
+                    CustomerInformation.addPaymentToCustomer(context, creditCard);
+                }
+                // save credit card
+                else
+                {
+                    creditCard.save();
+                }
+                // set shipping costs to order
+                order.setShippingCosts(6.99);
+                // set tax to order
+                order.setTax(0.06);
+                // calculate total costs
+                order.addShippingCostsToTotalCosts();
+                order.addTaxToTotalCosts();
+                // add order to data map
+                OrderInformation.addOrderToMap(order, data);
+                OrderInformation.addProductsFromOrderToMap(order, data);
+                // return page to get an overview of the checkout
+                template = xcpConf.templateCheckoutOverview;
+                // update order
+                order.update();
+            }
+        }
+        if (wrongCreditCard)
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
             // show inserted values in form
             Map<String, String> card = new HashMap<String, String>();
@@ -364,45 +410,7 @@ public class CheckoutController
             card.put("cardNumber", creditNumber);
             data.put("card", card);
             // show page to enter delivery address again
-            template = "views/CheckoutController/paymentMethod.ftl.html";
-        }
-        // all input fields might be correct
-        else
-        {
-            // create new credit card
-            CreditCard creditCard = new CreditCard();
-            creditCard.setCardNumber(creditNumber);
-            creditCard.setName(name);
-            creditCard.setMonth(month);
-            creditCard.setYear(year);
-            // get order by session id
-            Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
-            // set credit card to order
-            order.setCreditCard(creditCard);
-            // set new credit card to customer
-            if (SessionHandling.isCustomerLogged(context))
-            {
-                CustomerInformation.addPaymentToCustomer(context, creditCard);
-            }
-            // save credit card
-            else
-            {
-                creditCard.save();
-            }
-            // set shipping costs to order
-            order.setShippingCosts(6.99);
-            // set tax to order
-            order.setTax(0.06);
-            // calculate total costs
-            order.addShippingCostsToTotalCosts();
-            order.addTaxToTotalCosts();
-            // add order to data map
-            OrderInformation.addOrderToMap(order, data);
-            OrderInformation.addProductsFromOrderToMap(order, data);
-            // return page to get an overview of the checkout
-            template = "views/CheckoutController/checkoutOverview.ftl.html";
-            // update order
-            order.update();
+            template = xcpConf.templatePaymentMethod;
         }
         return Results.html().render(data).template(template);
     }
@@ -436,7 +444,7 @@ public class CheckoutController
         OrderInformation.addOrderToMap(order, data);
         OrderInformation.addProductsFromOrderToMap(order, data);
         // return page to get an overview of the checkout
-        String template = "views/CheckoutController/checkoutOverview.ftl.html";
+        String template = xcpConf.templateCheckoutOverview;
         // update order
         order.update();
         return Results.html().render(data).template(template);
@@ -480,10 +488,9 @@ public class CheckoutController
 
         CommonInformation.setCommonData(data, context);
         // show success message
-        Optional language = Optional.of("en");
         data.put("successMessage", msg.get("checkoutCompleted", language).get());
         // remember products for carousel
         CarouselInformation.getCarouselProducts(data);
-        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
+        return Results.html().render(data).template(xcpConf.templateIndex);
     }
 }

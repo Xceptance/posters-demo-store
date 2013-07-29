@@ -11,8 +11,15 @@ import util.database.CategoryInformation;
 import util.database.CommonInformation;
 import util.database.ProductInformation;
 
+import com.google.inject.Inject;
+
+import conf.XCPosterConf;
+
 public class CatalogController
 {
+    
+    @Inject
+    XCPosterConf xcpConf;
 
     /**
      * Returns a product detail page for the given product.
@@ -68,6 +75,6 @@ public class CatalogController
         // add top category to data map
         CategoryInformation.addTopCategoryToMap(topCategory, data);
         // return product overview page
-        return Results.html().template("views/CatalogController/productOverview.ftl.html").render(data);
+        return Results.html().template(xcpConf.templateProductOverview).render(data);
     }
 }

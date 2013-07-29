@@ -27,11 +27,18 @@ import com.avaje.ebean.Ebean;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
+import conf.XCPosterConf;
+
 public class CustomerController
 {
 
     @Inject
     Messages msg;
+
+    @Inject
+    XCPosterConf xcpConf;
+
+    private Optional language = Optional.of("en");
 
     /**
      * Logs on to the system with email and password. Returns the home page, if the email and the password are correct,
@@ -46,10 +53,9 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         // is email valid
-        if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
+        if (!Pattern.matches(xcpConf.regexEmail, email))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorValidEmail", language).get());
         }
         else
@@ -77,21 +83,19 @@ public class CustomerController
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                Optional language = Optional.of("en");
                 data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             }
             // wrong email
             else
             {
                 // error message
-                Optional language = Optional.of("en");
                 data.put("errorMessage", msg.get("errorEmailExist", language).get());
             }
         }
         // put products for carousel to data map
         CarouselInformation.getCarouselProducts(data);
         CommonInformation.setCommonData(data, context);
-        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
+        return Results.html().render(data).template(xcpConf.templateIndex);
     }
 
     /**
@@ -110,7 +114,7 @@ public class CustomerController
         // put products for carousel to data map
         CarouselInformation.getCarouselProducts(data);
 
-        return Results.html().render(data).template("views/WebShopController/index.ftl.html");
+        return Results.html().render(data).template(xcpConf.templateIndex);
     }
 
     /**
@@ -151,15 +155,13 @@ public class CustomerController
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorAccountExist", language).get());
             failure = true;
         }
         // is email valid
-        else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
+        else if (!Pattern.matches(xcpConf.regexEmail, email))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorValidEmail", language).get());
             failure = true;
         }
@@ -167,7 +169,6 @@ public class CustomerController
         else if (!password.equals(passwordAgain))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
@@ -179,7 +180,7 @@ public class CustomerController
             registration.put("email", email);
             data.put("registration", registration);
             // show registration page again
-            template = "views/CustomerController/registration.ftl.html";
+            template = xcpConf.templateRegistration;
         }
         // all input fields might be correct
         else
@@ -196,7 +197,7 @@ public class CustomerController
             SessionHandling.setCustomerId(context, customer.getId());
             // put products for carousel to data map
             CarouselInformation.getCarouselProducts(data);
-            template = "views/WebShopController/index.ftl.html";
+            template = xcpConf.templateIndex;
         }
         CommonInformation.setCommonData(data, context);
         return Results.html().render(data).template(template);
@@ -280,43 +281,47 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context);
-        String template;
+        String template = "";
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
+        boolean wrongCreditCard = true;
         // check input
-        if (!Pattern.matches("4[0-9]{12}(?:[0-9]{3})?", creditNumber))
+        for (String regExCreditCard : xcpConf.regexCreditCard)
+        {
+            // credit card number is correct
+            if (Pattern.matches(regExCreditCard, creditNumber))
+            {
+                wrongCreditCard = false;
+                // get customer by session id
+                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+                // create new credit card
+                CreditCard creditCard = new CreditCard();
+                creditCard.setCardNumber(creditNumber);
+                creditCard.setName(name);
+                creditCard.setMonth(month);
+                creditCard.setYear(year);
+                // add credit card to customer
+                customer.addCreditCard(creditCard);
+                // update customer
+                customer.update();
+                // success message
+                data.put("successMessage", msg.get("successSave", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
+        }
+        if (wrongCreditCard)
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
             // show inserted values in form
             Map<String, String> card = new HashMap<String, String>();
             card.put("name", name);
             card.put("cardNumber", creditNumber);
             data.put("card", card);
-            // show page to enter delivery address again
-            template = "views/CustomerController/addPaymentToCustomer.ftl.html";
+            // show page to enter payment information again
+            template = xcpConf.templateAddPaymentToCustomer;
         }
-        // all input fields might be correct
-        else
-        {
-            // get customer by session id
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // create new credit card
-            CreditCard creditCard = new CreditCard();
-            creditCard.setCardNumber(creditNumber);
-            creditCard.setName(name);
-            creditCard.setMonth(month);
-            creditCard.setYear(year);
-            // add credit card to customer
-            customer.addCreditCard(creditCard);
-            // update customer
-            customer.update();
-            // success message
-            Optional language = Optional.of("en");
-            data.put("successMessage", msg.get("successSave", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
-        }
+
         return Results.html().render(data).template(template);
     }
 
@@ -350,9 +355,8 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context);
         // success message
-        Optional language = Optional.of("en");
         data.put("successMessage", msg.get("successDelete", language).get());
-        return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
+        return Results.html().render(data).template(xcpConf.templateAccountOverview);
     }
 
     /**
@@ -387,9 +391,8 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context);
         // success message
-        Optional language = Optional.of("en");
         data.put("successMessage", msg.get("successDelete", language).get());
-        return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
+        return Results.html().render(data).template(xcpConf.templateAccountOverview);
     }
 
     /**
@@ -408,9 +411,8 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context);
         // success message
-        Optional language = Optional.of("en");
         data.put("successMessage", msg.get("successDelete", language).get());
-        return Results.html().render(data).template("views/CustomerController/accountOverview.ftl.html");
+        return Results.html().render(data).template(xcpConf.templateAccountOverview);
     }
 
     /**
@@ -458,10 +460,9 @@ public class CustomerController
         CommonInformation.setCommonData(data, context);
         String template;
         // check input
-        if (!Pattern.matches("[0-9]*", zip))
+        if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -475,7 +476,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter delivery address again
-            template = "views/CustomerController/updateDeliveryAddress.ftl.html";
+            template = xcpConf.templateUpdateDeliveryAddress;
         }
         // all input fields might be correct
         else
@@ -490,9 +491,8 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // success message
-            Optional language = Optional.of("en");
             data.put("successMessage", msg.get("successUpdate", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
+            template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
     }
@@ -542,10 +542,9 @@ public class CustomerController
         CommonInformation.setCommonData(data, context);
         String template;
         // check input
-        if (!Pattern.matches("[0-9]*", zip))
+        if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -559,7 +558,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter billing address again
-            template = "views/CustomerController/updateBillingAddress.ftl.html";
+            template = xcpConf.templateUpdateBillingAddress;
         }
         // all input fields might be correct
         else
@@ -575,9 +574,8 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // success message
-            Optional language = Optional.of("en");
             data.put("successMessage", msg.get("successUpdate", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
+            template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
     }
@@ -639,10 +637,9 @@ public class CustomerController
         CommonInformation.setCommonData(data, context);
         String template;
         // check input
-        if (!Pattern.matches("[0-9]*", zip))
+        if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -655,7 +652,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter delivery address again
-            template = "views/CustomerController/addDeliveryAddressToCustomer.ftl.html";
+            template = xcpConf.templateAddDeliveryAddressToCustomer;
         }
         // all input fields might be correct
         else
@@ -674,9 +671,8 @@ public class CustomerController
             customer.addDeliveryAddress(address);
             customer.update();
             // success message
-            Optional language = Optional.of("en");
             data.put("successMessage", msg.get("successSave", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
+            template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
     }
@@ -711,7 +707,6 @@ public class CustomerController
         if (!Pattern.matches("[0-9]*", zip))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -724,7 +719,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter billing address again
-            template = "views/CustomerController/addBillingAddressToCustomer.ftl.html";
+            template = xcpConf.templateAddBillingAddressToCustomer;
         }
         // all input fields might be correct
         else
@@ -743,9 +738,8 @@ public class CustomerController
             customer.addBillingAddress(address);
             customer.update();
             // success message
-            Optional language = Optional.of("en");
             data.put("successMessage", msg.get("successSave", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
+            template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
     }
@@ -788,14 +782,12 @@ public class CustomerController
         if (!CustomerInformation.correctPassword(customer.getEmail(), password))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             failure = true;
         }
-        else if (!Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}", email))
+        else if (!Pattern.matches(xcpConf.regexEmail, email))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorValidEmail", language).get());
             failure = true;
         }
@@ -807,7 +799,7 @@ public class CustomerController
             updatedCustomer.put("email", email);
             data.put("customer", customer);
             // show page to update name or email again
-            template = "views/CustomerController/changeNameOrEmail.ftl.html";
+            template = xcpConf.templateChangeNameOrEmail;
         }
         else
         {
@@ -816,9 +808,8 @@ public class CustomerController
             customer.setEmail(email);
             customer.update();
             // success message
-            Optional language = Optional.of("en");
             data.put("successMessage", msg.get("successUpdate", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
+            template = xcpConf.templateAccountOverview;
         }
         CommonInformation.setCommonData(data, context);
         return Results.html().render(data).template(template);
@@ -859,7 +850,6 @@ public class CustomerController
         if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             failure = true;
         }
@@ -867,23 +857,21 @@ public class CustomerController
         else if (!password.equals(passwordAgain))
         {
             // error message
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
         if (failure)
         {
             // show page to change password again
-            template = "views/CustomerController/changePassword.ftl.html";
+            template = xcpConf.templateChangePassword;
         }
         else
         {
             customer.hashPasswd(password);
             customer.update();
             // success message
-            Optional language = Optional.of("en");
             data.put("successMessage", msg.get("successUpdate", language).get());
-            template = "views/CustomerController/accountOverview.ftl.html";
+            template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
     }
@@ -920,16 +908,14 @@ public class CustomerController
             }
             // put products for carousel to data map
             CarouselInformation.getCarouselProducts(data);
-            template = "views/WebShopController/index.ftl.html";
-            Optional language = Optional.of("en");
+            template = xcpConf.templateIndex;
             data.put("successMessage", msg.get("successDeleteAccount", language).get());
         }
         // incorrect password
         else
         {
-            Optional language = Optional.of("en");
             data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            template = "views/CustomerController/confirmDeletion";
+            template = xcpConf.templateConfirmDeletion;
         }
         CommonInformation.setCommonData(data, context);
         return Results.html().render(data).template(template);

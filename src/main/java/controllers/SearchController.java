@@ -19,11 +19,18 @@ import com.avaje.ebean.Ebean;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
+import conf.XCPosterConf;
+
 public class SearchController
 {
 
     @Inject
     Messages msg;
+
+    @Inject
+    XCPosterConf xcpConf;
+
+    private Optional language = Optional.of("en");
 
     public Result search(@Param("searchText") String searchText, Context context)
     {
@@ -33,8 +40,7 @@ public class SearchController
         // search text is empty
         if (searchText.isEmpty() || searchText.equals(" "))
         {
-            template = "views/WebShopController/index.ftl.html";
-            Optional language = Optional.of("en");
+            template = xcpConf.templateIndex;
             data.put("infoMessage", msg.get("infoNoSearchTerm", language).get());
             CarouselInformation.getCarouselProducts(data);
         }
@@ -66,15 +72,13 @@ public class SearchController
 
             if (products.isEmpty())
             {
-                Optional language = Optional.of("en");
                 data.put("noResults", msg.get("noSearchResults", language).get());
             }
             else
             {
-                Optional language = Optional.of("en");
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
             }
-            template = "views/CatalogController/productOverview.ftl.html";
+            template = xcpConf.templateProductOverview;
         }
         return Results.html().render(data).template(template);
     }

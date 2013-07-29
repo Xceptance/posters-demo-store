@@ -21,12 +21,9 @@ public class WebShopController
     public Result index(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context);
-
         // remember products for carousel
         CarouselInformation.getCarouselProducts(data);
-
         return Results.html().render(data);
     }
 }
