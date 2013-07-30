@@ -48,11 +48,32 @@ public class CreditCard
         this.id = id;
     }
 
+    public String getCardNumberCryptic()
+    {
+        String number = "";
+        if (cardNumber != null)
+        {
+            for (int i = 1; i <= (cardNumber.length() - 4); i++)
+            {
+                if (i % 4 == 0)
+                {
+                    number += "x ";
+                }
+                else
+                {
+                    number += "x";
+                }
+            }
+            number += cardNumber.substring(cardNumber.length() - 4);
+        }
+        return number;
+    }
+
     public String getCardNumber()
     {
         return cardNumber;
     }
-
+    
     public void setCardNumber(String cardNumber)
     {
         this.cardNumber = cardNumber;

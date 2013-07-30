@@ -9,7 +9,7 @@
 		</#if>
 		<li class="span4">
 			<p>${i18n("titleName")}: ${payment.name}</p>
-			<p>${i18n("titleNumber")}: ${payment.cardNumber}</p>
+			<p>${i18n("titleNumber")}: ${payment.getCardNumberCryptic()}</p>
 			<p>${i18n("titleValidTo")}: ${payment.month} ${payment.year}</p>
 			<p>
 			<form action="/deletePayment" method="post">
