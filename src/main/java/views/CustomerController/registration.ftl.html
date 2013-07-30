@@ -11,7 +11,7 @@
 <div class="control-group">
   <label class="control-label">${i18n("labelMyName")}:</label>
   <div class="controls">
-    <input id="name" name="name" placeholder="name" class="input-xlarge" required="" type="text" value=${(registration.name)!}>
+    <input id="name" name="name" required placeholder="${i18n("registrationName")}" class="input-xlarge" type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(registration.name)!}">
     
   </div>
 </div>
@@ -20,7 +20,7 @@
 <div class="control-group">
   <label class="control-label">${i18n("labelMyFirstName")}:</label>
   <div class="controls">
-    <input id="firstName" name="firstName" placeholder="firstName" class="input-xlarge" required="" type="text" value=${(registration.firstName)!}>
+    <input id="firstName" name="firstName" placeholder="${i18n("registrationFirstName")}" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(registration.firstName)!}">
     
   </div>
 </div>
@@ -29,7 +29,7 @@
 <div class="control-group">
   <label class="control-label">${i18n("labelMyEmail")}:</label>
   <div class="controls">
-    <input id="eMail" name="eMail" placeholder="e-mail" class="input-xlarge" required="" type="text"  value=${(registration.email)!}>
+    <input id="eMail" name="eMail" placeholder="${i18n("registrationEmail")}" class="input-xlarge" required type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}" data-error="${i18n("errorValidEmail")}" value="${(registration.email)!}">
     
   </div>
 </div>
@@ -38,7 +38,7 @@
 <div class="control-group">
   <label class="control-label">${i18n("changePasswordNew")}:</label>
   <div class="controls">
-    <input id="password" name="password" placeholder="password" class="input-xlarge" required="" type="password">
+    <input id="password" name="password" placeholder="${i18n("registrationPassword")}" class="input-xlarge" required type="password">
     
   </div>
 </div>
@@ -47,7 +47,7 @@
 <div class="control-group">
   <label class="control-label">${i18n("changePasswordNewAgain")}:</label>
   <div class="controls">
-    <input id="passwordAgain" name="passwordAgain" placeholder="password again" class="input-xlarge" required="" type="password">
+    <input id="passwordAgain" name="passwordAgain" placeholder="${i18n("registrationPasswordAgain")}" class="input-xlarge" required type="password">
     
   </div>
 </div>

@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>${title}</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap-form.css" rel="stylesheet">
     	<style type="text/css">
       		body {
         		padding-top: 60px;
@@ -55,6 +57,13 @@
 		</div>
 		<script src="/assets/js/jquery-1.9.1.min.js"></script>
     	<script src="/assets/js/bootstrap.min.js"></script>
+    	<script src="/assets/js/bootstrap-tooltip.js"></script>
+		<script src="/assets/js/bootstrap-form.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('form').form();
+			});
+		</script>
     </body>
 </html>
 </#macro>

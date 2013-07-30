@@ -2,7 +2,7 @@
 <div class="control-group">
   <label class="control-label" for="creditCardNumber">${i18n("titleNumber")}:</label>
   <div class="controls">
-    <input id="creditCardNumber" name="creditCardNumber" placeholder="" class="input-xlarge" required="" type="text" value=${(card.cardNumber)!}>
+    <input id="creditCardNumber" name="creditCardNumber" class="input-xlarge" required type="text" pattern="4[0-9]{12}(?:[0-9]{3})?" data-error="${i18n("errorWrongCreditCard")}" value="${(card.cardNumber)!}">
     
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="control-group">
   <label class="control-label" for="name">${i18n("paymentCardholderName")}:</label>
   <div class="controls">
-    <input id="name" name="name" placeholder="" class="input-xlarge" required="" type="text" value=${(card.name)!}>
+    <input id="name" name="name" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(card.name)!}">
     
   </div>
 </div>
