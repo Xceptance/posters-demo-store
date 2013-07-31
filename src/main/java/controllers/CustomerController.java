@@ -40,6 +40,13 @@ public class CustomerController
 
     private Optional language = Optional.of("en");
 
+    public Result loginForm(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context);
+        return Results.html().render(data);
+    }
+    
     /**
      * Logs on to the system with email and password. Returns the home page, if the email and the password are correct,
      * otherwise an error page.

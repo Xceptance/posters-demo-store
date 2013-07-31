@@ -1,7 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-
 	<h1>${i18n("titleOrderOverview")}</h1>
+	<!-- print products -->
 	<h3>${i18n("titleProducts")}</h3>
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
@@ -14,6 +14,7 @@
 		</tr>
 		</#list>
 	</table>
+	<!-- print total price -->
 	<div class="row">
 		<div class="span4 offset8">
 			<h3>${i18n("checkoutOverviewSalesTax")}: ${order.tax*100}%</h3>
@@ -29,73 +30,42 @@
 			<h3>${i18n("checkoutOverviewTotalCosts")}: ${order.totalCosts}$</h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span4">
-			<h3>${i18n("titleDeliveryAddress")}</h3>
-		</div>
-		<div class="span4 offset1">
-			<h3>${i18n("titleBillingAddress")}</h3>
-		</div>
+	<div class="row-fluid">
+		<ul>
+			<!-- print delivery address -->
+			<li class="span4">
+				<h3>${i18n("titleDeliveryAddress")}</h3>
+				<address>
+      				<strong>${order.deliveryAddress.name}</strong><br>
+      				${order.deliveryAddress.addressline1}<br>
+      				${order.deliveryAddress.addressline2}<br>
+      				${order.deliveryAddress.zip} ${order.deliveryAddress.city}<br>
+      				${order.deliveryAddress.state} ${order.deliveryAddress.country}<br>
+      			</address>
+			</li>
+			<!-- print billing address -->
+			<li class="span4">
+				<h3>${i18n("titleBillingAddress")}</h3>
+				<address>
+      				<strong>${order.billingAddress.name}</strong><br>
+      				${order.billingAddress.addressline1}<br>
+      				${order.billingAddress.addressline2}<br>
+      				${order.billingAddress.zip} ${order.billingAddress.city}<br>
+      				${order.billingAddress.state} ${order.billingAddress.country}<br>
+      			</address>
+			</li>
+			<!-- print credit card -->
+			<li class="span4">
+				<h3>${i18n("titlePaymentInformation")}</h3>
+				<address>
+      				${i18n("titleName")}: ${order.creditCard.name}<br>
+      				${i18n("titleCreditCard")}: ${order.creditCard.getCardNumberCryptic()}<br>
+      				${i18n("titleValidTo")}: ${order.creditCard.month} ${order.creditCard.year}<br>
+      			</address>
+			</li>
+		</ul>
 	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.name}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.name}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.addressline1}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.addressline1}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.addressline2}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.addressline2}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.zip} ${order.deliveryAddress.city}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.zip} ${order.billingAddress.city}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.state}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.state}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.country}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.country}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			<h3>${i18n("titlePaymentInformation")}</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			<p>${i18n("titleName")}:   ${order.creditCard.name}</p>
-			<p>${i18n("titleNumber")}: ${order.creditCard.getCardNumberCryptic()}</p>
-		</div>
-	</div>
+	<!-- order button -->
 	<div class="row">
 		<div class="span4 offset8">
 			<form action="/checkoutCompleted" method="post">
@@ -103,5 +73,4 @@
 			</form>
 		</div>
 	</div>
-
 </@layout.myLayout>

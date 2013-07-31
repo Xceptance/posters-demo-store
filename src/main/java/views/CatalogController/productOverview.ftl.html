@@ -1,28 +1,28 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-      	<h1>${(category.name)!}</h1>
-      	<h1>${(searchText)!}</h1>
-      	<h1>${(noResults)!}</h1>
-      	<#list products as pro>
-      	<#if (pro_index + 3) % 3 ==0>
-      	<div class="row">
-      		<ul class="thumbnails">
+	<h1>${(category.name)!}</h1>
+	<h1>${(searchText)!}</h1>
+	<h1>${(noResults)!}</h1>
+	<#list products as pro>
+    	<#if (pro_index + 3) % 3 ==0>
+    		<div class="row-fluid">
+      			<ul class="thumbnails">
       	</#if>
-      			<li class="span4">
-      				<div class="thumbnail">
-      					<a href=/productDetail/${pro.url}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
-      					<h3>${pro.name}</h3>
-      					<p>${pro.descriptionOverview}</p>
-      					<p>$ ${pro.price} </p>
-      				</div>
-      			</li>
+      				<li class="span4">
+      					<div class="thumbnail">
+      						<a href=/productDetail/${pro.url}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
+      						<h3>${pro.name}</h3>
+      						<p>${pro.descriptionOverview}</p>
+      						<p>$ ${pro.price} </p>
+      					</div>
+      				</li>
       	<#if (pro_index + 1) % 3 ==0>
-      		</ul>
-      	</div>
+      			</ul>
+      		</div>
       	</#if>
       	<#if !pro_has_next && (pro_index + 1) % 3 !=0>
-      	    </ul>
-      	</div>
+      	    	</ul>
+      		</div>
       	</#if>
-      	</#list>
+	</#list>
 </@layout.myLayout>

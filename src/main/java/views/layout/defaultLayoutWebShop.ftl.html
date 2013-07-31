@@ -1,4 +1,4 @@
-<#macro myLayout title="Layout example">
+<#macro myLayout title="The ultimate poster webshop">
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,50 +11,56 @@
       		body {
         		padding-top: 60px;
         		padding-bottom: 40px;
-        		padding-left: 100px;
+        		padding-left: 20px;
         		padding-right: 100px;
-      		}
-      		.right-fix {
-      			position:fixed;
       		}
     	</style>
     </head>
     <body>
-		<div class="container-fluid">
-			<#include "headerWebShop.ftl.html"/>
-			<#if errorMessage??>
-				<div class="alert alert-error">  
-  					<a class="close" data-dismiss="alert">×</a>  
-  					<strong>${errorMessage}</strong>  
-				</div> 
-			</#if>
-			<#if successMessage??>
-				<div class="alert alert-success">  
-  					<a class="close" data-dismiss="alert">×</a>  
-  					<strong>${successMessage}</strong> 
-				</div> 
-			</#if>
-			<#if infoMessage??>
-				<div class="alert alert-info">  
-  					<a class="close" data-dismiss="alert">×</a>  
-  					<strong>${infoMessage}</strong>  
-				</div> 
-			</#if>
+    	<!-- header -->
+		<#include "header.ftl.html"/>
+		<!-- messages -->
+		<#if errorMessage??>
 			<div class="row">
-				<div class="span10-fluid">
-					<p>
-					<#nested/>
-					</p>
-				</div>
-				<div class="span2-fluid pull-right">
-					<div class="right-fix">
-						<p><#include "basket.ftl.html"/></p>
-						<p><#include "registrationMainPage.ftl.html"/></p>
-					</div>
+				<div class="span6 offset3 text-center alert alert-error">
+  					<a class="close" data-dismiss="alert">×</a>
+  					<strong>${errorMessage}</strong>
 				</div>
 			</div>
+		</#if>
+		<#if successMessage??>
+			<div class="row">
+				<div class="span6 offset3 text-center alert alert-success">
+  					<a class="close" data-dismiss="alert">×</a>
+  					<strong>${successMessage}</strong>
+				</div>
+			</div>
+		</#if>
+		<#if infoMessage??>
+			<div class="row">
+				<div class="span6 offset3 text-center alert alert-info">
+  					<a class="close" data-dismiss="alert">×</a>
+  					<strong>${infoMessage}</strong>
+				</div>
+			</div>
+		</#if>
+		<!-- body -->
+		<div class="container-fluid">
+			<div class="row">
+				<!-- sidebar -->
+				<div class="span3">
+					<#include "sidebar.ftl.html"/>
+				</div>
+				<!-- content -->
+				<div class="span11 offset1">
+					<#nested/>
+				</div>
+			</div>
+			<!-- footer -->
+			<hr>
 			<#include "footerWebShop.ftl.html"/>
 		</div>
+
 		<script src="/assets/js/jquery-1.9.1.min.js"></script>
     	<script src="/assets/js/bootstrap.min.js"></script>
     	<script src="/assets/js/bootstrap-tooltip.js"></script>

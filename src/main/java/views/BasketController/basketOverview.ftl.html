@@ -1,38 +1,34 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-
 	<h1>${i18n("basketOverviewTitle")}</h1>
-	
 	<table class="table" table-bordered>
-		
 		<#list basketProducts as basketProduct>
-		<tr>
-			<td><a href=/productDetail/${basketProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
-			<td>${basketProduct.product.name}</td>
-			<td>${basketProduct.product.descriptionOverview}</td>
-			<td>${basketProduct.product.price}</td>
-			<td>
-				<form action="/updateProductCount" method="post">
-      				<input type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
-      				<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewUpdateQuantity")}</button>
-      			</form>
-			</td>
-			<td>
-				<form action="/deleteFromBasket" method="post">
-      				<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
-      			</form>
-			</td>
-		</tr>
+			<tr>
+				<td><a href=/productDetail/${basketProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
+				<td>${basketProduct.product.name}</td>
+				<td>${basketProduct.product.descriptionOverview}</td>
+				<td>${basketProduct.product.price}</td>
+				<td>
+					<form class="form-inline" action="/updateProductCount" method="post">
+	      				<input class="input-mini" type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
+      					<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
+      					<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewUpdateQuantity")}</button>
+   	   				</form>
+				</td>
+				<td>
+					<form action="/deleteFromBasket" method="post">
+      					<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
+      					<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
+      				</form>
+				</td>
+			</tr>
 		</#list>
 	</table>
-	
-	<h3>${i18n("basketOverviewTotalPrice")}: ${totalPrice}$</h3>
-	
-	<form action="/checkout" method="post">
-      	<input type="hidden" id="basketId" name="basketId" value=${basketId}>
-      	<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewStartCheckout")}</button>
-    </form>
 
+	<h3>${i18n("basketOverviewTotalPrice")}: ${totalPrice}$</h3>
+
+	<form action="/checkout" method="post">
+		<input type="hidden" id="basketId" name="basketId" value=${basketId}>
+		<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewStartCheckout")}</button>
+	</form>
 </@layout.myLayout>

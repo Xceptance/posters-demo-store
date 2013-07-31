@@ -1,0 +1,11 @@
+<div class="well sidebar-nav">
+	<ul class="nav nav-list">
+		<#list topCategory as tC>
+			<li class="nav-header">${tC.name}</li>
+			<li><a href="/topCategory/${tC.url}">${i18n("headerOverview")} ${tC.name}</a></li>
+			<#list tC.subCategories as sC>
+				<li><a href="/category/${sC.url}">${sC.name}</a></li>
+			</#list>
+		</#list>
+	</ul>
+</div>

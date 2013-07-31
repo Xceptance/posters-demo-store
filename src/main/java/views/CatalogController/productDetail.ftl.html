@@ -1,10 +1,8 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-
 	<h1>${productDetail.name}</h1>
-	
-	<div class="row">
-		<div class="span 4">
+	<div class="row-fluid">
+		<div class="span4">
       		<img class="img-polaroid" width="300" alt="" src=${productDetail.imageURL}></img>
       	</div>
       	<div class="span5">
@@ -13,13 +11,10 @@
       	</div>
       	<div class="span3">
       		<h3>${productDetail.price}$</h3>
-      		<p>
-      			<form action="/addToBasket" method="post">
-      				<input type="hidden" id="productName" name="productName" value=${productDetail.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">${i18n("productDetailAddToBasket")}</button>
-      			</form>
-      		</p>
+      		<form action="/addToBasket" method="post">
+      			<input type="hidden" id="productName" name="productName" value=${productDetail.id}>
+      			<button class="btn"id="submit" name="submit" type="submit">${i18n("productDetailAddToBasket")}</button>
+      		</form>
       	</div>
     </div>
-
 </@layout.myLayout>

@@ -1,53 +1,48 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-
-<#if paymentOverview??>
-<h1>${i18n("paymentMethodTitleSelect")}</h1>
-<#list paymentOverview as payment>
-	<#if (payment_index + 3) % 3 ==0>
-      	<div class="row">
-      		<ul class="thumbnails">
-    </#if>
-      			<li class="span4">
-      					<p>${i18n("titleName")}: ${payment.name}<p>
-      					<p>${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}</p>
-      					<p>${i18n("titleValidTo")}: ${payment.month} ${payment.year}</p>
-      					<p>
-      						<form action="/addPaymentToOrder" method="post">
-    							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">${i18n("paymentMethodChoose")}</button>
-							</form>
-      					</p>
-      			</li>
+	<#if paymentOverview??>
+	<!-- choose available credit card -->
+	<h3>${i18n("paymentMethodTitleSelect")}</h3>
+	<#list paymentOverview as payment>
+		<#if (payment_index + 3) % 3 ==0>
+      		<div class="row-fluid">
+      			<ul>
+    	</#if>
+      				<li class="span4">
+      					<address>
+      						${i18n("titleName")}: ${payment.name}<br>
+      						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
+      						${i18n("titleValidTo")}: ${payment.month} ${payment.year}<br>
+      					</address>
+      					<form action="/addPaymentToOrder" method="post">
+    						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
+    						<button class="btn"id="submit" name="submit" type="submit">${i18n("paymentMethodChoose")}</button>
+						</form>
+      				</li>
 		<#if (payment_index + 1) % 3 ==0>
-      		</ul>
-      	</div>
+      			</ul>
+      		</div>
       	</#if>
       	<#if !payment_has_next && (payment_index + 1) % 3 !=0>
-      	    </ul>
-      	</div>
+      	    	</ul>
+      		</div>
       	</#if>
-</#list>
-</#if>
-
-<form class="form-horizontal" action="/paymentMethodCompleted" method="post">
-<fieldset>
-
-<!-- Form Name -->
-<legend>${i18n("paymentMethodAddNew")}</legend>
-
-<#include "../form/paymentForm.ftl.html"/>
-
-<!-- Button -->
-<div class="control-group">
-  <label class="control-label" for="continue"></label>
-  <div class="controls">
-    <button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonContinue")}</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-
-
+	</#list>
+	</#if>
+	<!-- add new credit card -->
+	<form class="form-horizontal" action="/paymentMethodCompleted" method="post">
+		<fieldset>
+			<!-- Form Name -->
+			<legend>${i18n("paymentMethodAddNew")}</legend>
+			<!-- include form -->
+			<#include "../form/paymentForm.ftl.html"/>
+			<!-- continue button -->
+			<div class="control-group">
+				<label class="control-label" for="continue"></label>
+				<div class="controls">
+					<button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonContinue")}</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </@layout.myLayout>
