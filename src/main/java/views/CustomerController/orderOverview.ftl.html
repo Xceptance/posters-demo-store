@@ -1,13 +1,11 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-
 	<h1>${i18n("titleOrderOverview")}</h1>
-	
 	<#list orderOverview as order>
-	<div class="row">
+	<div class="row well">
 	<div class="span2">
-		${order.orderDate} <br>
-		${order.totalCosts}$
+		<h5>${order.orderDate}</h5>
+		<h5>${order.totalCosts}$</h5>
 	</div>
 	<div class="span8">
 		<table class="table" table-bordered>
@@ -16,11 +14,11 @@
 			<td><a href=/productDetail/${orderProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
 			<td>${orderProduct.product.name}</td>
 			<td>${orderProduct.product.descriptionOverview}</td>
+			<td>${orderProduct.countProduct}x</td>
 		</tr>
 		</#list>
 		</table>
 	</div>
 	</div>
 	</#list>
-
 </@layout.myLayout>

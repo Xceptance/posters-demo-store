@@ -1,25 +1,19 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-
-<form class="form-horizontal" action="/updateBillingAddressCompleted" method="post">
-<fieldset>
-
-<!-- Form Name -->
-<legend>${i18n("updateBillingTitle")}</legend>
-
-<#include "../form/addressForm.ftl.html"/>
-
-<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-
-<!-- Button -->
-<div class="control-group">
-  <label class="control-label" for="continue"></label>
-  <div class="controls">
-    <button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonSave")}</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-
+	<form class="form-horizontal" action="/updateBillingAddressCompleted" method="post">
+		<fieldset>
+			<!-- Form Name -->
+			<legend>${i18n("updateBillingTitle")}</legend>
+			<!-- include form -->
+			<#include "../form/addressForm.ftl.html"/>
+			<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+			<!-- update -->
+			<div class="control-group">
+				<label class="control-label" for="continue"></label>
+				<div class="controls">
+				<button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonSave")}</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </@layout.myLayout>
