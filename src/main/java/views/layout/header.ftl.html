@@ -4,7 +4,7 @@
 			<a class="brand" href="/"><img
 				src="/assets/img/xceptanceLogo.png" width="25"></img>-Poster</a>
 			<div class="nav-collapse collapse">
-				<form class="navbar-search span7 offset3" action="/search"
+				<form class="navbar-search span6 offset3" action="/search"
 					method="post">
 					<input id="searchText" name="searchText" type="text"
 						class="search-query span5" placeholder="Search">
@@ -12,9 +12,9 @@
 						<i class="icon-search"></i>
 					</button>
 				</form>
-				<p class="navbar-text span2">
+				<p class="navbar-text span3">
 					<a href="/basket"><i class="icon-shopping-cart"></i>
-						${i18n("basketOverviewTitle")} ${basketProductCount}
+						${i18n("basketOverviewTitle")}: ${basketProductCount}
 						${i18n("basketItem")} - ${totalPrice}$</a>
 				</p>
 				<#if isLogged == false>
