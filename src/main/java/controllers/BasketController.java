@@ -46,7 +46,7 @@ public class BasketController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
@@ -75,7 +75,7 @@ public class BasketController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
@@ -106,7 +106,7 @@ public class BasketController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // return basket overview page
         return Results.html().render(data).template(xcpConf.templateBasketOverview);
     }
@@ -124,7 +124,7 @@ public class BasketController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
 

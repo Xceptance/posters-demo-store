@@ -43,7 +43,7 @@ public class CustomerController
     public Result loginForm(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
     
@@ -101,7 +101,7 @@ public class CustomerController
         }
         // put products for carousel to data map
         CarouselInformation.getCarouselProducts(data);
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(xcpConf.templateIndex);
     }
 
@@ -119,7 +119,7 @@ public class CustomerController
         // remove basket from session
         SessionHandling.deleteBasketId(context);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // put products for carousel to data map
         CarouselInformation.getCarouselProducts(data);
 
@@ -136,7 +136,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         return Results.html().render(data);
     }
@@ -208,7 +208,7 @@ public class CustomerController
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
     }
 
@@ -222,7 +222,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -238,7 +238,7 @@ public class CustomerController
 
         CustomerInformation.addOrderOfCustomerToMap(context, data);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -254,7 +254,7 @@ public class CustomerController
 
         CustomerInformation.addPaymentOfCustomerToMap(context, data);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -270,7 +270,7 @@ public class CustomerController
 
         CustomerInformation.addCustomerToMap(context, data);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -289,7 +289,7 @@ public class CustomerController
                                                 @Param("expirationDateYear") int year, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template = "";
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
@@ -344,7 +344,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         return Results.html().render(data);
     }
@@ -362,7 +362,7 @@ public class CustomerController
 
         CreditCardInformation.deleteCreditCardFromCustomer(cardId);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // success message
         data.put("successMessage", msg.get("successDelete", language).get());
         return Results.html().render(data).template(xcpConf.templateAccountOverview);
@@ -380,7 +380,7 @@ public class CustomerController
 
         CustomerInformation.addAddressOfCustomerToMap(context, data);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -398,7 +398,7 @@ public class CustomerController
         // remove billing address
         AddressInformation.deleteBillingAddressFromCustomer(addressId);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // success message
         data.put("successMessage", msg.get("successDelete", language).get());
         return Results.html().render(data).template(xcpConf.templateAccountOverview);
@@ -418,7 +418,7 @@ public class CustomerController
         // remove delivery address
         AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // success message
         data.put("successMessage", msg.get("successDelete", language).get());
         return Results.html().render(data).template(xcpConf.templateAccountOverview);
@@ -437,7 +437,7 @@ public class CustomerController
 
         data.put("address", AddressInformation.getDeliveryAddressById(addressId));
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         return Results.html().render(data);
     }
@@ -466,7 +466,7 @@ public class CustomerController
 
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
@@ -519,7 +519,7 @@ public class CustomerController
 
         data.put("address", AddressInformation.getBillingAddressById(addressId));
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         return Results.html().render(data);
     }
@@ -548,7 +548,7 @@ public class CustomerController
 
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
@@ -599,7 +599,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         return Results.html().render(data);
     }
@@ -614,7 +614,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         return Results.html().render(data);
     }
@@ -643,7 +643,7 @@ public class CustomerController
 
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
@@ -710,7 +710,7 @@ public class CustomerController
 
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // check input
         if (!Pattern.matches("[0-9]*", zip))
@@ -763,7 +763,7 @@ public class CustomerController
     public Result changeNameOrEmail(@Param("customerId") String customerId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         Customer customer = CustomerInformation.getCustomerById(Integer.parseInt(customerId));
         data.put("customer", customer);
         return Results.html().render(data);
@@ -820,7 +820,7 @@ public class CustomerController
             data.put("successMessage", msg.get("successUpdate", language).get());
             template = xcpConf.templateAccountOverview;
         }
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
     }
 
@@ -834,7 +834,7 @@ public class CustomerController
     public Result changePassword(@Param("customerId") String customerId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -851,7 +851,7 @@ public class CustomerController
                                           @Param("passwordAgain") String passwordAgain, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         boolean failure = false;
         String template;
         Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
@@ -926,14 +926,14 @@ public class CustomerController
             data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
             template = xcpConf.templateConfirmDeletion;
         }
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
     }
 
     public Result confirmDeletion(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 }

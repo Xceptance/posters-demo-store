@@ -35,7 +35,7 @@ public class SearchController
     public Result search(@Param("searchText") String searchText, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // search text is empty
         if (searchText.isEmpty() || searchText.equals(" "))

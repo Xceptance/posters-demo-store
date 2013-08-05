@@ -32,7 +32,7 @@ public class CatalogController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
 
         // put product to data map
         ProductInformation.addProductDetailToMap(productUrl, data);
@@ -51,7 +51,7 @@ public class CatalogController
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // add products for the given sub category to data map
         ProductInformation.addSubCategoryProductsToMap(subCategory, data);
         // add sub category to data map
@@ -69,7 +69,7 @@ public class CatalogController
     public Result topCategoryOverview(@PathParam("topCategory") String topCategory, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // add products for the given top category to data map
         ProductInformation.addTopCategoryProductsToMap(topCategory, data);
         // add top category to data map

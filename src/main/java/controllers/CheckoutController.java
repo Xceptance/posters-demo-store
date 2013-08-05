@@ -51,7 +51,7 @@ public class CheckoutController
     public Result checkout(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
 
         // get basket by session id
@@ -111,7 +111,7 @@ public class CheckoutController
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
 
         // check input
@@ -216,7 +216,7 @@ public class CheckoutController
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
 
         // get delivery address
@@ -252,7 +252,7 @@ public class CheckoutController
                                           @Param("country") String country, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
 
         // check input
@@ -320,7 +320,7 @@ public class CheckoutController
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template;
 
         // get billing address
@@ -352,7 +352,7 @@ public class CheckoutController
                                          @Param("expirationDateYear") int year, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         String template = "";
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
@@ -426,7 +426,7 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // get credit card by id
         CreditCard creditCard = CreditCardInformation.getCreditCardById(Integer.parseInt(creditCardId));
         // get order by session id
@@ -486,7 +486,7 @@ public class CheckoutController
         // remove order from session
         SessionHandling.deleteOrderId(context);
 
-        CommonInformation.setCommonData(data, context);
+        CommonInformation.setCommonData(data, context, xcpConf);
         // show success message
         data.put("successMessage", msg.get("checkoutCompleted", language).get());
         // remember products for carousel

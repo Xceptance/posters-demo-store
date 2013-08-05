@@ -2,6 +2,10 @@ package util.database;
 
 import java.util.Map;
 
+import com.google.inject.Inject;
+
+import conf.XCPosterConf;
+
 import models.Basket;
 import ninja.Context;
 import util.session.SessionHandling;
@@ -15,10 +19,11 @@ public abstract class CommonInformation
      * 
      * @param data
      * @param context
+     * @param xcpConf TODO
      */
-    public static void setCommonData(final Map<String, Object> data, Context context)
+    public static void setCommonData(final Map<String, Object> data, Context context, XCPosterConf xcpConf)
     {
-        // remember categories
+        // set categories
         CategoryInformation.addCategoriesToMap(data);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
@@ -29,9 +34,12 @@ public abstract class CommonInformation
             // put basket id to session
             SessionHandling.setBasketId(context, basket.getId());
         }
-        // remember basket stuff
+        // set basket stuff
         BasketInformation.addBasketDetailToMap(basket, data);
-        // remember logged customer
+        // set logged customer
         CustomerInformation.addCustomerFirstNameToMap(context, data);
+        // set application url
+        data.put("applUrlHttp", xcpConf.applicationUrlHttp);
+        data.put("applUrlHttps", xcpConf.applicationUrlHttps);
     }
 }

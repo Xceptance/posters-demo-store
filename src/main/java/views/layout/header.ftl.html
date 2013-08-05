@@ -1,10 +1,10 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-			<a class="brand" href="/"><img
+			<a class="brand" href="${applUrlHttp}/"><img
 				src="/assets/img/xceptanceLogo.png" width="25"></img>-Poster</a>
 			<div class="nav-collapse collapse">
-				<form class="navbar-search span6 offset3" action="/search"
+				<form class="navbar-search span6 offset3" action="${applUrlHttp}/search"
 					method="post">
 					<input id="searchText" name="searchText" type="text"
 						class="search-query span5" placeholder="Search">
@@ -13,13 +13,13 @@
 					</button>
 				</form>
 				<p class="navbar-text span3">
-					<a href="/basket"><i class="icon-shopping-cart"></i>
+					<a href="${applUrlHttp}/basket"><i class="icon-shopping-cart"></i>
 						${i18n("basketOverviewTitle")}: ${basketProductCount}
 						${i18n("basketItem")} - ${totalPrice}$</a>
 				</p>
 				<#if isLogged == false>
 					<p class="navbar-text span3">
-						Welcome! <a href="https://localhost:8443/login">Sign in</a>
+						Welcome! <a href="${applUrlHttps}/login">Sign in</a>
 					</p>
 				</#if>
 				<#if isLogged == true>
@@ -28,10 +28,10 @@
 							data-toggle="dropdown">${i18n("headerWelcome")} ${customerFirstName} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="/accountOverview">${i18n("accountOverviewTitle")}</a>
+									<a href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
 								</li> 
 								<li>
-									<a href="/logout">${i18n("headerLogout")}</a>
+									<a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
 								</li>
 							</ul>
 						</li>

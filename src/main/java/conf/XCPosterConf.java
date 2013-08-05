@@ -50,6 +50,10 @@ public class XCPosterConf
     public final String templateChangePassword;
 
     public final String templateConfirmDeletion;
+    
+    public final String applicationUrlHttp;
+    
+    public final String applicationUrlHttps;
 
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
@@ -95,5 +99,9 @@ public class XCPosterConf
         templateChangePassword = "views/CustomerController/changePassword.ftl.html";
 
         templateConfirmDeletion = "views/CustomerController/confirmDeletion.ftl.html";
+        
+        applicationUrlHttp = ninjaProp.getOrDie("application.url.http");
+        
+        applicationUrlHttps = ninjaProp.getOrDie("application.url.https");
     }
 }

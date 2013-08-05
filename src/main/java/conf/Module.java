@@ -24,6 +24,7 @@ public class Module extends AbstractModule
     protected void configure()
     {
         bind(XCPosterConf.class);
+        requestStaticInjection(XCPosterConf.class);
     }
 
 }

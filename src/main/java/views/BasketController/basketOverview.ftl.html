@@ -27,7 +27,7 @@
 
 	<h3>${i18n("basketOverviewTotalPrice")}: ${totalPrice}$</h3>
 
-	<form action="/checkout" method="post">
+	<form action="${applUrlHttps}/checkout" method="post">
 		<input type="hidden" id="basketId" name="basketId" value=${basketId}>
 		<button class="btn"id="submit" name="submit" type="submit">${i18n("basketOverviewStartCheckout")}</button>
 	</form>
