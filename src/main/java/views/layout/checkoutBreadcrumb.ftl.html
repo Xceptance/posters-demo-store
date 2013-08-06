@@ -1,0 +1,32 @@
+<div class="row">
+	<ul class="breadcrumb span6 offset4 text-center">
+		<!-- add delivery address -->
+		<#if deliveryAddressActive??>
+		<li class="active">
+		<#else>
+		<li>
+		</#if>
+			Delivery address <span class="divider"> > </span></li>
+		<!-- add billing address -->	
+		<#if billingAddressActive??>
+		<li class="active">
+		<#else>
+		<li>
+		</#if>
+			Billing address <span class="divider"> > </span></li>
+		<!-- add credit card -->
+		<#if creditCardActive??>
+		<li class="active">
+		<#else>
+		<li>
+		</#if>
+			Credit card <span class="divider"> > </span></li>
+		<!-- place order -->
+		<#if placeOrderActive??>
+		<li class="active">
+		<#else>
+		<li>
+		</#if>
+			Place order</li>
+	</ul>
+</div>

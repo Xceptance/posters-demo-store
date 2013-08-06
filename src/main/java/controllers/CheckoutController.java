@@ -84,6 +84,8 @@ public class CheckoutController
             }
             // save order
             Ebean.save(order);
+            data.put("checkout", true);
+            data.put("deliveryAddressActive", true);
         }
         return Results.html().render(data).template(template);
     }
@@ -131,6 +133,7 @@ public class CheckoutController
             data.put("address", address);
             // show page to enter delivery address again
             template = xcpConf.templateDeliveryAddress;
+            data.put("deliveryAddressActive", true);
         }
         // all input fields might be correct
         else
@@ -187,6 +190,7 @@ public class CheckoutController
                 CustomerInformation.addPaymentOfCustomerToMap(context, data);
                 // return page to enter payment information
                 template = xcpConf.templatePaymentMethod;
+                data.put("creditCardActive", true);
             }
             // billing and delivery address are not equal
             else
@@ -198,10 +202,12 @@ public class CheckoutController
                 }
                 // return page to enter billing address
                 template = xcpConf.templateBillingAddress;
+                data.put("billingAddressActive", true);
             }
             // update order
             order.update();
         }
+        data.put("checkout", true);
         return Results.html().render(data).template(template);
     }
 
@@ -230,6 +236,8 @@ public class CheckoutController
         CustomerInformation.addAddressOfCustomerToMap(context, data);
         // update order
         order.update();
+        data.put("checkout", true);
+        data.put("billingAddressActive", true);
         return Results.html().render(data).template(template);
     }
 
@@ -272,6 +280,7 @@ public class CheckoutController
             data.put("address", address);
             // show page to enter billing address again
             template = xcpConf.templateBillingAddress;
+            data.put("billingAddressActive", true);
         }
         // all input fields might be correct
         else
@@ -301,11 +310,13 @@ public class CheckoutController
             order.setBillingAddress(billingAddress);
             // return page to enter payment information
             template = xcpConf.templatePaymentMethod;
+            data.put("creditCardActive", true);
             // add payment information to map
             CustomerInformation.addPaymentOfCustomerToMap(context, data);
             // update order
             Ebean.save(order);
         }
+        data.put("checkout", true);
         return Results.html().render(data).template(template);
     }
 
@@ -334,6 +345,8 @@ public class CheckoutController
         CustomerInformation.addPaymentOfCustomerToMap(context, data);
         // update order
         order.update();
+        data.put("checkout", true);
+        data.put("creditCardActive", true);
         return Results.html().render(data).template(template);
     }
 
@@ -396,6 +409,7 @@ public class CheckoutController
                 OrderInformation.addProductsFromOrderToMap(order, data);
                 // return page to get an overview of the checkout
                 template = xcpConf.templateCheckoutOverview;
+                data.put("placeOrderActive", true);
                 // update order
                 order.update();
             }
@@ -411,7 +425,9 @@ public class CheckoutController
             data.put("card", card);
             // show page to enter delivery address again
             template = xcpConf.templatePaymentMethod;
+            data.put("creditCardActive", true);
         }
+        data.put("checkout", true);
         return Results.html().render(data).template(template);
     }
 
@@ -445,8 +461,10 @@ public class CheckoutController
         OrderInformation.addProductsFromOrderToMap(order, data);
         // return page to get an overview of the checkout
         String template = xcpConf.templateCheckoutOverview;
+        data.put("placeOrderActive", true);
         // update order
         order.update();
+        data.put("checkout", true);
         return Results.html().render(data).template(template);
     }
 

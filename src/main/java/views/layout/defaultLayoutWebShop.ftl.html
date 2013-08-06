@@ -19,6 +19,10 @@
     <body>
     	<!-- header -->
 		<#include "header.ftl.html"/>
+		<!-- checkout breadcrumb -->
+		<#if checkout??>
+			<#include "checkoutBreadcrumb.ftl.html"/>
+		</#if>
 		<!-- messages -->
 		<#if errorMessage??>
 			<div class="row">
