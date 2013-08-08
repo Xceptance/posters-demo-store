@@ -1027,36 +1027,36 @@
   </product>
       <!--SubCategory XXL-->
   <product>
-    <name>XXL 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>North Boston</name>
+    <shortDescription>Taken from the US Custom House Tower</shortDescription>
+    <longDescription>And much better than anything they use for postcards and travel guides today. If you prefer Boston over NYC, you should go for this one. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/XXL/XXL_1.jpg</imageURL>
     <carousel>true</carousel>
     <subCategory>XXL</subCategory>
   </product>
   <product>
-    <name>XXL 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Boston Sunset</name>
+    <shortDescription>The perfect Boston Skyline poster</shortDescription>
+    <longDescription>It just can't get any better than this. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/XXL/XXL_2.jpg</imageURL>
     <carousel>true</carousel>
     <subCategory>XXL</subCategory>
   </product>
   <product>
-    <name>XXL 3</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Bryce National Park, Utah I</name>
+    <shortDescription>Absolutely stunning!</shortDescription>
+    <longDescription>Check out the special geology. The panorama view delivers details you wouldn't be able to see in real life. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/XXL/XXL_3.jpg</imageURL>
     <carousel>true</carousel>
     <subCategory>XXL</subCategory>
   </product>
   <product>
-    <name>XXL 4</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Bryce National Park, Utah II</name>
+    <shortDescription>WOW! WOW! WOW!</shortDescription>
+    <longDescription>No need to say more. And actually no need to visit this place anymore. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/XXL/XXL_4.jpg</imageURL>
     <carousel>true</carousel>
