@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <categories>
-	<category>
-		<nameCategory>Flora and Fauna</nameCategory>
+    <category>
+		<nameCategory>World of Nature</nameCategory>
 		<subCategory>
 			<nameSubCategory>Animals</nameSubCategory>
 		</subCategory>
@@ -13,21 +13,21 @@
 		</subCategory>
 	</category>
 	<category>
-		<nameCategory>Food</nameCategory>
+		<nameCategory>Dining</nameCategory>
 		<subCategory>
 			<nameSubCategory>Cold Cuts</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Grillables</nameSubCategory>
+			<nameSubCategory>Main Dishes</nameSubCategory>
 		</subCategory>
 		<subCategory>
 			<nameSubCategory>Sweets</nameSubCategory>
 		</subCategory>
 	</category>
 	<category>
-		<nameCategory>Means of Transportation</nameCategory>
+		<nameCategory>Transportation</nameCategory>
 		<subCategory>
-			<nameSubCategory>Airplanes</nameSubCategory>
+			<nameSubCategory>Air Travel</nameSubCategory>
 		</subCategory>
 		<subCategory>
 			<nameSubCategory>Classic Cars</nameSubCategory>
@@ -39,7 +39,7 @@
 	<category>
 		<nameCategory>Panoramas</nameCategory>
 		<subCategory>
-			<nameSubCategory>Buildings</nameSubCategory>
+			<nameSubCategory>Architecture</nameSubCategory>
 		</subCategory>
 		<subCategory>
 			<nameSubCategory>Fireworks</nameSubCategory>
@@ -48,7 +48,7 @@
 			<nameSubCategory>Landscapes</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>XXL</nameSubCategory>
+			<nameSubCategory>XXL Panoramas</nameSubCategory>
 		</subCategory>
 	</category>
 </categories>

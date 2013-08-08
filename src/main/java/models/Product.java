@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -47,11 +48,13 @@ public class Product
     /**
      * A detailed description of the product.
      */
+    @Column(length = 4096)
     private String descriptionDetail;
 
     /**
      * A overview description of the product.
      */
+    @Column(length = 1024)
     private String descriptionOverview;
 
     /**
