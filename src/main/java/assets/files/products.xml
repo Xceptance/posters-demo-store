@@ -620,7 +620,7 @@
   </product>
   <product>
     <name>IFA W50</name>
-    <shortDescription>A truck! In East Germany!</shortDescription>
+    <shortDescription>A truck! In East Germany! What the heck!</shortDescription>
     <longDescription>Absolutely unique to have. Produced from 1965 to 1990.  Check out the shovel that came with it to build lots of Plattenbauten. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_3.jpg</imageURL>
@@ -686,84 +686,84 @@
   </product>
   <!--SubCategory Railways-->
   <product>
-    <name>Rail car 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Third Avenue Railway System, Car 631</name>
+    <shortDescription>Historic railway system of NYC</shortDescription>
+    <longDescription>Still operating at Seashore Trolley Museum, in Kennebunkport, Maine. Show off as an NYC expert and go for a NYC poster that's different. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_1.jpg</imageURL>
     <subCategory>Railways</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Rail car 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Eastern Massachussetts Street Railway, Car 4387</name>
+    <shortDescription>Historic Streetcar company of Boston</shortDescription>
+    <longDescription>Still operating at Seashore Trolley Museum, in Kennebunkport, Maine. We think it looks pretty darn good in bright orange. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_2.jpg</imageURL>
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Rail car 3</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Boston MBTA Wartime Pullman Green PCC Trolley, Car 3328 </name>
+    <shortDescription>Wait... what?!</shortDescription>
+    <longDescription>Pretty long name. Looks absolutely cool though. Early beginnings of Massachusetts Bay Transportation Authority. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_3.jpg</imageURL>
     <subCategory>Railways</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Diesel-powered engine</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>NOHAB-GM, Car 2372</name>
+    <shortDescription>The famous "Bulldog Nose"</shortDescription>
+    <longDescription>Diesel locomotive produced by GM-EMD from 1939 to 1970. Spotted in Bernsdorf, Germany. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_4.jpg</imageURL>
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Steam engine 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>German Steam Locomotive</name>
+    <shortDescription>For all nostalgics</shortDescription>
+    <longDescription>Spotted in Germany during a city festival. Must-have for all railway nerds. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_5.jpg</imageURL>
     <subCategory>Railways</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Steam engine 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>German Steam Locomotive II</name>
+    <shortDescription>Another one from the back</shortDescription>
+    <longDescription>Perfectly matches the previous image. Don't miss our Steam Locomotive combo! Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_6.jpg</imageURL>
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Electro lokomotive</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>East German LEW EL 2</name>
+    <shortDescription>Electric Coal Mine Railway</shortDescription>
+    <longDescription>East Germany produced a total of 1384 of these between 1952 and 1988. Some of them also got delivered to Bulgaria, China, Poland, and USSR. Spotted in Besucherbergwerk Abraumförderbrücke F60 in Brandenburg, Germany. Very rare and absolutely unique. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_7.jpg</imageURL>
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Urban railway</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>NYC Subway</name>
+    <shortDescription>For all NYC fans</shortDescription>
+    <longDescription>Makes another fancy NYC  poster in your home. The camera angle perfectly conveys the urban atmosphere. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_8.jpg</imageURL>
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Old rail car</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>U.S. Railway Mail Service Car</name>
+    <shortDescription>Pretty historic</shortDescription>
+    <longDescription>Hard to believe the RMS carried the majority of mail in the US until the 1960s. Time flies! Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_9.jpg</imageURL>
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>Old urban railway</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Old NYC Subway</name>
+    <shortDescription>Nothing lasts forever</shortDescription>
+    <longDescription>This looks so awesome if you put it next to our NYC Subway between skyscrapers. Hurry and get both of them, they make a fantastic duo. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_10.jpg</imageURL>
     <subCategory>Railways</subCategory>
