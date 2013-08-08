@@ -41,5 +41,7 @@ public abstract class CommonInformation
         // set application url
         data.put("applUrlHttp", xcpConf.applicationUrlHttp);
         data.put("applUrlHttps", xcpConf.applicationUrlHttps);
+        // set currency
+        data.put("currency", xcpConf.currency);
     }
 }

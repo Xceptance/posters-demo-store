@@ -13,7 +13,7 @@
       						<a href=/productDetail/${pro.url}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
       						<h3>${pro.name}</h3>
       						<p>${pro.descriptionOverview}</p>
-      						<p>$ ${pro.price} </p>
+      						<p>${pro.price}${currency}</p>
       					</div>
       				</li>
       	<#if (pro_index + 1) % 3 ==0>

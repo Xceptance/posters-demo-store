@@ -7,7 +7,7 @@
 				<td><a href=/productDetail/${basketProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
 				<td>${basketProduct.product.name}</td>
 				<td>${basketProduct.product.descriptionOverview}</td>
-				<td>${basketProduct.product.price}</td>
+				<td>${basketProduct.product.price}${currency}</td>
 				<td>
 					<form class="form-inline" action="/updateProductCount" method="post">
 	      				<input class="input-mini" type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
@@ -25,7 +25,7 @@
 		</#list>
 	</table>
 
-	<h3>${i18n("basketOverviewTotalPrice")}: ${totalPrice}$</h3>
+	<h3>${i18n("basketOverviewTotalPrice")}: ${totalPrice}${currency}</h3>
 
 	<form action="${applUrlHttps}/checkout" method="post">
 		<input type="hidden" id="basketId" name="basketId" value=${basketId}>

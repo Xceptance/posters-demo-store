@@ -14,7 +14,7 @@ public class XCPosterConf
     public final String[] regexCreditCard;
 
     public final String regexEmail;
-    
+
     public final String regexProductCount;
 
     public final String templateIndex;
@@ -50,10 +50,12 @@ public class XCPosterConf
     public final String templateChangePassword;
 
     public final String templateConfirmDeletion;
-    
+
     public final String applicationUrlHttp;
-    
+
     public final String applicationUrlHttps;
+
+    public final String currency;
 
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
@@ -63,7 +65,7 @@ public class XCPosterConf
         regexCreditCard = ninjaProp.getStringArray("regex.creditCard");
 
         regexEmail = ninjaProp.getOrDie("regex.email");
-        
+
         regexProductCount = ninjaProp.getOrDie("regex.productCount");
 
         templateIndex = "views/WebShopController/index.ftl.html";
@@ -99,9 +101,11 @@ public class XCPosterConf
         templateChangePassword = "views/CustomerController/changePassword.ftl.html";
 
         templateConfirmDeletion = "views/CustomerController/confirmDeletion.ftl.html";
-        
+
         applicationUrlHttp = ninjaProp.getOrDie("application.url.http");
-        
+
         applicationUrlHttps = ninjaProp.getOrDie("application.url.https");
+
+        currency = ninjaProp.getOrDie("application.currency");
     }
 }
