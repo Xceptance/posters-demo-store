@@ -1,10 +1,18 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-			<a class="brand" href="${applUrlHttp}/"><img
+			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<!-- brand -->
+			<a class="brand span2 text-center" href="${applUrlHttp}/"><img
 				src="/assets/img/xceptanceLogo.png" width="25"></img>-Poster</a>
-			<div class="nav-collapse collapse">
-				<form class="navbar-search span6 offset3" action="${applUrlHttp}/search"
+			<!-- collapse -->
+			<div class="nav-collapse collapse navbar-responsive-collapse">
+				<form class="navbar-search span6" action="${applUrlHttp}/search"
 					method="post">
 					<input id="searchText" name="searchText" type="text"
 						class="search-query span5" placeholder="Search">
@@ -12,18 +20,13 @@
 						<i class="icon-search"></i>
 					</button>
 				</form>
-				<p class="navbar-text span3">
-					<a href="${applUrlHttp}/basket"><i class="icon-shopping-cart"></i>
-						${i18n("basketOverviewTitle")}: ${basketProductCount}
-						${i18n("basketItem")} - ${totalPrice}$</a>
-				</p>
 				<#if isLogged == false>
-					<p class="navbar-text span3">
+					<p class="navbar-text span2 pull-right">
 						Welcome! <a href="${applUrlHttps}/login">Sign in</a>
 					</p>
 				</#if>
 				<#if isLogged == true>
-					<ul class="nav">
+					<ul class="nav pull-right">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">${i18n("headerWelcome")} ${customerFirstName} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -37,6 +40,11 @@
 						</li>
 					</ul>
 				</#if>
+				<p class="navbar-text span3 pull-right">
+					<a href="${applUrlHttp}/basket"><i class="icon-shopping-cart"></i>
+						${i18n("basketOverviewTitle")}: ${basketProductCount}
+						${i18n("basketItem")} - ${totalPrice}${currency}</a>
+				</p>
 			</div>
 		</div>
 	</div>
