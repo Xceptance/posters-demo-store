@@ -27,7 +27,7 @@
 	<category>
 		<nameCategory>Transportation</nameCategory>
 		<subCategory>
-			<nameSubCategory>Airplanes</nameSubCategory>
+			<nameSubCategory>Air Travel</nameSubCategory>
 		</subCategory>
 		<subCategory>
 			<nameSubCategory>Classic Cars</nameSubCategory>
@@ -48,7 +48,7 @@
 			<nameSubCategory>Landscapes</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>XXL Posters</nameSubCategory>
+			<nameSubCategory>XXL Panoramas</nameSubCategory>
 		</subCategory>
 	</category>
 </categories>
