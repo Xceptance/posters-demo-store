@@ -36,7 +36,7 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("name"))
         {
             product.setName(currentValue);
-            String url = currentValue.replaceAll(" ", "");
+            String url = currentValue; //.replaceAll(" ", "");
             product.setUrl(url);
         }
         if (localName.equals("shortDescription"))
