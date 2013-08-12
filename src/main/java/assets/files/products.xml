@@ -5,7 +5,7 @@
   <product>
     <name>Relaxed Grizzly</name>
     <shortDescription>Take a break every once in a while</shortDescription>
-    <longDescription>Hiding in the depths of the woods, grizzlies are hard to catch on a picture. Our photographer decided to risk his life and got you this awesome shot. It delivers details you wouldn't be able to see in real life. Printed with high quality ink and a coating to protect the colors. Available in matte and gloss finish. </longDescription>
+    <longDescription>Hiding in the depths of the woods, grizzlies are hard to catch on a picture. Our photographer decided to risk his life and got you this awesome shot. Printed with high quality ink and a coating to protect the colors. Available in matte and gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_1.jpg</imageURL>
     <subCategory>Animals</subCategory>
@@ -65,8 +65,8 @@
   </product>
   <product>
     <name>Chipmunk</name>
-    <shortDescription>Enjoying the gifts of nature</shortDescription>
-    <longDescription>Just awful that this cutie belongs to the endangered species. Printed with high quality ink and a coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Looking for Simon and Theodore</shortDescription>
+    <longDescription>It's impossible to NOT fall in love with this cutie. Printed with high quality ink and a coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_8.jpg</imageURL>
     <subCategory>Animals</subCategory>
@@ -519,7 +519,7 @@
   <product>
     <name>Swiss Air Airbus A320</name>
     <shortDescription>Beautiful take-off</shortDescription>
-    <longDescription>... including the perfect flying weather. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <longDescription>Let's hope it leaves to bring their famous chocolate. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_1.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
@@ -535,7 +535,7 @@
   <product>
     <name>American Airlines Boeing 737-800</name>
     <shortDescription>Beautiful landing</shortDescription>
-    <longDescription>Welcome to America. The zoom is so perfectly set here it even makes you see how the plane reflects the sunlight! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <longDescription>Welcome to America! The zoom is so perfectly set here it even makes you see how the plane reflects the sunlight! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_3.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
@@ -544,7 +544,7 @@
   <product>
     <name>Air Greenland Airbus A330-200</name>
     <shortDescription>Yes, there's also airplanes in Greenland</shortDescription>
-    <longDescription>The sharp contrast between the bright red plance and the snow-covered surrounding is breathtaking. If you have an affection for planes, this one is a must-have! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <longDescription>... and they look pretty fancy as well. A must-have for all airplane nerds! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_4.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
@@ -559,8 +559,8 @@
   </product>
   <product>
     <name>U.S. Air Force Starlifter</name>
-    <shortDescription>For All Airplance Fans: The Smithsonian National Air and Space Museum Collection</shortDescription>
-    <longDescription>The first pic of our series. If you're into airplanes and haven't been to the Smithsonian in D.C. yourself, you have to have these! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Smithsonian National Air and Space Museum</shortDescription>
+    <longDescription>The first pic of our Smithsonian National Air and Space Museum collection. If you're into airplanes and haven't been to the Smithsonian in D.C. yet, you have to have it! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_6.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
@@ -568,16 +568,16 @@
   </product>
   <product>
     <name>Boeing 707</name>
-    <shortDescription>Smithsonian National Air and Space Museum Collection II</shortDescription>
-    <longDescription>A historical Boeing... we're glad they decided to change their looks at some point. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>How it used to look like</shortDescription>
+    <longDescription>We're glad they decided to change their look at some point... Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_7.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
   </product>
   <product>
     <name>Boeing 307 Stratoliner</name>
-    <shortDescription>Smithsonian National Air and Space Museum Collection III</shortDescription>
-    <longDescription>Well-educated people know, of course, that this was the first aircraft flying with a pressurized cabin. The polished surface makes it a stylish eye-catcher in modern homes. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Stylish in silver</shortDescription>
+    <longDescription>Even your girlfriend will fall in love with the polished aluminium. It'll be easy to convince her that this poster will make a pretty eye-catcher in your modern home. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_8.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
@@ -585,16 +585,16 @@
   </product>
   <product>
     <name>Lufthansa JU 52</name>
-    <shortDescription>Smithsonian National Air and Space Museum Collection IV</shortDescription>
-    <longDescription>Auntie Ju. Air Travel has come a long way... Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Auntie Ju</shortDescription>
+    <longDescription>Air Travel has come a long way... We're glad Lufthansa planes eventually got bigger. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_9.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
   </product>
   <product>
-    <name>Phantom II 157307 F-4S VMFA 232 U.S. Navy</name>
-    <shortDescription>Smithsonian National Air and Space Museum Collection V</shortDescription>
-    <longDescription>Supersonic Jet Fighter used in the Vietnam War. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <name>F-4S from VMFA-232</name>
+    <shortDescription>U.S. Marine Corps Fighter</shortDescription>
+    <longDescription>Used in the Vietnam War. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_10.jpg</imageURL>
     <subCategory>Air Travel</subCategory>
@@ -602,8 +602,8 @@
   <!--SubCategory Classic_Cars-->
   <product>
     <name>Trabant</name>
-    <shortDescription>Must-have for all East Germany Nostalgics</shortDescription>
-    <longDescription>The first pic of our tribute to East German IFA cars (Industrial Association for Vehicle Construction) showing the most famous symbol for East German car production. The fancy tuning makes this the perfect poster for everyone who's missing the good old Trabi. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Go, Trabi, go!</shortDescription>
+    <longDescription>Probably the most famous outcome of East German car production. The fancy tuning makes this the perfect poster for everyone who's missing the good old Trabi. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_1.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
@@ -620,8 +620,8 @@
   </product>
   <product>
     <name>IFA W50</name>
-    <shortDescription>A truck! In East Germany! What the heck!</shortDescription>
-    <longDescription>Absolutely unique to have. Produced from 1965 to 1990.  Check out the shovel that came with it to build lots of Plattenbauten. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>A truck! In East Germany! What the heck?!</shortDescription>
+    <longDescription>Absolutely unique to have. Produced from 1965 to 1990. Note the shovel that came with it to build... right... "Plattenbauten"". Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_3.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
@@ -629,16 +629,16 @@
   </product>
   <product>
     <name>IFA H6, Grey/Red</name>
-    <shortDescription>The most prominent one</shortDescription>
-    <longDescription>Produced from 1952 to 1959. A true allrounder that suited all kinds of purposes. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Not as big but quite sufficient</shortDescription>
+    <longDescription>... to help build "Plattenbauten". Produced from 1952 to 1959. A true allrounder that also suited other purposes than building "Plattenbauten" if there were any. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_4.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
   </product>
   <product>
     <name>IFA G5</name>
-    <shortDescription>Watersupply for National People's Army</shortDescription>
-    <longDescription>Produced from 1952 to 1964. Since trucks were scarce, the G5 was used as fire or tanker trucks when the NPA didn't necessarily need it. </longDescription>
+    <shortDescription>Watersupply for the National People's Army</shortDescription>
+    <longDescription>Produced from 1952 to 1964. Since not only bananas were scarce in East Germany, the G5 also had to serve as fire or tank truck when the NPA didn't necessarily need it. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_5.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
@@ -652,17 +652,17 @@
     <subCategory>Classic Cars</subCategory>
   </product>
   <product>
-    <name>IFA G5 Used as Tank Truck</name>
+    <name>IFA G5 Tank Truck</name>
     <shortDescription>Simply cute</shortDescription>
-    <longDescription>You have to admit that this one just looks so cute. Its size was sufficient to supply East German gasstations as there weren't too many of them. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <longDescription>Its size was sufficient to supply East German gasstations. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_7.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
   </product>
   <product>
     <name>IFA Cement Truck</name>
-    <shortDescription>Plattenbau, Plattenbau, Plattenbau</shortDescription>
-    <longDescription>Desperately needed for East German Plattenbau. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Essential for building all those "Plattenbauten"</shortDescription>
+    <longDescription>Hang up a true historic reference to the East German way of living! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_8.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
@@ -670,15 +670,15 @@
   <product>
     <name>Ikarus 211</name>
     <shortDescription>Made in Hungary</shortDescription>
-    <longDescription>Production started in 1976 and lasted till 1990. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <longDescription>Production started in 1976 and lasted till 1990. A rare sight since there weren't too many of them. Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_9.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
   </product>
   <product>
     <name>Ex-Omaha Transit Company Bus 1312</name>
-    <shortDescription>Seashore Trolley Museum Kennebunkport, Maine</shortDescription>
-    <longDescription>Awesome pic for USA fans and absolutely unique compared to the standard NYC/Yellow cab pictures! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
+    <shortDescription>Absolutely unique</shortDescription>
+    <longDescription>... compared to those standard NYC/Yellow cab pics. Be different! Printed with high quality ink and a special coating to protect the colors. Available in matte and gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_10.jpg</imageURL>
     <subCategory>Classic Cars</subCategory>
@@ -772,120 +772,120 @@
   <!--TopCategory Panoramas-->
   <!--SubCategory Buildings-->
   <product>
-    <name>Ferris wheel</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Niagara Ferris Wheel</name>
+    <shortDescription>Up for a night sky wheel ride?</shortDescription>
+    <longDescription>For everyone who loves to ride ferris wheels. Awesome shot perfectly edited. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_1.jpg</imageURL>
     <subCategory>Architecture</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>House on water</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Swedish Cottages</name>
+    <shortDescription>Get the famous Falun red </shortDescription>
+    <longDescription>Falun red is the name of this beautiful deep red paint that the Swedish use to paint their houses with and that makes Swedish landscape look so special. Buy this one and add a bit of Swedish flair to your home! Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_2.jpg</imageURL>
     <subCategory>Architecture</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Castle 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Gustavianum, Uppsala, Sweden</name>
+    <shortDescription>Beautiful cupola reaching into beautiful sky</shortDescription>
+    <longDescription>A must-have for everyone who's into architecture. The cupola looks awesome standing out in the sky like this. Oh, and it houses the second oldest anatomical theatre in the world. Another good reason to buy this one. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_3.jpg</imageURL>
     <subCategory>Architecture</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Castle 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Grochwitz Castle, Herzberg, Germany </name>
+    <shortDescription>Sun fighting off the storm</shortDescription>
+    <longDescription>A cute little castle with a huge thunderstorm creeping up from behind. Awesome how the camera captures the dark sky in the background and the sun coming from the side trying to fight it off. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_4.jpg</imageURL>
     <subCategory>Architecture</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Rosebud</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Rosebud Diner, Somerville, MA</name>
+    <shortDescription>Have it the American way</shortDescription>
+    <longDescription>Who cares about nice restaurants? A tribute to the good old American Diner. This one's been sitting there ever since 1941. A real sight in American terms. And pictures of sights are always worth hanging up. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_5.jpg</imageURL>
     <subCategory>Architecture</subCategory>
   </product>
   <product>
-    <name>Old factory</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Historic Car Factory, Eisenach, Germany</name>
+    <shortDescription>Dirt turned into gold</shortDescription>
+    <longDescription>Decay looking good! Old manufacturing plant in Eisenach in former East Germany where they built the famous Wartburg. You can be sure it doesn't look that awesome in real life! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Available in matte and high gloss finish.  </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_6.jpg</imageURL>
     <subCategory>Architecture</subCategory>
   </product>
   <product>
-    <name>Factory</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Coal Briquet Factory  </name>
+    <shortDescription>Well...</shortDescription>
+    <longDescription>The oldest coal briquet factory in Europe. We do admit that the history behind what is in the picture might be slightly more exciting than the image itself. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_7.jpg</imageURL>
     <subCategory>Architecture</subCategory>
   </product>
   <product>
-    <name>Half-timbered house</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Beautiful Timber Framework</name>
+    <shortDescription>The famous German Fachwerk building</shortDescription>
+    <longDescription>A tribute to the laborious woodworking of our ancestors. Captured in Elxleben, Thuringia, Germany. Looks especially cool next to  modern and postmodern architecture pics. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_8.jpg</imageURL>
     <subCategory>Architecture</subCategory>
   </product>
   <product>
-    <name>Buildings 9</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Utah State Capitol</name>
+    <shortDescription>An outstanding architexture shot!</shortDescription>
+    <longDescription>The lighting effects can't get any better. If you've seen the building at night-time, you know our photographer absolutely nailed this one. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_9.jpg</imageURL>
     <subCategory>Architecture</subCategory>
   </product>
   <product>
-    <name>Buildings 10</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>American Christmas House</name>
+    <shortDescription>Way to go!</shortDescription>
+    <longDescription>This is how your Christmas decoration should look like. Snoopy and Woodstock in the front are our favorite. Very kind of the owner to provide them with their own Christmas tree. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_10.jpg</imageURL>
     <subCategory>Architecture</subCategory>
   </product>
   <!--SubCategory Fireworks-->
   <product>
-    <name>Fireworks 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>New Year's Fireworks I</name>
+    <shortDescription>Delivering all pyro effects possible</shortDescription>
+    <longDescription>Happy New Years! Captured at midnight in Jena, Germany, this image shows a colorful mix of all sorts of fireworks effects. Just awesome how they illuminate the sky! A must-have for all fans of New Year's Eve. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_1.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Fireworks 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>New Year's Fireworks II</name>
+    <shortDescription>Bouquets, Stars, and Pearls</shortDescription>
+    <longDescription>If you want a clear-cut contrast between the night sky and the single lighting effects. Speaking of New Year's... Please refrain from asking us to look back on last year's resolutions at this point. We don't want to talk about it.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_2.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Fireworks 3</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>New Year's Fireworks III</name>
+    <shortDescription>Awesome change of sky color</shortDescription>
+    <longDescription>The bright glitter in the center beautifully highlights the sky and delivers this spectaculay color change effect. Picture composition at its best. Memo: There's also no use asking about our new year's resolutions. We don't have any.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_3.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Fireworks 4</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>New Year's Fireworks IV</name>
+    <shortDescription>Night sky getting smoky</shortDescription>
+    <longDescription>One hour past midnight. The bright crossette in the center produces a set of stars that beautifully stands out in the smoky night sky. Great pic to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_4.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
