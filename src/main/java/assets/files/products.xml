@@ -745,9 +745,9 @@
     <subCategory>Railways</subCategory>
   </product>
   <product>
-    <name>NYC Subway</name>
-    <shortDescription>For all NYC fans</shortDescription>
-    <longDescription>Makes another fancy NYC  poster in your home. The camera angle perfectly conveys the urban atmosphere. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
+    <name>Chicago "L"</name>
+    <shortDescription>For all fans of the windy city</shortDescription>
+    <longDescription>A train of Chicago's rapid transit. Makes another fancy U.S. poster in your home. The camera angle perfectly conveys the urban atmosphere. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_8.jpg</imageURL>
     <subCategory>Railways</subCategory>
@@ -763,7 +763,7 @@
   <product>
     <name>Old NYC Subway</name>
     <shortDescription>Nothing lasts forever</shortDescription>
-    <longDescription>This looks so awesome if you put it next to our NYC Subway between skyscrapers. Hurry and get both of them, they make a fantastic duo. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
+    <longDescription>This will look especially awesome if you hang it next to the Chicago L. Hurry and get both of them, they make a fantastic duo. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_10.jpg</imageURL>
     <subCategory>Railways</subCategory>
@@ -868,7 +868,7 @@
   <product>
     <name>New Year's Fireworks II</name>
     <shortDescription>Bouquets, Stars, and Pearls</shortDescription>
-    <longDescription>If you want a clear-cut contrast between the night sky and the single lighting effects. Speaking of New Year's... Please refrain from asking us to look back on last year's resolutions at this point. We don't want to talk about it.</longDescription>
+    <longDescription>If you want a clear-cut contrast between the night sky and the single lighting effects. Speaking of New Year's... Please refrain from asking us to look back on last year's resolutions at this point. We don't want to talk about it. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_2.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
@@ -877,7 +877,7 @@
   <product>
     <name>New Year's Fireworks III</name>
     <shortDescription>Awesome change of sky color</shortDescription>
-    <longDescription>The bright glitter in the center beautifully highlights the sky and delivers this spectaculay color change effect. Picture composition at its best. Memo: There's also no use asking about our new year's resolutions. We don't have any.</longDescription>
+    <longDescription>The bright glitter in the center beautifully highlights the sky and delivers this spectacular color change effect. Picture composition at its best. Memo: There's also no use asking about our new year's resolutions. We don't have any. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_3.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
@@ -885,92 +885,92 @@
   <product>
     <name>New Year's Fireworks IV</name>
     <shortDescription>Night sky getting smoky</shortDescription>
-    <longDescription>One hour past midnight. The bright crossette in the center produces a set of stars that beautifully stands out in the smoky night sky. Great pic to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep.</longDescription>
+    <longDescription>One hour past midnight. The bright crossette in the center produces a set of stars that beautifully stands out in the smoky night sky. Great pic to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep.Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_4.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>White firework</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Silver Dahlias</name>
+    <shortDescription>Perfectly shaped</shortDescription>
+    <longDescription>Looking like starfish in the clear sky. Hang this up in your bedroom and you're guaranteed to have romantic nights! Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_5.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Green firework</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Crossette, Silver/Green</name>
+    <shortDescription>It can't get any better than this</shortDescription>
+    <longDescription>The zoomed-in view delivers details you would never be able to see in real life! Just look how the exploding stars leave their trails in the night sky. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_6.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Fireworks 7</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Purple Crossette with Stars</name>
+    <shortDescription>Wait... it does!</shortDescription>
+    <longDescription>Absolutely outstanding! We really don't want to show off but you just have to admit that we have a pretty darn good photographer. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_7.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Yellow firework</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Golden Dahlias with Blue Stars</name>
+    <shortDescription>Be exclusive</shortDescription>
+    <longDescription>This explosion of gold is sure to add a stylish touch to your home décor. Go for this one if you want to be special.Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_8.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
   </product>
   <product>
-    <name>Blue firework</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Brocade, Red/Blue</name>
+    <shortDescription>100% Perfection</shortDescription>
+    <longDescription>Night time, a lake, and a perfectly shaped brocade that even sparkles on the water... The author of these lines starts running out of words to describe how spectacular our fireworks posters are. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_9.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Red firework</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Chrysanthemum and Brocades, Red/Blue</name>
+    <shortDescription>One final word: marvelous</shortDescription>
+    <longDescription>Please forgive the author of these lines as he can't think of any more words to illustrate our... umm... marvelous  fireworks posters. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_10.jpg</imageURL>
     <subCategory>Fireworks</subCategory>
   </product>
   <!--SubCategory Landscapes-->
   <product>
-    <name>Landscapes 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Niagara Falls, Canada</name>
+    <shortDescription>Absolutely gorgeous</shortDescription>
+    <longDescription>The natural spectacle enhanced with the latest picture editing technologies. We're starting to think our photographer is an artist. Hang this up in your home and people will simply be amazed. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_1.jpg</imageURL>
     <subCategory>Landscapes</subCategory>
   </product>
   <product>
-    <name>Landscapes 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Niagara Falls, Canada, with City Skyline</name>
+    <shortDescription>If you want it both natural and urban</shortDescription>
+    <longDescription>The picture's composition perfectly reenacts the coming together of nature and human culture. If you're into philosophical speculation, you may now start pondering what that could possibly mean. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. Available in matte and high gloss finish.</longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_2.jpg</imageURL>
     <subCategory>Landscapes</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Waterfall 1</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Trollhättan Falls, Sweden I</name>
+    <shortDescription>Up for rafting? Anyone?</shortDescription>
+    <longDescription>Just kidding. We prefer looking at this awesome water movement for now. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish.  </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_3.jpg</imageURL>
     <subCategory>Landscapes</subCategory>
     <showInTopCategory>true</showInTopCategory>
   </product>
   <product>
-    <name>Waterfall 2</name>
-    <shortDescription>This is the short description for this product.</shortDescription>
-    <longDescription>This is the long description for this product.</longDescription>
+    <name>Trollhättan Falls, Sweden II</name>
+    <shortDescription>The Beautiful Vastness of Swedish Landscape </shortDescription>
+    <longDescription>Pretty much a must-have for all Sweden fans since it comprises all the country is loved for: wild water, stones, hills, coniferous forests, and – don't miss it - the falun red houses in the background. See, it doesn't always need to be IKEA. Printed with high quality ink and a special coating to protect the colors. Available in matte and high gloss finish. </longDescription>
     <price>17.99</price>
     <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_4.jpg</imageURL>
     <subCategory>Landscapes</subCategory>
