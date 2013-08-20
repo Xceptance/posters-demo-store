@@ -57,6 +57,10 @@ public class XCPosterConf
 
     public final String currency;
 
+    public final double shippingCosts;
+
+    public final double tax;
+
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
     {
@@ -107,5 +111,9 @@ public class XCPosterConf
         applicationUrlHttps = ninjaProp.getOrDie("application.url.https");
 
         currency = ninjaProp.getOrDie("application.currency");
+
+        shippingCosts = Double.parseDouble(ninjaProp.getOrDie("application.shippingCosts"));
+
+        tax = Double.parseDouble(ninjaProp.getOrDie("application.tax"));
     }
 }

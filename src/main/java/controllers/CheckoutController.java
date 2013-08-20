@@ -38,7 +38,7 @@ public class CheckoutController
 
     @Inject
     XCPosterConf xcpConf;
-    
+
     private Optional language = Optional.of("en");
 
     /**
@@ -84,7 +84,9 @@ public class CheckoutController
             }
             // save order
             Ebean.save(order);
+            // show checkout bread crumb
             data.put("checkout", true);
+            // show delivery address as active link
             data.put("deliveryAddressActive", true);
         }
         return Results.html().render(data).template(template);
@@ -450,9 +452,9 @@ public class CheckoutController
         // set credit card to order
         order.setCreditCard(creditCard);
         // set shipping costs to order
-        order.setShippingCosts(6.99);
+        order.setShippingCosts(xcpConf.shippingCosts);
         // set tax to order
-        order.setTax(0.06);
+        order.setTax(xcpConf.tax);
         // calculate total costs
         order.addShippingCostsToTotalCosts();
         order.addTaxToTotalCosts();
