@@ -1,0 +1,25 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">
+	<form class="form-horizontal" action="/deletePayment" method="post">
+		<fieldset>
+			<legend>${i18n("confirmDeletePayment")}</legend>
+			<!-- Password input-->
+			<div class="control-group">
+				<label class="control-label">${i18n("confirmDeletionPassword")}:</label>
+				<div class="controls">
+					<input id="password" name="password" placeholder="${i18n("registrationPassword")}"
+						class="input-xlarge" required type="password">
+				</div>
+			</div>
+			<!-- card id -->
+			<input name="cardId" id="cardId" type="hidden" value=${cardId}></input>
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<button id="deletePayment" name="deletePayment"
+						class="btn btn-danger" type="reset">${i18n("confirmDeletePayment")}</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</@layout.myLayout>

@@ -12,7 +12,7 @@
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
       						${i18n("titleValidTo")}: ${payment.month} ${payment.year}<br>
       					</address>
-      					<form action="/deletePayment" method="post">
+      					<form action="/confirmDeletePayment" method="post">
 							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
 							<button class="btn btn-danger" id="submit" name="submit" type="submit">${i18n("buttonDelete")}</button>
 						</form>

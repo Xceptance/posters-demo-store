@@ -356,16 +356,36 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result deletePayment(@Param("cardId") int cardId, Context context)
+    public Result deletePayment(@Param("password") String password, @Param("cardId") int cardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        CreditCardInformation.deleteCreditCardFromCustomer(cardId);
-
+        String template;
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
+        {
+            CreditCardInformation.deleteCreditCardFromCustomer(cardId);
+            template = xcpConf.templateAccountOverview;
+            // success message
+            data.put("successMessage", msg.get("successDelete", language).get());
+        }
+        // incorrect password
+        else
+        {
+            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+            template = xcpConf.templateConfirmDeletePayment;
+            data.put("cardId", cardId);
+        }
         CommonInformation.setCommonData(data, context, xcpConf);
-        // success message
-        data.put("successMessage", msg.get("successDelete", language).get());
-        return Results.html().render(data).template(xcpConf.templateAccountOverview);
+        return Results.html().render(data).template(template);
+    }
+
+    public Result confirmDeletePayment(@Param("cardId") int cardId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("cardId", cardId);
+        CommonInformation.setCommonData(data, context, xcpConf);
+        return Results.html().render(data);
     }
 
     /**
