@@ -6,7 +6,7 @@
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
 		<tr>
-			<td><a href=/productDetail/${orderProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
+			<td><a href=/productDetail/${orderProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
 			<td>${orderProduct.product.name}</td>
 			<td>${orderProduct.product.descriptionOverview}</td>
 			<td>${orderProduct.product.price}${currency}</td>

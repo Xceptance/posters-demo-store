@@ -4,7 +4,7 @@
 	<table class="table" table-bordered>
 		<#list basketProducts as basketProduct>
 			<tr>
-				<td><a href=/productDetail/${basketProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
+				<td><a href=/productDetail/${basketProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
 				<td>${basketProduct.product.name}</td>
 				<td>${basketProduct.product.descriptionOverview}</td>
 				<td>${basketProduct.product.price}${currency}</td>
