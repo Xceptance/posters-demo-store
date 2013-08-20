@@ -20,9 +20,6 @@ public class DeliveryAddress
     @Id
     private int id;
 
-    @Version
-    private Timestamp lastUpdate;
-
     private String name;
 
     private String addressline1;
@@ -141,16 +138,6 @@ public class DeliveryAddress
     public void setOrder(List<Order> order)
     {
         this.order = order;
-    }
-
-    public Timestamp getLastUpdate()
-    {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Timestamp lastUpdate)
-    {
-        this.lastUpdate = lastUpdate;
     }
 
     public void update()
