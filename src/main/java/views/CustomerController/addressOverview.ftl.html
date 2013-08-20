@@ -21,7 +21,7 @@
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn"id="submit" name="submit" type="submit">${i18n("buttonChangeDetail")}</button>
 					</form>
-      				<form action="/deleteDeliveryAddress" method="post">
+      				<form action="/confirmDeleteDeliveryAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn btn-danger"id="submit" name="submit" type="submit">${i18n("buttonDelete")}</button>
 					</form>
@@ -63,7 +63,7 @@
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn"id="submit" name="submit" type="submit">${i18n("buttonChangeDetail")}</button>
 					</form>
-      				<form action="/deleteBillingAddress" method="post">
+      				<form action="/confirmDeleteBillingAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn btn-danger"id="submit" name="submit" type="submit">${i18n("buttonDelete")}</button>
 					</form>

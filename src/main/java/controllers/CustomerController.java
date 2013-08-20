@@ -46,7 +46,7 @@ public class CustomerController
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
-    
+
     /**
      * Logs on to the system with email and password. Returns the home page, if the email and the password are correct,
      * otherwise an error page.
@@ -391,17 +391,41 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result deleteBillingAddress(@Param("addressId") int addressId, Context context)
+    public Result deleteBillingAddress(@Param("password") String password, @Param("addressId") int addressId,
+                                       Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        // remove billing address
-        AddressInformation.deleteBillingAddressFromCustomer(addressId);
-
+        String template;
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
+        {
+            // remove billing address
+            AddressInformation.deleteBillingAddressFromCustomer(addressId);
+            // success message
+            data.put("successMessage", msg.get("successDelete", language).get());
+            template = xcpConf.templateAccountOverview;
+        }
+        // incorrect password
+        else
+        {
+            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+            template = xcpConf.templateConfirmDeleteAddress;
+            data.put("deleteAddressURL", "deleteBillingAddress");
+            data.put("addressId", addressId);
+        }
         CommonInformation.setCommonData(data, context, xcpConf);
-        // success message
-        data.put("successMessage", msg.get("successDelete", language).get());
-        return Results.html().render(data).template(xcpConf.templateAccountOverview);
+
+        return Results.html().render(data).template(template);
+    }
+
+    public Result confirmDeleteBillingAddress(@Param("addressId") int addressId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("deleteAddressURL", "deleteBillingAddress");
+        data.put("addressId", addressId);
+        CommonInformation.setCommonData(data, context, xcpConf);
+        return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
     }
 
     /**
@@ -411,17 +435,41 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result deleteDeliveryAddress(@Param("addressId") int addressId, Context context)
+    public Result deleteDeliveryAddress(@Param("password") String password, @Param("addressId") int addressId,
+                                        Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        // remove delivery address
-        AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
-
+        String template;
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
+        {
+            // remove billing address
+            AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
+            // success message
+            data.put("successMessage", msg.get("successDelete", language).get());
+            template = xcpConf.templateAccountOverview;
+        }
+        // incorrect password
+        else
+        {
+            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+            template = xcpConf.templateConfirmDeleteAddress;
+            data.put("deleteAddressURL", "deleteDeliveryAddress");
+            data.put("addressId", addressId);
+        }
         CommonInformation.setCommonData(data, context, xcpConf);
-        // success message
-        data.put("successMessage", msg.get("successDelete", language).get());
-        return Results.html().render(data).template(xcpConf.templateAccountOverview);
+
+        return Results.html().render(data).template(template);
+    }
+
+    public Result confirmDeleteDeliveryAddress(@Param("addressId") int addressId, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("deleteAddressURL", "deleteDeliveryAddress");
+        data.put("addressId", addressId);
+        CommonInformation.setCommonData(data, context, xcpConf);
+        return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
     }
 
     /**
@@ -924,13 +972,13 @@ public class CustomerController
         else
         {
             data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            template = xcpConf.templateConfirmDeletion;
+            template = xcpConf.templateConfirmDeleteAccount;
         }
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
     }
 
-    public Result confirmDeletion(Context context)
+    public Result confirmDeleteAccount(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);

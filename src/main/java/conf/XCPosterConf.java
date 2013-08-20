@@ -49,7 +49,9 @@ public class XCPosterConf
 
     public final String templateChangePassword;
 
-    public final String templateConfirmDeletion;
+    public final String templateConfirmDeleteAccount;
+    
+    public final String templateConfirmDeleteAddress;
 
     public final String applicationUrlHttp;
 
@@ -104,7 +106,9 @@ public class XCPosterConf
 
         templateChangePassword = "views/CustomerController/changePassword.ftl.html";
 
-        templateConfirmDeletion = "views/CustomerController/confirmDeletion.ftl.html";
+        templateConfirmDeleteAccount = "views/CustomerController/confirmDeleteAccount.ftl.html";
+        
+        templateConfirmDeleteAddress = "views/CustomerController/confirmDeleteAddress.ftl.html";
 
         applicationUrlHttp = ninjaProp.getOrDie("application.url.http");
 
