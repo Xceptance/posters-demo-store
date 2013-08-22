@@ -12,14 +12,16 @@
 				src="/assets/img/xceptanceLogo.png" width="25"></img>-Poster</a>
 			<!-- collapse -->
 			<div class="nav-collapse collapse navbar-responsive-collapse">
-				<form class="navbar-search span6" action="${applUrlHttp}/search"
-					method="post">
+				<!-- search -->
+				<form class="navbar-search span6" action="${applUrlHttp}/search/1"
+					method="get">
 					<input id="searchText" name="searchText" type="text"
 						class="search-query span5" placeholder="Search">
 					<button id="searchSubmit" class="btn" type="submit">
 						<i class="icon-search"></i>
 					</button>
 				</form>
+				<!-- login -->
 				<#if isLogged == false>
 					<p class="navbar-text span2 pull-right">
 						Welcome! <a href="${applUrlHttps}/login">Sign in</a>
@@ -40,6 +42,7 @@
 						</li>
 					</ul>
 				</#if>
+				<!-- cart overview -->
 				<p class="navbar-text span3 pull-right">
 					<a href="${applUrlHttp}/basket"><i class="icon-shopping-cart"></i>
 						${i18n("basketOverviewTitle")}: ${basketProductCount}

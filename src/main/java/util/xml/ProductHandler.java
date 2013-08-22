@@ -2,6 +2,7 @@ package util.xml;
 
 import models.Product;
 import models.SubCategory;
+import models.TopCategory;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -64,6 +65,8 @@ public class ProductHandler extends DefaultHandler
                 subCategory.setName(currentValue);
             }
             product.setSubCategory(subCategory);
+            TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findUnique();
+            product.setTopCategory(topCategory);
         }
         if (localName.equals("carousel"))
         {

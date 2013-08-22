@@ -42,6 +42,13 @@ public class TopCategory
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
     List<SubCategory> subCategories;
+    
+    /**
+     * The products of the top category.
+     */
+    @OneToMany
+    private List<Product> products;
+    
 
     public int getId()
     {
@@ -81,6 +88,16 @@ public class TopCategory
     public void setUrl(String url)
     {
         this.url = url;
+    }
+
+    public List<Product> getProducts()
+    {
+        return products;
+    }
+
+    public void setProducts(List<Product> products)
+    {
+        this.products = products;
     }
 
     public void update()

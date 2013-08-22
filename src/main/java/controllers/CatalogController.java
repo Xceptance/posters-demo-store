@@ -17,7 +17,7 @@ import conf.XCPosterConf;
 
 public class CatalogController
 {
-    
+
     @Inject
     XCPosterConf xcpConf;
 
@@ -47,15 +47,17 @@ public class CatalogController
      * @param context
      * @return
      */
-    public Result productOverview(@PathParam("subCategory") String subCategory, Context context)
+    public Result productOverview(@PathParam("subCategory") String subCategory,
+                                  @PathParam("pageNumber") int pageNumber, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
+        int pageSize = xcpConf.pageSize;
         CommonInformation.setCommonData(data, context, xcpConf);
-        // add products for the given sub category to data map
-        ProductInformation.addSubCategoryProductsToMap(subCategory, data);
+        // add products of the given sub category to data map
+        ProductInformation.addSubCategoryProductsToMap(subCategory, pageNumber, pageSize, data);
         // add sub category to data map
         CategoryInformation.addSubCategoryToMap(subCategory, data);
+        data.put("isSubCategory", true);
         return Results.html().render(data);
     }
 
@@ -66,14 +68,17 @@ public class CatalogController
      * @param context
      * @return
      */
-    public Result topCategoryOverview(@PathParam("topCategory") String topCategory, Context context)
+    public Result topCategoryOverview(@PathParam("topCategory") String topCategory,
+                                      @PathParam("pageNumber") int pageNumber, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
+        int pageSize = xcpConf.pageSize;
         CommonInformation.setCommonData(data, context, xcpConf);
-        // add products for the given top category to data map
-        ProductInformation.addTopCategoryProductsToMap(topCategory, data);
+        // add products of the given top category to data map
+        ProductInformation.addTopCategoryProductsToMap(topCategory, pageNumber, pageSize, data);
         // add top category to data map
         CategoryInformation.addTopCategoryToMap(topCategory, data);
+        data.put("isTopCategory", true);
         // return product overview page
         return Results.html().template(xcpConf.templateProductOverview).render(data);
     }

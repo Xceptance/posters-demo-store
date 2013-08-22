@@ -9,6 +9,8 @@ import models.SubCategory;
 import models.TopCategory;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Page;
+import com.avaje.ebean.PagingList;
 
 public abstract class ProductInformation
 {
@@ -19,14 +21,16 @@ public abstract class ProductInformation
      * @param category
      * @param data
      */
-    public static void addSubCategoryProductsToMap(String subCategoryUrl, final Map<String, Object> data)
+    public static void addSubCategoryProductsToMap(String subCategoryUrl, int pageNumber, int pageSize,
+                                                   final Map<String, Object> data)
     {
         // get the sub category by the given category
         SubCategory category = Ebean.find(SubCategory.class).where().eq("url", subCategoryUrl).findUnique();
         // get all products of the sub category
-        List<Product> products = Ebean.find(Product.class).where().eq("subCategory", category).findList();
+        PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category)
+                                              .findPagingList(pageSize);
         // add the products to the data map
-        data.put("products", products);
+        createPagingListProductOverview(pagingList, pageNumber, data);
     }
 
     /**
@@ -49,23 +53,16 @@ public abstract class ProductInformation
      * @param topCategory
      * @param data
      */
-    public static void addTopCategoryProductsToMap(String topCategoryUrl, final Map<String, Object> data)
+    public static void addTopCategoryProductsToMap(String topCategoryUrl, int pageNumber, int pageSize,
+                                                   final Map<String, Object> data)
     {
-
         // get the given top category
         TopCategory category = Ebean.find(TopCategory.class).where().eq("url", topCategoryUrl).findUnique();
-        // get all sub categories of the given top category
-        List<SubCategory> subCategories = Ebean.find(SubCategory.class).where().eq("topCategory", category).findList();
-        // list of products
-        List<Product> products = new ArrayList<Product>();
-        // get for each sub category the marked products
-        for (SubCategory subCategory : subCategories)
-        {
-            products.addAll(Ebean.find(Product.class).where().eq("subCategory", subCategory)
-                                 .eq("showInTopCategorie", true).findList());
-        }
+        // get the marked products, which should show in the top category
+        PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category)
+                                              .eq("showInTopCategorie", true).findPagingList(pageSize);
         // add all products to the data map
-        data.put("products", products);
+        createPagingListProductOverview(pagingList, pageNumber, data);
     }
 
     /**
@@ -76,7 +73,7 @@ public abstract class ProductInformation
      */
     public static void addProductDetailToMap(String productUrl, final Map<String, Object> data)
     {
-        // get product by product's url
+        // get product by url
         Product product = Ebean.find(Product.class).where().eq("url", productUrl).findUnique();
         data.put("productDetail", product);
     }
@@ -92,5 +89,22 @@ public abstract class ProductInformation
         // get product by id
         Product product = Ebean.find(Product.class, id);
         return product;
+    }
+
+    private static void createPagingListProductOverview(PagingList<Product> pagingList, int pageNumber,
+                                                       final Map<String, Object> data)
+    {
+        // get row count in background
+        pagingList.getFutureRowCount();
+        // get the current page
+        Page<Product> page = pagingList.getPage(pageNumber - 1);
+        // get the products of the current page
+        List<Product> list = page.getList();
+        // get the total page count
+        int pageCount = pagingList.getTotalPageCount();
+        // add the products to the data map
+        data.put("products", list);
+        // add the page count to the data map
+        data.put("pageCount", pageCount);
     }
 }

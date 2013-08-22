@@ -3,6 +3,21 @@
 	<h1>${(category.name)!}</h1>
 	<h1>${(searchText)!}</h1>
 	<h1>${(noResults)!}</h1>
+	<!-- paging -->
+	<div class="pagination pagination-centered">
+		<ul>
+			<#list 1..pageCount as x>
+			<#if isTopCategory??>
+			<li><a href="/topCategory/${category.url}/${x}">${x}</a></li>
+			<#elseif isSubCategory??>
+			<li><a href="/category/${category.url}/${x}">${x}</a></li>
+			<#elseif isSearch??>
+			<li><a href="/search/${x}?searchText=${searchTerm}">${x}</a></li>
+			</#if>
+			</#list>
+		</ul>
+	</div>
+	<!-- products -->
 	<#list products as pro>
     	<#if (pro_index + 3) % 3 ==0>
     		<div class="row-fluid">

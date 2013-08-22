@@ -78,6 +78,12 @@ public class Product
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subCategory_id")
     private SubCategory subCategory;
+    
+    /**
+     * The top category, the product belongs to.
+     */
+    @ManyToOne
+    private TopCategory topCategory;
 
     @OneToMany(mappedBy = "product")
     private List<Basket_Product> basket;
@@ -158,6 +164,16 @@ public class Product
     public void setSubCategory(SubCategory subCategory)
     {
         this.subCategory = subCategory;
+    }
+
+    public TopCategory getTopCategory()
+    {
+        return topCategory;
+    }
+
+    public void setTopCategory(TopCategory topCategory)
+    {
+        this.topCategory = topCategory;
     }
 
     public boolean isShowInCarousel()

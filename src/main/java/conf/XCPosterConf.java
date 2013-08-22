@@ -64,6 +64,8 @@ public class XCPosterConf
     public final double shippingCosts;
 
     public final double tax;
+    
+    public final int pageSize;
 
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
@@ -123,5 +125,7 @@ public class XCPosterConf
         shippingCosts = Double.parseDouble(ninjaProp.getOrDie("application.shippingCosts"));
 
         tax = Double.parseDouble(ninjaProp.getOrDie("application.tax"));
+        
+        pageSize = ninjaProp.getInteger("application.pageSize");
     }
 }

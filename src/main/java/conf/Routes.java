@@ -20,7 +20,7 @@ public class Routes implements ApplicationRoutes
         router.GET().route("/").with(WebShopController.class, "index");
 
         // search
-        router.POST().route("/search").with(SearchController.class, "search");
+        router.GET().route("/search/{pageNumber}").with(SearchController.class, "search2");
 
         // Customer
         router.GET().route("/login").with(CustomerController.class, "loginForm");
@@ -65,8 +65,8 @@ public class Routes implements ApplicationRoutes
 
         // products and catalog
         router.GET().route("/productDetail/{product}").with(CatalogController.class, "productDetail");
-        router.GET().route("/topCategory/{topCategory}").with(CatalogController.class, "topCategoryOverview");
-        router.GET().route("/category/{subCategory}").with(CatalogController.class, "productOverview");
+        router.GET().route("/topCategory/{topCategory}/{pageNumber}").with(CatalogController.class, "topCategoryOverview");
+        router.GET().route("/category/{subCategory}/{pageNumber}").with(CatalogController.class, "productOverview");
 
         // basket
         router.POST().route("/addToBasket").with(BasketController.class, "addToBasket");

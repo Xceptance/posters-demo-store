@@ -12,10 +12,16 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 import util.database.CarouselInformation;
 import util.database.CommonInformation;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Page;
+import com.avaje.ebean.PagingList;
+import com.avaje.ebean.Query;
+import com.avaje.ebean.RawSql;
+import com.avaje.ebean.RawSqlBuilder;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
@@ -78,6 +84,71 @@ public class SearchController
             {
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
             }
+            template = xcpConf.templateProductOverview;
+        }
+        return Results.html().render(data).template(template);
+    }
+    
+    
+    public Result search2(@Param("searchText") String searchText, @PathParam("pageNumber") int pageNumber, Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        String template;
+        // search text is empty
+        if (searchText.isEmpty() || searchText.equals(" "))
+        {
+            template = xcpConf.templateIndex;
+            data.put("infoMessage", msg.get("infoNoSearchTerm", language).get());
+            CarouselInformation.getCarouselProducts(data);
+        }
+        else
+        {
+            // build SQL string
+            String sql = "SELECT id, name, url, price, description_detail FROM product where ";
+            // divide search text by spaces
+            String[] searchTerms = searchText.split(" ");
+            for(int i=0; i< searchTerms.length; i++)
+            {
+                System.out.println("searchTerms: " + searchTerms[i]);
+            }
+            sql += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
+            sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
+            if(searchTerms.length > 1)
+            {
+                for (int i = 1; i < searchTerms.length; i++)
+                {
+                    sql += " OR LOWER(description_detail) LIKE LOWER('%" + searchTerms[i] + "%')";
+                    sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[i] + "%')";
+                }
+            }
+            RawSql rawSql = RawSqlBuilder.parse(sql).create();
+            Query<Product> query = Ebean.find(Product.class);
+            query.setRawSql(rawSql);
+            final PagingList<Product> pagingList = query.findPagingList(6);
+            // get row count in background
+            pagingList.getFutureRowCount();
+            // get the current page
+            Page<Product> page = pagingList.getPage(pageNumber - 1);
+            // get the products of the current page
+            List<Product> products = page.getList();
+            // add the products to the data map
+            data.put("products", products);
+            if (products.isEmpty())
+            {
+                data.put("pageCount", 0);
+                data.put("noResults", msg.get("noSearchResults", language).get());
+            }
+            else
+            {
+                // get the total page count
+                int pageCount = pagingList.getTotalPageCount();
+                // add the page count to the data map
+                data.put("pageCount", pageCount);
+                data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
+                data.put("isSearch", true);
+            }
+            data.put("searchTerm", searchText);
             template = xcpConf.templateProductOverview;
         }
         return Results.html().render(data).template(template);
