@@ -16,6 +16,8 @@
 
 package conf;
 
+import ninja.ebean.NinjaEbeanModule;
+
 import com.google.inject.AbstractModule;
 
 public class Module extends AbstractModule
@@ -25,6 +27,7 @@ public class Module extends AbstractModule
     {
         bind(XCPosterConf.class);
         requestStaticInjection(XCPosterConf.class);
+        install(new NinjaEbeanModule());
     }
 
 }
