@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers>
+	<customer>
+		<email>john@doe.com</email>
+		<password>topsecret</password>
+		<name>Doe</name>
+		<firstName>John</firstName>
+		<deliveryAddress>
+			<delName>John Doe</delName>
+			<delAddressLine1>Xceptance</delAddressLine1>
+			<delAddressLine2>Leutragraben</delAddressLine2>
+			<delCity>Jena</delCity>
+			<delState>Thuringia</delState>
+			<delCountry>Germany</delCountry>
+			<delZip>07743</delZip>
+		</deliveryAddress>
+		<billingAddress>
+			<billName>John Doe</billName>
+			<billAddressLine1>Xceptance</billAddressLine1>
+			<billAddressLine2>Leutragraben</billAddressLine2>
+			<billCity>Jena</billCity>
+			<billState>Thuringia</billState>
+			<billCountry>Germany</billCountry>
+			<billZip>07743</billZip>
+		</billingAddress>
+	</customer>
+</customers>

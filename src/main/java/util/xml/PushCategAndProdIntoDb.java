@@ -14,5 +14,8 @@ public class PushCategAndProdIntoDb
         // read products from xml and push into database
         ProductHandler productHandler = new ProductHandler();
         XmlUtils.readXmlFile(productHandler, "src/main/java/assets/files/products.xml");
+        // read customers from xml and push into database
+        CustomerHandler customerHandler = new CustomerHandler();
+        XmlUtils.readXmlFile(customerHandler, "src/main/java/assets/files/customer.xml");
     }
 }
