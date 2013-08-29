@@ -20,14 +20,17 @@ import ninja.ebean.NinjaEbeanModule;
 
 import com.google.inject.AbstractModule;
 
+import controllers.JobController;
+
 public class Module extends AbstractModule
 {
 
     protected void configure()
     {
-        bind(XCPosterConf.class);
-        requestStaticInjection(XCPosterConf.class);
         install(new NinjaEbeanModule());
+        bind(XCPosterConf.class);
+        bind(JobController.class);
+        requestStaticInjection(XCPosterConf.class);
     }
 
 }
