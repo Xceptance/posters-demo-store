@@ -108,23 +108,24 @@ public class SearchController
             String sql = "SELECT id, name, url, price, description_detail FROM product where ";
             // divide search text by spaces
             String[] searchTerms = searchText.split(" ");
-            for(int i=0; i< searchTerms.length; i++)
-            {
-                System.out.println("searchTerms: " + searchTerms[i]);
-            }
+            // search in description detail
             sql += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
+            // search in name
             sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
             if(searchTerms.length > 1)
             {
+                // add next search term to select statement
                 for (int i = 1; i < searchTerms.length; i++)
                 {
                     sql += " OR LOWER(description_detail) LIKE LOWER('%" + searchTerms[i] + "%')";
                     sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[i] + "%')";
                 }
             }
+            // create SQL statement
             RawSql rawSql = RawSqlBuilder.parse(sql).create();
             Query<Product> query = Ebean.find(Product.class);
             query.setRawSql(rawSql);
+            // get paging list
             final PagingList<Product> pagingList = query.findPagingList(6);
             // get row count in background
             pagingList.getFutureRowCount();
@@ -134,11 +135,13 @@ public class SearchController
             List<Product> products = page.getList();
             // add the products to the data map
             data.put("products", products);
+            // no product was found
             if (products.isEmpty())
             {
                 data.put("pageCount", 0);
                 data.put("noResults", msg.get("noSearchResults", language).get());
             }
+            // at least one product was found
             else
             {
                 // get the total page count
@@ -147,8 +150,8 @@ public class SearchController
                 data.put("pageCount", pageCount);
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("isSearch", true);
+                data.put("searchTerm", searchText);
             }
-            data.put("searchTerm", searchText);
             template = xcpConf.templateProductOverview;
         }
         return Results.html().render(data).template(template);

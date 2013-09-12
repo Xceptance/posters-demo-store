@@ -60,7 +60,7 @@ public abstract class CategoryInformation
     }
 
     /**
-     * Adds the sub category to the given data map.
+     * Adds the top category to the given data map.
      * 
      * @param category
      * @param data
