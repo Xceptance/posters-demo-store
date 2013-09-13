@@ -1,8 +1,5 @@
 - get current version from git
-- import project to IDE
-- open ebean.properties and set ebean.ddl.run=true
-- go to src/main/java/util/xml and run PushCategAndProdIntoDb.java as JavaApplication
-- open ebean.properties and set ebean.ddl.run=false
+- go to src/main/java/conf and adjust the application.conf if needed
 - open a terminal and navigate to project folder: type 'mvn jetty-run'
-- open web browser and go to http://localhost:8080/
+- open a web browser and go to http://localhost:8080/
 - happy testing
