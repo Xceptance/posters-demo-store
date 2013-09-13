@@ -221,9 +221,17 @@ public class CustomerController
     public Result accountOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
+        String template = xcpConf.templateAccountOverview;
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -235,11 +243,22 @@ public class CustomerController
     public Result orderOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        CustomerInformation.addOrderOfCustomerToMap(context, data);
-
+        String template;
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
+        }
+        else
+        {
+            CustomerInformation.addOrderOfCustomerToMap(context, data);
+            template = xcpConf.templateOrderOverview;
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -251,11 +270,22 @@ public class CustomerController
     public Result paymentOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        CustomerInformation.addPaymentOfCustomerToMap(context, data);
-
+        String template;
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
+        }
+        else
+        {
+            CustomerInformation.addPaymentOfCustomerToMap(context, data);
+            template = xcpConf.templatePaymentOverview;
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -267,11 +297,22 @@ public class CustomerController
     public Result settingOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        CustomerInformation.addCustomerToMap(context, data);
-
+        String template;
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
+        }
+        else
+        {
+            CustomerInformation.addCustomerToMap(context, data);
+            template = xcpConf.templateSettingOverview;
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -291,46 +332,56 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         String template = "";
-        // replace spaces and dashes
-        creditNumber = creditNumber.replaceAll("[ -]+", "");
-        boolean wrongCreditCard = true;
-        // check input
-        for (String regExCreditCard : xcpConf.regexCreditCard)
-        {
-            // credit card number is correct
-            if (Pattern.matches(regExCreditCard, creditNumber))
-            {
-                wrongCreditCard = false;
-                // get customer by session id
-                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-                // create new credit card
-                CreditCard creditCard = new CreditCard();
-                creditCard.setCardNumber(creditNumber);
-                creditCard.setName(name);
-                creditCard.setMonth(month);
-                creditCard.setYear(year);
-                // add credit card to customer
-                customer.addCreditCard(creditCard);
-                // update customer
-                customer.update();
-                // success message
-                data.put("successMessage", msg.get("successSave", language).get());
-                template = xcpConf.templateAccountOverview;
-            }
-        }
-        if (wrongCreditCard)
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
-            // show inserted values in form
-            Map<String, String> card = new HashMap<String, String>();
-            card.put("name", name);
-            card.put("cardNumber", creditNumber);
-            data.put("card", card);
-            // show page to enter payment information again
-            template = xcpConf.templateAddPaymentToCustomer;
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
-
+        else
+        {
+            // replace spaces and dashes
+            creditNumber = creditNumber.replaceAll("[ -]+", "");
+            boolean wrongCreditCard = true;
+            // check input
+            for (String regExCreditCard : xcpConf.regexCreditCard)
+            {
+                // credit card number is correct
+                if (Pattern.matches(regExCreditCard, creditNumber))
+                {
+                    wrongCreditCard = false;
+                    // get customer by session id
+                    Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+                    // create new credit card
+                    CreditCard creditCard = new CreditCard();
+                    creditCard.setCardNumber(creditNumber);
+                    creditCard.setName(name);
+                    creditCard.setMonth(month);
+                    creditCard.setYear(year);
+                    // add credit card to customer
+                    customer.addCreditCard(creditCard);
+                    // update customer
+                    customer.update();
+                    // success message
+                    data.put("successMessage", msg.get("successSave", language).get());
+                    template = xcpConf.templateAccountOverview;
+                }
+            }
+            if (wrongCreditCard)
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
+                // show inserted values in form
+                Map<String, String> card = new HashMap<String, String>();
+                card.put("name", name);
+                card.put("cardNumber", creditNumber);
+                data.put("card", card);
+                // show page to enter payment information again
+                template = xcpConf.templateAddPaymentToCustomer;
+            }
+        }
         return Results.html().render(data).template(template);
     }
 
@@ -343,10 +394,21 @@ public class CustomerController
     public Result addPaymentToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
-        return Results.html().render(data);
+        String template;
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
+        }
+        else
+        {
+            template = xcpConf.templateAddPaymentToCustomer;
+        }
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -360,26 +422,43 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
-            CreditCardInformation.deleteCreditCardFromCustomer(cardId);
-            template = xcpConf.templateAccountOverview;
-            // success message
-            data.put("successMessage", msg.get("successDelete", language).get());
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
-        // incorrect password
         else
         {
-            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            template = xcpConf.templateConfirmDeletePayment;
-            data.put("cardId", cardId);
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // correct password
+            if (customer.checkPasswd(password))
+            {
+                CreditCardInformation.deleteCreditCardFromCustomer(cardId);
+                template = xcpConf.templateAccountOverview;
+                // success message
+                data.put("successMessage", msg.get("successDelete", language).get());
+            }
+            // incorrect password
+            else
+            {
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                template = xcpConf.templateConfirmDeletePayment;
+                data.put("cardId", cardId);
+            }
         }
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
     }
 
+    /**
+     * Returns the page to confirm the deletion of a credit card.
+     * @param cardId
+     * @param context
+     * @return
+     */
     public Result confirmDeletePayment(@Param("cardId") int cardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -397,11 +476,22 @@ public class CustomerController
     public Result addressOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
-        CustomerInformation.addAddressOfCustomerToMap(context, data);
-
+        String template;
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
+        }
+        else
+        {
+            CustomerInformation.addAddressOfCustomerToMap(context, data);
+            template = xcpConf.templateAddressOverview;
+        }
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
+        return Results.html().render(data).template(template);
     }
 
     /**
@@ -416,29 +506,46 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
-            // remove billing address
-            AddressInformation.deleteBillingAddressFromCustomer(addressId);
-            // success message
-            data.put("successMessage", msg.get("successDelete", language).get());
-            template = xcpConf.templateAccountOverview;
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
-        // incorrect password
         else
         {
-            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            template = xcpConf.templateConfirmDeleteAddress;
-            data.put("deleteAddressURL", "deleteBillingAddress");
-            data.put("addressId", addressId);
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // correct password
+            if (customer.checkPasswd(password))
+            {
+                // remove billing address
+                AddressInformation.deleteBillingAddressFromCustomer(addressId);
+                // success message
+                data.put("successMessage", msg.get("successDelete", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
+            // incorrect password
+            else
+            {
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                template = xcpConf.templateConfirmDeleteAddress;
+                data.put("deleteAddressURL", "deleteBillingAddress");
+                data.put("addressId", addressId);
+            }
         }
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data).template(template);
     }
 
+    /**
+     * Returns the page to confirm the deletion of a billing address.
+     * 
+     * @param addressId
+     * @param context
+     * @return
+     */
     public Result confirmDeleteBillingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -460,29 +567,46 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
-            // remove billing address
-            AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
-            // success message
-            data.put("successMessage", msg.get("successDelete", language).get());
-            template = xcpConf.templateAccountOverview;
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
-        // incorrect password
         else
         {
-            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            template = xcpConf.templateConfirmDeleteAddress;
-            data.put("deleteAddressURL", "deleteDeliveryAddress");
-            data.put("addressId", addressId);
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // correct password
+            if (customer.checkPasswd(password))
+            {
+                // remove billing address
+                AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
+                // success message
+                data.put("successMessage", msg.get("successDelete", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
+            // incorrect password
+            else
+            {
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                template = xcpConf.templateConfirmDeleteAddress;
+                data.put("deleteAddressURL", "deleteDeliveryAddress");
+                data.put("addressId", addressId);
+            }
         }
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data).template(template);
     }
 
+    /**
+     * Returns the page to confirm the deletion of a delivery address.
+     * 
+     * @param addressId
+     * @param context
+     * @return
+     */
     public Result confirmDeleteDeliveryAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -713,43 +837,54 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-        // check input
-        if (!Pattern.matches(xcpConf.regexZip, zip))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorWrongZip", language).get());
-            // show inserted values in form
-            Map<String, String> address = new HashMap<String, String>();
-            address.put("name", name);
-            address.put("addressline1", addressLine1);
-            address.put("addressline2", addressLine2);
-            address.put("city", city);
-            address.put("state", state);
-            address.put("zip", zip);
-            address.put("country", country);
-            data.put("address", address);
-            // show page to enter delivery address again
-            template = xcpConf.templateAddDeliveryAddressToCustomer;
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
-        // all input fields might be correct
         else
         {
-            DeliveryAddress address = new DeliveryAddress();
+            // check input
+            if (!Pattern.matches(xcpConf.regexZip, zip))
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                Map<String, String> address = new HashMap<String, String>();
+                address.put("name", name);
+                address.put("addressline1", addressLine1);
+                address.put("addressline2", addressLine2);
+                address.put("city", city);
+                address.put("state", state);
+                address.put("zip", zip);
+                address.put("country", country);
+                data.put("address", address);
+                // show page to enter delivery address again
+                template = xcpConf.templateAddDeliveryAddressToCustomer;
+            }
+            // all input fields might be correct
+            else
+            {
+                DeliveryAddress address = new DeliveryAddress();
 
-            address.setName(name);
-            address.setAddressline1(addressLine1);
-            address.setAddressline2(addressLine2);
-            address.setCity(city);
-            address.setState(state);
-            address.setZip(zip);
-            address.setCountry(country);
-            // add address to customer
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            customer.addDeliveryAddress(address);
-            customer.update();
-            // success message
-            data.put("successMessage", msg.get("successSave", language).get());
-            template = xcpConf.templateAccountOverview;
+                address.setName(name);
+                address.setAddressline1(addressLine1);
+                address.setAddressline2(addressLine2);
+                address.setCity(city);
+                address.setState(state);
+                address.setZip(zip);
+                address.setCountry(country);
+                // add address to customer
+                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+                customer.addDeliveryAddress(address);
+                customer.update();
+                // success message
+                data.put("successMessage", msg.get("successSave", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
         }
         return Results.html().render(data).template(template);
     }
@@ -780,43 +915,54 @@ public class CustomerController
 
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-        // check input
-        if (!Pattern.matches("[0-9]*", zip))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorWrongZip", language).get());
-            // show inserted values in form
-            Map<String, String> address = new HashMap<String, String>();
-            address.put("name", name);
-            address.put("addressline1", addressLine1);
-            address.put("addressline2", addressLine2);
-            address.put("city", city);
-            address.put("state", state);
-            address.put("zip", zip);
-            address.put("country", country);
-            data.put("address", address);
-            // show page to enter billing address again
-            template = xcpConf.templateAddBillingAddressToCustomer;
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
-        // all input fields might be correct
         else
         {
-            BillingAddress address = new BillingAddress();
+            // check input
+            if (!Pattern.matches("[0-9]*", zip))
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                Map<String, String> address = new HashMap<String, String>();
+                address.put("name", name);
+                address.put("addressline1", addressLine1);
+                address.put("addressline2", addressLine2);
+                address.put("city", city);
+                address.put("state", state);
+                address.put("zip", zip);
+                address.put("country", country);
+                data.put("address", address);
+                // show page to enter billing address again
+                template = xcpConf.templateAddBillingAddressToCustomer;
+            }
+            // all input fields might be correct
+            else
+            {
+                BillingAddress address = new BillingAddress();
 
-            address.setName(name);
-            address.setAddressline1(addressLine1);
-            address.setAddressline2(addressLine2);
-            address.setCity(city);
-            address.setState(state);
-            address.setZip(zip);
-            address.setCountry(country);
-            // add address to customer
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            customer.addBillingAddress(address);
-            customer.update();
-            // success message
-            data.put("successMessage", msg.get("successSave", language).get());
-            template = xcpConf.templateAccountOverview;
+                address.setName(name);
+                address.setAddressline1(addressLine1);
+                address.setAddressline2(addressLine2);
+                address.setCity(city);
+                address.setState(state);
+                address.setZip(zip);
+                address.setCountry(country);
+                // add address to customer
+                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+                customer.addBillingAddress(address);
+                customer.update();
+                // success message
+                data.put("successMessage", msg.get("successSave", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
         }
         return Results.html().render(data).template(template);
     }
@@ -853,40 +999,51 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
-        boolean failure = false;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // incorrect password
-        if (!CustomerInformation.correctPassword(customer.getEmail(), password))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            failure = true;
-        }
-        else if (!Pattern.matches(xcpConf.regexEmail, email))
-        {
-            // error message
-            data.put("errorMessage", msg.get("errorValidEmail", language).get());
-            failure = true;
-        }
-        if (failure)
-        {
-            Map<String, String> updatedCustomer = new HashMap<String, String>();
-            updatedCustomer.put("name", name);
-            updatedCustomer.put("firstName", firstName);
-            updatedCustomer.put("email", email);
-            data.put("customer", customer);
-            // show page to update name or email again
-            template = xcpConf.templateChangeNameOrEmail;
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
         else
         {
-            customer.setName(name);
-            customer.setFirstName(firstName);
-            customer.setEmail(email);
-            customer.update();
-            // success message
-            data.put("successMessage", msg.get("successUpdate", language).get());
-            template = xcpConf.templateAccountOverview;
+            boolean failure = false;
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // incorrect password
+            if (!CustomerInformation.correctPassword(customer.getEmail(), password))
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                failure = true;
+            }
+            else if (!Pattern.matches(xcpConf.regexEmail, email))
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorValidEmail", language).get());
+                failure = true;
+            }
+            if (failure)
+            {
+                Map<String, String> updatedCustomer = new HashMap<String, String>();
+                updatedCustomer.put("name", name);
+                updatedCustomer.put("firstName", firstName);
+                updatedCustomer.put("email", email);
+                data.put("customer", customer);
+                // show page to update name or email again
+                template = xcpConf.templateChangeNameOrEmail;
+            }
+            else
+            {
+                customer.setName(name);
+                customer.setFirstName(firstName);
+                customer.setEmail(email);
+                customer.update();
+                // success message
+                data.put("successMessage", msg.get("successUpdate", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
         }
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
@@ -920,35 +1077,46 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        boolean failure = false;
         String template;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // incorrect password
-        if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            failure = true;
-        }
-        // passwords don't match
-        else if (!password.equals(passwordAgain))
-        {
-            // error message
-            data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
-            failure = true;
-        }
-        if (failure)
-        {
-            // show page to change password again
-            template = xcpConf.templateChangePassword;
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            CarouselInformation.getCarouselProducts(data);
+            template = xcpConf.templateIndex;
         }
         else
         {
-            customer.hashPasswd(password);
-            customer.update();
-            // success message
-            data.put("successMessage", msg.get("successUpdate", language).get());
-            template = xcpConf.templateAccountOverview;
+            boolean failure = false;
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // incorrect password
+            if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                failure = true;
+            }
+            // passwords don't match
+            else if (!password.equals(passwordAgain))
+            {
+                // error message
+                data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
+                failure = true;
+            }
+            if (failure)
+            {
+                // show page to change password again
+                template = xcpConf.templateChangePassword;
+            }
+            else
+            {
+                customer.hashPasswd(password);
+                customer.update();
+                // success message
+                data.put("successMessage", msg.get("successUpdate", language).get());
+                template = xcpConf.templateAccountOverview;
+            }
         }
         return Results.html().render(data).template(template);
     }
@@ -964,40 +1132,57 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
         {
-            // remove customer from session
-            SessionHandling.deleteCustomerId(context);
-            // remove basket from session
-            SessionHandling.deleteBasketId(context);
-            // remove customers orders, deletes also customer, deletes also addresses and payment information
-            List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
-            for (Order order : orders)
-            {
-                Ebean.delete(order);
-            }
-            // delete customer, if customer has no order
-            if (orders.isEmpty())
-            {
-                Ebean.delete(customer);
-            }
-            // put products for carousel to data map
+            // error message
+            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
-            data.put("successMessage", msg.get("successDeleteAccount", language).get());
         }
-        // incorrect password
         else
         {
-            data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
-            template = xcpConf.templateConfirmDeleteAccount;
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            // correct password
+            if (customer.checkPasswd(password))
+            {
+                // remove customer from session
+                SessionHandling.deleteCustomerId(context);
+                // remove basket from session
+                SessionHandling.deleteBasketId(context);
+                // remove customers orders, deletes also customer, deletes also addresses and payment information
+                List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
+                for (Order order : orders)
+                {
+                    Ebean.delete(order);
+                }
+                // delete customer, if customer has no order
+                if (orders.isEmpty())
+                {
+                    Ebean.delete(customer);
+                }
+                // put products for carousel to data map
+                CarouselInformation.getCarouselProducts(data);
+                template = xcpConf.templateIndex;
+                data.put("successMessage", msg.get("successDeleteAccount", language).get());
+            }
+            // incorrect password
+            else
+            {
+                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                template = xcpConf.templateConfirmDeleteAccount;
+            }
         }
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(template);
     }
 
+    /**
+     * Returns the page to confirm the deletion of customer's account.
+     * 
+     * @param context
+     * @return
+     */
     public Result confirmDeleteAccount(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();

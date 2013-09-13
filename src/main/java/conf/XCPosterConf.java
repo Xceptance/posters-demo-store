@@ -67,6 +67,14 @@ public class XCPosterConf
     
     public final int pageSize;
 
+    public final String templateOrderOverview;
+
+    public final String templatePaymentOverview;
+
+    public final String templateSettingOverview;
+
+    public final String templateAddressOverview;
+
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
     {
@@ -127,5 +135,13 @@ public class XCPosterConf
         tax = Double.parseDouble(ninjaProp.getOrDie("application.tax"));
         
         pageSize = ninjaProp.getInteger("application.pageSize");
+        
+        templateOrderOverview = "views/CustomerController/orderOverview.ftl.html";
+        
+        templatePaymentOverview = "views/CustomerController/paymentOverview.ftl.html";
+        
+        templateSettingOverview = "views/CustomerController/settingOverview.ftl.html";
+        
+        templateAddressOverview = "views/CustomerController/addressOverview.ftl.html";
     }
 }
