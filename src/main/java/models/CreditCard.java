@@ -1,5 +1,6 @@
 package models;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +93,12 @@ public class CreditCard
     public int getMonth()
     {
         return month;
+    }
+    
+    public String getMonthLeadingZero()
+    {
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(getMonth());
     }
 
     public void setMonth(int month)

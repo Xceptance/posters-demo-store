@@ -60,7 +60,7 @@
 				<address>
       				${i18n("titleName")}: ${order.creditCard.name}<br>
       				${i18n("titleCreditCard")}: ${order.creditCard.getCardNumberCryptic()}<br>
-      				${i18n("titleValidTo")}: ${order.creditCard.month} ${order.creditCard.year}<br>
+      				${i18n("titleValidTo")}: ${order.creditCard.getMonthLeadingZero()} ${order.creditCard.year}<br>
       			</address>
 			</li>
 		</ul>

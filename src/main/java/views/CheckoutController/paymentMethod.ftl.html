@@ -12,7 +12,7 @@
       					<address>
       						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
-      						${i18n("titleValidTo")}: ${payment.month} ${payment.year}<br>
+      						${i18n("titleValidTo")}: ${payment.getMonthLeadingZero()} ${payment.year}<br>
       					</address>
       					<form action="/addPaymentToOrder" method="post">
     						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
