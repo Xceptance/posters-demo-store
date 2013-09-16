@@ -201,5 +201,4 @@ public class SessionHandling
     {
         return Integer.parseInt(context.getSessionCookie().get("user"));
     }
-
 }

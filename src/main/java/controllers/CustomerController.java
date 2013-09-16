@@ -40,6 +40,12 @@ public class CustomerController
 
     private Optional language = Optional.of("en");
 
+    /**
+     * Returns a page to log in to the customer backend.
+     * 
+     * @param context
+     * @return
+     */
     public Result loginForm(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -48,7 +54,7 @@ public class CustomerController
     }
 
     /**
-     * Logs on to the system with email and password. Returns the home page, if the email and the password are correct,
+     * Logs in to the system with email and password. Returns the home page, if the email and the password are correct,
      * otherwise an error page.
      * 
      * @param email
@@ -118,7 +124,6 @@ public class CustomerController
         SessionHandling.deleteCustomerId(context);
         // remove basket from session
         SessionHandling.deleteBasketId(context);
-
         CommonInformation.setCommonData(data, context, xcpConf);
         // put products for carousel to data map
         CarouselInformation.getCarouselProducts(data);
@@ -127,7 +132,7 @@ public class CustomerController
     }
 
     /**
-     * Starts a registration to get an account. Returns the page to enter account information.
+     * Returns the page to enter account information to create a new one.
      * 
      * @param context
      * @return
@@ -135,14 +140,12 @@ public class CustomerController
     public Result registration(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data);
     }
 
     /**
-     * Creates a new Customer.
+     * Creates a new customer account.
      * 
      * @param name
      * @param firstName
@@ -156,7 +159,6 @@ public class CustomerController
                                         @Param("eMail") String email, @Param("password") String password,
                                         @Param("passwordAgain") String passwordAgain, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
         String template;
         boolean failure = false;
@@ -455,6 +457,7 @@ public class CustomerController
 
     /**
      * Returns the page to confirm the deletion of a credit card.
+     * 
      * @param cardId
      * @param context
      * @return
@@ -626,11 +629,8 @@ public class CustomerController
     public Result updateDeliveryAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         data.put("address", AddressInformation.getDeliveryAddressById(addressId));
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data);
     }
 
@@ -648,16 +648,13 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result updateDeliveryAddressCompleted(@Param("fullName") String name,
-                                                 @Param("company") String company,
-                                                 @Param("addressLine") String addressLine,
-                                                 @Param("city") String city, @Param("state") String state,
-                                                 @Param("zip") String zip, @Param("country") String country,
+    public Result updateDeliveryAddressCompleted(@Param("fullName") String name, @Param("company") String company,
+                                                 @Param("addressLine") String addressLine, @Param("city") String city,
+                                                 @Param("state") String state, @Param("zip") String zip,
+                                                 @Param("country") String country,
                                                  @Param("addressId") String addressId, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // check input
@@ -708,11 +705,8 @@ public class CustomerController
     public Result updateBillingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         data.put("address", AddressInformation.getBillingAddressById(addressId));
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data);
     }
 
@@ -730,16 +724,13 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result updateBillingAddressCompleted(@Param("fullName") String name,
-                                                @Param("company") String company,
+    public Result updateBillingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                                 @Param("addressLine") String addressLine, @Param("city") String city,
                                                 @Param("state") String state, @Param("zip") String zip,
                                                 @Param("country") String country, @Param("addressId") String addressId,
                                                 Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // check input
@@ -790,9 +781,7 @@ public class CustomerController
     public Result addDeliveryAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data);
     }
 
@@ -805,9 +794,7 @@ public class CustomerController
     public Result addBillingAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         return Results.html().render(data);
     }
 
@@ -832,9 +819,7 @@ public class CustomerController
                                                         @Param("zip") String zip, @Param("country") String country,
                                                         @Param("addressId") String addressId, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // no customer is logged
@@ -910,9 +895,7 @@ public class CustomerController
                                                        @Param("zip") String zip, @Param("country") String country,
                                                        @Param("addressId") String addressId, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
         // no customer is logged

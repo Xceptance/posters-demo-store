@@ -32,7 +32,6 @@ public class StarterConf
     {
         // get the server file-location
         HOME = System.getProperty("starter.home");
-
         // get the config file-location
         String confFile = System.getProperty("ninja.external.configuration");
         PropertiesConfiguration cfg = new PropertiesConfiguration();

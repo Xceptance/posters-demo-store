@@ -35,7 +35,7 @@ public class BasketController
     private Optional language = Optional.of("en");
 
     /**
-     * Adds one product, given by the product id, to the basket. The basket will be chosen by the session.
+     * Adds one product to the basket. The basket will be chosen by the session.
      * 
      * @param productId
      *            The ID of the product.
@@ -45,9 +45,7 @@ public class BasketController
     public Result addToBasket(@Param("productName") String productId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
         // get basket by session
@@ -74,18 +72,17 @@ public class BasketController
     public Result deleteFromBasket(@Param("productName") String productId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // put basket id to session
         SessionHandling.setBasketId(context, basket.getId());
+        // get count of this product
         int countProduct = Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
                                 .findUnique().getCountProduct();
-        // delete all of this products
+        // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
             BasketInformation.removeProductFromBasket(basket, product);
@@ -105,7 +102,6 @@ public class BasketController
     public Result basket(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         // return basket overview page
         return Results.html().render(data).template(xcpConf.templateBasketOverview);
@@ -123,11 +119,9 @@ public class BasketController
                                      @Param("productCount") String productCount, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
             data.put("infoMessage", msg.get("infoProductCount", language).get());

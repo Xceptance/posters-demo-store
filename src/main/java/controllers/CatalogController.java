@@ -31,12 +31,9 @@ public class CatalogController
     public Result productDetail(@PathParam("product") String productUrl, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
-
         // put product to data map
         ProductInformation.addProductDetailToMap(productUrl, data);
-
         return Results.html().render(data);
     }
 

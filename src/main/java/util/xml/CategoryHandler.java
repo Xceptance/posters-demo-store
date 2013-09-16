@@ -30,7 +30,6 @@ public class CategoryHandler extends DefaultHandler
             category = new TopCategory();
             subCategoryList = new ArrayList<SubCategory>();
         }
-
         if (localName.equals("subCategory"))
         {
             subCategory = new SubCategory();
@@ -46,20 +45,17 @@ public class CategoryHandler extends DefaultHandler
             String url = currentValue.replaceAll(" ", "");
             category.setUrl(url);
         }
-
         if (localName.equals("category"))
         {
             category.setSubCategories(subCategoryList);
             Ebean.save(category);
         }
-
         if (localName.equals("nameSubCategory"))
         {
             subCategory.setName(currentValue);
             String url = currentValue.replaceAll(" ", "");
             subCategory.setUrl(url);
         }
-
         if (localName.equals("subCategory"))
         {
             subCategoryList.add(subCategory);

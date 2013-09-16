@@ -1,6 +1,5 @@
 package util.database;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +39,6 @@ public abstract class ProductInformation
      */
     public static void addAllProductsToMap(final Map<String, Object> data)
     {
-
         // find all products in the database
         List<Product> products = Ebean.find(Product.class).findList();
         // add all products to the data map
@@ -92,7 +90,7 @@ public abstract class ProductInformation
     }
 
     private static void createPagingListProductOverview(PagingList<Product> pagingList, int pageNumber,
-                                                       final Map<String, Object> data)
+                                                        final Map<String, Object> data)
     {
         // get row count in background
         pagingList.getFutureRowCount();

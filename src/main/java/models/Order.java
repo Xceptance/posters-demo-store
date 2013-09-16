@@ -191,7 +191,6 @@ public class Order
             orderProducts.setCountProduct(1);
             Ebean.save(orderProducts);
             products.add(orderProducts);
-
         }
         // this product is in the order at least one time
         else

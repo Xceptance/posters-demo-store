@@ -87,5 +87,4 @@ public abstract class OrderInformation
     {
         return Ebean.find(Order.class).where().eq("customer", customer).findList();
     }
-
 }

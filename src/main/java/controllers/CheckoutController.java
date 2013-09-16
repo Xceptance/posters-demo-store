@@ -53,7 +53,6 @@ public class CheckoutController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-
         // get basket by session id
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // check, if the basket is empty
@@ -117,7 +116,6 @@ public class CheckoutController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
@@ -222,11 +220,9 @@ public class CheckoutController
      */
     public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-
         // get delivery address
         DeliveryAddress deliveryAddress = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
         // get order by session id
@@ -264,7 +260,6 @@ public class CheckoutController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
@@ -331,11 +326,9 @@ public class CheckoutController
      */
     public Result addBillingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
-
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         String template;
-
         // get billing address
         BillingAddress billingAddress = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
         // get order by session id
@@ -400,9 +393,9 @@ public class CheckoutController
                     creditCard.save();
                 }
                 // set shipping costs to order
-                order.setShippingCosts(6.99);
+                order.setShippingCosts(xcpConf.shippingCosts);
                 // set tax to order
-                order.setTax(0.06);
+                order.setTax(xcpConf.tax);
                 // calculate total costs
                 order.addShippingCostsToTotalCosts();
                 order.addTaxToTotalCosts();
@@ -443,7 +436,6 @@ public class CheckoutController
     public Result addPaymentToOrder(@Param("cardId") String creditCardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-
         CommonInformation.setCommonData(data, context, xcpConf);
         // get credit card by id
         CreditCard creditCard = CreditCardInformation.getCreditCardById(Integer.parseInt(creditCardId));

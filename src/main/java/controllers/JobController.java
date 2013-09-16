@@ -33,19 +33,19 @@ public class JobController
 
         StarterConf config = new StarterConf();
         prepareDatabase(config);
+        // import categories, products and dummy customer
         importData(config);
     }
 
     private void prepareDatabase(StarterConf config)
     {
-        // Handle the connection
+        // handle the connection
         Connection connection;
         try
         {
             Class.forName(config.DB_DRIVER);
-
+            // connect to database
             connection = DriverManager.getConnection(config.DB_URL, config.DB_USER, config.DB_PASS);
-
             boolean basketProductTable = false;
             boolean basketTable = false;
             boolean billingAddressTable = false;
@@ -57,7 +57,6 @@ public class JobController
             boolean productTable = false;
             boolean topCategoryTable = false;
             boolean subCategoryTable = false;
-
             // if server has been started with the parameter "-Dstarter.droptables=true"
             // drop all tables
             if (config.DROP_TABLES != null)
@@ -67,7 +66,6 @@ public class JobController
                     RunScript.execute(connection, new FileReader("default-drop.sql"));
                 }
             }
-
             // get the DB-metadata
             DatabaseMetaData md = connection.getMetaData();
             ResultSet rs = md.getTables(null, null, "%", null);
@@ -126,7 +124,6 @@ public class JobController
                 // simply execute the create-script
                 RunScript.execute(connection, new FileReader("default-create.sql"));
             }
-
             connection.close();
         }
         catch (Exception e)

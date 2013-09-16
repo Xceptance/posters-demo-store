@@ -103,7 +103,6 @@ public class Basket
             basketProducts.setCountProduct(1);
             basketProducts.save();
             products.add(basketProducts);
-
         }
         // this product is in the basket at least one time
         else
@@ -152,7 +151,7 @@ public class Basket
     {
         Ebean.save(this);
     }
-    
+
     public void delete()
     {
         this.clearProducts();

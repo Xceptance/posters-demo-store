@@ -114,7 +114,6 @@ public abstract class BasketInformation
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             basket.setCustomer(customer);
             basket.update();
-
             customer.setBasket(basket);
             customer.update();
         }
