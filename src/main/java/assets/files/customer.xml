@@ -7,8 +7,8 @@
 		<firstName>John</firstName>
 		<deliveryAddress>
 			<delName>John Doe</delName>
-			<delAddressLine1>Xceptance</delAddressLine1>
-			<delAddressLine2>Leutragraben</delAddressLine2>
+			<delCompany>Xceptance</delCompany>
+			<delAddressLine>2-4 Leutragraben</delAddressLine>
 			<delCity>Jena</delCity>
 			<delState>Thuringia</delState>
 			<delCountry>Germany</delCountry>
@@ -16,8 +16,8 @@
 		</deliveryAddress>
 		<billingAddress>
 			<billName>John Doe</billName>
-			<billAddressLine1>Xceptance</billAddressLine1>
-			<billAddressLine2>Leutragraben</billAddressLine2>
+			<billCompany>Xceptance</billCompany>
+			<billAddressLine>2-4 Leutragraben</billAddressLine>
 			<billCity>Jena</billCity>
 			<billState>Thuringia</billState>
 			<billCountry>Germany</billCountry>

@@ -22,9 +22,9 @@ public class DeliveryAddress
 
     private String name;
 
-    private String addressline1;
+    private String company;
 
-    private String addressline2;
+    private String addressLine;
 
     private String city;
 
@@ -50,14 +50,14 @@ public class DeliveryAddress
         this.id = id;
     }
 
-    public String getAddressline1()
+    public String getCompany()
     {
-        return addressline1;
+        return company;
     }
 
-    public void setAddressline1(String street)
+    public void setCompany(String company)
     {
-        this.addressline1 = street;
+        this.company = company;
     }
 
     public Customer getCustomer()
@@ -80,14 +80,14 @@ public class DeliveryAddress
         this.name = name;
     }
 
-    public String getAddressline2()
+    public String getAddressLine()
     {
-        return addressline2;
+        return addressLine;
     }
 
-    public void setAddressline2(String addressline2)
+    public void setAddressLine(String addressLine)
     {
-        this.addressline2 = addressline2;
+        this.addressLine = addressLine;
     }
 
     public String getCity()

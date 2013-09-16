@@ -97,8 +97,8 @@ public class CheckoutController
      * the delivery address, otherwise the page to enter a billing address.
      * 
      * @param name
-     * @param addressLine1
-     * @param addressLine2
+     * @param company
+     * @param addressLine
      * @param city
      * @param state
      * @param zip
@@ -107,8 +107,8 @@ public class CheckoutController
      * @param context
      * @return
      */
-    public Result deliveryAddressCompleted(@Param("fullName") String name, @Param("addressLine1") String addressLine1,
-                                           @Param("addressLine2") String addressLine2, @Param("city") String city,
+    public Result deliveryAddressCompleted(@Param("fullName") String name, @Param("company") String company,
+                                           @Param("addressLine") String addressLine, @Param("city") String city,
                                            @Param("state") String state, @Param("zip") String zip,
                                            @Param("country") String country,
                                            @Param("billingAddress") String billingEqualDelivery, Context context)
@@ -126,8 +126,8 @@ public class CheckoutController
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
-            address.put("addressline1", addressLine1);
-            address.put("addressline2", addressLine2);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
             address.put("city", city);
             address.put("state", state);
             address.put("zip", zip);
@@ -143,8 +143,8 @@ public class CheckoutController
             // create delivery address
             DeliveryAddress deliveryAddress = new DeliveryAddress();
             deliveryAddress.setName(name);
-            deliveryAddress.setAddressline1(addressLine1);
-            deliveryAddress.setAddressline2(addressLine2);
+            deliveryAddress.setCompany(company);
+            deliveryAddress.setAddressLine(addressLine);
             deliveryAddress.setCity(city);
             deliveryAddress.setState(state);
             deliveryAddress.setZip(zip);
@@ -170,8 +170,8 @@ public class CheckoutController
                 // create billing address
                 BillingAddress billingAddress = new BillingAddress();
                 billingAddress.setName(name);
-                billingAddress.setAddressline1(addressLine1);
-                billingAddress.setAddressline2(addressLine2);
+                billingAddress.setCompany(company);
+                billingAddress.setAddressLine(addressLine);
                 billingAddress.setCity(city);
                 billingAddress.setState(state);
                 billingAddress.setZip(zip);
@@ -247,8 +247,8 @@ public class CheckoutController
      * Creates a new billing address. Returns the page to enter payment information.
      * 
      * @param name
-     * @param addressLine1
-     * @param addressLine2
+     * @param company
+     * @param addressLine
      * @param city
      * @param state
      * @param zip
@@ -256,8 +256,8 @@ public class CheckoutController
      * @param context
      * @return
      */
-    public Result billingAddressCompleted(@Param("fullName") String name, @Param("addressLine1") String addressLine1,
-                                          @Param("addressLine2") String addressLine2, @Param("city") String city,
+    public Result billingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
+                                          @Param("addressLine") String addressLine, @Param("city") String city,
                                           @Param("state") String state, @Param("zip") String zip,
                                           @Param("country") String country, Context context)
     {
@@ -273,8 +273,8 @@ public class CheckoutController
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
-            address.put("addressline1", addressLine1);
-            address.put("addressline2", addressLine2);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
             address.put("city", city);
             address.put("state", state);
             address.put("zip", zip);
@@ -290,8 +290,8 @@ public class CheckoutController
             // create new billing address
             BillingAddress billingAddress = new BillingAddress();
             billingAddress.setName(name);
-            billingAddress.setAddressline1(addressLine1);
-            billingAddress.setAddressline2(addressLine2);
+            billingAddress.setCompany(company);
+            billingAddress.setAddressLine(addressLine);
             billingAddress.setCity(city);
             billingAddress.setState(state);
             billingAddress.setZip(zip);

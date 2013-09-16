@@ -638,8 +638,8 @@ public class CustomerController
      * Updates a delivery address of the customer.
      * 
      * @param name
-     * @param addressLine1
-     * @param addressLine2
+     * @param company
+     * @param addressLine
      * @param city
      * @param state
      * @param zip
@@ -649,8 +649,8 @@ public class CustomerController
      * @return
      */
     public Result updateDeliveryAddressCompleted(@Param("fullName") String name,
-                                                 @Param("addressLine1") String addressLine1,
-                                                 @Param("addressLine2") String addressLine2,
+                                                 @Param("company") String company,
+                                                 @Param("addressLine") String addressLine,
                                                  @Param("city") String city, @Param("state") String state,
                                                  @Param("zip") String zip, @Param("country") String country,
                                                  @Param("addressId") String addressId, Context context)
@@ -669,8 +669,8 @@ public class CustomerController
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
             address.put("name", name);
-            address.put("addressline1", addressLine1);
-            address.put("addressline2", addressLine2);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
             address.put("city", city);
             address.put("state", state);
             address.put("zip", zip);
@@ -684,8 +684,8 @@ public class CustomerController
         {
             DeliveryAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
             address.setName(name);
-            address.setAddressline1(addressLine1);
-            address.setAddressline2(addressLine2);
+            address.setCompany(company);
+            address.setAddressLine(addressLine);
             address.setCity(city);
             address.setState(state);
             address.setZip(zip);
@@ -720,8 +720,8 @@ public class CustomerController
      * Updates a billing address of the customer.
      * 
      * @param name
-     * @param addressLine1
-     * @param addressLine2
+     * @param company
+     * @param addressLine
      * @param city
      * @param state
      * @param zip
@@ -731,8 +731,8 @@ public class CustomerController
      * @return
      */
     public Result updateBillingAddressCompleted(@Param("fullName") String name,
-                                                @Param("addressLine1") String addressLine1,
-                                                @Param("addressLine2") String addressLine2, @Param("city") String city,
+                                                @Param("company") String company,
+                                                @Param("addressLine") String addressLine, @Param("city") String city,
                                                 @Param("state") String state, @Param("zip") String zip,
                                                 @Param("country") String country, @Param("addressId") String addressId,
                                                 Context context)
@@ -751,8 +751,8 @@ public class CustomerController
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
             address.put("name", name);
-            address.put("addressline1", addressLine1);
-            address.put("addressline2", addressLine2);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
             address.put("city", city);
             address.put("state", state);
             address.put("zip", zip);
@@ -767,8 +767,8 @@ public class CustomerController
             BillingAddress address = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
 
             address.setName(name);
-            address.setAddressline1(addressLine1);
-            address.setAddressline2(addressLine2);
+            address.setCompany(company);
+            address.setAddressLine(addressLine);
             address.setCity(city);
             address.setState(state);
             address.setZip(zip);
@@ -815,8 +815,8 @@ public class CustomerController
      * Adds a new delivery address to a customer.
      * 
      * @param name
-     * @param addressLine1
-     * @param addressLine2
+     * @param company
+     * @param addressLine
      * @param city
      * @param state
      * @param zip
@@ -826,8 +826,8 @@ public class CustomerController
      * @return
      */
     public Result addDeliveryAddressToCustomerCompleted(@Param("fullName") String name,
-                                                        @Param("addressLine1") String addressLine1,
-                                                        @Param("addressLine2") String addressLine2,
+                                                        @Param("company") String company,
+                                                        @Param("addressLine") String addressLine,
                                                         @Param("city") String city, @Param("state") String state,
                                                         @Param("zip") String zip, @Param("country") String country,
                                                         @Param("addressId") String addressId, Context context)
@@ -855,8 +855,8 @@ public class CustomerController
                 // show inserted values in form
                 Map<String, String> address = new HashMap<String, String>();
                 address.put("name", name);
-                address.put("addressline1", addressLine1);
-                address.put("addressline2", addressLine2);
+                address.put("company", company);
+                address.put("addressLine", addressLine);
                 address.put("city", city);
                 address.put("state", state);
                 address.put("zip", zip);
@@ -871,8 +871,8 @@ public class CustomerController
                 DeliveryAddress address = new DeliveryAddress();
 
                 address.setName(name);
-                address.setAddressline1(addressLine1);
-                address.setAddressline2(addressLine2);
+                address.setCompany(company);
+                address.setAddressLine(addressLine);
                 address.setCity(city);
                 address.setState(state);
                 address.setZip(zip);
@@ -893,8 +893,8 @@ public class CustomerController
      * Adds a new billing address to a customer.
      * 
      * @param name
-     * @param addressLine1
-     * @param addressLine2
+     * @param company
+     * @param addressLine
      * @param city
      * @param state
      * @param zip
@@ -904,8 +904,8 @@ public class CustomerController
      * @return
      */
     public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
-                                                       @Param("addressLine1") String addressLine1,
-                                                       @Param("addressLine2") String addressLine2,
+                                                       @Param("company") String company,
+                                                       @Param("addressLine") String addressLine,
                                                        @Param("city") String city, @Param("state") String state,
                                                        @Param("zip") String zip, @Param("country") String country,
                                                        @Param("addressId") String addressId, Context context)
@@ -933,8 +933,8 @@ public class CustomerController
                 // show inserted values in form
                 Map<String, String> address = new HashMap<String, String>();
                 address.put("name", name);
-                address.put("addressline1", addressLine1);
-                address.put("addressline2", addressLine2);
+                address.put("company", company);
+                address.put("addressLine", addressLine);
                 address.put("city", city);
                 address.put("state", state);
                 address.put("zip", zip);
@@ -949,8 +949,8 @@ public class CustomerController
                 BillingAddress address = new BillingAddress();
 
                 address.setName(name);
-                address.setAddressline1(addressLine1);
-                address.setAddressline2(addressLine2);
+                address.setCompany(company);
+                address.setAddressLine(addressLine);
                 address.setCity(city);
                 address.setState(state);
                 address.setZip(zip);

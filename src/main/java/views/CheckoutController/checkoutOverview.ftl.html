@@ -37,10 +37,10 @@
 				<h3>${i18n("titleDeliveryAddress")}</h3>
 				<address>
       				<strong>${order.deliveryAddress.name}</strong><br>
-      				${order.deliveryAddress.addressline1}<br>
-      				${order.deliveryAddress.addressline2}<br>
-      				${order.deliveryAddress.zip} ${order.deliveryAddress.city}<br>
-      				${order.deliveryAddress.state} ${order.deliveryAddress.country}<br>
+      				${order.deliveryAddress.company}<br>
+      				${order.deliveryAddress.addressLine}<br>
+      				${order.deliveryAddress.city}, ${order.deliveryAddress.state} ${order.deliveryAddress.zip}<br>
+      				${order.deliveryAddress.country}<br>
       			</address>
 			</li>
 			<!-- print billing address -->
@@ -48,10 +48,10 @@
 				<h3>${i18n("titleBillingAddress")}</h3>
 				<address>
       				<strong>${order.billingAddress.name}</strong><br>
-      				${order.billingAddress.addressline1}<br>
-      				${order.billingAddress.addressline2}<br>
-      				${order.billingAddress.zip} ${order.billingAddress.city}<br>
-      				${order.billingAddress.state} ${order.billingAddress.country}<br>
+      				${order.billingAddress.company}<br>
+      				${order.billingAddress.addressLine}<br>
+      				${order.billingAddress.city}, ${order.billingAddress.state} ${order.billingAddress.zip}<br>
+      				${order.billingAddress.country}<br>
       			</address>
 			</li>
 			<!-- print credit card -->

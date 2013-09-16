@@ -81,14 +81,14 @@ public class CustomerHandler extends DefaultHandler
             deliveryAddress.setName(currentValue);
         }
         
-        if (localName.equals("delAddressLine1"))
+        if (localName.equals("delCompany"))
         {
-            deliveryAddress.setAddressline1(currentValue);
+            deliveryAddress.setCompany(currentValue);
         }
         
-        if (localName.equals("delAddressLine2"))
+        if (localName.equals("delAddressLine"))
         {
-            deliveryAddress.setAddressline2(currentValue);
+            deliveryAddress.setAddressLine(currentValue);
         }
         
         if (localName.equals("delCity"))
@@ -116,14 +116,14 @@ public class CustomerHandler extends DefaultHandler
             billingAddress.setName(currentValue);
         }
         
-        if (localName.equals("billAddressLine1"))
+        if (localName.equals("billCompany"))
         {
-            billingAddress.setAddressline1(currentValue);
+            billingAddress.setCompany(currentValue);
         }
         
-        if (localName.equals("billAddressLine2"))
+        if (localName.equals("billAddressLine"))
         {
-            billingAddress.setAddressline2(currentValue);
+            billingAddress.setAddressLine(currentValue);
         }
         
         if (localName.equals("billCity"))

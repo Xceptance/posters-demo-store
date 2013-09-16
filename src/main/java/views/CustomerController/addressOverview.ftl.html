@@ -12,10 +12,10 @@
     			<li class="span4">
       				<address>
       					<strong>${address.name}</strong><br>
-      					${address.addressline1}<br>
-      					${address.addressline2}<br>
-      					${address.zip} ${address.city}<br>
-      					${address.state} ${address.country}<br>
+      					${address.company}<br>
+      					${address.addressLine}<br>
+      					${address.city}, ${address.state} ${address.zip}<br>
+      					${address.country}<br>
       				</address>
       				<form action="/updateDeliveryAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
@@ -54,10 +54,10 @@
     			<li class="span4">
       				<address>
       					<strong>${address.name}</strong><br>
-      					${address.addressline1}<br>
-      					${address.addressline2}<br>
-      					${address.zip} ${address.city}<br>
-      					${address.state} ${address.country}<br>
+      					${address.company}<br>
+      					${address.addressLine}<br>
+      					 ${address.city}, ${address.state} ${address.zip}<br>
+      					${address.country}<br>
       				</address>
       				<form action="/updateBillingAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>

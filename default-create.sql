@@ -16,8 +16,8 @@ create table basket_product (
 create table billingAddress (
   id                        integer not null,
   name                      varchar(255),
-  addressline1              varchar(255),
-  addressline2              varchar(255),
+  company                   varchar(255),
+  address_line              varchar(255),
   city                      varchar(255),
   state                     varchar(255),
   country                   varchar(255),
@@ -49,8 +49,8 @@ create table customer (
 create table deliveryAddress (
   id                        integer not null,
   name                      varchar(255),
-  addressline1              varchar(255),
-  addressline2              varchar(255),
+  company                   varchar(255),
+  address_line              varchar(255),
   city                      varchar(255),
   state                     varchar(255),
   country                   varchar(255),
