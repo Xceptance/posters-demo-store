@@ -1,14 +1,14 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
+	<h3 id="titlePayment">${i18n("paymentMethodTitleSelect")}</h3>
 	<#if paymentOverview??>
 	<!-- choose available credit card -->
-	<h3>${i18n("paymentMethodTitleSelect")}</h3>
 	<#list paymentOverview as payment>
 		<#if (payment_index + 3) % 3 ==0>
       		<div class="row-fluid">
       			<ul>
     	</#if>
-      				<li class="span4">
+      				<li class="span4" id="payment${payment_index}">
       					<address>
       						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
@@ -16,7 +16,7 @@
       					</address>
       					<form action="/addPaymentToOrder" method="post">
     						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-    						<button class="btn"id="submit" name="submit" type="submit">${i18n("paymentMethodChoose")}</button>
+    						<button class="btn" id="btnUsePayment${payment_index}" name="btnUsePayment${payment_index}" type="submit">${i18n("paymentMethodChoose")}</button>
 						</form>
       				</li>
 		<#if (payment_index + 1) % 3 ==0>
@@ -30,7 +30,7 @@
 	</#list>
 	</#if>
 	<!-- add new credit card -->
-	<form class="form-horizontal" action="/paymentMethodCompleted" method="post">
+	<form id="formAddPayment" class="form-horizontal" action="/paymentMethodCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("paymentMethodAddNew")}</legend>
@@ -40,7 +40,7 @@
 			<div class="control-group">
 				<label class="control-label" for="continue"></label>
 				<div class="controls">
-					<button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonContinue")}</button>
+					<button id="btnAddPayment" name="btnAddPayment" class="btn btn-primary" type="submit">${i18n("buttonContinue")}</button>
 				</div>
 			</div>
 		</fieldset>
