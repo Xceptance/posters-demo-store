@@ -1,18 +1,18 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-	<h1>${(category.name)!}</h1>
-	<h1>${(searchText)!}</h1>
-	<h1>${(noResults)!}</h1>
+	<h1 id="titleCategoryName">${(category.name)!}</h1>
+	<h1 id="titleSearchText">${(searchText)!}</h1>
+	<h1 id="titleNoResults">${(noResults)!}</h1>
 	<!-- paging -->
 	<div class="pagination pagination-centered">
 		<ul>
 			<#list 1..pageCount as x>
 			<#if isTopCategory??>
-			<li><a href="/topCategory/${category.url}/${x}">${x}</a></li>
+			<li id="pagelist${x}"><a href="/topCategory/${category.url}/${x}">${x}</a></li>
 			<#elseif isSubCategory??>
-			<li><a href="/category/${category.url}/${x}">${x}</a></li>
+			<li id="pagelist${x}"><a href="/category/${category.url}/${x}">${x}</a></li>
 			<#elseif isSearch??>
-			<li><a href="/search/${x}?searchText=${searchTerm}">${x}</a></li>
+			<li id="pagelist${x}"><a href="/search/${x}?searchText=${searchTerm}">${x}</a></li>
 			</#if>
 			</#list>
 		</ul>
@@ -24,11 +24,11 @@
       			<ul class="thumbnails">
       	</#if>
       				<li class="span4">
-      					<div class="thumbnail">
+      					<div id="product${pro_index}" class="thumbnail">
       						<a href=/productDetail/${pro.url?url('UTF-8')}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
-      						<h3>${pro.name}</h3>
-      						<p>${pro.descriptionOverview}</p>
-      						<p>${pro.price}${currency}</p>
+      						<h3 id="productName">${pro.name}</h3>
+      						<p id="productDescriptionOverview">${pro.descriptionOverview}</p>
+      						<p id="productPrice">${pro.price}${currency}</p>
       					</div>
       				</li>
       	<#if (pro_index + 1) % 3 ==0>
