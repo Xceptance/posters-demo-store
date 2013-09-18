@@ -1,31 +1,31 @@
-<div class="row">
+<div class="row" id="breadcrumbCheckout">
 	<ul class="breadcrumb span6 offset4 text-center">
 		<!-- add delivery address -->
 		<#if deliveryAddressActive??>
-		<li class="active">
+		<li class="active" id="btnDelAddr">
 		<#else>
-		<li>
+		<li id="btnDelAddr">
 		</#if>
 			Delivery address <span class="divider"> > </span></li>
 		<!-- add billing address -->	
 		<#if billingAddressActive??>
-		<li class="active">
+		<li class="active" id="btnBillAddr">
 		<#else>
-		<li>
+		<li id="btnBillAddr">
 		</#if>
 			Billing address <span class="divider"> > </span></li>
 		<!-- add credit card -->
 		<#if creditCardActive??>
-		<li class="active">
+		<li class="active" id="btnCreditCard">
 		<#else>
-		<li>
+		<li id="btnCreditCard">
 		</#if>
 			Credit card <span class="divider"> > </span></li>
 		<!-- place order -->
 		<#if placeOrderActive??>
-		<li class="active">
+		<li class="active" id="btnPlaceOrder">
 		<#else>
-		<li>
+		<li id="btnPlaceOrder">
 		</#if>
 			Place order</li>
 	</ul>
