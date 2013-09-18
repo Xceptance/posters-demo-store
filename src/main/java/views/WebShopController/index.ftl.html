@@ -2,19 +2,19 @@
 <@layout.myLayout "The ultimate webshop">    	
 	<div class="row-fluid">
 		<div class="span12 text-center">
-			<h1>${i18n("indexTitle")}!</h1>
+			<h1 id="titleIndex">${i18n("indexTitle")}!</h1>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span12">
-			<div id="myCarousel" class="carousel slide">
+			<div id="carousel" class="carousel slide">
 				<!-- Carousel slides -->
 				<div class="carousel-inner">
 					<#list carousel as caro>
 						<#if (caro_index == 0)>
-							<div class="active item">	
+							<div id="carouselItem${caro_index}" class="active item">	
 	      				<#else>
-	      					<div class="item">
+	      					<div id="carouselItem${caro_index}" class="item">
 	      				</#if>
 							<img src="${caro.imageURL}">
 							<div class="carousel-caption">
@@ -24,8 +24,8 @@
 					</#list>
 				</div>
 				<!-- Carousel nav -->
-				<a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
-				<a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
+				<a id="btnCarouselPrev" class="carousel-control left" href="#carousel" data-slide="prev">‹</a>
+				<a id="btnCarouselNext" class="carousel-control right" href="#carousel" data-slide="next">›</a>
 			</div>
 		</div>
 	</div>
