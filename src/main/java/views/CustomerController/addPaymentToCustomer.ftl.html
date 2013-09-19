@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form class="form-horizontal" action="/addPaymentToCustomer" method="post">
+	<form id="formAddPayment" class="form-horizontal" action="/addPaymentToCustomer" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("titlePaymentInformation")}</legend>
@@ -8,9 +8,9 @@
 			<#include "../form/paymentForm.ftl.html"/>
 			<!-- add button -->
 			<div class="control-group">
-				<label class="control-label" for="continue"></label>
+				<label class="control-label" for="btnAddPayment"></label>
 				<div class="controls">
-					<button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("paymentMethodAddNew")}</button>
+					<button id="btnAddPayment" name="btnAddPayment" class="btn btn-primary" type="submit">${i18n("paymentMethodAddNew")}</button>
 				</div>
 			</div>
 		</fieldset>

@@ -1,20 +1,20 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-	<h1>${productDetail.name}</h1>
+	<h1 id="titleProductName">${productDetail.name}</h1>
 	<div class="row-fluid">
-		<div class="span4">
+		<div class="span4" id="prodImg">
       		<img class="img-polaroid" width="300" alt="" src=${productDetail.imageURL}></img>
       	</div>
       	<div class="span5">
-      		<h3>${productDetail.descriptionOverview}</h3>
-      		<h4>${productDetail.descriptionDetail}</h4>
-      		<p>${i18n("productDetailPosterFinish")}</p>
+      		<h3 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h3>
+      		<h4 id="prodDescriptionDetail">${productDetail.descriptionDetail}</h4>
+      		<p id="prodFinish">${i18n("productDetailPosterFinish")}</p>
       	</div>
       	<div class="span3">
-      		<h3>${productDetail.price}${currency}</h3>
+      		<h3 id="prodPrice">${productDetail.price}${currency}</h3>
       		<form action="/addToBasket" method="post">
       			<input type="hidden" id="productName" name="productName" value=${productDetail.id}>
-      			<button class="btn"id="submit" name="submit" type="submit">${i18n("productDetailAddToBasket")}</button>
+      			<button class="btn"id="btnAddToCart" name="btnAddToCart" type="submit">${i18n("productDetailAddToBasket")}</button>
       		</form>
       	</div>
     </div>

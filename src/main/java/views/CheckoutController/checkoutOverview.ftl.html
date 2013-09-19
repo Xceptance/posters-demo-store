@@ -1,31 +1,31 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<h1>${i18n("titleOrderOverview")}</h1>
+	<h1 id="titleOrderOverview">${i18n("titleOrderOverview")}</h1>
 	<!-- print products -->
-	<h3>${i18n("titleProducts")}</h3>
+	<h3 id="titleProducts">${i18n("titleProducts")}</h3>
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
-		<tr>
+		<tr id="product${orderProduct_index}">
 			<td><a href=/productDetail/${orderProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
-			<td>${orderProduct.product.name}</td>
-			<td>${orderProduct.product.descriptionOverview}</td>
-			<td>${orderProduct.product.price}${currency}</td>
-			<td>${orderProduct.countProduct}</td>
+			<td id="product${orderProduct_index}Name">${orderProduct.product.name}</td>
+			<td id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
+			<td id="product${orderProduct_index}Price">${orderProduct.product.price}${currency}</td>
+			<td id="product${orderProduct_index}Count">${orderProduct.countProduct}</td>
 		</tr>
 		</#list>
 	</table>
 	<!-- print total price -->
-	<div class="row-fluid">
+	<div class="row-fluid" id="tax">
 		<div class="text-right">
 			<h3>${i18n("checkoutOverviewSalesTax")}: ${order.tax*100}%</h3>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid" id="shippingCosts">
 		<div class="text-right">
 			<h3>${i18n("checkoutOverviewShippingCosts")}: ${order.shippingCosts}${currency}</h3>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid" id="totalCosts">
 		<div class="text-right">
 			<h3>${i18n("checkoutOverviewTotalCosts")}: ${order.totalCosts}${currency}</h3>
 		</div>
@@ -33,7 +33,7 @@
 	<div class="row-fluid">
 		<ul>
 			<!-- print delivery address -->
-			<li class="span4">
+			<li class="span4" id="delAddr">
 				<h3>${i18n("titleDeliveryAddress")}</h3>
 				<address>
       				<strong>${order.deliveryAddress.name}</strong><br>
@@ -44,7 +44,7 @@
       			</address>
 			</li>
 			<!-- print billing address -->
-			<li class="span4">
+			<li class="span4" id="billAddr">
 				<h3>${i18n("titleBillingAddress")}</h3>
 				<address>
       				<strong>${order.billingAddress.name}</strong><br>
@@ -55,7 +55,7 @@
       			</address>
 			</li>
 			<!-- print credit card -->
-			<li class="span4">
+			<li class="span4" id="payment">
 				<h3>${i18n("titlePaymentInformation")}</h3>
 				<address>
       				${i18n("titleName")}: ${order.creditCard.name}<br>
@@ -69,7 +69,7 @@
 	<div class="row-fluid">
 		<div class="text-right">
 			<form action="/checkoutCompleted" method="post">
-    			<button class="btn"id="submit" name="submit" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
+    			<button class="btn" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
 			</form>
 		</div>
 	</div>

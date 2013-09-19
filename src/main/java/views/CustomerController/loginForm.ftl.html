@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "Sign in">
-	<form class="form-horizontal" action="${applUrlHttps}/login" method="post">
+	<form id="formLogin" class="form-horizontal" action="${applUrlHttps}/login" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("titleSignIn")}</legend>
@@ -27,7 +27,7 @@
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<button id="submit" name="submit" class="btn btn-success"
+					<button id="btnSignIn" name="btnSignIn" class="btn btn-success"
 						type="submit">${i18n("buttonSignIn")}</button>
 				</div>
 			</div>
@@ -36,6 +36,6 @@
 
 	<!-- new customer -->
 	<div class="span5">
-		<h3>${i18n("registrationNew")}? <a href="${applUrlHttps}/registration">${i18n("registrationRegister")}!</a></h3>
+		<h3>${i18n("registrationNew")}? <a id="linkRegister" href="${applUrlHttps}/registration">${i18n("registrationRegister")}!</a></h3>
 	</div>
 </@layout.myLayout>

@@ -1,32 +1,32 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-	<h1>${i18n("titleSettings")}</h1>
+	<h1 id="titlePersonalData">${i18n("titleSettings")}</h1>
 	<div class="row-fluid">
-		<div class="span5">
+		<div class="span5" id="customerName">
 			${i18n("titleName")}: ${customer.firstName} ${customer.name}
 		</div>
 		<div class="span5 offset1">
 			<form action="/changeNameEmail" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">${i18n("settingsChange")}</button>
+    			<button class="btn" id="btnChangeNameEmail" name="btnChangeNameEmail" type="submit">${i18n("settingsChange")}</button>
 			</form>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span5">
+		<div class="span5" id="customerEmail">
 			${i18n("titleEmail")}: ${customer.email}
 		</div>
 		<div class="span5 offset1">
 			<form action="/changePassword" method="post">
     			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">${i18n("changePasswordTitle")}</button>
+    			<button class="btn" id="btnChangePassword" name="btnChangePassword" type="submit">${i18n("changePasswordTitle")}</button>
 			</form>
 		</div>
 	</div>
 	<div class="row-fluid">
 		<div class="span5 offset6">
 			<form action="/confirmDeleteAccount" method="post">
-    			<button class="btn"id="submit" name="submit" type="submit">${i18n("confirmDeletionTitle")}</button>
+    			<button class="btn btn-danger" id="btnDeleteAccount" name="btnDeleteAccount" type="submit">${i18n("confirmDeletionTitle")}</button>
 			</form>
 		</div>
 	</div>
