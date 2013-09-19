@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form class="form-horizontal" action="/addDeliveryAddressToCustomerCompleted" method="post">
+	<form id="formAddDelAddr" class="form-horizontal" action="/addDeliveryAddressToCustomerCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("deliveryAddressAddNew")}</legend>
@@ -8,9 +8,9 @@
 			<#include "../form/addressForm.ftl.html"/>
 			<!-- add button -->
 			<div class="control-group">
-				<label class="control-label" for="continue"></label>
+				<label class="control-label" for="btnAddDelAddr"></label>
 				<div class="controls">
-					<button id="continue" name="continue" class="btn btn-primary" type="submit">${i18n("buttonAddNewAddress")}</button>
+					<button id="btnAddDelAddr" name="btnAddDelAddr" class="btn btn-primary" type="submit">${i18n("buttonAddNewAddress")}</button>
 				</div>
 			</div>
 		</fieldset>

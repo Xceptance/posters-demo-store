@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form class="form-horizontal" action="/deletePayment" method="post">
+	<form id="formDeletePayment" class="form-horizontal" action="/deletePayment" method="post">
 		<fieldset>
 			<legend>${i18n("confirmDeletePayment")}</legend>
 			<!-- Password input-->
@@ -16,7 +16,7 @@
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<button id="deletePayment" name="deletePayment"
+					<button id="btnDeletePayment" name="btnDeletePayment"
 						class="btn btn-danger" type="submit">${i18n("confirmDeletePayment")}</button>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-	<form class="form-horizontal" action="/registration" method="post">
+	<form id="formRegister" class="form-horizontal" action="/registration" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("titleRegistration")}</legend>
@@ -43,8 +43,8 @@
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<button id="submit" name="submit" class="btn btn-success" type="submit">${i18n("registrationCreate")}</button>
-					<button id="clear" name="clear" class="btn btn-danger" type="reset">${i18n("buttonClear")}</button>
+					<button id="btnRegister" name="btnRegister" class="btn btn-success" type="submit">${i18n("registrationCreate")}</button>
+					<button id="btnClear" name="btnClear" class="btn btn-danger" type="reset">${i18n("buttonClear")}</button>
 				</div>
 			</div>
 		</fieldset>

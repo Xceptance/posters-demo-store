@@ -1,12 +1,12 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<h1>${i18n("titlePaymentInformation")}</h1>
+	<h1 id="titlePaymentOverview">${i18n("titlePaymentInformation")}</h1>
 	<#list paymentOverview as payment>
 		<#if (payment_index + 3) % 3 ==0>
       		<div class="row-fluid">
       			<ul>
     	</#if>
-      				<li class="span4">
+      				<li class="span4" id="payment${payment_index}">
       					<address>
       						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
@@ -14,7 +14,7 @@
       					</address>
       					<form action="/confirmDeletePayment" method="post">
 							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-							<button class="btn btn-danger" id="submit" name="submit" type="submit">${i18n("buttonDelete")}</button>
+							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n("buttonDelete")}</button>
 						</form>
       				</li>
 		<#if (payment_index + 1) % 3 ==0>
@@ -27,6 +27,6 @@
       	</#if>
 	</#list>
 	<div class="span4 offset6">
-		<a href="/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
+		<a id="linkAddNewPayment" href="/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
 	</div>
 </@layout.myLayout>

@@ -1,20 +1,20 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-	<h1>${i18n("titleOrderOverview")}</h1>
+	<h1 id="titleOrderHistory">${i18n("titleOrderOverview")}</h1>
 	<#list orderOverview as order>
-	<div class="row well">
+	<div class="row well" id="order${order_index}">
 	<div class="span2">
-		<h5>${order.orderDate}</h5>
-		<h5>${order.totalCosts}${currency}</h5>
+		<h5 id="order${order_index}Date">${order.orderDate}</h5>
+		<h5 id="order${order_index}Costs">${order.totalCosts}${currency}</h5>
 	</div>
 	<div class="span8">
 		<table class="table" table-bordered>
 		<#list order.products as orderProduct>
-		<tr>
+		<tr id="order${order_index}Product${orderProduct_index}">
 			<td><a href=/productDetail/${orderProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
-			<td>${orderProduct.product.name}</td>
-			<td>${orderProduct.product.descriptionOverview}</td>
-			<td>${orderProduct.countProduct}x</td>
+			<td id="order${order_index}Product${orderProduct_index}Name">${orderProduct.product.name}</td>
+			<td id="order${order_index}Product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
+			<td id="order${order_index}Product${orderProduct_index}Count">${orderProduct.countProduct}x</td>
 		</tr>
 		</#list>
 		</table>
