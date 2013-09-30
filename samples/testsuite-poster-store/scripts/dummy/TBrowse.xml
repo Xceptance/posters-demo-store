@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <action name="OpenStartPage"/>
+  <command name="open" value="/"/>
+  <command name="assertText" target="id=titleIndex" value="Check out our new panorama posters!"/>
+  <action name="TBrowse-0"/>
+  <command name="clickAndWait" target="link=Overview World of Nature"/>
+  <command name="assertText" target="id=titleCategoryName" value="World of Nature"/>
+  <command name="assertText" target="//*[@id='product0']/h3[@id='productName'][1]" value="Grizzly Bear"/>
+  <command name="clickAndWait" target="xpath=id('pagelist2')/a"/>
+  <command name="assertText" target="//*[@id='product0']/h3[@id='productName'][1]" value="Violas"/>
+  <command name="clickAndWait" target="xpath=id('pagelist3')/a"/>
+  <command name="assertText" target="//*[@id='product0']/h3[@id='productName'][1]" value="Fir Covered with Snow"/>
+  <command name="clickAndWait" target="xpath=id('pagelist1')/a"/>
+  <command name="assertText" target="//*[@id='product0']/h3[@id='productName'][1]" value="Grizzly Bear"/>
+  <command name="clickAndWait" target="//*[@id='product3']//img"/>
+  <command name="assertText" target="id=titleProductName" value="Chipmunk"/>
+  <action name="TBrowse-1"/>
+  <command name="clickAndWait" target="link=Air Travel"/>
+  <command name="assertText" target="id=titleCategoryName" value="Air Travel"/>
+  <command name="clickAndWait" target="link=2"/>
+  <command name="clickAndWait" target="//*[@id='product4']//img"/>
+  <command name="assertText" target="id=titleProductName" value="F-4S from VMFA-232"/>
+  <action name="TBrowse-2"/>
+  <command name="clickAndWait" target="link=Sweets"/>
+  <command name="assertText" target="id=titleCategoryName" value="Sweets"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
+  <command name="assertText" target="id=titleProductName" value="German Apple Pie"/>
+</testcase>
