@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Logs a user in using the specified credentials.</description>
+  <parameter name="email"/>
+  <parameter name="password"/>
+  <parameter name="firstName"/>
+  <action name="Login"/>
+  <command name="assertElementPresent" target="link=Sign in"/>
+  <command name="clickAndWait" target="link=Sign in"/>
+  <command name="type" target="id=email" value="@{email}"/>
+  <command name="type" target="id=password" value="@{password}"/>
+  <command name="clickAndWait" target="id=btnSignIn"/>
+  <command name="assertNotElementPresent" target="link=Sign in"/>
+  <command name="assertText" target="link=Hi! @{firstName}" value="Hi! @{firstName}"/>
+</scriptmodule>
