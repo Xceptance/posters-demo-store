@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Simulates browsing the catalog and adding product to cart.</description>
+  <action name="OpenStartPage"/>
+  <command name="open" value="/"/>
+  <command name="assertText" target="id=titleIndex" value="Check out our new panorama posters!"/>
+  <action name="Browse-0"/>
+  <command name="clickAndWait" target="link=XXL Panoramas"/>
+  <command name="assertText" target="id=titleCategoryName" value="XXL Panoramas"/>
+  <command name="clickAndWait" target="//*[@id='product1']//img"/>
+  <command name="assertText" target="id=titleProductName" value="Boston Sunset"/>
+  <command name="clickAndWait" target="link=Classic Cars"/>
+  <command name="assertText" target="id=titleCategoryName" value="Classic Cars"/>
+  <command name="clickAndWait" target="link=2"/>
+  <command name="clickAndWait" target="//*[@id='product1']//img"/>
+  <command name="assertText" target="id=titleProductName" value="IFA W50"/>
+  <action name="TAddToCart-0"/>
+  <command name="clickAndWait" target="id=btnAddToCart"/>
+  <command name="assertText" target="id=titleBasket" value="Cart"/>
+  <command name="assertText" target="id=productName0" value="IFA W50"/>
+  <command name="type" target="//*[contains(@class,'productCount0')]" value="1"/>
+  <command name="assertText" target="id=totalPrice" value="glob:Total: 17,99€"/>
+  <action name="Browse-1"/>
+  <command name="clickAndWait" target="link=Flowers"/>
+  <command name="assertText" target="id=titleCategoryName" value="Flowers"/>
+  <command name="clickAndWait" target="link=2"/>
+  <command name="clickAndWait" target="//*[@id='product4']//img"/>
+  <command name="assertText" target="id=titleProductName" value="Anthurium"/>
+  <command name="clickAndWait" target="link=Main Dishes"/>
+  <command name="clickAndWait" target="//*[@id='product4']//img"/>
+  <command name="assertText" target="id=titleProductName" value="Tuna Steak"/>
+  <action name="TAddToCart-1"/>
+  <command name="clickAndWait" target="id=btnAddToCart"/>
+  <command name="assertText" target="id=titleBasket" value="Cart"/>
+  <command name="assertText" target="id=productName1" value="Tuna Steak"/>
+  <command name="type" target="//*[contains(@class,'productCount1')]" value="1"/>
+  <command name="assertText" target="id=totalPrice" value="glob:Total: 35,98€"/>
+  <action name="UpdateProductCount"/>
+  <command name="type" target="//*[contains(@class,'productCount0')]" value="3"/>
+  <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
+  <command name="assertText" target="//*[contains(@class,'productCount0')]" value="3"/>
+  <command name="assertText" target="id=totalPrice" value="glob:Total: 71,96€"/>
+  <action name="RemoveProduct"/>
+  <command name="clickAndWait" target="id=btnRemoveProduct1"/>
+  <command name="assertNotElementPresent" target="id=product1"/>
+  <command name="assertText" target="id=totalPrice" value="glob:Total: 53,97€"/>
+</testcase>
