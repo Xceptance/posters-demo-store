@@ -5,20 +5,20 @@
 		<#list basketProducts as basketProduct>
 			<tr id="product${basketProduct_index}">
 				<td><a href=/productDetail/${basketProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${basketProduct.product.imageURL} width="150"></img></a></td>
-				<td id="productName">${basketProduct.product.name}</td>
-				<td id="productDescriptionOverview">${basketProduct.product.descriptionOverview}</td>
-				<td id="productPrice">${basketProduct.product.price}${currency}</td>
+				<td id="productName${basketProduct_index}">${basketProduct.product.name}</td>
+				<td id="productDescriptionOverview${basketProduct_index}">${basketProduct.product.descriptionOverview}</td>
+				<td id="productPrice${basketProduct_index}">${basketProduct.product.price}${currency}</td>
 				<td>
-					<form class="form-inline" action="/updateProductCount" method="post">
-	      				<input class="input-mini" type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
+					<form id="formProdCount${basketProduct_index}" class="form-inline" action="/updateProductCount" method="post">
+	      				<input class="input-mini productCount${basketProduct_index}" type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
       					<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
-      					<button class="btn" id="btnUpdateProdCount" name="btnUpdateProdCount" type="submit">${i18n("basketOverviewUpdateQuantity")}</button>
+      					<button class="btn" id="btnUpdateProdCount${basketProduct_index}" name="btnUpdateProdCount${basketProduct_index}" type="submit">${i18n("basketOverviewUpdateQuantity")}</button>
    	   				</form>
 				</td>
 				<td>
 					<form action="/deleteFromBasket" method="post">
       					<input type="hidden" id="productName" name="productName" value=${basketProduct.product.id}>
-      					<button class="btn" id="btnRemoveProduct" name="btnRemoveProduct" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
+      					<button class="btn" id="btnRemoveProduct${basketProduct_index}" name="btnRemoveProduct${basketProduct_index}" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
       				</form>
 				</td>
 			</tr>
