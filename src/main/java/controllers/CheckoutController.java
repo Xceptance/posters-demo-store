@@ -110,7 +110,7 @@ public class CheckoutController
                                            @Param("addressLine") String addressLine, @Param("city") String city,
                                            @Param("state") String state, @Param("zip") String zip,
                                            @Param("country") String country,
-                                           @Param("billingAddress") String billingEqualDelivery, Context context)
+                                           @Param("billEqualShipp") String billingEqualDelivery, Context context)
     {
 
         final Map<String, Object> data = new HashMap<String, Object>();

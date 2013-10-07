@@ -40,14 +40,14 @@
 			<#include "../form/addressForm.ftl.html"/>
 			<!-- choose: delivery equals billing address -->
 			<div class="control-group">
-				<label class="control-label" for="billingAddress">${i18n("deliveryAddressEqualsBillingAddress")}?</label>
+				<label class="control-label" for="billEqualShipp">${i18n("deliveryAddressEqualsBillingAddress")}?</label>
 				<div class="controls">
-					<label class="radio" for="billingAddress-0">
-						<input name="billingAddress" id="billingAddress-0" value="Yes" checked="checked" type="radio">
+					<label class="radio" for="billEqualShipp-Yes">
+						<input name="billEqualShipp" id="billEqualShipp-Yes" value="Yes" checked="checked" type="radio">
 							${i18n("chooseYes")}
 					</label>
-					<label class="radio" for="billingAddress-1">
-						<input name="billingAddress" id="billingAddress-1" value="No" type="radio">
+					<label class="radio" for="billEqualShipp-No">
+						<input name="billEqualShipp" id="billEqualShipp-No" value="No" type="radio">
 							${i18n("chooseNo")}
 					</label>
 				</div>
