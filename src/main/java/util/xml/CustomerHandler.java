@@ -1,6 +1,7 @@
 package util.xml;
 
 import models.BillingAddress;
+import models.CreditCard;
 import models.Customer;
 import models.DeliveryAddress;
 
@@ -15,6 +16,8 @@ public class CustomerHandler extends DefaultHandler
     private DeliveryAddress deliveryAddress;
 
     private BillingAddress billingAddress;
+
+    private CreditCard creditCard;
 
     private String currentValue;
 
@@ -33,6 +36,10 @@ public class CustomerHandler extends DefaultHandler
         {
             billingAddress = new BillingAddress();
         }
+        if (localName.equals("paymentMethod"))
+        {
+            creditCard = new CreditCard();
+        }
     }
 
     @Override
@@ -49,6 +56,10 @@ public class CustomerHandler extends DefaultHandler
         if (localName.equals("billingAddress"))
         {
             customer.addBillingAddress(billingAddress);
+        }
+        if (localName.equals("paymentMethod"))
+        {
+            customer.addCreditCard(creditCard);
         }
         if (localName.equals("email"))
         {
@@ -121,6 +132,22 @@ public class CustomerHandler extends DefaultHandler
         if (localName.equals("billZip"))
         {
             billingAddress.setZip(currentValue);
+        }
+        if (localName.equals("paymentName"))
+        {
+            creditCard.setName(currentValue);
+        }
+        if (localName.equals("cardNumber"))
+        {
+            creditCard.setCardNumber(currentValue);
+        }
+        if (localName.equals("month"))
+        {
+            creditCard.setMonth(Integer.parseInt(currentValue));
+        }
+        if (localName.equals("year"))
+        {
+            creditCard.setYear(Integer.parseInt(currentValue));
         }
     }
 

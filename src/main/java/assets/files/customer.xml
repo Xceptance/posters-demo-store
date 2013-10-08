@@ -23,5 +23,11 @@
 			<billCountry>Germany</billCountry>
 			<billZip>07743</billZip>
 		</billingAddress>
+		<paymentMethod>
+			<paymentName>John Doe</paymentName>
+			<cardNumber>4111111111111111</cardNumber>
+			<month>08</month>
+			<year>2022</year>
+		</paymentMethod>
 	</customer>
 </customers>
