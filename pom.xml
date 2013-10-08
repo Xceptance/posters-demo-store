@@ -31,7 +31,7 @@
 					<stopKey>stop</stopKey>
 					<stopPort>8889</stopPort>
 					<scanIntervalSeconds>1</scanIntervalSeconds>
-					<reload>automatic</reload>
+					<reload>manual</reload>
 					<classesDirectory>target/classes</classesDirectory>
 					<scanTargetPatterns>
 						<scanTargetPattern>
