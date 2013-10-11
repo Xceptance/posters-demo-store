@@ -59,7 +59,7 @@ public class BasketController
         // put basket to data map
         BasketInformation.addBasketDetailToMap(basket, data);
         // return basket overview page
-        return Results.html().render(data).template(xcpConf.templateBasketOverview);
+        return Results.html().render(data).template(xcpConf.templateBasketOverview).redirect(context.getContextPath() + "/basket");
     }
 
     /**
@@ -90,7 +90,7 @@ public class BasketController
         // put basket to data map
         BasketInformation.addBasketDetailToMap(basket, data);
         // return basket overview page
-        return Results.html().render(data).template(xcpConf.templateBasketOverview);
+        return Results.html().render(data).template(xcpConf.templateBasketOverview).redirect(context.getContextPath() + "/basket");
     }
 
     /**
@@ -119,12 +119,15 @@ public class BasketController
                                      @Param("productCount") String productCount, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
+        Result result = Results.html().template(xcpConf.templateBasketOverview);
         CommonInformation.setCommonData(data, context, xcpConf);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
             data.put("infoMessage", msg.get("infoProductCount", language).get());
+            // return basket overview page
+            return result.render(data);
         }
         // product count is OK
         else
@@ -162,10 +165,10 @@ public class BasketController
                     BasketInformation.removeProductFromBasket(basket, product);
                 }
             }
+            // update basket in data map
+            BasketInformation.addBasketDetailToMap(basket, data);
         }
-        // put basket to data map
-        BasketInformation.addBasketDetailToMap(basket, data);
         // return basket overview page
-        return Results.html().render(data).template(xcpConf.templateBasketOverview);
+        return result.render(data).redirect(context.getContextPath() + "/basket");
     }
 }
