@@ -61,4 +61,7 @@
   <command name="assertElementPresent" target="id=order0Product1"/>
   <command name="assertText" target="id=order0Product0Count" value="3x"/>
   <command name="assertText" target="id=order0Product1Count" value="1x"/>
+  <module name="module.Logout">
+    <parameter name="firstName" value="John"/>
+  </module>
 </testcase>
