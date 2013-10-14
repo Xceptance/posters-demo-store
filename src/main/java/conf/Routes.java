@@ -77,13 +77,17 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/updateProductCount").with(BasketController.class, "updateProductCount");
 
         // checkout
-        router.POST().route("/checkout").with(CheckoutController.class, "checkout");
+        router.GET().route("/checkout").with(CheckoutController.class, "checkout");
+        router.GET().route("/enterShippingAddress").with(CheckoutController.class, "enterShippingAddress");
         router.POST().route("/deliveryAddressCompleted").with(CheckoutController.class, "deliveryAddressCompleted");
+        router.GET().route("/enterBillingAddress").with(CheckoutController.class, "enterBillingAddress");
         router.POST().route("/billingAddressCompleted").with(CheckoutController.class, "billingAddressCompleted");
         router.POST().route("/addDeliveryAddressToOrder").with(CheckoutController.class, "addDeliveryAddressToOrder");
         router.POST().route("/addBillingAddressToOrder").with(CheckoutController.class, "addBillingAddressToOrder");
+        router.GET().route("/enterPaymentMethod").with(CheckoutController.class, "enterPaymentMethod");
         router.POST().route("/addPaymentToOrder").with(CheckoutController.class, "addPaymentToOrder");
         router.POST().route("/paymentMethodCompleted").with(CheckoutController.class, "paymentMethodCompleted");
+        router.GET().route("/checkoutOverview").with(CheckoutController.class, "checkoutOverview");
         router.POST().route("/checkoutCompleted").with(CheckoutController.class, "checkoutCompleted");
 
         // assets
