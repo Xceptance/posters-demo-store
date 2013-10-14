@@ -183,7 +183,7 @@ public abstract class CustomerInformation
     }
 
     /**
-     * Adds all delivery and billing addresses of a customer to the data base.
+     * Adds all delivery and billing addresses of a customer to the data map.
      * 
      * @param context
      * @param data
