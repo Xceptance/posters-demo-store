@@ -25,10 +25,8 @@
 		</#list>
 	</table>
 
-	<h3 id="totalPrice">${i18n("basketOverviewTotalPrice")}: ${totalPrice}${currency}</h3>
+	<h3 align="right" id="totalPrice">${i18n("basketOverviewTotalPrice")}: ${totalPrice}${currency}</h3>
+	
+	<h3 align="right"><a href="${applUrlHttps}/checkout" id="btnStartCheckout">${i18n("basketOverviewStartCheckout")}</a></h3>
 
-	<form action="${applUrlHttps}/checkout" method="post">
-		<input type="hidden" id="basketId" name="basketId" value=${basketId}>
-		<button class="btn" id="btnStartCheckout" name="btnStartCheckout" type="submit">${i18n("basketOverviewStartCheckout")}</button>
-	</form>
 </@layout.myLayout>

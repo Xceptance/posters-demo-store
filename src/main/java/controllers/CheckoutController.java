@@ -50,17 +50,17 @@ public class CheckoutController
      */
     public Result checkout(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // get basket by session id
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // check, if the basket is empty
         if (basket.getProducts().size() == 0)
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             // show info
             data.put("infoMessage", msg.get("infoEmptyBasket", language).get());
-            template = xcpConf.templateBasketOverview;
+            // return basket overview page
+            return Results.html().render(data).template(xcpConf.templateBasketOverview);
         }
         // start checkout, if the basket is not empty
         else
@@ -73,22 +73,40 @@ public class CheckoutController
             SessionHandling.setOrderId(context, order.getId());
             // set basket to order
             order.addProductsFromBasket(basket);
-            // return page to enter delivery address
-            template = xcpConf.templateDeliveryAddress;
-            // customer is logged
-            if (SessionHandling.isCustomerLogged(context))
-            {
-                // put address information of customer to data map
-                CustomerInformation.addAddressOfCustomerToMap(context, data);
-            }
-            // save order
-            Ebean.save(order);
-            // show checkout bread crumb
-            data.put("checkout", true);
-            // show delivery address as active link
-            data.put("deliveryAddressActive", true);
+            // update order
+            order.update();
+            // return page to enter shipping address
+            return Results.redirect(context.getContextPath() + "/enterShippingAddress");
         }
-        return Results.html().render(data).template(template);
+    }
+
+    /**
+     * Returns the page to select or enter a shipping address.
+     * 
+     * @param context
+     * @return
+     */
+    public Result enterShippingAddress(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        // customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // put address information of customer to data map
+            CustomerInformation.addAddressOfCustomerToMap(context, data);
+        }
+        // show checkout bread crumb
+        data.put("checkout", true);
+        // get shipping address by order
+        DeliveryAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context))
+                                                  .getDeliveryAddress();
+        // add address to data map, if an address was already entered
+        if (address != null)
+        {
+            data.put("address", address);
+        }
+        return Results.html().render(data).template(xcpConf.templateDeliveryAddress);
     }
 
     /**
@@ -112,13 +130,11 @@ public class CheckoutController
                                            @Param("country") String country,
                                            @Param("billEqualShipp") String billingEqualDelivery, Context context)
     {
-
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             // error message
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -131,9 +147,10 @@ public class CheckoutController
             address.put("zip", zip);
             address.put("country", country);
             data.put("address", address);
+            // show checkout bread crumb
+            data.put("checkout", true);
             // show page to enter delivery address again
-            template = xcpConf.templateDeliveryAddress;
-            data.put("deliveryAddressActive", true);
+            return Results.html().render(data).template(xcpConf.templateDeliveryAddress);
         }
         // all input fields might be correct
         else
@@ -161,7 +178,8 @@ public class CheckoutController
             Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
             // set delivery address to order
             order.setDeliveryAddress(deliveryAddress);
-
+            // update order
+            order.update();
             // billing address is equal to delivery address
             if (billingEqualDelivery.equals("Yes"))
             {
@@ -186,29 +204,18 @@ public class CheckoutController
                 }
                 // set billing address to order
                 order.setBillingAddress(billingAddress);
-                // add payment information to map
-                CustomerInformation.addPaymentOfCustomerToMap(context, data);
+                // update order
+                order.update();
                 // return page to enter payment information
-                template = xcpConf.templatePaymentMethod;
-                data.put("creditCardActive", true);
+                return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
             }
             // billing and delivery address are not equal
             else
             {
-                if (SessionHandling.isCustomerLogged(context))
-                {
-                    // put address information of customer to data map
-                    CustomerInformation.addAddressOfCustomerToMap(context, data);
-                }
                 // return page to enter billing address
-                template = xcpConf.templateBillingAddress;
-                data.put("billingAddressActive", true);
+                return Results.redirect(context.getContextPath() + "/enterBillingAddress");
             }
-            // update order
-            order.update();
         }
-        data.put("checkout", true);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -220,23 +227,44 @@ public class CheckoutController
      */
     public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // get delivery address
         DeliveryAddress deliveryAddress = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
         order.setDeliveryAddress(deliveryAddress);
-        template = xcpConf.templateBillingAddress;
-        // put address information of customer to data map
-        CustomerInformation.addAddressOfCustomerToMap(context, data);
         // update order
         order.update();
+        // return page to enter billing address
+        return Results.redirect(context.getContextPath() + "/enterBillingAddress");
+    }
+
+    /**
+     * Returns the page to select or enter a billing address.
+     * 
+     * @param context
+     * @return
+     */
+    public Result enterBillingAddress(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // put address information of customer to data map
+            CustomerInformation.addAddressOfCustomerToMap(context, data);
+        }
+        // get billing address by order
+        BillingAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
+        // add address to data map, if an address was already entered
+        if (address != null)
+        {
+            data.put("address", address);
+        }
         data.put("checkout", true);
         data.put("billingAddressActive", true);
-        return Results.html().render(data).template(template);
+        // return page to enter billing address
+        return Results.html().render(data).template(xcpConf.templateBillingAddress);
     }
 
     /**
@@ -257,12 +285,11 @@ public class CheckoutController
                                           @Param("state") String state, @Param("zip") String zip,
                                           @Param("country") String country, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             // error message
             data.put("errorMessage", msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -275,9 +302,11 @@ public class CheckoutController
             address.put("zip", zip);
             address.put("country", country);
             data.put("address", address);
-            // show page to enter billing address again
-            template = xcpConf.templateBillingAddress;
+            // show checkout bread crumb
+            data.put("checkout", true);
             data.put("billingAddressActive", true);
+            // show page to enter billing address again
+            return Results.html().render(data).template(xcpConf.templateBillingAddress);
         }
         // all input fields might be correct
         else
@@ -305,16 +334,11 @@ public class CheckoutController
             Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
             // set billing address to order
             order.setBillingAddress(billingAddress);
-            // return page to enter payment information
-            template = xcpConf.templatePaymentMethod;
-            data.put("creditCardActive", true);
-            // add payment information to map
-            CustomerInformation.addPaymentOfCustomerToMap(context, data);
             // update order
-            Ebean.save(order);
+            order.update();
+            // return page to enter payment information
+            return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
         }
-        data.put("checkout", true);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -326,23 +350,45 @@ public class CheckoutController
      */
     public Result addBillingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // get billing address
         BillingAddress billingAddress = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set billing address to order
         order.setBillingAddress(billingAddress);
-        template = xcpConf.templatePaymentMethod;
-        // add payment information to map
-        CustomerInformation.addPaymentOfCustomerToMap(context, data);
         // update order
         order.update();
+        // return page to enter payment information
+        return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
+    }
+
+    /**
+     * Returns the page to select or enter a payment method.
+     * 
+     * @param context
+     * @return
+     */
+    public Result enterPaymentMethod(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // add payment method to map
+            CustomerInformation.addPaymentOfCustomerToMap(context, data);
+        }
+        // get payment method by order
+        CreditCard card = OrderInformation.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
+        // add payment method to data map, if a payment method was already entered
+        if (card != null)
+        {
+            data.put("card", card);
+        }
         data.put("checkout", true);
+        data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
-        return Results.html().render(data).template(template);
+        // return page to enter payment method
+        return Results.html().render(data).template(xcpConf.templatePaymentMethod);
     }
 
     /**
@@ -359,29 +405,20 @@ public class CheckoutController
                                          @Param("expirationDateMonth") int month,
                                          @Param("expirationDateYear") int year, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template = "";
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
-        boolean wrongCreditCard = true;
-        // check input
+        // check each regular expression
         for (String regExCreditCard : xcpConf.regexCreditCard)
         {
             // credit card number is correct
             if (Pattern.matches(regExCreditCard, creditNumber))
             {
-                wrongCreditCard = false;
                 // create new credit card
                 CreditCard creditCard = new CreditCard();
                 creditCard.setCardNumber(creditNumber);
                 creditCard.setName(name);
                 creditCard.setMonth(month);
                 creditCard.setYear(year);
-                // get order by session id
-                Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
-                // set credit card to order
-                order.setCreditCard(creditCard);
                 // set new credit card to customer
                 if (SessionHandling.isCustomerLogged(context))
                 {
@@ -392,38 +429,31 @@ public class CheckoutController
                 {
                     creditCard.save();
                 }
-                // set shipping costs to order
-                order.setShippingCosts(xcpConf.shippingCosts);
-                // set tax to order
-                order.setTax(xcpConf.tax);
-                // calculate total costs
-                order.addShippingCostsToTotalCosts();
-                order.addTaxToTotalCosts();
-                // add order to data map
-                OrderInformation.addOrderToMap(order, data);
-                OrderInformation.addProductsFromOrderToMap(order, data);
-                // return page to get an overview of the checkout
-                template = xcpConf.templateCheckoutOverview;
-                data.put("placeOrderActive", true);
+                // get order by session id
+                Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+                // set credit card to order
+                order.setCreditCard(creditCard);
                 // update order
                 order.update();
+                // return page to get an overview of the checkout
+                return Results.redirect(context.getContextPath() + "/checkoutOverview");
             }
         }
-        if (wrongCreditCard)
-        {
-            // error message
-            data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
-            // show inserted values in form
-            Map<String, String> card = new HashMap<String, String>();
-            card.put("name", name);
-            card.put("cardNumber", creditNumber);
-            data.put("card", card);
-            // show page to enter delivery address again
-            template = xcpConf.templatePaymentMethod;
-            data.put("creditCardActive", true);
-        }
+        // credit card was wrong
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        // error message
+        data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
+        // show inserted values in form
+        Map<String, String> card = new HashMap<String, String>();
+        card.put("name", name);
+        card.put("cardNumber", creditNumber);
+        data.put("card", card);
         data.put("checkout", true);
-        return Results.html().render(data).template(template);
+        data.put("billingAddressActive", true);
+        data.put("creditCardActive", true);
+        // show page to enter payment method again
+        return Results.html().render(data).template(xcpConf.templatePaymentMethod);
     }
 
     /**
@@ -443,23 +473,33 @@ public class CheckoutController
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set credit card to order
         order.setCreditCard(creditCard);
-        // set shipping costs to order
-        order.setShippingCosts(xcpConf.shippingCosts);
-        // set tax to order
-        order.setTax(xcpConf.tax);
-        // calculate total costs
-        order.addShippingCostsToTotalCosts();
-        order.addTaxToTotalCosts();
+        // update order
+        order.update();
+        return Results.redirect(context.getContextPath() + "/checkoutOverview");
+    }
+
+    /**
+     * Returns the overview page of the checkout.
+     * 
+     * @param context
+     * @return
+     */
+    public Result checkoutOverview(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        data.put("checkout", true);
+        data.put("billingAddressActive", true);
+        data.put("creditCardActive", true);
+        data.put("placeOrderActive", true);
+        // calculate shipping costs and tax
+        calculateShippingAndTax(context);
+        // get order by session id
+        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // add order to data map
         OrderInformation.addOrderToMap(order, data);
         OrderInformation.addProductsFromOrderToMap(order, data);
-        // return page to get an overview of the checkout
-        String template = xcpConf.templateCheckoutOverview;
-        data.put("placeOrderActive", true);
-        // update order
-        order.update();
-        data.put("checkout", true);
-        return Results.html().render(data).template(template);
+        return Results.html().render(data).template(xcpConf.templateCheckoutOverview);
     }
 
     /**
@@ -504,5 +544,23 @@ public class CheckoutController
         // remember products for carousel
         CarouselInformation.getCarouselProducts(data);
         return Results.html().render(data).template(xcpConf.templateIndex);
+    }
+
+    private void calculateShippingAndTax(Context context)
+    {
+        // get order by session id
+        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        if ((order.getShippingCosts() == 0.0) && (order.getTax() == 0.0))
+        {
+            // set shipping costs to order
+            order.setShippingCosts(xcpConf.shippingCosts);
+            // set tax to order
+            order.setTax(xcpConf.tax);
+            // calculate total costs
+            order.addShippingCostsToTotalCosts();
+            order.addTaxToTotalCosts();
+            // update order
+            order.update();
+        }
     }
 }
