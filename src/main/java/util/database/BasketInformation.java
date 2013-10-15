@@ -17,6 +17,24 @@ public abstract class BasketInformation
 {
 
     /**
+     * Creates and returns a new basket.
+     * 
+     * @return
+     */
+    public static Basket createNewBasket()
+    {
+        // create new basket
+        Basket basket = new Basket();
+        // save basket
+        basket.save();
+        // get new basket by id
+        int id = basket.getId();
+        Basket newBasket = Ebean.find(Basket.class, id);
+        // return new basket
+        return newBasket;
+    }
+
+    /**
      * Returns the basket by the given id. Returns null, if no basket was found.
      * 
      * @param id

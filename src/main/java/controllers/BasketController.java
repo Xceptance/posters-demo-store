@@ -44,22 +44,16 @@ public class BasketController
      */
     public Result addToBasket(@Param("productName") String productId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        // put basket id to session
-        SessionHandling.setBasketId(context, basket.getId());
         // set customer to basket
         BasketInformation.setCustomerToBasket(context, basket);
         // add product to basket
         BasketInformation.addProductToBasket(basket, product);
-        // put basket to data map
-        BasketInformation.addBasketDetailToMap(basket, data);
         // return basket overview page
-        return Results.html().render(data).template(xcpConf.templateBasketOverview).redirect(context.getContextPath() + "/basket");
+        return Results.redirect(context.getContextPath() + "/basket");
     }
 
     /**
@@ -71,14 +65,10 @@ public class BasketController
      */
     public Result deleteFromBasket(@Param("productName") String productId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        // put basket id to session
-        SessionHandling.setBasketId(context, basket.getId());
         // get count of this product
         int countProduct = Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
                                 .findUnique().getCountProduct();
@@ -87,10 +77,8 @@ public class BasketController
         {
             BasketInformation.removeProductFromBasket(basket, product);
         }
-        // put basket to data map
-        BasketInformation.addBasketDetailToMap(basket, data);
         // return basket overview page
-        return Results.html().render(data).template(xcpConf.templateBasketOverview).redirect(context.getContextPath() + "/basket");
+        return Results.redirect(context.getContextPath() + "/basket");
     }
 
     /**
@@ -118,26 +106,21 @@ public class BasketController
     public Result updateProductCount(@Param("productName") String productId,
                                      @Param("productCount") String productCount, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        Result result = Results.html().template(xcpConf.templateBasketOverview);
-        CommonInformation.setCommonData(data, context, xcpConf);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             data.put("infoMessage", msg.get("infoProductCount", language).get());
             // return basket overview page
-            return result.render(data);
+            return Results.html().template(xcpConf.templateBasketOverview).render(data);
         }
         // product count is OK
         else
         {
             // get product by id
             Product product = ProductInformation.getProductById(Integer.parseInt(productId));
-
-            // put basket id to session
-            SessionHandling.setBasketId(context, basket.getId());
-
             int newProductCount = Integer.parseInt(productCount);
             // zero is minimum of product count
             if (newProductCount < 0)
@@ -165,10 +148,8 @@ public class BasketController
                     BasketInformation.removeProductFromBasket(basket, product);
                 }
             }
-            // update basket in data map
-            BasketInformation.addBasketDetailToMap(basket, data);
+            // return basket overview page
+            return Results.redirect(context.getContextPath() + "/basket");
         }
-        // return basket overview page
-        return result.render(data).redirect(context.getContextPath() + "/basket");
     }
 }
