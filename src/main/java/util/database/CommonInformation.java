@@ -19,7 +19,7 @@ public abstract class CommonInformation
      * 
      * @param data
      * @param context
-     * @param xcpConf TODO
+     * @param xcpConf
      */
     public static void setCommonData(final Map<String, Object> data, Context context, XCPosterConf xcpConf)
     {
@@ -27,13 +27,6 @@ public abstract class CommonInformation
         CategoryInformation.addCategoriesToMap(data);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        if (basket == null)
-        {
-            basket = new Basket();
-            basket.save();
-            // put basket id to session
-            SessionHandling.setBasketId(context, basket.getId());
-        }
         // set basket stuff
         BasketInformation.addBasketDetailToMap(basket, data);
         // set logged customer

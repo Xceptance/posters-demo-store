@@ -122,10 +122,14 @@ public abstract class CustomerInformation
      */
     public static void addOrderOfCustomerToMap(Context context, final Map<String, Object> data)
     {
-        // get customer by session
-        Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
-        // add all orders to the data map
-        data.put("orderOverview", customer.getOrder());
+        // customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // get customer by session
+            Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
+            // add all orders to the data map
+            data.put("orderOverview", customer.getOrder());
+        }
     }
 
     /**
@@ -190,11 +194,15 @@ public abstract class CustomerInformation
      */
     public static void addAddressOfCustomerToMap(Context context, final Map<String, Object> data)
     {
-        Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
-        // add all delivery addresses
-        data.put("deliveryAddresses", customer.getDeliveryAddress());
-        // add all billing addresses
-        data.put("billingAddresses", customer.getBillingAddress());
+        // just add, if customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
+            // add all delivery addresses
+            data.put("deliveryAddresses", customer.getDeliveryAddress());
+            // add all billing addresses
+            data.put("billingAddresses", customer.getBillingAddress());
+        }
     }
 
     /**
@@ -238,27 +246,26 @@ public abstract class CustomerInformation
 
     public static void mergeCurrentBasketAndCustomerBasket(Context context)
     {
-        // get current basket
-        Basket currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        if (currentBasket == null)
+        if (SessionHandling.isCustomerLogged(context))
         {
-            currentBasket = new Basket();
-        }
-        // get basket of customer
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-        if (customer.getBasket() == null)
-        {
-            customer.setBasket(new Basket());
-            customer.update();
-        }
-        Basket customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
-        for (Basket_Product basket_Product : currentBasket.getProducts())
-        {
-            for (int i = 0; i < basket_Product.getCountProduct(); i++)
+            // get current basket
+            Basket currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+            // get basket of customer
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            if (customer.getBasket() == null)
             {
-                customerBasket.addProduct(basket_Product.getProduct());
+                customer.setBasket(new Basket());
+                customer.update();
             }
+            Basket customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
+            for (Basket_Product basket_Product : currentBasket.getProducts())
+            {
+                for (int i = 0; i < basket_Product.getCountProduct(); i++)
+                {
+                    customerBasket.addProduct(basket_Product.getProduct());
+                }
+            }
+            customerBasket.update();
         }
-        customerBasket.update();
     }
 }
