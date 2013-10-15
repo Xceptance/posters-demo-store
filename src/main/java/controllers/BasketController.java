@@ -110,11 +110,8 @@ public class BasketController
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
-            data.put("infoMessage", msg.get("infoProductCount", language).get());
-            // return basket overview page
-            return Results.html().template(xcpConf.templateBasketOverview).render(data);
+            // show info message
+            context.getFlashCookie().put("info", msg.get("infoProductCount", language).get());
         }
         // product count is OK
         else
@@ -148,8 +145,8 @@ public class BasketController
                     BasketInformation.removeProductFromBasket(basket, product);
                 }
             }
-            // return basket overview page
-            return Results.redirect(context.getContextPath() + "/basket");
         }
+        // return basket overview page
+        return Results.redirect(context.getContextPath() + "/basket");
     }
 }
