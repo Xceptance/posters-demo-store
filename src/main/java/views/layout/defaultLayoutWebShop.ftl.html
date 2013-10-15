@@ -24,27 +24,27 @@
 			<#include "checkoutBreadcrumb.ftl.html"/>
 		</#if>
 		<!-- messages -->
-		<#if errorMessage??>
+		<#if flash.error??>
 			<div class="row" id="errorMessage">
 				<div class="span6 offset3 text-center alert alert-error">
   					<a class="close" data-dismiss="alert">×</a>
-  					<strong>${errorMessage}</strong>
+  					<strong>${flash.error}</strong>
 				</div>
 			</div>
 		</#if>
-		<#if successMessage??>
+		<#if flash.success??>
 			<div class="row" id="successMessage">
 				<div class="span6 offset3 text-center alert alert-success">
   					<a class="close" data-dismiss="alert">×</a>
-  					<strong>${successMessage}</strong>
+  					<strong>${flash.success}</strong>
 				</div>
 			</div>
 		</#if>
-		<#if infoMessage??>
+		<#if flash.info??>
 			<div class="row" id="infoMessage">
 				<div class="span6 offset3 text-center alert alert-info">
   					<a class="close" data-dismiss="alert">×</a>
-  					<strong>${infoMessage}</strong>
+  					<strong>${flash.info}</strong>
 				</div>
 			</div>
 		</#if>
