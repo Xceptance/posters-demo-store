@@ -47,7 +47,7 @@ public class SearchController
         if (searchText.isEmpty() || searchText.equals(" "))
         {
             template = xcpConf.templateIndex;
-            data.put("infoMessage", msg.get("infoNoSearchTerm", language).get());
+            context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
             CarouselInformation.getCarouselProducts(data);
         }
         else
@@ -88,9 +88,9 @@ public class SearchController
         }
         return Results.html().render(data).template(template);
     }
-    
-    
-    public Result search2(@Param("searchText") String searchText, @PathParam("pageNumber") int pageNumber, Context context)
+
+    public Result search2(@Param("searchText") String searchText, @PathParam("pageNumber") int pageNumber,
+                          Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
@@ -99,7 +99,7 @@ public class SearchController
         if (searchText.isEmpty() || searchText.equals(" "))
         {
             template = xcpConf.templateIndex;
-            data.put("infoMessage", msg.get("infoNoSearchTerm", language).get());
+            context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
             CarouselInformation.getCarouselProducts(data);
         }
         else
@@ -112,7 +112,7 @@ public class SearchController
             sql += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
             // search in name
             sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
-            if(searchTerms.length > 1)
+            if (searchTerms.length > 1)
             {
                 // add next search term to select statement
                 for (int i = 1; i < searchTerms.length; i++)
