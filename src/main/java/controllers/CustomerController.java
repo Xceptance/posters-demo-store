@@ -69,7 +69,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.regexEmail, email))
         {
             // error message
-            data.put("errorMessage", msg.get("errorValidEmail", language).get());
+            context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
         }
         else
         {
@@ -96,13 +96,13 @@ public class CustomerController
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             }
             // wrong email
             else
             {
                 // error message
-                data.put("errorMessage", msg.get("errorEmailExist", language).get());
+                context.getFlashCookie().error(msg.get("errorEmailExist", language).get());
             }
         }
         // put products for carousel to data map
@@ -166,21 +166,21 @@ public class CustomerController
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // error message
-            data.put("errorMessage", msg.get("errorAccountExist", language).get());
+            context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
             failure = true;
         }
         // is email valid
         else if (!Pattern.matches(xcpConf.regexEmail, email))
         {
             // error message
-            data.put("errorMessage", msg.get("errorValidEmail", language).get());
+            context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
             // error message
-            data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
+            context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
         if (failure)
@@ -229,7 +229,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -251,7 +251,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -278,7 +278,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -305,7 +305,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -338,7 +338,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -367,14 +367,14 @@ public class CustomerController
                     // update customer
                     customer.update();
                     // success message
-                    data.put("successMessage", msg.get("successSave", language).get());
+                    context.getFlashCookie().success(msg.get("successSave", language).get());
                     template = xcpConf.templateAccountOverview;
                 }
             }
             if (wrongCreditCard)
             {
                 // error message
-                data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
+                context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
                 // show inserted values in form
                 Map<String, String> card = new HashMap<String, String>();
                 card.put("name", name);
@@ -402,7 +402,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -428,7 +428,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -441,12 +441,12 @@ public class CustomerController
                 CreditCardInformation.deleteCreditCardFromCustomer(cardId);
                 template = xcpConf.templateAccountOverview;
                 // success message
-                data.put("successMessage", msg.get("successDelete", language).get());
+                context.getFlashCookie().success(msg.get("successDelete", language).get());
             }
             // incorrect password
             else
             {
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
                 template = xcpConf.templateConfirmDeletePayment;
                 data.put("cardId", cardId);
             }
@@ -484,7 +484,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -513,7 +513,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -526,13 +526,13 @@ public class CustomerController
                 // remove billing address
                 AddressInformation.deleteBillingAddressFromCustomer(addressId);
                 // success message
-                data.put("successMessage", msg.get("successDelete", language).get());
+                context.getFlashCookie().success(msg.get("successDelete", language).get());
                 template = xcpConf.templateAccountOverview;
             }
             // incorrect password
             else
             {
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
                 template = xcpConf.templateConfirmDeleteAddress;
                 data.put("deleteAddressURL", "deleteBillingAddress");
                 data.put("addressId", addressId);
@@ -574,7 +574,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -587,13 +587,13 @@ public class CustomerController
                 // remove billing address
                 AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
                 // success message
-                data.put("successMessage", msg.get("successDelete", language).get());
+                context.getFlashCookie().success(msg.get("successDelete", language).get());
                 template = xcpConf.templateAccountOverview;
             }
             // incorrect password
             else
             {
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
                 template = xcpConf.templateConfirmDeleteAddress;
                 data.put("deleteAddressURL", "deleteDeliveryAddress");
                 data.put("addressId", addressId);
@@ -661,7 +661,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            data.put("errorMessage", msg.get("errorWrongZip", language).get());
+            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
@@ -689,7 +689,7 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // success message
-            data.put("successMessage", msg.get("successUpdate", language).get());
+            context.getFlashCookie().success(msg.get("successUpdate", language).get());
             template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
@@ -737,7 +737,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             // error message
-            data.put("errorMessage", msg.get("errorWrongZip", language).get());
+            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
@@ -766,7 +766,7 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // success message
-            data.put("successMessage", msg.get("successUpdate", language).get());
+            context.getFlashCookie().success(msg.get("successUpdate", language).get());
             template = xcpConf.templateAccountOverview;
         }
         return Results.html().render(data).template(template);
@@ -826,7 +826,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -836,7 +836,7 @@ public class CustomerController
             if (!Pattern.matches(xcpConf.regexZip, zip))
             {
                 // error message
-                data.put("errorMessage", msg.get("errorWrongZip", language).get());
+                context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
                 // show inserted values in form
                 Map<String, String> address = new HashMap<String, String>();
                 address.put("name", name);
@@ -867,7 +867,7 @@ public class CustomerController
                 customer.addDeliveryAddress(address);
                 customer.update();
                 // success message
-                data.put("successMessage", msg.get("successSave", language).get());
+                context.getFlashCookie().success(msg.get("successSave", language).get());
                 template = xcpConf.templateAccountOverview;
             }
         }
@@ -902,7 +902,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -912,7 +912,7 @@ public class CustomerController
             if (!Pattern.matches("[0-9]*", zip))
             {
                 // error message
-                data.put("errorMessage", msg.get("errorWrongZip", language).get());
+                context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
                 // show inserted values in form
                 Map<String, String> address = new HashMap<String, String>();
                 address.put("name", name);
@@ -943,7 +943,7 @@ public class CustomerController
                 customer.addBillingAddress(address);
                 customer.update();
                 // success message
-                data.put("successMessage", msg.get("successSave", language).get());
+                context.getFlashCookie().success(msg.get("successSave", language).get());
                 template = xcpConf.templateAccountOverview;
             }
         }
@@ -986,7 +986,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -998,13 +998,13 @@ public class CustomerController
             if (!CustomerInformation.correctPassword(customer.getEmail(), password))
             {
                 // error message
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
                 failure = true;
             }
             else if (!Pattern.matches(xcpConf.regexEmail, email))
             {
                 // error message
-                data.put("errorMessage", msg.get("errorValidEmail", language).get());
+                context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
                 failure = true;
             }
             if (failure)
@@ -1024,7 +1024,7 @@ public class CustomerController
                 customer.setEmail(email);
                 customer.update();
                 // success message
-                data.put("successMessage", msg.get("successUpdate", language).get());
+                context.getFlashCookie().success(msg.get("successUpdate", language).get());
                 template = xcpConf.templateAccountOverview;
             }
         }
@@ -1065,7 +1065,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -1077,14 +1077,14 @@ public class CustomerController
             if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
             {
                 // error message
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
                 failure = true;
             }
             // passwords don't match
             else if (!password.equals(passwordAgain))
             {
                 // error message
-                data.put("errorMessage", msg.get("errorPasswordMatch", language).get());
+                context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
                 failure = true;
             }
             if (failure)
@@ -1097,7 +1097,7 @@ public class CustomerController
                 customer.hashPasswd(password);
                 customer.update();
                 // success message
-                data.put("successMessage", msg.get("successUpdate", language).get());
+                context.getFlashCookie().success(msg.get("successUpdate", language).get());
                 template = xcpConf.templateAccountOverview;
             }
         }
@@ -1119,7 +1119,7 @@ public class CustomerController
         if (!SessionHandling.isCustomerLogged(context))
         {
             // error message
-            data.put("errorMessage", msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
             CarouselInformation.getCarouselProducts(data);
             template = xcpConf.templateIndex;
         }
@@ -1147,12 +1147,12 @@ public class CustomerController
                 // put products for carousel to data map
                 CarouselInformation.getCarouselProducts(data);
                 template = xcpConf.templateIndex;
-                data.put("successMessage", msg.get("successDeleteAccount", language).get());
+                context.getFlashCookie().success(msg.get("successDeleteAccount", language).get());
             }
             // incorrect password
             else
             {
-                data.put("errorMessage", msg.get("errorIncorrectPassword", language).get());
+                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
                 template = xcpConf.templateConfirmDeleteAccount;
             }
         }
