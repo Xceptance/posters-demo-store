@@ -17,7 +17,6 @@ import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.AddressInformation;
 import util.database.BasketInformation;
-import util.database.CarouselInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
@@ -25,7 +24,6 @@ import util.database.OrderInformation;
 import util.date.DateUtils;
 import util.session.SessionHandling;
 
-import com.avaje.ebean.Ebean;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
@@ -55,12 +53,10 @@ public class CheckoutController
         // check, if the basket is empty
         if (basket.getProducts().size() == 0)
         {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
             // show info
-            data.put("infoMessage", msg.get("infoEmptyBasket", language).get());
+            context.getFlashCookie().put("info", msg.get("infoEmptyBasket", language).get());
             // return basket overview page
-            return Results.html().render(data).template(xcpConf.templateBasketOverview);
+            return Results.redirect(context.getContextPath() + "/basket");
         }
         // start checkout, if the basket is not empty
         else
@@ -136,7 +132,7 @@ public class CheckoutController
             final Map<String, Object> data = new HashMap<String, Object>();
             CommonInformation.setCommonData(data, context, xcpConf);
             // error message
-            data.put("errorMessage", msg.get("errorWrongZip", language).get());
+            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -291,7 +287,7 @@ public class CheckoutController
             final Map<String, Object> data = new HashMap<String, Object>();
             CommonInformation.setCommonData(data, context, xcpConf);
             // error message
-            data.put("errorMessage", msg.get("errorWrongZip", language).get());
+            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -443,7 +439,7 @@ public class CheckoutController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         // error message
-        data.put("errorMessage", msg.get("errorWrongCreditCard", language).get());
+        context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
         Map<String, String> card = new HashMap<String, String>();
         card.put("name", name);
@@ -511,7 +507,6 @@ public class CheckoutController
      */
     public Result checkoutCompleted(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set date to order
@@ -537,13 +532,9 @@ public class CheckoutController
         SessionHandling.deleteBasketId(context);
         // remove order from session
         SessionHandling.deleteOrderId(context);
-
-        CommonInformation.setCommonData(data, context, xcpConf);
         // show success message
-        data.put("successMessage", msg.get("checkoutCompleted", language).get());
-        // remember products for carousel
-        CarouselInformation.getCarouselProducts(data);
-        return Results.html().render(data).template(xcpConf.templateIndex);
+        context.getFlashCookie().success(msg.get("checkoutCompleted", language).get());
+        return Results.redirect(context.getContextPath() + "/");
     }
 
     private void calculateShippingAndTax(Context context)
