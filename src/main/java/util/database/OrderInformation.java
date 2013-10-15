@@ -46,7 +46,7 @@ public abstract class OrderInformation
         // create new order
         Order order = new Order();
         // save order
-        Ebean.save(order);
+        order.save();
         // get new order by id
         int id = order.getId();
         Order newOrder = Ebean.find(Order.class, id);
