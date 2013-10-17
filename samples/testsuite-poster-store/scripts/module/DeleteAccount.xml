@@ -11,7 +11,7 @@
   <command name="clickAndWait" target="id=linkPersonalData"/>
   <command name="assertText" target="id=titlePersonalData" value="Personal Data"/>
   <command name="clickAndWait" target="id=btnDeleteAccount"/>
-  <command name="type" target="id=password" value="topsecret"/>
+  <command name="type" target="id=password" value="@{password}"/>
   <command name="clickAndWait" target="id=btnDeleteAccount"/>
   <command name="assertElementPresent" target="id=successMessage"/>
   <command name="assertText" target="//*[@id='successMessage']//strong[1]" value="Your account has been deleted. We hope to see you soon again!"/>
