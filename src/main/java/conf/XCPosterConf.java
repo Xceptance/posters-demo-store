@@ -64,7 +64,7 @@ public class XCPosterConf
     public final double shippingCosts;
 
     public final double tax;
-    
+
     public final int pageSize;
 
     public final String templateOrderOverview;
@@ -74,6 +74,8 @@ public class XCPosterConf
     public final String templateSettingOverview;
 
     public final String templateAddressOverview;
+
+    public final String templateLoginForm;
 
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
@@ -133,15 +135,17 @@ public class XCPosterConf
         shippingCosts = Double.parseDouble(ninjaProp.getOrDie("application.shippingCosts"));
 
         tax = Double.parseDouble(ninjaProp.getOrDie("application.tax"));
-        
+
         pageSize = ninjaProp.getInteger("application.pageSize");
-        
+
         templateOrderOverview = "views/CustomerController/orderOverview.ftl.html";
-        
+
         templatePaymentOverview = "views/CustomerController/paymentOverview.ftl.html";
-        
+
         templateSettingOverview = "views/CustomerController/settingOverview.ftl.html";
-        
+
         templateAddressOverview = "views/CustomerController/addressOverview.ftl.html";
+
+        templateLoginForm = "views/CustomerController/loginForm.ftl.html";
     }
 }
