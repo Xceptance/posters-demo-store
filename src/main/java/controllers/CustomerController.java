@@ -55,7 +55,7 @@ public class CustomerController
 
     /**
      * Logs in to the system with email and password. Returns the home page, if the email and the password are correct,
-     * otherwise an error page.
+     * otherwise the page to log-in again.
      * 
      * @param email
      * @param password
@@ -64,7 +64,6 @@ public class CustomerController
      */
     public Result login(@Param("email") String email, @Param("password") String password, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
         // is email valid
         if (!Pattern.matches(xcpConf.regexEmail, email))
         {
@@ -91,6 +90,8 @@ public class CustomerController
                 // put customer's basket id to session
                 Customer updatedCustomer = CustomerInformation.getCustomerByEmail(email);
                 SessionHandling.setBasketId(context, updatedCustomer.getBasket().getId());
+                // show home page
+                return Results.redirect(context.getContextPath() + "/");
             }
             // user exist, wrong password
             else if (emailExist && !correctPassowrd)
@@ -105,10 +106,12 @@ public class CustomerController
                 context.getFlashCookie().error(msg.get("errorEmailExist", language).get());
             }
         }
-        // put products for carousel to data map
-        CarouselInformation.getCarouselProducts(data);
+        final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.templateIndex);
+        // show entered email address
+        data.put("email", email);
+        // show page to log-in again
+        return Results.html().render(data).template(xcpConf.templateLoginForm);
     }
 
     /**
@@ -119,16 +122,12 @@ public class CustomerController
      */
     public Result logout(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
         // remove customer from session
         SessionHandling.deleteCustomerId(context);
         // remove basket from session
         SessionHandling.deleteBasketId(context);
-        CommonInformation.setCommonData(data, context, xcpConf);
-        // put products for carousel to data map
-        CarouselInformation.getCarouselProducts(data);
-
-        return Results.html().render(data).template(xcpConf.templateIndex);
+        // show home page
+        return Results.redirect(context.getContextPath() + "/");
     }
 
     /**
@@ -159,8 +158,6 @@ public class CustomerController
                                         @Param("eMail") String email, @Param("password") String password,
                                         @Param("passwordAgain") String passwordAgain, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         boolean failure = false;
         // email must be unique
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
@@ -185,13 +182,15 @@ public class CustomerController
         }
         if (failure)
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             Map<String, String> registration = new HashMap<String, String>();
             registration.put("name", name);
             registration.put("firstName", firstName);
             registration.put("email", email);
             data.put("registration", registration);
             // show registration page again
-            template = xcpConf.templateRegistration;
+            return Results.html().render(data).template(xcpConf.templateRegistration);
         }
         // all input fields might be correct
         else
@@ -204,14 +203,11 @@ public class CustomerController
             customer.hashPasswd(password);
             // save customer
             Ebean.save(customer);
-            // put customer id to session
-            SessionHandling.setCustomerId(context, customer.getId());
-            // put products for carousel to data map
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            // show success message
+            context.getFlashCookie().success(msg.get("successCreateAccount", language).get());
+            // show page to log-in
+            return Results.redirect(context.getContextPath() + "/login");
         }
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -222,18 +218,14 @@ public class CustomerController
      */
     public Result accountOverview(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template = xcpConf.templateAccountOverview;
-        CommonInformation.setCommonData(data, context, xcpConf);
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
-        return Results.html().render(data).template(template);
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        return Results.html().render(data);
     }
 
     /**
@@ -244,23 +236,15 @@ public class CustomerController
      */
     public Result orderOverview(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
-        CommonInformation.setCommonData(data, context, xcpConf);
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
-        else
-        {
-            CustomerInformation.addOrderOfCustomerToMap(context, data);
-            template = xcpConf.templateOrderOverview;
-        }
-        return Results.html().render(data).template(template);
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        CustomerInformation.addOrderOfCustomerToMap(context, data);
+        return Results.html().render(data);
     }
 
     /**
@@ -271,23 +255,15 @@ public class CustomerController
      */
     public Result paymentOverview(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
-        CommonInformation.setCommonData(data, context, xcpConf);
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
-        else
-        {
-            CustomerInformation.addPaymentOfCustomerToMap(context, data);
-            template = xcpConf.templatePaymentOverview;
-        }
-        return Results.html().render(data).template(template);
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        CustomerInformation.addPaymentOfCustomerToMap(context, data);
+        return Results.html().render(data);
     }
 
     /**
@@ -298,23 +274,15 @@ public class CustomerController
      */
     public Result settingOverview(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
-        CommonInformation.setCommonData(data, context, xcpConf);
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
-        else
-        {
-            CustomerInformation.addCustomerToMap(context, data);
-            template = xcpConf.templateSettingOverview;
-        }
-        return Results.html().render(data).template(template);
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        CustomerInformation.addCustomerToMap(context, data);
+        return Results.html().render(data);
     }
 
     /**
@@ -331,29 +299,21 @@ public class CustomerController
                                                 @Param("name") String name, @Param("expirationDateMonth") int month,
                                                 @Param("expirationDateYear") int year, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template = "";
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
             // replace spaces and dashes
             creditNumber = creditNumber.replaceAll("[ -]+", "");
-            boolean wrongCreditCard = true;
             // check input
             for (String regExCreditCard : xcpConf.regexCreditCard)
             {
                 // credit card number is correct
                 if (Pattern.matches(regExCreditCard, creditNumber))
                 {
-                    wrongCreditCard = false;
                     // get customer by session id
                     Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
                     // create new credit card
@@ -368,23 +328,22 @@ public class CustomerController
                     customer.update();
                     // success message
                     context.getFlashCookie().success(msg.get("successSave", language).get());
-                    template = xcpConf.templateAccountOverview;
+                    // show payment overview page
+                    return Results.redirect(context.getContextPath() + "/paymentOverview");
                 }
             }
-            if (wrongCreditCard)
-            {
-                // error message
-                context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
-                // show inserted values in form
-                Map<String, String> card = new HashMap<String, String>();
-                card.put("name", name);
-                card.put("cardNumber", creditNumber);
-                data.put("card", card);
-                // show page to enter payment information again
-                template = xcpConf.templateAddPaymentToCustomer;
-            }
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
+            // error message
+            context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
+            // show inserted values in form
+            Map<String, String> card = new HashMap<String, String>();
+            card.put("name", name);
+            card.put("cardNumber", creditNumber);
+            data.put("card", card);
+            // show page to enter payment information again
+            return Results.html().render(data).template(xcpConf.templateAddPaymentToCustomer);
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -395,22 +354,14 @@ public class CustomerController
      */
     public Result addPaymentToCustomer(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
-        else
-        {
-            template = xcpConf.templateAddPaymentToCustomer;
-        }
-        return Results.html().render(data).template(template);
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        return Results.html().render(data);
     }
 
     /**
@@ -422,15 +373,10 @@ public class CustomerController
      */
     public Result deletePayment(@Param("password") String password, @Param("cardId") int cardId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
@@ -439,20 +385,22 @@ public class CustomerController
             if (customer.checkPasswd(password))
             {
                 CreditCardInformation.deleteCreditCardFromCustomer(cardId);
-                template = xcpConf.templateAccountOverview;
                 // success message
                 context.getFlashCookie().success(msg.get("successDelete", language).get());
+                // show payment overview page
+                return Results.redirect(context.getContextPath() + "/paymentOverview");
             }
             // incorrect password
             else
             {
+                final Map<String, Object> data = new HashMap<String, Object>();
                 context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                template = xcpConf.templateConfirmDeletePayment;
                 data.put("cardId", cardId);
+                CommonInformation.setCommonData(data, context, xcpConf);
+                // show page again
+                return Results.html().render(data).template(xcpConf.templateConfirmDeletePayment);
             }
         }
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -478,23 +426,15 @@ public class CustomerController
      */
     public Result addressOverview(Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
-        else
-        {
-            CustomerInformation.addAddressOfCustomerToMap(context, data);
-            template = xcpConf.templateAddressOverview;
-        }
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CustomerInformation.addAddressOfCustomerToMap(context, data);
         CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
+        return Results.html().render(data);
     }
 
     /**
@@ -507,15 +447,10 @@ public class CustomerController
     public Result deleteBillingAddress(@Param("password") String password, @Param("addressId") int addressId,
                                        Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
@@ -527,19 +462,20 @@ public class CustomerController
                 AddressInformation.deleteBillingAddressFromCustomer(addressId);
                 // success message
                 context.getFlashCookie().success(msg.get("successDelete", language).get());
-                template = xcpConf.templateAccountOverview;
+                return Results.redirect(context.getContextPath() + "/addressOverview");
             }
             // incorrect password
             else
             {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                CommonInformation.setCommonData(data, context, xcpConf);
                 context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                template = xcpConf.templateConfirmDeleteAddress;
                 data.put("deleteAddressURL", "deleteBillingAddress");
                 data.put("addressId", addressId);
+                // show page again
+                return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
             }
         }
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -568,15 +504,10 @@ public class CustomerController
     public Result deleteDeliveryAddress(@Param("password") String password, @Param("addressId") int addressId,
                                         Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
@@ -588,19 +519,20 @@ public class CustomerController
                 AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
                 // success message
                 context.getFlashCookie().success(msg.get("successDelete", language).get());
-                template = xcpConf.templateAccountOverview;
+                // show address overview page
+                return Results.redirect(context.getContextPath() + "/addressOverview");
             }
             // incorrect password
             else
             {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                CommonInformation.setCommonData(data, context, xcpConf);
                 context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                template = xcpConf.templateConfirmDeleteAddress;
                 data.put("deleteAddressURL", "deleteDeliveryAddress");
                 data.put("addressId", addressId);
+                return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
             }
         }
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -654,12 +586,11 @@ public class CustomerController
                                                  @Param("country") String country,
                                                  @Param("addressId") String addressId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -674,7 +605,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter delivery address again
-            template = xcpConf.templateUpdateDeliveryAddress;
+            return Results.html().render(data).template(xcpConf.templateUpdateDeliveryAddress);
         }
         // all input fields might be correct
         else
@@ -687,12 +618,12 @@ public class CustomerController
             address.setState(state);
             address.setZip(zip);
             address.setCountry(country);
+            // update address
             address.update();
             // success message
             context.getFlashCookie().success(msg.get("successUpdate", language).get());
-            template = xcpConf.templateAccountOverview;
+            return Results.redirect(context.getContextPath() + "/addressOverview");
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -730,12 +661,11 @@ public class CustomerController
                                                 @Param("country") String country, @Param("addressId") String addressId,
                                                 Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // check input
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -750,7 +680,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter billing address again
-            template = xcpConf.templateUpdateBillingAddress;
+            return Results.html().render(data).template(xcpConf.templateUpdateBillingAddress);
         }
         // all input fields might be correct
         else
@@ -767,9 +697,8 @@ public class CustomerController
             address.update();
             // success message
             context.getFlashCookie().success(msg.get("successUpdate", language).get());
-            template = xcpConf.templateAccountOverview;
+            return Results.redirect(context.getContextPath() + "/addressOverview");
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -819,22 +748,18 @@ public class CustomerController
                                                         @Param("zip") String zip, @Param("country") String country,
                                                         @Param("addressId") String addressId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
             // check input
             if (!Pattern.matches(xcpConf.regexZip, zip))
             {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                CommonInformation.setCommonData(data, context, xcpConf);
                 // error message
                 context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
                 // show inserted values in form
@@ -848,13 +773,12 @@ public class CustomerController
                 address.put("country", country);
                 data.put("address", address);
                 // show page to enter delivery address again
-                template = xcpConf.templateAddDeliveryAddressToCustomer;
+                return Results.html().render(data).template(xcpConf.templateAddDeliveryAddressToCustomer);
             }
             // all input fields might be correct
             else
             {
                 DeliveryAddress address = new DeliveryAddress();
-
                 address.setName(name);
                 address.setCompany(company);
                 address.setAddressLine(addressLine);
@@ -868,10 +792,9 @@ public class CustomerController
                 customer.update();
                 // success message
                 context.getFlashCookie().success(msg.get("successSave", language).get());
-                template = xcpConf.templateAccountOverview;
+                return Results.redirect(context.getContextPath() + "/addressOverview");
             }
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -895,22 +818,18 @@ public class CustomerController
                                                        @Param("zip") String zip, @Param("country") String country,
                                                        @Param("addressId") String addressId, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
             // check input
             if (!Pattern.matches("[0-9]*", zip))
             {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                CommonInformation.setCommonData(data, context, xcpConf);
                 // error message
                 context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
                 // show inserted values in form
@@ -924,7 +843,7 @@ public class CustomerController
                 address.put("country", country);
                 data.put("address", address);
                 // show page to enter billing address again
-                template = xcpConf.templateAddBillingAddressToCustomer;
+                return Results.html().render(data).template(xcpConf.templateAddBillingAddressToCustomer);
             }
             // all input fields might be correct
             else
@@ -944,10 +863,9 @@ public class CustomerController
                 customer.update();
                 // success message
                 context.getFlashCookie().success(msg.get("successSave", language).get());
-                template = xcpConf.templateAccountOverview;
+                return Results.redirect(context.getContextPath() + "/addressOverview");
             }
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -980,15 +898,10 @@ public class CustomerController
                                              @Param("eMail") String email, @Param("password") String password,
                                              Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
@@ -1009,13 +922,15 @@ public class CustomerController
             }
             if (failure)
             {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                CommonInformation.setCommonData(data, context, xcpConf);
                 Map<String, String> updatedCustomer = new HashMap<String, String>();
                 updatedCustomer.put("name", name);
                 updatedCustomer.put("firstName", firstName);
                 updatedCustomer.put("email", email);
                 data.put("customer", customer);
                 // show page to update name or email again
-                template = xcpConf.templateChangeNameOrEmail;
+                return Results.html().render(data).template(xcpConf.templateChangeNameOrEmail);
             }
             else
             {
@@ -1025,11 +940,9 @@ public class CustomerController
                 customer.update();
                 // success message
                 context.getFlashCookie().success(msg.get("successUpdate", language).get());
-                template = xcpConf.templateAccountOverview;
+                return Results.redirect(context.getContextPath() + "/settingOverview");
             }
         }
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -1058,16 +971,10 @@ public class CustomerController
     public Result changePasswordCompleted(@Param("oldPassword") String oldPassword, @Param("password") String password,
                                           @Param("passwordAgain") String passwordAgain, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
@@ -1090,7 +997,7 @@ public class CustomerController
             if (failure)
             {
                 // show page to change password again
-                template = xcpConf.templateChangePassword;
+                return Results.redirect(context.getContextPath() + "/changePassword");
             }
             else
             {
@@ -1098,10 +1005,9 @@ public class CustomerController
                 customer.update();
                 // success message
                 context.getFlashCookie().success(msg.get("successUpdate", language).get());
-                template = xcpConf.templateAccountOverview;
+                return Results.redirect(context.getContextPath() + "/settingOverview");
             }
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -1113,15 +1019,10 @@ public class CustomerController
      */
     public Result deleteAccount(@Param("password") String password, Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        String template;
         // no customer is logged
         if (!SessionHandling.isCustomerLogged(context))
         {
-            // error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-            CarouselInformation.getCarouselProducts(data);
-            template = xcpConf.templateIndex;
+            return customerIsNotLogged(context);
         }
         else
         {
@@ -1133,7 +1034,7 @@ public class CustomerController
                 SessionHandling.deleteCustomerId(context);
                 // remove basket from session
                 SessionHandling.deleteBasketId(context);
-                // remove customers orders, deletes also customer, deletes also addresses and payment information
+                // remove customers orders --> deletes also customer --> deletes also addresses and payment information
                 List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
                 for (Order order : orders)
                 {
@@ -1144,20 +1045,18 @@ public class CustomerController
                 {
                     Ebean.delete(customer);
                 }
-                // put products for carousel to data map
-                CarouselInformation.getCarouselProducts(data);
-                template = xcpConf.templateIndex;
                 context.getFlashCookie().success(msg.get("successDeleteAccount", language).get());
+                // return home page
+                return Results.redirect(context.getContextPath() + "/");
             }
             // incorrect password
             else
             {
                 context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                template = xcpConf.templateConfirmDeleteAccount;
+                // show page again
+                return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
             }
         }
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(template);
     }
 
     /**
@@ -1171,5 +1070,19 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
+    }
+
+    /**
+     * Returns the home page and shows an error message.
+     * 
+     * @param context
+     * @return
+     */
+    private Result customerIsNotLogged(Context context)
+    {
+        // error message
+        context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
+        // show home page
+        return Results.redirect(context.getContextPath() + "/");
     }
 }
