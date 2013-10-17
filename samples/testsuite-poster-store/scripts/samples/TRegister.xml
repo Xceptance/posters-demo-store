@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates customer registration.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="/"/>
-  <command name="assertText" target="id=titleIndex" value="Check out our new panorama posters!"/>
-  <command name="clickAndWait" target="id=btnShowLoginForm"/>
+  <module name="module.OpenHomepage"/>
   <action name="StartRegistration"/>
+  <command name="clickAndWait" target="id=btnShowLoginForm"/>
   <command name="clickAndWait" target="id=linkRegister"/>
-  <command name="assertText" target="//*[@id='formRegister']//legend[1]" value="Create an account"/>
+  <command name="assertElementPresent" target="id=formRegister"/>
+  <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
   <action name="RegisterWithWrongPassword">
     <comment>The entered passwords don't match.</comment>
   </action>
-  <command name="type" target="id=name" value="Doe"/>
-  <command name="type" target="id=firstName" value="John"/>
-  <command name="type" target="id=eMail" value="john@test.com"/>
-  <command name="type" target="id=password" value="topsecret"/>
-  <command name="type" target="id=passwordAgain" value="wrongpassword"/>
+  <module name="module.FillInRegistrationForm">
+    <parameter name="name" value="${name}"/>
+    <parameter name="firstName" value="${firstName}"/>
+    <parameter name="email" value="${generatedEmail}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="passwordAgain" value="wrongPassword"/>
+  </module>
   <command name="clickAndWait" target="id=btnRegister"/>
   <command name="assertElementPresent" target="xpath=id('errorMessage')"/>
   <command name="assertText" target="//*[@id='errorMessage']//strong[1]" value="The passwords you entered dont match. Please try again."/>
   <action name="Register"/>
-  <command name="assertText" target="id=name" value="Doe"/>
-  <command name="assertText" target="id=firstName" value="John"/>
-  <command name="assertText" target="id=eMail" value="john@test.com"/>
-  <command name="type" target="id=password" value="topsecret"/>
-  <command name="type" target="id=passwordAgain" value="topsecret"/>
+  <command name="assertText" target="id=name" value="${name}"/>
+  <command name="assertText" target="id=firstName" value="${firstName}"/>
+  <command name="assertText" target="id=eMail" value="${generatedEmail}"/>
+  <command name="type" target="id=password" value="${password}"/>
+  <command name="type" target="id=passwordAgain" value="${password}"/>
   <command name="clickAndWait" target="id=btnRegister"/>
-  <command name="assertText" target="link=Hi! John" value="Hi! John"/>
+  <command name="assertElementPresent" target="xpath=id('successMessage')"/>
+  <command name="assertText" target="//*[@id='successMessage']//strong[1]" value="Your account has been created. Log in with your email address and password."/>
+  <module name="module.Login">
+    <parameter name="email" value="${generatedEmail}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="firstName" value="${firstName}"/>
+  </module>
   <module name="module.DeleteAccount">
-    <parameter name="firstName" value="John"/>
-    <parameter name="password" value="topsecret"/>
+    <parameter name="firstName" value="${firstName}"/>
+    <parameter name="password" value="${password}"/>
   </module>
 </testcase>
