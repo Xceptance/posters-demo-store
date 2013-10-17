@@ -2,9 +2,9 @@
 	<ul class="nav nav-list">
 		<#list topCategory as tC>
 			<li class="nav-header">${tC.name}</li>
-			<li id="${tC.name}"><a href="${applUrlHttp}/topCategory/${tC.url}/1">${i18n("headerOverview")} ${tC.name}</a></li>
+			<li id="topCategory${tC_index}"><a href="${applUrlHttp}/topCategory/${tC.url}/1">${i18n("headerOverview")} ${tC.name}</a></li>
 			<#list tC.subCategories as sC>
-				<li id="${sC.name}"><a href="${applUrlHttp}/category/${sC.url}/1">${sC.name}</a></li>
+				<li id="subCategory${sC_index}${tC_index}"><a href="${applUrlHttp}/category/${sC.url}/1">${sC.name}</a></li>
 			</#list>
 		</#list>
 	</ul>
