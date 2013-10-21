@@ -35,7 +35,12 @@
     <parameter name="firstName" value="${firstName}"/>
   </module>
   <module name="module.DeleteAccount">
-    <parameter name="firstName" value="${firstName}"/>
     <parameter name="password" value="${password}"/>
   </module>
+  <action name="TryToLoginAgain"/>
+  <command name="clickAndWait" target="id=btnShowLoginForm"/>
+  <command name="type" target="id=email" value="${generatedEmail}"/>
+  <command name="type" target="id=password" value="${password}"/>
+  <command name="clickAndWait" target="id=btnSignIn"/>
+  <command name="assertElementPresent" target="id=errorMessage"/>
 </testcase>
