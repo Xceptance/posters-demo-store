@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates browsing the catalog, adding product(s) to the cart, checkout as registered customer and place the order.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="/"/>
-  <command name="assertElementPresent" target="id=titleIndex"/>
+  <module name="module.OpenHomepage"/>
   <module name="module.Login">
-    <parameter name="email" value="john@doe.com"/>
-    <parameter name="password" value="topsecret"/>
-    <parameter name="firstName" value="John"/>
+    <parameter name="email" value="${email}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="firstName" value="${firstName}"/>
   </module>
-  <action name="Browse-0"/>
-  <command name="clickAndWait" target="link=Animals"/>
-  <command name="clickAndWait" target="//*[@id='product3']//img"/>
-  <command name="assertElementPresent" target="id=titleProductName"/>
   <action name="AddToCart-0"/>
+  <command name="clickAndWait" target="//*[@id='subCategory13']/a"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertElementPresent" target="id=product0"/>
-  <action name="TOrder-0"/>
   <command name="type" target="//*[contains(@class,'productCount0')]" value="3"/>
   <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
-  <action name="Browse-1"/>
-  <command name="clickAndWait" target="link=Cold Cuts"/>
-  <command name="clickAndWait" target="link=2"/>
-  <command name="clickAndWait" target="//*[@id='product1']//img"/>
-  <command name="assertElementPresent" target="id=titleProductName"/>
   <action name="AddToCart-1"/>
+  <command name="clickAndWait" target="//*[@id='subCategory22']/a"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertElementPresent" target="id=product1"/>
   <action name="Checkout"/>
+  <command name="storeText" target="id=productName0" value="product1Name"/>
+  <command name="storeText" target="id=productName1" value="product2Name"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="SelectShippingAddress"/>
   <command name="assertElementPresent" target="id=titleDelAddr"/>
@@ -45,23 +37,28 @@
   <command name="assertElementPresent" target="id=titleOrderOverview"/>
   <command name="assertElementPresent" target="id=product0"/>
   <command name="assertElementPresent" target="id=product1"/>
+  <command name="assertText" target="id=product0Name" value="${product1Name}"/>
   <command name="assertText" target="id=product0Count" value="3"/>
+  <command name="assertText" target="id=product1Name" value="${product2Name}"/>
   <command name="assertText" target="id=product1Count" value="1"/>
+  <command name="assertText" target="id=delAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <command name="assertText" target="id=billAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <command name="assertText" target="id=payment" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
   <command name="clickAndWait" target="id=btnOrder"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="xpath=id('btnBasketOverview')" value="glob:Cart: 0 Items - 0€"/>
+  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*0.*0.*"/>
   <action name="VerifyOrderInCustomerBackend"/>
-  <command name="click" target="link=Hi! John"/>
-  <command name="clickAndWait" target="link=My Account"/>
+  <command name="click" target="//li[@id='dropdown']/a"/>
+  <command name="clickAndWait" target="//*[@id='btnAccountOverview']/a"/>
   <command name="assertElementPresent" target="id=titleAccountOverview"/>
   <command name="clickAndWait" target="id=linkOrderOverview"/>
   <command name="assertElementPresent" target="id=titleOrderHistory"/>
   <command name="assertElementPresent" target="id=order0"/>
   <command name="assertElementPresent" target="id=order0Product0"/>
   <command name="assertElementPresent" target="id=order0Product1"/>
+  <command name="assertText" target="id=order0Product0Name" value="${product1Name}"/>
+  <command name="assertText" target="id=order0Product1Name" value="${product2Name}"/>
   <command name="assertText" target="id=order0Product0Count" value="3x"/>
   <command name="assertText" target="id=order0Product1Count" value="1x"/>
-  <module name="module.Logout">
-    <parameter name="firstName" value="John"/>
-  </module>
+  <module name="module.Logout"/>
 </testcase>

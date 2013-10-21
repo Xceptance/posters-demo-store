@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Deletes a customer account.</description>
-  <parameter name="firstName"/>
   <parameter name="password"/>
   <action name="DeleteAccount"/>
-  <command name="assertNotElementPresent" target="link=Sign in"/>
-  <command name="click" target="link=Hi! @{firstName}"/>
-  <command name="clickAndWait" target="link=My Account"/>
-  <command name="assertText" target="id=titleAccountOverview" value="My Account"/>
+  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
+  <command name="click" target="//li[@id='dropdown']/a"/>
+  <command name="clickAndWait" target="//*[@id='btnAccountOverview']/a"/>
+  <command name="assertElementPresent" target="id=titleAccountOverview"/>
   <command name="clickAndWait" target="id=linkPersonalData"/>
-  <command name="assertText" target="id=titlePersonalData" value="Personal Data"/>
+  <command name="assertElementPresent" target="id=titlePersonalData"/>
   <command name="clickAndWait" target="id=btnDeleteAccount"/>
-  <command name="type" target="id=password" value="topsecret"/>
+  <command name="type" target="id=password" value="@{password}"/>
   <command name="clickAndWait" target="id=btnDeleteAccount"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="//*[@id='successMessage']//strong[1]" value="Your account has been deleted. We hope to see you soon again!"/>
 </scriptmodule>

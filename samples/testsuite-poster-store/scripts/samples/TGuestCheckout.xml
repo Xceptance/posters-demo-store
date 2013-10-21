@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates browsing the catalog, adding product(s) to the cart and checkout as guest without final order placement.</description>
-  <action name="OpenStartPage"/>
-  <command name="open" value="/"/>
-  <command name="assertText" target="id=titleIndex" value="Check out our new panorama posters!"/>
+  <module name="module.OpenHomepage"/>
   <action name="Browse-0"/>
-  <command name="clickAndWait" target="link=Trees"/>
-  <command name="clickAndWait" target="//*[@id='product0']//img"/>
-  <command name="assertText" target="id=titleProductName" value="Fall Leaves I"/>
+  <command name="storeText" target="//*[@id='topCategory2']/a" value="topCat2Name"/>
+  <command name="clickAndWait" target="//*[@id='topCategory2']/a"/>
+  <command name="assertText" target="id=titleCategoryName" value="${topCat2Name}"/>
+  <command name="storeText" target="//*[@id='product2']/h3[@id='productName'][1]" value="prod1Name"/>
+  <command name="clickAndWait" target="//*[@id='product2']//img"/>
+  <command name="assertText" target="id=titleProductName" value="${prod1Name}"/>
   <action name="AddToCart-0"/>
   <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertText" target="id=titleBasket" value="Cart"/>
-  <command name="assertText" target="id=productName0" value="Fall Leaves I"/>
-  <command name="assertText" target="//*[contains(@class,'productCount0')]" value="1"/>
+  <command name="assertText" target="id=productName0" value="${prod1Name}"/>
+  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*1.*"/>
   <action name="Browse-1"/>
-  <command name="clickAndWait" target="link=Air Travel"/>
-  <command name="assertText" target="id=titleCategoryName" value="Air Travel"/>
-  <command name="clickAndWait" target="//*[@id='product3']//img"/>
-  <command name="assertText" target="id=titleProductName" value="Air Greenland Airbus A330-200"/>
+  <command name="storeText" target="//*[@id='subCategory02']/a" value="subCat02Name"/>
+  <command name="clickAndWait" target="//*[@id='subCategory02']/a"/>
+  <command name="assertText" target="id=titleCategoryName" value="${subCat02Name}"/>
+  <command name="storeText" target="//*[@id='product0']/h3[@id='productName'][1]" value="prod2Name"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
+  <command name="assertText" target="id=titleProductName" value="${prod2Name}"/>
   <action name="AddToCart-1"/>
   <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertText" target="id=productName1" value="Air Greenland Airbus A330-200"/>
-  <command name="assertText" target="//*[contains(@class,'productCount1')]" value="1"/>
+  <command name="assertText" target="id=productName1" value="${prod2Name}"/>
+  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*2.*"/>
   <action name="StartCheckout"/>
+  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="EnterShippingAddress"/>
+  <command name="assertElementPresent" target="id=titleDelAddr"/>
   <module name="module.FillInAddressForm">
-    <parameter name="name" value="John Doe"/>
-    <parameter name="company" value="John Doe Inc."/>
-    <parameter name="address" value="5-6 John Doe Street"/>
-    <parameter name="city" value="New York"/>
-    <parameter name="state" value="NY"/>
-    <parameter name="zip" value="12345"/>
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
   </module>
-  <command name="select" target="id=country" value="label=United States"/>
   <command name="check" target="id=billEqualShipp-No"/>
   <command name="clickAndWait" target="id=btnAddDelAddr"/>
   <action name="EnterBillingAddress"/>
   <command name="assertElementPresent" target="id=titleBillAddr"/>
   <module name="module.FillInAddressForm">
-    <parameter name="name" value="John Doe"/>
-    <parameter name="company" value="John Doe Inc."/>
-    <parameter name="address" value="5-6 John Doe Street"/>
-    <parameter name="city" value="New York"/>
-    <parameter name="state" value="NY"/>
-    <parameter name="zip" value="12345"/>
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
   </module>
-  <command name="select" target="id=country" value="label=United States"/>
   <command name="clickAndWait" target="id=btnAddBillAddr"/>
   <action name="EnterPaymentMethod"/>
   <command name="assertElementPresent" target="id=titlePayment"/>
   <module name="module.FillInPaymentForm">
-    <parameter name="number" value="4111111111111111"/>
-    <parameter name="name" value="John Doe"/>
-    <parameter name="month" value="08"/>
-    <parameter name="year" value="2022"/>
+    <parameter name="number" value="${creditCard}"/>
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="month" value="${expDateMonth}"/>
+    <parameter name="year" value="${expDateYear}"/>
   </module>
   <command name="clickAndWait" target="id=btnAddPayment"/>
   <action name="OrderOverview"/>
@@ -62,9 +66,11 @@
   <command name="assertElementPresent" target="id=product0"/>
   <command name="assertElementPresent" target="id=product1"/>
   <command name="assertNotElementPresent" target="id=product2"/>
+  <command name="assertText" target="id=product0Name" value="${prod1Name}"/>
   <command name="assertText" target="id=product0Count" value="1"/>
+  <command name="assertText" target="id=product1Name" value="${prod2Name}"/>
   <command name="assertText" target="id=product1Count" value="1"/>
-  <command name="assertText" target="id=delAddr" value="Shipping Addresses John Doe John Doe Inc. 5-6 John Doe Street New York, NY 12345 United States"/>
-  <command name="assertText" target="id=billAddr" value="Billing Addresses John Doe John Doe Inc. 5-6 John Doe Street New York, NY 12345 United States"/>
-  <command name="assertText" target="id=payment" value="glob:Payment Settings Name: John Doe Credit card: xxxx xxxx xxxx 1111 Valid to: 08 2022"/>
+  <command name="assertText" target="id=delAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <command name="assertText" target="id=billAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <command name="assertText" target="id=payment" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
 </testcase>

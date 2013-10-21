@@ -5,11 +5,11 @@
   <parameter name="password"/>
   <parameter name="firstName"/>
   <action name="Login"/>
-  <command name="assertElementPresent" target="link=Sign in"/>
-  <command name="clickAndWait" target="link=Sign in"/>
+  <command name="assertElementPresent" target="id=btnShowLoginForm"/>
+  <command name="clickAndWait" target="id=btnShowLoginForm"/>
   <command name="type" target="id=email" value="@{email}"/>
   <command name="type" target="id=password" value="@{password}"/>
   <command name="clickAndWait" target="id=btnSignIn"/>
-  <command name="assertNotElementPresent" target="link=Sign in"/>
-  <command name="assertText" target="link=Hi! @{firstName}" value="Hi! @{firstName}"/>
+  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
+  <command name="assertText" target="//li[@id='dropdown']/a" value="regexp:.*@{firstName}"/>
 </scriptmodule>

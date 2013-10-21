@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Logs the current user out.</description>
-  <parameter name="firstName"/>
   <action name="Logout"/>
-  <command name="assertNotElementPresent" target="link=Sign in"/>
-  <command name="click" target="link=Hi! @{firstName}"/>
-  <command name="clickAndWait" target="link=Logout"/>
-  <command name="assertElementPresent" target="link=Sign in"/>
+  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
+  <command name="click" target="//li[@id='dropdown']/a"/>
+  <command name="clickAndWait" target="//*[@id='btnLogout']/a"/>
+  <command name="assertElementPresent" target="id=btnShowLoginForm"/>
 </scriptmodule>

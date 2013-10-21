@@ -33,9 +33,9 @@
 	<div class="row-fluid">
 		<ul>
 			<!-- print delivery address -->
-			<li class="span4" id="delAddr">
+			<li class="span4">
 				<h3>${i18n("titleDeliveryAddress")}</h3>
-				<address>
+				<address  id="delAddr">
       				<strong>${order.deliveryAddress.name}</strong><br>
       				${order.deliveryAddress.company}<br>
       				${order.deliveryAddress.addressLine}<br>
@@ -44,9 +44,9 @@
       			</address>
 			</li>
 			<!-- print billing address -->
-			<li class="span4" id="billAddr">
+			<li class="span4">
 				<h3>${i18n("titleBillingAddress")}</h3>
-				<address>
+				<address id="billAddr">
       				<strong>${order.billingAddress.name}</strong><br>
       				${order.billingAddress.company}<br>
       				${order.billingAddress.addressLine}<br>
@@ -55,9 +55,9 @@
       			</address>
 			</li>
 			<!-- print credit card -->
-			<li class="span4" id="payment">
+			<li class="span4">
 				<h3>${i18n("titlePaymentInformation")}</h3>
-				<address>
+				<address  id="payment">
       				${i18n("titleName")}: ${order.creditCard.name}<br>
       				${i18n("titleCreditCard")}: ${order.creditCard.getCardNumberCryptic()}<br>
       				${i18n("titleValidTo")}: ${order.creditCard.getMonthLeadingZero()} ${order.creditCard.year}<br>

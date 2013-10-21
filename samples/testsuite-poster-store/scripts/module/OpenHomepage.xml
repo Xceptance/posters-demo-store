@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <action name="OpenStartPage"/>
+  <command name="deleteAllVisibleCookies"/>
+  <command name="open" value="/"/>
+  <command name="assertElementPresent" target="id=titleIndex"/>
+</scriptmodule>

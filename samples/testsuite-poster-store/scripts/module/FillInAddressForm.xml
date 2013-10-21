@@ -7,10 +7,12 @@
   <parameter name="city"/>
   <parameter name="state"/>
   <parameter name="zip"/>
+  <parameter name="country"/>
   <command name="type" target="id=fullName" value="@{name}"/>
   <command name="type" target="id=company" value="@{company}"/>
   <command name="type" target="id=addressLine" value="@{address}"/>
   <command name="type" target="id=city" value="@{city}"/>
   <command name="type" target="id=state" value="@{state}"/>
   <command name="type" target="id=zip" value="@{zip}"/>
+  <command name="select" target="id=country" value="label=@{country}"/>
 </scriptmodule>
