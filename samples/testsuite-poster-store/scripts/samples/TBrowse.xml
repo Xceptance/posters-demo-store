@@ -2,13 +2,13 @@
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates browsing the catalog.</description>
   <module name="module.OpenHomepage"/>
-  <action name="TBrowse-0" disabled="true"/>
-  <command name="storeText" disabled="true" target="//*[@id='topCategory0']/a" value="topCat0Name"/>
-  <command name="clickAndWait" disabled="true" target="//*[@id='topCategory0']/a"/>
-  <command name="assertText" disabled="true" target="id=titleCategoryName" value="regexp:.* ${topCat0Name}"/>
-  <command name="storeText" disabled="true" target="//*[@id='product0']/h3[@id='productName']" value="product0Name"/>
-  <command name="clickAndWait" disabled="true" target="//*[@id='product0']//img"/>
-  <command name="assertText" disabled="true" target="id=titleProductName" value="${product0Name}"/>
+  <action name="TBrowse-0"/>
+  <command name="storeText" target="//*[@id='topCategory0']/a" value="topCat0Name"/>
+  <command name="clickAndWait" target="//*[@id='topCategory0']/a"/>
+  <command name="assertText" target="id=titleCategoryName" value="${topCat0Name}"/>
+  <command name="storeText" target="//*[@id='product0']/h3[@id='productName']" value="product0Name"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
+  <command name="assertText" target="id=titleProductName" value="${product0Name}"/>
   <action name="TBrowse-1"/>
   <command name="storeText" target="//*[@id='subCategory02']/a" value="subCat02Name"/>
   <command name="clickAndWait" target="//*[@id='subCategory02']/a"/>
