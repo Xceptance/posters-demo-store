@@ -7,21 +7,21 @@
 		<firstName>John</firstName>
 		<deliveryAddress>
 			<delName>John Doe</delName>
-			<delCompany>Xceptance</delCompany>
-			<delAddressLine>2-4 Leutragraben</delAddressLine>
-			<delCity>Jena</delCity>
-			<delState>Thuringia</delState>
-			<delCountry>Germany</delCountry>
-			<delZip>07743</delZip>
+			<delCompany>John Doe Inc.</delCompany>
+			<delAddressLine>5-7 John Doe street</delAddressLine>
+			<delCity>New York</delCity>
+			<delState>NY</delState>
+			<delCountry>United States</delCountry>
+			<delZip>12345</delZip>
 		</deliveryAddress>
 		<billingAddress>
 			<billName>John Doe</billName>
-			<billCompany>Xceptance</billCompany>
-			<billAddressLine>2-4 Leutragraben</billAddressLine>
-			<billCity>Jena</billCity>
-			<billState>Thuringia</billState>
-			<billCountry>Germany</billCountry>
-			<billZip>07743</billZip>
+			<billCompany>John Doe Inc.</billCompany>
+			<billAddressLine>5-7 John Doe street</billAddressLine>
+			<billCity>New York</billCity>
+			<billState>NY</billState>
+			<billCountry>United States</billCountry>
+			<billZip>12345</billZip>
 		</billingAddress>
 		<paymentMethod>
 			<paymentName>John Doe</paymentName>
