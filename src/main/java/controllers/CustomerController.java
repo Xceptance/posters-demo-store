@@ -16,7 +16,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.AddressInformation;
-import util.database.CarouselInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
@@ -875,11 +874,16 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result changeNameOrEmail(@Param("customerId") String customerId, Context context)
+    public Result changeNameOrEmail(Context context)
     {
+        // no customer is logged
+        if (!SessionHandling.isCustomerLogged(context))
+        {
+            return customerIsNotLogged(context);
+        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        Customer customer = CustomerInformation.getCustomerById(Integer.parseInt(customerId));
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
         data.put("customer", customer);
         return Results.html().render(data);
     }
@@ -952,7 +956,7 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result changePassword(@Param("customerId") String customerId, Context context)
+    public Result changePassword(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
@@ -1011,6 +1015,19 @@ public class CustomerController
     }
 
     /**
+     * Returns the page to confirm the deletion of customer's account.
+     * 
+     * @param context
+     * @return
+     */
+    public Result confirmDeleteAccount(Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        return Results.html().render(data);
+    }
+
+    /**
      * Deletes the current customer and all its addresses, orders and payment information.
      * 
      * @param customerId
@@ -1057,19 +1074,6 @@ public class CustomerController
                 return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
             }
         }
-    }
-
-    /**
-     * Returns the page to confirm the deletion of customer's account.
-     * 
-     * @param context
-     * @return
-     */
-    public Result confirmDeleteAccount(Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
     }
 
     /**
