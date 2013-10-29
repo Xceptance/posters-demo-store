@@ -73,4 +73,7 @@
   <command name="assertText" target="id=delAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
   <command name="assertText" target="id=billAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
   <command name="assertText" target="id=payment" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
+  <action name="Order"/>
+  <command name="clickAndWait" target="id=btnOrder"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
 </testcase>
