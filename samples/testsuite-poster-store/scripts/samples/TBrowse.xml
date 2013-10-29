@@ -6,21 +6,21 @@
   <command name="storeText" target="//*[@id='topCategory0']/a" value="topCat0Name"/>
   <command name="clickAndWait" target="//*[@id='topCategory0']/a"/>
   <command name="assertText" target="id=titleCategoryName" value="${topCat0Name}"/>
-  <command name="storeText" target="//*[@id='product0']/h3[@id='productName']" value="product0Name"/>
+  <command name="storeText" target="id=product0Name" value="product0Name"/>
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="assertText" target="id=titleProductName" value="${product0Name}"/>
   <action name="TBrowse-1"/>
   <command name="storeText" target="//*[@id='subCategory02']/a" value="subCat02Name"/>
   <command name="clickAndWait" target="//*[@id='subCategory02']/a"/>
   <command name="assertText" target="id=titleCategoryName" value="${subCat02Name}"/>
-  <command name="storeText" target="//*[@id='product1']/h3[@id='productName']" value="product1Name"/>
+  <command name="storeText" target="id=product1Name" value="product1Name"/>
   <command name="clickAndWait" target="//*[@id='product1']//img"/>
   <command name="assertText" target="id=titleProductName" value="${product1Name}"/>
   <action name="TBrowse-2"/>
   <command name="storeText" target="//*[@id='subCategory11']/a" value="subCat11Name"/>
   <command name="clickAndWait" target="//*[@id='subCategory11']/a"/>
   <command name="assertText" target="id=titleCategoryName" value="${subCat11Name}"/>
-  <command name="storeText" target="//*[@id='product1']/h3[@id='productName']" value="product2Name"/>
+  <command name="storeText" target="id=product1Name" value="product2Name"/>
   <command name="clickAndWait" target="//*[@id='product1']//img"/>
   <command name="assertText" target="id=titleProductName" value="${product2Name}"/>
 </testcase>

@@ -11,7 +11,7 @@
   <command name="clickAndWait" target="//*[@id='subCategory13']/a"/>
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="type" target="//*[contains(@class,'productCount0')]" value="3"/>
+  <command name="type" target="css=.productCount0" value="3"/>
   <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
   <action name="AddToCart-1"/>
   <command name="clickAndWait" target="//*[@id='subCategory22']/a"/>

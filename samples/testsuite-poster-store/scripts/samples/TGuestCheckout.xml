@@ -6,7 +6,7 @@
   <command name="storeText" target="//*[@id='topCategory2']/a" value="topCat2Name"/>
   <command name="clickAndWait" target="//*[@id='topCategory2']/a"/>
   <command name="assertText" target="id=titleCategoryName" value="${topCat2Name}"/>
-  <command name="storeText" target="//*[@id='product2']/h3[@id='productName'][1]" value="prod1Name"/>
+  <command name="storeText" target="id=product2Name" value="prod1Name"/>
   <command name="clickAndWait" target="//*[@id='product2']//img"/>
   <command name="assertText" target="id=titleProductName" value="${prod1Name}"/>
   <action name="AddToCart-0"/>
@@ -17,7 +17,7 @@
   <command name="storeText" target="//*[@id='subCategory02']/a" value="subCat02Name"/>
   <command name="clickAndWait" target="//*[@id='subCategory02']/a"/>
   <command name="assertText" target="id=titleCategoryName" value="${subCat02Name}"/>
-  <command name="storeText" target="//*[@id='product0']/h3[@id='productName'][1]" value="prod2Name"/>
+  <command name="storeText" target="id=product0Name" value="prod2Name"/>
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="assertText" target="id=titleProductName" value="${prod2Name}"/>
   <action name="AddToCart-1"/>
