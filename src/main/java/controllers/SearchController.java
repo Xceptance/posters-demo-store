@@ -125,8 +125,9 @@ public class SearchController
             RawSql rawSql = RawSqlBuilder.parse(sql).create();
             Query<Product> query = Ebean.find(Product.class);
             query.setRawSql(rawSql);
+            int pageSize = xcpConf.pageSize;
             // get paging list
-            final PagingList<Product> pagingList = query.findPagingList(6);
+            final PagingList<Product> pagingList = query.findPagingList(pageSize);
             // get row count in background
             pagingList.getFutureRowCount();
             // get the current page
@@ -138,7 +139,7 @@ public class SearchController
             // no product was found
             if (products.isEmpty())
             {
-                data.put("pageCount", 0);
+                data.put("totalPages", 0);
                 data.put("noResults", msg.get("noSearchResults", language).get());
             }
             // at least one product was found
@@ -147,12 +148,13 @@ public class SearchController
                 // get the total page count
                 int pageCount = pagingList.getTotalPageCount();
                 // add the page count to the data map
-                data.put("pageCount", pageCount);
+                data.put("totalPages", pageCount);
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
-                data.put("isSearch", true);
-                data.put("searchTerm", searchText);
             }
             template = xcpConf.templateProductOverview;
+            data.put("currentPage", pageNumber);
+            data.put("isSearch", "true");
+            data.put("searchTerm", searchText);
         }
         return Results.html().render(data).template(template);
     }

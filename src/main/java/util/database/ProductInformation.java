@@ -103,6 +103,8 @@ public abstract class ProductInformation
         // add the products to the data map
         data.put("products", list);
         // add the page count to the data map
-        data.put("pageCount", pageCount);
+        data.put("totalPages", pageCount);
+        data.put("currentPage", pageNumber);
+        data.put("isSearch", "false");
     }
 }
