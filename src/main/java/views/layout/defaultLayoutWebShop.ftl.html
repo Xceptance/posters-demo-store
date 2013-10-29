@@ -7,16 +7,29 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="/assets/css/bootstrap-form.css" rel="stylesheet">
-    	<style type="text/css">
-      		body {
-        		padding-top: 60px;
-        		padding-bottom: 40px;
-        		padding-left: 20px;
-        		padding-right: 40px;
-      		}
-    	</style>
-    </head>
-    <body>
+	<link href="/assets/css/pagination.css" rel="stylesheet"/>
+    <style type="text/css">
+      	body {
+        	padding-top: 60px;
+        	padding-bottom: 40px;
+        	padding-left: 20px;
+        	padding-right: 40px;
+      	}
+    </style>
+    
+	<script src="/assets/js/jquery-1.9.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap-tooltip.js"></script>
+	<script src="/assets/js/bootstrap-form.js"></script>
+	<script src="/assets/js/bootstrap-paginator.js"></script>
+	<script src="/assets/js/bootstrap-collapse.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('form').form();
+		});
+	</script>
+  </head>
+  <body>
     	<!-- header -->
 		<#include "header.ftl.html"/>
 		<!-- checkout breadcrumb -->
@@ -64,18 +77,6 @@
 			<hr>
 			<#include "footer.ftl.html"/>
 		</div>
-
-		<script src="/assets/js/jquery-1.9.1.min.js"></script>
-    	<script src="/assets/js/bootstrap.min.js"></script>
-    	<script src="/assets/js/bootstrap-tooltip.js"></script>
-		<script src="/assets/js/bootstrap-form.js"></script>
-		<script src="/assets/js/bootstrap-paginator.js"></script>
-		<script src="/assets/js/bootstrap-collapse.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('form').form();
-			});
-		</script>
-    </body>
+  </body>
 </html>
 </#macro>
