@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Simulates storefront search including search result browsing.</description>
+  <module name="module.OpenHomepage"/>
+  <module name="module.Search">
+    <parameter name="searchTerm" value="gjP#Iq!"/>
+  </module>
+  <command name="assertElementPresent" target="id=titleNoResults"/>
+  <module name="module.Search">
+    <parameter name="searchTerm" value="bear"/>
+  </module>
+  <command name="assertElementPresent" target="id=titleSearchText"/>
+  <action name="ViewProduct"/>
+  <command name="assertElementPresent" target="id=product0"/>
+  <command name="storeText" target="id=product0Name" value="productName"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
+  <command name="assertText" target="id=titleProductName" value="${productName}"/>
+  <module name="module.Search">
+    <parameter name="searchTerm" value="red bear"/>
+  </module>
+  <command name="assertElementPresent" target="id=titleSearchText"/>
+</testcase>
