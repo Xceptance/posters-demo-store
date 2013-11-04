@@ -2,56 +2,45 @@
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates browsing the catalog and adding product to cart.</description>
   <module name="module.OpenHomepage"/>
-  <action name="Browse-0"/>
-  <command name="storeText" target="//*[@id='subCategory33']/a" value="subCat33Name"/>
-  <command name="clickAndWait" target="//*[@id='subCategory33']/a"/>
-  <command name="assertText" target="id=titleCategoryName" value="${subCat33Name}"/>
-  <command name="storeText" target="id=product1Name" value="prod1Name"/>
-  <command name="clickAndWait" target="//*[@id='product1']//img"/>
-  <command name="assertText" target="id=titleProductName" value="${prod1Name}"/>
-  <action name="TAddToCart-0"/>
-  <command name="storeText" target="id=prodPrice" value="prod1Price"/>
-  <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertElementPresent" target="id=titleBasket"/>
-  <command name="assertText" target="id=productName0" value="${prod1Name}"/>
-  <command name="assertText" target="id=productPrice0" value="${prod1Price}"/>
-  <command name="assertValue" target="css=.productCount0" value="1"/>
-  <command name="assertText" target="id=totalPrice" value="${prod1Price}"/>
-  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*1.*${prod1Price}"/>
-  <action name="Browse-1"/>
-  <command name="storeText" target="//*[@id='subCategory10']/a" value="subCat10Name"/>
-  <command name="clickAndWait" target="//*[@id='subCategory10']/a"/>
-  <command name="assertText" target="id=titleCategoryName" value="${subCat10Name}"/>
-  <command name="storeText" target="id=product0Name" value="prod2Name"/>
-  <command name="clickAndWait" target="//*[@id='product0']//img"/>
-  <command name="assertText" target="id=titleProductName" value="${prod2Name}"/>
-  <action name="TAddToCart-1"/>
-  <command name="storeText" target="id=prodPrice" value="prod2Price"/>
-  <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertText" target="id=productName0" value="${prod1Name}"/>
-  <command name="assertValue" target="css=.productCount0" value="1"/>
-  <command name="assertText" target="id=productName1" value="${prod2Name}"/>
-  <command name="assertText" target="id=productPrice1" value="${prod2Price}"/>
-  <command name="assertValue" target="css=.productCount1" value="1"/>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*2.*${totalPrice}"/>
+  <module name="module.AddToCart">
+    <parameter name="idSubCategory" value="33"/>
+    <parameter name="idProduct" value="1"/>
+  </module>
+  <module name="module.VerifyCart">
+    <parameter name="priority" value="0"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productCount" value="1"/>
+  </module>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*"/>
+  <module name="module.AddToCart">
+    <parameter name="idSubCategory" value="10"/>
+    <parameter name="idProduct" value="0"/>
+  </module>
+  <module name="module.VerifyCart">
+    <parameter name="priority" value="1"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productCount" value="1"/>
+  </module>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*2.*"/>
   <action name="UpdateProductCount"/>
   <command name="type" target="css=.productCount0" value="3"/>
   <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
   <command name="assertValue" target="css=.productCount0" value="3"/>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*4.*${totalPrice}"/>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*4.*${totalPrice}"/>
   <action name="RemoveProduct"/>
   <command name="clickAndWait" target="id=btnRemoveProduct1"/>
   <command name="assertNotElementPresent" target="id=productName1"/>
   <command name="assertValue" target="css=.productCount0" value="3"/>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*3.*${totalPrice}"/>
-  <action name="AddSameProduct"/>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*3.*${totalPrice}"/>
+  <action name="ShowProductOfCart"/>
+  <command name="storeText" target="id=productName0" value="productName"/>
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
-  <command name="assertText" target="id=titleProductName" value="${prod1Name}"/>
+  <command name="assertText" target="id=titleProductName" value="${productName}"/>
+  <action name="AddSameProduct"/>
   <command name="clickAndWait" target="id=btnAddToCart"/>
   <command name="assertValue" target="css=.productCount0" value="4"/>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*4.*${totalPrice}"/>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*4.*${totalPrice}"/>
 </testcase>
