@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
-  <description>Simulates browsing the catalog, adding product(s) to the cart and checkout as guest without final order placement.</description>
+  <description>Simulates browsing the catalog, adding product(s) to the cart, checkout as guest and place the order.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart">
     <parameter name="idSubCategory" value="23"/>
