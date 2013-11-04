@@ -2,25 +2,20 @@
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates browsing the catalog.</description>
   <module name="module.OpenHomepage"/>
-  <action name="TBrowse-0"/>
-  <command name="storeText" target="//*[@id='topCategory0']/a" value="topCat0Name"/>
+  <module name="module.Browse">
+    <parameter name="idSubCategory" value="02"/>
+    <parameter name="idProduct" value="1"/>
+  </module>
+  <module name="module.Browse">
+    <parameter name="idSubCategory" value="11"/>
+    <parameter name="idProduct" value="3"/>
+  </module>
+  <action name="ViewTopCategory"/>
+  <command name="storeText" target="//*[@id='topCategory0']/a" value="topCategoryName"/>
   <command name="clickAndWait" target="//*[@id='topCategory0']/a"/>
-  <command name="assertText" target="id=titleCategoryName" value="${topCat0Name}"/>
-  <command name="storeText" target="id=product0Name" value="product0Name"/>
+  <command name="assertText" target="id=titleCategoryName" value="${topCategoryName}"/>
+  <action name="ViewProduct"/>
+  <command name="storeText" target="id=product0Name" value="productName"/>
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
-  <command name="assertText" target="id=titleProductName" value="${product0Name}"/>
-  <action name="TBrowse-1"/>
-  <command name="storeText" target="//*[@id='subCategory02']/a" value="subCat02Name"/>
-  <command name="clickAndWait" target="//*[@id='subCategory02']/a"/>
-  <command name="assertText" target="id=titleCategoryName" value="${subCat02Name}"/>
-  <command name="storeText" target="id=product1Name" value="product1Name"/>
-  <command name="clickAndWait" target="//*[@id='product1']//img"/>
-  <command name="assertText" target="id=titleProductName" value="${product1Name}"/>
-  <action name="TBrowse-2"/>
-  <command name="storeText" target="//*[@id='subCategory11']/a" value="subCat11Name"/>
-  <command name="clickAndWait" target="//*[@id='subCategory11']/a"/>
-  <command name="assertText" target="id=titleCategoryName" value="${subCat11Name}"/>
-  <command name="storeText" target="id=product1Name" value="product2Name"/>
-  <command name="clickAndWait" target="//*[@id='product1']//img"/>
-  <command name="assertText" target="id=titleProductName" value="${product2Name}"/>
+  <command name="assertText" target="id=titleProductName" value="${productName}"/>
 </testcase>
