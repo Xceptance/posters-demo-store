@@ -2,8 +2,8 @@
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates customer registration.</description>
   <module name="module.OpenHomepage"/>
+  <module name="module.OpenLoginForm"/>
   <action name="StartRegistration"/>
-  <command name="clickAndWait" target="id=btnShowLoginForm"/>
   <command name="clickAndWait" target="id=linkRegister"/>
   <command name="assertElementPresent" target="id=formRegister"/>
   <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
@@ -37,8 +37,8 @@
   <module name="module.DeleteAccount">
     <parameter name="password" value="${password}"/>
   </module>
+  <module name="module.OpenLoginForm"/>
   <action name="TryToLoginAgain"/>
-  <command name="clickAndWait" target="id=btnShowLoginForm"/>
   <command name="type" target="id=email" value="${generatedEmail}"/>
   <command name="type" target="id=password" value="${password}"/>
   <command name="clickAndWait" target="id=btnSignIn"/>
