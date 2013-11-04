@@ -7,25 +7,14 @@
   <command name="clickAndWait" target="id=linkRegister"/>
   <command name="assertElementPresent" target="id=formRegister"/>
   <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
-  <action name="RegisterWithWrongPassword">
-    <comment>The entered passwords don't match.</comment>
-  </action>
   <module name="module.FillInRegistrationForm">
     <parameter name="name" value="${name}"/>
     <parameter name="firstName" value="${firstName}"/>
     <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>
-    <parameter name="passwordAgain" value="wrongPassword"/>
+    <parameter name="passwordAgain" value="${password}"/>
   </module>
-  <command name="clickAndWait" target="id=btnRegister"/>
-  <command name="assertElementPresent" target="xpath=id('errorMessage')"/>
-  <command name="assertText" target="//*[@id='errorMessage']//strong[1]" value="The passwords you entered dont match. Please try again."/>
   <action name="Register"/>
-  <command name="assertText" target="id=name" value="${name}"/>
-  <command name="assertText" target="id=firstName" value="${firstName}"/>
-  <command name="assertText" target="id=eMail" value="${generatedEmail}"/>
-  <command name="type" target="id=password" value="${password}"/>
-  <command name="type" target="id=passwordAgain" value="${password}"/>
   <command name="clickAndWait" target="id=btnRegister"/>
   <command name="assertElementPresent" target="xpath=id('successMessage')"/>
   <command name="assertText" target="//*[@id='successMessage']//strong[1]" value="Your account has been created. Log in with your email address and password."/>
