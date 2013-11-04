@@ -909,43 +909,35 @@ public class CustomerController
         }
         else
         {
-            boolean failure = false;
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             // incorrect password
             if (!CustomerInformation.correctPassword(customer.getEmail(), password))
             {
                 // error message
                 context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                failure = true;
+                return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
             }
+            // email isn't valid
             else if (!Pattern.matches(xcpConf.regexEmail, email))
             {
                 // error message
                 context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
-                failure = true;
+                return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
             }
-            if (failure)
+            // email already exist
+            else if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
             {
-                final Map<String, Object> data = new HashMap<String, Object>();
-                CommonInformation.setCommonData(data, context, xcpConf);
-                Map<String, String> updatedCustomer = new HashMap<String, String>();
-                updatedCustomer.put("name", name);
-                updatedCustomer.put("firstName", firstName);
-                updatedCustomer.put("email", email);
-                data.put("customer", customer);
-                // show page to update name or email again
-                return Results.html().render(data).template(xcpConf.templateChangeNameOrEmail);
+                // error message
+                context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
+                return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
             }
-            else
-            {
-                customer.setName(name);
-                customer.setFirstName(firstName);
-                customer.setEmail(email);
-                customer.update();
-                // success message
-                context.getFlashCookie().success(msg.get("successUpdate", language).get());
-                return Results.redirect(context.getContextPath() + "/settingOverview");
-            }
+            customer.setName(name);
+            customer.setFirstName(firstName);
+            customer.setEmail(email);
+            customer.update();
+            // success message
+            context.getFlashCookie().success(msg.get("successUpdate", language).get());
+            return Results.redirect(context.getContextPath() + "/settingOverview");
         }
     }
 
