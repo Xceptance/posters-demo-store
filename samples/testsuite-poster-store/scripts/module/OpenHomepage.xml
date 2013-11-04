@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Deletes all visible cookies and opens the homepage.</description>
   <action name="OpenStartPage"/>
   <command name="deleteAllVisibleCookies"/>
   <command name="open" value="/"/>
