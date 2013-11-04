@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Verifies that a product is in the cart in a specified count.</description>
+  <parameter name="priority"/>
+  <parameter name="productName"/>
+  <parameter name="productCount"/>
+  <command name="assertText" target="id=productName@{priority}" value="@{productName}"/>
+  <command name="assertValue" target="css=.productCount@{priority}" value="@{productCount}"/>
+</scriptmodule>
