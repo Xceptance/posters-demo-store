@@ -92,18 +92,16 @@ public class SearchController
     public Result search2(@Param("searchText") String searchText, @PathParam("pageNumber") int pageNumber,
                           Context context)
     {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
-        String template;
         // search text is empty
-        if (searchText.isEmpty() || searchText.equals(" "))
+        if (searchText.isEmpty() || searchText.trim().isEmpty())
         {
-            template = xcpConf.templateIndex;
             context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
-            CarouselInformation.getCarouselProducts(data);
+            return Results.redirect(context.getContextPath() + "/");
         }
         else
         {
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
             // build SQL string
             String sql = "SELECT id, name, url, price, description_detail FROM product where ";
             // divide search text by spaces
@@ -151,12 +149,11 @@ public class SearchController
                 data.put("totalPages", pageCount);
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
             }
-            template = xcpConf.templateProductOverview;
             data.put("currentPage", pageNumber);
             data.put("isSearch", "true");
             data.put("searchTerm", searchText);
+            return Results.html().render(data).template(xcpConf.templateProductOverview);
         }
-        return Results.html().render(data).template(template);
     }
 
     /**
