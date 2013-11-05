@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Opens the account overview page.</description>
+  <action name="OpenAccountOverview"/>
+  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
+  <command name="click" target="//li[@id='dropdown']/a"/>
+  <command name="clickAndWait" target="//*[@id='btnAccountOverview']/a"/>
+  <command name="assertElementPresent" target="id=titleAccountOverview"/>
+</scriptmodule>

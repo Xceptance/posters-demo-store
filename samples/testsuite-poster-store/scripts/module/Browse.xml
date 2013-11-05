@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Browses to a product of a sub category.</description>
+  <parameter name="idSubCategory"/>
+  <parameter name="idProduct"/>
+  <action name="ViewCategory"/>
+  <command name="storeText" target="xpath=id('subCategory@{idSubCategory}')/a" value="categoryName"/>
+  <command name="clickAndWait" target="xpath=id('subCategory@{idSubCategory}')/a"/>
+  <command name="assertText" target="id=titleCategoryName" value="${categoryName}"/>
+  <action name="ViewProduct"/>
+  <command name="storeText" target="id=product@{idProduct}Name" value="productName"/>
+  <command name="clickAndWait" target="//*[@id='product@{idProduct}']//img"/>
+  <command name="assertText" target="id=titleProductName" value="${productName}"/>
+</scriptmodule>

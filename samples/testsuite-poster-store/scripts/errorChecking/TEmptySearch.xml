@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Verifies that an info message is shown after a search for an empty search term.</description>
+  <module name="module.OpenHomepage"/>
+  <action name="SearchEmptyString"/>
+  <command name="clickAndWait" target="id=btnSearch"/>
+  <command name="assertText" target="id=infoMessage" value="× Sorry! No results found matching your search. Please try again."/>
+</testcase>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<scriptmodule version="3" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Browses to a product of a sub category and add this product to the cart.</description>
+  <parameter name="idSubCategory"/>
+  <parameter name="idProduct"/>
+  <module name="module.Browse">
+    <parameter name="idSubCategory" value="@{idSubCategory}"/>
+    <parameter name="idProduct" value="@{idProduct}"/>
+  </module>
+  <action name="AddToCart"/>
+  <command name="clickAndWait" target="id=btnAddToCart"/>
+  <command name="assertElementPresent" target="id=titleBasket"/>
+</scriptmodule>

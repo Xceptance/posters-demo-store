@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Simulates browsing the catalog, adding product(s) to the cart, checkout as guest and place the order.</description>
+  <module name="module.OpenHomepage"/>
+  <module name="module.AddToCart">
+    <parameter name="idSubCategory" value="23"/>
+    <parameter name="idProduct" value="2"/>
+  </module>
+  <action name="StartCheckout"/>
+  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
+  <command name="clickAndWait" target="id=btnStartCheckout"/>
+  <action name="EnterShippingAddress"/>
+  <command name="assertElementPresent" target="id=titleDelAddr"/>
+  <module name="module.FillInAddressForm">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+  </module>
+  <command name="check" target="id=billEqualShipp-No"/>
+  <command name="clickAndWait" target="id=btnAddDelAddr"/>
+  <action name="EnterBillingAddress"/>
+  <command name="assertElementPresent" target="id=titleBillAddr"/>
+  <module name="module.FillInAddressForm">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+  </module>
+  <command name="clickAndWait" target="id=btnAddBillAddr"/>
+  <action name="EnterPaymentMethod"/>
+  <command name="assertElementPresent" target="id=titlePayment"/>
+  <module name="module.FillInPaymentForm">
+    <parameter name="number" value="${creditCard}"/>
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="month" value="${expDateMonth}"/>
+    <parameter name="year" value="${expDateYear}"/>
+  </module>
+  <command name="clickAndWait" target="id=btnAddPayment"/>
+  <action name="Order"/>
+  <module name="module.VerifyOrderOverview">
+    <parameter name="priority" value="0"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productCount" value="1"/>
+  </module>
+  <module name="module.VerifyAddressAndPaymentOfOrder">
+    <parameter name="fullName" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+    <parameter name="creditCard" value="${creditCardCryptic}"/>
+    <parameter name="expDateMonth" value="${expDateMonth}"/>
+    <parameter name="expDateYear" value="${expDateYear}"/>
+  </module>
+  <command name="clickAndWait" target="id=btnOrder"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*0.*"/>
+</testcase>

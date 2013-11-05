@@ -4,9 +4,8 @@
   <parameter name="email"/>
   <parameter name="password"/>
   <parameter name="firstName"/>
+  <module name="module.OpenLoginForm"/>
   <action name="Login"/>
-  <command name="assertElementPresent" target="id=btnShowLoginForm"/>
-  <command name="clickAndWait" target="id=btnShowLoginForm"/>
   <command name="type" target="id=email" value="@{email}"/>
   <command name="type" target="id=password" value="@{password}"/>
   <command name="clickAndWait" target="id=btnSignIn"/>

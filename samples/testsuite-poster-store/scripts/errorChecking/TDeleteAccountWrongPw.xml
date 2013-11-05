@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Verifies that an error is shown if the user types a wrong password while deleting the account.</description>
+  <module name="module.OpenHomepage"/>
+  <module name="module.Login">
+    <parameter name="email" value="${email}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="firstName" value="${firstName}"/>
+  </module>
+  <module name="module.OpenAccountOverview"/>
+  <action name="OpenPersonalData"/>
+  <command name="clickAndWait" target="id=linkPersonalData"/>
+  <action name="OpenFormToDeleteAccount"/>
+  <command name="clickAndWait" target="id=btnDeleteAccount"/>
+  <action name="TryToDeleteAccount"/>
+  <command name="type" target="id=password" value="wrongPassword"/>
+  <command name="clickAndWait" target="id=btnDeleteAccount"/>
+  <command name="assertText" target="id=errorMessage" value="× The password you entered is incorrect. Please try again."/>
+  <command name="assertElementPresent" target="id=formDeleteAccount"/>
+</testcase>

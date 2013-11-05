@@ -7,19 +7,11 @@
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
-  <action name="AddToCart-0"/>
-  <command name="clickAndWait" target="//*[@id='subCategory13']/a"/>
-  <command name="clickAndWait" target="//*[@id='product0']//img"/>
-  <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="type" target="//*[contains(@class,'productCount0')]" value="3"/>
-  <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
-  <action name="AddToCart-1"/>
-  <command name="clickAndWait" target="//*[@id='subCategory22']/a"/>
-  <command name="clickAndWait" target="//*[@id='product0']//img"/>
-  <command name="clickAndWait" target="id=btnAddToCart"/>
-  <action name="Checkout"/>
-  <command name="storeText" target="id=productName0" value="product1Name"/>
-  <command name="storeText" target="id=productName1" value="product2Name"/>
+  <module name="module.AddToCart">
+    <parameter name="idSubCategory" value="12"/>
+    <parameter name="idProduct" value="3"/>
+  </module>
+  <action name="StartCheckout"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="SelectShippingAddress"/>
   <command name="assertElementPresent" target="id=titleDelAddr"/>
@@ -34,31 +26,33 @@
   <command name="assertElementPresent" target="id=payment0"/>
   <command name="clickAndWait" target="id=btnUsePayment0"/>
   <action name="Order"/>
-  <command name="assertElementPresent" target="id=titleOrderOverview"/>
-  <command name="assertElementPresent" target="id=product0"/>
-  <command name="assertElementPresent" target="id=product1"/>
-  <command name="assertText" target="id=product0Name" value="${product1Name}"/>
-  <command name="assertText" target="id=product0Count" value="3"/>
-  <command name="assertText" target="id=product1Name" value="${product2Name}"/>
-  <command name="assertText" target="id=product1Count" value="1"/>
-  <command name="assertText" target="id=delAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
-  <command name="assertText" target="id=billAddr" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
-  <command name="assertText" target="id=payment" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
+  <module name="module.VerifyOrderOverview">
+    <parameter name="priority" value="0"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productCount" value="1"/>
+  </module>
+  <module name="module.VerifyAddressAndPaymentOfOrder">
+    <parameter name="fullName" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+    <parameter name="creditCard" value="${creditCardCryptic}"/>
+    <parameter name="expDateMonth" value="${expDateMonth}"/>
+    <parameter name="expDateYear" value="${expDateYear}"/>
+  </module>
   <command name="clickAndWait" target="id=btnOrder"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="//*[@id='btnBasketOverview']/a" value="regexp:.*0.*0.*"/>
-  <action name="VerifyOrderInCustomerBackend"/>
-  <command name="click" target="//li[@id='dropdown']/a"/>
-  <command name="clickAndWait" target="//*[@id='btnAccountOverview']/a"/>
-  <command name="assertElementPresent" target="id=titleAccountOverview"/>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*0.*"/>
+  <module name="module.OpenAccountOverview"/>
+  <action name="ViewOrderOverview"/>
   <command name="clickAndWait" target="id=linkOrderOverview"/>
   <command name="assertElementPresent" target="id=titleOrderHistory"/>
   <command name="assertElementPresent" target="id=order0"/>
   <command name="assertElementPresent" target="id=order0Product0"/>
-  <command name="assertElementPresent" target="id=order0Product1"/>
-  <command name="assertText" target="id=order0Product0Name" value="${product1Name}"/>
-  <command name="assertText" target="id=order0Product1Name" value="${product2Name}"/>
-  <command name="assertText" target="id=order0Product0Count" value="3x"/>
-  <command name="assertText" target="id=order0Product1Count" value="1x"/>
+  <command name="assertText" target="id=order0Product0Name" value="${productName}"/>
+  <command name="assertText" target="id=order0Product0Count" value="1x"/>
   <module name="module.Logout"/>
 </testcase>
