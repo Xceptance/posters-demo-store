@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+  <description>Verifies that an error is shown if the product count of the cart couldn't be updated.</description>
+  <module name="module.OpenHomepage"/>
+  <module name="module.AddToCart">
+    <parameter name="idSubCategory" value="11"/>
+    <parameter name="idProduct" value="3"/>
+  </module>
+  <action name="UpdateProductCount"/>
+  <command name="type" target="css=.productCount0" value="asdf"/>
+  <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
+  <command name="assertText" target="id=infoMessage" value="× The product count could not be updated. Please try again."/>
+  <command name="assertValue" target="css=.productCount0" value="1"/>
+</testcase>
