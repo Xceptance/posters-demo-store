@@ -9,6 +9,7 @@ import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
 import models.DeliveryAddress;
+import models.Order;
 import ninja.Context;
 import util.session.SessionHandling;
 
@@ -125,10 +126,12 @@ public abstract class CustomerInformation
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
-            // get customer by session
-            Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
+            // get orders by customer id order by last update
+            List<Order> orders = Ebean.find(Order.class).where()
+                                      .eq("customer.id", SessionHandling.getCustomerId(context)).orderBy("lastUpdate")
+                                      .findList();
             // add all orders to the data map
-            data.put("orderOverview", customer.getOrder());
+            data.put("orderOverview", orders);
         }
     }
 
