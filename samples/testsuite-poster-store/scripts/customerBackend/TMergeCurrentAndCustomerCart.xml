@@ -7,26 +7,14 @@
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
-  <module name="module.AddToCart">
-    <parameter name="idSubCategory" value="11"/>
-    <parameter name="idProduct" value="0"/>
-  </module>
+  <module name="module.AddToCart"/>
   <command name="storeText" target="id=productName0" value="product1Name"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*-.*"/>
   <module name="module.Logout"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*-.*"/>
-  <module name="module.AddToCart">
-    <parameter name="idSubCategory" value="12"/>
-    <parameter name="idProduct" value="0"/>
-  </module>
+  <module name="module.AddToCart"/>
   <command name="storeText" target="id=productName0" value="product2Name"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*-.*"/>
-  <module name="module.AddToCart">
-    <parameter name="idSubCategory" value="11"/>
-    <parameter name="idProduct" value="0"/>
-  </module>
-  <command name="assertText" target="id=productName1" value="${product1Name}"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*2.*-.*"/>
   <module name="module.Login">
     <parameter name="email" value="${email}"/>
     <parameter name="password" value="${password}"/>
@@ -35,10 +23,10 @@
   <action name="GetMergedCart"/>
   <command name="clickAndWait" target="//*[@id='btnBasketOverview']/a"/>
   <command name="assertText" target="id=productName0" value="${product1Name}"/>
-  <command name="assertValue" target="css=.productCount0" value="2"/>
+  <command name="assertValue" target="css=.productCount0" value="1"/>
   <command name="assertText" target="id=productName1" value="${product2Name}"/>
   <command name="assertValue" target="css=.productCount1" value="1"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*3.*-.*"/>
+  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*2.*-.*"/>
   <action name="RemoveProductFromCart"/>
   <command name="clickAndWait" target="id=btnRemoveProduct0"/>
   <action name="RemoveProductFromCart"/>
