@@ -25,6 +25,7 @@
         $('#pagination').bootstrapPaginator(options);
 	</script>
 	<!-- products -->
+	<div id="productOverview">
 	<#list products as pro>
     	<#if (pro_index + 3) % 3 ==0>
     		<div class="row-fluid">
@@ -47,4 +48,5 @@
       		</div>
       	</#if>
 	</#list>
+	</div>
 </@layout.myLayout>
