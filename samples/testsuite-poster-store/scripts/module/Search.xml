@@ -5,5 +5,4 @@
   <action name="Search"/>
   <command name="type" target="id=searchText" value="@{searchTerm}"/>
   <command name="clickAndWait" target="id=btnSearch"/>
-  <command name="assertText" target="id=searchText" value="@{searchTerm}"/>
 </scriptmodule>
