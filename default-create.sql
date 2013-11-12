@@ -69,6 +69,7 @@ create table ordering (
   total_costs               double,
   credit_card_id            integer,
   customer_id               integer,
+  last_update               timestamp not null,
   constraint pk_ordering primary key (id))
 ;
 

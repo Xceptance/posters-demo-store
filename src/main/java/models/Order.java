@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.avaje.ebean.Ebean;
 
@@ -42,6 +44,9 @@ public class Order
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<Order_Product> products;
+    
+    @Version
+    private Timestamp lastUpdate;
 
     public Order()
     {
@@ -154,6 +159,16 @@ public class Order
     public void setOrderDate(String date)
     {
         this.orderDate = date;
+    }
+
+    public Timestamp getLastUpdate()
+    {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate)
+    {
+        this.lastUpdate = lastUpdate;
     }
 
     public void update()
