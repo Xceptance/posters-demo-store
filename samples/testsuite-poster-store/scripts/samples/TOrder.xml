@@ -7,10 +7,7 @@
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
-  <module name="module.AddToCart">
-    <parameter name="idSubCategory" value="12"/>
-    <parameter name="idProduct" value="3"/>
-  </module>
+  <module name="module.AddToCart"/>
   <action name="StartCheckout"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="SelectShippingAddress"/>
@@ -50,9 +47,6 @@
   <action name="ViewOrderOverview"/>
   <command name="clickAndWait" target="id=linkOrderOverview"/>
   <command name="assertElementPresent" target="id=titleOrderHistory"/>
-  <command name="assertElementPresent" target="id=order0"/>
-  <command name="assertElementPresent" target="id=order0Product0"/>
-  <command name="assertText" target="id=order0Product0Name" value="${productName}"/>
-  <command name="assertText" target="id=order0Product0Count" value="1x"/>
-  <module name="module.Logout"/>
+  <command name="assertText" target="//div[@id='orderOverview']/descendant::table[last()]/*/tr/td[2]" value="${productName}"/>
+  <command name="assertText" target="//div[@id='orderOverview']/descendant::table[last()]/*/tr/td[4]" value="1x"/>
 </testcase>
