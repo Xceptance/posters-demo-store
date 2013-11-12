@@ -100,8 +100,6 @@ public class SearchController
         }
         else
         {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
             // build SQL string
             String sql = "SELECT id, name, url, price, description_detail FROM product where ";
             // divide search text by spaces
@@ -126,33 +124,35 @@ public class SearchController
             int pageSize = xcpConf.pageSize;
             // get paging list
             final PagingList<Product> pagingList = query.findPagingList(pageSize);
+            // get all products to 
+            int totalProductCount = query.findList().size();            
             // get row count in background
             pagingList.getFutureRowCount();
             // get the current page
             Page<Product> page = pagingList.getPage(pageNumber - 1);
             // get the products of the current page
             List<Product> products = page.getList();
-            // add the products to the data map
-            data.put("products", products);
             // no product was found
             if (products.isEmpty())
             {
-                data.put("totalPages", 0);
-                data.put("noResults", msg.get("noSearchResults", language).get());
+                context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+                return Results.redirect(context.getContextPath() + "/");
             }
             // at least one product was found
             else
             {
-                // get the total page count
-                int pageCount = pagingList.getTotalPageCount();
+                final Map<String, Object> data = new HashMap<String, Object>();
+                CommonInformation.setCommonData(data, context, xcpConf);
+                // add the products to the data map
+                data.put("products", products);
                 // add the page count to the data map
-                data.put("totalPages", pageCount);
+                data.put("totalPages", Math.ceil(totalProductCount / (double)pageSize));
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
+                data.put("currentPage", pageNumber);
+                data.put("isSearch", "true");
+                data.put("searchTerm", searchText);
+                return Results.html().render(data).template(xcpConf.templateProductOverview);
             }
-            data.put("currentPage", pageNumber);
-            data.put("isSearch", "true");
-            data.put("searchTerm", searchText);
-            return Results.html().render(data).template(xcpConf.templateProductOverview);
         }
     }
 
