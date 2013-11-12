@@ -2,10 +2,7 @@
 <testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
   <description>Simulates browsing the catalog, adding product(s) to the cart, checkout as guest and place the order.</description>
   <module name="module.OpenHomepage"/>
-  <module name="module.AddToCart">
-    <parameter name="idSubCategory" value="23"/>
-    <parameter name="idProduct" value="2"/>
-  </module>
+  <module name="module.AddToCart"/>
   <action name="StartCheckout"/>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
