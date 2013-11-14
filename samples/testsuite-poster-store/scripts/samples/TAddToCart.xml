@@ -3,15 +3,15 @@
   <description>Simulates browsing the catalog and adding product to cart.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
-  <module name="module.VerifyCart">
-    <parameter name="priority" value="0"/>
+  <module name="module.VerifyCartItem">
+    <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productCount" value="1"/>
   </module>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*"/>
   <module name="module.AddToCart"/>
-  <module name="module.VerifyCart">
-    <parameter name="priority" value="1"/>
+  <module name="module.VerifyCartItem">
+    <parameter name="index" value="1"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productCount" value="1"/>
   </module>
