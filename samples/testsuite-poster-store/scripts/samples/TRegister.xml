@@ -16,20 +16,10 @@
   </module>
   <action name="Register"/>
   <command name="clickAndWait" target="id=btnRegister"/>
-  <command name="assertElementPresent" target="xpath=id('successMessage')"/>
-  <command name="assertText" target="//*[@id='successMessage']//strong[1]" value="Your account has been created. Log in with your email address and password."/>
+  <command name="assertElementPresent" target="id=successMessage"/>
   <module name="module.Login">
     <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
-  <module name="module.DeleteAccount">
-    <parameter name="password" value="${password}"/>
-  </module>
-  <module name="module.OpenLoginForm"/>
-  <action name="TryToLoginAgain"/>
-  <command name="type" target="id=email" value="${generatedEmail}"/>
-  <command name="type" target="id=password" value="${password}"/>
-  <command name="clickAndWait" target="id=btnSignIn"/>
-  <command name="assertElementPresent" target="id=errorMessage"/>
 </testcase>
