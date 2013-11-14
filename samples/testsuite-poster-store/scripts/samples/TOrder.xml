@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
   <description>Simulates browsing the catalog, adding product(s) to the cart, checkout as registered customer and place the order.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.Login">

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testcase version="3" baseURL="http://localhost:8080" xmlns="http://xlt.xceptance.com/xlt-script/2">
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
   <description>Changes name, email address and password of a customer.</description>
   <module name="module.OpenHomepage"/>
   <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
