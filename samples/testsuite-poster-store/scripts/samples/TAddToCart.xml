@@ -15,7 +15,7 @@
   </module>
   <module name="module.AddToCart"/>
   <module name="module.VerifyCartItem">
-    <parameter name="index" value="1"/>
+    <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productCount" value="1"/>
   </module>
