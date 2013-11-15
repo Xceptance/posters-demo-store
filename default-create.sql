@@ -10,6 +10,7 @@ create table basket_product (
   product_id                integer,
   basket_id                 integer,
   count_product             integer,
+  last_update               timestamp not null,
   constraint pk_basket_product primary key (id))
 ;
 
