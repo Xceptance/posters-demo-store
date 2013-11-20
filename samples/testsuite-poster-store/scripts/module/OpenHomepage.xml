@@ -2,7 +2,7 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
   <description>Deletes all visible cookies and opens the homepage.</description>
   <action name="OpenStartPage"/>
-  <command name="deleteAllVisibleCookies"/>
+  <command name="deleteCookie" target="NINJA_SESSION"/>
   <command name="open" value="/"/>
   <command name="assertElementPresent" target="id=titleIndex"/>
 </scriptmodule>
