@@ -63,8 +63,13 @@ public abstract class BasketInformation
      * @param basket
      * @param data
      */
-    public static void addBasketDetailToMap(final Basket basket, final Map<String, Object> data)
+    public static void addBasketDetailToMap(Basket basket, final Map<String, Object> data)
     {
+        if (basket == null)
+        {
+            basket = createNewBasket();
+        }
+
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
         // get all products of the basket
