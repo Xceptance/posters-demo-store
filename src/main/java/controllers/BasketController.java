@@ -42,7 +42,7 @@ public class BasketController
      * @param context
      * @return The basket overview page.
      */
-    public Result addToBasket(@Param("productName") String productId, Context context)
+    public Result addToBasket(@Param("productId") String productId, @Param("finish") String finish, Context context)
     {
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
@@ -51,7 +51,7 @@ public class BasketController
         // set customer to basket
         BasketInformation.setCustomerToBasket(context, basket);
         // add product to basket
-        BasketInformation.addProductToBasket(basket, product);
+        BasketInformation.addProductToBasket(basket, product, finish);
         // return basket overview page
         return Results.redirect(context.getContextPath() + "/basket");
     }
@@ -63,19 +63,17 @@ public class BasketController
      * @param context
      * @return
      */
-    public Result deleteFromBasket(@Param("productName") String productId, Context context)
+    public Result deleteFromBasket(@Param("basketProductId") int basketProductId, Context context)
     {
-        // get product by id
-        Product product = ProductInformation.getProductById(Integer.parseInt(productId));
+        Basket_Product basketProduct = Ebean.find(Basket_Product.class, basketProductId);
         // get basket by session
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // get count of this product
-        int countProduct = Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
-                                .findUnique().getCountProduct();
+        int countProduct = basketProduct.getCountProduct();
         // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
-            BasketInformation.removeProductFromBasket(basket, product);
+            BasketInformation.removeProductFromBasket(basket, basketProduct);
         }
         // return basket overview page
         return Results.redirect(context.getContextPath() + "/basket");
@@ -98,16 +96,14 @@ public class BasketController
     /**
      * Updates the product count of the given product.
      * 
-     * @param productId
+     * @param basketProductId
      * @param productCount
      * @param context
      * @return
      */
-    public Result updateProductCount(@Param("productName") String productId,
+    public Result updateProductCount(@Param("basketProductId") int basketProductId,
                                      @Param("productCount") String productCount, Context context)
     {
-        // get basket by session
-        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
             // show info message
@@ -116,16 +112,18 @@ public class BasketController
         // product count is OK
         else
         {
-            // get product by id
-            Product product = ProductInformation.getProductById(Integer.parseInt(productId));
             int newProductCount = Integer.parseInt(productCount);
             // zero is minimum of product count
             if (newProductCount < 0)
             {
                 newProductCount = 0;
             }
-            int currentProductCount = Ebean.find(Basket_Product.class).where().eq("basket", basket)
-                                           .eq("product", product).findUnique().getCountProduct();
+            // get basket by session
+            Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+            // get basket product by id
+            Basket_Product basketProduct = Ebean.find(Basket_Product.class, basketProductId);
+            Product product = basketProduct.getProduct();
+            int currentProductCount = basketProduct.getCountProduct();
             int difference = newProductCount - currentProductCount;
             // product must be added
             if (difference > 0)
@@ -133,7 +131,7 @@ public class BasketController
                 for (int i = 0; i < difference; i++)
                 {
                     // add product to basket
-                    BasketInformation.addProductToBasket(basket, product);
+                    BasketInformation.addProductToBasket(basket, product, basketProduct.getFinish());
                 }
             }
             // product must be removed
@@ -142,7 +140,7 @@ public class BasketController
                 for (int i = difference; i < 0; i++)
                 {
                     // remove product from basket
-                    BasketInformation.removeProductFromBasket(basket, product);
+                    BasketInformation.removeProductFromBasket(basket, basketProduct);
                 }
             }
         }

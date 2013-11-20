@@ -15,6 +15,7 @@
 			<td><a href=/productDetail/${orderProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
 			<td id="order${order_index}Product${orderProduct_index}Name">${orderProduct.product.name}</td>
 			<td id="order${order_index}Product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
+			<td id="order${order_index}Product${orderProduct_index}Finish">${orderProduct.finish}</td>
 			<td id="order${order_index}Product${orderProduct_index}Count">${orderProduct.countProduct}x</td>
 		</tr>
 		</#list>

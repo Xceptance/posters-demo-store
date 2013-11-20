@@ -88,58 +88,50 @@ public class Basket
         this.products = products;
     }
 
-    public void addProduct(Product product)
+    public void addProduct(Product product, final String finish)
     {
-        Basket_Product basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", this)
-                                             .eq("product", product).findUnique();
+        Basket_Product basketProduct = Ebean.find(Basket_Product.class).where().eq("basket", this)
+                                            .eq("product", product).eq("finish", finish).findUnique();
         // this product is not in the basket
-        if (basketProducts == null)
+        if (basketProduct == null)
         {
             // add product to basket
-            basketProducts = new Basket_Product();
-            basketProducts.setBasket(this);
-            basketProducts.setProduct(product);
+            basketProduct = new Basket_Product();
+            basketProduct.setBasket(this);
+            basketProduct.setProduct(product);
             // set product count to one
-            basketProducts.setCountProduct(1);
-            basketProducts.save();
-            products.add(basketProducts);
+            basketProduct.setCountProduct(1);
+            // set finish
+            basketProduct.setFinish(finish);
+            basketProduct.save();
+            products.add(basketProduct);
         }
         // this product is in the basket at least one time
         else
         {
             // increment the count of this product
-            basketProducts.incCountProduct();
-            basketProducts.update();
+            basketProduct.incCountProduct();
+            basketProduct.update();
         }
         // recalculate total price
         this.setTotalPrice(getTotalPrice() + product.getPrice());
     }
 
-    public void deleteProduct(Product product)
+    public void deleteProduct(final Basket_Product basketProduct)
     {
-        Basket_Product basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", this)
-                                             .eq("product", product).findUnique();
-        // product is not in the basket
-        if (basketProducts == null)
+        // product is in the basket more than once
+        if (basketProduct.getCountProduct() > 1)
         {
-            // do nothing
+            basketProduct.decrementProductCount();
+            basketProduct.update();
         }
         else
         {
-            // product is in the basket more than once
-            if (basketProducts.getCountProduct() > 1)
-            {
-                basketProducts.decrementProductCount();
-                basketProducts.update();
-            }
-            else
-            {
-                Ebean.delete(basketProducts);
-                this.products.remove(basketProducts);
-            }
-            // recalculate total price
-            this.setTotalPrice(getTotalPrice() - product.getPrice());
+            Ebean.delete(basketProduct);
+            this.products.remove(basketProduct);
         }
+        // recalculate total price
+        this.setTotalPrice(getTotalPrice() - basketProduct.getProduct().getPrice());
     }
 
     public void update()
@@ -169,11 +161,9 @@ public class Basket
         // delete each product
         for (Basket_Product basketProduct : basketProducts)
         {
-            // delete all of this kind of product
-            for (int i = 0; i < basketProduct.getCountProduct(); i++)
-            {
-                this.deleteProduct(basketProduct.getProduct());
-            }
+            Ebean.delete(basketProduct);
+            this.products.remove(basketProduct);
         }
+        this.setTotalPrice(0);
     }
 }

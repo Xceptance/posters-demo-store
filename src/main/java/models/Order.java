@@ -44,7 +44,7 @@ public class Order
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
     private List<Order_Product> products;
-    
+
     @Version
     private Timestamp lastUpdate;
 
@@ -191,28 +191,30 @@ public class Order
         this.setTotalCosts(this.getShippingCosts() + this.getTotalCosts());
     }
 
-    private void addProduct(Product product)
+    private void addProduct(Product product, String finish)
     {
-        Order_Product orderProducts = Ebean.find(Order_Product.class).where().eq("order", this).eq("product", product)
-                                           .findUnique();
+        Order_Product orderProduct = Ebean.find(Order_Product.class).where().eq("order", this).eq("product", product)
+                                          .eq("finish", finish).findUnique();
         // this product is not in the order
-        if (orderProducts == null)
+        if (orderProduct == null)
         {
             // add product to order
-            orderProducts = new Order_Product();
-            orderProducts.setOrder(this);
-            orderProducts.setProduct(product);
+            orderProduct = new Order_Product();
+            orderProduct.setOrder(this);
+            orderProduct.setProduct(product);
             // set product count to one
-            orderProducts.setCountProduct(1);
-            Ebean.save(orderProducts);
-            products.add(orderProducts);
+            orderProduct.setCountProduct(1);
+            // set finish
+            orderProduct.setFinish(finish);
+            Ebean.save(orderProduct);
+            products.add(orderProduct);
         }
         // this product is in the order at least one time
         else
         {
             // increment the count of this product
-            orderProducts.incCountProduct();
-            Ebean.update(orderProducts);
+            orderProduct.incCountProduct();
+            Ebean.update(orderProduct);
         }
         // recalculate total costs
         this.setTotalCosts(getTotalCosts() + product.getPrice());
@@ -223,12 +225,12 @@ public class Order
         // get all products from basket
         List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
         // for each product
-        for (Basket_Product orderProduct : basketProducts)
+        for (Basket_Product basketProduct : basketProducts)
         {
             // add the product to the order
-            for (int i = 0; i < orderProduct.getCountProduct(); i++)
+            for (int i = 0; i < basketProduct.getCountProduct(); i++)
             {
-                this.addProduct(orderProduct.getProduct());
+                this.addProduct(basketProduct.getProduct(), basketProduct.getFinish());
             }
         }
     }

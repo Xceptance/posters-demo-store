@@ -51,9 +51,9 @@ public abstract class BasketInformation
      * @param basket
      * @param productId
      */
-    public static void addProductToBasket(final Basket basket, final Product product)
+    public static void addProductToBasket(final Basket basket, final Product product, final String finish)
     {
-        basket.addProduct(product);
+        basket.addProduct(product, finish);
         basket.update();
     }
 
@@ -68,7 +68,8 @@ public abstract class BasketInformation
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
         // get all products of the basket
-        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).orderBy("lastUpdate desc").findList();
+        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket)
+                                                   .orderBy("lastUpdate desc").findList();
         for (Basket_Product basketProduct : basketProducts)
         {
             products.put(basketProduct.getProduct(), basketProduct.getCountProduct());
@@ -112,10 +113,10 @@ public abstract class BasketInformation
      * @param basket
      * @param product
      */
-    public static void removeProductFromBasket(Basket basket, Product product)
+    public static void removeProductFromBasket(Basket basket, Basket_Product basketProduct)
     {
         // delete product from basket
-        basket.deleteProduct(product);
+        basket.deleteProduct(basketProduct);
         basket.update();
     }
 

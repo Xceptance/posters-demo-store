@@ -25,6 +25,11 @@ public class Order_Product
 
     private int countProduct;
 
+    /**
+     * The finish of the poster, e.g. matte or gloss.
+     */
+    private String finish;
+
     public int getId()
     {
         return id;
@@ -68,6 +73,16 @@ public class Order_Product
     public void incCountProduct()
     {
         this.setCountProduct(this.getCountProduct() + 1);
+    }
+
+    public String getFinish()
+    {
+        return finish;
+    }
+
+    public void setFinish(String finish)
+    {
+        this.finish = finish;
     }
 
     public void update()
