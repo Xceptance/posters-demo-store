@@ -4,3 +4,5 @@ h2-create.sql
 h2-drop.sql
 bin/
 target/
+samples/testsuite-poster-store/results/
+samples/testsuite-poster-store/lib/

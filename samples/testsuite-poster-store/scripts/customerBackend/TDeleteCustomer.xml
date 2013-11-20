@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
-  <description>Simulates customer registration.</description>
+  <description>Registers a new customer and deletes them.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.OpenLoginForm"/>
   <action name="StartRegistration"/>
@@ -22,4 +22,13 @@
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
+  <module name="module.DeleteAccount">
+    <parameter name="password" value="${password}"/>
+  </module>
+  <module name="module.OpenLoginForm"/>
+  <action name="TryToLoginAgain"/>
+  <command name="type" target="id=email" value="${generatedEmail}"/>
+  <command name="type" target="id=password" value="${password}"/>
+  <command name="clickAndWait" target="id=btnSignIn"/>
+  <command name="assertElementPresent" target="id=errorMessage"/>
 </testcase>

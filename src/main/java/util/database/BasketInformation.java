@@ -68,7 +68,7 @@ public abstract class BasketInformation
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
         // get all products of the basket
-        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
+        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).orderBy("lastUpdate desc").findList();
         for (Basket_Product basketProduct : basketProducts)
         {
             products.put(basketProduct.getProduct(), basketProduct.getCountProduct());

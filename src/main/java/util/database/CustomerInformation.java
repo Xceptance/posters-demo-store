@@ -128,7 +128,7 @@ public abstract class CustomerInformation
         {
             // get orders by customer id order by last update
             List<Order> orders = Ebean.find(Order.class).where()
-                                      .eq("customer.id", SessionHandling.getCustomerId(context)).orderBy("lastUpdate")
+                                      .eq("customer.id", SessionHandling.getCustomerId(context)).orderBy("lastUpdate  desc")
                                       .findList();
             // add all orders to the data map
             data.put("orderOverview", orders);
