@@ -28,6 +28,11 @@ public class Basket_Product
 
     private int countProduct;
 
+    /**
+     * The finish of the poster, e.g. matte or gloss.
+     */
+    private String finish;
+
     @Version
     private Timestamp lastUpdate;
 
@@ -69,6 +74,16 @@ public class Basket_Product
     public void setCountProduct(int countProduct)
     {
         this.countProduct = countProduct;
+    }
+
+    public String getFinish()
+    {
+        return finish;
+    }
+
+    public void setFinish(String finish)
+    {
+        this.finish = finish;
     }
 
     public Timestamp getLastUpdate()
