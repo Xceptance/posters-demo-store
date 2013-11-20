@@ -30,13 +30,13 @@ public class OrderTest extends NinjaTest
         product2.save();
         basket.save();
 
-        basket.addProduct(product1);
+        basket.addProduct(product1, "matt");
         basket.update();
 
-        basket.addProduct(product2);
+        basket.addProduct(product2, "matt");
         basket.update();
 
-        basket.addProduct(product1);
+        basket.addProduct(product1, "matt");
         basket.update();
     }
 
