@@ -128,8 +128,8 @@ public abstract class CustomerInformation
         {
             // get orders by customer id order by last update
             List<Order> orders = Ebean.find(Order.class).where()
-                                      .eq("customer.id", SessionHandling.getCustomerId(context)).orderBy("lastUpdate  desc")
-                                      .findList();
+                                      .eq("customer.id", SessionHandling.getCustomerId(context))
+                                      .orderBy("lastUpdate  desc").findList();
             // add all orders to the data map
             data.put("orderOverview", orders);
         }
@@ -261,11 +261,11 @@ public abstract class CustomerInformation
                 customer.update();
             }
             Basket customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
-            for (Basket_Product basket_Product : currentBasket.getProducts())
+            for (Basket_Product basketProduct : currentBasket.getProducts())
             {
-                for (int i = 0; i < basket_Product.getCountProduct(); i++)
+                for (int i = 0; i < basketProduct.getCountProduct(); i++)
                 {
-                    customerBasket.addProduct(basket_Product.getProduct());
+                    customerBasket.addProduct(basketProduct.getProduct(), basketProduct.getFinish());
                 }
             }
             customerBasket.update();
