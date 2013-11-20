@@ -47,6 +47,6 @@
   <action name="ViewOrderOverview"/>
   <command name="clickAndWait" target="id=linkOrderOverview"/>
   <command name="assertElementPresent" target="id=titleOrderHistory"/>
-  <command name="assertText" target="//div[@id='orderOverview']/descendant::table[1]/*/tr/td[2]" value="${productName}"/>
-  <command name="assertText" target="//div[@id='orderOverview']/descendant::table[1]/*/tr/td[4]" value="1x"/>
+  <command name="assertText" target="id=order0Product0Name" value="${productName}"/>
+  <command name="assertText" target="id=order0Product0Count" value="1x"/>
 </testcase>
