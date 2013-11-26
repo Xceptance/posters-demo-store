@@ -75,6 +75,7 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/deleteFromBasket").with(BasketController.class, "deleteFromBasket");
         router.GET().route("/basket").with(BasketController.class, "basket");
         router.POST().route("/updateProductCount").with(BasketController.class, "updateProductCount");
+        router.GET().route("/addToBasket").with(BasketController.class, "addToBasketAjax");
 
         // checkout
         router.GET().route("/checkout").with(CheckoutController.class, "checkout");

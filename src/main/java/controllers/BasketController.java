@@ -147,4 +147,23 @@ public class BasketController
         // return basket overview page
         return Results.redirect(context.getContextPath() + "/basket");
     }
+
+    public Result addToBasketAjax(@Param("productId") String productId, @Param("finish") String finish, Context context)
+    {
+        // get product by id
+        Product product = ProductInformation.getProductById(Integer.parseInt(productId));
+        // get basket by session
+        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        // set customer to basket
+        BasketInformation.setCustomerToBasket(context, basket);
+        // add product to basket
+        BasketInformation.addProductToBasket(basket, product, finish);
+        // get product count
+        int productCount = BasketInformation.getProductCount(basket);
+        // total price
+        double totalPrice = basket.getTotalPrice();
+        String headerCartOverview = " " + msg.get("basketOverviewTitle", language).get() + ": " + productCount + " "
+                                    + msg.get("basketItem", language).get() + " - " + totalPrice + xcpConf.currency;
+        return Results.json().render("headerCartOverview", headerCartOverview);
+    }
 }

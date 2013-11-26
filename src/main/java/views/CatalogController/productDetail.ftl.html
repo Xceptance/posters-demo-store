@@ -12,7 +12,7 @@
       	</div>
       	<div class="span3">
       		<h3 id="prodPrice">${productDetail.price}${currency}</h3>
-      		<form action="/addToBasket" method="post">
+      		<form action="/addToBasket" method="post" id="addToCartForm" name="addToCartForm">
       			<input type="hidden" id="productId" name="productId" value=${productDetail.id}>
       			<!-- Select finish -->
 				<div class="control-group">
@@ -24,7 +24,7 @@
 						</select>
 					</div>
 				</div>
-      			<button class="btn"id="btnAddToCart" name="btnAddToCart" type="submit">${i18n("productDetailAddToBasket")}</button>
+      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(document.addToCartForm.productId.value, document.addToCartForm.finish.value)">${i18n("productDetailAddToBasket")}</button>
       		</form>
       	</div>
     </div>
