@@ -30,7 +30,7 @@ public class WebShopController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         // remember products for carousel
-        CarouselInformation.getCarouselProducts(data);
+        CarouselInformation.addCarouselProductsToMap(data);
         return Results.html().render(data);
     }
 }

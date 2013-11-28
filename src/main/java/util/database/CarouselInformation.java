@@ -15,7 +15,7 @@ public abstract class CarouselInformation
      * 
      * @param data
      */
-    public static void getCarouselProducts(final Map<String, Object> data)
+    public static void addCarouselProductsToMap(final Map<String, Object> data)
     {
         // find all products
         List<Product> products = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();

@@ -48,7 +48,7 @@ public class SearchController
         {
             template = xcpConf.templateIndex;
             context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
-            CarouselInformation.getCarouselProducts(data);
+            CarouselInformation.addCarouselProductsToMap(data);
         }
         else
         {
