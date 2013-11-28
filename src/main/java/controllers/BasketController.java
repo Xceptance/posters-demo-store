@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -33,28 +35,6 @@ public class BasketController
     XCPosterConf xcpConf;
 
     private Optional language = Optional.of("en");
-
-    /**
-     * Adds one product to the basket. The basket will be chosen by the session.
-     * 
-     * @param productId
-     *            The ID of the product.
-     * @param context
-     * @return The basket overview page.
-     */
-    public Result addToBasket(@Param("productId") String productId, @Param("finish") String finish, Context context)
-    {
-        // get product by id
-        Product product = ProductInformation.getProductById(Integer.parseInt(productId));
-        // get basket by session
-        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        // set customer to basket
-        BasketInformation.setCustomerToBasket(context, basket);
-        // add product to basket
-        BasketInformation.addProductToBasket(basket, product, finish);
-        // return basket overview page
-        return Results.redirect(context.getContextPath() + "/basket");
-    }
 
     /**
      * Deletes the product from the basket.
@@ -148,8 +128,44 @@ public class BasketController
         return Results.redirect(context.getContextPath() + "/basket");
     }
 
-    public Result addToBasketAjax(@Param("productId") String productId, @Param("finish") String finish, Context context)
+    /**
+     * Returns all products of the basket as a json object.
+     * 
+     * @param context
+     * @return
+     */
+    public Result getCartElementSlider(Context context)
     {
+        // get basket by session
+        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        // get all products of the basket
+        List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket)
+                                                   .orderBy("lastUpdate desc").findList();
+        // prepare just some attributes
+        for (Basket_Product basketProduct : basketProducts)
+        {
+            Map<String, Object> product = new HashMap<String, Object>();
+            product.put("productCount", basketProduct.getCountProduct());
+            product.put("productName", basketProduct.getProduct().getName());
+            product.put("productId", basketProduct.getProduct().getId());
+            product.put("productPrice", basketProduct.getProduct().getPrice());
+            results.add(product);
+        }
+        return Results.json().render("cartElements", results);
+    }
+
+    /**
+     * Adds one product to the cart.
+     * 
+     * @param productId
+     * @param finish
+     * @param context
+     * @return
+     */
+    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish, Context context)
+    {
+        Result result = Results.json();
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
         // get basket by session
@@ -158,12 +174,25 @@ public class BasketController
         BasketInformation.setCustomerToBasket(context, basket);
         // add product to basket
         BasketInformation.addProductToBasket(basket, product, finish);
+        // get added basket product
+        Basket_Product basketProduct = Ebean.find(Basket_Product.class).where().eq("basket", basket)
+                                            .eq("product", product).findUnique();
+        Map<String, Object> updatedProduct = new HashMap<String, Object>();
+        updatedProduct.put("productCount", basketProduct.getCountProduct());
+        updatedProduct.put("productName", basketProduct.getProduct().getName());
+        updatedProduct.put("productId", basketProduct.getProduct().getId());
+        updatedProduct.put("productPrice", basketProduct.getProduct().getPrice());
+        // add product to result
+        result.render("product", updatedProduct);
         // get product count
         int productCount = BasketInformation.getProductCount(basket);
         // total price
         double totalPrice = basket.getTotalPrice();
+        // prepare updated cart in header
         String headerCartOverview = " " + msg.get("basketOverviewTitle", language).get() + ": " + productCount + " "
                                     + msg.get("basketItem", language).get() + " - " + totalPrice + xcpConf.currency;
-        return Results.json().render("headerCartOverview", headerCartOverview);
+        // add new header to result
+        result.render("headerCartOverview", headerCartOverview);
+        return result;
     }
 }
