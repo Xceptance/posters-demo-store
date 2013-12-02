@@ -11,6 +11,7 @@ import models.Customer;
 import models.DeliveryAddress;
 import models.Order;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
@@ -27,6 +28,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.XCPosterConf;
+import filters.SessionCustomerFilter;
 
 public class CustomerController
 {
@@ -215,13 +217,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result accountOverview(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
@@ -233,13 +231,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result orderOverview(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         CustomerInformation.addOrderOfCustomerToMap(context, data);
@@ -252,13 +246,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result paymentOverview(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         CustomerInformation.addPaymentOfCustomerToMap(context, data);
@@ -271,13 +261,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result settingOverview(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         CustomerInformation.addCustomerToMap(context, data);
@@ -294,55 +280,48 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") String creditNumber,
                                                 @Param("name") String name, @Param("expirationDateMonth") int month,
                                                 @Param("expirationDateYear") int year, Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        // replace spaces and dashes
+        creditNumber = creditNumber.replaceAll("[ -]+", "");
+        // check input
+        for (String regExCreditCard : xcpConf.regexCreditCard)
         {
-            return customerIsNotLogged(context);
-        }
-        else
-        {
-            // replace spaces and dashes
-            creditNumber = creditNumber.replaceAll("[ -]+", "");
-            // check input
-            for (String regExCreditCard : xcpConf.regexCreditCard)
+            // credit card number is correct
+            if (Pattern.matches(regExCreditCard, creditNumber))
             {
-                // credit card number is correct
-                if (Pattern.matches(regExCreditCard, creditNumber))
-                {
-                    // get customer by session id
-                    Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-                    // create new credit card
-                    CreditCard creditCard = new CreditCard();
-                    creditCard.setCardNumber(creditNumber);
-                    creditCard.setName(name);
-                    creditCard.setMonth(month);
-                    creditCard.setYear(year);
-                    // add credit card to customer
-                    customer.addCreditCard(creditCard);
-                    // update customer
-                    customer.update();
-                    // success message
-                    context.getFlashCookie().success(msg.get("successSave", language).get());
-                    // show payment overview page
-                    return Results.redirect(context.getContextPath() + "/paymentOverview");
-                }
+                // get customer by session id
+                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+                // create new credit card
+                CreditCard creditCard = new CreditCard();
+                creditCard.setCardNumber(creditNumber);
+                creditCard.setName(name);
+                creditCard.setMonth(month);
+                creditCard.setYear(year);
+                // add credit card to customer
+                customer.addCreditCard(creditCard);
+                // update customer
+                customer.update();
+                // success message
+                context.getFlashCookie().success(msg.get("successSave", language).get());
+                // show payment overview page
+                return Results.redirect(context.getContextPath() + "/paymentOverview");
             }
-            final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
-            // error message
-            context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
-            // show inserted values in form
-            Map<String, String> card = new HashMap<String, String>();
-            card.put("name", name);
-            card.put("cardNumber", creditNumber);
-            data.put("card", card);
-            // show page to enter payment information again
-            return Results.html().render(data).template(xcpConf.templateAddPaymentToCustomer);
         }
+        final Map<String, Object> data = new HashMap<String, Object>();
+        CommonInformation.setCommonData(data, context, xcpConf);
+        // error message
+        context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
+        // show inserted values in form
+        Map<String, String> card = new HashMap<String, String>();
+        card.put("name", name);
+        card.put("cardNumber", creditNumber);
+        data.put("card", card);
+        // show page to enter payment information again
+        return Results.html().render(data).template(xcpConf.templateAddPaymentToCustomer);
     }
 
     /**
@@ -351,13 +330,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result addPaymentToCustomer(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
@@ -370,35 +345,28 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result deletePayment(@Param("password") String password, @Param("cardId") int cardId, Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
         {
-            return customerIsNotLogged(context);
+            CreditCardInformation.deleteCreditCardFromCustomer(cardId);
+            // success message
+            context.getFlashCookie().success(msg.get("successDelete", language).get());
+            // show payment overview page
+            return Results.redirect(context.getContextPath() + "/paymentOverview");
         }
+        // incorrect password
         else
         {
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // correct password
-            if (customer.checkPasswd(password))
-            {
-                CreditCardInformation.deleteCreditCardFromCustomer(cardId);
-                // success message
-                context.getFlashCookie().success(msg.get("successDelete", language).get());
-                // show payment overview page
-                return Results.redirect(context.getContextPath() + "/paymentOverview");
-            }
-            // incorrect password
-            else
-            {
-                final Map<String, Object> data = new HashMap<String, Object>();
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                data.put("cardId", cardId);
-                CommonInformation.setCommonData(data, context, xcpConf);
-                // show page again
-                return Results.html().render(data).template(xcpConf.templateConfirmDeletePayment);
-            }
+            final Map<String, Object> data = new HashMap<String, Object>();
+            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            data.put("cardId", cardId);
+            CommonInformation.setCommonData(data, context, xcpConf);
+            // show page again
+            return Results.html().render(data).template(xcpConf.templateConfirmDeletePayment);
         }
     }
 
@@ -423,13 +391,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result addressOverview(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CustomerInformation.addAddressOfCustomerToMap(context, data);
         CommonInformation.setCommonData(data, context, xcpConf);
@@ -443,37 +407,30 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result deleteBillingAddress(@Param("password") String password, @Param("addressId") int addressId,
                                        Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
         {
-            return customerIsNotLogged(context);
+            // remove billing address
+            AddressInformation.deleteBillingAddressFromCustomer(addressId);
+            // success message
+            context.getFlashCookie().success(msg.get("successDelete", language).get());
+            return Results.redirect(context.getContextPath() + "/addressOverview");
         }
+        // incorrect password
         else
         {
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // correct password
-            if (customer.checkPasswd(password))
-            {
-                // remove billing address
-                AddressInformation.deleteBillingAddressFromCustomer(addressId);
-                // success message
-                context.getFlashCookie().success(msg.get("successDelete", language).get());
-                return Results.redirect(context.getContextPath() + "/addressOverview");
-            }
-            // incorrect password
-            else
-            {
-                final Map<String, Object> data = new HashMap<String, Object>();
-                CommonInformation.setCommonData(data, context, xcpConf);
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                data.put("deleteAddressURL", "deleteBillingAddress");
-                data.put("addressId", addressId);
-                // show page again
-                return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
-            }
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
+            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            data.put("deleteAddressURL", "deleteBillingAddress");
+            data.put("addressId", addressId);
+            // show page again
+            return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
         }
     }
 
@@ -500,37 +457,30 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result deleteDeliveryAddress(@Param("password") String password, @Param("addressId") int addressId,
                                         Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
         {
-            return customerIsNotLogged(context);
+            // remove billing address
+            AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
+            // success message
+            context.getFlashCookie().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/addressOverview");
         }
+        // incorrect password
         else
         {
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // correct password
-            if (customer.checkPasswd(password))
-            {
-                // remove billing address
-                AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
-                // success message
-                context.getFlashCookie().success(msg.get("successDelete", language).get());
-                // show address overview page
-                return Results.redirect(context.getContextPath() + "/addressOverview");
-            }
-            // incorrect password
-            else
-            {
-                final Map<String, Object> data = new HashMap<String, Object>();
-                CommonInformation.setCommonData(data, context, xcpConf);
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                data.put("deleteAddressURL", "deleteDeliveryAddress");
-                data.put("addressId", addressId);
-                return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
-            }
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
+            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            data.put("deleteAddressURL", "deleteDeliveryAddress");
+            data.put("addressId", addressId);
+            return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
         }
     }
 
@@ -740,6 +690,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result addDeliveryAddressToCustomerCompleted(@Param("fullName") String name,
                                                         @Param("company") String company,
                                                         @Param("addressLine") String addressLine,
@@ -747,52 +698,44 @@ public class CustomerController
                                                         @Param("zip") String zip, @Param("country") String country,
                                                         @Param("addressId") String addressId, Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        // check input
+        if (!Pattern.matches(xcpConf.regexZip, zip))
         {
-            return customerIsNotLogged(context);
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
+            // error message
+            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("name", name);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter delivery address again
+            return Results.html().render(data).template(xcpConf.templateAddDeliveryAddressToCustomer);
         }
+        // all input fields might be correct
         else
         {
-            // check input
-            if (!Pattern.matches(xcpConf.regexZip, zip))
-            {
-                final Map<String, Object> data = new HashMap<String, Object>();
-                CommonInformation.setCommonData(data, context, xcpConf);
-                // error message
-                context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
-                // show inserted values in form
-                Map<String, String> address = new HashMap<String, String>();
-                address.put("name", name);
-                address.put("company", company);
-                address.put("addressLine", addressLine);
-                address.put("city", city);
-                address.put("state", state);
-                address.put("zip", zip);
-                address.put("country", country);
-                data.put("address", address);
-                // show page to enter delivery address again
-                return Results.html().render(data).template(xcpConf.templateAddDeliveryAddressToCustomer);
-            }
-            // all input fields might be correct
-            else
-            {
-                DeliveryAddress address = new DeliveryAddress();
-                address.setName(name);
-                address.setCompany(company);
-                address.setAddressLine(addressLine);
-                address.setCity(city);
-                address.setState(state);
-                address.setZip(zip);
-                address.setCountry(country);
-                // add address to customer
-                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-                customer.addDeliveryAddress(address);
-                customer.update();
-                // success message
-                context.getFlashCookie().success(msg.get("successSave", language).get());
-                return Results.redirect(context.getContextPath() + "/addressOverview");
-            }
+            DeliveryAddress address = new DeliveryAddress();
+            address.setName(name);
+            address.setCompany(company);
+            address.setAddressLine(addressLine);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(zip);
+            address.setCountry(country);
+            // add address to customer
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addDeliveryAddress(address);
+            customer.update();
+            // success message
+            context.getFlashCookie().success(msg.get("successSave", language).get());
+            return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
 
@@ -810,6 +753,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
                                                        @Param("company") String company,
                                                        @Param("addressLine") String addressLine,
@@ -817,53 +761,45 @@ public class CustomerController
                                                        @Param("zip") String zip, @Param("country") String country,
                                                        @Param("addressId") String addressId, Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        // check input
+        if (!Pattern.matches("[0-9]*", zip))
         {
-            return customerIsNotLogged(context);
+            final Map<String, Object> data = new HashMap<String, Object>();
+            CommonInformation.setCommonData(data, context, xcpConf);
+            // error message
+            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            // show inserted values in form
+            Map<String, String> address = new HashMap<String, String>();
+            address.put("name", name);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // show page to enter billing address again
+            return Results.html().render(data).template(xcpConf.templateAddBillingAddressToCustomer);
         }
+        // all input fields might be correct
         else
         {
-            // check input
-            if (!Pattern.matches("[0-9]*", zip))
-            {
-                final Map<String, Object> data = new HashMap<String, Object>();
-                CommonInformation.setCommonData(data, context, xcpConf);
-                // error message
-                context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
-                // show inserted values in form
-                Map<String, String> address = new HashMap<String, String>();
-                address.put("name", name);
-                address.put("company", company);
-                address.put("addressLine", addressLine);
-                address.put("city", city);
-                address.put("state", state);
-                address.put("zip", zip);
-                address.put("country", country);
-                data.put("address", address);
-                // show page to enter billing address again
-                return Results.html().render(data).template(xcpConf.templateAddBillingAddressToCustomer);
-            }
-            // all input fields might be correct
-            else
-            {
-                BillingAddress address = new BillingAddress();
+            BillingAddress address = new BillingAddress();
 
-                address.setName(name);
-                address.setCompany(company);
-                address.setAddressLine(addressLine);
-                address.setCity(city);
-                address.setState(state);
-                address.setZip(zip);
-                address.setCountry(country);
-                // add address to customer
-                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-                customer.addBillingAddress(address);
-                customer.update();
-                // success message
-                context.getFlashCookie().success(msg.get("successSave", language).get());
-                return Results.redirect(context.getContextPath() + "/addressOverview");
-            }
+            address.setName(name);
+            address.setCompany(company);
+            address.setAddressLine(addressLine);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(zip);
+            address.setCountry(country);
+            // add address to customer
+            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addBillingAddress(address);
+            customer.update();
+            // success message
+            context.getFlashCookie().success(msg.get("successSave", language).get());
+            return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
 
@@ -874,13 +810,9 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result changeNameOrEmail(Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
-        {
-            return customerIsNotLogged(context);
-        }
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
@@ -898,47 +830,40 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result changeNameOrEmailCompleted(@Param("name") String name, @Param("firstName") String firstName,
                                              @Param("eMail") String email, @Param("password") String password,
                                              Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // incorrect password
+        if (!CustomerInformation.correctPassword(customer.getEmail(), password))
         {
-            return customerIsNotLogged(context);
+            // error message
+            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
-        else
+        // email isn't valid
+        else if (!Pattern.matches(xcpConf.regexEmail, email))
         {
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // incorrect password
-            if (!CustomerInformation.correctPassword(customer.getEmail(), password))
-            {
-                // error message
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
-            }
-            // email isn't valid
-            else if (!Pattern.matches(xcpConf.regexEmail, email))
-            {
-                // error message
-                context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
-                return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
-            }
-            // email already exist
-            else if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
-            {
-                // error message
-                context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
-                return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
-            }
-            customer.setName(name);
-            customer.setFirstName(firstName);
-            customer.setEmail(email);
-            customer.update();
-            // success message
-            context.getFlashCookie().success(msg.get("successUpdate", language).get());
-            return Results.redirect(context.getContextPath() + "/settingOverview");
+            // error message
+            context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
+            return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
+        // email already exist
+        else if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
+        {
+            // error message
+            context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
+            return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
+        }
+        customer.setName(name);
+        customer.setFirstName(firstName);
+        customer.setEmail(email);
+        customer.update();
+        // success message
+        context.getFlashCookie().success(msg.get("successUpdate", language).get());
+        return Results.redirect(context.getContextPath() + "/settingOverview");
     }
 
     /**
@@ -964,45 +889,38 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result changePasswordCompleted(@Param("oldPassword") String oldPassword, @Param("password") String password,
                                           @Param("passwordAgain") String passwordAgain, Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        boolean failure = false;
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // incorrect password
+        if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
         {
-            return customerIsNotLogged(context);
+            // error message
+            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            failure = true;
+        }
+        // passwords don't match
+        else if (!password.equals(passwordAgain))
+        {
+            // error message
+            context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
+            failure = true;
+        }
+        if (failure)
+        {
+            // show page to change password again
+            return Results.redirect(context.getContextPath() + "/changePassword");
         }
         else
         {
-            boolean failure = false;
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // incorrect password
-            if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
-            {
-                // error message
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                failure = true;
-            }
-            // passwords don't match
-            else if (!password.equals(passwordAgain))
-            {
-                // error message
-                context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
-                failure = true;
-            }
-            if (failure)
-            {
-                // show page to change password again
-                return Results.redirect(context.getContextPath() + "/changePassword");
-            }
-            else
-            {
-                customer.hashPasswd(password);
-                customer.update();
-                // success message
-                context.getFlashCookie().success(msg.get("successUpdate", language).get());
-                return Results.redirect(context.getContextPath() + "/settingOverview");
-            }
+            customer.hashPasswd(password);
+            customer.update();
+            // success message
+            context.getFlashCookie().success(msg.get("successUpdate", language).get());
+            return Results.redirect(context.getContextPath() + "/settingOverview");
         }
     }
 
@@ -1026,59 +944,38 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerFilter.class)
     public Result deleteAccount(@Param("password") String password, Context context)
     {
-        // no customer is logged
-        if (!SessionHandling.isCustomerLogged(context))
+        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        // correct password
+        if (customer.checkPasswd(password))
         {
-            return customerIsNotLogged(context);
+            // remove customer from session
+            SessionHandling.deleteCustomerId(context);
+            // remove basket from session
+            SessionHandling.deleteBasketId(context);
+            // remove customers orders --> deletes also customer --> deletes also addresses and payment information
+            List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
+            for (Order order : orders)
+            {
+                Ebean.delete(order);
+            }
+            // delete customer, if customer has no order
+            if (orders.isEmpty())
+            {
+                Ebean.delete(customer);
+            }
+            context.getFlashCookie().success(msg.get("successDeleteAccount", language).get());
+            // return home page
+            return Results.redirect(context.getContextPath() + "/");
         }
+        // incorrect password
         else
         {
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            // correct password
-            if (customer.checkPasswd(password))
-            {
-                // remove customer from session
-                SessionHandling.deleteCustomerId(context);
-                // remove basket from session
-                SessionHandling.deleteBasketId(context);
-                // remove customers orders --> deletes also customer --> deletes also addresses and payment information
-                List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
-                for (Order order : orders)
-                {
-                    Ebean.delete(order);
-                }
-                // delete customer, if customer has no order
-                if (orders.isEmpty())
-                {
-                    Ebean.delete(customer);
-                }
-                context.getFlashCookie().success(msg.get("successDeleteAccount", language).get());
-                // return home page
-                return Results.redirect(context.getContextPath() + "/");
-            }
-            // incorrect password
-            else
-            {
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-                // show page again
-                return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
-            }
+            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            // show page again
+            return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
         }
-    }
-
-    /**
-     * Returns the home page and shows an error message.
-     * 
-     * @param context
-     * @return
-     */
-    private Result customerIsNotLogged(Context context)
-    {
-        // error message
-        context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
-        // show home page
-        return Results.redirect(context.getContextPath() + "/");
     }
 }

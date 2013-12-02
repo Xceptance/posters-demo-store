@@ -10,6 +10,7 @@ import models.Basket;
 import models.Basket_Product;
 import models.Product;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
@@ -24,6 +25,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.XCPosterConf;
+import filters.SessionTerminatedFilter;
 
 public class BasketController
 {
@@ -43,6 +45,7 @@ public class BasketController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result deleteFromBasket(@Param("basketProductId") int basketProductId, Context context)
     {
         Basket_Product basketProduct = Ebean.find(Basket_Product.class, basketProductId);
@@ -81,6 +84,7 @@ public class BasketController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result updateProductCount(@Param("basketProductId") int basketProductId,
                                      @Param("productCount") String productCount, Context context)
     {
@@ -164,6 +168,7 @@ public class BasketController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result addToCart(@Param("productId") String productId, @Param("finish") String finish, Context context)
     {
         Result result = Results.json();
