@@ -11,6 +11,7 @@ import models.Customer;
 import models.DeliveryAddress;
 import models.Order;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
@@ -28,6 +29,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.XCPosterConf;
+import filters.SessionTerminatedFilter;
 
 public class CheckoutController
 {
@@ -46,6 +48,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result checkout(Context context)
     {
         // get basket by session id
@@ -82,6 +85,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result enterShippingAddress(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -120,6 +124,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result deliveryAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                            @Param("addressLine") String addressLine, @Param("city") String city,
                                            @Param("state") String state, @Param("zip") String zip,
@@ -221,6 +226,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get delivery address
@@ -241,6 +247,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result enterBillingAddress(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -276,6 +283,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result billingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                           @Param("addressLine") String addressLine, @Param("city") String city,
                                           @Param("state") String state, @Param("zip") String zip,
@@ -344,6 +352,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result addBillingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get billing address
@@ -364,6 +373,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result enterPaymentMethod(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -397,6 +407,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result paymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") String name,
                                          @Param("expirationDateMonth") int month,
                                          @Param("expirationDateYear") int year, Context context)
@@ -459,6 +470,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result addPaymentToOrder(@Param("cardId") String creditCardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -480,6 +492,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result checkoutOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -505,6 +518,7 @@ public class CheckoutController
      * @param context
      * @return
      */
+    @FilterWith(SessionTerminatedFilter.class)
     public Result checkoutCompleted(Context context)
     {
         // get order by session id
