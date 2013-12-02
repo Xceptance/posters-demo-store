@@ -160,4 +160,10 @@ public abstract class BasketInformation
         }
         return productCount;
     }
+
+    public static Basket_Product getBasketProduct(Basket basket, Product product, String finish)
+    {
+        return Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
+                    .eq("finish", finish).findUnique();
+    }
 }

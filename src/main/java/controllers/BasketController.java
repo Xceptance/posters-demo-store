@@ -150,6 +150,7 @@ public class BasketController
             product.put("productName", basketProduct.getProduct().getName());
             product.put("productId", basketProduct.getProduct().getId());
             product.put("productPrice", basketProduct.getProduct().getPrice());
+            product.put("finish", basketProduct.getFinish());
             results.add(product);
         }
         return Results.json().render("cartElements", results);
@@ -175,13 +176,13 @@ public class BasketController
         // add product to basket
         BasketInformation.addProductToBasket(basket, product, finish);
         // get added basket product
-        Basket_Product basketProduct = Ebean.find(Basket_Product.class).where().eq("basket", basket)
-                                            .eq("product", product).findUnique();
+        Basket_Product basketProduct = BasketInformation.getBasketProduct(basket, product, finish);
         Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", basketProduct.getCountProduct());
         updatedProduct.put("productName", basketProduct.getProduct().getName());
         updatedProduct.put("productId", basketProduct.getProduct().getId());
         updatedProduct.put("productPrice", basketProduct.getProduct().getPrice());
+        updatedProduct.put("finish", finish);
         // add product to result
         result.render("product", updatedProduct);
         // get product count
