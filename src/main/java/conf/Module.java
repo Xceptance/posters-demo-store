@@ -18,5 +18,7 @@ public class Module extends AbstractModule
         requestStaticInjection(XCPosterConf.class);
         // bind starter class
         bind(JobController.class);
+        // bind scheduler class
+        bind(Scheduler.class);
     }
 }

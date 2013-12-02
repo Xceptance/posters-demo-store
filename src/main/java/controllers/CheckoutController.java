@@ -526,8 +526,6 @@ public class CheckoutController
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // remove basket
         BasketInformation.removeBasket(basket);
-        // remove order, if no customer is set
-        OrderInformation.removeOrder(order);
         // remove basket from session
         SessionHandling.deleteBasketId(context);
         // remove order from session
