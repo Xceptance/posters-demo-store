@@ -3,6 +3,8 @@
   <description>Browses to a product of a category and add this product to the cart.</description>
   <module name="module.Browse"/>
   <action name="AddToCart"/>
-  <command name="clickAndWait" target="id=btnAddToCart"/>
-  <command name="assertElementPresent" target="id=titleBasket"/>
+  <command name="click" target="id=btnAddToCart"/>
+  <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
+  <command name="assertElementPresent" target="//ul[@id='cartElementList']/li[1]"/>
+  <command name="waitForNotVisible" target="id=cartElementList"/>
 </scriptmodule>

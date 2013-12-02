@@ -8,11 +8,15 @@
     <parameter name="firstName" value="${firstName}"/>
   </module>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <command name="storeText" target="id=productName0" value="product1Name"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*-.*"/>
   <module name="module.Logout"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*-.*"/>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <command name="storeText" target="id=productName0" value="product2Name"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*-.*"/>
   <module name="module.Login">
