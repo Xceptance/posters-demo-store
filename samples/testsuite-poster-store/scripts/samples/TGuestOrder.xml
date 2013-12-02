@@ -3,6 +3,8 @@
   <description>Simulates browsing the catalog, adding product(s) to the cart, checkout as guest and place the order.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <action name="StartCheckout"/>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>

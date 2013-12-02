@@ -3,6 +3,8 @@
   <description>Verifies that an error is shown if the product count of the cart couldn't be updated.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <action name="UpdateProductCount"/>
   <command name="type" target="css=.productCount0" value="asdf"/>
   <command name="clickAndWait" target="id=btnUpdateProdCount0"/>

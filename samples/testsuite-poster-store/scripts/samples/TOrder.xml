@@ -8,6 +8,8 @@
     <parameter name="firstName" value="${firstName}"/>
   </module>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <action name="StartCheckout"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="SelectShippingAddress"/>

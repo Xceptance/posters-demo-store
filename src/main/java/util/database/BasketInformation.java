@@ -142,4 +142,28 @@ public abstract class BasketInformation
             customer.update();
         }
     }
+
+    /**
+     * Returns the total product count of a basket.
+     * 
+     * @param basket
+     * @return
+     */
+    public static int getProductCount(Basket basket)
+    {
+        int productCount = 0;
+        // get all products of the basket
+        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
+        for (Basket_Product basketProduct : basketProducts)
+        {
+            productCount += basketProduct.getCountProduct();
+        }
+        return productCount;
+    }
+
+    public static Basket_Product getBasketProduct(Basket basket, Product product, String finish)
+    {
+        return Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
+                    .eq("finish", finish).findUnique();
+    }
 }

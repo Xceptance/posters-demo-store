@@ -3,6 +3,8 @@
   <description>Simulates browsing the catalog and adding product to cart.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -14,6 +16,8 @@
     <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
   <module name="module.AddToCart"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -47,7 +51,11 @@
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="assertText" target="id=titleProductName" value="${productName}"/>
   <action name="AddSameProduct"/>
-  <command name="clickAndWait" target="id=btnAddToCart"/>
+  <command name="click" target="id=btnAddToCart"/>
+  <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
+  <command name="waitForNotVisible" target="//ul[@id='cartElementList']/li"/>
+  <action name="OpenCartOverview"/>
+  <command name="clickAndWait" target="id=headerBasketOverview"/>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
