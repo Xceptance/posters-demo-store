@@ -79,21 +79,14 @@ function addToCartSlider(productId, finish)
 			liElement.innerHTML = setCartSliderElementInnerHtml(data.product);
 			if( $("#" + liId).length > 0)
 			{
-				$("#" + liId).animate({ opacity: 0 }, 500);
 				$("#" + liId).before(liElement).remove();
-				$("#" + liId).animate({ opacity: 0 }, 500);
-				$("#" + liId).animate({ opacity: 1 }, 500);
-				$("#notificationsLoader").empty();
-			
 			}
 			else
 			{
 				var list = document.getElementById("cartElementList");
 				list.insertBefore(liElement, list.firstChild);
-				$("#basketItemsWrap li:first").hide();
-				$("#basketItemsWrap li:first").show("slow");  
-				$("#notificationsLoader").empty();			
 			}
+			$("#notificationsLoader").empty();
 			// update cart in header
 			document.getElementById("headerBasketOverview").firstChild.nextSibling.nodeValue = data.headerCartOverview;
 		}
