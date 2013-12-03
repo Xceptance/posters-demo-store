@@ -1,6 +1,3 @@
-// prepare cart slider
-window.onload = getCartSliderText;
-
 $(document).ready(function(){ 
 	$("#basketItemsWrap li:first").hide();
 	$("#slidingTopContent").hide();
@@ -9,15 +6,19 @@ $(document).ready(function(){
 
 function showCartSlider()
 {
-      	$("#slidingTopContent").slideToggle("slow", function(){
-			if ($("#slidingTopContent").is(":visible")) {
-				$("#slidingTopTriggerShow").hide();
-				$("#slidingTopTriggerHide").show();
-			} else {
-				$("#slidingTopTriggerShow").show();
-				$("#slidingTopTriggerHide").hide();
-			}
-		});	
+    $("#slidingTopContent").slideToggle("slow", function(){
+    	if ($("#slidingTopContent").is(":visible"))
+    	{
+    		getCartSliderText();
+    		$("#slidingTopTriggerShow").hide();
+    		$("#slidingTopTriggerHide").show();
+    	}
+    	else
+    	{
+    		$("#slidingTopTriggerShow").show();
+    		$("#slidingTopTriggerHide").hide();
+    	}
+	});	
 }
 
 function getCartSliderText()
@@ -28,12 +29,14 @@ function getCartSliderText()
 
 function updateCartSlider(data)
 {
-	for(var i=0;i<data.cartElements.length;i++)
+	// clear list
+	$('#cartElementList').empty();
+	// add products to list
+	for (var i=0; i<data.cartElements.length; i++)
 	{
-		var liElement = document.createElement("li");
-		liElement.setAttribute("id", "productId" + data.cartElements[i].productId + data.cartElements[i].finish);
-		liElement.innerHTML = setCartSliderElementInnerHtml(data.cartElements[i]);
-		document.getElementById("cartElementList").appendChild(liElement);
+		var liId = "productId" + data.cartElements[i].productId + data.cartElements[i].finish;
+		var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.cartElements[i]) + "</li>";
+		$("#cartElementList").append(liElement);
 	}
 }
 
@@ -44,6 +47,7 @@ function setCartSliderElementInnerHtml(product)
 
 function addToCart(productId, finish)
 {
+	getCartSliderText();
 	if ($("#slidingTopContent").is(":visible"))
 	{
 		addToCartSlider(productId, finish);
@@ -73,22 +77,19 @@ function addToCartSlider(productId, finish)
 		url: '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish, 
 		success: function(data) {
 			// create new <li> element
-			var liElement = document.createElement("li");
 			var liId = "productId" + data.product.productId + data.product.finish;
-			liElement.setAttribute("id", liId);
-			liElement.innerHTML = setCartSliderElementInnerHtml(data.product);
+			var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.product) + "</li>";
 			if( $("#" + liId).length > 0)
 			{
 				$("#" + liId).before(liElement).remove();
 			}
 			else
 			{
-				var list = document.getElementById("cartElementList");
-				list.insertBefore(liElement, list.firstChild);
+				$("#cartElementList").prepend(liElement);
 			}
 			$("#notificationsLoader").empty();
 			// update cart in header
-			document.getElementById("headerBasketOverview").firstChild.nextSibling.nodeValue = data.headerCartOverview;
+			$("#headerBasketOverview span").text(data.headerCartOverview);
 		}
 	});
 }
