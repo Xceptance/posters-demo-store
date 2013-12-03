@@ -39,30 +39,6 @@ public class BasketController
     private Optional language = Optional.of("en");
 
     /**
-     * Deletes the product from the basket.
-     * 
-     * @param productId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionTerminatedFilter.class)
-    public Result deleteFromBasket(@Param("basketProductId") int basketProductId, Context context)
-    {
-        Basket_Product basketProduct = Ebean.find(Basket_Product.class, basketProductId);
-        // get basket by session
-        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        // get count of this product
-        int countProduct = basketProduct.getCountProduct();
-        // delete all items of this products
-        for (int i = 0; i < countProduct; i++)
-        {
-            BasketInformation.removeProductFromBasket(basket, basketProduct);
-        }
-        // return basket overview page
-        return Results.redirect(context.getContextPath() + "/basket");
-    }
-
-    /**
      * Returns the basket overview page.
      * 
      * @param context
@@ -190,15 +166,46 @@ public class BasketController
         updatedProduct.put("finish", finish);
         // add product to result
         result.render("product", updatedProduct);
-        // get product count
-        int productCount = BasketInformation.getProductCount(basket);
-        // total price
-        double totalPrice = basket.getTotalPrice();
-        // prepare updated cart in header
-        String headerCartOverview = " " + msg.get("basketOverviewTitle", language).get() + ": " + productCount + " "
-                                    + msg.get("basketItem", language).get() + " - " + totalPrice + xcpConf.currency;
         // add new header to result
-        result.render("headerCartOverview", headerCartOverview);
+        result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         return result;
+    }
+
+    /**
+     * Deletes the product from the cart.
+     * 
+     * @param productId
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionTerminatedFilter.class)
+    public Result deleteFromCart(@Param("basketProductId") int basketProductId, Context context)
+    {
+        Basket_Product basketProduct = Ebean.find(Basket_Product.class, basketProductId);
+        // get basket by session
+        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        // get count of this product
+        int countProduct = basketProduct.getCountProduct();
+        // delete all items of this products
+        for (int i = 0; i < countProduct; i++)
+        {
+            BasketInformation.removeProductFromBasket(basket, basketProduct);
+        }
+        Result result = Results.json();
+        // add new header
+        result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+        // add totalPrice
+        result.render("totalPrice", (basket.getTotalPrice() + xcpConf.currency));
+        return result;
+    }
+
+    private String prepareCartOverviewInHeader(Basket basket)
+    {
+        StringBuilder headerCartOverview = new StringBuilder();
+        headerCartOverview.append(" " + msg.get("basketOverviewTitle", language).get() + ": ");
+        headerCartOverview.append(BasketInformation.getProductCount(basket));
+        headerCartOverview.append(" " + msg.get("basketItem", language).get() + " - ");
+        headerCartOverview.append(basket.getTotalPrice() + xcpConf.currency);
+        return headerCartOverview.toString();
     }
 }

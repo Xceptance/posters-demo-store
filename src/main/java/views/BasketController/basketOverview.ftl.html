@@ -17,10 +17,7 @@
    	   				</form>
 				</td>
 				<td>
-					<form action="/deleteFromBasket" method="post">
-      					<input type="hidden" id="basketProductId" name="basketProductId" value=${basketProduct.id}>
-      					<button class="btn" id="btnRemoveProduct${basketProduct_index}" name="btnRemoveProduct${basketProduct_index}" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
-      				</form>
+      				<button class="btn" id="btnRemoveProduct${basketProduct_index}" name="btnRemoveProduct${basketProduct_index}" onclick="deleteFromCart(${basketProduct.id}, ${basketProduct_index})">${i18n("basketOverviewRemoveFromBasket")}</button>
 				</td>
 			</tr>
 		</#list>
