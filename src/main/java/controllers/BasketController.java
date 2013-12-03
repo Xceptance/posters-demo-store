@@ -64,10 +64,12 @@ public class BasketController
     public Result updateProductCount(@Param("basketProductId") int basketProductId,
                                      @Param("productCount") String productCount, Context context)
     {
+        Result result = Results.json();
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
             // show info message
-            context.getFlashCookie().put("info", msg.get("infoProductCount", language).get());
+            result.render("error", true);
+            result.render("message", msg.get("infoProductCount", language).get());
         }
         // product count is OK
         else
@@ -103,9 +105,13 @@ public class BasketController
                     BasketInformation.removeProductFromBasket(basket, basketProduct);
                 }
             }
+            result.render("error", false);
+            // add new header
+            result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+            // add totalPrice
+            result.render("totalPrice", (basket.getTotalPrice() + xcpConf.currency));
         }
-        // return basket overview page
-        return Results.redirect(context.getContextPath() + "/basket");
+        return result;
     }
 
     /**
