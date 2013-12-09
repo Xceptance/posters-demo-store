@@ -7,7 +7,7 @@
   <command name="clickAndWait" target="id=headerBasketOverview"/>
   <action name="UpdateProductCount"/>
   <command name="type" target="css=.productCount0" value="asdf"/>
-  <command name="clickAndWait" target="id=btnUpdateProdCount0"/>
-  <command name="assertText" target="id=infoMessage" value="× The product count could not be updated. Please try again."/>
+  <command name="click" target="id=btnUpdateProdCount0"/>
+  <command name="waitForText" target="id=infoMessage" value="× The product count could not be updated. Please try again."/>
   <command name="assertValue" target="css=.productCount0" value="1"/>
 </testcase>
