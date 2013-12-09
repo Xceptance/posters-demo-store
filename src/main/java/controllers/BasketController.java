@@ -68,8 +68,8 @@ public class BasketController
         if (!Pattern.matches(xcpConf.regexProductCount, productCount))
         {
             // show info message
-            result.render("error", true);
             result.render("message", msg.get("infoProductCount", language).get());
+            return result.status(Result.SC_400_BAD_REQUEST);
         }
         // product count is OK
         else
@@ -105,7 +105,6 @@ public class BasketController
                     BasketInformation.removeProductFromBasket(basket, basketProduct);
                 }
             }
-            result.render("error", false);
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
             // add totalPrice

@@ -1,5 +1,15 @@
+$(document).ready(hideMessages);
+
+function hideMessages()
+{
+	$("#errorMessage").hide();
+	$("#successMessage").hide();
+	$("#infoMessage").hide();
+}
+
 function deleteFromCart(basketProductId, cartIndex)
 {
+	hideMessages();
 	var url = '/deleteFromCart?basketProductId=' + basketProductId;
 	$.get(url, function(data)
 		{
@@ -14,23 +24,24 @@ function deleteFromCart(basketProductId, cartIndex)
 		});
 }
 
-function updateProductCount(basketProductId, count, cartIndex, event)
+function updateProductCount(basketProductId, count, cartIndex)
 {
 	var url = '/updateProductCount?basketProductId=' + basketProductId + '&productCount=' + count;
-	$.get(url, function(data)
-		{
-			if (data.error == false)
-			{
-				// update cart in header
-				$("#headerBasketOverview span").text(data.headerCartOverview);
-				// update total price
-				$("#totalPrice:first-child").text(data.totalPrice);
-				// update cart slider
-				getCartSliderText();
-			}
-			else
-			{
-				alert(data.message);
-			}
+	$.get(url)
+		.always(function() {
+			hideMessages();
+		})
+		.done(function(data) {
+			// update cart in header
+			$("#headerBasketOverview span").text(data.headerCartOverview);
+			// update total price
+			$("#totalPrice:first-child").text(data.totalPrice);
+			// update cart slider
+			getCartSliderText();
+		})
+		.error(function(data) {
+			var err = eval("(" + data.responseText + ")");
+			$("#infoMessage").show();
+			$("#infoMessage div strong").text(err.message);
 		});
 }
