@@ -6,7 +6,7 @@
 	<div class="row well" id="order${order_index}">
 	<div class="span2">
 		<h5 id="order${order_index}Date">${order.orderDate}</h5>
-		<h5 id="order${order_index}Costs">${order.totalCosts}${currency}</h5>
+		<h5 id="order${order_index}Costs">${order.getTotalCostsAsString()}${currency}</h5>
 	</div>
 	<div class="span8">
 		<table class="table" table-bordered>
