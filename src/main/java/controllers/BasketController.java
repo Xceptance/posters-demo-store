@@ -109,8 +109,8 @@ public class BasketController
             result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
             // add totalPrice
             result.render("totalPrice", (basket.getTotalPrice() + xcpConf.currency));
+            return result;
         }
-        return result;
     }
 
     /**
@@ -138,7 +138,7 @@ public class BasketController
             product.put("finish", basketProduct.getFinish());
             results.add(product);
         }
-        return Results.json().render("cartElements", results);
+        return Results.json().render("cartElements", results).render("currency", xcpConf.currency);
     }
 
     /**
@@ -171,6 +171,8 @@ public class BasketController
         updatedProduct.put("finish", finish);
         // add product to result
         result.render("product", updatedProduct);
+        // add currency
+        result.render("currency", xcpConf.currency);
         // add new header to result
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         return result;
