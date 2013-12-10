@@ -78,7 +78,7 @@ public class Product
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subCategory_id")
     private SubCategory subCategory;
-    
+
     /**
      * The top category, the product belongs to.
      */
@@ -224,6 +224,11 @@ public class Product
     public void setOrder(List<Order_Product> order)
     {
         this.order = order;
+    }
+
+    public String getPriceAsString()
+    {
+        return String.valueOf(this.price);
     }
 
     public void update()

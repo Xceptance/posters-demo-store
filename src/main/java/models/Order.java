@@ -97,6 +97,11 @@ public class Order
         this.shippingCosts = shippingCosts;
     }
 
+    public String getShippingCostsAsString()
+    {
+        return String.valueOf(this.getShippingCosts());
+    }
+
     public double getTax()
     {
         return tax;
@@ -105,6 +110,11 @@ public class Order
     public void setTax(double tax)
     {
         this.tax = tax;
+    }
+
+    public String getTaxAsString()
+    {
+        return String.valueOf(this.tax);
     }
 
     public double getTotalCosts()
@@ -119,6 +129,11 @@ public class Order
     public void setTotalCosts(double totalCosts)
     {
         this.totalCosts = totalCosts;
+    }
+
+    public String getTotalCostsAsString()
+    {
+        return String.valueOf(this.getTotalCosts());
     }
 
     public CreditCard getCreditCard()
