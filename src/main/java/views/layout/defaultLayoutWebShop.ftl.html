@@ -23,6 +23,7 @@
 	<script src="/assets/js/bootstrap-paginator.js"></script>
 	<script src="/assets/js/bootstrap-collapse.js"></script>
 	<script src="/assets/js/customCartSlider.js"></script>
+	<script src="/assets/js/custom.js"></script>
   </head>
   <body>
   		<!-- cart slider -->
@@ -35,29 +36,48 @@
 		</#if>
 		<!-- messages -->
 		<#if flash.error??>
-			<div class="row" id="errorMessage">
-				<div class="span6 offset3 text-center alert alert-error">
-  					<a class="close" data-dismiss="alert">×</a>
-  					<strong>${flash.error}</strong>
-				</div>
-			</div>
+			<script type="text/javascript">
+				$(document).ready(function(){ 
+					$("#errorMessage").show();
+					$("#errorMessage div strong").text("${flash.error}");
+				});
+			</script>
 		</#if>
+		<div class="row" id="errorMessage">
+			<div class="span6 offset3 text-center alert alert-error">
+  				<a class="close" data-dismiss="alert">×</a>
+  				<strong></strong>
+			</div>
+		</div>
 		<#if flash.success??>
-			<div class="row" id="successMessage">
-				<div class="span6 offset3 text-center alert alert-success">
-  					<a class="close" data-dismiss="alert">×</a>
-  					<strong>${flash.success}</strong>
-				</div>
-			</div>
+			<script type="text/javascript">
+				$(document).ready(function(){ 
+					$("#successMessage").show();
+					$("#successMessage div strong").text("${flash.success}");
+				});
+			</script>
 		</#if>
+		<div class="row" id="successMessage">
+			<div class="span6 offset3 text-center alert alert-success">
+  				<a class="close" data-dismiss="alert">×</a>
+  				<strong></strong>
+			</div>
+		</div>
 		<#if flash.info??>
-			<div class="row" id="infoMessage">
-				<div class="span6 offset3 text-center alert alert-info">
-  					<a class="close" data-dismiss="alert">×</a>
-  					<strong>${flash.info}</strong>
-				</div>
-			</div>
+			<script type="text/javascript">
+				$(document).ready(function(){ 
+					$("#infoMessage").show();
+					$("#infoMessage div strong").text("${flash.info}");
+				});
+			</script>
 		</#if>
+		<div class="row" id="infoMessage">
+			<div class="span6 offset3 text-center alert alert-info">
+  				<a class="close" data-dismiss="alert">×</a>
+  				<strong></strong>
+			</div>
+		</div>
+
 		<!-- body -->
 		<div class="container-fluid">
 			<div class="row-fluid">

@@ -10,17 +10,11 @@
 				<td id="productFinish${basketProduct_index}">${basketProduct.finish}</td>
 				<td id="productPrice${basketProduct_index}">${basketProduct.product.price}${currency}</td>
 				<td>
-					<form id="formProdCount${basketProduct_index}" class="form-inline" action="/updateProductCount" method="post">
-	      				<input class="input-mini productCount${basketProduct_index}" type="number" id="productCount" name="productCount" value=${basketProduct.countProduct}>
-      					<input type="hidden" id="basketProductId" name="basketProductId" value=${basketProduct.id}>
-      					<button class="btn" id="btnUpdateProdCount${basketProduct_index}" name="btnUpdateProdCount${basketProduct_index}" type="submit">${i18n("basketOverviewUpdateQuantity")}</button>
-   	   				</form>
+	      			<input class="input-mini productCount${basketProduct_index}" type="number" id="productCount${basketProduct_index}" name="productCount${basketProduct_index}" value=${basketProduct.countProduct}><br/>
+	      			<button class="btn" id="btnUpdateProdCount${basketProduct_index}" name="btnUpdateProdCount${basketProduct_index}" onclick="updateProductCount(${basketProduct.id}, $('#productCount${basketProduct_index}').val(), ${basketProduct_index})">${i18n("basketOverviewUpdateQuantity")}</button>
 				</td>
 				<td>
-					<form action="/deleteFromBasket" method="post">
-      					<input type="hidden" id="basketProductId" name="basketProductId" value=${basketProduct.id}>
-      					<button class="btn" id="btnRemoveProduct${basketProduct_index}" name="btnRemoveProduct${basketProduct_index}" type="submit">${i18n("basketOverviewRemoveFromBasket")}</button>
-      				</form>
+      				<button class="btn" id="btnRemoveProduct${basketProduct_index}" name="btnRemoveProduct${basketProduct_index}" onclick="deleteFromCart(${basketProduct.id}, ${basketProduct_index})">${i18n("basketOverviewRemoveFromBasket")}</button>
 				</td>
 			</tr>
 		</#list>

@@ -32,8 +32,8 @@
   <command name="assertValue" target="css=.productCount1" value="1"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*2.*-.*"/>
   <action name="RemoveProductFromCart"/>
-  <command name="clickAndWait" target="id=btnRemoveProduct0"/>
+  <command name="click" target="id=btnRemoveProduct0"/>
   <action name="RemoveProductFromCart"/>
-  <command name="clickAndWait" target="id=btnRemoveProduct0"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*-.*"/>
+  <command name="click" target="id=btnRemoveProduct1"/>
+  <command name="waitForText" target="id=btnBasketOverview" value="regexp:.*0.*-.*"/>
 </testcase>
