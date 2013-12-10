@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Verifies the cart slider.</description>
+  <parameter name="index"/>
+  <parameter name="productName"/>
+  <parameter name="productFinish"/>
+  <parameter name="productPrice"/>
+  <parameter name="productCount"/>
+  <command name="click" target="id=slidingTopTriggerShow"/>
+  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdName']" value="@{productName}"/>
+  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdFinish']" value="@{productFinish}"/>
+  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdPrice']" value="@{productPrice}"/>
+  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdCount']" value="@{productCount}"/>
+</scriptmodule>
