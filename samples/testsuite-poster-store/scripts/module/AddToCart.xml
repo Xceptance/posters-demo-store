@@ -3,6 +3,11 @@
   <description>Browses to a product of a category and add this product to the cart.</description>
   <module name="module.Browse"/>
   <action name="AddToCart"/>
+  <command name="storeXpathCount" target="//select[@id='finish']/option" value="finishCount"/>
+  <command name="store" target="${RANDOM.Number(${finishCount})}" value="finishIndex"/>
+  <command name="select" target="id=finish" value="index=${finishIndex}"/>
+  <command name="storeText" target="//select[@id='finish']/option[${finishIndex}+1]" value="productFinish"/>
+  <command name="storeText" target="id=prodPrice" value="productPrice"/>
   <command name="click" target="id=btnAddToCart"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
   <command name="assertElementPresent" target="//ul[@id='cartElementList']/li[1]"/>
