@@ -42,7 +42,7 @@ function updateCartSlider(data)
 
 function setCartSliderElementInnerHtml(product)
 {
-	return product.productName + " - " + product.finish + " - " + product.productPrice + " (" + product.productCount + " items)";
+	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span> - <span id='sliderProdPrice'>" + product.productPrice + "</span> (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
 }
 
 function addToCart(productId, finish)
@@ -81,7 +81,8 @@ function addToCartSlider(productId, finish)
 			var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.product) + "</li>";
 			if( $("#" + liId).length > 0)
 			{
-				$("#" + liId).before(liElement).remove();
+				$("#" + liId).remove();
+				$("#cartElementList").prepend(liElement);
 			}
 			else
 			{
