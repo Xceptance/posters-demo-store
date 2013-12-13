@@ -8,6 +8,7 @@
 				<td id="productName${basketProduct_index}">${basketProduct.product.name}</td>
 				<td id="productDescriptionOverview${basketProduct_index}">${basketProduct.product.descriptionOverview}</td>
 				<td id="productFinish${basketProduct_index}">${basketProduct.finish}</td>
+				<td id="productSize${basketProduct_index}">${basketProduct.size.width} x ${basketProduct.size.height} ${unitLength}</td>
 				<td id="productPrice${basketProduct_index}">${basketProduct.product.getPriceAsString()}${currency}</td>
 				<td>
 	      			<input class="input-mini productCount${basketProduct_index}" type="number" id="productCount${basketProduct_index}" name="productCount${basketProduct_index}" value=${basketProduct.countProduct}><br/>
