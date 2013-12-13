@@ -35,14 +35,17 @@ function updateCartSlider(data)
 	for (var i=0; i<data.cartElements.length; i++)
 	{
 		var liId = "productId" + data.cartElements[i].productId + data.cartElements[i].finish;
-		var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.cartElements[i], data.currency) + "</li>";
+		var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.cartElements[i], data.currency, data.unitLength) + "</li>";
 		$("#cartElementList").append(liElement);
 	}
 }
 
-function setCartSliderElementInnerHtml(product, currency)
+function setCartSliderElementInnerHtml(product, currency, unitLength)
 {
-	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span> - <span id='sliderProdPrice'>" + product.productPrice + currency + "</span> (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
+	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span>" +
+			" - <span id='sliderProdSize'>" + product.size.width + " x " + product.size.height + " " + unitLength + "</span>" +
+			" - <span id='sliderProdPrice'>" + product.productPrice + currency + "</span>" +
+			" (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
 }
 
 function addToCart(productId, finish, size)
@@ -78,7 +81,7 @@ function addToCartSlider(productId, finish, size)
 		success: function(data) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish;
-			var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.product, data.currency) + "</li>";
+			var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.product, data.currency, data.unitLength) + "</li>";
 			if( $("#" + liId).length > 0)
 			{
 				$("#" + liId).remove();

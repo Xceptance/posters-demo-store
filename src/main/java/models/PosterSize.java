@@ -1,11 +1,7 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.avaje.ebean.Ebean;
@@ -30,17 +26,6 @@ public class PosterSize
      * The height of the poster.
      */
     private int height;
-
-    /**
-     * The products which are available in this size.
-     */
-    @OneToMany(mappedBy = "size")
-    private List<Product_PosterSize> products;
-
-    public PosterSize()
-    {
-        this.products = new ArrayList<Product_PosterSize>();
-    }
 
     public int getId()
     {
@@ -70,16 +55,6 @@ public class PosterSize
     public void setHeight(int height)
     {
         this.height = height;
-    }
-
-    public List<Product_PosterSize> getProducts()
-    {
-        return products;
-    }
-
-    public void setProducts(List<Product_PosterSize> products)
-    {
-        this.products = products;
     }
 
     public void update()
