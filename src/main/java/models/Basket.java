@@ -88,10 +88,10 @@ public class Basket
         this.products = products;
     }
 
-    public void addProduct(Product product, final String finish)
+    public void addProduct(Product product, final String finish, final PosterSize size)
     {
         Basket_Product basketProduct = Ebean.find(Basket_Product.class).where().eq("basket", this)
-                                            .eq("product", product).eq("finish", finish).findUnique();
+                                            .eq("product", product).eq("finish", finish).eq("size", size).findUnique();
         // this product is not in the basket
         if (basketProduct == null)
         {
@@ -103,6 +103,8 @@ public class Basket
             basketProduct.setCountProduct(1);
             // set finish
             basketProduct.setFinish(finish);
+            // set size
+            basketProduct.setSize(size);
             basketProduct.save();
             products.add(basketProduct);
         }

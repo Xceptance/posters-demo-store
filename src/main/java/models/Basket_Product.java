@@ -33,6 +33,13 @@ public class Basket_Product
      */
     private String finish;
 
+    /**
+     * The size of the poster.
+     */
+    @ManyToOne
+    @JoinColumn(name = "posterSize_id")
+    private PosterSize size;
+
     @Version
     private Timestamp lastUpdate;
 
@@ -84,6 +91,16 @@ public class Basket_Product
     public void setFinish(String finish)
     {
         this.finish = finish;
+    }
+
+    public PosterSize getSize()
+    {
+        return size;
+    }
+
+    public void setSize(PosterSize size)
+    {
+        this.size = size;
     }
 
     public Timestamp getLastUpdate()

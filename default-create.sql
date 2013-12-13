@@ -11,6 +11,7 @@ create table basket_product (
   basket_id                 integer,
   count_product             integer,
   finish                    varchar(255),
+  posterSize_id             integer,
   last_update               timestamp not null,
   constraint pk_basket_product primary key (id))
 ;
@@ -81,7 +82,15 @@ create table order_product (
   ordering_id               integer,
   count_product             integer,
   finish                    varchar(255),
+  postersize_id             integer,
   constraint pk_order_product primary key (id))
+;
+
+create table posterSize (
+  id                        integer not null,
+  width                     integer,
+  height                    integer,
+  constraint pk_posterSize primary key (id))
 ;
 
 create table product (
@@ -97,6 +106,13 @@ create table product (
   subCategory_id            integer,
   top_category_id           integer,
   constraint pk_product primary key (id))
+;
+
+create table product_posterSize (
+  id                        integer not null,
+  product_id                integer,
+  posterSize_id             integer,
+  constraint pk_product_posterSize primary key (id))
 ;
 
 create table subCategory (
@@ -130,7 +146,11 @@ create sequence ordering_seq;
 
 create sequence order_product_seq;
 
+create sequence posterSize_seq;
+
 create sequence product_seq;
+
+create sequence product_posterSize_seq;
 
 create sequence subCategory_seq;
 
@@ -142,31 +162,39 @@ alter table basket_product add constraint fk_basket_product_product_2 foreign ke
 create index ix_basket_product_product_2 on basket_product (product_id);
 alter table basket_product add constraint fk_basket_product_basket_3 foreign key (basket_id) references basket (id) on delete restrict on update restrict;
 create index ix_basket_product_basket_3 on basket_product (basket_id);
-alter table billingAddress add constraint fk_billingAddress_customer_4 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
-create index ix_billingAddress_customer_4 on billingAddress (customer_id);
-alter table creditCard add constraint fk_creditCard_customer_5 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
-create index ix_creditCard_customer_5 on creditCard (customer_id);
-alter table customer add constraint fk_customer_basket_6 foreign key (basket_id) references basket (id) on delete restrict on update restrict;
-create index ix_customer_basket_6 on customer (basket_id);
-alter table deliveryAddress add constraint fk_deliveryAddress_customer_7 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
-create index ix_deliveryAddress_customer_7 on deliveryAddress (customer_id);
-alter table ordering add constraint fk_ordering_deliveryAddress_8 foreign key (delivery_address_id) references deliveryAddress (id) on delete restrict on update restrict;
-create index ix_ordering_deliveryAddress_8 on ordering (delivery_address_id);
-alter table ordering add constraint fk_ordering_billingAddress_9 foreign key (billing_address_id) references billingAddress (id) on delete restrict on update restrict;
-create index ix_ordering_billingAddress_9 on ordering (billing_address_id);
-alter table ordering add constraint fk_ordering_creditCard_10 foreign key (credit_card_id) references creditCard (id) on delete restrict on update restrict;
-create index ix_ordering_creditCard_10 on ordering (credit_card_id);
-alter table ordering add constraint fk_ordering_customer_11 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
-create index ix_ordering_customer_11 on ordering (customer_id);
-alter table order_product add constraint fk_order_product_product_12 foreign key (product_id) references product (id) on delete restrict on update restrict;
-create index ix_order_product_product_12 on order_product (product_id);
-alter table order_product add constraint fk_order_product_order_13 foreign key (ordering_id) references ordering (id) on delete restrict on update restrict;
-create index ix_order_product_order_13 on order_product (ordering_id);
-alter table product add constraint fk_product_subCategory_14 foreign key (subCategory_id) references subCategory (id) on delete restrict on update restrict;
-create index ix_product_subCategory_14 on product (subCategory_id);
-alter table product add constraint fk_product_topCategory_15 foreign key (top_category_id) references category (id) on delete restrict on update restrict;
-create index ix_product_topCategory_15 on product (top_category_id);
-alter table subCategory add constraint fk_subCategory_topCategory_16 foreign key (topCategory_id) references category (id) on delete restrict on update restrict;
-create index ix_subCategory_topCategory_16 on subCategory (topCategory_id);
+alter table basket_product add constraint fk_basket_product_size_4 foreign key (posterSize_id) references posterSize (id) on delete restrict on update restrict;
+create index ix_basket_product_size_4 on basket_product (posterSize_id);
+alter table billingAddress add constraint fk_billingAddress_customer_5 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+create index ix_billingAddress_customer_5 on billingAddress (customer_id);
+alter table creditCard add constraint fk_creditCard_customer_6 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+create index ix_creditCard_customer_6 on creditCard (customer_id);
+alter table customer add constraint fk_customer_basket_7 foreign key (basket_id) references basket (id) on delete restrict on update restrict;
+create index ix_customer_basket_7 on customer (basket_id);
+alter table deliveryAddress add constraint fk_deliveryAddress_customer_8 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+create index ix_deliveryAddress_customer_8 on deliveryAddress (customer_id);
+alter table ordering add constraint fk_ordering_deliveryAddress_9 foreign key (delivery_address_id) references deliveryAddress (id) on delete restrict on update restrict;
+create index ix_ordering_deliveryAddress_9 on ordering (delivery_address_id);
+alter table ordering add constraint fk_ordering_billingAddress_10 foreign key (billing_address_id) references billingAddress (id) on delete restrict on update restrict;
+create index ix_ordering_billingAddress_10 on ordering (billing_address_id);
+alter table ordering add constraint fk_ordering_creditCard_11 foreign key (credit_card_id) references creditCard (id) on delete restrict on update restrict;
+create index ix_ordering_creditCard_11 on ordering (credit_card_id);
+alter table ordering add constraint fk_ordering_customer_12 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+create index ix_ordering_customer_12 on ordering (customer_id);
+alter table order_product add constraint fk_order_product_product_13 foreign key (product_id) references product (id) on delete restrict on update restrict;
+create index ix_order_product_product_13 on order_product (product_id);
+alter table order_product add constraint fk_order_product_order_14 foreign key (ordering_id) references ordering (id) on delete restrict on update restrict;
+create index ix_order_product_order_14 on order_product (ordering_id);
+alter table order_product add constraint fk_order_product_size_15 foreign key (postersize_id) references posterSize (id) on delete restrict on update restrict;
+create index ix_order_product_size_15 on order_product (postersize_id);
+alter table product add constraint fk_product_subCategory_16 foreign key (subCategory_id) references subCategory (id) on delete restrict on update restrict;
+create index ix_product_subCategory_16 on product (subCategory_id);
+alter table product add constraint fk_product_topCategory_17 foreign key (top_category_id) references category (id) on delete restrict on update restrict;
+create index ix_product_topCategory_17 on product (top_category_id);
+alter table product_posterSize add constraint fk_product_posterSize_product_18 foreign key (product_id) references product (id) on delete restrict on update restrict;
+create index ix_product_posterSize_product_18 on product_posterSize (product_id);
+alter table product_posterSize add constraint fk_product_posterSize_size_19 foreign key (posterSize_id) references posterSize (id) on delete restrict on update restrict;
+create index ix_product_posterSize_size_19 on product_posterSize (posterSize_id);
+alter table subCategory add constraint fk_subCategory_topCategory_20 foreign key (topCategory_id) references category (id) on delete restrict on update restrict;
+create index ix_subCategory_topCategory_20 on subCategory (topCategory_id);
 
 

@@ -206,10 +206,10 @@ public class Order
         this.setTotalCosts(this.getShippingCosts() + this.getTotalCosts());
     }
 
-    private void addProduct(Product product, String finish)
+    private void addProduct(Product product, String finish, PosterSize size)
     {
         Order_Product orderProduct = Ebean.find(Order_Product.class).where().eq("order", this).eq("product", product)
-                                          .eq("finish", finish).findUnique();
+                                          .eq("finish", finish).eq("size", size).findUnique();
         // this product is not in the order
         if (orderProduct == null)
         {
@@ -221,6 +221,8 @@ public class Order
             orderProduct.setCountProduct(1);
             // set finish
             orderProduct.setFinish(finish);
+            // set size
+            orderProduct.setSize(size);
             Ebean.save(orderProduct);
             products.add(orderProduct);
         }
@@ -245,7 +247,7 @@ public class Order
             // add the product to the order
             for (int i = 0; i < basketProduct.getCountProduct(); i++)
             {
-                this.addProduct(basketProduct.getProduct(), basketProduct.getFinish());
+                this.addProduct(basketProduct.getProduct(), basketProduct.getFinish(), basketProduct.getSize());
             }
         }
     }

@@ -30,6 +30,13 @@ public class Order_Product
      */
     private String finish;
 
+    /**
+     * The size of the poster.
+     */
+    @ManyToOne
+    @JoinColumn(name = "postersize_id")
+    private PosterSize size;
+
     public int getId()
     {
         return id;
@@ -83,6 +90,16 @@ public class Order_Product
     public void setFinish(String finish)
     {
         this.finish = finish;
+    }
+
+    public PosterSize getSize()
+    {
+        return size;
+    }
+
+    public void setSize(PosterSize size)
+    {
+        this.size = size;
     }
 
     public void update()
