@@ -36,5 +36,7 @@ public abstract class CommonInformation
         data.put("applUrlHttps", xcpConf.applicationUrlHttps);
         // set currency
         data.put("currency", xcpConf.currency);
+        // add unit of length
+        data.put("unitLength", xcpConf.unitLength);
     }
 }
