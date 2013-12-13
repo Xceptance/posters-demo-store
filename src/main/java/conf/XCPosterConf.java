@@ -77,6 +77,8 @@ public class XCPosterConf
 
     public final String templateLoginForm;
 
+    public final String unitLength;
+
     @Inject
     public XCPosterConf(NinjaProperties ninjaProp)
     {
@@ -147,5 +149,7 @@ public class XCPosterConf
         templateAddressOverview = "views/CustomerController/addressOverview.ftl.html";
 
         templateLoginForm = "views/CustomerController/loginForm.ftl.html";
+
+        unitLength = ninjaProp.getOrDie("application.unitLength");
     }
 }
