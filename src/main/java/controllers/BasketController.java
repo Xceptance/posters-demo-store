@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import models.Basket;
 import models.Basket_Product;
+import models.PosterSize;
 import models.Product;
 import ninja.Context;
 import ninja.FilterWith;
@@ -93,7 +94,8 @@ public class BasketController
                 for (int i = 0; i < difference; i++)
                 {
                     // add product to basket
-                    BasketInformation.addProductToBasket(basket, product, basketProduct.getFinish());
+                    BasketInformation.addProductToBasket(basket, product, basketProduct.getFinish(),
+                                                         basketProduct.getSize());
                 }
             }
             // product must be removed
@@ -150,7 +152,8 @@ public class BasketController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish, Context context)
+    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish,
+                            @Param("size") String size, Context context)
     {
         Result result = Results.json();
         // get product by id
@@ -159,10 +162,16 @@ public class BasketController
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // set customer to basket
         BasketInformation.setCustomerToBasket(context, basket);
+        // get poster size
+        String[] dummy = size.split(" ");
+        int width = Integer.parseInt(dummy[0]);
+        int height = Integer.parseInt(dummy[2]);
+        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
+                                     .findUnique();
         // add product to basket
-        BasketInformation.addProductToBasket(basket, product, finish);
+        BasketInformation.addProductToBasket(basket, product, finish, posterSize);
         // get added basket product
-        Basket_Product basketProduct = BasketInformation.getBasketProduct(basket, product, finish);
+        Basket_Product basketProduct = BasketInformation.getBasketProduct(basket, product, finish, posterSize);
         Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", basketProduct.getCountProduct());
         updatedProduct.put("productName", basketProduct.getProduct().getName());

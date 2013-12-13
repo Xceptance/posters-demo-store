@@ -7,6 +7,7 @@ import java.util.Map;
 import models.Basket;
 import models.Basket_Product;
 import models.Customer;
+import models.PosterSize;
 import models.Product;
 import ninja.Context;
 import util.session.SessionHandling;
@@ -51,9 +52,10 @@ public abstract class BasketInformation
      * @param basket
      * @param productId
      */
-    public static void addProductToBasket(final Basket basket, final Product product, final String finish)
+    public static void addProductToBasket(final Basket basket, final Product product, final String finish,
+                                          final PosterSize size)
     {
-        basket.addProduct(product, finish);
+        basket.addProduct(product, finish, size);
         basket.update();
     }
 
@@ -161,9 +163,10 @@ public abstract class BasketInformation
         return productCount;
     }
 
-    public static Basket_Product getBasketProduct(Basket basket, Product product, String finish)
+    public static Basket_Product getBasketProduct(final Basket basket, final Product product, final String finish,
+                                                  final PosterSize size)
     {
         return Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
-                    .eq("finish", finish).findUnique();
+                    .eq("finish", finish).eq("size", size).findUnique();
     }
 }

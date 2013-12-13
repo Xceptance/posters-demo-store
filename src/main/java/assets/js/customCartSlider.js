@@ -45,19 +45,19 @@ function setCartSliderElementInnerHtml(product, currency)
 	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span> - <span id='sliderProdPrice'>" + product.productPrice + currency + "</span> (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
 }
 
-function addToCart(productId, finish)
+function addToCart(productId, finish, size)
 {
 	getCartSliderText();
 	if ($("#slidingTopContent").is(":visible"))
 	{
-		addToCartSlider(productId, finish);
+		addToCartSlider(productId, finish, size);
 	}
 	else
 	{
 		$("#slidingTopContent").slideToggle("slow", function(){		
 			$("#slidingTopTriggerShow").hide();
 			$("#slidingTopTriggerHide").show();
-			addToCartSlider(productId, finish);
+			addToCartSlider(productId, finish, size);
 			$("#slidingTopTriggerHide").fadeTo(4000, 1, function(){
 				$("#slidingTopContent").slideToggle("slow", function(){
 					$("#slidingTopTriggerShow").show();
@@ -68,13 +68,13 @@ function addToCart(productId, finish)
 	}
 }
 
-function addToCartSlider(productId, finish)
+function addToCartSlider(productId, finish, size)
 {
 	$("#notificationsLoader").html('<img src="/assets/img/loader.gif">');
 	
 	$.ajax({  
 		type: "GET",  
-		url: '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish, 
+		url: '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size, 
 		success: function(data) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish;
