@@ -10,6 +10,7 @@
     <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_1.jpg</imageURL>
     <subCategory>Animals</subCategory>
     <showInTopCategory>true</showInTopCategory>
+    <availableSize>16x12;32x24;64x48</availableSize>
   </product>
   <product>
     <name>Great Grey Owl</name>
@@ -18,6 +19,7 @@
     <price>17.99</price>
     <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_2.jpg</imageURL>
     <subCategory>Animals</subCategory>
+    <availableSize>48x36;32x24;64x48</availableSize>
   </product>
   <product>
     <name>Swedish Moose</name>
@@ -26,6 +28,7 @@
     <price>17.99</price>
     <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_3.jpg</imageURL>
     <subCategory>Animals</subCategory>
+    <availableSize>16x12;32x24;64x48</availableSize>
   </product>
   <product>
     <name>European Hornet</name>
