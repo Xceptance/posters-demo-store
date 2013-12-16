@@ -17,10 +17,16 @@
 				<div class="control-group">
 					<label class="control-label" for="finish">${i18n("basketSelectFinish")}</label>
 					<div class="controls">
-						<select id="finish" name="finish" class="input-small">
-							<option>${i18n("basketSelectFinishMatte")}</option>
-							<option>${i18n("basketSelectFinishGloss")}</option>
-						</select>
+						<div id="selectFinish">
+						<label class="radio" for="finish-matte">
+						<input name="finish" id="finish-matte" value="matte" checked="checked" type="radio">
+							${i18n("basketSelectFinishMatte")}
+						</label>
+						<label class="radio" for="finish-gloss">
+						<input name="finish" id="finish-gloss" value="gloss" type="radio">
+							${i18n("basketSelectFinishGloss")}
+						</label>
+						</div>
 					</div>
 				</div>
 				<!-- Select size -->
@@ -34,7 +40,7 @@
 						</select>
 					</div>
 				</div>
-      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(${productDetail.id}, $('#finish').val(), $('#selectSize').val())">${i18n("productDetailAddToBasket")}</button>
+      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToBasket")}</button>
       		</form>
       	</div>
     </div>
