@@ -44,6 +44,7 @@
     <parameter name="expDateMonth" value="${expDateMonth}"/>
     <parameter name="expDateYear" value="${expDateYear}"/>
   </module>
+  <command name="storeText" target="id=totalWithTax" value="totalWithTax"/>
   <command name="clickAndWait" target="id=btnOrder"/>
   <command name="assertElementPresent" target="id=successMessage"/>
   <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*0.*"/>
@@ -51,6 +52,7 @@
   <action name="ViewOrderOverview"/>
   <command name="clickAndWait" target="id=linkOrderOverview"/>
   <command name="assertElementPresent" target="id=titleOrderHistory"/>
+  <command name="assertText" target="id=order0Costs" value="${totalWithTax}"/>
   <command name="assertText" target="id=order0Product0Name" value="${productName}"/>
   <command name="assertText" target="id=order0Product0Count" value="1x"/>
   <command name="assertText" target="id=order0Product0Finish" value="${productFinish}"/>
