@@ -269,6 +269,7 @@ public abstract class CustomerInformation
                                               basketProduct.getSize());
                 }
             }
+            customerBasket.setCustomer(customer);
             customerBasket.update();
         }
     }
