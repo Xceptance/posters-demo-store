@@ -3,5 +3,5 @@
   <description>Verifies the cart overview in the header.</description>
   <parameter name="productCount"/>
   <parameter name="totalPrice"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*@{productCount}.*@{totalPrice}"/>
+  <command name="assertText" target="id=btnBasketOverview" value="*@{productCount}*@{totalPrice}"/>
 </scriptmodule>
