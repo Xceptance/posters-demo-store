@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import models.Basket;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
@@ -955,6 +956,13 @@ public class CustomerController
             SessionHandling.deleteCustomerId(context);
             // remove basket from session
             SessionHandling.deleteBasketId(context);
+            // remove customer's basket
+            Basket basket = Ebean.find(Basket.class).where().eq("customer", customer).findUnique();
+            if (basket != null)
+            {
+                basket.setCustomer(null);
+                basket.update();
+            }
             // remove customers orders --> deletes also customer --> deletes also addresses and payment information
             List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
             for (Order order : orders)
