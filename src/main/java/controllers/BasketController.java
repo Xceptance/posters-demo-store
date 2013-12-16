@@ -110,7 +110,7 @@ public class BasketController
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
             // add totalPrice
-            result.render("totalPrice", (basket.getTotalPrice() + xcpConf.currency));
+            result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.currency));
             return result;
         }
     }
@@ -136,7 +136,7 @@ public class BasketController
             product.put("productCount", basketProduct.getCountProduct());
             product.put("productName", basketProduct.getProduct().getName());
             product.put("productId", basketProduct.getProduct().getId());
-            product.put("productPrice", basketProduct.getProduct().getPrice());
+            product.put("productPrice", basketProduct.getProduct().getPriceAsString());
             product.put("finish", basketProduct.getFinish());
             product.put("size", basketProduct.getSize());
             results.add(product);
@@ -149,7 +149,7 @@ public class BasketController
         // add unit of length
         result.render("unitLength", xcpConf.unitLength);
         // add total price
-        result.render("totalPrice", basket.getTotalPrice());
+        result.render("totalPrice", basket.getTotalPriceAsString());
         return result;
     }
 
@@ -186,7 +186,7 @@ public class BasketController
         updatedProduct.put("productCount", basketProduct.getCountProduct());
         updatedProduct.put("productName", basketProduct.getProduct().getName());
         updatedProduct.put("productId", basketProduct.getProduct().getId());
-        updatedProduct.put("productPrice", basketProduct.getProduct().getPrice());
+        updatedProduct.put("productPrice", basketProduct.getProduct().getPriceAsString());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", basketProduct.getSize());
         // add product to result
@@ -198,7 +198,7 @@ public class BasketController
         // add new header to result
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         // add total price
-        result.render("totalPrice", basket.getTotalPrice());
+        result.render("totalPrice", basket.getTotalPriceAsString());
         return result;
     }
 
@@ -226,7 +226,7 @@ public class BasketController
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         // add totalPrice
-        result.render("totalPrice", (basket.getTotalPrice() + xcpConf.currency));
+        result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.currency));
         return result;
     }
 
@@ -236,7 +236,7 @@ public class BasketController
         headerCartOverview.append(" " + msg.get("basketOverviewTitle", language).get() + ": ");
         headerCartOverview.append(BasketInformation.getProductCount(basket));
         headerCartOverview.append(" " + msg.get("basketItem", language).get() + " - ");
-        headerCartOverview.append(basket.getTotalPrice() + xcpConf.currency);
+        headerCartOverview.append(basket.getTotalPriceAsString() + xcpConf.currency);
         return headerCartOverview.toString();
     }
 }

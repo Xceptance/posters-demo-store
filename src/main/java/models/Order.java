@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,11 +86,7 @@ public class Order
 
     public double getShippingCosts()
     {
-        double temp = shippingCosts;
-        temp = temp * 100;
-        temp = Math.round(temp);
-        temp = temp / 100;
-        return temp;
+        return shippingCosts;
     }
 
     public void setShippingCosts(double shippingCosts)
@@ -99,7 +96,12 @@ public class Order
 
     public String getShippingCostsAsString()
     {
-        return String.valueOf(this.getShippingCosts());
+        DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = shippingCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
     }
 
     public double getTax()
@@ -119,11 +121,7 @@ public class Order
 
     public double getTotalCosts()
     {
-        double temp = totalCosts;
-        temp = temp * 100;
-        temp = Math.round(temp);
-        temp = temp / 100;
-        return temp;
+        return totalCosts;
     }
 
     public void setTotalCosts(double totalCosts)
@@ -133,7 +131,12 @@ public class Order
 
     public String getTotalCostsAsString()
     {
-        return String.valueOf(this.getTotalCosts());
+        DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = totalCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
     }
 
     public CreditCard getCreditCard()

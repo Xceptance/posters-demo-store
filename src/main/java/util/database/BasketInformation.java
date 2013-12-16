@@ -90,8 +90,7 @@ public abstract class BasketInformation
         int basketId = basket.getId();
         data.put("basketId", basketId);
         // add total price of basket
-        double totalPrice = basket.getTotalPrice();
-        data.put("totalPrice", String.valueOf(totalPrice));
+        data.put("totalPrice", basket.getTotalPriceAsString());
     }
 
     /**

@@ -1,5 +1,6 @@
 package models;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +150,16 @@ public class Product
         return price;
     }
 
+    public String getPriceAsString()
+    {
+        DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
     public void setPrice(double price)
     {
         this.price = price;
@@ -247,11 +258,6 @@ public class Product
     public void setOrder(List<Order_Product> order)
     {
         this.order = order;
-    }
-
-    public String getPriceAsString()
-    {
-        return String.valueOf(this.price);
     }
 
     public void update()

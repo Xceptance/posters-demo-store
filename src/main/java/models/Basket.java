@@ -1,5 +1,6 @@
 package models;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +57,17 @@ public class Basket
 
     public double getTotalPrice()
     {
+        return totalPrice;
+    }
+
+    public String getTotalPriceAsString()
+    {
+        DecimalFormat f = new DecimalFormat("#0.00");
         double temp = totalPrice;
         temp = temp * 100;
         temp = Math.round(temp);
         temp = temp / 100;
-        return temp;
+        return f.format(temp).replace(',', '.');
     }
 
     public void setTotalPrice(double totalPrice)
