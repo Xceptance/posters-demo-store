@@ -77,12 +77,22 @@ public abstract class CustomerInformation
         // a customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
-            // add information that a customer is logged
-            data.put("isLogged", true);
+
             // get customer by session
             Customer customer = getCustomerById(Integer.parseInt(context.getSessionCookie().get("user")));
-            // add customer's first name to data map
-            data.put("customerFirstName", customer.getFirstName());
+            // something went wrong
+            if (customer == null)
+            {
+                data.put("isLogged", false);
+            }
+            else
+            {
+                // add information that a customer is logged
+                data.put("isLogged", true);
+                // add customer's first name to data map
+                data.put("customerFirstName", customer.getFirstName());
+            }
+
         }
         // no customer is logged
         else
