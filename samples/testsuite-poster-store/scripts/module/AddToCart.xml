@@ -3,10 +3,10 @@
   <description>Browses to a product of a category and add this product to the cart.</description>
   <module name="module.Browse"/>
   <action name="AddToCart"/>
-  <command name="storeXpathCount" target="//select[@id='finish']/option" value="finishCount"/>
+  <command name="storeXpathCount" target="//div[@id='selectFinish']/label" value="finishCount"/>
   <command name="store" target="${RANDOM.Number(${finishCount})}" value="finishIndex"/>
-  <command name="select" target="id=finish" value="index=${finishIndex}"/>
-  <command name="storeText" target="//select[@id='finish']/option[${finishIndex}+1]" value="productFinish"/>
+  <command name="check" target="//div[@id='selectFinish']/label[${finishIndex}+1]/input"/>
+  <command name="storeText" target="//div[@id='selectFinish']/label[${finishIndex}+1][1]" value="productFinish"/>
   <command name="storeXpathCount" target="//select[@id='selectSize']/option" value="availableSizeCount"/>
   <command name="store" target="${RANDOM.Number(${availableSizeCount})}" value="availableSizeIndex"/>
   <command name="select" target="id=selectSize" value="index=${availableSizeIndex}"/>
