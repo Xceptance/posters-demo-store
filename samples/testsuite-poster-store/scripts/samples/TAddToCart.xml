@@ -3,14 +3,6 @@
   <description>Simulates browsing the catalog and adding product to cart.</description>
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
-  <module name="module.VerifyCartSliderElement">
-    <parameter name="index" value="1"/>
-    <parameter name="productName" value="${productName}"/>
-    <parameter name="productFinish" value="${productFinish}"/>
-    <parameter name="productPrice" value="${productPrice}"/>
-    <parameter name="productCount" value="1"/>
-    <parameter name="productSize" value="${productSize}"/>
-  </module>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -19,19 +11,20 @@
     <parameter name="productSize" value="${productSize}"/>
   </module>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
+  <module name="module.VerifyCartSliderElement">
+    <parameter name="index" value="1"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productFinish" value="${productFinish}"/>
+    <parameter name="productPrice" value="${productPrice}"/>
+    <parameter name="productCount" value="1"/>
+    <parameter name="productSize" value="${productSize}"/>
+    <parameter name="totalPrice" value="${totalPrice}"/>
+  </module>
   <module name="module.VerifyCartOverview">
     <parameter name="productCount" value="1"/>
     <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
   <module name="module.AddToCart"/>
-  <module name="module.VerifyCartSliderElement">
-    <parameter name="index" value="1"/>
-    <parameter name="productName" value="${productName}"/>
-    <parameter name="productFinish" value="${productFinish}"/>
-    <parameter name="productPrice" value="${productPrice}"/>
-    <parameter name="productCount" value="1"/>
-    <parameter name="productSize" value="${productSize}"/>
-  </module>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -40,6 +33,15 @@
     <parameter name="productSize" value="${productSize}"/>
   </module>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
+  <module name="module.VerifyCartSliderElement">
+    <parameter name="index" value="1"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productFinish" value="${productFinish}"/>
+    <parameter name="productPrice" value="${productPrice}"/>
+    <parameter name="productCount" value="1"/>
+    <parameter name="productSize" value="${productSize}"/>
+    <parameter name="totalPrice" value="${totalPrice}"/>
+  </module>
   <module name="module.VerifyCartOverview">
     <parameter name="productCount" value="2"/>
     <parameter name="totalPrice" value="${totalPrice}"/>
@@ -48,15 +50,16 @@
   <command name="type" target="css=.productCount0" value="3"/>
   <command name="click" target="id=btnUpdateProdCount0"/>
   <command name="assertText" target="css=.productCount0" value="3"/>
+  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
   <module name="module.VerifyCartSliderElement">
     <parameter name="index" value="1"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productPrice" value="${productPrice}"/>
     <parameter name="productCount" value="3"/>
-    <parameter name="productSize" value=""/>
+    <parameter name="productSize" value="${productSize}"/>
+    <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
   <module name="module.VerifyCartOverview">
     <parameter name="productCount" value="4"/>
     <parameter name="totalPrice" value="${totalPrice}"/>
@@ -81,14 +84,6 @@
   <command name="click" target="id=btnAddToCart"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
   <command name="waitForNotVisible" target="//ul[@id='cartElementList']/li"/>
-  <module name="module.VerifyCartSliderElement">
-    <parameter name="index" value="1"/>
-    <parameter name="productName" value="${productName}"/>
-    <parameter name="productFinish" value="${productFinish}"/>
-    <parameter name="productPrice" value="${productPrice}"/>
-    <parameter name="productCount" value="4"/>
-    <parameter name="productSize" value="${productSize}"/>
-  </module>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -97,6 +92,15 @@
     <parameter name="productSize" value="${productSize}"/>
   </module>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
+  <module name="module.VerifyCartSliderElement">
+    <parameter name="index" value="1"/>
+    <parameter name="productName" value="${productName}"/>
+    <parameter name="productFinish" value="${productFinish}"/>
+    <parameter name="productPrice" value="${productPrice}"/>
+    <parameter name="productCount" value="4"/>
+    <parameter name="productSize" value="${productSize}"/>
+    <parameter name="totalPrice" value="${totalPrice}"/>
+  </module>
   <module name="module.VerifyCartOverview">
     <parameter name="productCount" value="4"/>
     <parameter name="totalPrice" value="${totalPrice}"/>
