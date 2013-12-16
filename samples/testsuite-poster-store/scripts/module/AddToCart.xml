@@ -7,6 +7,10 @@
   <command name="store" target="${RANDOM.Number(${finishCount})}" value="finishIndex"/>
   <command name="select" target="id=finish" value="index=${finishIndex}"/>
   <command name="storeText" target="//select[@id='finish']/option[${finishIndex}+1]" value="productFinish"/>
+  <command name="storeXpathCount" target="//select[@id='selectSize']/option" value="availableSizeCount"/>
+  <command name="store" target="${RANDOM.Number(${availableSizeCount})}" value="availableSizeIndex"/>
+  <command name="select" target="id=selectSize" value="index=${availableSizeIndex}"/>
+  <command name="storeText" target="//select[@id='finish']/option[${availableSizeIndex}+1]" value="productSize"/>
   <command name="storeText" target="id=prodPrice" value="productPrice"/>
   <command name="click" target="id=btnAddToCart"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
