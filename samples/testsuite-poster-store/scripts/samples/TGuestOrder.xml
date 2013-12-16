@@ -44,9 +44,11 @@
   <command name="clickAndWait" target="id=btnAddPayment"/>
   <action name="Order"/>
   <module name="module.VerifyOrderOverview">
-    <parameter name="priority" value="0"/>
+    <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productCount" value="1"/>
+    <parameter name="productFinish" value="${productFinish}"/>
+    <parameter name="productSize" value="${productSize}"/>
   </module>
   <module name="module.VerifyAddressAndPaymentOfOrder">
     <parameter name="fullName" value="${fullName}"/>
