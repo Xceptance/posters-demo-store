@@ -16,7 +16,11 @@ drop table if exists ordering;
 
 drop table if exists order_product;
 
+drop table if exists posterSize;
+
 drop table if exists product;
+
+drop table if exists product_posterSize;
 
 drop table if exists subCategory;
 
@@ -40,7 +44,11 @@ drop sequence if exists ordering_seq;
 
 drop sequence if exists order_product_seq;
 
+drop sequence if exists posterSize_seq;
+
 drop sequence if exists product_seq;
+
+drop sequence if exists product_posterSize_seq;
 
 drop sequence if exists subCategory_seq;
 

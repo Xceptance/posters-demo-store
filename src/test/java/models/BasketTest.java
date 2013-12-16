@@ -19,6 +19,8 @@ public class BasketTest extends NinjaTest
 
     Basket basket = new Basket();
 
+    PosterSize size;
+
     @Before
     public void setUp()
     {
@@ -29,8 +31,12 @@ public class BasketTest extends NinjaTest
         product2.setPrice(7.77);
         product2.save();
         basket.save();
+        size = new PosterSize();
+        size.setWidth(16);
+        size.setHeight(12);
+        size.save();
     }
-    
+
     @After
     public void tearDown()
     {
@@ -55,7 +61,7 @@ public class BasketTest extends NinjaTest
     @Test
     public void testAddProductToBasket()
     {
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
         // get all products of the basket
@@ -66,11 +72,11 @@ public class BasketTest extends NinjaTest
         // one of product one is in the basket
         Assert.assertEquals(1, basketProducts.get(0).getCountProduct());
     }
-    
+
     @Test
     public void testDeleteSingleProductFromBasket()
     {
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
         // get all products of the basket
@@ -79,26 +85,26 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(product1.getName(), basketProducts.get(0).getProduct().getName());
         // one of product one is in the basket
         Assert.assertEquals(1, basketProducts.get(0).getCountProduct());
-        
+
         // delete product one from basket
         basket.deleteProduct(basketProducts.get(0));
         basket.update();
-        
+
         // get all products of the basket
         List<Basket_Product> basketProducts2 = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
         Assert.assertTrue(basketProducts2.size() == 0);
     }
-    
+
     @Test
     public void testDeleteProductsFromBasket()
     {
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
-        
-        basket.addProduct(product1, "matt");
+
+        basket.addProduct(product1, "matt", size);
         basket.update();
-        
-        basket.addProduct(product2, "matt");
+
+        basket.addProduct(product2, "matt", size);
         basket.update();
 
         // get all products of the basket
@@ -111,11 +117,11 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(product2.getName(), basketProducts.get(1).getProduct().getName());
         // one of product two is in the basket
         Assert.assertEquals(1, basketProducts.get(1).getCountProduct());
-        
+
         // delete product one from basket
         basket.deleteProduct(basketProducts.get(0));
         basket.update();
-        
+
         // get all products of the basket
         List<Basket_Product> basketProducts2 = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
         // product one is in the basket
@@ -128,11 +134,11 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(1, basketProducts2.get(1).getCountProduct());
         // total price is sum of all three product prices
         Assert.assertEquals(13.32, basket.getTotalPrice(), 0.01);
-        
+
         // delete product two from basket
         basket.deleteProduct(basketProducts2.get(1));
         basket.update();
-        
+
         // get all products of the basket
         List<Basket_Product> basketProducts3 = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
         // product one is in the basket
@@ -143,11 +149,11 @@ public class BasketTest extends NinjaTest
         Assert.assertTrue(basketProducts3.size() == 1);
         // total price is sum of all three product prices
         Assert.assertEquals(5.55, basket.getTotalPrice(), 0.01);
-        
+
         // delete product one from basket
         basket.deleteProduct(basketProducts3.get(0));
         basket.update();
-        
+
         // get all products of the basket
         List<Basket_Product> basketProducts4 = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
         Assert.assertTrue(basketProducts4.size() == 0);
@@ -158,13 +164,13 @@ public class BasketTest extends NinjaTest
     @Test
     public void testAddSameProductMoreThanOnce()
     {
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
-        basket.addProduct(product2, "matt");
+        basket.addProduct(product2, "matt", size);
         basket.update();
 
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
         // two different products
@@ -198,17 +204,17 @@ public class BasketTest extends NinjaTest
         // get customer by basket
         Assert.assertEquals(customer, basket.getCustomer());
     }
-    
+
     @Test
     public void testClearProducts()
     {
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
-        basket.addProduct(product2, "matt");
+        basket.addProduct(product2, "matt", size);
         basket.update();
 
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
         // two different products
@@ -225,7 +231,7 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(product2.getName(), basketProducts.get(1).getProduct().getName());
         // one of product two is in the basket
         Assert.assertEquals(1, basketProducts.get(1).getCountProduct());
-        
+
         basket.clearProducts();
         // get all products of the basket
         List<Basket_Product> basketProducts2 = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();

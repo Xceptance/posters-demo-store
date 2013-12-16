@@ -19,6 +19,8 @@ public class OrderTest extends NinjaTest
 
     Basket basket = new Basket();
 
+    PosterSize size;
+
     @Before
     public void setUp() throws Exception
     {
@@ -30,13 +32,18 @@ public class OrderTest extends NinjaTest
         product2.save();
         basket.save();
 
-        basket.addProduct(product1, "matt");
+        size = new PosterSize();
+        size.setWidth(16);
+        size.setHeight(12);
+        size.save();
+
+        basket.addProduct(product1, "matt", size);
         basket.update();
 
-        basket.addProduct(product2, "matt");
+        basket.addProduct(product2, "matt", size);
         basket.update();
 
-        basket.addProduct(product1, "matt");
+        basket.addProduct(product1, "matt", size);
         basket.update();
     }
 

@@ -265,7 +265,8 @@ public abstract class CustomerInformation
             {
                 for (int i = 0; i < basketProduct.getCountProduct(); i++)
                 {
-                    customerBasket.addProduct(basketProduct.getProduct(), basketProduct.getFinish());
+                    customerBasket.addProduct(basketProduct.getProduct(), basketProduct.getFinish(),
+                                              basketProduct.getSize());
                 }
             }
             customerBasket.update();

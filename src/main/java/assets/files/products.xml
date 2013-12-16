@@ -1,1065 +1,1655 @@
 <?xml version="1.0" encoding="utf-8"?>
 <products>
-  <!--TopCategory World_of_Nature-->
-  <!--SubCategory Animals-->
-  <product>
-    <name>Grizzly Bear</name>
-    <shortDescription>Relax and take it easy!</shortDescription>
-    <longDescription>Our photographer claims he had risked his life to get you this shot. We can't help it, but this bear looks as if he didn't mind him too much...</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_1.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Great Grey Owl</name>
-    <shortDescription>Not exactly Harry's Hedwig but still cute.</shortDescription>
-    <longDescription>Looks a little skeptic as to whether or not it likes to be in pictures, though.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_2.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-  </product>
-  <product>
-    <name>Swedish Moose</name>
-    <shortDescription>Look at this beauty!</shortDescription>
-    <longDescription>Just adorable. By the way, moose don't moo as cows do, and we think that's an awesome rhyme.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_3.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-  </product>
-  <product>
-    <name>European Hornet</name>
-    <shortDescription>Don't get stinged!</shortDescription>
-    <longDescription>This photographic print benefits from digital picture editing to deliver nature at its best. A hurrah to our photographer!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_4.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Roman Snail</name>
-    <shortDescription>At home.</shortDescription>
-    <longDescription>Retreating into your shell is not always a bad thing. Have this poster remind you of taking a break from everyday hassles every once in a while.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_5.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-  </product>
-  <product>
-    <name>Blue Morpho Butterfly</name>
-    <shortDescription>Lovely.</shortDescription>
-    <longDescription>Forget about decoration trinkets and hang this poster instead! The coloring of this beautiful morpho perfectly blends with the green leaves and the yellow flower in the background.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_6.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Red Birdwing</name>
-    <shortDescription>Dating a lilac dragon flower.</shortDescription>
-    <longDescription>Awww, look how well they get along! Makes you think of peace and harmony.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_7.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-  </product>
-  <product>
-    <name>Chipmunk</name>
-    <shortDescription>Looking for Simon and Theodore.</shortDescription>
-    <longDescription>Our tribute to "Alvin and the Chipmunks". We're absolutely sure: this is Alvin. "Do, do, do do do do!" </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_8.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Red Domestic Cat</name>
-    <shortDescription>Here's looking at you, kid!</shortDescription>
-    <longDescription>If "Casablanca" had starred cats, this one would have won an Oscar.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_9.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-  </product>
-  <product>
-    <name>Brown Domestic Cat</name>
-    <shortDescription>On alert!</shortDescription>
-    <longDescription>A cat at its best. The vivid zoomed-in view and sharp coloring makes you think its about to jump out of the picture.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_10.jpg</imageURL>
-    <subCategory>Animals</subCategory>
-  </product>
-  <!--SubCategory Flowers-->
-  <product>
-    <name>Pink Dahlia</name>
-    <shortDescription>Pink up your home!</shortDescription>
-    <longDescription>... with this precious Dahlia and be sure that all the girls in your life will love it.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_1.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Cactus Dahlia, Pink/White</name>
-    <shortDescription>If too much pink doesn't do it for you.</shortDescription>
-    <longDescription>For people who love flowers but are not so much into bright colors. The lilac and white combo matches about every wall color.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_2.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-  </product>
-  <product>
-    <name>Cactus Dahlia, Yellow/Pink</name>
-    <shortDescription>A special coloring for special people.</shortDescription>
-    <longDescription>Awesome what nature has in store for us. This blossom really is an eye-catcher!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_3.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-  </product>
-  <product>
-    <name>Jerusalem Artichoke</name>
-    <shortDescription>Let the sunshine in!</shortDescription>
-    <longDescription>This beautiful close-up of the tiny Jerusalem artichoke blossom will make your home a lot brighter. Goes well with greenish and brownish tones.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_4.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-  </product>
-  <product>
-    <name>Snowdrop Anemone</name>
-    <shortDescription>A blossom in all its details.</shortDescription>
-    <longDescription>The zoomed-in view of this flower’s center perfectly reveals all its delicacy. You can't get any closer than this!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_5.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-  </product>
-  <product>
-    <name>Violas</name>
-    <shortDescription>If it can’t get too flowery for you.</shortDescription>
-    <longDescription>For people who dream of sleeping on flowery meadows. The color mix is sure to pimp your walls.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_6.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Yellow and Orange Tulips</name>
-    <shortDescription>Springtime!</shortDescription>
-    <longDescription>Let the spring into your home and brighten up your rooms! The beautiful yellow/orange combo will especially go well with green, brown and light yellow tones.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_7.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-  </product>
-  <product>
-    <name>Mixed-Colored Tulips</name>
-    <shortDescription>For those who want them more colorful.</shortDescription>
-    <longDescription>If you prefer tulips in all their natural variation. The light green perfectly blends with the bright blossoms. Now, where are the Easter eggs?</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_8.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Garden Roses</name>
-    <shortDescription>Feel beloved!</shortDescription>
-    <longDescription>Have this poster remind you every day that you are loved by someone. If you’re a guy, your girl is going to love this as a gift.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_9.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Anthurium</name>
-    <shortDescription>Pure elegance.</shortDescription>
-    <longDescription>A must-have for all Anthurium lovers. We know they are out there.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_10.jpg</imageURL>
-    <subCategory>Flowers</subCategory>
-  </product>
-  <!--SubCategory Trees-->
-  <product>
-    <name>Indian Summer: Red Beeches </name>
-    <shortDescription>Check out that color change!</shortDescription>
-    <longDescription>Two beautifully shaped beeches with the first signs of fall coming around. The gleaming of the sun in the tree's leaves and the red/green contrast make this poster absolutely special.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_1.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-  </product>
-  <product>
-    <name>Indian Summer: Yellow Oak</name>
-    <shortDescription>The wise and humble one.</shortDescription>
-    <longDescription>Oaks can live to be over 200 years old. Being huge and all wrinkled, this one must have been sitting there forever, silently watching the course of human history. Hang this one and think of the beauty of nature.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_2.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-  </product>
-  <product>
-    <name>Indian Summer: Orange Beech</name>
-    <shortDescription>Indian Summer at its best.</shortDescription>
-    <longDescription>Sooo romantic... an orange beech in front of a wooden cottage in the middle of nowhere with sunbeams on the ground. If it starts to get dark in the fall, the bright orange will definitely cheer you up!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_3.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-  </product>
-  <product>
-    <name>Indian Summer: Young Ashes</name>
-    <shortDescription>Kissed by fall.</shortDescription>
-    <longDescription>Just amazing how some of the leaves seem to resist the coming of fall. The bright red sets a nice highlight without disturbing the overall harmony in this picture.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_4.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-  </product>
-  <product>
-    <name>Indian Summer: Young Birches</name>
-    <shortDescription>Standing strong...</shortDescription>
-    <longDescription>against the cold of fall. The one on the most left seems to be strongest.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_5.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-  </product>
-  <product>
-    <name>Indian Summer: Tree Mix</name>
-    <shortDescription>Green, yellow, and red ones. We have them all!</shortDescription>
-    <longDescription>Our camera perfectly captures this great color mix. If you don’t want flowers but still lots of colors, you should go for this one.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_6.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Fir Covered with Snow</name>
-    <shortDescription>Winter is here.</shortDescription>
-    <longDescription>For all snow lovers. And the perfect reminder that you still need to get that Christmas tree...</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_7.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Cherry Blossom</name>
-    <shortDescription>Absolutely gorgeous!</shortDescription>
-    <longDescription>This one reveals the true genius of our photographer. The cherry blossoms simply look outstanding against the bright blue sky. Pimps each room regardless!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_8.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Fall Leaves I</name>
-    <shortDescription>A beautiful red-based color mix.</shortDescription>
-    <longDescription>Brings back childhood memories... running through rustling leaves, collecting chestnuts, having a hot chocolade afterwards... Yes, this one’s for all that tend to get melancholic at times.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_9.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Fall Leaves II</name>
-    <shortDescription>Reds, browns, and greens.</shortDescription>
-    <longDescription>If you want your fall leaves poster to be more colorful and the leaves to sparkle in the sun. Get this poster for free if you give the exact number of leaves it shows.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_10.jpg</imageURL>
-    <subCategory>Trees</subCategory>
-  </product>
-  <!--TopCategory Food-->
-  <!--SubCategory Cold_Cuts-->
-  <product>
-    <name>Tomato and Mozzarella Bites</name>
-    <shortDescription>The Italian classic.</shortDescription>
-    <longDescription>The close-up delivers all the fine details of this well-arranged plate. The mix of red, white, and green doesn’t only look good to Italian food lovers.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_1.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Rolled Bacon</name>
-    <shortDescription>For meat lovers.</shortDescription>
-    <longDescription>Bacon neatly rolled and arranged. Veggies are overrated.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_2.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Cheese Varieties</name>
-    <shortDescription>Geez!</shortDescription>
-    <longDescription>That's one delicious plate of cheese! Another cool rhyme.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_3.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Mixed Olives</name>
-    <shortDescription>Love 'em or hate 'em.</shortDescription>
-    <longDescription> For the mediterranean touch in your home. The olive color tones go especially well with yellow, green, and brown walls.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_4.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Finger Food</name>
-    <shortDescription>Can't make up your mind?</shortDescription>
-    <longDescription>Just go for this one since it offers a bit of everything.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_5.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-  </product>
-  <product>
-    <name>Rocket Salad with Mozzarella</name>
-    <shortDescription>For the ladies.</shortDescription>
-    <longDescription>C’mon, you know a guy would never order this in a restaurant!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_6.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-  </product>
-  <product>
-    <name>Meatfoot</name>
-    <shortDescription>Umm... yeah...</shortDescription>
-    <longDescription>A foot out of minced meat... The author of these lines can’t think of any way to reasonably advertise this poster and quickly goes on to the next one.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_7.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-  </product>
-  <product>
-    <name>Peperoni Sandwich</name>
-    <shortDescription>Time for lunch!</shortDescription>
-    <longDescription>There’s nothing like a decent sandwich and a vanilla macchiato for lunch. A nice reminder to make time for lunch at work.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_8.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-  </product>
-  <product>
-    <name>Chicken Teryiaki</name>
-    <shortDescription>Show off as a chef.</shortDescription>
-    <longDescription>A perfect arrangement and zoom make this look especially delicious. Tell people you made this and you'll have new friends in an instant.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_9.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-  </product>
-  <product>
-    <name>Fried Rice</name>
-    <shortDescription>For people with attention to detail.</shortDescription>
-    <longDescription>Have you ever been able to check out the food you’re about to put in your mouth this closely? ... Right, that’s what we thought. So you probably also didn't notice that this is a unicorn with a red saddle on its back. Pretty exciting, huh?</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_10.jpg</imageURL>
-    <subCategory>Cold Cuts</subCategory>
-  </product>
-  <!--SubCategory Main Dishes-->
-  <product>
-    <name>Grilled Salmon with Potato Wedges</name>
-    <shortDescription>Eye candy for gourmets.</shortDescription>
-    <longDescription>A grilled salmon steak wrapped in eggplant. The author of these lines is getting hungry.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_1.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Goulash with Dumplings</name>
-    <shortDescription>German home-style cooking.</shortDescription>
-    <longDescription>If you think those Germans know beer and weißwurst only, you should hang this. Yes, they also have goulash!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_2.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Selfmade Mac and Cheese</name>
-    <shortDescription>When you were young...</shortDescription>
-    <longDescription>Makes you think of the good old times when you came home from school and could have as much instant mac and cheese as you liked since mummy and daddy were still at work. Plus, this plate probably looks much nicer than your childish attempts at cooking.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_3.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Stuffed Turkey</name>
-    <shortDescription>Vegetarians, please skip this one!</shortDescription>
-    <longDescription>A grilled turkey about to be cut into pieces... well, you might want to make sure to buy this for yourself and not as a gift for someone you want to stay friends with.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_4.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-  </product>
-  <product>
-    <name>Tuna Steak</name>
-    <shortDescription>And how to ruin it...</shortDescription>
-    <longDescription>Just put it on a barbecue grill, it's that easy!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_5.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-  </product>
-  <product>
-    <name>Frozen Pizza</name>
-    <shortDescription>An honest tribute to fast food.</shortDescription>
-    <longDescription>For all who somehow always end up in the freezer aisle at the grocery store. No, we're not lazy bums who don't care about a healthy diet! We just like it to be convenient. Hang this in your kitchen and dare be oben about your love for fast food!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_6.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Meatballs</name>
-    <shortDescription>Yummy!</shortDescription>
-    <longDescription>Nicely arranged with mashed potato and salad. The plastic fork reveals that our photographer didn't make this himself, but who cares anyway when it comes to meatballs.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_7.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-  </product>
-  <product>
-    <name>XXL Burger</name>
-    <shortDescription>A must-have for all burger lovers.</shortDescription>
-    <longDescription>This close-up delivers all the fine details it takes for a burger to be truely perfect. This one is made with lots of love.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_8.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-  </product>
-  <product>
-    <name>Small Burger</name>
-    <shortDescription>Umm... </shortDescription>
-    <longDescription>This one looks a little... well... must have been a happy meal or something.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_9.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-  </product>
-  <product>
-    <name>Medium Burger</name>
-    <shortDescription>You can’t have too many burger pictures, can you?</shortDescription>
-    <longDescription>Look, our photographer lives on a well-balanced diet after all: his came with salad and not with fries like the one of the person sitting opposite.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Grillables/Grillables_10.jpg</imageURL>
-    <subCategory>Main Dishes</subCategory>
-  </product>
-  <!--SubCategory Sweets-->
-  <product>
-    <name>German Apple Pie</name>
-    <shortDescription>One of our favorites.</shortDescription>
-    <longDescription>Hang this in your kitchen and be reminded of the great taste of German apple pie. Yummy! Looks especially good on brownish and greenish walls.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_1.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Whipped Cream with Caramel</name>
-    <shortDescription>This came on top of the pie.</shortDescription>
-    <longDescription>... and is sure to enhance the previous poster if placed right next to it.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_2.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Blueberry Cake</name>
-    <shortDescription>Photographer got hungry.</shortDescription>
-    <longDescription>Picture taking is pretty tiring in the long run. Our photographer really deserved this delicious slice of blueberry cake. Good thing he took a picture before eating it all.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_3.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-  </product>
-  <product>
-    <name>Fruit Tart with Cocoa</name>
-    <shortDescription>Isn't this pretty?</shortDescription>
-    <longDescription>We fell in love with the lovely cocoa decoration on the side.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_4.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-  </product>
-  <product>
-    <name>Gummy Bears on Keyboard</name>
-    <shortDescription>Pimp your office!</shortDescription>
-    <longDescription>...and be reminded to go get some candy for your colleagues. This photographic print benefits from digital picture editing to display details you wouldn’t be able to see in real life... Have you actually ever seen three gummy bears sitting on a keyboard in the first place?! Right, that’s what we thought, so make sure to get this one asap!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_5.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-  </product>
-  <product>
-    <name>Colored Sprinkles</name>
-    <shortDescription>How many white ones do you see?</shortDescription>
-    <longDescription>See the back of the poster for the right answer.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_6.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Gummy Bears in Bowl</name>
-    <shortDescription>Help yourself!</shortDescription>
-    <longDescription>Don’t you just want to grab into it? The zoomed-in view makes you think it's sitting right in front of you. A must-have for gummy bear lovers!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_7.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Raspberry Jello</name>
-    <shortDescription>Two little raspberries...</shortDescription>
-    <longDescription>... waiting to be eaten instantly. Hurry! Goes especially well with brown, white and green color tones.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_8.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-  </product>
-  <product>
-    <name>Strawberry and Grapes</name>
-    <shortDescription>The calorie-conscious option.</shortDescription>
-    <longDescription>If you think our posters of sweets to be awesome but want to make sure not to run to the grocery store every night to gorge on all the awful things shown in them.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_9.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-  </product>
-  <product>
-    <name>Donut Mix</name>
-    <shortDescription>Awesome! A whole box of them!</shortDescription>
-    <longDescription>The author of these lines needs to run to the grocery store now to go get... right: donuts.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Food/Sweets/Sweets_10.jpg</imageURL>
-    <subCategory>Sweets</subCategory>
-  </product>
-  <!--TopCategory Means_of_Transportation-->
-  <!--SubCategory Airplanes-->
-  <product>
-    <name>Swiss Air Airbus A320</name>
-    <shortDescription>Beautiful take-off.</shortDescription>
-    <longDescription>Let's hope it leaves to bring their famous chocolate.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_1.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <product>
-    <name>FedEx Express</name>
-    <shortDescription>Snail Mail.</shortDescription>
-    <longDescription>The ultimate reminder it's been a while since you've sent someone a birthday card.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_2.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <product>
-    <name>American Airlines Boeing 737-800</name>
-    <shortDescription>Welcome to America!</shortDescription>
-    <longDescription>An AA Boeing during landing. The zoom is so perfectly set here it even lets you see how the plane reflects the sunlight!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_3.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Air Greenland Airbus A330-200</name>
-    <shortDescription>Yes, there's airplanes in Greenland...</shortDescription>
-    <longDescription>...and they actually look pretty fancy. A must-have for all airplane nerds!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_4.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <product>
-    <name>Aer Lingus Airbus A320</name>
-    <shortDescription>Hail to Saint Patrick!</shortDescription>
-    <longDescription>The national flag carrier of Ireland. For everyone who loves celebrating Saint Patrick's Day.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_5.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <product>
-    <name>US Air Force Starlifter</name>
-    <shortDescription>Show off with exclusive shots from the Smithsonian in D.C.!</shortDescription>
-    <longDescription>The first picture in our Smithsonian National Air and Space Museum collection. If you're into airplanes and haven't been to the Smithsonian yet, you have to get them all!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_6.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Boeing 707</name>
-    <shortDescription>How it used to look like.</shortDescription>
-    <longDescription>We're glad they decided to change their look at some point...</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_7.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <product>
-    <name>Boeing 307 Stratoliner</name>
-    <shortDescription>Stylish in silver.</shortDescription>
-    <longDescription>Even your girlfriend will fall in love with the polished aluminum! It will be easy to convince her that this poster must be hung in your home!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_8.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Lufthansa JU 52</name>
-    <shortDescription>"Auntie Ju"!</shortDescription>
-    <longDescription>Air travel has come a long way... We're pleased Lufthansa planes eventually got bigger.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_9.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <product>
-    <name>F-4S from VMFA-232</name>
-    <shortDescription>An original US Marine Corps Fighter.</shortDescription>
-    <longDescription>Used in the Vietnam War.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_10.jpg</imageURL>
-    <subCategory>Air Travel</subCategory>
-  </product>
-  <!--SubCategory Classic_Cars-->
-  <product>
-    <name>Trabant P50</name>
-    <shortDescription>Go, Trabi, go!</shortDescription>
-    <longDescription>Probably the most famous outcome of East German car production. For everyone who's missing the good old Trabi.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_1.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>IFA F8</name>
-    <shortDescription>One of 25.000.</shortDescription>
-    <longDescription>Produced from 1949 to 1955 and therefore another thing that was scarce in East Germany.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_2.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>IFA W50</name>
-    <shortDescription>A truck! In East Germany! What the heck?!</shortDescription>
-    <longDescription>Yes, it's true: produced from 1965 to 1990. Note the shovel that came with it to build... right... "Plattenbauten".</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_3.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>IFA H6, Grey/Red</name>
-    <shortDescription>Not as big but quite sufficient.</shortDescription>
-    <longDescription>...to help build "Plattenbauten".</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_4.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-  </product>
-  <product>
-    <name>IFA G5</name>
-    <shortDescription>Watersupply for the National People's Army</shortDescription>
-    <longDescription>Produced from 1952 to 1964. Since not only bananas were scarce in East Germany, the G5 also had to serve as fire or tank truck when the NPA didn't necessarily need it.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_5.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-  </product>
-  <product>
-    <name>IFA H6, Green</name>
-    <shortDescription>Why not hang a bright green truck?</shortDescription>
-    <longDescription>Makes life a lot more colorful. The author of these lines is also beginning to realize that writing about classic cars might not be his favorite thing to do.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_6.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-  </product>
-  <product>
-    <name>IFA G5 Tank Truck</name>
-    <shortDescription>Just cute.</shortDescription>
-    <longDescription>Its size was sufficient to supply East German gas stations. There weren't too many of them.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_7.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-  </product>
-  <product>
-    <name>IFA Cement Truck</name>
-    <shortDescription>Building all those "Plattenbauten".</shortDescription>
-    <longDescription>Not just a classic car poster but a historic reference to East German housing culture!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_8.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-  </product>
-  <product>
-    <name>Ikarus 211</name>
-    <shortDescription>Made in Hungary.</shortDescription>
-    <longDescription>Production started in 1976 and lasted till 1990. A rare sight since, again, there weren't too many of them.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_9.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-  </product>
-  <product>
-    <name>Ex-Omaha Transit Company Bus</name>
-    <shortDescription>Absolutely unique!</shortDescription>
-    <longDescription>...compared to those standard NYC/yellow cab posters. Dare to be different!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_10.jpg</imageURL>
-    <subCategory>Classic Cars</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <!--SubCategory Railways-->
-  <product>
-    <name>Third Avenue Railway System</name>
-    <shortDescription>The old railway system of NYC.</shortDescription>
-    <longDescription>Still operating at Seashore Trolley Museum, in Kennebunkport, Maine. Show off as an NYC expert and go for a NYC poster that's different.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_1.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Eastern Massachussetts Street Railway</name>
-    <shortDescription>The historic streetcar company of Boston.</shortDescription>
-    <longDescription>We think it looks cool in bright orange. Other than that, the author of these lines thinks railways aren't the most exciting topic to write about.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_2.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-  </product>
-  <product>
-    <name>Boston MBTA Wartime Pullman Green PCC Trolley</name>
-    <shortDescription>Wait... what?!</shortDescription>
-    <longDescription>Pretty long name. And the early beginnings of Massachusetts Bay Transportation Authority.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_3.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>NOHAB-GM, Car 2372</name>
-    <shortDescription>The famous "Bulldog Nose"!</shortDescription>
-    <longDescription>A Diesel locomotive produced by GM-EMD from 1939 to 1970. Spotted in Bernsdorf, Germany.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_4.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-  </product>
-  <product>
-    <name>German Steam Locomotive</name>
-    <shortDescription>For railway nostalgics.</shortDescription>
-    <longDescription>Spotted at a German city festival and a must-have for all railway nerds.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_5.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>German Steam Locomotive II</name>
-    <shortDescription>Get our ultimate steam locomotive combo!</shortDescription>
-    <longDescription> Yes, we know, we have posters of pretty much everything.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_6.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-  </product>
-  <product>
-    <name>East German LEW EL 2</name>
-    <shortDescription>Electric coal mine railway</shortDescription>
-    <longDescription>Memo: East Germany produced a total of 1384 of these from 1952 to 1988. Some of them also got shipped to Bulgaria, China, Poland, and USSR. Spotted in "Besucherbergwerk Abraumförderbrücke F60" in Brandenburg, Germany. Yeah, we also think that German is a complicated language.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_7.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-  </product>
-  <product>
-    <name>Chicago "L"</name>
-    <shortDescription>A tribute to the windy city.</shortDescription>
-    <longDescription>Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_8.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-  </product>
-  <product>
-    <name>US Railway Mail Service Car</name>
-    <shortDescription>Time flies!</shortDescription>
-    <longDescription>Hard to believe the RMS carried the majority of mail in the US until the 1960s. Will look especially cool if you place it next to our FedEx Express poster.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_9.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-  </product>
-  <product>
-    <name>Old NYC Subway</name>
-    <shortDescription>Nothing lasts forever.</shortDescription>
-    <longDescription>Not even subway trains. Darn!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_10.jpg</imageURL>
-    <subCategory>Railways</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <!--TopCategory Panoramas-->
-  <!--SubCategory Buildings-->
-  <product>
-    <name>Niagara Ferris Wheel</name>
-    <shortDescription>Up for a night sky wheel ride?</shortDescription>
-    <longDescription>We just hope it doesn't go as fast as it looks in the picture. A fantastic shot perfectly edited. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_1.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Swedish Cottages</name>
-    <shortDescription>Get the famous Falun red!</shortDescription>
-    <longDescription>Falun red is the name of this deep red paint that the Swedish use to paint their houses with and that makes Swedish landscape so unique. Buy this one and add a bit of Swedish flair to your home!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_2.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Gustavianum, Sweden</name>
-    <shortDescription>Beautiful cupola reaching into beautiful sky.</shortDescription>
-    <longDescription>The cupola looks awesome from this perspective. Oh, and it houses the second oldest anatomical theatre in the world. Another good reason to buy this poster. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_3.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Grochwitz Castle, Germany </name>
-    <shortDescription>With the sun fighting off a storm.</shortDescription>
-    <longDescription>A cute little castle with a thunderstorm creeping up from behind. Awesome how the camera captures the sun coming from the side trying to push it away. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_4.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Rosebud Diner, USA</name>
-    <shortDescription>Have it the American way!</shortDescription>
-    <longDescription>Who cares about nice restaurants? A tribute to the good old American Diner. This one is located in Somerville, MA, and has been sitting there ever since 1941. A real historic site in American terms. And pictures of sites are always worth having. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_5.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-  </product>
-  <product>
-    <name>Historic Car Factory, Germany</name>
-    <shortDescription>Dirt turned into gold.</shortDescription>
-    <longDescription>Decay looking good! An old manufacturing plant in Eisenach in former East Germany where they built the famous Wartburg. You can be sure it doesn't look that cool in real life! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_6.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-  </product>
-  <product>
-    <name>Coal Briquet Factory, Germany</name>
-    <shortDescription>Well...</shortDescription>
-    <longDescription>The oldest coal briquet factory in Europe. We do admit that the history behind what is in the picture might be slightly more exciting than the image itself. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_7.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-  </product>
-  <product>
-    <name>Timber Framework, Germany</name>
-    <shortDescription>The German Fachwerk building.</shortDescription>
-    <longDescription>A tribute to the laborious woodworking of our ancestors. Captured in Elxleben, Thuringia. Looks especially cool next to modern and postmodern architecture posters. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_8.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-  </product>
-  <product>
-    <name>Utah State Capitol</name>
-    <shortDescription>An outstanding architecture shot!</shortDescription>
-    <longDescription>The lighting effects can't get any better than this. If you've seen the building at night-time, you know our photographer absolutely nailed this one! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_9.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-  </product>
-  <product>
-    <name>American Christmas House</name>
-    <shortDescription>Way to go!</shortDescription>
-    <longDescription>This is how your Christmas decoration should look like! Snoopy and Woodstock in the front are our favorite. Very kind of the owner to provide them with their own Christmas tree. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Buildings/Buildings_10.jpg</imageURL>
-    <subCategory>Architecture</subCategory>
-  </product>
-  <!--SubCategory Fireworks-->
-  <product>
-    <name>New Year's Fireworks I</name>
-    <shortDescription>Delivering all pyro effects possible!</shortDescription>
-    <longDescription>Happy New Years! Captured at midnight in Jena, Germany, this poster shows an incredible mix of all sorts of fireworks effects. Just awesome how they illuminate the sky!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_1.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>New Year's Fireworks II</name>
-    <shortDescription>Bouquets, Stars, and Pearls.</shortDescription>
-    <longDescription>If you want a clear-cut contrast between the night sky and the single effects. Speaking of New Year's... Please refrain from asking us if we kept last year's resolutions at this point. We don't want to talk about it.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_2.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>New Year's Fireworks III</name>
-    <shortDescription>A fantastic skycolor change!</shortDescription>
-    <longDescription>The bright glitter in the center beautifully highlights the sky and delivers this spectacular color change effect. Picture composition at its best. Memo: there's also no use asking about our new year's resolutions. We don't have any.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_3.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-  </product>
-  <product>
-    <name>New Year's Fireworks IV</name>
-    <shortDescription>Night sky getting smoky.</shortDescription>
-    <longDescription>One hour past midnight. The bright crossette in the center produces a set of stars that stands out in the smoky night sky. A great picture to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_4.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-  </product>
-  <product>
-    <name>Silver Dahlias</name>
-    <shortDescription>Perfectly shaped.</shortDescription>
-    <longDescription>Looking like a starfish in the clear sky. Hang this in your bedroom and you're guaranteed to have romantic nights! </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_5.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-  </product>
-  <product>
-    <name>Crossette, Silver/Green</name>
-    <shortDescription>It can't get any better than this!</shortDescription>
-    <longDescription>The zoomed-in view delivers spectacular details! Just look how the exploding stars leave their trails in the night sky!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_6.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Purple Crossette with Stars</name>
-    <shortDescription>Wait... it does!</shortDescription>
-    <longDescription>Absolutely stunning! We really don't want to show off but you just have to admit that we have a pretty darn good photographer.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_7.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-  </product>
-  <product>
-    <name>Golden Dahlias with Blue Stars</name>
-    <shortDescription>Be exclusive.</shortDescription>
-    <longDescription>This explosion of gold is sure to add a stylish touch to your home decor. Go for this one if you want to be special! </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_8.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-  </product>
-  <product>
-    <name>Brocade, Red/Blue</name>
-    <shortDescription>100% Perfection.</shortDescription>
-    <longDescription>Night time, a lake, and a perfectly shaped brocade that gleams in the water... The author of these lines is running out of words to describe how awesome our fireworks posters are. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_9.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Chrysanthemum and Brocades, Red</name>
-    <shortDescription>One final word: marvelous.</shortDescription>
-    <longDescription>Please forgive the author of these lines as he can't think of any more words to illustrate our... umm... marvelous fireworks posters. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_10.jpg</imageURL>
-    <subCategory>Fireworks</subCategory>
-  </product>
-  <!--SubCategory Landscapes-->
-  <product>
-    <name>Niagara Falls, Canada</name>
-    <shortDescription>Picture editing at its best.</shortDescription>
-    <longDescription>The natural spectacle enhanced with the latest picture editing technologies. We're starting to think our photographer is an artist. Hang this in your home and people will simply be amazed! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_1.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-  </product>
-  <product>
-    <name>Niagara Falls, Canada, with City Skyline</name>
-    <shortDescription>If you want it both natural and urban.</shortDescription>
-    <longDescription>This composition perfectly reenacts the coming together of nature and human culture. If you're into philosophical speculation, you can now start pondering what that could possibly mean. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_2.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Trollhättan Falls, Sweden I</name>
-    <shortDescription>Up for rafting? Anyone?</shortDescription>
-    <longDescription>Just kidding. We prefer to look at this awesome water movement for now.  </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_3.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Trollhättan Falls, Sweden II</name>
-    <shortDescription>The beautiful vastness of Swedish landscape.</shortDescription>
-    <longDescription>Pretty much a must-have for Sweden fans since it comprises all the country is loved for: wild water, stones, hills, coniferous forests, and – don't miss them – the Falun red houses in the background. It doesn't always need to be IKEA. </longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_4.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-  </product>
-  <product>
-    <name>Linnaean Garden and Museum, Sweden</name>
-    <shortDescription>A perfect symmetry.</shortDescription>
-    <longDescription>In case you didn't know: the oldest botanical garden of Uppsala University, originally planted in 1655. For everyone who prefers symmetries over chaos and tends to get nervous when things aren't as neat and perfect as they should be.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_5.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Winter Wonderland</name>
-    <shortDescription>This is exactly what the song talks about!</shortDescription>
-    <longDescription>“In the lane, snow is glistening, a beautiful sight, we're happy tonigt, walking in a winter wonderland“. A fantastic landscape shot! Sometimes it doesn't need much to show nature in all its beauty. A must-have for all winter weather fans!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_6.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-    <showInTopCategory>true</showInTopCategory>
-  </product>
-  <product>
-    <name>Lonesome Ski Lift in Winter Wonderland </name>
-    <shortDescription>For melancholics.</shortDescription>
-    <longDescription>A deserted winter landscape, no tourists whatsoever. Perfectly matches the previous poster. Go get our winter wonderland combo, hang it above your fireplace and get all cozy!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_7.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-  </product>
-  <product>
-    <name>Boston Skyline with Scaffolding</name>
-    <shortDescription>When new and old come together...</shortDescription>
-    <longDescription>...they make a pretty awesome contrast. Go for this one if you want a US skyline poster that is different.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_8.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-  </product>
-  <product>
-    <name>Boston Skyline at Night</name>
-    <shortDescription>The perfect water reflection.</shortDescription>
-    <longDescription>Taken from the Cambridge side of the Charles River, this picture captures the most gorgeous water refelection ever. An outstanding skyline panorama for all Boston lovers! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_9.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-  </product>
-  <product>
-    <name>Six Flags New England, Water Park</name>
-    <shortDescription>Yay! Great childhood memories!</shortDescription>
-    <longDescription>Water parks! Aren't they just the best!? Okaaay, this one might not be the prettiest poster in our collection but it's the idea behind it that counts, isn't it?</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_10.jpg</imageURL>
-    <subCategory>Landscapes</subCategory>
-  </product>
-      <!--SubCategory XXL-->
-  <product>
-    <name>North Boston</name>
-    <shortDescription>A unique perspective.</shortDescription>
-    <longDescription>Taken from the US Custom House Tower. Much better than anything they use for postcards and travel guides today. If you prefer Boston over NYC, you should definitely buy this one!</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/XXL/XXL_1.jpg</imageURL>
-    <carousel>true</carousel>
-    <subCategory>XXL Panoramas</subCategory>
-  </product>
-  <product>
-    <name>Boston Sunset</name>
-    <shortDescription>One hell of a poster!</shortDescription>
-    <longDescription>The perfect Boston skyline poster including gorgeous sky color effects.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/XXL/XXL_2.jpg</imageURL>
-    <carousel>true</carousel>
-    <subCategory>XXL Panoramas</subCategory>
-  </product>
-  <product>
-    <name>Bryce National Park, Utah I</name>
-    <shortDescription>Absolutely stunning!</shortDescription>
-    <longDescription>The zoom reveals the geology in all its beautiful details. No need to say more.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/XXL/XXL_3.jpg</imageURL>
-    <carousel>true</carousel>
-    <subCategory>XXL Panoramas</subCategory>
-  </product>
-  <product>
-    <name>Bryce National Park, Utah II</name>
-    <shortDescription>Now... Is this real life?!</shortDescription>
-    <longDescription>Speechless.</longDescription>
-    <price>17.99</price>
-    <imageURL>/assets/img/products/XXL/XXL_4.jpg</imageURL>
-    <carousel>true</carousel>
-    <subCategory>XXL Panoramas</subCategory>
-  </product>
+	<!--TopCategory World_of_Nature -->
+	<!--SubCategory Animals -->
+	<product>
+		<name>Grizzly Bear</name>
+		<shortDescription>Relax and take it easy!</shortDescription>
+		<longDescription>Our photographer claims he had risked his life to get
+			you this shot. We can't help it, but this bear looks as if he didn't
+			mind him too much...
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_1.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Great Grey Owl</name>
+		<shortDescription>Not exactly Harry's Hedwig but still cute.
+		</shortDescription>
+		<longDescription>Looks a little skeptic as to whether or not it likes
+			to be in pictures, though.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_2.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<availableSize>48x36;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Swedish Moose</name>
+		<shortDescription>Look at this beauty!</shortDescription>
+		<longDescription>Just adorable. By the way, moose don't moo as cows
+			do, and we think that's an awesome rhyme.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_3.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>European Hornet</name>
+		<shortDescription>Don't get stinged!</shortDescription>
+		<longDescription>This photographic print benefits from digital picture
+			editing to deliver nature at its best. A hurrah to our photographer!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_4.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Roman Snail</name>
+		<shortDescription>At home.</shortDescription>
+		<longDescription>Retreating into your shell is not always a bad thing.
+			Have this poster remind you of taking a break from everyday hassles
+			every once in a while.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_5.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Blue Morpho Butterfly</name>
+		<shortDescription>Lovely.</shortDescription>
+		<longDescription>Forget about decoration trinkets and hang this poster
+			instead! The coloring of this beautiful morpho perfectly blends with
+			the green leaves and the yellow flower in the background.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_6.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Red Birdwing</name>
+		<shortDescription>Dating a lilac dragon flower.</shortDescription>
+		<longDescription>Awww, look how well they get along! Makes you think
+			of peace and harmony.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_7.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Chipmunk</name>
+		<shortDescription>Looking for Simon and Theodore.</shortDescription>
+		<longDescription>Our tribute to "Alvin and the Chipmunks". We're
+			absolutely sure: this is Alvin. "Do, do, do do do do!"
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_8.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Red Domestic Cat</name>
+		<shortDescription>Here's looking at you, kid!</shortDescription>
+		<longDescription>If "Casablanca" had starred cats, this one would have
+			won an Oscar.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_9.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Brown Domestic Cat</name>
+		<shortDescription>On alert!</shortDescription>
+		<longDescription>A cat at its best. The vivid zoomed-in view and sharp
+			coloring makes you think its about to jump out of the picture.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_10.jpg
+		</imageURL>
+		<subCategory>Animals</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Flowers -->
+	<product>
+		<name>Pink Dahlia</name>
+		<shortDescription>Pink up your home!</shortDescription>
+		<longDescription>... with this precious Dahlia and be sure that all
+			the girls in your life will love it.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_1.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Cactus Dahlia, Pink/White</name>
+		<shortDescription>If too much pink doesn't do it for you.
+		</shortDescription>
+		<longDescription>For people who love flowers but are not so much into
+			bright colors. The lilac and white combo matches about every wall
+			color.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_2.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Cactus Dahlia, Yellow/Pink</name>
+		<shortDescription>A special coloring for special people.
+		</shortDescription>
+		<longDescription>Awesome what nature has in store for us. This blossom
+			really is an eye-catcher!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_3.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Jerusalem Artichoke</name>
+		<shortDescription>Let the sunshine in!</shortDescription>
+		<longDescription>This beautiful close-up of the tiny Jerusalem
+			artichoke blossom will make your home a lot brighter. Goes well with
+			greenish and brownish tones.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_4.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Snowdrop Anemone</name>
+		<shortDescription>A blossom in all its details.</shortDescription>
+		<longDescription>The zoomed-in view of this flower’s center perfectly
+			reveals all its delicacy. You can't get any closer than this!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_5.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Violas</name>
+		<shortDescription>If it can’t get too flowery for you.
+		</shortDescription>
+		<longDescription>For people who dream of sleeping on flowery meadows.
+			The color mix is sure to pimp your walls.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_6.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Yellow and Orange Tulips</name>
+		<shortDescription>Springtime!</shortDescription>
+		<longDescription>Let the spring into your home and brighten up your
+			rooms! The beautiful yellow/orange combo will especially go well with
+			green, brown and light yellow tones.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_7.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Mixed-Colored Tulips</name>
+		<shortDescription>For those who want them more colorful.
+		</shortDescription>
+		<longDescription>If you prefer tulips in all their natural variation.
+			The light green perfectly blends with the bright blossoms. Now, where
+			are the Easter eggs?
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_8.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Garden Roses</name>
+		<shortDescription>Feel beloved!</shortDescription>
+		<longDescription>Have this poster remind you every day that you are
+			loved by someone. If you’re a guy, your girl is going to love this as
+			a gift.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_9.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Anthurium</name>
+		<shortDescription>Pure elegance.</shortDescription>
+		<longDescription>A must-have for all Anthurium lovers. We know they
+			are out there.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_10.jpg
+		</imageURL>
+		<subCategory>Flowers</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Trees -->
+	<product>
+		<name>Indian Summer: Red Beeches </name>
+		<shortDescription>Check out that color change!</shortDescription>
+		<longDescription>Two beautifully shaped beeches with the first signs
+			of fall coming around. The gleaming of the sun in the tree's leaves
+			and the red/green contrast make this poster absolutely special.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_1.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Indian Summer: Yellow Oak</name>
+		<shortDescription>The wise and humble one.</shortDescription>
+		<longDescription>Oaks can live to be over 200 years old. Being huge
+			and all wrinkled, this one must have been sitting there forever,
+			silently watching the course of human history. Hang this one and
+			think of the beauty of nature.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_2.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Indian Summer: Orange Beech</name>
+		<shortDescription>Indian Summer at its best.</shortDescription>
+		<longDescription>Sooo romantic... an orange beech in front of a wooden
+			cottage in the middle of nowhere with sunbeams on the ground. If it
+			starts to get dark in the fall, the bright orange will definitely
+			cheer you up!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_3.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Indian Summer: Young Ashes</name>
+		<shortDescription>Kissed by fall.</shortDescription>
+		<longDescription>Just amazing how some of the leaves seem to resist
+			the coming of fall. The bright red sets a nice highlight without
+			disturbing the overall harmony in this picture.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_4.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Indian Summer: Young Birches</name>
+		<shortDescription>Standing strong...</shortDescription>
+		<longDescription>against the cold of fall. The one on the most left
+			seems to be strongest.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_5.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Indian Summer: Tree Mix</name>
+		<shortDescription>Green, yellow, and red ones. We have them all!
+		</shortDescription>
+		<longDescription>Our camera perfectly captures this great color mix.
+			If you don’t want flowers but still lots of colors, you should go for
+			this one.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_6.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Fir Covered with Snow</name>
+		<shortDescription>Winter is here.</shortDescription>
+		<longDescription>For all snow lovers. And the perfect reminder that
+			you still need to get that Christmas tree...
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_7.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Cherry Blossom</name>
+		<shortDescription>Absolutely gorgeous!</shortDescription>
+		<longDescription>This one reveals the true genius of our photographer.
+			The cherry blossoms simply look outstanding against the bright blue
+			sky. Pimps each room regardless!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_8.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Fall Leaves I</name>
+		<shortDescription>A beautiful red-based color mix.</shortDescription>
+		<longDescription>Brings back childhood memories... running through
+			rustling leaves, collecting chestnuts, having a hot chocolade
+			afterwards... Yes, this one’s for all that tend to get melancholic at
+			times.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_9.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Fall Leaves II</name>
+		<shortDescription>Reds, browns, and greens.</shortDescription>
+		<longDescription>If you want your fall leaves poster to be more
+			colorful and the leaves to sparkle in the sun. Get this poster for
+			free if you give the exact number of leaves it shows.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_10.jpg
+		</imageURL>
+		<subCategory>Trees</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--TopCategory Food -->
+	<!--SubCategory Cold_Cuts -->
+	<product>
+		<name>Tomato and Mozzarella Bites</name>
+		<shortDescription>The Italian classic.</shortDescription>
+		<longDescription>The close-up delivers all the fine details of this
+			well-arranged plate. The mix of red, white, and green doesn’t only
+			look good to Italian food lovers.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_1.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Rolled Bacon</name>
+		<shortDescription>For meat lovers.</shortDescription>
+		<longDescription>Bacon neatly rolled and arranged. Veggies are
+			overrated.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_2.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Cheese Varieties</name>
+		<shortDescription>Geez!</shortDescription>
+		<longDescription>That's one delicious plate of cheese! Another cool
+			rhyme.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_3.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Mixed Olives</name>
+		<shortDescription>Love 'em or hate 'em.</shortDescription>
+		<longDescription> For the mediterranean touch in your home. The olive
+			color tones go especially well with yellow, green, and brown walls.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_4.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Finger Food</name>
+		<shortDescription>Can't make up your mind?</shortDescription>
+		<longDescription>Just go for this one since it offers a bit of
+			everything.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_5.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Rocket Salad with Mozzarella</name>
+		<shortDescription>For the ladies.</shortDescription>
+		<longDescription>C’mon, you know a guy would never order this in a
+			restaurant!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_6.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Meatfoot</name>
+		<shortDescription>Umm... yeah...</shortDescription>
+		<longDescription>A foot out of minced meat... The author of these
+			lines can’t think of any way to reasonably advertise this poster and
+			quickly goes on to the next one.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_7.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Peperoni Sandwich</name>
+		<shortDescription>Time for lunch!</shortDescription>
+		<longDescription>There’s nothing like a decent sandwich and a vanilla
+			macchiato for lunch. A nice reminder to make time for lunch at work.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_8.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Chicken Teryiaki</name>
+		<shortDescription>Show off as a chef.</shortDescription>
+		<longDescription>A perfect arrangement and zoom make this look
+			especially delicious. Tell people you made this and you'll have new
+			friends in an instant.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_9.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Fried Rice</name>
+		<shortDescription>For people with attention to detail.
+		</shortDescription>
+		<longDescription>Have you ever been able to check out the food you’re
+			about to put in your mouth this closely? ... Right, that’s what we
+			thought. So you probably also didn't notice that this is a unicorn
+			with a red saddle on its back. Pretty exciting, huh?
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_10.jpg
+		</imageURL>
+		<subCategory>Cold Cuts</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Main Dishes -->
+	<product>
+		<name>Grilled Salmon with Potato Wedges</name>
+		<shortDescription>Eye candy for gourmets.</shortDescription>
+		<longDescription>A grilled salmon steak wrapped in eggplant. The
+			author of these lines is getting hungry.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_1.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Goulash with Dumplings</name>
+		<shortDescription>German home-style cooking.</shortDescription>
+		<longDescription>If you think those Germans know beer and weißwurst
+			only, you should hang this. Yes, they also have goulash!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_2.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Selfmade Mac and Cheese</name>
+		<shortDescription>When you were young...</shortDescription>
+		<longDescription>Makes you think of the good old times when you came
+			home from school and could have as much instant mac and cheese as you
+			liked since mummy and daddy were still at work. Plus, this plate
+			probably looks much nicer than your childish attempts at cooking.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_3.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Stuffed Turkey</name>
+		<shortDescription>Vegetarians, please skip this one!
+		</shortDescription>
+		<longDescription>A grilled turkey about to be cut into pieces... well,
+			you might want to make sure to buy this for yourself and not as a
+			gift for someone you want to stay friends with.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_4.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Tuna Steak</name>
+		<shortDescription>And how to ruin it...</shortDescription>
+		<longDescription>Just put it on a barbecue grill, it's that easy!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_5.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Frozen Pizza</name>
+		<shortDescription>An honest tribute to fast food.</shortDescription>
+		<longDescription>For all who somehow always end up in the freezer
+			aisle at the grocery store. No, we're not lazy bums who don't care
+			about a healthy diet! We just like it to be convenient. Hang this in
+			your kitchen and dare be oben about your love for fast food!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_6.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Meatballs</name>
+		<shortDescription>Yummy!</shortDescription>
+		<longDescription>Nicely arranged with mashed potato and salad. The
+			plastic fork reveals that our photographer didn't make this himself,
+			but who cares anyway when it comes to meatballs.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_7.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>XXL Burger</name>
+		<shortDescription>A must-have for all burger lovers.
+		</shortDescription>
+		<longDescription>This close-up delivers all the fine details it takes
+			for a burger to be truely perfect. This one is made with lots of
+			love.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_8.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Small Burger</name>
+		<shortDescription>Umm... </shortDescription>
+		<longDescription>This one looks a little... well... must have been a
+			happy meal or something.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_9.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Medium Burger</name>
+		<shortDescription>You can’t have too many burger pictures, can you?
+		</shortDescription>
+		<longDescription>Look, our photographer lives on a well-balanced diet
+			after all: his came with salad and not with fries like the one of the
+			person sitting opposite.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Grillables/Grillables_10.jpg
+		</imageURL>
+		<subCategory>Main Dishes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Sweets -->
+	<product>
+		<name>German Apple Pie</name>
+		<shortDescription>One of our favorites.</shortDescription>
+		<longDescription>Hang this in your kitchen and be reminded of the
+			great taste of German apple pie. Yummy! Looks especially good on
+			brownish and greenish walls.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_1.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Whipped Cream with Caramel</name>
+		<shortDescription>This came on top of the pie.</shortDescription>
+		<longDescription>... and is sure to enhance the previous poster if
+			placed right next to it.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_2.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Blueberry Cake</name>
+		<shortDescription>Photographer got hungry.</shortDescription>
+		<longDescription>Picture taking is pretty tiring in the long run. Our
+			photographer really deserved this delicious slice of blueberry cake.
+			Good thing he took a picture before eating it all.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_3.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Fruit Tart with Cocoa</name>
+		<shortDescription>Isn't this pretty?</shortDescription>
+		<longDescription>We fell in love with the lovely cocoa decoration on
+			the side.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_4.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Gummy Bears on Keyboard</name>
+		<shortDescription>Pimp your office!</shortDescription>
+		<longDescription>...and be reminded to go get some candy for your
+			colleagues. This photographic print benefits from digital picture
+			editing to display details you wouldn’t be able to see in real
+			life... Have you actually ever seen three gummy bears sitting on a
+			keyboard in the first place?! Right, that’s what we thought, so make
+			sure to get this one asap!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_5.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Colored Sprinkles</name>
+		<shortDescription>How many white ones do you see?</shortDescription>
+		<longDescription>See the back of the poster for the right answer.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_6.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Gummy Bears in Bowl</name>
+		<shortDescription>Help yourself!</shortDescription>
+		<longDescription>Don’t you just want to grab into it? The zoomed-in
+			view makes you think it's sitting right in front of you. A must-have
+			for gummy bear lovers!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_7.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Raspberry Jello</name>
+		<shortDescription>Two little raspberries...</shortDescription>
+		<longDescription>... waiting to be eaten instantly. Hurry! Goes
+			especially well with brown, white and green color tones.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_8.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Strawberry and Grapes</name>
+		<shortDescription>The calorie-conscious option.</shortDescription>
+		<longDescription>If you think our posters of sweets to be awesome but
+			want to make sure not to run to the grocery store every night to
+			gorge on all the awful things shown in them.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_9.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Donut Mix</name>
+		<shortDescription>Awesome! A whole box of them!</shortDescription>
+		<longDescription>The author of these lines needs to run to the grocery
+			store now to go get... right: donuts.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Food/Sweets/Sweets_10.jpg</imageURL>
+		<subCategory>Sweets</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--TopCategory Means_of_Transportation -->
+	<!--SubCategory Airplanes -->
+	<product>
+		<name>Swiss Air Airbus A320</name>
+		<shortDescription>Beautiful take-off.</shortDescription>
+		<longDescription>Let's hope it leaves to bring their famous chocolate.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_1.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>FedEx Express</name>
+		<shortDescription>Snail Mail.</shortDescription>
+		<longDescription>The ultimate reminder it's been a while since you've
+			sent someone a birthday card.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_2.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>American Airlines Boeing 737-800</name>
+		<shortDescription>Welcome to America!</shortDescription>
+		<longDescription>An AA Boeing during landing. The zoom is so perfectly
+			set here it even lets you see how the plane reflects the sunlight!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_3.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Air Greenland Airbus A330-200</name>
+		<shortDescription>Yes, there's airplanes in Greenland...
+		</shortDescription>
+		<longDescription>...and they actually look pretty fancy. A must-have
+			for all airplane nerds!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_4.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Aer Lingus Airbus A320</name>
+		<shortDescription>Hail to Saint Patrick!</shortDescription>
+		<longDescription>The national flag carrier of Ireland. For everyone
+			who loves celebrating Saint Patrick's Day.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_5.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>US Air Force Starlifter</name>
+		<shortDescription>Show off with exclusive shots from the Smithsonian
+			in D.C.!
+		</shortDescription>
+		<longDescription>The first picture in our Smithsonian National Air and
+			Space Museum collection. If you're into airplanes and haven't been to
+			the Smithsonian yet, you have to get them all!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_6.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Boeing 707</name>
+		<shortDescription>How it used to look like.</shortDescription>
+		<longDescription>We're glad they decided to change their look at some
+			point...
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_7.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Boeing 307 Stratoliner</name>
+		<shortDescription>Stylish in silver.</shortDescription>
+		<longDescription>Even your girlfriend will fall in love with the
+			polished aluminum! It will be easy to convince her that this poster
+			must be hung in your home!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_8.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Lufthansa JU 52</name>
+		<shortDescription>"Auntie Ju"!</shortDescription>
+		<longDescription>Air travel has come a long way... We're pleased
+			Lufthansa planes eventually got bigger.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_9.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>F-4S from VMFA-232</name>
+		<shortDescription>An original US Marine Corps Fighter.
+		</shortDescription>
+		<longDescription>Used in the Vietnam War.</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_10.jpg
+		</imageURL>
+		<subCategory>Air Travel</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Classic_Cars -->
+	<product>
+		<name>Trabant P50</name>
+		<shortDescription>Go, Trabi, go!</shortDescription>
+		<longDescription>Probably the most famous outcome of East German car
+			production. For everyone who's missing the good old Trabi.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_1.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA F8</name>
+		<shortDescription>One of 25.000.</shortDescription>
+		<longDescription>Produced from 1949 to 1955 and therefore another
+			thing that was scarce in East Germany.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_2.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA W50</name>
+		<shortDescription>A truck! In East Germany! What the heck?!
+		</shortDescription>
+		<longDescription>Yes, it's true: produced from 1965 to 1990. Note the
+			shovel that came with it to build... right... "Plattenbauten".
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_3.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA H6, Grey/Red</name>
+		<shortDescription>Not as big but quite sufficient.</shortDescription>
+		<longDescription>...to help build "Plattenbauten".</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_4.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA G5</name>
+		<shortDescription>Watersupply for the National People's Army
+		</shortDescription>
+		<longDescription>Produced from 1952 to 1964. Since not only bananas
+			were scarce in East Germany, the G5 also had to serve as fire or tank
+			truck when the NPA didn't necessarily need it.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_5.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA H6, Green</name>
+		<shortDescription>Why not hang a bright green truck?
+		</shortDescription>
+		<longDescription>Makes life a lot more colorful. The author of these
+			lines is also beginning to realize that writing about classic cars
+			might not be his favorite thing to do.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_6.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA G5 Tank Truck</name>
+		<shortDescription>Just cute.</shortDescription>
+		<longDescription>Its size was sufficient to supply East German gas
+			stations. There weren't too many of them.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_7.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>IFA Cement Truck</name>
+		<shortDescription>Building all those "Plattenbauten".
+		</shortDescription>
+		<longDescription>Not just a classic car poster but a historic
+			reference to East German housing culture!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_8.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Ikarus 211</name>
+		<shortDescription>Made in Hungary.</shortDescription>
+		<longDescription>Production started in 1976 and lasted till 1990. A
+			rare sight since, again, there weren't too many of them.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_9.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Ex-Omaha Transit Company Bus</name>
+		<shortDescription>Absolutely unique!</shortDescription>
+		<longDescription>...compared to those standard NYC/yellow cab posters.
+			Dare to be different!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_10.jpg
+		</imageURL>
+		<subCategory>Classic Cars</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Railways -->
+	<product>
+		<name>Third Avenue Railway System</name>
+		<shortDescription>The old railway system of NYC.</shortDescription>
+		<longDescription>Still operating at Seashore Trolley Museum, in
+			Kennebunkport, Maine. Show off as an NYC expert and go for a NYC
+			poster that's different.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_1.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Eastern Massachussetts Street Railway</name>
+		<shortDescription>The historic streetcar company of Boston.
+		</shortDescription>
+		<longDescription>We think it looks cool in bright orange. Other than
+			that, the author of these lines thinks railways aren't the most
+			exciting topic to write about.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_2.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Boston MBTA Wartime Pullman Green PCC Trolley</name>
+		<shortDescription>Wait... what?!</shortDescription>
+		<longDescription>Pretty long name. And the early beginnings of
+			Massachusetts Bay Transportation Authority.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_3.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>NOHAB-GM, Car 2372</name>
+		<shortDescription>The famous "Bulldog Nose"!</shortDescription>
+		<longDescription>A Diesel locomotive produced by GM-EMD from 1939 to
+			1970. Spotted in Bernsdorf, Germany.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_4.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>German Steam Locomotive</name>
+		<shortDescription>For railway nostalgics.</shortDescription>
+		<longDescription>Spotted at a German city festival and a must-have for
+			all railway nerds.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_5.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>German Steam Locomotive II</name>
+		<shortDescription>Get our ultimate steam locomotive combo!
+		</shortDescription>
+		<longDescription> Yes, we know, we have posters of pretty much
+			everything.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_6.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>East German LEW EL 2</name>
+		<shortDescription>Electric coal mine railway</shortDescription>
+		<longDescription>Memo: East Germany produced a total of 1384 of these
+			from 1952 to 1988. Some of them also got shipped to Bulgaria, China,
+			Poland, and USSR. Spotted in "Besucherbergwerk Abraumförderbrücke
+			F60" in Brandenburg, Germany. Yeah, we also think that German is a
+			complicated language.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_7.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Chicago "L"</name>
+		<shortDescription>A tribute to the windy city.</shortDescription>
+		<longDescription>Chicago's rapid transit between skyscrapers. The
+			camera angle perfectly conveys the urban atmosphere. Another fancy US
+			poster!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_8.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>US Railway Mail Service Car</name>
+		<shortDescription>Time flies!</shortDescription>
+		<longDescription>Hard to believe the RMS carried the majority of mail
+			in the US until the 1960s. Will look especially cool if you place it
+			next to our FedEx Express poster.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_9.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Old NYC Subway</name>
+		<shortDescription>Nothing lasts forever.</shortDescription>
+		<longDescription>Not even subway trains. Darn!</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_10.jpg
+		</imageURL>
+		<subCategory>Railways</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--TopCategory Panoramas -->
+	<!--SubCategory Buildings -->
+	<product>
+		<name>Niagara Ferris Wheel</name>
+		<shortDescription>Up for a night sky wheel ride?</shortDescription>
+		<longDescription>We just hope it doesn't go as fast as it looks in the
+			picture. A fantastic shot perfectly edited. This poster is an HDR
+			image and delivers a dynamic range and color intensity that are
+			absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_1.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Swedish Cottages</name>
+		<shortDescription>Get the famous Falun red!</shortDescription>
+		<longDescription>Falun red is the name of this deep red paint that the
+			Swedish use to paint their houses with and that makes Swedish
+			landscape so unique. Buy this one and add a bit of Swedish flair to
+			your home!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_2.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Gustavianum, Sweden</name>
+		<shortDescription>Beautiful cupola reaching into beautiful sky.
+		</shortDescription>
+		<longDescription>The cupola looks awesome from this perspective. Oh,
+			and it houses the second oldest anatomical theatre in the world.
+			Another good reason to buy this poster.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_3.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Grochwitz Castle, Germany </name>
+		<shortDescription>With the sun fighting off a storm.
+		</shortDescription>
+		<longDescription>A cute little castle with a thunderstorm creeping up
+			from behind. Awesome how the camera captures the sun coming from the
+			side trying to push it away. This poster is an HDR image and delivers
+			a dynamic range and color intensity that are absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_4.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Rosebud Diner, USA</name>
+		<shortDescription>Have it the American way!</shortDescription>
+		<longDescription>Who cares about nice restaurants? A tribute to the
+			good old American Diner. This one is located in Somerville, MA, and
+			has been sitting there ever since 1941. A real historic site in
+			American terms. And pictures of sites are always worth having.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_5.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Historic Car Factory, Germany</name>
+		<shortDescription>Dirt turned into gold.</shortDescription>
+		<longDescription>Decay looking good! An old manufacturing plant in
+			Eisenach in former East Germany where they built the famous Wartburg.
+			You can be sure it doesn't look that cool in real life! This poster
+			is an HDR image and delivers a dynamic range and color intensity that
+			are absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_6.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Coal Briquet Factory, Germany</name>
+		<shortDescription>Well...</shortDescription>
+		<longDescription>The oldest coal briquet factory in Europe. We do
+			admit that the history behind what is in the picture might be
+			slightly more exciting than the image itself.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_7.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Timber Framework, Germany</name>
+		<shortDescription>The German Fachwerk building.</shortDescription>
+		<longDescription>A tribute to the laborious woodworking of our
+			ancestors. Captured in Elxleben, Thuringia. Looks especially cool
+			next to modern and postmodern architecture posters.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_8.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Utah State Capitol</name>
+		<shortDescription>An outstanding architecture shot!</shortDescription>
+		<longDescription>The lighting effects can't get any better than this.
+			If you've seen the building at night-time, you know our photographer
+			absolutely nailed this one! This poster is an HDR image and delivers
+			a dynamic range and color intensity that are absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_9.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>American Christmas House</name>
+		<shortDescription>Way to go!</shortDescription>
+		<longDescription>This is how your Christmas decoration should look
+			like! Snoopy and Woodstock in the front are our favorite. Very kind
+			of the owner to provide them with their own Christmas tree. This
+			poster is an HDR image and delivers a dynamic range and color
+			intensity that are absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_10.jpg
+		</imageURL>
+		<subCategory>Architecture</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Fireworks -->
+	<product>
+		<name>New Year's Fireworks I</name>
+		<shortDescription>Delivering all pyro effects possible!
+		</shortDescription>
+		<longDescription>Happy New Years! Captured at midnight in Jena,
+			Germany, this poster shows an incredible mix of all sorts of
+			fireworks effects. Just awesome how they illuminate the sky!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_1.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>New Year's Fireworks II</name>
+		<shortDescription>Bouquets, Stars, and Pearls.</shortDescription>
+		<longDescription>If you want a clear-cut contrast between the night
+			sky and the single effects. Speaking of New Year's... Please refrain
+			from asking us if we kept last year's resolutions at this point. We
+			don't want to talk about it.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_2.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>New Year's Fireworks III</name>
+		<shortDescription>A fantastic skycolor change!</shortDescription>
+		<longDescription>The bright glitter in the center beautifully
+			highlights the sky and delivers this spectacular color change effect.
+			Picture composition at its best. Memo: there's also no use asking
+			about our new year's resolutions. We don't have any.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_3.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>New Year's Fireworks IV</name>
+		<shortDescription>Night sky getting smoky.</shortDescription>
+		<longDescription>One hour past midnight. The bright crossette in the
+			center produces a set of stars that stands out in the smoky night
+			sky. A great picture to finish off our New Year's Eve impressions.
+			Our photographer needs to go to bed and think about New Year's
+			resolutions he can actually keep.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_4.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Silver Dahlias</name>
+		<shortDescription>Perfectly shaped.</shortDescription>
+		<longDescription>Looking like a starfish in the clear sky. Hang this
+			in your bedroom and you're guaranteed to have romantic nights!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_5.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Crossette, Silver/Green</name>
+		<shortDescription>It can't get any better than this!
+		</shortDescription>
+		<longDescription>The zoomed-in view delivers spectacular details! Just
+			look how the exploding stars leave their trails in the night sky!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_6.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Purple Crossette with Stars</name>
+		<shortDescription>Wait... it does!</shortDescription>
+		<longDescription>Absolutely stunning! We really don't want to show off
+			but you just have to admit that we have a pretty darn good
+			photographer.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_7.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Golden Dahlias with Blue Stars</name>
+		<shortDescription>Be exclusive.</shortDescription>
+		<longDescription>This explosion of gold is sure to add a stylish touch
+			to your home decor. Go for this one if you want to be special!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_8.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Brocade, Red/Blue</name>
+		<shortDescription>100% Perfection.</shortDescription>
+		<longDescription>Night time, a lake, and a perfectly shaped brocade
+			that gleams in the water... The author of these lines is running out
+			of words to describe how awesome our fireworks posters are.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_9.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Chrysanthemum and Brocades, Red</name>
+		<shortDescription>One final word: marvelous.</shortDescription>
+		<longDescription>Please forgive the author of these lines as he can't
+			think of any more words to illustrate our... umm... marvelous
+			fireworks posters.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_10.jpg
+		</imageURL>
+		<subCategory>Fireworks</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory Landscapes -->
+	<product>
+		<name>Niagara Falls, Canada</name>
+		<shortDescription>Picture editing at its best.</shortDescription>
+		<longDescription>The natural spectacle enhanced with the latest
+			picture editing technologies. We're starting to think our
+			photographer is an artist. Hang this in your home and people will
+			simply be amazed! This poster is an HDR image and delivers a dynamic
+			range and color intensity that are absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_1.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Niagara Falls, Canada, with City Skyline</name>
+		<shortDescription>If you want it both natural and urban.
+		</shortDescription>
+		<longDescription>This composition perfectly reenacts the coming
+			together of nature and human culture. If you're into philosophical
+			speculation, you can now start pondering what that could possibly
+			mean. This poster is an HDR image and delivers a dynamic range and
+			color intensity that are absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_2.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Trollhättan Falls, Sweden I</name>
+		<shortDescription>Up for rafting? Anyone?</shortDescription>
+		<longDescription>Just kidding. We prefer to look at this awesome water
+			movement for now.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_3.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Trollhättan Falls, Sweden II</name>
+		<shortDescription>The beautiful vastness of Swedish landscape.
+		</shortDescription>
+		<longDescription>Pretty much a must-have for Sweden fans since it
+			comprises all the country is loved for: wild water, stones, hills,
+			coniferous forests, and – don't miss them – the Falun red houses in
+			the background. It doesn't always need to be IKEA.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_4.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Linnaean Garden and Museum, Sweden</name>
+		<shortDescription>A perfect symmetry.</shortDescription>
+		<longDescription>In case you didn't know: the oldest botanical garden
+			of Uppsala University, originally planted in 1655. For everyone who
+			prefers symmetries over chaos and tends to get nervous when things
+			aren't as neat and perfect as they should be.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_5.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Winter Wonderland</name>
+		<shortDescription>This is exactly what the song talks about!
+		</shortDescription>
+		<longDescription>“In the lane, snow is glistening, a beautiful sight,
+			we're happy tonigt, walking in a winter wonderland“. A fantastic
+			landscape shot! Sometimes it doesn't need much to show nature in all
+			its beauty. A must-have for all winter weather fans!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_6.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<showInTopCategory>true</showInTopCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Lonesome Ski Lift in Winter Wonderland </name>
+		<shortDescription>For melancholics.</shortDescription>
+		<longDescription>A deserted winter landscape, no tourists whatsoever.
+			Perfectly matches the previous poster. Go get our winter wonderland
+			combo, hang it above your fireplace and get all cozy!
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_7.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Boston Skyline with Scaffolding</name>
+		<shortDescription>When new and old come together...</shortDescription>
+		<longDescription>...they make a pretty awesome contrast. Go for this
+			one if you want a US skyline poster that is different.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_8.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Boston Skyline at Night</name>
+		<shortDescription>The perfect water reflection.</shortDescription>
+		<longDescription>Taken from the Cambridge side of the Charles River,
+			this picture captures the most gorgeous water refelection ever. An
+			outstanding skyline panorama for all Boston lovers! This poster is an
+			HDR image and delivers a dynamic range and color intensity that are
+			absolutely stunning.
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_9.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<product>
+		<name>Six Flags New England, Water Park</name>
+		<shortDescription>Yay! Great childhood memories!</shortDescription>
+		<longDescription>Water parks! Aren't they just the best!? Okaaay, this
+			one might not be the prettiest poster in our collection but it's the
+			idea behind it that counts, isn't it?
+		</longDescription>
+		<price>17.99</price>
+		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_10.jpg
+		</imageURL>
+		<subCategory>Landscapes</subCategory>
+		<availableSize>16x12;32x24;64x48</availableSize>
+	</product>
+	<!--SubCategory XXL -->
+	<product>
+		<name>North Boston</name>
+		<shortDescription>A unique perspective.</shortDescription>
+		<longDescription>Taken from the US Custom House Tower. Much better than anything they use for postcards and travel guides today. If you prefer Boston over NYC, you should definitely buy this one!</longDescription>
+		<price>34.99</price>
+		<imageURL>/assets/img/products/XXL/XXL_1.jpg</imageURL>
+		<carousel>true</carousel>
+		<subCategory>XXL Panoramas</subCategory>
+		<availableSize>96x32</availableSize>
+	</product>
+	<product>
+		<name>Boston Sunset</name>
+		<shortDescription>One hell of a poster!</shortDescription>
+		<longDescription>The perfect Boston skyline poster including gorgeous sky color effects.</longDescription>
+		<price>34.99</price>
+		<imageURL>/assets/img/products/XXL/XXL_2.jpg</imageURL>
+		<carousel>true</carousel>
+		<subCategory>XXL Panoramas</subCategory>
+		<availableSize>96x32</availableSize>
+	</product>
+	<product>
+		<name>Bryce National Park, Utah I</name>
+		<shortDescription>Absolutely stunning!</shortDescription>
+		<longDescription>The zoom reveals the geology in all its beautiful details. No need to say more.</longDescription>
+		<price>34.99</price>
+		<imageURL>/assets/img/products/XXL/XXL_3.jpg</imageURL>
+		<carousel>true</carousel>
+		<subCategory>XXL Panoramas</subCategory>
+		<availableSize>96x32</availableSize>
+	</product>
+	<product>
+		<name>Bryce National Park, Utah II</name>
+		<shortDescription>Now... Is this real life?!</shortDescription>
+		<longDescription>Speechless.</longDescription>
+		<price>34.99</price>
+		<imageURL>/assets/img/products/XXL/XXL_4.jpg</imageURL>
+		<carousel>true</carousel>
+		<subCategory>XXL Panoramas</subCategory>
+		<availableSize>96x32</availableSize>
+	</product>
 </products>

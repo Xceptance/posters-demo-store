@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import models.Basket;
 import models.Basket_Product;
+import models.PosterSize;
 import models.Product;
 import ninja.Context;
 import ninja.FilterWith;
@@ -93,7 +94,8 @@ public class BasketController
                 for (int i = 0; i < difference; i++)
                 {
                     // add product to basket
-                    BasketInformation.addProductToBasket(basket, product, basketProduct.getFinish());
+                    BasketInformation.addProductToBasket(basket, product, basketProduct.getFinish(),
+                                                         basketProduct.getSize());
                 }
             }
             // product must be removed
@@ -136,9 +138,19 @@ public class BasketController
             product.put("productId", basketProduct.getProduct().getId());
             product.put("productPrice", basketProduct.getProduct().getPrice());
             product.put("finish", basketProduct.getFinish());
+            product.put("size", basketProduct.getSize());
             results.add(product);
         }
-        return Results.json().render("cartElements", results).render("currency", xcpConf.currency);
+        Result result = Results.json();
+        // add products
+        result.render("cartElements", results);
+        // add currency
+        result.render("currency", xcpConf.currency);
+        // add unit of length
+        result.render("unitLength", xcpConf.unitLength);
+        // add total price
+        result.render("totalPrice", basket.getTotalPrice());
+        return result;
     }
 
     /**
@@ -150,7 +162,8 @@ public class BasketController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish, Context context)
+    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish,
+                            @Param("size") String size, Context context)
     {
         Result result = Results.json();
         // get product by id
@@ -159,22 +172,33 @@ public class BasketController
         Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // set customer to basket
         BasketInformation.setCustomerToBasket(context, basket);
+        // get poster size
+        String[] dummy = size.split(" ");
+        int width = Integer.parseInt(dummy[0]);
+        int height = Integer.parseInt(dummy[2]);
+        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
+                                     .findUnique();
         // add product to basket
-        BasketInformation.addProductToBasket(basket, product, finish);
+        BasketInformation.addProductToBasket(basket, product, finish, posterSize);
         // get added basket product
-        Basket_Product basketProduct = BasketInformation.getBasketProduct(basket, product, finish);
+        Basket_Product basketProduct = BasketInformation.getBasketProduct(basket, product, finish, posterSize);
         Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", basketProduct.getCountProduct());
         updatedProduct.put("productName", basketProduct.getProduct().getName());
         updatedProduct.put("productId", basketProduct.getProduct().getId());
         updatedProduct.put("productPrice", basketProduct.getProduct().getPrice());
         updatedProduct.put("finish", finish);
+        updatedProduct.put("size", basketProduct.getSize());
         // add product to result
         result.render("product", updatedProduct);
         // add currency
         result.render("currency", xcpConf.currency);
+        // add unit of length
+        result.render("unitLength", xcpConf.unitLength);
         // add new header to result
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+        // add total price
+        result.render("totalPrice", basket.getTotalPrice());
         return result;
     }
 

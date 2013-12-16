@@ -6,6 +6,7 @@
   <parameter name="productFinish"/>
   <parameter name="productPrice"/>
   <parameter name="productCount"/>
+  <parameter name="productSize"/>
   <command name="click" target="id=slidingTopTriggerShow"/>
   <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdName']" value="@{productName}"/>
   <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdFinish']" value="@{productFinish}"/>

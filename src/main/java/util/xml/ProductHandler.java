@@ -1,6 +1,8 @@
 package util.xml;
 
+import models.PosterSize;
 import models.Product;
+import models.Product_PosterSize;
 import models.SubCategory;
 import models.TopCategory;
 
@@ -12,14 +14,14 @@ import com.avaje.ebean.Ebean;
 public class ProductHandler extends DefaultHandler
 {
 
-    private String currentValue;
+    private StringBuilder currentValue;
 
     private Product product;
 
     @Override
     public void characters(char[] ch, int start, int length)
     {
-        currentValue = new String(ch, start, length);
+        currentValue.append(new String(ch, start, length));
     }
 
     @Override
@@ -28,49 +30,52 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("product"))
         {
             product = new Product();
+            product.save();
         }
+        currentValue = new StringBuilder();
     }
 
     @Override
     public void endElement(String uri, String localName, String qName)
     {
+        String toAdd = currentValue.toString();
         if (localName.equals("name"))
         {
-            product.setName(currentValue);
-            String url = currentValue; //.replaceAll(" ", "");
-            product.setUrl(url);
+            product.setName(toAdd);
+            product.setUrl(toAdd);
         }
         if (localName.equals("shortDescription"))
         {
-            product.setDescriptionOverview(currentValue);
+            product.setDescriptionOverview(toAdd);
         }
         if (localName.equals("longDescription"))
         {
-            product.setDescriptionDetail(currentValue);
+            product.setDescriptionDetail(toAdd);
         }
         if (localName.equals("price"))
         {
-            product.setPrice(Double.parseDouble(currentValue));
+            product.setPrice(Double.parseDouble(toAdd));
         }
         if (localName.equals("imageURL"))
         {
-            product.setImageURL(currentValue);
+            product.setImageURL(toAdd);
         }
         if (localName.equals("subCategory"))
         {
-            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", currentValue).findUnique();
+            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findUnique();
             if (subCategory == null)
             {
                 subCategory = new SubCategory();
-                subCategory.setName(currentValue);
+                subCategory.setName(toAdd);
             }
             product.setSubCategory(subCategory);
-            TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findUnique();
+            TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory)
+                                           .findUnique();
             product.setTopCategory(topCategory);
         }
         if (localName.equals("carousel"))
         {
-            if (currentValue.equals("true"))
+            if (toAdd.equals("true"))
             {
                 product.setShowInCarousel(true);
             }
@@ -81,7 +86,7 @@ public class ProductHandler extends DefaultHandler
         }
         if (localName.equals("showInTopCategory"))
         {
-            if (currentValue.equals("true"))
+            if (toAdd.equals("true"))
             {
                 product.setShowInTopCategorie(true);
             }
@@ -92,7 +97,31 @@ public class ProductHandler extends DefaultHandler
         }
         if (localName.equals("product"))
         {
-            Ebean.save(product);
+            Ebean.update(product);
+        }
+        if (localName.equals("availableSize"))
+        {
+            String[] sizes = toAdd.split(";");
+            for (String size : sizes)
+            {
+                String[] dummy = size.split("x");
+                int width = Integer.parseInt(dummy[0]);
+                int height = Integer.parseInt(dummy[1]);
+                PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
+                                             .findUnique();
+                if (posterSize == null)
+                {
+                    posterSize = new PosterSize();
+                    posterSize.setWidth(width);
+                    posterSize.setHeight(height);
+                    posterSize.save();
+                }
+                Product_PosterSize productPosterSize = new Product_PosterSize();
+                productPosterSize.setProduct(product);
+                productPosterSize.setSize(posterSize);
+                productPosterSize.save();
+                product.addAvailableSize(productPosterSize);
+            }
         }
     }
 }

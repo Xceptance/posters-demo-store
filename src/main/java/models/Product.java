@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -58,6 +59,12 @@ public class Product
     private String descriptionOverview;
 
     /**
+     * The sizes which are available for this product.
+     */
+    @OneToMany(mappedBy = "product")
+    private List<Product_PosterSize> availableSizes;
+
+    /**
      * The url of the product image.
      */
     private String imageURL;
@@ -94,6 +101,7 @@ public class Product
     public Product()
     {
         this.basket = new ArrayList<Basket_Product>();
+        this.availableSizes = new ArrayList<Product_PosterSize>();
     }
 
     public String getName()
@@ -154,6 +162,21 @@ public class Product
     public void setDescriptionDetail(String descriptionDetail)
     {
         this.descriptionDetail = descriptionDetail;
+    }
+
+    public List<Product_PosterSize> getAvailableSizes()
+    {
+        return availableSizes;
+    }
+
+    public void setAvailableSizes(List<Product_PosterSize> availableSizes)
+    {
+        this.availableSizes = availableSizes;
+    }
+
+    public void addAvailableSize(Product_PosterSize size)
+    {
+        this.availableSizes.add(size);
     }
 
     public SubCategory getSubCategory()
