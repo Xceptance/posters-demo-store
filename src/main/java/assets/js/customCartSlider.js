@@ -34,7 +34,7 @@ function updateCartSlider(data)
 	// add products to list
 	for (var i=0; i<data.cartElements.length; i++)
 	{
-		var liId = "productId" + data.cartElements[i].productId + data.cartElements[i].finish;
+		var liId = "productId" + data.cartElements[i].productId + data.cartElements[i].finish + data.cartElements[i].size.width + "x" + data.cartElements[i].size.height;
 		var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.cartElements[i], data.currency, data.unitLength) + "</li>";
 		$("#cartElementList").append(liElement);
 	}
@@ -80,7 +80,7 @@ function addToCartSlider(productId, finish, size)
 		url: '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size, 
 		success: function(data) {
 			// create new <li> element
-			var liId = "productId" + data.product.productId + data.product.finish;
+			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
 			var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.product, data.currency, data.unitLength) + "</li>";
 			if( $("#" + liId).length > 0)
 			{
