@@ -38,11 +38,13 @@ function updateCartSlider(data)
 		var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.cartElements[i], data.currency, data.unitLength) + "</li>";
 		$("#cartElementList").append(liElement);
 	}
+	// update total price in cart slider
+	$('#cartSliderTotalPrice').text(data.totalPrice + data.currency);
 }
 
 function setCartSliderElementInnerHtml(product, currency, unitLength)
 {
-	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span>" +
+	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span> </br>" +
 			" - <span id='sliderProdSize'>" + product.size.width + " x " + product.size.height + " " + unitLength + "</span>" +
 			" - <span id='sliderProdPrice'>" + product.productPrice + currency + "</span>" +
 			" (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
@@ -91,6 +93,8 @@ function addToCartSlider(productId, finish, size)
 			{
 				$("#cartElementList").prepend(liElement);
 			}
+			// update total price in cart slider
+			$('#cartSliderTotalPrice').text(data.totalPrice + data.currency);
 			$("#notificationsLoader").empty();
 			// update cart in header
 			$("#headerBasketOverview span").text(data.headerCartOverview);

@@ -141,8 +141,16 @@ public class BasketController
             product.put("size", basketProduct.getSize());
             results.add(product);
         }
-        return Results.json().render("cartElements", results).render("currency", xcpConf.currency)
-                      .render("unitLength", xcpConf.unitLength);
+        Result result = Results.json();
+        // add products
+        result.render("cartElements", results);
+        // add currency
+        result.render("currency", xcpConf.currency);
+        // add unit of length
+        result.render("unitLength", xcpConf.unitLength);
+        // add total price
+        result.render("totalPrice", basket.getTotalPrice());
+        return result;
     }
 
     /**
@@ -189,6 +197,8 @@ public class BasketController
         result.render("unitLength", xcpConf.unitLength);
         // add new header to result
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+        // add total price
+        result.render("totalPrice", basket.getTotalPrice());
         return result;
     }
 
