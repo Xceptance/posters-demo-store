@@ -76,7 +76,7 @@
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="assertText" target="id=titleProductName" value="${productName}"/>
   <action name="AddSameProduct"/>
-  <command name="select" target="id=finish" value="label=${productFinish}"/>
+  <command name="check" target="//div[@id='selectFinish']/label[${finishIndex}+1]/input"/>
   <command name="select" target="id=selectSize" value="label=${productSize}"/>
   <command name="click" target="id=btnAddToCart"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
