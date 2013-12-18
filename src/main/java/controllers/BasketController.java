@@ -10,6 +10,7 @@ import models.Basket;
 import models.Basket_Product;
 import models.PosterSize;
 import models.Product;
+import models.Product_PosterSize;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -136,7 +137,7 @@ public class BasketController
             product.put("productCount", basketProduct.getCountProduct());
             product.put("productName", basketProduct.getProduct().getName());
             product.put("productId", basketProduct.getProduct().getId());
-            product.put("productPrice", basketProduct.getProduct().getPriceAsString());
+            product.put("productPrice", basketProduct.getPriceAsString());
             product.put("finish", basketProduct.getFinish());
             product.put("size", basketProduct.getSize());
             results.add(product);
@@ -186,7 +187,7 @@ public class BasketController
         updatedProduct.put("productCount", basketProduct.getCountProduct());
         updatedProduct.put("productName", basketProduct.getProduct().getName());
         updatedProduct.put("productId", basketProduct.getProduct().getId());
-        updatedProduct.put("productPrice", basketProduct.getProduct().getPriceAsString());
+        updatedProduct.put("productPrice", basketProduct.getPriceAsString());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", basketProduct.getSize());
         // add product to result
@@ -227,6 +228,22 @@ public class BasketController
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         // add totalPrice
         result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.currency));
+        return result;
+    }
+
+    public Result updatePrice(@Param("size") String size, @Param("productId") int productId, Context context)
+    {
+        String[] dummy = size.split(" ");
+        int width = Integer.parseInt(dummy[0]);
+        int height = Integer.parseInt(dummy[2]);
+        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
+                                     .findUnique();
+        Product product = ProductInformation.getProductById(productId);
+        Product_PosterSize productPosterSize = Ebean.find(Product_PosterSize.class).where().eq("product", product)
+                                                    .eq("size", posterSize).findUnique();
+        Result result = Results.json();
+        // add new price
+        result.render("newPrice", productPosterSize.getPriceAsString() + xcpConf.currency);
         return result;
     }
 
