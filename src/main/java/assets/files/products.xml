@@ -9,12 +9,12 @@
 			you this shot. We can't help it, but this bear looks as if he didn't
 			mind him too much...
 		</longDescription>
-		<price>17.00</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_1.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.00;25.50;32.95</price>
 	</product>
 	<product>
 		<name>Great Grey Owl</name>
@@ -23,11 +23,11 @@
 		<longDescription>Looks a little skeptic as to whether or not it likes
 			to be in pictures, though.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_2.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
-		<availableSize>48x36;32x24;64x48</availableSize>
+		<availableSize>32x24;48x36;64x48</availableSize>
+		<price>12.85;17.99;23.89</price>
 	</product>
 	<product>
 		<name>Swedish Moose</name>
@@ -35,11 +35,11 @@
 		<longDescription>Just adorable. By the way, moose don't moo as cows
 			do, and we think that's an awesome rhyme.
 		</longDescription>
-		<price>9.30</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_3.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>9.30;15.00;19.99</price>
 	</product>
 	<product>
 		<name>European Hornet</name>
@@ -47,13 +47,13 @@
 		<longDescription>This photographic print benefits from digital picture
 			editing to deliver nature at its best. A hurrah to our photographer!
 		</longDescription>
-		<price>10.50</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_4.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>10.50;15.64;20.22</price>
 	</product>
 	<product>
 		<name>Roman Snail</name>
@@ -62,11 +62,11 @@
 			Have this poster remind you of taking a break from everyday hassles
 			every once in a while.
 		</longDescription>
-		<price>23.00</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_5.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.00;30.45;38.00</price>
 	</product>
 	<product>
 		<name>Blue Morpho Butterfly</name>
@@ -75,13 +75,13 @@
 			instead! The coloring of this beautiful morpho perfectly blends with
 			the green leaves and the yellow flower in the background.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_6.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;23.99;29.99</price>
 	</product>
 	<product>
 		<name>Red Birdwing</name>
@@ -89,11 +89,11 @@
 		<longDescription>Awww, look how well they get along! Makes you think
 			of peace and harmony.
 		</longDescription>
-		<price>8.75</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_7.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>8.75;15.75;22;45</price>
 	</product>
 	<product>
 		<name>Chipmunk</name>
@@ -101,12 +101,12 @@
 		<longDescription>Our tribute to "Alvin and the Chipmunks". We're
 			absolutely sure: this is Alvin. "Do, do, do do do do!"
 		</longDescription>
-		<price>12.87</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_8.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.87;19.99;25.99</price>
 	</product>
 	<product>
 		<name>Red Domestic Cat</name>
@@ -114,11 +114,11 @@
 		<longDescription>If "Casablanca" had starred cats, this one would have
 			won an Oscar.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_9.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;26.98;34.89</price>
 	</product>
 	<product>
 		<name>Brown Domestic Cat</name>
@@ -126,11 +126,11 @@
 		<longDescription>A cat at its best. The vivid zoomed-in view and sharp
 			coloring makes you think its about to jump out of the picture.
 		</longDescription>
-		<price>17.90</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_10.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.90;25.29;30.00</price>
 	</product>
 	<!--SubCategory Flowers -->
 	<product>
@@ -139,12 +139,12 @@
 		<longDescription>... with this precious Dahlia and be sure that all
 			the girls in your life will love it.
 		</longDescription>
-		<price>0.30</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_1.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>0.30;1.45;5.99</price>
 	</product>
 	<product>
 		<name>Cactus Dahlia, Pink/White</name>
@@ -154,11 +154,11 @@
 			bright colors. The lilac and white combo matches about every wall
 			color.
 		</longDescription>
-		<price>0.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_2.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>0.99;4.00;7.99</price>
 	</product>
 	<product>
 		<name>Cactus Dahlia, Yellow/Pink</name>
@@ -167,11 +167,11 @@
 		<longDescription>Awesome what nature has in store for us. This blossom
 			really is an eye-catcher!
 		</longDescription>
-		<price>17.10</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_3.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.10;24.90;29.99</price>
 	</product>
 	<product>
 		<name>Jerusalem Artichoke</name>
@@ -180,11 +180,11 @@
 			artichoke blossom will make your home a lot brighter. Goes well with
 			greenish and brownish tones.
 		</longDescription>
-		<price>23.59</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_4.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.59;31.75;38.00</price>
 	</product>
 	<product>
 		<name>Snowdrop Anemone</name>
@@ -192,7 +192,7 @@
 		<longDescription>The zoomed-in view of this flower’s center perfectly
 			reveals all its delicacy. You can't get any closer than this!
 		</longDescription>
-		<price>12.38</price>
+		<price>12.38;25.99;49.90</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_5.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
@@ -205,12 +205,12 @@
 		<longDescription>For people who dream of sleeping on flowery meadows.
 			The color mix is sure to pimp your walls.
 		</longDescription>
-		<price>35.70</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_6.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>35.70;50.00;65.89</price>
 	</product>
 	<product>
 		<name>Yellow and Orange Tulips</name>
@@ -219,11 +219,11 @@
 			rooms! The beautiful yellow/orange combo will especially go well with
 			green, brown and light yellow tones.
 		</longDescription>
-		<price>18.50</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_7.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>18.50;25.30;31.90</price>
 	</product>
 	<product>
 		<name>Mixed-Colored Tulips</name>
@@ -233,12 +233,12 @@
 			The light green perfectly blends with the bright blossoms. Now, where
 			are the Easter eggs?
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_8.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;24.99;38.10</price>
 	</product>
 	<product>
 		<name>Garden Roses</name>
@@ -247,12 +247,12 @@
 			loved by someone. If you’re a guy, your girl is going to love this as
 			a gift.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_9.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;24.99;38.10</price>
 	</product>
 	<product>
 		<name>Anthurium</name>
@@ -260,11 +260,11 @@
 		<longDescription>A must-have for all Anthurium lovers. We know they
 			are out there.
 		</longDescription>
-		<price>16.30</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_10.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.30;24.80;30.00</price>
 	</product>
 	<!--SubCategory Trees -->
 	<product>
@@ -274,11 +274,11 @@
 			of fall coming around. The gleaming of the sun in the tree's leaves
 			and the red/green contrast make this poster absolutely special.
 		</longDescription>
-		<price>12.89</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_1.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.89;19.99;29.99</price>
 	</product>
 	<product>
 		<name>Indian Summer: Yellow Oak</name>
@@ -288,11 +288,11 @@
 			silently watching the course of human history. Hang this one and
 			think of the beauty of nature.
 		</longDescription>
-		<price>15.78</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_2.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.78;21.90;27.97</price>
 	</product>
 	<product>
 		<name>Indian Summer: Orange Beech</name>
@@ -302,11 +302,11 @@
 			starts to get dark in the fall, the bright orange will definitely
 			cheer you up!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_3.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;20.85;29.90</price>
 	</product>
 	<product>
 		<name>Indian Summer: Young Ashes</name>
@@ -315,11 +315,11 @@
 			the coming of fall. The bright red sets a nice highlight without
 			disturbing the overall harmony in this picture.
 		</longDescription>
-		<price>16.67</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_4.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.67;27.90;34.00</price>
 	</product>
 	<product>
 		<name>Indian Summer: Young Birches</name>
@@ -327,11 +327,11 @@
 		<longDescription>against the cold of fall. The one on the most left
 			seems to be strongest.
 		</longDescription>
-		<price>16.98</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_5.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.98;29.99;45.50</price>
 	</product>
 	<product>
 		<name>Indian Summer: Tree Mix</name>
@@ -341,12 +341,12 @@
 			If you don’t want flowers but still lots of colors, you should go for
 			this one.
 		</longDescription>
-		<price>29.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_6.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>29.99;39.90;45.99</price>
 	</product>
 	<product>
 		<name>Fir Covered with Snow</name>
@@ -354,12 +354,12 @@
 		<longDescription>For all snow lovers. And the perfect reminder that
 			you still need to get that Christmas tree...
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_7.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;24.99;33.33</price>
 	</product>
 	<product>
 		<name>Cherry Blossom</name>
@@ -368,12 +368,12 @@
 			The cherry blossoms simply look outstanding against the bright blue
 			sky. Pimps each room regardless!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_8.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;24.99;33.33</price>
 	</product>
 	<product>
 		<name>Fall Leaves I</name>
@@ -383,12 +383,12 @@
 			afterwards... Yes, this one’s for all that tend to get melancholic at
 			times.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_9.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;24.99;33.33</price>
 	</product>
 	<product>
 		<name>Fall Leaves II</name>
@@ -397,11 +397,11 @@
 			colorful and the leaves to sparkle in the sun. Get this poster for
 			free if you give the exact number of leaves it shows.
 		</longDescription>
-		<price>16.13</price>
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_10.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.13;24.99;32.65</price>
 	</product>
 	<!--TopCategory Food -->
 	<!--SubCategory Cold_Cuts -->
@@ -412,12 +412,12 @@
 			well-arranged plate. The mix of red, white, and green doesn’t only
 			look good to Italian food lovers.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_1.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;25.90;29.99</price>
 	</product>
 	<product>
 		<name>Rolled Bacon</name>
@@ -425,12 +425,12 @@
 		<longDescription>Bacon neatly rolled and arranged. Veggies are
 			overrated.
 		</longDescription>
-		<price>16.89</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_2.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.89;27.90;40.00</price>
 	</product>
 	<product>
 		<name>Cheese Varieties</name>
@@ -438,12 +438,12 @@
 		<longDescription>That's one delicious plate of cheese! Another cool
 			rhyme.
 		</longDescription>
-		<price>9.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_3.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>9.99;18.99;27.99</price>
 	</product>
 	<product>
 		<name>Mixed Olives</name>
@@ -451,12 +451,12 @@
 		<longDescription> For the mediterranean touch in your home. The olive
 			color tones go especially well with yellow, green, and brown walls.
 		</longDescription>
-		<price>16.75</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_4.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.75;28.90;54.90</price>
 	</product>
 	<product>
 		<name>Finger Food</name>
@@ -464,11 +464,11 @@
 		<longDescription>Just go for this one since it offers a bit of
 			everything.
 		</longDescription>
-		<price>13.39</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_5.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>13.39;21.20;28.10</price>
 	</product>
 	<product>
 		<name>Rocket Salad with Mozzarella</name>
@@ -476,11 +476,11 @@
 		<longDescription>C’mon, you know a guy would never order this in a
 			restaurant!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_6.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;27.99;37.99</price>
 	</product>
 	<product>
 		<name>Meatfoot</name>
@@ -489,11 +489,11 @@
 			lines can’t think of any way to reasonably advertise this poster and
 			quickly goes on to the next one.
 		</longDescription>
-		<price>19.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_7.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>19.99;29.90;39.80</price>
 	</product>
 	<product>
 		<name>Peperoni Sandwich</name>
@@ -501,11 +501,11 @@
 		<longDescription>There’s nothing like a decent sandwich and a vanilla
 			macchiato for lunch. A nice reminder to make time for lunch at work.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_8.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;28.10;37.90</price>
 	</product>
 	<product>
 		<name>Chicken Teryiaki</name>
@@ -514,11 +514,11 @@
 			especially delicious. Tell people you made this and you'll have new
 			friends in an instant.
 		</longDescription>
-		<price>29.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_9.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>29.99;45.00;70.30</price>
 	</product>
 	<product>
 		<name>Fried Rice</name>
@@ -529,11 +529,11 @@
 			thought. So you probably also didn't notice that this is a unicorn
 			with a red saddle on its back. Pretty exciting, huh?
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_10.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;25.90;31.70</price>
 	</product>
 	<!--SubCategory Main Dishes -->
 	<product>
@@ -542,12 +542,12 @@
 		<longDescription>A grilled salmon steak wrapped in eggplant. The
 			author of these lines is getting hungry.
 		</longDescription>
-		<price>16.68</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_1.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.68;24.90;29.99</price>
 	</product>
 	<product>
 		<name>Goulash with Dumplings</name>
@@ -555,12 +555,12 @@
 		<longDescription>If you think those Germans know beer and weißwurst
 			only, you should hang this. Yes, they also have goulash!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_2.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;43.00</price>
 	</product>
 	<product>
 		<name>Selfmade Mac and Cheese</name>
@@ -570,12 +570,12 @@
 			liked since mummy and daddy were still at work. Plus, this plate
 			probably looks much nicer than your childish attempts at cooking.
 		</longDescription>
-		<price>29.10</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_3.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>29.10;35.50;45.60</price>
 	</product>
 	<product>
 		<name>Stuffed Turkey</name>
@@ -585,22 +585,22 @@
 			you might want to make sure to buy this for yourself and not as a
 			gift for someone you want to stay friends with.
 		</longDescription>
-		<price>23.50</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_4.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.50;34.40;42.65</price>
 	</product>
 	<product>
 		<name>Tuna Steak</name>
 		<shortDescription>And how to ruin it...</shortDescription>
 		<longDescription>Just put it on a barbecue grill, it's that easy!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_5.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Frozen Pizza</name>
@@ -610,12 +610,12 @@
 			about a healthy diet! We just like it to be convenient. Hang this in
 			your kitchen and dare be oben about your love for fast food!
 		</longDescription>
-		<price>11.12</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_6.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>11.12;13.14;15.16</price>
 	</product>
 	<product>
 		<name>Meatballs</name>
@@ -624,11 +624,11 @@
 			plastic fork reveals that our photographer didn't make this himself,
 			but who cares anyway when it comes to meatballs.
 		</longDescription>
-		<price>13.99</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_7.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>13.99;22.12;28.45</price>
 	</product>
 	<product>
 		<name>XXL Burger</name>
@@ -638,11 +638,11 @@
 			for a burger to be truely perfect. This one is made with lots of
 			love.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_8.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.90</price>
 	</product>
 	<product>
 		<name>Small Burger</name>
@@ -650,11 +650,11 @@
 		<longDescription>This one looks a little... well... must have been a
 			happy meal or something.
 		</longDescription>
-		<price>12.45</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_9.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.45;23.24;29.78</price>
 	</product>
 	<product>
 		<name>Medium Burger</name>
@@ -664,11 +664,11 @@
 			after all: his came with salad and not with fries like the one of the
 			person sitting opposite.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_10.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<!--SubCategory Sweets -->
 	<product>
@@ -678,11 +678,11 @@
 			great taste of German apple pie. Yummy! Looks especially good on
 			brownish and greenish walls.
 		</longDescription>
-		<price>23.78</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_1.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.78;28.89;35.45</price>
 	</product>
 	<product>
 		<name>Whipped Cream with Caramel</name>
@@ -690,11 +690,11 @@
 		<longDescription>... and is sure to enhance the previous poster if
 			placed right next to it.
 		</longDescription>
-		<price>11.78</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_2.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>11.78;21.84;29.87</price>
 	</product>
 	<product>
 		<name>Blueberry Cake</name>
@@ -703,10 +703,10 @@
 			photographer really deserved this delicious slice of blueberry cake.
 			Good thing he took a picture before eating it all.
 		</longDescription>
-		<price>18.89</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_3.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>18.89;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Fruit Tart with Cocoa</name>
@@ -714,10 +714,10 @@
 		<longDescription>We fell in love with the lovely cocoa decoration on
 			the side.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_4.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Gummy Bears on Keyboard</name>
@@ -729,21 +729,21 @@
 			keyboard in the first place?! Right, that’s what we thought, so make
 			sure to get this one asap!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_5.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Colored Sprinkles</name>
 		<shortDescription>How many white ones do you see?</shortDescription>
 		<longDescription>See the back of the poster for the right answer.
 		</longDescription>
-		<price>9.89</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_6.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>9.89;19.78;28.79</price>
 	</product>
 	<product>
 		<name>Gummy Bears in Bowl</name>
@@ -752,11 +752,11 @@
 			view makes you think it's sitting right in front of you. A must-have
 			for gummy bear lovers!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_7.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;27.99;39.56</price>
 	</product>
 	<product>
 		<name>Raspberry Jello</name>
@@ -764,10 +764,10 @@
 		<longDescription>... waiting to be eaten instantly. Hurry! Goes
 			especially well with brown, white and green color tones.
 		</longDescription>
-		<price>12.75</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_8.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.75;18.99;27.65</price>
 	</product>
 	<product>
 		<name>Strawberry and Grapes</name>
@@ -776,10 +776,10 @@
 			want to make sure not to run to the grocery store every night to
 			gorge on all the awful things shown in them.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_9.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.90</price>
 	</product>
 	<product>
 		<name>Donut Mix</name>
@@ -787,10 +787,10 @@
 		<longDescription>The author of these lines needs to run to the grocery
 			store now to go get... right: donuts.
 		</longDescription>
-		<price>23.89</price>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_10.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.89;29.99;39.99</price>
 	</product>
 	<!--TopCategory Means_of_Transportation -->
 	<!--SubCategory Airplanes -->
@@ -799,11 +799,11 @@
 		<shortDescription>Beautiful take-off.</shortDescription>
 		<longDescription>Let's hope it leaves to bring their famous chocolate.
 		</longDescription>
-		<price>12.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_1.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.99;23.80;31.00</price>
 	</product>
 	<product>
 		<name>FedEx Express</name>
@@ -811,11 +811,11 @@
 		<longDescription>The ultimate reminder it's been a while since you've
 			sent someone a birthday card.
 		</longDescription>
-		<price>23.56</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_2.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.56;31.70;39.99</price>
 	</product>
 	<product>
 		<name>American Airlines Boeing 737-800</name>
@@ -823,12 +823,12 @@
 		<longDescription>An AA Boeing during landing. The zoom is so perfectly
 			set here it even lets you see how the plane reflects the sunlight!
 		</longDescription>
-		<price>12.59</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_3.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.59;21.90;29.99</price>
 	</product>
 	<product>
 		<name>Air Greenland Airbus A330-200</name>
@@ -837,23 +837,23 @@
 		<longDescription>...and they actually look pretty fancy. A must-have
 			for all airplane nerds!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_4.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
-		<name>Aer Lingus Airbus A320</name>
+		<name>Air Lingus Airbus A320</name>
 		<shortDescription>Hail to Saint Patrick!</shortDescription>
 		<longDescription>The national flag carrier of Ireland. For everyone
 			who loves celebrating Saint Patrick's Day.
 		</longDescription>
-		<price>15.89</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_5.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.89;24.70;35.90</price>
 	</product>
 	<product>
 		<name>US Air Force Starlifter</name>
@@ -864,12 +864,12 @@
 			Space Museum collection. If you're into airplanes and haven't been to
 			the Smithsonian yet, you have to get them all!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_6.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Boeing 707</name>
@@ -877,11 +877,11 @@
 		<longDescription>We're glad they decided to change their look at some
 			point...
 		</longDescription>
-		<price>23.78</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_7.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.78;38.90;51.00</price>
 	</product>
 	<product>
 		<name>Boeing 307 Stratoliner</name>
@@ -890,12 +890,12 @@
 			polished aluminum! It will be easy to convince her that this poster
 			must be hung in your home!
 		</longDescription>
-		<price>12.95</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_8.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.95;27.90;38.40</price>
 	</product>
 	<product>
 		<name>Lufthansa JU 52</name>
@@ -903,22 +903,22 @@
 		<longDescription>Air travel has come a long way... We're pleased
 			Lufthansa planes eventually got bigger.
 		</longDescription>
-		<price>15.97</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_9.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.97;28.90;34.65</price>
 	</product>
 	<product>
 		<name>F-4S from VMFA-232</name>
 		<shortDescription>An original US Marine Corps Fighter.
 		</shortDescription>
 		<longDescription>Used in the Vietnam War.</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_10.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<!--SubCategory Classic_Cars -->
 	<product>
@@ -927,12 +927,12 @@
 		<longDescription>Probably the most famous outcome of East German car
 			production. For everyone who's missing the good old Trabi.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_1.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>IFA F8</name>
@@ -940,12 +940,12 @@
 		<longDescription>Produced from 1949 to 1955 and therefore another
 			thing that was scarce in East Germany.
 		</longDescription>
-		<price>12.95</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_2.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.95;18.40;27.90</price>
 	</product>
 	<product>
 		<name>IFA W50</name>
@@ -954,22 +954,22 @@
 		<longDescription>Yes, it's true: produced from 1965 to 1990. Note the
 			shovel that came with it to build... right... "Plattenbauten".
 		</longDescription>
-		<price>18.36</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_3.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>18.36;28.65;41.10</price>
 	</product>
 	<product>
 		<name>IFA H6, Grey/Red</name>
 		<shortDescription>Not as big but quite sufficient.</shortDescription>
 		<longDescription>...to help build "Plattenbauten".</longDescription>
-		<price>9.74</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_4.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>9.74;19.78;27.19</price>
 	</product>
 	<product>
 		<name>IFA G5</name>
@@ -979,11 +979,11 @@
 			were scarce in East Germany, the G5 also had to serve as fire or tank
 			truck when the NPA didn't necessarily need it.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_5.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>IFA H6, Green</name>
@@ -993,11 +993,11 @@
 			lines is also beginning to realize that writing about classic cars
 			might not be his favorite thing to do.
 		</longDescription>
-		<price>12.63</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_6.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.63;18.91;26.78</price>
 	</product>
 	<product>
 		<name>IFA G5 Tank Truck</name>
@@ -1005,11 +1005,11 @@
 		<longDescription>Its size was sufficient to supply East German gas
 			stations. There weren't too many of them.
 		</longDescription>
-		<price>15.45</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_7.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.45;22.90;29.90</price>
 	</product>
 	<product>
 		<name>IFA Cement Truck</name>
@@ -1018,11 +1018,11 @@
 		<longDescription>Not just a classic car poster but a historic
 			reference to East German housing culture!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_8.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Ikarus 211</name>
@@ -1030,11 +1030,11 @@
 		<longDescription>Production started in 1976 and lasted till 1990. A
 			rare sight since, again, there weren't too many of them.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_9.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Ex-Omaha Transit Company Bus</name>
@@ -1042,12 +1042,12 @@
 		<longDescription>...compared to those standard NYC/yellow cab posters.
 			Dare to be different!
 		</longDescription>
-		<price>13.65</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_10.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>13.65;23.67;34.78</price>
 	</product>
 	<!--SubCategory Railways -->
 	<product>
@@ -1057,12 +1057,12 @@
 			Kennebunkport, Maine. Show off as an NYC expert and go for a NYC
 			poster that's different.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_1.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Eastern Massachussetts Street Railway</name>
@@ -1072,11 +1072,11 @@
 			that, the author of these lines thinks railways aren't the most
 			exciting topic to write about.
 		</longDescription>
-		<price>23.56</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_2.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.56;33.68;40.90</price>
 	</product>
 	<product>
 		<name>Boston MBTA Wartime Pullman Green PCC Trolley</name>
@@ -1084,12 +1084,12 @@
 		<longDescription>Pretty long name. And the early beginnings of
 			Massachusetts Bay Transportation Authority.
 		</longDescription>
-		<price>12.45</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_3.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.45;21.20;33.33</price>
 	</product>
 	<product>
 		<name>NOHAB-GM, Car 2372</name>
@@ -1097,11 +1097,11 @@
 		<longDescription>A Diesel locomotive produced by GM-EMD from 1939 to
 			1970. Spotted in Bernsdorf, Germany.
 		</longDescription>
-		<price>12.78</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_4.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.78;20.90;34.40</price>
 	</product>
 	<product>
 		<name>German Steam Locomotive</name>
@@ -1109,12 +1109,12 @@
 		<longDescription>Spotted at a German city festival and a must-have for
 			all railway nerds.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_5.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>German Steam Locomotive II</name>
@@ -1123,11 +1123,11 @@
 		<longDescription> Yes, we know, we have posters of pretty much
 			everything.
 		</longDescription>
-		<price>15.98</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_6.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.98;18.67;23.90</price>
 	</product>
 	<product>
 		<name>East German LEW EL 2</name>
@@ -1138,11 +1138,11 @@
 			F60" in Brandenburg, Germany. Yeah, we also think that German is a
 			complicated language.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_7.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;39.99;56.80</price>
 	</product>
 	<product>
 		<name>Chicago "L"</name>
@@ -1151,11 +1151,11 @@
 			camera angle perfectly conveys the urban atmosphere. Another fancy US
 			poster!
 		</longDescription>
-		<price>16.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_8.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.99;29.70;34.50</price>
 	</product>
 	<product>
 		<name>US Railway Mail Service Car</name>
@@ -1164,17 +1164,17 @@
 			in the US until the 1960s. Will look especially cool if you place it
 			next to our FedEx Express poster.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_9.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;35.00;51.90</price>
 	</product>
 	<product>
 		<name>Old NYC Subway</name>
 		<shortDescription>Nothing lasts forever.</shortDescription>
 		<longDescription>Not even subway trains. Darn!</longDescription>
-		<price>17.80</price>
+		<price>17.80;22.00;33.30</price>
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_10.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
@@ -1191,12 +1191,12 @@
 			image and delivers a dynamic range and color intensity that are
 			absolutely stunning.
 		</longDescription>
-		<price>12.90</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_1.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.90;23.90;34.90</price>
 	</product>
 	<product>
 		<name>Swedish Cottages</name>
@@ -1206,12 +1206,12 @@
 			landscape so unique. Buy this one and add a bit of Swedish flair to
 			your home!
 		</longDescription>
-		<price>13.78</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_2.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>13.78;19.90;25.90</price>
 	</product>
 	<product>
 		<name>Gustavianum, Sweden</name>
@@ -1221,12 +1221,12 @@
 			and it houses the second oldest anatomical theatre in the world.
 			Another good reason to buy this poster.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_3.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Grochwitz Castle, Germany </name>
@@ -1237,12 +1237,12 @@
 			side trying to push it away. This poster is an HDR image and delivers
 			a dynamic range and color intensity that are absolutely stunning.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_4.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Rosebud Diner, USA</name>
@@ -1252,11 +1252,11 @@
 			has been sitting there ever since 1941. A real historic site in
 			American terms. And pictures of sites are always worth having.
 		</longDescription>
-		<price>14.59</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_5.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>14.59;28.56;42.89</price>
 	</product>
 	<product>
 		<name>Historic Car Factory, Germany</name>
@@ -1267,11 +1267,11 @@
 			is an HDR image and delivers a dynamic range and color intensity that
 			are absolutely stunning.
 		</longDescription>
-		<price>12.89</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_6.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.89;19.90;33.30</price>
 	</product>
 	<product>
 		<name>Coal Briquet Factory, Germany</name>
@@ -1280,11 +1280,11 @@
 			admit that the history behind what is in the picture might be
 			slightly more exciting than the image itself.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_7.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.90;39.90</price>
 	</product>
 	<product>
 		<name>Timber Framework, Germany</name>
@@ -1293,11 +1293,11 @@
 			ancestors. Captured in Elxleben, Thuringia. Looks especially cool
 			next to modern and postmodern architecture posters.
 		</longDescription>
-		<price>12.00</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_8.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.00;25.00;43.00</price>
 	</product>
 	<product>
 		<name>Utah State Capitol</name>
@@ -1307,11 +1307,11 @@
 			absolutely nailed this one! This poster is an HDR image and delivers
 			a dynamic range and color intensity that are absolutely stunning.
 		</longDescription>
-		<price>13.33</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_9.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>13.33;22.22;33.33</price>
 	</product>
 	<product>
 		<name>American Christmas House</name>
@@ -1322,11 +1322,11 @@
 			poster is an HDR image and delivers a dynamic range and color
 			intensity that are absolutely stunning.
 		</longDescription>
-		<price>15.00</price>
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_10.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.00;30.00;60.00</price>
 	</product>
 	<!--SubCategory Fireworks -->
 	<product>
@@ -1337,12 +1337,12 @@
 			Germany, this poster shows an incredible mix of all sorts of
 			fireworks effects. Just awesome how they illuminate the sky!
 		</longDescription>
-		<price>14.78</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_1.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>14.78;25.90;34.60</price>
 	</product>
 	<product>
 		<name>New Year's Fireworks II</name>
@@ -1352,12 +1352,12 @@
 			from asking us if we kept last year's resolutions at this point. We
 			don't want to talk about it.
 		</longDescription>
-		<price>15.57</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_2.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.57;23.45;45.67</price>
 	</product>
 	<product>
 		<name>New Year's Fireworks III</name>
@@ -1367,11 +1367,11 @@
 			Picture composition at its best. Memo: there's also no use asking
 			about our new year's resolutions. We don't have any.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_3.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>New Year's Fireworks IV</name>
@@ -1382,11 +1382,11 @@
 			Our photographer needs to go to bed and think about New Year's
 			resolutions he can actually keep.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_4.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.90</price>
 	</product>
 	<product>
 		<name>Silver Dahlias</name>
@@ -1394,11 +1394,11 @@
 		<longDescription>Looking like a starfish in the clear sky. Hang this
 			in your bedroom and you're guaranteed to have romantic nights!
 		</longDescription>
-		<price>12.50</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_5.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.50;25.60;45.00</price>
 	</product>
 	<product>
 		<name>Crossette, Silver/Green</name>
@@ -1407,12 +1407,12 @@
 		<longDescription>The zoomed-in view delivers spectacular details! Just
 			look how the exploding stars leave their trails in the night sky!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_6.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Purple Crossette with Stars</name>
@@ -1421,11 +1421,11 @@
 			but you just have to admit that we have a pretty darn good
 			photographer.
 		</longDescription>
-		<price>23.78</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_7.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>23.78;31.90;42.00</price>
 	</product>
 	<product>
 		<name>Golden Dahlias with Blue Stars</name>
@@ -1433,11 +1433,11 @@
 		<longDescription>This explosion of gold is sure to add a stylish touch
 			to your home decor. Go for this one if you want to be special!
 		</longDescription>
-		<price>12.99</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_8.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.99;23.90;31.80</price>
 	</product>
 	<product>
 		<name>Brocade, Red/Blue</name>
@@ -1446,12 +1446,12 @@
 			that gleams in the water... The author of these lines is running out
 			of words to describe how awesome our fireworks posters are.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_9.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.90;39.90</price>
 	</product>
 	<product>
 		<name>Chrysanthemum and Brocades, Red</name>
@@ -1460,11 +1460,11 @@
 			think of any more words to illustrate our... umm... marvelous
 			fireworks posters.
 		</longDescription>
-		<price>15.40</price>
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_10.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.40;26.90;37.40</price>
 	</product>
 	<!--SubCategory Landscapes -->
 	<product>
@@ -1476,11 +1476,11 @@
 			simply be amazed! This poster is an HDR image and delivers a dynamic
 			range and color intensity that are absolutely stunning.
 		</longDescription>
-		<price>12.00</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_1.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.00;24.00;48.00</price>
 	</product>
 	<product>
 		<name>Niagara Falls, Canada, with City Skyline</name>
@@ -1492,12 +1492,12 @@
 			mean. This poster is an HDR image and delivers a dynamic range and
 			color intensity that are absolutely stunning.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_2.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Trollhättan Falls, Sweden I</name>
@@ -1505,12 +1505,12 @@
 		<longDescription>Just kidding. We prefer to look at this awesome water
 			movement for now.
 		</longDescription>
-		<price>15.55</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_3.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.55;23.44;34.55</price>
 	</product>
 	<product>
 		<name>Trollhättan Falls, Sweden II</name>
@@ -1521,11 +1521,11 @@
 			coniferous forests, and – don't miss them – the Falun red houses in
 			the background. It doesn't always need to be IKEA.
 		</longDescription>
-		<price>13.33</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_4.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>13.33;22.22;44.44</price>
 	</product>
 	<product>
 		<name>Linnaean Garden and Museum, Sweden</name>
@@ -1535,12 +1535,12 @@
 			prefers symmetries over chaos and tends to get nervous when things
 			aren't as neat and perfect as they should be.
 		</longDescription>
-		<price>12.25</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_5.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>12.25;19.90;28.30</price>
 	</product>
 	<product>
 		<name>Winter Wonderland</name>
@@ -1551,12 +1551,12 @@
 			landscape shot! Sometimes it doesn't need much to show nature in all
 			its beauty. A must-have for all winter weather fans!
 		</longDescription>
-		<price>16.00</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_6.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>16.00;29.98;37.90</price>
 	</product>
 	<product>
 		<name>Lonesome Ski Lift in Winter Wonderland </name>
@@ -1565,11 +1565,11 @@
 			Perfectly matches the previous poster. Go get our winter wonderland
 			combo, hang it above your fireplace and get all cozy!
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_7.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.90</price>
 	</product>
 	<product>
 		<name>Boston Skyline with Scaffolding</name>
@@ -1577,11 +1577,11 @@
 		<longDescription>...they make a pretty awesome contrast. Go for this
 			one if you want a US skyline poster that is different.
 		</longDescription>
-		<price>17.99</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_8.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>17.99;29.99;39.99</price>
 	</product>
 	<product>
 		<name>Boston Skyline at Night</name>
@@ -1592,11 +1592,11 @@
 			HDR image and delivers a dynamic range and color intensity that are
 			absolutely stunning.
 		</longDescription>
-		<price>18.20</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_9.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>18.20;24.70;31.80</price>
 	</product>
 	<product>
 		<name>Six Flags New England, Water Park</name>
@@ -1605,51 +1605,58 @@
 			one might not be the prettiest poster in our collection but it's the
 			idea behind it that counts, isn't it?
 		</longDescription>
-		<price>15.45</price>
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_10.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
+		<price>15.45;25.00;32.10</price>
 	</product>
 	<!--SubCategory XXL -->
 	<product>
 		<name>North Boston</name>
 		<shortDescription>A unique perspective.</shortDescription>
-		<longDescription>Taken from the US Custom House Tower. Much better than anything they use for postcards and travel guides today. If you prefer Boston over NYC, you should definitely buy this one!</longDescription>
-		<price>34.99</price>
+		<longDescription>Taken from the US Custom House Tower. Much better
+			than anything they use for postcards and travel guides today. If you
+			prefer Boston over NYC, you should definitely buy this one!
+		</longDescription>
 		<imageURL>/assets/img/products/XXL/XXL_1.jpg</imageURL>
 		<carousel>true</carousel>
 		<subCategory>XXL Panoramas</subCategory>
 		<availableSize>96x32</availableSize>
+		<price>34.99</price>
 	</product>
 	<product>
 		<name>Boston Sunset</name>
 		<shortDescription>One hell of a poster!</shortDescription>
-		<longDescription>The perfect Boston skyline poster including gorgeous sky color effects.</longDescription>
-		<price>36.00</price>
+		<longDescription>The perfect Boston skyline poster including gorgeous
+			sky color effects.
+		</longDescription>
 		<imageURL>/assets/img/products/XXL/XXL_2.jpg</imageURL>
 		<carousel>true</carousel>
 		<subCategory>XXL Panoramas</subCategory>
 		<availableSize>96x32</availableSize>
+		<price>36.00</price>
 	</product>
 	<product>
 		<name>Bryce National Park, Utah I</name>
 		<shortDescription>Absolutely stunning!</shortDescription>
-		<longDescription>The zoom reveals the geology in all its beautiful details. No need to say more.</longDescription>
-		<price>38.90</price>
+		<longDescription>The zoom reveals the geology in all its beautiful
+			details. No need to say more.
+		</longDescription>
 		<imageURL>/assets/img/products/XXL/XXL_3.jpg</imageURL>
 		<carousel>true</carousel>
 		<subCategory>XXL Panoramas</subCategory>
 		<availableSize>96x32</availableSize>
+		<price>38.90</price>
 	</product>
 	<product>
 		<name>Bryce National Park, Utah II</name>
 		<shortDescription>Now... Is this real life?!</shortDescription>
 		<longDescription>Speechless.</longDescription>
-		<price>34.78</price>
 		<imageURL>/assets/img/products/XXL/XXL_4.jpg</imageURL>
 		<carousel>true</carousel>
 		<subCategory>XXL Panoramas</subCategory>
 		<availableSize>96x32</availableSize>
+		<price>34.78</price>
 	</product>
 </products>
