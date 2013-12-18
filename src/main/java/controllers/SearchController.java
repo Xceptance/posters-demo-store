@@ -101,7 +101,7 @@ public class SearchController
         else
         {
             // build SQL string
-            String sql = "SELECT id, name, url, price, description_detail FROM product where ";
+            String sql = "SELECT id, name, url, minimum_Price, description_detail FROM product where ";
             // divide search text by spaces
             String[] searchTerms = searchText.split(" ");
             // search in description detail

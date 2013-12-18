@@ -1,13 +1,14 @@
 package models;
 
-import junit.framework.Assert;
+import ninja.NinjaTest;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.avaje.ebean.Ebean;
 
-public class CreditCardTest
+public class CreditCardTest extends NinjaTest
 {
     CreditCard card;
 

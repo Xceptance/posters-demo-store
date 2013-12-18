@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,11 +40,6 @@ public class Product
      * The URL of the product.
      */
     private String url;
-
-    /**
-     * The netto price of the product.
-     */
-    private double price;
 
     /**
      * A detailed description of the product.
@@ -99,6 +93,8 @@ public class Product
     @OneToMany(mappedBy = "product")
     private List<Order_Product> order;
 
+    private double minimumPrice;
+
     public Product()
     {
         this.basket = new ArrayList<Basket_Product>();
@@ -143,26 +139,6 @@ public class Product
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public double getPrice()
-    {
-        return price;
-    }
-
-    public String getPriceAsString()
-    {
-        DecimalFormat f = new DecimalFormat("#0.00");
-        double temp = price;
-        temp = temp * 100;
-        temp = Math.round(temp);
-        temp = temp / 100;
-        return f.format(temp).replace(',', '.');
-    }
-
-    public void setPrice(double price)
-    {
-        this.price = price;
     }
 
     public String getDescriptionDetail()
@@ -258,6 +234,26 @@ public class Product
     public void setOrder(List<Order_Product> order)
     {
         this.order = order;
+    }
+
+    public double getMinimumPrice()
+    {
+        return minimumPrice;
+    }
+
+    public String getPriceAsString()
+    {
+        DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = minimumPrice;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    public void setMinimumPrice(double minimumPrice)
+    {
+        this.minimumPrice = minimumPrice;
     }
 
     public void update()

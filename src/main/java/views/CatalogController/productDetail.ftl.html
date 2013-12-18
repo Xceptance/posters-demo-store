@@ -33,7 +33,7 @@
 				<div class="control-group">
 					<label class="control-label" for="selectSize">${i18n("basketSelectSize")}</label>
 					<div class="controls">
-						<select id="selectSize" name="selectSize" class="input-medium">
+						<select id="selectSize" name="selectSize" class="input-medium" onchange="updatePrice(this, ${productDetail.id});">
 							<#list productDetail.availableSizes as size>
 								<option>${size.size.width} x ${size.size.height} ${unitLength}</option>
 							</#list>

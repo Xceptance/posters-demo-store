@@ -45,3 +45,13 @@ function updateProductCount(basketProductId, count, cartIndex)
 			$("#infoMessage div strong").text(err.message);
 		});
 }
+
+// update price of product if the selected size has changed
+function updatePrice(selectedField, productId)
+{
+	var url = '/updatePrice';
+	$.post(url, {size: selectedField.value, productId: productId}, function(data)
+			{
+				$('#prodPrice').text(data.newPrice);
+			});
+}

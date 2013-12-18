@@ -1,5 +1,7 @@
 package util.xml;
 
+import java.util.List;
+
 import models.PosterSize;
 import models.Product;
 import models.Product_PosterSize;
@@ -54,7 +56,18 @@ public class ProductHandler extends DefaultHandler
         }
         if (localName.equals("price"))
         {
-            product.setPrice(Double.parseDouble(toAdd));
+            // get all available prices
+            String[] prices = toAdd.split(";");
+            // add first price as minimum price
+            product.setMinimumPrice(Double.parseDouble(prices[0]));
+            // add the price for each size
+            List<Product_PosterSize> productPosterSizes = Ebean.find(Product_PosterSize.class).where()
+                                                               .eq("product", product).findList();
+            for (int i = 0; i < productPosterSizes.size(); i++)
+            {
+                productPosterSizes.get(i).setPrice(Double.parseDouble(prices[i]));
+                productPosterSizes.get(i).update();
+            }
         }
         if (localName.equals("imageURL"))
         {

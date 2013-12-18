@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -39,6 +40,11 @@ public class Basket_Product
     @ManyToOne
     @JoinColumn(name = "posterSize_id")
     private PosterSize size;
+
+    /**
+     * The price of the product in the selected finish and size.
+     */
+    private double price;
 
     @Version
     private Timestamp lastUpdate;
@@ -101,6 +107,26 @@ public class Basket_Product
     public void setSize(PosterSize size)
     {
         this.size = size;
+    }
+
+    public double getPrice()
+    {
+        return price;
+    }
+
+    public String getPriceAsString()
+    {
+        DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    public void setPrice(double price)
+    {
+        this.price = price;
     }
 
     public Timestamp getLastUpdate()

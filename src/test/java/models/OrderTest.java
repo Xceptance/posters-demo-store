@@ -25,10 +25,10 @@ public class OrderTest extends NinjaTest
     public void setUp() throws Exception
     {
         product1.setName("product1");
-        product1.setPrice(5.55);
+        product1.setMinimumPrice(5.55);
         product1.save();
         product2.setName("product2");
-        product2.setPrice(7.77);
+        product2.setMinimumPrice(7.77);
         product2.save();
         basket.save();
 
@@ -36,6 +36,18 @@ public class OrderTest extends NinjaTest
         size.setWidth(16);
         size.setHeight(12);
         size.save();
+        
+        Product_PosterSize productPosterSize = new Product_PosterSize();
+        productPosterSize.setProduct(product1);
+        productPosterSize.setSize(size);
+        productPosterSize.setPrice(5.55);
+        productPosterSize.save();
+        
+        Product_PosterSize productPosterSize2 = new Product_PosterSize();
+        productPosterSize2.setProduct(product2);
+        productPosterSize2.setSize(size);
+        productPosterSize2.setPrice(7.77);
+        productPosterSize2.save();
 
         basket.addProduct(product1, "matt", size);
         basket.update();
