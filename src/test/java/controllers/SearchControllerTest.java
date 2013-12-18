@@ -3,15 +3,14 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
 import models.Product;
 import ninja.NinjaTest;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SearchControllerTest extends NinjaTest
 {
-
 
     @Test
     public void testMergeProductLists()
