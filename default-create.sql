@@ -12,6 +12,7 @@ create table basket_product (
   count_product             integer,
   finish                    varchar(255),
   posterSize_id             integer,
+  price                     double,
   last_update               timestamp not null,
   constraint pk_basket_product primary key (id))
 ;
@@ -83,6 +84,7 @@ create table order_product (
   count_product             integer,
   finish                    varchar(255),
   postersize_id             integer,
+  price                     double,
   constraint pk_order_product primary key (id))
 ;
 
@@ -97,7 +99,6 @@ create table product (
   id                        integer not null,
   name                      varchar(255),
   url                       varchar(255),
-  price                     double,
   description_detail        varchar(4096),
   description_overview      varchar(1024),
   image_url                 varchar(255),
@@ -105,6 +106,7 @@ create table product (
   show_in_top_categorie     boolean,
   subCategory_id            integer,
   top_category_id           integer,
+  minimum_price             double,
   constraint pk_product primary key (id))
 ;
 
@@ -112,6 +114,7 @@ create table product_posterSize (
   id                        integer not null,
   product_id                integer,
   posterSize_id             integer,
+  price                     double,
   constraint pk_product_posterSize primary key (id))
 ;
 

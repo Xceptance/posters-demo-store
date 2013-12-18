@@ -112,6 +112,9 @@ public class Basket
             basketProduct.setFinish(finish);
             // set size
             basketProduct.setSize(size);
+            // set price of the product
+            basketProduct.setPrice(Ebean.find(Product_PosterSize.class).where().eq("product", product).eq("size", size)
+                                        .findUnique().getPrice());
             basketProduct.save();
             products.add(basketProduct);
         }
@@ -123,7 +126,7 @@ public class Basket
             basketProduct.update();
         }
         // recalculate total price
-        this.setTotalPrice(getTotalPrice() + product.getPrice());
+        this.setTotalPrice(getTotalPrice() + basketProduct.getPrice());
     }
 
     public void deleteProduct(final Basket_Product basketProduct)
@@ -140,7 +143,7 @@ public class Basket
             this.products.remove(basketProduct);
         }
         // recalculate total price
-        this.setTotalPrice(getTotalPrice() - basketProduct.getProduct().getPrice());
+        this.setTotalPrice(getTotalPrice() - basketProduct.getPrice());
     }
 
     public void update()

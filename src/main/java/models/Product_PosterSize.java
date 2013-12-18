@@ -1,5 +1,7 @@
 package models;
 
+import java.text.DecimalFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,6 +24,11 @@ public class Product_PosterSize
     @ManyToOne
     @JoinColumn(name = "posterSize_id")
     private PosterSize size;
+
+    /**
+     * The price of this product with the selected size.
+     */
+    private double price;
 
     public int getId()
     {
@@ -51,6 +58,26 @@ public class Product_PosterSize
     public void setSize(PosterSize size)
     {
         this.size = size;
+    }
+
+    public double getPrice()
+    {
+        return price;
+    }
+
+    public String getPriceAsString()
+    {
+        DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    public void setPrice(double price)
+    {
+        this.price = price;
     }
 
     public void update()
