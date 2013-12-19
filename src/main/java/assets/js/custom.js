@@ -38,6 +38,11 @@ function updateProductCount(basketProductId, count, cartIndex)
 			$("#totalPrice:first-child").text(data.totalPrice);
 			// update cart slider
 			getCartSliderText();
+			// update cart overview, if count was zero
+			if (count == 0) {
+				// remove product from cart overview
+				$('#product' + cartIndex).remove();
+			}
 		})
 		.error(function(data) {
 			var err = eval("(" + data.responseText + ")");
