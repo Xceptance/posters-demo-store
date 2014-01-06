@@ -11,15 +11,11 @@
             totalPages: ${totalPages},
             alignment:'center',
             onPageClicked: function(e, originalEvent, type, page) {
-            	// set current page
-            	options = {
-            			currentPage: page,
-            	}
-            	$('#pagination').bootstrapPaginator(options);
-            	// get products of new page
+            	// show searched products
             	if($(location).attr('search') != "") {
 					$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
             	}
+            	// show products of category
             	else {
             		var pathname = $(location).attr('pathname');
             		var categoryType = pathname.substring(1, pathname.indexOf('/', 1));
