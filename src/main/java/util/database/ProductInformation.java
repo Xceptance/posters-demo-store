@@ -98,6 +98,15 @@ public abstract class ProductInformation
         Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
         List<Product> list = page.getList();
+        // remove some informations of the product list, to render a small-sized json-object
+        for(int i = 0; i < list.size(); i++)
+        {
+            list.get(i).setAvailableSizes(null);
+            list.get(i).setSubCategory(null);
+            list.get(i).setTopCategory(null);
+            list.get(i).setBasket(null);
+            list.get(i).setOrder(null);
+        }
         // get the total page count
         int pageCount = pagingList.getTotalPageCount();
         // add the products to the data map
@@ -105,6 +114,5 @@ public abstract class ProductInformation
         // add the page count to the data map
         data.put("totalPages", pageCount);
         data.put("currentPage", pageNumber);
-        data.put("isSearch", "false");
     }
 }

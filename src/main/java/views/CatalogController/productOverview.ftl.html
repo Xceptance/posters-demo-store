@@ -10,16 +10,24 @@
 			currentPage: ${currentPage},
             totalPages: ${totalPages},
             alignment:'center',
-            onPageClicked: function(e,originalEvent,type,page){
-            	var isSearch = ${(isSearch)};
-            	var nextPage;
-            	if(isSearch == true) {
-            		nextPage = "/search/" + page + "?searchText=${(searchTerm)!}";
+            onPageClicked: function(e, originalEvent, type, page) {
+            	// show searched products
+            	if($(location).attr('search') != "") {
+					$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
             	}
+            	// show products of category
             	else {
-            		nextPage = page;
+            		var pathname = $(location).attr('pathname');
+            		var categoryType = pathname.substring(1, pathname.indexOf('/', 1));
+            		// top category
+            		if(categoryType == "topCategory") {
+            			$.post('/getProductOfTopCategory', {pathname: pathname, page: page}, updateProductOverview);
+            		}
+            		// sub category
+            		else {
+						$.post('/getProductOfSubCategory', {pathname: pathname, page: page}, updateProductOverview);
+            		}
             	}
-            	window.location.href = nextPage;
             }
         }
         $('#pagination').bootstrapPaginator(options);
@@ -36,7 +44,7 @@
       						<a href=/productDetail/${pro.url?url('UTF-8')}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
       						<h3 id="product${pro_index}Name">${pro.name}</h3>
       						<p id="product${pro_index}DescriptionOverview">${pro.descriptionOverview}</p>
-      						<p id="product${pro_index}Price">${i18n("priceStart")} ${pro.getPriceAsString()}${currency}</p>
+      						<p>${i18n("priceStart")} <span id="product${pro_index}Price">${pro.getPriceAsString()}</span>${currency}</p>
       					</div>
       				</li>
       	<#if (pro_index + 1) % 3 ==0>
