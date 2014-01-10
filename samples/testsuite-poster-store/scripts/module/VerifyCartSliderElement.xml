@@ -10,11 +10,12 @@
   <parameter name="totalPrice"/>
   <command name="click" target="id=slidingTopTriggerShow"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li[@{index}]"/>
-  <command name="waitForText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdName']" value="@{productName}"/>
-  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdName']" value="@{productName}"/>
-  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdFinish']" value="@{productFinish}"/>
-  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdPrice']" value="@{productPrice}"/>
-  <command name="assertText" target="//ul[@id='cartElementList']/li[@{index}]/span[@id='sliderProdCount']" value="@{productCount}"/>
+  <command name="waitForVisible" target="css=#cartElementList li:first-child #sliderProdName"/>
+  <command name="assertText" target="css=#cartElementList li:first-child #sliderProdName" value="@{productName}"/>
+  <command name="assertText" target="css=#cartElementList li:first-child #sliderProdFinish" value="@{productFinish}"/>
+  <command name="assertText" target="css=#cartElementList li:first-child #sliderProdPrice" value="@{productPrice}"/>
+  <command name="assertText" target="css=#cartElementList li:first-child #sliderProdCount" value="@{productCount}"/>
   <command name="assertText" target="id=cartSliderTotalPrice" value="@{totalPrice}"/>
   <command name="click" target="id=slidingTopTriggerHide"/>
+  <command name="waitForNotVisible" target="id=cartElementList"/>
 </scriptmodule>
