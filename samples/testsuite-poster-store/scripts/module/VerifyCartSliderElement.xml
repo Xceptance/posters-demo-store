@@ -9,6 +9,7 @@
   <parameter name="productSize"/>
   <parameter name="totalPrice"/>
   <command name="click" target="id=slidingTopTriggerShow"/>
+  <command name="waitForVisible" target="id=slidingTopTriggerHide"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li[@{index}]"/>
   <command name="waitForVisible" target="css=#cartElementList li:first-child #sliderProdName"/>
   <command name="assertText" target="css=#cartElementList li:first-child #sliderProdName" value="@{productName}"/>
