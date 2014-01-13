@@ -35,7 +35,8 @@ function updateCartSlider(data)
 	for (var i=0; i<data.cartElements.length; i++)
 	{
 		var liId = "productId" + data.cartElements[i].productId + data.cartElements[i].finish + data.cartElements[i].size.width + "x" + data.cartElements[i].size.height;
-		var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.cartElements[i], data.currency, data.unitLength) + "</li>";
+		var inner = setCartSliderElementInnerHtml(data.cartElements[i], data.currency, data.unitLength);
+		var liElement = $("<li id='" + liId + "'></li>").html(inner);
 		$("#cartElementList").append(liElement);
 	}
 	// update total price in cart slider
@@ -83,7 +84,8 @@ function addToCartSlider(productId, finish, size)
 		success: function(data) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
-			var liElement = "<li id='" + liId + "'>" + setCartSliderElementInnerHtml(data.product, data.currency, data.unitLength) + "</li>";
+			var inner = setCartSliderElementInnerHtml(data.product, data.currency, data.unitLength);
+			var liElement = $("<li id='" + liId + "'></li>").html(inner);
 			if( $("#" + liId).length > 0)
 			{
 				$("#" + liId).remove();

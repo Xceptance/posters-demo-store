@@ -11,9 +11,9 @@
   <command name="store" target="${RANDOM.Number(${availableSizeCount})}" value="availableSizeIndex"/>
   <command name="select" target="id=selectSize" value="index=${availableSizeIndex}"/>
   <command name="storeText" target="//select[@id='selectSize']/option[${availableSizeIndex}+1]" value="productSize"/>
-  <command name="storeText" target="id=prodPrice" value="productPrice"/>
   <command name="click" target="id=btnAddToCart"/>
   <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
+  <command name="storeText" target="id=prodPrice" value="productPrice"/>
   <command name="assertElementPresent" target="//ul[@id='cartElementList']/li[1]"/>
   <command name="waitForNotVisible" target="id=cartElementList"/>
 </scriptmodule>
