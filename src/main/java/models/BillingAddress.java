@@ -147,4 +147,21 @@ public class BillingAddress
     {
         Ebean.save(this);
     }
+
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
+
+    public static BillingAddress getBillingAddressById(int id)
+    {
+        return Ebean.find(BillingAddress.class, id);
+    }
+
+    public static void deleteBillingAddressFromCustomer(int id)
+    {
+        BillingAddress address = getBillingAddressById(id);
+        address.setCustomer(null);
+        address.update();
+    }
 }

@@ -147,4 +147,21 @@ public class ShippingAddress
     {
         Ebean.save(this);
     }
+
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
+
+    public static ShippingAddress getShippingAddressById(int id)
+    {
+        return Ebean.find(ShippingAddress.class, id);
+    }
+
+    public static void removeCustomerFromShippingAddress(int id)
+    {
+        ShippingAddress address = ShippingAddress.getShippingAddressById(id);
+        address.setCustomer(null);
+        address.update();
+    }
 }

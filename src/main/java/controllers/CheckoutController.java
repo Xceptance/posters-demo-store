@@ -4,19 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import models.Cart;
 import models.BillingAddress;
+import models.Cart;
 import models.CreditCard;
 import models.Customer;
-import models.ShippingAddress;
 import models.Order;
+import models.ShippingAddress;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.AddressInformation;
 import util.database.BasketInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
@@ -230,7 +229,7 @@ public class CheckoutController
     public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get delivery address
-        ShippingAddress deliveryAddress = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+        ShippingAddress deliveryAddress = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
@@ -356,7 +355,7 @@ public class CheckoutController
     public Result addBillingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get billing address
-        BillingAddress billingAddress = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
+        BillingAddress billingAddress = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set billing address to order

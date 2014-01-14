@@ -5,19 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import models.Cart;
 import models.BillingAddress;
+import models.Cart;
 import models.CreditCard;
 import models.Customer;
-import models.ShippingAddress;
 import models.Order;
+import models.ShippingAddress;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.AddressInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
@@ -417,7 +416,7 @@ public class CustomerController
         if (customer.checkPasswd(password))
         {
             // remove billing address
-            AddressInformation.deleteBillingAddressFromCustomer(addressId);
+            BillingAddress.deleteBillingAddressFromCustomer(addressId);
             // success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
@@ -466,8 +465,8 @@ public class CustomerController
         // correct password
         if (customer.checkPasswd(password))
         {
-            // remove billing address
-            AddressInformation.deleteDeliveryAddressFromCustomer(addressId);
+            // remove shipping address
+            ShippingAddress.removeCustomerFromShippingAddress(addressId);
             // success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             // show address overview page
@@ -511,7 +510,7 @@ public class CustomerController
     public Result updateDeliveryAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("address", AddressInformation.getDeliveryAddressById(addressId));
+        data.put("address", ShippingAddress.getShippingAddressById(addressId));
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
@@ -560,7 +559,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            ShippingAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+            ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -586,7 +585,7 @@ public class CustomerController
     public Result updateBillingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("address", AddressInformation.getBillingAddressById(addressId));
+        data.put("address", BillingAddress.getBillingAddressById(addressId));
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
@@ -635,7 +634,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            BillingAddress address = AddressInformation.getBillingAddressById(Integer.parseInt(addressId));
+            BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
 
             address.setName(name);
             address.setCompany(company);
