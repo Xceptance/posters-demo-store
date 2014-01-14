@@ -17,7 +17,7 @@ public class OrderTest extends NinjaTest
 
     Product product2 = new Product();
 
-    Basket basket = new Basket();
+    Cart basket = new Cart();
 
     PosterSize size;
 
@@ -37,13 +37,13 @@ public class OrderTest extends NinjaTest
         size.setHeight(12);
         size.save();
 
-        Product_PosterSize productPosterSize = new Product_PosterSize();
+        ProductPosterSize productPosterSize = new ProductPosterSize();
         productPosterSize.setProduct(product1);
         productPosterSize.setSize(size);
         productPosterSize.setPrice(5.55);
         productPosterSize.save();
 
-        Product_PosterSize productPosterSize2 = new Product_PosterSize();
+        ProductPosterSize productPosterSize2 = new ProductPosterSize();
         productPosterSize2.setProduct(product2);
         productPosterSize2.setSize(size);
         productPosterSize2.setPrice(7.77);
@@ -69,7 +69,7 @@ public class OrderTest extends NinjaTest
         order.addProductsFromBasket(basket);
         order.update();
         // get all products from the order
-        List<Order_Product> orderProducts = Ebean.find(Order_Product.class).where().eq("order", order).findList();
+        List<OrderProduct> orderProducts = Ebean.find(OrderProduct.class).where().eq("order", order).findList();
         // verify, that product one is in the order...
         Assert.assertEquals(product1.getName(), orderProducts.get(0).getProduct().getName());
         // ...with an amount of two

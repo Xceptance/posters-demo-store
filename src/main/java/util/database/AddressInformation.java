@@ -7,14 +7,14 @@ import com.avaje.ebean.Ebean;
 
 import models.BillingAddress;
 import models.Customer;
-import models.DeliveryAddress;
+import models.ShippingAddress;
 
 public abstract class AddressInformation
 {
 
-    public static DeliveryAddress getDeliveryAddressById(int id)
+    public static ShippingAddress getDeliveryAddressById(int id)
     {
-        return Ebean.find(DeliveryAddress.class, id);
+        return Ebean.find(ShippingAddress.class, id);
     }
 
     public static BillingAddress getBillingAddressById(int id)
@@ -24,7 +24,7 @@ public abstract class AddressInformation
 
     public static void deleteDeliveryAddressFromCustomer(int id)
     {
-        DeliveryAddress address = getDeliveryAddressById(id);
+        ShippingAddress address = getDeliveryAddressById(id);
         address.setCustomer(null);
         address.update();
     }
@@ -36,7 +36,7 @@ public abstract class AddressInformation
         address.update();
     }
 
-    public static void addDeliveryAddressToMap(DeliveryAddress deliveryAddress, Map<String, Object> data)
+    public static void addDeliveryAddressToMap(ShippingAddress deliveryAddress, Map<String, Object> data)
     {
         data.put("deliveryAddress", deliveryAddress);
     }
@@ -46,9 +46,9 @@ public abstract class AddressInformation
         data.put("billingAddress", billingAddress);
     }
 
-    public static List<DeliveryAddress> getAllDeliveryAddressesOfCustomer(Customer customer)
+    public static List<ShippingAddress> getAllDeliveryAddressesOfCustomer(Customer customer)
     {
-        return Ebean.find(DeliveryAddress.class).where().eq("customer", customer).findList();
+        return Ebean.find(ShippingAddress.class).where().eq("customer", customer).findList();
     }
 
     public static List<BillingAddress> getAllBillingAddressesOfCustomer(Customer customer)

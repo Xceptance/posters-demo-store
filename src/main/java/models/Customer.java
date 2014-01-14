@@ -31,7 +31,7 @@ public class Customer
     private String firstName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<DeliveryAddress> deliveryAddress;
+    private List<ShippingAddress> deliveryAddress;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<BillingAddress> billingAddress;
@@ -43,11 +43,11 @@ public class Customer
     private List<Order> order;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Basket basket;
+    private Cart basket;
 
     public Customer()
     {
-        this.deliveryAddress = new ArrayList<DeliveryAddress>();
+        this.deliveryAddress = new ArrayList<ShippingAddress>();
         this.billingAddress = new ArrayList<BillingAddress>();
         this.creditCard = new ArrayList<CreditCard>();
         this.order = new ArrayList<Order>();
@@ -93,17 +93,17 @@ public class Customer
         this.firstName = firstName;
     }
 
-    public List<DeliveryAddress> getDeliveryAddress()
+    public List<ShippingAddress> getDeliveryAddress()
     {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(List<DeliveryAddress> deliveryAddress)
+    public void setDeliveryAddress(List<ShippingAddress> deliveryAddress)
     {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public void addDeliveryAddress(DeliveryAddress deliveryAddress)
+    public void addDeliveryAddress(ShippingAddress deliveryAddress)
     {
         this.deliveryAddress.add(deliveryAddress);
     }
@@ -153,12 +153,12 @@ public class Customer
         this.order = order;
     }
 
-    public Basket getBasket()
+    public Cart getBasket()
     {
         return basket;
     }
 
-    public void setBasket(Basket basket)
+    public void setBasket(Cart basket)
     {
         this.basket = basket;
     }

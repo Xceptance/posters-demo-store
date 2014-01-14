@@ -26,7 +26,7 @@ public class Order
     private String orderDate;
 
     @ManyToOne
-    private DeliveryAddress deliveryAddress;
+    private ShippingAddress deliveryAddress;
 
     @ManyToOne
     private BillingAddress billingAddress;
@@ -44,14 +44,14 @@ public class Order
     private Customer customer;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
-    private List<Order_Product> products;
+    private List<OrderProduct> products;
 
     @Version
     private Timestamp lastUpdate;
 
     public Order()
     {
-        this.products = new ArrayList<Order_Product>();
+        this.products = new ArrayList<OrderProduct>();
     }
 
     public int getId()
@@ -64,12 +64,12 @@ public class Order
         this.id = id;
     }
 
-    public DeliveryAddress getDeliveryAddress()
+    public ShippingAddress getDeliveryAddress()
     {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(DeliveryAddress deliveryAddress)
+    public void setDeliveryAddress(ShippingAddress deliveryAddress)
     {
         this.deliveryAddress = deliveryAddress;
     }
@@ -159,12 +159,12 @@ public class Order
         this.customer = customer;
     }
 
-    public List<Order_Product> getProducts()
+    public List<OrderProduct> getProducts()
     {
         return products;
     }
 
-    public void setProducts(List<Order_Product> products)
+    public void setProducts(List<OrderProduct> products)
     {
         this.products = products;
     }
@@ -211,13 +211,13 @@ public class Order
 
     private void addProduct(Product product, String finish, PosterSize size)
     {
-        Order_Product orderProduct = Ebean.find(Order_Product.class).where().eq("order", this).eq("product", product)
+        OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product)
                                           .eq("finish", finish).eq("size", size).findUnique();
         // this product is not in the order
         if (orderProduct == null)
         {
             // add product to order
-            orderProduct = new Order_Product();
+            orderProduct = new OrderProduct();
             orderProduct.setOrder(this);
             orderProduct.setProduct(product);
             // set product count to one
@@ -227,7 +227,7 @@ public class Order
             // set size
             orderProduct.setSize(size);
             // set price
-            orderProduct.setPrice(Ebean.find(Product_PosterSize.class).where().eq("product", product).eq("size", size)
+            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size)
                                        .findUnique().getPrice());
             Ebean.save(orderProduct);
             products.add(orderProduct);
@@ -243,12 +243,12 @@ public class Order
         this.setTotalCosts(getTotalCosts() + orderProduct.getPrice());
     }
 
-    public void addProductsFromBasket(Basket basket)
+    public void addProductsFromBasket(Cart basket)
     {
         // get all products from basket
-        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
+        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket).findList();
         // for each product
-        for (Basket_Product basketProduct : basketProducts)
+        for (CartProduct basketProduct : basketProducts)
         {
             // add the product to the order
             for (int i = 0; i < basketProduct.getCountProduct(); i++)

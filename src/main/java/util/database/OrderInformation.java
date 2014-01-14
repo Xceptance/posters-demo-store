@@ -5,7 +5,7 @@ import java.util.Map;
 
 import models.Customer;
 import models.Order;
-import models.Order_Product;
+import models.OrderProduct;
 
 import com.avaje.ebean.Ebean;
 
@@ -67,7 +67,7 @@ public abstract class OrderInformation
     public static void addProductsFromOrderToMap(Order order, final Map<String, Object> data)
     {
         // get all products of the order
-        List<Order_Product> orderProducts = Ebean.find(Order_Product.class).where().eq("order", order).findList();
+        List<OrderProduct> orderProducts = Ebean.find(OrderProduct.class).where().eq("order", order).findList();
         // add all products of the order
         data.put("orderProducts", orderProducts);
     }

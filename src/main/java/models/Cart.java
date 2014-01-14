@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 @Entity
-@Table(name = "basket")
-public class Basket
+@Table(name = "cart")
+public class Cart
 {
 
     /**
@@ -33,16 +33,16 @@ public class Basket
      * The products of the basket.
      */
     @OneToMany(mappedBy = "basket")
-    private List<Basket_Product> products;
+    private List<CartProduct> products;
 
     /**
      * The total price of the basket.
      */
     private double totalPrice;
 
-    public Basket()
+    public Cart()
     {
-        this.products = new ArrayList<Basket_Product>();
+        this.products = new ArrayList<CartProduct>();
     }
 
     public int getId()
@@ -85,25 +85,25 @@ public class Basket
         this.customer = customer;
     }
 
-    public List<Basket_Product> getProducts()
+    public List<CartProduct> getProducts()
     {
         return products;
     }
 
-    public void setProducts(List<Basket_Product> products)
+    public void setProducts(List<CartProduct> products)
     {
         this.products = products;
     }
 
     public void addProduct(Product product, final String finish, final PosterSize size)
     {
-        Basket_Product basketProduct = Ebean.find(Basket_Product.class).where().eq("basket", this)
-                                            .eq("product", product).eq("finish", finish).eq("size", size).findUnique();
+        CartProduct basketProduct = Ebean.find(CartProduct.class).where().eq("basket", this).eq("product", product)
+                                         .eq("finish", finish).eq("size", size).findUnique();
         // this product is not in the basket
         if (basketProduct == null)
         {
             // add product to basket
-            basketProduct = new Basket_Product();
+            basketProduct = new CartProduct();
             basketProduct.setBasket(this);
             basketProduct.setProduct(product);
             // set product count to one
@@ -113,7 +113,7 @@ public class Basket
             // set size
             basketProduct.setSize(size);
             // set price of the product
-            basketProduct.setPrice(Ebean.find(Product_PosterSize.class).where().eq("product", product).eq("size", size)
+            basketProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size)
                                         .findUnique().getPrice());
             basketProduct.save();
             products.add(basketProduct);
@@ -129,7 +129,7 @@ public class Basket
         this.setTotalPrice(getTotalPrice() + basketProduct.getPrice());
     }
 
-    public void deleteProduct(final Basket_Product basketProduct)
+    public void deleteProduct(final CartProduct basketProduct)
     {
         // product is in the basket more than once
         if (basketProduct.getCountProduct() > 1)
@@ -169,9 +169,9 @@ public class Basket
     public void clearProducts()
     {
         // get all products of the basket
-        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", this).findList();
+        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", this).findList();
         // delete each product
-        for (Basket_Product basketProduct : basketProducts)
+        for (CartProduct basketProduct : basketProducts)
         {
             Ebean.delete(basketProduct);
             this.products.remove(basketProduct);

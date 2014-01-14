@@ -3,7 +3,7 @@ package util.xml;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
-import models.DeliveryAddress;
+import models.ShippingAddress;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -13,7 +13,7 @@ public class CustomerHandler extends DefaultHandler
 
     private Customer customer;
 
-    private DeliveryAddress deliveryAddress;
+    private ShippingAddress deliveryAddress;
 
     private BillingAddress billingAddress;
 
@@ -30,7 +30,7 @@ public class CustomerHandler extends DefaultHandler
         }
         if (localName.equals("deliveryAddress"))
         {
-            deliveryAddress = new DeliveryAddress();
+            deliveryAddress = new ShippingAddress();
         }
         if (localName.equals("billingAddress"))
         {

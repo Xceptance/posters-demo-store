@@ -6,7 +6,7 @@ import com.google.inject.Inject;
 
 import conf.XCPosterConf;
 
-import models.Basket;
+import models.Cart;
 import ninja.Context;
 import util.session.SessionHandling;
 
@@ -26,7 +26,7 @@ public abstract class CommonInformation
         // set categories
         CategoryInformation.addCategoriesToMap(data);
         // get basket by session
-        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // set basket stuff
         BasketInformation.addBasketDetailToMap(basket, data);
         // set logged customer

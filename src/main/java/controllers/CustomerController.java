@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import models.Basket;
+import models.Cart;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
-import models.DeliveryAddress;
+import models.ShippingAddress;
 import models.Order;
 import ninja.Context;
 import ninja.FilterWith;
@@ -560,7 +560,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            DeliveryAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+            ShippingAddress address = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -722,7 +722,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            DeliveryAddress address = new DeliveryAddress();
+            ShippingAddress address = new ShippingAddress();
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -957,7 +957,7 @@ public class CustomerController
             // remove basket from session
             SessionHandling.deleteBasketId(context);
             // remove customer's basket
-            Basket basket = Ebean.find(Basket.class).where().eq("customer", customer).findUnique();
+            Cart basket = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
             if (basket != null)
             {
                 basket.setCustomer(null);

@@ -3,12 +3,12 @@ package util.database;
 import java.util.List;
 import java.util.Map;
 
-import models.Basket;
-import models.Basket_Product;
+import models.Cart;
+import models.CartProduct;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
-import models.DeliveryAddress;
+import models.ShippingAddress;
 import models.Order;
 import ninja.Context;
 import util.session.SessionHandling;
@@ -235,7 +235,7 @@ public abstract class CustomerInformation
         }
     }
 
-    public static void addDeliveryAddressToCustomer(Context context, DeliveryAddress deliveryAddress)
+    public static void addDeliveryAddressToCustomer(Context context, ShippingAddress deliveryAddress)
     {
         // just add, if customer is logged
         if (SessionHandling.isCustomerLogged(context))
@@ -262,16 +262,16 @@ public abstract class CustomerInformation
         if (SessionHandling.isCustomerLogged(context))
         {
             // get current basket
-            Basket currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+            Cart currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
             // get basket of customer
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getBasket() == null)
             {
-                customer.setBasket(new Basket());
+                customer.setBasket(new Cart());
                 customer.update();
             }
-            Basket customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
-            for (Basket_Product basketProduct : currentBasket.getProducts())
+            Cart customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
+            for (CartProduct basketProduct : currentBasket.getProducts())
             {
                 for (int i = 0; i < basketProduct.getCountProduct(); i++)
                 {

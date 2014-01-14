@@ -74,7 +74,7 @@ public class CreditCard
     {
         return cardNumber;
     }
-    
+
     public void setCardNumber(String cardNumber)
     {
         this.cardNumber = cardNumber;
@@ -94,7 +94,7 @@ public class CreditCard
     {
         return month;
     }
-    
+
     public String getMonthLeadingZero()
     {
         DecimalFormat df = new DecimalFormat("00");

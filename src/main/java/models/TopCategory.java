@@ -17,7 +17,7 @@ import com.avaje.ebean.Ebean;
  * @author sebastianloob
  */
 @Entity
-@Table(name = "category")
+@Table(name = "topCategory")
 public class TopCategory
 {
 
@@ -42,13 +42,12 @@ public class TopCategory
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
     List<SubCategory> subCategories;
-    
+
     /**
      * The products of the top category.
      */
     @OneToMany
     private List<Product> products;
-    
 
     public int getId()
     {

@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import models.Basket;
+import models.Cart;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
-import models.DeliveryAddress;
+import models.ShippingAddress;
 import models.Order;
 import ninja.Context;
 import ninja.FilterWith;
@@ -52,7 +52,7 @@ public class CheckoutController
     public Result checkout(Context context)
     {
         // get basket by session id
-        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // check, if the basket is empty
         if (basket.getProducts().size() == 0)
         {
@@ -99,7 +99,7 @@ public class CheckoutController
         // show checkout bread crumb
         data.put("checkout", true);
         // get shipping address by order
-        DeliveryAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context))
+        ShippingAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context))
                                                   .getDeliveryAddress();
         // add address to data map, if an address was already entered
         if (address != null)
@@ -157,7 +157,7 @@ public class CheckoutController
         else
         {
             // create delivery address
-            DeliveryAddress deliveryAddress = new DeliveryAddress();
+            ShippingAddress deliveryAddress = new ShippingAddress();
             deliveryAddress.setName(name);
             deliveryAddress.setCompany(company);
             deliveryAddress.setAddressLine(addressLine);
@@ -230,7 +230,7 @@ public class CheckoutController
     public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get delivery address
-        DeliveryAddress deliveryAddress = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
+        ShippingAddress deliveryAddress = AddressInformation.getDeliveryAddressById(Integer.parseInt(addressId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
@@ -537,7 +537,7 @@ public class CheckoutController
         // update order
         order.update();
         // get basket by session id
-        Basket basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
         // remove basket
         BasketInformation.removeBasket(basket);
         // remove basket from session

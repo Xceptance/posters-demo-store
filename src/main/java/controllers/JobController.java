@@ -72,11 +72,11 @@ public class JobController
             // check if all tables exist
             while (rs.next())
             {
-                if (rs.getString(3).equals("BASKET_PRODUCT"))
+                if (rs.getString(3).equals("CARTPRODUCT"))
                 {
                     basketProductTable = true;
                 }
-                if (rs.getString(3).equals("BASKET"))
+                if (rs.getString(3).equals("CART"))
                 {
                     basketTable = true;
                 }
@@ -92,11 +92,11 @@ public class JobController
                 {
                     customerTable = true;
                 }
-                if (rs.getString(3).equals("DELIVERYADDRESS"))
+                if (rs.getString(3).equals("SHIPPINGADDRESS"))
                 {
                     deliveryAddressTable = true;
                 }
-                if (rs.getString(3).equals("ORDER_PRODUCT"))
+                if (rs.getString(3).equals("ORDERPRODUCT"))
                 {
                     orderProductTable = true;
                 }
@@ -108,7 +108,7 @@ public class JobController
                 {
                     productTable = true;
                 }
-                if (rs.getString(3).equals("CATEGORY"))
+                if (rs.getString(3).equals("TOPCATEGORY"))
                 {
                     topCategoryTable = true;
                 }

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import models.Basket;
-import models.Basket_Product;
+import models.Cart;
+import models.CartProduct;
 import models.Customer;
 import models.PosterSize;
 import models.Product;
@@ -22,15 +22,15 @@ public abstract class BasketInformation
      * 
      * @return
      */
-    public static Basket createNewBasket()
+    public static Cart createNewBasket()
     {
         // create new basket
-        Basket basket = new Basket();
+        Cart basket = new Cart();
         // save basket
         basket.save();
         // get new basket by id
         int id = basket.getId();
-        Basket newBasket = Ebean.find(Basket.class, id);
+        Cart newBasket = Ebean.find(Cart.class, id);
         // return new basket
         return newBasket;
     }
@@ -41,9 +41,9 @@ public abstract class BasketInformation
      * @param id
      * @return
      */
-    public static Basket getBasketById(int id)
+    public static Cart getBasketById(int id)
     {
-        return Ebean.find(Basket.class, id);
+        return Ebean.find(Cart.class, id);
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class BasketInformation
      * @param basket
      * @param productId
      */
-    public static void addProductToBasket(final Basket basket, final Product product, final String finish,
+    public static void addProductToBasket(final Cart basket, final Product product, final String finish,
                                           final PosterSize size)
     {
         basket.addProduct(product, finish, size);
@@ -65,7 +65,7 @@ public abstract class BasketInformation
      * @param basket
      * @param data
      */
-    public static void addBasketDetailToMap(Basket basket, final Map<String, Object> data)
+    public static void addBasketDetailToMap(Cart basket, final Map<String, Object> data)
     {
         if (basket == null)
         {
@@ -75,9 +75,9 @@ public abstract class BasketInformation
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
         // get all products of the basket
-        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket)
+        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket)
                                                    .orderBy("lastUpdate desc").findList();
-        for (Basket_Product basketProduct : basketProducts)
+        for (CartProduct basketProduct : basketProducts)
         {
             products.put(basketProduct.getProduct(), basketProduct.getCountProduct());
             totalProductCount += basketProduct.getCountProduct();
@@ -98,9 +98,9 @@ public abstract class BasketInformation
      * 
      * @return
      */
-    public static List<Basket> getAllBaskets()
+    public static List<Cart> getAllBaskets()
     {
-        return Ebean.find(Basket.class).findList();
+        return Ebean.find(Cart.class).findList();
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class BasketInformation
      * 
      * @param basket
      */
-    public static void removeBasket(Basket basket)
+    public static void removeBasket(Cart basket)
     {
         basket.delete();
     }
@@ -119,7 +119,7 @@ public abstract class BasketInformation
      * @param basket
      * @param product
      */
-    public static void removeProductFromBasket(Basket basket, Basket_Product basketProduct)
+    public static void removeProductFromBasket(Cart basket, CartProduct basketProduct)
     {
         // delete product from basket
         basket.deleteProduct(basketProduct);
@@ -132,7 +132,7 @@ public abstract class BasketInformation
      * @param context
      * @param basket
      */
-    public static void setCustomerToBasket(Context context, Basket basket)
+    public static void setCustomerToBasket(Context context, Cart basket)
     {
         if (SessionHandling.isCustomerLogged(context) && basket.getCustomer() == null)
         {
@@ -150,22 +150,22 @@ public abstract class BasketInformation
      * @param basket
      * @return
      */
-    public static int getProductCount(Basket basket)
+    public static int getProductCount(Cart basket)
     {
         int productCount = 0;
         // get all products of the basket
-        List<Basket_Product> basketProducts = Ebean.find(Basket_Product.class).where().eq("basket", basket).findList();
-        for (Basket_Product basketProduct : basketProducts)
+        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket).findList();
+        for (CartProduct basketProduct : basketProducts)
         {
             productCount += basketProduct.getCountProduct();
         }
         return productCount;
     }
 
-    public static Basket_Product getBasketProduct(final Basket basket, final Product product, final String finish,
+    public static CartProduct getBasketProduct(final Cart basket, final Product product, final String finish,
                                                   final PosterSize size)
     {
-        return Ebean.find(Basket_Product.class).where().eq("basket", basket).eq("product", product)
+        return Ebean.find(CartProduct.class).where().eq("basket", basket).eq("product", product)
                     .eq("finish", finish).eq("size", size).findUnique();
     }
 }

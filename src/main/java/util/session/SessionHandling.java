@@ -2,7 +2,7 @@ package util.session;
 
 import java.util.Map;
 
-import models.Basket;
+import models.Cart;
 import models.Order;
 import ninja.Context;
 import ninja.session.SessionCookie;
@@ -154,7 +154,7 @@ public class SessionHandling
         // create new basket, if no basket is set
         if (cookie.get(BASKET) == null)
         {
-            Basket basket = BasketInformation.createNewBasket();
+            Cart basket = BasketInformation.createNewBasket();
             setBasketId(context, basket.getId());
             cookie = context.getSessionCookie();
         }

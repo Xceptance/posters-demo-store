@@ -3,8 +3,8 @@ package conf;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import models.Basket;
-import models.Basket_Product;
+import models.Cart;
+import models.CartProduct;
 import ninja.scheduler.Schedule;
 import util.database.BasketInformation;
 
@@ -20,18 +20,18 @@ public class Scheduler
     @Schedule(delay = 3600, timeUnit = TimeUnit.SECONDS)
     public void deleteUnusedCart()
     {
-        List<Basket> baskets = BasketInformation.getAllBaskets();
+        List<Cart> baskets = BasketInformation.getAllBaskets();
         // check each cart
-        for (Basket basket : baskets)
+        for (Cart basket : baskets)
         {
             // just delete if cart belongs to no customer
             if (basket.getCustomer() == null)
             {
                 // delete cart, if last update is more than 3600 seconds ago
                 boolean delete = true;
-                List<Basket_Product> basketProducts = basket.getProducts();
+                List<CartProduct> basketProducts = basket.getProducts();
                 // check each product of the cart
-                for (Basket_Product basketProduct : basketProducts)
+                for (CartProduct basketProduct : basketProducts)
                 {
                     if (basketProduct.getLastUpdate().getTime() + (long) 3600000 > System.currentTimeMillis())
                     {
