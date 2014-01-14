@@ -71,7 +71,7 @@ public class CheckoutController
             // put new order id to session
             SessionHandling.setOrderId(context, order.getId());
             // set basket to order
-            order.addProductsFromBasket(basket);
+            order.addProductsFromCart(basket);
             // update order
             order.update();
             // return page to enter shipping address
@@ -100,7 +100,7 @@ public class CheckoutController
         data.put("checkout", true);
         // get shipping address by order
         ShippingAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context))
-                                                  .getDeliveryAddress();
+                                                  .getShippingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
@@ -178,7 +178,7 @@ public class CheckoutController
             // get order by session id
             Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
             // set delivery address to order
-            order.setDeliveryAddress(deliveryAddress);
+            order.setShippingAddress(deliveryAddress);
             // update order
             order.update();
             // billing address is equal to delivery address
@@ -234,7 +234,7 @@ public class CheckoutController
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
-        order.setDeliveryAddress(deliveryAddress);
+        order.setShippingAddress(deliveryAddress);
         // update order
         order.update();
         // return page to enter billing address
@@ -530,7 +530,7 @@ public class CheckoutController
             // get customer by session id
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             // remove basket from customer
-            customer.setBasket(null);
+            customer.setCart(null);
             // set customer to order
             order.setCustomer(customer);
         }

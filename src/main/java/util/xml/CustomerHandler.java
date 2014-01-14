@@ -51,7 +51,7 @@ public class CustomerHandler extends DefaultHandler
         }
         if (localName.equals("deliveryAddress"))
         {
-            customer.addDeliveryAddress(deliveryAddress);
+            customer.addShippingAddress(deliveryAddress);
         }
         if (localName.equals("billingAddress"))
         {

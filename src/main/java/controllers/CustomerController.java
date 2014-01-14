@@ -91,7 +91,7 @@ public class CustomerController
                 SessionHandling.deleteBasketId(context);
                 // put customer's basket id to session
                 Customer updatedCustomer = CustomerInformation.getCustomerByEmail(email);
-                SessionHandling.setBasketId(context, updatedCustomer.getBasket().getId());
+                SessionHandling.setBasketId(context, updatedCustomer.getCart().getId());
                 // show home page
                 return Results.redirect(context.getContextPath() + "/");
             }
@@ -732,7 +732,7 @@ public class CustomerController
             address.setCountry(country);
             // add address to customer
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            customer.addDeliveryAddress(address);
+            customer.addShippingAddress(address);
             customer.update();
             // success message
             context.getFlashCookie().success(msg.get("successSave", language).get());

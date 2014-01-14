@@ -26,7 +26,7 @@ public class Order
     private String orderDate;
 
     @ManyToOne
-    private ShippingAddress deliveryAddress;
+    private ShippingAddress shippingAddress;
 
     @ManyToOne
     private BillingAddress billingAddress;
@@ -64,14 +64,14 @@ public class Order
         this.id = id;
     }
 
-    public ShippingAddress getDeliveryAddress()
+    public ShippingAddress getShippingAddress()
     {
-        return deliveryAddress;
+        return shippingAddress;
     }
 
-    public void setDeliveryAddress(ShippingAddress deliveryAddress)
+    public void setShippingAddress(ShippingAddress shippingAddress)
     {
-        this.deliveryAddress = deliveryAddress;
+        this.shippingAddress = shippingAddress;
     }
 
     public BillingAddress getBillingAddress()
@@ -212,7 +212,7 @@ public class Order
     private void addProduct(Product product, String finish, PosterSize size)
     {
         OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product)
-                                          .eq("finish", finish).eq("size", size).findUnique();
+                                         .eq("finish", finish).eq("size", size).findUnique();
         // this product is not in the order
         if (orderProduct == null)
         {
@@ -221,7 +221,7 @@ public class Order
             orderProduct.setOrder(this);
             orderProduct.setProduct(product);
             // set product count to one
-            orderProduct.setCountProduct(1);
+            orderProduct.setProductCount(1);
             // set finish
             orderProduct.setFinish(finish);
             // set size
@@ -236,24 +236,24 @@ public class Order
         else
         {
             // increment the count of this product
-            orderProduct.incCountProduct();
+            orderProduct.incProductCount();
             Ebean.update(orderProduct);
         }
         // recalculate total costs
         this.setTotalCosts(getTotalCosts() + orderProduct.getPrice());
     }
 
-    public void addProductsFromBasket(Cart basket)
+    public void addProductsFromCart(Cart cart)
     {
-        // get all products from basket
-        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket).findList();
+        // get all products from cart
+        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
         // for each product
-        for (CartProduct basketProduct : basketProducts)
+        for (CartProduct cartProduct : cartProducts)
         {
             // add the product to the order
-            for (int i = 0; i < basketProduct.getCountProduct(); i++)
+            for (int i = 0; i < cartProduct.getProductCount(); i++)
             {
-                this.addProduct(basketProduct.getProduct(), basketProduct.getFinish(), basketProduct.getSize());
+                this.addProduct(cartProduct.getProduct(), cartProduct.getFinish(), cartProduct.getSize());
             }
         }
     }

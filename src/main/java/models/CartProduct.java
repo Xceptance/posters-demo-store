@@ -24,10 +24,10 @@ public class CartProduct
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "basket_id")
-    private Cart basket;
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
-    private int countProduct;
+    private int productCount;
 
     /**
      * The finish of the poster, e.g. matte or gloss.
@@ -69,24 +69,24 @@ public class CartProduct
         this.product = product;
     }
 
-    public Cart getBasket()
+    public Cart getCart()
     {
-        return basket;
+        return cart;
     }
 
-    public void setBasket(Cart basket)
+    public void setCart(Cart cart)
     {
-        this.basket = basket;
+        this.cart = cart;
     }
 
-    public int getCountProduct()
+    public int getProductCount()
     {
-        return countProduct;
+        return productCount;
     }
 
-    public void setCountProduct(int countProduct)
+    public void setProductCount(int productCount)
     {
-        this.countProduct = countProduct;
+        this.productCount = productCount;
     }
 
     public String getFinish()
@@ -139,9 +139,10 @@ public class CartProduct
         this.lastUpdate = lastUpdate;
     }
 
-    public void incCountProduct()
+    public void incProductCount()
     {
-        this.setCountProduct(this.getCountProduct() + 1);
+        this.setProductCount(this.getProductCount() + 1);
+        this.update();
     }
 
     public void update()
@@ -154,8 +155,14 @@ public class CartProduct
         Ebean.save(this);
     }
 
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
+
     public void decrementProductCount()
     {
-        this.setCountProduct(this.getCountProduct() - 1);
+        this.setProductCount(this.getProductCount() - 1);
+        this.update();
     }
 }

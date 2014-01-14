@@ -25,7 +25,7 @@ public class OrderProduct
     @JoinColumn(name = "ordering_id")
     private Order order;
 
-    private int countProduct;
+    private int productCount;
 
     /**
      * The finish of the poster, e.g. matte or gloss.
@@ -74,19 +74,19 @@ public class OrderProduct
         this.order = order;
     }
 
-    public int getCountProduct()
+    public int getProductCount()
     {
-        return countProduct;
+        return productCount;
     }
 
-    public void setCountProduct(int countProduct)
+    public void setProductCount(int productCount)
     {
-        this.countProduct = countProduct;
+        this.productCount = productCount;
     }
 
-    public void incCountProduct()
+    public void incProductCount()
     {
-        this.setCountProduct(this.getCountProduct() + 1);
+        this.setProductCount(this.getProductCount() + 1);
     }
 
     public String getFinish()

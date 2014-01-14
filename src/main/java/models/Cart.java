@@ -18,25 +18,25 @@ public class Cart
 {
 
     /**
-     * The id of the basket.
+     * The id of the cart.
      */
     @Id
     private int id;
 
     /**
-     * The customer of the basket.
+     * The customer of the cart.
      */
     @OneToOne
     private Customer customer;
 
     /**
-     * The products of the basket.
+     * The products which are in the cart.
      */
-    @OneToMany(mappedBy = "basket")
+    @OneToMany(mappedBy = "cart")
     private List<CartProduct> products;
 
     /**
-     * The total price of the basket.
+     * The total price of the cart.
      */
     private double totalPrice;
 
@@ -95,55 +95,66 @@ public class Cart
         this.products = products;
     }
 
+    /**
+     * Adds the product with the given finish and size to the cart.
+     * 
+     * @param product
+     * @param finish
+     * @param size
+     */
     public void addProduct(Product product, final String finish, final PosterSize size)
     {
-        CartProduct basketProduct = Ebean.find(CartProduct.class).where().eq("basket", this).eq("product", product)
-                                         .eq("finish", finish).eq("size", size).findUnique();
-        // this product is not in the basket
-        if (basketProduct == null)
+        CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product)
+                                       .eq("finish", finish).eq("size", size).findUnique();
+        // the product is not in the cart
+        if (cartProduct == null)
         {
-            // add product to basket
-            basketProduct = new CartProduct();
-            basketProduct.setBasket(this);
-            basketProduct.setProduct(product);
+            // add product to cart
+            cartProduct = new CartProduct();
+            cartProduct.setCart(this);
+            cartProduct.setProduct(product);
             // set product count to one
-            basketProduct.setCountProduct(1);
+            cartProduct.setProductCount(1);
             // set finish
-            basketProduct.setFinish(finish);
+            cartProduct.setFinish(finish);
             // set size
-            basketProduct.setSize(size);
+            cartProduct.setSize(size);
             // set price of the product
-            basketProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size)
-                                        .findUnique().getPrice());
-            basketProduct.save();
-            products.add(basketProduct);
+            cartProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size)
+                                      .findUnique().getPrice());
+            cartProduct.save();
+            products.add(cartProduct);
         }
-        // this product is in the basket at least one time
+        // the product is in the cart
         else
         {
-            // increment the count of this product
-            basketProduct.incCountProduct();
-            basketProduct.update();
+            // increment the count of the product
+            cartProduct.incProductCount();
         }
         // recalculate total price
-        this.setTotalPrice(getTotalPrice() + basketProduct.getPrice());
+        this.setTotalPrice(getTotalPrice() + cartProduct.getPrice());
     }
 
-    public void deleteProduct(final CartProduct basketProduct)
+    /**
+     * Deletes the given product from the cart.
+     * 
+     * @param cartProduct
+     */
+    public void deleteProduct(final CartProduct cartProduct)
     {
-        // product is in the basket more than once
-        if (basketProduct.getCountProduct() > 1)
+        // product is in the cart more than once
+        if (cartProduct.getProductCount() > 1)
         {
-            basketProduct.decrementProductCount();
-            basketProduct.update();
+            // decrement the count of the product
+            cartProduct.decrementProductCount();
         }
         else
         {
-            Ebean.delete(basketProduct);
-            this.products.remove(basketProduct);
+            cartProduct.delete();
+            this.products.remove(cartProduct);
         }
         // recalculate total price
-        this.setTotalPrice(getTotalPrice() - basketProduct.getPrice());
+        this.setTotalPrice(getTotalPrice() - cartProduct.getPrice());
     }
 
     public void update()
@@ -164,17 +175,17 @@ public class Cart
     }
 
     /**
-     * removes all products from the basket
+     * removes all products from the cart
      */
     public void clearProducts()
     {
-        // get all products of the basket
-        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", this).findList();
+        // get all products of the cart
+        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("basket", this).findList();
         // delete each product
-        for (CartProduct basketProduct : basketProducts)
+        for (CartProduct cartProduct : cartProducts)
         {
-            Ebean.delete(basketProduct);
-            this.products.remove(basketProduct);
+            cartProduct.delete();
+            this.products.remove(cartProduct);
         }
         this.setTotalPrice(0);
     }

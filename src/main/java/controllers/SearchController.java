@@ -90,7 +90,7 @@ public class SearchController
             products.get(i).setAvailableSizes(null);
             products.get(i).setSubCategory(null);
             products.get(i).setTopCategory(null);
-            products.get(i).setBasket(null);
+            products.get(i).setCart(null);
             products.get(i).setOrder(null);
         }
         data.put("products", products);
@@ -145,7 +145,7 @@ public class SearchController
             products.get(i).setAvailableSizes(null);
             products.get(i).setSubCategory(null);
             products.get(i).setTopCategory(null);
-            products.get(i).setBasket(null);
+            products.get(i).setCart(null);
             products.get(i).setOrder(null);
         }
         // add the page count to the data map

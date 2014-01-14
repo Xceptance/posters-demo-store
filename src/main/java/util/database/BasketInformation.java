@@ -76,11 +76,11 @@ public abstract class BasketInformation
         int totalProductCount = 0;
         // get all products of the basket
         List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket)
-                                                   .orderBy("lastUpdate desc").findList();
+                                                .orderBy("lastUpdate desc").findList();
         for (CartProduct basketProduct : basketProducts)
         {
-            products.put(basketProduct.getProduct(), basketProduct.getCountProduct());
-            totalProductCount += basketProduct.getCountProduct();
+            products.put(basketProduct.getProduct(), basketProduct.getProductCount());
+            totalProductCount += basketProduct.getProductCount();
         }
         // add all products of the basket
         data.put("basketProducts", basketProducts);
@@ -139,7 +139,7 @@ public abstract class BasketInformation
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             basket.setCustomer(customer);
             basket.update();
-            customer.setBasket(basket);
+            customer.setCart(basket);
             customer.update();
         }
     }
@@ -157,15 +157,15 @@ public abstract class BasketInformation
         List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket).findList();
         for (CartProduct basketProduct : basketProducts)
         {
-            productCount += basketProduct.getCountProduct();
+            productCount += basketProduct.getProductCount();
         }
         return productCount;
     }
 
     public static CartProduct getBasketProduct(final Cart basket, final Product product, final String finish,
-                                                  final PosterSize size)
+                                               final PosterSize size)
     {
-        return Ebean.find(CartProduct.class).where().eq("basket", basket).eq("product", product)
-                    .eq("finish", finish).eq("size", size).findUnique();
+        return Ebean.find(CartProduct.class).where().eq("basket", basket).eq("product", product).eq("finish", finish)
+                    .eq("size", size).findUnique();
     }
 }

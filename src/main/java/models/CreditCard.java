@@ -145,4 +145,9 @@ public class CreditCard
     {
         Ebean.save(this);
     }
+
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
 }

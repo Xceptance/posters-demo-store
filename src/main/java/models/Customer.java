@@ -31,7 +31,7 @@ public class Customer
     private String firstName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<ShippingAddress> deliveryAddress;
+    private List<ShippingAddress> shippingAddress;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<BillingAddress> billingAddress;
@@ -43,11 +43,11 @@ public class Customer
     private List<Order> order;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Cart basket;
+    private Cart cart;
 
     public Customer()
     {
-        this.deliveryAddress = new ArrayList<ShippingAddress>();
+        this.shippingAddress = new ArrayList<ShippingAddress>();
         this.billingAddress = new ArrayList<BillingAddress>();
         this.creditCard = new ArrayList<CreditCard>();
         this.order = new ArrayList<Order>();
@@ -93,19 +93,19 @@ public class Customer
         this.firstName = firstName;
     }
 
-    public List<ShippingAddress> getDeliveryAddress()
+    public List<ShippingAddress> getShippingAddress()
     {
-        return deliveryAddress;
+        return shippingAddress;
     }
 
-    public void setDeliveryAddress(List<ShippingAddress> deliveryAddress)
+    public void setShippingAddress(List<ShippingAddress> shippingAddress)
     {
-        this.deliveryAddress = deliveryAddress;
+        this.shippingAddress = shippingAddress;
     }
 
-    public void addDeliveryAddress(ShippingAddress deliveryAddress)
+    public void addShippingAddress(ShippingAddress shippingAddress)
     {
-        this.deliveryAddress.add(deliveryAddress);
+        this.shippingAddress.add(shippingAddress);
     }
 
     public List<BillingAddress> getBillingAddress()
@@ -153,14 +153,14 @@ public class Customer
         this.order = order;
     }
 
-    public Cart getBasket()
+    public Cart getCart()
     {
-        return basket;
+        return cart;
     }
 
-    public void setBasket(Cart basket)
+    public void setCart(Cart cart)
     {
-        this.basket = basket;
+        this.cart = cart;
     }
 
     public void addCreditCard(CreditCard creditCard)
@@ -197,5 +197,10 @@ public class Customer
     public void save()
     {
         Ebean.save(this);
+    }
+
+    public void delete()
+    {
+        Ebean.delete(this);
     }
 }

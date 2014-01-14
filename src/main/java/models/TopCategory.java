@@ -41,7 +41,7 @@ public class TopCategory
      * The sub categories of the category.
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
-    List<SubCategory> subCategories;
+    private List<SubCategory> subCategories;
 
     /**
      * The products of the top category.

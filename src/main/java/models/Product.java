@@ -88,7 +88,7 @@ public class Product
     private TopCategory topCategory;
 
     @OneToMany(mappedBy = "product")
-    private List<CartProduct> basket;
+    private List<CartProduct> cart;
 
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> order;
@@ -97,7 +97,7 @@ public class Product
 
     public Product()
     {
-        this.basket = new ArrayList<CartProduct>();
+        this.cart = new ArrayList<CartProduct>();
         this.availableSizes = new ArrayList<ProductPosterSize>();
     }
 
@@ -216,14 +216,14 @@ public class Product
         this.url = url;
     }
 
-    public List<CartProduct> getBasket()
+    public List<CartProduct> getCart()
     {
-        return basket;
+        return cart;
     }
 
-    public void setBasket(List<CartProduct> basket)
+    public void setCart(List<CartProduct> cart)
     {
-        this.basket = basket;
+        this.cart = cart;
     }
 
     public List<OrderProduct> getOrder()

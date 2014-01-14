@@ -212,7 +212,7 @@ public abstract class CustomerInformation
         {
             Customer customer = Ebean.find(Customer.class, SessionHandling.getCustomerId(context));
             // add all delivery addresses
-            data.put("deliveryAddresses", customer.getDeliveryAddress());
+            data.put("deliveryAddresses", customer.getShippingAddress());
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
         }
@@ -241,7 +241,7 @@ public abstract class CustomerInformation
         if (SessionHandling.isCustomerLogged(context))
         {
             Customer customer = getCustomerById(SessionHandling.getCustomerId(context));
-            customer.addDeliveryAddress(deliveryAddress);
+            customer.addShippingAddress(deliveryAddress);
             customer.update();
         }
     }
@@ -265,15 +265,15 @@ public abstract class CustomerInformation
             Cart currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
             // get basket of customer
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
-            if (customer.getBasket() == null)
+            if (customer.getCart() == null)
             {
-                customer.setBasket(new Cart());
+                customer.setCart(new Cart());
                 customer.update();
             }
-            Cart customerBasket = BasketInformation.getBasketById(customer.getBasket().getId());
+            Cart customerBasket = BasketInformation.getBasketById(customer.getCart().getId());
             for (CartProduct basketProduct : currentBasket.getProducts())
             {
-                for (int i = 0; i < basketProduct.getCountProduct(); i++)
+                for (int i = 0; i < basketProduct.getProductCount(); i++)
                 {
                     customerBasket.addProduct(basketProduct.getProduct(), basketProduct.getFinish(),
                                               basketProduct.getSize());

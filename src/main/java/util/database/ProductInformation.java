@@ -104,7 +104,7 @@ public abstract class ProductInformation
             list.get(i).setAvailableSizes(null);
             list.get(i).setSubCategory(null);
             list.get(i).setTopCategory(null);
-            list.get(i).setBasket(null);
+            list.get(i).setCart(null);
             list.get(i).setOrder(null);
         }
         // get the total page count

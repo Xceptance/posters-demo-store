@@ -86,7 +86,7 @@ public class BasketTest extends NinjaTest
         // verify, that product one is in the basket...
         Assert.assertEquals(product1.getName(), basketProducts.get(0).getProduct().getName());
         // ...with an amount of one
-        Assert.assertEquals(1, basketProducts.get(0).getCountProduct());
+        Assert.assertEquals(1, basketProducts.get(0).getProductCount());
         // verify the finish
         Assert.assertEquals("matte", basketProducts.get(0).getFinish());
         // verify the size
@@ -103,7 +103,7 @@ public class BasketTest extends NinjaTest
         // verify, that product one is in the basket...
         Assert.assertEquals(product1.getName(), basketProducts.get(0).getProduct().getName());
         // ...with an amount of one
-        Assert.assertEquals(1, basketProducts.get(0).getCountProduct());
+        Assert.assertEquals(1, basketProducts.get(0).getProductCount());
         // delete product one from basket
         basket.deleteProduct(basketProducts.get(0));
         // persist
@@ -126,11 +126,11 @@ public class BasketTest extends NinjaTest
         // verify, that product one is in the basket...
         Assert.assertEquals(product1.getName(), basketProducts.get(0).getProduct().getName());
         // ...with an amount of two
-        Assert.assertEquals(2, basketProducts.get(0).getCountProduct());
+        Assert.assertEquals(2, basketProducts.get(0).getProductCount());
         // verify, that product two is in the basket...
         Assert.assertEquals(product2.getName(), basketProducts.get(1).getProduct().getName());
         // ...with an amount of one
-        Assert.assertEquals(1, basketProducts.get(1).getCountProduct());
+        Assert.assertEquals(1, basketProducts.get(1).getProductCount());
 
         // delete product one from basket
         basket.deleteProduct(basketProducts.get(0));
@@ -141,11 +141,11 @@ public class BasketTest extends NinjaTest
         // verify, that product one is in the basket...
         Assert.assertEquals(product1.getName(), basketProducts2.get(0).getProduct().getName());
         // ...with an amount of one
-        Assert.assertEquals(1, basketProducts2.get(0).getCountProduct());
+        Assert.assertEquals(1, basketProducts2.get(0).getProductCount());
         // verify, that product two is in the basket...
         Assert.assertEquals(product2.getName(), basketProducts2.get(1).getProduct().getName());
         // ...with an amount of one
-        Assert.assertEquals(1, basketProducts2.get(1).getCountProduct());
+        Assert.assertEquals(1, basketProducts2.get(1).getProductCount());
         // verify, that total price is sum of both product prices
         Assert.assertEquals(13.32, basket.getTotalPrice(), 0.01);
 
@@ -158,7 +158,7 @@ public class BasketTest extends NinjaTest
         // verify, that product one is in the basket...
         Assert.assertEquals(product1.getName(), basketProducts3.get(0).getProduct().getName());
         // ...with an amount of one
-        Assert.assertEquals(1, basketProducts3.get(0).getCountProduct());
+        Assert.assertEquals(1, basketProducts3.get(0).getProductCount());
         // verify, that product two is not in the basket
         Assert.assertTrue(basketProducts3.size() == 1);
         // verify, that total price is price of product one
@@ -192,7 +192,7 @@ public class BasketTest extends NinjaTest
         // verify, that product one is in the basket...
         Assert.assertEquals(product1.getName(), basketProducts.get(0).getProduct().getName());
         // ...with an amount of two
-        Assert.assertEquals(2, basketProducts.get(0).getCountProduct());
+        Assert.assertEquals(2, basketProducts.get(0).getProductCount());
         // verify, that total price is sum of both product prices
         Assert.assertEquals(11.10, basket.getTotalPrice(), 0.01);
     }
