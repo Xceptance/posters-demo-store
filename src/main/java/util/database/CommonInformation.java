@@ -12,6 +12,7 @@ import conf.XCPosterConf;
 import models.Cart;
 import models.CartProduct;
 import models.Product;
+import models.TopCategory;
 import ninja.Context;
 import util.session.SessionHandling;
 
@@ -29,7 +30,7 @@ public abstract class CommonInformation
     public static void setCommonData(final Map<String, Object> data, Context context, XCPosterConf xcpConf)
     {
         // set categories
-        CategoryInformation.addCategoriesToMap(data);
+        data.put("topCategory", TopCategory.getAllTopCategories());
         // get basket by session
         Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // set basket stuff

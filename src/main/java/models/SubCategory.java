@@ -110,4 +110,10 @@ public class SubCategory
     {
         Ebean.save(this);
     }
+
+    public static SubCategory getSubCategoryByUrl(String url)
+    {
+        // get the sub category by the given category url
+        return Ebean.find(SubCategory.class).where().eq("url", url).findUnique();
+    }
 }

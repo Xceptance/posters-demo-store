@@ -3,13 +3,14 @@ package controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import models.SubCategory;
+import models.TopCategory;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import ninja.params.PathParam;
-import util.database.CategoryInformation;
 import util.database.CommonInformation;
 import util.database.ProductInformation;
 
@@ -57,7 +58,7 @@ public class CatalogController
         // add products of the given sub category to data map
         ProductInformation.addSubCategoryProductsToMap(subCategory, 1, pageSize, data);
         // add sub category to data map
-        CategoryInformation.addSubCategoryToMap(subCategory, data);
+        data.put("category", SubCategory.getSubCategoryByUrl(subCategory));
         return Results.html().render(data);
     }
 
@@ -76,7 +77,7 @@ public class CatalogController
         // add products of the given top category to data map
         ProductInformation.addTopCategoryProductsToMap(topCategory, 1, pageSize, data);
         // add top category to data map
-        CategoryInformation.addTopCategoryToMap(topCategory, data);
+        data.put("category", TopCategory.getTopCategoryByUrl(topCategory));
         // return product overview page
         return Results.html().template(xcpConf.templateProductOverview).render(data);
     }

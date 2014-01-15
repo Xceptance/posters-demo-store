@@ -108,4 +108,15 @@ public class TopCategory
     {
         Ebean.save(this);
     }
+
+    public static List<TopCategory> getAllTopCategories()
+    {
+        // get all top categories from database
+        return Ebean.find(TopCategory.class).findList();
+    }
+
+    public static TopCategory getTopCategoryByUrl(String url)
+    {
+        return Ebean.find(TopCategory.class).where().eq("url", url).findUnique();
+    }
 }
