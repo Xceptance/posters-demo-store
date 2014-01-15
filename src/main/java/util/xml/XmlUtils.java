@@ -13,6 +13,12 @@ import org.xml.sax.helpers.XMLReaderFactory;
 public abstract class XmlUtils
 {
 
+    /**
+     * Reads an xml file from the given source with the given SAX handler.
+     * 
+     * @param handler
+     * @param source
+     */
     public static void readXmlFile(DefaultHandler handler, String source)
     {
         try
