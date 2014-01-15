@@ -47,7 +47,7 @@ public class CheckoutController
     public Result checkout(Context context)
     {
         // get basket by session id
-        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
         // check, if the basket is empty
         if (basket.getProducts().size() == 0)
         {
@@ -62,7 +62,7 @@ public class CheckoutController
             // create new order
             Order order = Order.createNewOrder();
             // delete old order from session
-            SessionHandling.deleteOrderId(context);
+            SessionHandling.removeOrderId(context);
             // put new order id to session
             SessionHandling.setOrderId(context, order.getId());
             // set basket to order
@@ -543,13 +543,13 @@ public class CheckoutController
         // update order
         order.update();
         // get basket by session id
-        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
         // remove basket
         basket.delete();
         // remove basket from session
-        SessionHandling.deleteBasketId(context);
+        SessionHandling.removeCartId(context);
         // remove order from session
-        SessionHandling.deleteOrderId(context);
+        SessionHandling.removeOrderId(context);
         // show success message
         context.getFlashCookie().success(msg.get("checkoutCompleted", language).get());
         return Results.redirect(context.getContextPath() + "/");

@@ -84,10 +84,10 @@ public class CustomerController
                 // add products of current basket to customer's basket
                 mergeCurrentCartAndCustomerCart(context);
                 // delete current basket
-                SessionHandling.deleteBasketId(context);
+                SessionHandling.removeCartId(context);
                 // put customer's basket id to session
                 Customer updatedCustomer = Customer.getCustomerByEmail(email);
-                SessionHandling.setBasketId(context, updatedCustomer.getCart().getId());
+                SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
                 return Results.redirect(context.getContextPath() + "/");
             }
@@ -121,9 +121,9 @@ public class CustomerController
     public Result logout(Context context)
     {
         // remove customer from session
-        SessionHandling.deleteCustomerId(context);
+        SessionHandling.removeCustomerId(context);
         // remove basket from session
-        SessionHandling.deleteBasketId(context);
+        SessionHandling.removeCartId(context);
         // show home page
         return Results.redirect(context.getContextPath() + "/");
     }
@@ -955,9 +955,9 @@ public class CustomerController
         if (customer.checkPasswd(password))
         {
             // remove customer from session
-            SessionHandling.deleteCustomerId(context);
+            SessionHandling.removeCustomerId(context);
             // remove basket from session
-            SessionHandling.deleteBasketId(context);
+            SessionHandling.removeCartId(context);
             // remove customer's basket
             Cart basket = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
             if (basket != null)
@@ -994,7 +994,7 @@ public class CustomerController
         if (SessionHandling.isCustomerLogged(context))
         {
             // get current basket
-            Cart currentCart = Cart.getCartById(SessionHandling.getBasketId(context));
+            Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context));
             // get basket of customer
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getCart() == null)

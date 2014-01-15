@@ -80,7 +80,7 @@ public class BasketController
                 newProductCount = 0;
             }
             // get basket by session
-            Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+            Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
             // get basket product by id
             CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
             Product product = basketProduct.getProduct();
@@ -121,7 +121,7 @@ public class BasketController
     public Result getCartElementSlider(Context context)
     {
         // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
         // get all products of the basket
         List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
         List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("cart", basket)
@@ -166,7 +166,7 @@ public class BasketController
         // get product by id
         Product product = Product.getProductById(Integer.parseInt(productId));
         // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
         // get poster size
         String[] dummy = size.split(" ");
         int width = Integer.parseInt(dummy[0]);
@@ -209,7 +209,7 @@ public class BasketController
     {
         CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
         // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
         // get count of this product
         int countProduct = basketProduct.getProductCount();
         // delete all items of this products

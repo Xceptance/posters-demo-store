@@ -55,7 +55,7 @@ public class WebShopController
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
         // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
         // set basket stuff
         addCartDetailToMap(basket, data);
         // a customer is logged
