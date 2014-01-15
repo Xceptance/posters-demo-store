@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import models.Cart;
 import models.CartProduct;
 import ninja.scheduler.Schedule;
-import util.database.BasketInformation;
 
 import com.google.inject.Singleton;
 
@@ -20,7 +19,7 @@ public class Scheduler
     @Schedule(delay = 3600, timeUnit = TimeUnit.SECONDS)
     public void deleteUnusedCart()
     {
-        List<Cart> baskets = BasketInformation.getAllBaskets();
+        List<Cart> baskets = Cart.getAllCarts();
         // check each cart
         for (Cart basket : baskets)
         {

@@ -105,7 +105,7 @@ public class BasketTest extends NinjaTest
         // ...with an amount of one
         Assert.assertEquals(1, basketProducts.get(0).getProductCount());
         // delete product one from basket
-        basket.deleteProduct(basketProducts.get(0));
+        basket.removeProduct(basketProducts.get(0));
         // persist
         basket.update();
         // get all products of the basket
@@ -133,7 +133,7 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(1, basketProducts.get(1).getProductCount());
 
         // delete product one from basket
-        basket.deleteProduct(basketProducts.get(0));
+        basket.removeProduct(basketProducts.get(0));
         basket.update();
 
         // get all products of the basket
@@ -150,7 +150,7 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(13.32, basket.getTotalPrice(), 0.01);
 
         // delete product two from basket
-        basket.deleteProduct(basketProducts2.get(1));
+        basket.removeProduct(basketProducts2.get(1));
         basket.update();
 
         // get all products of the basket
@@ -165,7 +165,7 @@ public class BasketTest extends NinjaTest
         Assert.assertEquals(5.55, basket.getTotalPrice(), 0.01);
 
         // delete product one from basket
-        basket.deleteProduct(basketProducts3.get(0));
+        basket.removeProduct(basketProducts3.get(0));
         basket.update();
 
         // get all products of the basket

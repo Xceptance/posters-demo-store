@@ -17,7 +17,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.BasketInformation;
 import util.database.CommonInformation;
 import util.database.ProductInformation;
 import util.session.SessionHandling;
@@ -83,7 +82,7 @@ public class BasketController
                 newProductCount = 0;
             }
             // get basket by session
-            Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+            Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
             // get basket product by id
             CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
             Product product = basketProduct.getProduct();
@@ -95,8 +94,7 @@ public class BasketController
                 for (int i = 0; i < difference; i++)
                 {
                     // add product to basket
-                    BasketInformation.addProductToBasket(basket, product, basketProduct.getFinish(),
-                                                         basketProduct.getSize());
+                    basket.addProduct(product, basketProduct.getFinish(), basketProduct.getSize());
                 }
             }
             // product must be removed
@@ -105,7 +103,7 @@ public class BasketController
                 for (int i = difference; i < 0; i++)
                 {
                     // remove product from basket
-                    BasketInformation.removeProductFromBasket(basket, basketProduct);
+                    basket.removeProduct(basketProduct);
                 }
             }
             // add new header
@@ -125,10 +123,10 @@ public class BasketController
     public Result getCartElementSlider(Context context)
     {
         // get basket by session
-        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // get all products of the basket
         List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
-        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("basket", basket)
+        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("cart", basket)
                                                 .orderBy("lastUpdate desc").findList();
         // prepare just some attributes
         for (CartProduct basketProduct : basketProducts)
@@ -170,9 +168,7 @@ public class BasketController
         // get product by id
         Product product = ProductInformation.getProductById(Integer.parseInt(productId));
         // get basket by session
-        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
-        // set customer to basket
-        BasketInformation.setCustomerToBasket(context, basket);
+        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // get poster size
         String[] dummy = size.split(" ");
         int width = Integer.parseInt(dummy[0]);
@@ -180,9 +176,9 @@ public class BasketController
         PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
                                      .findUnique();
         // add product to basket
-        BasketInformation.addProductToBasket(basket, product, finish, posterSize);
+        basket.addProduct(product, finish, posterSize);
         // get added basket product
-        CartProduct basketProduct = BasketInformation.getBasketProduct(basket, product, finish, posterSize);
+        CartProduct basketProduct = Cart.getCartProduct(basket, product, finish, posterSize);
         Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", basketProduct.getProductCount());
         updatedProduct.put("productName", basketProduct.getProduct().getName());
@@ -215,13 +211,13 @@ public class BasketController
     {
         CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
         // get basket by session
-        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // get count of this product
         int countProduct = basketProduct.getProductCount();
         // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
-            BasketInformation.removeProductFromBasket(basket, basketProduct);
+            basket.removeProduct(basketProduct);
         }
         Result result = Results.json();
         // add new header
@@ -251,7 +247,7 @@ public class BasketController
     {
         StringBuilder headerCartOverview = new StringBuilder();
         headerCartOverview.append(" " + msg.get("basketOverviewTitle", language).get() + ": ");
-        headerCartOverview.append(BasketInformation.getProductCount(basket));
+        headerCartOverview.append(basket.getProductCount());
         headerCartOverview.append(" " + msg.get("basketItem", language).get() + " - ");
         headerCartOverview.append(basket.getTotalPriceAsString() + xcpConf.currency);
         return headerCartOverview.toString();

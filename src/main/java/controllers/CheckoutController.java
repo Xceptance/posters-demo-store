@@ -16,7 +16,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.BasketInformation;
 import util.database.CommonInformation;
 import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
@@ -51,7 +50,7 @@ public class CheckoutController
     public Result checkout(Context context)
     {
         // get basket by session id
-        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // check, if the basket is empty
         if (basket.getProducts().size() == 0)
         {
@@ -536,9 +535,9 @@ public class CheckoutController
         // update order
         order.update();
         // get basket by session id
-        Cart basket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+        Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // remove basket
-        BasketInformation.removeBasket(basket);
+        basket.delete();
         // remove basket from session
         SessionHandling.deleteBasketId(context);
         // remove order from session

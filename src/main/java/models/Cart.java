@@ -133,14 +133,15 @@ public class Cart
         }
         // recalculate total price
         this.setTotalPrice(getTotalPrice() + cartProduct.getPrice());
+        this.update();
     }
 
     /**
-     * Deletes the given product from the cart.
+     * Removes the given product from the cart.
      * 
      * @param cartProduct
      */
-    public void deleteProduct(final CartProduct cartProduct)
+    public void removeProduct(final CartProduct cartProduct)
     {
         // product is in the cart more than once
         if (cartProduct.getProductCount() > 1)
@@ -155,6 +156,7 @@ public class Cart
         }
         // recalculate total price
         this.setTotalPrice(getTotalPrice() - cartProduct.getPrice());
+        this.update();
     }
 
     public void update()
@@ -180,7 +182,7 @@ public class Cart
     public void clearProducts()
     {
         // get all products of the cart
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("basket", this).findList();
+        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
         // delete each product
         for (CartProduct cartProduct : cartProducts)
         {
@@ -188,5 +190,61 @@ public class Cart
             this.products.remove(cartProduct);
         }
         this.setTotalPrice(0);
+    }
+
+    public static Cart getCartById(int id)
+    {
+        return Ebean.find(Cart.class, id);
+    }
+
+    /**
+     * Returns all carts, which are stored in the data base.
+     * 
+     * @return
+     */
+    public static List<Cart> getAllCarts()
+    {
+        return Ebean.find(Cart.class).findList();
+    }
+
+    /**
+     * Creates and returns a new cart.
+     * 
+     * @return
+     */
+    public static Cart createNewCart()
+    {
+        // create new cart
+        Cart cart = new Cart();
+        // save cart
+        cart.save();
+        // get new cart by id
+        Cart newCart = Ebean.find(Cart.class, cart.getId());
+        // return new cart
+        return newCart;
+    }
+
+    /**
+     * Returns the total product count of the cart.
+     * 
+     * @return
+     */
+    public int getProductCount()
+    {
+        int productCount = 0;
+        // get all products of the cart
+        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
+        for (CartProduct cartProduct : cartProducts)
+        {
+            productCount += cartProduct.getProductCount();
+        }
+        return productCount;
+    }
+
+    public static CartProduct getCartProduct(final Cart cart, final Product product, final String finish,
+                                             final PosterSize size)
+    {
+        return Ebean.find(CartProduct.class).where().eq("cart", cart).eq("product", product).eq("finish", finish)
+                    .eq("size", size).findUnique();
     }
 }

@@ -262,7 +262,7 @@ public abstract class CustomerInformation
         if (SessionHandling.isCustomerLogged(context))
         {
             // get current basket
-            Cart currentBasket = BasketInformation.getBasketById(SessionHandling.getBasketId(context));
+            Cart currentBasket = Cart.getCartById(SessionHandling.getBasketId(context));
             // get basket of customer
             Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getCart() == null)
@@ -270,7 +270,7 @@ public abstract class CustomerInformation
                 customer.setCart(new Cart());
                 customer.update();
             }
-            Cart customerBasket = BasketInformation.getBasketById(customer.getCart().getId());
+            Cart customerBasket = Cart.getCartById(customer.getCart().getId());
             for (CartProduct basketProduct : currentBasket.getProducts())
             {
                 for (int i = 0; i < basketProduct.getProductCount(); i++)

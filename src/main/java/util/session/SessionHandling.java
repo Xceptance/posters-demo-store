@@ -6,7 +6,6 @@ import models.Cart;
 import models.Order;
 import ninja.Context;
 import ninja.session.SessionCookie;
-import util.database.BasketInformation;
 import util.database.OrderInformation;
 
 public class SessionHandling
@@ -154,7 +153,7 @@ public class SessionHandling
         // create new basket, if no basket is set
         if (cookie.get(BASKET) == null)
         {
-            Cart basket = BasketInformation.createNewBasket();
+            Cart basket = Cart.createNewCart();
             setBasketId(context, basket.getId());
             cookie = context.getSessionCookie();
         }
