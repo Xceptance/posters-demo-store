@@ -265,4 +265,21 @@ public class Product
     {
         Ebean.save(this);
     }
+
+    public static Product getProductByUrl(String url)
+    {
+        return Ebean.find(Product.class).where().eq("url", url).findUnique();
+    }
+
+    /**
+     * Returns a product by the product's id.
+     * 
+     * @param id
+     * @return
+     */
+    public static Product getProductById(int id)
+    {
+        // get product by id
+        return Ebean.find(Product.class, id);
+    }
 }

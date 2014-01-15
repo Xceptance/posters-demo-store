@@ -18,7 +18,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.ProductInformation;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
@@ -166,7 +165,7 @@ public class BasketController
     {
         Result result = Results.json();
         // get product by id
-        Product product = ProductInformation.getProductById(Integer.parseInt(productId));
+        Product product = Product.getProductById(Integer.parseInt(productId));
         // get basket by session
         Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // get poster size
@@ -234,7 +233,7 @@ public class BasketController
         int height = Integer.parseInt(dummy[2]);
         PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
                                      .findUnique();
-        Product product = ProductInformation.getProductById(productId);
+        Product product = Product.getProductById(productId);
         ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
                                                    .eq("size", posterSize).findUnique();
         Result result = Results.json();
