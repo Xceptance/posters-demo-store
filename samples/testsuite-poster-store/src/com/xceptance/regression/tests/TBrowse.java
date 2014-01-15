@@ -1,7 +1,7 @@
 /*
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
-package samples;
+package com.xceptance.regression.tests;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
@@ -10,7 +10,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  * Simulates browsing the catalog.
  */
 @ScriptName
-("samples.TBrowse")
+("com.xceptance.regression.tests.TBrowse")
 public class TBrowse extends AbstractScriptTestCase
 {
 }
