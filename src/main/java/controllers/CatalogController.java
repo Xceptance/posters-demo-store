@@ -13,7 +13,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import ninja.params.PathParam;
-import util.database.CommonInformation;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Page;
@@ -41,7 +40,7 @@ public class CatalogController
     public Result productDetail(@PathParam("product") String productUrl, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // put product to data map
         data.put("productDetail", Product.getProductByUrl(productUrl));
         return Results.html().render(data);
@@ -58,7 +57,7 @@ public class CatalogController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.pageSize;
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategory, 1, pageSize, data);
         // add sub category to data map
@@ -77,7 +76,7 @@ public class CatalogController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.pageSize;
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategory, 1, pageSize, data);
         // add top category to data map

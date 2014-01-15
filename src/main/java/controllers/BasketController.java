@@ -17,7 +17,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.CommonInformation;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
@@ -47,7 +46,7 @@ public class BasketController
     public Result basket(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // return basket overview page
         return Results.html().render(data).template(xcpConf.templateBasketOverview);
     }

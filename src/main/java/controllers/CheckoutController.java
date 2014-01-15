@@ -16,7 +16,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.CommonInformation;
 import util.date.DateUtils;
 import util.session.SessionHandling;
 
@@ -85,7 +84,7 @@ public class CheckoutController
     public Result enterShippingAddress(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
@@ -133,7 +132,7 @@ public class CheckoutController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -249,7 +248,7 @@ public class CheckoutController
     public Result enterBillingAddress(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         if (SessionHandling.isCustomerLogged(context))
         {
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
@@ -294,7 +293,7 @@ public class CheckoutController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -381,7 +380,7 @@ public class CheckoutController
     public Result enterPaymentMethod(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer by session
@@ -454,7 +453,7 @@ public class CheckoutController
         }
         // credit card was wrong
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // error message
         context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
@@ -480,7 +479,7 @@ public class CheckoutController
     public Result addPaymentToOrder(@Param("cardId") String creditCardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // get credit card by id
         CreditCard creditCard = CreditCard.getCreditCardById(Integer.parseInt(creditCardId));
         // get order by session id
@@ -502,7 +501,7 @@ public class CheckoutController
     public Result checkoutOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         data.put("checkout", true);
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);

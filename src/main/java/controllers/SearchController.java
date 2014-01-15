@@ -10,7 +10,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.CommonInformation;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Page;
@@ -63,7 +62,7 @@ public class SearchController
             else
             {
                 data.put("products", products);
-                CommonInformation.setCommonData(data, context, xcpConf);
+                WebShopController.setCommonData(data, context, xcpConf);
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("searchTerm", searchText);
                 data.put("currentPage", 1);

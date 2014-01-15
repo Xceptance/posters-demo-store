@@ -18,7 +18,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.CommonInformation;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
@@ -48,7 +47,7 @@ public class CustomerController
     public Result loginForm(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -106,7 +105,7 @@ public class CustomerController
             }
         }
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // show entered email address
         data.put("email", email);
         // show page to log-in again
@@ -138,7 +137,7 @@ public class CustomerController
     public Result registration(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -182,7 +181,7 @@ public class CustomerController
         if (failure)
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             Map<String, String> registration = new HashMap<String, String>();
             registration.put("name", name);
             registration.put("firstName", firstName);
@@ -219,7 +218,7 @@ public class CustomerController
     public Result accountOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -233,7 +232,7 @@ public class CustomerController
     public Result orderOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         data.put("orderOverview", Customer.getCustomerById(SessionHandling.getCustomerId(context)).getAllOrders());
         return Results.html().render(data);
     }
@@ -248,7 +247,7 @@ public class CustomerController
     public Result paymentOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // get customer by session
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // add payment information
@@ -266,7 +265,7 @@ public class CustomerController
     public Result settingOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // add customer to data map
         data.put("customer", Customer.getCustomerById(SessionHandling.getCustomerId(context)));
         return Results.html().render(data);
@@ -312,7 +311,7 @@ public class CustomerController
             }
         }
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         // error message
         context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
@@ -334,7 +333,7 @@ public class CustomerController
     public Result addPaymentToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -364,7 +363,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("cardId", cardId);
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // show page again
             return Results.html().render(data).template(xcpConf.templateConfirmDeletePayment);
         }
@@ -381,7 +380,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("cardId", cardId);
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -400,7 +399,7 @@ public class CustomerController
         data.put("deliveryAddresses", customer.getShippingAddress());
         // add all billing addresses
         data.put("billingAddresses", customer.getBillingAddress());
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -429,7 +428,7 @@ public class CustomerController
         else
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteBillingAddress");
             data.put("addressId", addressId);
@@ -450,7 +449,7 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("deleteAddressURL", "deleteBillingAddress");
         data.put("addressId", addressId);
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
     }
 
@@ -480,7 +479,7 @@ public class CustomerController
         else
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteDeliveryAddress");
             data.put("addressId", addressId);
@@ -500,7 +499,7 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("deleteAddressURL", "deleteDeliveryAddress");
         data.put("addressId", addressId);
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
     }
 
@@ -515,7 +514,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("address", ShippingAddress.getShippingAddressById(addressId));
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -543,7 +542,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -590,7 +589,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("address", BillingAddress.getBillingAddressById(addressId));
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -618,7 +617,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -663,7 +662,7 @@ public class CustomerController
     public Result addDeliveryAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -676,7 +675,7 @@ public class CustomerController
     public Result addBillingAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -706,7 +705,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.regexZip, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -769,7 +768,7 @@ public class CustomerController
         if (!Pattern.matches("[0-9]*", zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
-            CommonInformation.setCommonData(data, context, xcpConf);
+            WebShopController.setCommonData(data, context, xcpConf);
             // error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
@@ -818,7 +817,7 @@ public class CustomerController
     public Result changeNameOrEmail(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         data.put("customer", customer);
         return Results.html().render(data);
@@ -880,7 +879,7 @@ public class CustomerController
     public Result changePassword(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
@@ -937,7 +936,7 @@ public class CustomerController
     public Result confirmDeleteAccount(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CommonInformation.setCommonData(data, context, xcpConf);
+        WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
 
