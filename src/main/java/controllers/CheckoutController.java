@@ -17,7 +17,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.CustomerInformation;
 import util.database.OrderInformation;
 import util.date.DateUtils;
 import util.session.SessionHandling;
@@ -26,6 +25,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.XCPosterConf;
+import filters.SessionCustomerFilter;
 import filters.SessionTerminatedFilter;
 
 public class CheckoutController
@@ -90,8 +90,11 @@ public class CheckoutController
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
-            // put address information of customer to data map
-            CustomerInformation.addAddressOfCustomerToMap(context, data);
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            // add all delivery addresses
+            data.put("deliveryAddresses", customer.getShippingAddress());
+            // add all billing addresses
+            data.put("billingAddresses", customer.getBillingAddress());
         }
         // show checkout bread crumb
         data.put("checkout", true);
@@ -165,7 +168,7 @@ public class CheckoutController
             // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
             {
-                CustomerInformation.addDeliveryAddressToCustomer(context, deliveryAddress);
+                Customer.getCustomerById(SessionHandling.getCustomerId(context)).addShippingAddress(deliveryAddress);
             }
             // save delivery address
             else
@@ -193,7 +196,7 @@ public class CheckoutController
                 // set new address to customer
                 if (SessionHandling.isCustomerLogged(context))
                 {
-                    CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+                    Customer.getCustomerById(SessionHandling.getCustomerId(context)).addBillingAddress(billingAddress);
                 }
                 // save billing address
                 else
@@ -251,8 +254,11 @@ public class CheckoutController
         CommonInformation.setCommonData(data, context, xcpConf);
         if (SessionHandling.isCustomerLogged(context))
         {
-            // put address information of customer to data map
-            CustomerInformation.addAddressOfCustomerToMap(context, data);
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            // add all delivery addresses
+            data.put("deliveryAddresses", customer.getShippingAddress());
+            // add all billing addresses
+            data.put("billingAddresses", customer.getBillingAddress());
         }
         // get billing address by order
         BillingAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
@@ -324,7 +330,7 @@ public class CheckoutController
             // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
             {
-                CustomerInformation.addBillingAddressToCustomer(context, billingAddress);
+                Customer.getCustomerById(SessionHandling.getCustomerId(context)).addBillingAddress(billingAddress);
             }
             // save billing address
             else
@@ -370,15 +376,20 @@ public class CheckoutController
      * @param context
      * @return
      */
-    @FilterWith(SessionTerminatedFilter.class)
+    @FilterWith(
+        {
+            SessionTerminatedFilter.class, SessionCustomerFilter.class
+        })
     public Result enterPaymentMethod(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         if (SessionHandling.isCustomerLogged(context))
         {
-            // add payment method to map
-            CustomerInformation.addPaymentOfCustomerToMap(context, data);
+            // get customer by session
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            // add payment information
+            data.put("paymentOverview", customer.getCreditCard());
         }
         // get payment method by order
         CreditCard card = OrderInformation.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
@@ -426,7 +437,7 @@ public class CheckoutController
                 // set new credit card to customer
                 if (SessionHandling.isCustomerLogged(context))
                 {
-                    CustomerInformation.addPaymentToCustomer(context, creditCard);
+                    Customer.getCustomerById(SessionHandling.getCustomerId(context)).addCreditCard(creditCard);
                 }
                 // save credit card
                 else
@@ -525,7 +536,7 @@ public class CheckoutController
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer by session id
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // remove basket from customer
             customer.setCart(null);
             // set customer to order

@@ -27,6 +27,7 @@ public class CustomerHandler extends DefaultHandler
         if (localName.equals("customer"))
         {
             customer = new Customer();
+            customer.save();
         }
         if (localName.equals("deliveryAddress"))
         {
@@ -47,7 +48,7 @@ public class CustomerHandler extends DefaultHandler
     {
         if (localName.equals("customer"))
         {
-            customer.save();
+            customer.update();
         }
         if (localName.equals("deliveryAddress"))
         {

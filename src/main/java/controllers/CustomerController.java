@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import models.BillingAddress;
 import models.Cart;
+import models.CartProduct;
 import models.CreditCard;
 import models.Customer;
 import models.Order;
@@ -18,7 +19,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.CustomerInformation;
 import util.database.OrderInformation;
 import util.session.SessionHandling;
 
@@ -73,22 +73,22 @@ public class CustomerController
         else
         {
             // exists the given email in the database
-            boolean emailExist = CustomerInformation.emailExist(email);
+            boolean emailExist = Customer.emailExist(email);
+            // get customer by the given email
+            Customer customer = Customer.getCustomerByEmail(email);
             // is the password correct
-            boolean correctPassowrd = CustomerInformation.correctPassword(email, password);
+            boolean correctPassowrd = customer.checkPasswd(password);
             // email and password are correct
             if (emailExist && correctPassowrd)
             {
-                // get customer by the given email
-                Customer customer = CustomerInformation.getCustomerByEmail(email);
                 // put customer id to session
                 SessionHandling.setCustomerId(context, customer.getId());
                 // add products of current basket to customer's basket
-                CustomerInformation.mergeCurrentBasketAndCustomerBasket(context);
+                mergeCurrentCartAndCustomerCart(context);
                 // delete current basket
                 SessionHandling.deleteBasketId(context);
                 // put customer's basket id to session
-                Customer updatedCustomer = CustomerInformation.getCustomerByEmail(email);
+                Customer updatedCustomer = Customer.getCustomerByEmail(email);
                 SessionHandling.setBasketId(context, updatedCustomer.getCart().getId());
                 // show home page
                 return Results.redirect(context.getContextPath() + "/");
@@ -235,7 +235,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        CustomerInformation.addOrderOfCustomerToMap(context, data);
+        data.put("orderOverview", Customer.getCustomerById(SessionHandling.getCustomerId(context)).getAllOrders());
         return Results.html().render(data);
     }
 
@@ -250,7 +250,10 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        CustomerInformation.addPaymentOfCustomerToMap(context, data);
+        // get customer by session
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        // add payment information
+        data.put("paymentOverview", customer.getCreditCard());
         return Results.html().render(data);
     }
 
@@ -265,7 +268,8 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        CustomerInformation.addCustomerToMap(context, data);
+        // add customer to data map
+        data.put("customer", Customer.getCustomerById(SessionHandling.getCustomerId(context)));
         return Results.html().render(data);
     }
 
@@ -293,7 +297,7 @@ public class CustomerController
             if (Pattern.matches(regExCreditCard, creditNumber))
             {
                 // get customer by session id
-                Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+                Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
                 // create new credit card
                 CreditCard creditCard = new CreditCard();
                 creditCard.setCardNumber(creditNumber);
@@ -302,8 +306,6 @@ public class CustomerController
                 creditCard.setYear(year);
                 // add credit card to customer
                 customer.addCreditCard(creditCard);
-                // update customer
-                customer.update();
                 // success message
                 context.getFlashCookie().success(msg.get("successSave", language).get());
                 // show payment overview page
@@ -347,7 +349,7 @@ public class CustomerController
     @FilterWith(SessionCustomerFilter.class)
     public Result deletePayment(@Param("password") String password, @Param("cardId") int cardId, Context context)
     {
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -394,7 +396,11 @@ public class CustomerController
     public Result addressOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        CustomerInformation.addAddressOfCustomerToMap(context, data);
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        // add all delivery addresses
+        data.put("deliveryAddresses", customer.getShippingAddress());
+        // add all billing addresses
+        data.put("billingAddresses", customer.getBillingAddress());
         CommonInformation.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
@@ -410,7 +416,7 @@ public class CustomerController
     public Result deleteBillingAddress(@Param("password") String password, @Param("addressId") int addressId,
                                        Context context)
     {
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -460,7 +466,7 @@ public class CustomerController
     public Result deleteDeliveryAddress(@Param("password") String password, @Param("addressId") int addressId,
                                         Context context)
     {
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -729,7 +735,7 @@ public class CustomerController
             address.setZip(zip);
             address.setCountry(country);
             // add address to customer
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
             customer.update();
             // success message
@@ -793,7 +799,7 @@ public class CustomerController
             address.setZip(zip);
             address.setCountry(country);
             // add address to customer
-            Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addBillingAddress(address);
             customer.update();
             // success message
@@ -814,7 +820,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         data.put("customer", customer);
         return Results.html().render(data);
     }
@@ -834,9 +840,9 @@ public class CustomerController
                                              @Param("eMail") String email, @Param("password") String password,
                                              Context context)
     {
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
-        if (!CustomerInformation.correctPassword(customer.getEmail(), password))
+        if (!customer.checkPasswd(password))
         {
             // error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
@@ -893,9 +899,9 @@ public class CustomerController
                                           @Param("passwordAgain") String passwordAgain, Context context)
     {
         boolean failure = false;
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
-        if (!CustomerInformation.correctPassword(customer.getEmail(), oldPassword))
+        if (!customer.checkPasswd(oldPassword))
         {
             // error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
@@ -946,7 +952,7 @@ public class CustomerController
     @FilterWith(SessionCustomerFilter.class)
     public Result deleteAccount(@Param("password") String password, Context context)
     {
-        Customer customer = CustomerInformation.getCustomerById(SessionHandling.getCustomerId(context));
+        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -982,6 +988,32 @@ public class CustomerController
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             // show page again
             return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
+        }
+    }
+
+    private static void mergeCurrentCartAndCustomerCart(Context context)
+    {
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // get current basket
+            Cart currentCart = Cart.getCartById(SessionHandling.getBasketId(context));
+            // get basket of customer
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            if (customer.getCart() == null)
+            {
+                customer.setCart(new Cart());
+                customer.update();
+            }
+            Cart customerCart = Cart.getCartById(customer.getCart().getId());
+            for (CartProduct cartProduct : currentCart.getProducts())
+            {
+                for (int i = 0; i < cartProduct.getProductCount(); i++)
+                {
+                    customerCart.addProduct(cartProduct.getProduct(), cartProduct.getFinish(), cartProduct.getSize());
+                }
+            }
+            customerCart.setCustomer(customer);
+            customerCart.update();
         }
     }
 }

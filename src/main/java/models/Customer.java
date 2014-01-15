@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import util.session.SessionHandling;
+
 import com.avaje.ebean.Ebean;
 
 @Entity
@@ -106,6 +108,7 @@ public class Customer
     public void addShippingAddress(ShippingAddress shippingAddress)
     {
         this.shippingAddress.add(shippingAddress);
+        this.update();
     }
 
     public List<BillingAddress> getBillingAddress()
@@ -121,6 +124,7 @@ public class Customer
     public void addBillingAddress(BillingAddress billingAddress)
     {
         this.billingAddress.add(billingAddress);
+        this.update();
     }
 
     public int getId()
@@ -143,6 +147,12 @@ public class Customer
         this.creditCard = creditCard;
     }
 
+    public void addCreditCard(CreditCard card)
+    {
+        this.creditCard.add(card);
+        this.update();
+    }
+
     public List<Order> getOrder()
     {
         return order;
@@ -161,11 +171,6 @@ public class Customer
     public void setCart(Cart cart)
     {
         this.cart = cart;
-    }
-
-    public void addCreditCard(CreditCard creditCard)
-    {
-        this.creditCard.add(creditCard);
     }
 
     /**
@@ -202,5 +207,58 @@ public class Customer
     public void delete()
     {
         Ebean.delete(this);
+    }
+
+    /**
+     * Returns true, if there is a customer with the given email address, otherwise false.
+     * 
+     * @param email
+     * @return
+     */
+    public static boolean emailExist(String email)
+    {
+        boolean exist = true;
+        // get a list of customers, which have the given email address
+        List<Customer> loginExist = Ebean.find(Customer.class).where().eq("email", email).findList();
+        // no customer has this email address
+        if (loginExist.size() == 0)
+        {
+            exist = false;
+        }
+        // more than one customer has this email address
+        else if (loginExist.size() > 1)
+        {
+            // FAILURE
+        }
+        return exist;
+    }
+
+    /**
+     * Returns the customer by the customer's email address.
+     * 
+     * @param email
+     * @return
+     */
+    public static Customer getCustomerByEmail(String email)
+    {
+        // get customer by email address
+        return Ebean.find(Customer.class).where().eq("email", email).findUnique();
+    }
+
+    /**
+     * Returns the customer by the customer's id.
+     * 
+     * @param customerId
+     * @return
+     */
+    public static Customer getCustomerById(int customerId)
+    {
+        // get customer by id
+        return Ebean.find(Customer.class, customerId);
+    }
+
+    public List<Order> getAllOrders()
+    {
+        return Ebean.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
     }
 }

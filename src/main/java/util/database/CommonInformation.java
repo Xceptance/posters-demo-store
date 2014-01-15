@@ -11,6 +11,7 @@ import conf.XCPosterConf;
 
 import models.Cart;
 import models.CartProduct;
+import models.Customer;
 import models.Product;
 import models.TopCategory;
 import ninja.Context;
@@ -35,8 +36,21 @@ public abstract class CommonInformation
         Cart basket = Cart.getCartById(SessionHandling.getBasketId(context));
         // set basket stuff
         addCartDetailToMap(basket, data);
-        // set logged customer
-        CustomerInformation.addCustomerFirstNameToMap(context, data);
+        // a customer is logged
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // get customer by session
+            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            // add information that a customer is logged
+            data.put("isLogged", true);
+            // add customer's first name to data map
+            data.put("customerFirstName", customer.getFirstName());
+        }
+        // no customer is logged
+        else
+        {
+            data.put("isLogged", false);
+        }
         // set application url
         data.put("applUrlHttp", xcpConf.applicationUrlHttp);
         data.put("applUrlHttps", xcpConf.applicationUrlHttps);
