@@ -150,4 +150,23 @@ public class CreditCard
     {
         Ebean.delete(this);
     }
+
+    /**
+     * Returns the credit card by the given id.
+     * 
+     * @param id
+     * @return
+     */
+    public static CreditCard getCreditCardById(int id)
+    {
+        // get credit card by id
+        return Ebean.find(CreditCard.class, id);
+    }
+
+    public static void removeCreditCardFromCustomer(int id)
+    {
+        CreditCard card = getCreditCardById(id);
+        card.setCustomer(null);
+        card.update();
+    }
 }

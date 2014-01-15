@@ -18,7 +18,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
 import util.database.OrderInformation;
 import util.session.SessionHandling;
@@ -352,7 +351,7 @@ public class CustomerController
         // correct password
         if (customer.checkPasswd(password))
         {
-            CreditCardInformation.deleteCreditCardFromCustomer(cardId);
+            CreditCard.removeCreditCardFromCustomer(cardId);
             // success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             // show payment overview page

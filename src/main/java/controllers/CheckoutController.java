@@ -17,7 +17,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.CreditCardInformation;
 import util.database.CustomerInformation;
 import util.database.OrderInformation;
 import util.date.DateUtils;
@@ -474,7 +473,7 @@ public class CheckoutController
         final Map<String, Object> data = new HashMap<String, Object>();
         CommonInformation.setCommonData(data, context, xcpConf);
         // get credit card by id
-        CreditCard creditCard = CreditCardInformation.getCreditCardById(Integer.parseInt(creditCardId));
+        CreditCard creditCard = CreditCard.getCreditCardById(Integer.parseInt(creditCardId));
         // get order by session id
         Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
         // set credit card to order
