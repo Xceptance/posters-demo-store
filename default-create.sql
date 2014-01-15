@@ -21,8 +21,8 @@ create table cart (
 create table cartProduct (
   id                        integer not null,
   product_id                integer,
-  basket_id                 integer,
-  count_product             integer,
+  cart_id                   integer,
+  product_count             integer,
   finish                    varchar(255),
   posterSize_id             integer,
   price                     double,
@@ -46,14 +46,14 @@ create table customer (
   password                  varchar(255),
   name                      varchar(255),
   first_name                varchar(255),
-  basket_id                 integer,
+  cart_id                   integer,
   constraint pk_customer primary key (id))
 ;
 
 create table ordering (
   id                        integer not null,
   order_date                varchar(255),
-  delivery_address_id       integer,
+  shipping_address_id       integer,
   billing_address_id        integer,
   shipping_costs            double,
   tax                       double,
@@ -68,7 +68,7 @@ create table orderProduct (
   id                        integer not null,
   product_id                integer,
   ordering_id               integer,
-  count_product             integer,
+  product_count             integer,
   finish                    varchar(255),
   postersize_id             integer,
   price                     double,
@@ -165,16 +165,16 @@ alter table cart add constraint fk_cart_customer_2 foreign key (customer_id) ref
 create index ix_cart_customer_2 on cart (customer_id);
 alter table cartProduct add constraint fk_cartProduct_product_3 foreign key (product_id) references product (id) on delete restrict on update restrict;
 create index ix_cartProduct_product_3 on cartProduct (product_id);
-alter table cartProduct add constraint fk_cartProduct_basket_4 foreign key (basket_id) references cart (id) on delete restrict on update restrict;
-create index ix_cartProduct_basket_4 on cartProduct (basket_id);
+alter table cartProduct add constraint fk_cartProduct_cart_4 foreign key (cart_id) references cart (id) on delete restrict on update restrict;
+create index ix_cartProduct_cart_4 on cartProduct (cart_id);
 alter table cartProduct add constraint fk_cartProduct_size_5 foreign key (posterSize_id) references posterSize (id) on delete restrict on update restrict;
 create index ix_cartProduct_size_5 on cartProduct (posterSize_id);
 alter table creditCard add constraint fk_creditCard_customer_6 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
 create index ix_creditCard_customer_6 on creditCard (customer_id);
-alter table customer add constraint fk_customer_basket_7 foreign key (basket_id) references cart (id) on delete restrict on update restrict;
-create index ix_customer_basket_7 on customer (basket_id);
-alter table ordering add constraint fk_ordering_deliveryAddress_8 foreign key (delivery_address_id) references shippingAddress (id) on delete restrict on update restrict;
-create index ix_ordering_deliveryAddress_8 on ordering (delivery_address_id);
+alter table customer add constraint fk_customer_cart_7 foreign key (cart_id) references cart (id) on delete restrict on update restrict;
+create index ix_customer_cart_7 on customer (cart_id);
+alter table ordering add constraint fk_ordering_shippingAddress_8 foreign key (shipping_address_id) references shippingAddress (id) on delete restrict on update restrict;
+create index ix_ordering_shippingAddress_8 on ordering (shipping_address_id);
 alter table ordering add constraint fk_ordering_billingAddress_9 foreign key (billing_address_id) references billingAddress (id) on delete restrict on update restrict;
 create index ix_ordering_billingAddress_9 on ordering (billing_address_id);
 alter table ordering add constraint fk_ordering_creditCard_10 foreign key (credit_card_id) references creditCard (id) on delete restrict on update restrict;
