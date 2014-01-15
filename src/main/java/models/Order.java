@@ -257,4 +257,32 @@ public class Order
             }
         }
     }
+
+    /**
+     * Returns the order by the order's id.
+     * 
+     * @param id
+     * @return
+     */
+    public static Order getOrderById(int id)
+    {
+        return Ebean.find(Order.class, id);
+    }
+
+    /**
+     * Creates and returns a new order.
+     * 
+     * @return
+     */
+    public static Order createNewOrder()
+    {
+        // create new order
+        Order order = new Order();
+        // save order
+        order.save();
+        // get new order by id
+        Order newOrder = Ebean.find(Order.class, order.getId());
+        // return new order
+        return newOrder;
+    }
 }

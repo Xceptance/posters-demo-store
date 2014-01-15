@@ -6,7 +6,6 @@ import models.Cart;
 import models.Order;
 import ninja.Context;
 import ninja.session.SessionCookie;
-import util.database.OrderInformation;
 
 public class SessionHandling
 {
@@ -105,7 +104,7 @@ public class SessionHandling
         if (cookie.get(ORDER) == null)
         {
             // create new order
-            Order order = OrderInformation.createNewOrder();
+            Order order = Order.createNewOrder();
             // set id of new order
             setOrderId(context, order.getId());
             // get cookie again

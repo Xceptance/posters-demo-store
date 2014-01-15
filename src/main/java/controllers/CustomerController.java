@@ -19,7 +19,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.OrderInformation;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
@@ -968,7 +967,7 @@ public class CustomerController
                 basket.update();
             }
             // remove customers orders --> deletes also customer --> deletes also addresses and payment information
-            List<Order> orders = OrderInformation.getAllOrdersOfCustomer(customer);
+            List<Order> orders = customer.getOrder();
             for (Order order : orders)
             {
                 Ebean.delete(order);

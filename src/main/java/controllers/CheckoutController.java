@@ -17,7 +17,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.database.CommonInformation;
-import util.database.OrderInformation;
 import util.date.DateUtils;
 import util.session.SessionHandling;
 
@@ -62,7 +61,7 @@ public class CheckoutController
         else
         {
             // create new order
-            Order order = OrderInformation.createNewOrder();
+            Order order = Order.createNewOrder();
             // delete old order from session
             SessionHandling.deleteOrderId(context);
             // put new order id to session
@@ -99,8 +98,7 @@ public class CheckoutController
         // show checkout bread crumb
         data.put("checkout", true);
         // get shipping address by order
-        ShippingAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context))
-                                                  .getShippingAddress();
+        ShippingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getShippingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
@@ -176,7 +174,7 @@ public class CheckoutController
                 deliveryAddress.save();
             }
             // get order by session id
-            Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+            Order order = Order.getOrderById(SessionHandling.getOrderId(context));
             // set delivery address to order
             order.setShippingAddress(deliveryAddress);
             // update order
@@ -232,7 +230,7 @@ public class CheckoutController
         // get delivery address
         ShippingAddress deliveryAddress = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
         // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // set delivery address to order
         order.setShippingAddress(deliveryAddress);
         // update order
@@ -261,7 +259,7 @@ public class CheckoutController
             data.put("billingAddresses", customer.getBillingAddress());
         }
         // get billing address by order
-        BillingAddress address = OrderInformation.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
+        BillingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
@@ -338,7 +336,7 @@ public class CheckoutController
                 billingAddress.save();
             }
             // get order by session id
-            Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+            Order order = Order.getOrderById(SessionHandling.getOrderId(context));
             // set billing address to order
             order.setBillingAddress(billingAddress);
             // update order
@@ -361,7 +359,7 @@ public class CheckoutController
         // get billing address
         BillingAddress billingAddress = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
         // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // set billing address to order
         order.setBillingAddress(billingAddress);
         // update order
@@ -392,7 +390,7 @@ public class CheckoutController
             data.put("paymentOverview", customer.getCreditCard());
         }
         // get payment method by order
-        CreditCard card = OrderInformation.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
+        CreditCard card = Order.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
         // add payment method to data map, if a payment method was already entered
         if (card != null)
         {
@@ -445,7 +443,7 @@ public class CheckoutController
                     creditCard.save();
                 }
                 // get order by session id
-                Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+                Order order = Order.getOrderById(SessionHandling.getOrderId(context));
                 // set credit card to order
                 order.setCreditCard(creditCard);
                 // update order
@@ -486,7 +484,7 @@ public class CheckoutController
         // get credit card by id
         CreditCard creditCard = CreditCard.getCreditCardById(Integer.parseInt(creditCardId));
         // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // set credit card to order
         order.setCreditCard(creditCard);
         // update order
@@ -512,10 +510,11 @@ public class CheckoutController
         // calculate shipping costs and tax
         calculateShippingAndTax(context);
         // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // add order to data map
-        OrderInformation.addOrderToMap(order, data);
-        OrderInformation.addProductsFromOrderToMap(order, data);
+        data.put("order", order);
+        // add all products of the order
+        data.put("orderProducts", order.getProducts());
         return Results.html().render(data).template(xcpConf.templateCheckoutOverview);
     }
 
@@ -530,7 +529,7 @@ public class CheckoutController
     public Result checkoutCompleted(Context context)
     {
         // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // set date to order
         order.setOrderDate(DateUtils.getCurrentDate());
         if (SessionHandling.isCustomerLogged(context))
@@ -560,7 +559,7 @@ public class CheckoutController
     private void calculateShippingAndTax(Context context)
     {
         // get order by session id
-        Order order = OrderInformation.getOrderById(SessionHandling.getOrderId(context));
+        Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         if ((order.getShippingCosts() == 0.0) && (order.getTax() == 0.0))
         {
             // set shipping costs to order
