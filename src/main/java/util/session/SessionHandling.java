@@ -5,6 +5,11 @@ import models.Order;
 import ninja.Context;
 import ninja.session.SessionCookie;
 
+/**
+ * Provides methods for the session handling.
+ * 
+ * @author sebastianloob
+ */
 public class SessionHandling
 {
     // The keys of session cookie values.
