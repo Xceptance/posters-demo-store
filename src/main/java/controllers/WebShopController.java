@@ -43,8 +43,8 @@ public class WebShopController
     }
 
     /**
-     * Adds all categories to the map data. Sets the session cookie, if its unknown. Adds some information of the basket
-     * of the current user. Should be called before each page view.
+     * Adds all categories to the map data. Sets the session cookie, if its unknown. Adds some information of the
+     * current user's cart. Should be called before each page view.
      * 
      * @param data
      * @param context
@@ -54,10 +54,10 @@ public class WebShopController
     {
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
-        // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
-        // set basket stuff
-        addCartDetailToMap(basket, data);
+        // get cart by session
+        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        // set cart stuff
+        addCartDetailToMap(cart, data);
         // a customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
@@ -94,24 +94,22 @@ public class WebShopController
         {
             cart = Cart.createNewCart();
         }
-
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
-        // get all products of the basket
-        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("cart", cart)
-                                                .orderBy("lastUpdate desc").findList();
-        for (CartProduct basketProduct : basketProducts)
+        // get all products of the cart
+        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart)
+                                              .orderBy("lastUpdate desc").findList();
+        for (CartProduct cartProduct : cartProducts)
         {
-            products.put(basketProduct.getProduct(), basketProduct.getProductCount());
-            totalProductCount += basketProduct.getProductCount();
+            products.put(cartProduct.getProduct(), cartProduct.getProductCount());
+            totalProductCount += cartProduct.getProductCount();
         }
-        // add all products of the basket
-        data.put("basketProducts", basketProducts);
-        // add product count of basket
+        // add all products of the cart
+        data.put("basketProducts", cartProducts);
+        // add product count of cart
         data.put("basketProductCount", totalProductCount);
-        // add basket id
-        int basketId = cart.getId();
-        data.put("basketId", basketId);
+        // add cart id
+        data.put("basketId", cart.getId());
         // add total price of basket
         data.put("totalPrice", cart.getTotalPriceAsString());
     }
