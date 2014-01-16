@@ -9,30 +9,37 @@ import ninja.scheduler.Schedule;
 
 import com.google.inject.Singleton;
 
+/**
+ * The class provides methods to do some tasks in a scheduled way. Just add the @{@link Schedule} annotation.
+ * 
+ * @author sebastianloob
+ */
 @Singleton
 public class Scheduler
 {
 
     /**
-     * Deletes unused carts.
+     * Deletes unused carts. A cart is unused, if it is not set to a customer and the cart was last used at least one
+     * hour ago. Will be triggered every hour.
      */
     @Schedule(delay = 3600, timeUnit = TimeUnit.SECONDS)
     public void deleteUnusedCart()
     {
-        List<Cart> baskets = Cart.getAllCarts();
+        // get all carts, which are stored in the database
+        List<Cart> carts = Cart.getAllCarts();
         // check each cart
-        for (Cart basket : baskets)
+        for (Cart cart : carts)
         {
             // just delete if cart belongs to no customer
-            if (basket.getCustomer() == null)
+            if (cart.getCustomer() == null)
             {
                 // delete cart, if last update is more than 3600 seconds ago
                 boolean delete = true;
-                List<CartProduct> basketProducts = basket.getProducts();
+                List<CartProduct> cartProducts = cart.getProducts();
                 // check each product of the cart
-                for (CartProduct basketProduct : basketProducts)
+                for (CartProduct cartProduct : cartProducts)
                 {
-                    if (basketProduct.getLastUpdate().getTime() + (long) 3600000 > System.currentTimeMillis())
+                    if (cartProduct.getLastUpdate().getTime() + (long) 3600000 > System.currentTimeMillis())
                     {
                         delete = false;
                         break;
@@ -40,7 +47,7 @@ public class Scheduler
                 }
                 if (delete)
                 {
-                    basket.delete();
+                    cart.delete();
                 }
             }
         }
