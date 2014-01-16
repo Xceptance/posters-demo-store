@@ -26,6 +26,11 @@ import com.google.inject.Inject;
 import conf.PosterConstants;
 import filters.SessionTerminatedFilter;
 
+/**
+ * Controller class, that provides the cart functionality.
+ * 
+ * @author sebastianloob
+ */
 public class CartController
 {
 
@@ -35,35 +40,37 @@ public class CartController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
-     * Returns the basket overview page.
+     * Returns the cart overview page.
      * 
      * @param context
-     * @return The basket overview page.
+     * @return The cart overview page.
      */
     public Result cart(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        // return basket overview page
+        // return cart overview page
         return Results.html().render(data).template(xcpConf.TEMPLATE_CART_OVERVIEW);
     }
 
     /**
      * Updates the product count of the given product.
      * 
-     * @param basketProductId
+     * @param cartProductId
      * @param productCount
      * @param context
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result updateProductCount(@Param("basketProductId") int basketProductId,
+    public Result updateProductCount(@Param("basketProductId") int cartProductId,
                                      @Param("productCount") String productCount, Context context)
     {
+        // result is a json
         Result result = Results.json();
+        // product count doesn't match regex
         if (!Pattern.matches(xcpConf.REGEX_PRODUCT_COUNT, productCount))
         {
             // show info message
@@ -79,20 +86,20 @@ public class CartController
             {
                 newProductCount = 0;
             }
-            // get basket by session
-            Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
-            // get basket product by id
-            CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
-            Product product = basketProduct.getProduct();
-            int currentProductCount = basketProduct.getProductCount();
+            // get cart by session
+            Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+            // get cart product by id
+            CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+            Product product = cartProduct.getProduct();
+            int currentProductCount = cartProduct.getProductCount();
             int difference = newProductCount - currentProductCount;
             // product must be added
             if (difference > 0)
             {
                 for (int i = 0; i < difference; i++)
                 {
-                    // add product to basket
-                    basket.addProduct(product, basketProduct.getFinish(), basketProduct.getSize());
+                    // add product to cart
+                    cart.addProduct(product, cartProduct.getFinish(), cartProduct.getSize());
                 }
             }
             // product must be removed
@@ -100,42 +107,42 @@ public class CartController
             {
                 for (int i = difference; i < 0; i++)
                 {
-                    // remove product from basket
-                    basket.removeProduct(basketProduct);
+                    // remove product from cart
+                    cart.removeProduct(cartProduct);
                 }
             }
             // add new header
-            result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+            result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
             // add totalPrice
-            result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.CURRENCY));
+            result.render("totalPrice", (cart.getTotalPriceAsString() + xcpConf.CURRENCY));
             return result;
         }
     }
 
     /**
-     * Returns all products of the basket as a json object.
+     * Returns all products of the cart as a json object.
      * 
      * @param context
      * @return
      */
     public Result getCartElementSlider(Context context)
     {
-        // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
-        // get all products of the basket
+        // get cart by session
+        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        // get all products of the cart
         List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
-        List<CartProduct> basketProducts = Ebean.find(CartProduct.class).where().eq("cart", basket)
-                                                .orderBy("lastUpdate desc").findList();
+        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart)
+                                              .orderBy("lastUpdate desc").findList();
         // prepare just some attributes
-        for (CartProduct basketProduct : basketProducts)
+        for (CartProduct cartProduct : cartProducts)
         {
             Map<String, Object> product = new HashMap<String, Object>();
-            product.put("productCount", basketProduct.getProductCount());
-            product.put("productName", basketProduct.getProduct().getName());
-            product.put("productId", basketProduct.getProduct().getId());
-            product.put("productPrice", basketProduct.getPriceAsString());
-            product.put("finish", basketProduct.getFinish());
-            product.put("size", basketProduct.getSize());
+            product.put("productCount", cartProduct.getProductCount());
+            product.put("productName", cartProduct.getProduct().getName());
+            product.put("productId", cartProduct.getProduct().getId());
+            product.put("productPrice", cartProduct.getPriceAsString());
+            product.put("finish", cartProduct.getFinish());
+            product.put("size", cartProduct.getSize());
             results.add(product);
         }
         Result result = Results.json();
@@ -146,7 +153,7 @@ public class CartController
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
         // add total price
-        result.render("totalPrice", basket.getTotalPriceAsString());
+        result.render("totalPrice", cart.getTotalPriceAsString());
         return result;
     }
 
@@ -165,25 +172,25 @@ public class CartController
         Result result = Results.json();
         // get product by id
         Product product = Product.getProductById(Integer.parseInt(productId));
-        // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
+        // get cart by session
+        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get poster size
         String[] dummy = size.split(" ");
         int width = Integer.parseInt(dummy[0]);
         int height = Integer.parseInt(dummy[2]);
         PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
                                      .findUnique();
-        // add product to basket
-        basket.addProduct(product, finish, posterSize);
-        // get added basket product
-        CartProduct basketProduct = Cart.getCartProduct(basket, product, finish, posterSize);
+        // add product to cart
+        cart.addProduct(product, finish, posterSize);
+        // get added cart product
+        CartProduct cartProduct = Cart.getCartProduct(cart, product, finish, posterSize);
         Map<String, Object> updatedProduct = new HashMap<String, Object>();
-        updatedProduct.put("productCount", basketProduct.getProductCount());
-        updatedProduct.put("productName", basketProduct.getProduct().getName());
-        updatedProduct.put("productId", basketProduct.getProduct().getId());
-        updatedProduct.put("productPrice", basketProduct.getPriceAsString());
+        updatedProduct.put("productCount", cartProduct.getProductCount());
+        updatedProduct.put("productName", cartProduct.getProduct().getName());
+        updatedProduct.put("productId", cartProduct.getProduct().getId());
+        updatedProduct.put("productPrice", cartProduct.getPriceAsString());
         updatedProduct.put("finish", finish);
-        updatedProduct.put("size", basketProduct.getSize());
+        updatedProduct.put("size", cartProduct.getSize());
         // add product to result
         result.render("product", updatedProduct);
         // add currency
@@ -191,9 +198,9 @@ public class CartController
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
         // add new header to result
-        result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+        result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add total price
-        result.render("totalPrice", basket.getTotalPriceAsString());
+        result.render("totalPrice", cart.getTotalPriceAsString());
         return result;
     }
 
@@ -208,31 +215,43 @@ public class CartController
     public Result deleteFromCart(@Param("basketProductId") int basketProductId, Context context)
     {
         CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
-        // get basket by session
-        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
+        // get cart by session
+        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get count of this product
         int countProduct = basketProduct.getProductCount();
         // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
-            basket.removeProduct(basketProduct);
+            cart.removeProduct(basketProduct);
         }
         Result result = Results.json();
         // add new header
-        result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
+        result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add totalPrice
-        result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.CURRENCY));
+        result.render("totalPrice", (cart.getTotalPriceAsString() + xcpConf.CURRENCY));
         return result;
     }
 
+    /**
+     * Returns the price of the product with the given size.
+     * 
+     * @param size
+     * @param productId
+     * @param context
+     * @return
+     */
     public Result updatePrice(@Param("size") String size, @Param("productId") int productId, Context context)
     {
+        // split the size to the width and height
         String[] dummy = size.split(" ");
         int width = Integer.parseInt(dummy[0]);
         int height = Integer.parseInt(dummy[2]);
+        // get the specified poster size
         PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
                                      .findUnique();
+        // get the product
         Product product = Product.getProductById(productId);
+        // get the product poster size
         ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
                                                    .eq("size", posterSize).findUnique();
         Result result = Results.json();
@@ -241,13 +260,19 @@ public class CartController
         return result;
     }
 
-    private String prepareCartOverviewInHeader(Cart basket)
+    /**
+     * Returns the text for the cart overview in the header.
+     * 
+     * @param cart
+     * @return
+     */
+    private String prepareCartOverviewInHeader(Cart cart)
     {
         StringBuilder headerCartOverview = new StringBuilder();
         headerCartOverview.append(" " + msg.get("basketOverviewTitle", language).get() + ": ");
-        headerCartOverview.append(basket.getProductCount());
+        headerCartOverview.append(cart.getProductCount());
         headerCartOverview.append(" " + msg.get("basketItem", language).get() + " - ");
-        headerCartOverview.append(basket.getTotalPriceAsString() + xcpConf.CURRENCY);
+        headerCartOverview.append(cart.getTotalPriceAsString() + xcpConf.CURRENCY);
         return headerCartOverview.toString();
     }
 }
