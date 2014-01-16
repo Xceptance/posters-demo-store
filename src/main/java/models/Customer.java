@@ -12,8 +12,6 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import util.session.SessionHandling;
-
 import com.avaje.ebean.Ebean;
 
 @Entity
