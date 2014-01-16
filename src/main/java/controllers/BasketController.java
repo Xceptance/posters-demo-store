@@ -23,7 +23,7 @@ import com.avaje.ebean.Ebean;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 import filters.SessionTerminatedFilter;
 
 public class BasketController
@@ -33,7 +33,7 @@ public class BasketController
     Messages msg;
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
     private Optional language = Optional.of("en");
 
@@ -48,7 +48,7 @@ public class BasketController
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
         // return basket overview page
-        return Results.html().render(data).template(xcpConf.templateBasketOverview);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_CART_OVERVIEW);
     }
 
     /**
@@ -64,7 +64,7 @@ public class BasketController
                                      @Param("productCount") String productCount, Context context)
     {
         Result result = Results.json();
-        if (!Pattern.matches(xcpConf.regexProductCount, productCount))
+        if (!Pattern.matches(xcpConf.REGEX_PRODUCT_COUNT, productCount))
         {
             // show info message
             result.render("message", msg.get("infoProductCount", language).get());
@@ -107,7 +107,7 @@ public class BasketController
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
             // add totalPrice
-            result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.currency));
+            result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.CURRENCY));
             return result;
         }
     }
@@ -142,9 +142,9 @@ public class BasketController
         // add products
         result.render("cartElements", results);
         // add currency
-        result.render("currency", xcpConf.currency);
+        result.render("currency", xcpConf.CURRENCY);
         // add unit of length
-        result.render("unitLength", xcpConf.unitLength);
+        result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
         // add total price
         result.render("totalPrice", basket.getTotalPriceAsString());
         return result;
@@ -187,9 +187,9 @@ public class BasketController
         // add product to result
         result.render("product", updatedProduct);
         // add currency
-        result.render("currency", xcpConf.currency);
+        result.render("currency", xcpConf.CURRENCY);
         // add unit of length
-        result.render("unitLength", xcpConf.unitLength);
+        result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
         // add new header to result
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         // add total price
@@ -221,7 +221,7 @@ public class BasketController
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(basket));
         // add totalPrice
-        result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.currency));
+        result.render("totalPrice", (basket.getTotalPriceAsString() + xcpConf.CURRENCY));
         return result;
     }
 
@@ -237,7 +237,7 @@ public class BasketController
                                                    .eq("size", posterSize).findUnique();
         Result result = Results.json();
         // add new price
-        result.render("newPrice", productPosterSize.getPriceAsString() + xcpConf.currency);
+        result.render("newPrice", productPosterSize.getPriceAsString() + xcpConf.CURRENCY);
         return result;
     }
 
@@ -247,7 +247,7 @@ public class BasketController
         headerCartOverview.append(" " + msg.get("basketOverviewTitle", language).get() + ": ");
         headerCartOverview.append(basket.getProductCount());
         headerCartOverview.append(" " + msg.get("basketItem", language).get() + " - ");
-        headerCartOverview.append(basket.getTotalPriceAsString() + xcpConf.currency);
+        headerCartOverview.append(basket.getTotalPriceAsString() + xcpConf.CURRENCY);
         return headerCartOverview.toString();
     }
 }

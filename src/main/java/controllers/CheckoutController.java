@@ -22,7 +22,7 @@ import util.session.SessionHandling;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 import filters.SessionCustomerFilter;
 import filters.SessionTerminatedFilter;
 
@@ -32,7 +32,7 @@ public class CheckoutController
     Messages msg;
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
     private Optional language = Optional.of("en");
 
@@ -103,7 +103,7 @@ public class CheckoutController
         {
             data.put("address", address);
         }
-        return Results.html().render(data).template(xcpConf.templateDeliveryAddress);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
     }
 
     /**
@@ -129,7 +129,7 @@ public class CheckoutController
                                            @Param("billEqualShipp") String billingEqualDelivery, Context context)
     {
         // check input
-        if (!Pattern.matches(xcpConf.regexZip, zip))
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
@@ -148,7 +148,7 @@ public class CheckoutController
             // show checkout bread crumb
             data.put("checkout", true);
             // show page to enter delivery address again
-            return Results.html().render(data).template(xcpConf.templateDeliveryAddress);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
         }
         // all input fields might be correct
         else
@@ -267,7 +267,7 @@ public class CheckoutController
         data.put("checkout", true);
         data.put("billingAddressActive", true);
         // return page to enter billing address
-        return Results.html().render(data).template(xcpConf.templateBillingAddress);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
     }
 
     /**
@@ -290,7 +290,7 @@ public class CheckoutController
                                           @Param("country") String country, Context context)
     {
         // check input
-        if (!Pattern.matches(xcpConf.regexZip, zip))
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
@@ -310,7 +310,7 @@ public class CheckoutController
             data.put("checkout", true);
             data.put("billingAddressActive", true);
             // show page to enter billing address again
-            return Results.html().render(data).template(xcpConf.templateBillingAddress);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
         }
         // all input fields might be correct
         else
@@ -399,7 +399,7 @@ public class CheckoutController
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
         // return page to enter payment method
-        return Results.html().render(data).template(xcpConf.templatePaymentMethod);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
     }
 
     /**
@@ -420,7 +420,7 @@ public class CheckoutController
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check each regular expression
-        for (String regExCreditCard : xcpConf.regexCreditCard)
+        for (String regExCreditCard : xcpConf.REGEX_CREDITCARD)
         {
             // credit card number is correct
             if (Pattern.matches(regExCreditCard, creditNumber))
@@ -465,7 +465,7 @@ public class CheckoutController
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
         // show page to enter payment method again
-        return Results.html().render(data).template(xcpConf.templatePaymentMethod);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
     }
 
     /**
@@ -514,7 +514,7 @@ public class CheckoutController
         data.put("order", order);
         // add all products of the order
         data.put("orderProducts", order.getProducts());
-        return Results.html().render(data).template(xcpConf.templateCheckoutOverview);
+        return Results.html().render(data);
     }
 
     /**
@@ -562,9 +562,9 @@ public class CheckoutController
         if ((order.getShippingCosts() == 0.0) && (order.getTax() == 0.0))
         {
             // set shipping costs to order
-            order.setShippingCosts(xcpConf.shippingCosts);
+            order.setShippingCosts(xcpConf.SHIPPING_COSTS);
             // set tax to order
-            order.setTax(xcpConf.tax);
+            order.setTax(xcpConf.TAX);
             // calculate total costs
             order.addShippingCostsToTotalCosts();
             order.addTaxToTotalCosts();

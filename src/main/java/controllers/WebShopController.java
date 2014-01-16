@@ -17,13 +17,13 @@ import util.session.SessionHandling;
 import com.avaje.ebean.Ebean;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 
 public class WebShopController
 {
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
     /**
      * Returns the main page of the web shop.
@@ -50,7 +50,7 @@ public class WebShopController
      * @param context
      * @param xcpConf
      */
-    public static void setCommonData(final Map<String, Object> data, Context context, XCPosterConf xcpConf)
+    public static void setCommonData(final Map<String, Object> data, Context context, PosterConstants xcpConf)
     {
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
@@ -74,12 +74,12 @@ public class WebShopController
             data.put("isLogged", false);
         }
         // set application url
-        data.put("applUrlHttp", xcpConf.applicationUrlHttp);
-        data.put("applUrlHttps", xcpConf.applicationUrlHttps);
+        data.put("applUrlHttp", xcpConf.APPLICATION_URL_HTTP);
+        data.put("applUrlHttps", xcpConf.APPLICATION_URL_HTTPS);
         // set currency
-        data.put("currency", xcpConf.currency);
+        data.put("currency", xcpConf.CURRENCY);
         // add unit of length
-        data.put("unitLength", xcpConf.unitLength);
+        data.put("unitLength", xcpConf.UNIT_OF_LENGTH);
     }
 
     /**

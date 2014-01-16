@@ -20,7 +20,7 @@ import com.avaje.ebean.RawSqlBuilder;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 
 public class SearchController
 {
@@ -29,7 +29,7 @@ public class SearchController
     Messages msg;
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
     private Optional language = Optional.of("en");
 
@@ -66,7 +66,7 @@ public class SearchController
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("searchTerm", searchText);
                 data.put("currentPage", 1);
-                return Results.html().render(data).template(xcpConf.templateProductOverview);
+                return Results.html().render(data).template(xcpConf.TEMPLATE_PRODUCT_OVERVIEW);
             }
         }
     }
@@ -127,7 +127,7 @@ public class SearchController
         RawSql rawSql = RawSqlBuilder.parse(sql).create();
         Query<Product> query = Ebean.find(Product.class);
         query.setRawSql(rawSql);
-        int pageSize = xcpConf.pageSize;
+        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // get paging list
         PagingList<Product> pagingList = query.findPagingList(pageSize);
         // get all products to

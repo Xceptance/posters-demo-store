@@ -24,7 +24,7 @@ import com.avaje.ebean.Ebean;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 import filters.SessionCustomerFilter;
 
 public class CustomerController
@@ -34,7 +34,7 @@ public class CustomerController
     Messages msg;
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
     private Optional language = Optional.of("en");
 
@@ -63,7 +63,7 @@ public class CustomerController
     public Result login(@Param("email") String email, @Param("password") String password, Context context)
     {
         // is email valid
-        if (!Pattern.matches(xcpConf.regexEmail, email))
+        if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // error message
             context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
@@ -109,7 +109,7 @@ public class CustomerController
         // show entered email address
         data.put("email", email);
         // show page to log-in again
-        return Results.html().render(data).template(xcpConf.templateLoginForm);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_LOGIN_FORM);
     }
 
     /**
@@ -165,7 +165,7 @@ public class CustomerController
             failure = true;
         }
         // is email valid
-        else if (!Pattern.matches(xcpConf.regexEmail, email))
+        else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // error message
             context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
@@ -188,7 +188,7 @@ public class CustomerController
             registration.put("email", email);
             data.put("registration", registration);
             // show registration page again
-            return Results.html().render(data).template(xcpConf.templateRegistration);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_REGISTRATION);
         }
         // all input fields might be correct
         else
@@ -289,7 +289,7 @@ public class CustomerController
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check input
-        for (String regExCreditCard : xcpConf.regexCreditCard)
+        for (String regExCreditCard : xcpConf.REGEX_CREDITCARD)
         {
             // credit card number is correct
             if (Pattern.matches(regExCreditCard, creditNumber))
@@ -320,7 +320,7 @@ public class CustomerController
         card.put("cardNumber", creditNumber);
         data.put("card", card);
         // show page to enter payment information again
-        return Results.html().render(data).template(xcpConf.templateAddPaymentToCustomer);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_PAYMENT_TO_CUSTOMER);
     }
 
     /**
@@ -365,7 +365,7 @@ public class CustomerController
             data.put("cardId", cardId);
             WebShopController.setCommonData(data, context, xcpConf);
             // show page again
-            return Results.html().render(data).template(xcpConf.templateConfirmDeletePayment);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_PAYMENT);
         }
     }
 
@@ -433,7 +433,7 @@ public class CustomerController
             data.put("deleteAddressURL", "deleteBillingAddress");
             data.put("addressId", addressId);
             // show page again
-            return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
         }
     }
 
@@ -450,7 +450,7 @@ public class CustomerController
         data.put("deleteAddressURL", "deleteBillingAddress");
         data.put("addressId", addressId);
         WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
     }
 
     /**
@@ -483,7 +483,7 @@ public class CustomerController
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteDeliveryAddress");
             data.put("addressId", addressId);
-            return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
         }
     }
 
@@ -500,7 +500,7 @@ public class CustomerController
         data.put("deleteAddressURL", "deleteDeliveryAddress");
         data.put("addressId", addressId);
         WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.templateConfirmDeleteAddress);
+        return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
     }
 
     /**
@@ -539,7 +539,7 @@ public class CustomerController
                                                  @Param("addressId") String addressId, Context context)
     {
         // check input
-        if (!Pattern.matches(xcpConf.regexZip, zip))
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
@@ -557,7 +557,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter delivery address again
-            return Results.html().render(data).template(xcpConf.templateUpdateDeliveryAddress);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_SHIPPING_ADDRESS);
         }
         // all input fields might be correct
         else
@@ -614,7 +614,7 @@ public class CustomerController
                                                 Context context)
     {
         // check input
-        if (!Pattern.matches(xcpConf.regexZip, zip))
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
@@ -632,7 +632,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter billing address again
-            return Results.html().render(data).template(xcpConf.templateUpdateBillingAddress);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_BILLING_ADDRESS);
         }
         // all input fields might be correct
         else
@@ -702,7 +702,7 @@ public class CustomerController
                                                         @Param("addressId") String addressId, Context context)
     {
         // check input
-        if (!Pattern.matches(xcpConf.regexZip, zip))
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
@@ -719,7 +719,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter delivery address again
-            return Results.html().render(data).template(xcpConf.templateAddDeliveryAddressToCustomer);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
         }
         // all input fields might be correct
         else
@@ -782,7 +782,7 @@ public class CustomerController
             address.put("country", country);
             data.put("address", address);
             // show page to enter billing address again
-            return Results.html().render(data).template(xcpConf.templateAddBillingAddressToCustomer);
+            return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_BILLING_ADDRESS_TO_CUSTOMER);
         }
         // all input fields might be correct
         else
@@ -847,7 +847,7 @@ public class CustomerController
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         // email isn't valid
-        else if (!Pattern.matches(xcpConf.regexEmail, email))
+        else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // error message
             context.getFlashCookie().error(msg.get("errorValidEmail", language).get());

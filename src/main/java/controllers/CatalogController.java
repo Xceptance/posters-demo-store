@@ -19,7 +19,7 @@ import com.avaje.ebean.Page;
 import com.avaje.ebean.PagingList;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 
 public class CatalogController
 {
@@ -28,7 +28,7 @@ public class CatalogController
     Messages msg;
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
     /**
      * Returns a product detail page for the given product.
@@ -56,7 +56,7 @@ public class CatalogController
     public Result productOverview(@PathParam("subCategory") String subCategory, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.pageSize;
+        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategory, 1, pageSize, data);
@@ -75,21 +75,21 @@ public class CatalogController
     public Result topCategoryOverview(@PathParam("topCategory") String topCategory, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.pageSize;
+        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategory, 1, pageSize, data);
         // add top category to data map
         data.put("category", TopCategory.getTopCategoryByUrl(topCategory));
         // return product overview page
-        return Results.html().template(xcpConf.templateProductOverview).render(data);
+        return Results.html().template(xcpConf.TEMPLATE_PRODUCT_OVERVIEW).render(data);
     }
 
     public Result getProductOfTopCategory(@Param("pathname") String pathname, @Param("page") int page)
     {
         Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.pageSize;
+        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         String topCategory = pathname.split("/")[2];
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategory, page, pageSize, data);
@@ -100,7 +100,7 @@ public class CatalogController
     {
         Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.pageSize;
+        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         String subCategory = pathname.split("/")[2];
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategory, page, pageSize, data);

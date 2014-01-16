@@ -14,8 +14,8 @@ public class Module extends AbstractModule
         // install ebean module
         install(new NinjaEbeanModule());
         // bind configuration class
-        bind(XCPosterConf.class);
-        requestStaticInjection(XCPosterConf.class);
+        bind(PosterConstants.class);
+        requestStaticInjection(PosterConstants.class);
         // bind starter class
         bind(JobController.class);
         // bind scheduler class
