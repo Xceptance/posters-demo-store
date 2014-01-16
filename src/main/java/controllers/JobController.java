@@ -20,10 +20,20 @@ import com.google.inject.Singleton;
 
 import conf.StarterConf;
 
+/**
+ * Executes some actions, before the application starts.
+ * 
+ * @author sebastianloob
+ */
 @Singleton
 public class JobController
 {
 
+    /**
+     * Prepares the database and, if necessary, imports some data to the database.
+     * 
+     * @throws Exception
+     */
     @Start(order = 90)
     public void startActions() throws Exception
     {
@@ -33,11 +43,17 @@ public class JobController
         System.setProperty("ninja.mode", "prod");
 
         StarterConf config = new StarterConf();
+        // prepare database
         prepareDatabase(config);
         // import categories, products and dummy customer
         importData(config);
     }
 
+    /**
+     * Prepares the database. Drops all tables, if it is set. Creates a new database, if necessary.
+     * 
+     * @param config
+     */
     private void prepareDatabase(StarterConf config)
     {
         // handle the connection
@@ -134,6 +150,11 @@ public class JobController
         }
     }
 
+    /**
+     * Imports some data, if the database is empty.
+     * 
+     * @param config
+     */
     private void importData(StarterConf config)
     {
         // import categories, if there is no category in DB
