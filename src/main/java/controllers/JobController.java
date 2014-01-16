@@ -13,11 +13,12 @@ import ninja.lifecycle.Start;
 
 import org.h2.tools.RunScript;
 
-import util.starter.StarterConf;
 import util.xml.ImportFromXMLToDB;
 
 import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
+
+import conf.StarterConf;
 
 @Singleton
 public class JobController
