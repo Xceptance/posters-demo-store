@@ -27,6 +27,11 @@ import com.google.inject.Inject;
 import conf.PosterConstants;
 import filters.SessionCustomerFilter;
 
+/**
+ * Controller class, that provides the customer functionality.
+ * 
+ * @author sebastianloob
+ */
 public class CustomerController
 {
 
@@ -36,7 +41,7 @@ public class CustomerController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
      * Returns a page to log in to the customer backend.
@@ -62,10 +67,10 @@ public class CustomerController
      */
     public Result login(@Param("email") String email, @Param("password") String password, Context context)
     {
-        // is email valid
+        // email is not valid
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
         }
         else
@@ -75,7 +80,12 @@ public class CustomerController
             // get customer by the given email
             Customer customer = Customer.getCustomerByEmail(email);
             // is the password correct
-            boolean correctPassowrd = customer.checkPasswd(password);
+            boolean correctPassowrd = false;
+            // check password, if the email exist
+            if (emailExist)
+            {
+                correctPassowrd = customer.checkPasswd(password);
+            }
             // email and password are correct
             if (emailExist && correctPassowrd)
             {
@@ -122,14 +132,14 @@ public class CustomerController
     {
         // remove customer from session
         SessionHandling.removeCustomerId(context);
-        // remove basket from session
+        // remove cart from session
         SessionHandling.removeCartId(context);
         // show home page
         return Results.redirect(context.getContextPath() + "/");
     }
 
     /**
-     * Returns the page to enter account information to create a new one.
+     * Returns the page to create a new account.
      * 
      * @param context
      * @return
@@ -157,24 +167,24 @@ public class CustomerController
                                         @Param("passwordAgain") String passwordAgain, Context context)
     {
         boolean failure = false;
-        // email must be unique
+        // account with this email already exist
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
             failure = true;
         }
-        // is email valid
+        // email is not valid
         else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
@@ -238,7 +248,7 @@ public class CustomerController
     }
 
     /**
-     * Returns an overview page of payment information of the customer.
+     * Returns an overview page of payment methods of the customer.
      * 
      * @param context
      * @return
@@ -250,7 +260,7 @@ public class CustomerController
         WebShopController.setCommonData(data, context, xcpConf);
         // get customer by session
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // add payment information
+        // add payment methods
         data.put("paymentOverview", customer.getCreditCard());
         return Results.html().render(data);
     }
@@ -272,7 +282,7 @@ public class CustomerController
     }
 
     /**
-     * Adds a new payment information to the customer.
+     * Adds a new payment method to the customer.
      * 
      * @param creditNumber
      * @param name
@@ -310,9 +320,10 @@ public class CustomerController
                 return Results.redirect(context.getContextPath() + "/paymentOverview");
             }
         }
+        // credit card number is not valid
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        // error message
+        // show error message
         context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
         Map<String, String> card = new HashMap<String, String>();
@@ -324,7 +335,7 @@ public class CustomerController
     }
 
     /**
-     * Returns a page to enter payment information.
+     * Returns a page to enter a payment method.
      * 
      * @param context
      * @return
@@ -338,7 +349,7 @@ public class CustomerController
     }
 
     /**
-     * Removes a payment information of the customer.
+     * Removes a payment method of the customer.
      * 
      * @param cardId
      * @param context
@@ -352,7 +363,7 @@ public class CustomerController
         if (customer.checkPasswd(password))
         {
             CreditCard.removeCreditCardFromCustomer(cardId);
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             // show payment overview page
             return Results.redirect(context.getContextPath() + "/paymentOverview");
@@ -361,6 +372,7 @@ public class CustomerController
         else
         {
             final Map<String, Object> data = new HashMap<String, Object>();
+            // show error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("cardId", cardId);
             WebShopController.setCommonData(data, context, xcpConf);
@@ -370,7 +382,7 @@ public class CustomerController
     }
 
     /**
-     * Returns the page to confirm the deletion of a credit card.
+     * Returns the page to confirm the deletion of a payment method.
      * 
      * @param cardId
      * @param context
@@ -385,7 +397,7 @@ public class CustomerController
     }
 
     /**
-     * Returns an overview page of billing and delivery addresses of the customer.
+     * Returns an overview page of billing and shipping addresses of the customer.
      * 
      * @param context
      * @return
@@ -395,7 +407,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // add all delivery addresses
+        // add all shipping addresses
         data.put("deliveryAddresses", customer.getShippingAddress());
         // add all billing addresses
         data.put("billingAddresses", customer.getBillingAddress());
@@ -420,7 +432,7 @@ public class CustomerController
         {
             // remove billing address
             BillingAddress.deleteBillingAddressFromCustomer(addressId);
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
@@ -429,6 +441,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
+            // show error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteBillingAddress");
             data.put("addressId", addressId);
@@ -454,14 +467,14 @@ public class CustomerController
     }
 
     /**
-     * Removes a delivery address of the customer.
+     * Removes a shipping address of the customer.
      * 
      * @param cardId
      * @param context
      * @return
      */
     @FilterWith(SessionCustomerFilter.class)
-    public Result deleteDeliveryAddress(@Param("password") String password, @Param("addressId") int addressId,
+    public Result deleteShippingAddress(@Param("password") String password, @Param("addressId") int addressId,
                                         Context context)
     {
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
@@ -470,7 +483,7 @@ public class CustomerController
         {
             // remove shipping address
             ShippingAddress.removeCustomerFromShippingAddress(addressId);
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             // show address overview page
             return Results.redirect(context.getContextPath() + "/addressOverview");
@@ -480,6 +493,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
+            // show error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteDeliveryAddress");
             data.put("addressId", addressId);
@@ -488,13 +502,13 @@ public class CustomerController
     }
 
     /**
-     * Returns the page to confirm the deletion of a delivery address.
+     * Returns the page to confirm the deletion of a shipping address.
      * 
      * @param addressId
      * @param context
      * @return
      */
-    public Result confirmDeleteDeliveryAddress(@Param("addressId") int addressId, Context context)
+    public Result confirmDeleteShippingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("deleteAddressURL", "deleteDeliveryAddress");
@@ -504,13 +518,13 @@ public class CustomerController
     }
 
     /**
-     * Returns the page to update a delivery address of the customer.
+     * Returns the page to update a shipping address of the customer.
      * 
      * @param cardId
      * @param context
      * @return
      */
-    public Result updateDeliveryAddress(@Param("addressId") int addressId, Context context)
+    public Result updateShippingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("address", ShippingAddress.getShippingAddressById(addressId));
@@ -519,7 +533,7 @@ public class CustomerController
     }
 
     /**
-     * Updates a delivery address of the customer.
+     * Updates a shipping address of the customer.
      * 
      * @param name
      * @param company
@@ -532,7 +546,7 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result updateDeliveryAddressCompleted(@Param("fullName") String name, @Param("company") String company,
+    public Result updateShippingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                                  @Param("addressLine") String addressLine, @Param("city") String city,
                                                  @Param("state") String state, @Param("zip") String zip,
                                                  @Param("country") String country,
@@ -543,7 +557,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -556,7 +570,7 @@ public class CustomerController
             address.put("zip", zip);
             address.put("country", country);
             data.put("address", address);
-            // show page to enter delivery address again
+            // show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_SHIPPING_ADDRESS);
         }
         // all input fields might be correct
@@ -572,7 +586,7 @@ public class CustomerController
             address.setCountry(country);
             // update address
             address.update();
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successUpdate", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
@@ -618,7 +632,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -647,19 +661,19 @@ public class CustomerController
             address.setZip(zip);
             address.setCountry(country);
             address.update();
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successUpdate", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
 
     /**
-     * Returns a page to enter a new delivery address.
+     * Returns a page to enter a new shipping address.
      * 
      * @param context
      * @return
      */
-    public Result addDeliveryAddressToCustomer(Context context)
+    public Result addShippingAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -680,7 +694,7 @@ public class CustomerController
     }
 
     /**
-     * Adds a new delivery address to a customer.
+     * Adds a new shipping address to a customer.
      * 
      * @param name
      * @param company
@@ -694,7 +708,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerFilter.class)
-    public Result addDeliveryAddressToCustomerCompleted(@Param("fullName") String name,
+    public Result addShippingAddressToCustomerCompleted(@Param("fullName") String name,
                                                         @Param("company") String company,
                                                         @Param("addressLine") String addressLine,
                                                         @Param("city") String city, @Param("state") String state,
@@ -706,7 +720,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -718,7 +732,7 @@ public class CustomerController
             address.put("zip", zip);
             address.put("country", country);
             data.put("address", address);
-            // show page to enter delivery address again
+            // show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
         }
         // all input fields might be correct
@@ -736,7 +750,7 @@ public class CustomerController
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
             customer.update();
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
@@ -769,7 +783,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -788,7 +802,6 @@ public class CustomerController
         else
         {
             BillingAddress address = new BillingAddress();
-
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -800,7 +813,7 @@ public class CustomerController
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addBillingAddress(address);
             customer.update();
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
@@ -842,21 +855,21 @@ public class CustomerController
         // incorrect password
         if (!customer.checkPasswd(password))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         // email isn't valid
         else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         // email already exist
         else if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
@@ -864,7 +877,7 @@ public class CustomerController
         customer.setFirstName(firstName);
         customer.setEmail(email);
         customer.update();
-        // success message
+        // show success message
         context.getFlashCookie().success(msg.get("successUpdate", language).get());
         return Results.redirect(context.getContextPath() + "/settingOverview");
     }
@@ -901,14 +914,14 @@ public class CustomerController
         // incorrect password
         if (!customer.checkPasswd(oldPassword))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
@@ -921,7 +934,7 @@ public class CustomerController
         {
             customer.hashPasswd(password);
             customer.update();
-            // success message
+            // show success message
             context.getFlashCookie().success(msg.get("successUpdate", language).get());
             return Results.redirect(context.getContextPath() + "/settingOverview");
         }
@@ -956,14 +969,14 @@ public class CustomerController
         {
             // remove customer from session
             SessionHandling.removeCustomerId(context);
-            // remove basket from session
+            // remove cart from session
             SessionHandling.removeCartId(context);
-            // remove customer's basket
-            Cart basket = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
-            if (basket != null)
+            // remove customer's cart
+            Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
+            if (cart != null)
             {
-                basket.setCustomer(null);
-                basket.update();
+                cart.setCustomer(null);
+                cart.update();
             }
             // remove customers orders --> deletes also customer --> deletes also addresses and payment information
             List<Order> orders = customer.getOrder();
@@ -976,6 +989,7 @@ public class CustomerController
             {
                 Ebean.delete(customer);
             }
+            // show success message
             context.getFlashCookie().success(msg.get("successDeleteAccount", language).get());
             // return home page
             return Results.redirect(context.getContextPath() + "/");
@@ -989,13 +1003,18 @@ public class CustomerController
         }
     }
 
+    /**
+     * Merges the current cart from the session and the customer's cart.
+     * 
+     * @param context
+     */
     private static void mergeCurrentCartAndCustomerCart(Context context)
     {
         if (SessionHandling.isCustomerLogged(context))
         {
-            // get current basket
+            // get current cart
             Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context));
-            // get basket of customer
+            // get cart of customer
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getCart() == null)
             {

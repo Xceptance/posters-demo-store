@@ -61,22 +61,22 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // customer's addresses
         // ############################################################
-        router.POST().route("/updateDeliveryAddress").with(CustomerController.class, "updateDeliveryAddress");
+        router.POST().route("/updateDeliveryAddress").with(CustomerController.class, "updateShippingAddress");
         router.POST().route("/updateDeliveryAddressCompleted")
-              .with(CustomerController.class, "updateDeliveryAddressCompleted");
+              .with(CustomerController.class, "updateShippingAddressCompleted");
         router.POST().route("/updateBillingAddress").with(CustomerController.class, "updateBillingAddress");
         router.POST().route("/updateBillingAddressCompleted")
               .with(CustomerController.class, "updateBillingAddressCompleted");
         router.POST().route("/deleteBillingAddress").with(CustomerController.class, "deleteBillingAddress");
         router.POST().route("/confirmDeleteBillingAddress")
               .with(CustomerController.class, "confirmDeleteBillingAddress");
-        router.POST().route("/deleteDeliveryAddress").with(CustomerController.class, "deleteDeliveryAddress");
+        router.POST().route("/deleteDeliveryAddress").with(CustomerController.class, "deleteShippingAddress");
         router.POST().route("/confirmDeleteDeliveryAddress")
-              .with(CustomerController.class, "confirmDeleteDeliveryAddress");
+              .with(CustomerController.class, "confirmDeleteShippingAddress");
         router.GET().route("/addDeliveryAddressToCustomer")
-              .with(CustomerController.class, "addDeliveryAddressToCustomer");
+              .with(CustomerController.class, "addShippingAddressToCustomer");
         router.POST().route("/addDeliveryAddressToCustomerCompleted")
-              .with(CustomerController.class, "addDeliveryAddressToCustomerCompleted");
+              .with(CustomerController.class, "addShippingAddressToCustomerCompleted");
         router.GET().route("/addBillingAddressToCustomer")
               .with(CustomerController.class, "addBillingAddressToCustomer");
         router.POST().route("/addBillingAddressToCustomerCompleted")
