@@ -21,6 +21,11 @@ import com.google.inject.Inject;
 
 import conf.PosterConstants;
 
+/**
+ * Controller class, that provides the catalog functionality.
+ * 
+ * @author sebastianloob
+ */
 public class CatalogController
 {
 
@@ -85,22 +90,38 @@ public class CatalogController
         return Results.html().template(xcpConf.TEMPLATE_PRODUCT_OVERVIEW).render(data);
     }
 
+    /**
+     * Returns the products of the top category for the given page number as JSON.
+     * 
+     * @param pathname
+     * @param page
+     * @return
+     */
     public Result getProductOfTopCategory(@Param("pathname") String pathname, @Param("page") int page)
     {
         Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        // get the name of the top category from the path
         String topCategory = pathname.split("/")[2];
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategory, page, pageSize, data);
         return result.render(data);
     }
 
+    /**
+     * Returns the products of the sub category for the given page number as JSON.
+     * 
+     * @param pathname
+     * @param page
+     * @return
+     */
     public Result getProductOfSubCategory(@Param("pathname") String pathname, @Param("page") int page)
     {
         Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        // get the name of the sub category from the path
         String subCategory = pathname.split("/")[2];
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategory, page, pageSize, data);
@@ -108,9 +129,11 @@ public class CatalogController
     }
 
     /**
-     * Adds all products, which should be shown in the given top category, to the given data map.
+     * Adds products of the given top category to the given data map, according to the given page number.
      * 
-     * @param topCategory
+     * @param topCategoryUrl
+     * @param pageNumber
+     * @param pageSize
      * @param data
      */
     private static void addTopCategoryProductsToMap(String topCategoryUrl, int pageNumber, int pageSize,
@@ -126,9 +149,11 @@ public class CatalogController
     }
 
     /**
-     * Adds all products from the given sub category to the given data map.
+     * Adds products of the given sub category to the given data map, according to the given page number.
      * 
-     * @param category
+     * @param subCategoryUrl
+     * @param pageNumber
+     * @param pageSize
      * @param data
      */
     private static void addSubCategoryProductsToMap(String subCategoryUrl, int pageNumber, int pageSize,
@@ -143,6 +168,13 @@ public class CatalogController
         createPagingListProductOverview(pagingList, pageNumber, data);
     }
 
+    /**
+     * Adds the product from the given paging list to the data map.
+     * 
+     * @param pagingList
+     * @param pageNumber
+     * @param data
+     */
     private static void createPagingListProductOverview(PagingList<Product> pagingList, int pageNumber,
                                                         final Map<String, Object> data)
     {
