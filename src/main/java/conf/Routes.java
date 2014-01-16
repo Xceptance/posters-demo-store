@@ -10,6 +10,11 @@ import controllers.CustomerController;
 import controllers.SearchController;
 import controllers.WebShopController;
 
+/**
+ * This class provides all routes of the application.
+ * 
+ * @author sebastianloob
+ */
 public class Routes implements ApplicationRoutes
 {
 

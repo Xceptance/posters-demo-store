@@ -3,6 +3,11 @@ package conf;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
+/**
+ * Collection of some constants, which are used to start the application.
+ * 
+ * @author sebastianloob
+ */
 public class StarterConf
 {
 
