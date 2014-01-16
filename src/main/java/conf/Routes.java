@@ -3,7 +3,7 @@ package conf;
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
-import controllers.BasketController;
+import controllers.CartController;
 import controllers.CatalogController;
 import controllers.CheckoutController;
 import controllers.CustomerController;
@@ -104,12 +104,12 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // cart
         // ############################################################
-        router.GET().route("/addToCartSlider").with(BasketController.class, "addToCart");
-        router.GET().route("/basket").with(BasketController.class, "basket");
-        router.GET().route("/getCartElementSlider").with(BasketController.class, "getCartElementSlider");
-        router.GET().route("/deleteFromCart").with(BasketController.class, "deleteFromCart");
-        router.GET().route("/updateProductCount").with(BasketController.class, "updateProductCount");
-        router.POST().route("/updatePrice").with(BasketController.class, "updatePrice");
+        router.GET().route("/addToCartSlider").with(CartController.class, "addToCart");
+        router.GET().route("/basket").with(CartController.class, "cart");
+        router.GET().route("/getCartElementSlider").with(CartController.class, "getCartElementSlider");
+        router.GET().route("/deleteFromCart").with(CartController.class, "deleteFromCart");
+        router.GET().route("/updateProductCount").with(CartController.class, "updateProductCount");
+        router.POST().route("/updatePrice").with(CartController.class, "updatePrice");
 
         // ############################################################
         // checkout

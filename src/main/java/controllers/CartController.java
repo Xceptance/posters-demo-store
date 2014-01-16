@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 import conf.PosterConstants;
 import filters.SessionTerminatedFilter;
 
-public class BasketController
+public class CartController
 {
 
     @Inject
@@ -43,7 +43,7 @@ public class BasketController
      * @param context
      * @return The basket overview page.
      */
-    public Result basket(Context context)
+    public Result cart(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);

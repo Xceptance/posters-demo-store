@@ -38,7 +38,7 @@ public class PosterConstants
     /**
      * The path to the cart overview template.
      */
-    public final String TEMPLATE_CART_OVERVIEW = "views/BasketController/basketOverview.ftl.html";
+    public final String TEMPLATE_CART_OVERVIEW = "views/CartController/cartOverview.ftl.html";
 
     /**
      * The path to the product overview template.
