@@ -26,6 +26,11 @@ import conf.PosterConstants;
 import filters.SessionCustomerFilter;
 import filters.SessionTerminatedFilter;
 
+/**
+ * Controller class, that provides the checkout functionality.
+ * 
+ * @author sebastianloob
+ */
 public class CheckoutController
 {
     @Inject
@@ -34,11 +39,10 @@ public class CheckoutController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
-     * Starts the checkout. Returns an error page, if the basket is empty, otherwise the page to enter a delivery
-     * address.
+     * Starts the checkout. Returns an error page, if the cart is empty, otherwise the page to enter a shipping address.
      * 
      * @param context
      * @return
@@ -46,17 +50,17 @@ public class CheckoutController
     @FilterWith(SessionTerminatedFilter.class)
     public Result checkout(Context context)
     {
-        // get basket by session id
-        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
-        // check, if the basket is empty
-        if (basket.getProducts().size() == 0)
+        // get cart by session id
+        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        // check, if the cart is empty
+        if (cart.getProducts().size() == 0)
         {
-            // show info
+            // show info message
             context.getFlashCookie().put("info", msg.get("infoEmptyBasket", language).get());
-            // return basket overview page
+            // return cart overview page
             return Results.redirect(context.getContextPath() + "/basket");
         }
-        // start checkout, if the basket is not empty
+        // start checkout, if the cart is not empty
         else
         {
             // create new order
@@ -65,8 +69,8 @@ public class CheckoutController
             SessionHandling.removeOrderId(context);
             // put new order id to session
             SessionHandling.setOrderId(context, order.getId());
-            // set basket to order
-            order.addProductsFromCart(basket);
+            // add the products from the cart to the order
+            order.addProductsFromCart(cart);
             // update order
             order.update();
             // return page to enter shipping address
@@ -88,8 +92,9 @@ public class CheckoutController
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
+            // get customer
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add all delivery addresses
+            // add all shipping addresses
             data.put("deliveryAddresses", customer.getShippingAddress());
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
@@ -107,8 +112,8 @@ public class CheckoutController
     }
 
     /**
-     * Creates a new delivery address. Returns the page to enter payment information, if the billing address is equal to
-     * the delivery address, otherwise the page to enter a billing address.
+     * Creates a new shipping address. Returns the page to enter payment information, if the billing address is equal to
+     * the shipping address, otherwise the page to enter a billing address.
      * 
      * @param name
      * @param company
@@ -122,7 +127,7 @@ public class CheckoutController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result deliveryAddressCompleted(@Param("fullName") String name, @Param("company") String company,
+    public Result shippingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                            @Param("addressLine") String addressLine, @Param("city") String city,
                                            @Param("state") String state, @Param("zip") String zip,
                                            @Param("country") String country,
@@ -133,7 +138,7 @@ public class CheckoutController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -147,38 +152,38 @@ public class CheckoutController
             data.put("address", address);
             // show checkout bread crumb
             data.put("checkout", true);
-            // show page to enter delivery address again
+            // show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
         }
         // all input fields might be correct
         else
         {
-            // create delivery address
-            ShippingAddress deliveryAddress = new ShippingAddress();
-            deliveryAddress.setName(name);
-            deliveryAddress.setCompany(company);
-            deliveryAddress.setAddressLine(addressLine);
-            deliveryAddress.setCity(city);
-            deliveryAddress.setState(state);
-            deliveryAddress.setZip(zip);
-            deliveryAddress.setCountry(country);
+            // create shipping address
+            ShippingAddress shippingAddress = new ShippingAddress();
+            shippingAddress.setName(name);
+            shippingAddress.setCompany(company);
+            shippingAddress.setAddressLine(addressLine);
+            shippingAddress.setCity(city);
+            shippingAddress.setState(state);
+            shippingAddress.setZip(zip);
+            shippingAddress.setCountry(country);
             // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
             {
-                Customer.getCustomerById(SessionHandling.getCustomerId(context)).addShippingAddress(deliveryAddress);
+                Customer.getCustomerById(SessionHandling.getCustomerId(context)).addShippingAddress(shippingAddress);
             }
-            // save delivery address
+            // save shipping address
             else
             {
-                deliveryAddress.save();
+                shippingAddress.save();
             }
             // get order by session id
             Order order = Order.getOrderById(SessionHandling.getOrderId(context));
-            // set delivery address to order
-            order.setShippingAddress(deliveryAddress);
+            // set shipping address to order
+            order.setShippingAddress(shippingAddress);
             // update order
             order.update();
-            // billing address is equal to delivery address
+            // billing address is equal to shipping address
             if (billingEqualDelivery.equals("Yes"))
             {
                 // create billing address
@@ -207,7 +212,7 @@ public class CheckoutController
                 // return page to enter payment information
                 return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
             }
-            // billing and delivery address are not equal
+            // billing and shipping address are not equal
             else
             {
                 // return page to enter billing address
@@ -217,21 +222,21 @@ public class CheckoutController
     }
 
     /**
-     * Adds the delivery address to the order. Returns the page to enter the billing address.
+     * Adds the shipping address to the order. Returns the page to enter the billing address.
      * 
      * @param addressId
      * @param context
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result addDeliveryAddressToOrder(@Param("addressId") String addressId, Context context)
+    public Result addShippingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
-        // get delivery address
-        ShippingAddress deliveryAddress = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
+        // get shipping address
+        ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
         // get order by session id
         Order order = Order.getOrderById(SessionHandling.getOrderId(context));
-        // set delivery address to order
-        order.setShippingAddress(deliveryAddress);
+        // set shipping address to order
+        order.setShippingAddress(shippingAddress);
         // update order
         order.update();
         // return page to enter billing address
@@ -252,7 +257,7 @@ public class CheckoutController
         if (SessionHandling.isCustomerLogged(context))
         {
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add all delivery addresses
+            // add all shipping addresses
             data.put("deliveryAddresses", customer.getShippingAddress());
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
@@ -294,7 +299,7 @@ public class CheckoutController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
@@ -454,7 +459,7 @@ public class CheckoutController
         // credit card was wrong
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        // error message
+        // show error message
         context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
         Map<String, String> card = new HashMap<String, String>();
@@ -518,8 +523,8 @@ public class CheckoutController
     }
 
     /**
-     * Removes the basket and the order from the session. Cleans the basket, which means to delete all products in the
-     * basket. Returns the page, that the order was successful.
+     * Removes the cart and the order from the session. Cleans the cart, which means to remove all products from the
+     * cart. Returns the page, that the order was successful.
      * 
      * @param context
      * @return
@@ -542,11 +547,11 @@ public class CheckoutController
         }
         // update order
         order.update();
-        // get basket by session id
-        Cart basket = Cart.getCartById(SessionHandling.getCartId(context));
-        // remove basket
-        basket.delete();
-        // remove basket from session
+        // get cart by session id
+        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        // remove cart
+        cart.delete();
+        // remove cart from session
         SessionHandling.removeCartId(context);
         // remove order from session
         SessionHandling.removeOrderId(context);
@@ -555,6 +560,11 @@ public class CheckoutController
         return Results.redirect(context.getContextPath() + "/");
     }
 
+    /**
+     * Adds the shipping costs and tax to the price of the order.
+     * 
+     * @param context
+     */
     private void calculateShippingAndTax(Context context)
     {
         // get order by session id
