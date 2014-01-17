@@ -48,7 +48,7 @@ public class PosterConstants
     /**
      * The path to the template to enter a shipping address.
      */
-    public final String TEMPLATE_SHIPPING_ADDRESS = "views/CheckoutController/deliveryAddress.ftl.html";
+    public final String TEMPLATE_SHIPPING_ADDRESS = "views/CheckoutController/shippingAddress.ftl.html";
 
     /**
      * The path to the template to enter a billing address.
@@ -73,7 +73,7 @@ public class PosterConstants
     /**
      * The path to the template to add a customer's shipping address.
      */
-    public final String TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER = "views/CustomerController/addDeliveryAddressToCustomer.ftl.html";
+    public final String TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER = "views/CustomerController/addShippingAddressToCustomer.ftl.html";
 
     /**
      * The path to the template to add a customer's billing address.
@@ -83,7 +83,7 @@ public class PosterConstants
     /**
      * The path to the template to update a customer's shipping address.
      */
-    public final String TEMPLATE_UPDATE_SHIPPING_ADDRESS = "views/CustomerController/updateDeliveryAddress.ftl.html";
+    public final String TEMPLATE_UPDATE_SHIPPING_ADDRESS = "views/CustomerController/updateShippingAddress.ftl.html";
 
     /**
      * The path to the template to update a customer's billing address.

@@ -61,8 +61,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // customer's addresses
         // ############################################################
-        router.POST().route("/updateDeliveryAddress").with(CustomerController.class, "updateShippingAddress");
-        router.POST().route("/updateDeliveryAddressCompleted")
+        router.POST().route("/updateShippingAddress").with(CustomerController.class, "updateShippingAddress");
+        router.POST().route("/updateShippingAddressCompleted")
               .with(CustomerController.class, "updateShippingAddressCompleted");
         router.POST().route("/updateBillingAddress").with(CustomerController.class, "updateBillingAddress");
         router.POST().route("/updateBillingAddressCompleted")
@@ -70,12 +70,12 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/deleteBillingAddress").with(CustomerController.class, "deleteBillingAddress");
         router.POST().route("/confirmDeleteBillingAddress")
               .with(CustomerController.class, "confirmDeleteBillingAddress");
-        router.POST().route("/deleteDeliveryAddress").with(CustomerController.class, "deleteShippingAddress");
-        router.POST().route("/confirmDeleteDeliveryAddress")
+        router.POST().route("/deleteShippingAddress").with(CustomerController.class, "deleteShippingAddress");
+        router.POST().route("/confirmDeleteShippingAddress")
               .with(CustomerController.class, "confirmDeleteShippingAddress");
-        router.GET().route("/addDeliveryAddressToCustomer")
+        router.GET().route("/addShippingAddressToCustomer")
               .with(CustomerController.class, "addShippingAddressToCustomer");
-        router.POST().route("/addDeliveryAddressToCustomerCompleted")
+        router.POST().route("/addShippingAddressToCustomerCompleted")
               .with(CustomerController.class, "addShippingAddressToCustomerCompleted");
         router.GET().route("/addBillingAddressToCustomer")
               .with(CustomerController.class, "addBillingAddressToCustomer");
@@ -116,10 +116,10 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/checkout").with(CheckoutController.class, "checkout");
         router.GET().route("/enterShippingAddress").with(CheckoutController.class, "enterShippingAddress");
-        router.POST().route("/deliveryAddressCompleted").with(CheckoutController.class, "shippingAddressCompleted");
+        router.POST().route("/shippingAddressCompleted").with(CheckoutController.class, "shippingAddressCompleted");
         router.GET().route("/enterBillingAddress").with(CheckoutController.class, "enterBillingAddress");
         router.POST().route("/billingAddressCompleted").with(CheckoutController.class, "billingAddressCompleted");
-        router.POST().route("/addDeliveryAddressToOrder").with(CheckoutController.class, "addShippingAddressToOrder");
+        router.POST().route("/addShippingAddressToOrder").with(CheckoutController.class, "addShippingAddressToOrder");
         router.POST().route("/addBillingAddressToOrder").with(CheckoutController.class, "addBillingAddressToOrder");
         router.GET().route("/enterPaymentMethod").with(CheckoutController.class, "enterPaymentMethod");
         router.POST().route("/addPaymentToOrder").with(CheckoutController.class, "addPaymentToOrder");

@@ -23,7 +23,6 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
-import filters.SessionCustomerFilter;
 import filters.SessionTerminatedFilter;
 
 /**
@@ -95,7 +94,7 @@ public class CheckoutController
             // get customer
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // add all shipping addresses
-            data.put("deliveryAddresses", customer.getShippingAddress());
+            data.put("shippingAddresses", customer.getShippingAddress());
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
         }
@@ -122,7 +121,7 @@ public class CheckoutController
      * @param state
      * @param zip
      * @param country
-     * @param billingEqualDelivery
+     * @param billingEqualShipp
      * @param context
      * @return
      */
@@ -131,7 +130,7 @@ public class CheckoutController
                                            @Param("addressLine") String addressLine, @Param("city") String city,
                                            @Param("state") String state, @Param("zip") String zip,
                                            @Param("country") String country,
-                                           @Param("billEqualShipp") String billingEqualDelivery, Context context)
+                                           @Param("billEqualShipp") String billingEqualShipping, Context context)
     {
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
@@ -184,7 +183,7 @@ public class CheckoutController
             // update order
             order.update();
             // billing address is equal to shipping address
-            if (billingEqualDelivery.equals("Yes"))
+            if (billingEqualShipping.equals("Yes"))
             {
                 // create billing address
                 BillingAddress billingAddress = new BillingAddress();
@@ -258,7 +257,7 @@ public class CheckoutController
         {
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // add all shipping addresses
-            data.put("deliveryAddresses", customer.getShippingAddress());
+            data.put("shippingAddresses", customer.getShippingAddress());
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
         }
@@ -378,10 +377,7 @@ public class CheckoutController
      * @param context
      * @return
      */
-    @FilterWith(
-        {
-            SessionTerminatedFilter.class, SessionCustomerFilter.class
-        })
+    @FilterWith(SessionTerminatedFilter.class)
     public Result enterPaymentMethod(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();

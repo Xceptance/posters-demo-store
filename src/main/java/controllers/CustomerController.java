@@ -408,7 +408,7 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // add all shipping addresses
-        data.put("deliveryAddresses", customer.getShippingAddress());
+        data.put("shippingAddresses", customer.getShippingAddress());
         // add all billing addresses
         data.put("billingAddresses", customer.getBillingAddress());
         WebShopController.setCommonData(data, context, xcpConf);
@@ -495,7 +495,7 @@ public class CustomerController
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
             context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("deleteAddressURL", "deleteDeliveryAddress");
+            data.put("deleteAddressURL", "deleteShippingAddress");
             data.put("addressId", addressId);
             return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
         }
@@ -511,7 +511,7 @@ public class CustomerController
     public Result confirmDeleteShippingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("deleteAddressURL", "deleteDeliveryAddress");
+        data.put("deleteAddressURL", "deleteShippingAddress");
         data.put("addressId", addressId);
         WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
@@ -749,7 +749,6 @@ public class CustomerController
             // add address to customer
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
-            customer.update();
             // show success message
             context.getFlashCookie().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
@@ -812,7 +811,6 @@ public class CustomerController
             // add address to customer
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addBillingAddress(address);
-            customer.update();
             // show success message
             context.getFlashCookie().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");

@@ -68,7 +68,7 @@ public class JobController
             boolean billingAddressTable = false;
             boolean creditCardTable = false;
             boolean customerTable = false;
-            boolean deliveryAddressTable = false;
+            boolean shippingAddressTable = false;
             boolean orderProductTable = false;
             boolean orderTable = false;
             boolean productTable = false;
@@ -111,7 +111,7 @@ public class JobController
                 }
                 if (rs.getString(3).equals("SHIPPINGADDRESS"))
                 {
-                    deliveryAddressTable = true;
+                    shippingAddressTable = true;
                 }
                 if (rs.getString(3).equals("ORDERPRODUCT"))
                 {
@@ -136,7 +136,7 @@ public class JobController
             }
             // create the tables if they not exist
             if (!(basketProductTable && basketTable && billingAddressTable && creditCardTable && customerTable
-                  && deliveryAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
+                  && shippingAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
             {
                 // simply execute the create-script
                 RunScript.execute(connection, new FileReader("default-create.sql"));

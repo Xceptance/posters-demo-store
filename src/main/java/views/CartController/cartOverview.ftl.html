@@ -11,7 +11,7 @@
 				<td id="productSize${basketProduct_index}">${basketProduct.size.width} x ${basketProduct.size.height} ${unitLength}</td>
 				<td id="productPrice${basketProduct_index}">${basketProduct.getPriceAsString()}${currency}</td>
 				<td>
-	      			<input class="input-mini productCount${basketProduct_index}" type="number" id="productCount${basketProduct_index}" name="productCount${basketProduct_index}" value=${basketProduct.countProduct}><br/>
+	      			<input class="input-mini productCount${basketProduct_index}" type="number" id="productCount${basketProduct_index}" name="productCount${basketProduct_index}" value=${basketProduct.productCount}><br/>
 	      			<button class="btn" id="btnUpdateProdCount${basketProduct_index}" name="btnUpdateProdCount${basketProduct_index}" onclick="updateProductCount(${basketProduct.id}, $('#productCount${basketProduct_index}').val(), ${basketProduct_index})">${i18n("basketOverviewUpdateQuantity")}</button>
 				</td>
 				<td>

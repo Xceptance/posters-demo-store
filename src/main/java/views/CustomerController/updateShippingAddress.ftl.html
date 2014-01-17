@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-	<form id="formUpdateDelAddr" class="form-horizontal" action="/updateDeliveryAddressCompleted" method="post">
+	<form id="formUpdateDelAddr" class="form-horizontal" action="/updateShippingAddressCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
-			<legend>${i18n("updateDeliveryTitle")}</legend>
+			<legend>${i18n("updateShippingTitle")}</legend>
 			<!-- include form -->
 			<#include "../form/addressForm.ftl.html"/>
 			<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
