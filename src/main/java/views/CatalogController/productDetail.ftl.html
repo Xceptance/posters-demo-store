@@ -15,23 +15,23 @@
       		<form id="addToCartForm" name="addToCartForm">
       			<!-- Select finish -->
 				<div class="control-group">
-					<label class="control-label" for="finish">${i18n("basketSelectFinish")}</label>
+					<label class="control-label" for="finish">${i18n("cartSelectFinish")}</label>
 					<div class="controls">
 						<div id="selectFinish">
 						<label class="radio" for="finish-matte">
 						<input name="finish" id="finish-matte" value="matte" checked="checked" type="radio">
-							${i18n("basketSelectFinishMatte")}
+							${i18n("cartSelectFinishMatte")}
 						</label>
 						<label class="radio" for="finish-gloss">
 						<input name="finish" id="finish-gloss" value="gloss" type="radio">
-							${i18n("basketSelectFinishGloss")}
+							${i18n("cartSelectFinishGloss")}
 						</label>
 						</div>
 					</div>
 				</div>
 				<!-- Select size -->
 				<div class="control-group">
-					<label class="control-label" for="selectSize">${i18n("basketSelectSize")}</label>
+					<label class="control-label" for="selectSize">${i18n("cartSelectSize")}</label>
 					<div class="controls">
 						<select id="selectSize" name="selectSize" class="input-medium" onchange="updatePrice(this, ${productDetail.id});">
 							<#list productDetail.availableSizes as size>
@@ -40,7 +40,7 @@
 						</select>
 					</div>
 				</div>
-      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToBasket")}</button>
+      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToCart")}</button>
       		</form>
       	</div>
     </div>

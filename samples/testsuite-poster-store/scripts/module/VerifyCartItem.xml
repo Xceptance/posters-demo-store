@@ -7,7 +7,7 @@
   <parameter name="productFinish"/>
   <parameter name="productSize"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerBasketOverview"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <command name="assertText" target="id=productName@{index}" value="@{productName}"/>
   <command name="assertValue" target="css=.productCount@{index}" value="@{productCount}"/>
   <command name="assertText" target="id=productFinish@{index}" value="@{productFinish}"/>

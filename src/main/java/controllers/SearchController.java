@@ -10,7 +10,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.database.CommonInformation;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Page;
@@ -21,8 +20,13 @@ import com.avaje.ebean.RawSqlBuilder;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
-import conf.XCPosterConf;
+import conf.PosterConstants;
 
+/**
+ * Controller class, that provides the search functionality.
+ * 
+ * @author sebastianloob
+ */
 public class SearchController
 {
 
@@ -30,9 +34,9 @@ public class SearchController
     Messages msg;
 
     @Inject
-    XCPosterConf xcpConf;
+    PosterConstants xcpConf;
 
-    private Optional language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
      * Returns a product overview page with products, that matches the search text.
@@ -46,34 +50,40 @@ public class SearchController
         // search text is empty
         if (searchText.isEmpty() || searchText.trim().isEmpty())
         {
+            // show info message
             context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+            // return index page
             return Results.redirect(context.getContextPath() + "/");
         }
         else
         {
             final Map<String, Object> data = new HashMap<String, Object>();
+            // search for products
             List<Product> products = searchForProducts(searchText, 1, data);
             // no product was found
             if (products.isEmpty())
             {
+                // show info message
                 context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+                // return index page
                 return Results.redirect(context.getContextPath() + "/");
             }
             // at least one product was found
             else
             {
                 data.put("products", products);
-                CommonInformation.setCommonData(data, context, xcpConf);
+                WebShopController.setCommonData(data, context, xcpConf);
                 data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("searchTerm", searchText);
                 data.put("currentPage", 1);
-                return Results.html().render(data).template(xcpConf.templateProductOverview);
+                // return product overview page
+                return Results.html().render(data).template(xcpConf.TEMPLATE_PRODUCT_OVERVIEW);
             }
         }
     }
 
     /**
-     * Returns a list of products, that matches the search text.
+     * Returns a list of products as JSON, that matches the search text.
      * 
      * @param searchText
      * @param pageNumber
@@ -84,13 +94,15 @@ public class SearchController
                                      Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
+        // search for products
         List<Product> products = searchForProducts(searchText, pageNumber, data);
+        // set some attributes to null to get a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {
             products.get(i).setAvailableSizes(null);
             products.get(i).setSubCategory(null);
             products.get(i).setTopCategory(null);
-            products.get(i).setBasket(null);
+            products.get(i).setCart(null);
             products.get(i).setOrder(null);
         }
         data.put("products", products);
@@ -128,7 +140,7 @@ public class SearchController
         RawSql rawSql = RawSqlBuilder.parse(sql).create();
         Query<Product> query = Ebean.find(Product.class);
         query.setRawSql(rawSql);
-        int pageSize = xcpConf.pageSize;
+        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // get paging list
         PagingList<Product> pagingList = query.findPagingList(pageSize);
         // get all products to
@@ -139,13 +151,13 @@ public class SearchController
         Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
         List<Product> products = page.getList();
-        // remove some data of the product list, to render a small-sized json-object
+        // remove some data of the product list, to render a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {
             products.get(i).setAvailableSizes(null);
             products.get(i).setSubCategory(null);
             products.get(i).setTopCategory(null);
-            products.get(i).setBasket(null);
+            products.get(i).setCart(null);
             products.get(i).setOrder(null);
         }
         // add the page count to the data map

@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 
 import javax.persistence.Entity;
@@ -7,12 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.avaje.ebean.Ebean;
 
 @Entity
-@Table(name = "order_product")
-public class Order_Product
+@Table(name = "cartProduct")
+public class CartProduct
 {
     @Id
     private int id;
@@ -22,10 +24,10 @@ public class Order_Product
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "ordering_id")
-    private Order order;
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
-    private int countProduct;
+    private int productCount;
 
     /**
      * The finish of the poster, e.g. matte or gloss.
@@ -36,13 +38,16 @@ public class Order_Product
      * The size of the poster.
      */
     @ManyToOne
-    @JoinColumn(name = "postersize_id")
+    @JoinColumn(name = "posterSize_id")
     private PosterSize size;
 
     /**
      * The price of the product in the selected finish and size.
      */
     private double price;
+
+    @Version
+    private Timestamp lastUpdate;
 
     public int getId()
     {
@@ -64,29 +69,24 @@ public class Order_Product
         this.product = product;
     }
 
-    public Order getOrder()
+    public Cart getCart()
     {
-        return order;
+        return cart;
     }
 
-    public void setOrder(Order order)
+    public void setCart(Cart cart)
     {
-        this.order = order;
+        this.cart = cart;
     }
 
-    public int getCountProduct()
+    public int getProductCount()
     {
-        return countProduct;
+        return productCount;
     }
 
-    public void setCountProduct(int countProduct)
+    public void setProductCount(int productCount)
     {
-        this.countProduct = countProduct;
-    }
-
-    public void incCountProduct()
-    {
-        this.setCountProduct(this.getCountProduct() + 1);
+        this.productCount = productCount;
     }
 
     public String getFinish()
@@ -129,6 +129,22 @@ public class Order_Product
         this.price = price;
     }
 
+    public Timestamp getLastUpdate()
+    {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate)
+    {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public void incProductCount()
+    {
+        this.setProductCount(this.getProductCount() + 1);
+        this.update();
+    }
+
     public void update()
     {
         Ebean.update(this);
@@ -137,5 +153,16 @@ public class Order_Product
     public void save()
     {
         Ebean.save(this);
+    }
+
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
+
+    public void decrementProductCount()
+    {
+        this.setProductCount(this.getProductCount() - 1);
+        this.update();
     }
 }

@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,13 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 import com.avaje.ebean.Ebean;
 
 @Entity
-@Table(name = "deliveryAddress")
-public class DeliveryAddress
+@Table(name = "shippingAddress")
+public class ShippingAddress
 {
 
     @Id
@@ -148,5 +146,22 @@ public class DeliveryAddress
     public void save()
     {
         Ebean.save(this);
+    }
+
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
+
+    public static ShippingAddress getShippingAddressById(int id)
+    {
+        return Ebean.find(ShippingAddress.class, id);
+    }
+
+    public static void removeCustomerFromShippingAddress(int id)
+    {
+        ShippingAddress address = ShippingAddress.getShippingAddressById(id);
+        address.setCustomer(null);
+        address.update();
     }
 }

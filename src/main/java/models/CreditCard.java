@@ -74,7 +74,7 @@ public class CreditCard
     {
         return cardNumber;
     }
-    
+
     public void setCardNumber(String cardNumber)
     {
         this.cardNumber = cardNumber;
@@ -94,7 +94,7 @@ public class CreditCard
     {
         return month;
     }
-    
+
     public String getMonthLeadingZero()
     {
         DecimalFormat df = new DecimalFormat("00");
@@ -144,5 +144,29 @@ public class CreditCard
     public void save()
     {
         Ebean.save(this);
+    }
+
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
+
+    /**
+     * Returns the credit card by the given id.
+     * 
+     * @param id
+     * @return
+     */
+    public static CreditCard getCreditCardById(int id)
+    {
+        // get credit card by id
+        return Ebean.find(CreditCard.class, id);
+    }
+
+    public static void removeCreditCardFromCustomer(int id)
+    {
+        CreditCard card = getCreditCardById(id);
+        card.setCustomer(null);
+        card.update();
     }
 }

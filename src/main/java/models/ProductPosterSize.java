@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 @Entity
-@Table(name = "product_posterSize")
-public class Product_PosterSize
+@Table(name = "productPosterSize")
+public class ProductPosterSize
 {
     @Id
     private int id;

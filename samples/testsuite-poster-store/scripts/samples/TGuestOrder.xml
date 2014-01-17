@@ -4,7 +4,7 @@
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerBasketOverview"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <action name="StartCheckout"/>
   <command name="storeText" target="id=totalPrice" value="totalPrice"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
@@ -64,5 +64,5 @@
   </module>
   <command name="clickAndWait" target="id=btnOrder"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*0.*"/>
+  <command name="assertText" target="id=btnCartOverview" value="regexp:.*0.*0.*"/>
 </testcase>

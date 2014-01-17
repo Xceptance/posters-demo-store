@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form id="formAddDelAddr" class="form-horizontal" action="/addDeliveryAddressToCustomerCompleted" method="post">
+	<form id="formAddDelAddr" class="form-horizontal" action="/addShippingAddressToCustomerCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
-			<legend>${i18n("deliveryAddressAddNew")}</legend>
+			<legend>${i18n("shippingAddressAddNew")}</legend>
 			<!-- include form -->
 			<#include "../form/addressForm.ftl.html"/>
 			<!-- add button -->

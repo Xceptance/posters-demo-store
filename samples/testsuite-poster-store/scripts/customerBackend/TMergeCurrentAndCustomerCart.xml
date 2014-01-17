@@ -9,31 +9,31 @@
   </module>
   <module name="module.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerBasketOverview"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <command name="storeText" target="id=productName0" value="product1Name"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*-.*"/>
+  <command name="assertText" target="id=btnCartOverview" value="regexp:.*1.*-.*"/>
   <module name="module.Logout"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*-.*"/>
+  <command name="assertText" target="id=btnCartOverview" value="regexp:.*0.*-.*"/>
   <module name="module.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerBasketOverview"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <command name="storeText" target="id=productName0" value="product2Name"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*1.*-.*"/>
+  <command name="assertText" target="id=btnCartOverview" value="regexp:.*1.*-.*"/>
   <module name="module.Login">
     <parameter name="email" value="${email}"/>
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
   <action name="GetMergedCart"/>
-  <command name="clickAndWait" target="//*[@id='btnBasketOverview']/a"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <command name="assertText" target="id=productName0" value="${product2Name}"/>
   <command name="assertValue" target="css=.productCount0" value="1"/>
   <command name="assertText" target="id=productName1" value="${product1Name}"/>
   <command name="assertValue" target="css=.productCount1" value="1"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*2.*-.*"/>
+  <command name="assertText" target="id=btnCartOverview" value="regexp:.*2.*-.*"/>
   <action name="RemoveProductFromCart"/>
   <command name="click" target="id=btnRemoveProduct0"/>
   <action name="RemoveProductFromCart"/>
   <command name="click" target="id=btnRemoveProduct1"/>
-  <command name="waitForText" target="id=btnBasketOverview" value="regexp:.*0.*-.*"/>
+  <command name="waitForText" target="id=btnCartOverview" value="regexp:.*0.*-.*"/>
 </testcase>

@@ -4,7 +4,7 @@
   <module name="module.OpenHomepage"/>
   <module name="module.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerBasketOverview"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <action name="UpdateProductCount"/>
   <command name="type" target="css=.productCount0" value="asdf"/>
   <command name="click" target="id=btnUpdateProdCount0"/>

@@ -51,21 +51,21 @@ public class CustomerTest extends NinjaTest
     }
 
     @Test
-    public void testAddDeliveryAddress()
+    public void testAddShippingAddress()
     {
-        // add delivery address to the customer
-        DeliveryAddress address = new DeliveryAddress();
+        // add shipping address to the customer
+        ShippingAddress address = new ShippingAddress();
         address.setName("customer");
-        customer.addDeliveryAddress(address);
+        customer.addShippingAddress(address);
         customer.update();
         // verify, that address is persistent
-        Assert.assertNotNull(Ebean.find(DeliveryAddress.class, address.getId()));
+        Assert.assertNotNull(Ebean.find(ShippingAddress.class, address.getId()));
         // get updated customer
         Customer newCustomer = Ebean.find(Customer.class, customer.getId());
-        // verify, that customer has one delivery address
-        Assert.assertEquals(1, newCustomer.getDeliveryAddress().size());
+        // verify, that customer has one shipping address
+        Assert.assertEquals(1, newCustomer.getShippingAddress().size());
         // verify, that the address is trhe right one
-        Assert.assertEquals(address.getId(), newCustomer.getDeliveryAddress().get(0).getId());
+        Assert.assertEquals(address.getId(), newCustomer.getShippingAddress().get(0).getId());
     }
 
 }

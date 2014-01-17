@@ -57,7 +57,7 @@ public class Product
      * The sizes which are available for this product.
      */
     @OneToMany(mappedBy = "product")
-    private List<Product_PosterSize> availableSizes;
+    private List<ProductPosterSize> availableSizes;
 
     /**
      * The url of the product image.
@@ -88,17 +88,17 @@ public class Product
     private TopCategory topCategory;
 
     @OneToMany(mappedBy = "product")
-    private List<Basket_Product> basket;
+    private List<CartProduct> cart;
 
     @OneToMany(mappedBy = "product")
-    private List<Order_Product> order;
+    private List<OrderProduct> order;
 
     private double minimumPrice;
 
     public Product()
     {
-        this.basket = new ArrayList<Basket_Product>();
-        this.availableSizes = new ArrayList<Product_PosterSize>();
+        this.cart = new ArrayList<CartProduct>();
+        this.availableSizes = new ArrayList<ProductPosterSize>();
     }
 
     public String getName()
@@ -151,17 +151,17 @@ public class Product
         this.descriptionDetail = descriptionDetail;
     }
 
-    public List<Product_PosterSize> getAvailableSizes()
+    public List<ProductPosterSize> getAvailableSizes()
     {
         return availableSizes;
     }
 
-    public void setAvailableSizes(List<Product_PosterSize> availableSizes)
+    public void setAvailableSizes(List<ProductPosterSize> availableSizes)
     {
         this.availableSizes = availableSizes;
     }
 
-    public void addAvailableSize(Product_PosterSize size)
+    public void addAvailableSize(ProductPosterSize size)
     {
         this.availableSizes.add(size);
     }
@@ -216,22 +216,22 @@ public class Product
         this.url = url;
     }
 
-    public List<Basket_Product> getBasket()
+    public List<CartProduct> getCart()
     {
-        return basket;
+        return cart;
     }
 
-    public void setBasket(List<Basket_Product> basket)
+    public void setCart(List<CartProduct> cart)
     {
-        this.basket = basket;
+        this.cart = cart;
     }
 
-    public List<Order_Product> getOrder()
+    public List<OrderProduct> getOrder()
     {
         return order;
     }
 
-    public void setOrder(List<Order_Product> order)
+    public void setOrder(List<OrderProduct> order)
     {
         this.order = order;
     }
@@ -264,5 +264,22 @@ public class Product
     public void save()
     {
         Ebean.save(this);
+    }
+
+    public static Product getProductByUrl(String url)
+    {
+        return Ebean.find(Product.class).where().eq("url", url).findUnique();
+    }
+
+    /**
+     * Returns a product by the product's id.
+     * 
+     * @param id
+     * @return
+     */
+    public static Product getProductById(int id)
+    {
+        // get product by id
+        return Ebean.find(Product.class, id);
     }
 }

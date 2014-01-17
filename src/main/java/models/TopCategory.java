@@ -17,7 +17,7 @@ import com.avaje.ebean.Ebean;
  * @author sebastianloob
  */
 @Entity
-@Table(name = "category")
+@Table(name = "topCategory")
 public class TopCategory
 {
 
@@ -41,14 +41,13 @@ public class TopCategory
      * The sub categories of the category.
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
-    List<SubCategory> subCategories;
-    
+    private List<SubCategory> subCategories;
+
     /**
      * The products of the top category.
      */
     @OneToMany
     private List<Product> products;
-    
 
     public int getId()
     {
@@ -108,5 +107,16 @@ public class TopCategory
     public void save()
     {
         Ebean.save(this);
+    }
+
+    public static List<TopCategory> getAllTopCategories()
+    {
+        // get all top categories from database
+        return Ebean.find(TopCategory.class).findList();
+    }
+
+    public static TopCategory getTopCategoryByUrl(String url)
+    {
+        return Ebean.find(TopCategory.class).where().eq("url", url).findUnique();
     }
 }
