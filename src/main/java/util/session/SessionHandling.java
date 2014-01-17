@@ -59,6 +59,17 @@ public class SessionHandling
             // get cookie again
             cookie = context.getSessionCookie();
         }
+        Order order = Order.getOrderById(Integer.parseInt(cookie.get(ORDER)));
+        // order was removed from database
+        if (order == null)
+        {
+            // create new order
+            order = Order.createNewOrder();
+            // add order id to session
+            setOrderId(context, order.getId());
+            // get cookie again
+            cookie = context.getSessionCookie();
+        }
         return Integer.parseInt(cookie.get(ORDER));
     }
 
@@ -95,8 +106,22 @@ public class SessionHandling
         // create new cart, if no cart is set
         if (cookie.get(CART) == null)
         {
+            // create new cart
             Cart cart = Cart.createNewCart();
+            // add cart id to session
             setCartId(context, cart.getId());
+            // get cookie again
+            cookie = context.getSessionCookie();
+        }
+        Cart cart = Cart.getCartById(Integer.parseInt(cookie.get(CART)));
+        // cart was removed from database
+        if (cart == null)
+        {
+            // create new cart
+            cart = Cart.createNewCart();
+            // add cart id to session
+            setCartId(context, cart.getId());
+            // get cookie again
             cookie = context.getSessionCookie();
         }
         return Integer.parseInt(cookie.get(CART));
