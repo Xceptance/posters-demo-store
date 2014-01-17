@@ -65,7 +65,7 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result updateProductCount(@Param("basketProductId") int cartProductId,
+    public Result updateProductCount(@Param("cartProductId") int cartProductId,
                                      @Param("productCount") String productCount, Context context)
     {
         // result is a json
@@ -212,17 +212,17 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result deleteFromCart(@Param("basketProductId") int basketProductId, Context context)
+    public Result deleteFromCart(@Param("cartProductId") int cartProductId, Context context)
     {
-        CartProduct basketProduct = Ebean.find(CartProduct.class, basketProductId);
+        CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
         // get cart by session
         Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get count of this product
-        int countProduct = basketProduct.getProductCount();
+        int countProduct = cartProduct.getProductCount();
         // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
-            cart.removeProduct(basketProduct);
+            cart.removeProduct(cartProduct);
         }
         Result result = Results.json();
         // add new header
@@ -269,9 +269,9 @@ public class CartController
     private String prepareCartOverviewInHeader(Cart cart)
     {
         StringBuilder headerCartOverview = new StringBuilder();
-        headerCartOverview.append(" " + msg.get("basketOverviewTitle", language).get() + ": ");
+        headerCartOverview.append(" " + msg.get("cartOverviewTitle", language).get() + ": ");
         headerCartOverview.append(cart.getProductCount());
-        headerCartOverview.append(" " + msg.get("basketItem", language).get() + " - ");
+        headerCartOverview.append(" " + msg.get("cartItem", language).get() + " - ");
         headerCartOverview.append(cart.getTotalPriceAsString() + xcpConf.CURRENCY);
         return headerCartOverview.toString();
     }

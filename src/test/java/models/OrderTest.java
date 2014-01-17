@@ -17,7 +17,7 @@ public class OrderTest extends NinjaTest
 
     Product product2 = new Product();
 
-    Cart basket = new Cart();
+    Cart cart = new Cart();
 
     PosterSize size;
 
@@ -30,7 +30,7 @@ public class OrderTest extends NinjaTest
         product2.setName("product2");
         product2.setMinimumPrice(7.77);
         product2.save();
-        basket.save();
+        cart.save();
 
         size = new PosterSize();
         size.setWidth(16);
@@ -49,24 +49,24 @@ public class OrderTest extends NinjaTest
         productPosterSize2.setPrice(7.77);
         productPosterSize2.save();
 
-        basket.addProduct(product1, "matte", size);
-        basket.update();
+        cart.addProduct(product1, "matte", size);
+        cart.update();
 
-        basket.addProduct(product2, "matte", size);
-        basket.update();
+        cart.addProduct(product2, "matte", size);
+        cart.update();
 
-        basket.addProduct(product1, "matte", size);
-        basket.update();
+        cart.addProduct(product1, "matte", size);
+        cart.update();
     }
 
     @Test
-    public void testAddProductsFromBasket()
+    public void testAddProductsFromCart()
     {
         // create new order
         Order order = new Order();
         order.save();
-        // add all products from the basket to the order
-        order.addProductsFromCart(basket);
+        // add all products from the cart to the order
+        order.addProductsFromCart(cart);
         order.update();
         // get all products from the order
         List<OrderProduct> orderProducts = Ebean.find(OrderProduct.class).where().eq("order", order).findList();
@@ -88,7 +88,7 @@ public class OrderTest extends NinjaTest
         Order order = new Order();
         order.save();
 
-        order.addProductsFromCart(basket);
+        order.addProductsFromCart(cart);
         order.update();
 
         Order updatedOrder = Ebean.find(Order.class, order.getId());
@@ -110,7 +110,7 @@ public class OrderTest extends NinjaTest
         Order order = new Order();
         order.save();
 
-        order.addProductsFromCart(basket);
+        order.addProductsFromCart(cart);
         order.update();
 
         Order updatedOrder = Ebean.find(Order.class, order.getId());

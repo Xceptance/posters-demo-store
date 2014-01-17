@@ -7,16 +7,16 @@ function hideMessages()
 	$("#infoMessage").hide();
 }
 
-function deleteFromCart(basketProductId, cartIndex)
+function deleteFromCart(cartProductId, cartIndex)
 {
 	hideMessages();
-	var url = '/deleteFromCart?basketProductId=' + basketProductId;
+	var url = '/deleteFromCart?cartProductId=' + cartProductId;
 	$.get(url, function(data)
 		{
 			// remove product from cart overview
 			$('#product' + cartIndex).remove();
 			// update cart in header
-			$("#headerBasketOverview span").text(data.headerCartOverview);
+			$("#headerCartOverview span").text(data.headerCartOverview);
 			// update total price
 			$("#totalPrice:first-child").text(data.totalPrice);
 			// update cart slider
@@ -24,16 +24,16 @@ function deleteFromCart(basketProductId, cartIndex)
 		});
 }
 
-function updateProductCount(basketProductId, count, cartIndex)
+function updateProductCount(cartProductId, count, cartIndex)
 {
-	var url = '/updateProductCount?basketProductId=' + basketProductId + '&productCount=' + count;
+	var url = '/updateProductCount?cartProductId=' + cartProductId + '&productCount=' + count;
 	$.get(url)
 		.always(function() {
 			hideMessages();
 		})
 		.done(function(data) {
 			// update cart in header
-			$("#headerBasketOverview span").text(data.headerCartOverview);
+			$("#headerCartOverview span").text(data.headerCartOverview);
 			// update total price
 			$("#totalPrice:first-child").text(data.totalPrice);
 			// update cart slider

@@ -105,7 +105,7 @@ public class Routes implements ApplicationRoutes
         // cart
         // ############################################################
         router.GET().route("/addToCartSlider").with(CartController.class, "addToCart");
-        router.GET().route("/basket").with(CartController.class, "cart");
+        router.GET().route("/cart").with(CartController.class, "cart");
         router.GET().route("/getCartElementSlider").with(CartController.class, "getCartElementSlider");
         router.GET().route("/deleteFromCart").with(CartController.class, "deleteFromCart");
         router.GET().route("/updateProductCount").with(CartController.class, "updateProductCount");

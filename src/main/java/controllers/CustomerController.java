@@ -91,11 +91,11 @@ public class CustomerController
             {
                 // put customer id to session
                 SessionHandling.setCustomerId(context, customer.getId());
-                // add products of current basket to customer's basket
+                // add products of current cart to customer's cart
                 mergeCurrentCartAndCustomerCart(context);
-                // delete current basket
+                // delete current cart
                 SessionHandling.removeCartId(context);
-                // put customer's basket id to session
+                // put customer's cart id to session
                 Customer updatedCustomer = Customer.getCustomerByEmail(email);
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page

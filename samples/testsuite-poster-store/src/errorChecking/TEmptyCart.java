@@ -10,7 +10,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
  * Verifies that an error is shown if the checkout is started with an empty cart.
  */
 @ScriptName
-("errorChecking.TEmptyBasket")
-public class TEmptyBasket extends AbstractScriptTestCase
+("errorChecking.TEmptyCart")
+public class TEmptyCart extends AbstractScriptTestCase
 {
 }

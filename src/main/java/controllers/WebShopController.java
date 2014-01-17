@@ -105,12 +105,12 @@ public class WebShopController
             totalProductCount += cartProduct.getProductCount();
         }
         // add all products of the cart
-        data.put("basketProducts", cartProducts);
+        data.put("cartProducts", cartProducts);
         // add product count of cart
-        data.put("basketProductCount", totalProductCount);
+        data.put("cartProductCount", totalProductCount);
         // add cart id
-        data.put("basketId", cart.getId());
-        // add total price of basket
+        data.put("cartId", cart.getId());
+        // add total price of cart
         data.put("totalPrice", cart.getTotalPriceAsString());
     }
 }

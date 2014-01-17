@@ -63,8 +63,8 @@ public class JobController
             Class.forName(config.DB_DRIVER);
             // connect to database
             connection = DriverManager.getConnection(config.DB_URL, config.DB_USER, config.DB_PASS);
-            boolean basketProductTable = false;
-            boolean basketTable = false;
+            boolean cartProductTable = false;
+            boolean cartTable = false;
             boolean billingAddressTable = false;
             boolean creditCardTable = false;
             boolean customerTable = false;
@@ -91,11 +91,11 @@ public class JobController
             {
                 if (rs.getString(3).equals("CARTPRODUCT"))
                 {
-                    basketProductTable = true;
+                    cartProductTable = true;
                 }
                 if (rs.getString(3).equals("CART"))
                 {
-                    basketTable = true;
+                    cartTable = true;
                 }
                 if (rs.getString(3).equals("BILLINGADDRESS"))
                 {
@@ -135,7 +135,7 @@ public class JobController
                 }
             }
             // create the tables if they not exist
-            if (!(basketProductTable && basketTable && billingAddressTable && creditCardTable && customerTable
+            if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable
                   && shippingAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
             {
                 // simply execute the create-script

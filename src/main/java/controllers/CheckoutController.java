@@ -55,9 +55,9 @@ public class CheckoutController
         if (cart.getProducts().size() == 0)
         {
             // show info message
-            context.getFlashCookie().put("info", msg.get("infoEmptyBasket", language).get());
+            context.getFlashCookie().put("info", msg.get("infoEmptyCart", language).get());
             // return cart overview page
-            return Results.redirect(context.getContextPath() + "/basket");
+            return Results.redirect(context.getContextPath() + "/cart");
         }
         // start checkout, if the cart is not empty
         else
@@ -536,7 +536,7 @@ public class CheckoutController
         {
             // get customer by session id
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // remove basket from customer
+            // remove cart from customer
             customer.setCart(null);
             // set customer to order
             order.setCustomer(customer);
