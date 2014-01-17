@@ -8,6 +8,11 @@ import models.ShippingAddress;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * This {@link DefaultHandler} parses an XML file with customer data and persists them in the database.
+ * 
+ * @author sebastianloob
+ */
 public class CustomerHandler extends DefaultHandler
 {
 

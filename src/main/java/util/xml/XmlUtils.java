@@ -10,7 +10,12 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-public abstract class XmlUtils
+/**
+ * Provides methods to read data from a XML file.
+ * 
+ * @author sebastianloob
+ */
+public class XmlUtils
 {
 
     /**

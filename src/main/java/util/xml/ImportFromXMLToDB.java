@@ -1,5 +1,10 @@
 package util.xml;
 
+/**
+ * Provides methods to import data from a XML file into the database.
+ * 
+ * @author sebastianloob
+ */
 public class ImportFromXMLToDB
 {
 
