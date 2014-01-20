@@ -51,7 +51,7 @@ create table customer (
 ;
 
 create table ordering (
-  id                        integer not null,
+  id                        varchar(40) not null,
   order_date                varchar(255),
   shipping_address_id       integer,
   billing_address_id        integer,
@@ -67,7 +67,7 @@ create table ordering (
 create table orderProduct (
   id                        integer not null,
   product_id                integer,
-  ordering_id               integer,
+  ordering_id               varchar(40),
   product_count             integer,
   finish                    varchar(255),
   postersize_id             integer,
@@ -140,8 +140,6 @@ create sequence cartProduct_seq;
 create sequence creditCard_seq;
 
 create sequence customer_seq;
-
-create sequence ordering_seq;
 
 create sequence orderProduct_seq;
 

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class Order
 {
 
     @Id
-    private int id;
+    private UUID id;
 
     private String orderDate;
 
@@ -54,12 +55,12 @@ public class Order
         this.products = new ArrayList<OrderProduct>();
     }
 
-    public int getId()
+    public UUID getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(UUID id)
     {
         this.id = id;
     }
@@ -264,7 +265,7 @@ public class Order
      * @param id
      * @return
      */
-    public static Order getOrderById(int id)
+    public static Order getOrderById(UUID id)
     {
         return Ebean.find(Order.class, id);
     }

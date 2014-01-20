@@ -55,9 +55,9 @@ public class SessionHandling
      * @param context
      * @param orderId
      */
-    public static void setOrderId(Context context, int orderId)
+    public static void setOrderId(Context context, UUID orderId)
     {
-        context.getSessionCookie().put(ORDER, Integer.toString(orderId));
+        context.getSessionCookie().put(ORDER, orderId.toString());
     }
 
     /**
@@ -66,7 +66,7 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static int getOrderId(Context context)
+    public static UUID getOrderId(Context context)
     {
         SessionCookie cookie = context.getSessionCookie();
         // order id is not set, if the session is terminated
@@ -79,7 +79,7 @@ public class SessionHandling
             // get cookie again
             cookie = context.getSessionCookie();
         }
-        return Integer.parseInt(cookie.get(ORDER));
+        return UUID.fromString(cookie.get(ORDER));
     }
 
     /**
