@@ -30,6 +30,24 @@ public class SessionHandling
     }
 
     /**
+     * Returns true, if an order-id is set in the session, otherwise false.
+     * 
+     * @param context
+     * @return
+     */
+    public static boolean isOrderIdSet(Context context)
+    {
+        if (context.getSessionCookie().get(ORDER) == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    /**
      * Adds an order id to the session.
      * 
      * @param context
@@ -55,17 +73,6 @@ public class SessionHandling
             // create new order
             Order order = Order.createNewOrder();
             // set id of new order
-            setOrderId(context, order.getId());
-            // get cookie again
-            cookie = context.getSessionCookie();
-        }
-        Order order = Order.getOrderById(Integer.parseInt(cookie.get(ORDER)));
-        // order was removed from database
-        if (order == null)
-        {
-            // create new order
-            order = Order.createNewOrder();
-            // add order id to session
             setOrderId(context, order.getId());
             // get cookie again
             cookie = context.getSessionCookie();

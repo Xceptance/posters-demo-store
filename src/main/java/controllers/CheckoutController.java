@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 
 import conf.PosterConstants;
 import filters.SessionCustomerExistFilter;
+import filters.SessionOrderExistFilter;
 import filters.SessionTerminatedFilter;
 
 /**
@@ -86,7 +87,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result enterShippingAddress(Context context)
     {
@@ -131,7 +132,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result shippingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                            @Param("addressLine") String addressLine, @Param("city") String city,
@@ -234,7 +235,10 @@ public class CheckoutController
      * @param context
      * @return
      */
-    @FilterWith(SessionTerminatedFilter.class)
+    @FilterWith(
+        {
+            SessionTerminatedFilter.class, SessionOrderExistFilter.class
+        })
     public Result addShippingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get shipping address
@@ -257,7 +261,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result enterBillingAddress(Context context)
     {
@@ -299,7 +303,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result billingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                           @Param("addressLine") String addressLine, @Param("city") String city,
@@ -369,7 +373,10 @@ public class CheckoutController
      * @param context
      * @return
      */
-    @FilterWith(SessionTerminatedFilter.class)
+    @FilterWith(
+        {
+            SessionTerminatedFilter.class, SessionOrderExistFilter.class
+        })
     public Result addBillingAddressToOrder(@Param("addressId") String addressId, Context context)
     {
         // get billing address
@@ -392,7 +399,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result enterPaymentMethod(Context context)
     {
@@ -431,7 +438,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result paymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") String name,
                                          @Param("expirationDateMonth") int month,
@@ -497,7 +504,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result addPaymentToOrder(@Param("cardId") String creditCardId, Context context)
     {
@@ -520,7 +527,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result checkoutOverview(Context context)
     {
@@ -550,7 +557,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
     public Result checkoutCompleted(Context context)
     {
