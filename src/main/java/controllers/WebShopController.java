@@ -10,6 +10,7 @@ import models.Customer;
 import models.Product;
 import models.TopCategory;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import util.session.SessionHandling;
@@ -18,6 +19,7 @@ import com.avaje.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
 
 public class WebShopController
 {
@@ -31,6 +33,7 @@ public class WebShopController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result index(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();

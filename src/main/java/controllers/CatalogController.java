@@ -8,6 +8,7 @@ import models.Product;
 import models.SubCategory;
 import models.TopCategory;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
@@ -20,6 +21,7 @@ import com.avaje.ebean.PagingList;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
 
 /**
  * Controller class, that provides the catalog functionality.
@@ -42,6 +44,7 @@ public class CatalogController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result productDetail(@PathParam("product") String productUrl, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -58,6 +61,7 @@ public class CatalogController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result productOverview(@PathParam("subCategory") String subCategory, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -77,6 +81,7 @@ public class CatalogController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result topCategoryOverview(@PathParam("topCategory") String topCategory, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();

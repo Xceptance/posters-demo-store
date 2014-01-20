@@ -25,6 +25,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
 import filters.SessionCustomerIsLoggedFilter;
 
 /**
@@ -49,6 +50,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result loginForm(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -65,6 +67,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result login(@Param("email") String email, @Param("password") String password, Context context)
     {
         // email is not valid
@@ -144,6 +147,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result registration(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -162,6 +166,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result registrationCompleted(@Param("name") String name, @Param("firstName") String firstName,
                                         @Param("eMail") String email, @Param("password") String password,
                                         @Param("passwordAgain") String passwordAgain, Context context)
@@ -224,7 +229,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result accountOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -238,7 +246,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result orderOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -253,7 +264,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result paymentOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -271,7 +285,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result settingOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -291,7 +308,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") String creditNumber,
                                                 @Param("name") String name, @Param("expirationDateMonth") int month,
                                                 @Param("expirationDateYear") int year, Context context)
@@ -340,7 +360,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result addPaymentToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -355,7 +378,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result deletePayment(@Param("password") String password, @Param("cardId") int cardId, Context context)
     {
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
@@ -388,6 +414,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result confirmDeletePayment(@Param("cardId") int cardId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -402,7 +429,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result addressOverview(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -422,7 +452,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result deleteBillingAddress(@Param("password") String password, @Param("addressId") int addressId,
                                        Context context)
     {
@@ -457,6 +490,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result confirmDeleteBillingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -473,7 +507,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result deleteShippingAddress(@Param("password") String password, @Param("addressId") int addressId,
                                         Context context)
     {
@@ -508,6 +545,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result confirmDeleteShippingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -524,6 +562,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result updateShippingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -546,6 +585,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result updateShippingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                                  @Param("addressLine") String addressLine, @Param("city") String city,
                                                  @Param("state") String state, @Param("zip") String zip,
@@ -599,6 +639,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result updateBillingAddress(@Param("addressId") int addressId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -621,6 +662,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result updateBillingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
                                                 @Param("addressLine") String addressLine, @Param("city") String city,
                                                 @Param("state") String state, @Param("zip") String zip,
@@ -673,6 +715,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result addShippingAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -686,6 +729,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result addBillingAddressToCustomer(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -707,7 +751,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result addShippingAddressToCustomerCompleted(@Param("fullName") String name,
                                                         @Param("company") String company,
                                                         @Param("addressLine") String addressLine,
@@ -769,7 +816,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
                                                        @Param("company") String company,
                                                        @Param("addressLine") String addressLine,
@@ -824,7 +874,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result changeNameOrEmail(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -844,7 +897,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result changeNameOrEmailCompleted(@Param("name") String name, @Param("firstName") String firstName,
                                              @Param("eMail") String email, @Param("password") String password,
                                              Context context)
@@ -887,6 +943,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result changePassword(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -903,7 +960,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result changePasswordCompleted(@Param("oldPassword") String oldPassword, @Param("password") String password,
                                           @Param("passwordAgain") String passwordAgain, Context context)
     {
@@ -944,6 +1004,7 @@ public class CustomerController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result confirmDeleteAccount(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import models.Product;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
@@ -21,6 +22,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
 
 /**
  * Controller class, that provides the search functionality.
@@ -45,6 +47,7 @@ public class SearchController
      * @param context
      * @return
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result searchProduct(@Param("searchText") String searchText, Context context)
     {
         // search text is empty

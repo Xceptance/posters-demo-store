@@ -24,6 +24,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
 import filters.SessionTerminatedFilter;
 
 /**
@@ -48,6 +49,7 @@ public class CartController
      * @param context
      * @return The cart overview page.
      */
+    @FilterWith(SessionCustomerExistFilter.class)
     public Result cart(Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
