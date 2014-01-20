@@ -12,8 +12,8 @@
   <command name="select" target="id=selectSize" value="index=${availableSizeIndex}"/>
   <command name="storeText" target="//select[@id='selectSize']/option[${availableSizeIndex}+1]" value="productSize"/>
   <command name="click" target="id=btnAddToCart"/>
-  <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
+  <command name="waitForVisible" target="//ul[@id='cartSliderElementList']/li"/>
   <command name="storeText" target="id=prodPrice" value="productPrice"/>
-  <command name="assertElementPresent" target="//ul[@id='cartElementList']/li[1]"/>
-  <command name="waitForNotVisible" target="id=cartElementList"/>
+  <command name="assertElementPresent" target="//ul[@id='cartSliderElementList']/li[1]"/>
+  <command name="waitForNotVisible" target="id=cartSliderElementList"/>
 </scriptmodule>
