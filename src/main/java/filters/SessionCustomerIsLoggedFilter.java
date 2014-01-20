@@ -16,7 +16,7 @@ import com.google.inject.Inject;
  * 
  * @author sebastianloob
  */
-public class SessionCustomerFilter implements Filter
+public class SessionCustomerIsLoggedFilter implements Filter
 {
 
     @Inject
