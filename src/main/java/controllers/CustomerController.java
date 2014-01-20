@@ -1019,7 +1019,10 @@ public class CustomerController
      * @param context
      * @return
      */
-    @FilterWith(SessionCustomerIsLoggedFilter.class)
+    @FilterWith(
+        {
+            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+        })
     public Result deleteAccount(@Param("password") String password, Context context)
     {
         Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));

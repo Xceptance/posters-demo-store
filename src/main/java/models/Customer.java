@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Customer
 {
 
     @Id
-    private int id;
+    private UUID id;
 
     private String email;
 
@@ -125,12 +126,12 @@ public class Customer
         this.update();
     }
 
-    public int getId()
+    public UUID getId()
     {
         return id;
     }
 
-    public void setId(int customerId)
+    public void setId(UUID customerId)
     {
         this.id = customerId;
     }
@@ -249,7 +250,7 @@ public class Customer
      * @param customerId
      * @return
      */
-    public static Customer getCustomerById(int customerId)
+    public static Customer getCustomerById(UUID customerId)
     {
         // get customer by id
         return Ebean.find(Customer.class, customerId);

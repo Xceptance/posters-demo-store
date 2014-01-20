@@ -7,13 +7,13 @@ create table billingAddress (
   state                     varchar(255),
   country                   varchar(255),
   zip                       varchar(255),
-  customer_id               integer,
+  customer_id               varchar(40),
   constraint pk_billingAddress primary key (id))
 ;
 
 create table cart (
   id                        varchar(40) not null,
-  customer_id               integer,
+  customer_id               varchar(40),
   total_price               double,
   constraint pk_cart primary key (id))
 ;
@@ -36,12 +36,12 @@ create table creditCard (
   name                      varchar(255),
   month                     integer,
   year                      integer,
-  customer_id               integer,
+  customer_id               varchar(40),
   constraint pk_creditCard primary key (id))
 ;
 
 create table customer (
-  id                        integer not null,
+  id                        varchar(40) not null,
   email                     varchar(255),
   password                  varchar(255),
   name                      varchar(255),
@@ -59,7 +59,7 @@ create table ordering (
   tax                       double,
   total_costs               double,
   credit_card_id            integer,
-  customer_id               integer,
+  customer_id               varchar(40),
   last_update               timestamp not null,
   constraint pk_ordering primary key (id))
 ;
@@ -114,7 +114,7 @@ create table shippingAddress (
   state                     varchar(255),
   country                   varchar(255),
   zip                       varchar(255),
-  customer_id               integer,
+  customer_id               varchar(40),
   constraint pk_shippingAddress primary key (id))
 ;
 
@@ -138,8 +138,6 @@ create sequence billingAddress_seq;
 create sequence cartProduct_seq;
 
 create sequence creditCard_seq;
-
-create sequence customer_seq;
 
 create sequence orderProduct_seq;
 

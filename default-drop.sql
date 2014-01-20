@@ -34,8 +34,6 @@ drop sequence if exists cartProduct_seq;
 
 drop sequence if exists creditCard_seq;
 
-drop sequence if exists customer_seq;
-
 drop sequence if exists orderProduct_seq;
 
 drop sequence if exists posterSize_seq;

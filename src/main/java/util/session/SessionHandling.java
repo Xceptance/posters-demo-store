@@ -168,29 +168,19 @@ public class SessionHandling
      * @param context
      * @param customerId
      */
-    public static void setCustomerId(Context context, int customerId)
+    public static void setCustomerId(Context context, UUID customerId)
     {
-        context.getSessionCookie().put(USER, Integer.toString(customerId));
+        context.getSessionCookie().put(USER, customerId.toString());
     }
 
     /**
-     * Returns customer id of the session, if an id is set, otherwise -1.
+     * Returns customer id of the session.
      * 
      * @param context
      * @return
      */
-    public static int getCustomerId(Context context)
+    public static UUID getCustomerId(Context context)
     {
-        int customerId;
-        String customer = context.getSessionCookie().get(USER);
-        if (customer == null)
-        {
-            customerId = -1;
-        }
-        else
-        {
-            customerId = Integer.parseInt(customer);
-        }
-        return customerId;
+        return UUID.fromString(context.getSessionCookie().get(USER));
     }
 }
