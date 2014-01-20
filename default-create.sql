@@ -12,7 +12,7 @@ create table billingAddress (
 ;
 
 create table cart (
-  id                        integer not null,
+  id                        varchar(40) not null,
   customer_id               integer,
   total_price               double,
   constraint pk_cart primary key (id))
@@ -21,7 +21,7 @@ create table cart (
 create table cartProduct (
   id                        integer not null,
   product_id                integer,
-  cart_id                   integer,
+  cart_id                   varchar(40),
   product_count             integer,
   finish                    varchar(255),
   posterSize_id             integer,
@@ -46,7 +46,7 @@ create table customer (
   password                  varchar(255),
   name                      varchar(255),
   first_name                varchar(255),
-  cart_id                   integer,
+  cart_id                   varchar(40),
   constraint pk_customer primary key (id))
 ;
 
@@ -134,8 +134,6 @@ create table topCategory (
 ;
 
 create sequence billingAddress_seq;
-
-create sequence cart_seq;
 
 create sequence cartProduct_seq;
 

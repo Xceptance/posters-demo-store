@@ -30,8 +30,6 @@ SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists billingAddress_seq;
 
-drop sequence if exists cart_seq;
-
 drop sequence if exists cartProduct_seq;
 
 drop sequence if exists creditCard_seq;

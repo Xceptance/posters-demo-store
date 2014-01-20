@@ -1,5 +1,7 @@
 package util.session;
 
+import java.util.UUID;
+
 import models.Cart;
 import models.Order;
 import ninja.Context;
@@ -96,9 +98,9 @@ public class SessionHandling
      * @param context
      * @param cartId
      */
-    public static void setCartId(Context context, int cartId)
+    public static void setCartId(Context context, UUID cartId)
     {
-        context.getSessionCookie().put(CART, Integer.toString(cartId));
+        context.getSessionCookie().put(CART, cartId.toString());
     }
 
     /**
@@ -107,7 +109,7 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static int getCartId(Context context)
+    public static UUID getCartId(Context context)
     {
         SessionCookie cookie = context.getSessionCookie();
         // create new cart, if no cart is set
@@ -120,7 +122,7 @@ public class SessionHandling
             // get cookie again
             cookie = context.getSessionCookie();
         }
-        Cart cart = Cart.getCartById(Integer.parseInt(cookie.get(CART)));
+        Cart cart = Cart.getCartById(UUID.fromString(cookie.get(CART)));
         // cart was removed from database
         if (cart == null)
         {
@@ -131,7 +133,7 @@ public class SessionHandling
             // get cookie again
             cookie = context.getSessionCookie();
         }
-        return Integer.parseInt(cookie.get(CART));
+        return UUID.fromString(cookie.get(CART));
     }
 
     /**

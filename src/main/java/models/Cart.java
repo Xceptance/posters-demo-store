@@ -3,6 +3,7 @@ package models;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Cart
      * The id of the cart.
      */
     @Id
-    private int id;
+    private UUID id;
 
     /**
      * The customer of the cart.
@@ -45,12 +46,12 @@ public class Cart
         this.products = new ArrayList<CartProduct>();
     }
 
-    public int getId()
+    public UUID getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(UUID id)
     {
         this.id = id;
     }
@@ -192,7 +193,7 @@ public class Cart
         this.setTotalPrice(0);
     }
 
-    public static Cart getCartById(int id)
+    public static Cart getCartById(UUID id)
     {
         return Ebean.find(Cart.class, id);
     }
