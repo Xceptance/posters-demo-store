@@ -1,14 +1,17 @@
 package com.xceptance.loadtest.actions;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.xceptance.loadtest.validators.HeaderValidator;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.engine.NetworkData;
+import com.xceptance.xlt.api.util.HtmlPageUtils;
 import com.xceptance.xlt.api.validators.ContentLengthValidator;
 import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
@@ -81,8 +84,8 @@ public class Homepage extends AbstractHtmlPageAction
     /**
      * Validate the correctness of the result. Once the homepage has been loaded, we can ensure that certain key element
      * are present in our previous request's responses. For example, here we are validating that the proper response
-     * code was sent, the length of the page is correct, an end tag is present, there is a head line on the page
-     * and a footer. This is all being done with the help of validators. Validators are used when we need to check the
+     * code was sent, the length of the page is correct, an end tag is present, there is a head line on the page.
+     * This is all being done with the help of validators. Validators are used when we need to check the
      * same thing after several different actions.
      */
     @Override
@@ -109,12 +112,33 @@ public class Homepage extends AbstractHtmlPageAction
         // check for the header
         HeaderValidator.getInstance().validate(page);
 
-
         // We can be pretty sure now, that the page fulfils the basic
         // requirements to be a valid page from our demo poster store.
         // Run more page specific tests now.
 
-        //TODO
+        //Check that the side navigation contains at least two top categories
+        //For this purpose we get a list of all top categories and check the size of the list
+        List<HtmlElement> topCategories = HtmlPageUtils.findHtmlElements(page, "id('sidebarNav')/ul/li[@class='topCategory']");
+        Assert.assertTrue("There are less then two top categories in the side nav.", topCategories.size() >= 2);
+        
+        //Check that each top category is followed by at least one level-1 category
+        for (Iterator<HtmlElement> iterator = topCategories.iterator(); iterator.hasNext();)
+	{
+	    HtmlElement htmlElement = (HtmlElement) iterator.next();
+	    //relative xpath to address the first sibling after the top category that is a level-1 category
+	    HtmlPageUtils.isElementPresent(htmlElement, "./following-sibling::li[1][@class='level-1']");
+	}
+        
+        // Get the homepage title
+        final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
+        Assert.assertNotNull("Title not found", blogNameElement);
+
+        // get the content form the element
+        final String text = blogNameElement.asText();
+
+        // compare it
+        Assert.assertEquals("Title does not match", "Check out our new panorama posters!", text);
+        
 
         /*
          * This section validates the responses on the network layer using the API from #471
