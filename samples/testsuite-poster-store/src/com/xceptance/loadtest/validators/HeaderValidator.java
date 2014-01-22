@@ -4,6 +4,7 @@ import org.junit.Assert;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.xceptance.xlt.api.util.HtmlPageUtils;
 
 /**
  * Checks for the correct header elements
@@ -23,16 +24,18 @@ public class HeaderValidator
      */
     public void validate(final HtmlPage page) throws Exception
     {
-        //TODO more header validations, e.g. search and mini-cart
-	// get the header
-        final HtmlElement header = page.getHtmlElementById("xxxxx");
-        Assert.assertNotNull("Header not found", header);
-
-        // get the content form the element
-        final String text = header.asText();
-
-        // compare it
-        Assert.assertEquals("Brand does not match", "-Poster", text);
+	//assert presence of some basic elements in the header
+	//the brand logo
+	HtmlPageUtils.isElementPresent(page, "id('brand')");
+	//The search form
+	HtmlPageUtils.isElementPresent(page, "id('search')");
+	//The search input
+	HtmlPageUtils.isElementPresent(page, "id('searchText')");
+	//The serach button
+	HtmlPageUtils.isElementPresent(page, "id('searchBtn')");
+	//The basket overview
+	HtmlPageUtils.isElementPresent(page, "id('headerBasketOverview')");
+	
     }
 
 
