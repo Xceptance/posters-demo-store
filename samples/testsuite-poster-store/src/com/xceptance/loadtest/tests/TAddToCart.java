@@ -2,25 +2,21 @@ package com.xceptance.loadtest.tests;
 
 import org.junit.Test;
 
+import com.xceptance.loadtest.actions.AddToCart;
 import com.xceptance.loadtest.actions.Homepage;
 import com.xceptance.loadtest.actions.ProductDetailView;
-import com.xceptance.loadtest.actions.SelectTopCategory;
 import com.xceptance.loadtest.actions.SelectCategory;
+import com.xceptance.loadtest.actions.SelectTopCategory;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
 
-/**
- * Open the homepage, browse the catalog. If there's a product overview
- * open random poster's detail view.
- * 
- **/
-public class TBrowse extends AbstractTestCase
+public class TAddToCart extends AbstractTestCase
 {
     /**
      * Main test method
      */
     @Test
-    public void browsePosterStore() throws Throwable
+    public void addToCart() throws Throwable
     {
     // Read the store URL from properties. Directly referring to the properties allows to access them by the full
     // path.
@@ -42,7 +38,9 @@ public class TBrowse extends AbstractTestCase
     ProductDetailView productDetailView = new ProductDetailView(selectCategory, "ProductDetailView");
     productDetailView.run();
     
+    // Configure the product (size and finish) and add it to cart
+    AddToCart addToCart = new AddToCart(productDetailView, "AddToCart");
+    addToCart.run();
     
-     
     }
 }

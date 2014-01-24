@@ -3,6 +3,7 @@ package com.xceptance.loadtest.actions;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.xceptance.loadtest.validators.HeaderValidator;
+import com.xceptance.loadtest.validators.SideNavValidator;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.util.HtmlPageUtils;
 import com.xceptance.xlt.api.validators.ContentLengthValidator;
@@ -12,12 +13,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 public class SelectTopCategory extends AbstractHtmlPageAction
 {
 
-    /**
-     * The timer name to use. The timer name is used to log measurements associated with this action. It can be passed
-     * to the super class by the constructor.
-     */
-    private static final String TIMERNAME = "SelectTopCategory";
-
 
     /**
      * Constructor.
@@ -25,9 +20,9 @@ public class SelectTopCategory extends AbstractHtmlPageAction
      * @param lastAction
      *            previous action
      */
-    public SelectTopCategory(final AbstractHtmlPageAction lastAction)
+    public SelectTopCategory(final AbstractHtmlPageAction lastAction, String timerName)
     {
-        super(lastAction, TIMERNAME);
+        super(lastAction, timerName);
     }
     
     /**
@@ -42,7 +37,6 @@ public class SelectTopCategory extends AbstractHtmlPageAction
 	//Get all top category links and select a random one
 	topCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(), "id('sidebarNav')/ul/li[@class='topCategory']/h4/a");
 
-	
     }
 
     @Override
@@ -70,19 +64,28 @@ public class SelectTopCategory extends AbstractHtmlPageAction
         // content length that was announced in the
         // HTTP response header
         ContentLengthValidator.getInstance().validate(page);
-
+        
         // check for complete HTML
         HtmlEndTagValidator.getInstance().validate(page);
-
-        // check for the header
-        HeaderValidator.getInstance().validate(page);
+        
 
         // We can be pretty sure now, that the page fulfils the basic
         // requirements to be a valid page from our demo poster store.
         // Run more page specific tests now.
+        // Check that we arrived on a category page.
         
-	// TODO Check that we arrived on a category page
-
+        // check for the header
+        HeaderValidator.getInstance().validate(page);
+        
+        //Check the side navigation
+        SideNavValidator.getInstance().validate(page);
+        
+        // The product over view element is present
+        HtmlPageUtils.isElementPresent(page, "id('productOverview')");
+        
+        // and we also see some poster's thumbnail images
+        HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
+        
     }
 
 }

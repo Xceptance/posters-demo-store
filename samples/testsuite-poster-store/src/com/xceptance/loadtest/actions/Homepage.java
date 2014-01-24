@@ -1,7 +1,6 @@
 package com.xceptance.loadtest.actions;
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
@@ -9,9 +8,9 @@ import org.junit.Assert;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.xceptance.loadtest.validators.HeaderValidator;
+import com.xceptance.loadtest.validators.SideNavValidator;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.engine.NetworkData;
-import com.xceptance.xlt.api.util.HtmlPageUtils;
 import com.xceptance.xlt.api.validators.ContentLengthValidator;
 import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
@@ -22,12 +21,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
  */
 public class Homepage extends AbstractHtmlPageAction
 {
-
-    /**
-     * The timer name to use. The timer name is used to log measurements associated with this action. It can be passed
-     * to the super class by the constructor.
-     */
-    private static final String TIMERNAME = "Homepage";
     
     /**
      * The URL to fetch the data from.
@@ -49,9 +42,9 @@ public class Homepage extends AbstractHtmlPageAction
      * @param urlAsString
      *            the URL to fetch the data from
      */
-    public Homepage(final String urlAsString)
+    public Homepage(final String urlAsString, String timerName)
     {
-        super(TIMERNAME);
+        super(timerName);
 
         this.urlAsString = urlAsString;
     }
@@ -109,25 +102,15 @@ public class Homepage extends AbstractHtmlPageAction
         // check for complete HTML
         HtmlEndTagValidator.getInstance().validate(page);
 
-        // check for the header
-        HeaderValidator.getInstance().validate(page);
-
         // We can be pretty sure now, that the page fulfils the basic
         // requirements to be a valid page from our demo poster store.
         // Run more page specific tests now.
-
-        //Check that the side navigation contains at least two top categories
-        //For this purpose we get a list of all top categories and check the size of the list
-        List<HtmlElement> topCategories = HtmlPageUtils.findHtmlElements(page, "id('sidebarNav')/ul/li[@class='topCategory']");
-        Assert.assertTrue("There are less then two top categories in the side nav.", topCategories.size() >= 2);
         
-        //Check that each top category is followed by at least one level-1 category
-        for (Iterator<HtmlElement> iterator = topCategories.iterator(); iterator.hasNext();)
-	{
-	    HtmlElement htmlElement = (HtmlElement) iterator.next();
-	    //relative xpath to address the first sibling after the top category that is a level-1 category
-	    HtmlPageUtils.isElementPresent(htmlElement, "./following-sibling::li[1][@class='level-1']");
-	}
+        // check for the header
+        HeaderValidator.getInstance().validate(page);
+        
+        //Check the side navigation
+        SideNavValidator.getInstance().validate(page);
         
         // Get the homepage title
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
