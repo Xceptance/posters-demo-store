@@ -85,7 +85,6 @@ create table posterSize (
 create table product (
   id                        integer not null,
   name                      varchar(255),
-  url                       varchar(255),
   description_detail        varchar(4096),
   description_overview      varchar(1024),
   image_url                 varchar(255),

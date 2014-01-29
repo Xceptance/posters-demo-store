@@ -49,7 +49,6 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("name"))
         {
             product.setName(toAdd);
-            product.setUrl(toAdd);
         }
         if (localName.equals("shortDescription"))
         {
