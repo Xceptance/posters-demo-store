@@ -50,7 +50,7 @@ public class Product
     private String descriptionOverview;
 
     /**
-     * The {@link PosterSize}s which are available for this product.
+     * The {@link ProductPosterSize}s which are available for this product.
      */
     @OneToMany(mappedBy = "product")
     private List<ProductPosterSize> availableSizes;
@@ -215,9 +215,9 @@ public class Product
     }
 
     /**
-     * Returns a list of available {@link PosterSize}s of the product.
+     * Returns a list of available {@link ProductPosterSize}s of the product.
      * 
-     * @return a list of available {@link PosterSize}s of the product
+     * @return a list of available {@link ProductPosterSize}s of the product
      */
     public List<ProductPosterSize> getAvailableSizes()
     {
@@ -225,10 +225,10 @@ public class Product
     }
 
     /**
-     * Sets a list of available {@link PosterSize}s of the product.
+     * Sets a list of available {@link ProductPosterSize}s of the product.
      * 
      * @param availableSizes
-     *            a list of available {@link PosterSize}s of the product
+     *            a list of available {@link ProductPosterSize}s of the product
      */
     public void setAvailableSizes(List<ProductPosterSize> availableSizes)
     {
@@ -236,10 +236,10 @@ public class Product
     }
 
     /**
-     * Adds a {@link PosterSize} to the available {@link PosterSize}s of the product
+     * Adds a {@link ProductPosterSize} to the available {@link ProductPosterSize}s of the product
      * 
      * @param size
-     *            the {@link PosterSize} to add
+     *            the {@link ProductPosterSize} to add
      */
     public void addAvailableSize(ProductPosterSize size)
     {
@@ -330,31 +330,63 @@ public class Product
         this.showInTopCategorie = showInTopCategorie;
     }
 
+    /**
+     * Returns the {@link CartProduct}s.
+     * 
+     * @return the {@link CartProduct}s
+     */
     public List<CartProduct> getCart()
     {
         return cart;
     }
 
+    /**
+     * Sets the {@link CartProduct}s.
+     * 
+     * @param cart
+     *            the {@link CartProduct}s
+     */
     public void setCart(List<CartProduct> cart)
     {
         this.cart = cart;
     }
 
+    /**
+     * Returns the {@link OrderProduct}s.
+     * 
+     * @return the {@link OrderProduct}s
+     */
     public List<OrderProduct> getOrder()
     {
         return order;
     }
 
+    /**
+     * Sets the {@link OrderProduct}s.
+     * 
+     * @param order
+     *            the {@link OrderProduct}s
+     */
     public void setOrder(List<OrderProduct> order)
     {
         this.order = order;
     }
 
+    /**
+     * Returns the minimum price of the product.
+     * 
+     * @return the minimum price of the product
+     */
     public double getMinimumPrice()
     {
         return minimumPrice;
     }
 
+    /**
+     * Returns the minimum price of the product as a well formatted String.
+     * 
+     * @return the minimum price of the product
+     */
     public String getPriceAsString()
     {
         DecimalFormat f = new DecimalFormat("#0.00");
@@ -365,31 +397,51 @@ public class Product
         return f.format(temp).replace(',', '.');
     }
 
+    /**
+     * Sets the minimum price of the product.
+     * 
+     * @param minimumPrice
+     *            the minimum price of the product
+     */
     public void setMinimumPrice(double minimumPrice)
     {
         this.minimumPrice = minimumPrice;
     }
 
+    /**
+     * Updates the entity in the database.
+     */
     public void update()
     {
         Ebean.update(this);
     }
 
+    /**
+     * Saves the entity in the database.
+     */
     public void save()
     {
         Ebean.save(this);
     }
 
-    public static Product getProductByUrl(String url)
+    /**
+     * Returns a {@link Product} that matches the given name.
+     * 
+     * @param name
+     *            the name of the product
+     * @return a {@link Product} that matches the given name
+     */
+    public static Product getProductByName(String name)
     {
-        return Ebean.find(Product.class).where().eq("url", url).findUnique();
+        return Ebean.find(Product.class).where().eq("name", name).findUnique();
     }
 
     /**
-     * Returns a product by the product's id.
+     * Returns a {@link Product} that matches the given ID.
      * 
      * @param id
-     * @return
+     *            the ID of the product
+     * @return a {@link Product} that matches the given ID
      */
     public static Product getProductById(int id)
     {

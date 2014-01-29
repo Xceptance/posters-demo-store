@@ -388,7 +388,7 @@ public class CustomerController
         // correct password
         if (customer.checkPasswd(password))
         {
-            CreditCard.removeCreditCardFromCustomer(cardId);
+            CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             // show payment overview page
@@ -464,7 +464,7 @@ public class CustomerController
         if (customer.checkPasswd(password))
         {
             // remove billing address
-            BillingAddress.deleteBillingAddressFromCustomer(addressId);
+            BillingAddress.removeCustomerFromBillingAddress(addressId);
             // show success message
             context.getFlashCookie().success(msg.get("successDelete", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");

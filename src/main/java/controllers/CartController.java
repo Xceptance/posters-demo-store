@@ -185,7 +185,7 @@ public class CartController
         // add product to cart
         cart.addProduct(product, finish, posterSize);
         // get added cart product
-        CartProduct cartProduct = Cart.getCartProduct(cart, product, finish, posterSize);
+        CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
         Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("productName", cartProduct.getProduct().getName());

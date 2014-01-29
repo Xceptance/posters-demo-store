@@ -13,13 +13,19 @@ import javax.persistence.Table;
 
 import com.avaje.ebean.Ebean;
 
+/**
+ * This {@link Entity} provides a shopping cart. Each customer of the demo poster store has its own cart. A cart
+ * contains a list of {@link CartProduct}s.
+ * 
+ * @author sebastianloob
+ */
 @Entity
 @Table(name = "cart")
 public class Cart
 {
 
     /**
-     * The id of the cart.
+     * The {@link UUID} of the entity.
      */
     @Id
     private UUID id;
@@ -41,26 +47,50 @@ public class Cart
      */
     private double totalPrice;
 
+    /**
+     * The constructor.
+     */
     public Cart()
     {
         this.products = new ArrayList<CartProduct>();
     }
 
+    /**
+     * Returns the cart {@link UUID}.
+     * 
+     * @return cart ID
+     */
     public UUID getId()
     {
         return id;
     }
 
+    /**
+     * Sets the cart id.
+     * 
+     * @param id
+     *            {@link UUID} of the cart.
+     */
     public void setId(UUID id)
     {
         this.id = id;
     }
 
+    /**
+     * Returns the total price of all products, which are in the cart.
+     * 
+     * @return total price of the cart
+     */
     public double getTotalPrice()
     {
         return totalPrice;
     }
 
+    /**
+     * Returns the total price of all products, which are stored in the database.
+     * 
+     * @return total price of the cart in a well formatted {@link String}.
+     */
     public String getTotalPriceAsString()
     {
         DecimalFormat f = new DecimalFormat("#0.00");
@@ -71,26 +101,54 @@ public class Cart
         return f.format(temp).replace(',', '.');
     }
 
+    /**
+     * Sets the total price of the cart.
+     * 
+     * @param totalPrice
+     *            the total price of the cart
+     */
     public void setTotalPrice(double totalPrice)
     {
         this.totalPrice = totalPrice;
     }
 
+    /**
+     * Returns the customer of the cart.
+     * 
+     * @return customer of the cart
+     */
     public Customer getCustomer()
     {
         return customer;
     }
 
+    /**
+     * Sets the customer of the cart.
+     * 
+     * @param customer
+     *            the customer of the cart
+     */
     public void setCustomer(Customer customer)
     {
         this.customer = customer;
     }
 
+    /**
+     * Returns all {@link CartProduct}s of this cart.
+     * 
+     * @return all {@link CartProduct}s of the cart
+     */
     public List<CartProduct> getProducts()
     {
         return products;
     }
 
+    /**
+     * Sets the {@link CartProduct}s of the cart.
+     * 
+     * @param products
+     *            the {@link CartProduct}s of the cart
+     */
     public void setProducts(List<CartProduct> products)
     {
         this.products = products;
@@ -100,11 +158,15 @@ public class Cart
      * Adds the product with the given finish and size to the cart.
      * 
      * @param product
+     *            the {@link Product} which is to be added
      * @param finish
+     *            the finish of the product
      * @param size
+     *            the {@link PosterSize} of the product
      */
     public void addProduct(Product product, final String finish, final PosterSize size)
     {
+        // check, whether the product with the given finish and size is in the cart
         CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product)
                                        .eq("finish", finish).eq("size", size).findUnique();
         // the product is not in the cart
@@ -138,9 +200,10 @@ public class Cart
     }
 
     /**
-     * Removes the given product from the cart.
+     * Removes one of the product from the cart.
      * 
      * @param cartProduct
+     *            the {@link CartProduct} which is to be removed from the cart
      */
     public void removeProduct(final CartProduct cartProduct)
     {
@@ -160,48 +223,68 @@ public class Cart
         this.update();
     }
 
+    /**
+     * Updates the {@link Cart} in the database.
+     */
     public void update()
     {
         Ebean.update(this);
     }
 
+    /**
+     * Saves the {@link Cart} in the database.
+     */
     public void save()
     {
         Ebean.save(this);
     }
 
+    /**
+     * Deletes the {@link Cart} from the database.
+     */
     public void delete()
     {
+        // remove all products from the cart
         this.clearProducts();
-        Ebean.update(this);
-        Ebean.delete(this);
+        // refresh to prevent foreign key violation
+        this.update();
+        // finally delete the cart
+        this.delete();
     }
 
     /**
-     * removes all products from the cart
+     * Removes all products from the cart
      */
     public void clearProducts()
     {
         // get all products of the cart
         List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
-        // delete each product
+        // remove each product
         for (CartProduct cartProduct : cartProducts)
         {
             cartProduct.delete();
             this.products.remove(cartProduct);
         }
+        // adjust total price
         this.setTotalPrice(0);
     }
 
+    /**
+     * Returns the {@link Cart} with the given {@link UUID}. Returns {@code null}, if no cart was found.
+     * 
+     * @param id
+     *            the {@link UUID} of the cart
+     * @return the {@link Cart} that matches the unique id
+     */
     public static Cart getCartById(UUID id)
     {
         return Ebean.find(Cart.class, id);
     }
 
     /**
-     * Returns all carts, which are stored in the data base.
+     * Returns all {@link Cart}s, which are stored in the database.
      * 
-     * @return
+     * @return {@link Cart}s
      */
     public static List<Cart> getAllCarts()
     {
@@ -209,9 +292,9 @@ public class Cart
     }
 
     /**
-     * Creates and returns a new cart.
+     * Creates and returns a new {@link Cart}.
      * 
-     * @return
+     * @return a new {@link Cart}
      */
     public static Cart createNewCart()
     {
@@ -220,7 +303,7 @@ public class Cart
         // save cart
         cart.save();
         // get new cart by id
-        Cart newCart = Ebean.find(Cart.class, cart.getId());
+        Cart newCart = Cart.getCartById(cart.getId());
         // return new cart
         return newCart;
     }
@@ -228,24 +311,38 @@ public class Cart
     /**
      * Returns the total product count of the cart.
      * 
-     * @return
+     * @return total count of products
      */
     public int getProductCount()
     {
         int productCount = 0;
         // get all products of the cart
         List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
+        // get the count of each product
         for (CartProduct cartProduct : cartProducts)
         {
+            // add the count of the current product to total count
             productCount += cartProduct.getProductCount();
         }
         return productCount;
     }
 
-    public static CartProduct getCartProduct(final Cart cart, final Product product, final String finish,
-                                             final PosterSize size)
+    /**
+     * Returns a {@link CartProduct}, which is in the cart. The {@link CartProduct} is specified by the given
+     * parameters. Returns {@code null}, if no {@link CartProduct} was found, that matches the given parameters.
+     * 
+     * @param product
+     *            the {@link Product} which is in the cart
+     * @param finish
+     *            the finish of the product
+     * @param size
+     *            the {@link PosterSize} of the product
+     * @return a {@link CartProduct}, that matches the given parameters, or {@code null}, if no {@link CartProduct}
+     *         matches
+     */
+    public CartProduct getCartProduct(final Product product, final String finish, final PosterSize size)
     {
-        return Ebean.find(CartProduct.class).where().eq("cart", cart).eq("product", product).eq("finish", finish)
+        return Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
                     .eq("size", size).findUnique();
     }
 }

@@ -123,7 +123,7 @@ public class SearchController
     private List<Product> searchForProducts(String searchText, int pageNumber, final Map<String, Object> data)
     {
         // build SQL string
-        String sql = "SELECT id, name, url, minimum_Price, description_detail FROM product where ";
+        String sql = "SELECT id, name, minimum_Price, description_detail FROM product where ";
         // divide search text by spaces
         String[] searchTerms = searchText.split(" ");
         // search in description detail
