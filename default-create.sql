@@ -120,7 +120,6 @@ create table shippingAddress (
 create table subCategory (
   id                        integer not null,
   name                      varchar(255),
-  url                       varchar(255),
   topCategory_id            integer,
   constraint pk_subCategory primary key (id))
 ;
@@ -128,7 +127,6 @@ create table subCategory (
 create table topCategory (
   id                        integer not null,
   name                      varchar(255),
-  url                       varchar(255),
   constraint pk_topCategory primary key (id))
 ;
 

@@ -1,9 +1,9 @@
 <div id="sidebarNav" class="well sidebar-nav">
 	<ul class="nav nav-list">
 		<#list topCategory as tC>
-			<li id="topCategory${tC_index}"><h4><a href="${applUrlHttp}/topCategory/${tC.url}">${tC.name}</a></h4></li>
+			<li id="topCategory${tC_index}"><h4><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}">${tC.name}</a></h4></li>
 			<#list tC.subCategories as sC>
-			<li id="subCategory${sC_index}${tC_index}"><a href="${applUrlHttp}/category/${sC.url}">${sC.name}</a></li>
+			<li id="subCategory${sC_index}${tC_index}"><a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}">${sC.name}</a></li>
 			</#list>
 		</#list>
 	</ul>

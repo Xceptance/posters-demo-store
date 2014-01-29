@@ -12,22 +12,22 @@
             alignment:'center',
             onPageClicked: function(e, originalEvent, type, page) {
             	// show searched products
-            	if($(location).attr('search') != "") {
-					$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
-            	}
+            	//if($(location).attr('search') != "") {
+				//	$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+            	//}
             	// show products of category
-            	else {
+            	//else {
             		var pathname = $(location).attr('pathname');
             		var categoryType = pathname.substring(1, pathname.indexOf('/', 1));
             		// top category
             		if(categoryType == "topCategory") {
-            			$.post('/getProductOfTopCategory', {pathname: pathname, page: page}, updateProductOverview);
+            			$.post('/getProductOfTopCategory', {categoryId: ${category.id}, page: page}, updateProductOverview);
             		}
             		// sub category
             		else {
-						$.post('/getProductOfSubCategory', {pathname: pathname, page: page}, updateProductOverview);
+						$.post('/getProductOfSubCategory', {categoryId: ${category.id}, page: page}, updateProductOverview);
             		}
-            	}
+            	//}
             }
         }
         $('#pagination').bootstrapPaginator(options);

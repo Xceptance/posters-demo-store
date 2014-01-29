@@ -33,11 +33,6 @@ public class TopCategory
     private String name;
 
     /**
-     * The URL of the top category.
-     */
-    private String url;
-
-    /**
      * The sub categories of the category.
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
@@ -79,16 +74,6 @@ public class TopCategory
         this.subCategories = subCategories;
     }
 
-    public String getUrl()
-    {
-        return url;
-    }
-
-    public void setUrl(String url)
-    {
-        this.url = url;
-    }
-
     public List<Product> getProducts()
     {
         return products;
@@ -115,8 +100,8 @@ public class TopCategory
         return Ebean.find(TopCategory.class).findList();
     }
 
-    public static TopCategory getTopCategoryByUrl(String url)
+    public static TopCategory getTopCategoryById(int id)
     {
-        return Ebean.find(TopCategory.class).where().eq("url", url).findUnique();
+        return Ebean.find(TopCategory.class, id);
     }
 }

@@ -50,47 +50,47 @@ public class CatalogController
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
         // put product to data map
-        data.put("productDetail", Product.getProductByUrl(productUrl));
+        data.put("productDetail", Product.getProductByName(productUrl));
         return Results.html().render(data);
     }
 
     /**
      * Returns a product overview page for the given sub category.
      * 
-     * @param subCategory
+     * @param subCategoryId
      * @param context
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result productOverview(@PathParam("subCategory") String subCategory, Context context)
+    public Result productOverview(@Param("categoryId") int subCategoryId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given sub category to data map
-        addSubCategoryProductsToMap(subCategory, 1, pageSize, data);
+        addSubCategoryProductsToMap(subCategoryId, 1, pageSize, data);
         // add sub category to data map
-        data.put("category", SubCategory.getSubCategoryByUrl(subCategory));
+        data.put("category", SubCategory.getSubCategoryById(subCategoryId));
         return Results.html().render(data);
     }
 
     /**
      * Returns a product overview page for the given top category.
      * 
-     * @param topCategory
+     * @param topCategoryId
      * @param context
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result topCategoryOverview(@PathParam("topCategory") String topCategory, Context context)
+    public Result topCategoryOverview(@Param("categoryId") int topCategoryId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given top category to data map
-        addTopCategoryProductsToMap(topCategory, 1, pageSize, data);
+        addTopCategoryProductsToMap(topCategoryId, 1, pageSize, data);
         // add top category to data map
-        data.put("category", TopCategory.getTopCategoryByUrl(topCategory));
+        data.put("category", TopCategory.getTopCategoryById(topCategoryId));
         // return product overview page
         return Results.html().template(xcpConf.TEMPLATE_PRODUCT_OVERVIEW).render(data);
     }
@@ -98,19 +98,17 @@ public class CatalogController
     /**
      * Returns the products of the top category for the given page number as JSON.
      * 
-     * @param pathname
+     * @param topCategoryId
      * @param page
      * @return
      */
-    public Result getProductOfTopCategory(@Param("pathname") String pathname, @Param("page") int page)
+    public Result getProductOfTopCategory(@Param("categoryId") int topCategoryId, @Param("page") int page)
     {
         Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
-        // get the name of the top category from the path
-        String topCategory = pathname.split("/")[2];
         // add products of the given top category to data map
-        addTopCategoryProductsToMap(topCategory, page, pageSize, data);
+        addTopCategoryProductsToMap(topCategoryId, page, pageSize, data);
         return result.render(data);
     }
 
@@ -121,31 +119,29 @@ public class CatalogController
      * @param page
      * @return
      */
-    public Result getProductOfSubCategory(@Param("pathname") String pathname, @Param("page") int page)
+    public Result getProductOfSubCategory(@Param("categoryId") int subCategoryId, @Param("page") int page)
     {
         Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
-        // get the name of the sub category from the path
-        String subCategory = pathname.split("/")[2];
         // add products of the given sub category to data map
-        addSubCategoryProductsToMap(subCategory, page, pageSize, data);
+        addSubCategoryProductsToMap(subCategoryId, page, pageSize, data);
         return result.render(data);
     }
 
     /**
      * Adds products of the given top category to the given data map, according to the given page number.
      * 
-     * @param topCategoryUrl
+     * @param topCategoryId
      * @param pageNumber
      * @param pageSize
      * @param data
      */
-    private static void addTopCategoryProductsToMap(String topCategoryUrl, int pageNumber, int pageSize,
+    private static void addTopCategoryProductsToMap(int topCategoryId, int pageNumber, int pageSize,
                                                     final Map<String, Object> data)
     {
         // get the given top category
-        TopCategory category = Ebean.find(TopCategory.class).where().eq("url", topCategoryUrl).findUnique();
+        TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
         // get the marked products, which should show in the top category
         PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category)
                                               .eq("showInTopCategorie", true).findPagingList(pageSize);
@@ -156,16 +152,16 @@ public class CatalogController
     /**
      * Adds products of the given sub category to the given data map, according to the given page number.
      * 
-     * @param subCategoryUrl
+     * @param subCategoryId
      * @param pageNumber
      * @param pageSize
      * @param data
      */
-    private static void addSubCategoryProductsToMap(String subCategoryUrl, int pageNumber, int pageSize,
+    private static void addSubCategoryProductsToMap(int subCategoryId, int pageNumber, int pageSize,
                                                     final Map<String, Object> data)
     {
         // get the sub category by the given category
-        SubCategory category = Ebean.find(SubCategory.class).where().eq("url", subCategoryUrl).findUnique();
+        SubCategory category = SubCategory.getSubCategoryById(subCategoryId);
         // get all products of the sub category
         PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category)
                                               .findPagingList(pageSize);

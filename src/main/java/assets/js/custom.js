@@ -71,7 +71,7 @@ function updateProductOverview(data) {
 	// set new content of products
 	for(i = 0; i < data.products.length; i++) {
 		$('#product' + i + " h3").text(data.products[i].name);
-		$('#product' + i + " a").attr("href", "/productDetail/" + data.products[i].url);
+		$('#product' + i + " a").attr("href", "/productDetail/" + data.products[i].name);
 		$('#product' + i + " a img").attr("src", data.products[i].imageURL);
 		$('#product' + i + "DescriptionOverview").text(data.products[i].descriptionOverview);
 		$('#product' + i + "Price").text(data.products[i].priceAsString);

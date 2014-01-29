@@ -13,7 +13,8 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * The sub category belongs to one {@link TopCategory}. A sub category has different products.
+ * This {@link Entity} provides a sub category in the catalog of the poster store. The sub category belongs to one
+ * {@link TopCategory}. A sub category has different products.
  * 
  * @author sebastianloob
  */
@@ -23,7 +24,7 @@ public class SubCategory
 {
 
     /**
-     * The ID of the sub category.
+     * The ID of the entity.
      */
     @Id
     private int id;
@@ -34,19 +35,14 @@ public class SubCategory
     private String name;
 
     /**
-     * The URL of the sub category.
-     */
-    private String url;
-
-    /**
-     * The top category of the sub category.
+     * The {@link TopCategory} the sub category belongs to.
      */
     @ManyToOne
     @JoinColumn(name = "topCategory_id")
     private TopCategory topCategory;
 
     /**
-     * The products of the sub category.
+     * The {@link Product}s of the sub category.
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subCategory")
     private List<Product> products;
@@ -91,16 +87,6 @@ public class SubCategory
         this.products = products;
     }
 
-    public String getUrl()
-    {
-        return url;
-    }
-
-    public void setUrl(String url)
-    {
-        this.url = url;
-    }
-
     public void update()
     {
         Ebean.update(this);
@@ -111,9 +97,8 @@ public class SubCategory
         Ebean.save(this);
     }
 
-    public static SubCategory getSubCategoryByUrl(String url)
+    public static SubCategory getSubCategoryById(int id)
     {
-        // get the sub category by the given category url
-        return Ebean.find(SubCategory.class).where().eq("url", url).findUnique();
+        return Ebean.find(SubCategory.class, id);
     }
 }

@@ -47,8 +47,6 @@ public class CategoryHandler extends DefaultHandler
         if (localName.equals("nameCategory"))
         {
             category.setName(currentValue);
-            String url = currentValue.replaceAll(" ", "");
-            category.setUrl(url);
         }
         if (localName.equals("category"))
         {
@@ -58,8 +56,6 @@ public class CategoryHandler extends DefaultHandler
         if (localName.equals("nameSubCategory"))
         {
             subCategory.setName(currentValue);
-            String url = currentValue.replaceAll(" ", "");
-            subCategory.setUrl(url);
         }
         if (localName.equals("subCategory"))
         {
