@@ -41,7 +41,7 @@
       	</#if>
       				<li class="span4">
       					<div id="product${pro_index}" class="thumbnail">
-      						<a href=/productDetail/${pro.name?url('UTF-8')}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
+      						<a href="/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
       						<h3 id="product${pro_index}Name">${pro.name}</h3>
       						<p id="product${pro_index}DescriptionOverview">${pro.descriptionOverview}</p>
       						<p>${i18n("priceStart")} <span id="product${pro_index}Price">${pro.getPriceAsString()}</span>${currency}</p>

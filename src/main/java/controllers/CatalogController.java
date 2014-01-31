@@ -13,7 +13,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import ninja.params.PathParam;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Page;
@@ -40,17 +39,17 @@ public class CatalogController
     /**
      * Returns a product detail page for the given product.
      * 
-     * @param productUrl
+     * @param productId
      * @param context
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result productDetail(@PathParam("product") String productUrl, Context context)
+    public Result productDetail(@Param("productId") int productId, Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
         // put product to data map
-        data.put("productDetail", Product.getProductByName(productUrl));
+        data.put("productDetail", Product.getProductById(productId));
         return Results.html().render(data);
     }
 

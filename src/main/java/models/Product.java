@@ -425,18 +425,6 @@ public class Product
     }
 
     /**
-     * Returns a {@link Product} that matches the given name.
-     * 
-     * @param name
-     *            the name of the product
-     * @return a {@link Product} that matches the given name
-     */
-    public static Product getProductByName(String name)
-    {
-        return Ebean.find(Product.class).where().eq("name", name).findUnique();
-    }
-
-    /**
      * Returns a {@link Product} that matches the given ID.
      * 
      * @param id
