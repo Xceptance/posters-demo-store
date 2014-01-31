@@ -11,23 +11,20 @@
             totalPages: ${totalPages},
             alignment:'center',
             onPageClicked: function(e, originalEvent, type, page) {
-            	// show searched products
-            	//if($(location).attr('search') != "") {
-				//	$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
-            	//}
-            	// show products of category
-            	//else {
-            		var pathname = $(location).attr('pathname');
-            		var categoryType = pathname.substring(1, pathname.indexOf('/', 1));
-            		// top category
-            		if(categoryType == "topCategory") {
-            			$.post('/getProductOfTopCategory', {categoryId: ${category.id}, page: page}, updateProductOverview);
-            		}
-            		// sub category
-            		else {
-						$.post('/getProductOfSubCategory', {categoryId: ${category.id}, page: page}, updateProductOverview);
-            		}
-            	//}
+           		var pathname = $(location).attr('pathname');
+           		var pageType = pathname.substring(1, pathname.indexOf('/', 1));
+           		// top category
+           		if(pageType == "topCategory") {
+           			$.post('/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+           		}
+           		// sub category
+           		else if(pageType == "category"){
+					$.post('/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+           		}
+           		// search
+           		else {
+           			$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+           		}
             }
         }
         $('#pagination').bootstrapPaginator(options);
