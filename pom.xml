@@ -15,7 +15,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
-		<ninja.version>2.2.0</ninja.version>
+		<ninja.version>2.5.1</ninja.version>
 		<jetty.version>8.1.12.v20130726</jetty.version>
 		<java.version>1.7</java.version>
 	</properties>

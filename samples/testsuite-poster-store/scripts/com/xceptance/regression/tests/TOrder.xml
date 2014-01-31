@@ -9,7 +9,7 @@
   </module>
   <module name="module.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerBasketOverview"/>
+  <command name="clickAndWait" target="id=headerCartOverview"/>
   <action name="StartCheckout"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="SelectShippingAddress"/>
@@ -47,7 +47,7 @@
   <command name="storeText" target="id=totalWithTax" value="totalWithTax"/>
   <command name="clickAndWait" target="id=btnOrder"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="id=btnBasketOverview" value="regexp:.*0.*0.*"/>
+  <command name="assertText" target="id=btnCartOverview" value="regexp:.*0.*0.*"/>
   <module name="module.OpenAccountOverview"/>
   <action name="ViewOrderOverview"/>
   <command name="clickAndWait" target="id=linkOrderOverview"/>

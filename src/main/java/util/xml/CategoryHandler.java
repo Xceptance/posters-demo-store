@@ -11,6 +11,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.avaje.ebean.Ebean;
 
+/**
+ * This {@link DefaultHandler} parses an XML file with top and sub categories and persists them in the database.
+ * 
+ * @author sebastianloob
+ */
 public class CategoryHandler extends DefaultHandler
 {
 
@@ -42,8 +47,6 @@ public class CategoryHandler extends DefaultHandler
         if (localName.equals("nameCategory"))
         {
             category.setName(currentValue);
-            String url = currentValue.replaceAll(" ", "");
-            category.setUrl(url);
         }
         if (localName.equals("category"))
         {
@@ -53,8 +56,6 @@ public class CategoryHandler extends DefaultHandler
         if (localName.equals("nameSubCategory"))
         {
             subCategory.setName(currentValue);
-            String url = currentValue.replaceAll(" ", "");
-            subCategory.setUrl(url);
         }
         if (localName.equals("subCategory"))
         {

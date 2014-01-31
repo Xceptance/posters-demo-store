@@ -84,8 +84,8 @@
   <command name="check" target="//div[@id='selectFinish']/label[${finishIndex}+1]/input"/>
   <command name="select" target="id=selectSize" value="label=${productSize}"/>
   <command name="click" target="id=btnAddToCart"/>
-  <command name="waitForVisible" target="//ul[@id='cartElementList']/li"/>
-  <command name="waitForNotVisible" target="//ul[@id='cartElementList']/li"/>
+  <command name="waitForVisible" target="//ul[@id='cartSliderElementList']/li"/>
+  <command name="waitForNotVisible" target="//ul[@id='cartSliderElementList']/li"/>
   <module name="module.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>

@@ -6,13 +6,13 @@
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
 		<tr id="product${orderProduct_index}">
-			<td><a href=/productDetail/${orderProduct.product.url?url('UTF-8')}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
+			<td><a href="/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
 			<td id="product${orderProduct_index}Name">${orderProduct.product.name}</td>
 			<td id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
 			<td id="product${orderProduct_index}Finish">${orderProduct.finish}</td>
 			<td id="product${orderProduct_index}Size">${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</td>
 			<td id="product${orderProduct_index}Price">${orderProduct.getPriceAsString()}${currency}</td>
-			<td id="product${orderProduct_index}Count">${orderProduct.countProduct}</td>
+			<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
 		</tr>
 		</#list>
 	</table>
@@ -34,15 +34,15 @@
 	</div>
 	<div class="row-fluid">
 		<ul>
-			<!-- print delivery address -->
+			<!-- print shipping address -->
 			<li class="span4">
-				<h3>${i18n("titleDeliveryAddress")}</h3>
+				<h3>${i18n("titleShippingAddress")}</h3>
 				<address  id="delAddr">
-      				<strong>${order.deliveryAddress.name}</strong><br>
-      				${order.deliveryAddress.company}<br>
-      				${order.deliveryAddress.addressLine}<br>
-      				${order.deliveryAddress.city}, ${order.deliveryAddress.state} ${order.deliveryAddress.zip}<br>
-      				${order.deliveryAddress.country}<br>
+      				<strong>${order.shippingAddress.name}</strong><br>
+      				${order.shippingAddress.company}<br>
+      				${order.shippingAddress.addressLine}<br>
+      				${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zip}<br>
+      				${order.shippingAddress.country}<br>
       			</address>
 			</li>
 			<!-- print billing address -->

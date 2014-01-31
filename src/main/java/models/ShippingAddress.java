@@ -11,17 +11,17 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides a billing address. A billing address can be set to at most one {@link Customer}.
+ * This {@link Entity} provides a shipping address. A shipping address can be set to at most one {@link Customer}.
  * 
  * @author sebastianloob
  */
 @Entity
-@Table(name = "billingAddress")
-public class BillingAddress
+@Table(name = "shippingAddress")
+public class ShippingAddress
 {
 
     /**
-     * The id of the entity.
+     * The ID of the entity.
      */
     @Id
     private int id;
@@ -68,15 +68,15 @@ public class BillingAddress
     private Customer customer;
 
     /**
-     * A list of {@link Order}s, for which this address is set as the billing address.
+     * A list of {@link Order}s, for which this address is set as the shipping address.
      */
     @OneToMany
     private List<Order> order;
 
     /**
-     * Returns the ID of the billing address.
+     * Returns the ID of the entity.
      * 
-     * @return the ID of the address
+     * @return the ID of the entity
      */
     public int getId()
     {
@@ -95,9 +95,9 @@ public class BillingAddress
     }
 
     /**
-     * Returns the company field of the billing address.
+     * Returns the company field of the shipping address.
      * 
-     * @return the company field
+     * @return the company field of the shipping address
      */
     public String getCompany()
     {
@@ -105,10 +105,10 @@ public class BillingAddress
     }
 
     /**
-     * Sets the company field of the billing address.
+     * Sets the company field of the shipping address.
      * 
      * @param company
-     *            the company field
+     *            the company field of the shipping address
      */
     public void setCompany(String company)
     {
@@ -116,9 +116,9 @@ public class BillingAddress
     }
 
     /**
-     * Returns the {@link Customer} with this billing address.
+     * Returns the {@link Customer} with this shipping address.
      * 
-     * @return the {@link Customer} with this billing address
+     * @return the {@link Customer} with this shipping address
      */
     public Customer getCustomer()
     {
@@ -126,10 +126,10 @@ public class BillingAddress
     }
 
     /**
-     * Sets a customer to the billing address.
+     * Sets a customer to the shipping address.
      * 
      * @param customer
-     *            the customer with this billing address
+     *            the customer with this shipping address
      */
     public void setCustomer(Customer customer)
     {
@@ -137,7 +137,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns the name field of the billing address.
+     * Returns the name field of the shipping address.
      * 
      * @return the name field
      */
@@ -147,7 +147,7 @@ public class BillingAddress
     }
 
     /**
-     * Sets the name field of the billing address.
+     * Sets the name field of the shipping address.
      * 
      * @param name
      *            the name field
@@ -158,7 +158,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns the address line of the billing address.
+     * Returns the address line of the shipping address.
      * 
      * @return the address line
      */
@@ -168,7 +168,7 @@ public class BillingAddress
     }
 
     /**
-     * Sets the address line of the billing address.
+     * Sets the address line of the shipping address.
      * 
      * @param addressLine
      *            the address line
@@ -179,7 +179,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns the city field of the billing address.
+     * Returns the city field of the shipping address.
      * 
      * @return the city field
      */
@@ -189,7 +189,7 @@ public class BillingAddress
     }
 
     /**
-     * Sets the city field of the billing address.
+     * Sets the city field of the shipping address.
      * 
      * @param city
      *            the city field
@@ -200,7 +200,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns the state field of the billing address.
+     * Returns the state field of the shipping address.
      * 
      * @return the state field
      */
@@ -210,7 +210,7 @@ public class BillingAddress
     }
 
     /**
-     * Sets the state field of the billing address.
+     * Sets the state field of the shipping address.
      * 
      * @param state
      *            the state field
@@ -221,7 +221,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns the country field of the billing address.
+     * Returns the country field of the shipping address.
      * 
      * @return the country field
      */
@@ -231,7 +231,7 @@ public class BillingAddress
     }
 
     /**
-     * Sets the country field of the billing address.
+     * Sets the country field of the shipping address.
      * 
      * @param country
      *            the country field
@@ -242,7 +242,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns the ZIP code of the billing address.
+     * Returns the ZIP code of the shipping address.
      * 
      * @return the ZIP code
      */
@@ -252,7 +252,7 @@ public class BillingAddress
     }
 
     /**
-     * Sets the ZIP code of the billing address.
+     * Sets the ZIP code of the shipping address.
      * 
      * @param zip
      *            the ZIP code
@@ -263,7 +263,7 @@ public class BillingAddress
     }
 
     /**
-     * Returns all {@link Order}s, for which this address is set as billing address.
+     * Returns all {@link Order}s, for which this address is set as shipping address.
      * 
      * @return a list of {@link Order}s
      */
@@ -273,18 +273,18 @@ public class BillingAddress
     }
 
     /**
-     * Sets the list of {@link Order}s, for which this address is set as billing address.
+     * Sets the list of {@link Order}s, for which this address is set as shipping address.
      * 
      * @param orders
      *            a list of {@link Order}s
      */
-    public void setOrder(List<Order> orders)
+    public void setOrder(List<Order> order)
     {
-        this.order = orders;
+        this.order = order;
     }
 
     /**
-     * Updates the {@link BillingAddress} in the database.
+     * Updates the entity in the database.
      */
     public void update()
     {
@@ -292,7 +292,7 @@ public class BillingAddress
     }
 
     /**
-     * Saves the {@link BillingAddress} in the database.
+     * Saves the entity in the database.
      */
     public void save()
     {
@@ -300,7 +300,7 @@ public class BillingAddress
     }
 
     /**
-     * Deletes the {@link BillingAddress} in the database.
+     * Deletes the entity from the database.
      */
     public void delete()
     {
@@ -308,33 +308,27 @@ public class BillingAddress
     }
 
     /**
-     * Returns the {@link BillingAddress} that matches the given ID.
+     * Returns the {@link ShippingAddress} that matches the given ID.
      * 
      * @param id
-     *            the ID of the billing address
-     * @return the {@link BillingAddress} that matches the given ID
+     *            the ID of the shipping address
+     * @return the {@link ShippingAddress} that matches the given ID
      */
-    public static BillingAddress getBillingAddressById(int id)
+    public static ShippingAddress getShippingAddressById(int id)
     {
-        return Ebean.find(BillingAddress.class, id);
+        return Ebean.find(ShippingAddress.class, id);
     }
 
     /**
-     * Sets the {@link Customer} of the {@link BillingAddress} to {@code null}.
+     * Sets the {@link Customer} of the {@link ShippingAddress} to {@code null}.
      * 
      * @param id
-     *            the ID of the billing address
+     *            the ID of the shipping address
      */
-    public static void removeCustomerFromBillingAddress(int id)
+    public static void removeCustomerFromShippingAddress(int id)
     {
-        // get the billing address by the ID
-        BillingAddress address = getBillingAddressById(id);
-        if (address != null)
-        {
-            // set customer of the billing address to null
-            address.setCustomer(null);
-            // update billing address
-            address.update();
-        }
+        ShippingAddress address = ShippingAddress.getShippingAddressById(id);
+        address.setCustomer(null);
+        address.update();
     }
 }

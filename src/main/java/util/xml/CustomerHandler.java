@@ -3,17 +3,22 @@ package util.xml;
 import models.BillingAddress;
 import models.CreditCard;
 import models.Customer;
-import models.DeliveryAddress;
+import models.ShippingAddress;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * This {@link DefaultHandler} parses an XML file with customer data and persists them in the database.
+ * 
+ * @author sebastianloob
+ */
 public class CustomerHandler extends DefaultHandler
 {
 
     private Customer customer;
 
-    private DeliveryAddress deliveryAddress;
+    private ShippingAddress shippingAddress;
 
     private BillingAddress billingAddress;
 
@@ -27,10 +32,11 @@ public class CustomerHandler extends DefaultHandler
         if (localName.equals("customer"))
         {
             customer = new Customer();
+            customer.save();
         }
-        if (localName.equals("deliveryAddress"))
+        if (localName.equals("shippingAddress"))
         {
-            deliveryAddress = new DeliveryAddress();
+            shippingAddress = new ShippingAddress();
         }
         if (localName.equals("billingAddress"))
         {
@@ -47,11 +53,11 @@ public class CustomerHandler extends DefaultHandler
     {
         if (localName.equals("customer"))
         {
-            customer.save();
+            customer.update();
         }
-        if (localName.equals("deliveryAddress"))
+        if (localName.equals("shippingAddress"))
         {
-            customer.addDeliveryAddress(deliveryAddress);
+            customer.addShippingAddress(shippingAddress);
         }
         if (localName.equals("billingAddress"))
         {
@@ -79,31 +85,31 @@ public class CustomerHandler extends DefaultHandler
         }
         if (localName.equals("delName"))
         {
-            deliveryAddress.setName(currentValue);
+            shippingAddress.setName(currentValue);
         }
         if (localName.equals("delCompany"))
         {
-            deliveryAddress.setCompany(currentValue);
+            shippingAddress.setCompany(currentValue);
         }
         if (localName.equals("delAddressLine"))
         {
-            deliveryAddress.setAddressLine(currentValue);
+            shippingAddress.setAddressLine(currentValue);
         }
         if (localName.equals("delCity"))
         {
-            deliveryAddress.setCity(currentValue);
+            shippingAddress.setCity(currentValue);
         }
         if (localName.equals("delState"))
         {
-            deliveryAddress.setState(currentValue);
+            shippingAddress.setState(currentValue);
         }
         if (localName.equals("delCountry"))
         {
-            deliveryAddress.setCountry(currentValue);
+            shippingAddress.setCountry(currentValue);
         }
         if (localName.equals("delZip"))
         {
-            deliveryAddress.setZip(currentValue);
+            shippingAddress.setZip(currentValue);
         }
         if (localName.equals("billName"))
         {

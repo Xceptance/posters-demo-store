@@ -6,18 +6,22 @@ import ninja.FilterChain;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
-import util.session.SessionHandling;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
+/**
+ * This {@link Filter} breaks, if the session is terminated.
+ * 
+ * @author sebastianloob
+ */
 public class SessionTerminatedFilter implements Filter
 {
 
     @Inject
     Messages msg;
 
-    private Optional language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     @Override
     public Result filter(FilterChain chain, Context context)
@@ -25,11 +29,12 @@ public class SessionTerminatedFilter implements Filter
         // break, if session is terminated
         if (context.getSessionCookie().isEmpty())
         {
-            // error message
+            // show error message
             context.getFlashCookie().error(msg.get("errorSessionTerminated", language).get());
             // show home page
             return Results.redirect(context.getContextPath() + "/");
         }
+        // everything is fine
         else
         {
             return chain.next(context);

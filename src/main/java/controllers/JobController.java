@@ -13,16 +13,27 @@ import ninja.lifecycle.Start;
 
 import org.h2.tools.RunScript;
 
-import util.starter.StarterConf;
 import util.xml.ImportFromXMLToDB;
 
 import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
 
+import conf.StarterConf;
+
+/**
+ * Executes some actions, before the application starts.
+ * 
+ * @author sebastianloob
+ */
 @Singleton
 public class JobController
 {
 
+    /**
+     * Prepares the database and, if necessary, imports some data to the database.
+     * 
+     * @throws Exception
+     */
     @Start(order = 90)
     public void startActions() throws Exception
     {
@@ -32,11 +43,17 @@ public class JobController
         System.setProperty("ninja.mode", "prod");
 
         StarterConf config = new StarterConf();
+        // prepare database
         prepareDatabase(config);
         // import categories, products and dummy customer
         importData(config);
     }
 
+    /**
+     * Prepares the database. Drops all tables, if it is set. Creates a new database, if necessary.
+     * 
+     * @param config
+     */
     private void prepareDatabase(StarterConf config)
     {
         // handle the connection
@@ -46,12 +63,12 @@ public class JobController
             Class.forName(config.DB_DRIVER);
             // connect to database
             connection = DriverManager.getConnection(config.DB_URL, config.DB_USER, config.DB_PASS);
-            boolean basketProductTable = false;
-            boolean basketTable = false;
+            boolean cartProductTable = false;
+            boolean cartTable = false;
             boolean billingAddressTable = false;
             boolean creditCardTable = false;
             boolean customerTable = false;
-            boolean deliveryAddressTable = false;
+            boolean shippingAddressTable = false;
             boolean orderProductTable = false;
             boolean orderTable = false;
             boolean productTable = false;
@@ -72,13 +89,13 @@ public class JobController
             // check if all tables exist
             while (rs.next())
             {
-                if (rs.getString(3).equals("BASKET_PRODUCT"))
+                if (rs.getString(3).equals("CARTPRODUCT"))
                 {
-                    basketProductTable = true;
+                    cartProductTable = true;
                 }
-                if (rs.getString(3).equals("BASKET"))
+                if (rs.getString(3).equals("CART"))
                 {
-                    basketTable = true;
+                    cartTable = true;
                 }
                 if (rs.getString(3).equals("BILLINGADDRESS"))
                 {
@@ -92,11 +109,11 @@ public class JobController
                 {
                     customerTable = true;
                 }
-                if (rs.getString(3).equals("DELIVERYADDRESS"))
+                if (rs.getString(3).equals("SHIPPINGADDRESS"))
                 {
-                    deliveryAddressTable = true;
+                    shippingAddressTable = true;
                 }
-                if (rs.getString(3).equals("ORDER_PRODUCT"))
+                if (rs.getString(3).equals("ORDERPRODUCT"))
                 {
                     orderProductTable = true;
                 }
@@ -108,7 +125,7 @@ public class JobController
                 {
                     productTable = true;
                 }
-                if (rs.getString(3).equals("CATEGORY"))
+                if (rs.getString(3).equals("TOPCATEGORY"))
                 {
                     topCategoryTable = true;
                 }
@@ -118,8 +135,8 @@ public class JobController
                 }
             }
             // create the tables if they not exist
-            if (!(basketProductTable && basketTable && billingAddressTable && creditCardTable && customerTable
-                  && deliveryAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
+            if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable
+                  && shippingAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
             {
                 // simply execute the create-script
                 RunScript.execute(connection, new FileReader("default-create.sql"));
@@ -133,6 +150,11 @@ public class JobController
         }
     }
 
+    /**
+     * Imports some data, if the database is empty.
+     * 
+     * @param config
+     */
     private void importData(StarterConf config)
     {
         // import categories, if there is no category in DB

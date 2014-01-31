@@ -1,35 +1,36 @@
 package util.xml;
 
+/**
+ * Provides methods to import data from a XML file into the database.
+ * 
+ * @author sebastianloob
+ */
 public class ImportFromXMLToDB
 {
 
     /**
-     * @param args
+     * Reads categories from xml and pushes into database.
      */
-    public static void main(String[] args)
-    {
-        importCategory();
-        importProduct();
-        importCustomer();
-    }
-    
     public static void importCategory()
     {
-        // read categories from xml and push into database
         CategoryHandler contentHandler = new CategoryHandler();
         XmlUtils.readXmlFile(contentHandler, "src/main/java/assets/files/categories.xml");
     }
-    
+
+    /**
+     * Reads products from xml and pushes into database.
+     */
     public static void importProduct()
     {
-        // read products from xml and push into database
         ProductHandler productHandler = new ProductHandler();
         XmlUtils.readXmlFile(productHandler, "src/main/java/assets/files/products.xml");
     }
-    
+
+    /**
+     * Reads customers from xml and pushes into database.
+     */
     public static void importCustomer()
     {
-        // read customers from xml and push into database
         CustomerHandler customerHandler = new CustomerHandler();
         XmlUtils.readXmlFile(customerHandler, "src/main/java/assets/files/customer.xml");
     }

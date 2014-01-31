@@ -1,0 +1,28 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">    	
+	<h1 id="titleCart">${i18n("cartOverviewTitle")}</h1>
+	<table class="table" table-bordered>
+		<#list cartProducts as cartProduct>
+			<tr id="product${cartProduct_index}">
+				<td><a href="/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img data-src="/assets/js/holder.js/150x100" alt="" src=${cartProduct.product.imageURL} width="150"></img></a></td>
+				<td id="productName${cartProduct_index}">${cartProduct.product.name}</td>
+				<td id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</td>
+				<td id="productFinish${cartProduct_index}">${cartProduct.finish}</td>
+				<td id="productSize${cartProduct_index}">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</td>
+				<td id="productPrice${cartProduct_index}">${cartProduct.getPriceAsString()}${currency}</td>
+				<td>
+	      			<input class="input-mini productCount${cartProduct_index}" type="number" id="productCount${cartProduct_index}" name="productCount${cartProduct_index}" value=${cartProduct.productCount}><br/>
+	      			<button class="btn" id="btnUpdateProdCount${cartProduct_index}" name="btnUpdateProdCount${cartProduct_index}" onclick="updateProductCount(${cartProduct.id}, $('#productCount${cartProduct_index}').val(), ${cartProduct_index})">${i18n("cartOverviewUpdateQuantity")}</button>
+				</td>
+				<td>
+      				<button class="btn" id="btnRemoveProduct${cartProduct_index}" name="btnRemoveProduct${cartProduct_index}" onclick="deleteFromCart(${cartProduct.id}, ${cartProduct_index})">${i18n("cartOverviewRemoveFromCart")}</button>
+				</td>
+			</tr>
+		</#list>
+	</table>
+
+	<h3 align="right">${i18n("cartOverviewTotalPrice")}: <b id="totalPrice">${totalPrice}${currency}</b></h3>
+	
+	<h3 align="right"><a href="${applUrlHttps}/checkout" id="btnStartCheckout">${i18n("cartOverviewStartCheckout")}</a></h3>
+
+</@layout.myLayout>

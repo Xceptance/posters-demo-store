@@ -3,7 +3,12 @@ package util.date;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class DateUtils
+/**
+ * Date utility class.
+ * 
+ * @author sebastianloob
+ */
+public class DateUtils
 {
 
     /**

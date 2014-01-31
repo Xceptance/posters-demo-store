@@ -1,56 +1,50 @@
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists basket;
-
-drop table if exists basket_product;
-
 drop table if exists billingAddress;
+
+drop table if exists cart;
+
+drop table if exists cartProduct;
 
 drop table if exists creditCard;
 
 drop table if exists customer;
 
-drop table if exists deliveryAddress;
-
 drop table if exists ordering;
 
-drop table if exists order_product;
+drop table if exists orderProduct;
 
 drop table if exists posterSize;
 
 drop table if exists product;
 
-drop table if exists product_posterSize;
+drop table if exists productPosterSize;
+
+drop table if exists shippingAddress;
 
 drop table if exists subCategory;
 
-drop table if exists category;
+drop table if exists topCategory;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists basket_seq;
-
-drop sequence if exists basket_product_seq;
-
 drop sequence if exists billingAddress_seq;
+
+drop sequence if exists cartProduct_seq;
 
 drop sequence if exists creditCard_seq;
 
-drop sequence if exists customer_seq;
-
-drop sequence if exists deliveryAddress_seq;
-
-drop sequence if exists ordering_seq;
-
-drop sequence if exists order_product_seq;
+drop sequence if exists orderProduct_seq;
 
 drop sequence if exists posterSize_seq;
 
 drop sequence if exists product_seq;
 
-drop sequence if exists product_posterSize_seq;
+drop sequence if exists productPosterSize_seq;
+
+drop sequence if exists shippingAddress_seq;
 
 drop sequence if exists subCategory_seq;
 
-drop sequence if exists category_seq;
+drop sequence if exists topCategory_seq;
 

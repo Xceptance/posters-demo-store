@@ -4,7 +4,7 @@ import java.util.List;
 
 import models.PosterSize;
 import models.Product;
-import models.Product_PosterSize;
+import models.ProductPosterSize;
 import models.SubCategory;
 import models.TopCategory;
 
@@ -13,6 +13,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.avaje.ebean.Ebean;
 
+/**
+ * This {@link DefaultHandler} parses an XML file with product data and persists them in the database.
+ * 
+ * @author sebastianloob
+ */
 public class ProductHandler extends DefaultHandler
 {
 
@@ -44,7 +49,6 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("name"))
         {
             product.setName(toAdd);
-            product.setUrl(toAdd);
         }
         if (localName.equals("shortDescription"))
         {
@@ -61,7 +65,7 @@ public class ProductHandler extends DefaultHandler
             // add first price as minimum price
             product.setMinimumPrice(Double.parseDouble(prices[0]));
             // add the price for each size
-            List<Product_PosterSize> productPosterSizes = Ebean.find(Product_PosterSize.class).where()
+            List<ProductPosterSize> productPosterSizes = Ebean.find(ProductPosterSize.class).where()
                                                                .eq("product", product).findList();
             for (int i = 0; i < productPosterSizes.size(); i++)
             {
@@ -129,7 +133,7 @@ public class ProductHandler extends DefaultHandler
                     posterSize.setHeight(height);
                     posterSize.save();
                 }
-                Product_PosterSize productPosterSize = new Product_PosterSize();
+                ProductPosterSize productPosterSize = new ProductPosterSize();
                 productPosterSize.setProduct(product);
                 productPosterSize.setSize(posterSize);
                 productPosterSize.save();
