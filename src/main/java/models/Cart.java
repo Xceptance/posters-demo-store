@@ -249,7 +249,7 @@ public class Cart
         // refresh to prevent foreign key violation
         this.update();
         // finally delete the cart
-        this.delete();
+        Ebean.delete(this);
     }
 
     /**
