@@ -93,10 +93,9 @@ public class Register extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // check that the account was successfully created
-        HtmlElement successMessage = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('successMessage')/div/strong");
-        Assert.assertEquals("Registration failed.",
-                            "Your account has been created. Log in with your email address and password.",
-                            successMessage.asText());
+        boolean accountCreated = page.asXml()
+                                     .contains("Your account has been created. Log in with your email address and password.");
+        Assert.assertTrue("Registration failed", accountCreated);
         // check that it's the sign in page
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
