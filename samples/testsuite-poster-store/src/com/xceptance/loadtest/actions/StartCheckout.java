@@ -12,19 +12,19 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} opens the registration form.
+ * This {@link AbstractHtmlPageAction} starts the checkout.
  * 
  * @author sebastianloob
  */
-public class GoToRegistrationForm extends AbstractHtmlPageAction
+public class StartCheckout extends AbstractHtmlPageAction
 {
 
     /**
-     * The link to the registration form.
+     * The checkout link.
      */
-    private HtmlElement registerButton;
+    private HtmlElement checkoutLink;
 
-    public GoToRegistrationForm(AbstractHtmlPageAction previousAction, String timerName)
+    public StartCheckout(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
     }
@@ -34,19 +34,21 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
-
-        // check that the registration link is available
-        Assert.assertTrue("Registration link not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
-
-        // remember the registration link
-        this.registerButton = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
+        // check that the cart is not empty
+        boolean cartIsEmpty = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('headerCartOverview')/span")
+                                           .asText().matches(".*: 0 Items.*");
+        Assert.assertFalse("Cart must not be empty for checkout.", cartIsEmpty);
+        // check that the checkout link is available
+        Assert.assertTrue("Checkout link not found.", HtmlPageUtils.isElementPresent(page, "id('btnStartCheckout')"));
+        // remember the checkout link
+        this.checkoutLink = HtmlPageUtils.findSingleHtmlElementByID(page, "btnStartCheckout");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // load the registration page
-        loadPageByClick(this.registerButton);
+        // start the checkout
+        loadPageByClick(checkoutLink);
     }
 
     @Override
@@ -62,9 +64,10 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the registration page
-        Assert.assertTrue("Registration form not found.", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
-        Assert.assertTrue("Link to create new account not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
+        // check that it's the page to enter or select a shipping address
+        Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleDelAddr')"));
+        // check that the form to enter a new shipping address is available
+        Assert.assertTrue("Form to enter shipping address not found.",
+                          HtmlPageUtils.isElementPresent(page, "id('formAddDelAddr')"));
     }
 }

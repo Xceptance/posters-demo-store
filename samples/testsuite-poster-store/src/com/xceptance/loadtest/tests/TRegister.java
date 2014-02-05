@@ -12,6 +12,12 @@ import com.xceptance.loadtest.util.Account;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
 
+/**
+ * Open landing page and navigate to the registration form. Register a new customer, log in with new account data and
+ * log out afterwards.
+ * 
+ * @author sebastianloob
+ */
 public class TRegister extends AbstractTestCase
 {
 

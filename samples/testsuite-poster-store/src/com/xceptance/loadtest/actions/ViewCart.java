@@ -12,19 +12,19 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} opens the registration form.
+ * This {@link AbstractHtmlPageAction} opens the cart overview page.
  * 
  * @author sebastianloob
  */
-public class GoToRegistrationForm extends AbstractHtmlPageAction
+public class ViewCart extends AbstractHtmlPageAction
 {
 
     /**
-     * The link to the registration form.
+     * Link to shopping cart page.
      */
-    private HtmlElement registerButton;
+    private HtmlElement viewCartLink;
 
-    public GoToRegistrationForm(AbstractHtmlPageAction previousAction, String timerName)
+    public ViewCart(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
     }
@@ -32,21 +32,20 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the last action
+        // Get the current page.
         final HtmlPage page = getPreviousAction().getHtmlPage();
-
-        // check that the registration link is available
-        Assert.assertTrue("Registration link not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
-
-        // remember the registration link
-        this.registerButton = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
+        // check that the cart overview link is available
+        Assert.assertTrue("Cart overview link not found",
+                          HtmlPageUtils.isElementPresent(page, "id('headerCartOverview')"));
+        // remember cart overview link
+        this.viewCartLink = HtmlPageUtils.findSingleHtmlElementByID(page, "headerCartOverview");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // load the registration page
-        loadPageByClick(this.registerButton);
+        // load the cart overview page
+        loadPageByClick(this.viewCartLink);
     }
 
     @Override
@@ -62,9 +61,9 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the registration page
-        Assert.assertTrue("Registration form not found.", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
-        Assert.assertTrue("Link to create new account not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
+        // check that it's the cart overview page
+        Assert.assertTrue("Title not found", HtmlPageUtils.isElementPresent(page, "id('titleCart')"));
+        Assert.assertTrue("Total price not found", HtmlPageUtils.isElementPresent(page, "id('totalPrice')"));
+        Assert.assertTrue("Checkout button not found", HtmlPageUtils.isElementPresent(page, "id('btnStartCheckout')"));
     }
 }
