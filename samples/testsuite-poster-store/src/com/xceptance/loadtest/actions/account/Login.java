@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.account;
 
 import org.junit.Assert;
 
@@ -56,6 +56,7 @@ public class Login extends AbstractHtmlPageAction
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
         // check that the sign in form is available
         Assert.assertTrue("Sign in form not found", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         // remember the sign in form

@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.account;
 
 import org.junit.Assert;
 
@@ -55,6 +55,7 @@ public class Register extends AbstractHtmlPageAction
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
         // check that the registration form is available
         Assert.assertTrue("Registration form not found", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
         // remember the registration form
@@ -95,7 +96,7 @@ public class Register extends AbstractHtmlPageAction
         // check that the account was successfully created
         boolean accountCreated = page.asXml()
                                      .contains("Your account has been created. Log in with your email address and password.");
-        Assert.assertTrue("Registration failed", accountCreated);
+        Assert.assertTrue("Registration failed.", accountCreated);
         // check that it's the sign in page
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));

@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.order;
 
 import org.junit.Assert;
 
@@ -46,11 +46,19 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
         this.address = address;
     }
 
+    public EnterBillingAddress(AbstractHtmlPageAction previousAction, String timerName, Address address)
+    {
+        super(previousAction, timerName);
+        this.account = new Account();
+        this.address = address;
+    }
+
     @Override
     public void preValidate() throws Exception
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
         // check that the form to enter a new billing address is available
         Assert.assertTrue("Form to enter billing address not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));

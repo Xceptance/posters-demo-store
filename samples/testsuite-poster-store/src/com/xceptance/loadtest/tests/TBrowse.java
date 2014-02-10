@@ -3,9 +3,9 @@ package com.xceptance.loadtest.tests;
 import org.junit.Test;
 
 import com.xceptance.loadtest.actions.Homepage;
-import com.xceptance.loadtest.actions.ProductDetailView;
-import com.xceptance.loadtest.actions.SelectTopCategory;
-import com.xceptance.loadtest.actions.SelectCategory;
+import com.xceptance.loadtest.actions.catalog.ProductDetailView;
+import com.xceptance.loadtest.actions.catalog.SelectCategory;
+import com.xceptance.loadtest.actions.catalog.SelectTopCategory;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
 

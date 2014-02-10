@@ -3,6 +3,8 @@ package com.xceptance.loadtest.actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -51,6 +53,7 @@ public class AddToCart extends AbstractHtmlPageAction
     {
 	// Get the result of the last action
 	final HtmlPage page = getPreviousAction().getHtmlPage();
+	Assert.assertNotNull("Failed to get page from previous action.", page);
 
 	// Look up the 'add to cart' form
 	addToCartForm = HtmlPageUtils.findSingleHtmlElementByID(page,

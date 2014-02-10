@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.order;
 
 import org.junit.Assert;
 
@@ -44,6 +44,7 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
         // check that the form to enter a new credit card is available
         Assert.assertTrue("Form to enter credit card not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddPayment')"));
@@ -60,7 +61,8 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
     protected void execute() throws Exception
     {
         // fill in the payment method
-        HtmlPageUtils.setInputValue(paymentForm, "number", creditCard.getNumber());
+        HtmlPageUtils.setInputValue(paymentForm, "creditCardNumber", creditCard.getNumber());
+        HtmlPageUtils.setInputValue(paymentForm, "name", creditCard.getOwner());
         HtmlPageUtils.selectRandomly(paymentForm, "expirationDateMonth");
         HtmlPageUtils.selectRandomly(paymentForm, "expirationDateYear");
 
@@ -80,12 +82,8 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
-        // TODO
-        // check that it's the page to enter or select a payment method
-        Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titlePayment')"));
-        // check that the form to enter a new payment method is available
-        Assert.assertTrue("Form to enter payment method not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('formAddPayment')"));
-    }
 
+        // check that it's the order overview page
+        Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleOrderOverview')"));
+    }
 }

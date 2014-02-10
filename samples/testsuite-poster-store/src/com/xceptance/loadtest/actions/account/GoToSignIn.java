@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.account;
 
 import org.junit.Assert;
 
@@ -34,6 +34,7 @@ public class GoToSignIn extends AbstractHtmlPageAction
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
 
         // check that no customer is logged
         Assert.assertTrue("A customer is already logged.",

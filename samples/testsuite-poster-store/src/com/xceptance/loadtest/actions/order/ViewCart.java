@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.order;
 
 import org.junit.Assert;
 
@@ -34,6 +34,7 @@ public class ViewCart extends AbstractHtmlPageAction
     {
         // Get the current page.
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
         // check that the cart overview link is available
         Assert.assertTrue("Cart overview link not found",
                           HtmlPageUtils.isElementPresent(page, "id('headerCartOverview')"));

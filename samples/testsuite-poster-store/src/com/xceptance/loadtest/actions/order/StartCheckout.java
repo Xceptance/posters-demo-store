@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.order;
 
 import org.junit.Assert;
 
@@ -34,6 +34,7 @@ public class StartCheckout extends AbstractHtmlPageAction
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
         // check that the cart is not empty
         boolean cartIsEmpty = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('headerCartOverview')/span")
                                            .asText().matches(".*: 0 Items.*");

@@ -1,4 +1,4 @@
-package com.xceptance.loadtest.actions;
+package com.xceptance.loadtest.actions.account;
 
 import org.junit.Assert;
 
@@ -12,19 +12,19 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} opens the registration form.
+ * This {@link AbstractHtmlPageAction} logs out the currently logged in user.
  * 
  * @author sebastianloob
  */
-public class GoToRegistrationForm extends AbstractHtmlPageAction
+public class Logout extends AbstractHtmlPageAction
 {
 
     /**
-     * The link to the registration form.
+     * The log out link.
      */
-    private HtmlElement registerButton;
+    HtmlElement logout;
 
-    public GoToRegistrationForm(AbstractHtmlPageAction previousAction, String timerName)
+    public Logout(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
     }
@@ -32,21 +32,22 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the last action
+        // get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
+        Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the registration link is available
-        Assert.assertTrue("Registration link not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
+        // check that the customer is logged
+        Assert.assertTrue("No customer is logged.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
 
-        // remember the registration link
-        this.registerButton = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
+        // remember log out link
+        this.logout = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // load the registration page
-        loadPageByClick(this.registerButton);
+        // log out
+        loadPageByClick(logout);
     }
 
     @Override
@@ -62,9 +63,14 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the registration page
-        Assert.assertTrue("Registration form not found.", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
-        Assert.assertTrue("Link to create new account not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
+        // check that no customer is logged
+        Assert.assertTrue("A customer is still logged.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
+
+        // check that it's the home page
+        final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
+        Assert.assertNotNull("Title not found", blogNameElement);
+        // check the title
+        Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
     }
+
 }

@@ -2,12 +2,12 @@ package com.xceptance.loadtest.tests;
 
 import org.junit.Test;
 
-import com.xceptance.loadtest.actions.GoToRegistrationForm;
-import com.xceptance.loadtest.actions.GoToSignIn;
 import com.xceptance.loadtest.actions.Homepage;
-import com.xceptance.loadtest.actions.Login;
-import com.xceptance.loadtest.actions.Logout;
-import com.xceptance.loadtest.actions.Register;
+import com.xceptance.loadtest.actions.account.GoToRegistrationForm;
+import com.xceptance.loadtest.actions.account.GoToSignIn;
+import com.xceptance.loadtest.actions.account.Login;
+import com.xceptance.loadtest.actions.account.Logout;
+import com.xceptance.loadtest.actions.account.Register;
 import com.xceptance.loadtest.util.Account;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
