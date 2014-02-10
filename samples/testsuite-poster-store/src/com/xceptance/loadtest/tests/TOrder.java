@@ -3,17 +3,19 @@ package com.xceptance.loadtest.tests;
 import org.junit.Test;
 
 import com.xceptance.loadtest.actions.AddToCart;
-import com.xceptance.loadtest.actions.EnterBillingAddress;
-import com.xceptance.loadtest.actions.EnterShippingAddress;
-import com.xceptance.loadtest.actions.GoToRegistrationForm;
-import com.xceptance.loadtest.actions.GoToSignIn;
 import com.xceptance.loadtest.actions.Homepage;
-import com.xceptance.loadtest.actions.Login;
-import com.xceptance.loadtest.actions.ProductDetailView;
-import com.xceptance.loadtest.actions.Register;
-import com.xceptance.loadtest.actions.SelectCategory;
-import com.xceptance.loadtest.actions.StartCheckout;
-import com.xceptance.loadtest.actions.ViewCart;
+import com.xceptance.loadtest.actions.account.GoToRegistrationForm;
+import com.xceptance.loadtest.actions.account.GoToSignIn;
+import com.xceptance.loadtest.actions.account.Login;
+import com.xceptance.loadtest.actions.account.Register;
+import com.xceptance.loadtest.actions.catalog.ProductDetailView;
+import com.xceptance.loadtest.actions.catalog.SelectCategory;
+import com.xceptance.loadtest.actions.order.EnterBillingAddress;
+import com.xceptance.loadtest.actions.order.EnterPaymentMethod;
+import com.xceptance.loadtest.actions.order.EnterShippingAddress;
+import com.xceptance.loadtest.actions.order.PlaceOrder;
+import com.xceptance.loadtest.actions.order.StartCheckout;
+import com.xceptance.loadtest.actions.order.ViewCart;
 import com.xceptance.loadtest.util.Account;
 import com.xceptance.loadtest.util.Address;
 import com.xceptance.loadtest.util.CreditCard;
@@ -52,7 +54,7 @@ public class TOrder extends AbstractTestCase
         Address billingAddress = new Address();
 
         // Create new credit card. Use this credit card as payment method.
-        CreditCard creditCard = new CreditCard();
+        CreditCard creditCard = new CreditCard(account);
 
         // Go to poster store homepage
         Homepage homepage = new Homepage(url, "Homepage");
@@ -105,7 +107,12 @@ public class TOrder extends AbstractTestCase
         enterBillingAddress.run();
 
         // enter the payment method
+        EnterPaymentMethod enterPaymentMethod = new EnterPaymentMethod(enterBillingAddress, "EnterPaymentMethod",
+                                                                       creditCard);
+        enterPaymentMethod.run();
 
         // place the order
+        PlaceOrder placeOrder = new PlaceOrder(enterPaymentMethod, "PlaceOrder");
+        placeOrder.run();
     }
 }
