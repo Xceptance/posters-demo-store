@@ -84,7 +84,15 @@ public class Paging extends AbstractHtmlPageAction
 
         // get the type of the page by the path of the current URL
         final String path = page.getUrl().getPath();
-        pageType = path.substring(1, path.indexOf("/", 1));
+        try
+        {
+            pageType = path.substring(1, path.indexOf("/", 1));
+        }
+        // the page shows rearch results
+        catch (Exception e)
+        {
+            pageType = "search";
+        }
         // get the category id by the query part of the URL
         categoryId = page.getUrl().getQuery().substring(11);
     }
@@ -100,7 +108,7 @@ public class Paging extends AbstractHtmlPageAction
         pagingParams.add(new NameValuePair("page", Integer.toString(targetPageNumber)));
 
         // execute the AJAX call and get the response
-        WebResponse response;
+        WebResponse response = null;
         // the current page is a top category overview page
         if (pageType.equalsIgnoreCase("topCategory"))
         {
@@ -114,11 +122,16 @@ public class Paging extends AbstractHtmlPageAction
             response = AjaxUtils.callPost(page, "/getProductOfSubCategory", pagingParams);
         }
         // the current page shows some search results
-        else
+        else if (pageType.equalsIgnoreCase("search"))
         {
             pagingParams.add(new NameValuePair("searchText",
                                                HtmlPageUtils.findSingleHtmlElementByID(page, "searchText").asText()));
             response = AjaxUtils.callPost(page, "/getProductOfSearch", pagingParams);
+        }
+        // unknown page type
+        else
+        {
+            Assert.fail("Unknown page type.");
         }
 
         // update the page, show new products
