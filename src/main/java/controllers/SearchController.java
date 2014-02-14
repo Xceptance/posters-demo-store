@@ -109,6 +109,7 @@ public class SearchController
             products.get(i).setOrder(null);
         }
         data.put("products", products);
+        data.put("currentPage", pageNumber);
         return Results.json().render(data);
     }
 

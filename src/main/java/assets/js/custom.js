@@ -80,4 +80,6 @@ function updateProductOverview(data) {
 		$('#product' + i).hide();
 		i++;
 	}
+	// set current page attribute
+	$('#productOverview').attr("currentPage",data.currentPage);
 }
