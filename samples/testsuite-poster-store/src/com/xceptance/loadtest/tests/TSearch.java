@@ -11,6 +11,7 @@ import com.xceptance.loadtest.actions.Search;
 import com.xceptance.loadtest.actions.catalog.Paging;
 import com.xceptance.loadtest.actions.catalog.ProductDetailView;
 import com.xceptance.loadtest.util.SearchOption;
+import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.data.DataProvider;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltRandom;
@@ -23,6 +24,11 @@ import com.xceptance.xlt.api.util.XltRandom;
  */
 public class TSearch extends AbstractTestCase
 {
+
+    /**
+     * Last action
+     */
+    private AbstractHtmlPageAction lastAction;
 
     /**
      * Data provider for search results.
@@ -57,6 +63,7 @@ public class TSearch extends AbstractTestCase
         // Go to poster store homepage
         Homepage homepage = new Homepage(url, "Homepage");
         homepage.run();
+        lastAction = homepage;
 
         // Get the number of searches determined from the configured min and max
         // products.
@@ -70,16 +77,33 @@ public class TSearch extends AbstractTestCase
 
             // Run the search with an appropriate search phrase according to the
             // search option.
-            Search search = new Search(homepage, "Search", getSearchPhrase(option), option);
+            Search search = new Search(lastAction, "Search", getSearchPhrase(option), option);
             search.run();
+            lastAction = search;
 
-            // paging
-            Paging paging = new Paging(search, "Paging");
-            paging.run();
-
-            // product detail view
-            ProductDetailView productDetailView = new ProductDetailView(paging, "ProductDetailView");
-            productDetailView.run();
+            // perform Paging and go to product detail page of a result according to the search option
+            if (option == SearchOption.HITS)
+            {
+                // According to the configured probability perform the paging or
+                // not.
+                if (XltRandom.nextBoolean(getProperty("paging.probability", 0)))
+                {
+                    // Get current number of paging rounds determined from the configured
+                    // min and max value for paging.
+                    final int nbPagings = XltRandom.nextInt(getProperty("paging.min", 0), getProperty("paging.max", 0));
+                    for (int j = 0; j < nbPagings; j++)
+                    {
+                        // perform the paging
+                        Paging paging = new Paging(lastAction, "Paging");
+                        paging.run();
+                        lastAction = paging;
+                    }
+                }
+                // product detail view
+                ProductDetailView productDetailView = new ProductDetailView(lastAction, "ProductDetailView");
+                productDetailView.run();
+                lastAction = productDetailView;
+            }
         }
     }
 
