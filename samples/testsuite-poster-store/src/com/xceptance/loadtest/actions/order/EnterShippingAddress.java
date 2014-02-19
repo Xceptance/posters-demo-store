@@ -37,8 +37,19 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
      */
     private Account account;
 
+    /**
+     * The submit address button
+     */
     private HtmlElement submitAddressButton;
 
+    /**
+     * Constructor that takes an account object to provide a shipping address
+     * 
+     * @param previousAction
+     * @param timerName
+     * @param account
+     * @param address
+     */
     public EnterShippingAddress(AbstractHtmlPageAction previousAction, String timerName, Account account,
         Address address)
     {
@@ -47,6 +58,13 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
         this.address = address;
     }
 
+    /**
+     * Constructor that takes an address object to provide a shipping address
+     * 
+     * @param previousAction
+     * @param timerName
+     * @param address
+     */
     public EnterShippingAddress(AbstractHtmlPageAction previousAction, String timerName, Address address)
     {
         super(previousAction, timerName);
@@ -60,18 +78,23 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
+        
         // check that the form to enter a new shipping address is available
         Assert.assertTrue("Form to enter shipping address not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddDelAddr')"));
+        
         // remember the shipping address form
         this.shippingAddressForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddDelAddr");
+        
         // check that the button to submit the shipping address is available
         Assert.assertTrue("Button to submit shipping address not found.",
                           HtmlPageUtils.isElementPresent(page, "id('btnAddDelAddr')"));
+        
         // remember the button to submit the shipping address
         this.submitAddressButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddDelAddr");
     }
 
+    
     @Override
     protected void execute() throws Exception
     {
@@ -105,6 +128,7 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
 
         // check that it's the page to enter or select a billing address
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleBillAddr')"));
+        
         // check that the form to enter a new billing address is available
         Assert.assertTrue("Form to enter billing address not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));

@@ -38,6 +38,8 @@ public class Login extends AbstractHtmlPageAction
     private Account account;
 
     /**
+     * Constructor 
+     * 
      * @param previousAction
      *            previous action
      * @param timerName
@@ -57,12 +59,16 @@ public class Login extends AbstractHtmlPageAction
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
+        
         // check that the sign in form is available
         Assert.assertTrue("Sign in form not found", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
+        
         // remember the sign in form
         this.signInForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formLogin");
-        // check that the registration link is available
+        
+        // check that the sign in button is available
         Assert.assertTrue("Sign in button not found", HtmlPageUtils.isElementPresent(page, "id('btnSignIn')"));
+        
         // remember the sign in button
         this.signInButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnSignIn");
     }
@@ -91,12 +97,13 @@ public class Login extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that the customer is logged
-        Assert.assertTrue("No customer is logged.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
+        // check that the customer is logged in
+        Assert.assertTrue("Customer is not logged in.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
 
-        // check that it's the home page
+        // check that it's the homepage
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
         Assert.assertNotNull("Title not found", blogNameElement);
+        
         // check the title
         Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
     }

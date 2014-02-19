@@ -13,7 +13,7 @@ import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
 
 /**
- * Open landing page and navigate to the registration form. Register a new customer, log in with new account data and
+ * Open landing page and navigate to the registration form. Register a new customer, log in with new account and
  * log out afterwards.
  * 
  * @author sebastianloob
@@ -34,7 +34,7 @@ public class TRegister extends AbstractTestCase
         final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
                                                                    "http://localhost:8080/");
 
-        // Create new account data. These account data will be used to create a new account.
+        // Create new account data. This account data will be used to create a new account.
         Account account = new Account();
 
         // Go to poster store homepage

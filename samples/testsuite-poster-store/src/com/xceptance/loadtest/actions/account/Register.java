@@ -37,17 +37,19 @@ public class Register extends AbstractHtmlPageAction
     private Account account;
 
     /**
+     * Constructor
+     * 
      * @param previousAction
      *            previous action
      * @param timerName
      *            timer name
-     * @param account
-     *            account to register
+     * @param accountData
+     *            The account data used to register new account
      */
-    public Register(AbstractHtmlPageAction previousAction, String timerName, Account account)
+    public Register(AbstractHtmlPageAction previousAction, String timerName, Account accountData)
     {
         super(previousAction, timerName);
-        this.account = account;
+        this.account = accountData;
     }
 
     @Override
@@ -56,12 +58,16 @@ public class Register extends AbstractHtmlPageAction
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
+        
         // check that the registration form is available
         Assert.assertTrue("Registration form not found", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
+        
         // remember the registration form
         this.registrationForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formRegister");
+        
         // check that the create account button is available
         Assert.assertTrue("Create account button not found", HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
+        
         // remember the create account button
         this.createAccountButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnRegister");
     }
@@ -97,9 +103,11 @@ public class Register extends AbstractHtmlPageAction
         boolean accountCreated = page.asXml()
                                      .contains("Your account has been created. Log in with your email address and password.");
         Assert.assertTrue("Registration failed.", accountCreated);
+        
         // check that it's the sign in page
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
+        
         // check that the customer is not logged after registration
         Assert.assertTrue("Customer is logged after registration.",
                           HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));

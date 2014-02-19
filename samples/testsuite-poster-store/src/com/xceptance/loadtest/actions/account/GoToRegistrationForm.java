@@ -22,13 +22,20 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     /**
      * The link to the registration form.
      */
-    private HtmlElement registerButton;
+    private HtmlElement registerLink;
 
+    
+    /**
+     * Constructor
+     * @param previousAction
+     * @param timerName
+     */
     public GoToRegistrationForm(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
     }
 
+    
     @Override
     public void preValidate() throws Exception
     {
@@ -40,14 +47,14 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
         Assert.assertTrue("Registration link not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
 
         // remember the registration link
-        this.registerButton = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
+        this.registerLink = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // load the registration page
-        loadPageByClick(this.registerButton);
+        // load the registration page by clicking the link
+        loadPageByClick(this.registerLink);
     }
 
     @Override
@@ -65,7 +72,7 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
 
         // check that it's the registration page
         Assert.assertTrue("Registration form not found.", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
-        Assert.assertTrue("Link to create new account not found.",
+        Assert.assertTrue("Button to create account not found.",
                           HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
     }
 }

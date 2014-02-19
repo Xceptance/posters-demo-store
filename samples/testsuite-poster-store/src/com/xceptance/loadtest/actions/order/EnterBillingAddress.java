@@ -37,8 +37,20 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
      */
     private Account account;
 
+    /**
+     * The submit address button
+     */
     private HtmlElement submitAddressButton;
 
+    
+    /**
+     * Constructor that takes an existing account to get a first name and last name
+     * 
+     * @param previousAction
+     * @param timerName
+     * @param account
+     * @param address
+     */
     public EnterBillingAddress(AbstractHtmlPageAction previousAction, String timerName, Account account, Address address)
     {
         super(previousAction, timerName);
@@ -46,6 +58,13 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
         this.address = address;
     }
 
+   /**
+    * Constructor that creates an new account to get a first name and a last name
+    * 
+    * @param previousAction
+    * @param timerName
+    * @param address
+    */
     public EnterBillingAddress(AbstractHtmlPageAction previousAction, String timerName, Address address)
     {
         super(previousAction, timerName);
@@ -53,20 +72,25 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
         this.address = address;
     }
 
+    
     @Override
     public void preValidate() throws Exception
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
+        
         // check that the form to enter a new billing address is available
         Assert.assertTrue("Form to enter billing address not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));
+        
         // remember the billing address form
         this.billingAddressForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddBillAddr");
+        
         // check that the button to submit the billing address is available
         Assert.assertTrue("Button to submit billing address not found.",
                           HtmlPageUtils.isElementPresent(page, "id('btnAddBillAddr')"));
+        
         // remember the button to submit the billing address
         this.submitAddressButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddBillAddr");
     }
@@ -102,6 +126,7 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
 
         // check that it's the page to enter or select a payment method
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titlePayment')"));
+        
         // check that the form to enter a new payment method is available
         Assert.assertTrue("Form to enter payment method not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddPayment')"));

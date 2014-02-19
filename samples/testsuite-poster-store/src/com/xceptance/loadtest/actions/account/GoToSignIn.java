@@ -24,10 +24,16 @@ public class GoToSignIn extends AbstractHtmlPageAction
      */
     private HtmlElement signInButton;
 
+    /**
+     *  Constructor
+     * @param previousAction
+     * @param timerName
+     */
     public GoToSignIn(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
     }
+
 
     @Override
     public void preValidate() throws Exception
@@ -36,8 +42,8 @@ public class GoToSignIn extends AbstractHtmlPageAction
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that no customer is logged
-        Assert.assertTrue("A customer is already logged.",
+        // check that no customer is logged in
+        Assert.assertTrue("A customer is already logged in.",
                           HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
 
         // remember the sign in button
@@ -47,7 +53,7 @@ public class GoToSignIn extends AbstractHtmlPageAction
     @Override
     protected void execute() throws Exception
     {
-        // load the page to sign in
+        // Click the button to load the sign in page
         loadPageByClick(this.signInButton);
     }
 
@@ -57,7 +63,7 @@ public class GoToSignIn extends AbstractHtmlPageAction
         // get the result of the last action
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Repeated Basic checks - see action 'Homepage' for some more details how and when to use these validators
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);

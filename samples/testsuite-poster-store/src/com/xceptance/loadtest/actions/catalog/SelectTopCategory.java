@@ -1,5 +1,7 @@
 package com.xceptance.loadtest.actions.catalog;
 
+import org.junit.Assert;
+
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.xceptance.loadtest.validators.HeaderValidator;
@@ -81,7 +83,7 @@ public class SelectTopCategory extends AbstractHtmlPageAction
         SideNavValidator.getInstance().validate(page);
         
         // The product over view element is present
-        HtmlPageUtils.isElementPresent(page, "id('productOverview')");
+        Assert.assertTrue("Product over view element not present.",HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
         
         // and we also see some poster's thumbnail images
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");

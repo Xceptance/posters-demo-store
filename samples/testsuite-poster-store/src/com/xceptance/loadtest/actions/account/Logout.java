@@ -20,15 +20,22 @@ public class Logout extends AbstractHtmlPageAction
 {
 
     /**
-     * The log out link.
+     * The logout link.
      */
-    HtmlElement logout;
+    HtmlElement logoutLink;
 
+    /**
+     * Constructor
+     * 
+     * @param previousAction
+     * @param timerName
+     */
     public Logout(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
     }
 
+    
     @Override
     public void preValidate() throws Exception
     {
@@ -36,18 +43,18 @@ public class Logout extends AbstractHtmlPageAction
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the customer is logged
-        Assert.assertTrue("No customer is logged.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
+        // check that the customer is logged in
+        Assert.assertTrue("No customer is logged in.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
 
-        // remember log out link
-        this.logout = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
+        // remember logout link
+        this.logoutLink = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // log out
-        loadPageByClick(logout);
+        // log out by clicking the link
+        loadPageByClick(logoutLink);
     }
 
     @Override
@@ -63,12 +70,13 @@ public class Logout extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that no customer is logged
-        Assert.assertTrue("A customer is still logged.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
+        // check that no customer is logged in
+        Assert.assertTrue("A customer is still logged in.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
 
         // check that it's the home page
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
         Assert.assertNotNull("Title not found", blogNameElement);
+        
         // check the title
         Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
     }

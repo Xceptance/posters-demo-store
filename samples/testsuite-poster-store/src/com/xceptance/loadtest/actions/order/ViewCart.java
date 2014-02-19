@@ -24,6 +24,12 @@ public class ViewCart extends AbstractHtmlPageAction
      */
     private HtmlElement viewCartLink;
 
+    /**
+     * Constructor
+     * 
+     * @param previousAction
+     * @param timerName
+     */
     public ViewCart(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
@@ -35,9 +41,11 @@ public class ViewCart extends AbstractHtmlPageAction
         // Get the current page.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
+        
         // check that the cart overview link is available
         Assert.assertTrue("Cart overview link not found",
                           HtmlPageUtils.isElementPresent(page, "id('headerCartOverview')"));
+        
         // remember cart overview link
         this.viewCartLink = HtmlPageUtils.findSingleHtmlElementByID(page, "headerCartOverview");
     }

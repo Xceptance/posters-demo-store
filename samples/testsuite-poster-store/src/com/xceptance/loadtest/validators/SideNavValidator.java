@@ -45,8 +45,8 @@ public class SideNavValidator
 	    HtmlElement htmlElement = (HtmlElement) iterator.next();
 	    // relative xpath to address the first sibling after the top
 	    // category that is a level-1 category
-	    HtmlPageUtils.isElementPresent(htmlElement,
-		    "./following-sibling::li[1][@class='level-1']");
+	    Assert.assertTrue("Top category is not followed by a level-1 category.",HtmlPageUtils.isElementPresent(htmlElement,
+		    "./following-sibling::li[1][@class='level-1']"));
 	}
 
     }

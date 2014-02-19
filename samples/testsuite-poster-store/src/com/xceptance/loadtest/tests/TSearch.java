@@ -40,7 +40,7 @@ public class TSearch extends AbstractTestCase
         {
             // Initialize the search provider with the search phrases file
             // 'results.txt'
-            HITS_PROVIDER = DataProvider.getInstance(DataProvider.DEFAULT + File.separator + "results.txt");
+            HITS_PROVIDER = DataProvider.getInstance(DataProvider.DEFAULT + File.separator + "search_phrases.txt");
         }
         catch (IOException ioe)
         {

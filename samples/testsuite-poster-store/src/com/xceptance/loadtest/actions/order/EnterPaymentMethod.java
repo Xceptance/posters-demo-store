@@ -27,12 +27,22 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
     private HtmlForm paymentForm;
 
     /**
-     * The payment method.
+     * The credit card data.
      */
     private CreditCard creditCard;
 
+    /**
+     * The payment method.
+     */
     private HtmlElement submitPaymentMethod;
 
+    /**
+     * Constructor
+     * 
+     * @param previousAction
+     * @param timerName
+     * @param creditCard
+     */
     public EnterPaymentMethod(AbstractHtmlPageAction previousAction, String timerName, final CreditCard creditCard)
     {
         super(previousAction, timerName);
@@ -45,14 +55,18 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
+        
         // check that the form to enter a new credit card is available
         Assert.assertTrue("Form to enter credit card not found.",
                           HtmlPageUtils.isElementPresent(page, "id('formAddPayment')"));
+        
         // remember the payment form
         this.paymentForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddPayment");
+        
         // check that the button to submit the payment method is available
         Assert.assertTrue("Button to submit payment method not found.",
                           HtmlPageUtils.isElementPresent(page, "id('btnAddPayment')"));
+        
         // remember the button to submit the payment method
         this.submitPaymentMethod = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddPayment");
     }

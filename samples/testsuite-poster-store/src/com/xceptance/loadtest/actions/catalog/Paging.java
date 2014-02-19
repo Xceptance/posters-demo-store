@@ -48,6 +48,12 @@ public class Paging extends AbstractHtmlPageAction
      */
     private String categoryId;
 
+    /**
+     * Constructor 
+     *
+     * @param previousAction
+     * @param timerName
+     */
     public Paging(AbstractHtmlPageAction previousAction, String timerName)
     {
         super(previousAction, timerName);
@@ -186,7 +192,7 @@ public class Paging extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check the current page is a product overview page.
-        HtmlPageUtils.isElementPresent(page, "id('productOverview')");
+        Assert.assertTrue("Product Overview element missing.", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
 
         // and we also see some poster's thumbnail images
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");

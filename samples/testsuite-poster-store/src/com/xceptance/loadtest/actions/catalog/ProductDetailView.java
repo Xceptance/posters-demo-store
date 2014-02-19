@@ -38,7 +38,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
         Assert.assertNotNull("Failed to get page from previous action", page);
 
         // Check the current page is a product overview category page.
-        HtmlPageUtils.isElementPresent(page, "id('productOverview')");
+        Assert.assertTrue("Product Overview element missing.",HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
         
         // and we also see some poster's thumbnail images
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
@@ -75,23 +75,23 @@ public class ProductDetailView extends AbstractHtmlPageAction
         HtmlPageUtils.isElementPresent(page, "id('main')/div/div/h1[@id='titleProductName']");
         
         // The product description is there in the right presentation (h3 - h4 -span)
-        HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/h3[@id='prodDescriptionOverview']");
-        HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/h4[@id='prodDescriptionDetail']");
-        HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/p[@id='prodFinish']");
+        Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).", HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/h3[@id='prodDescriptionOverview']"));
+        Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).", HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/h4[@id='prodDescriptionDetail']"));
+        Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).", HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/p[@id='prodFinish']"));
         
         // There is a price with the correct currency
         HtmlElement productPriceElement = HtmlPageUtils.findSingleHtmlElementByID(page, "prodPrice");
         String productPrice = productPriceElement.getTextContent();
-        productPrice.endsWith("$");
+        Assert.assertTrue("The price does not end with $", productPrice.endsWith("$"));
         
         // Product configuration elements are present
-        HtmlPageUtils.isElementPresent(page, "id('selectFinish')");
-        HtmlPageUtils.isElementPresent(page, "id('finish-matte')");
-        HtmlPageUtils.isElementPresent(page, "id('finish-gloss')");
-        HtmlPageUtils.isElementPresent(page, "id('size')");
+        Assert.assertTrue("Product configuration element (select Finish) is not present.", HtmlPageUtils.isElementPresent(page, "id('selectFinish')"));
+        Assert.assertTrue("Product configuration element (finish matte) is not present.", HtmlPageUtils.isElementPresent(page, "id('finish-matte')"));
+        Assert.assertTrue("Product configuration element (finish gloss) is not present.", HtmlPageUtils.isElementPresent(page, "id('finish-gloss')"));
+        Assert.assertTrue("Product configuration element (size) is not present.", HtmlPageUtils.isElementPresent(page, "id('selectSize')"));
         
         // 'Add to cart' button is available
-        HtmlPageUtils.isElementPresent(page, "id('btnAddToCart')");
+        Assert.assertTrue("'Add to cart' button is not available", HtmlPageUtils.isElementPresent(page, "id('btnAddToCart')"));
         
     }
 
