@@ -89,8 +89,8 @@ public class Search extends AbstractHtmlPageAction
                 break;
 
             case NO_HITS:
-                Assert.assertNull("Search phrase '" + phrase + "' should result in no hits.",
-                                  HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview"));
+                Assert.assertFalse("Search phrase '" + phrase + "' should result in no hits.",
+                                  HtmlPageUtils.isElementPresent(page, "productOverview"));
                 break;
 
             default:
