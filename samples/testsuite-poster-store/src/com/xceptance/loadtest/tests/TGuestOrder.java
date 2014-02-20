@@ -19,7 +19,7 @@ import com.xceptance.xlt.api.util.XltProperties;
  */
 public class TGuestOrder extends AbstractTestCase
 {
-
+    
     /**
      * Main test method.
      * 

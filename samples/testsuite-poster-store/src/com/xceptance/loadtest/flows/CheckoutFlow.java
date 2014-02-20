@@ -41,7 +41,7 @@ public class CheckoutFlow
     /**
      * Create new credit card. Use this credit card as payment method.
      */
-    private CreditCard creditCard = new CreditCard(account);
+    private CreditCard creditCard;
 
     /**
      * Constructor
@@ -52,6 +52,7 @@ public class CheckoutFlow
     {
 	this.previousAction = previousAction;
 	this.account = account;
+	this.creditCard = new CreditCard(account);
 
     }
 

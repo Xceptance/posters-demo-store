@@ -67,6 +67,7 @@ public class AddToCart extends AbstractHtmlPageAction
 	// string.
 	// We will need it as a parameter later on in the subsequent AJAX calls
 	// to update price and add poster to cart
+	// FIXME If the poster is only available in one size then ..andPickOne is not working!
 	HtmlElement option = HtmlPageUtils.findHtmlElementsAndPickOne(page,
 		"id('selectSize')/option", true);
 	// Get the text content of the element as trimmed string
