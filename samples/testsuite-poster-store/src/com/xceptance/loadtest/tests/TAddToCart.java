@@ -2,11 +2,8 @@ package com.xceptance.loadtest.tests;
 
 import org.junit.Test;
 
-import com.xceptance.loadtest.actions.AddToCart;
 import com.xceptance.loadtest.actions.Homepage;
-import com.xceptance.loadtest.actions.catalog.ProductDetailView;
-import com.xceptance.loadtest.actions.catalog.SelectCategory;
-import com.xceptance.loadtest.actions.catalog.SelectTopCategory;
+import com.xceptance.loadtest.flows.BrowseAndAddToCartFlow;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
 
@@ -26,21 +23,10 @@ public class TAddToCart extends AbstractTestCase
     Homepage homepage = new Homepage(url, "Homepage");
     homepage.run();
     
-    //Select a random top category from side navigation
-    SelectTopCategory selectTopCategory = new SelectTopCategory(homepage, "SelectTopCategory");
-    selectTopCategory.run();
-    
-    //Select a random level-1 category from side navigation
-    SelectCategory selectCategory = new SelectCategory(selectTopCategory, "SelectCategory");
-    selectCategory.run();
-    
-    // Select a random poster from product overview and show product detail page
-    ProductDetailView productDetailView = new ProductDetailView(selectCategory, "ProductDetailView");
-    productDetailView.run();
-    
-    // Configure the product (size and finish) and add it to cart
-    AddToCart addToCart = new AddToCart(productDetailView, "AddToCart");
-    addToCart.run();
+    // Browse and add a product to cart (FLOW!!)
+    // TODO Add more comments to explain what a flow is and how it works
+    BrowseAndAddToCartFlow browseAndAddToCart = new BrowseAndAddToCartFlow(homepage);
+    browseAndAddToCart.run();
     
     }
 }

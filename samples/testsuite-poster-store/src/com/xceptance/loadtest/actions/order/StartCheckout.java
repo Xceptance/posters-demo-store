@@ -35,6 +35,7 @@ public class StartCheckout extends AbstractHtmlPageAction
         super(previousAction, timerName);
     }
 
+
     @Override
     public void preValidate() throws Exception
     {

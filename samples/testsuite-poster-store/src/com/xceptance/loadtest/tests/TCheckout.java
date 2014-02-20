@@ -7,7 +7,6 @@ import com.xceptance.loadtest.actions.account.GoToRegistrationForm;
 import com.xceptance.loadtest.actions.account.GoToSignIn;
 import com.xceptance.loadtest.actions.account.Login;
 import com.xceptance.loadtest.actions.account.Register;
-import com.xceptance.loadtest.actions.order.PlaceOrder;
 import com.xceptance.loadtest.flows.BrowseAndAddToCartFlow;
 import com.xceptance.loadtest.flows.CheckoutFlow;
 import com.xceptance.loadtest.util.Account;
@@ -17,19 +16,15 @@ import com.xceptance.xlt.api.util.XltProperties;
 
 /**
  * Open the landing page, register account and browse the catalog to a random product. Configure this product and add it
- * to the cart. Finally process the checkout including the final order placement step.
+ * to the cart. Finally process the checkout. But do NOT execute the final order placement step. This is to simulate an abandoned checkout.
  * 
- * @author sebastianloob
  */
-public class TOrder extends AbstractTestCase
+public class TCheckout extends AbstractTestCase
 {
-
     /**
-     * Create account data. 
-     * This data will be used to register a new shop account.
+     *  Create new account data. These account data will be used to create a new account.
      */
-    private final Account account = new Account();
-    
+    private Account account = new Account();
     
     /**
      * Main test method.
@@ -37,14 +32,13 @@ public class TOrder extends AbstractTestCase
      * @throws Throwable
      */
     @Test
-    public void order() throws Throwable
+    public void checkout() throws Throwable
     {
         // Read the store URL from properties. Directly referring to the properties allows to access them by the full
         // path.
         final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
                                                                    "http://localhost:8080/");
-        
-        
+
         // Go to poster store homepage
         Homepage homepage = new Homepage(url, "Homepage");
         homepage.run();
@@ -58,13 +52,13 @@ public class TOrder extends AbstractTestCase
         goToRegistrationForm.run();
 
         // register
-        Register register = new Register(goToRegistrationForm, "Register", this.account);
+        Register register = new Register(goToRegistrationForm, "Register", account);
         register.run();
 
         // log in
         Login login = new Login(register, "Login", account);
         login.run();
-
+        
         // Browse and add a product to cart (FLOW!!)
         // TODO Add more comments to explain what a flow is and how it works
         BrowseAndAddToCartFlow browseAndAddToCart = new BrowseAndAddToCartFlow(login);
@@ -72,10 +66,6 @@ public class TOrder extends AbstractTestCase
 
         // Checkout Flow
         CheckoutFlow checkoutFlow = new CheckoutFlow(viewCart, account);
-        AbstractHtmlPageAction enterPaymentMethod = checkoutFlow.run();
-
-        // place the order
-        PlaceOrder placeOrder = new PlaceOrder(enterPaymentMethod, "PlaceOrder");
-        placeOrder.run();
+        checkoutFlow.run();
     }
 }
