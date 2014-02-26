@@ -72,7 +72,7 @@ public class StarterConf
         PropertiesConfiguration cfg = new PropertiesConfiguration();
         cfg.setEncoding("utf-8");
         cfg.setDelimiterParsingDisabled(true);
-        String confPath = HOME + "/" + confFile;
+        String confPath = confFile;
         // try to load the config
         cfg.load(confPath);
         conf = (Configuration) cfg;
