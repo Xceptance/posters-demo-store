@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+  <description>Updates, creates and removes a shipping and a billing address.</description>
+  <module name="module.OpenHomepage"/>
+  <module name="module.Login">
+    <parameter name="email" value="${email}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="firstName" value="${firstName}"/>
+  </module>
+  <module name="module.OpenAccountOverview"/>
+  <action name="OpenAddressOverview"/>
+  <command name="clickAndWait" target="id=linkAddressOverview"/>
+  <command name="assertElementPresent" target="id=titleDelAddr"/>
+  <command name="assertElementPresent" target="id=delAddr0"/>
+  <command name="assertText" target="//*[@id='delAddr0']/address" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <action name="OpenFormToEnterNewShippingAddress"/>
+  <command name="clickAndWait" target="id=linkAddNewDelAddr"/>
+  <module name="module.FillInAddressForm">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+  </module>
+  <action name="AddNewShippingAddress"/>
+  <command name="clickAndWait" target="id=btnAddDelAddr"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertText" target="//*[@id='delAddr1']/address" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <action name="OpenFormToUpdateShippingAddress"/>
+  <command name="clickAndWait" target="id=btnChangeDelAddr1"/>
+  <module name="module.VerifyAddressForm">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+  </module>
+  <module name="module.FillInAddressForm">
+    <parameter name="name" value="name"/>
+    <parameter name="company" value="company"/>
+    <parameter name="address" value="address"/>
+    <parameter name="city" value="city"/>
+    <parameter name="state" value="state"/>
+    <parameter name="zip" value="67890"/>
+    <parameter name="country" value="Germany"/>
+  </module>
+  <action name="UpdateShippingAddress"/>
+  <command name="clickAndWait" target="id=btnUpdateDelAddr"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertText" target="//*[@id='delAddr1']/address" value="regexp:name.*company.*address.*city, state 67890.*Germany"/>
+  <action name="DeleteShippingAddress"/>
+  <command name="clickAndWait" target="id=btnDeleteDelAddr1"/>
+  <command name="type" target="id=password" value="${password}"/>
+  <action name="ConfirmDeletion"/>
+  <command name="clickAndWait" target="id=btnDeleteAddress"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertNotElementPresent" target="id=delAddr1"/>
+  <action name="OpenFormToEnterNewBillingAddress"/>
+  <command name="clickAndWait" target="id=linkAddNewBillAddr"/>
+  <module name="module.FillInAddressForm">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+  </module>
+  <action name="AddNewBillingAddress"/>
+  <command name="clickAndWait" target="id=btnAddBillAddr"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertText" target="//*[@id='billAddr1']/address" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <action name="OpenFormToUpdateBillingAddress"/>
+  <command name="clickAndWait" target="id=btnChangeBillAddr1"/>
+  <module name="module.VerifyAddressForm">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="company" value="${company}"/>
+    <parameter name="address" value="${address}"/>
+    <parameter name="city" value="${city}"/>
+    <parameter name="state" value="${state}"/>
+    <parameter name="zip" value="${zip}"/>
+    <parameter name="country" value="${country}"/>
+  </module>
+  <module name="module.FillInAddressForm">
+    <parameter name="name" value="name"/>
+    <parameter name="company" value="company"/>
+    <parameter name="address" value="address"/>
+    <parameter name="city" value="city"/>
+    <parameter name="state" value="state"/>
+    <parameter name="zip" value="67890"/>
+    <parameter name="country" value="Germany"/>
+  </module>
+  <action name="UpdateBillingAddress"/>
+  <command name="clickAndWait" target="id=btnUpdateBillAddr"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertText" target="//*[@id='billAddr1']/address" value="regexp:name.*company.*address.*city, state 67890.*Germany"/>
+  <action name="DeleteBillingAddress"/>
+  <command name="clickAndWait" target="id=btnDeleteBillAddr1"/>
+  <command name="type" target="id=password" value="${password}"/>
+  <action name="ConfirmDeletion"/>
+  <command name="clickAndWait" target="id=btnDeleteAddress"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertNotElementPresent" target="id=billAddr1"/>
+</testcase>

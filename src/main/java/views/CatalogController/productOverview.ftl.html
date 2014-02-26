@@ -1,26 +1,57 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-      	<h1>${category.name}</h1>
-      	<#list products as pro>
-      	<#if (pro_index + 3) % 3 ==0>
-      	<div class="row">
-      		<ul class="thumbnails">
+	<h1 id="titleCategoryName">${(category.name)!}</h1>
+	<h1 id="titleSearchText">${(searchText)!}</h1>
+	<h1 id="titleNoResults">${(noResults)!}</h1>
+	<!-- paging -->
+	<div id="pagination"></div>
+	<script type="text/javascript">
+		var options = {
+			currentPage: ${currentPage},
+            totalPages: ${totalPages},
+            alignment:'center',
+            onPageClicked: function(e, originalEvent, type, page) {
+           		var pathname = $(location).attr('pathname');
+           		var pageType = pathname.substring(1, pathname.indexOf('/', 1));
+           		// top category
+           		if(pageType == "topCategory") {
+           			$.post('/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+           		}
+           		// sub category
+           		else if(pageType == "category"){
+					$.post('/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+           		}
+           		// search
+           		else {
+           			$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+           		}
+            }
+        }
+        $('#pagination').bootstrapPaginator(options);
+	</script>
+	<!-- products -->
+	<div id="productOverview" currentPage="${currentPage}">
+	<#list products as pro>
+    	<#if (pro_index + 3) % 3 ==0>
+    		<div class="row-fluid">
+      			<ul class="thumbnails">
       	</#if>
-      			<li class="span4">
-      				<div class="thumbnail">
-      					<a href=/productDetail/${pro.url}><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
-      					<h3>${pro.name}</h3>
-      					<p>${pro.descriptionOverview}</p>
-      					<p>$ ${pro.price} </p>
-      				</div>
-      			</li>
+      				<li class="span4">
+      					<div id="product${pro_index}" class="thumbnail">
+      						<a href="/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
+      						<h3 id="product${pro_index}Name">${pro.name}</h3>
+      						<p id="product${pro_index}DescriptionOverview">${pro.descriptionOverview}</p>
+      						<p>${i18n("priceStart")} <span id="product${pro_index}Price">${pro.getPriceAsString()}</span>${currency}</p>
+      					</div>
+      				</li>
       	<#if (pro_index + 1) % 3 ==0>
-      		</ul>
-      	</div>
+      			</ul>
+      		</div>
       	</#if>
       	<#if !pro_has_next && (pro_index + 1) % 3 !=0>
-      	    </ul>
-      	</div>
+      	    	</ul>
+      		</div>
       	</#if>
-      	</#list>
+	</#list>
+	</div>
 </@layout.myLayout>

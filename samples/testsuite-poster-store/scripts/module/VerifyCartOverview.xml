@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Verifies the cart overview in the header.</description>
+  <parameter name="productCount"/>
+  <parameter name="totalPrice"/>
+  <command name="assertText" target="id=btnCartOverview" value="*@{productCount}*@{totalPrice}"/>
+</scriptmodule>

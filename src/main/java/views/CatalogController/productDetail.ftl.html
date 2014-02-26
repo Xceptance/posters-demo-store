@@ -1,25 +1,47 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-
-	<h1>${productDetail.name}</h1>
-	
-	<div class="row">
-		<div class="span 4">
+	<h1 id="titleProductName">${productDetail.name}</h1>
+	<div class="row-fluid" productid="${productDetail.id}">
+		<div class="span4" id="prodImg">
       		<img class="img-polaroid" width="300" alt="" src=${productDetail.imageURL}></img>
       	</div>
       	<div class="span5">
-      		<h3>${productDetail.descriptionOverview}</h3>
-      		<h4>${productDetail.descriptionDetail}</h4>
+      		<h3 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h3>
+      		<h4 id="prodDescriptionDetail">${productDetail.descriptionDetail}</h4>
+      		<p id="prodFinish">${i18n("productDetailPosterFinish")}</p>
       	</div>
       	<div class="span3">
-      		<h3>$ ${productDetail.price}</h3>
-      		<p>
-      			<form action="/addToBasket" method="post">
-      				<input type="hidden" id="productName" name="productName" value=${productDetail.id}>
-      				<button class="btn"id="submit" name="submit" type="submit">Add to basket</button>
-      			</form>
-      		</p>
+      		<h3 id="prodPrice">${productDetail.getPriceAsString()}${currency}</h3>
+      		<form id="addToCartForm" name="addToCartForm">
+      			<!-- Select finish -->
+				<div class="control-group">
+					<label class="control-label" for="finish">${i18n("cartSelectFinish")}</label>
+					<div class="controls">
+						<div id="selectFinish">
+						<label class="radio" for="finish-matte">
+						<input name="finish" id="finish-matte" value="matte" checked="checked" type="radio">
+							${i18n("cartSelectFinishMatte")}
+						</label>
+						<label class="radio" for="finish-gloss">
+						<input name="finish" id="finish-gloss" value="gloss" type="radio">
+							${i18n("cartSelectFinishGloss")}
+						</label>
+						</div>
+					</div>
+				</div>
+				<!-- Select size -->
+				<div class="control-group">
+					<label class="control-label" for="selectSize">${i18n("cartSelectSize")}</label>
+					<div class="controls">
+						<select id="selectSize" name="selectSize" class="input-medium" onchange="updatePrice(this, ${productDetail.id});">
+							<#list productDetail.availableSizes as size>
+								<option>${size.size.width} x ${size.size.height} ${unitLength}</option>
+							</#list>
+						</select>
+					</div>
+				</div>
+      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToCart")}</button>
+      		</form>
       	</div>
     </div>
-
 </@layout.myLayout>

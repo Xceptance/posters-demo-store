@@ -1,107 +1,78 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-
-	<h1>Order overview</h1>
-	<h3>Products</h3>
+	<h1 id="titleOrderOverview">${i18n("titleOrderOverview")}</h1>
+	<!-- print products -->
+	<h3 id="titleProducts">${i18n("titleProducts")}</h3>
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
-		<tr>
-			<td><a href=/productDetail/${orderProduct.product.url}><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
-			<td>${orderProduct.product.name}</td>
-			<td>${orderProduct.product.descriptionOverview}</td>
-			<td>${orderProduct.product.price}</td>
-			<td>${orderProduct.countProduct}</td>
+		<tr id="product${orderProduct_index}">
+			<td><a href="/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
+			<td id="product${orderProduct_index}Name">${orderProduct.product.name}</td>
+			<td id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
+			<td id="product${orderProduct_index}Finish">${orderProduct.finish}</td>
+			<td id="product${orderProduct_index}Size">${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</td>
+			<td id="product${orderProduct_index}Price">${orderProduct.getPriceAsString()}${currency}</td>
+			<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
 		</tr>
 		</#list>
 	</table>
-	<div class="row">
-		<div class="span4 offset8">
-			<h3>Sales tax: ${order.tax*100}%</h3>
+	<!-- print total price -->
+	<div class="row-fluid" id="tax">
+		<div class="text-right">
+			<h3>${i18n("checkoutOverviewSalesTax")}: ${order.tax*100}%</h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span4 offset8">
-			<h3>Shipping costs: ${order.shippingCosts}</h3>
+	<div class="row-fluid" id="shippingCosts">
+		<div class="text-right">
+			<h3>${i18n("checkoutOverviewShippingCosts")}: ${order.getShippingCostsAsString()}${currency}</h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span4 offset8">
-			<h3>Total costs: ${order.totalCosts}$</h3>
+	<div class="row-fluid" id="totalCosts">
+		<div class="text-right">
+			<h3>${i18n("checkoutOverviewTotalCosts")}: <span id="totalWithTax">${order.getTotalCostsAsString()}${currency}</span></h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span4">
-			<h3>Delivery address</h3>
-		</div>
-		<div class="span4 offset1">
-			<h3>Billing address</h3>
-		</div>
+	<div class="row-fluid">
+		<ul>
+			<!-- print shipping address -->
+			<li class="span4">
+				<h3>${i18n("titleShippingAddress")}</h3>
+				<address  id="delAddr">
+      				<strong>${order.shippingAddress.name}</strong><br>
+      				${order.shippingAddress.company}<br>
+      				${order.shippingAddress.addressLine}<br>
+      				${order.shippingAddress.city}, ${order.shippingAddress.state} ${order.shippingAddress.zip}<br>
+      				${order.shippingAddress.country}<br>
+      			</address>
+			</li>
+			<!-- print billing address -->
+			<li class="span4">
+				<h3>${i18n("titleBillingAddress")}</h3>
+				<address id="billAddr">
+      				<strong>${order.billingAddress.name}</strong><br>
+      				${order.billingAddress.company}<br>
+      				${order.billingAddress.addressLine}<br>
+      				${order.billingAddress.city}, ${order.billingAddress.state} ${order.billingAddress.zip}<br>
+      				${order.billingAddress.country}<br>
+      			</address>
+			</li>
+			<!-- print credit card -->
+			<li class="span4">
+				<h3>${i18n("titlePaymentInformation")}</h3>
+				<address  id="payment">
+      				${i18n("titleName")}: ${order.creditCard.name}<br>
+      				${i18n("titleCreditCard")}: ${order.creditCard.getCardNumberCryptic()}<br>
+      				${i18n("titleValidTo")}: ${order.creditCard.getMonthLeadingZero()} ${order.creditCard.year}<br>
+      			</address>
+			</li>
+		</ul>
 	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.name}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.name}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.addressline1}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.addressline1}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.addressline2}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.addressline2}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.zip} ${order.deliveryAddress.city}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.zip} ${order.billingAddress.city}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.state}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.state}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			${order.deliveryAddress.country}
-		</div>
-		<div class="span4 offset1">
-			${order.billingAddress.country}
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			<h3>Payment information</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4">
-			<p>Name:   ${order.creditCard.name}</p>
-			<p>Number: ${order.creditCard.number}</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span4 offset8">
+	<!-- order button -->
+	<div class="row-fluid">
+		<div class="text-right">
 			<form action="/checkoutCompleted" method="post">
-    			<button class="btn"id="submit" name="submit" type="submit">Order with costs</button>
+    			<button class="btn" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
 			</form>
 		</div>
 	</div>
-
 </@layout.myLayout>

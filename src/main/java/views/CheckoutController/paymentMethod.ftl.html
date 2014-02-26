@@ -1,104 +1,48 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-
-<#if paymentOverview??>
-<h1>Select a credit card</h1>
-<#list paymentOverview as payment>
-	<#if (payment_index + 3) % 3 ==0>
-      	<div class="row">
-      		<ul class="thumbnails">
-    </#if>
-      			<li class="span4">
-      					<p>Name: ${payment.name}<p>
-      					<p>Credit card: ${payment.number}</p>
-      					<p>Valid to: ${payment.month} ${payment.year}</p>
-      					<p>
-      						<form action="/addPaymentToOrder" method="post">
-    							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">Pay with this credit card</button>
-							</form>
-      					</p>
-      			</li>
+	<h3 id="titlePayment">${i18n("paymentMethodTitleSelect")}</h3>
+	<#if paymentOverview??>
+	<!-- choose available credit card -->
+	<#list paymentOverview as payment>
+		<#if (payment_index + 3) % 3 ==0>
+      		<div class="row-fluid">
+      			<ul>
+    	</#if>
+      				<li class="span4" id="payment${payment_index}">
+      					<address>
+      						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
+      						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
+      						${i18n("titleValidTo")}: ${payment.getMonthLeadingZero()} ${payment.year}<br>
+      					</address>
+      					<form action="/addPaymentToOrder" method="post">
+    						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
+    						<button class="btn" id="btnUsePayment${payment_index}" name="btnUsePayment${payment_index}" type="submit">${i18n("paymentMethodChoose")}</button>
+						</form>
+      				</li>
 		<#if (payment_index + 1) % 3 ==0>
-      		</ul>
-      	</div>
+      			</ul>
+      		</div>
       	</#if>
       	<#if !payment_has_next && (payment_index + 1) % 3 !=0>
-      	    </ul>
-      	</div>
+      	    	</ul>
+      		</div>
       	</#if>
-</#list>
-</#if>
-
-<form class="form-horizontal" action="/paymentMethodCompleted" method="post">
-<fieldset>
-
-<!-- Form Name -->
-<legend>Add new credit card</legend>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="creditCardNumber">Credit number:</label>
-  <div class="controls">
-    <input id="creditCardNumber" name="creditCardNumber" placeholder="" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="name">Cardholder's name:</label>
-  <div class="controls">
-    <input id="name" name="name" placeholder="" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="control-group">
-  <label class="control-label" for="expirationDate">Expiration Date:</label>
-  <div class="controls">
-    <select id="expirationDateMonth" name="expirationDateMonth" class="input-xlarge">
-      <option>01</option>
-      <option>02</option>
-      <option>03</option>
-      <option>04</option>
-      <option>05</option>
-      <option>06</option>
-      <option>07</option>
-      <option>08</option>
-      <option>09</option>
-      <option>10</option>
-      <option>11</option>
-      <option>12</option>
-    </select>
-    <select id="expirationDateYear" name="expirationDateYear" class="input-xlarge">
-      <option>2013</option>
-      <option>2014</option>
-      <option>2015</option>
-      <option>2016</option>
-      <option>2017</option>
-      <option>2018</option>
-      <option>2019</option>
-      <option>2020</option>
-      <option>2021</option>
-      <option>2022</option>
-      <option>2023</option>
-      <option>2024</option>
-    </select>
-  </div>
-</div>
-
-<!-- Button -->
-<div class="control-group">
-  <label class="control-label" for="continue"></label>
-  <div class="controls">
-    <button id="continue" name="continue" class="btn btn-primary" type="submit">Continue</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-
-
+	</#list>
+	</#if>
+	<!-- add new credit card -->
+	<form id="formAddPayment" class="form-horizontal" action="/paymentMethodCompleted" method="post">
+		<fieldset>
+			<!-- Form Name -->
+			<legend>${i18n("paymentMethodAddNew")}</legend>
+			<!-- include form -->
+			<#include "../form/paymentForm.ftl.html"/>
+			<!-- continue button -->
+			<div class="control-group">
+				<label class="control-label" for="continue"></label>
+				<div class="controls">
+					<button id="btnAddPayment" name="btnAddPayment" class="btn btn-primary" type="submit">${i18n("buttonContinue")}</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </@layout.myLayout>

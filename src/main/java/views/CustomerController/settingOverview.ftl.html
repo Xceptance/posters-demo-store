@@ -1,39 +1,26 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-
-	<h1>Settings overview</h1>
-	
-	<div class="row">
-		<div class="span3">
-			Name: ${customer.firstName} ${customer.name}
+	<h1 id="titlePersonalData">${i18n("titleSettings")}</h1>
+	<div class="row-fluid">
+		<div class="span5" id="customerName">
+			${i18n("titleName")}: ${customer.firstName} ${customer.name}
 		</div>
-		<div class="span3 offset1">
-			<form action="/" method="post">
-    			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">Change detail</button>
-			</form>
+		<div class="span5 offset1">
+			<a href="/changeNameOrEmail" id="btnChangeNameEmail">${i18n("settingsChange")}</a>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="span3">
-			Email address: ${customer.email}
+	<div class="row-fluid">
+		<div class="span5" id="customerEmail">
+			${i18n("titleEmail")}: ${customer.email}
+		</div>
+		<div class="span5 offset1">
+			<a href="/changePassword" id="btnChangePassword">${i18n("changePasswordTitle")}</a>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="span3">
-			<form action="/" method="post">
-    			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">Change password</button>
-			</form>
-		</div>
-		<div class="span3 offset1">
-			<form action="/" method="post">
-    			<input name="customerId" id="customerId" type="hidden" value=${customer.id}></input>
-    			<button class="btn"id="submit" name="submit" type="submit">Delete account</button>
-			</form>
+	<div class="row-fluid">
+		<div class="span5"></div>
+		<div class="span5 offset1">
+			<a href="/confirmDeleteAccount" id="btnDeleteAccount">${i18n("confirmDeletionTitle")}</a>
 		</div>
 	</div>
-
 </@layout.myLayout>

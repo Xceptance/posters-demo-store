@@ -1,0 +1,58 @@
+<!-- full name-->
+<div class="control-group">
+  <label class="control-label" for="fullName">${i18n("addressFullName")}:</label>
+  <div class="controls">
+    <input id="fullName" name="fullName" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(address.name)!}">
+  </div>
+</div>
+
+<!-- company-->
+<div class="control-group">
+  <label class="control-label" for="company">${i18n("addressCompany")}:</label>
+  <div class="controls">
+    <input id="company" name="company" placeholder="${i18n("addressCompanyPlaceholder")}" class="input-xlarge" required type="text" value="${(address.company)!}">
+  </div>
+</div>
+
+<!-- address line-->
+<div class="control-group">
+  <label class="control-label" for="addressLine">${i18n("addressLine")}:</label>
+  <div class="controls">
+    <input id="addressLine" name="addressLine" placeholder="${i18n("addressLinePlaceholder")}" class="input-xlarge" required type="text" value="${(address.addressLine)!}">
+  </div>
+</div>
+
+<!-- city-->
+<div class="control-group">
+  <label class="control-label" for="city">${i18n("addressCity")}:</label>
+  <div class="controls">
+    <input id="city" name="city" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongCity")}" value="${(address.city)!}">
+  </div>
+</div>
+
+<!-- state-->
+<div class="control-group">
+  <label class="control-label" for="state">${i18n("addressState")}:</label>
+  <div class="controls">
+    <input id="state" name="state" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongState")}" value="${(address.state)!}">
+  </div>
+</div>
+
+<!-- zip-->
+<div class="control-group">
+  <label class="control-label" for="zip">${i18n("addressZip")}:</label>
+  <div class="controls">
+    <input id="zip" name="zip" class="input-xlarge" required type="text" pattern="[0-9]+" data-error="${i18n("errorWrongZip")}" value="${(address.zip)!}">
+  </div>
+</div>
+
+<!-- Select country -->
+<div class="control-group">
+  <label class="control-label" for="country">${i18n("addressCountry")}:</label>
+  <div class="controls">
+    <select id="country" name="country" class="input-xlarge">
+      <option>${i18n("countryUS")}</option>
+      <option>${i18n("countryGermany")}</option>
+    </select>
+  </div>
+</div>

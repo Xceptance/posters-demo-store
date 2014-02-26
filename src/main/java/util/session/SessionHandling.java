@@ -1,84 +1,52 @@
 package util.session;
 
-import java.util.Map;
+import java.util.UUID;
 
+import models.Cart;
+import models.Order;
 import ninja.Context;
 import ninja.session.SessionCookie;
 
+/**
+ * Provides methods for the session handling.
+ * 
+ * @author sebastianloob
+ */
 public class SessionHandling
 {
+    // The keys of session cookie values.
+    private static String CART = "cart";
+
+    private static String ORDER = "order";
+
+    private static String USER = "user";
 
     /**
-     * Returns the id of the session.
+     * Removes the user information from the session.
+     * 
+     * @param context
+     */
+    public static void removeCustomerId(Context context)
+    {
+        context.getSessionCookie().remove(USER);
+    }
+
+    /**
+     * Returns true, if an order-id is set in the session, otherwise false.
      * 
      * @param context
      * @return
      */
-    public static String getId(Context context)
+    public static boolean isOrderIdSet(Context context)
     {
-        // get id of the session
-        String id = context.getSessionCookie().getId();
-        return id;
-    }
-
-    /**
-     * Returns all data of the session.
-     * 
-     * @param context
-     * @return
-     */
-    public static Map<String, String> getData(Context context)
-    {
-        Map<String, String> data = context.getSessionCookie().getData();
-        return data;
-    }
-
-    /**
-     * Returns the authenticity token of the session.
-     * 
-     * @param context
-     * @return
-     */
-    public static String getToken(Context context)
-    {
-        return context.getSessionCookie().getAuthenticityToken();
-    }
-
-    /**
-     * Adds a key-value-pair to the session.
-     * 
-     * @param context
-     * @param key
-     * @param value
-     */
-    public static void put(Context context, String key, String value)
-    {
-        context.getSessionCookie().put(key, value);
-    }
-
-    /**
-     * Sets user information to guest, if no user is registered in the session.
-     * 
-     * @param context
-     */
-    public static void setUnknownUser(Context context)
-    {
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("user") == null)
+        if (context.getSessionCookie().get(ORDER) == null)
         {
-            cookie.put("user", "guest");
+            return false;
         }
-    }
-
-    /**
-     * Overrides the user information in the session to guest.
-     * 
-     * @param context
-     */
-    public static void deleteCustomerId(Context context)
-    {
-        SessionCookie cookie = context.getSessionCookie();
-        cookie.put("user", "guest");
+        else
+        {
+            return true;
+        }
     }
 
     /**
@@ -87,99 +55,95 @@ public class SessionHandling
      * @param context
      * @param orderId
      */
-    public static void setOrderId(Context context, int orderId)
+    public static void setOrderId(Context context, UUID orderId)
     {
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("order") == null)
-        {
-            cookie.put("order", Integer.toString(orderId));
-        }
+        context.getSessionCookie().put(ORDER, orderId.toString());
     }
 
     /**
-     * Returns the order id of the session.
+     * Returns the order id of the session. Creates a new order, if no is set.
      * 
      * @param context
      * @return
      */
-    public static int getOrderId(Context context)
+    public static UUID getOrderId(Context context)
     {
-        int orderId;
         SessionCookie cookie = context.getSessionCookie();
-        orderId = Integer.parseInt(cookie.get("order"));
-        return orderId;
+        // order id is not set, if the session is terminated
+        if (cookie.get(ORDER) == null)
+        {
+            // create new order
+            Order order = Order.createNewOrder();
+            // set id of new order
+            setOrderId(context, order.getId());
+            // get cookie again
+            cookie = context.getSessionCookie();
+        }
+        return UUID.fromString(cookie.get(ORDER));
     }
 
     /**
-     * Deletes the order id from the session.
+     * Removes the order id from the session.
      * 
      * @param context
      */
-    public static void deleteOrderId(Context context)
+    public static void removeOrderId(Context context)
     {
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("order") != null)
-        {
-            cookie.remove("order");
-        }
+        context.getSessionCookie().remove(ORDER);
     }
 
     /**
-     * Adds the basket id to the session.
+     * Adds the cart id to the session.
      * 
      * @param context
-     * @param basketId
+     * @param cartId
      */
-    public static void setBasketId(Context context, int basketId)
+    public static void setCartId(Context context, UUID cartId)
     {
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("basket") == null)
-        {
-            cookie.put("basket", Integer.toString(basketId));
-        }
+        context.getSessionCookie().put(CART, cartId.toString());
     }
 
     /**
-     * Returns the basket id of the session. Returns -1, if the session has no basket.
+     * Returns the cart id of the session. Creates a new cart, if no is set.
      * 
      * @param context
      * @return
      */
-    public static int getBasketId(Context context)
+    public static UUID getCartId(Context context)
     {
-        int basketId = -1;
         SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("basket") != null)
+        // create new cart, if no cart is set
+        if (cookie.get(CART) == null)
         {
-            basketId = Integer.parseInt(cookie.get("basket"));
+            // create new cart
+            Cart cart = Cart.createNewCart();
+            // add cart id to session
+            setCartId(context, cart.getId());
+            // get cookie again
+            cookie = context.getSessionCookie();
         }
-        return basketId;
+        Cart cart = Cart.getCartById(UUID.fromString(cookie.get(CART)));
+        // cart was removed from database
+        if (cart == null)
+        {
+            // create new cart
+            cart = Cart.createNewCart();
+            // add cart id to session
+            setCartId(context, cart.getId());
+            // get cookie again
+            cookie = context.getSessionCookie();
+        }
+        return UUID.fromString(cookie.get(CART));
     }
 
     /**
-     * Deletes the basket id from the session.
+     * Removes the cart id from the session.
      * 
      * @param context
      */
-    public static void deleteBasketId(Context context)
+    public static void removeCartId(Context context)
     {
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("basket") != null)
-        {
-            cookie.remove("basket");
-        }
-    }
-
-    /**
-     * Returns session information by key.
-     * 
-     * @param context
-     * @param key
-     * @return
-     */
-    public static String get(Context context, String key)
-    {
-        return context.getSessionCookie().get(key);
+        context.getSessionCookie().remove(CART);
     }
 
     /**
@@ -191,8 +155,7 @@ public class SessionHandling
     public static boolean isCustomerLogged(Context context)
     {
         boolean isLogged = true;
-        SessionCookie cookie = context.getSessionCookie();
-        if (cookie.get("user") == null || cookie.get("user").equals("guest"))
+        if (context.getSessionCookie().get(USER) == null)
         {
             isLogged = false;
         }
@@ -205,10 +168,9 @@ public class SessionHandling
      * @param context
      * @param customerId
      */
-    public static void setCustomerId(Context context, int customerId)
+    public static void setCustomerId(Context context, UUID customerId)
     {
-        SessionCookie cookie = context.getSessionCookie();
-        cookie.put("user", Integer.toString(customerId));
+        context.getSessionCookie().put(USER, customerId.toString());
     }
 
     /**
@@ -217,9 +179,8 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static int getCustomerId(Context context)
+    public static UUID getCustomerId(Context context)
     {
-        return Integer.parseInt(context.getSessionCookie().get("user"));
+        return UUID.fromString(context.getSessionCookie().get(USER));
     }
-
 }

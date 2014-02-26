@@ -1,11 +1,8 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-
-<h1>Account overview</h1>
-
-<h4><a href="/orderOverview">Orders</a></h4>
-<h4><a href="/paymentOverview">Payment</a></h4>
-<h4><a href="/settingOverview">Settings</a></h4>
-<h4><a href="/addressOverview">Addresses</a></h4>
-
+	<h1 id="titleAccountOverview">${i18n("accountOverviewTitle")}</h1>
+	<h4><a id="linkOrderOverview" href="/orderOverview">${i18n("titleOrderHistory")}</a></h4>
+	<h4><a id="linkAddressOverview" href="/addressOverview">${i18n("titleAddressOverview")}</a></h4>
+	<h4><a id="linkPaymentOverview" href="/paymentOverview">${i18n("titlePaymentInformation")}</a></h4>
+	<h4><a id="linkPersonalData" href="/settingOverview">${i18n("titleSettings")}</a></h4>
 </@layout.myLayout>

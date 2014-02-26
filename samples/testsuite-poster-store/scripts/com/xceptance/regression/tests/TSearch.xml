@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+  <description>Simulates storefront search including search result browsing.</description>
+  <module name="module.OpenHomepage"/>
+  <command name="store" target="gjP#lQ!" value="searchTerm"/>
+  <module name="module.Search">
+    <parameter name="searchTerm" value="${searchTerm}"/>
+  </module>
+  <command name="assertElementPresent" target="id=infoMessage"/>
+  <command name="store" target="bear" value="searchTerm"/>
+  <module name="module.Search">
+    <parameter name="searchTerm" value="${searchTerm}"/>
+  </module>
+  <command name="assertText" target="id=searchText" value="${searchTerm}"/>
+  <command name="assertElementPresent" target="id=titleSearchText"/>
+  <action name="ViewProduct"/>
+  <command name="assertElementPresent" target="id=product0"/>
+  <command name="storeText" target="id=product0Name" value="productName"/>
+  <command name="clickAndWait" target="//*[@id='product0']//img"/>
+  <command name="assertText" target="id=titleProductName" value="${productName}"/>
+  <command name="store" target="red bear" value="searchTerm"/>
+  <module name="module.Search">
+    <parameter name="searchTerm" value="${searchTerm}"/>
+  </module>
+  <command name="assertText" target="id=searchText" value="${searchTerm}"/>
+  <command name="assertElementPresent" target="id=titleSearchText"/>
+</testcase>

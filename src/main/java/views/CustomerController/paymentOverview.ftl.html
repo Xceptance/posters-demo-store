@@ -1,33 +1,32 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-
-	<h1>Payment overview</h1>
-	
+<@layout.myLayout "The ultimate webshop">
+	<h1 id="titlePaymentOverview">${i18n("titlePaymentInformation")}</h1>
 	<#list paymentOverview as payment>
-	<table class="table" table-bordered>
-		<tr>
-			<td>Name: ${payment.name}</td>
-			<td><a href="/">Change</a></td>
-		</tr>
-		<tr>
-			<td>Credit card: ${payment.number}</td>
-			<td>
-				<form action="/deletePayment" method="post">
-    				<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-    				<button class="btn"id="submit" name="submit" type="submit">Delete</button>
-				</form>
-			</td>
-		</tr>
-		<tr>
-			<td>Valid to: ${payment.month} ${payment.year}</td>
-			<td></td>
-		</tr>
-	</table>
+		<#if (payment_index + 3) % 3 ==0>
+      		<div class="row-fluid">
+      			<ul>
+    	</#if>
+      				<li class="span4" id="payment${payment_index}">
+      					<address>
+      						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
+      						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
+      						${i18n("titleValidTo")}: ${payment.getMonthLeadingZero()} ${payment.year}<br>
+      					</address>
+      					<form action="/confirmDeletePayment" method="post">
+							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
+							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n("buttonDelete")}</button>
+						</form>
+      				</li>
+		<#if (payment_index + 1) % 3 ==0>
+      			</ul>
+      		</div>
+      	</#if>
+      	<#if !payment_has_next && (payment_index + 1) % 3 !=0>
+      	    	</ul>
+      		</div>
+      	</#if>
 	</#list>
-
-	
-	<div class="span2 offset6">
-		<a href="/addPaymentToCustomer">Add new credit card</a>
+	<div class="span4 offset6">
+		<a id="linkAddNewPayment" href="/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
 	</div>
-
 </@layout.myLayout>

@@ -1,0 +1,14 @@
+[0.000][INFO]:      ChromeDriver 18.0.1022.0 /home/sebastianloob/Downloads/chromedriver_64/chromedriver
+[0.646][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.switches": [  ],
+   "chromeOptions": {
+      "args": [  ],
+      "extensions": [  ]
+   },
+   "platform": "ANY",
+   "version": ""
+}
+
+[0.646][INFO]:      Launching chrome: /usr/bin/chromium-browser --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --ignore-certificate-errors --homepage=about:blank
+[14.832][SEVERE]:   Failed to initialize connection

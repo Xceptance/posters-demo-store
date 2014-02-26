@@ -11,13 +11,13 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * A top category is a category, which has at least one {@link SubCategory}. The top category itself has no products,
- * just the referenced sub categories have products.
+ * This {@link Entity} provides a top category in the catalog of the poster store. A top category is a category, which
+ * has at least one {@link SubCategory}. A top category contains all products of the corresponding sub categories.
  * 
  * @author sebastianloob
  */
 @Entity
-@Table(name = "category")
+@Table(name = "topCategory")
 public class TopCategory
 {
 
@@ -33,63 +33,136 @@ public class TopCategory
     private String name;
 
     /**
-     * The URL of the top category.
-     */
-    private String url;
-
-    /**
-     * The sub categories of the category.
+     * The {@link SubCategory} list of the category.
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "topCategory")
-    List<SubCategory> subCategories;
+    private List<SubCategory> subCategories;
 
+    /**
+     * The products of the top category.
+     */
+    @OneToMany
+    private List<Product> products;
+
+    /**
+     * Returns the ID of the entity.
+     * 
+     * @return the ID of the entity
+     */
     public int getId()
     {
         return id;
     }
 
+    /**
+     * Sets the ID of the entity.
+     * 
+     * @param id
+     *            the ID of the entity
+     */
     public void setId(int id)
     {
         this.id = id;
     }
 
+    /**
+     * Returns the name of the category.
+     * 
+     * @return the name of the category
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Sets the name of the category.
+     * 
+     * @param name
+     *            the name of the category
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Returns the {@link SubCategory} of the top category.
+     * 
+     * @return the {@link SubCategory} of the top category
+     */
     public List<SubCategory> getSubCategories()
     {
         return subCategories;
     }
 
+    /**
+     * Sets the {@link SubCategory} of the top category.
+     * 
+     * @param subCategories
+     *            the {@link SubCategory} of the top category
+     */
     public void setSubCategories(List<SubCategory> subCategories)
     {
         this.subCategories = subCategories;
     }
 
-    public String getUrl()
+    /**
+     * Returns the {@link Product}s of the top category.
+     * 
+     * @return the {@link Product}s of the top category
+     */
+    public List<Product> getProducts()
     {
-        return url;
+        return products;
     }
 
-    public void setUrl(String url)
+    /**
+     * Sets the {@link Product}s of the top category.
+     * 
+     * @param products
+     *            the {@link Product}s of the top category
+     */
+    public void setProducts(List<Product> products)
     {
-        this.url = url;
+        this.products = products;
     }
 
+    /**
+     * Updates the entity in the database.
+     */
     public void update()
     {
         Ebean.update(this);
     }
 
+    /**
+     * Saves the entity in the database.
+     */
     public void save()
     {
         Ebean.save(this);
+    }
+
+    /**
+     * Returns all top categories which are stored in the database.
+     * 
+     * @return all top categories which are stored in the database
+     */
+    public static List<TopCategory> getAllTopCategories()
+    {
+        return Ebean.find(TopCategory.class).findList();
+    }
+
+    /**
+     * Returns the {@link TopCategory} that matches the given ID.
+     * 
+     * @param id
+     *            the ID of the {@link TopCategory}
+     * @return the {@link TopCategory} that matches the given ID
+     */
+    public static TopCategory getTopCategoryById(int id)
+    {
+        return Ebean.find(TopCategory.class, id);
     }
 }

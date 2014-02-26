@@ -1,36 +1,31 @@
-/**
- * Copyright (C) 2012 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package conf;
 
-import com.google.inject.AbstractModule;
+import ninja.ebean.NinjaEbeanModule;
 
+import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
+
+import controllers.JobController;
+
+/**
+ * Ninja uses Guice as injection tool. Define your bindings in this class, which you want to use via @{@link Inject} in
+ * another class.
+ * 
+ * @author sebastianloob
+ */
 public class Module extends AbstractModule
 {
 
     protected void configure()
     {
-
-        // /////////////////////////////////////////////////////////////////////
-        // Some guice bindings
-        // /////////////////////////////////////////////////////////////////////
-        // some additional bindings for the application:
-        // bind(GreetingService.class).to(GreetingServiceImpl.class);
-        // Bind the UDP ping controller so it starts up on server start
-        // bind(UdpPingController.class);
+        // install ebean module
+        install(new NinjaEbeanModule());
+        // bind configuration class
+        bind(PosterConstants.class);
+        requestStaticInjection(PosterConstants.class);
+        // bind starter class
+        bind(JobController.class);
+        // bind scheduler class
+        bind(Scheduler.class);
     }
-
 }

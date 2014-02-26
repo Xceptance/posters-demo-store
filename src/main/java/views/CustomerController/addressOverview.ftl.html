@@ -1,32 +1,30 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-
-<h1>Address overview</h1>
-
-<#if billingAddresses??>
-<h3>Billing address</h3>
-<#list billingAddresses as address>
-	<#if (address_index + 3) % 3 ==0>
-      	<div class="row">
+	<h1 id="titleAddressOverview">${i18n("titleAddressOverview")}</h1>
+	<!-- print available shipping addresses -->
+	<#if shippingAddresses??>
+	<h3 id="titleDelAddr">${i18n("titleShippingAddress")}</h3>
+	<#list shippingAddresses as address>
+		<#if (address_index + 3) % 3 ==0>
+      	<div class="row-fluid">
       		<ul class="inline">
-    </#if>
-      			<li class="span4">
-      					<p>${address.name}<p>
-      					<p>${address.addressline1}</p>
-      					<p>${address.addressline2}</p>
-      					<p>${address.zip} ${address.city}</p>
-      					<p>${address.state} ${address.country}</p>
-      					<p>
-      						<!-- <form action="/updateBillingAddress" method="post">
-    							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">Change detail</button>
-							</form>
-							 -->
-      						<form action="/deleteBillingAddress" method="post">
-    							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">Delete</button>
-							</form>
-      					</p>
+    	</#if>
+    			<li class="span4" id="delAddr${address_index}">
+      				<address>
+      					<strong>${address.name}</strong><br>
+      					${address.company}<br>
+      					${address.addressLine}<br>
+      					${address.city}, ${address.state} ${address.zip}<br>
+      					${address.country}<br>
+      				</address>
+      				<form action="/updateShippingAddress" method="post">
+    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+    					<button class="btn" id="btnChangeDelAddr${address_index}" name="btnChangeDelAddr${address_index}" type="submit">${i18n("buttonChangeDetail")}</button>
+					</form>
+      				<form action="/confirmDeleteShippingAddress" method="post">
+    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+    					<button class="btn btn-danger" id="btnDeleteDelAddr${address_index}" name="btnDeleteDelAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
+					</form>
       			</li>
 		<#if (address_index + 1) % 3 ==0>
       		</ul>
@@ -36,33 +34,39 @@
       	    </ul>
       	</div>
       	</#if>
-</#list>
-</#if>
+	</#list>
+	</#if>
+	<!-- add new shipping address -->
+	<div class="row-fluid">
+		<div class="span4">
+			<a id="linkAddNewDelAddr" href="/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
+		</div>
+	</div>
 
-<#if deliveryAddresses??>
-<h3>Delivery address</h3>
-<#list deliveryAddresses as address>
-	<#if (address_index + 3) % 3 ==0>
-      	<div class="row">
+	<!-- print available billing addresses -->
+	<#if billingAddresses??>
+	<h3 id="titleBillAddr">${i18n("titleBillingAddress")}</h3>
+	<#list billingAddresses as address>
+		<#if (address_index + 3) % 3 ==0>
+      	<div class="row-fluid">
       		<ul class="inline">
-    </#if>
-      			<li class="span4">
-      					<p>${address.name}<p>
-      					<p>${address.addressline1}</p>
-      					<p>${address.addressline2}</p>
-      					<p>${address.zip} ${address.city}</p>
-      					<p>${address.state} ${address.country}</p>
-      					<p>
-      						<!-- <form action="/updateDeliveryAddress" method="post">
-    							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">Change detail</button>
-							</form>
-							 -->
-      						<form action="/deleteDeliveryAddress" method="post">
-    							<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-    							<button class="btn"id="submit" name="submit" type="submit">Delete</button>
-							</form>
-      					</p>
+    	</#if>
+    			<li class="span4" id="billAddr${address_index}">
+      				<address>
+      					<strong>${address.name}</strong><br>
+      					${address.company}<br>
+      					${address.addressLine}<br>
+      					 ${address.city}, ${address.state} ${address.zip}<br>
+      					${address.country}<br>
+      				</address>
+      				<form action="/updateBillingAddress" method="post">
+    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+    					<button class="btn" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonChangeDetail")}</button>
+					</form>
+      				<form action="/confirmDeleteBillingAddress" method="post">
+    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+    					<button class="btn btn-danger" id="btnDeleteBillAddr${address_index}" name="btnDeleteBillAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
+					</form>
       			</li>
 		<#if (address_index + 1) % 3 ==0>
       		</ul>
@@ -72,7 +76,12 @@
       	    </ul>
       	</div>
       	</#if>
-</#list>
-</#if>
-
+	</#list>
+	</#if>
+	<!-- add new billing address -->
+	<div class="row-fluid">
+		<div class="span4">
+			<a id="linkAddNewBillAddr" href="/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
+		</div>
+	</div>
 </@layout.myLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+  <description>Simulates customer registration.</description>
+  <module name="module.OpenHomepage"/>
+  <module name="module.OpenLoginForm"/>
+  <action name="StartRegistration"/>
+  <command name="clickAndWait" target="id=linkRegister"/>
+  <command name="assertElementPresent" target="id=formRegister"/>
+  <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
+  <module name="module.FillInRegistrationForm">
+    <parameter name="name" value="${name}"/>
+    <parameter name="firstName" value="${firstName}"/>
+    <parameter name="email" value="${generatedEmail}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="passwordAgain" value="${password}"/>
+  </module>
+  <action name="Register"/>
+  <command name="clickAndWait" target="id=btnRegister"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <module name="module.Login">
+    <parameter name="email" value="${generatedEmail}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="firstName" value="${firstName}"/>
+  </module>
+</testcase>

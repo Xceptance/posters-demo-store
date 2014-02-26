@@ -1,0 +1,43 @@
+package filters;
+
+import ninja.Context;
+import ninja.Filter;
+import ninja.FilterChain;
+import ninja.Result;
+import ninja.Results;
+import ninja.i18n.Messages;
+
+import com.google.common.base.Optional;
+import com.google.inject.Inject;
+
+/**
+ * This {@link Filter} breaks, if the session is terminated.
+ * 
+ * @author sebastianloob
+ */
+public class SessionTerminatedFilter implements Filter
+{
+
+    @Inject
+    Messages msg;
+
+    private Optional<String> language = Optional.of("en");
+
+    @Override
+    public Result filter(FilterChain chain, Context context)
+    {
+        // break, if session is terminated
+        if (context.getSessionCookie().isEmpty())
+        {
+            // show error message
+            context.getFlashCookie().error(msg.get("errorSessionTerminated", language).get());
+            // show home page
+            return Results.redirect(context.getContextPath() + "/");
+        }
+        // everything is fine
+        else
+        {
+            return chain.next(context);
+        }
+    }
+}

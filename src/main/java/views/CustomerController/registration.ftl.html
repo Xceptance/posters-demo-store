@@ -1,67 +1,51 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">    	
-
-<form class="form-horizontal" action="/registrationCompleted" method="post">
-<fieldset>
-
-<!-- Form Name -->
-<legend>Registration</legend>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label">My name is:</label>
-  <div class="controls">
-    <input id="name" name="name" placeholder="name" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label">My first name is:</label>
-  <div class="controls">
-    <input id="firstName" name="firstName" placeholder="firstName" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label">My e-mail address is:</label>
-  <div class="controls">
-    <input id="eMail" name="eMail" placeholder="e-mail" class="input-xlarge" required="" type="text">
-    
-  </div>
-</div>
-
-<!-- Password input-->
-<div class="control-group">
-  <label class="control-label">Enter a new password:</label>
-  <div class="controls">
-    <input id="password" name="password" placeholder="password" class="input-xlarge" required="" type="password">
-    
-  </div>
-</div>
-
-<!-- Password input-->
-<div class="control-group">
-  <label class="control-label">Type password again:</label>
-  <div class="controls">
-    <input id="passwordAgain" name="passwordAgain" placeholder="password again" class="input-xlarge" required="" type="password">
-    
-  </div>
-</div>
-
-<!-- Button (Double) -->
-<div class="control-group">
-  <label class="control-label"></label>
-  <div class="controls">
-    <button id="submit" name="submit" class="btn btn-success" type="submit">Create Account</button>
-    <button id="clear" name="clear" class="btn btn-danger" type="reset">Clear</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-
+	<form id="formRegister" class="form-horizontal" action="/registration" method="post">
+		<fieldset>
+			<!-- Form Name -->
+			<legend>${i18n("titleRegistration")}</legend>
+			<!-- name -->
+			<div class="control-group">
+				<label class="control-label">${i18n("labelMyName")}:</label>
+				<div class="controls">
+					<input id="name" name="name" required placeholder="${i18n("registrationName")}" class="input-xlarge" type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(registration.name)!}">
+				</div>
+			</div>
+			<!-- first name -->
+			<div class="control-group">
+				<label class="control-label">${i18n("labelMyFirstName")}:</label>
+				<div class="controls">
+					<input id="firstName" name="firstName" placeholder="${i18n("registrationFirstName")}" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(registration.firstName)!}">
+				</div>
+			</div>
+			<!-- email -->
+			<div class="control-group">
+				<label class="control-label">${i18n("labelMyEmail")}:</label>
+				<div class="controls">
+					<input id="eMail" name="eMail" placeholder="${i18n("registrationEmail")}" class="input-xlarge" required type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}" data-error="${i18n("errorValidEmail")}" value="${(registration.email)!}">
+				</div>
+			</div>
+			<!-- password -->
+			<div class="control-group">
+				<label class="control-label">${i18n("changePasswordNew")}:</label>
+				<div class="controls">
+					<input id="password" name="password" placeholder="${i18n("registrationPassword")}" class="input-xlarge" required type="password">
+				</div>
+			</div>
+			<!-- password again -->
+			<div class="control-group">
+				<label class="control-label">${i18n("changePasswordNewAgain")}:</label>
+				<div class="controls">
+					<input id="passwordAgain" name="passwordAgain" placeholder="${i18n("registrationPasswordAgain")}" class="input-xlarge" required type="password">
+				</div>
+			</div>
+			<!-- submit / clear -->
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<button id="btnRegister" name="btnRegister" class="btn btn-success" type="submit">${i18n("registrationCreate")}</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </@layout.myLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Verifies the cart slider.</description>
+  <parameter name="index"/>
+  <parameter name="productName"/>
+  <parameter name="productFinish"/>
+  <parameter name="productPrice"/>
+  <parameter name="productCount"/>
+  <parameter name="productSize"/>
+  <parameter name="totalPrice"/>
+  <command name="click" target="id=slidingTopTriggerShow"/>
+  <command name="waitForVisible" target="id=slidingTopTriggerHide"/>
+  <command name="waitForVisible" target="//ul[@id='cartSliderElementList']/li[@{index}]"/>
+  <command name="waitForVisible" target="css=#cartSliderElementList li:first-child #sliderProdName"/>
+  <command name="assertText" target="css=#cartSliderElementList li:first-child #sliderProdName" value="@{productName}"/>
+  <command name="assertText" target="css=#cartSliderElementList li:first-child #sliderProdFinish" value="@{productFinish}"/>
+  <command name="assertText" target="css=#cartSliderElementList li:first-child #sliderProdPrice" value="@{productPrice}"/>
+  <command name="assertText" target="css=#cartSliderElementList li:first-child #sliderProdCount" value="@{productCount}"/>
+  <command name="assertText" target="id=cartSliderTotalPrice" value="@{totalPrice}"/>
+  <command name="click" target="id=slidingTopTriggerHide"/>
+  <command name="waitForNotVisible" target="id=cartSliderElementList"/>
+</scriptmodule>
