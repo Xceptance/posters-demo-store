@@ -1,5 +1,6 @@
 package com.xceptance.loadtest.actions.catalog;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +50,8 @@ public class Paging extends AbstractHtmlPageAction
     private String categoryId;
 
     /**
-     * Constructor 
-     *
+     * Constructor
+     * 
      * @param previousAction
      * @param timerName
      */
@@ -169,7 +170,8 @@ public class Paging extends AbstractHtmlPageAction
             // create link to product detail page
             HtmlElement productLink = HtmlPageUtils.createHtmlElement("a", productTag);
             productLink.setAttribute("href",
-                                     "/productDetail/" + product.get("name") + "?productId=" + product.get("id"));
+                                     "/productDetail/" + URLEncoder.encode(product.get("name").toString(), "UTF-8")
+                                         + "?productId=" + product.get("id"));
         }
         // set the current page number
         HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")
@@ -192,7 +194,8 @@ public class Paging extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check the current page is a product overview page.
-        Assert.assertTrue("Product Overview element missing.", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
+        Assert.assertTrue("Product Overview element missing.",
+                          HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
 
         // and we also see some poster's thumbnail images
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
