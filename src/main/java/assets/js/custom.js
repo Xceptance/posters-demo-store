@@ -68,7 +68,7 @@ function updateProductOverview(data) {
 		$('#product' + i + " h3").text(data.products[i].name);
 		$('#product' + i + " a").attr(
 				"href",
-				"/productDetail/" + data.products[i].name + "?productId="
+				"/productDetail/" + encodeURIComponent(data.products[i].name) + "?productId="
 						+ data.products[i].id);
 		$('#product' + i + " a img").attr("src", data.products[i].imageURL);
 		$('#product' + i + "DescriptionOverview").text(
