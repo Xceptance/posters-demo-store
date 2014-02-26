@@ -16,8 +16,6 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Page;
 import com.avaje.ebean.PagingList;
 import com.avaje.ebean.Query;
-import com.avaje.ebean.RawSql;
-import com.avaje.ebean.RawSqlBuilder;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
@@ -123,27 +121,25 @@ public class SearchController
      */
     private List<Product> searchForProducts(String searchText, int pageNumber, final Map<String, Object> data)
     {
-        // build SQL string
-        String sql = "SELECT id, name, minimum_Price, description_detail FROM product where ";
+        // build query string
+        String queryString = "find product where ";
         // divide search text by spaces
         String[] searchTerms = searchText.split(" ");
         // search in description detail
-        sql += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
+        queryString += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
         // search in name
-        sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
+        queryString += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
         if (searchTerms.length > 1)
         {
-            // add next search term to select statement
+            // add next search term to query
             for (int i = 1; i < searchTerms.length; i++)
             {
-                sql += " OR LOWER(description_detail) LIKE LOWER('%" + searchTerms[i] + "%')";
-                sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[i] + "%')";
+                queryString += " OR LOWER(description_detail) LIKE LOWER('%" + searchTerms[i] + "%')";
+                queryString += " OR LOWER(name) LIKE LOWER('%" + searchTerms[i] + "%')";
             }
         }
-        // create SQL statement
-        RawSql rawSql = RawSqlBuilder.parse(sql).create();
-        Query<Product> query = Ebean.find(Product.class);
-        query.setRawSql(rawSql);
+        // create query
+        Query<Product> query = Ebean.createQuery(Product.class, queryString);
         int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // get paging list
         PagingList<Product> pagingList = query.findPagingList(pageSize);
@@ -166,6 +162,9 @@ public class SearchController
         }
         // add the page count to the data map
         data.put("totalPages", Math.ceil(totalProductCount / (double) pageSize));
+
+        query.cancel();
+
         return products;
     }
 }
