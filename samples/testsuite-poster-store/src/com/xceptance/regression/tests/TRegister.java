@@ -1,16 +1,16 @@
 /*
  * NOTE: This file is generated. Do not edit! Your changes will be lost.
  */
-package samples;
+package com.xceptance.regression.tests;
 import com.xceptance.xlt.api.engine.scripting.AbstractScriptTestCase;
 import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Simulates browsing the catalog, adding product(s) to the cart, checkout as guest and place the order.
+ * Simulates customer registration.
  */
 @ScriptName
-("samples.TGuestOrder")
-public class TGuestOrder extends AbstractScriptTestCase
+("com.xceptance.regression.tests.TRegister")
+public class TRegister extends AbstractScriptTestCase
 {
 }

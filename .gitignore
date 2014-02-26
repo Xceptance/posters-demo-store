@@ -6,3 +6,4 @@ bin/
 target/
 samples/testsuite-poster-store/results/
 samples/testsuite-poster-store/lib/
+samples/testsuite-poster-store/classes/
