@@ -1,0 +1,19 @@
+used Technologies:
+	Webframework: Ninja Framework
+	Webapplication-Server: Jetty
+	Database: H2
+	ORM (object-relational mapping): eBean
+	Template engine: FreeMarker
+	client-side: Twitter Bootstrap, jQuery, HTML5
+
+open issues:
+	start server without maven
+		first solution with standalone mode
+			see: http://www.ninjaframework.org/documentation/deployment/ninja_standalone.html
+			just one port available
+			server doesn't find the models (solution: add all models in conf/application.conf)
+	implement a filter search
+		e.g. Apache Lucene
+	Regression test
+		the cart of a customer has to be empty before the test starts
+
