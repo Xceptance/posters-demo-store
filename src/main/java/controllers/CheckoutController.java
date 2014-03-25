@@ -57,7 +57,7 @@ public class CheckoutController
         if (cart.getProducts().size() == 0)
         {
             // show info message
-            context.getFlashCookie().put("info", msg.get("infoEmptyCart", language).get());
+            context.getFlashScope().put("info", msg.get("infoEmptyCart", language).get());
             // return cart overview page
             return Results.redirect(context.getContextPath() + "/cart");
         }
@@ -146,7 +146,7 @@ public class CheckoutController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -316,7 +316,7 @@ public class CheckoutController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -482,7 +482,7 @@ public class CheckoutController
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
         // show error message
-        context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
+        context.getFlashScope().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
         Map<String, String> card = new HashMap<String, String>();
         card.put("name", name);
@@ -585,7 +585,7 @@ public class CheckoutController
         // remove order from session
         SessionHandling.removeOrderId(context);
         // show success message
-        context.getFlashCookie().success(msg.get("checkoutCompleted", language).get());
+        context.getFlashScope().success(msg.get("checkoutCompleted", language).get());
         return Results.redirect(context.getContextPath() + "/");
     }
 

@@ -38,7 +38,7 @@ public class SessionCustomerExistFilter implements Filter
                 // remove customer from session
                 SessionHandling.removeCustomerId(context);
                 // show error message
-                context.getFlashCookie().error(msg.get("errorSessionTerminated", language).get());
+                context.getFlashScope().error(msg.get("errorSessionTerminated", language).get());
                 // show home page
                 return Results.redirect(context.getContextPath() + "/");
             }

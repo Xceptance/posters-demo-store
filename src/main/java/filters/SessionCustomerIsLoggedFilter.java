@@ -36,7 +36,7 @@ public class SessionCustomerIsLoggedFilter implements Filter
         else
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorNoLoggedCustomer", language).get());
+            context.getFlashScope().error(msg.get("errorNoLoggedCustomer", language).get());
             // show home page
             return Results.redirect(context.getContextPath() + "/");
         }

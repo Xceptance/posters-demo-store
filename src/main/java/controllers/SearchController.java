@@ -52,7 +52,7 @@ public class SearchController
         if (searchText.isEmpty() || searchText.trim().isEmpty())
         {
             // show info message
-            context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+            context.getFlashScope().put("info", msg.get("infoNoSearchTerm", language).get());
             // return index page
             return Results.redirect(context.getContextPath() + "/");
         }
@@ -65,7 +65,7 @@ public class SearchController
             if (products.isEmpty())
             {
                 // show info message
-                context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+                context.getFlashScope().put("info", msg.get("infoNoSearchTerm", language).get());
                 // return index page
                 return Results.redirect(context.getContextPath() + "/");
             }

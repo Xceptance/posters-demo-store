@@ -74,7 +74,7 @@ public class CustomerController
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
+            context.getFlashScope().error(msg.get("errorValidEmail", language).get());
         }
         else
         {
@@ -108,13 +108,13 @@ public class CustomerController
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+                context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             }
             // wrong email
             else
             {
                 // error message
-                context.getFlashCookie().error(msg.get("errorEmailExist", language).get());
+                context.getFlashScope().error(msg.get("errorEmailExist", language).get());
             }
         }
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -176,21 +176,21 @@ public class CustomerController
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
+            context.getFlashScope().error(msg.get("errorAccountExist", language).get());
             failure = true;
         }
         // email is not valid
         else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
+            context.getFlashScope().error(msg.get("errorValidEmail", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
+            context.getFlashScope().error(msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
         if (failure)
@@ -217,7 +217,7 @@ public class CustomerController
             // save customer
             Ebean.save(customer);
             // show success message
-            context.getFlashCookie().success(msg.get("successCreateAccount", language).get());
+            context.getFlashScope().success(msg.get("successCreateAccount", language).get());
             // show page to log-in
             return Results.redirect(context.getContextPath() + "/login");
         }
@@ -335,7 +335,7 @@ public class CustomerController
                 // add credit card to customer
                 customer.addCreditCard(creditCard);
                 // success message
-                context.getFlashCookie().success(msg.get("successSave", language).get());
+                context.getFlashScope().success(msg.get("successSave", language).get());
                 // show payment overview page
                 return Results.redirect(context.getContextPath() + "/paymentOverview");
             }
@@ -344,7 +344,7 @@ public class CustomerController
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
         // show error message
-        context.getFlashCookie().error(msg.get("errorWrongCreditCard", language).get());
+        context.getFlashScope().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
         Map<String, String> card = new HashMap<String, String>();
         card.put("name", name);
@@ -390,7 +390,7 @@ public class CustomerController
         {
             CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
-            context.getFlashCookie().success(msg.get("successDelete", language).get());
+            context.getFlashScope().success(msg.get("successDelete", language).get());
             // show payment overview page
             return Results.redirect(context.getContextPath() + "/paymentOverview");
         }
@@ -399,7 +399,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             // show error message
-            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             data.put("cardId", cardId);
             WebShopController.setCommonData(data, context, xcpConf);
             // show page again
@@ -466,7 +466,7 @@ public class CustomerController
             // remove billing address
             BillingAddress.removeCustomerFromBillingAddress(addressId);
             // show success message
-            context.getFlashCookie().success(msg.get("successDelete", language).get());
+            context.getFlashScope().success(msg.get("successDelete", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
         // incorrect password
@@ -475,7 +475,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteBillingAddress");
             data.put("addressId", addressId);
             // show page again
@@ -521,7 +521,7 @@ public class CustomerController
             // remove shipping address
             ShippingAddress.removeCustomerFromShippingAddress(addressId);
             // show success message
-            context.getFlashCookie().success(msg.get("successDelete", language).get());
+            context.getFlashScope().success(msg.get("successDelete", language).get());
             // show address overview page
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
@@ -531,7 +531,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             data.put("deleteAddressURL", "deleteShippingAddress");
             data.put("addressId", addressId);
             return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
@@ -598,7 +598,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
@@ -627,7 +627,7 @@ public class CustomerController
             // update address
             address.update();
             // show success message
-            context.getFlashCookie().success(msg.get("successUpdate", language).get());
+            context.getFlashScope().success(msg.get("successUpdate", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
@@ -675,7 +675,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
@@ -704,7 +704,7 @@ public class CustomerController
             address.setCountry(country);
             address.update();
             // show success message
-            context.getFlashCookie().success(msg.get("successUpdate", language).get());
+            context.getFlashScope().success(msg.get("successUpdate", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
@@ -768,7 +768,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -797,7 +797,7 @@ public class CustomerController
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
             // show success message
-            context.getFlashCookie().success(msg.get("successSave", language).get());
+            context.getFlashScope().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
@@ -833,7 +833,7 @@ public class CustomerController
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
             // show error message
-            context.getFlashCookie().error(msg.get("errorWrongZip", language).get());
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
@@ -862,7 +862,7 @@ public class CustomerController
             Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addBillingAddress(address);
             // show success message
-            context.getFlashCookie().success(msg.get("successSave", language).get());
+            context.getFlashScope().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
@@ -910,21 +910,21 @@ public class CustomerController
         if (!customer.checkPasswd(password))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         // email isn't valid
         else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorValidEmail", language).get());
+            context.getFlashScope().error(msg.get("errorValidEmail", language).get());
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         // email already exist
         else if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorAccountExist", language).get());
+            context.getFlashScope().error(msg.get("errorAccountExist", language).get());
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         customer.setName(name);
@@ -932,7 +932,7 @@ public class CustomerController
         customer.setEmail(email);
         customer.update();
         // show success message
-        context.getFlashCookie().success(msg.get("successUpdate", language).get());
+        context.getFlashScope().success(msg.get("successUpdate", language).get());
         return Results.redirect(context.getContextPath() + "/settingOverview");
     }
 
@@ -973,14 +973,14 @@ public class CustomerController
         if (!customer.checkPasswd(oldPassword))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             failure = true;
         }
         // passwords don't match
         else if (!password.equals(passwordAgain))
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorPasswordMatch", language).get());
+            context.getFlashScope().error(msg.get("errorPasswordMatch", language).get());
             failure = true;
         }
         if (failure)
@@ -993,7 +993,7 @@ public class CustomerController
             customer.hashPasswd(password);
             customer.update();
             // show success message
-            context.getFlashCookie().success(msg.get("successUpdate", language).get());
+            context.getFlashScope().success(msg.get("successUpdate", language).get());
             return Results.redirect(context.getContextPath() + "/settingOverview");
         }
     }
@@ -1052,14 +1052,14 @@ public class CustomerController
                 Ebean.delete(customer);
             }
             // show success message
-            context.getFlashCookie().success(msg.get("successDeleteAccount", language).get());
+            context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
             // return home page
             return Results.redirect(context.getContextPath() + "/");
         }
         // incorrect password
         else
         {
-            context.getFlashCookie().error(msg.get("errorIncorrectPassword", language).get());
+            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
             // show page again
             return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
         }

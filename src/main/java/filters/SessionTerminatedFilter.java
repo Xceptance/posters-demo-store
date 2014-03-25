@@ -27,10 +27,10 @@ public class SessionTerminatedFilter implements Filter
     public Result filter(FilterChain chain, Context context)
     {
         // break, if session is terminated
-        if (context.getSessionCookie().isEmpty())
+        if (context.getSession().isEmpty())
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorSessionTerminated", language).get());
+            context.getFlashScope().error(msg.get("errorSessionTerminated", language).get());
             // show home page
             return Results.redirect(context.getContextPath() + "/");
         }
