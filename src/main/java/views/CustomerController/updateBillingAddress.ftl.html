@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-	<form id="formUpdateBillAddr" class="form-horizontal" action="/updateBillingAddressCompleted" method="post">
+	<form id="formUpdateBillAddr" class="form-horizontal" action="${contextPath}/updateBillingAddressCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("updateBillingTitle")}</legend>

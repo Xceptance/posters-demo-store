@@ -12,7 +12,7 @@
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
       						${i18n("titleValidTo")}: ${payment.getMonthLeadingZero()} ${payment.year}<br>
       					</address>
-      					<form action="/confirmDeletePayment" method="post">
+      					<form action="${contextPath}/confirmDeletePayment" method="post">
 							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
 							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n("buttonDelete")}</button>
 						</form>
@@ -27,6 +27,6 @@
       	</#if>
 	</#list>
 	<div class="span4 offset6">
-		<a id="linkAddNewPayment" href="/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
+		<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
 	</div>
 </@layout.myLayout>

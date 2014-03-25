@@ -14,7 +14,7 @@
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
       						${i18n("titleValidTo")}: ${payment.getMonthLeadingZero()} ${payment.year}<br>
       					</address>
-      					<form action="/addPaymentToOrder" method="post">
+      					<form action="addPaymentToOrder" method="post">
     						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
     						<button class="btn" id="btnUsePayment${payment_index}" name="btnUsePayment${payment_index}" type="submit">${i18n("paymentMethodChoose")}</button>
 						</form>
@@ -30,7 +30,7 @@
 	</#list>
 	</#if>
 	<!-- add new credit card -->
-	<form id="formAddPayment" class="form-horizontal" action="/paymentMethodCompleted" method="post">
+	<form id="formAddPayment" class="form-horizontal" action="${contextPath}/paymentMethodCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("paymentMethodAddNew")}</legend>

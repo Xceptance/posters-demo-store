@@ -8,7 +8,7 @@ function hideMessages() {
 
 function deleteFromCart(cartProductId, cartIndex) {
 	hideMessages();
-	var url = '/deleteFromCart?cartProductId=' + cartProductId;
+	var url = 'deleteFromCart?cartProductId=' + cartProductId;
 	$.get(url, function(data) {
 		// remove product from cart overview
 		$('#product' + cartIndex).remove();
@@ -22,7 +22,7 @@ function deleteFromCart(cartProductId, cartIndex) {
 }
 
 function updateProductCount(cartProductId, count, cartIndex) {
-	var url = '/updateProductCount?cartProductId=' + cartProductId
+	var url = 'updateProductCount?cartProductId=' + cartProductId
 			+ '&productCount=' + count;
 	$.get(url).always(function() {
 		hideMessages();
@@ -47,7 +47,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 
 // update price of product if the selected size has changed
 function updatePrice(selectedField, productId) {
-	var url = '/updatePrice';
+	var url = '../updatePrice';
 	$.post(url, {
 		size : selectedField.value,
 		productId : productId
@@ -68,7 +68,7 @@ function updateProductOverview(data) {
 		$('#product' + i + " h3").text(data.products[i].name);
 		$('#product' + i + " a").attr(
 				"href",
-				"/productDetail/" + encodeURIComponent(data.products[i].name) + "?productId="
+				"productDetail/" + encodeURIComponent(data.products[i].name) + "?productId="
 						+ data.products[i].id);
 		$('#product' + i + " a img").attr("src", data.products[i].imageURL);
 		$('#product' + i + "DescriptionOverview").text(

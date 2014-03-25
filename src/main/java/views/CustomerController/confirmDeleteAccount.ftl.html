@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form id="formDeleteAccount" class="form-horizontal" action="/deleteAccount" method="post">
+	<form id="formDeleteAccount" class="form-horizontal" action="${contextPath}/deleteAccount" method="post">
 		<fieldset>
 			<legend>${i18n("confirmDeletionTitle")}</legend>
 			<!-- Password input-->

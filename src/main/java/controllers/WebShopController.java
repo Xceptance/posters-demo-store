@@ -77,8 +77,8 @@ public class WebShopController
             data.put("isLogged", false);
         }
         // set application url
-        data.put("applUrlHttp", xcpConf.APPLICATION_URL_HTTP);
-        data.put("applUrlHttps", xcpConf.APPLICATION_URL_HTTPS);
+        data.put("applUrlHttp", xcpConf.APPLICATION_URL_HTTP + context.getContextPath());
+        data.put("applUrlHttps", xcpConf.APPLICATION_URL_HTTPS + context.getContextPath());
         // set currency
         data.put("currency", xcpConf.CURRENCY);
         // add unit of length

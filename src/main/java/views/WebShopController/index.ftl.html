@@ -16,9 +16,9 @@
 	      				<#else>
 	      					<div id="carouselItem${caro_index}" class="item">
 	      				</#if>
-							<img src="${caro.imageURL}">
+							<img src="${contextPath}${caro.imageURL}">
 							<div class="carousel-caption">
-								<a href="${applUrlHttp}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}">${caro.name}</a>
+								<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}">${caro.name}</a>
 							</div>
 						</div>
 					</#list>

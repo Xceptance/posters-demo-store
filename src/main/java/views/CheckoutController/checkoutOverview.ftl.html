@@ -6,7 +6,7 @@
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
 		<tr id="product${orderProduct_index}">
-			<td><a href="/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img data-src="/assets/js/holder.js/150x100" alt="" src=${orderProduct.product.imageURL} width="150"></img></a></td>
+			<td><a href="productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img data-src="${contextPath}/assets/js/holder.js/150x100" alt="" src="${contextPath}${orderProduct.product.imageURL}" width="150"></img></a></td>
 			<td id="product${orderProduct_index}Name">${orderProduct.product.name}</td>
 			<td id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
 			<td id="product${orderProduct_index}Finish">${orderProduct.finish}</td>
@@ -70,7 +70,7 @@
 	<!-- order button -->
 	<div class="row-fluid">
 		<div class="text-right">
-			<form action="/checkoutCompleted" method="post">
+			<form action="${contextPath}/checkoutCompleted" method="post">
     			<button class="btn" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
 			</form>
 		</div>

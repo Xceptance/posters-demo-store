@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form id="formAddPayment" class="form-horizontal" action="/addPaymentToCustomer" method="post">
+	<form id="formAddPayment" class="form-horizontal" action="${contextPath}/addPaymentToCustomer" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("titlePaymentInformation")}</legend>

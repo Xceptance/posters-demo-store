@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form id="formAddDelAddr" class="form-horizontal" action="/addShippingAddressToCustomerCompleted" method="post">
+	<form id="formAddDelAddr" class="form-horizontal" action="${contextPath}/addShippingAddressToCustomerCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("shippingAddressAddNew")}</legend>

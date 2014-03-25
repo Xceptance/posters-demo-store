@@ -16,7 +16,7 @@
       						${address.city}, ${address.state} ${address.zip}<br>
       						${address.country}<br>
       					</address>
-      					<form action="/addBillingAddressToOrder" method="post">
+      					<form action="${contextPath}/addBillingAddressToOrder" method="post">
     						<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     						<button class="btn" id="btnUseBillAddress${address_index}" name="btnUseBillAddress${address_index}" type="submit">${i18n("billingAddressChoose")}</button>
 						</form>
@@ -32,7 +32,7 @@
 	</#list>
 	</#if>
 	<!-- add new address -->
-	<form id="formAddBillAddr" class="form-horizontal" action="/billingAddressCompleted" method="post">
+	<form id="formAddBillAddr" class="form-horizontal" action="${contextPath}/billingAddressCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
 			<legend>${i18n("billingAddressAddNew")}</legend>

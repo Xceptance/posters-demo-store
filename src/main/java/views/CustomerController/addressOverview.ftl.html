@@ -17,11 +17,11 @@
       					${address.city}, ${address.state} ${address.zip}<br>
       					${address.country}<br>
       				</address>
-      				<form action="/updateShippingAddress" method="post">
+      				<form action="${contextPath}/updateShippingAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn" id="btnChangeDelAddr${address_index}" name="btnChangeDelAddr${address_index}" type="submit">${i18n("buttonChangeDetail")}</button>
 					</form>
-      				<form action="/confirmDeleteShippingAddress" method="post">
+      				<form action="${contextPath}/confirmDeleteShippingAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn btn-danger" id="btnDeleteDelAddr${address_index}" name="btnDeleteDelAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
 					</form>
@@ -39,7 +39,7 @@
 	<!-- add new shipping address -->
 	<div class="row-fluid">
 		<div class="span4">
-			<a id="linkAddNewDelAddr" href="/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
+			<a id="linkAddNewDelAddr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
 		</div>
 	</div>
 
@@ -59,11 +59,11 @@
       					 ${address.city}, ${address.state} ${address.zip}<br>
       					${address.country}<br>
       				</address>
-      				<form action="/updateBillingAddress" method="post">
+      				<form action="${contextPath}/updateBillingAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonChangeDetail")}</button>
 					</form>
-      				<form action="/confirmDeleteBillingAddress" method="post">
+      				<form action="${contextPath}/confirmDeleteBillingAddress" method="post">
     					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
     					<button class="btn btn-danger" id="btnDeleteBillAddr${address_index}" name="btnDeleteBillAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
 					</form>
@@ -81,7 +81,7 @@
 	<!-- add new billing address -->
 	<div class="row-fluid">
 		<div class="span4">
-			<a id="linkAddNewBillAddr" href="/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
+			<a id="linkAddNewBillAddr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
 		</div>
 	</div>
 </@layout.myLayout>

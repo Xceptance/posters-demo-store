@@ -4,7 +4,7 @@
 	<table class="table" table-bordered>
 		<#list cartProducts as cartProduct>
 			<tr id="product${cartProduct_index}">
-				<td><a href="/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img data-src="/assets/js/holder.js/150x100" alt="" src=${cartProduct.product.imageURL} width="150"></img></a></td>
+				<td><a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img data-src="${contextPath}/assets/js/holder.js/150x100" alt="" src="${contextPath}${cartProduct.product.imageURL}" width="150"></img></a></td>
 				<td id="productName${cartProduct_index}">${cartProduct.product.name}</td>
 				<td id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</td>
 				<td id="productFinish${cartProduct_index}">${cartProduct.finish}</td>

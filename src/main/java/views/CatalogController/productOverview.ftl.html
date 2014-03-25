@@ -15,15 +15,15 @@
            		var pageType = pathname.substring(1, pathname.indexOf('/', 1));
            		// top category
            		if(pageType == "topCategory") {
-           			$.post('/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+           			$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
            		}
            		// sub category
            		else if(pageType == "category"){
-					$.post('/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+					$.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
            		}
            		// search
            		else {
-           			$.post('/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+           			$.post('${contextPath}/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
            		}
             }
         }
@@ -38,7 +38,7 @@
       	</#if>
       				<li class="span4">
       					<div id="product${pro_index}" class="thumbnail">
-      						<a href="/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img data-src="/assets/js/holder.js/300x200" alt="" src=${pro.imageURL}></img></a>
+      						<a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img data-src="${contextPath}/assets/js/holder.js/300x200" alt="" src="${contextPath}${pro.imageURL}"></img></a>
       						<h3 id="product${pro_index}Name">${pro.name}</h3>
       						<p id="product${pro_index}DescriptionOverview">${pro.descriptionOverview}</p>
       						<p>${i18n("priceStart")} <span id="product${pro_index}Price">${pro.getPriceAsString()}</span>${currency}</p>

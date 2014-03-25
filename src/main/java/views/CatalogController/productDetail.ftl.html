@@ -3,7 +3,7 @@
 	<h1 id="titleProductName">${productDetail.name}</h1>
 	<div class="row-fluid" productid="${productDetail.id}">
 		<div class="span4" id="prodImg">
-      		<img class="img-polaroid" width="300" alt="" src=${productDetail.imageURL}></img>
+      		<img class="img-polaroid" width="300" alt="" src="${contextPath}${productDetail.imageURL}"></img>
       	</div>
       	<div class="span5">
       		<h3 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h3>

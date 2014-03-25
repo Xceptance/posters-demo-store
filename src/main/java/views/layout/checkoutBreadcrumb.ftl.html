@@ -2,25 +2,25 @@
 	<ul class="breadcrumb span6 offset4 text-center">
 		<!-- add shipping address -->
 			<li id="btnDelAddr">
-				<a href="/enterShippingAddress">${i18n("titleShippingAddress")}</a> <span class="divider"> > </span>
+				<a href="enterShippingAddress">${i18n("titleShippingAddress")}</a> <span class="divider"> > </span>
 			</li>
 		<!-- add billing address -->	
 		<#if billingAddressActive??>
-			<li class="active" id="btnBillAddr"> <a href="/enterBillingAddress">${i18n("titleBillingAddress")}</a>
+			<li class="active" id="btnBillAddr"> <a href="${contextPath}/enterBillingAddress">${i18n("titleBillingAddress")}</a>
 		<#else>
 			<li id="btnBillAddr"> ${i18n("titleBillingAddress")}
 		</#if>
 			<span class="divider"> > </span></li>
 		<!-- add credit card -->
 		<#if creditCardActive??>
-			<li class="active" id="btnCreditCard"> <a href="/enterPaymentMethod">${i18n("titleCreditCard")}</a>
+			<li class="active" id="btnCreditCard"> <a href="${contextPath}/enterPaymentMethod">${i18n("titleCreditCard")}</a>
 		<#else>
 			<li id="btnCreditCard"> ${i18n("titleCreditCard")}
 		</#if>
 			<span class="divider"> > </span></li>
 		<!-- place order -->
 		<#if placeOrderActive??>
-			<li class="active" id="btnPlaceOrder"> <a href="/checkoutOverview">${i18n("buttonPlaceOrder")}</a>
+			<li class="active" id="btnPlaceOrder"> <a href="${contextPath}/checkoutOverview">${i18n("buttonPlaceOrder")}</a>
 		<#else>
 			<li id="btnPlaceOrder"> ${i18n("buttonPlaceOrder")}
 		</#if>
