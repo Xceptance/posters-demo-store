@@ -1,8 +1,9 @@
 package util.xml;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -29,7 +30,7 @@ public class XmlUtils
         try
         {
             XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-            FileReader reader = new FileReader(source);
+            Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source));
             InputSource inputSource = new InputSource(reader);
             xmlReader.setContentHandler(handler);
             xmlReader.parse(inputSource);

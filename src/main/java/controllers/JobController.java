@@ -1,6 +1,6 @@
 package controllers;
 
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -80,7 +80,9 @@ public class JobController
             {
                 if (config.DROP_TABLES.equals("true"))
                 {
-                    RunScript.execute(connection, new FileReader("default-drop.sql"));
+                    RunScript.execute(connection,
+                                      new InputStreamReader(getClass().getClassLoader()
+                                                                      .getResourceAsStream("conf/default-drop.sql")));
                 }
             }
             // get the DB-metadata
@@ -139,7 +141,9 @@ public class JobController
                   && shippingAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
             {
                 // simply execute the create-script
-                RunScript.execute(connection, new FileReader("default-create.sql"));
+                RunScript.execute(connection,
+                                  new InputStreamReader(getClass().getClassLoader()
+                                                                  .getResourceAsStream("conf/default-create.sql")));
             }
             connection.close();
         }
