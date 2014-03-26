@@ -130,7 +130,7 @@ public class Homepage extends AbstractHtmlPageAction
 
         // we just look at the first request/response pair
         final NetworkData n0 = networkData.get(0);
-        Assert.assertEquals("/", n0.getURL().getPath());
+        Assert.assertEquals("/posters/", n0.getURL().getPath());
         Assert.assertEquals("text/html", n0.getContentType());
         Assert.assertEquals("GET", n0.getRequestMethod().toString());
         Assert.assertEquals(200, n0.getResponseStatusCode());

@@ -105,7 +105,7 @@ public class AddToCart extends AbstractHtmlPageAction
 	updatePriceParams.add(new NameValuePair("size", size));
 	// Perform the AJAX call and return the result.
 	WebResponse updatePriceResponse = AjaxUtils.callPost(page,
-		"/updatePrice", updatePriceParams);	
+		"/posters/updatePrice", updatePriceParams);	
         // get JSON object from response
         JSONObject updatePriceJsonResponse = new JSONObject(updatePriceResponse.getContentAsString());
         // get the new price from JSON object
@@ -121,7 +121,7 @@ public class AddToCart extends AbstractHtmlPageAction
 	// Perform the AJAX call and return the result.
 	// This call doesn't have any parameters
 	WebResponse cartElementSliderResponse = AjaxUtils.callGet(page,
-		"/getCartElementSlider", null);
+		"/posters/getCartElementSlider", null);
         // get JSON object from response
         JSONObject getCartElementSliderJsonResponse = new JSONObject(cartElementSliderResponse.getContentAsString());
         // get the keys from JSON object and do some basic validation
@@ -138,7 +138,7 @@ public class AddToCart extends AbstractHtmlPageAction
 	addToCartParams.add(new NameValuePair("finish", finish));
 	addToCartParams.add(new NameValuePair("size", size));
 	// Perform the AJAX call and return the result.
-	WebResponse addToCartResponse = AjaxUtils.callGet(page, "/addToCartSlider", addToCartParams);
+	WebResponse addToCartResponse = AjaxUtils.callGet(page, "/posters/addToCartSlider", addToCartParams);
         // get JSON object from response
         JSONObject addToCartJsonResponse = new JSONObject(addToCartResponse.getContentAsString());
         // get the keys from JSON object and do some basic validation

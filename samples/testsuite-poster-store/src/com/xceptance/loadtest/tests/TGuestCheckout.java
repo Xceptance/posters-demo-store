@@ -29,7 +29,7 @@ public class TGuestCheckout extends AbstractTestCase
         // Read the store URL from properties. Directly referring to the properties allows to access them by the full
         // path.
         final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
-                                                                   "http://localhost:8080/");
+                                                                   "http://localhost:8080/posters/");
 
 
         // Go to poster store homepage

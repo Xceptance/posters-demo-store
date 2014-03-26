@@ -93,7 +93,7 @@ public class Paging extends AbstractHtmlPageAction
         final String path = page.getUrl().getPath();
         try
         {
-            pageType = path.substring(1, path.indexOf("/", 1));
+            pageType = path.substring(1, path.indexOf("/posters/", 1));
         }
         // the page shows rearch results
         catch (Exception e)
@@ -120,20 +120,20 @@ public class Paging extends AbstractHtmlPageAction
         if (pageType.equalsIgnoreCase("topCategory"))
         {
             pagingParams.add(new NameValuePair("categoryId", categoryId));
-            response = AjaxUtils.callPost(page, "/getProductOfTopCategory", pagingParams);
+            response = AjaxUtils.callPost(page, "/posters/getProductOfTopCategory", pagingParams);
         }
         // the current page is a sub category overview page
         else if (pageType.equalsIgnoreCase("category"))
         {
             pagingParams.add(new NameValuePair("categoryId", categoryId));
-            response = AjaxUtils.callPost(page, "/getProductOfSubCategory", pagingParams);
+            response = AjaxUtils.callPost(page, "/posters/getProductOfSubCategory", pagingParams);
         }
         // the current page shows some search results
         else if (pageType.equalsIgnoreCase("search"))
         {
             pagingParams.add(new NameValuePair("searchText",
                                                HtmlPageUtils.findSingleHtmlElementByID(page, "searchText").asText()));
-            response = AjaxUtils.callPost(page, "/getProductOfSearch", pagingParams);
+            response = AjaxUtils.callPost(page, "/posters/getProductOfSearch", pagingParams);
         }
         // unknown page type
         else

@@ -58,7 +58,7 @@ public class TSearch extends AbstractTestCase
     {
         // Read the store URL from properties. Directly referring to the properties allows to access them by the full
         // path.
-        final String url = getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/");
+        final String url = getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
 
         // Go to poster store homepage
         Homepage homepage = new Homepage(url, "Homepage");
