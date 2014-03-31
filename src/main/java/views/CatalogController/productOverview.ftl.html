@@ -12,7 +12,7 @@
             alignment:'center',
             onPageClicked: function(e, originalEvent, type, page) {
            		var pathname = $(location).attr('pathname');
-           		var pageType = pathname.substring(1, pathname.indexOf('/', 1));
+           		var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
            		// top category
            		if(pageType == "topCategory") {
            			$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);

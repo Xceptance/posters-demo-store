@@ -23,14 +23,7 @@ function showCartSlider()
 
 function getCartSliderText()
 {
-	var url = 'getCartElementSlider';
-	
-	// HACK: prefix URL in case we were called from a category or product detail page
-	if (window.location.pathname.match(/[/](topCategory|category|productDetail)[/]/))
-	{
-	    url = '../' + url;
-	}
-	
+	var url = CONTEXT_PATH + '/getCartElementSlider';
 	$.get(url, updateCartSlider);
 }
 
@@ -83,11 +76,11 @@ function addToCart(productId, finish, size)
 
 function addToCartSlider(productId, finish, size)
 {
-	$("#notificationsLoader").html('<img src="../assets/img/loader.gif">');
+	$("#notificationsLoader").html('<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
 	
 	$.ajax({  
 		type: "GET",  
-		url: '../addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size, 
+		url: CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size, 
 		success: function(data) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
