@@ -24,11 +24,40 @@ import com.xceptance.xlt.api.util.XltRandom;
  */
 public class TSearch extends AbstractTestCase
 {
-
     /**
-     * Last action
+     * The previous action
      */
-    private AbstractHtmlPageAction lastAction;
+    private AbstractHtmlPageAction previousAction;
+    
+    /**
+     *  The probability to perform a paging during browsing the categories
+     */
+    private final int pagingProbability = getProperty("paging.probability", 0);
+    
+    /**
+     *  The min number of paging rounds
+     */
+    private final int pagingMin = getProperty("paging.min", 0);
+    
+    /**
+     *  The max number of paging rounds
+     */
+    private final int pagingMax = getProperty("paging.max", 0);
+    
+    /**
+     *  The probability to perform a search without hits
+     */
+    private final int searchNoHitsProbability = getProperty("search.nohits.probability", 0);
+    
+    /**
+     * The minimum number of products to search
+     */
+    private final int productsMin = getProperty("products.min", 1);
+    
+    /**
+     * The maximum number of products to search
+     */
+    private final int productsMax = getProperty("products.max", 1);
 
     /**
      * Data provider for search results.
@@ -62,39 +91,42 @@ public class TSearch extends AbstractTestCase
 
         // Go to poster store homepage
         Homepage homepage = new Homepage(url);
+        // Disable JavaScript to reduce client side resource consumption.
+        // If JavaScript executes needed functionality (i.e. AJAX calls) we will simulate this in the related action
+        homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
         homepage.run();
-        lastAction = homepage;
+        previousAction = homepage;
 
         // Get the number of searches determined from the configured min and max
         // products.
-        final int searches = XltRandom.nextInt(getProperty("products.min", 1), getProperty("products.max", 1));
+        final int searches = XltRandom.nextInt(productsMin, productsMax);
         for (int i = 0; i < searches; i++)
         {
             // The search option is the indicator whether to search for one of
             // the search phrases from the 'HITS_PROVIDER' that results in a hit
             // or a generated phrase that results in a 'no results' page.
-            final SearchOption option = getSearchOption(getProperty("search.nohits.probability", 0));
+            final SearchOption option = getSearchOption(searchNoHitsProbability);
 
             // Run the search with an appropriate search phrase according to the
             // search option.
-            Search search = new Search(lastAction, "Search", getSearchPhrase(option), option);
+            Search search = new Search(previousAction, "Search", getSearchPhrase(option), option);
             search.run();
-            lastAction = search;
+            previousAction = search;
 
             // perform Paging and go to product detail page of a result according to the search option
             if (option == SearchOption.HITS)
             {
                 // According to the configured probability perform the paging or
                 // not.
-                if (XltRandom.nextBoolean(getProperty("paging.probability", 0)))
+                if (XltRandom.nextBoolean(pagingProbability))
                 {
                     // Get current number of paging rounds determined from the configured
                     // min and max value for paging.
-                    final int pagingRounds = XltRandom.nextInt(getProperty("paging.min", 0), getProperty("paging.max", 0));
+                    final int pagingRounds = XltRandom.nextInt(pagingMin, pagingMax);
                     for (int j = 0; j < pagingRounds; j++)
                     {
                         // perform a paging if possible
-                        Paging paging = new Paging(lastAction, "Paging");
+                        Paging paging = new Paging(previousAction, "Paging");
                 	if (paging.preValidateSafe())
                 	{
                 	    paging.run();
@@ -103,13 +135,13 @@ public class TSearch extends AbstractTestCase
                 	{
                 	    break;
                 	}
-                        lastAction = paging;
+                        previousAction = paging;
                     }
                 }
                 // product detail view
-                ProductDetailView productDetailView = new ProductDetailView(lastAction);
+                ProductDetailView productDetailView = new ProductDetailView(previousAction);
                 productDetailView.run();
-                lastAction = productDetailView;
+                previousAction = productDetailView;
             }
         }
     }

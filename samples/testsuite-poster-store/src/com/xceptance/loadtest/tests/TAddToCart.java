@@ -21,17 +21,22 @@ public class TAddToCart extends AbstractTestCase
     /**
      *  The probability to perform a paging during browsing the categories
      */
-    final int pagingProbability = getProperty("paging.probability", 0);
+    private final int pagingProbability = getProperty("paging.probability", 0);
     
     /**
      *  The min number of paging rounds
      */
-    final int pagingMin = getProperty("paging.min", 0);
+    private final int pagingMin = getProperty("paging.min", 0);
     
     /**
      *  The max number of paging rounds
      */
-    final int pagingMax = getProperty("paging.max", 0);
+    private final int pagingMax = getProperty("paging.max", 0);
+    
+    /**
+     *  Read the store URL from properties. Directly referring to the properties allows to access them by the full path.
+     */
+    private final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
     
     /**
      * Main test method
@@ -39,12 +44,12 @@ public class TAddToCart extends AbstractTestCase
     @Test
     public void addToCart() throws Throwable
     {
-    // Read the store URL from properties. Directly referring to the properties allows to access them by the full
-    // path.
-    final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
-    
+
     // Go to poster store homepage
     Homepage homepage = new Homepage(url);
+    // Disable JavaScript to reduce client side resource consumption
+    // If JavaScript executes needed functionality (i.e. AJAX calls) we will simulate this in the related action
+    homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
     homepage.run();
     previousAction = homepage;
     

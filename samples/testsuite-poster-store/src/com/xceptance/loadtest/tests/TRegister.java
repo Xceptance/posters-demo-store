@@ -40,6 +40,9 @@ public class TRegister extends AbstractTestCase
 
         // Go to poster store homepage
         Homepage homepage = new Homepage(url);
+        // Disable JavaScript to reduce client side resource consumption
+        // If JavaScript executes needed functionality (i.e. AJAX calls) we will simulate this in the related action
+        homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
         homepage.run();
 
         // go to sign in
