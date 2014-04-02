@@ -61,7 +61,7 @@ public class TSearch extends AbstractTestCase
         final String url = getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
 
         // Go to poster store homepage
-        Homepage homepage = new Homepage(url, "Homepage");
+        Homepage homepage = new Homepage(url);
         homepage.run();
         lastAction = homepage;
 
@@ -90,17 +90,24 @@ public class TSearch extends AbstractTestCase
                 {
                     // Get current number of paging rounds determined from the configured
                     // min and max value for paging.
-                    final int nbPagings = XltRandom.nextInt(getProperty("paging.min", 0), getProperty("paging.max", 0));
-                    for (int j = 0; j < nbPagings; j++)
+                    final int pagingRounds = XltRandom.nextInt(getProperty("paging.min", 0), getProperty("paging.max", 0));
+                    for (int j = 0; j < pagingRounds; j++)
                     {
-                        // perform the paging
+                        // perform a paging if possible
                         Paging paging = new Paging(lastAction, "Paging");
-                        paging.run();
+                	if (paging.preValidateSafe())
+                	{
+                	    paging.run();
+                	}
+                	else
+                	{
+                	    break;
+                	}
                         lastAction = paging;
                     }
                 }
                 // product detail view
-                ProductDetailView productDetailView = new ProductDetailView(lastAction, "ProductDetailView");
+                ProductDetailView productDetailView = new ProductDetailView(lastAction);
                 productDetailView.run();
                 lastAction = productDetailView;
             }

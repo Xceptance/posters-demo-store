@@ -17,7 +17,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
  * This {@link AbstractHtmlPageAction} fills in and submits the sign in form. <br>
  * The previous action should be {@link GoToSignIn}.
  * 
- * @author sebastianloob
  */
 public class Login extends AbstractHtmlPageAction
 {
@@ -47,9 +46,9 @@ public class Login extends AbstractHtmlPageAction
      * @param account
      *            the account to log in
      */
-    public Login(AbstractHtmlPageAction previousAction, String timerName, Account account)
+    public Login(AbstractHtmlPageAction previousAction, Account account)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
         this.account = account;
     }
 

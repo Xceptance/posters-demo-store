@@ -15,9 +15,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 public class SelectCategory extends AbstractHtmlPageAction
 {
     
-    public SelectCategory(AbstractHtmlPageAction previousAction, String timerName)
+    public SelectCategory(AbstractHtmlPageAction previousAction)
     {
-	super(previousAction, timerName);
+	super(previousAction, null);
     }
 
     /**

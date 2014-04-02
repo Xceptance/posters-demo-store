@@ -44,9 +44,9 @@ public class AddToCart extends AbstractHtmlPageAction
      * @param previousAction
      * @param timerName
      */
-    public AddToCart(AbstractHtmlPageAction previousAction, String timerName)
+    public AddToCart(AbstractHtmlPageAction previousAction)
     {
-	super(previousAction, timerName);
+	super(previousAction, null);
     }
 
     @Override

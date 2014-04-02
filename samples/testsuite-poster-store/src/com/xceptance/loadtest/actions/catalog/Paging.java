@@ -12,6 +12,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.xceptance.common.util.RegExUtils;
 import com.xceptance.loadtest.util.AjaxUtils;
 import com.xceptance.loadtest.validators.HeaderValidator;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
@@ -42,12 +43,23 @@ public class Paging extends AbstractHtmlPageAction
      * The current page type. Possibilities are a top category overview page, a sub category overview page or a search
      * results overview page.
      */
-    private String pageType;
+    private String path;
 
     /**
      * The ID of the current category.
      */
     private String categoryId;
+
+    /**
+     * The javascript code for the paging functionality
+     */
+    private String scriptCodeAsString;
+
+    private String getProductOfTopCategoryURL;
+
+    private String getProductOfSubCategoryURL;
+
+    private String getProductOfSearchURL;
 
     /**
      * Constructor
@@ -74,13 +86,17 @@ public class Paging extends AbstractHtmlPageAction
         // get the current page number
         this.currentPageNumber = Integer.parseInt(HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")
                                                                .getAttribute("currentPage"));
-        // the paging is build with Javascript, so we need to extract the information out of the javascript code
-        String pageAsXml = page.asXml();
-        int beginIndex = pageAsXml.indexOf("totalPages: ") + 12;
-        int totalPageCount = Integer.parseInt(pageAsXml.substring(beginIndex, pageAsXml.indexOf(",", beginIndex)));
+        // the paging is build with Javascript, so we need to extract the information out of the paging javascript code
+        HtmlElement scriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div/div[@id='pagination']/following-sibling::script");
+        scriptCodeAsString = scriptElement.getTextContent();
+        
+        int beginIndex = scriptCodeAsString.indexOf("totalPages: ") + 12;
+        int totalPageCount = Integer.parseInt(scriptCodeAsString.substring(beginIndex, scriptCodeAsString.indexOf(",", beginIndex)));
         this.targetPageNumber = XltRandom.nextInt(1, totalPageCount);
 
         // be sure, that the target page number is not the current page number
+        Assert.assertFalse("The total page count is 1. Paging is not possible.",totalPageCount == 1);
+        
         if (totalPageCount > 1)
         {
             while (this.currentPageNumber == this.targetPageNumber)
@@ -88,28 +104,31 @@ public class Paging extends AbstractHtmlPageAction
                 this.targetPageNumber = XltRandom.nextInt(1, totalPageCount);
             }
         }
+        
 
-        // get the type of the page by the path of the current URL
-        final String path = page.getUrl().getPath();
-        try
-        {
-            pageType = path.substring(1, path.indexOf("/posters/", 1));
-        }
-        // the page shows rearch results
-        catch (Exception e)
-        {
-            pageType = "search";
-        }
-        // get the category id by the query part of the URL
+        // get the path of the current URL to later extract the page type
+        path = page.getUrl().getPath();
+
         categoryId = page.getUrl().getQuery().substring(11);
-    }
+        
+        // The javascript code also contains the URLs that we need to perform the subsequent ajax call to get the products of the next page.
+        // Depending on the current page type we need one of the three extracted URLs
+        List<String> URLStrings = RegExUtils.getAllMatches(scriptCodeAsString, "\\$\\.post\\('([^']*)", 1);  
+        getProductOfTopCategoryURL = URLStrings.get(0);
+        getProductOfSubCategoryURL = URLStrings.get(1);
+        getProductOfSearchURL = URLStrings.get(2);
 
+    }
+    
+    
+    
+    
     @Override
     protected void execute() throws Exception
     {
         // Get the result of the last action
         final HtmlPage page = getPreviousAction().getHtmlPage();
-
+        
         // the request parameters of the AJAX call
         List<NameValuePair> pagingParams = new ArrayList<NameValuePair>();
         pagingParams.add(new NameValuePair("page", Integer.toString(targetPageNumber)));
@@ -117,23 +136,23 @@ public class Paging extends AbstractHtmlPageAction
         // execute the AJAX call and get the response
         WebResponse response = null;
         // the current page is a top category overview page
-        if (pageType.equalsIgnoreCase("topCategory"))
+        if (path.contains("topCategory"))
         {
             pagingParams.add(new NameValuePair("categoryId", categoryId));
-            response = AjaxUtils.callPost(page, "/posters/getProductOfTopCategory", pagingParams);
+            response = AjaxUtils.callPost(page, getProductOfTopCategoryURL, pagingParams);
         }
         // the current page is a sub category overview page
-        else if (pageType.equalsIgnoreCase("category"))
+        else if (path.contains("category"))
         {
             pagingParams.add(new NameValuePair("categoryId", categoryId));
-            response = AjaxUtils.callPost(page, "/posters/getProductOfSubCategory", pagingParams);
+            response = AjaxUtils.callPost(page, getProductOfSubCategoryURL, pagingParams);
         }
         // the current page shows some search results
-        else if (pageType.equalsIgnoreCase("search"))
+        else if (path.contains("search"))
         {
             pagingParams.add(new NameValuePair("searchText",
                                                HtmlPageUtils.findSingleHtmlElementByID(page, "searchText").asText()));
-            response = AjaxUtils.callPost(page, "/posters/getProductOfSearch", pagingParams);
+            response = AjaxUtils.callPost(page, getProductOfSearchURL, pagingParams);
         }
         // unknown page type
         else
@@ -169,9 +188,15 @@ public class Paging extends AbstractHtmlPageAction
             productTag.setAttribute("class", "thumbnail");
             // create link to product detail page
             HtmlElement productLink = HtmlPageUtils.createHtmlElement("a", productTag);
+            HtmlElement contextPathScriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page, "html/head/script[@type='text/javascript' and contains(.,'CONTEXT_PATH')]");
+            String contextPath = RegExUtils.getFirstMatch(contextPathScriptElement.getTextContent(), "CONTEXT_PATH = '(.*)';", 1);
             productLink.setAttribute("href",
-                                     "/productDetail/" + URLEncoder.encode(product.get("name").toString(), "UTF-8")
+                                     contextPath + "/productDetail/" + URLEncoder.encode(product.get("name").toString(), "UTF-8")
                                          + "?productId=" + product.get("id"));
+            // add image tag
+            HtmlElement imageTag = HtmlPageUtils.createHtmlElement("img", productLink);
+            imageTag.setAttribute("src",
+                    contextPath + product.get("imageURL"));
         }
         // set the current page number
         HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")

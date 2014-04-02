@@ -1,20 +1,34 @@
 package com.xceptance.loadtest.tests;
 
 import org.junit.Test;
-
 import com.xceptance.loadtest.actions.Homepage;
-import com.xceptance.loadtest.actions.catalog.Paging;
-import com.xceptance.loadtest.actions.catalog.ProductDetailView;
-import com.xceptance.loadtest.actions.catalog.SelectCategory;
-import com.xceptance.loadtest.actions.catalog.SelectTopCategory;
+import com.xceptance.loadtest.flows.BrowsingFlow;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
+
 
 /**
  * Open the homepage, browse the catalog. If there's a product overview open random poster's detail view.
  **/
 public class TBrowse extends AbstractTestCase
 {
+
+    /**
+     *  The probability to perform a paging during browsing the categories
+     */
+    final int pagingProbability = getProperty("paging.probability", 0);
+    
+    /**
+     *  The min number of paging rounds
+     */
+    final int pagingMin = getProperty("paging.min", 0);
+    
+    /**
+     *  The max number of paging rounds
+     */
+    final int pagingMax = getProperty("paging.max", 0);
+    
+    
     /**
      * Main test method
      */
@@ -27,24 +41,14 @@ public class TBrowse extends AbstractTestCase
                                                                    "http://localhost:8080/posters/");
 
         // Go to poster store homepage
-        Homepage homepage = new Homepage(url, "Homepage");
+        Homepage homepage = new Homepage(url);
         homepage.run();
 
-        // Select a random top category from side navigation
-        SelectTopCategory selectTopCategory = new SelectTopCategory(homepage, "SelectTopCategory");
-        selectTopCategory.run();
+        // Browse
+        BrowsingFlow browse = new BrowsingFlow(homepage, pagingProbability, pagingMin, pagingMax);
+        browse.run();
 
-        // Select a random level-1 category from side navigation
-        SelectCategory selectCategory = new SelectCategory(selectTopCategory, "SelectCategory");
-        selectCategory.run();
 
-        // Page through results
-        Paging paging = new Paging(selectCategory, "Paging");
-        paging.run();
-
-        // Select a random poster from product overview and show product detail page
-        ProductDetailView productDetailView = new ProductDetailView(paging, "ProductDetailView");
-        productDetailView.run();
 
     }
 }

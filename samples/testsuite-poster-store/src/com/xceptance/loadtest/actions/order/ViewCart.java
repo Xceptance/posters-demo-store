@@ -30,9 +30,9 @@ public class ViewCart extends AbstractHtmlPageAction
      * @param previousAction
      * @param timerName
      */
-    public ViewCart(AbstractHtmlPageAction previousAction, String timerName)
+    public ViewCart(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
     @Override

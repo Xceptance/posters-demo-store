@@ -19,10 +19,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 public class ProductDetailView extends AbstractHtmlPageAction
 {
 
-    public ProductDetailView(AbstractHtmlPageAction previousAction,
-	    String timerName)
+    public ProductDetailView(AbstractHtmlPageAction previousAction)
     {
-	super(previousAction, timerName);
+	super(previousAction, null);
     }
 
     /**
@@ -45,6 +44,9 @@ public class ProductDetailView extends AbstractHtmlPageAction
 
         // Remember a random product's link URL.
         productDetailLink = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('productOverview')/div/ul[@class='thumbnails']/li/div/a");
+        
+        @SuppressWarnings("unused")
+	String linkdAddress = productDetailLink.getAttribute("href");
 
     }
 

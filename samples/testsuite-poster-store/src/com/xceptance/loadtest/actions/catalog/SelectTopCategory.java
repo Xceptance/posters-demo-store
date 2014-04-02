@@ -22,9 +22,9 @@ public class SelectTopCategory extends AbstractHtmlPageAction
      * @param lastAction
      *            previous action
      */
-    public SelectTopCategory(final AbstractHtmlPageAction lastAction, String timerName)
+    public SelectTopCategory(final AbstractHtmlPageAction lastAction)
     {
-        super(lastAction, timerName);
+        super(lastAction, null);
     }
     
     /**

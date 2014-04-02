@@ -14,7 +14,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 /**
  * This {@link AbstractHtmlPageAction} opens the registration form.
  * 
- * @author sebastianloob
  */
 public class GoToRegistrationForm extends AbstractHtmlPageAction
 {
@@ -30,9 +29,9 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
      * @param previousAction
      * @param timerName
      */
-    public GoToRegistrationForm(AbstractHtmlPageAction previousAction, String timerName)
+    public GoToRegistrationForm(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
     

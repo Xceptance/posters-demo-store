@@ -20,7 +20,12 @@ import com.xceptance.xlt.api.util.XltProperties;
  */
 public class TRegister extends AbstractTestCase
 {
-
+    /**
+     *  Read the store URL from properties. Directly referring to the properties allows to access them by the full path.
+     */
+    private final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
+                                                               "http://localhost:8080/posters/");
+    
     /**
      * Main test method.
      * 
@@ -29,36 +34,32 @@ public class TRegister extends AbstractTestCase
     @Test
     public void register() throws Throwable
     {
-        // Read the store URL from properties. Directly referring to the properties allows to access them by the full
-        // path.
-        final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
-                                                                   "http://localhost:8080/posters/");
 
         // Create new account data. This account data will be used to create a new account.
         Account account = new Account();
 
         // Go to poster store homepage
-        Homepage homepage = new Homepage(url, "Homepage");
+        Homepage homepage = new Homepage(url);
         homepage.run();
 
         // go to sign in
-        GoToSignIn goToSignIn = new GoToSignIn(homepage, "GoToSignIn");
+        GoToSignIn goToSignIn = new GoToSignIn(homepage);
         goToSignIn.run();
 
         // go to registration form
-        GoToRegistrationForm goToRegistrationForm = new GoToRegistrationForm(goToSignIn, "GoToRegistrationForm");
+        GoToRegistrationForm goToRegistrationForm = new GoToRegistrationForm(goToSignIn);
         goToRegistrationForm.run();
 
         // register
-        Register register = new Register(goToRegistrationForm, "Register", account);
+        Register register = new Register(goToRegistrationForm, account);
         register.run();
 
         // log in
-        Login login = new Login(register, "Login", account);
+        Login login = new Login(register, account);
         login.run();
 
         // log out
-        Logout logout = new Logout(login, "Logout");
+        Logout logout = new Logout(login);
         logout.run();
     }
 }

@@ -2,9 +2,11 @@ package com.xceptance.loadtest.tests;
 
 import org.junit.Test;
 
+import com.xceptance.loadtest.actions.AddToCart;
 import com.xceptance.loadtest.actions.Homepage;
 import com.xceptance.loadtest.actions.order.PlaceOrder;
-import com.xceptance.loadtest.flows.BrowseAndAddToCartFlow;
+import com.xceptance.loadtest.actions.order.ViewCart;
+import com.xceptance.loadtest.flows.BrowsingFlow;
 import com.xceptance.loadtest.flows.CheckoutFlow;
 import com.xceptance.loadtest.util.Account;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
@@ -19,6 +21,25 @@ import com.xceptance.xlt.api.util.XltProperties;
  */
 public class TGuestOrder extends AbstractTestCase
 {
+    /**
+     * The previous action
+     */
+    private AbstractHtmlPageAction previousAction;
+    
+    /**
+     *  The probability to perform a paging during browsing the categories
+     */
+    final int pagingProbability = getProperty("paging.probability", 0);
+    
+    /**
+     *  The min number of paging rounds
+     */
+    final int pagingMin = getProperty("paging.min", 0);
+    
+    /**
+     *  The max number of paging rounds
+     */
+    final int pagingMax = getProperty("paging.max", 0);
     
     /**
      * Main test method.
@@ -35,20 +56,32 @@ public class TGuestOrder extends AbstractTestCase
 
 
         // Go to poster store homepage
-        Homepage homepage = new Homepage(url, "Homepage");
+        Homepage homepage = new Homepage(url);
         homepage.run();
+        previousAction = homepage;
 
-        // Browse and add a product to cart (FLOW!!)
-        // TODO Add more comments to explain what a flow is used for and it works
-        BrowseAndAddToCartFlow browseAndAddToCart = new BrowseAndAddToCartFlow(homepage);
-        AbstractHtmlPageAction viewCart = browseAndAddToCart.run();
+        // Browse (FLOW!!)
+        // TODO Add more comments to explain what a flow is and how it works
+        BrowsingFlow browse = new BrowsingFlow(previousAction, pagingProbability, pagingMin, pagingMax);
+        previousAction = browse.run();
 
+        // Configure the product (size and finish) and add it to cart
+        AddToCart addToCart = new AddToCart(previousAction);
+        addToCart.run();
+        previousAction = addToCart;
+
+        // go to the cart overview page
+        ViewCart viewCart = new ViewCart(previousAction);
+        viewCart.run();
+        previousAction = viewCart;
+        
         // Checkout Flow
-        CheckoutFlow checkoutFlow = new CheckoutFlow(viewCart, new Account());
+        CheckoutFlow checkoutFlow = new CheckoutFlow(previousAction, new Account());
         AbstractHtmlPageAction enterPaymentMethod = checkoutFlow.run();
+        previousAction = enterPaymentMethod;
 
         // place the order
-        PlaceOrder placeOrder = new PlaceOrder(enterPaymentMethod, "PlaceOrder");
+        PlaceOrder placeOrder = new PlaceOrder(previousAction, "PlaceOrder");
         placeOrder.run();
     }
 }

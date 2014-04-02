@@ -19,7 +19,7 @@ public class TVisit extends AbstractTestCase
     final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
     
     // Go to poster store homepage
-    final Homepage homepage = new Homepage(url, "Homepage");
+    final Homepage homepage = new Homepage(url);
     homepage.run();
     }
 }

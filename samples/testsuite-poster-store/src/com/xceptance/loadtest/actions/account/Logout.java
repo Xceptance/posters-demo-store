@@ -30,9 +30,9 @@ public class Logout extends AbstractHtmlPageAction
      * @param previousAction
      * @param timerName
      */
-    public Logout(AbstractHtmlPageAction previousAction, String timerName)
+    public Logout(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
     

@@ -29,9 +29,9 @@ public class GoToSignIn extends AbstractHtmlPageAction
      * @param previousAction
      * @param timerName
      */
-    public GoToSignIn(AbstractHtmlPageAction previousAction, String timerName)
+    public GoToSignIn(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
 

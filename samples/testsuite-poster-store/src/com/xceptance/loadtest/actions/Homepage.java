@@ -42,9 +42,9 @@ public class Homepage extends AbstractHtmlPageAction
      * @param urlAsString
      *            the URL to fetch the data from
      */
-    public Homepage(final String urlAsString, String timerName)
+    public Homepage(final String urlAsString)
     {
-        super(timerName);
+        super(null);
 
         this.urlAsString = urlAsString;
     }

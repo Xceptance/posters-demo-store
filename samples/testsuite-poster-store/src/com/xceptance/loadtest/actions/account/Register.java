@@ -16,7 +16,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 /**
  * This {@link AbstractHtmlPageAction} fills in and submits the registration form.
  * 
- * @author sebastianloob
  */
 public class Register extends AbstractHtmlPageAction
 {
@@ -46,9 +45,9 @@ public class Register extends AbstractHtmlPageAction
      * @param accountData
      *            The account data used to register new account
      */
-    public Register(AbstractHtmlPageAction previousAction, String timerName, Account accountData)
+    public Register(AbstractHtmlPageAction previousAction, Account accountData)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
         this.account = accountData;
     }
 
