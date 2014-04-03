@@ -53,7 +53,7 @@ public class TGuestOrder extends AbstractTestCase
 	previousAction = homepage;
 
 	// Browse the catalogue and view a product detail page
-	// The browsing is encapsulated in flow that combines a sequence of several XLT actions.
+	// The browsing is encapsulated in a flow that combines a sequence of several XLT actions.
 	// Different test cases can call this method now to reuse the flow. 
 	// This is a concept for code structuring you can implement if needed, yet explicit support 
 	// is neither available in the XLT framework nor necessary when you manually create a flow.

@@ -12,7 +12,10 @@ import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 /**
  * Perform the checkout steps: Start checkout from cart overview page, enter
  * shipping and billing address and payment method but do not submit the order.
- * 
+ * The checkout is encapsulated in a flow that combines a sequence of several XLT actions.
+ * Different test cases can call this method now to reuse the flow. 
+ * This is a concept for code structuring you can implement if needed, yet explicit support 
+ * is neither available in the XLT framework nor necessary when you manually create a flow.
  * 
  */
 public class CheckoutFlow
@@ -46,41 +49,44 @@ public class CheckoutFlow
      * Constructor
      * 
      * @param previousAction
+     * 		The previously performed action
+     * @param account
+     * 		The account used in the checkout
      */
     public CheckoutFlow(AbstractHtmlPageAction previousAction, Account account)
     {
 	this.previousAction = previousAction;
 	this.account = account;
 	this.creditCard = new CreditCard(account);
-
     }
 
+    
     /**
      * {@inheritDoc}
      */
     public AbstractHtmlPageAction run() throws Throwable
     {
-
-	// start the checkout
+	// Start the checkout
 	StartCheckout startCheckout = new StartCheckout(previousAction);
 	startCheckout.run();
 
-	// enter the shipping address
+	// Enter the shipping address
 	EnterShippingAddress enterShippingAddress = new EnterShippingAddress(
 		startCheckout, account, shippingAddress);
 	enterShippingAddress.run();
 
-	// enter the billing address
+	// Enter the billing address
 	EnterBillingAddress enterBillingAddress = new EnterBillingAddress(
 		enterShippingAddress, account,
 		billingAddress);
 	enterBillingAddress.run();
 
-	// enter the payment method
+	// Enter the payment method
 	EnterPaymentMethod enterPaymentMethod = new EnterPaymentMethod(
 		enterBillingAddress, creditCard);
 	enterPaymentMethod.run();
 
+	// Return the last action of this flow to be the input for subsequent actions in a test case
 	return enterPaymentMethod;
     }
 }
