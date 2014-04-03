@@ -14,67 +14,30 @@ import com.xceptance.loadtest.util.SearchOption;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.data.DataProvider;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
+import com.xceptance.xlt.api.util.XltProperties;
 import com.xceptance.xlt.api.util.XltRandom;
 
 /**
- * Open the landing page and search for predefined key words as well as for random string. If there are search results
- * open a random product's quick or detail view.
- * 
- * @author sebastianloob
+ * Open the landing page and search for predefined key words as well as for random strings. If there are search results
+ * open a random product's detail view.
  */
 public class TSearch extends AbstractTestCase
 {
     /**
-     * The previous action
-     */
-    private AbstractHtmlPageAction previousAction;
-    
-    /**
-     *  The probability to perform a paging during browsing the categories
-     */
-    private final int pagingProbability = getProperty("paging.probability", 0);
-    
-    /**
-     *  The min number of paging rounds
-     */
-    private final int pagingMin = getProperty("paging.min", 0);
-    
-    /**
-     *  The max number of paging rounds
-     */
-    private final int pagingMax = getProperty("paging.max", 0);
-    
-    /**
-     *  The probability to perform a search without hits
-     */
-    private final int searchNoHitsProbability = getProperty("search.nohits.probability", 0);
-    
-    /**
-     * The minimum number of products to search
-     */
-    private final int productsMin = getProperty("products.min", 1);
-    
-    /**
-     * The maximum number of products to search
-     */
-    private final int productsMax = getProperty("products.max", 1);
-
-    /**
-     * Data provider for search results.
+     * Data provider for search phrases that result in hits..
      */
     private static final DataProvider HITS_PROVIDER;
     static
     {
-        try
-        {
-            // Initialize the search provider with the search phrases file
-            // 'results.txt'
-            HITS_PROVIDER = DataProvider.getInstance(DataProvider.DEFAULT + File.separator + "search_phrases.txt");
-        }
-        catch (IOException ioe)
-        {
-            throw new RuntimeException(ioe);
-        }
+	try
+	{
+	    // Initialise the search provider with file containing the search phrases
+	    HITS_PROVIDER = DataProvider.getInstance(DataProvider.DEFAULT + File.separator + "search_phrases.txt");
+	}
+	catch (IOException ioe)
+	{
+	    throw new RuntimeException(ioe);
+	}
     }
 
     /**
@@ -85,65 +48,87 @@ public class TSearch extends AbstractTestCase
     @Test
     public void search() throws Throwable
     {
-        // Read the store URL from properties. Directly referring to the properties allows to access them by the full
-        // path.
-        final String url = getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
+	// The previous action
+	AbstractHtmlPageAction previousAction;
 
-        // Go to poster store homepage
-        Homepage homepage = new Homepage(url);
-        // Disable JavaScript to reduce client side resource consumption.
-        // If JavaScript executes needed functionality (i.e. AJAX calls) we will simulate this in the related action
-        homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
-        homepage.run();
-        previousAction = homepage;
+	// Read the store URL from properties.
+	final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
 
-        // Get the number of searches determined from the configured min and max
-        // products.
-        final int searches = XltRandom.nextInt(productsMin, productsMax);
-        for (int i = 0; i < searches; i++)
-        {
-            // The search option is the indicator whether to search for one of
-            // the search phrases from the 'HITS_PROVIDER' that results in a hit
-            // or a generated phrase that results in a 'no results' page.
-            final SearchOption option = getSearchOption(searchNoHitsProbability);
+	// The probability to perform a paging during browsing the categories
+	final int pagingProbability = getProperty("paging.probability", 0);
 
-            // Run the search with an appropriate search phrase according to the
-            // search option.
-            Search search = new Search(previousAction, "Search", getSearchPhrase(option), option);
-            search.run();
-            previousAction = search;
+	// The min. number of paging rounds
+	final int pagingMin = getProperty("paging.min", 0);
 
-            // perform Paging and go to product detail page of a result according to the search option
-            if (option == SearchOption.HITS)
-            {
-                // According to the configured probability perform the paging or
-                // not.
-                if (XltRandom.nextBoolean(pagingProbability))
-                {
-                    // Get current number of paging rounds determined from the configured
-                    // min and max value for paging.
-                    final int pagingRounds = XltRandom.nextInt(pagingMin, pagingMax);
-                    for (int j = 0; j < pagingRounds; j++)
-                    {
-                        // perform a paging if possible
-                        Paging paging = new Paging(previousAction, "Paging");
-                	if (paging.preValidateSafe())
-                	{
-                	    paging.run();
-                	}
-                	else
-                	{
-                	    break;
-                	}
-                        previousAction = paging;
-                    }
-                }
-                // product detail view
-                ProductDetailView productDetailView = new ProductDetailView(previousAction);
-                productDetailView.run();
-                previousAction = productDetailView;
-            }
-        }
+	// The max. number of paging rounds
+	final int pagingMax = getProperty("paging.max", 0);
+
+	// The probability to perform a search without hits
+	final int searchNoHitsProbability = getProperty("search.nohits.probability", 0);
+
+	// The minimum number of products to search
+	final int productsMin = getProperty("products.min", 1);
+
+	// The maximum number of products to search
+	final int productsMax = getProperty("products.max", 1);
+
+
+	// Go to poster store homepage
+	final Homepage homepage = new Homepage(url);
+	// Disable JavaScript for the complete test case to reduce client side resource consumption.
+	// If JavaScript executed functionality is needed to proceed with the scenario (i.e. AJAX calls) 
+	// we will simulate this in the related actions.
+	homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
+	homepage.run();
+	previousAction = homepage;
+
+	// Get the number of searches determined from the configured min and max
+	// products.
+	final int searches = XltRandom.nextInt(productsMin, productsMax);
+	for (int i = 0; i < searches; i++)
+	{
+	    // The search option is the indicator whether to search for one of
+	    // the search phrases from the 'HITS_PROVIDER' that results in a hit
+	    // or a generated phrase that results in a 'no results' page.
+	    final SearchOption option = getSearchOption(searchNoHitsProbability);
+
+	    // Run the search with an appropriate search phrase according to the
+	    // search option.
+	    Search search = new Search(previousAction, "Search", getSearchPhrase(option), option);
+	    search.run();
+	    previousAction = search;
+
+	    // Perform Paging and go to product detail page of a result according to the search option
+	    if (option == SearchOption.HITS)
+	    {
+		// According to the configured probability perform the paging or
+		// not.
+		if (XltRandom.nextBoolean(pagingProbability))
+		{
+		    // Get current number of paging rounds determined from the configured
+		    // min and max value for paging.
+		    final int pagingRounds = XltRandom.nextInt(pagingMin, pagingMax);
+		    for (int j = 0; j < pagingRounds; j++)
+		    {
+			// perform a paging if possible
+			Paging paging = new Paging(previousAction, "Paging");
+			if (paging.preValidateSafe())
+			{
+			    paging.run();
+			}
+			else
+			{
+			    break;
+			}
+			previousAction = paging;
+		    }
+		}
+		// product detail view
+		ProductDetailView productDetailView = new ProductDetailView(previousAction);
+		productDetailView.run();
+		previousAction = productDetailView;
+	    }
+	}
     }
 
     /**
@@ -155,14 +140,14 @@ public class TSearch extends AbstractTestCase
      */
     private SearchOption getSearchOption(final int searchNoHitsProbability)
     {
-        if (XltRandom.nextBoolean(searchNoHitsProbability))
-        {
-            return SearchOption.NO_HITS;
-        }
-        else
-        {
-            return SearchOption.HITS;
-        }
+	if (XltRandom.nextBoolean(searchNoHitsProbability))
+	{
+	    return SearchOption.NO_HITS;
+	}
+	else
+	{
+	    return SearchOption.HITS;
+	}
     }
 
     /**
@@ -172,18 +157,18 @@ public class TSearch extends AbstractTestCase
      */
     protected String getSearchPhrase(SearchOption option)
     {
-        switch (option)
-        {
-            case HITS:
-                // Return one of the predefined search phrases.
-                return HITS_PROVIDER.getRandomRow(false);
+	switch (option)
+	{
+	case HITS:
+	    // Return one of the predefined search phrases.
+	    return HITS_PROVIDER.getRandomRow(false);
 
-            case NO_HITS:
-                // Return a random alphanumeric string, make it random and long enough.
-                return RandomStringUtils.randomAlphabetic(XltRandom.nextInt(5, 10)) + " "
-                       + RandomStringUtils.randomAlphabetic(XltRandom.nextInt(8, 10));
-            default:
-                return null;
-        }
+	case NO_HITS:
+	    // Return a random alphanumeric string, make it random and long enough.
+	    return RandomStringUtils.randomAlphabetic(XltRandom.nextInt(5, 10)) + " "
+	    + RandomStringUtils.randomAlphabetic(XltRandom.nextInt(8, 10));
+	default:
+	    return null;
+	}
     }
 }

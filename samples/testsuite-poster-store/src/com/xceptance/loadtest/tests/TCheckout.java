@@ -18,37 +18,11 @@ import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
 
 /**
- * Open the landing page, register account and browse the catalog to a random product. Configure this product and add it
+ * Open the landing page, register account and browse the catalogue to a random product. Configure this product and add it
  * to the cart. Finally process the checkout. But do NOT execute the final order placement step. This is to simulate an abandoned checkout.
- * 
  */
 public class TCheckout extends AbstractTestCase
 {
-    /**
-     * The previous action
-     */
-    private AbstractHtmlPageAction previousAction;
-    
-    /**
-     *  Create new account data. These account data will be used to create a new account.
-     */
-    private Account account = new Account();
-    
-    /**
-     *  The probability to perform a paging during browsing the categories
-     */
-    final int pagingProbability = getProperty("paging.probability", 0);
-    
-    /**
-     *  The min number of paging rounds
-     */
-    final int pagingMin = getProperty("paging.min", 0);
-    
-    /**
-     *  The max number of paging rounds
-     */
-    final int pagingMax = getProperty("paging.max", 0);
-    
     /**
      * Main test method.
      * 
@@ -57,61 +31,79 @@ public class TCheckout extends AbstractTestCase
     @Test
     public void checkout() throws Throwable
     {
-        // Read the store URL from properties. Directly referring to the properties allows to access them by the full
-        // path.
-        final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
-                                                                   "http://localhost:8080/posters/");
+	// The previous action
+	AbstractHtmlPageAction previousAction;
 
-        // Go to poster store homepage
-        Homepage homepage = new Homepage(url);
-        // Disable JavaScript to reduce client side resource consumption
-        // If JavaScript executes needed functionality (i.e. AJAX calls) we will simulate this in the related action
-        homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
-        homepage.run();
-        previousAction = homepage;
+	// Create new account data. These account data will be used to create a new account.
+	Account account = new Account();
 
-        // go to sign in
-        GoToSignIn goToSignIn = new GoToSignIn(previousAction);
-        goToSignIn.run();
-        previousAction = goToSignIn;
+	// Read the store URL from properties.
+	final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
 
-        // go to registration form
-        GoToRegistrationForm goToRegistrationForm = new GoToRegistrationForm(previousAction);
-        goToRegistrationForm.run();
-        previousAction = goToRegistrationForm;
+	// The probability to perform a paging during browsing the categories
+	final int pagingProbability = getProperty("paging.probability", 0);
 
-        // register
-        Register register = new Register(previousAction, account);
-        register.run();
-        previousAction = register;
+	// The min. number of paging rounds
+	final int pagingMin = getProperty("paging.min", 0);
 
-        // log in
-        Login login = new Login(previousAction, account);
-        login.run();
-        previousAction = login;
-        
-        // Browse (FLOW!!)
-        // TODO Add more comments to explain what a flow is and how it works
-        BrowsingFlow browse = new BrowsingFlow(previousAction, pagingProbability, pagingMin, pagingMax);
-        previousAction = browse.run();
-        
-        // Configure the product (size and finish) and add it to cart
-        AddToCart addToCart = new AddToCart(previousAction);
-        addToCart.run();
-        previousAction = addToCart;
+	// The max. number of paging rounds
+	final int pagingMax = getProperty("paging.max", 0);
 
-        // go to the cart overview page
-        ViewCart viewCart = new ViewCart(previousAction);
-        viewCart.run();
-        previousAction = viewCart;
 
-        // Checkout Flow
-        CheckoutFlow checkoutFlow = new CheckoutFlow(previousAction, account);
-        previousAction = checkoutFlow.run();
-        
-        // log out
-        Logout logout = new Logout(previousAction);
-        logout.run();
-        
+	// Go to poster store homepage
+	final Homepage homepage = new Homepage(url);
+	// Disable JavaScript for the complete test case to reduce client side resource consumption.
+	// If JavaScript executed functionality is needed to proceed with the scenario (i.e. AJAX calls) 
+	// we will simulate this in the related actions.
+	homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
+	homepage.run();
+	previousAction = homepage;
+
+	// go to sign in
+	GoToSignIn goToSignIn = new GoToSignIn(previousAction);
+	goToSignIn.run();
+	previousAction = goToSignIn;
+
+	// go to registration form
+	GoToRegistrationForm goToRegistrationForm = new GoToRegistrationForm(previousAction);
+	goToRegistrationForm.run();
+	previousAction = goToRegistrationForm;
+
+	// register
+	Register register = new Register(previousAction, account);
+	register.run();
+	previousAction = register;
+
+	// log in
+	Login login = new Login(previousAction, account);
+	login.run();
+	previousAction = login;
+
+	// Browse the catalogue and view a product detail page
+	// The browsing is encapsulated in flow that combines a sequence of several XLT actions.
+	// Different test cases can call this method now to reuse the flow. 
+	// This is a concept for code structuring you can implement if needed, yet explicit support 
+	// is neither available in the XLT framework nor necessary when you manually create a flow.
+	BrowsingFlow browsingFlow = new BrowsingFlow(previousAction, pagingProbability, pagingMin, pagingMax);
+	previousAction = browsingFlow.run();
+
+	// Configure the product (size and finish) and add it to cart
+	AddToCart addToCart = new AddToCart(previousAction);
+	addToCart.run();
+	previousAction = addToCart;
+
+	// go to the cart overview page
+	ViewCart viewCart = new ViewCart(previousAction);
+	viewCart.run();
+	previousAction = viewCart;
+
+	// Checkout Flow
+	CheckoutFlow checkoutFlow = new CheckoutFlow(previousAction, account);
+	previousAction = checkoutFlow.run();
+
+	// log out
+	Logout logout = new Logout(previousAction);
+	logout.run();
+
     }
 }

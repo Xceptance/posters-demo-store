@@ -15,17 +15,9 @@ import com.xceptance.xlt.api.util.XltProperties;
 /**
  * Open landing page and navigate to the registration form. Register a new customer, log in with new account and
  * log out afterwards.
- * 
- * @author sebastianloob
  */
 public class TRegister extends AbstractTestCase
 {
-    /**
-     *  Read the store URL from properties. Directly referring to the properties allows to access them by the full path.
-     */
-    private final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
-                                                               "http://localhost:8080/posters/");
-    
     /**
      * Main test method.
      * 
@@ -34,16 +26,20 @@ public class TRegister extends AbstractTestCase
     @Test
     public void register() throws Throwable
     {
+	// Create new account data. This account data will be used to create a new account.
+	Account account = new Account();
 
-        // Create new account data. This account data will be used to create a new account.
-        Account account = new Account();
-
-        // Go to poster store homepage
-        Homepage homepage = new Homepage(url);
-        // Disable JavaScript to reduce client side resource consumption
-        // If JavaScript executes needed functionality (i.e. AJAX calls) we will simulate this in the related action
-        homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
-        homepage.run();
+	// Read the store URL from properties.
+	final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
+	
+	
+	// Go to poster store homepage
+	final Homepage homepage = new Homepage(url);
+	// Disable JavaScript for the complete test case to reduce client side resource consumption.
+	// If JavaScript executed functionality is needed to proceed with the scenario (i.e. AJAX calls) 
+	// we will simulate this in the related actions.
+	homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
+	homepage.run();
 
         // go to sign in
         GoToSignIn goToSignIn = new GoToSignIn(homepage);
