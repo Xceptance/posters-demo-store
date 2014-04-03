@@ -14,7 +14,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 /**
  * This {@link AbstractHtmlPageAction} starts the checkout.
  * 
- * @author sebastianloob
  */
 public class StartCheckout extends AbstractHtmlPageAction
 {
@@ -28,18 +27,18 @@ public class StartCheckout extends AbstractHtmlPageAction
      * Constructor
      * 
      * @param previousAction
-     * @param timerName
+     * 		The previously performed action
      */
-    public StartCheckout(AbstractHtmlPageAction previousAction, String timerName)
+    public StartCheckout(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
 
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the last action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
         
@@ -65,7 +64,7 @@ public class StartCheckout extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators

@@ -12,19 +12,21 @@ import com.xceptance.xlt.api.validators.ContentLengthValidator;
 import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
+/**
+ * Selects a random top-category links and opens the related product overview page.
+ *
+ */
 public class SelectTopCategory extends AbstractHtmlPageAction
 {
-
-
     /**
      * Constructor.
      * 
-     * @param lastAction
-     *            previous action
+     * @param previousAction
+     *            The previously performed action
      */
-    public SelectTopCategory(final AbstractHtmlPageAction lastAction)
+    public SelectTopCategory(final AbstractHtmlPageAction previousAction)
     {
-        super(lastAction, null);
+        super(previousAction, null);
     }
     
     /**
@@ -36,7 +38,7 @@ public class SelectTopCategory extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-	//Get all top category links and select a random one
+	//Get all top category links and select one randomly
 	topCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(), "id('sidebarNav')/ul/li[@class='topCategory']/h4/a");
 
     }
@@ -52,7 +54,7 @@ public class SelectTopCategory extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // First, we check all common criteria. This code can be bundled and

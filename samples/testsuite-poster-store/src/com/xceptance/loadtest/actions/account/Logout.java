@@ -14,7 +14,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 /**
  * This {@link AbstractHtmlPageAction} logs out the currently logged in user.
  * 
- * @author sebastianloob
  */
 public class Logout extends AbstractHtmlPageAction
 {
@@ -28,7 +27,7 @@ public class Logout extends AbstractHtmlPageAction
      * Constructor
      * 
      * @param previousAction
-     * @param timerName
+     * 		The previously performed action
      */
     public Logout(AbstractHtmlPageAction previousAction)
     {
@@ -39,28 +38,28 @@ public class Logout extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the customer is logged in
+        // Check that the customer is logged in
         Assert.assertTrue("No customer is logged in.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
 
-        // remember logout link
+        // Remember logout link
         this.logoutLink = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // log out by clicking the link
+        // Log out by clicking the link
         loadPageByClick(logoutLink);
     }
 
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators
@@ -70,14 +69,14 @@ public class Logout extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that no customer is logged in
+        // Check that no customer is logged in
         Assert.assertTrue("A customer is still logged in.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
 
-        // check that it's the home page
+        // Check that it's the home page
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
         Assert.assertNotNull("Title not found", blogNameElement);
         
-        // check the title
+        // Check the title
         Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
     }
 

@@ -13,7 +13,6 @@ import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
  * Perform the checkout steps: Start checkout from cart overview page, enter
  * shipping and billing address and payment method but do not submit the order.
  * 
- * @author sebastian
  * 
  */
 public class CheckoutFlow
@@ -63,24 +62,23 @@ public class CheckoutFlow
     {
 
 	// start the checkout
-	StartCheckout startCheckout = new StartCheckout(previousAction,
-		"StartCheckout");
+	StartCheckout startCheckout = new StartCheckout(previousAction);
 	startCheckout.run();
 
 	// enter the shipping address
 	EnterShippingAddress enterShippingAddress = new EnterShippingAddress(
-		startCheckout, "EnterShippingAddress", account, shippingAddress);
+		startCheckout, account, shippingAddress);
 	enterShippingAddress.run();
 
 	// enter the billing address
 	EnterBillingAddress enterBillingAddress = new EnterBillingAddress(
-		enterShippingAddress, "EnterBillingAddress", account,
+		enterShippingAddress, account,
 		billingAddress);
 	enterBillingAddress.run();
 
 	// enter the payment method
 	EnterPaymentMethod enterPaymentMethod = new EnterPaymentMethod(
-		enterBillingAddress, "EnterPaymentMethod", creditCard);
+		enterBillingAddress, creditCard);
 	enterPaymentMethod.run();
 
 	return enterPaymentMethod;

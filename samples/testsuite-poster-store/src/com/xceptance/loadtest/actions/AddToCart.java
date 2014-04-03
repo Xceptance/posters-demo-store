@@ -15,28 +15,33 @@ import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.util.HtmlPageUtils;
 import com.xceptance.loadtest.util.AjaxUtils;
 
+/**
+ * Adds a previously configured product to cart. 
+ * This action does not result in a page load but consists of a sequence of three AJAX calls. 
+ * JavaScript is disabled due to performance reasons. So assembling the request parameters, 
+ * make the call and evaluating the response content makes this kind of actions a bit more complex.
+ */
 public class AddToCart extends AbstractHtmlPageAction
 {
-
     /**
      * The ID of the product to add to cart
      */
-    String productId;
+    private String productId;
 
     /**
      * The selected poster size
      */
-    String size;
+    private String size;
 
     /**
      * The selected poster finish (matte or gloss)
      */
-    String finish;
+    private String finish;
 
     /**
      * The 'Add to cart' form
      */
-    HtmlForm addToCartForm;
+    private HtmlForm addToCartForm;
 
     /**
      * Constructor
@@ -52,21 +57,19 @@ public class AddToCart extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-	// Get the result of the last action
+	// Get the result of the previous action
 	final HtmlPage page = getPreviousAction().getHtmlPage();
 	Assert.assertNotNull("Failed to get page from previous action.", page);
 
 	// Look up the 'add to cart' form
-	addToCartForm = HtmlPageUtils.findSingleHtmlElementByID(page,
-		"addToCartForm");
+	addToCartForm = HtmlPageUtils.findSingleHtmlElementByID(page, "addToCartForm");
 
 	// Configure the product by selecting a random finish (matte or gloss).
 	finish = HtmlPageUtils.findHtmlElementsAndPickOne(addToCartForm, "id('selectFinish')/label").getTextContent().trim();
 
-	// We choose one of the size options randomly and remember it as a
-	// string.
+	// We choose one of the size options randomly and remember it as a string.
 	// We will need it as a parameter later on in the subsequent AJAX calls
-	// to update price and add poster to cart
+	// to update the price and add poster to cart.
 	HtmlElement option = HtmlPageUtils.findHtmlElementsAndPickOne(page,
 		"id('selectSize')/option");
 	// Get the text content of the element as trimmed string
@@ -77,8 +80,8 @@ public class AddToCart extends AbstractHtmlPageAction
 		"id('main')/div/div[2]/div[@class='row-fluid']").getAttribute(
 		"productid");
 
-	// Check the presence of the add to cart button (even though we do not use
-	// it since we're just simulating the AJAX calls that are normally
+	// Assert the presence of the add to cart button (even though we do not use
+	// it here since we're just simulating the AJAX calls that are normally
 	// triggered by JavaScript after hitting the button)
 	Assert.assertTrue("AddToCart button is not present.", HtmlPageUtils.isElementPresent(page,"id('btnAddToCart')"));
 
@@ -87,14 +90,8 @@ public class AddToCart extends AbstractHtmlPageAction
     @Override
     protected void execute() throws Exception
     {
-	// Get the result of the last action
+	// Get the result of the this action
 	final HtmlPage page = getPreviousAction().getHtmlPage();
-
-	// With JavaScript disabled due to performance reasons on the load
-	// generating agents...
-	getWebClient().getOptions().setJavaScriptEnabled(false);
-	// ... we need to simulate the AJAX call that updates the price after
-	// selecting a different size and the two AJAX calls for adding the poster to cart.
 
 	
 	// Update price:
@@ -103,17 +100,22 @@ public class AddToCart extends AbstractHtmlPageAction
 	List<NameValuePair> updatePriceParams = new ArrayList<NameValuePair>();
 	updatePriceParams.add(new NameValuePair("productId", productId));
 	updatePriceParams.add(new NameValuePair("size", size));
+	
 	// Perform the AJAX call and return the result.
 	WebResponse updatePriceResponse = AjaxUtils.callPost(page,
 		"/posters/updatePrice", updatePriceParams);	
-        // get JSON object from response
+        
+	// get JSON object from response
         JSONObject updatePriceJsonResponse = new JSONObject(updatePriceResponse.getContentAsString());
+        
         // get the new price from JSON object
         String newPrice = updatePriceJsonResponse.getString("newPrice");
+        
         // Validate the call returned a price in the correct currency
         Assert.assertTrue("The price does not end with $", newPrice.endsWith("$"));
+        
         // Put the returned price into the page. 
-        // Note: This is not necessary since we just want to simulate realistic traffic for the server and should not care about client side stuff.
+        // Note: This is not necessary since we just want to simulate realistic traffic for the server and nromally do not care about client side stuff.
         HtmlPageUtils.findSingleHtmlElementByID(page, "prodPrice").setTextContent(newPrice);
            
 
@@ -122,8 +124,10 @@ public class AddToCart extends AbstractHtmlPageAction
 	// This call doesn't have any parameters
 	WebResponse cartElementSliderResponse = AjaxUtils.callGet(page,
 		"/posters/getCartElementSlider", null);
+	
         // get JSON object from response
         JSONObject getCartElementSliderJsonResponse = new JSONObject(cartElementSliderResponse.getContentAsString());
+        
         // get the keys from JSON object and do some basic validation
         Assert.assertEquals("Length unit is not 'in'.", getCartElementSliderJsonResponse.getString("unitLength"), "in");
         Assert.assertFalse("The 'total price' JSON key is empty.", getCartElementSliderJsonResponse.getString("totalPrice").isEmpty());
@@ -137,10 +141,13 @@ public class AddToCart extends AbstractHtmlPageAction
 	addToCartParams.add(new NameValuePair("productId", productId));
 	addToCartParams.add(new NameValuePair("finish", finish));
 	addToCartParams.add(new NameValuePair("size", size));
+	
 	// Perform the AJAX call and return the result.
 	WebResponse addToCartResponse = AjaxUtils.callGet(page, "/posters/addToCartSlider", addToCartParams);
-        // get JSON object from response
+        
+	// get JSON object from response
         JSONObject addToCartJsonResponse = new JSONObject(addToCartResponse.getContentAsString());
+        
         // get the keys from JSON object and do some basic validation
         JSONObject product = addToCartJsonResponse.getJSONObject("product");
         Assert.assertEquals("The addToCart call returned the wrong finish.", product.get("finish"), finish);

@@ -19,6 +19,12 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 public class ProductDetailView extends AbstractHtmlPageAction
 {
 
+    /**
+     * Constructor
+     * 
+     * @param previousAction
+     * 		The previously performed action
+     */
     public ProductDetailView(AbstractHtmlPageAction previousAction)
     {
 	super(previousAction, null);
@@ -28,6 +34,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
      * The product detail link to follow
      */
     private HtmlElement productDetailLink;
+    
     
     @Override
     public void preValidate() throws Exception
@@ -44,9 +51,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
 
         // Remember a random product's link URL.
         productDetailLink = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('productOverview')/div/ul[@class='thumbnails']/li/div/a");
-        
-        @SuppressWarnings("unused")
-	String linkdAddress = productDetailLink.getAttribute("href");
+        Assert.assertNotNull("No matching product detail link found.", productDetailLink);
 
     }
 
@@ -61,7 +66,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators

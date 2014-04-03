@@ -26,8 +26,9 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     
     /**
      * Constructor
+     * 
      * @param previousAction
-     * @param timerName
+     * 		The previously performed action
      */
     public GoToRegistrationForm(AbstractHtmlPageAction previousAction)
     {
@@ -38,7 +39,7 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the last action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
@@ -59,7 +60,7 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // get the result of this action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators

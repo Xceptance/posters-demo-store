@@ -21,17 +21,17 @@ public class Register extends AbstractHtmlPageAction
 {
 
     /**
-     * the registration form
+     * The registration form
      */
     private HtmlForm registrationForm;
 
     /**
-     * the button to submit the registration form
+     * The button to submit the registration form
      */
     private HtmlElement createAccountButton;
 
     /**
-     * the account to register
+     * The account to register
      */
     private Account account;
 
@@ -39,9 +39,7 @@ public class Register extends AbstractHtmlPageAction
      * Constructor
      * 
      * @param previousAction
-     *            previous action
-     * @param timerName
-     *            timer name
+     *            The previously performed action
      * @param accountData
      *            The account data used to register new account
      */
@@ -54,20 +52,20 @@ public class Register extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the last action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
         
-        // check that the registration form is available
+        // Check that the registration form is available
         Assert.assertTrue("Registration form not found", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
         
-        // remember the registration form
+        // Remember the registration form
         this.registrationForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formRegister");
         
         // check that the create account button is available
         Assert.assertTrue("Create account button not found", HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
         
-        // remember the create account button
+        // Remember the create account button
         this.createAccountButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnRegister");
     }
 
@@ -81,14 +79,14 @@ public class Register extends AbstractHtmlPageAction
         HtmlPageUtils.setInputValue(registrationForm, "password", account.getPassword());
         HtmlPageUtils.setInputValue(registrationForm, "passwordAgain", account.getPassword());
 
-        // submit the registration form
+        // Submit the registration form
         loadPageByClick(this.createAccountButton);
     }
 
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators
@@ -98,17 +96,17 @@ public class Register extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that the account was successfully created
-        boolean accountCreated = page.asXml()
+        // Check that the account was successfully created
+        boolean isAccountCreated = page.asXml()
                                      .contains("Your account has been created. Log in with your email address and password.");
-        Assert.assertTrue("Registration failed.", accountCreated);
+        Assert.assertTrue("Registration failed.", isAccountCreated);
         
-        // check that it's the sign in page
+        // Check that it's the sign in page
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
         
-        // check that the customer is not logged after registration
-        Assert.assertTrue("Customer is logged after registration.",
+        // Check that the customer is not logged in after registration
+        Assert.assertTrue("Customer is logged in after registration.",
                           HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
     }
 

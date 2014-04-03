@@ -12,9 +12,8 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} places the order finally.
+ * This {@link AbstractHtmlPageAction} places the order.
  * 
- * @author sebastianloob
  */
 public class PlaceOrder extends AbstractHtmlPageAction
 {
@@ -28,17 +27,17 @@ public class PlaceOrder extends AbstractHtmlPageAction
      * Constructor.
      * 
      * @param previousAction
-     * @param timerName
+     * 		The previously performed action
      */
-    public PlaceOrder(AbstractHtmlPageAction previousAction, String timerName)
+    public PlaceOrder(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
     @Override
     public void preValidate() throws Exception
     {
-        // Get the current page.
+	// Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
@@ -59,7 +58,7 @@ public class PlaceOrder extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators

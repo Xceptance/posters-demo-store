@@ -104,7 +104,7 @@ public class TOrder extends AbstractTestCase
         previousAction = checkoutFlow.run();
 
         // place the order
-        PlaceOrder placeOrder = new PlaceOrder(previousAction, "PlaceOrder");
+        PlaceOrder placeOrder = new PlaceOrder(previousAction);
         placeOrder.run();
         previousAction = placeOrder;
         

@@ -23,21 +23,18 @@ public class Homepage extends AbstractHtmlPageAction
 {
     
     /**
-     * The URL to fetch the data from.
+     * The url as string to fetch the data from.
      */
     private final String urlAsString;
 
     /**
-     * The URL to fetch as URL object.
+     * The url as URL object.
      */
     private URL url;
     
     /**
      * Constructor. This will be called from a test case and while doing so the homepage's URL will be passed so that
-     * the page can eventually be loaded. We also see here that the timer's name is being passed to the superclass.
-     * Since the default name that will be given to an action's timer is already the class' name (i.e. "Homepage"), the
-     * passing of this variable, in this case, is redundant. However this can be useful if a different name than the
-     * class' name is desired.
+     * the page can eventually be loaded.
      * 
      * @param urlAsString
      *            the URL to fetch the data from

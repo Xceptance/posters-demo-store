@@ -14,7 +14,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 /**
  * This {@link AbstractHtmlPageAction} opens the sign in page.
  * 
- * @author sebastianloob
  */
 public class GoToSignIn extends AbstractHtmlPageAction
 {
@@ -27,7 +26,7 @@ public class GoToSignIn extends AbstractHtmlPageAction
     /**
      *  Constructor
      * @param previousAction
-     * @param timerName
+     * 		The previously performed action
      */
     public GoToSignIn(AbstractHtmlPageAction previousAction)
     {
@@ -38,15 +37,15 @@ public class GoToSignIn extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the last action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that no customer is logged in
+        // Check that no customer is logged in
         Assert.assertTrue("A customer is already logged in.",
                           HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
 
-        // remember the sign in button
+        // Remember the sign in button
         this.signInButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnShowLoginForm");
     }
 
@@ -60,17 +59,17 @@ public class GoToSignIn extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
-        // Repeated Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Repeated basic checks - see action 'Homepage' for some more details how and when to use these validators
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the sign in page
+        // Check that it's the sign in page
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
     }

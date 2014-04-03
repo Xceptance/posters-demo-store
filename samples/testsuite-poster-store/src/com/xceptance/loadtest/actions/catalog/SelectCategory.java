@@ -12,9 +12,18 @@ import com.xceptance.xlt.api.validators.ContentLengthValidator;
 import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
+/**
+ * Selects a random sub-category links and opens the related product overview page.
+ *
+ */
 public class SelectCategory extends AbstractHtmlPageAction
 {
-    
+    /**
+     * Constructor
+     * 
+     * @param previousAction
+     * 		The previously performed action
+     */
     public SelectCategory(AbstractHtmlPageAction previousAction)
     {
 	super(previousAction, null);
@@ -28,7 +37,7 @@ public class SelectCategory extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-	//Get all level-1 category links and select a random one
+	//Get all level-1 category links and select one randomly
 	categoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(), "id('sidebarNav')/ul/li[@class='level-1']/a");
 
     }
@@ -36,7 +45,7 @@ public class SelectCategory extends AbstractHtmlPageAction
     @Override
     protected void execute() throws Exception
     {
-        // click the link
+        // Click the link
         loadPageByClick(categoryLink);
 
     }
@@ -44,7 +53,7 @@ public class SelectCategory extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks that are part of the XLT API
@@ -61,7 +70,7 @@ public class SelectCategory extends AbstractHtmlPageAction
         // The product over view element is present
         Assert.assertTrue("Product over view element is bot present", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
         
-        // and we also see some poster's thumbnail images
+        // and we also see some poster's thumbnail images.
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
 
     }

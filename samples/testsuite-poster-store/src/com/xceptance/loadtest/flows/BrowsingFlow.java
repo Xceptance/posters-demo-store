@@ -78,7 +78,7 @@ public class BrowsingFlow
             for (int j = 0; j < pagingRounds; j++)
             {
                 // perform a paging if possible
-                Paging paging = new Paging(previousAction, "Paging");
+                Paging paging = new Paging(previousAction);
                 
                 if (paging.preValidateSafe())
         	{

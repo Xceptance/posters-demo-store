@@ -76,7 +76,7 @@ public class TGuestOrder extends AbstractTestCase
         previousAction = enterPaymentMethod;
 
         // place the order
-        PlaceOrder placeOrder = new PlaceOrder(previousAction, "PlaceOrder");
+        PlaceOrder placeOrder = new PlaceOrder(previousAction);
         placeOrder.run();
     }
 }

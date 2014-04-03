@@ -24,8 +24,10 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * This {@link AbstractHtmlPageAction} performs a paging.
+ * This action does not result in a page load but consists of a sequence of AJAX calls. 
+ * JavaScript is disabled due to performance reasons. So assembling the request parameters, 
+ * make the call and evaluating the response content makes this kind of actions a bit more complex.
  * 
- * @author sebastianloob
  */
 public class Paging extends AbstractHtmlPageAction
 {
@@ -40,8 +42,9 @@ public class Paging extends AbstractHtmlPageAction
     private int targetPageNumber;
 
     /**
-     * The current page type. Possibilities are a top category overview page, a sub category overview page or a search
-     * results overview page.
+     * The path of the current page url. 
+     * This is needed to determine the current page type. Possibilities are a top category overview page, 
+     * a sub category overview page or a search results overview page.
      */
     private String path;
 
@@ -51,25 +54,34 @@ public class Paging extends AbstractHtmlPageAction
     private String categoryId;
 
     /**
-     * The javascript code for the paging functionality
+     * The JavaScript code for the paging functionality
      */
     private String scriptCodeAsString;
 
+    /**
+     * The URL for the getProductOfTopCategory AJAX call
+     */
     private String getProductOfTopCategoryURL;
 
+    /**
+     * The URL for the getProductOfSubCategory AJAX call
+     */
     private String getProductOfSubCategoryURL;
 
+    /**
+     * The URL for the getProductOfSearch AJAX call
+     */
     private String getProductOfSearchURL;
 
     /**
      * Constructor
      * 
      * @param previousAction
-     * @param timerName
+     * 		The previously performed action
      */
-    public Paging(AbstractHtmlPageAction previousAction, String timerName)
+    public Paging(AbstractHtmlPageAction previousAction)
     {
-        super(previousAction, timerName);
+        super(previousAction, null);
     }
 
     @Override
@@ -83,10 +95,10 @@ public class Paging extends AbstractHtmlPageAction
         Assert.assertTrue("No product overview page, so paging is impossible.",
                           HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
 
-        // get the current page number
+        // Get the current page number
         this.currentPageNumber = Integer.parseInt(HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")
                                                                .getAttribute("currentPage"));
-        // the paging is build with Javascript, so we need to extract the information out of the paging javascript code
+        // The paging is build with JavaScript, so we need to extract the information out of the paging javascript code
         HtmlElement scriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div/div[@id='pagination']/following-sibling::script");
         scriptCodeAsString = scriptElement.getTextContent();
         
@@ -94,7 +106,7 @@ public class Paging extends AbstractHtmlPageAction
         int totalPageCount = Integer.parseInt(scriptCodeAsString.substring(beginIndex, scriptCodeAsString.indexOf(",", beginIndex)));
         this.targetPageNumber = XltRandom.nextInt(1, totalPageCount);
 
-        // be sure, that the target page number is not the current page number
+        // Be sure, that the target page number is not the current page number
         Assert.assertFalse("The total page count is 1. Paging is not possible.",totalPageCount == 1);
         
         if (totalPageCount > 1)
@@ -106,12 +118,12 @@ public class Paging extends AbstractHtmlPageAction
         }
         
 
-        // get the path of the current URL to later extract the page type
+        // Get the path of the current URL to later extract the page type
         path = page.getUrl().getPath();
 
         categoryId = page.getUrl().getQuery().substring(11);
         
-        // The javascript code also contains the URLs that we need to perform the subsequent ajax call to get the products of the next page.
+        // The JavaScript code also contains the URLs that we need to perform the subsequent AJAX call to get the products of the next page.
         // Depending on the current page type we need one of the three extracted URLs
         List<String> URLStrings = RegExUtils.getAllMatches(scriptCodeAsString, "\\$\\.post\\('([^']*)", 1);  
         getProductOfTopCategoryURL = URLStrings.get(0);
@@ -126,16 +138,17 @@ public class Paging extends AbstractHtmlPageAction
     @Override
     protected void execute() throws Exception
     {
-        // Get the result of the last action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         
-        // the request parameters of the AJAX call
+        // The request parameter of the AJAX call
         List<NameValuePair> pagingParams = new ArrayList<NameValuePair>();
         pagingParams.add(new NameValuePair("page", Integer.toString(targetPageNumber)));
 
-        // execute the AJAX call and get the response
+        // Execute the AJAX call and get the response
         WebResponse response = null;
-        // the current page is a top category overview page
+        
+        // The current page is a top category overview page
         if (path.contains("topCategory"))
         {
             pagingParams.add(new NameValuePair("categoryId", categoryId));
@@ -160,16 +173,20 @@ public class Paging extends AbstractHtmlPageAction
             Assert.fail("Unknown page type.");
         }
 
-        // update the page, show new products
-        // remove current products from page
+        // Update the page, show new products
+        // remove current products from page.
         HtmlElement productOverview = HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview");
         productOverview.removeAllChildren();
+        
         // get JSON object from response
         JSONObject jsonResponse = new JSONObject(response.getContentAsString());
+        
         // get all products from JSON object
         JSONArray products = (JSONArray) jsonResponse.get("products");
+        
         // remember the current index of the list
         HtmlElement ulElement = null;
+        
         // render each product
         for (int i = 0; i < products.length(); i++)
         {
@@ -186,6 +203,7 @@ public class Paging extends AbstractHtmlPageAction
                                                                      HtmlPageUtils.createHtmlElement("li", ulElement));
             productTag.setId("product" + i);
             productTag.setAttribute("class", "thumbnail");
+            
             // create link to product detail page
             HtmlElement productLink = HtmlPageUtils.createHtmlElement("a", productTag);
             HtmlElement contextPathScriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page, "html/head/script[@type='text/javascript' and contains(.,'CONTEXT_PATH')]");
@@ -198,9 +216,13 @@ public class Paging extends AbstractHtmlPageAction
             imageTag.setAttribute("src",
                     contextPath + product.get("imageURL"));
         }
-        // set the current page number
+        
+        // Set the current page number.
+        // This is invisible (i.e. in the XLT Result Browser) but is important
+        // for potential subsequent paging actions
         HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")
                      .setAttribute("currentPage", Integer.toString(this.targetPageNumber));
+        
         // Publish the results.
         setHtmlPage(page);
     }
@@ -208,7 +230,7 @@ public class Paging extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // get the result of the last action
+        // get the result of the action
         final HtmlPage page = getHtmlPage();
 
         // Basic checks - see action 'Homepage' for some more details how and when to use these validators
@@ -218,11 +240,11 @@ public class Paging extends AbstractHtmlPageAction
 
         HeaderValidator.getInstance().validate(page);
 
-        // Check the current page is a product overview page.
+        // Check the current page is a product overview page
         Assert.assertTrue("Product Overview element missing.",
                           HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
 
-        // and we also see some poster's thumbnail images
+        // and we also see some poster's thumbnail images.
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
     }
 }

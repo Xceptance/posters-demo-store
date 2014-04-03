@@ -94,7 +94,7 @@ public class TSearch extends AbstractTestCase
 
 	    // Run the search with an appropriate search phrase according to the
 	    // search option.
-	    Search search = new Search(previousAction, "Search", getSearchPhrase(option), option);
+	    Search search = new Search(previousAction, getSearchPhrase(option), option);
 	    search.run();
 	    previousAction = search;
 
@@ -111,7 +111,7 @@ public class TSearch extends AbstractTestCase
 		    for (int j = 0; j < pagingRounds; j++)
 		    {
 			// perform a paging if possible
-			Paging paging = new Paging(previousAction, "Paging");
+			Paging paging = new Paging(previousAction);
 			if (paging.preValidateSafe())
 			{
 			    paging.run();
