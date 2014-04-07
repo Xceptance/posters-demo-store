@@ -10,7 +10,6 @@ import com.xceptance.xlt.api.util.HtmlPageUtils;
  */
 public class HeaderValidator
 {
-
     /**
      * Make a stateless singleton available.
      */
@@ -34,8 +33,7 @@ public class HeaderValidator
         // The search button
         Assert.assertTrue("Search button not found.", HtmlPageUtils.isElementPresent(page, "id('btnSearch')"));
         // The cart overview
-        Assert.assertTrue("Cart overview in header not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('headerCartOverview')"));
+        Assert.assertTrue("Cart overview in header not found.", HtmlPageUtils.isElementPresent(page, "id('headerCartOverview')"));
     }
 
     /**

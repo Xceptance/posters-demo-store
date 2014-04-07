@@ -29,35 +29,29 @@ public class AjaxUtils
      * @throws Exception
      *             if something bad happens
      */
-    public static WebResponse callGet(final HtmlPage page,
-	    final String urlString, final List<NameValuePair> params)
-	    throws Exception
+    public static WebResponse callGet(final HtmlPage page, final String urlString, final List<NameValuePair> params) throws Exception
     {
-	// Build a fully qualified URL
-	final URL pageURL = page.getFullyQualifiedUrl(urlString);
-	// Decide if the given parameters are additional parameters and append
-	// them properly encoded to the given
-	// URL and build the request.
-	String requestUrlString = pageURL.toExternalForm();
-	if (params != null)
-	{
-	    requestUrlString += (pageURL.getQuery() == null ? "?" : "&")
-		    + paramsToQueryString(params);
-	}
-	WebRequest request = new WebRequest(new URL(requestUrlString),
-		HttpMethod.GET);
+        // Build a fully qualified URL
+        final URL pageURL = page.getFullyQualifiedUrl(urlString);
+        // Decide if the given parameters are additional parameters and append
+        // them properly encoded to the given
+        // URL and build the request.
+        String requestUrlString = pageURL.toExternalForm();
+        if (params != null)
+        {
+            requestUrlString += (pageURL.getQuery() == null ? "?" : "&") + paramsToQueryString(params);
+        }
+        final WebRequest request = new WebRequest(new URL(requestUrlString), HttpMethod.GET);
 
-	// XHR requests must not get cached internally. This is achieved by
-	// setting the XHR flag.
-	request.setXHR();
-	// XHR request have an additional header.
-	request.getAdditionalHeaders()
-		.put("X-Requested-With", "XMLHttpRequest");
-	request.getAdditionalHeaders().put("Referer",
-		page.getUrl().toExternalForm());
+        // XHR requests must not get cached internally. This is achieved by
+        // setting the XHR flag.
+        request.setXHR();
+        // XHR request have an additional header.
+        request.getAdditionalHeaders().put("X-Requested-With", "XMLHttpRequest");
+        request.getAdditionalHeaders().put("Referer", page.getUrl().toExternalForm());
 
-	// Perform the updatePrice call and return the result.
-	return page.getWebClient().loadWebResponse(request);
+        // Perform the updatePrice call and return the result.
+        return page.getWebClient().loadWebResponse(request);
     }
 
     /**
@@ -73,30 +67,26 @@ public class AjaxUtils
      * @throws Exception
      *             if something bad happens
      */
-    public static WebResponse callPost(final HtmlPage page,
-	    final String urlString, final List<NameValuePair> params)
-	    throws Exception
+    public static WebResponse callPost(final HtmlPage page, final String urlString, final List<NameValuePair> params) throws Exception
     {
-	// Often an URL string is (relative or absolute) not full qualified
-	// (e.g. '/foo/bar.html'). So this example shows how to build a full
-	// qualified URL first from a url string.
-	final URL pageURL = page.getFullyQualifiedUrl(urlString);
+        // Often an URL string is (relative or absolute) not full qualified
+        // (e.g. '/foo/bar.html'). So this example shows how to build a full
+        // qualified URL first from a url string.
+        final URL pageURL = page.getFullyQualifiedUrl(urlString);
 
-	// We create a web request and set the parameters
-	WebRequest request = new WebRequest(pageURL, HttpMethod.POST);
-	request.setRequestParameters(params);
+        // We create a web request and set the parameters
+        final WebRequest request = new WebRequest(pageURL, HttpMethod.POST);
+        request.setRequestParameters(params);
 
-	// XHR requests must not get cached internally. This is achieved by
-	// setting the XHR flag.
-	request.setXHR();
-	// XHR request have an additional header.
-	request.getAdditionalHeaders()
-		.put("X-Requested-With", "XMLHttpRequest");
-	request.getAdditionalHeaders().put("Referer",
-		page.getUrl().toExternalForm());
+        // XHR requests must not get cached internally. This is achieved by
+        // setting the XHR flag.
+        request.setXHR();
+        // XHR request have an additional header.
+        request.getAdditionalHeaders().put("X-Requested-With", "XMLHttpRequest");
+        request.getAdditionalHeaders().put("Referer", page.getUrl().toExternalForm());
 
-	// Perform the updatePrice call and return the result.
-	return page.getWebClient().loadWebResponse(request);
+        // Perform the updatePrice call and return the result.
+        return page.getWebClient().loadWebResponse(request);
     }
 
     /**
@@ -106,17 +96,14 @@ public class AjaxUtils
      *            parameters to transform
      * @return an URL parameter string
      */
-    public static String paramsToQueryString(
-	    final List<NameValuePair> parameters) throws Exception
+    public static String paramsToQueryString(final List<NameValuePair> parameters) throws Exception
     {
-	final ArrayList<org.apache.http.NameValuePair> arr = new ArrayList<org.apache.http.NameValuePair>();
-	for (final org.apache.http.NameValuePair nvp : NameValuePair
-		.toHttpClient(parameters))
-	{
-	    arr.add(nvp);
-	}
+        final ArrayList<org.apache.http.NameValuePair> arr = new ArrayList<org.apache.http.NameValuePair>();
+        for (final org.apache.http.NameValuePair nvp : NameValuePair.toHttpClient(parameters))
+        {
+            arr.add(nvp);
+        }
 
-	return URLEncodedUtils.format(arr, "UTF-8");
+        return URLEncodedUtils.format(arr, "UTF-8");
     }
-
 }

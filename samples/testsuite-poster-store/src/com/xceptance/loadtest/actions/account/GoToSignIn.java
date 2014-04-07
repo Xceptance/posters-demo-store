@@ -13,26 +13,24 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * This {@link AbstractHtmlPageAction} opens the sign in page.
- * 
  */
 public class GoToSignIn extends AbstractHtmlPageAction
 {
-
     /**
      * The sign in button.
      */
     private HtmlElement signInButton;
 
     /**
-     *  Constructor
+     * Constructor
+     * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      */
-    public GoToSignIn(AbstractHtmlPageAction previousAction)
+    public GoToSignIn(final AbstractHtmlPageAction previousAction)
     {
         super(previousAction, null);
     }
-
 
     @Override
     public void preValidate() throws Exception
@@ -42,18 +40,17 @@ public class GoToSignIn extends AbstractHtmlPageAction
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
         // Check that no customer is logged in
-        Assert.assertTrue("A customer is already logged in.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
+        Assert.assertTrue("A customer is already logged in.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
 
         // Remember the sign in button
-        this.signInButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnShowLoginForm");
+        signInButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnShowLoginForm");
     }
 
     @Override
     protected void execute() throws Exception
     {
         // Click the button to load the sign in page
-        loadPageByClick(this.signInButton);
+        loadPageByClick(signInButton);
     }
 
     @Override
@@ -73,5 +70,4 @@ public class GoToSignIn extends AbstractHtmlPageAction
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
     }
-
 }

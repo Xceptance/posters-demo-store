@@ -2,12 +2,9 @@ package com.xceptance.loadtest.util;
 
 /**
  * Provides a credit card.
- * 
- * @author sebastianloob
  */
 public class CreditCard
 {
-
     /**
      * Credit card owner.
      */
@@ -30,14 +27,14 @@ public class CreditCard
 
     public CreditCard()
     {
-        this.number = "4111111111111111";
-        this.owner = "John Doe";
+        number = "4111111111111111";
+        owner = "John Doe";
     }
 
-    public CreditCard(Account account)
+    public CreditCard(final Account account)
     {
-        this.number = "4111111111111111";
-        this.owner = account.getFirstName() + " " + account.getLastName();
+        number = "4111111111111111";
+        owner = account.getFirstName() + " " + account.getLastName();
     }
 
     public String getOwner()
@@ -45,7 +42,7 @@ public class CreditCard
         return owner;
     }
 
-    public void setOwner(String owner)
+    public void setOwner(final String owner)
     {
         this.owner = owner;
     }
@@ -55,7 +52,7 @@ public class CreditCard
         return number;
     }
 
-    public void setNumber(String number)
+    public void setNumber(final String number)
     {
         this.number = number;
     }
@@ -65,7 +62,7 @@ public class CreditCard
         return expirationMonth;
     }
 
-    public void setExpirationMonth(String expirationMonth)
+    public void setExpirationMonth(final String expirationMonth)
     {
         this.expirationMonth = expirationMonth;
     }
@@ -75,7 +72,7 @@ public class CreditCard
         return expirationYear;
     }
 
-    public void setExpirationYear(String expirationYear)
+    public void setExpirationYear(final String expirationYear)
     {
         this.expirationYear = expirationYear;
     }

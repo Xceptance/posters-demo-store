@@ -14,7 +14,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * Selects a random sub-category links and opens the related product overview page.
- *
  */
 public class SelectCategory extends AbstractHtmlPageAction
 {
@@ -22,23 +21,24 @@ public class SelectCategory extends AbstractHtmlPageAction
      * Constructor
      * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      */
-    public SelectCategory(AbstractHtmlPageAction previousAction)
+    public SelectCategory(final AbstractHtmlPageAction previousAction)
     {
-	super(previousAction, null);
+        super(previousAction, null);
     }
 
     /**
      * Chosen level-1 category.
      */
     private HtmlElement categoryLink;
-    
+
     @Override
     public void preValidate() throws Exception
     {
-	//Get all level-1 category links and select one randomly
-	categoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(), "id('sidebarNav')/ul/li[@class='level-1']/a");
+        // Get all level-1 category links and select one randomly
+        categoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
+                                                                "id('sidebarNav')/ul/li[@class='level-1']/a");
 
     }
 
@@ -60,19 +60,18 @@ public class SelectCategory extends AbstractHtmlPageAction
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
-      
+
         // Check for the header
         HeaderValidator.getInstance().validate(page);
-        
+
         // Check the side navigation
         SideNavValidator.getInstance().validate(page);
-        
+
         // The product over view element is present
         Assert.assertTrue("Product over view element is bot present", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
-        
+
         // and we also see some poster's thumbnail images.
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
 
     }
-
 }

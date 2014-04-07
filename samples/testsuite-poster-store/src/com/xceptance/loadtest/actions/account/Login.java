@@ -16,11 +16,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 /**
  * This {@link AbstractHtmlPageAction} fills in and submits the sign in form. <br>
  * The previous action should be {@link GoToSignIn}. The resulting page is the homepage.
- * 
  */
 public class Login extends AbstractHtmlPageAction
 {
-
     /**
      * The sign in form.
      */
@@ -34,17 +32,17 @@ public class Login extends AbstractHtmlPageAction
     /**
      * The account to log in.
      */
-    private Account account;
+    private final Account account;
 
     /**
-     * Constructor 
+     * Constructor
      * 
      * @param previousAction
      *            the previously performed action
      * @param account
      *            the account to log in
      */
-    public Login(AbstractHtmlPageAction previousAction, Account account)
+    public Login(final AbstractHtmlPageAction previousAction, final Account account)
     {
         super(previousAction, null);
         this.account = account;
@@ -56,18 +54,18 @@ public class Login extends AbstractHtmlPageAction
         // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
-        
+
         // check that the sign in form is available
         Assert.assertTrue("Sign in form not found", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
-        
+
         // Remember the sign in form
-        this.signInForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formLogin");
-        
+        signInForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formLogin");
+
         // Check that the sign in button is available
         Assert.assertTrue("Sign in button not found", HtmlPageUtils.isElementPresent(page, "id('btnSignIn')"));
-        
+
         // Remember the sign in button
-        this.signInButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnSignIn");
+        signInButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnSignIn");
     }
 
     @Override
@@ -78,7 +76,7 @@ public class Login extends AbstractHtmlPageAction
         HtmlPageUtils.setInputValue(signInForm, "password", account.getPassword());
 
         // Submit the registration form
-        loadPageByClick(this.signInButton);
+        loadPageByClick(signInButton);
     }
 
     @Override
@@ -100,9 +98,8 @@ public class Login extends AbstractHtmlPageAction
         // Check that it's the homepage
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
         Assert.assertNotNull("Title not found", blogNameElement);
-        
+
         // Check the title
         Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
     }
-
 }

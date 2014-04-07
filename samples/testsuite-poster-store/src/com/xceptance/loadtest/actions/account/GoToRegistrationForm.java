@@ -13,29 +13,25 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * This {@link AbstractHtmlPageAction} opens the registration form.
- * 
  */
 public class GoToRegistrationForm extends AbstractHtmlPageAction
 {
-
     /**
      * The link to the registration form.
      */
     private HtmlElement registerLink;
 
-    
     /**
      * Constructor
      * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      */
-    public GoToRegistrationForm(AbstractHtmlPageAction previousAction)
+    public GoToRegistrationForm(final AbstractHtmlPageAction previousAction)
     {
         super(previousAction, null);
     }
 
-    
     @Override
     public void preValidate() throws Exception
     {
@@ -47,14 +43,14 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
         Assert.assertTrue("Registration link not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
 
         // remember the registration link
-        this.registerLink = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
+        registerLink = HtmlPageUtils.findSingleHtmlElementByID(page, "linkRegister");
     }
 
     @Override
     protected void execute() throws Exception
     {
         // load the registration page by clicking the link
-        loadPageByClick(this.registerLink);
+        loadPageByClick(registerLink);
     }
 
     @Override
@@ -72,7 +68,6 @@ public class GoToRegistrationForm extends AbstractHtmlPageAction
 
         // check that it's the registration page
         Assert.assertTrue("Registration form not found.", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
-        Assert.assertTrue("Button to create account not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
+        Assert.assertTrue("Button to create account not found.", HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
     }
 }

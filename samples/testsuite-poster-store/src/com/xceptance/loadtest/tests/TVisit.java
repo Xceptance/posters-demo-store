@@ -2,14 +2,13 @@ package com.xceptance.loadtest.tests;
 
 import org.junit.Test;
 
+import com.xceptance.loadtest.actions.Homepage;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
 import com.xceptance.xlt.api.util.XltProperties;
-import com.xceptance.loadtest.actions.*;
 
 /**
- * This test case simulates a single click visit. 
- * The visitor opens the poster store landing page and will not do any interaction.
- *
+ * This test case simulates a single click visit. The visitor opens the poster store landing page and will not do any
+ * interaction.
  */
 public class TVisit extends AbstractTestCase
 {
@@ -19,15 +18,16 @@ public class TVisit extends AbstractTestCase
     @Test
     public void visitPosterStore() throws Throwable
     {
-	// Read the store URL from properties.
-	final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url", "http://localhost:8080/posters/");
+        // Read the store URL from properties.
+        final String url = XltProperties.getInstance().getProperty("com.xceptance.xlt.loadtest.tests.store-url",
+                                                                   "http://localhost:8080/posters/");
 
-	// Go to poster store homepage
-	final Homepage homepage = new Homepage(url);
-	// Disable JavaScript for the complete test case to reduce client side resource consumption.
-	// If JavaScript executed functionality is needed to proceed with the scenario (i.e. AJAX calls) 
-	// we will simulate this in the related actions.
-	homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
-	homepage.run();
+        // Go to poster store homepage
+        final Homepage homepage = new Homepage(url);
+        // Disable JavaScript for the complete test case to reduce client side resource consumption.
+        // If JavaScript executed functionality is needed to proceed with the scenario (i.e. AJAX calls)
+        // we will simulate this in the related actions.
+        homepage.getWebClient().getOptions().setJavaScriptEnabled(false);
+        homepage.run();
     }
 }

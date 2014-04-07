@@ -8,12 +8,9 @@ import com.xceptance.xlt.api.data.GeneralDataProvider;
 
 /**
  * Provides a customer account.
- * 
- * @author sebastianloob
  */
 public class Account
 {
-
     /**
      * the email address
      */
@@ -43,8 +40,7 @@ public class Account
 
         firstName = provider.getFirstName(false);
         lastName = provider.getLastName(false);
-        email = RandomStringUtils.randomAlphanumeric(2)
-                + UUID.randomUUID().toString().replaceAll("-", "").substring(0, 12) + "@varmail.de";
+        email = RandomStringUtils.randomAlphanumeric(2) + UUID.randomUUID().toString().replaceAll("-", "").substring(0, 12) + "@varmail.de";
         password = RandomStringUtils.randomAlphanumeric(10);
     }
 
@@ -53,7 +49,7 @@ public class Account
         return email;
     }
 
-    public void setEmail(String email)
+    public void setEmail(final String email)
     {
         this.email = email;
     }
@@ -63,7 +59,7 @@ public class Account
         return firstName;
     }
 
-    public void setFirstName(String firstName)
+    public void setFirstName(final String firstName)
     {
         this.firstName = firstName;
     }
@@ -73,7 +69,7 @@ public class Account
         return lastName;
     }
 
-    public void setLastName(String lastName)
+    public void setLastName(final String lastName)
     {
         this.lastName = lastName;
     }
@@ -83,7 +79,7 @@ public class Account
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword(final String password)
     {
         this.password = password;
     }

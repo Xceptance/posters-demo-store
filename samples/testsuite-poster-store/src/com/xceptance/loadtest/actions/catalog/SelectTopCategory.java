@@ -14,7 +14,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * Selects a random top-category links and opens the related product overview page.
- *
  */
 public class SelectTopCategory extends AbstractHtmlPageAction
 {
@@ -28,18 +27,18 @@ public class SelectTopCategory extends AbstractHtmlPageAction
     {
         super(previousAction, null);
     }
-    
+
     /**
      * Chosen top-category.
      */
     private HtmlElement topCategoryLink;
-    
-    
+
     @Override
     public void preValidate() throws Exception
     {
-	//Get all top category links and select one randomly
-	topCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(), "id('sidebarNav')/ul/li[@class='topCategory']/h4/a");
+        // Get all top category links and select one randomly
+        topCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
+                                                                   "id('sidebarNav')/ul/li[@class='topCategory']/h4/a");
 
     }
 
@@ -68,28 +67,26 @@ public class SelectTopCategory extends AbstractHtmlPageAction
         // content length that was announced in the
         // HTTP response header
         ContentLengthValidator.getInstance().validate(page);
-        
+
         // check for complete HTML
         HtmlEndTagValidator.getInstance().validate(page);
-        
 
         // We can be pretty sure now, that the page fulfils the basic
         // requirements to be a valid page from our demo poster store.
         // Run more page specific tests now.
         // Check that we arrived on a category page.
-        
+
         // check for the header
         HeaderValidator.getInstance().validate(page);
-        
-        //Check the side navigation
+
+        // Check the side navigation
         SideNavValidator.getInstance().validate(page);
-        
+
         // The product over view element is present
-        Assert.assertTrue("Product over view element not present.",HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
-        
+        Assert.assertTrue("Product over view element not present.", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
+
         // and we also see some poster's thumbnail images
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
-        
-    }
 
+    }
 }

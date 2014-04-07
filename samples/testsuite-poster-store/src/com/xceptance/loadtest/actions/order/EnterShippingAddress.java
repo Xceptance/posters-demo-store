@@ -16,11 +16,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * Fill in and submit the shipping address form.
- * 
  */
 public class EnterShippingAddress extends AbstractHtmlPageAction
 {
-
     /**
      * The shipping address form.
      */
@@ -29,12 +27,12 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
     /**
      * The shipping address.
      */
-    private Address address;
+    private final Address address;
 
     /**
      * Account data to use.
      */
-    private Account account;
+    private final Account account;
 
     /**
      * The submit address button
@@ -45,14 +43,13 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
      * Constructor that takes an account object to provide a shipping address
      * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      * @param account
-     * 		The account to get a first name and last name
+     *            The account to get a first name and last name
      * @param address
-     * 		The address used in the billing form
+     *            The address used in the billing form
      */
-    public EnterShippingAddress(AbstractHtmlPageAction previousAction, Account account,
-        Address address)
+    public EnterShippingAddress(final AbstractHtmlPageAction previousAction, final Account account, final Address address)
     {
         super(previousAction, null);
         this.account = account;
@@ -66,10 +63,10 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
      * @param timerName
      * @param address
      */
-    public EnterShippingAddress(AbstractHtmlPageAction previousAction, String timerName, Address address)
+    public EnterShippingAddress(final AbstractHtmlPageAction previousAction, final String timerName, final Address address)
     {
         super(previousAction, timerName);
-        this.account = new Account();
+        account = new Account();
         this.address = address;
     }
 
@@ -79,29 +76,25 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
         // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
-        
+
         // check that the form to enter a new shipping address is available
-        Assert.assertTrue("Form to enter shipping address not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('formAddDelAddr')"));
-        
+        Assert.assertTrue("Form to enter shipping address not found.", HtmlPageUtils.isElementPresent(page, "id('formAddDelAddr')"));
+
         // remember the shipping address form
-        this.shippingAddressForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddDelAddr");
-        
+        shippingAddressForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddDelAddr");
+
         // check that the button to submit the shipping address is available
-        Assert.assertTrue("Button to submit shipping address not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnAddDelAddr')"));
-        
+        Assert.assertTrue("Button to submit shipping address not found.", HtmlPageUtils.isElementPresent(page, "id('btnAddDelAddr')"));
+
         // remember the button to submit the shipping address
-        this.submitAddressButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddDelAddr");
+        submitAddressButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddDelAddr");
     }
 
-    
     @Override
     protected void execute() throws Exception
     {
         // fill in the shipping address
-        HtmlPageUtils.setInputValue(shippingAddressForm, "fullName",
-                                    account.getFirstName() + " " + account.getLastName());
+        HtmlPageUtils.setInputValue(shippingAddressForm, "fullName", account.getFirstName() + " " + account.getLastName());
         HtmlPageUtils.setInputValue(shippingAddressForm, "company", address.getCompany());
         HtmlPageUtils.setInputValue(shippingAddressForm, "addressLine", address.getAddressLine());
         HtmlPageUtils.setInputValue(shippingAddressForm, "city", address.getCity());
@@ -129,10 +122,8 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
 
         // check that it's the page to enter or select a billing address
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleBillAddr')"));
-        
-        // check that the form to enter a new billing address is available
-        Assert.assertTrue("Form to enter billing address not found.",
-                          HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));
-    }
 
+        // check that the form to enter a new billing address is available
+        Assert.assertTrue("Form to enter billing address not found.", HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));
+    }
 }

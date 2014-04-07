@@ -13,11 +13,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * This {@link AbstractHtmlPageAction} logs out the currently logged in user.
- * 
  */
 public class Logout extends AbstractHtmlPageAction
 {
-
     /**
      * The logout link.
      */
@@ -27,14 +25,13 @@ public class Logout extends AbstractHtmlPageAction
      * Constructor
      * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      */
-    public Logout(AbstractHtmlPageAction previousAction)
+    public Logout(final AbstractHtmlPageAction previousAction)
     {
         super(previousAction, null);
     }
 
-    
     @Override
     public void preValidate() throws Exception
     {
@@ -46,7 +43,7 @@ public class Logout extends AbstractHtmlPageAction
         Assert.assertTrue("No customer is logged in.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
 
         // Remember logout link
-        this.logoutLink = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
+        logoutLink = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
     }
 
     @Override
@@ -75,9 +72,8 @@ public class Logout extends AbstractHtmlPageAction
         // Check that it's the home page
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
         Assert.assertNotNull("Title not found", blogNameElement);
-        
+
         // Check the title
         Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
     }
-
 }

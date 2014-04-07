@@ -13,11 +13,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * This {@link AbstractHtmlPageAction} places the order.
- * 
  */
 public class PlaceOrder extends AbstractHtmlPageAction
 {
-
     /**
      * Place order button.
      */
@@ -27,9 +25,9 @@ public class PlaceOrder extends AbstractHtmlPageAction
      * Constructor.
      * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      */
-    public PlaceOrder(AbstractHtmlPageAction previousAction)
+    public PlaceOrder(final AbstractHtmlPageAction previousAction)
     {
         super(previousAction, null);
     }
@@ -37,7 +35,7 @@ public class PlaceOrder extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-	// Get the result of the previous action
+        // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
@@ -45,7 +43,7 @@ public class PlaceOrder extends AbstractHtmlPageAction
         Assert.assertTrue("Place order button not found.", HtmlPageUtils.isElementPresent(page, "id('btnOrder')"));
 
         // remember the place order button
-        this.placeOrderButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnOrder");
+        placeOrderButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnOrder");
     }
 
     @Override
@@ -69,7 +67,7 @@ public class PlaceOrder extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // check that the order was successfully placed
-        boolean successfulOrder = page.asXml().contains("Thank you for shopping with us!");
+        final boolean successfulOrder = page.asXml().contains("Thank you for shopping with us!");
         Assert.assertTrue("Placing order failed.", successfulOrder);
     }
 }

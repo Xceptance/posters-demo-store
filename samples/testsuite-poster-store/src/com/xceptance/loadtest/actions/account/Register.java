@@ -15,11 +15,9 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
  * This {@link AbstractHtmlPageAction} fills in and submits the registration form.
- * 
  */
 public class Register extends AbstractHtmlPageAction
 {
-
     /**
      * The registration form
      */
@@ -33,7 +31,7 @@ public class Register extends AbstractHtmlPageAction
     /**
      * The account to register
      */
-    private Account account;
+    private final Account account;
 
     /**
      * Constructor
@@ -43,10 +41,10 @@ public class Register extends AbstractHtmlPageAction
      * @param accountData
      *            The account data used to register new account
      */
-    public Register(AbstractHtmlPageAction previousAction, Account accountData)
+    public Register(final AbstractHtmlPageAction previousAction, final Account accountData)
     {
         super(previousAction, null);
-        this.account = accountData;
+        account = accountData;
     }
 
     @Override
@@ -55,18 +53,18 @@ public class Register extends AbstractHtmlPageAction
         // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
-        
+
         // Check that the registration form is available
         Assert.assertTrue("Registration form not found", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
-        
+
         // Remember the registration form
-        this.registrationForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formRegister");
-        
+        registrationForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formRegister");
+
         // check that the create account button is available
         Assert.assertTrue("Create account button not found", HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
-        
+
         // Remember the create account button
-        this.createAccountButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnRegister");
+        createAccountButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnRegister");
     }
 
     @Override
@@ -80,7 +78,7 @@ public class Register extends AbstractHtmlPageAction
         HtmlPageUtils.setInputValue(registrationForm, "passwordAgain", account.getPassword());
 
         // Submit the registration form
-        loadPageByClick(this.createAccountButton);
+        loadPageByClick(createAccountButton);
     }
 
     @Override
@@ -97,17 +95,15 @@ public class Register extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check that the account was successfully created
-        boolean isAccountCreated = page.asXml()
-                                     .contains("Your account has been created. Log in with your email address and password.");
+        final boolean isAccountCreated = page.asXml()
+                                             .contains("Your account has been created. Log in with your email address and password.");
         Assert.assertTrue("Registration failed.", isAccountCreated);
-        
+
         // Check that it's the sign in page
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
-        
-        // Check that the customer is not logged in after registration
-        Assert.assertTrue("Customer is logged in after registration.",
-                          HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
-    }
 
+        // Check that the customer is not logged in after registration
+        Assert.assertTrue("Customer is logged in after registration.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
+    }
 }

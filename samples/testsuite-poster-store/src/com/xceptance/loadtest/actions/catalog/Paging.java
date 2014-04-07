@@ -23,11 +23,9 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} performs a paging.
- * This action does not result in a page load but consists of a sequence of AJAX calls. 
- * JavaScript is disabled due to performance reasons. So assembling the request parameters, 
- * make the call and evaluating the response content makes this kind of actions a bit more complex.
- * 
+ * This {@link AbstractHtmlPageAction} performs a paging. This action does not result in a page load but consists of a
+ * sequence of AJAX calls. JavaScript is disabled due to performance reasons. So assembling the request parameters, make
+ * the call and evaluating the response content makes this kind of actions a bit more complex.
  */
 public class Paging extends AbstractHtmlPageAction
 {
@@ -42,9 +40,8 @@ public class Paging extends AbstractHtmlPageAction
     private int targetPageNumber;
 
     /**
-     * The path of the current page url. 
-     * This is needed to determine the current page type. Possibilities are a top category overview page, 
-     * a sub category overview page or a search results overview page.
+     * The path of the current page url. This is needed to determine the current page type. Possibilities are a top
+     * category overview page, a sub category overview page or a search results overview page.
      */
     private String path;
 
@@ -77,9 +74,9 @@ public class Paging extends AbstractHtmlPageAction
      * Constructor
      * 
      * @param previousAction
-     * 		The previously performed action
+     *            The previously performed action
      */
-    public Paging(AbstractHtmlPageAction previousAction)
+    public Paging(final AbstractHtmlPageAction previousAction)
     {
         super(previousAction, null);
     }
@@ -96,58 +93,55 @@ public class Paging extends AbstractHtmlPageAction
                           HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
 
         // Get the current page number
-        this.currentPageNumber = Integer.parseInt(HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")
-                                                               .getAttribute("currentPage"));
+        currentPageNumber = Integer.parseInt(HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview").getAttribute("currentPage"));
         // The paging is build with JavaScript, so we need to extract the information out of the paging javascript code
-        HtmlElement scriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div/div[@id='pagination']/following-sibling::script");
+        final HtmlElement scriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page,
+                                                                                     "id('main')/div/div/div[@id='pagination']/following-sibling::script");
         scriptCodeAsString = scriptElement.getTextContent();
-        
-        int beginIndex = scriptCodeAsString.indexOf("totalPages: ") + 12;
-        int totalPageCount = Integer.parseInt(scriptCodeAsString.substring(beginIndex, scriptCodeAsString.indexOf(",", beginIndex)));
-        this.targetPageNumber = XltRandom.nextInt(1, totalPageCount);
+
+        final int beginIndex = scriptCodeAsString.indexOf("totalPages: ") + 12;
+        final int totalPageCount = Integer.parseInt(scriptCodeAsString.substring(beginIndex, scriptCodeAsString.indexOf(",", beginIndex)));
+        targetPageNumber = XltRandom.nextInt(1, totalPageCount);
 
         // Be sure, that the target page number is not the current page number
-        Assert.assertFalse("The total page count is 1. Paging is not possible.",totalPageCount == 1);
-        
+        Assert.assertFalse("The total page count is 1. Paging is not possible.", totalPageCount == 1);
+
         if (totalPageCount > 1)
         {
-            while (this.currentPageNumber == this.targetPageNumber)
+            while (currentPageNumber == targetPageNumber)
             {
-                this.targetPageNumber = XltRandom.nextInt(1, totalPageCount);
+                targetPageNumber = XltRandom.nextInt(1, totalPageCount);
             }
         }
-        
 
         // Get the path of the current URL to later extract the page type
         path = page.getUrl().getPath();
 
         categoryId = page.getUrl().getQuery().substring(11);
-        
-        // The JavaScript code also contains the URLs that we need to perform the subsequent AJAX call to get the products of the next page.
+
+        // The JavaScript code also contains the URLs that we need to perform the subsequent AJAX call to get the
+        // products of the next page.
         // Depending on the current page type we need one of the three extracted URLs
-        List<String> URLStrings = RegExUtils.getAllMatches(scriptCodeAsString, "\\$\\.post\\('([^']*)", 1);  
+        final List<String> URLStrings = RegExUtils.getAllMatches(scriptCodeAsString, "\\$\\.post\\('([^']*)", 1);
         getProductOfTopCategoryURL = URLStrings.get(0);
         getProductOfSubCategoryURL = URLStrings.get(1);
         getProductOfSearchURL = URLStrings.get(2);
 
     }
-    
-    
-    
-    
+
     @Override
     protected void execute() throws Exception
     {
         // Get the result of the previous action
         final HtmlPage page = getPreviousAction().getHtmlPage();
-        
+
         // The request parameter of the AJAX call
-        List<NameValuePair> pagingParams = new ArrayList<NameValuePair>();
+        final List<NameValuePair> pagingParams = new ArrayList<NameValuePair>();
         pagingParams.add(new NameValuePair("page", Integer.toString(targetPageNumber)));
 
         // Execute the AJAX call and get the response
         WebResponse response = null;
-        
+
         // The current page is a top category overview page
         if (path.contains("topCategory"))
         {
@@ -163,8 +157,7 @@ public class Paging extends AbstractHtmlPageAction
         // the current page shows some search results
         else if (path.contains("search"))
         {
-            pagingParams.add(new NameValuePair("searchText",
-                                               HtmlPageUtils.findSingleHtmlElementByID(page, "searchText").asText()));
+            pagingParams.add(new NameValuePair("searchText", HtmlPageUtils.findSingleHtmlElementByID(page, "searchText").asText()));
             response = AjaxUtils.callPost(page, getProductOfSearchURL, pagingParams);
         }
         // unknown page type
@@ -175,54 +168,50 @@ public class Paging extends AbstractHtmlPageAction
 
         // Update the page, show new products
         // remove current products from page.
-        HtmlElement productOverview = HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview");
+        final HtmlElement productOverview = HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview");
         productOverview.removeAllChildren();
-        
+
         // get JSON object from response
-        JSONObject jsonResponse = new JSONObject(response.getContentAsString());
-        
+        final JSONObject jsonResponse = new JSONObject(response.getContentAsString());
+
         // get all products from JSON object
-        JSONArray products = (JSONArray) jsonResponse.get("products");
-        
+        final JSONArray products = (JSONArray) jsonResponse.get("products");
+
         // remember the current index of the list
         HtmlElement ulElement = null;
-        
+
         // render each product
         for (int i = 0; i < products.length(); i++)
         {
-            JSONObject product = (JSONObject) products.get(i);
+            final JSONObject product = (JSONObject) products.get(i);
             // create a new row of products in the product grid
             if (i % 3 == 0)
             {
-                ulElement = HtmlPageUtils.createHtmlElement("ul",
-                                                            HtmlPageUtils.createHtmlElement("div", productOverview));
+                ulElement = HtmlPageUtils.createHtmlElement("ul", HtmlPageUtils.createHtmlElement("div", productOverview));
                 ulElement.setAttribute("class", "thumbnails");
             }
             // add product as a list item
-            HtmlElement productTag = HtmlPageUtils.createHtmlElement("div",
-                                                                     HtmlPageUtils.createHtmlElement("li", ulElement));
+            final HtmlElement productTag = HtmlPageUtils.createHtmlElement("div", HtmlPageUtils.createHtmlElement("li", ulElement));
             productTag.setId("product" + i);
             productTag.setAttribute("class", "thumbnail");
-            
+
             // create link to product detail page
-            HtmlElement productLink = HtmlPageUtils.createHtmlElement("a", productTag);
-            HtmlElement contextPathScriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page, "html/head/script[@type='text/javascript' and contains(.,'CONTEXT_PATH')]");
-            String contextPath = RegExUtils.getFirstMatch(contextPathScriptElement.getTextContent(), "CONTEXT_PATH = '(.*)';", 1);
-            productLink.setAttribute("href",
-                                     contextPath + "/productDetail/" + URLEncoder.encode(product.get("name").toString(), "UTF-8")
-                                         + "?productId=" + product.get("id"));
+            final HtmlElement productLink = HtmlPageUtils.createHtmlElement("a", productTag);
+            final HtmlElement contextPathScriptElement = HtmlPageUtils.findSingleHtmlElementByXPath(page,
+                                                                                                    "html/head/script[@type='text/javascript' and contains(.,'CONTEXT_PATH')]");
+            final String contextPath = RegExUtils.getFirstMatch(contextPathScriptElement.getTextContent(), "CONTEXT_PATH = '(.*)';", 1);
+            productLink.setAttribute("href", contextPath + "/productDetail/" + URLEncoder.encode(product.get("name").toString(), "UTF-8") +
+                                             "?productId=" + product.get("id"));
             // add image tag
-            HtmlElement imageTag = HtmlPageUtils.createHtmlElement("img", productLink);
-            imageTag.setAttribute("src",
-                    contextPath + product.get("imageURL"));
+            final HtmlElement imageTag = HtmlPageUtils.createHtmlElement("img", productLink);
+            imageTag.setAttribute("src", contextPath + product.get("imageURL"));
         }
-        
+
         // Set the current page number.
         // This is invisible (i.e. in the XLT Result Browser) but is important
         // for potential subsequent paging actions
-        HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview")
-                     .setAttribute("currentPage", Integer.toString(this.targetPageNumber));
-        
+        HtmlPageUtils.findSingleHtmlElementByID(page, "productOverview").setAttribute("currentPage", Integer.toString(targetPageNumber));
+
         // Publish the results.
         setHtmlPage(page);
     }
@@ -241,8 +230,7 @@ public class Paging extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check the current page is a product overview page
-        Assert.assertTrue("Product Overview element missing.",
-                          HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
+        Assert.assertTrue("Product Overview element missing.", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));
 
         // and we also see some poster's thumbnail images.
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");

@@ -21,7 +21,6 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
  */
 public class Homepage extends AbstractHtmlPageAction
 {
-    
     /**
      * The url as string to fetch the data from.
      */
@@ -31,7 +30,7 @@ public class Homepage extends AbstractHtmlPageAction
      * The url as URL object.
      */
     private URL url;
-    
+
     /**
      * Constructor. This will be called from a test case and while doing so the homepage's URL will be passed so that
      * the page can eventually be loaded.
@@ -45,7 +44,7 @@ public class Homepage extends AbstractHtmlPageAction
 
         this.urlAsString = urlAsString;
     }
-    
+
     @Override
     public void preValidate() throws Exception
     {
@@ -74,9 +73,9 @@ public class Homepage extends AbstractHtmlPageAction
     /**
      * Validate the correctness of the result. Once the homepage has been loaded, we can ensure that certain key element
      * are present in our previous request's responses. For example, here we are validating that the proper response
-     * code was sent, the length of the page is correct, an end tag is present, there is a head line on the page.
-     * This is all being done with the help of validators. Validators are used when we need to check the
-     * same thing after several different actions.
+     * code was sent, the length of the page is correct, an end tag is present, there is a head line on the page. This
+     * is all being done with the help of validators. Validators are used when we need to check the same thing after
+     * several different actions.
      */
     @Override
     protected void postValidate() throws Exception
@@ -102,13 +101,13 @@ public class Homepage extends AbstractHtmlPageAction
         // We can be pretty sure now, that the page fulfils the basic
         // requirements to be a valid page from our demo poster store.
         // Run more page specific tests now.
-        
+
         // check for the header
         HeaderValidator.getInstance().validate(page);
-        
-        //Check the side navigation
+
+        // Check the side navigation
         SideNavValidator.getInstance().validate(page);
-        
+
         // Get the homepage title
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
         Assert.assertNotNull("Title not found", blogNameElement);
@@ -118,7 +117,6 @@ public class Homepage extends AbstractHtmlPageAction
 
         // compare it
         Assert.assertEquals("Title does not match", "Check out our new panorama posters!", text);
-        
 
         /*
          * This section validates the responses on the network layer using the API from #471
@@ -143,5 +141,4 @@ public class Homepage extends AbstractHtmlPageAction
         Assert.assertTrue(n0.getAdditionalRequestHeaders().containsKey("Accept-Language")); // check only
         Assert.assertTrue(n0.getAdditionalRequestHeaders().containsKey("Accept")); // check only
     }
-
 }
