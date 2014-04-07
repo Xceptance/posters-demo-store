@@ -21,10 +21,10 @@ public class SessionTerminatedFilter implements Filter
     @Inject
     Messages msg;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     @Override
-    public Result filter(FilterChain chain, Context context)
+    public Result filter(final FilterChain chain, final Context context)
     {
         // break, if session is terminated
         if (context.getSession().isEmpty())

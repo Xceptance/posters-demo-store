@@ -42,7 +42,7 @@ public class CustomerController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns a page to log in to the customer backend.
@@ -51,7 +51,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result loginForm(Context context)
+    public Result loginForm(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -68,7 +68,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result login(@Param("email") String email, @Param("password") String password, Context context)
+    public Result login(@Param("email") final String email, @Param("password") final String password, final Context context)
     {
         // email is not valid
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
@@ -79,9 +79,9 @@ public class CustomerController
         else
         {
             // exists the given email in the database
-            boolean emailExist = Customer.emailExist(email);
+            final boolean emailExist = Customer.emailExist(email);
             // get customer by the given email
-            Customer customer = Customer.getCustomerByEmail(email);
+            final Customer customer = Customer.getCustomerByEmail(email);
             // is the password correct
             boolean correctPassowrd = false;
             // check password, if the email exist
@@ -99,7 +99,7 @@ public class CustomerController
                 // delete current cart
                 SessionHandling.removeCartId(context);
                 // put customer's cart id to session
-                Customer updatedCustomer = Customer.getCustomerByEmail(email);
+                final Customer updatedCustomer = Customer.getCustomerByEmail(email);
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
                 return Results.redirect(context.getContextPath() + "/");
@@ -131,7 +131,7 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result logout(Context context)
+    public Result logout(final Context context)
     {
         // remove customer from session
         SessionHandling.removeCustomerId(context);
@@ -148,7 +148,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result registration(Context context)
+    public Result registration(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -167,9 +167,9 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result registrationCompleted(@Param("name") String name, @Param("firstName") String firstName,
-                                        @Param("eMail") String email, @Param("password") String password,
-                                        @Param("passwordAgain") String passwordAgain, Context context)
+    public Result registrationCompleted(@Param("name") final String name, @Param("firstName") final String firstName,
+                                        @Param("eMail") final String email, @Param("password") final String password,
+                                        @Param("passwordAgain") final String passwordAgain, final Context context)
     {
         boolean failure = false;
         // account with this email already exist
@@ -197,7 +197,7 @@ public class CustomerController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             WebShopController.setCommonData(data, context, xcpConf);
-            Map<String, String> registration = new HashMap<String, String>();
+            final Map<String, String> registration = new HashMap<String, String>();
             registration.put("name", name);
             registration.put("firstName", firstName);
             registration.put("email", email);
@@ -209,7 +209,7 @@ public class CustomerController
         else
         {
             // create new customer
-            Customer customer = new Customer();
+            final Customer customer = new Customer();
             customer.setName(name);
             customer.setFirstName(firstName);
             customer.setEmail(email);
@@ -233,7 +233,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result accountOverview(Context context)
+    public Result accountOverview(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -250,7 +250,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result orderOverview(Context context)
+    public Result orderOverview(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -268,12 +268,12 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result paymentOverview(Context context)
+    public Result paymentOverview(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
         // get customer by session
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // add payment methods
         data.put("paymentOverview", customer.getCreditCard());
         return Results.html().render(data);
@@ -289,7 +289,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result settingOverview(Context context)
+    public Result settingOverview(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -312,22 +312,22 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") String creditNumber,
-                                                @Param("name") String name, @Param("expirationDateMonth") int month,
-                                                @Param("expirationDateYear") int year, Context context)
+    public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") final String name,
+                                                @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
+                                                final Context context)
     {
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check input
-        for (String regExCreditCard : xcpConf.REGEX_CREDITCARD)
+        for (final String regExCreditCard : xcpConf.REGEX_CREDITCARD)
         {
             // credit card number is correct
             if (Pattern.matches(regExCreditCard, creditNumber))
             {
                 // get customer by session id
-                Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+                final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
                 // create new credit card
-                CreditCard creditCard = new CreditCard();
+                final CreditCard creditCard = new CreditCard();
                 creditCard.setCardNumber(creditNumber);
                 creditCard.setName(name);
                 creditCard.setMonth(month);
@@ -346,7 +346,7 @@ public class CustomerController
         // show error message
         context.getFlashScope().error(msg.get("errorWrongCreditCard", language).get());
         // show inserted values in form
-        Map<String, String> card = new HashMap<String, String>();
+        final Map<String, String> card = new HashMap<String, String>();
         card.put("name", name);
         card.put("cardNumber", creditNumber);
         data.put("card", card);
@@ -364,7 +364,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addPaymentToCustomer(Context context)
+    public Result addPaymentToCustomer(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -382,9 +382,9 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deletePayment(@Param("password") String password, @Param("cardId") int cardId, Context context)
+    public Result deletePayment(@Param("password") final String password, @Param("cardId") final int cardId, final Context context)
     {
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -415,7 +415,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeletePayment(@Param("cardId") int cardId, Context context)
+    public Result confirmDeletePayment(@Param("cardId") final int cardId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("cardId", cardId);
@@ -433,10 +433,10 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addressOverview(Context context)
+    public Result addressOverview(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // add all shipping addresses
         data.put("shippingAddresses", customer.getShippingAddress());
         // add all billing addresses
@@ -456,10 +456,10 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteBillingAddress(@Param("password") String password, @Param("addressId") int addressId,
-                                       Context context)
+    public Result deleteBillingAddress(@Param("password") final String password, @Param("addressId") final int addressId,
+                                       final Context context)
     {
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -491,7 +491,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteBillingAddress(@Param("addressId") int addressId, Context context)
+    public Result confirmDeleteBillingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("deleteAddressURL", "deleteBillingAddress");
@@ -511,10 +511,10 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteShippingAddress(@Param("password") String password, @Param("addressId") int addressId,
-                                        Context context)
+    public Result deleteShippingAddress(@Param("password") final String password, @Param("addressId") final int addressId,
+                                        final Context context)
     {
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -546,7 +546,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteShippingAddress(@Param("addressId") int addressId, Context context)
+    public Result confirmDeleteShippingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("deleteAddressURL", "deleteShippingAddress");
@@ -563,7 +563,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateShippingAddress(@Param("addressId") int addressId, Context context)
+    public Result updateShippingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("address", ShippingAddress.getShippingAddressById(addressId));
@@ -586,11 +586,11 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateShippingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
-                                                 @Param("addressLine") String addressLine, @Param("city") String city,
-                                                 @Param("state") String state, @Param("zip") String zip,
-                                                 @Param("country") String country,
-                                                 @Param("addressId") String addressId, Context context)
+    public Result updateShippingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
+                                                 @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                 @Param("state") final String state, @Param("zip") final String zip,
+                                                 @Param("country") final String country, @Param("addressId") final String addressId,
+                                                 final Context context)
     {
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
@@ -600,7 +600,7 @@ public class CustomerController
             // show error message
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
-            Map<String, String> address = new HashMap<String, String>();
+            final Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
             address.put("name", name);
             address.put("company", company);
@@ -616,7 +616,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
+            final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -640,7 +640,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateBillingAddress(@Param("addressId") int addressId, Context context)
+    public Result updateBillingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         data.put("address", BillingAddress.getBillingAddressById(addressId));
@@ -663,11 +663,11 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateBillingAddressCompleted(@Param("fullName") String name, @Param("company") String company,
-                                                @Param("addressLine") String addressLine, @Param("city") String city,
-                                                @Param("state") String state, @Param("zip") String zip,
-                                                @Param("country") String country, @Param("addressId") String addressId,
-                                                Context context)
+    public Result updateBillingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
+                                                @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                @Param("state") final String state, @Param("zip") final String zip,
+                                                @Param("country") final String country, @Param("addressId") final String addressId,
+                                                final Context context)
     {
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
@@ -677,7 +677,7 @@ public class CustomerController
             // show error message
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
-            Map<String, String> address = new HashMap<String, String>();
+            final Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
             address.put("name", name);
             address.put("company", company);
@@ -693,7 +693,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
+            final BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
 
             address.setName(name);
             address.setCompany(company);
@@ -716,7 +716,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result addShippingAddressToCustomer(Context context)
+    public Result addShippingAddressToCustomer(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -730,7 +730,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result addBillingAddressToCustomer(Context context)
+    public Result addBillingAddressToCustomer(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -755,12 +755,11 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addShippingAddressToCustomerCompleted(@Param("fullName") String name,
-                                                        @Param("company") String company,
-                                                        @Param("addressLine") String addressLine,
-                                                        @Param("city") String city, @Param("state") String state,
-                                                        @Param("zip") String zip, @Param("country") String country,
-                                                        @Param("addressId") String addressId, Context context)
+    public Result addShippingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
+                                                        @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                        @Param("state") final String state, @Param("zip") final String zip,
+                                                        @Param("country") final String country, @Param("addressId") final String addressId,
+                                                        final Context context)
     {
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
@@ -770,7 +769,7 @@ public class CustomerController
             // show error message
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
-            Map<String, String> address = new HashMap<String, String>();
+            final Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
             address.put("company", company);
             address.put("addressLine", addressLine);
@@ -785,7 +784,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            ShippingAddress address = new ShippingAddress();
+            final ShippingAddress address = new ShippingAddress();
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -794,7 +793,7 @@ public class CustomerController
             address.setZip(zip);
             address.setCountry(country);
             // add address to customer
-            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
             // show success message
             context.getFlashScope().success(msg.get("successSave", language).get());
@@ -820,12 +819,11 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addBillingAddressToCustomerCompleted(@Param("fullName") String name,
-                                                       @Param("company") String company,
-                                                       @Param("addressLine") String addressLine,
-                                                       @Param("city") String city, @Param("state") String state,
-                                                       @Param("zip") String zip, @Param("country") String country,
-                                                       @Param("addressId") String addressId, Context context)
+    public Result addBillingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
+                                                       @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                       @Param("state") final String state, @Param("zip") final String zip,
+                                                       @Param("country") final String country, @Param("addressId") final String addressId,
+                                                       final Context context)
     {
         // check input
         if (!Pattern.matches("[0-9]*", zip))
@@ -835,7 +833,7 @@ public class CustomerController
             // show error message
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
-            Map<String, String> address = new HashMap<String, String>();
+            final Map<String, String> address = new HashMap<String, String>();
             address.put("name", name);
             address.put("company", company);
             address.put("addressLine", addressLine);
@@ -850,7 +848,7 @@ public class CustomerController
         // all input fields might be correct
         else
         {
-            BillingAddress address = new BillingAddress();
+            final BillingAddress address = new BillingAddress();
             address.setName(name);
             address.setCompany(company);
             address.setAddressLine(addressLine);
@@ -859,7 +857,7 @@ public class CustomerController
             address.setZip(zip);
             address.setCountry(country);
             // add address to customer
-            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addBillingAddress(address);
             // show success message
             context.getFlashScope().success(msg.get("successSave", language).get());
@@ -878,11 +876,11 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result changeNameOrEmail(Context context)
+    public Result changeNameOrEmail(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         data.put("customer", customer);
         return Results.html().render(data);
     }
@@ -901,11 +899,11 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result changeNameOrEmailCompleted(@Param("name") String name, @Param("firstName") String firstName,
-                                             @Param("eMail") String email, @Param("password") String password,
-                                             Context context)
+    public Result changeNameOrEmailCompleted(@Param("name") final String name, @Param("firstName") final String firstName,
+                                             @Param("eMail") final String email, @Param("password") final String password,
+                                             final Context context)
     {
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
         if (!customer.checkPasswd(password))
         {
@@ -944,7 +942,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result changePassword(Context context)
+    public Result changePassword(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -964,11 +962,11 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result changePasswordCompleted(@Param("oldPassword") String oldPassword, @Param("password") String password,
-                                          @Param("passwordAgain") String passwordAgain, Context context)
+    public Result changePasswordCompleted(@Param("oldPassword") final String oldPassword, @Param("password") final String password,
+                                          @Param("passwordAgain") final String passwordAgain, final Context context)
     {
         boolean failure = false;
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
         if (!customer.checkPasswd(oldPassword))
         {
@@ -1005,7 +1003,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteAccount(Context context)
+    public Result confirmDeleteAccount(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -1023,9 +1021,9 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteAccount(@Param("password") String password, Context context)
+    public Result deleteAccount(@Param("password") final String password, final Context context)
     {
-        Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // correct password
         if (customer.checkPasswd(password))
         {
@@ -1034,15 +1032,15 @@ public class CustomerController
             // remove cart from session
             SessionHandling.removeCartId(context);
             // remove customer's cart
-            Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
+            final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
             if (cart != null)
             {
                 cart.setCustomer(null);
                 cart.update();
             }
             // remove customers orders --> deletes also customer --> deletes also addresses and payment information
-            List<Order> orders = customer.getOrder();
-            for (Order order : orders)
+            final List<Order> orders = customer.getOrder();
+            for (final Order order : orders)
             {
                 Ebean.delete(order);
             }
@@ -1070,21 +1068,21 @@ public class CustomerController
      * 
      * @param context
      */
-    private static void mergeCurrentCartAndCustomerCart(Context context)
+    private static void mergeCurrentCartAndCustomerCart(final Context context)
     {
         if (SessionHandling.isCustomerLogged(context))
         {
             // get current cart
-            Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context));
+            final Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context));
             // get cart of customer
-            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getCart() == null)
             {
                 customer.setCart(new Cart());
                 customer.update();
             }
-            Cart customerCart = Cart.getCartById(customer.getCart().getId());
-            for (CartProduct cartProduct : currentCart.getProducts())
+            final Cart customerCart = Cart.getCartById(customer.getCart().getId());
+            for (final CartProduct cartProduct : currentCart.getProducts())
             {
                 for (int i = 0; i < cartProduct.getProductCount(); i++)
                 {

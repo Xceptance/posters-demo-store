@@ -63,7 +63,7 @@ public class SubCategory
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -84,7 +84,7 @@ public class SubCategory
      * @param name
      *            the name of the category
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -105,7 +105,7 @@ public class SubCategory
      * @param topCategory
      *            the {@link TopCategory} this sub category belongs to
      */
-    public void setTopCategory(TopCategory topCategory)
+    public void setTopCategory(final TopCategory topCategory)
     {
         this.topCategory = topCategory;
     }
@@ -126,7 +126,7 @@ public class SubCategory
      * @param products
      *            the {@link Product}s of the category
      */
-    public void setProducts(List<Product> products)
+    public void setProducts(final List<Product> products)
     {
         this.products = products;
     }
@@ -154,7 +154,7 @@ public class SubCategory
      *            the ID of the {@link SubCategory}
      * @return the {@link SubCategory} that matches the given ID
      */
-    public static SubCategory getSubCategoryById(int id)
+    public static SubCategory getSubCategoryById(final int id)
     {
         return Ebean.find(SubCategory.class, id);
     }

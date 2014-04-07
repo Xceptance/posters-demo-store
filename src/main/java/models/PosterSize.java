@@ -49,7 +49,7 @@ public class PosterSize
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -70,7 +70,7 @@ public class PosterSize
      * @param width
      *            the width of the poster
      */
-    public void setWidth(int width)
+    public void setWidth(final int width)
     {
         this.width = width;
     }
@@ -91,7 +91,7 @@ public class PosterSize
      * @param height
      *            the height of the poster
      */
-    public void setHeight(int height)
+    public void setHeight(final int height)
     {
         this.height = height;
     }

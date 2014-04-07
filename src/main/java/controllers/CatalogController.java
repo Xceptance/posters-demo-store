@@ -44,7 +44,7 @@ public class CatalogController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result productDetail(@Param("productId") int productId, Context context)
+    public Result productDetail(@Param("productId") final int productId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -61,10 +61,10 @@ public class CatalogController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result productOverview(@Param("categoryId") int subCategoryId, Context context)
+    public Result productOverview(@Param("categoryId") final int subCategoryId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategoryId, 1, pageSize, data);
@@ -81,10 +81,10 @@ public class CatalogController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result topCategoryOverview(@Param("categoryId") int topCategoryId, Context context)
+    public Result topCategoryOverview(@Param("categoryId") final int topCategoryId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategoryId, 1, pageSize, data);
@@ -101,11 +101,11 @@ public class CatalogController
      * @param page
      * @return
      */
-    public Result getProductOfTopCategory(@Param("categoryId") int topCategoryId, @Param("page") int page)
+    public Result getProductOfTopCategory(@Param("categoryId") final int topCategoryId, @Param("page") final int page)
     {
-        Result result = Results.json();
+        final Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategoryId, page, pageSize, data);
         return result.render(data);
@@ -118,11 +118,11 @@ public class CatalogController
      * @param page
      * @return
      */
-    public Result getProductOfSubCategory(@Param("categoryId") int subCategoryId, @Param("page") int page)
+    public Result getProductOfSubCategory(@Param("categoryId") final int subCategoryId, @Param("page") final int page)
     {
-        Result result = Results.json();
+        final Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
-        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategoryId, page, pageSize, data);
         return result.render(data);
@@ -136,14 +136,14 @@ public class CatalogController
      * @param pageSize
      * @param data
      */
-    private static void addTopCategoryProductsToMap(int topCategoryId, int pageNumber, int pageSize,
+    private static void addTopCategoryProductsToMap(final int topCategoryId, final int pageNumber, final int pageSize,
                                                     final Map<String, Object> data)
     {
         // get the given top category
-        TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
+        final TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
         // get the marked products, which should show in the top category
-        PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category)
-                                              .eq("showInTopCategorie", true).findPagingList(pageSize);
+        final PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category).eq("showInTopCategorie", true)
+                                                    .findPagingList(pageSize);
         // add all products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);
     }
@@ -156,14 +156,13 @@ public class CatalogController
      * @param pageSize
      * @param data
      */
-    private static void addSubCategoryProductsToMap(int subCategoryId, int pageNumber, int pageSize,
+    private static void addSubCategoryProductsToMap(final int subCategoryId, final int pageNumber, final int pageSize,
                                                     final Map<String, Object> data)
     {
         // get the sub category by the given category
-        SubCategory category = SubCategory.getSubCategoryById(subCategoryId);
+        final SubCategory category = SubCategory.getSubCategoryById(subCategoryId);
         // get all products of the sub category
-        PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category)
-                                              .findPagingList(pageSize);
+        final PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category).findPagingList(pageSize);
         // add the products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);
     }
@@ -175,15 +174,15 @@ public class CatalogController
      * @param pageNumber
      * @param data
      */
-    private static void createPagingListProductOverview(PagingList<Product> pagingList, int pageNumber,
+    private static void createPagingListProductOverview(final PagingList<Product> pagingList, final int pageNumber,
                                                         final Map<String, Object> data)
     {
         // get row count in background
         pagingList.getFutureRowCount();
         // get the current page
-        Page<Product> page = pagingList.getPage(pageNumber - 1);
+        final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
-        List<Product> list = page.getList();
+        final List<Product> list = page.getList();
         // remove some informations of the product list, to render a small-sized json-object
         for (int i = 0; i < list.size(); i++)
         {
@@ -194,7 +193,7 @@ public class CatalogController
             list.get(i).setOrder(null);
         }
         // get the total page count
-        int pageCount = pagingList.getTotalPageCount();
+        final int pageCount = pagingList.getTotalPageCount();
         // add the products to the data map
         data.put("products", list);
         // add the page count to the data map

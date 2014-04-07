@@ -26,13 +26,13 @@ public class ProductHandler extends DefaultHandler
     private Product product;
 
     @Override
-    public void characters(char[] ch, int start, int length)
+    public void characters(final char[] ch, final int start, final int length)
     {
         currentValue.append(new String(ch, start, length));
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes atts)
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
     {
         if (localName.equals("product"))
         {
@@ -43,9 +43,9 @@ public class ProductHandler extends DefaultHandler
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName)
+    public void endElement(final String uri, final String localName, final String qName)
     {
-        String toAdd = currentValue.toString();
+        final String toAdd = currentValue.toString();
         if (localName.equals("name"))
         {
             product.setName(toAdd);
@@ -61,12 +61,12 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("price"))
         {
             // get all available prices
-            String[] prices = toAdd.split(";");
+            final String[] prices = toAdd.split(";");
             // add first price as minimum price
             product.setMinimumPrice(Double.parseDouble(prices[0]));
             // add the price for each size
-            List<ProductPosterSize> productPosterSizes = Ebean.find(ProductPosterSize.class).where()
-                                                               .eq("product", product).findList();
+            final List<ProductPosterSize> productPosterSizes = Ebean.find(ProductPosterSize.class).where().eq("product", product)
+                                                                    .findList();
             for (int i = 0; i < productPosterSizes.size(); i++)
             {
                 productPosterSizes.get(i).setPrice(Double.parseDouble(prices[i]));
@@ -86,8 +86,7 @@ public class ProductHandler extends DefaultHandler
                 subCategory.setName(toAdd);
             }
             product.setSubCategory(subCategory);
-            TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory)
-                                           .findUnique();
+            final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findUnique();
             product.setTopCategory(topCategory);
         }
         if (localName.equals("carousel"))
@@ -118,14 +117,13 @@ public class ProductHandler extends DefaultHandler
         }
         if (localName.equals("availableSize"))
         {
-            String[] sizes = toAdd.split(";");
-            for (String size : sizes)
+            final String[] sizes = toAdd.split(";");
+            for (final String size : sizes)
             {
-                String[] dummy = size.split("x");
-                int width = Integer.parseInt(dummy[0]);
-                int height = Integer.parseInt(dummy[1]);
-                PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
-                                             .findUnique();
+                final String[] dummy = size.split("x");
+                final int width = Integer.parseInt(dummy[0]);
+                final int height = Integer.parseInt(dummy[1]);
+                PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
                 if (posterSize == null)
                 {
                     posterSize = new PosterSize();
@@ -133,7 +131,7 @@ public class ProductHandler extends DefaultHandler
                     posterSize.setHeight(height);
                     posterSize.save();
                 }
-                ProductPosterSize productPosterSize = new ProductPosterSize();
+                final ProductPosterSize productPosterSize = new ProductPosterSize();
                 productPosterSize.setProduct(product);
                 productPosterSize.setSize(posterSize);
                 productPosterSize.save();

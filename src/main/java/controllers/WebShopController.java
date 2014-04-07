@@ -34,12 +34,12 @@ public class WebShopController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result index(Context context)
+    public Result index(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
-        List<Product> products = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
+        final List<Product> products = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
         // add products to data map
         data.put("carousel", products);
         return Results.html().render(data);
@@ -53,19 +53,19 @@ public class WebShopController
      * @param context
      * @param xcpConf
      */
-    public static void setCommonData(final Map<String, Object> data, Context context, PosterConstants xcpConf)
+    public static void setCommonData(final Map<String, Object> data, final Context context, final PosterConstants xcpConf)
     {
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // set cart stuff
         addCartDetailToMap(cart, data);
         // a customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer by session
-            Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // add information that a customer is logged
             data.put("isLogged", true);
             // add customer's first name to data map
@@ -100,9 +100,8 @@ public class WebShopController
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
         // get all products of the cart
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart)
-                                              .orderBy("lastUpdate desc").findList();
-        for (CartProduct cartProduct : cartProducts)
+        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
+        for (final CartProduct cartProduct : cartProducts)
         {
             products.put(cartProduct.getProduct(), cartProduct.getProductCount());
             totalProductCount += cartProduct.getProductCount();

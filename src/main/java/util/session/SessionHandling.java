@@ -26,7 +26,7 @@ public class SessionHandling
      * 
      * @param context
      */
-    public static void removeCustomerId(Context context)
+    public static void removeCustomerId(final Context context)
     {
         context.getSession().remove(USER);
     }
@@ -37,7 +37,7 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static boolean isOrderIdSet(Context context)
+    public static boolean isOrderIdSet(final Context context)
     {
         if (context.getSession().get(ORDER) == null)
         {
@@ -55,7 +55,7 @@ public class SessionHandling
      * @param context
      * @param orderId
      */
-    public static void setOrderId(Context context, UUID orderId)
+    public static void setOrderId(final Context context, final UUID orderId)
     {
         context.getSession().put(ORDER, orderId.toString());
     }
@@ -66,14 +66,14 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static UUID getOrderId(Context context)
+    public static UUID getOrderId(final Context context)
     {
         Session cookie = context.getSession();
         // order id is not set, if the session is terminated
         if (cookie.get(ORDER) == null)
         {
             // create new order
-            Order order = Order.createNewOrder();
+            final Order order = Order.createNewOrder();
             // set id of new order
             setOrderId(context, order.getId());
             // get cookie again
@@ -87,7 +87,7 @@ public class SessionHandling
      * 
      * @param context
      */
-    public static void removeOrderId(Context context)
+    public static void removeOrderId(final Context context)
     {
         context.getSession().remove(ORDER);
     }
@@ -98,7 +98,7 @@ public class SessionHandling
      * @param context
      * @param cartId
      */
-    public static void setCartId(Context context, UUID cartId)
+    public static void setCartId(final Context context, final UUID cartId)
     {
         context.getSession().put(CART, cartId.toString());
     }
@@ -109,14 +109,14 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static UUID getCartId(Context context)
+    public static UUID getCartId(final Context context)
     {
         Session cookie = context.getSession();
         // create new cart, if no cart is set
         if (cookie.get(CART) == null)
         {
             // create new cart
-            Cart cart = Cart.createNewCart();
+            final Cart cart = Cart.createNewCart();
             // add cart id to session
             setCartId(context, cart.getId());
             // get cookie again
@@ -141,7 +141,7 @@ public class SessionHandling
      * 
      * @param context
      */
-    public static void removeCartId(Context context)
+    public static void removeCartId(final Context context)
     {
         context.getSession().remove(CART);
     }
@@ -152,7 +152,7 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static boolean isCustomerLogged(Context context)
+    public static boolean isCustomerLogged(final Context context)
     {
         boolean isLogged = true;
         if (context.getSession().get(USER) == null)
@@ -168,7 +168,7 @@ public class SessionHandling
      * @param context
      * @param customerId
      */
-    public static void setCustomerId(Context context, UUID customerId)
+    public static void setCustomerId(final Context context, final UUID customerId)
     {
         context.getSession().put(USER, customerId.toString());
     }
@@ -179,7 +179,7 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static UUID getCustomerId(Context context)
+    public static UUID getCustomerId(final Context context)
     {
         return UUID.fromString(context.getSession().get(USER));
     }

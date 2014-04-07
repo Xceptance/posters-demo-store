@@ -89,7 +89,7 @@ public class BillingAddress
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -110,7 +110,7 @@ public class BillingAddress
      * @param company
      *            the company field
      */
-    public void setCompany(String company)
+    public void setCompany(final String company)
     {
         this.company = company;
     }
@@ -131,7 +131,7 @@ public class BillingAddress
      * @param customer
      *            the customer with this billing address
      */
-    public void setCustomer(Customer customer)
+    public void setCustomer(final Customer customer)
     {
         this.customer = customer;
     }
@@ -152,7 +152,7 @@ public class BillingAddress
      * @param name
      *            the name field
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -173,7 +173,7 @@ public class BillingAddress
      * @param addressLine
      *            the address line
      */
-    public void setAddressLine(String addressLine)
+    public void setAddressLine(final String addressLine)
     {
         this.addressLine = addressLine;
     }
@@ -194,7 +194,7 @@ public class BillingAddress
      * @param city
      *            the city field
      */
-    public void setCity(String city)
+    public void setCity(final String city)
     {
         this.city = city;
     }
@@ -215,7 +215,7 @@ public class BillingAddress
      * @param state
      *            the state field
      */
-    public void setState(String state)
+    public void setState(final String state)
     {
         this.state = state;
     }
@@ -236,7 +236,7 @@ public class BillingAddress
      * @param country
      *            the country field
      */
-    public void setCountry(String country)
+    public void setCountry(final String country)
     {
         this.country = country;
     }
@@ -257,7 +257,7 @@ public class BillingAddress
      * @param zip
      *            the ZIP code
      */
-    public void setZip(String zip)
+    public void setZip(final String zip)
     {
         this.zip = zip;
     }
@@ -278,9 +278,9 @@ public class BillingAddress
      * @param orders
      *            a list of {@link Order}s
      */
-    public void setOrder(List<Order> orders)
+    public void setOrder(final List<Order> orders)
     {
-        this.order = orders;
+        order = orders;
     }
 
     /**
@@ -314,7 +314,7 @@ public class BillingAddress
      *            the ID of the billing address
      * @return the {@link BillingAddress} that matches the given ID
      */
-    public static BillingAddress getBillingAddressById(int id)
+    public static BillingAddress getBillingAddressById(final int id)
     {
         return Ebean.find(BillingAddress.class, id);
     }
@@ -325,10 +325,10 @@ public class BillingAddress
      * @param id
      *            the ID of the billing address
      */
-    public static void removeCustomerFromBillingAddress(int id)
+    public static void removeCustomerFromBillingAddress(final int id)
     {
         // get the billing address by the ID
-        BillingAddress address = getBillingAddressById(id);
+        final BillingAddress address = getBillingAddressById(id);
         if (address != null)
         {
             // set customer of the billing address to null

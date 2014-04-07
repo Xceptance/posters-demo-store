@@ -13,7 +13,7 @@ public class ImportFromXMLToDB
      */
     public static void importCategory()
     {
-        CategoryHandler contentHandler = new CategoryHandler();
+        final CategoryHandler contentHandler = new CategoryHandler();
         XmlUtils.readXmlFile(contentHandler, "assets/files/categories.xml");
     }
 
@@ -22,7 +22,7 @@ public class ImportFromXMLToDB
      */
     public static void importProduct()
     {
-        ProductHandler productHandler = new ProductHandler();
+        final ProductHandler productHandler = new ProductHandler();
         XmlUtils.readXmlFile(productHandler, "assets/files/products.xml");
     }
 
@@ -31,7 +31,7 @@ public class ImportFromXMLToDB
      */
     public static void importCustomer()
     {
-        CustomerHandler customerHandler = new CustomerHandler();
+        final CustomerHandler customerHandler = new CustomerHandler();
         XmlUtils.readXmlFile(customerHandler, "assets/files/customer.xml");
     }
 }

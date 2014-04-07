@@ -28,7 +28,7 @@ public class CategoryHandler extends DefaultHandler
     private String currentValue;
 
     @Override
-    public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
+    public void startElement(final String namespaceURI, final String localName, final String qName, final Attributes atts)
     {
         if (localName.equals("category"))
         {
@@ -42,7 +42,7 @@ public class CategoryHandler extends DefaultHandler
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName)
+    public void endElement(final String uri, final String localName, final String qName)
     {
         if (localName.equals("nameCategory"))
         {
@@ -64,7 +64,7 @@ public class CategoryHandler extends DefaultHandler
     }
 
     @Override
-    public void characters(char[] ch, int start, int length)
+    public void characters(final char[] ch, final int start, final int length)
     {
         currentValue = new String(ch, start, length);
     }

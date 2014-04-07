@@ -42,7 +42,7 @@ public class JobController
         System.setProperty("ninja.external.configuration", "conf/application.conf");
         System.setProperty("ninja.mode", "prod");
 
-        StarterConf config = new StarterConf();
+        final StarterConf config = new StarterConf();
         // prepare database
         prepareDatabase(config);
         // import categories, products and dummy customer
@@ -54,7 +54,7 @@ public class JobController
      * 
      * @param config
      */
-    private void prepareDatabase(StarterConf config)
+    private void prepareDatabase(final StarterConf config)
     {
         // handle the connection
         Connection connection;
@@ -81,13 +81,12 @@ public class JobController
                 if (config.DROP_TABLES.equals("true"))
                 {
                     RunScript.execute(connection,
-                                      new InputStreamReader(getClass().getClassLoader()
-                                                                      .getResourceAsStream("conf/default-drop.sql")));
+                                      new InputStreamReader(getClass().getClassLoader().getResourceAsStream("conf/default-drop.sql")));
                 }
             }
             // get the DB-metadata
-            DatabaseMetaData md = connection.getMetaData();
-            ResultSet rs = md.getTables(null, null, "%", null);
+            final DatabaseMetaData md = connection.getMetaData();
+            final ResultSet rs = md.getTables(null, null, "%", null);
             // check if all tables exist
             while (rs.next())
             {
@@ -137,17 +136,16 @@ public class JobController
                 }
             }
             // create the tables if they not exist
-            if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable
-                  && shippingAddressTable && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
+            if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable && shippingAddressTable &&
+                  orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
             {
                 // simply execute the create-script
                 RunScript.execute(connection,
-                                  new InputStreamReader(getClass().getClassLoader()
-                                                                  .getResourceAsStream("conf/default-create.sql")));
+                                  new InputStreamReader(getClass().getClassLoader().getResourceAsStream("conf/default-create.sql")));
             }
             connection.close();
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
             e.printStackTrace();
             System.exit(0);
@@ -159,7 +157,7 @@ public class JobController
      * 
      * @param config
      */
-    private void importData(StarterConf config)
+    private void importData(final StarterConf config)
     {
         // import categories, if there is no category in DB
         if (Ebean.find(TopCategory.class).findList().size() == 0)

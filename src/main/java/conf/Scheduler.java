@@ -26,20 +26,20 @@ public class Scheduler
     public void deleteUnusedCart()
     {
         // get all carts, which are stored in the database
-        List<Cart> carts = Cart.getAllCarts();
+        final List<Cart> carts = Cart.getAllCarts();
         // check each cart
-        for (Cart cart : carts)
+        for (final Cart cart : carts)
         {
             // just delete if cart belongs to no customer
             if (cart.getCustomer() == null)
             {
                 // delete cart, if last update is more than 3600 seconds ago
                 boolean delete = true;
-                List<CartProduct> cartProducts = cart.getProducts();
+                final List<CartProduct> cartProducts = cart.getProducts();
                 // check each product of the cart
-                for (CartProduct cartProduct : cartProducts)
+                for (final CartProduct cartProduct : cartProducts)
                 {
-                    if (cartProduct.getLastUpdate().getTime() + (long) 3600000 > System.currentTimeMillis())
+                    if (cartProduct.getLastUpdate().getTime() + 3600000 > System.currentTimeMillis())
                     {
                         delete = false;
                         break;

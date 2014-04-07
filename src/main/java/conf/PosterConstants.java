@@ -141,7 +141,7 @@ public class PosterConstants
     public final String UNIT_OF_LENGTH;
 
     @Inject
-    public PosterConstants(NinjaProperties ninjaProp)
+    public PosterConstants(final NinjaProperties ninjaProp)
     {
         REGEX_ZIP = ninjaProp.getOrDie("regex.zip");
 

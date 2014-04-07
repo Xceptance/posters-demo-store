@@ -36,7 +36,7 @@ public class SearchController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns a product overview page with products, that matches the search text.
@@ -46,7 +46,7 @@ public class SearchController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result searchProduct(@Param("searchText") String searchText, Context context)
+    public Result searchProduct(@Param("searchText") final String searchText, final Context context)
     {
         // search text is empty
         if (searchText.isEmpty() || searchText.trim().isEmpty())
@@ -60,7 +60,7 @@ public class SearchController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             // search for products
-            List<Product> products = searchForProducts(searchText, 1, data);
+            final List<Product> products = searchForProducts(searchText, 1, data);
             // no product was found
             if (products.isEmpty())
             {
@@ -91,12 +91,12 @@ public class SearchController
      * @param context
      * @return
      */
-    public Result getProductOfSearch(@Param("searchText") String searchText, @Param("page") int pageNumber,
-                                     Context context)
+    public Result getProductOfSearch(@Param("searchText") final String searchText, @Param("page") final int pageNumber,
+                                     final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         // search for products
-        List<Product> products = searchForProducts(searchText, pageNumber, data);
+        final List<Product> products = searchForProducts(searchText, pageNumber, data);
         // set some attributes to null to get a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {
@@ -119,12 +119,12 @@ public class SearchController
      * @param data
      * @return
      */
-    private List<Product> searchForProducts(String searchText, int pageNumber, final Map<String, Object> data)
+    private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data)
     {
         // build query string
         String queryString = "find product where ";
         // divide search text by spaces
-        String[] searchTerms = searchText.split(" ");
+        final String[] searchTerms = searchText.split(" ");
         // search in description detail
         queryString += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
         // search in name
@@ -139,18 +139,18 @@ public class SearchController
             }
         }
         // create query
-        Query<Product> query = Ebean.createQuery(Product.class, queryString);
-        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        final Query<Product> query = Ebean.createQuery(Product.class, queryString);
+        final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // get paging list
-        PagingList<Product> pagingList = query.findPagingList(pageSize);
+        final PagingList<Product> pagingList = query.findPagingList(pageSize);
         // get all products to
-        int totalProductCount = query.findList().size();
+        final int totalProductCount = query.findList().size();
         // get row count in background
         pagingList.getFutureRowCount();
         // get the current page
-        Page<Product> page = pagingList.getPage(pageNumber - 1);
+        final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
-        List<Product> products = page.getList();
+        final List<Product> products = page.getList();
         // remove some data of the product list, to render a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {

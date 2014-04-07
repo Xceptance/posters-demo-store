@@ -105,8 +105,8 @@ public class Product
      */
     public Product()
     {
-        this.cart = new ArrayList<CartProduct>();
-        this.availableSizes = new ArrayList<ProductPosterSize>();
+        cart = new ArrayList<CartProduct>();
+        availableSizes = new ArrayList<ProductPosterSize>();
     }
 
     /**
@@ -125,7 +125,7 @@ public class Product
      * @param name
      *            the name of the product
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -146,7 +146,7 @@ public class Product
      * @param descriptionOverview
      *            the short description of the product
      */
-    public void setDescriptionOverview(String descriptionOverview)
+    public void setDescriptionOverview(final String descriptionOverview)
     {
         this.descriptionOverview = descriptionOverview;
     }
@@ -167,7 +167,7 @@ public class Product
      * @param imageURL
      *            the URL to the product image
      */
-    public void setImageURL(String imageURL)
+    public void setImageURL(final String imageURL)
     {
         this.imageURL = imageURL;
     }
@@ -188,7 +188,7 @@ public class Product
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -209,7 +209,7 @@ public class Product
      * @param descriptionDetail
      *            the long description of the product
      */
-    public void setDescriptionDetail(String descriptionDetail)
+    public void setDescriptionDetail(final String descriptionDetail)
     {
         this.descriptionDetail = descriptionDetail;
     }
@@ -230,7 +230,7 @@ public class Product
      * @param availableSizes
      *            a list of available {@link ProductPosterSize}s of the product
      */
-    public void setAvailableSizes(List<ProductPosterSize> availableSizes)
+    public void setAvailableSizes(final List<ProductPosterSize> availableSizes)
     {
         this.availableSizes = availableSizes;
     }
@@ -241,9 +241,9 @@ public class Product
      * @param size
      *            the {@link ProductPosterSize} to add
      */
-    public void addAvailableSize(ProductPosterSize size)
+    public void addAvailableSize(final ProductPosterSize size)
     {
-        this.availableSizes.add(size);
+        availableSizes.add(size);
     }
 
     /**
@@ -262,7 +262,7 @@ public class Product
      * @param subCategory
      *            the {@link SubCategory} of the product
      */
-    public void setSubCategory(SubCategory subCategory)
+    public void setSubCategory(final SubCategory subCategory)
     {
         this.subCategory = subCategory;
     }
@@ -283,7 +283,7 @@ public class Product
      * @param topCategory
      *            the {@link TopCategory} of the product
      */
-    public void setTopCategory(TopCategory topCategory)
+    public void setTopCategory(final TopCategory topCategory)
     {
         this.topCategory = topCategory;
     }
@@ -304,7 +304,7 @@ public class Product
      * @param showInCarousel
      *            the information, whether or not the product will be shown in the carousel
      */
-    public void setShowInCarousel(boolean showInCarousel)
+    public void setShowInCarousel(final boolean showInCarousel)
     {
         this.showInCarousel = showInCarousel;
     }
@@ -325,7 +325,7 @@ public class Product
      * @param showInTopCategorie
      *            the information, whether or not the product will be shown on the top category overview page
      */
-    public void setShowInTopCategorie(boolean showInTopCategorie)
+    public void setShowInTopCategorie(final boolean showInTopCategorie)
     {
         this.showInTopCategorie = showInTopCategorie;
     }
@@ -346,7 +346,7 @@ public class Product
      * @param cart
      *            the {@link CartProduct}s
      */
-    public void setCart(List<CartProduct> cart)
+    public void setCart(final List<CartProduct> cart)
     {
         this.cart = cart;
     }
@@ -367,7 +367,7 @@ public class Product
      * @param order
      *            the {@link OrderProduct}s
      */
-    public void setOrder(List<OrderProduct> order)
+    public void setOrder(final List<OrderProduct> order)
     {
         this.order = order;
     }
@@ -389,7 +389,7 @@ public class Product
      */
     public String getPriceAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = minimumPrice;
         temp = temp * 100;
         temp = Math.round(temp);
@@ -403,7 +403,7 @@ public class Product
      * @param minimumPrice
      *            the minimum price of the product
      */
-    public void setMinimumPrice(double minimumPrice)
+    public void setMinimumPrice(final double minimumPrice)
     {
         this.minimumPrice = minimumPrice;
     }
@@ -431,7 +431,7 @@ public class Product
      *            the ID of the product
      * @return a {@link Product} that matches the given ID
      */
-    public static Product getProductById(int id)
+    public static Product getProductById(final int id)
     {
         // get product by id
         return Ebean.find(Product.class, id);

@@ -22,10 +22,10 @@ public class SessionCustomerIsLoggedFilter implements Filter
     @Inject
     Messages msg;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     @Override
-    public Result filter(FilterChain chain, Context context)
+    public Result filter(final FilterChain chain, final Context context)
     {
         // customer is logged, everything is fine
         if (SessionHandling.isCustomerLogged(context))

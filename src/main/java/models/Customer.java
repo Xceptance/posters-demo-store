@@ -88,10 +88,10 @@ public class Customer
      */
     public Customer()
     {
-        this.shippingAddress = new ArrayList<ShippingAddress>();
-        this.billingAddress = new ArrayList<BillingAddress>();
-        this.creditCard = new ArrayList<CreditCard>();
-        this.order = new ArrayList<Order>();
+        shippingAddress = new ArrayList<ShippingAddress>();
+        billingAddress = new ArrayList<BillingAddress>();
+        creditCard = new ArrayList<CreditCard>();
+        order = new ArrayList<Order>();
     }
 
     /**
@@ -110,7 +110,7 @@ public class Customer
      * @param email
      *            the customer's email address
      */
-    public void setEmail(String email)
+    public void setEmail(final String email)
     {
         this.email = email;
     }
@@ -131,7 +131,7 @@ public class Customer
      * @param password
      *            the customer's password
      */
-    public void setPassword(String password)
+    public void setPassword(final String password)
     {
         this.password = password;
     }
@@ -152,7 +152,7 @@ public class Customer
      * @param name
      *            the customer's last name
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -173,7 +173,7 @@ public class Customer
      * @param firstName
      *            the customer's first name
      */
-    public void setFirstName(String firstName)
+    public void setFirstName(final String firstName)
     {
         this.firstName = firstName;
     }
@@ -194,7 +194,7 @@ public class Customer
      * @param shippingAddress
      *            the list of the customer's {@link ShippingAddress}es
      */
-    public void setShippingAddress(List<ShippingAddress> shippingAddress)
+    public void setShippingAddress(final List<ShippingAddress> shippingAddress)
     {
         this.shippingAddress = shippingAddress;
     }
@@ -205,10 +205,10 @@ public class Customer
      * @param shippingAddress
      *            the shipping address to add
      */
-    public void addShippingAddress(ShippingAddress shippingAddress)
+    public void addShippingAddress(final ShippingAddress shippingAddress)
     {
         this.shippingAddress.add(shippingAddress);
-        this.update();
+        update();
     }
 
     /**
@@ -227,7 +227,7 @@ public class Customer
      * @param billingAddress
      *            the list of the customer's {@link BillingAddress}es
      */
-    public void setBillingAddress(List<BillingAddress> billingAddress)
+    public void setBillingAddress(final List<BillingAddress> billingAddress)
     {
         this.billingAddress = billingAddress;
     }
@@ -238,10 +238,10 @@ public class Customer
      * @param billingAddress
      *            the billing address to add
      */
-    public void addBillingAddress(BillingAddress billingAddress)
+    public void addBillingAddress(final BillingAddress billingAddress)
     {
         this.billingAddress.add(billingAddress);
-        this.update();
+        update();
     }
 
     /**
@@ -260,9 +260,9 @@ public class Customer
      * @param customerId
      *            the {@link UUID} of the entity
      */
-    public void setId(UUID customerId)
+    public void setId(final UUID customerId)
     {
-        this.id = customerId;
+        id = customerId;
     }
 
     /**
@@ -281,7 +281,7 @@ public class Customer
      * @param creditCard
      *            the list of customer's {@link CreditCard}s
      */
-    public void setCreditCard(List<CreditCard> creditCard)
+    public void setCreditCard(final List<CreditCard> creditCard)
     {
         this.creditCard = creditCard;
     }
@@ -292,10 +292,10 @@ public class Customer
      * @param card
      *            the {@link CreditCard} to add.
      */
-    public void addCreditCard(CreditCard card)
+    public void addCreditCard(final CreditCard card)
     {
-        this.creditCard.add(card);
-        this.update();
+        creditCard.add(card);
+        update();
     }
 
     /**
@@ -314,7 +314,7 @@ public class Customer
      * @param order
      *            the list of the customer's {@link Order}s
      */
-    public void setOrder(List<Order> order)
+    public void setOrder(final List<Order> order)
     {
         this.order = order;
     }
@@ -335,7 +335,7 @@ public class Customer
      * @param cart
      *            the current cart of the customer
      */
-    public void setCart(Cart cart)
+    public void setCart(final Cart cart)
     {
         this.cart = cart;
     }
@@ -346,7 +346,7 @@ public class Customer
      * @param password
      *            the password to hash
      */
-    public void hashPasswd(String password)
+    public void hashPasswd(final String password)
     {
         setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
     }
@@ -358,7 +358,7 @@ public class Customer
      *            the password to check
      * @return {@code true} if the password matches, otherwise {@code false}
      */
-    public boolean checkPasswd(String password)
+    public boolean checkPasswd(final String password)
     {
         return BCrypt.checkpw(password, this.password);
     }
@@ -394,11 +394,11 @@ public class Customer
      *            the email address to check
      * @return {@code true} if the email address exist, otherwise {@code false}
      */
-    public static boolean emailExist(String email)
+    public static boolean emailExist(final String email)
     {
         boolean exist = true;
         // get a list of customers, which have the given email address
-        List<Customer> loginExist = Ebean.find(Customer.class).where().eq("email", email).findList();
+        final List<Customer> loginExist = Ebean.find(Customer.class).where().eq("email", email).findList();
         // no customer has this email address
         if (loginExist.size() == 0)
         {
@@ -419,7 +419,7 @@ public class Customer
      *            the customer's email address
      * @return the {@link Customer} with the given email address
      */
-    public static Customer getCustomerByEmail(String email)
+    public static Customer getCustomerByEmail(final String email)
     {
         // get customer by email address
         return Ebean.find(Customer.class).where().eq("email", email).findUnique();
@@ -432,7 +432,7 @@ public class Customer
      *            the {@link UUID} of the customer
      * @return the {@link Customer} with the given {@link UUID}
      */
-    public static Customer getCustomerById(UUID customerId)
+    public static Customer getCustomerById(final UUID customerId)
     {
         // get customer by id
         return Ebean.find(Customer.class, customerId);

@@ -19,7 +19,7 @@ public class Routes implements ApplicationRoutes
 {
 
     @Override
-    public void init(Router router)
+    public void init(final Router router)
     {
         // ############################################################
         // home page
@@ -62,25 +62,18 @@ public class Routes implements ApplicationRoutes
         // customer's addresses
         // ############################################################
         router.POST().route("/updateShippingAddress").with(CustomerController.class, "updateShippingAddress");
-        router.POST().route("/updateShippingAddressCompleted")
-              .with(CustomerController.class, "updateShippingAddressCompleted");
+        router.POST().route("/updateShippingAddressCompleted").with(CustomerController.class, "updateShippingAddressCompleted");
         router.POST().route("/updateBillingAddress").with(CustomerController.class, "updateBillingAddress");
-        router.POST().route("/updateBillingAddressCompleted")
-              .with(CustomerController.class, "updateBillingAddressCompleted");
+        router.POST().route("/updateBillingAddressCompleted").with(CustomerController.class, "updateBillingAddressCompleted");
         router.POST().route("/deleteBillingAddress").with(CustomerController.class, "deleteBillingAddress");
-        router.POST().route("/confirmDeleteBillingAddress")
-              .with(CustomerController.class, "confirmDeleteBillingAddress");
+        router.POST().route("/confirmDeleteBillingAddress").with(CustomerController.class, "confirmDeleteBillingAddress");
         router.POST().route("/deleteShippingAddress").with(CustomerController.class, "deleteShippingAddress");
-        router.POST().route("/confirmDeleteShippingAddress")
-              .with(CustomerController.class, "confirmDeleteShippingAddress");
-        router.GET().route("/addShippingAddressToCustomer")
-              .with(CustomerController.class, "addShippingAddressToCustomer");
+        router.POST().route("/confirmDeleteShippingAddress").with(CustomerController.class, "confirmDeleteShippingAddress");
+        router.GET().route("/addShippingAddressToCustomer").with(CustomerController.class, "addShippingAddressToCustomer");
         router.POST().route("/addShippingAddressToCustomerCompleted")
               .with(CustomerController.class, "addShippingAddressToCustomerCompleted");
-        router.GET().route("/addBillingAddressToCustomer")
-              .with(CustomerController.class, "addBillingAddressToCustomer");
-        router.POST().route("/addBillingAddressToCustomerCompleted")
-              .with(CustomerController.class, "addBillingAddressToCustomerCompleted");
+        router.GET().route("/addBillingAddressToCustomer").with(CustomerController.class, "addBillingAddressToCustomer");
+        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController.class, "addBillingAddressToCustomerCompleted");
 
         // ############################################################
         // customer's personal data

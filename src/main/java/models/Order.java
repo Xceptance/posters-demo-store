@@ -95,7 +95,7 @@ public class Order
      */
     public Order()
     {
-        this.products = new ArrayList<OrderProduct>();
+        products = new ArrayList<OrderProduct>();
     }
 
     /**
@@ -114,7 +114,7 @@ public class Order
      * @param id
      *            the {@link UUID} of the entity
      */
-    public void setId(UUID id)
+    public void setId(final UUID id)
     {
         this.id = id;
     }
@@ -135,7 +135,7 @@ public class Order
      * @param shippingAddress
      *            the {@link ShippingAddress} of the order
      */
-    public void setShippingAddress(ShippingAddress shippingAddress)
+    public void setShippingAddress(final ShippingAddress shippingAddress)
     {
         this.shippingAddress = shippingAddress;
     }
@@ -156,7 +156,7 @@ public class Order
      * @param billingAddress
      *            the {@link BillingAddress} of the order
      */
-    public void setBillingAddress(BillingAddress billingAddress)
+    public void setBillingAddress(final BillingAddress billingAddress)
     {
         this.billingAddress = billingAddress;
     }
@@ -177,7 +177,7 @@ public class Order
      * @param shippingCosts
      *            the shipping costs of the order
      */
-    public void setShippingCosts(double shippingCosts)
+    public void setShippingCosts(final double shippingCosts)
     {
         this.shippingCosts = shippingCosts;
     }
@@ -189,7 +189,7 @@ public class Order
      */
     public String getShippingCostsAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = shippingCosts;
         temp = temp * 100;
         temp = Math.round(temp);
@@ -213,7 +213,7 @@ public class Order
      * @param tax
      *            the tax of the order
      */
-    public void setTax(double tax)
+    public void setTax(final double tax)
     {
         this.tax = tax;
     }
@@ -225,7 +225,7 @@ public class Order
      */
     public String getTaxAsString()
     {
-        return String.valueOf(this.tax);
+        return String.valueOf(tax);
     }
 
     /**
@@ -244,7 +244,7 @@ public class Order
      * @param totalCosts
      *            the total costs of the order
      */
-    public void setTotalCosts(double totalCosts)
+    public void setTotalCosts(final double totalCosts)
     {
         this.totalCosts = totalCosts;
     }
@@ -256,7 +256,7 @@ public class Order
      */
     public String getTotalCostsAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = totalCosts;
         temp = temp * 100;
         temp = Math.round(temp);
@@ -280,7 +280,7 @@ public class Order
      * @param creditCard
      *            the {@link CreditCard} the order is paid with
      */
-    public void setCreditCard(CreditCard creditCard)
+    public void setCreditCard(final CreditCard creditCard)
     {
         this.creditCard = creditCard;
     }
@@ -301,7 +301,7 @@ public class Order
      * @param customer
      *            the {@link Customer} of the order
      */
-    public void setCustomer(Customer customer)
+    public void setCustomer(final Customer customer)
     {
         this.customer = customer;
     }
@@ -322,7 +322,7 @@ public class Order
      * @param products
      *            the {@link OrderProduct}s of the order
      */
-    public void setProducts(List<OrderProduct> products)
+    public void setProducts(final List<OrderProduct> products)
     {
         this.products = products;
     }
@@ -343,9 +343,9 @@ public class Order
      * @param date
      *            the date the order was made
      */
-    public void setOrderDate(String date)
+    public void setOrderDate(final String date)
     {
-        this.orderDate = date;
+        orderDate = date;
     }
 
     /**
@@ -364,7 +364,7 @@ public class Order
      * @param lastUpdate
      *            the {@link Timestamp} of the entity
      */
-    public void setLastUpdate(Timestamp lastUpdate)
+    public void setLastUpdate(final Timestamp lastUpdate)
     {
         this.lastUpdate = lastUpdate;
     }
@@ -390,7 +390,7 @@ public class Order
      */
     public void addTaxToTotalCosts()
     {
-        this.setTotalCosts(this.getTotalCosts() * this.getTax() + this.getTotalCosts());
+        setTotalCosts(getTotalCosts() * getTax() + getTotalCosts());
     }
 
     /**
@@ -398,7 +398,7 @@ public class Order
      */
     public void addShippingCostsToTotalCosts()
     {
-        this.setTotalCosts(this.getShippingCosts() + this.getTotalCosts());
+        setTotalCosts(getShippingCosts() + getTotalCosts());
     }
 
     /**
@@ -411,10 +411,10 @@ public class Order
      * @param size
      *            the {@link PosterSize} of the product
      */
-    private void addProduct(Product product, String finish, PosterSize size)
+    private void addProduct(final Product product, final String finish, final PosterSize size)
     {
-        OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product)
-                                         .eq("finish", finish).eq("size", size).findUnique();
+        OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product).eq("finish", finish)
+                                         .eq("size", size).findUnique();
         // this product is not in the order
         if (orderProduct == null)
         {
@@ -429,8 +429,8 @@ public class Order
             // set size
             orderProduct.setSize(size);
             // set price
-            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size)
-                                       .findUnique().getPrice());
+            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findUnique()
+                                       .getPrice());
             orderProduct.save();
             products.add(orderProduct);
         }
@@ -442,7 +442,7 @@ public class Order
             orderProduct.update();
         }
         // recalculate total costs
-        this.setTotalCosts(getTotalCosts() + orderProduct.getPrice());
+        setTotalCosts(getTotalCosts() + orderProduct.getPrice());
     }
 
     /**
@@ -451,17 +451,17 @@ public class Order
      * @param cart
      *            the {@link Cart} which will be ordered
      */
-    public void addProductsFromCart(Cart cart)
+    public void addProductsFromCart(final Cart cart)
     {
         // get all products from cart
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
         // for each product
-        for (CartProduct cartProduct : cartProducts)
+        for (final CartProduct cartProduct : cartProducts)
         {
             // add the product to the order
             for (int i = 0; i < cartProduct.getProductCount(); i++)
             {
-                this.addProduct(cartProduct.getProduct(), cartProduct.getFinish(), cartProduct.getSize());
+                addProduct(cartProduct.getProduct(), cartProduct.getFinish(), cartProduct.getSize());
             }
         }
     }
@@ -473,7 +473,7 @@ public class Order
      *            the {@link UUID} of the order
      * @return the order with the given ID
      */
-    public static Order getOrderById(UUID id)
+    public static Order getOrderById(final UUID id)
     {
         return Ebean.find(Order.class, id);
     }
@@ -486,11 +486,11 @@ public class Order
     public static Order createNewOrder()
     {
         // create new order
-        Order order = new Order();
+        final Order order = new Order();
         // save order
         order.save();
         // get new order by id
-        Order newOrder = Ebean.find(Order.class, order.getId());
+        final Order newOrder = Ebean.find(Order.class, order.getId());
         // return new order
         return newOrder;
     }

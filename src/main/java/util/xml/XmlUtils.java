@@ -25,25 +25,25 @@ public class XmlUtils
      * @param handler
      * @param source
      */
-    public static void readXmlFile(DefaultHandler handler, String source)
+    public static void readXmlFile(final DefaultHandler handler, final String source)
     {
         try
         {
-            XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-            Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source));
-            InputSource inputSource = new InputSource(reader);
+            final XMLReader xmlReader = XMLReaderFactory.createXMLReader();
+            final Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source));
+            final InputSource inputSource = new InputSource(reader);
             xmlReader.setContentHandler(handler);
             xmlReader.parse(inputSource);
         }
-        catch (FileNotFoundException e)
+        catch (final FileNotFoundException e)
         {
             e.printStackTrace();
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             e.printStackTrace();
         }
-        catch (SAXException e)
+        catch (final SAXException e)
         {
             e.printStackTrace();
         }

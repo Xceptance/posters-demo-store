@@ -41,7 +41,7 @@ public class CartController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns the cart overview page.
@@ -50,7 +50,7 @@ public class CartController
      * @return The cart overview page.
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result cart(Context context)
+    public Result cart(final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
@@ -67,11 +67,11 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result updateProductCount(@Param("cartProductId") int cartProductId,
-                                     @Param("productCount") String productCount, Context context)
+    public Result updateProductCount(@Param("cartProductId") final int cartProductId, @Param("productCount") final String productCount,
+                                     final Context context)
     {
         // result is a json
-        Result result = Results.json();
+        final Result result = Results.json();
         // product count doesn't match regex
         if (!Pattern.matches(xcpConf.REGEX_PRODUCT_COUNT, productCount))
         {
@@ -89,12 +89,12 @@ public class CartController
                 newProductCount = 0;
             }
             // get cart by session
-            Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+            final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
             // get cart product by id
-            CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
-            Product product = cartProduct.getProduct();
-            int currentProductCount = cartProduct.getProductCount();
-            int difference = newProductCount - currentProductCount;
+            final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+            final Product product = cartProduct.getProduct();
+            final int currentProductCount = cartProduct.getProductCount();
+            final int difference = newProductCount - currentProductCount;
             // product must be added
             if (difference > 0)
             {
@@ -127,18 +127,17 @@ public class CartController
      * @param context
      * @return
      */
-    public Result getCartElementSlider(Context context)
+    public Result getCartElementSlider(final Context context)
     {
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get all products of the cart
-        List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart)
-                                              .orderBy("lastUpdate desc").findList();
+        final List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
         // prepare just some attributes
-        for (CartProduct cartProduct : cartProducts)
+        for (final CartProduct cartProduct : cartProducts)
         {
-            Map<String, Object> product = new HashMap<String, Object>();
+            final Map<String, Object> product = new HashMap<String, Object>();
             product.put("productCount", cartProduct.getProductCount());
             product.put("productName", cartProduct.getProduct().getName());
             product.put("productId", cartProduct.getProduct().getId());
@@ -147,7 +146,7 @@ public class CartController
             product.put("size", cartProduct.getSize());
             results.add(product);
         }
-        Result result = Results.json();
+        final Result result = Results.json();
         // add products
         result.render("cartElements", results);
         // add currency
@@ -168,25 +167,24 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish,
-                            @Param("size") String size, Context context)
+    public Result addToCart(@Param("productId") final String productId, @Param("finish") final String finish,
+                            @Param("size") final String size, final Context context)
     {
-        Result result = Results.json();
+        final Result result = Results.json();
         // get product by id
-        Product product = Product.getProductById(Integer.parseInt(productId));
+        final Product product = Product.getProductById(Integer.parseInt(productId));
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get poster size
-        String[] dummy = size.split(" ");
-        int width = Integer.parseInt(dummy[0]);
-        int height = Integer.parseInt(dummy[2]);
-        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
-                                     .findUnique();
+        final String[] dummy = size.split(" ");
+        final int width = Integer.parseInt(dummy[0]);
+        final int height = Integer.parseInt(dummy[2]);
+        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
         // add product to cart
         cart.addProduct(product, finish, posterSize);
         // get added cart product
-        CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
-        Map<String, Object> updatedProduct = new HashMap<String, Object>();
+        final CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
+        final Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("productName", cartProduct.getProduct().getName());
         updatedProduct.put("productId", cartProduct.getProduct().getId());
@@ -214,19 +212,19 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result deleteFromCart(@Param("cartProductId") int cartProductId, Context context)
+    public Result deleteFromCart(@Param("cartProductId") final int cartProductId, final Context context)
     {
-        CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+        final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get count of this product
-        int countProduct = cartProduct.getProductCount();
+        final int countProduct = cartProduct.getProductCount();
         // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
             cart.removeProduct(cartProduct);
         }
-        Result result = Results.json();
+        final Result result = Results.json();
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add totalPrice
@@ -242,21 +240,20 @@ public class CartController
      * @param context
      * @return
      */
-    public Result updatePrice(@Param("size") String size, @Param("productId") int productId, Context context)
+    public Result updatePrice(@Param("size") final String size, @Param("productId") final int productId, final Context context)
     {
         // split the size to the width and height
-        String[] dummy = size.split(" ");
-        int width = Integer.parseInt(dummy[0]);
-        int height = Integer.parseInt(dummy[2]);
+        final String[] dummy = size.split(" ");
+        final int width = Integer.parseInt(dummy[0]);
+        final int height = Integer.parseInt(dummy[2]);
         // get the specified poster size
-        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
-                                     .findUnique();
+        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
         // get the product
-        Product product = Product.getProductById(productId);
+        final Product product = Product.getProductById(productId);
         // get the product poster size
-        ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
-                                                   .eq("size", posterSize).findUnique();
-        Result result = Results.json();
+        final ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
+                                                         .eq("size", posterSize).findUnique();
+        final Result result = Results.json();
         // add new price
         result.render("newPrice", productPosterSize.getPriceAsString() + xcpConf.CURRENCY);
         return result;
@@ -268,9 +265,9 @@ public class CartController
      * @param cart
      * @return
      */
-    private String prepareCartOverviewInHeader(Cart cart)
+    private String prepareCartOverviewInHeader(final Cart cart)
     {
-        StringBuilder headerCartOverview = new StringBuilder();
+        final StringBuilder headerCartOverview = new StringBuilder();
         headerCartOverview.append(" " + msg.get("cartOverviewTitle", language).get() + ": ");
         headerCartOverview.append(cart.getProductCount());
         headerCartOverview.append(" " + msg.get("cartItem", language).get() + " - ");
