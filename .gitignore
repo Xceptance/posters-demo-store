@@ -3,3 +3,4 @@
 /target/
 /samples/testsuite-poster-store/results/
 /samples/testsuite-poster-store/classes/
+/*.sql
