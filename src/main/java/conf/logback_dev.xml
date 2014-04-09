@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>[%d{HH:mm:ss.SSS}] %-5p [%t] - %m%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>log/posters.log</File>
+        <encoder>
+            <Pattern>[%d{yyyy/MM/dd-HH:mm:ss.SSS}] %-5p [%t] %c - %m%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>10</maxIndex>
+            <FileNamePattern>log/posters.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <!-- Ninja Framework (uses both named logger "Ninja" and package logger "ninja.*") -->
+    <logger name="Ninja" additivity="false" level="debug">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </logger>
+    <logger name="ninja" additivity="false" level="debug">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </logger>
+    <!-- MongoDB -->
+    <logger name="com.mongodb" additivity="false" level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </logger>
+    <!-- all other code -->
+    <root level="warn">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+</configuration>
