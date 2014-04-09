@@ -27,6 +27,7 @@ public class TSearch extends AbstractTestCase
      * Data provider for search phrases that result in hits..
      */
     private static final DataProvider HITS_PROVIDER;
+    
     static
     {
         try

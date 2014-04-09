@@ -63,6 +63,5 @@ public class TAddToCart extends AbstractTestCase
         // go to the cart overview page
         final ViewCart viewCart = new ViewCart(previousAction);
         viewCart.run();
-
     }
 }

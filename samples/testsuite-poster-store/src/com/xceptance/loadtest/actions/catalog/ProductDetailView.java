@@ -18,6 +18,11 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 public class ProductDetailView extends AbstractHtmlPageAction
 {
     /**
+     * The product detail link to follow
+     */
+    private HtmlElement productDetailLink;
+
+    /**
      * Constructor
      * 
      * @param previousAction
@@ -27,11 +32,6 @@ public class ProductDetailView extends AbstractHtmlPageAction
     {
         super(previousAction, null);
     }
-
-    /**
-     * The product detail link to follow
-     */
-    private HtmlElement productDetailLink;
 
     @Override
     public void preValidate() throws Exception

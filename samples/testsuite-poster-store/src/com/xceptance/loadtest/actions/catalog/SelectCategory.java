@@ -18,6 +18,11 @@ import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 public class SelectCategory extends AbstractHtmlPageAction
 {
     /**
+     * Chosen level-1 category.
+     */
+    private HtmlElement categoryLink;
+
+    /**
      * Constructor
      * 
      * @param previousAction
@@ -27,11 +32,6 @@ public class SelectCategory extends AbstractHtmlPageAction
     {
         super(previousAction, null);
     }
-
-    /**
-     * Chosen level-1 category.
-     */
-    private HtmlElement categoryLink;
 
     @Override
     public void preValidate() throws Exception

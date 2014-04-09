@@ -61,7 +61,6 @@ public class BrowsingFlow
      */
     public AbstractHtmlPageAction run() throws Throwable
     {
-
         // Select a random top category from side navigation
         final SelectTopCategory selectTopCategory = new SelectTopCategory(previousAction);
         selectTopCategory.run();

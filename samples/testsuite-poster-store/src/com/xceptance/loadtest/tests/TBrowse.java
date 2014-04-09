@@ -46,6 +46,5 @@ public class TBrowse extends AbstractTestCase
         // is neither available in the XLT framework nor necessary when you manually create a flow.
         final BrowsingFlow browsingFlow = new BrowsingFlow(homepage, pagingProbability, pagingMin, pagingMax);
         browsingFlow.run();
-
     }
 }

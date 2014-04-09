@@ -105,6 +105,5 @@ public class TCheckout extends AbstractTestCase
         // log out
         final Logout logout = new Logout(previousAction);
         logout.run();
-
     }
 }
