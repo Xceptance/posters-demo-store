@@ -18,7 +18,6 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 public class XmlUtils
 {
-
     /**
      * Reads an xml file from the given source with the given SAX handler.
      * 
@@ -30,7 +29,7 @@ public class XmlUtils
         try
         {
             final XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-            final Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source));
+            final Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source), "UTF-8");
             final InputSource inputSource = new InputSource(reader);
             xmlReader.setContentHandler(handler);
             xmlReader.parse(inputSource);
