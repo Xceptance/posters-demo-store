@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+  <description>Verifies that an error is shown if a user wants to register with an email that already exist.</description>
+  <module name="posters.functional.modules.OpenHomepage"/>
+  <module name="posters.functional.modules.OpenLoginForm"/>
+  <action name="OpenFormToRegister"/>
+  <command name="clickAndWait" target="id=linkRegister"/>
+  <module name="posters.functional.modules.FillInRegistrationForm">
+    <parameter name="name" value="${name}"/>
+    <parameter name="firstName" value="${firstName}"/>
+    <parameter name="email" value="${email}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="passwordAgain" value="${password}"/>
+  </module>
+  <action name="TryToRegister"/>
+  <command name="clickAndWait" target="id=btnRegister"/>
+  <command name="assertText" target="id=errorMessage" value="× An account with this email address already exists."/>
+  <command name="assertText" target="id=name" value="${name}"/>
+  <command name="assertText" target="id=firstName" value="${firstName}"/>
+  <command name="assertText" target="id=eMail" value="${email}"/>
+</testcase>

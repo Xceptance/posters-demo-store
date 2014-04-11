@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+  <description>Browses to a product of a category and add this product to the cart.</description>
+  <module name="posters.functional.modules.Browse"/>
+  <action name="AddToCart"/>
+  <command name="storeXpathCount" target="//div[@id='selectFinish']/label" value="finishCount"/>
+  <command name="store" target="${RANDOM.Number(${finishCount})}" value="finishIndex"/>
+  <command name="check" target="//div[@id='selectFinish']/label[${finishIndex}+1]/input"/>
+  <command name="storeText" target="//div[@id='selectFinish']/label[${finishIndex}+1][1]" value="productFinish"/>
+  <command name="storeXpathCount" target="//select[@id='selectSize']/option" value="availableSizeCount"/>
+  <command name="store" target="${RANDOM.Number(${availableSizeCount})}" value="availableSizeIndex"/>
+  <command name="select" target="id=selectSize" value="index=${availableSizeIndex}"/>
+  <command name="storeText" target="//select[@id='selectSize']/option[${availableSizeIndex}+1]" value="productSize"/>
+  <command name="click" target="id=btnAddToCart"/>
+  <command name="waitForVisible" target="//ul[@id='cartSliderElementList']/li"/>
+  <command name="storeText" target="id=prodPrice" value="productPrice"/>
+  <command name="assertElementPresent" target="//ul[@id='cartSliderElementList']/li[1]"/>
+  <command name="waitForNotVisible" target="id=cartSliderElementList"/>
+</scriptmodule>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Searches the specified term.</description>
-  <parameter name="searchTerm"/>
-  <action name="Search"/>
-  <command name="type" target="id=searchText" value="@{searchTerm}"/>
-  <command name="clickAndWait" target="id=btnSearch"/>
-</scriptmodule>

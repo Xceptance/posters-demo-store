@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+  <description>Creates and deletes a credit card.</description>
+  <module name="posters.functional.modules.OpenHomepage"/>
+  <module name="posters.functional.modules.Login">
+    <parameter name="email" value="${email}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="firstName" value="${firstName}"/>
+  </module>
+  <module name="posters.functional.modules.OpenAccountOverview"/>
+  <action name="OpenPaymentSettings"/>
+  <command name="clickAndWait" target="id=linkPaymentOverview"/>
+  <command name="assertElementPresent" target="id=titlePaymentOverview"/>
+  <command name="assertText" target="//*[@id='payment0']/address" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
+  <action name="OpenFormToAddNewCreditCard"/>
+  <command name="clickAndWait" target="id=linkAddNewPayment"/>
+  <module name="posters.functional.modules.FillInPaymentForm">
+    <parameter name="number" value="${creditCard}"/>
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="month" value="${expDateMonth}"/>
+    <parameter name="year" value="${expDateYear}"/>
+  </module>
+  <action name="AddNewCreditCard"/>
+  <command name="clickAndWait" target="id=btnAddPayment"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertText" target="//*[@id='payment1']/address" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
+  <action name="DeleteCreditCard"/>
+  <command name="clickAndWait" target="id=btnDeletePayment1"/>
+  <command name="type" target="id=password" value="${password}"/>
+  <action name="ConfirmDeletion"/>
+  <command name="clickAndWait" target="id=btnDeletePayment"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <command name="assertNotElementPresent" target="id=payment1"/>
+</testcase>
