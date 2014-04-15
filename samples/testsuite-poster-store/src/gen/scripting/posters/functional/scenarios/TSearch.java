@@ -42,7 +42,7 @@ public class TSearch extends AbstractWebDriverScriptTestCase
         store(resolve("${searchTerm_noHits}"), "searchTerm");
         // Execute the search (module call)
         final Search _search = new Search();
-        _search.execute(resolve("${searchTerm}"));
+        _search.execute(resolve("${searchTerm_hits}"));
 
         // Assert presence of info maessage element
         assertElementPresent("id=infoMessage");
@@ -54,16 +54,16 @@ public class TSearch extends AbstractWebDriverScriptTestCase
         //
         startAction("Search");
         // Store a search phrase that gives results
-        store(resolve("${searchTerm_1}"), "searchTerm");
+        store(resolve("${searchTerm_hits}"), "searchTerm");
         // Execute the search (module call)
-        _search.execute(resolve("${searchTerm}"));
+        _search.execute(resolve("${searchTerm_hits}"));
 
         // Validate the entered search phrase is still visible in the input
-        assertText("id=searchText", resolve("${searchTerm}"));
+        assertText("id=searchText", resolve("${searchTerm_hits}"));
         // Validate presence of the search results page headline
         assertElementPresent("id=titleSearchText");
         // Validate the headline contains the search phrase
-        assertText("id=titleSearchText", resolve("glob:*Your results for your search: '${searchTerm}'*"));
+        assertText("id=titleSearchText", resolve("glob:*Your results for your search: '${searchTerm_hits}'*"));
 
         //
         // ~~~ ViewProduct ~~~
@@ -75,24 +75,8 @@ public class TSearch extends AbstractWebDriverScriptTestCase
         storeText("id=product0Name", "productName");
         // Click the product ilnk to open the product detail page
         clickAndWait("//*[@id='product0']//img");
-        // Validate it's the correct product detail page 
+        // Validate it's the correct product detail page
         assertText("id=titleProductName", resolve("${productName}"));
-
-        //
-        // ~~~ Search ~~~
-        //
-        startAction("Search");
-        // Store search phrase to repeat search
-        store(resolve("${searchTerm_2}"), "searchTerm");
-        // Execute the search (module call)
-        _search.execute(resolve("${searchTerm}"));
-
-        // Validate the entered search phrase is still visible in the input
-        assertText("id=searchText", resolve("${searchTerm}"));
-        // Validate presence of the search results page headline
-        assertElementPresent("id=titleSearchText");
-        // Validate the headline contains the search phrase
-        assertText("id=titleSearchText", resolve("glob:*Your results for your search: '${searchTerm}'*"));
 
     }
 
