@@ -50,6 +50,11 @@ public class Search extends AbstractHtmlPageAction
         searchOption = option;
     }
 
+    /**
+     * Validation prior to execution.
+     * @throws Exception
+     *             if some of the required input elements couldn't be found.
+     */
     @Override
     public void preValidate() throws Exception
     {
@@ -64,6 +69,13 @@ public class Search extends AbstractHtmlPageAction
         searchForm = HtmlPageUtils.findSingleHtmlElementByID(page, "search");
     }
 
+    /**
+     * Executes the search. Primarily this includes the input of the search
+     * phrase and a click on the proper search button.
+     * @throws Exception
+     *             if some of the inputs have become invalid or setting the
+     *             value attribute of the search input field has failed.
+     */
     @Override
     protected void execute() throws Exception
     {
@@ -74,6 +86,11 @@ public class Search extends AbstractHtmlPageAction
         loadPageByFormSubmit(searchForm);
     }
 
+    /**
+     * Validation after search has become complete.
+     * @throws Exception
+     *             if no search result block element could be found
+     */
     @Override
     protected void postValidate() throws Exception
     {
