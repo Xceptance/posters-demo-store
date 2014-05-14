@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
-  <description>Simulates storefront search including search result browsing.</description>
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080/posters">
+  <description>Simulates storefront search.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <action name="Search-NoHits"/>
   <command name="store" target="${searchTerm_noHits}" value="searchTerm">
@@ -8,7 +8,7 @@
   </command>
   <module name="posters.functional.modules.Search">
     <comment>Execute the search (module call)</comment>
-    <parameter name="searchTerm" value="${searchTerm_hits}"/>
+    <parameter name="searchTerm" value="${searchTerm_noHits}"/>
   </module>
   <command name="assertElementPresent" target="id=infoMessage">
     <comment>Assert presence of info maessage element</comment>
