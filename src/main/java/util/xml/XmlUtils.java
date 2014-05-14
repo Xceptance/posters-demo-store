@@ -30,7 +30,7 @@ public class XmlUtils
         try
         {
             final XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-            final Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source));
+            final Reader reader = new InputStreamReader(XmlUtils.class.getClassLoader().getResourceAsStream(source), "UTF-8");
             final InputSource inputSource = new InputSource(reader);
             xmlReader.setContentHandler(handler);
             xmlReader.parse(inputSource);
