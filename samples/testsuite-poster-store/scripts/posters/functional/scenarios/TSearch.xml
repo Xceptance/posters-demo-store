@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080/posters">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080/">
   <description>Simulates storefront search.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <action name="Search-NoHits"/>
