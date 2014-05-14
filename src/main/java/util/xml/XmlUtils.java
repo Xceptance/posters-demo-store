@@ -18,7 +18,6 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 public class XmlUtils
 {
-
     /**
      * Reads an xml file from the given source with the given SAX handler.
      * 
