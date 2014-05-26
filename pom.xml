@@ -46,6 +46,9 @@
                             </excludes>
                         </scanTargetPattern>
                     </scanTargetPatterns>
+                    <webApp>
+                        <contextPath>/posters</contextPath>
+                    </webApp>
                 </configuration>
             </plugin>
             <plugin>
