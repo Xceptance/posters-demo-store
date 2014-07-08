@@ -4,7 +4,7 @@
     <groupId>com.xceptance</groupId>
     <artifactId>demo-poster-store</artifactId>
     <packaging>war</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-alpha1</version>
 
     <properties>
         <ninja.version>3.1.5</ninja.version>
@@ -158,4 +158,12 @@
             <version>1.4.0</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>nexus-deploy</id>
+            <url>https://lab.xceptance.de/nexus/content/repositories/local</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 </project>
