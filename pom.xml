@@ -1,10 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xceptance</groupId>
     <artifactId>demo-poster-store</artifactId>
     <packaging>war</packaging>
-    <version>1.0.0-alpha1</version>
+    <version>1.0.0</version>
 
     <properties>
         <ninja.version>3.1.5</ninja.version>
@@ -158,6 +159,7 @@
             <version>1.4.0</version>
         </dependency>
     </dependencies>
+
     <distributionManagement>
         <repository>
             <uniqueVersion>false</uniqueVersion>
@@ -166,4 +168,5 @@
             <layout>default</layout>
         </repository>
     </distributionManagement>
+
 </project>
