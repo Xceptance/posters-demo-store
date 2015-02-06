@@ -5,7 +5,7 @@
     <groupId>com.xceptance</groupId>
     <artifactId>demo-poster-store</artifactId>
     <packaging>war</packaging>
-    <version>1.0.1-snapshot</version>
+    <version>1.0.1</version>
 
     <properties>
         <ninja.version>3.1.5</ninja.version>
