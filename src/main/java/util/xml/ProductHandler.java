@@ -25,6 +25,8 @@ public class ProductHandler extends DefaultHandler
 
     private Product product;
 
+    private String[] prices;
+
     @Override
     public void characters(final char[] ch, final int start, final int length)
     {
@@ -61,17 +63,9 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("price"))
         {
             // get all available prices
-            final String[] prices = toAdd.split(";");
+            prices = toAdd.split(";");
             // add first price as minimum price
             product.setMinimumPrice(Double.parseDouble(prices[0]));
-            // add the price for each size
-            final List<ProductPosterSize> productPosterSizes = Ebean.find(ProductPosterSize.class).where().eq("product", product)
-                                                                    .findList();
-            for (int i = 0; i < productPosterSizes.size(); i++)
-            {
-                productPosterSizes.get(i).setPrice(Double.parseDouble(prices[i]));
-                productPosterSizes.get(i).update();
-            }
         }
         if (localName.equals("imageURL"))
         {
@@ -113,7 +107,16 @@ public class ProductHandler extends DefaultHandler
         }
         if (localName.equals("product"))
         {
-            Ebean.update(product);
+            // add the price for each size
+            final List<ProductPosterSize> productPosterSizes = Ebean.find(ProductPosterSize.class).where().eq("product", product)
+                                                                    .findList();
+            for (int i = 0; i < productPosterSizes.size(); i++)
+            {
+                productPosterSizes.get(i).setPrice(Double.parseDouble(prices[i]));
+                productPosterSizes.get(i).update();
+            }
+            // update product
+            product.update();
         }
         if (localName.equals("availableSize"))
         {
