@@ -38,7 +38,7 @@
 			<script type="text/javascript">
 				$(document).ready(function(){ 
 					$("#errorMessage").show();
-					$("#errorMessage div strong").text("${flash.error}");
+					$("#errorMessage div strong").html("${flash.error}");
 				});
 			</script>
 		</#if>
@@ -52,7 +52,7 @@
 			<script type="text/javascript">
 				$(document).ready(function(){ 
 					$("#successMessage").show();
-					$("#successMessage div strong").text("${flash.success}");
+					$("#successMessage div strong").html("${flash.success}");
 				});
 			</script>
 		</#if>
@@ -66,7 +66,7 @@
 			<script type="text/javascript">
 				$(document).ready(function(){ 
 					$("#infoMessage").show();
-					$("#infoMessage div strong").text("${flash.info}");
+					$("#infoMessage div strong").html("${flash.info}");
 				});
 			</script>
 		</#if>
