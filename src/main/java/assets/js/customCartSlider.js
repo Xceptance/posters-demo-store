@@ -1,24 +1,22 @@
-$(document).ready(function(){ 
-	$("#cartSliderItemsWrap li:first").hide();
-	$("#slidingTopContent").hide();
-	$("#slidingTopTriggerHide").hide();
-});
-
-function showCartSlider()
+function showCartSlider(show)
 {
-    $("#slidingTopContent").slideToggle("slow", function(){
-    	if ($("#slidingTopContent").is(":visible"))
-    	{
-    		getCartSliderText();
-    		$("#slidingTopTriggerShow").hide();
-    		$("#slidingTopTriggerHide").show();
-    	}
-    	else
-    	{
-    		$("#slidingTopTriggerShow").show();
-    		$("#slidingTopTriggerHide").hide();
-    	}
-	});	
+	if( show === true ) {
+	    $("#slidingTopWrap").clearQueue().attr('style', 'display:none;').slideDown("slow", function(){
+	    	if ($("#slidingTopWrap").is(":visible"))
+	    	{
+	    		getCartSliderText();
+	    	}
+	    });	
+	} else if ( show === false ) {
+	    $("#slidingTopWrap").clearQueue().slideUp("slow").style;			
+	} else {
+	    $("#slidingTopWrap").clearQueue().slideToggle("slow", function(){
+	    	if ($("#slidingTopWrap").is(":visible"))
+	    	{
+	    		getCartSliderText();
+	    	}
+		});	
+	}
 }
 
 function getCartSliderText()
@@ -54,23 +52,13 @@ function setCartSliderElementInnerHtml(product, currency, unitLength)
 function addToCart(productId, finish, size)
 {
 	getCartSliderText();
-	if ($("#slidingTopContent").is(":visible"))
+	if ($("#slidingTopWrap").is(":visible"))
 	{
 		addToCartSlider(productId, finish, size);
-	}
-	else
-	{
-		$("#slidingTopContent").slideToggle("slow", function(){		
-			$("#slidingTopTriggerShow").hide();
-			$("#slidingTopTriggerHide").show();
+	} else {	
+		$("#slidingTopWrap").clearQueue().attr('style', 'display:none;').slideDown("slow", function(){		
 			addToCartSlider(productId, finish, size);
-			$("#slidingTopTriggerHide").fadeTo(4000, 1, function(){
-				$("#slidingTopContent").slideToggle("slow", function(){
-					$("#slidingTopTriggerShow").show();
-					$("#slidingTopTriggerHide").hide();
-				});
-			});
-		});
+		}).delay(5000).slideUp("slow");
 	}
 }
 
@@ -103,3 +91,16 @@ function addToCartSlider(productId, finish, size)
 		}
 	});
 }
+
+$(document).ready(function() {
+	$("#cartSliderItemsWrap li:first").hide();
+	$("#slidingTopWrap").hide();
+
+	$('#btnCartOverview').mouseenter(function(){
+		showCartSlider(true);
+	});
+	$('#btnCartOverview').mouseleave(function(){
+		showCartSlider(false);
+	});
+});
+

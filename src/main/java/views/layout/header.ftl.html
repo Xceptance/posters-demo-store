@@ -1,7 +1,5 @@
 <div id="header" class="navbar navbar-static-top">
 	<div class="navbar-inner">
-		<!-- cart slider -->
-		<#include "cartSlider.ftl.html" />
 
 		<div class="container-fluid">
 			<!-- brand -->
@@ -29,6 +27,7 @@
 							<i class="icon-search"></i>
 						</button>
 					</form>
+
 					<!-- login -->
 					<#if isLogged == false>
 					<p class="navbar-text  pull-right">
@@ -50,14 +49,17 @@
 						</li>
 					</ul>
 					</#if>
+
 					<!-- cart overview -->
-					<p id="btnCartOverview" class="navbar-text pull-right">
+					<div id="btnCartOverview" class="navbar-text pull-right">				
 						<a id="headerCartOverview" href="${applUrlHttp}/cart">
 						<i class="icon-shopping-cart"></i> <span>${i18n("cartOverviewTitle")}:
 								${cartProductCount} ${i18n("cartItem")} -
 								${totalPrice}${currency}</span>
 						</a>
-					</p>
+						<!-- cart slider -->
+						<#include "cartSlider.ftl.html" />
+					</div>
 				</div>
 			</div>
 		</div>
