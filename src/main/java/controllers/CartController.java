@@ -116,7 +116,7 @@ public class CartController
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
             // add totalPrice
-            result.render("totalPrice", (cart.getTotalPriceAsString() + xcpConf.CURRENCY));
+            result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
             return result;
         }
     }
@@ -228,7 +228,7 @@ public class CartController
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add totalPrice
-        result.render("totalPrice", (cart.getTotalPriceAsString() + xcpConf.CURRENCY));
+        result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
         return result;
     }
 
@@ -255,7 +255,7 @@ public class CartController
                                                          .eq("size", posterSize).findUnique();
         final Result result = Results.json();
         // add new price
-        result.render("newPrice", productPosterSize.getPriceAsString() + xcpConf.CURRENCY);
+        result.render("newPrice", xcpConf.CURRENCY + productPosterSize.getPriceAsString());
         return result;
     }
 
@@ -271,7 +271,7 @@ public class CartController
         headerCartOverview.append(" " + msg.get("cartOverviewTitle", language).get() + ": ");
         headerCartOverview.append(cart.getProductCount());
         headerCartOverview.append(" " + msg.get("cartItem", language).get() + " - ");
-        headerCartOverview.append(cart.getTotalPriceAsString() + xcpConf.CURRENCY);
+        headerCartOverview.append(xcpConf.CURRENCY + cart.getTotalPriceAsString());
         return headerCartOverview.toString();
     }
 }

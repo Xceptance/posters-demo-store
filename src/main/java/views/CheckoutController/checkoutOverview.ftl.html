@@ -11,7 +11,7 @@
 			<td id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
 			<td id="product${orderProduct_index}Finish">${orderProduct.finish}</td>
 			<td id="product${orderProduct_index}Size">${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</td>
-			<td id="product${orderProduct_index}Price">${orderProduct.getPriceAsString()}${currency}</td>
+			<td id="product${orderProduct_index}Price">${currency}${orderProduct.getPriceAsString()}</td>
 			<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
 		</tr>
 		</#list>
@@ -24,12 +24,12 @@
 	</div>
 	<div class="row-fluid" id="shippingCosts">
 		<div class="text-right">
-			<h3>${i18n("checkoutOverviewShippingCosts")}: ${order.getShippingCostsAsString()}${currency}</h3>
+			<h3>${i18n("checkoutOverviewShippingCosts")}: ${currency}${order.getShippingCostsAsString()}</h3>
 		</div>
 	</div>
 	<div class="row-fluid" id="totalCosts">
 		<div class="text-right">
-			<h3>${i18n("checkoutOverviewTotalCosts")}: <span id="totalWithTax">${order.getTotalCostsAsString()}${currency}</span></h3>
+			<h3>${i18n("checkoutOverviewTotalCosts")}: <span id="totalWithTax">${currency}${order.getTotalCostsAsString()}</span></h3>
 		</div>
 	</div>
 	<div class="row-fluid">

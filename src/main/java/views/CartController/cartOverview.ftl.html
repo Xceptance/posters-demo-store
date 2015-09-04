@@ -9,7 +9,7 @@
 				<td id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</td>
 				<td id="productFinish${cartProduct_index}">${cartProduct.finish}</td>
 				<td id="productSize${cartProduct_index}">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</td>
-				<td id="productPrice${cartProduct_index}">${cartProduct.getPriceAsString()}${currency}</td>
+				<td id="productPrice${cartProduct_index}">${currency}${cartProduct.getPriceAsString()}</td>
 				<td>
 	      			<input class="input-mini productCount${cartProduct_index}" type="number" id="productCount${cartProduct_index}" name="productCount${cartProduct_index}" value=${cartProduct.productCount}><br/>
 	      			<button class="btn" id="btnUpdateProdCount${cartProduct_index}" name="btnUpdateProdCount${cartProduct_index}" onclick="updateProductCount(${cartProduct.id}, $('#productCount${cartProduct_index}').val(), ${cartProduct_index})">${i18n("cartOverviewUpdateQuantity")}</button>
@@ -21,7 +21,7 @@
 		</#list>
 	</table>
 
-	<h3 align="right">${i18n("cartOverviewTotalPrice")}: <b id="totalPrice">${totalPrice}${currency}</b></h3>
+	<h3 align="right">${i18n("cartOverviewTotalPrice")}: <b id="totalPrice">${currency}${totalPrice}</b></h3>
 	
 	<h3 align="right"><a href="${applUrlHttps}/checkout" id="btnStartCheckout">${i18n("cartOverviewStartCheckout")}</a></h3>
 

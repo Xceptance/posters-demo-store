@@ -41,7 +41,7 @@
       						<a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img data-src="${contextPath}/assets/js/holder.js/300x200" alt="" src="${contextPath}${pro.imageURL}"></img></a>
       						<h3 id="product${pro_index}Name">${pro.name}</h3>
       						<p id="product${pro_index}DescriptionOverview">${pro.descriptionOverview}</p>
-      						<p>${i18n("priceStart")} <span id="product${pro_index}Price">${pro.getPriceAsString()}</span>${currency}</p>
+      						<p>${i18n("priceStart")} ${currency}<span id="product${pro_index}Price">${pro.getPriceAsString()}</span></p>
       					</div>
       				</li>
       	<#if (pro_index + 1) % 3 ==0>

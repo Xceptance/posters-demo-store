@@ -38,14 +38,14 @@ function updateCartSlider(data)
 		$("#cartSliderElementList").append(liElement);
 	}
 	// update total price in cart slider
-	$('#cartSliderTotalPrice').text(data.totalPrice + data.currency);
+	$('#cartSliderTotalPrice').text(data.currency + data.totalPrice);
 }
 
 function setCartSliderElementInnerHtml(product, currency, unitLength)
 {
 	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span> </br>" +
 			" - <span id='sliderProdSize'>" + product.size.width + " x " + product.size.height + " " + unitLength + "</span>" +
-			" - <span id='sliderProdPrice'>" + product.productPrice + currency + "</span>" +
+			" - <span id='sliderProdPrice'>" + currency + product.productPrice + "</span>" +
 			" (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
 }
 
@@ -84,7 +84,7 @@ function addToCartSlider(productId, finish, size)
 				$("#cartSliderElementList").prepend(liElement);
 			}
 			// update total price in cart slider
-			$('#cartSliderTotalPrice').text(data.totalPrice + data.currency);
+			$('#cartSliderTotalPrice').text(data.currency + data.totalPrice);
 			$("#notificationsLoader").empty();
 			// update cart in header
 			$("#headerCartOverview span").text(data.headerCartOverview);
