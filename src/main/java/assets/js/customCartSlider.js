@@ -58,7 +58,7 @@ function addToCart(productId, finish, size)
 	} else {	
 		$("#slidingTopWrap").clearQueue().attr('style', 'display:none;').slideDown("slow", function(){		
 			addToCartSlider(productId, finish, size);
-		}).delay(5000).slideUp("slow");
+		}).delay(2000).slideUp("slow");
 	}
 }
 
