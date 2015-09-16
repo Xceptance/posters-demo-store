@@ -1,0 +1,15 @@
+Design
+
+* Cart-Overview floated nicht richtig
+* Font?
+* Fontsizes anpassen (h1, h2, h3)
+* Cart-Tabelle eindampfen (Titel<br>Subtitle, Size<br>Finish)
+* non-breaking Space zwischen Größe und in.
+* Produktübersicht schöner
+* Auf Grid-Page den Anchor nicht nur auf das Bild beschränken?
+* "16 x 32" ohne Spaces? 
+* Search-Box unrund
+* Show-Cart-Bereich
+* title-text anders und aus messages.properties
+* Katalog-Navi wirklich immer anzeigen, auch auf Cart- und Account-Seiten?
+* Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen? 
