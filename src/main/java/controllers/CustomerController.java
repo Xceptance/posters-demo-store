@@ -919,7 +919,7 @@ public class CustomerController
             return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
         }
         // email already exist
-        else if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
+        else if (!Ebean.find(Customer.class).where().eq("email", email).ne("id", customer.getId()).findList().isEmpty())
         {
             // show error message
             context.getFlashScope().error(msg.get("errorAccountExist", language).get());
