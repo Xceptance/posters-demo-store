@@ -2,54 +2,78 @@ Design
 
 * Allgemein
 ** Font? , color:#444
-** FLAT Design? 
 ** Update zu Bootstrap 3.x?
+** FLAT Design? z.B. Rundungen gegen Ecken tauschen
 ** Fontsizes anpassen (h1, h2, h3)
-** title-text anders und aus messages.properties
-** Favicon Xceptance
-** Rundungen gegen Ecken tauschen
+** Favicon von Xceptance nehmen
+** Call to action Buttons alle in der selben Farbe
+** Required kennzeichnen
 
 *Produktdetail 
 ** non-breaking Space zwischen Größe und Einheit("in").
-** Bilgrößen "16 x 32" ohne Spaces? 
-** AddToCart grün nicht grau
+** Bildgrößen "16 x 32" ohne Spaces? 
+** AddToCart grün anstatt grau
 ** Beschreibung nicht fett
 ** Mehr Weißraum, wirkt gedrängt
+*** Text könnte Bild umfließen
 
 * Produktübersicht schöner
 ** eine Höhe pro Zeile
-** Rahmen gegen färbige Fläche austauschen?
+** Rahmen gegen farbige Fläche austauschen?
+** Feste Breite, wenn sichtbare Umfassung oder Bilder mit skalieren
 ** Produktnamen zu lang >> CSS ellipsis
-** Paging oben und unten
+** Paging oben und unten oder alternativ nur unten
+** Preis rechtsbündig hevorgehoben
+** Links vom Preis Zusatzinfo z.B Verfügbarkeit (gefaked)
+** Namen auch als Link zur Seite nutzen
 
 *Header
-** Search-Box unrund
+** Search-Box unrund (zu rund, vielleicht eine normales Input)
 ** Search-Box und Search-Button auf einen Höhe
-** Cart-Overview floated nicht richtig? Könnte schöner sein
-** Struktur: Navigation mit in header aufnehmen?
 ** Reihenfolge
 ** mobile Ansicht erweitern
 ** mobile Ansicht die schwarzen divider anpassen
-** graue icons mittels CSS?  
+** graue icons mittels CSS? (minor)
+
+*Mini-Cart
+** Oben Headline "Cart" einführen
+** Wording "View Cart" statt "Cart" und unten 
+** Cart-Overview wirkt nervös! Könnte schöner sein!
+** Leeren Cart Zustand einführen mit Infotext und ohne totals (Bedenke die Testfälle!)
+** Auch die zugeklappte Ansicht bedenken bei leeren Cart
 
 * Show-Cart-Bereich
 ** Cart-Tabelle eindampfen (Titel<br>Subtitle, Size<br>Finish)
-** Buttons sind zu groß
+** Namen fett
+** Short Description in die nächste Zeile unter Namen
+** Produkteigenschaften als Liste in einer Spalte
+** Buttons sind zu groß > Links daraus machen 
+** Anzahl rechtsbündig im input
+** Proceed to checkout als grüner Button
+** Platzhalter für Sales tax: 6%  und Shipping: $7.00 integrieren
+** Empty cart page mit Infotext füllen keine proceed to checkout, kein order totals
 
-* Register
-** Focus von Input Feldern nicht rot (Nur im Fehlerfall rot!) Anpassung überall.
-** Required kennzeichnen
+*Checkout
+** Breadcrumbs in den Context integrieren
+** Wording in den Breadcrumbs: Einzahl, Payment statt Credit card
+** Darstellung Order totals ansprechender gestalten  als Tabelle und Berechnungen hinzufügen z.B. Taxes
+** Anordnung der Adressen und der Kreditkarte überdenken
 
 *Landing page
-** Slider links farbe anpassen
+** Slider Links farbe anpassen bzw hintergrund
 ** Slider höher machen
 ** Netter Fülltext/Willkommenstext da die Seite sonst so leer wirkt
 
 
 Funktionalität
 
-* Auf Grid-Page den Anchor nicht nur auf das Bild beschränken?
-* Katalog-Navi wirklich immer anzeigen, auch auf Cart- und Account-Seiten?
-* Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen?
+* Page title anders? und aus messages.properties ziehen und nicht hardcoded im Template
+* Auf Show cart line item preis implementieren und ganz recht positioniern 
+* Order confirmation page anstatt message popup
+* Katalog-Navi wirklich immer anzeigen, auch auf Cart- und Account-Seiten? Nein!
+* Struktur: Navigation mit in header aufnehmen?
+* Company nicht required im checkout
 * paging in die URL integrieren um die Browserhistory zu gewährleisten
+* Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen? Besser: If conditions nutzen!
+* Focus von Input Feldern nicht rot (Nur im Fehlerfall rot!) Anpassung überall. First focus state (minor)
 * Testfälle checken
