@@ -1,15 +1,55 @@
 Design
 
-* Cart-Overview floated nicht richtig
-* Font?
-* Fontsizes anpassen (h1, h2, h3)
-* Cart-Tabelle eindampfen (Titel<br>Subtitle, Size<br>Finish)
-* non-breaking Space zwischen Größe und in.
+* Allgemein
+** Font? , color:#444
+** FLAT Design? 
+** Update zu Bootstrap 3.x?
+** Fontsizes anpassen (h1, h2, h3)
+** title-text anders und aus messages.properties
+** Favicon Xceptance
+** Rundungen gegen Ecken tauschen
+
+*Produktdetail 
+** non-breaking Space zwischen Größe und Einheit("in").
+** Bilgrößen "16 x 32" ohne Spaces? 
+** AddToCart grün nicht grau
+** Beschreibung nicht fett
+** Mehr Weißraum, wirkt gedrängt
+
 * Produktübersicht schöner
-* Auf Grid-Page den Anchor nicht nur auf das Bild beschränken?
-* "16 x 32" ohne Spaces? 
-* Search-Box unrund
+** eine Höhe pro Zeile
+** Rahmen gegen färbige Fläche austauschen?
+** Produktnamen zu lang >> CSS ellipsis
+** Paging oben und unten
+
+*Header
+** Search-Box unrund
+** Search-Box und Search-Button auf einen Höhe
+** Cart-Overview floated nicht richtig? Könnte schöner sein
+** Struktur: Navigation mit in header aufnehmen?
+** Reihenfolge
+** mobile Ansicht erweitern
+** mobile Ansicht die schwarzen divider anpassen
+** graue icons mittels CSS?  
+
 * Show-Cart-Bereich
-* title-text anders und aus messages.properties
+** Cart-Tabelle eindampfen (Titel<br>Subtitle, Size<br>Finish)
+** Buttons sind zu groß
+
+* Register
+** Focus von Input Feldern nicht rot (Nur im Fehlerfall rot!) Anpassung überall.
+** Required kennzeichnen
+
+*Landing page
+** Slider links farbe anpassen
+** Slider höher machen
+** Netter Fülltext/Willkommenstext da die Seite sonst so leer wirkt
+
+
+Funktionalität
+
+* Auf Grid-Page den Anchor nicht nur auf das Bild beschränken?
 * Katalog-Navi wirklich immer anzeigen, auch auf Cart- und Account-Seiten?
-* Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen? 
+* Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen?
+* paging in die URL integrieren um die Browserhistory zu gewährleisten
+* Testfälle checken
