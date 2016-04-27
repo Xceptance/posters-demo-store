@@ -2,15 +2,15 @@
 <@layout.myLayout "The ultimate webshop">    	
 	<h1 id="titleProductName">${productDetail.name}</h1>
 	<div class="row" productid="${productDetail.id}">
-		<div class="span4" id="prodImg">
+		<div class="col-md-4" id="prodImg">
       		<img class="img-polaroid" width="300" alt="" src="${contextPath}${productDetail.imageURL}"></img>
       	</div>
-      	<div class="span5">
+      	<div class="col-md-5">
       		<h3 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h3>
       		<h4 id="prodDescriptionDetail">${productDetail.descriptionDetail}</h4>
       		<p id="prodFinish">${i18n("productDetailPosterFinish")}</p>
       	</div>
-      	<div class="span3">
+      	<div class="col-md-3">
       		<h3 id="prodPrice">${currency}${productDetail.getPriceAsString()}</h3>
       		<form id="addToCartForm" name="addToCartForm">
       			<!-- Select finish -->

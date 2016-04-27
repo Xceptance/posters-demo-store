@@ -33,7 +33,7 @@
 			</script>
 		</#if>
 		<div class="row" id="errorMessage">
-			<div class="span6 offset3 text-center alert alert-error">
+			<div class="col-md-6 col-md-offset-3 text-center alert alert-error">
   				<a class="close" data-dismiss="alert">×</a>
   				<strong></strong>
 			</div>
@@ -47,7 +47,7 @@
 			</script>
 		</#if>
 		<div class="row" id="successMessage">
-			<div class="span6 offset3 text-center alert alert-success">
+			<div class="col-md-6 col-md-offset-3 text-center alert alert-success">
   				<a class="close" data-dismiss="alert">×</a>
   				<strong></strong>
 			</div>
@@ -61,7 +61,7 @@
 			</script>
 		</#if>
 		<div class="row" id="infoMessage">
-			<div class="span6 offset3 text-center alert alert-info">
+			<div class="col-md-6 col-md-offset-3 text-center alert alert-info">
   				<a class="close" data-dismiss="alert">×</a>
   				<strong></strong>
 			</div>
@@ -71,11 +71,11 @@
 		<div id="main">
 			<div class="row">
 				<!-- sidebar -->
-				<div class="span3">
+				<div class="col-md-3">
 					<#include "sidebar.ftl.html"/>
 				</div>
 				<!-- content -->
-				<div class="span9">
+				<div class="col-md-9">
 					<#nested/>
 				</div>
 			</div>

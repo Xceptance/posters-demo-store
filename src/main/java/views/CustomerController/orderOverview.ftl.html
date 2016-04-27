@@ -4,11 +4,11 @@
 	<div id="orderOverview">
 	<#list orderOverview as order>
 	<div class="row well" id="order${order_index}">
-	<div class="span2">
+	<div class="col-md-2">
 		<h5 id="order${order_index}Date">${order.orderDate}</h5>
 		<h5 id="order${order_index}Costs">${currency}${order.getTotalCostsAsString()}</h5>
 	</div>
-	<div class="span8">
+	<div class="col-md-8">
 		<table class="table" table-bordered>
 		<#list order.products as orderProduct>
 		<tr id="order${order_index}Product${orderProduct_index}">

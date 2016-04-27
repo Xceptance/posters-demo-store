@@ -35,7 +35,7 @@
 	<div class="row">
 		<ul>
 			<!-- print shipping address -->
-			<li class="span4">
+			<li class="col-md-4">
 				<h3>${i18n("titleShippingAddress")}</h3>
 				<address  id="delAddr">
       				<strong>${order.shippingAddress.name}</strong><br>
@@ -46,7 +46,7 @@
       			</address>
 			</li>
 			<!-- print billing address -->
-			<li class="span4">
+			<li class="col-md-4">
 				<h3>${i18n("titleBillingAddress")}</h3>
 				<address id="billAddr">
       				<strong>${order.billingAddress.name}</strong><br>
@@ -57,7 +57,7 @@
       			</address>
 			</li>
 			<!-- print credit card -->
-			<li class="span4">
+			<li class="col-md-4">
 				<h3>${i18n("titlePaymentInformation")}</h3>
 				<address  id="payment">
       				${i18n("titleName")}: ${order.creditCard.name}<br>

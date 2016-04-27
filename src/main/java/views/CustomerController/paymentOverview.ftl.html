@@ -6,7 +6,7 @@
       		<div class="">
       			<ul>
     	</#if>
-      				<li class="span4" id="payment${payment_index}">
+      				<li class="col-md-4" id="payment${payment_index}">
       					<address>
       						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
       						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
@@ -26,7 +26,7 @@
       		</div>
       	</#if>
 	</#list>
-	<div class="span4 offset6">
+	<div class="col-md-4 col-md-offset-6">
 		<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
 	</div>
 </@layout.myLayout>

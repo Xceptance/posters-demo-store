@@ -9,7 +9,7 @@
       	<div class="row">
       		<ul class="inline">
     	</#if>
-    			<li class="span4" id="delAddr${address_index}">
+    			<li class="col-md-4" id="delAddr${address_index}">
       				<address>
       					<strong>${address.name}</strong><br>
       					${address.company}<br>
@@ -38,7 +38,7 @@
 	</#if>
 	<!-- add new shipping address -->
 	<div class="row">
-		<div class="span4">
+		<div class="col-md-4">
 			<a id="linkAddNewDelAddr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
       	<div class="row">
       		<ul class="inline">
     	</#if>
-    			<li class="span4" id="billAddr${address_index}">
+    			<li class="col-md-4" id="billAddr${address_index}">
       				<address>
       					<strong>${address.name}</strong><br>
       					${address.company}<br>
@@ -80,7 +80,7 @@
 	</#if>
 	<!-- add new billing address -->
 	<div class="row">
-		<div class="span4">
+		<div class="col-md-4">
 			<a id="linkAddNewBillAddr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
 		</div>
 	</div>
