@@ -17,22 +17,22 @@
 		</#list>
 	</table>
 	<!-- print total price -->
-	<div class="row-fluid" id="tax">
+	<div class="row" id="tax">
 		<div class="text-right">
 			<h3>${i18n("checkoutOverviewSalesTax")}: ${order.tax*100}%</h3>
 		</div>
 	</div>
-	<div class="row-fluid" id="shippingCosts">
+	<div class="row" id="shippingCosts">
 		<div class="text-right">
 			<h3>${i18n("checkoutOverviewShippingCosts")}: ${currency}${order.getShippingCostsAsString()}</h3>
 		</div>
 	</div>
-	<div class="row-fluid" id="totalCosts">
+	<div class="row" id="totalCosts">
 		<div class="text-right">
 			<h3>${i18n("checkoutOverviewTotalCosts")}: <span id="totalWithTax">${currency}${order.getTotalCostsAsString()}</span></h3>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row">
 		<ul>
 			<!-- print shipping address -->
 			<li class="span4">
@@ -68,7 +68,7 @@
 		</ul>
 	</div>
 	<!-- order button -->
-	<div class="row-fluid">
+	<div class="row">
 		<div class="text-right">
 			<form action="${contextPath}/checkoutCompleted" method="post">
     			<button class="btn" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>

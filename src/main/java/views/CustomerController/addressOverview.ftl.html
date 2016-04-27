@@ -6,7 +6,7 @@
 	<h3 id="titleDelAddr">${i18n("titleShippingAddress")}</h3>
 	<#list shippingAddresses as address>
 		<#if (address_index + 3) % 3 ==0>
-      	<div class="row-fluid">
+      	<div class="row">
       		<ul class="inline">
     	</#if>
     			<li class="span4" id="delAddr${address_index}">
@@ -37,7 +37,7 @@
 	</#list>
 	</#if>
 	<!-- add new shipping address -->
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span4">
 			<a id="linkAddNewDelAddr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
 		</div>
@@ -48,7 +48,7 @@
 	<h3 id="titleBillAddr">${i18n("titleBillingAddress")}</h3>
 	<#list billingAddresses as address>
 		<#if (address_index + 3) % 3 ==0>
-      	<div class="row-fluid">
+      	<div class="row">
       		<ul class="inline">
     	</#if>
     			<li class="span4" id="billAddr${address_index}">
@@ -79,7 +79,7 @@
 	</#list>
 	</#if>
 	<!-- add new billing address -->
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span4">
 			<a id="linkAddNewBillAddr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
 		</div>

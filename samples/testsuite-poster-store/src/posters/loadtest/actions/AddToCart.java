@@ -77,7 +77,7 @@ public class AddToCart extends AbstractHtmlPageAction
         size = option.getTextContent().trim();
 
         // Get the product ID. This is also needed for the AJAX calls.
-        productId = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div[2]/div[@class='row-fluid']")
+        productId = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div[2]/div[@class='row']")
                                  .getAttribute("productid");
 
         // Assert the presence of the add to cart button (even though we do not use
