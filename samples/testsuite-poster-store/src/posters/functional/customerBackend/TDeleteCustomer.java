@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Registers a new customer and deletes them.
+ * <p>Registers a new customer and deletes them.</p>
  */
 @ScriptName
 ("posters.functional.customerBackend.TDeleteCustomer")

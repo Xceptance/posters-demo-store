@@ -60,27 +60,27 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // Check that the form to enter a new billing address is available
+        // Check that the form to enter a new billing address is available.
         Assert.assertTrue("Form to enter billing address not found.", HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));
 
-        // Remember the billing address form
+        // Remember the billing address form.
         billingAddressForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddBillAddr");
 
-        // Check that the button to submit the billing address is available
+        // Check that the button to submit the billing address is available.
         Assert.assertTrue("Button to submit billing address not found.", HtmlPageUtils.isElementPresent(page, "id('btnAddBillAddr')"));
 
-        // Remember the button to submit the billing address
+        // Remember the button to submit the billing address.
         submitAddressButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddBillAddr");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // Fill in the billing address
+        // Fill in the billing address.
         HtmlPageUtils.setInputValue(billingAddressForm, "fullName", account.getFirstName() + " " + account.getLastName());
         HtmlPageUtils.setInputValue(billingAddressForm, "company", address.getCompany());
         HtmlPageUtils.setInputValue(billingAddressForm, "addressLine", address.getAddressLine());
@@ -88,27 +88,27 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
         HtmlPageUtils.setInputValue(billingAddressForm, "state", address.getState());
         HtmlPageUtils.setInputValue(billingAddressForm, "zip", address.getZip());
 
-        // Submit the billing form
+        // Submit the billing form.
         loadPageByClick(submitAddressButton);
     }
 
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // Check that the resulting page is the payment page
+        // Check that the resulting page is the payment page.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titlePayment')"));
 
-        // Check that the form to enter a new payment method is available
+        // Check that the form to enter a new payment method is available.
         Assert.assertTrue("Form to enter payment method not found.", HtmlPageUtils.isElementPresent(page, "id('formAddPayment')"));
     }
 }

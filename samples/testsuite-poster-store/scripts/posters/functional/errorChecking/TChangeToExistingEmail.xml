@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Verifies that an error is shown if a customer wants to change the email to an email that aleady exist.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
+  <codecomment>First register a new customer</codecomment>
+  <module name="posters.functional.modules.OpenLoginForm"/>
+  <action name="StartRegistration"/>
+  <command name="clickAndWait" target="id=linkRegister"/>
+  <command name="assertElementPresent" target="id=formRegister"/>
+  <command name="store" target="${RANDOM.String(8)}" value="randomName"/>
+  <command name="store" target="${RANDOM.String(8)}" value="randomFirstName"/>
+  <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="randomEmail"/>
+  <module name="posters.functional.modules.FillInRegistrationForm">
+    <parameter name="name" value="${randomName}"/>
+    <parameter name="firstName" value="${randomFirstName}"/>
+    <parameter name="email" value="${randomEmail}"/>
+    <parameter name="password" value="${password}"/>
+    <parameter name="passwordAgain" value="${password}"/>
+  </module>
+  <action name="Register"/>
+  <command name="clickAndWait" target="id=btnRegister"/>
+  <command name="assertElementPresent" target="id=successMessage"/>
+  <codecomment>Now try to change John Doe's email to the one of the just created customer</codecomment>
   <module name="posters.functional.modules.Login">
     <parameter name="email" value="${email}"/>
     <parameter name="password" value="${password}"/>
@@ -13,6 +32,7 @@
   <action name="OpenFormToChangeEmail"/>
   <command name="clickAndWait" target="id=btnChangeNameEmail"/>
   <action name="TryToUpdateAccount"/>
+  <command name="type" target="id=eMail" value="${randomEmail}"/>
   <command name="type" target="id=password" value="${password}"/>
   <command name="clickAndWait" target="id=btnChangeNameEmail"/>
   <command name="assertText" target="id=errorMessage" value="× An account with this email address already exists."/>

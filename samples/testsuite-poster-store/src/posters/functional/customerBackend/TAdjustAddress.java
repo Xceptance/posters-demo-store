@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Updates, creates and removes a shipping and a billing address.
+ * <p>Updates, creates and removes a shipping and a billing address.</p>
  */
 @ScriptName
 ("posters.functional.customerBackend.TAdjustAddress")

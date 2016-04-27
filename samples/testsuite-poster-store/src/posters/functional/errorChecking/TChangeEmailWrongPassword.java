@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if the user wants to update the email and types a wrong password.
+ * <p>Verifies that an error is shown if the user wants to update the email and types a wrong password.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TChangeEmailWrongPassword")

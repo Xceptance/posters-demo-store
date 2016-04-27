@@ -5,7 +5,6 @@ import org.junit.Test;
 import posters.loadtest.actions.Homepage;
 
 import com.xceptance.xlt.api.tests.AbstractTestCase;
-import com.xceptance.xlt.api.util.XltProperties;
 
 /**
  * This test case simulates a single click visit. The visitor opens the poster store landing page and will not do any
@@ -20,8 +19,7 @@ public class TVisit extends AbstractTestCase
     public void visitPosterStore() throws Throwable
     {
         // Read the store URL from properties.
-        final String url = XltProperties.getInstance().getProperty("posters.xlt.loadtest.tests.store-url",
-                                                                   "http://localhost:8080/posters/");
+        final String url = getProperty("store-url", "http://localhost:8080/posters/");
 
         // Go to poster store homepage
         final Homepage homepage = new Homepage(url);

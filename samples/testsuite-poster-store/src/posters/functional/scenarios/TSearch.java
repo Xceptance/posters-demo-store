@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Simulates storefront search.
+ * <p>Simulates storefront search.</p>
  */
 @ScriptName
 ("posters.functional.scenarios.TSearch")

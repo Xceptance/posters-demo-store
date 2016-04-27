@@ -74,57 +74,57 @@ public class EnterShippingAddress extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the form to enter a new shipping address is available
+        // Check that the form to enter a new shipping address is available.
         Assert.assertTrue("Form to enter shipping address not found.", HtmlPageUtils.isElementPresent(page, "id('formAddDelAddr')"));
 
-        // remember the shipping address form
+        // Remember the shipping address form.
         shippingAddressForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddDelAddr");
 
-        // check that the button to submit the shipping address is available
+        // Check that the button to submit the shipping address is available.
         Assert.assertTrue("Button to submit shipping address not found.", HtmlPageUtils.isElementPresent(page, "id('btnAddDelAddr')"));
 
-        // remember the button to submit the shipping address
+        // Remember the button to submit the shipping address.
         submitAddressButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddDelAddr");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // fill in the shipping address
+        // Fill in the shipping address.
         HtmlPageUtils.setInputValue(shippingAddressForm, "fullName", account.getFirstName() + " " + account.getLastName());
         HtmlPageUtils.setInputValue(shippingAddressForm, "company", address.getCompany());
         HtmlPageUtils.setInputValue(shippingAddressForm, "addressLine", address.getAddressLine());
         HtmlPageUtils.setInputValue(shippingAddressForm, "city", address.getCity());
         HtmlPageUtils.setInputValue(shippingAddressForm, "state", address.getState());
         HtmlPageUtils.setInputValue(shippingAddressForm, "zip", address.getZip());
-        // we want to add a billing address separately, so both addresses are not equal
+        // We want to add a billing address separately, so both addresses are not equal.
         HtmlPageUtils.checkRadioButton(shippingAddressForm, "billEqualShipp", 1);
 
-        // submit the shipping address
+        // Submit the shipping address.
         loadPageByClick(submitAddressButton);
     }
 
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the page to enter or select a billing address
+        // Check that it's the page to enter or select a billing address.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleBillAddr')"));
 
-        // check that the form to enter a new billing address is available
+        // Check that the form to enter a new billing address is available.
         Assert.assertTrue("Form to enter billing address not found.", HtmlPageUtils.isElementPresent(page, "id('formAddBillAddr')"));
     }
 }

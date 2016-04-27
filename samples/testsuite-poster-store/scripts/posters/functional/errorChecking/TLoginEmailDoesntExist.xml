@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Verifies that an error is shown if the user wants to log in with an email that doesn't exist.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <module name="posters.functional.modules.OpenLoginForm"/>
@@ -8,6 +8,6 @@
   <command name="type" target="id=email" value="${generatedEmail}"/>
   <command name="type" target="id=password" value="wrongpassword"/>
   <command name="clickAndWait" target="id=btnSignIn"/>
-  <command name="assertText" target="id=errorMessage" value="× The email address you entered doesnt exist. Please try again."/>
+  <command name="assertText" target="id=errorMessage" value="× The email address you entered doesn't exist. Please try again."/>
   <command name="assertText" target="id=email" value="${generatedEmail}"/>
 </testcase>

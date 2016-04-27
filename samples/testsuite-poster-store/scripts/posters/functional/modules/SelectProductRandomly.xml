@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
   <description>Selects one product randomly.</description>
   <action name="SelectProductRandomly"/>
   <command name="storeXpathCount" target="//div[@id='productOverview']/div/ul/li" value="productCount"/>

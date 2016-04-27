@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if the user types a wrong password while changing password.
+ * <p>Verifies that an error is shown if the user types a wrong password while changing password.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TChangePwWrongPw")

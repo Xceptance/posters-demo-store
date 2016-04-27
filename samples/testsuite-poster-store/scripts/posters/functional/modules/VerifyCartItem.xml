@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
   <description>Verifies that a product is in the cart in a specified count.</description>
   <parameter name="index"/>
   <parameter name="productName"/>

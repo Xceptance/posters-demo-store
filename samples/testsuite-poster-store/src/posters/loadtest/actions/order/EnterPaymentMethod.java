@@ -51,50 +51,50 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // Check that the form to enter a new credit card is available
+        // Check that the form to enter a new credit card is available.
         Assert.assertTrue("Form to enter credit card not found.", HtmlPageUtils.isElementPresent(page, "id('formAddPayment')"));
 
-        // Remember the payment form
+        // Remember the payment form.
         paymentForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formAddPayment");
 
-        // Check that the button to submit the payment method is available
+        // Check that the button to submit the payment method is available.
         Assert.assertTrue("Button to submit payment method not found.", HtmlPageUtils.isElementPresent(page, "id('btnAddPayment')"));
 
-        // Remember the button to submit the payment method
+        // Remember the button to submit the payment method.
         submitPaymentMethod = HtmlPageUtils.findSingleHtmlElementByID(page, "btnAddPayment");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // Fill in the payment method
+        // Fill in the payment method.
         HtmlPageUtils.setInputValue(paymentForm, "creditCardNumber", creditCard.getNumber());
         HtmlPageUtils.setInputValue(paymentForm, "name", creditCard.getOwner());
         HtmlPageUtils.selectRandomly(paymentForm, "expirationDateMonth");
         HtmlPageUtils.selectRandomly(paymentForm, "expirationDateYear");
 
-        // Submit the billing address
+        // Submit the billing address.
         loadPageByClick(submitPaymentMethod);
     }
 
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // Check that it's the order overview page
+        // Check that it's the order overview page.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleOrderOverview')"));
     }
 }

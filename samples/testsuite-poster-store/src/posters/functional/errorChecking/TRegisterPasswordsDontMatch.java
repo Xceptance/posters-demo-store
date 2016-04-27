@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if a user wants to register and the entered passwords don't match.
+ * <p>Verifies that an error is shown if a user wants to register and the entered passwords don&#39;t match.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TRegisterPasswordsDontMatch")

@@ -3,6 +3,7 @@ package posters.loadtest.actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
 
@@ -17,37 +18,38 @@ import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.util.HtmlPageUtils;
 
 /**
- * Adds a previously configured product to cart. This action does not result in a page load but consists of a sequence
- * of three AJAX calls. JavaScript is disabled due to performance reasons. So assembling the request parameters, make
- * the call and evaluating the response content makes this kind of actions a bit more complex.
+ * Adds a previously configured product to cart.<br/>
+ * This action does not result in a page load but consists of a sequence of three AJAX calls. JavaScript is disabled due
+ * to performance reasons. So assembling the request parameters, make the call and evaluating the response content makes
+ * this kind of actions a bit more complex.
  */
 public class AddToCart extends AbstractHtmlPageAction
 {
     /**
-     * The ID of the product to add to cart
+     * The ID of the product to add to cart.
      */
     private String productId;
 
     /**
-     * The selected poster size
+     * The selected poster size.
      */
     private String size;
 
     /**
-     * The selected poster finish (matte or gloss)
+     * The selected poster finish (matte or gloss).
      */
     private String finish;
 
     /**
-     * The 'Add to cart' form
+     * The 'Add to cart' form.
      */
     private HtmlForm addToCartForm;
 
     /**
-     * Constructor
-     * 
+     * Constructor.
+     *
      * @param previousAction
-     * @param timerName
+     *            The previous action.
      */
     public AddToCart(final AbstractHtmlPageAction previousAction)
     {
@@ -57,11 +59,11 @@ public class AddToCart extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // Look up the 'add to cart' form
+        // Look up the 'add to cart' form.
         addToCartForm = HtmlPageUtils.findSingleHtmlElementByID(page, "addToCartForm");
 
         // Configure the product by selecting a random finish (matte or gloss).
@@ -71,16 +73,16 @@ public class AddToCart extends AbstractHtmlPageAction
         // We will need it as a parameter later on in the subsequent AJAX calls
         // to update the price and add poster to cart.
         final HtmlElement option = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('selectSize')/option");
-        // Get the text content of the element as trimmed string
+        // Get the text content of the element as trimmed string.
         size = option.getTextContent().trim();
 
-        // Get the product ID. This is also needed for the AJAX calls
+        // Get the product ID. This is also needed for the AJAX calls.
         productId = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div[2]/div[@class='row-fluid']")
                                  .getAttribute("productid");
 
         // Assert the presence of the add to cart button (even though we do not use
         // it here since we're just simulating the AJAX calls that are normally
-        // triggered by JavaScript after hitting the button)
+        // triggered by JavaScript after hitting the button).
         Assert.assertTrue("AddToCart button is not present.", HtmlPageUtils.isElementPresent(page, "id('btnAddToCart')"));
 
     }
@@ -88,12 +90,12 @@ public class AddToCart extends AbstractHtmlPageAction
     @Override
     protected void execute() throws Exception
     {
-        // Get the result of the this action
+        // Get the result of the this action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
 
-        // Update price:
+        // (1) Update price.
         // First we collect the (POST) request parameters for the call and
-        // create a list of name value pairs, one for each parameter
+        // create a list of name value pairs, one for each parameter.
         final List<NameValuePair> updatePriceParams = new ArrayList<NameValuePair>();
         updatePriceParams.add(new NameValuePair("productId", productId));
         updatePriceParams.add(new NameValuePair("size", size));
@@ -101,37 +103,35 @@ public class AddToCart extends AbstractHtmlPageAction
         // Perform the AJAX call and return the result.
         final WebResponse updatePriceResponse = AjaxUtils.callPost(page, "/posters/updatePrice", updatePriceParams);
 
-        // get JSON object from response
+        // Get JSON object from response.
         final JSONObject updatePriceJsonResponse = new JSONObject(updatePriceResponse.getContentAsString());
 
-        // get the new price from JSON object
+        // Get the new price from JSON object.
         final String newPrice = updatePriceJsonResponse.getString("newPrice");
 
-        // Validate the call returned a price in the correct currency
-        Assert.assertTrue("The price does not end with $", newPrice.endsWith("$"));
+        // Validate the call returned a price in the correct currency.
+        Assert.assertTrue("The price does not start with $", newPrice.startsWith("$"));
 
         // Put the returned price into the page.
-        // Note: This is not necessary since we just want to simulate realistic traffic for the server and nromally do
+        // Note: This is not necessary since we just want to simulate realistic traffic for the server and normally do
         // not care about client side stuff.
         HtmlPageUtils.findSingleHtmlElementByID(page, "prodPrice").setTextContent(newPrice);
 
-        // Get cart element slider content before adding poster to cart:
+        // (2) Get cart element slider content before adding poster to cart.
         // Perform the AJAX call and return the result.
         // This call doesn't have any parameters
         final WebResponse cartElementSliderResponse = AjaxUtils.callGet(page, "/posters/getCartElementSlider", null);
 
-        // get JSON object from response
+        // Get JSON object from response.
         final JSONObject getCartElementSliderJsonResponse = new JSONObject(cartElementSliderResponse.getContentAsString());
 
-        // get the keys from JSON object and do some basic validation
-        Assert.assertEquals("Length unit is not 'in'.", getCartElementSliderJsonResponse.getString("unitLength"), "in");
+        // Get the keys from JSON object and do some basic validation.
+        Assert.assertEquals("Length unit is not 'in'.", "in", getCartElementSliderJsonResponse.getString("unitLength"));
         Assert.assertFalse("The 'total price' JSON key is empty.", getCartElementSliderJsonResponse.getString("totalPrice").isEmpty());
-        Assert.assertEquals("Currency is not '$'.", getCartElementSliderJsonResponse.getString("currency"), "$");
-        Assert.assertEquals("There are cart elements but the cart elements key sould be empty.",
-                            getCartElementSliderJsonResponse.getString("cartElements"), "[]");
+        Assert.assertEquals("Currency is not '$'.", "$", getCartElementSliderJsonResponse.getString("currency"));
 
-        // Add poster to cart:
-        // Collect the request parameters
+        // (3) Add poster to cart.
+        // Collect the request parameters.
         final List<NameValuePair> addToCartParams = new ArrayList<NameValuePair>();
         addToCartParams.add(new NameValuePair("productId", productId));
         addToCartParams.add(new NameValuePair("finish", finish));
@@ -140,18 +140,55 @@ public class AddToCart extends AbstractHtmlPageAction
         // Perform the AJAX call and return the result.
         final WebResponse addToCartResponse = AjaxUtils.callGet(page, "/posters/addToCartSlider", addToCartParams);
 
-        // get JSON object from response
+        // Get JSON object from response.
         final JSONObject addToCartJsonResponse = new JSONObject(addToCartResponse.getContentAsString());
 
-        // get the keys from JSON object and do some basic validation
+        // (4) Check that the right item was added to cart and that the product's quantity has been increased by 1 if it
+        // was already in cart.
         final JSONObject product = addToCartJsonResponse.getJSONObject("product");
-        Assert.assertEquals("The addToCart call returned the wrong finish.", product.get("finish"), finish);
-        Assert.assertEquals("The addToCart call returned the wrong count", product.getInt("productCount"), 1);
-        Assert.assertEquals("The addToCart call returned the wrong price", product.get("productPrice"),
-                            newPrice.substring(0, newPrice.length() - 1));
-        Assert.assertEquals("The addToCart call returned the wrong product ID", product.getInt("productId"), Integer.parseInt(productId));
+        Assert.assertEquals("The addToCart call returned the wrong finish.", finish, product.get("finish"));
+        Assert.assertEquals("The addToCart call returned the wrong price", newPrice.substring(1), product.get("productPrice"));
+        Assert.assertEquals("The addToCart call returned the wrong product ID", Integer.parseInt(productId), product.getInt("productId"));
 
-        // Publish the results of that action.
+        // Get the added product's properties like ID, finish, weight, and height. This is necessary to identify the
+        // product in cart for quantity validation.
+        final int productIdCurrent = product.getInt("productId");
+        final String finishCurrent = product.get("finish").toString();
+        final JSONObject sizeCurrent = product.getJSONObject("size");
+        final int widthCurrent = sizeCurrent.getInt("width");
+        final int heightCurrent = sizeCurrent.getInt("height");
+
+        // To be safe let's assume the added product was not in cart before.
+        int cartItemQuantity = 0;
+
+        // Now search the initial cart for the added product by comparing the product properties.
+        final JSONArray cartItems = getCartElementSliderJsonResponse.getJSONArray("cartElements");
+        for (int i = 0; i < cartItems.length(); i++)
+        {
+            // Get the initial cart product's properties.
+            final JSONObject cartItem = cartItems.getJSONObject(i);
+            final int productIdBefore = cartItem.getInt("productId");
+            final String finishBefore = cartItem.get("finish").toString();
+            final JSONObject sizeBefore = cartItem.getJSONObject("size");
+            final int widthBefore = sizeBefore.getInt("width");
+            final int heightBefore = sizeBefore.getInt("height");
+
+            // Compare with added product.
+            if (productIdBefore == productIdCurrent && finishBefore.equals(finishCurrent) && widthBefore == widthCurrent &&
+                heightBefore == heightCurrent)
+            {
+                // The product was in cart before so let's remember the initial count.
+                cartItemQuantity = cartItems.getJSONObject(i).getInt("productCount");
+
+                // A product can exist in cart only once so we can stop searching.
+                break;
+            }
+        }
+
+        // It's expected that the item quantity for that special product has been increased by 1.
+        Assert.assertEquals("The addToCart call returned the wrong count", cartItemQuantity + 1, product.getInt("productCount"));
+
+        // (5) Publish the results of that action.
         setHtmlPage(page);
     }
 
@@ -161,6 +198,5 @@ public class AddToCart extends AbstractHtmlPageAction
         // Since the AJAX calls in this action do not load a new page
         // and all the JSON responses have been validated already in the execute() method
         // there is no need for further post validation here.
-
     }
 }

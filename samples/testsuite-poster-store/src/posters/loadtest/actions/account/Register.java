@@ -15,27 +15,27 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} fills in and submits the registration form.
+ * Fill in and submit the registration form.
  */
 public class Register extends AbstractHtmlPageAction
 {
     /**
-     * The registration form
+     * The registration form.
      */
     private HtmlForm registrationForm;
 
     /**
-     * The button to submit the registration form
+     * The button to submit the registration form.
      */
     private HtmlElement createAccountButton;
 
     /**
-     * The account to register
+     * The account to register.
      */
     private final Account account;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param previousAction
      *            The previously performed action
@@ -51,27 +51,27 @@ public class Register extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // Check that the registration form is available
+        // Check that the registration form is available.
         Assert.assertTrue("Registration form not found", HtmlPageUtils.isElementPresent(page, "id('formRegister')"));
 
-        // Remember the registration form
+        // Remember the registration form.
         registrationForm = HtmlPageUtils.findSingleHtmlElementByID(page, "formRegister");
 
-        // check that the create account button is available
+        // Check that the create account button is available.
         Assert.assertTrue("Create account button not found", HtmlPageUtils.isElementPresent(page, "id('btnRegister')"));
 
-        // Remember the create account button
+        // Remember the create account button.
         createAccountButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnRegister");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // Fill in the form
+        // Fill in the form.
         HtmlPageUtils.setInputValue(registrationForm, "name", account.getLastName());
         HtmlPageUtils.setInputValue(registrationForm, "firstName", account.getFirstName());
         HtmlPageUtils.setInputValue(registrationForm, "eMail", account.getEmail());
@@ -85,26 +85,26 @@ public class Register extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // Check that the account was successfully created
+        // Check that the account was successfully created.
         final boolean isAccountCreated = page.asXml()
                                              .contains("Your account has been created. Log in with your email address and password.");
         Assert.assertTrue("Registration failed.", isAccountCreated);
 
-        // Check that it's the sign in page
+        // Check that it's the sign in page.
         Assert.assertTrue("Sign in form not found.", HtmlPageUtils.isElementPresent(page, "id('formLogin')"));
         Assert.assertTrue("Link to register not found.", HtmlPageUtils.isElementPresent(page, "id('linkRegister')"));
 
-        // Check that the customer is not logged in after registration
+        // Check that the customer is not logged in after registration.
         Assert.assertTrue("Customer is logged in after registration.", HtmlPageUtils.isElementPresent(page, "id('btnShowLoginForm')"));
     }
 }

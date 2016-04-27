@@ -15,7 +15,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class AjaxUtils
 {
     /**
-     * Performs an XHR call for the given URL and parameters with method GET
+     * Performs an XHR call for the given URL and parameters with method GET.
      * 
      * @param page
      *            the current page
@@ -55,7 +55,7 @@ public class AjaxUtils
     }
 
     /**
-     * Performs an XHR call for the given URL and parameters with method POST
+     * Performs an XHR call for the given URL and parameters with method POST.
      * 
      * @param page
      *            the current page

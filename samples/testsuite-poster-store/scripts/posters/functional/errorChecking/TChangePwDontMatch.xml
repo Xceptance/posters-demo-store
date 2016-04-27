@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Verifies that an error is shown if the entered new passwords don't match while changing password.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <module name="posters.functional.modules.Login">
@@ -17,6 +17,6 @@
   <command name="type" target="id=password" value="newPassword"/>
   <command name="type" target="id=passwordAgain" value="otherPassword"/>
   <command name="clickAndWait" target="id=btnChangePassword"/>
-  <command name="assertText" target="id=errorMessage" value="× The passwords you entered dont match. Please try again."/>
+  <command name="assertText" target="id=errorMessage" value="× The passwords you entered don't match. Please try again."/>
   <command name="assertElementPresent" target="id=formChangePassword"/>
 </testcase>

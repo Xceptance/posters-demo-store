@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Simulates customer registration.
+ * <p>Simulates customer registration.</p>
  */
 @ScriptName
 ("posters.functional.scenarios.TRegister")

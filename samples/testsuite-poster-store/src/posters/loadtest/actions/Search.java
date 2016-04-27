@@ -34,7 +34,7 @@ public class Search extends AbstractHtmlPageAction
     private final SearchOption searchOption;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param previousAction
      *            The previously performed action
@@ -62,10 +62,10 @@ public class Search extends AbstractHtmlPageAction
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // Check that the search form is available
+        // Check that the search form is available.
         Assert.assertTrue("Search form not found.", HtmlPageUtils.isElementPresent(page, "id('search')"));
 
-        // Remember the search form
+        // Remember the search form.
         searchForm = HtmlPageUtils.findSingleHtmlElementByID(page, "search");
     }
 
@@ -79,10 +79,10 @@ public class Search extends AbstractHtmlPageAction
     @Override
     protected void execute() throws Exception
     {
-        // Fill the search form with the given phrase
+        // Fill the search form with the given phrase.
         HtmlPageUtils.setInputValue(searchForm, "searchText", phrase);
 
-        // Submit the search
+        // Submit the search.
         loadPageByFormSubmit(searchForm);
     }
 
@@ -94,10 +94,10 @@ public class Search extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);

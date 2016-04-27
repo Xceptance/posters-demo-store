@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if the entered new passwords don't match while changing password.
+ * <p>Verifies that an error is shown if the entered new passwords don&#39;t match while changing password.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TChangePwDontMatch")

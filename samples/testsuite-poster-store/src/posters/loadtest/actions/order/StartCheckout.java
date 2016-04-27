@@ -13,7 +13,7 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} starts the checkout.
+ * Starts the checkout.
  */
 public class StartCheckout extends AbstractHtmlPageAction
 {
@@ -36,26 +36,26 @@ public class StartCheckout extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the cart is not empty
+        // Check that the cart is not empty.
         final boolean cartIsEmpty = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('headerCartOverview')/span").asText()
                                                  .matches(".*: 0 Items.*");
         Assert.assertFalse("Cart must not be empty for checkout.", cartIsEmpty);
 
-        // check that the checkout link is available
+        // Check that the checkout link is available.
         Assert.assertTrue("Checkout link not found.", HtmlPageUtils.isElementPresent(page, "id('btnStartCheckout')"));
 
-        // remember the checkout link
+        // Remember the checkout link.
         checkoutLink = HtmlPageUtils.findSingleHtmlElementByID(page, "btnStartCheckout");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // start the checkout
+        // Start the checkout.
         loadPageByClick(checkoutLink);
     }
 
@@ -65,17 +65,17 @@ public class StartCheckout extends AbstractHtmlPageAction
         // Get the result of the action
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the page to enter or select a shipping address
+        // Check that it's the page to enter or select a shipping address.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleDelAddr')"));
 
-        // check that the form to enter a new shipping address is available
+        // Check that the form to enter a new shipping address is available.
         Assert.assertTrue("Form to enter shipping address not found.", HtmlPageUtils.isElementPresent(page, "id('formAddDelAddr')"));
     }
 }

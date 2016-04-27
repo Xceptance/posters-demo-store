@@ -13,7 +13,7 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} opens the cart overview page.
+ * Opens the cart overview page.
  */
 public class ViewCart extends AbstractHtmlPageAction
 {
@@ -36,38 +36,38 @@ public class ViewCart extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the cart overview link is available
+        // Check that the cart overview link is available.
         Assert.assertTrue("Cart overview link not found", HtmlPageUtils.isElementPresent(page, "id('headerCartOverview')"));
 
-        // remember cart overview link
+        // Remember cart overview link.
         viewCartLink = HtmlPageUtils.findSingleHtmlElementByID(page, "headerCartOverview");
     }
 
     @Override
     protected void execute() throws Exception
     {
-        // load the cart overview page
+        // Load the cart overview page.
         loadPageByClick(viewCartLink);
     }
 
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that it's the cart overview page
+        // Check that it's the cart overview page.
         Assert.assertTrue("Title not found", HtmlPageUtils.isElementPresent(page, "id('titleCart')"));
         Assert.assertTrue("Total price not found", HtmlPageUtils.isElementPresent(page, "id('totalPrice')"));
         Assert.assertTrue("Checkout button not found", HtmlPageUtils.isElementPresent(page, "id('btnStartCheckout')"));
