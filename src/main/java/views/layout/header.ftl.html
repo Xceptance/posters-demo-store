@@ -1,33 +1,33 @@
-<div id="header" class="navbar navbar-static-top">
+<nav id="header" class="navbar navbar-default navbar-static-top">
 	<div class="container">
-
-		<div>
+		<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+          data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
 			<!-- navbar-brand -->
-			<a id="brand" class="navbar-brand col-md-3" href="${applUrlHttp}/"> <img
-				src="${contextPath}/assets/img/xceptanceLogo.png" />
-				Poster&nbsp;Store
+			<a id="brand" href="${applUrlHttp}/" class="navbar-text"> <img
+				src="${contextPath}/assets/img/xceptanceLogo.png" /> Poster&nbsp;Store
 			</a>
-			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-			<a class="btn btn-navbar" data-toggle="collapse"
-				data-target=".navbar-responsive-collapse"> <span
-				class="icon-bar"></span> <span class="icon-bar"></span> <span
-				class="icon-bar"></span>
-			</a>
-
-			<!-- collapse -->
-			<div class="nav-collapse collapse navbar-responsive-collapse">
-				<div class="col-md-8">
-					<!-- search -->
-					<form id="search" class="navbar-form"
-						action="${applUrlHttp}/search" method="get">
-						<input id="searchText" name="searchText" type="text"
-							class="search-query" placeholder="Search"
-							value="${(searchTerm)!}">
-						<button id="btnSearch" class="btn" type="submit">
-							<i class="icon-search"></i>
-						</button>
-					</form>
-
+		</div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          <li>
+	        	<!-- search -->
+				<form id="search" class="navbar-form"
+					action="${applUrlHttp}/search" method="get">
+					<input id="searchText" name="searchText" type="text"
+						class="form-control" placeholder="Search" title="Search"
+						value="${(searchTerm)!}">
+					<button id="btnSearch" class="btn" type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</form>
+          </li>
+          <li>
 					<!-- login -->
 					<#if isLogged == false>
 					<p class="navbar-text  pull-right">
@@ -49,19 +49,20 @@
 						</li>
 					</ul>
 					</#if>
-
+          </li>
+          <li>
 					<!-- cart overview -->
 					<div id="btnCartOverview" class="navbar-text pull-right">				
 						<a id="headerCartOverview" href="${applUrlHttp}/cart">
-						<i class="icon-shopping-cart"></i> <span>${i18n("cartOverviewTitle")}:
+						<span class="glyphicon glyphicon-shopping-cart"></span> <span>${i18n("cartOverviewTitle")}:
 								${cartProductCount} ${i18n("cartItem")} -
 								${currency}${totalPrice}</span>
 						</a>
 						<!-- cart slider -->
 						<#include "cartSlider.ftl.html" />
 					</div>
-				</div>
-			</div>
-		</div>
+          </li>
+          </ul>
+        </div>
 	</div>
-</div>
+</nav>
