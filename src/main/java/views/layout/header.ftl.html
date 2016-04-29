@@ -1,6 +1,6 @@
 <nav id="header" class="navbar navbar-default navbar-static-top">
-	<div class="container">
-		<div class="navbar-header">
+	<div class="row">
+		<div class="navbar-header col-sm-4">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
           data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -9,9 +9,11 @@
             <span class="icon-bar"></span>
           </button>
 			<!-- navbar-brand -->
-			<a id="brand" href="${applUrlHttp}/" class="navbar-text"> <img
-				src="${contextPath}/assets/img/xceptanceLogo.png" /> Poster&nbsp;Store
-			</a>
+			<div class="col-sm-4 navbar-brand">
+				<a id="brand" href="${applUrlHttp}/">
+					<img src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
+				</a>
+			</div>
 		</div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -37,7 +39,7 @@
 					</#if> <#if isLogged == true>
 					<ul id="headerLoggedCustomer" class="nav pull-right">
 						<li id="dropdown" class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${i18n("headerWelcome")}
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${i18n('headerWelcome')}
 								${customerFirstName} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li id="btnAccountOverview"><a
