@@ -5,7 +5,6 @@ Design
 ** Update zu Bootstrap 3.x?
 ** FLAT Design? z.B. Rundungen gegen Ecken tauschen
 ** Fontsizes anpassen (h1, h2, h3)
-** Favicon von Xceptance nehmen
 ** Call to action Buttons alle in der selben Farbe
 ** Required kennzeichnen
 
