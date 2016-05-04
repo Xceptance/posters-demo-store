@@ -1,14 +1,15 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-	<h1 id="titleOrderHistory">${i18n("titleOrderHistory")}</h1>
+<@layout.myLayout "The ultimate webshop">
+<fieldset>
+	<legend id="titleOrderHistory"><h2>${i18n("titleOrderHistory")}</h2></legend> 	
 	<div id="orderOverview">
 	<#list orderOverview as order>
 	<div class="row well" id="order${order_index}">
-	<div class="col-md-2">
+	<div class="col-xs-2">
 		<h5 id="order${order_index}Date">${order.orderDate}</h5>
 		<h5 id="order${order_index}Costs">${currency}${order.getTotalCostsAsString()}</h5>
 	</div>
-	<div class="col-md-8">
+	<div class="col-xs-8">
 		<table class="table" table-bordered>
 		<#list order.products as orderProduct>
 		<tr id="order${order_index}Product${orderProduct_index}">
@@ -25,4 +26,5 @@
 	</div>
 	</#list>
 	</div>
+</fieldset>
 </@layout.myLayout>
