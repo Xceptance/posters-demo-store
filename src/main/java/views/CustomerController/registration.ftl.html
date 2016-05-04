@@ -1,51 +1,77 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-	<form id="formRegister" class="form-horizontal" action="${contextPath}/registration" method="post">
-		<fieldset>
-			<!-- Form Name -->
-			<legend>${i18n("titleRegistration")}</legend>
+<@layout.myLayout "The ultimate webshop">
+<form id="formRegister" class="form-horizontal"
+	action="${contextPath}/registration" method="post">
+	<fieldset>
+		<!-- Form Name -->
+		<legend><h2>${i18n("titleRegistration")}</h2></legend>
+		<div class="col-md-8">
+
 			<!-- name -->
-			<div class="control-group">
-				<label class="control-label">${i18n("labelMyName")}:</label>
-				<div class="controls">
-					<input id="name" name="name" required placeholder="${i18n("registrationName")}" class="input-xlarge" type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(registration.name)!}">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="name">${i18n('labelMyName')}:</label>
+				<div class="col-sm-10">
+					<input id="name" name="name" required
+						placeholder="${i18n('registrationName')}" class="form-control"
+						type="text" pattern="[A-Za-z\s]+"
+						data-error="${i18n('errorWrongName')}"
+						value="${(registration.name)!}">
 				</div>
 			</div>
+
 			<!-- first name -->
-			<div class="control-group">
-				<label class="control-label">${i18n("labelMyFirstName")}:</label>
-				<div class="controls">
-					<input id="firstName" name="firstName" placeholder="${i18n("registrationFirstName")}" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(registration.firstName)!}">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="firstName">${i18n('labelMyFirstName')}:</label>
+				<div class="col-sm-10">
+					<input id="firstName" name="firstName"
+						placeholder="${i18n('registrationFirstName')}"
+						class="form-control" required type="text" pattern="[A-Za-z\s]+"
+						data-error="${i18n('errorWrongName')}"
+						value="${(registration.firstName)!}">
 				</div>
 			</div>
+
 			<!-- email -->
-			<div class="control-group">
-				<label class="control-label">${i18n("labelMyEmail")}:</label>
-				<div class="controls">
-					<input id="eMail" name="eMail" placeholder="${i18n("registrationEmail")}" class="input-xlarge" required type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}" data-error="${i18n("errorValidEmail")}" value="${(registration.email)!}">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="eMail">${i18n('labelMyEmail')}:</label>
+				<div class="col-sm-10">
+					<input id="eMail" name="eMail"
+						placeholder="${i18n('registrationEmail')}" class="form-control"
+						required type="text"
+						pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"
+						data-error="${i18n('errorValidEmail')}"
+						value="${(registration.email)!}">
 				</div>
 			</div>
+
 			<!-- password -->
-			<div class="control-group">
-				<label class="control-label">${i18n("changePasswordNew")}:</label>
-				<div class="controls">
-					<input id="password" name="password" placeholder="${i18n("registrationPassword")}" class="input-xlarge" required type="password">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="password">${i18n('changePasswordNew')}:</label>
+				<div class="col-sm-10">
+					<input id="password" name="password"
+						placeholder="${i18n('registrationPassword')}" class="form-control"
+						required type="password">
 				</div>
 			</div>
+
 			<!-- password again -->
-			<div class="control-group">
-				<label class="control-label">${i18n("changePasswordNewAgain")}:</label>
-				<div class="controls">
-					<input id="passwordAgain" name="passwordAgain" placeholder="${i18n("registrationPasswordAgain")}" class="input-xlarge" required type="password">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="passwordAgain">${i18n('changePasswordNewAgain')}:</label>
+				<div class="col-sm-10">
+					<input id="passwordAgain" name="passwordAgain"
+						placeholder="${i18n('registrationPasswordAgain')}"
+						class="form-control" required type="password">
 				</div>
 			</div>
+
 			<!-- submit / clear -->
-			<div class="control-group">
-				<label class="control-label"></label>
-				<div class="controls">
-					<button id="btnRegister" name="btnRegister" class="btn btn-success" type="submit">${i18n("registrationCreate")}</button>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<button id="btnRegister" name="btnRegister" class="btn btn-success pull-right"
+						type="submit">${i18n('registrationCreate')}</button>
 				</div>
 			</div>
-		</fieldset>
-	</form>
+		</div>
+	</fieldset>
+</form>
 </@layout.myLayout>
