@@ -7,6 +7,7 @@ Design
 ** Fontsizes anpassen (h1, h2, h3)
 ** Call to action Buttons alle in der selben Farbe
 ** Required kennzeichnen
+** i18n durchziehen
 
 *Produktdetail 
 ** non-breaking Space zwischen Größe und Einheit("in").
@@ -58,6 +59,10 @@ Design
 ** Darstellung Order totals ansprechender gestalten  als Tabelle und Berechnungen hinzufügen z.B. Taxes
 ** Anordnung der Adressen und der Kreditkarte überdenken
 
+*Payment Settings
+** Expiration date auf das aktuelle Jahr setzten
+
+
 *Landing page
 ** Slider Links farbe anpassen bzw hintergrund
 ** Slider höher machen
@@ -76,3 +81,4 @@ Funktionalität
 * Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen? Besser: If conditions nutzen!
 * Focus von Input Feldern nicht rot (Nur im Fehlerfall rot!) Anpassung überall. First focus state (minor)
 * Testfälle checken
+* Payment Settings -> Expiration date -> ein abgelaufenes Datum darf nicht auswaehlbar sein
