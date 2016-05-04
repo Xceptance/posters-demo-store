@@ -3,14 +3,16 @@
 	<form id="formAddBillAddr" class="form-horizontal" action="${contextPath}/addBillingAddressToCustomerCompleted" method="post">
 		<fieldset>
 			<!-- Form Name -->
-			<legend>${i18n("billingAddressAddNew")}</legend>
-			<!-- include form -->
-			<#include "../form/addressForm.ftl.html"/>
-			<!-- add button -->
-			<div class="control-group">
-				<label class="control-label" for="btnAddBillAddr"></label>
-				<div class="controls">
-					<button id="btnAddBillAddr" name="btnAddBillAddr" class="btn btn-primary" type="submit">${i18n("buttonAddNewAddress")}</button>
+			<legend><h2>${i18n("billingAddressAddNew")}</h2></legend>
+			<div class="col-xs-8">
+				<!-- include form -->
+				<#include "../form/addressForm.ftl.html"/>
+				<!-- add button -->
+				<div class="form-group">
+					<div class="col-xs-12">
+						<button id="btnAddBillAddr" name="btnAddBillAddr"
+							 class="btn btn-success pull-right" type="submit">${i18n('buttonAddNewAddress')}</button>
+					</div>
 				</div>
 			</div>
 		</fieldset>
