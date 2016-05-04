@@ -1,8 +1,20 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-	<h1 id="titleAccountOverview">${i18n("accountOverviewTitle")}</h1>
-	<h4><a id="linkOrderOverview" href="${contextPath}/orderOverview">${i18n("titleOrderHistory")}</a></h4>
-	<h4><a id="linkAddressOverview" href="${contextPath}/addressOverview">${i18n("titleAddressOverview")}</a></h4>
-	<h4><a id="linkPaymentOverview" href="${contextPath}/paymentOverview">${i18n("titlePaymentInformation")}</a></h4>
-	<h4><a id="linkPersonalData" href="${contextPath}/settingOverview">${i18n("titleSettings")}</a></h4>
+<fieldset>
+	<legend id="titleAccountOverview"><h2>${i18n("accountOverviewTitle")}</h2></legend>
+	<ul class="list-unstyled">
+	<li>
+		<a id="linkOrderOverview" href="${contextPath}/orderOverview">${i18n("titleOrderHistory")}</a>
+	</li>
+	<li>
+		<a id="linkAddressOverview" href="${contextPath}/addressOverview">${i18n("titleAddressOverview")}</a>
+	</li>
+	<li>
+		<a id="linkPaymentOverview" href="${contextPath}/paymentOverview">${i18n("titlePaymentInformation")}</a>
+	</li>
+	<li>
+		<a id="linkPersonalData" href="${contextPath}/settingOverview">${i18n("titleSettings")}</a>
+	</li>
+	</ul>
+</fieldset>
 </@layout.myLayout>
