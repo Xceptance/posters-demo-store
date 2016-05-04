@@ -1,5 +1,5 @@
 <div id="sidebarNav" class="well">
-	<ul class="sidebar-nav list-unstyled">
+	<ul class="sidebar-nav list-unstyled" >
 		<#list topCategory as tC>
 			<li id="topCategory${tC_index}" class="topCategory"><strong><h4><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}">${tC.name}</a></h4></strong></li>
 			<#list tC.subCategories as sC>

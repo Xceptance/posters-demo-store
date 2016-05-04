@@ -4,6 +4,8 @@
   <head>
     <meta charset="utf-8">
     <title>Posters - The Ultimate Online Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link href="${contextPath}/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${contextPath}/assets/css/cartSlider.css" rel="stylesheet"/>
 	
@@ -36,7 +38,7 @@
 		</#if>
 		<div class="row" id="errorMessage">
 			<div class="col-md-6 col-md-offset-3 text-center alert alert-danger">
-  				<a class="close" data-dismiss="alert">×</a>
+  				<a class="close" data-dismiss="alert" aria-label="close">×</a>
   				<strong></strong>
 			</div>
 		</div>
@@ -50,7 +52,7 @@
 		</#if>
 		<div class="row" id="successMessage">
 			<div class="col-md-6 col-md-offset-3 text-center alert alert-success">
-  				<a class="close" data-dismiss="alert">×</a>
+  				<a class="close" data-dismiss="alert" aria-label="close">×</a>
   				<strong></strong>
 			</div>
 		</div>
@@ -64,27 +66,27 @@
 		</#if>
 		<div class="row" id="infoMessage">
 			<div class="col-md-6 col-md-offset-3 text-center alert alert-info">
-  				<a class="close" data-dismiss="alert">×</a>
+  				<a class="close" data-dismiss="alert" aria-label="close">×</a>
   				<strong></strong>
 			</div>
 		</div>
 
 		<!-- body -->
 		<div id="main">
-			<div class="row">
+			<div class="container-fluid">
 				<!-- sidebar -->
-				<div class="col-md-3">
+				<div class="col-xs-12 col-md-3">
 					<#include "sidebar.ftl.html"/>
 				</div>
 				<!-- content -->
-				<div class="col-md-9">
+				<div class="col-xs-12 col-md-9">
 					<#nested/>
 				</div>
 			</div>
-			<!-- footer -->
-			<hr>
-			<#include "footer.ftl.html"/>
 		</div>
+		<!-- footer -->
+		<hr>
+		<#include "footer.ftl.html"/>
   </body>
 </html>
 </#macro>
