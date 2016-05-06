@@ -4,7 +4,9 @@
 	action="${applUrlHttps}/login" method="post">
 	<fieldset>
 		<!-- Form Name -->
-		<legend><h2>${i18n("titleSignIn")}</h2></legend>
+		<legend>
+			<h2>${i18n("titleSignIn")}</h2>
+		</legend>
 		<div class="col-md-8">
 
 			<!-- Email input-->
@@ -34,8 +36,8 @@
 			<!-- button -->
 			<div class="form-group">
 				<div class="col-sm-12">
-					<input type="submit" class="btn btn-success pull-right" id="btnSignIn"
-						name="btnSignIn" value='${i18n("buttonSignIn")}' />
+					<button id="btnSignIn" name="btnSignIn"
+						class="btn btn-success pull-right" type="submit">${i18n("buttonSignIn")}</button>
 				</div>
 			</div>
 
