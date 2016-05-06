@@ -1,47 +1,64 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-	<h1 id="titleProductName">${productDetail.name}</h1>
-	<div class="row" productid="${productDetail.id}">
-		<div class="col-md-4" id="prodImg">
-      		<img class="img-polaroid" width="300" alt="" src="${contextPath}${productDetail.imageURL}"></img>
-      	</div>
-      	<div class="col-md-5">
-      		<h3 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h3>
-      		<h4 id="prodDescriptionDetail">${productDetail.descriptionDetail}</h4>
-      		<p id="prodFinish">${i18n("productDetailPosterFinish")}</p>
-      	</div>
-      	<div class="col-md-3">
-      		<h3 id="prodPrice">${currency}${productDetail.getPriceAsString()}</h3>
-      		<form id="addToCartForm" name="addToCartForm">
-      			<!-- Select finish -->
-				<div class="control-group">
-					<label class="control-label" for="finish">${i18n("cartSelectFinish")}</label>
-					<div class="controls">
-						<div id="selectFinish">
-						<label class="radio" for="finish-matte">
-						<input name="finish" id="finish-matte" value="matte" checked="checked" type="radio">
-							${i18n("cartSelectFinishMatte")}
-						</label>
-						<label class="radio" for="finish-gloss">
-						<input name="finish" id="finish-gloss" value="gloss" type="radio">
-							${i18n("cartSelectFinishGloss")}
-						</label>
-						</div>
+<@layout.myLayout "The ultimate webshop">
+
+<div class="row" productid="${productDetail.id}">
+	<form id="addToCartForm" name="addToCartForm">
+		<div class="col-xs-12 col-md-4" id="prodImg">
+			<img class="img-polaroid" width="300" alt=""
+				src="${contextPath}${productDetail.imageURL}"></img>
+		</div>
+		<div class="col-md-8">
+			<h2 id="titleProductName">${productDetail.name}</h2>
+			<h4 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h4>
+			<hr>
+			<div class="form-group container-fluid">
+				<strong>Product description:</strong>
+				<div class="col-xs-12" id="prodDescriptionDetail">
+					${productDetail.descriptionDetail}
+				</div>
+			</div>
+			<div class="form-group container-fluid">
+				<strong>Print information:</strong>
+				<div class="col-xs-12" id="prodFinish">
+					${i18n('productDetailPosterFinish')}
+				</div>
+			</div>
+
+			<!-- Select finish -->
+			<div class="form-group container-fluid">
+				<strong>${i18n("cartSelectFinish")}</strong>
+				<div class="col-xs-12" id="selectFinish">
+					<div class="radio">
+						<label><input type="radio" name="finish" id="finish-matte" value="matte" checked="checked">${i18n("cartSelectFinishMatte")}</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="finish" id="finish-gloss" value="gloss">${i18n("cartSelectFinishGloss")}</label>
 					</div>
 				</div>
-				<!-- Select size -->
-				<div class="control-group">
-					<label class="control-label" for="selectSize">${i18n("cartSelectSize")}</label>
-					<div class="controls">
-						<select id="selectSize" name="selectSize" class="input-medium" onchange="updatePrice(this, ${productDetail.id});">
-							<#list productDetail.availableSizes as size>
-								<option>${size.size.width} x ${size.size.height} ${unitLength}</option>
-							</#list>
-						</select>
-					</div>
+			</div>
+			<!-- Select size -->
+			<div class="form-group container-fluid">
+				<strong>${i18n("cartSelectSize")}</strong>
+				<div class="col-xs-12" id="selectFinish">
+					<select id="selectSize" name="selectSize" class="input-medium  container-fluid"
+						onchange="updatePrice(this, ${productDetail.id});">
+						<#list productDetail.availableSizes as size>
+							<option>${size.size.width} x ${size.size.height}${unitLength}</option> 
+						</#list>
+					</select>
 				</div>
-      			<button class="btn" id="btnAddToCart" name="btnAddToCart" type="button" onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToCart")}</button>
-      		</form>
-      	</div>
-    </div>
+			</div>
+			<div class="col-xs-12 ">
+				<div id="prodPrice" class="h3 pull-right">
+					${currency}${productDetail.getPriceAsString()}
+				</div>
+			</div>
+			<div class="form-group col-xs-12">
+				<button id="btnAddToCart" name="btnAddToCart"
+					class="btn btn-success pull-right" type="button"
+					onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToCart")}</button>
+			</div>
+		</div>
+	</form>
+</div>
 </@layout.myLayout>
