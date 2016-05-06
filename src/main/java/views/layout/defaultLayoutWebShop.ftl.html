@@ -22,7 +22,7 @@
   </head>
   <body>
     	<!-- header -->
-		<#include "header.ftl.html"/>
+		<#include "header2.ftl.html"/>
 		<!-- checkout breadcrumb -->
 		<#if checkout??>
 			<#include "checkoutBreadcrumb.ftl.html"/>
@@ -73,15 +73,8 @@
 
 		<!-- body -->
 		<div id="main">
-			<div class="container-fluid">
-				<!-- sidebar -->
-				<div class="col-xs-12 col-md-3">
-					<#include "sidebar.ftl.html"/>
-				</div>
-				<!-- content -->
-				<div class="col-xs-12 col-md-9">
+			<div class="container">
 					<#nested/>
-				</div>
 			</div>
 		</div>
 		<!-- footer -->

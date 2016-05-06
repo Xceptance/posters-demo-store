@@ -1,0 +1,82 @@
+<nav id="header" class="navbar navbar-default navbar-static-top">
+	<div class="container-fuid">
+		<div class="navbar-header col-xs-12 col-sm-4 col-lg-2">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+          data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+			<!-- navbar-brand -->
+			<div class="col-xs-7 col-sm-12 navbar-brand">
+				<a id="brand" href="${applUrlHttp}/">
+					<img src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
+				</a>
+			</div>
+		</div>
+        <div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav col-xs-12 col-sm-8 col-lg-5">
+				<#list topCategory as tC>
+			      <li class="dropdown">
+			        <a class="dropdown-toggle" data-toggle="dropdown" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" id="topCategory${tC_index}">${tC.name}
+			        <span class="caret"></span></a>
+			        <ul class="dropdown-menu">
+						<#list tC.subCategories as sC>
+						<li id="subCategory${sC_index}${tC_index}" class="level-1"><a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}">${sC.name}</a></li>
+						</#list>
+			        </ul>
+			      </li>
+			     </#list>
+		    </ul>
+          <ul class="nav navbar-nav col-xs-12 col-sm-12 col-lg-5">
+	          <li>
+		        	<!-- search -->
+					<form id="search" class="navbar-form"
+						action="${applUrlHttp}/search" method="get">
+						<input id="searchText" name="searchText" 
+							class="form-control col-xs-8"  type="text" placeholder="Search" 
+							title="Search" value="${(searchTerm)!}">
+						<button id="btnSearch" class="btn" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</form>
+	          </li>
+	          <li class="pull-right">
+						<!-- login -->
+						<#if isLogged == false>
+						<p class="navbar-text pull-right">
+							${i18n('headerWelcome')} <a id="btnShowLoginForm" href="${applUrlHttps}/login">${i18n('headerLogin')}</a>
+						</p>
+						</#if> <#if isLogged == true>
+						<ul id="headerLoggedCustomer" class="nav pull-right">
+							<li id="dropdown" class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">${i18n('headerWelcomShort')}
+									${customerFirstName} <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li id="btnAccountOverview"><a
+										href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
+									</li>
+									<li id="btnLogout"><a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						</#if>
+	          </li>
+	          <li class="pull-right">
+						<!-- cart overview -->
+						<div id="btnCartOverview" class="navbar-text">				
+							<a id="headerCartOverview" href="${applUrlHttp}/cart">
+							<span class="glyphicon glyphicon-shopping-cart"></span> <span>${i18n("cartOverviewTitle")}:
+									${cartProductCount} ${i18n("cartItem")} -
+									${currency}${totalPrice}</span>
+							</a>
+							<!-- cart slider -->
+							<#include "cartSlider.ftl.html" />
+						</div>
+	          </li>
+          </ul>
+        </div>
+	</div>
+</nav>
