@@ -4,12 +4,32 @@
 	<h1 id="titleSearchText">${(searchText)!}</h1>
 	<h1 id="titleNoResults">${(noResults)!}</h1>
 	<!-- paging -->
-	<div id="pagination" class="pagination"></div>
+	<div class="pagination">
+		<ul id="pagination"></ul>
+	</div>
 	<script type="text/javascript">
 		var options = {
 			currentPage: ${currentPage},
-            totalPages: ${totalPages}
-        }
+            totalPages: ${totalPages},
+            bootstrapMajorVersion: 3,
+			alignment:'center',
+			onPageClicked: function(e, originalEvent, type, page) {
+				var pathname = $(location).attr('pathname');
+				var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+				// top category
+				if(pageType == "topCategory") {
+					$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+				}
+				// sub category
+				else if(pageType == "category"){
+					$.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+				}
+				 // search
+				else {
+					$.post('${contextPath}/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+				}
+			}
+        };
         $('#pagination').bootstrapPaginator(options);
 	</script>
 	<!-- products -->
