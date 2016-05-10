@@ -2,11 +2,11 @@
 <@layout.myLayout "The ultimate webshop">
 <form id="addToCartForm" name="addToCartForm">
 	<div class="row-fluid" productid="${productDetail.id}">
-		<div class="col-xs-12 col-md-4" id="prodImg">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5" id="prodImg">
 			<img class="img-polaroid" width="300" alt=""
 				src="${contextPath}${productDetail.imageURL}"></img>
 		</div>
-		<div class="col-md-8">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
 			<h2 id="titleProductName">${productDetail.name}</h2>
 			<h4 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h4>
 			<hr>
@@ -14,11 +14,6 @@
 				<strong>Product description:</strong>
 				<div class="col-xs-12" id="prodDescriptionDetail">
 					${productDetail.descriptionDetail}</div>
-			</div>
-			<div class="form-group container-fluid">
-				<strong>Print information:</strong>
-				<div class="col-xs-12" id="prodFinish">
-					${i18n('productDetailPosterFinish')}</div>
 			</div>
 
 			<!-- Select finish -->
@@ -45,6 +40,12 @@
 						<option>${size.size.width} x ${size.size.height}
 							${unitLength}</option> </#list>
 					</select>
+				</div>
+			</div>
+			<div class="form-group container-fluid">
+					<strong>Print information:</strong>
+				<div class="col-xs-12" id="prodFinish">
+					${i18n('productDetailPosterFinish')}
 				</div>
 			</div>
 			<div class="col-xs-12 ">
