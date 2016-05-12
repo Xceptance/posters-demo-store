@@ -2,7 +2,6 @@ Design
 
 * Allgemein
 ** Font? , color:#444
-** Update zu Bootstrap 3.x?
 ** FLAT Design? z.B. Rundungen gegen Ecken tauschen
 ** Fontsizes anpassen (h1, h2, h3)
 ** Call to action Buttons alle in der selben Farbe
@@ -29,7 +28,6 @@ Design
 
 *Header
 ** Search-Box unrund (zu rund, vielleicht eine normales Input)
-** Search-Box und Search-Button auf einen Höhe
 ** Reihenfolge
 ** mobile Ansicht erweitern
 ** mobile Ansicht die schwarzen divider anpassen
@@ -43,10 +41,7 @@ Design
 ** Auch die zugeklappte Ansicht bedenken bei leeren Cart
 
 * Show-Cart-Bereich
-** Cart-Tabelle eindampfen (Titel<br>Subtitle, Size<br>Finish)
-** Namen fett
 ** Short Description in die nächste Zeile unter Namen
-** Produkteigenschaften als Liste in einer Spalte
 ** Buttons sind zu groß > Links daraus machen 
 ** Anzahl rechtsbündig im input
 ** Proceed to checkout als grüner Button
@@ -55,7 +50,6 @@ Design
 
 *Checkout
 ** Breadcrumbs in den Context integrieren
-** Wording in den Breadcrumbs: Einzahl, Payment statt Credit card
 ** Darstellung Order totals ansprechender gestalten  als Tabelle und Berechnungen hinzufügen z.B. Taxes
 ** Anordnung der Adressen und der Kreditkarte überdenken
 
