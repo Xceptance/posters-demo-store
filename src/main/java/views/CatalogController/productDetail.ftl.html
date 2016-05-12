@@ -3,7 +3,7 @@
 <form id="addToCartForm" name="addToCartForm">
 	<div class="row-fluid" productid="${productDetail.id}">
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5" id="prodImg">
-			<img class="img-polaroid" width="300" alt=""
+			<img class="img-polaroid" width="300" alt="${productDetail.name}"
 				src="${contextPath}${productDetail.imageURL}"></img>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-7">
@@ -42,22 +42,23 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group container-fluid">
+			<div class="col-xs-12 ">
+				<div id="prodPrice" class="h3 pull-right">
+					(${i18n("titlePriceExclVat")}) ${currency}${productDetail.getPriceAsString()}</div>
+			</div>
+
+			<div class="form-group container-fluid col-md-10">
 					<strong>Print information:</strong>
 				<div class="col-xs-12" id="prodFinish">
 					${i18n('productDetailPosterFinish')}
 				</div>
 			</div>
-			<div class="col-xs-12 ">
-				<div id="prodPrice" class="h3 pull-right">
-					${currency}${productDetail.getPriceAsString()}</div>
+			<div class="form-group col-xs-12 col-md-2">
+				<button id="btnAddToCart" name="btnAddToCart"
+					class="btn btn-success pull-right" type="button"
+					onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToCart")}</button>
 			</div>
-		</div>
 
-		<div class="form-group col-xs-12">
-			<button id="btnAddToCart" name="btnAddToCart"
-				class="btn btn-success pull-right" type="button"
-				onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())">${i18n("productDetailAddToCart")}</button>
 		</div>
 
 	</div>
