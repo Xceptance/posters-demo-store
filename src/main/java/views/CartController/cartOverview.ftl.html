@@ -1,40 +1,66 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-	<h2 id="titleCart">${i18n("cartOverviewTitle")}</h2>
-	<table class="table" table-bordered>
-		<#list cartProducts as cartProduct>
-			<tr id="product${cartProduct_index}">
-				<td><a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img data-src="${contextPath}/assets/js/holder.js/150x100" alt="" src="${contextPath}${cartProduct.product.imageURL}" width="150"></img></a></td>
-				<td id="productName${cartProduct_index}">${cartProduct.product.name}</td>
-				<td id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</td>
-				<td id="productFinish${cartProduct_index}">${cartProduct.finish}</td>
-				<td id="productSize${cartProduct_index}">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</td>
-				<td id="productPrice${cartProduct_index}">${currency}${cartProduct.getPriceAsString()}</td>
-				<td>
-				<!-- quantity box -->
-					<form class="form-inline">
-					    <div class="form-group">
-					      <label for="productCount${cartProduct_index}">Quantity</label>
-					      	<input id="productCount${cartProduct_index}" name="productCount${cartProduct_index}" class="form-control productCount${cartProduct_index}" type="text" value=${cartProduct.productCount} size="3" maxlength="3">
-						  <button class="btn btn-success" id="btnUpdateProdCount${cartProduct_index}" name="btnUpdateProdCount${cartProduct_index}" onclick="updateProductCount(${cartProduct.id}, $('#productCount${cartProduct_index}').val(), ${cartProduct_index})">${i18n("buttonSave")}</button>
-					    </div>
-					</form>
-				</td>
-				<td>
-      				<button class="btn btn-danger" id="btnRemoveProduct${cartProduct_index}" name="btnRemoveProduct${cartProduct_index}" onclick="deleteFromCart(${cartProduct.id}, ${cartProduct_index})"><span class="glyphicon glyphicon-remove"></span></button>
-				</td>
-			</tr>
-		</#list>
-	</table>
+<@layout.myLayout "The ultimate webshop">
+<h2 id="titleCart">${i18n("cartOverviewTitle")}</h2>
+<table class="table" table-bordered>
+	<#list cartProducts as cartProduct>
+	<tr id="product${cartProduct_index}">
+		<td><a
+			href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img
+				data-src="${contextPath}/assets/js/holder.js/150x100" alt=""
+				src="${contextPath}${cartProduct.product.imageURL}" width="150"></img></a></td>
+		<td><div id="productName${cartProduct_index}">
+				<strong>${cartProduct.product.name}</strong>
+			</div>
+			<div id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</div>
+		</td>
+		<td></td>
+		<td><div id="productFinish${cartProduct_index}">${cartProduct.finish}</div>
+			<div>${cartProduct.size.width} x ${cartProduct.size.height}
+				${unitLength}</div></td>
+		<td id="productSize${cartProduct_index}"></td>
+		<td id="productPrice${cartProduct_index}">${currency}${cartProduct.getPriceAsString()}</td>
+		<td>
+			<!-- quantity box -->
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="productCount${cartProduct_index}">Quantity</label> <input
+						id="productCount${cartProduct_index}"
+						name="productCount${cartProduct_index}"
+						class="form-control productCount${cartProduct_index}" type="text"
+						value=${cartProduct.productCount} size="3" maxlength="3"><br>
+					<button class="btn btn-link"
+						id="btnUpdateProdCount${cartProduct_index}"
+						name="btnUpdateProdCount${cartProduct_index}"
+						onclick="updateProductCount(${cartProduct.id}, $('#productCount${cartProduct_index}').val(), ${cartProduct_index})">${i18n("buttonUpdate")}</button>
+				</div>
+			</form>
+		</td>
+		<td id="productLineItemPrice${cartProduct_index}"><span
+			class="currency">${currency}</span>${cartProduct.getProductLineItemPriceAsString()}</td>
+		<td>
+			<button class="btn btn-default"
+				id="btnRemoveProduct${cartProduct_index}"
+				name="btnRemoveProduct${cartProduct_index}"
+				onclick="deleteFromCart(${cartProduct.id}, ${cartProduct_index})">
+				<span class="glyphicon glyphicon-remove"></span>
+			</button>
+		</td>
+	</tr>
+	</#list>
+</table>
 
-	<div class="col-xs-12 ">
-		<div id="prodPrice" class="h3 pull-right">
-			${i18n("cartOverviewTotalPrice")}: <b id="totalPrice">${currency}${totalPrice}</b>
-		</div>
+<div class="container-fluid">
+	<div class="col-md-8"></div>
+	<div class="col-md-2 h3 text-right">${i18n("cartOverviewTotalPrice")}:
 	</div>
-	<div class="col-xs-12 ">
-		<div id="prodPrice" class="pull-right">
-			<a href="${applUrlHttps}/checkout" id="btnStartCheckout" class="btn btn-success">${i18n("cartOverviewStartCheckout")}</a>
-		</div>
+	<div class="col-md-2 h3 text-right">
+		${currency}<span id="prodPrice"><strong>${totalPrice}</strong></span>
 	</div>
+</div>
+<div class="col-xs-12 ">
+	<div id="prodPrice" class="pull-right">
+		<a href="${applUrlHttps}/checkout" id="btnStartCheckout"
+			class="btn btn-success">${i18n("cartOverviewStartCheckout")}</a>
+	</div>
+</div>
 </@layout.myLayout>
