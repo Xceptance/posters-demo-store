@@ -2,15 +2,19 @@
 	<div id="slidingTopWrap">
 		<div id="slidingTopContent">
 			<div id="cartSliderWrap">
-				<div id="cartSliderTitleWrap">
-					<a id="cartSliderHeader" href="${applUrlHttp}/cart">${i18n("cartOverviewTitle")}</a>
-					<span id="notificationsLoader"></span>
-				</div>
 				<div id="cartSliderItemsWrap">
 					<ul id="cartSliderElementList">
 					</ul>
 				</div>
-				<div class="order-totals">${i18n("cartOverviewTotalPrice")}: <span id="cartSliderTotalPrice"></span></div>
+				<div class="order-totals row">
+					<div class="col-sm-6 text-left">${i18n("cartOverviewTotalPrice")}</div>
+					<div class="col-sm-6 text-right"><div id="cartSliderTotalPrice"></div></div>
+				</div>
+				<div id="cartSliderTitleWrap" class="col-sm-12">
+					<a href="${applUrlHttp}/cart" id="cartSliderHeader"
+						class="btn btn-success form-control">${i18n("cartOverviewTitle")}</a> <span
+						id="notificationsLoader"></span>
+				</div>
 			</div>
 		</div>
 	</div>
