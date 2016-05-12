@@ -11,6 +11,7 @@
 
 <link href="${contextPath}/assets/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
 <link href="${contextPath}/assets/css/cartSlider.css" rel="stylesheet" />
 
 <link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon"
@@ -27,9 +28,18 @@
 </head>
 <body>
 	<!-- header -->
-	<#include "header.ftl.html"/>
+	<div class="container-fluid">
+		<div class="col-md-2"></div>
+		<div class="col-md-8"><#include "header.ftl.html"/></div>
+	</div>
 	<!-- checkout breadcrumb -->
-	<#if checkout??> <#include "checkoutBreadcrumb.ftl.html"/> </#if>
+	<#if checkout??>
+	<div class="container-fluid">
+		<div class="col-md-2"></div>
+		<div class="col-md-8"><#include "checkoutBreadcrumb.ftl.html"/></div>
+		<div class="col-md-2"></div>
+	</div>
+	</#if>
 	<!-- messages -->
 	<#if flash.error??>
 	<script type="text/javascript">
