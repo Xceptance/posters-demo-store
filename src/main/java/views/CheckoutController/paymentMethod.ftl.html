@@ -1,54 +1,77 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <fieldset>
-	<legend id="titlePayment"><h2>${i18n("paymentMethodTitleSelect")}</h2></legend>
+	<legend id="titlePayment">
+		<h2>${i18n("paymentMethodTitleSelect")}</h2>
+	</legend>
 	<#if paymentOverview??>
 	<!-- choose available credit card -->
-	<#list paymentOverview as payment>
-		<#if (payment_index + 3) % 3 ==0>
-      		<div class="row">
-      			<ul class="list-unstyled">
-    	</#if>
-      				<li class="col-xs-12 col-sm-6 col-lg-3 thumbnail" id="payment${payment_index}">
-      					<address>
-	      					<ul class="list-unstyled row container-fluid">
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4"><strong>${i18n("titleName")}:</strong></div><div class="col-xs-12 col-sm-6 col-md-8"><strong>${payment.name}</strong></div></li>
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-6 col-md-8">${payment.getCardNumberCryptic()}</div></li>
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8">${payment.getMonthLeadingZero()} ${payment.year}</div></li>
-	      					</ul>
-      					</address>
-      					<div class="container-fuid">
-	      					<form action="addPaymentToOrder" method="post">
-	    						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-	    						<button class="btn btn-success" id="btnUsePayment${payment_index}" name="btnUsePayment${payment_index}" type="submit">${i18n("paymentMethodChoose")}</button>
-							</form>
-						</div>
-      				</li>
-		<#if (payment_index + 1) % 3 ==0>
-      			</ul>
-      		</div>
-      	</#if>
-      	<#if !payment_has_next && (payment_index + 1) % 3 !=0>
-      	    	</ul>
-      		</div>
-      	</#if>
-	</#list>
-	</#if>
-	<!-- add new credit card -->
-	<form id="formAddPayment" class="form-horizontal" action="${contextPath}/paymentMethodCompleted" method="post">
-		<fieldset>
-			<!-- Form Name -->
-			<legend>${i18n("paymentMethodAddNew")}</legend>
-			<!-- include form -->
-			<#include "../form/paymentForm.ftl.html"/>
-			<!-- continue button -->
-			<div class="form-group">
-				<div class="col-sm-12">
-					<button id="btnAddPayment" name="btnAddPayment"
-						class="btn btn-success pull-right" type="submit">${i18n("buttonContinue")}</button>
+	<#list paymentOverview as payment> <#if (payment_index + 3) % 3 ==0>
+	<div class="container-fluid">
+		<ul class="list-unstyled">
+			</#if>
+			<li class="col-xs-12 col-sm-6 col-lg-3 thumbnail margin_right10"
+				id="payment${payment_index}">
+				<address>
+					<ul class="list-unstyled row container-fluid">
+						<li class="container-fluid"><div class="col-xs-12 col-sm-6 col-md-4">
+								<strong>${i18n("titleName")}:</strong>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-8">
+								<strong>${payment.name}</strong>
+							</div></li>
+						<li class="container-fluid"><div class="col-xs-12 col-sm-6 col-md-4 ">${i18n("titleCreditCard")}:</div>
+							<div class="col-xs-12 col-sm-6 col-md-8">${payment.getCardNumberCryptic()}</div></li>
+						<li class="container-fluid"><div class="col-xs-12 col-sm-6 col-md-4 ">${i18n("titleValidTo")}:</div>
+							<div class="col-xs-12 col-sm-6 col-md-8">${payment.getMonthLeadingZero()}
+								${payment.year}</div></li>
+					</ul>
+				</address>
+				<div class="container-fuid">
+					<form action="addPaymentToOrder" method="post">
+						<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
+						<button class="btn btn-default" id="btnUsePayment${payment_index}"
+							name="btnUsePayment${payment_index}" type="submit">${i18n("paymentMethodChoose")}</button>
+					</form>
+				</div>
+			</li> <#if (payment_index + 1) % 3 ==0>
+		</ul>
+	</div>
+	</#if> <#if !payment_has_next && (payment_index + 1) % 3 !=0>
+	</ul>
+	</div>
+	</#if> </#list> </#if>
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse1"><span
+						class="glyphicon glyphicon-plus margin_right10"></span>${i18n("paymentMethodAddNew")}</a>
+				</h4>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse">
+				<div class="panel-body">
+
+					<!-- add new credit card -->
+					<form id="formAddPayment" class="form-horizontal"
+						action="${contextPath}/paymentMethodCompleted" method="post">
+						<fieldset>
+							<!-- Form Name -->
+							<legend>${i18n("paymentMethodAddNew")}</legend>
+							<!-- include form -->
+							<#include "../form/paymentForm.ftl.html"/>
+							<!-- continue button -->
+							<div class="form-group">
+								<div class="col-sm-12">
+									<button id="btnAddPayment" name="btnAddPayment"
+										class="btn btn-primary pull-right" type="submit">${i18n("buttonContinue")}</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
 				</div>
 			</div>
-		</fieldset>
-	</form>
+		</div>
+	</div>
 </fieldset>
 </@layout.myLayout>

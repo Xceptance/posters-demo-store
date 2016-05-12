@@ -1,52 +1,80 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <fieldset>
-	<legend id="titleOrderOverview"><h2>${i18n("titleOrderOverview")}</h2></legend>
+	<legend id="titleOrderOverview">
+		<h2>${i18n("titleOrderOverview")}</h2>
+	</legend>
 	<!-- print products -->
 	<h3 id="titleProducts">${i18n("titleProducts")}</h3>
 	<table class="table" table-bordered>
 		<#list orderProducts as orderProduct>
 		<tr id="product${orderProduct_index}">
-			<td><a href="productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img data-src="${contextPath}/assets/js/holder.js/150x100" alt="" src="${contextPath}${orderProduct.product.imageURL}" width="150"></img></a></td>
-			<td id="product${orderProduct_index}Name">${orderProduct.product.name}</td>
-			<td id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
-			<td id="product${orderProduct_index}Finish">${orderProduct.finish}</td>
-			<td id="product${orderProduct_index}Size">${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</td>
+			<td><a
+				href="productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img
+					data-src="${contextPath}/assets/js/holder.js/150x100" alt=""
+					src="${contextPath}${orderProduct.product.imageURL}" width="150"></img></a></td>
+			<td>
+				<div id="product${orderProduct_index}Name">
+					<strong>${orderProduct.product.name}</strong>
+				</div>
+				<div id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</div>
+			</td>
+
+			<td>
+				<div id="product${orderProduct_index}Finish">${i18n("checkoutOverviewFinish")}: ${orderProduct.finish}</div>
+				<div id="product${orderProduct_index}Size">${i18n("checkoutOverviewSize")}: ${orderProduct.size.width}
+					x ${orderProduct.size.height} ${unitLength}</div>
+			</td>
 			<td id="product${orderProduct_index}Price">${currency}${orderProduct.getPriceAsString()}</td>
 			<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
+			<td>${currency}${orderProduct.getProductLineItemPriceAsString()}</td>
 		</tr>
 		</#list>
 	</table>
+	<!-- print sub total price -->
+	<div class="container-fluid" id="SubTotal">
+		<div class="col-md-8"></div>
+		<div class="col-md-2 h3 text-right">${i18n("checkoutOverviewSubTotal")}:
+		</div>
+		<div class="col-md-2 h3 text-right" id="SubTotalValue" class="value">${currency}${order.getShippingCostsAsString()}</div>
+	</div>
+	<!-- print tax -->
+	<div class="container-fluid" id="tax">
+		<div class="col-md-8"></div>
+		<div class="col-md-2 h3 text-right">${i18n("checkoutOvervieSubTotalTax")}
+			(${order.tax*100}%):</div>
+		<div class="col-md-2 h3 text-right" id="subTotalTaxValue" class="value">${currency}${order.getShippingCostsAsString()}</div>
+	</div>
+	<!-- print shipping price -->
+	<div class="container-fluid" id="shippingCosts">
+		<div class="col-md-8"></div>
+		<div class="col-md-2 h3 text-right">${i18n("checkoutOverviewShippingCosts")}:
+		</div>
+		<div class="col-md-2 h3 text-right">${currency}${order.getShippingCostsAsString()}</div>
+	</div>
 	<!-- print total price -->
-	<div class="row" id="tax">
-		<div class="text-right">
-			<h3>${i18n("checkoutOverviewSalesTax")}: ${order.tax*100}%</h3>
+	<div class="container-fluid" id="totalCosts">
+		<div class="col-md-8"></div>
+		<div class="col-md-2 h3 text-right">${i18n("checkoutOverviewTotalCosts")}:
 		</div>
-	</div>
-	<div class="row" id="shippingCosts">
-		<div class="text-right">
-			<h3>${i18n("checkoutOverviewShippingCosts")}: ${currency}${order.getShippingCostsAsString()}</h3>
-		</div>
-	</div>
-	<div class="row" id="totalCosts">
-		<div class="text-right">
-			<h3>${i18n("checkoutOverviewTotalCosts")}: <span id="totalWithTax">${currency}${order.getTotalCostsAsString()}</span></h3>
-		</div>
+		<div class="col-md-2 h3 text-right" id="totalWithTax" class="value">${currency}${order.getTotalCostsAsString()}</div>
 	</div>
 	<div class="row">
 		<ul class="list-unstyled">
 			<!-- print shipping address -->
 			<li class="col-md-4">
 				<h3>${i18n("titleShippingAddress")}</h3>
-				<address  id="delAddr">
+				<address id="delAddr">
 					<ul class="list-unstyled container-fluid address">
 						<li class="name" title="${i18n('addressFullName')}"><strong>${order.shippingAddress.name}</strong></li>
 						<li class="company" title="${i18n('addressCompany')}">${order.shippingAddress.company}</li>
 						<li class="addressLine" title="${i18n('addressLine')}">${order.shippingAddress.addressLine}</li>
-						<li><span class="city" title="${i18n('addressCity')}">${order.shippingAddress.city}</span>, <span class="state" title="${i18n('addressState')}">${order.shippingAddress.state}</span> <span class="zip" title="${i18n('addressZip')}">${order.shippingAddress.zip}</span></li>
-					<li class="country" title="${i18n('addressCountry')}">${order.shippingAddress.country}</li>
+						<li><span class="city" title="${i18n('addressCity')}">${order.shippingAddress.city}</span>,
+							<span class="state" title="${i18n('addressState')}">${order.shippingAddress.state}</span>
+							<span class="zip" title="${i18n('addressZip')}">${order.shippingAddress.zip}</span></li>
+						<li class="country" title="${i18n('addressCountry')}">${order.shippingAddress.country}</li>
 					</ul>
-      			</address>
+				</address>
 			</li>
 			<!-- print billing address -->
 			<li class="col-md-4">
@@ -56,21 +84,34 @@
 						<li class="name" title="${i18n('addressFullName')}"><strong>${order.billingAddress.name}</strong></li>
 						<li class="company" title="${i18n('addressCompany')}">${order.billingAddress.company}</li>
 						<li class="addressLine" title="${i18n('addressLine')}">${order.billingAddress.addressLine}</li>
-						<li><span class="city" title="${i18n('addressCity')}">${order.billingAddress.city}</span>, <span class="state" title="${i18n('addressState')}">${order.billingAddress.state}</span> <span class="zip" title="${i18n('addressZip')}">${order.billingAddress.zip}</span></li>
+						<li><span class="city" title="${i18n('addressCity')}">${order.billingAddress.city}</span>,
+							<span class="state" title="${i18n('addressState')}">${order.billingAddress.state}</span>
+							<span class="zip" title="${i18n('addressZip')}">${order.billingAddress.zip}</span></li>
 						<li class="country" title="${i18n('addressCountry')}">${order.billingAddress.country}</li>
 					</ul>
-      			</address>
+				</address>
 			</li>
 			<!-- print credit card -->
 			<li class="col-md-4">
 				<h3>${i18n("titlePaymentInformation")}</h3>
 				<address id="payment">
 					<ul class="list-unstyled container-fluid creditCard">
-						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4"><strong>${i18n("titleName")}:</strong></div><div class="col-xs-12 col-sm-6 col-md-8"><strong><span class="name">${order.creditCard.name}</span></strong></div></li>
-						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-6 col-md-8"><span class="cardNumber">${order.creditCard.getCardNumberCryptic()}</span></div></li>
-						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8">${order.creditCard.getMonthLeadingZero()} <span class="year">${order.creditCard.year}</span></div></li>
+						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">
+								<strong>${i18n("titleName")}:</strong>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-8">
+								<strong><span class="name">${order.creditCard.name}</span></strong>
+							</div></li>
+						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div>
+							<div class="col-xs-12 col-sm-6 col-md-8">
+								<span class="cardNumber">${order.creditCard.getCardNumberCryptic()}</span>
+							</div></li>
+						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div>
+							<div class="col-xs-12 col-sm-6 col-md-8">
+								${order.creditCard.getMonthLeadingZero()} <span class="year">${order.creditCard.year}</span>
+							</div></li>
 					</ul>
-      			</address>
+				</address>
 			</li>
 		</ul>
 	</div>
@@ -78,8 +119,10 @@
 	<div class="form-group">
 		<div class="col-sm-12">
 			<form action="${contextPath}/checkoutCompleted" method="post">
-    			<button class="btn btn-success pull-right" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
+				<button class="btn btn-success pull-right" id="btnOrder"
+					name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
 			</form>
 		</div>
 	</div>
+</fieldset>
 </@layout.myLayout>
