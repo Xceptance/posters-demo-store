@@ -43,10 +43,22 @@ function updateCartSlider(data)
 
 function setCartSliderElementInnerHtml(product, currency, unitLength)
 {
-	return "<span id='sliderProdName'>" + product.productName + "</span> - <span id='sliderProdFinish'>" + product.finish + "</span> </br>" +
-			" - <span id='sliderProdSize'>" + product.size.width + " x " + product.size.height + " " + unitLength + "</span>" +
-			" - <span id='sliderProdPrice'>" + currency + product.productPrice + "</span>" +
-			" (<span id='sliderProdCount'>" + product.productCount + "</span> items)";
+	/*return "<div class='col-xs-4'>" +
+			"<span id='sliderProdImg'>"+
+			"<img src='" + product.productImageSrc + "' alt='" + product.productName + "'  width='30'></img></span><br>" +
+			"</div>" +
+			"<div class='col-xs-8'> " +
+			*/
+	return	"<span id='sliderProdName'>" + product.productName + "</span><br>" +
+			//"<span id='sliderProdName'>" + product.productDescription + "</span><br><br>" +
+			"<br>Finish: <span id='sliderProdFinish'>" + product.finish + "</span>" +
+			"<br>Size: <span id='sliderProdSize'>" + product.size.width + " x " + product.size.height + " " + unitLength + "</span><br><br>" +
+			"Quantity: <span id='sliderProdCount'>" + product.productCount + "</span><br>"+
+			"<span id='sliderProdPrice'>" + currency + product.productPrice + "</span>";
+	// +
+//			"</div>";
+
+	
 }
 
 function addToCart(productId, finish, size)
