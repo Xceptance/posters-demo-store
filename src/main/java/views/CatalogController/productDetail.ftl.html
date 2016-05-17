@@ -11,11 +11,23 @@
 			<h4 id="prodDescriptionOverview">${productDetail.descriptionOverview}</h4>
 			<hr>
 			<div class="form-group container-fluid">
-				<strong>Product description:</strong>
+				<strong>${i18n("productDetailProductDescription")}:</strong>
 				<div class="col-xs-12" id="prodDescriptionDetail">
 					${productDetail.descriptionDetail}</div>
 			</div>
 
+			<!-- Select size -->
+			<div class="form-group container-fluid">
+				<strong class="container-fluid">${i18n("cartSelectSize")}</strong>
+				<div class="col-xs-12 col-sm-4">
+					<select id="selectSize" name="selectSize" class="form-control"
+						onchange="updatePrice(this, ${productDetail.id});">
+						<#list productDetail.availableSizes as size>
+						<option>${size.size.width} x ${size.size.height}
+							${unitLength}</option> </#list>
+					</select>
+				</div>
+			</div>
 			<!-- Select finish -->
 			<div class="form-group container-fluid">
 				<strong>${i18n("cartSelectFinish")}</strong>
@@ -30,25 +42,13 @@
 					</div>
 				</div>
 			</div>
-			<!-- Select size -->
-			<div class="form-group container-fluid">
-				<label class="control-label" for="selectSize">${i18n("cartSelectSize")}</label>
-				<div class="col-xs-12">
-					<select id="selectSize" name="selectSize" class="input-medium"
-						onchange="updatePrice(this, ${productDetail.id});">
-						<#list productDetail.availableSizes as size>
-						<option>${size.size.width} x ${size.size.height}
-							${unitLength}</option> </#list>
-					</select>
-				</div>
-			</div>
 			<div class="col-xs-12 ">
-				<div id="prodPrice" class="h3 pull-right">
-					(${i18n("titlePriceExclVat")}) ${currency}${productDetail.getPriceAsString()}</div>
+				<div class="h3 pull-right">
+					(${i18n("titlePriceExclVat")}) <span id="prodPrice">${currency}${productDetail.getPriceAsString()}</span></div>
 			</div>
 
 			<div class="form-group container-fluid col-md-10">
-					<strong>Print information:</strong>
+					<strong>${i18n("productDetailPrintInformation")}:</strong>
 				<div class="col-xs-12" id="prodFinish">
 					${i18n('productDetailPosterFinish')}
 				</div>
