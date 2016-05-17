@@ -99,7 +99,7 @@ function addToCartSlider(productId, finish, size)
 			$('#cartSliderTotalPrice').text(data.currency + data.totalPrice);
 			$("#notificationsLoader").empty();
 			// update cart in header
-			$("#headerCartOverview span").text(data.headerCartOverview);
+			$("#headerCartOverview span.CartOverview").text(data.headerCartOverview);
 		}
 	});
 }
