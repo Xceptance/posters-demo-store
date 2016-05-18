@@ -1,5 +1,6 @@
 package controllers;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,10 +53,22 @@ public class CartController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result cart(final Context context)
     {
+
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        // return cart overview page
+
+        final double subOrderTotal = Double.parseDouble(data.get("totalPrice").toString());
+        final double subOrderTotalTax = xcpConf.TAX * subOrderTotal;
+        final double orderTotal = subOrderTotal + subOrderTotalTax + xcpConf.SHIPPING_COSTS;
+
+        data.put("tax", xcpConf.TAX);
+        data.put("shippingCosts",getDoubleAsString(xcpConf.SHIPPING_COSTS));
+        data.put("subOrderTotal", getDoubleAsString(subOrderTotal));
+        data.put("subOrderTotalTax", getDoubleAsString(subOrderTotalTax ));
+        data.put("orderTotal", getDoubleAsString(orderTotal));
+
         return Results.html().render(data).template(xcpConf.TEMPLATE_CART_OVERVIEW);
+
     }
 
     /**
@@ -116,7 +129,22 @@ public class CartController
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
             // add totalPrice
-            result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
+            //result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
+            // add currency
+            result.render("currency", xcpConf.CURRENCY);
+            // add unit of length
+            result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
+            // add unit of length
+            result.render("tax", xcpConf.TAX);
+            // add SHIPPING_COSTS
+            result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+            // add sub total price
+            result.render("subOrderTotal", cart.getTotalPriceAsString());
+            // add sub total price
+            result.render("subOrderTotalTax", xcpConf.TAX);
+            // add total price
+            result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+
             return result;
         }
     }
@@ -153,8 +181,9 @@ public class CartController
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add total price
-        result.render("totalPrice", cart.getTotalPriceAsString());
+        // add sub total price
+        result.render("subOrderTotal", cart.getTotalPriceAsString());
+
         return result;
     }
 
@@ -187,20 +216,31 @@ public class CartController
         final Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("productName", cartProduct.getProduct().getName());
+ //       updatedProduct.put("productDescription", cartProduct.getSize()); //@TODO
+ //       updatedProduct.put("productImageSrc", cartProduct.getPriceAsString());//@TODO
         updatedProduct.put("productId", cartProduct.getProduct().getId());
         updatedProduct.put("productPrice", cartProduct.getPriceAsString());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", cartProduct.getSize());
         // add product to result
         result.render("product", updatedProduct);
+        // add new header to result
+        result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add currency
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add new header to result
-        result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
+        // add unit of length
+        result.render("tax", xcpConf.TAX);
+        // add SHIPPING_COSTS
+        result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+        // add sub total price
+        result.render("subOrderTotal", cart.getTotalPriceAsString());
+        // add sub total price
+        result.render("subOrderTotalTax", xcpConf.TAX);
         // add total price
-        result.render("totalPrice", cart.getTotalPriceAsString());
+        result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+        
         return result;
     }
 
@@ -228,7 +268,22 @@ public class CartController
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add totalPrice
-        result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
+        //result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
+        // add currency
+        result.render("currency", xcpConf.CURRENCY);
+        // add unit of length
+        result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
+        // add unit of length
+        result.render("tax", xcpConf.TAX);
+        // add SHIPPING_COSTS
+        result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+        // add sub total price
+        result.render("subOrderTotal", cart.getTotalPriceAsString());
+        // add sub total price
+        result.render("subOrderTotalTax", xcpConf.TAX);
+        // add total price
+        result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+
         return result;
     }
 
@@ -273,5 +328,15 @@ public class CartController
         headerCartOverview.append(" " + msg.get("cartItem", language).get() + " - ");
         headerCartOverview.append(xcpConf.CURRENCY + cart.getTotalPriceAsString());
         return headerCartOverview.toString();
+    }
+    
+    public String getDoubleAsString(final double value)
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = value;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
     }
 }
