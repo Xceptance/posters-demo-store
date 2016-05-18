@@ -2,9 +2,44 @@
 	width: 40px;
 }
 
-.margin_right10{
+.margin_right10 {
 	margin-right: 10px;
 }
-.margin_left5{
-	margin-right: 10px;
+
+.margin_left5 {
+	margin-left: 5px;
+}
+
+#main {
+	padding-top: 20px;
+}
+
+#cartOverviewTable thead th, #checkoutOverviewTable thead th {
+	color: black;
+	font-size: 14px;
+	margin-left:10px;
+}
+
+#cartOverviewTable tbody tr, #checkoutOverviewTable tbody tr {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-bottom: 2px solid #e7e7e7;
+}
+
+#cartSummaryList li, #checkoutOverviewTable li {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #fff;
+}
+
+.textcolorlightgrey {
+	color: #e7e7e7;
+}
+
+.bgLightGrey {
+	background-color: #e7e7e7;
+}
+
+h1, h2, h3 {
+	text-transform: uppercase;
 }

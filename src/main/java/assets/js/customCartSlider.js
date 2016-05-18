@@ -38,7 +38,7 @@ function updateCartSlider(data)
 		$("#cartSliderElementList").append(liElement);
 	}
 	// update total price in cart slider
-	$('#cartSliderTotalPrice').text(data.currency + data.totalPrice);
+	$('#cartSliderSubOrderPrice').text(data.currency + data.subOrderTotal);
 }
 
 function setCartSliderElementInnerHtml(product, currency, unitLength)
@@ -96,7 +96,7 @@ function addToCartSlider(productId, finish, size)
 				$("#cartSliderElementList").prepend(liElement);
 			}
 			// update total price in cart slider
-			$('#cartSliderTotalPrice').text(data.currency + data.totalPrice);
+			$('#cartSliderSubOrderPrice').text(data.currency + data.subOrderTotal);
 			$("#notificationsLoader").empty();
 			// update cart in header
 			$("#headerCartOverview span.CartOverview").text(data.headerCartOverview);
