@@ -41,16 +41,14 @@ Design
 ** Auch die zugeklappte Ansicht bedenken bei leeren Cart
 
 * Show-Cart-Bereich
-** Short Description in die nächste Zeile unter Namen
 ** Buttons sind zu groß > Links daraus machen 
 ** Anzahl rechtsbündig im input
 ** Proceed to checkout als grüner Button
-** Platzhalter für Sales tax: 6%  und Shipping: $7.00 integrieren
-** Empty cart page mit Infotext füllen keine proceed to checkout, kein order totals
+
 
 *Checkout
 ** Breadcrumbs in den Context integrieren
-** Darstellung Order totals ansprechender gestalten  als Tabelle und Berechnungen hinzufügen z.B. Taxes
+** Berechnungen: sub-total, tax
 ** Anordnung der Adressen und der Kreditkarte überdenken
 
 *Payment Settings
