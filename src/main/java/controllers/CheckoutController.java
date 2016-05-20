@@ -1,5 +1,6 @@
 package controllers;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -545,6 +546,27 @@ public class CheckoutController
         data.put("order", order);
         // add all products of the order
         data.put("orderProducts", order.getProducts());
+
+        //final double totalPrice = Double.parseDouble(data.get("totalPrice").toString());
+        //final double subTotalTax = ((totalPrice - xcpConf.SHIPPING_COSTS)*(xcpConf.TAX*100)) / (100 + (xcpConf.TAX * 100));
+        //final double subTotal = totalPrice - (xcpConf.SHIPPING_COSTS)- subTotalTax;
+
+        final double subTotal = Double.parseDouble(data.get("totalPrice").toString());
+        final double subTotalTax = xcpConf.TAX * subTotal;
+        final double totalPrice = subTotal + subTotalTax + xcpConf.SHIPPING_COSTS;
+
+        data.put("tax", xcpConf.TAX);
+        data.put("subTotal", getDoubleAsString(subTotal));
+        data.put("subTotalTax", getDoubleAsString(subTotalTax));
+        data.put("shippingCosts",getDoubleAsString(xcpConf.SHIPPING_COSTS));
+        data.put("totalPrice", getDoubleAsString(totalPrice));
+       
+        //System.out.println(xcpConf.TAX);
+        //System.out.println(xcpConf.SHIPPING_COSTS);
+       // System.out.println();
+       // System.out.println(data.toString());
+      //  System.out.println();
+       // System.out.println(order.toString());
         return Results.html().render(data);
     }
 
@@ -610,5 +632,14 @@ public class CheckoutController
             // update order
             order.update();
         }
+    }
+    public String getDoubleAsString(final double value)
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = value;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
     }
 }

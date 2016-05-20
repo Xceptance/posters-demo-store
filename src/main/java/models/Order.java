@@ -57,6 +57,11 @@ public class Order
     private double shippingCosts;
 
     /**
+     * The sub total costs of the order.
+     */
+    //private double subTotalCosts;
+
+    /**
      * The tax that will be added to the sub-total price.
      */
     private double tax;
@@ -183,6 +188,22 @@ public class Order
     }
 
     /**
+     * Returns Sub Total Tax of the order as a well formatted String.
+     * 
+     * @return the sub total tax costs of the order
+     * @TODO NOT WORKING
+     */
+    public String getSubTotalTaxAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = tax;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
      * Returns the shipping costs of the order as a well formatted String.
      * 
      * @return the shipping costs of the order
@@ -196,7 +217,7 @@ public class Order
         temp = temp / 100;
         return f.format(temp).replace(',', '.');
     }
-
+ 
     /**
      * Returns the tax of the order.
      * 
@@ -228,6 +249,57 @@ public class Order
         return String.valueOf(tax);
     }
 
+    /**
+     * Returns the sub-total costs of the order.
+     * 
+     * @return the sub-total costs of the order
+     */
+/*    public double getSubTotalCosts()
+    {
+        return subTotalCosts;
+    }*/
+
+    /**
+     * Sets the sub-total costs of the order.
+     * 
+     * @param subtotalCosts
+     *            the sub-total costs of the order
+     */
+ /*   public void setSubTotalCosts(final double subtotalcosts)
+    {
+        this.subTotalCosts = subtotalcosts;
+    }*/
+    
+    /**
+     * Returns the sub-total costs of the order as a well formatted String.
+     * 
+     * @return
+     */
+/*    public String getSubTotalCostsAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = subTotalCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }*/
+ 
+    /**
+     * Returns the sub-total tax of the order as a well formatted String.
+     * 
+     * @return
+     */
+/*    public String getSubTotalTaxsAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = subTotalCosts*tax;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }*/
+    
     /**
      * Returns the total costs of the order.
      * 

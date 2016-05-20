@@ -1,64 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <fieldset>
-	<legend id="titleOrderOverview">
-		<h2>${i18n("titleOrderOverview")}</h2>
-	</legend>
-	<!-- print products -->
-	<h3 id="titleProducts">${i18n("titleProducts")}</h3>
-	<table class="table" table-bordered>
-		<#list orderProducts as orderProduct>
-		<tr id="product${orderProduct_index}">
-			<td><a
-				href="productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img
-					data-src="${contextPath}/assets/js/holder.js/150x100" alt=""
-					src="${contextPath}${orderProduct.product.imageURL}" width="150"></img></a></td>
-			<td>
-				<div id="product${orderProduct_index}Name">
-					<strong>${orderProduct.product.name}</strong>
-				</div>
-				<div id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</div>
-			</td>
-
-			<td>
-				<div id="product${orderProduct_index}Finish">${i18n("checkoutOverviewFinish")}: ${orderProduct.finish}</div>
-				<div id="product${orderProduct_index}Size">${i18n("checkoutOverviewSize")}: ${orderProduct.size.width}
-					x ${orderProduct.size.height} ${unitLength}</div>
-			</td>
-			<td id="product${orderProduct_index}Price">${currency}${orderProduct.getPriceAsString()}</td>
-			<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
-			<td>${currency}${orderProduct.getProductLineItemPriceAsString()}</td>
-		</tr>
-		</#list>
-	</table>
-	<!-- print sub total price -->
-	<div class="container-fluid" id="SubTotal">
-		<div class="col-md-8"></div>
-		<div class="col-md-2 h3 text-right">${i18n("checkoutOverviewSubTotal")}:
-		</div>
-		<div class="col-md-2 h3 text-right" id="SubTotalValue" class="value">${currency}${order.getShippingCostsAsString()}</div>
-	</div>
-	<!-- print tax -->
-	<div class="container-fluid" id="tax">
-		<div class="col-md-8"></div>
-		<div class="col-md-2 h3 text-right">${i18n("checkoutOvervieSubTotalTax")}
-			(${order.tax*100}%):</div>
-		<div class="col-md-2 h3 text-right" id="subTotalTaxValue" class="value">${currency}${order.getShippingCostsAsString()}</div>
-	</div>
-	<!-- print shipping price -->
-	<div class="container-fluid" id="shippingCosts">
-		<div class="col-md-8"></div>
-		<div class="col-md-2 h3 text-right">${i18n("checkoutOverviewShippingCosts")}:
-		</div>
-		<div class="col-md-2 h3 text-right">${currency}${order.getShippingCostsAsString()}</div>
-	</div>
-	<!-- print total price -->
-	<div class="container-fluid" id="totalCosts">
-		<div class="col-md-8"></div>
-		<div class="col-md-2 h3 text-right">${i18n("checkoutOverviewTotalCosts")}:
-		</div>
-		<div class="col-md-2 h3 text-right" id="totalWithTax" class="value">${currency}${order.getTotalCostsAsString()}</div>
-	</div>
+	<div id="titleOrderOverview"></div>
 	<div class="row">
 		<ul class="list-unstyled">
 			<!-- print shipping address -->
@@ -96,32 +39,114 @@
 				<h3>${i18n("titlePaymentInformation")}</h3>
 				<address id="payment">
 					<ul class="list-unstyled container-fluid creditCard">
-						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">
-								<strong>${i18n("titleName")}:</strong>
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-8">
-								<strong><span class="name">${order.creditCard.name}</span></strong>
-							</div></li>
-						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div>
-							<div class="col-xs-12 col-sm-6 col-md-8">
-								<span class="cardNumber">${order.creditCard.getCardNumberCryptic()}</span>
-							</div></li>
-						<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div>
-							<div class="col-xs-12 col-sm-6 col-md-8">
-								${order.creditCard.getMonthLeadingZero()} <span class="year">${order.creditCard.year}</span>
-							</div></li>
+						<li class="name" title="${i18n('titleName')}"><span
+							class="value"><strong>${order.creditCard.name}</strong></span></li>
+						<li class="cardNumber" title="${i18n('titleCreditCard')}"><span
+							class="value">${order.creditCard.getCardNumberCryptic()}</span></li>
+						<li class="exp" title="${i18n('titleValidTo')}"><span
+							class="month">${order.creditCard.getMonthLeadingZero()}</span>.<span
+							class="year">${order.creditCard.year}</span></li>
 					</ul>
 				</address>
 			</li>
 		</ul>
 	</div>
+	<!-- print products -->
+	<h3 id="titleProducts">${i18n("titleProducts")}</h3>
+	<table id="checkoutOverviewTable" class="table" table-bordered>
+		<thead class="bgLightGrey">
+			<th colspan="3"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
+			<th>${i18n("cartTableHeaderQuantity")}</th>
+			<th>${i18n("cartTableHeaderUnitPrice")}</th>
+			<th>${i18n("cartTableHeaderTotalPrice")}</th>
+		</thead>
+		<tbody>
+			<#list orderProducts as orderProduct>
+			<tr id="product${orderProduct_index}">
+				<td><a
+					href="productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img
+						data-src="${contextPath}/assets/js/holder.js/150x100" alt=""
+						src="${contextPath}${orderProduct.product.imageURL}" width="150"></img></a></td>
+				<td>
+					<div id="product${orderProduct_index}Name">
+						<strong>${orderProduct.product.name}</strong>
+					</div>
+					<div id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</div>
+				</td>
+
+				<td>
+					<div id="product${orderProduct_index}Finish">${i18n("checkoutOverviewFinish")}:
+						${orderProduct.finish}</div>
+					<div id="product${orderProduct_index}Size">${i18n("checkoutOverviewSize")}:
+						${orderProduct.size.width} x ${orderProduct.size.height}
+						${unitLength}</div>
+				</td>
+				<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
+				<td id="product${orderProduct_index}Price">
+					<div class="value text-right">${currency}${orderProduct.getPriceAsString()}</div>
+				</td>
+				<td id="product${orderProduct_index}LineItemPrice"><div
+						class="value text-right">${currency}${orderProduct.getProductLineItemPriceAsString()}</div></td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+
+	<div class="container-fluid" id="SubTotal">
+		<div class="col-md-8"></div>
+		<div class="col-md-4">
+			<ul id="cartSummaryList" class="list-unstyled row">
+				<li class="header bgLightGrey row">
+					<div class="col-xs-12">
+						<strong>${i18n("cartSummary")}</strong>
+					</div>
+				</li>
+				<!-- print sub total price -->
+				<li class="bgLightGrey row">
+					<div class="col-xs-6 text-left">
+						${i18n("checkoutOverviewSubTotal")}</div>
+					<div class="col-xs-6 text-right">
+						<span id="SubTotalValue" class="value">${currency}${subTotal}</span>
+					</div>
+
+				</li>
+				<!-- print tax -->
+				<li class="bgLightGrey row" id="tax">
+					<div class="col-xs-6 text-left">
+						${i18n("checkoutOvervieSubTotalTax")} (${tax*100}%)</div>
+					<div class="col-xs-6 text-right">
+						<span id="subTotalTaxValue" class="value">${currency}${subTotalTax}</span>
+					</div>
+				</li>
+				<!-- print shipping price -->
+				<li class="bgLightGrey row" id="shippingCosts">
+					<div class="col-xs-6 text-left">
+						${i18n("checkoutOverviewShippingCosts")}</div>
+					<div class="col-xs-6 text-right">
+						<span id="subTotalTaxValue" class="value">${currency}${shippingCosts}</span>
+					</div>
+				</li>
+				<!-- print total price -->
+				<li class="bgLightGrey row" id="totalCosts">
+					<div class="col-xs-6 text-left">
+						${i18n("checkoutOverviewTotalCosts")}</div>
+					<div class="col-xs-6 text-right">
+						<span id="totalWithTax" class="value"><strong>${currency}${totalPrice}</strong></span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
 	<!-- order button -->
-	<div class="form-group">
-		<div class="col-sm-12">
-			<form action="${contextPath}/checkoutCompleted" method="post">
-				<button class="btn btn-success pull-right" id="btnOrder"
-					name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
-			</form>
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="prodPrice" class="pull-right">
+				<form action="${contextPath}/checkoutCompleted" method="post">
+					<button class="btn btn-primary pull-right" id="btnOrder"
+						name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </fieldset>

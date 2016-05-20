@@ -100,7 +100,23 @@ public class Cart
         temp = temp / 100;
         return f.format(temp).replace(',', '.');
     }
-
+    
+    /**
+     *  Returns the total price of all products with tax, shippingCosts.
+     * @param subTotalPrice
+     * @param tax
+     * @param shippingCosts
+     * @return
+     */
+    public String getTotalPriceAsString(double subTotalPrice, double tax, double shippingCosts)
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = subTotalPrice + (subTotalPrice*tax) + shippingCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
     /**
      * Sets the total price of the cart.
      * 
