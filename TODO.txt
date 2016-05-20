@@ -7,6 +7,7 @@ Design
 ** Call to action Buttons alle in der selben Farbe
 ** Required kennzeichnen
 ** i18n durchziehen
+** input fields button, links => title tag
 
 *Produktdetail 
 ** non-breaking Space zwischen Größe und Einheit("in").
@@ -32,7 +33,7 @@ Design
 ** mobile Ansicht erweitern
 ** mobile Ansicht die schwarzen divider anpassen
 ** graue icons mittels CSS? (minor)
-
+** höhe anpassen der element
 *Mini-Cart
 ** Oben Headline "Cart" einführen
 ** Wording "View Cart" statt "Cart" und unten 
@@ -43,23 +44,27 @@ Design
 * Show-Cart-Bereich
 ** Buttons sind zu groß > Links daraus machen 
 ** Anzahl rechtsbündig im input
-** Proceed to checkout als grüner Button
+** Proceed to checkout als blauer Button
+** total: Schriftgröße ändern (entweder total price gross oder die anderen kleiner machen)
 
 
 *Checkout
 ** Breadcrumbs in den Context integrieren
-** Berechnungen: sub-total, tax
 ** Anordnung der Adressen und der Kreditkarte überdenken
+** bei angemeldeten usern die address mit abspeichern
+
 
 *Payment Settings
 ** Expiration date auf das aktuelle Jahr setzten
-
+** Einteilung: 3 zu 4 bei date
 
 *Landing page
 ** Slider Links farbe anpassen bzw hintergrund
 ** Slider höher machen
 ** Netter Fülltext/Willkommenstext da die Seite sonst so leer wirkt
 
+* msg
+** breite formatierung anpassen
 
 Funktionalität
 
@@ -67,10 +72,10 @@ Funktionalität
 * Auf Show cart line item preis implementieren und ganz recht positioniern 
 * Order confirmation page anstatt message popup
 * Katalog-Navi wirklich immer anzeigen, auch auf Cart- und Account-Seiten? Nein!
-* Struktur: Navigation mit in header aufnehmen?
 * Company nicht required im checkout
 * paging in die URL integrieren um die Browserhistory zu gewährleisten
 * Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen? Besser: If conditions nutzen!
 * Focus von Input Feldern nicht rot (Nur im Fehlerfall rot!) Anpassung überall. First focus state (minor)
 * Testfälle checken
 * Payment Settings -> Expiration date -> ein abgelaufenes Datum darf nicht auswaehlbar sein
+* address: use this address evl blau oder als select und continue anzeigen
