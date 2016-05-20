@@ -1,5 +1,25 @@
+.navbar-brand {
+	padding: 0;
+	font-size: 25px;
+	margin-left: 5px;
+}
+
+#header a {
+	text-decoration: none;
+}
+
+#headerCartOverview
+{
+	margin: 0;
+	paddin: 10px 15px;
+}
+#headerCartOverview:hover {
+	background-color: #eee;
+}
+
 #brand img {
-	width: 40px;
+	width: 55px;
+	margin-left: 5px;
 }
 
 .margin_right10 {
@@ -10,6 +30,10 @@
 	margin-left: 5px;
 }
 
+#dropdown {
+	padding: 5px 0 0 0;
+}
+
 #main {
 	padding-top: 20px;
 }
@@ -17,7 +41,7 @@
 #cartOverviewTable thead th, #checkoutOverviewTable thead th {
 	color: black;
 	font-size: 14px;
-	margin-left:10px;
+	margin-left: 10px;
 }
 
 #cartOverviewTable tbody tr, #checkoutOverviewTable tbody tr {
