@@ -8,11 +8,11 @@
 	text-decoration: none;
 }
 
-#headerCartOverview
-{
+#headerCartOverview {
 	margin: 0;
 	paddin: 10px 15px;
 }
+
 #headerCartOverview:hover {
 	background-color: #eee;
 }
@@ -33,24 +33,34 @@
 #dropdown {
 	padding: 5px 0 0 0;
 }
-
+/*
 #main {
 	padding-top: 20px;
 }
-
+*/
 #cartOverviewTable thead th, #checkoutOverviewTable thead th {
 	color: black;
 	font-size: 14px;
 	margin-left: 10px;
 }
 
-#cartOverviewTable tbody tr, #checkoutOverviewTable tbody tr {
+#cartOverviewTable>tbody>tr>td, #checkoutOverviewTable>tbody>tr>td {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border-bottom: 2px solid #e7e7e7;
 }
 
-#cartSummaryList li, #checkoutOverviewTable li {
+#cartOverviewTable tbody tr, #checkoutOverviewTable tbody tr {
+	
+}
+
+#cartOverviewTable ul, #checkoutOverviewTable ul {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 0;
+}
+
+#cartSummaryList li, #checkoutSummaryList li {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #fff;
@@ -64,6 +74,16 @@
 	background-color: #e7e7e7;
 }
 
+.bgLightGrey2 {
+	background-color: #F8F8F8;
+}
+
 h1, h2, h3 {
 	text-transform: uppercase;
+	margin-top: 10px;
+}
+
+.breadcrumb {
+	margin-bottom: 10px;
+	padding: 8px 15px 8px 15px;
 }

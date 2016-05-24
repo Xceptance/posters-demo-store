@@ -5,37 +5,50 @@
 	<#if (0 < cartProducts?size) >
 	<table id="cartOverviewTable" class="table" table-bordered>
 		<thead class="bgLightGrey">
-			<th colspan="3"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
+			<th colspan="2"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
 			<th colspan="2">${i18n("cartTableHeaderQuantity")}</th>
-			<th>${i18n("cartTableHeaderUnitPrice")}</th>
-			<th>${i18n("cartTableHeaderSubOrderPrice")}</th>
+			<th class="text-right">${i18n("cartTableHeaderUnitPrice")}</th>
+			<th class="text-right">${i18n("cartTableHeaderSubOrderPrice")}</th>
 		</thead>
 		<tbody>
 			<#list cartProducts as cartProduct>
 			<tr id="product${cartProduct_index}">
-				<td><div class="visible-xs h3">${cartProduct.product.descriptionOverview}</div>
-					<a
+				<td><div class="visible-xs">
+						<strong>${cartProduct.product.name}</strong>
+					</div> <a
 					href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img
-						data-src="${contextPath}/assets/js/holder.js/150x100" alt=""
+						data-src="${contextPath}/assets/js/holder.js/150x100"
+						alt="${cartProduct.product.descriptionOverview}"
 						src="${contextPath}${cartProduct.product.imageURL}" width="150"></img></a>
-						<div class="visible-xs h3">
-						${cartProduct.finish}</div>
-					<div id="productSize${cartProduct_index}">${cartProduct.size.width}
-						x ${cartProduct.size.height} ${unitLength}
+					<div class="visible-xs">
+						<div class="text-left">
+							<small><ul class="list-unstyled">
+									<li>${i18n("cartStyle")}: ${cartProduct.finish}</li>
+									<li>${i18n("cartSize")}: ${cartProduct.size.width} x
+										${cartProduct.size.height} ${unitLength}</li>
+								</ul> </small>
 						</div>
-						</td>
+					</div></td>
 				<td><div class="hidden-xs">
 						<div id="productName${cartProduct_index}">
 							<strong>${cartProduct.product.name}</strong>
+
+							<div id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</div>
+							<div class="text-left">
+								<small>
+									<ul class="list-unstyled">
+										<li>${i18n("cartStyle")}: <span
+											id="productFinish${cartProduct_index}">${cartProduct.finish}</span>
+										</li>
+										<li>${i18n("cartSize")}: <span
+											id="productSize${cartProduct_index}">${cartProduct.size.width}
+												x ${cartProduct.size.height} ${unitLength}</span>
+										</li>
+									</ul>
+								</small>
+							</div>
 						</div>
-						<div id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</div>
 					</div></td>
-				<td><div class="hidden-xs">
-				<div id="productFinish${cartProduct_index}">${cartProduct.finish}</div>
-					<div id="productSize${cartProduct_index}">${cartProduct.size.width}
-						x ${cartProduct.size.height} ${unitLength}</div>
-				</div>
-				</td>
 				<td>
 					<!-- quantity box -->
 					<form class="form-inline">
@@ -82,7 +95,7 @@
 					</div>
 				</li>
 				<!-- print sub total price -->
-				<li class="bgLightGrey row">
+				<li class="bgLightGrey2 row">
 					<div class="col-xs-6 text-left">
 						${i18n("checkoutOverviewSubTotal")}</div>
 					<div class="col-xs-6 text-right">
@@ -91,7 +104,7 @@
 
 				</li>
 				<!-- print tax -->
-				<li class="bgLightGrey row" id="tax">
+				<li class="bgLightGrey2 row" id="tax">
 					<div class="col-xs-6 text-left">
 						${i18n("checkoutOvervieSubTotalTax")} (${tax*100}%)</div>
 					<div class="col-xs-6 text-right">
@@ -99,7 +112,7 @@
 					</div>
 				</li>
 				<!-- print shipping price -->
-				<li class="bgLightGrey row" id="shippingCosts">
+				<li class="bgLightGrey2 row" id="shippingCosts">
 					<div class="col-xs-6 text-left">
 						${i18n("checkoutOverviewShippingCosts")}</div>
 					<div class="col-xs-6 text-right">
@@ -108,7 +121,7 @@
 				</li>
 				<li class="bgLightGrey row">
 					<div class="col-xs-6 text-left">
-						${i18n("cartOverviewTotalPrice")}</div>
+						<strong>${i18n("cartOverviewTotalPrice")}</strong></div>
 					<div class="col-xs-6 text-right">
 						<span id="orderTotal" class="value"><strong>${currency}${orderTotal}</strong></span>
 					</div>
