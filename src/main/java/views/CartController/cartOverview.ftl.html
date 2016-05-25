@@ -23,25 +23,23 @@
 					<div class="visible-xs">
 						<div class="text-left">
 							<small><ul class="list-unstyled">
-									<li>${i18n("cartStyle")}: ${cartProduct.finish}</li>
-									<li>${i18n("cartSize")}: ${cartProduct.size.width} x
-										${cartProduct.size.height} ${unitLength}</li>
+									<li>${i18n("cartStyle")}: <span class="productStyle">${cartProduct.finish}</span></li>
+									<li>${i18n("cartSize")}: <span class="productSize">${cartProduct.size.width}
+											x ${cartProduct.size.height} ${unitLength}</span></li>
 								</ul> </small>
 						</div>
 					</div></td>
 				<td><div class="hidden-xs">
-						<div id="productName${cartProduct_index}">
+						<div class="productName">
 							<strong>${cartProduct.product.name}</strong>
 
-							<div id="productDescriptionOverview${cartProduct_index}">${cartProduct.product.descriptionOverview}</div>
+							<div class="productDescriptionOverview">${cartProduct.product.descriptionOverview}</div>
 							<div class="text-left">
 								<small>
 									<ul class="list-unstyled">
-										<li>${i18n("cartStyle")}: <span
-											id="productFinish${cartProduct_index}">${cartProduct.finish}</span>
+										<li>${i18n("cartStyle")}: <span class="productStyle">${cartProduct.finish}</span>
 										</li>
-										<li>${i18n("cartSize")}: <span
-											id="productSize${cartProduct_index}">${cartProduct.size.width}
+										<li>${i18n("cartSize")}: <span class="productSize">${cartProduct.size.width}
 												x ${cartProduct.size.height} ${unitLength}</span>
 										</li>
 									</ul>
@@ -74,11 +72,11 @@
 					</form>
 				</td>
 				<td></td>
-				<td id="productPrice${cartProduct_index}">
-					<div class="value text-right">${currency}${cartProduct.getPriceAsString()}</div>
+				<td>
+					<div class="productUnitPrice text-right">${currency}${cartProduct.getPriceAsString()}</div>
 				</td>
-				<td id="productLineItemPrice${cartProduct_index}">
-					<div class="value text-right">${currency}${cartProduct.getProductLineItemPriceAsString()}</div>
+				<td>
+					<div class="productSubOrderPrice text-right">${currency}${cartProduct.getProductLineItemPriceAsString()}</div>
 				</td>
 			</tr>
 			</#list>
@@ -121,7 +119,8 @@
 				</li>
 				<li class="bgLightGrey row">
 					<div class="col-xs-6 text-left">
-						<strong>${i18n("cartOverviewTotalPrice")}</strong></div>
+						<strong>${i18n("cartOverviewTotalPrice")}</strong>
+					</div>
 					<div class="col-xs-6 text-right">
 						<span id="orderTotal" class="value"><strong>${currency}${orderTotal}</strong></span>
 					</div>
