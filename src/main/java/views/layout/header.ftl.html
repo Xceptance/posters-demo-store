@@ -1,6 +1,6 @@
 <nav id="header" class="navbar navbar-default navbar-static-top">
 	<div class="row">
-		<div class="navbar-header col-xs-12 col-sm-4 col-lg-3">
+		<div class="navbar-header col-xs-12 col-sm-4 col-lg-4">
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar">
@@ -16,59 +16,52 @@
 			</div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<div class="col-md-4">
-				<ul class="nav navbar-nav col-xs-12 col-sm-12">
+			<div class="col-sm-4">
+				<ul class="nav navbar-nav">
 					<li>
-						<!-- search -->
-						<form id="search" class="navbar-form"
-							action="${applUrlHttp}/search" method="get">
-							<input id="searchText" name="searchText"
-								class="form-control col-xs-8" type="text"
-								placeholder="${i18n('headerSearch')}"
-								title="${i18n('headerSearch')}" value="${(searchTerm)!}">
-							<button id="btnSearch" class="btn" type="submit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</form>
-					</li>
-				</ul>
-			</div>
-			<div class="col-md-5">
-				<ul class="nav navbar-nav col-xs-12 col-sm-12">
-					<li class="pull-right">
-						<!-- login --> <#if isLogged == false>
-						<p class="navbar-text pull-right">
-							${i18n('headerWelcome')} <a id="btnShowLoginForm"
-								href="${applUrlHttps}/login">${i18n('headerLogin')}</a>
-						</p> </#if> <#if isLogged == true>
-						<ul id="headerLoggedCustomer" class="nav pull-right">
-							<li id="dropdown" class="dropdown"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown">${i18n('headerWelcomShort')}
-									${customerFirstName} <b class="caret"></b>
-							</a>
-								<ul class="dropdown-menu">
-									<li id="btnAccountOverview"><a
-										href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
-									</li>
-									<li id="btnLogout"><a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
-									</li>
-								</ul></li>
-						</ul> </#if>
-					</li>
-					<li class="pull-right">
-						<!-- cart overview -->
-						<div id="btnCartOverview" class="navbar-text">
-							<a id="headerCartOverview" href="${applUrlHttp}/cart"> 
-							<span class="glyphicon glyphicon-shopping-cart"></span> 
-							<span class="CartOverview">${i18n('cartOverviewTitle')}:
-									${cartProductCount} ${i18n("cartItem")} -
-									${currency}${totalPrice}</span>
-							</a>
-							<!-- cart slider -->
-							<#include "cartSlider.ftl.html" />
+						<div class="row">
+							<!-- search -->
+							<form id="search" class="navbar-form"
+								action="${applUrlHttp}/search" method="get">
+								<input id="searchText" name="searchText" class="form-control"
+									type="search" placeholder="${i18n('headerSearch')}"
+									title="${i18n('headerSearch')}" value="${(searchTerm)!}">
+								<button id="btnSearch" class="btn btn-default" type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</form>
 						</div>
 					</li>
 				</ul>
+			</div>
+			<div class="col-sm-2">
+				<div id="btnCartOverview" class="navbar-text">
+					<a id="headerCartOverview" href="${applUrlHttp}/cart"> <span
+						class="glyphicon glyphicon-shopping-cart"></span><span class="margin_left5">${i18n('cartOverviewTitle')}:</span> <span
+							class="CartOverview headerCartProductCounter">${cartProductCount}</span>
+					</a>
+					<!-- cart slider -->
+					<#include "cartSlider.ftl.html" />
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="navbar-text">
+					<!-- login -->
+					<#if isLogged == false> <a id="btnShowLoginForm"
+						href="${applUrlHttps}/login">${i18n('headerLogin')}</a> </#if>
+					<#if isLogged == true> <a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">${i18n('headerWelcomShort')}
+						${customerFirstName} <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li id="btnAccountOverview"><a
+							href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
+						</li>
+						<li id="btnLogout"><a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
+						</li>
+					</ul>
+					</#if>
+				</div>
 			</div>
 
 			<div class="container-fluid">

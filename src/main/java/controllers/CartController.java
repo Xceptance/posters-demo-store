@@ -323,10 +323,7 @@ public class CartController
     private String prepareCartOverviewInHeader(final Cart cart)
     {
         final StringBuilder headerCartOverview = new StringBuilder();
-        headerCartOverview.append(" " + msg.get("cartOverviewTitle", language).get() + ": ");
         headerCartOverview.append(cart.getProductCount());
-        headerCartOverview.append(" " + msg.get("cartItem", language).get() + " - ");
-        headerCartOverview.append(xcpConf.CURRENCY + cart.getTotalPriceAsString());
         return headerCartOverview.toString();
     }
     
