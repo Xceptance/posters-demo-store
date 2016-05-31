@@ -79,3 +79,7 @@ Funktionalität
 * Testfälle checken
 * Payment Settings -> Expiration date -> ein abgelaufenes Datum darf nicht auswaehlbar sein
 * address: use this address evl blau oder als select und continue anzeigen
+
+Fehler:
+es wurde ein negativer warenwert angezeigt, nach dem löschen der cookies wurde der wert richtig angezeigt
+Vermutung: element in cart -> cookie abgelaufen, löschen der cart ?
