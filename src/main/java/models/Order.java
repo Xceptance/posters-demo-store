@@ -59,7 +59,12 @@ public class Order
     /**
      * The sub total costs of the order.
      */
-    //private double subTotalCosts;
+    private double subTotalCosts;
+
+    /**
+     * The total tax costs of the order.
+     */
+    private double totalTaxCosts;
 
     /**
      * The tax that will be added to the sub-total price.
@@ -177,6 +182,62 @@ public class Order
     }
 
     /**
+     * Returns Sub Total Costs of the order as a well formatted String.
+     * 
+     * @return the sub total costs of the order
+     */
+    public String getSubTotalCostsAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = subTotalCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @return the subTotalCosts
+     */
+    public double getSubTotalCosts()
+    {
+        return subTotalCosts;
+    }
+
+    /**
+     * @param subTotalCosts
+     *            the subTotalCosts to set
+     */
+    public void setSubTotalCosts(double subTotalCosts)
+    {
+        this.subTotalCosts = subTotalCosts;
+
+    }
+
+    /**
+     * @return the totalTaxCosts
+     */
+    public double getTotalTaxCosts()
+    {
+        // check totalTaxCosts
+        if (totalTaxCosts > 0)
+        {
+            return totalTaxCosts;
+        }
+        else
+            return -1;
+    }
+
+    /**
+     * @param totalTaxCosts
+     *            the totalTaxCosts to set
+     */
+    public void setTotalTaxCosts(double totalTaxCosts)
+    {
+        this.totalTaxCosts = totalTaxCosts;
+    }
+
+    /**
      * Sets the shipping costs of the order.
      * 
      * @param shippingCosts
@@ -185,22 +246,6 @@ public class Order
     public void setShippingCosts(final double shippingCosts)
     {
         this.shippingCosts = shippingCosts;
-    }
-
-    /**
-     * Returns Sub Total Tax of the order as a well formatted String.
-     * 
-     * @return the sub total tax costs of the order
-     * @TODO NOT WORKING
-     */
-    public String getSubTotalTaxAsString()
-    {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        double temp = tax;
-        temp = temp * 100;
-        temp = Math.round(temp);
-        temp = temp / 100;
-        return f.format(temp).replace(',', '.');
     }
 
     /**
@@ -217,7 +262,7 @@ public class Order
         temp = temp / 100;
         return f.format(temp).replace(',', '.');
     }
- 
+
     /**
      * Returns the tax of the order.
      * 
@@ -246,60 +291,25 @@ public class Order
      */
     public String getTaxAsString()
     {
-        return String.valueOf(tax);
+        // return String.valueOf(tax);
+        return String.valueOf(tax * 100);
     }
 
     /**
-     * Returns the sub-total costs of the order.
+     * Returns Sub Total Tax Costs of the order as a well formatted String.
      * 
-     * @return the sub-total costs of the order
+     * @return the sub total tax costs of the order
      */
-/*    public double getSubTotalCosts()
+    public String getTotalTaxCostsAsString()
     {
-        return subTotalCosts;
-    }*/
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = totalTaxCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
 
-    /**
-     * Sets the sub-total costs of the order.
-     * 
-     * @param subtotalCosts
-     *            the sub-total costs of the order
-     */
- /*   public void setSubTotalCosts(final double subtotalcosts)
-    {
-        this.subTotalCosts = subtotalcosts;
-    }*/
-    
-    /**
-     * Returns the sub-total costs of the order as a well formatted String.
-     * 
-     * @return
-     */
-/*    public String getSubTotalCostsAsString()
-    {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        double temp = subTotalCosts;
-        temp = temp * 100;
-        temp = Math.round(temp);
-        temp = temp / 100;
-        return f.format(temp).replace(',', '.');
-    }*/
- 
-    /**
-     * Returns the sub-total tax of the order as a well formatted String.
-     * 
-     * @return
-     */
-/*    public String getSubTotalTaxsAsString()
-    {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        double temp = subTotalCosts*tax;
-        temp = temp * 100;
-        temp = Math.round(temp);
-        temp = temp / 100;
-        return f.format(temp).replace(',', '.');
-    }*/
-    
     /**
      * Returns the total costs of the order.
      * 
@@ -458,22 +468,6 @@ public class Order
     }
 
     /**
-     * Adds the tax to the total costs of the order.
-     */
-    public void addTaxToTotalCosts()
-    {
-        setTotalCosts(getTotalCosts() * getTax() + getTotalCosts());
-    }
-
-    /**
-     * Adds the shipping costs to the total costs of the order.
-     */
-    public void addShippingCostsToTotalCosts()
-    {
-        setTotalCosts(getShippingCosts() + getTotalCosts());
-    }
-
-    /**
      * Adds the product with the given finish and size to the order.
      * 
      * @param product
@@ -505,6 +499,9 @@ public class Order
                                        .getPrice());
             orderProduct.save();
             products.add(orderProduct);
+            
+            // first price product is now subtotalcosts
+            setSubTotalCosts(orderProduct.getPrice());
         }
         // this product is in the order at least one time
         else
@@ -512,9 +509,16 @@ public class Order
             // increment the count of this product
             orderProduct.incProductCount();
             orderProduct.update();
+            
+            // recalculate subTotalCosts
+            setSubTotalCosts(getSubTotalCosts() + orderProduct.getPrice());
         }
+
+        // recalculate totalTaxCosts
+        setTotalTaxCosts(getSubTotalCosts() * getTax());
+        
         // recalculate total costs
-        setTotalCosts(getTotalCosts() + orderProduct.getPrice());
+        setTotalCosts(getSubTotalCosts() + getTotalTaxCosts() + getShippingCosts());
     }
 
     /**
@@ -559,6 +563,35 @@ public class Order
     {
         // create new order
         final Order order = new Order();
+        // save order
+        order.save();
+        // get new order by id
+        final Order newOrder = Ebean.find(Order.class, order.getId());
+        // return new order
+        return newOrder;
+    }
+
+    /***
+     * Creates and returns a new order with parameter
+     * @param tax
+     * @param shippingCosts
+     * @return
+     */
+    public static Order createNewOrder(final double tax,final double shippingCosts)
+    {
+        // create new order
+        final Order order = new Order();
+        
+        // start value = 0
+        order.setSubTotalCosts(0);
+        order.setTotalCosts(0);
+        
+        //set default tax
+        order.setTax(tax);
+        
+        //set default shipping costs
+        order.setShippingCosts(shippingCosts);
+        
         // save order
         order.save();
         // get new order by id

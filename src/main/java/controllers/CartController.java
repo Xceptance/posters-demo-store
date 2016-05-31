@@ -57,7 +57,7 @@ public class CartController
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
 
-        final double subOrderTotal = Double.parseDouble(data.get("totalPrice").toString());
+        final double subOrderTotal = Double.parseDouble(data.get("subTotalPrice").toString());
         final double subOrderTotalTax = xcpConf.TAX * subOrderTotal;
         final double orderTotal = subOrderTotal + subOrderTotalTax + xcpConf.SHIPPING_COSTS;
 

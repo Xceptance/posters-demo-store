@@ -123,16 +123,16 @@
 					<div class="col-xs-6 text-left">
 						${i18n("checkoutOverviewSubTotal")}</div>
 					<div class="col-xs-6 text-right">
-						<span id="SubTotalValue" class="value">${currency}${subTotal}</span>
+						<span id="SubTotalValue" class="value">${currency}${order.getSubTotalCostsAsString()}</span>
 					</div>
 
 				</li>
 				<!-- print tax -->
 				<li class="bgLightGrey2 row" id="tax">
 					<div class="col-xs-6 text-left">
-						${i18n("checkoutOvervieSubTotalTax")} (${tax*100}%)</div>
+						${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%)</div>
 					<div class="col-xs-6 text-right">
-						<span id="subTotalTaxValue" class="value">${currency}${subTotalTax}</span>
+						<span id="subTotalTaxValue" class="value">${currency}${order.getTotalTaxCostsAsString()}</span>
 					</div>
 				</li>
 				<!-- print shipping price -->
@@ -140,7 +140,7 @@
 					<div class="col-xs-6 text-left">
 						${i18n("checkoutOverviewShippingCosts")}</div>
 					<div class="col-xs-6 text-right">
-						<span id="subTotalTaxValue" class="value">${currency}${shippingCosts}</span>
+						<span id="subTotalTaxValue" class="value">${currency}${order.getShippingCostsAsString()}</span>
 					</div>
 				</li>
 				<!-- print total price -->
@@ -148,7 +148,7 @@
 					<div class="col-xs-6 text-left">
 						<strong>${i18n("checkoutOverviewTotalCosts")}</strong></div>
 					<div class="col-xs-6 text-right">
-						<span id="totalWithTax" class="value"><strong>${currency}${totalPrice}</strong></span>
+						<span id="totalWithTax" class="value"><strong>${currency}${order.getTotalCostsAsString()}</strong></span>
 					</div>
 				</li>
 			</ul>

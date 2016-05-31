@@ -96,7 +96,7 @@ public class OrderTest extends NinjaTest
         Assert.assertEquals(18.87, updatedOrder.getTotalCosts(), 0.01);
 
         order.setShippingCosts(4.99);
-        order.addShippingCostsToTotalCosts();
+ //       order.addShippingCostsToTotalCosts();
         order.update();
 
         updatedOrder = Ebean.find(Order.class, order.getId());
@@ -119,9 +119,9 @@ public class OrderTest extends NinjaTest
         Assert.assertEquals(18.87, updatedOrder.getTotalCosts(), 0.01);
 
         order.setShippingCosts(4.99);
-        order.addShippingCostsToTotalCosts();
+//        order.addShippingCostsToTotalCosts();
         order.setTax(0.10);
-        order.addTaxToTotalCosts();
+//        order.addTaxToTotalCosts();
         order.update();
 
         updatedOrder = Ebean.find(Order.class, order.getId());

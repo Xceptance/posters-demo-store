@@ -112,7 +112,7 @@ public class WebShopController
         data.put("cartProductCount", totalProductCount);
         // add cart id
         data.put("cartId", cart.getId());
-        // add total price of cart
-        data.put("totalPrice", cart.getTotalPriceAsString());
+        // add sub total price of cart
+        data.put("subTotalPrice", cart.getTotalPriceAsString());
     }
 }
