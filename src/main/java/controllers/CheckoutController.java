@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -414,14 +417,29 @@ public class CheckoutController
         }
         // get payment method by order
         final CreditCard card = Order.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
+
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+        Date date = new Date();
+
         // add payment method to data map, if a payment method was already entered
         if (card != null)
         {
             data.put("card", card);
         }
+        else
+        {
+            // get current month and year
+            data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+            data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+        }
+
+        data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
+        
         data.put("checkout", true);
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
+        System.out.println(data.toString());
         // return page to enter payment method
         return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
     }

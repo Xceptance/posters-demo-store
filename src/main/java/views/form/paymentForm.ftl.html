@@ -22,30 +22,33 @@
     <select id="expirationDateMonth" name="expirationDateMonth" class="form-control">
       	<#list 1..9 as i>
       	<#if card??>
-      	<#if (card.month==i)><option selected="selected">0${i}</option><#else><option>0${i}</option></#if>
+      	<#if (card.month == i)><option selected="selected">0${i}</option><#else><option>0${i}</option></#if>
      	<#else>
-		<option>0${i}</option>
+		<#if (currentMonth == i)><option selected="selected">0${i}</option><#else><option>0${i}</option></#if>
       	</#if>
       	</#list>
       	<#list 10..12 as i>
       	<#if card??>
-      	<#if (card.month==i)><option selected="selected">${i}</option><#else><option>${i}</option></#if>
+		<#if (card.month == i)><option selected="selected">${i}</option><#else><option>${i}</option></#if>
      	<#else>
-		<option>${i}</option>
+		<#if (currentMonth == i)><option selected="selected">${i}</option><#else><option>${i}</option></#if>
       	</#if>
       	</#list>
     </select>
     </div>
     <div class="col-sm-5">
     <select id="expirationDateYear" name="expirationDateYear" class="form-control">
-      <#list 2016..2026 as i>
+      <#list expirationDateStartYear..(expirationDateStartYear+10) as i>
       	<#if card??>
       		<#if (card.year == i)>
       			<option selected="selected">${i}</option>
       		<#else>
       			<option>${i}</option></#if>
      	<#else>
-		<option>${i}</option>
+      		<#if (currentYear == i)>
+      			<option selected="selected">${i}</option>
+      		<#else>
+      			<option>${i}</option></#if>
       	</#if>
       	</#list>
     </select>
