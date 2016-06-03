@@ -1,0 +1,29 @@
+<nav id="headerCheckout"
+	class="navbar navbar-default navbar-static-top container-fluid ">
+	<div class="col-xs-12 col-sm-10">
+		<a id="logo" href="${applUrlHttp}/"> <img
+			src="${contextPath}/assets/img/xceptanceLogo.png"
+			title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}"
+			class="logo" /> <span class="headerCheckoutLogoText">${i18n('titleShop')}</span>
+		</a>
+	</div>
+	<div class="col-xs-12 col-sm-2">
+		<div class="navbar-text">
+			<!-- login -->
+			<#if isLogged == false> <a id="btnShowLoginForm"
+				href="${applUrlHttps}/login">${i18n('headerLogin')}</a> </#if> <#if
+			isLogged == true> <a href="#" class="dropdown-toggle"
+				data-toggle="dropdown">${i18n('headerWelcomShort')}
+				${customerFirstName} <b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li id="btnAccountOverview"><a
+					href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
+				</li>
+				<li id="btnLogout"><a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
+				</li>
+			</ul>
+			</#if>
+		</div>
+	</div>
+</nav>

@@ -34,17 +34,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-sm-2">
-				<div id="btnCartOverview" class="navbar-text">
-					<a id="headerCartOverview" href="${applUrlHttp}/cart"> <span
-						class="glyphicon glyphicon-shopping-cart"></span><span
-						class="margin_left5">${i18n('cartOverviewTitle')}:</span>
-						<span class="CartOverview headerCartProductCounter">${cartProductCount}</span>
-					</a>
-					<!-- cart slider -->
-					<#include "cartSlider.ftl.html" />
-				</div>
-			</div>
+
 			<div class="col-sm-2">
 				<div class="navbar-text">
 					<!-- login -->
@@ -64,6 +54,19 @@
 					</#if>
 				</div>
 			</div>
+
+			<div class="col-sm-2">
+				<div id="btnCartOverview" class="navbar-text">
+					<a id="headerCartOverview" href="${applUrlHttp}/cart"> <span
+						class="glyphicon glyphicon-shopping-cart"></span><span
+						class="margin_left5">${i18n('cartOverviewTitle')}:</span> <span
+						class="CartOverview headerCartProductCounter">${cartProductCount}</span>
+					</a>
+					<!-- cart slider -->
+					<#include "cartSlider.ftl.html" />
+				</div>
+			</div>
+
 
 			<div class="container-fluid">
 				<ul class="nav navbar-nav col-xs-12">

@@ -30,7 +30,11 @@
 	<!-- header -->
 	<div class="container-fluid">
 		<div class="col-md-1 col-lg-2"></div>
+		<#if checkout??>
+		<div class="col-md-10 col-lg-8"><#include "headerCheckout.ftl.html"/></div>
+		<#else>
 		<div class="col-md-10 col-lg-8"><#include "header.ftl.html"/></div>
+		</#if>
 	</div>
 	<!-- checkout breadcrumb -->
 	<#if checkout??>
