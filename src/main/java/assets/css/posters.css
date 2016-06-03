@@ -97,6 +97,46 @@ h1, h2, h3 {
 	background-color: #d3d7cf;
 	border-radius: 20%;
 }
-.navbar-text{
+
+.navbar-text {
 	margin: 15px 0 15px 0;
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu {
+	display: block;
+	margin-top: 0px
+}
+
+.thumbnail {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+}
+
+.thumbnail a {
+	text-decoration: none;
+}
+
+.pagination {
+	margin: 10px 0 15px 0;
+	font-size: 75%;
+}
+
+.pInfo {
+	margin-left: auto;
+	margin-right: auto;
+	width:300px;
+}
+
+#headerCheckout .headerCheckoutLogoText {
+	font-size: 1.8em;
+}
+
+#headerCheckout a {
+	text-decoration: none;
+}
+
+#headerCheckout img {
+	width: 55px;
+	margin-left: 5px;
 }

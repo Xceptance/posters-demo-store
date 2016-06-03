@@ -1,68 +1,94 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<h2 id="titleCategoryName">${(category.name)!}</h2>
-<hr>
-<h2 id="titleSearchText">${(searchText)!}</h2>
-<h2 id="titleNoResults">${(noResults)!}</h2>
-<!-- paging -->
-<div class="pagination">
-	<ul id="pagination"></ul>
-</div>
 <script type="text/javascript">
-		var options = {
-			currentPage: ${currentPage},
-            totalPages: ${totalPages},
-            bootstrapMajorVersion: 3,
-			alignment:'center',
-			onPageClicked: function(e, originalEvent, type, page) {
-				var pathname = $(location).attr('pathname');
-				var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
-				// top category
-				if(pageType == "topCategory") {
-					$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
-				}
-				// sub category
-				else if(pageType == "category"){
-					$.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
-				}
-				 // search
-				else {
-					$.post('${contextPath}/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
-				}
+	var options = {
+		currentPage: ${currentPage},
+	          totalPages: ${totalPages},
+	          bootstrapMajorVersion: 3,
+		alignment:'center',
+		onPageClicked: function(e, originalEvent, type, page) {
+			var pathname = $(location).attr('pathname');
+			var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+			// top category
+			if(pageType == "topCategory") {
+				$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
 			}
-        };
-        $('#pagination').bootstrapPaginator(options);
-	</script>
-<!-- products -->
-<div id="productOverview" currentPage="${currentPage}">
-	<#list products as pro> <#if (pro_index + 3) % 3 == 0>
-	<div class="row">
-		<ul class="thumbnails list-unstyled">
+			// sub category
+			else if(pageType == "category"){
+				$.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+			}
+			 // search
+			else {
+				$.post('${contextPath}/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+			}
+		}
+	      };
+</script>
+
+<fieldset>
+	<legend>
+		<div class="container-fluid">
+			<#if category??>
+			<div id="titleCategoryName" class="h2">${category.name}</div>
+			</#if> <#if searchText??>
+			<div id="titleSearchText" class="h2">${searchText}</div>
+			</#if> <#if noResults??>
+			<div id="titleNoResults" class="h2">${noResults}</div>
 			</#if>
-			<li class="col-md-4">
-				<div id="product${pro_index}" class="thumbnail">
-					<div class="container-fluid">
-					<a
-						href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
-						<img data-src="${contextPath}/assets/js/holder.js/300x200"
-						alt="${pro.name}" src="${contextPath}${pro.imageURL}"></img>
-					</a>
+		</div>
+	</legend>
+
+	<!-- products -->
+	<div id="productOverview" currentPage="${currentPage}">
+		<#list products as pro> <#if (pro_index + 3) % 3 == 0>
+		<div class="row">
+			<ul class="thumbnails list-unstyled">
+				</#if>
+				<li class="col-md-4">
+					<div id="product${pro_index}" class="thumbnail">
+						<div class="container-fluid">
+							<a
+								href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
+
+								<img data-src="${contextPath}/assets/js/holder.js/300x200"
+								alt="${pro.name}" title="${pro.name}"
+								src="${contextPath}${pro.imageURL}" class="pImage">
+
+								<div class="pInfo">
+									<div class="h4 text-primary">
+										<span class="pName">${pro.name}</span>
+									</div>
+									<span class="text-muted"> <span
+										class="pDescriptionOverview">${pro.descriptionOverview}</span>
+										<div>
+											${i18n("priceStart")} ${currency}<strong><span
+												class="pPrice">${pro.getPriceAsString()}</strong>
+										</div>
+									</span> </img> </span>
+								</div>
+							</a>
+						</div>
 					</div>
-					<div class="container-fluid">
-						<h3 id="product${pro_index}Name">${pro.name}</h3>
-						<p id="product${pro_index}DescriptionOverview">${pro.descriptionOverview}</p>
-					</div>
-					<p>
-						${i18n("priceStart")} ${currency}<span
-							id="product${pro_index}Price">${pro.getPriceAsString()}</span>
-					</p>
-				</div>
-			</li> <#if (pro_index + 1) % 3 ==0>
+				</li> <#if (pro_index + 1) % 3 ==0>
+			</ul>
+		</div>
+		</#if> <#if !pro_has_next && (pro_index + 1) % 3 != 0>
 		</ul>
 	</div>
-	</#if> <#if !pro_has_next && (pro_index + 1) % 3 != 0>
-	</ul>
-</div>
-</#if> </#list>
-</div>
+	</#if> </#list>
+
+	</div>
+
+	<!-- paging -->
+	<div class="container-fluid h4">
+		<div class="pagination pull-right">
+			<ul id="pagination-bottom"></ul>
+		</div>
+	</div>
+</fieldset>
+<!-- paging -->
+<script type="text/javascript">	
+		$('#pagination-top').bootstrapPaginator(options);
+        $('#pagination-bottom').bootstrapPaginator(options);
+	</script>
 </@layout.myLayout>
