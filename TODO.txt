@@ -47,6 +47,8 @@ Design
 ** Proceed to checkout als blauer Button
 ** total: Schriftgröße ändern (entweder total price gross oder die anderen kleiner machen)
 
+* cardslider
+** beim hovern gib es noch probleme -> den das info feld , link ausrichten
 
 *Checkout
 ** Breadcrumbs in den Context integrieren
