@@ -1,7 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <fieldset>
-	<h2 id="titleCart">${i18n("cartOverviewTitle")}</h2>
+	<legend>
+		<span class="h2" id="titleCart">${i18n("cartOverviewTitle")}</span>
+	</legend>
 	<#if (0 < cartProducts?size) >
 	<table id="cartOverviewTable" class="table" table-bordered>
 		<thead class="bgLightGrey">

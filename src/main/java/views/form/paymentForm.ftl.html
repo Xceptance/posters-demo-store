@@ -18,7 +18,7 @@
 <div class="form-group">
 
   <label class="col-sm-2 control-label" for="expirationDate">${i18n("paymentExpiration")}:</label>
-  <div class="col-sm-5">
+  <div class="col-sm-2">
     <select id="expirationDateMonth" name="expirationDateMonth" class="form-control">
       	<#list 1..9 as i>
       	<#if card??>
@@ -36,7 +36,7 @@
       	</#list>
     </select>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-8">
     <select id="expirationDateYear" name="expirationDateYear" class="form-control">
       <#list expirationDateStartYear..(expirationDateStartYear+10) as i>
       	<#if card??>

@@ -1,13 +1,15 @@
 <#macro myLayout title="Posters - The Ultimate Online Shop">
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>Posters - The Ultimate Online Shop</title>
+
+<title>${i18n("titlePageShop")}</title>
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta charset="utf-8">
 
 <link href="${contextPath}/assets/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -27,11 +29,13 @@
 <script src="${contextPath}/assets/js/custom.js"></script>
 </head>
 <body>
+
 	<!-- header -->
 	<div class="container-fluid">
 		<div class="col-md-1 col-lg-2"></div>
 		<#if checkout??>
-		<div class="col-md-10 col-lg-8"><#include "headerCheckout.ftl.html"/></div>
+		<div class="col-md-10 col-lg-8"><#include
+			"headerCheckout.ftl.html"/></div>
 		<#else>
 		<div class="col-md-10 col-lg-8"><#include "header.ftl.html"/></div>
 		</#if>
@@ -40,7 +44,8 @@
 	<#if checkout??>
 	<div class="container-fluid">
 		<div class="col-md-1 col-lg-2"></div>
-		<div class="col-md-10 col-lg-8"><#include "checkoutBreadcrumb.ftl.html"/></div>
+		<div class="col-md-10 col-lg-8"><#include
+			"checkoutBreadcrumb.ftl.html"/></div>
 	</div>
 	</#if>
 	<!-- messages -->
@@ -52,10 +57,14 @@
 		});
 	</script>
 	</#if>
-	<div class="row" id="errorMessage">
-		<div class="col-md-6 col-md-offset-3 text-center alert alert-danger">
-			<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+	<div class="container-fluid" id="errorMessage">
+		<div class="col-md-1 col-lg-2"></div>
+		<div class="col-md-10 col-lg-8">
+			<div class="text-center alert alert-danger">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+			</div>
 		</div>
+		<div class="col-md-1 col-lg-2"></div>
 	</div>
 	<#if flash.success??>
 	<script type="text/javascript">
@@ -65,10 +74,14 @@
 		});
 	</script>
 	</#if>
-	<div class="row" id="successMessage">
-		<div class="col-md-6 col-md-offset-3 text-center alert alert-success">
-			<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+	<div class="container-fluid" id="successMessage">
+		<div class="col-md-1 col-lg-2"></div>
+		<div class="col-md-10 col-lg-8">
+			<div class="text-center alert alert-success">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+			</div>
 		</div>
+		<div class="col-md-1 col-lg-2"></div>
 	</div>
 	<#if flash.info??>
 	<script type="text/javascript">
@@ -78,10 +91,14 @@
 		});
 	</script>
 	</#if>
-	<div class="row" id="infoMessage">
-		<div class="col-md-6 col-md-offset-3 text-center alert alert-info">
-			<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+	<div class="container-fluid" id="infoMessage">
+		<div class="col-md-1 col-lg-2"></div>
+		<div class="col-md-10 col-lg-8">
+			<div class="text-center alert alert-info">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a>
+			</div>
 		</div>
+		<div class="col-md-1 col-lg-2"></div>
 	</div>
 
 	<!-- body -->
