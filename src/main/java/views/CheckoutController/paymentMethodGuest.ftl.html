@@ -1,0 +1,23 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">
+<fieldset>
+	<legend id="titlePayment">
+		<span class="h2">${i18n("paymentMethodTitlEnter")}</span>
+	</legend>
+
+	<!-- add new credit card -->
+	<form id="formAddPayment" class="form-horizontal"
+		action="${contextPath}/paymentMethodCompleted" method="post">
+
+		<!-- include form -->
+		<#include "../form/paymentForm.ftl.html"/>
+
+		<!-- continue button -->
+		<div class="form-group">
+			<div class="col-sm-12">
+				<button id="btnAddPayment" name="btnAddPayment"
+					class="btn btn-primary pull-right" type="submit">${i18n("buttonContinue")}</button>
+			</div>
+		</div>
+</fieldset>
+</@layout.myLayout>

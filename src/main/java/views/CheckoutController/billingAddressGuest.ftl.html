@@ -1,0 +1,22 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">
+<fieldset>
+	<legend id="titleBillAddr">
+		<span class="h2">${i18n("billingAddressTitleEnter")}</span>
+	</legend>
+
+	<!-- enter address -->
+	<form id="formAddBillAddr" class="form-horizontal"
+		action="${contextPath}/billingAddressCompleted" method="post">
+		<!-- include form -->
+		<#include "../form/addressForm.ftl.html"/>
+		<!-- continue button -->
+		<div class="form-group">
+			<div class="col-sm-12">
+				<button id="btnAddBillAddr" name="btnAddBillAddr"
+					class="btn btn-primary pull-right" type="submit">${i18n("buttonContinue")}</button>
+			</div>
+		</div>
+	</form>
+</fieldset>
+</@layout.myLayout>

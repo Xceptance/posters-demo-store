@@ -115,7 +115,16 @@ public class CheckoutController
         {
             data.put("address", address);
         }
-        return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
+
+        // customer not sign in
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
+        }
+        else
+        {
+            return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS_GUEST);
+        }
     }
 
     /**
@@ -287,8 +296,17 @@ public class CheckoutController
         }
         data.put("checkout", true);
         data.put("billingAddressActive", true);
+        
+        // customer not sign in
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
+        }
+        else
+        {
+            return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS_GUEST);
+        }
         // return page to enter billing address
-        return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
     }
 
     /**
@@ -435,13 +453,23 @@ public class CheckoutController
         }
 
         data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
-        
+
         data.put("checkout", true);
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
-        System.out.println(data.toString());
-        // return page to enter payment method
-        return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
+        //System.out.println(data.toString());
+        
+        // customer not sign in
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // return page to enter payment method
+            return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
+        }
+        else
+        {
+            // return page to enter payment method
+            return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD_GUEST);
+        }
     }
 
     /**
@@ -624,10 +652,10 @@ public class CheckoutController
             // set tax to order
             order.setTax(xcpConf.TAX);
             order.setTotalTaxCosts(order.getSubTotalCosts() * order.getTax());
-            
+
             // recalculate total costs
             order.setTotalCosts(order.getSubTotalCosts() + order.getTotalTaxCosts() + order.getShippingCosts());
-            
+
             // update order
             order.update();
         }
