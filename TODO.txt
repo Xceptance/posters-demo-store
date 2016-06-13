@@ -1,31 +1,31 @@
 Design
 
 * Allgemein
-** Font? , color:#444
+** Font? (X), color:#444
 ** FLAT Design? z.B. Rundungen gegen Ecken tauschen
-** Fontsizes anpassen (h1, h2, h3)
-** Call to action Buttons alle in der selben Farbe
+** Fontsizes anpassen (h1, h2, h3) (X)
+** Call to action Buttons alle in der selben Farbe (blau -> btn-primary) (X)
 ** Required kennzeichnen
 ** i18n durchziehen
-** input fields button, links => title tag
+** title tag uebergeben oder ausbauen (freemarker)
+** input fields button, links => title tag (Attribut)
 
 *Produktdetail 
-** non-breaking Space zwischen Größe und Einheit("in").
-** Bildgrößen "16 x 32" ohne Spaces? 
-** AddToCart grün anstatt grau
-** Beschreibung nicht fett
-** Mehr Weißraum, wirkt gedrängt
-*** Text könnte Bild umfließen
+** AddToCart grün anstatt grau (X)
+** Beschreibung nicht fett (X)
+** Mehr Weißraum, wirkt gedrängt (X)
+*** Text könnte Bild umfließen (X)
+** Bildgrösse anpassen?
 
 * Produktübersicht schöner
-** eine Höhe pro Zeile
-** Rahmen gegen farbige Fläche austauschen?
-** Feste Breite, wenn sichtbare Umfassung oder Bilder mit skalieren
-** Produktnamen zu lang >> CSS ellipsis
-** Paging oben und unten oder alternativ nur unten
-** Preis rechtsbündig hevorgehoben
+** eine Höhe pro Zeile (X)
+** Rahmen gegen farbige Fläche austauschen? (X)
+** Feste Breite, wenn sichtbare Umfassung oder Bilder mit skalieren (X)
+** Produktnamen zu lang >> CSS ellipsis (X)
+** Paging oben und unten oder alternativ nur unten (X)
+** Preis rechtsbündig hevorgehoben  (X?)
 ** Links vom Preis Zusatzinfo z.B Verfügbarkeit (gefaked)
-** Namen auch als Link zur Seite nutzen
+** Namen auch als Link zur Seite nutzen (X)
 
 *Header
 ** Search-Box unrund (zu rund, vielleicht eine normales Input)
@@ -42,6 +42,8 @@ Design
 ** Auch die zugeklappte Ansicht bedenken bei leeren Cart
 
 * Show-Cart-Bereich
+** non-breaking Space zwischen Größe und Einheit("in").
+** Bildgrößen "16 x 32" ohne Spaces? 
 ** Buttons sind zu groß > Links daraus machen 
 ** Anzahl rechtsbündig im input
 ** Proceed to checkout als blauer Button
