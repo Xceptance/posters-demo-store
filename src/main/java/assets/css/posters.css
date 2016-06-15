@@ -140,3 +140,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	width: 55px;
 	margin-left: 5px;
 }
+.carousel a {
+	color: #ffffff;
+	text-decoration: none;
+}
