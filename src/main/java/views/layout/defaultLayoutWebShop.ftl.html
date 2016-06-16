@@ -29,88 +29,66 @@
 <script src="${contextPath}/assets/js/custom.js"></script>
 </head>
 <body>
-
-	<!-- header -->
-	<div class="container-fluid">
-		<div class="col-md-1 col-lg-2"></div>
+	<div id="wrapper">
+		<!-- header -->
+		<div class="container-fluid"><#if checkout??> <#include
+			"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
+			</#if></div>
+		<!-- checkout breadcrumb -->
 		<#if checkout??>
-		<div class="col-md-10 col-lg-8"><#include
-			"headerCheckout.ftl.html"/></div>
-		<#else>
-		<div class="col-md-10 col-lg-8"><#include "header.ftl.html"/></div>
-		</#if>
-	</div>
-	<!-- checkout breadcrumb -->
-	<#if checkout??>
-	<div class="container-fluid">
-		<div class="col-md-1 col-lg-2"></div>
-		<div class="col-md-10 col-lg-8"><#include
+		<div class="container-fluid"><#include
 			"checkoutBreadcrumb.ftl.html"/></div>
-	</div>
-	</#if>
-	<!-- messages -->
-	<#if flash.error??>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#errorMessage").show();
-			$("#errorMessage div strong").html("${flash.error}");
-		});
-	</script>
-	</#if>
-	<div class="container-fluid" id="errorMessage">
-		<div class="col-md-1 col-lg-2"></div>
-		<div class="col-md-10 col-lg-8">
+		</#if>
+		<!-- messages -->
+		<#if flash.error??>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#errorMessage").show();
+				$("#errorMessage div strong").html("${flash.error}");
+			});
+		</script>
+		</#if>
+		<div class="container-fluid" id="errorMessage">
+
 			<div class="text-center alert alert-danger">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
+
 		</div>
-		<div class="col-md-1 col-lg-2"></div>
-	</div>
-	<#if flash.success??>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#successMessage").show();
-			$("#successMessage div strong").html("${flash.success}");
-		});
-	</script>
-	</#if>
-	<div class="container-fluid" id="successMessage">
-		<div class="col-md-1 col-lg-2"></div>
-		<div class="col-md-10 col-lg-8">
+		<#if flash.success??>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#successMessage").show();
+				$("#successMessage div strong").html("${flash.success}");
+			});
+		</script>
+		</#if>
+		<div class="container-fluid" id="successMessage">
 			<div class="text-center alert alert-success">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
 		</div>
-		<div class="col-md-1 col-lg-2"></div>
-	</div>
-	<#if flash.info??>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#infoMessage").show();
-			$("#infoMessage div strong").html("${flash.info}");
-		});
-	</script>
-	</#if>
-	<div class="container-fluid" id="infoMessage">
-		<div class="col-md-1 col-lg-2"></div>
-		<div class="col-md-10 col-lg-8">
+		<#if flash.info??>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#infoMessage").show();
+				$("#infoMessage div strong").html("${flash.info}");
+			});
+		</script>
+		</#if>
+		<div class="container-fluid" id="infoMessage">
 			<div class="text-center alert alert-info">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a>
 			</div>
 		</div>
-		<div class="col-md-1 col-lg-2"></div>
-	</div>
 
-	<!-- body -->
-	<div id="main">
-		<div class="container-fluid">
-			<div class="col-md-1 col-lg-2"></div>
-			<div class="col-md-10 col-lg-8"><#nested/></div>
-			<div class="col-md-1 col-lg-2"></div>
+		<!-- body -->
+		<div id="main">
+			<div class="container-fluid"><#nested/></div>
 		</div>
 	</div>
+
 	<!-- footer -->
-	<hr>
 	<#include "footer.ftl.html"/>
 </body>
 </html>

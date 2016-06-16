@@ -1,3 +1,10 @@
+
+#wrapper {
+	max-width: 992px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 .navbar-brand {
 	padding: 0;
 	font-size: 1.8em;
@@ -30,14 +37,13 @@
 	margin-left: 5px;
 }
 
+.margin_top20 {
+	margin-top: 20px;
+}
+
 #dropdown {
 	padding: 5px 0 0 0;
 }
-/*
-#main {
-	padding-top: 20px;
-}
-*/
 #cartOverviewTable thead th, #checkoutOverviewTable thead th {
 	color: black;
 	font-size: 14px;
@@ -76,11 +82,6 @@
 
 .bgLightGrey2 {
 	background-color: #F8F8F8;
-}
-
-h1, h2, h3 {
-	text-transform: uppercase;
-	margin-top: 10px;
 }
 
 .breadcrumb {
@@ -125,7 +126,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .pInfo {
 	margin-left: auto;
 	margin-right: auto;
-	width:300px;
+	width: 300px;
 }
 
 #headerCheckout .headerCheckoutLogoText {
@@ -140,7 +141,18 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	width: 55px;
 	margin-left: 5px;
 }
+
 .carousel a {
 	color: #ffffff;
 	text-decoration: none;
+}
+
+#productList .thumbnail {
+	padding-top: 0;
+}
+
+footer {
+	border-top: 1px solid #d3d7cf;
+	margin-top: 20px;
+	padding: 20px;
 }

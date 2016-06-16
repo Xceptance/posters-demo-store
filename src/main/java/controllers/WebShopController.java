@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +40,18 @@ public class WebShopController
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
-        final List<Product> products = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
+        final List<Product> productsCarousel = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
+
+        // add specific products to data map
+        List<Product> productsList = new ArrayList<>();
+        productsList.add(Product.getProductById(1));
+        productsList.add(Product.getProductById(23));
+        productsList.add(Product.getProductById(83));
+        
         // add products to data map
-        data.put("carousel", products);
+        data.put("carousel", productsCarousel);
+        data.put("productslist", productsList);
+        
         return Results.html().render(data);
     }
 
