@@ -9,14 +9,14 @@
 			</button>
 			<!-- navbar-brand -->
 			<div class="col-xs-7 col-sm-12 navbar-brand">
-				<a id="brand" href="${applUrlHttp}/"> <img
+				<a id="brand" href="${applUrlHttp}/" alt="${i18n('titleShop')}" title="${i18n('titleShop')}"> <img
 					src="${contextPath}/assets/img/xceptanceLogo.png"
 					title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
 				</a>
 			</div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<div class="col-sm-4">
+			<div class="col-xs-12 col-sm-4">
 				<ul class="nav navbar-nav">
 					<li>
 						<div class="row">
@@ -25,8 +25,8 @@
 								action="${applUrlHttp}/search" method="get">
 								<input id="searchText" name="searchText" class="form-control"
 									type="search" placeholder="${i18n('headerSearch')}"
-									title="${i18n('headerSearch')}" value="${(searchTerm)!}">
-								<button id="btnSearch" class="btn btn-default" type="submit">
+									title="${i18n('headerSearch')}" alt="${i18n('headerSearch')}" value="${(searchTerm)!}">
+								<button id="btnSearch" class="btn btn-default" type="submit" alt="${i18n('headerSearch')}" title="${i18n('headerSearch')}">
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
 							</form>
@@ -38,18 +38,44 @@
 			<div class="col-sm-2">
 				<div class="navbar-text">
 					<!-- login -->
-					<#if isLogged == false> <a id="btnShowLoginForm"
-						href="${applUrlHttps}/login">${i18n('headerLogin')}</a> </#if>
-					<#if isLogged == true> <a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">${i18n('headerWelcomShort')}
-						${customerFirstName} <b class="caret"></b>
-					</a>
+					<#if isLogged == false> <a id="btnShowLoginForm" a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"> <span
+						class="glyphicon glyphicon-user text-primary"></span><b
+						class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li id="btnAccountOverview"><a
-							href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
-						</li>
-						<li id="btnLogout"><a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
-						</li>
+						<li class="level-1"><span class="margin_left5"></span>${i18n('headerWelcomeGuest')}</li>
+						<li class="level-1"><a href="${applUrlHttps}/registration"
+							alt="${i18n('headerRegistration')}"
+							title="${i18n('headerRegistration')}"> <span
+								class="glyphicon glyphicon-user"></span> <span
+								class="margin_left5"></span><span id="btnAccountNew"
+								class="text-primary">${i18n("headerRegistration")}</span>
+						</a></li>
+						<li class="level-1"><a id="btnShowLoginForm" href="${applUrlHttps}/login"
+							alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"><span
+								class="glyphicon glyphicon-log-in"></span> <span
+								class="margin_left5"></span><span id="btnAccountLogin"
+								class="text-primary">${i18n('headerLogin')}</span> </a></li>
+					</ul>
+					</#if> <#if isLogged == true> <a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span
+						class="glyphicon glyphicon-user text-danger"></span> <b
+						class="caret"></b> </a>
+					<ul class="dropdown-menu ">
+						<li><span class="margin_left5"></span>${i18n('headerWelcome')}:
+							${customerFirstName}</li>
+						<li class="level-1"><a href="${applUrlHttps}/accountOverview"
+							title="${i18n('accountOverviewTitle')}"
+							alt="${i18n('accountOverviewTitle')}"><span
+								class="glyphicon glyphicon-info-sign"></span> <span
+								class="margin_left5"></span><span id="btnAccountOverview"
+								class="text-primary">${i18n("accountOverviewTitle")}</span></a></li>
+						<li class="level-1"><a href="${applUrlHttp}/logout"
+							title="${i18n('headerLogout')}" alt="${i18n('headerLogout')}"><span
+								class="glyphicon glyphicon-log-out"></span> <span
+								class="margin_left5"></span><span id="btnLogout"
+								class="text-primary">${i18n("headerLogout")}</span></a></li>
 					</ul>
 					</#if>
 				</div>
@@ -57,7 +83,7 @@
 
 			<div class="col-sm-2">
 				<div id="btnCartOverview" class="navbar-text">
-					<a id="headerCartOverview" href="${applUrlHttp}/cart"> <span
+					<a id="headerCartOverview" href="${applUrlHttp}/cart" alt="${i18n('cartOverviewTitle')}" title="${i18n('cartOverviewTitle')}"> <span
 						class="glyphicon glyphicon-shopping-cart"></span><span
 						class="margin_left5">${i18n('cartOverviewTitle')}:</span> <span
 						class="CartOverview headerCartProductCounter">${cartProductCount}</span>
@@ -74,11 +100,11 @@
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"
 						href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"
-						id="topCategory${tC_index}">${tC.name} <span class="caret"></span></a>
+						id="topCategory${tC_index}" alt="${tC.name}" title="${tC.name}">${tC.name} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<#list tC.subCategories as sC>
 							<li id="subCategory${sC_index}${tC_index}" class="level-1"><a
-								href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}">${sC.name}</a></li>
+								href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" alt="${sC.name}" title="${sC.name}">${sC.name}</a></li>
 							</#list>
 						</ul></li> </#list>
 				</ul>

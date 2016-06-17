@@ -17,7 +17,7 @@
 	box-shadow: 0 7px 10px rgba(0, 0, 0, 0);
 	padding: 10px 10px 10px 10px;
 	position: absolute;
-	right: -80px;
+	right: 0px;
 	top: 5px;
 	width: 230px;
 	z-index: 10;
@@ -144,4 +144,9 @@
 #bannerWrap {
 	margin: 10px;
 	padding-bottom: 5px;
+}
+
+#cartSliderElementList ul li {
+	margin: 0;
+ 	padding: 1px;
 }

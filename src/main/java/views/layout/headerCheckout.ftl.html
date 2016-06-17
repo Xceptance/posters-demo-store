@@ -1,29 +1,81 @@
-<nav id="headerCheckout"
-	class="navbar navbar-default navbar-static-top container-fluid ">
-	<div class="col-xs-12 col-sm-10">
-		<a id="logo" href="${applUrlHttp}/"> <img
-			src="${contextPath}/assets/img/xceptanceLogo.png"
-			title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}"
-			class="logo" /> <span class="headerCheckoutLogoText">${i18n('titleShop')}</span>
-		</a>
-	</div>
-	<div class="col-xs-12 col-sm-2">
-		<div class="navbar-text">
-			<!-- login -->
-			<#if isLogged == false> <a id="btnShowLoginForm"
-				href="${applUrlHttps}/login">${i18n('headerLogin')}</a> </#if> <#if
-			isLogged == true> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown">${i18n('headerWelcomShort')}
-				${customerFirstName} <b class="caret"></b>
-			</a>
-			<ul class="dropdown-menu">
-				<li id="btnAccountOverview"><a
-					href="${applUrlHttps}/accountOverview">${i18n("accountOverviewTitle")}</a>
-				</li>
-				<li id="btnLogout"><a href="${applUrlHttp}/logout">${i18n("headerLogout")}</a>
-				</li>
-			</ul>
-			</#if>
+<nav id="headerCheckout" class="navbar navbar-default navbar-static-top">
+	<div class="row">
+		<div class="navbar-header col-xs-12 col-sm-8">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<!-- navbar-brand -->
+			<div class="col-xs-7 col-sm-12 navbar-brand">
+				<a id="brand" href="${applUrlHttp}/" alt="${i18n('titleShop')}"
+					title="${i18n('titleShop')}"> <img
+					src="${contextPath}/assets/img/xceptanceLogo.png"
+					title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
+				</a>
+			</div>
 		</div>
+
+		<div class="col-sm-2">
+			<div class="navbar-text">
+				<!-- login -->
+				<#if isLogged == false> <a id="btnShowLoginForm" a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"
+					alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"> <span
+					class="glyphicon glyphicon-user text-primary"></span><b
+					class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><span class="margin_left5"></span>${i18n('headerWelcomeGuest')}</li>
+					<li><a href="${applUrlHttps}/registration"
+						alt="${i18n('headerRegistration')}"
+						title="${i18n('headerRegistration')}"> <span
+							class="glyphicon glyphicon-user"></span> <span
+							class="margin_left5"></span><span id="btnAccountNew"
+							class="text-primary">${i18n("headerRegistration")}</span>
+					</a></li>
+					<li><a id="btnShowLoginForm" href="${applUrlHttps}/login"
+						alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"><span
+							class="glyphicon glyphicon-log-in"></span> <span
+							class="margin_left5"></span><span id="btnAccountLogin"
+							class="text-primary">${i18n('headerLogin')}</span> </a></li>
+				</ul>
+				</#if> <#if isLogged == true> <a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><span
+					class="glyphicon glyphicon-user text-danger"></span> <b
+					class="caret"></b> </a>
+				<ul class="dropdown-menu">
+					<li><span class="margin_left5"></span>${i18n('headerWelcome')}:
+						${customerFirstName}</li>
+					<li><a href="${applUrlHttps}/accountOverview"
+						title="${i18n('accountOverviewTitle')}"
+						alt="${i18n('accountOverviewTitle')}"><span
+							class="glyphicon glyphicon-info-sign"></span> <span
+							class="margin_left5"></span><span id="btnAccountOverview"
+							class="text-primary">${i18n("accountOverviewTitle")}</span></a></li>
+					<li><a href="${applUrlHttp}/logout"
+						title="${i18n('headerLogout')}" alt="${i18n('headerLogout')}"><span
+							class="glyphicon glyphicon-log-out"></span> <span
+							class="margin_left5"></span><span id="btnLogout"
+							class="text-primary">${i18n("headerLogout")}</span></a></li>
+				</ul>
+				</#if>
+			</div>
+		</div>
+
+		<div class="col-sm-2">
+			<div id="btnCartOverview" class="navbar-text">
+				<a id="headerCartOverview" href="${applUrlHttp}/cart"
+					alt="${i18n('cartOverviewTitle')}"
+					title="${i18n('cartOverviewTitle')}"> <span
+					class="glyphicon glyphicon-shopping-cart"></span><span
+					class="margin_left5">${i18n('cartOverviewTitle')}:</span> <span
+					class="CartOverview headerCartProductCounter">${cartProductCount}</span>
+				</a>
+				<!-- cart slider -->
+				<#include "cartSlider.ftl.html" />
+			</div>
+		</div>
+
 	</div>
 </nav>
