@@ -83,3 +83,5 @@ Funktionalität
 * Testfälle checken
 * Payment Settings -> Expiration date -> ein abgelaufenes Datum darf nicht auswaehlbar sein
 * address: use this address evl blau oder als select und continue anzeigen
+* Checkout: Header mit weniger Inhalt?
+* order confirmation page hinzufügen ?
