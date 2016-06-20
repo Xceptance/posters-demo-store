@@ -1,8 +1,8 @@
 
 <!-- full name-->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="fullName">${i18n("addressFullName")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="fullName">${i18n("addressFullName")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<input id="fullName" name="fullName" class="form-control" required
 			type="text" pattern="[A-Za-z\s]+"
 			data-error="${i18n('errorWrongName')}"
@@ -12,8 +12,8 @@
 
 <!-- company-->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="company">${i18n("addressCompany")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="company">${i18n("addressCompany")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<input id="company" name="company"
 			placeholder="${i18n('addressCompanyPlaceholder')}"
 			class="form-control" required type="text"
@@ -23,8 +23,8 @@
 
 <!-- address line-->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="addressLine">${i18n("addressLine")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="addressLine">${i18n("addressLine")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<input id="addressLine" name="addressLine"
 			placeholder="${i18n('addressLinePlaceholder')}"
 			class="form-control" required type="text"
@@ -34,8 +34,8 @@
 
 <!-- city-->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="city">${i18n("addressCity")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="city">${i18n("addressCity")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<input id="city" name="city" class="form-control" required type="text"
 			pattern="[A-Za-z\s]+" data-error="${i18n('errorWrongCity')}"
 			value="${(address.city)!}">
@@ -44,8 +44,8 @@
 
 <!-- state-->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="state">${i18n("addressState")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="state">${i18n("addressState")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<input id="state" name="state" class="form-control" required
 			type="text" pattern="[A-Za-z\s]+"
 			data-error="${i18n('errorWrongState')}"
@@ -55,8 +55,8 @@
 
 <!-- zip-->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="zip">${i18n("addressZip")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="zip">${i18n("addressZip")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<input id="zip" name="zip" class="form-control" required type="text"
 			pattern="[0-9]+" data-error="${i18n('errorWrongZip')}"
 			value="${(address.zip)!}">
@@ -65,8 +65,8 @@
 
 <!-- Select country -->
 <div class="form-group">
-	<label class="col-sm-2 control-label" for="country">${i18n("addressCountry")}:</label>
-	<div class="col-sm-10">
+	<label class="col-xs-12 col-sm-3 control-label" for="country">${i18n("addressCountry")}:</label>
+	<div class="col-xs-12 col-sm-9">
 		<select id="country" name="country" class="form-control">
 			<option>${i18n('countryUS')}</option>
 			<option>${i18n('countryGermany')}</option>

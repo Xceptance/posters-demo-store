@@ -70,21 +70,25 @@
 						<fieldset>
 							<!-- include form -->
 							<#include "../form/addressForm.ftl.html"/>
+							<hr>
 							<!-- choose: shipping equals billing address -->
 							<div class="form-group">
-								<label class="col-sm-10 control-label text-right"
-									for="billEqualShipp">${i18n("shippingAddressEqualsBillingAddress")}?</label>
-
-								<div class="col-sm-2">
-									<label for="billEqualShipp-Yes"> <input
-										name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
-										checked="checked" type="radio" alt="${i18n('chooseYes')}"
-										title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
-									</label> <label for="billEqualShipp-No"> <input
-										name="billEqualShipp" id="billEqualShipp-No" value="No"
-										type="radio" alt="${i18n('chooseNo')}"
-										title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
-									</label>
+								<label class="col-xs-12 col-sm-3 control-label" for="country">${i18n("shippingAddressEqualsBillingAddress")}:</label>
+								<div class="col-xs-12 col-sm-9 margin_top7">
+									<div>
+										<label for="billEqualShipp-Yes"> <input
+											name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
+											checked="checked" type="radio" alt="${i18n('chooseYes')}"
+											title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
+										</label>
+									</div>
+									<div>
+										<label for="billEqualShipp-No"> <input
+											name="billEqualShipp" id="billEqualShipp-No" value="No"
+											type="radio" alt="${i18n('chooseNo')}"
+											title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
+										</label>
+									</div>
 								</div>
 							</div>
 						</fieldset>

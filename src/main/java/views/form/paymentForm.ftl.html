@@ -1,15 +1,15 @@
 <!-- credit card number -->
 <div class="form-group">
-  <label class="col-sm-2 control-label" for="creditCardNumber">${i18n("titleNumber")}:</label>
-  <div class="col-sm-10">
+  <label class="col-xs-12 col-sm-3 control-label" for="creditCardNumber">${i18n("titleNumber")}:</label>
+  <div class="col-xs-12 col-sm-9">
     <input id="creditCardNumber" name="creditCardNumber" class="form-control" required type="text" pattern="4[0-9]{12}(?:[0-9]{3})?" data-error="${i18n("errorWrongCreditCard")}" value="${(card.cardNumber)!}" size="16">
   </div>
 </div>
 
 <!-- name -->
 <div class=form-group>
-  <label class="col-sm-2 control-label" for="name">${i18n("paymentCardholderName")}:</label>
-  <div class="col-sm-10">
+  <label class="col-xs-12 col-sm-3 control-label" for="name">${i18n("paymentCardholderName")}:</label>
+  <div class="col-xs-12 col-sm-9">
     <input id="name" name="name" class="form-control" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(card.name)!}">
   </div>
 </div>
@@ -17,8 +17,8 @@
 <!-- Select expiration date -->
 <div class="form-group">
 
-  <label class="col-sm-2 control-label" for="expirationDate">${i18n("paymentExpiration")}:</label>
-  <div class="col-sm-2">
+  <label class="col-xs-12 col-sm-3 control-label" for="expirationDate">${i18n("paymentExpiration")}:</label>
+  <div class="col-xs-12 col-sm-4">
     <select id="expirationDateMonth" name="expirationDateMonth" class="form-control">
       	<#list 1..9 as i>
       	<#if card??>
@@ -36,7 +36,7 @@
       	</#list>
     </select>
     </div>
-    <div class="col-sm-8">
+    <div class="col-xs-12 col-sm-5">
     <select id="expirationDateYear" name="expirationDateYear" class="form-control">
       <#list expirationDateStartYear..(expirationDateStartYear+10) as i>
       	<#if card??>
