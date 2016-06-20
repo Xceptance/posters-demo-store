@@ -21,13 +21,14 @@
       					</ul>
       				</address>
        				<div class="container-fuid">
-	      				<form action="${contextPath}/confirmDeleteShippingAddress" method="post" class="col-xs-12 col-sm-4 col-lg-3">
+	      				<form action="${contextPath}/confirmDeleteShippingAddress" method="post" class="col-xs-12 col-sm-5 col-lg-5">
 	    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
 	    					<button class="btn btn-danger" id="btnDeleteDelAddr${address_index}" name="btnDeleteDelAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
 						</form>
-	      				<form action="${contextPath}/updateShippingAddress" method="post" class="col-xs-12 col-sm-8 col-lg-9">
+						<span class="margin_left5"></span>
+	      				<form action="${contextPath}/updateShippingAddress" method="post" class="col-xs-12 col-sm-5 col-lg-5">
 	    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-	    					<button class="btn btn-primary" id="btnChangeDelAddr${address_index}" name="btnChangeDelAddr${address_index}" type="submit">${i18n("buttonChangeDetail")}</button>
+	    					<button class="btn btn-primary" id="btnChangeDelAddr${address_index}" name="btnChangeDelAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 						</form>
 					</div>
       			</li>
@@ -67,13 +68,14 @@
       					</ul>
       				</address>
       				<div class="container-fuid">
-	      				<form action="${contextPath}/confirmDeleteBillingAddress" method="post" class="col-xs-12 col-sm-4 col-lg-3">
+	      				<form action="${contextPath}/confirmDeleteBillingAddress" method="post" class="col-xs-12 col-sm-5 col-lg-5">
 	    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
 	    					<button class="btn btn-danger" id="btnDeleteBillAddr${address_index}" name="btnDeleteBillAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
 						</form>
-	      				<form action="${contextPath}/updateBillingAddress" method="post" class="col-xs-12 col-sm-8 col-lg-9">
+						<span class="margin_left5"></span>
+	      				<form action="${contextPath}/updateBillingAddress" method="post" class="col-xs-12 col-sm-5 col-lg-5">
 	    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-	    					<button class="btn btn-primary" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonChangeDetail")}</button>
+	    					<button class="btn btn-primary" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 						</form>
       				</div>
       			</li>
