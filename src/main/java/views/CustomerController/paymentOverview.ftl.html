@@ -17,7 +17,7 @@
       					</address>
       					<form action="${contextPath}/confirmDeletePayment" method="post" class="container-fluid">
 							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n("buttonDelete")}</button>
+							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}</button>
 						</form>
       				</li>
 		<#if (payment_index + 1) % 3 ==0>
@@ -31,7 +31,7 @@
 	</#list>
 	<hr>
 	<div class="col-xs-12">
-		<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer" title="${i18n(')}paymentMethodAddNew'">${i18n('paymentMethodAddNew')}</a>
+		<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer" title="${i18n('paymentMethodAddNew')}">${i18n('paymentMethodAddNew')}</a>
 	</div>
 </fieldset>
 </@layout.myLayout>

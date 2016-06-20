@@ -9,12 +9,12 @@
 		</legend>
 		<div class="col-sm-12">
 
-			<!-- name -->
+			<!-- last name -->
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="name">${i18n("labelMyName")}:</label>
 				<div class="col-sm-10">
 					<input id="name" name="name"
-						placeholder="${i18n('registrationName')}" class="form-control"
+						placeholder="${i18n('registrationLastName')}" class="form-control"
 						required type="text" pattern="[A-Za-z\s]+"
 						data-error="${i18n('errorWrongName')}" value="${(customer.name)!}">
 				</div>
