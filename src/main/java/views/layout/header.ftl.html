@@ -1,6 +1,6 @@
 <nav id="header" class="navbar navbar-default navbar-static-top">
 	<div class="row">
-		<div class="navbar-header col-xs-12 col-sm-4 col-lg-4">
+		<div class="navbar-header col-xs-12 col-sm-8 col-lg-8">
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar">
@@ -9,41 +9,55 @@
 			</button>
 			<!-- navbar-brand -->
 			<div class="col-xs-7 col-sm-12 navbar-brand">
-				<a id="brand" href="${applUrlHttp}/" alt="${i18n('titleShop')}" title="${i18n('titleShop')}"> <img
+				<a id="brand" href="${applUrlHttp}/" alt="${i18n('titleShop')}"
+					title="${i18n('titleShop')}"> <img
 					src="${contextPath}/assets/img/xceptanceLogo.png"
 					title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
 				</a>
 			</div>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<div class="col-xs-12 col-sm-4">
-				<ul class="nav navbar-nav">
-					<li>
-						<div class="row">
-							<!-- search -->
-							<form id="search" class="navbar-form"
-								action="${applUrlHttp}/search" method="get">
+
+		<div class="col-sm-1">
+			<ul id="btnSearchForm" class="nav nav-pills margin_top7">
+				<li role="presentation" class="dropdown"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false"> <span
+						class="glyphicon glyphicon-search"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<!-- search -->
+						<form id="search" class="navbar-form"
+							action="${applUrlHttp}/search" method="get">
+							<div>
 								<input id="searchText" name="searchText" class="form-control"
 									type="search" placeholder="${i18n('headerSearch')}"
-									title="${i18n('headerSearch')}" alt="${i18n('headerSearch')}" value="${(searchTerm)!}">
-								<button id="btnSearch" class="btn btn-default" type="submit" alt="${i18n('headerSearch')}" title="${i18n('headerSearch')}">
+									title="${i18n('headerSearch')}" alt="${i18n('headerSearch')}"
+									value="${(searchTerm)!}">
+							</div>
+							<div>
+								<button id="btnSearch" class="btn btn-primary form-control"
+									type="submit" alt="${i18n('headerSearch')}"
+									title="${i18n('headerSearch')}">
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
-							</form>
-						</div>
-					</li>
-				</ul>
-			</div>
+							</div>
+						</form>
 
-			<div class="col-sm-2">
-				<div class="navbar-text">
-					<!-- login -->
-					<#if isLogged == false> <a id="btnShowLoginForm" a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"> <span
-						class="glyphicon glyphicon-user text-primary"></span><b
-						class="caret"></b></a>
+					</ul></li>
+			</ul>
+		</div>
+
+		<div class="col-sm-1">
+			<ul id="btnShowLoginForm" class="nav nav-pills margin_top7">
+				<li role="presentation" class="dropdown"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"
+					alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"
+					role="button" aria-haspopup="true" aria-expanded="false"> <span
+						class="glyphicon glyphicon-user"></span>
+				</a>
 					<ul class="dropdown-menu">
+						<!-- login -->
+						<#if isLogged == false>
 						<li class="level-1"><span class="margin_left5"></span>${i18n('headerWelcomeGuest')}</li>
 						<li class="level-1"><a href="${applUrlHttps}/registration"
 							alt="${i18n('headerRegistration')}"
@@ -52,17 +66,14 @@
 								class="margin_left5"></span><span id="btnAccountNew"
 								class="text-primary">${i18n("headerRegistration")}</span>
 						</a></li>
-						<li class="level-1"><a id="btnShowLoginForm" href="${applUrlHttps}/login"
-							alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"><span
+						<li class="level-1"><a id="btnShowLoginForm"
+							href="${applUrlHttps}/login" alt="${i18n('headerLogin')}"
+							title="${i18n('headerLogin')}"><span
 								class="glyphicon glyphicon-log-in"></span> <span
 								class="margin_left5"></span><span id="btnAccountLogin"
-								class="text-primary">${i18n('headerLogin')}</span> </a></li>
-					</ul>
-					</#if> <#if isLogged == true> <a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"><span
-						class="glyphicon glyphicon-user text-danger"></span> <b
-						class="caret"></b> </a>
-					<ul class="dropdown-menu ">
+								class="text-primary">${i18n('headerLogin')}</span> </a></li> </#if> <#if
+						isLogged == true>
+
 						<li><span class="margin_left5"></span>${i18n('headerWelcome')}:
 							${customerFirstName}</li>
 						<li class="level-1"><a href="${applUrlHttps}/accountOverview"
@@ -76,39 +87,41 @@
 								class="glyphicon glyphicon-log-out"></span> <span
 								class="margin_left5"></span><span id="btnLogout"
 								class="text-primary">${i18n("headerLogout")}</span></a></li>
-					</ul>
-					</#if>
-				</div>
-			</div>
+					</ul> </#if>
+			</ul>
+		</div>
 
-			<div class="col-sm-2">
-				<div id="btnCartOverview" class="navbar-text">
-					<a id="headerCartOverview" href="${applUrlHttp}/cart" alt="${i18n('cartOverviewTitle')}" title="${i18n('cartOverviewTitle')}"> <span
-						class="glyphicon glyphicon-shopping-cart"></span><span
-						class="margin_left5">${i18n('cartOverviewTitle')}:</span> <span
-						class="CartOverview headerCartProductCounter">${cartProductCount}</span>
-					</a>
-					<!-- cart slider -->
-					<#include "cartSlider.ftl.html" />
-				</div>
+		<div class="col-sm-2">
+			<div id="btnCartOverview" class="navbar-text">
+				<a id="headerCartOverview" href="${applUrlHttp}/cart"
+					alt="${i18n('cartOverviewTitle')}"
+					title="${i18n('cartOverviewTitle')}"> <span
+					class="glyphicon glyphicon-shopping-cart"></span><span
+					class="margin_left5">${i18n('cartOverviewTitle')}:</span> <span
+					class="CartOverview headerCartProductCounter">${cartProductCount}</span>
+				</a>
+				<!-- cart slider -->
+				<#include "cartSlider.ftl.html" />
 			</div>
+		</div>
 
 
-			<div class="container-fluid">
-				<ul class="nav navbar-nav col-xs-12">
-					<#list topCategory as tC>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown"
-						href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"
-						id="topCategory${tC_index}" alt="${tC.name}" title="${tC.name}">${tC.name} <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<#list tC.subCategories as sC>
-							<li id="subCategory${sC_index}${tC_index}" class="level-1"><a
-								href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" alt="${sC.name}" title="${sC.name}">${sC.name}</a></li>
-							</#list>
-						</ul></li> </#list>
-				</ul>
-			</div>
+		<div class="container-fluid">
+			<ul class="nav navbar-nav col-xs-12">
+				<#list topCategory as tC>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown"
+					href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"
+					id="topCategory${tC_index}" alt="${tC.name}" title="${tC.name}">${tC.name}
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<#list tC.subCategories as sC>
+						<li id="subCategory${sC_index}${tC_index}" class="level-1"><a
+							href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}"
+							alt="${sC.name}" title="${sC.name}">${sC.name}</a></li> </#list>
+					</ul></li> </#list>
+			</ul>
 		</div>
 	</div>
 </nav>
