@@ -40,13 +40,13 @@
 		</div>
 		</#if> </#list> </#if>
 
-
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="pull-right">
 					<!-- Trigger the modal with a button -->
 					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#addAdressAddrModal">${i18n("shippingAddressAddNew")}</button>
+						data-target="#addAdressModal">${i18n("shippingAddressAddNew")}</button>
+					<!-- button - continue  -->
 					<button class="btn btn-primary" id="btnUseAddressContinue"
 						name="btnUseAddressContinue" type="submit">${i18n("buttonContinue")}</button>
 				</div>
@@ -55,7 +55,7 @@
 	</form>
 
 	<!-- Modal for add new address-->
-	<div id="addAdressAddrModal" class="modal fade" role="dialog">
+	<div id="addAdressModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<form id="formAddAddr" class="form-horizontal"
 				action="${contextPath}/shippingAddressCompleted" method="post">
