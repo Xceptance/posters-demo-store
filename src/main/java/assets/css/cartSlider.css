@@ -1,7 +1,8 @@
+/*
 #btnCartOverview {
 	margin-right: 20px;
 	position: relative;
-	/*	height: 50px;*/
+		height: 50px;
 }
 
 #cartContainer {
@@ -149,4 +150,44 @@
 #cartSliderElementList ul li {
 	margin: 0;
  	padding: 1px;
+}*/
+.cartMini {
+	width: 250px;
+}
+
+.cartMiniHeader {
+	padding: 10px 20px;
+	border-bottom: 1px #EBEBEB solid;
+}
+
+.cartMiniProducts {
+	padding: 0 20px 0 20px;
+	background-color: #ffffff;
+}
+
+.cartMiniTotal {
+	padding: 20px;
+}
+
+.cartMiniSubOrderTotal {
+	padding: 10px 0;
+}
+
+.subOrderPrice {
+	font-weight: bold;
+	font-size: 120%;
+}
+
+.cartItems {
+	border-bottom: 1px #EBEBEB solid;
+	padding: 5px 0;
+}
+
+.emptyCartMsg {
+	margin: 10px;
+}
+
+.cartMiniEmpty {
+	background-color: #ffffff;
+	display: none;
 }
