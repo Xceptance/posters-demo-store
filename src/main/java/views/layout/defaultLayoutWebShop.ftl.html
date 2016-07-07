@@ -28,7 +28,7 @@
 <script src="${contextPath}/assets/js/customCartSlider.js"></script>
 <script src="${contextPath}/assets/js/custom.js"></script>
 </head>
-<body>
+<body id="body">
 	<div id="wrapper">
 		<!-- header -->
 		<div class="container-fluid"><#if checkout??> <#include
@@ -49,11 +49,9 @@
 		</script>
 		</#if>
 		<div class="container-fluid" id="errorMessage">
-
 			<div class="text-center alert alert-danger">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
-
 		</div>
 		<#if flash.success??>
 		<script type="text/javascript">
@@ -76,12 +74,13 @@
 			});
 		</script>
 		</#if>
+		<!-- 
 		<div class="container-fluid" id="infoMessage">
 			<div class="text-center alert alert-info">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a>
 			</div>
 		</div>
-
+ -->
 		<!-- body -->
 		<div id="main">
 			<div class="container-fluid"><#nested/></div>

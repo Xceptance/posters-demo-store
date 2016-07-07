@@ -32,14 +32,6 @@
 							</ul>
 						</address>
 					</div>
-					<div class="container-fuid">
-
-						<input name="addressId" id="addressId" type="hidden"
-							value=${address.id}></input>
-						<button class="btn btn-default"
-							id="btnUseBillAddress${address_index}"
-							name="btnUseBillAddress${address_index}" type="submit">${i18n("billingAddressChoose")}</button>
-					</div>
 				</li> <#if (address_index + 1) % 3 == 0>
 			</ul>
 		</div>
