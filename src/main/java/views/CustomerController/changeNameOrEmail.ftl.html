@@ -21,11 +21,12 @@
 			</div>
 
 			<!-- first name -->
+			
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="firstName">${i18n("labelMyFirstName")}:</label>
 				<div class="col-sm-10">
 					<input id="firstName" name="firstName"
-						placeholder="${i18n('registrationFirstName')}"
+						placeholder="${i18n('registrationFirstName')}" 
 						class="form-control" required type="text" pattern="[A-Za-z\s]+"
 						data-error="${i18n('errorWrongName')}"
 						value="${(customer.firstName)!}">
@@ -38,8 +39,7 @@
 				<div class="col-sm-10">
 					<input id="eMail" name="eMail"
 						placeholder="${i18n('registrationEmail')}" class="form-control"
-						required type="text"
-						pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"
+						required type="email"
 						data-error="${i18n('errorValidEmail')}"
 						value="${(customer.email)!}">
 				</div>
