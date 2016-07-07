@@ -1,8 +1,14 @@
 <div id="breadcrumbCheckout">
 	<ul class="breadcrumb text-left">
+
 		<!-- add shipping address -->
-		<li id="btnDelAddr"><a href="enterShippingAddress">${i18n("titleShippingAddress")}</a>
+		<li id="btnToCard"><a href="${applUrlHttp}/cart">${i18n("titleCard")}</a>
 			<span class="divider"> > </span></li>
+
+		<!-- add shipping address -->
+		<li id="btnShippAddr"><a href="enterShippingAddress">${i18n("titleShippingAddress")}</a>
+			<span class="divider"> > </span></li>
+
 		<!-- add billing address -->
 		<#if billingAddressActive??>
 		<li class="active" id="btnBillAddr"><a
@@ -10,6 +16,7 @@
 			<#else>
 		<li id="btnBillAddr">${i18n("titleBillingAddress")} </#if> <span
 			class="divider"> > </span></li>
+
 		<!-- add credit card -->
 		<#if creditCardActive??>
 		<li class="active" id="btnCreditCard"><a
@@ -17,11 +24,13 @@
 			<#else>
 		<li id="btnCreditCard">${i18n("titlePayment")} </#if> <span
 			class="divider"> > </span></li>
+
 		<!-- place order -->
 		<#if placeOrderActive??>
 		<li class="active" id="btnPlaceOrder"><a
-			href="${contextPath}/checkoutOverview">${i18n("buttonPlaceOrder")}</a>
+			href="${contextPath}/checkoutOverview">${i18n("titleCheckoutOverview")}</a>
 			<#else>
 		<li id="btnPlaceOrder">${i18n("buttonPlaceOrder")} </#if></li>
+
 	</ul>
 </div>

@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -368,6 +371,18 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+        //@TODO
+
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+        Date date = new Date();
+
+        // get current month and year
+        data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+
+        data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
+        
         return Results.html().render(data);
     }
 

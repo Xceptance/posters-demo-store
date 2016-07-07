@@ -96,18 +96,29 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+
+        boolean userHasAShippingAddress = false;
+
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add all shipping addresses
-            data.put("shippingAddresses", customer.getShippingAddress());
+
+            // user has a shipping address
+            if (!customer.getShippingAddress().isEmpty())
+            {
+                // add all shipping addresses
+                data.put("shippingAddresses", customer.getShippingAddress());
+                userHasAShippingAddress = true;
+            }
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
         }
         // show checkout bread crumb
         data.put("checkout", true);
+        data.put("shippingAddressesActive", true);
+
         // get shipping address by order
         final ShippingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getShippingAddress();
         // add address to data map, if an address was already entered
@@ -116,10 +127,17 @@ public class CheckoutController
             data.put("address", address);
         }
 
-        // customer not sign in
+        // customer not sign in or user has no address
         if (SessionHandling.isCustomerLogged(context))
         {
-            return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
+            if (userHasAShippingAddress == true)
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
+            }
+            else
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS_GUEST);
+            }
         }
         else
         {
@@ -171,6 +189,7 @@ public class CheckoutController
             data.put("address", address);
             // show checkout bread crumb
             data.put("checkout", true);
+            data.put("shippingAddressesActive", true);
             // show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
         }
@@ -279,13 +298,23 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+
+        boolean userHasBillingAddress = false;
+
         if (SessionHandling.isCustomerLogged(context))
         {
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add all shipping addresses
-            data.put("shippingAddresses", customer.getShippingAddress());
-            // add all billing addresses
-            data.put("billingAddresses", customer.getBillingAddress());
+
+            // user has a shipping address
+            if (!customer.getBillingAddress().isEmpty())
+            {
+                // add all shipping addresses
+                data.put("shippingAddresses", customer.getShippingAddress());
+                // add all billing addresses
+                data.put("billingAddresses", customer.getBillingAddress());
+
+                userHasBillingAddress = true;
+            }
         }
         // get billing address by order
         final BillingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
@@ -296,11 +325,18 @@ public class CheckoutController
         }
         data.put("checkout", true);
         data.put("billingAddressActive", true);
-        
+
         // customer not sign in
         if (SessionHandling.isCustomerLogged(context))
         {
-            return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
+            if (userHasBillingAddress == true)
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
+            }
+            else
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS_GUEST);
+            }
         }
         else
         {
@@ -426,12 +462,19 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+        
+        boolean userHasPaymentMethod = false;
+        
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer by session
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add payment information
-            data.put("paymentOverview", customer.getCreditCard());
+            if (!customer.getCreditCard().isEmpty())
+            {
+                // add payment information
+                data.put("paymentOverview", customer.getCreditCard());
+                userHasPaymentMethod = true;
+            }
         }
         // get payment method by order
         final CreditCard card = Order.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
@@ -457,13 +500,21 @@ public class CheckoutController
         data.put("checkout", true);
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
-        //System.out.println(data.toString());
-        
+        // System.out.println(data.toString());
+
         // customer not sign in
         if (SessionHandling.isCustomerLogged(context))
         {
             // return page to enter payment method
-            return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
+            if (userHasPaymentMethod == true)
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
+            }
+            else
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD_GUEST);
+            }
+
         }
         else
         {
