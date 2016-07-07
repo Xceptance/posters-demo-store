@@ -1,8 +1,7 @@
-
 #wrapper {
 	max-width: 992px;
-	margin-left:auto;
-	margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .navbar-brand {
@@ -40,12 +39,15 @@
 .margin_top20 {
 	margin-top: 20px;
 }
+
 .margin_top7 {
 	margin-top: 7px;
 }
+
 #dropdown {
 	padding: 5px 0 0 0;
 }
+
 #cartOverviewTable thead th, #checkoutOverviewTable thead th {
 	color: black;
 	font-size: 14px;
@@ -95,7 +97,7 @@
 	padding: 0;
 }
 
-.headerCartProductCounter {
+.headerCartProductCount {
 	padding: 3px;
 	background-color: #d3d7cf;
 	border-radius: 20%;
@@ -143,6 +145,31 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	width: 55px;
 	margin-left: 5px;
 }
+
+.header-menu-item {
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 7px;
+}
+
+.header-menu-search {
+	margin-right: 5px;
+	margin-left: 1px;
+	margin-top: 9px
+}
+
+.userMenu{
+	width: 200px;
+	padding: 10px 20px;
+}
+.userMenuContent {
+	padding: 5px 0;
+}
+
+.userMenuHeader {
+	padding: 0 0 5px 0;
+}
+
 
 .carousel a {
 	color: #ffffff;
