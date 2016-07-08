@@ -118,15 +118,15 @@ public class CheckoutController
         // show checkout bread crumb
         data.put("checkout", true);
         data.put("shippingAddressesActive", true);
-
+/*
         // get shipping address by order
         final ShippingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getShippingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
-            data.put("address", address);
+            //data.put("address", address);
         }
-
+*/
         // customer not sign in or user has no address
         if (SessionHandling.isCustomerLogged(context))
         {
@@ -316,13 +316,13 @@ public class CheckoutController
                 userHasBillingAddress = true;
             }
         }
-        // get billing address by order
+/*        // get billing address by order
         final BillingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
             data.put("address", address);
-        }
+        }*/
         data.put("checkout", true);
         data.put("billingAddressActive", true);
 
@@ -486,15 +486,13 @@ public class CheckoutController
         // add payment method to data map, if a payment method was already entered
         if (card != null)
         {
-            data.put("card", card);
+            //data.put("card", card);
         }
-        else
-        {
-            // get current month and year
-            data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
-            data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
-        }
-
+        
+        // get current month and year
+        data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+        
         data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
 
         data.put("checkout", true);

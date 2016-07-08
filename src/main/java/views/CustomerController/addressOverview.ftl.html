@@ -23,12 +23,12 @@
        				<div class="container-fuid">
 	      				<form action="${contextPath}/confirmDeleteShippingAddress" method="post" class="col-xs-12 col-sm-5 col-lg-5">
 	    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-	    					<button class="btn btn-danger" id="btnDeleteDelAddr${address_index}" name="btnDeleteDelAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
+	    					<button class="btn btn-danger" id="btnDeleteAddr${address_index}" name="btnDeleteAddr${address_index}" type="submit">${i18n("buttonDelete")}</button>
 						</form>
 						<span class="margin_left5"></span>
 	      				<form action="${contextPath}/updateShippingAddress" method="post" class="col-xs-12 col-sm-5 col-lg-5">
 	    					<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-	    					<button class="btn btn-primary" id="btnChangeDelAddr${address_index}" name="btnChangeDelAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
+	    					<button class="btn btn-primary" id="btnChangeAddr${address_index}" name="btnChangeAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 						</form>
 					</div>
       			</li>

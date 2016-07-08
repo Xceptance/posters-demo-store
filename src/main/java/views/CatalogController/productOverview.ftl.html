@@ -31,7 +31,7 @@
 			<#if category??>
 			<div id="titleCategoryName" class="h2">${category.name}</div>
 			</#if> <#if searchText??>
-			<div id="titleSearchText" class="h2">${searchText}</div>
+			<div id="titleSearchText" class="h2">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>'</div>
 			</#if> <#if noResults??>
 			<div id="titleNoResults" class="h2">${noResults}</div>
 			</#if>

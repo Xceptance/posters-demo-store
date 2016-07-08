@@ -52,7 +52,7 @@ public class SearchController
         if (searchText.isEmpty() || searchText.trim().isEmpty())
         {
             // show info message
-            context.getFlashScope().put("info", msg.get("infoNoSearchTerm", language).get());
+            context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
             // return index page
             return Results.redirect(context.getContextPath() + "/");
         }
@@ -65,7 +65,7 @@ public class SearchController
             if (products.isEmpty())
             {
                 // show info message
-                context.getFlashScope().put("info", msg.get("infoNoSearchTerm", language).get());
+                context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
                 // return index page
                 return Results.redirect(context.getContextPath() + "/");
             }
@@ -74,7 +74,7 @@ public class SearchController
             {
                 data.put("products", products);
                 WebShopController.setCommonData(data, context, xcpConf);
-                data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
+                data.put("searchText", searchText);//msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("searchTerm", searchText);
                 data.put("currentPage", 1);
                 // return product overview page
