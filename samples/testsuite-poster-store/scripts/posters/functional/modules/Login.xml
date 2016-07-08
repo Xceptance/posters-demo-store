@@ -9,6 +9,4 @@
   <command name="type" target="id=email" value="@{email}"/>
   <command name="type" target="id=password" value="@{password}"/>
   <command name="clickAndWait" target="id=btnSignIn"/>
-  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
-  <command name="assertText" target="//li[@id='dropdown']/a" value="regexp:.*@{firstName}"/>
 </scriptmodule>

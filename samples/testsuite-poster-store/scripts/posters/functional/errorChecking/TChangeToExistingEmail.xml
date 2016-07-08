@@ -7,11 +7,11 @@
   <action name="StartRegistration"/>
   <command name="clickAndWait" target="id=linkRegister"/>
   <command name="assertElementPresent" target="id=formRegister"/>
-  <command name="store" target="${RANDOM.String(8)}" value="randomName"/>
+  <command name="store" target="${RANDOM.String(8)}" value="randomLastName"/>
   <command name="store" target="${RANDOM.String(8)}" value="randomFirstName"/>
   <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="randomEmail"/>
   <module name="posters.functional.modules.FillInRegistrationForm">
-    <parameter name="name" value="${randomName}"/>
+    <parameter name="lastName" value="${randomLastName}"/>
     <parameter name="firstName" value="${randomFirstName}"/>
     <parameter name="email" value="${randomEmail}"/>
     <parameter name="password" value="${password}"/>
@@ -36,7 +36,7 @@
   <command name="type" target="id=password" value="${password}"/>
   <command name="clickAndWait" target="id=btnChangeNameEmail"/>
   <command name="assertText" target="id=errorMessage" value="× An account with this email address already exists."/>
-  <command name="assertText" target="id=name" value="${name}"/>
+  <command name="assertText" target="id=lastName" value="${lastName}"/>
   <command name="assertText" target="id=firstName" value="${firstName}"/>
   <command name="assertText" target="id=eMail" value="${email}"/>
 </testcase>

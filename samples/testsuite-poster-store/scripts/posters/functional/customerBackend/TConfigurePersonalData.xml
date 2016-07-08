@@ -8,7 +8,7 @@
   <action name="StartRegistration"/>
   <command name="clickAndWait" target="id=linkRegister"/>
   <module name="posters.functional.modules.FillInRegistrationForm">
-    <parameter name="name" value="name"/>
+    <parameter name="lastName" value="name"/>
     <parameter name="firstName" value="firstName"/>
     <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${generatedPassword}"/>
@@ -30,21 +30,27 @@
   <action name="OpenFormToChangeNameAndEmail"/>
   <command name="clickAndWait" target="id=btnChangeNameEmail"/>
   <command name="assertElementPresent" target="id=formChangeNameEmail"/>
-  <command name="assertText" target="id=name" value="name"/>
+  <command name="assertText" target="id=lastName" value="name"/>
   <command name="assertText" target="id=firstName" value="firstName"/>
   <command name="assertText" target="id=eMail" value="${generatedEmail}"/>
   <action name="ChangeNameAndEmail"/>
-  <command name="type" target="id=name" value="newName"/>
+  <codecomment>store elments</codecomment>
+  <command name="type" disabled="true" target="id=name" value="newName"/>
   <command name="store" target="${RANDOM.String(5)}" value="newFirstName"/>
+  <command name="store" target="${RANDOM.String(5)}" value="newLastName"/>
   <command name="type" target="id=firstName" value="${newFirstName}"/>
+  <command name="type" target="id=lastName" value="${newLastName}"/>
   <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="newEmail"/>
   <command name="type" target="id=eMail" value="${newEmail}"/>
   <command name="type" target="id=password" value="${generatedPassword}"/>
+  <action name="Update"/>
   <command name="clickAndWait" target="id=btnChangeNameEmail"/>
+  <codecomment>validate</codecomment>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="id=customerName" value="regexp:.*${newFirstName} newName"/>
-  <command name="assertText" target="id=customerEmail" value="regexp:.*${newEmail}"/>
-  <command name="assertText" target="//li[@id='dropdown']/a" value="regexp:.*${newFirstName}"/>
+  <command name="assertText" target="id=customerFirstName" value="*${newFirstName}"/>
+  <command name="assertText" target="id=customerLastName" value="*${newLastName}"/>
+  <command name="assertText" target="id=customerEmail" value="*${newEmail}"/>
+  <command name="assertText" disabled="true" target="//li[@id='dropdown']/a" value="regexp:.*${newFirstName}"/>
   <action name="OpenFormToChangePassword"/>
   <command name="clickAndWait" target="id=btnChangePassword"/>
   <command name="type" target="id=oldPassword" value="${generatedPassword}"/>

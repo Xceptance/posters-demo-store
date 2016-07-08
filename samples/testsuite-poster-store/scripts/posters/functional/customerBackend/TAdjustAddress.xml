@@ -11,8 +11,8 @@
   <action name="OpenAddressOverview"/>
   <command name="clickAndWait" target="id=linkAddressOverview"/>
   <command name="assertElementPresent" target="id=titleDelAddr"/>
-  <command name="assertElementPresent" target="id=delAddr0"/>
-  <command name="assertText" target="//*[@id='delAddr0']/address" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
+  <command name="assertElementPresent" disabled="true" target="id=delAddr0"/>
+  <command name="assertText" disabled="true" target="//*[@id='delAddr0']/address" value="regexp:${fullName}.*${company}.*${address}.*${city}, ${state} ${zip}.*${country}"/>
   <action name="OpenFormToEnterNewShippingAddress"/>
   <command name="clickAndWait" target="id=linkAddNewDelAddr"/>
   <module name="posters.functional.modules.FillInAddressForm">
@@ -58,7 +58,7 @@
   <action name="ConfirmDeletion"/>
   <command name="clickAndWait" target="id=btnDeleteAddress"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertNotElementPresent" target="id=delAddr1"/>
+  <command name="assertNotElementPresent" target="id=btnDeleteAddr1"/>
   <action name="OpenFormToEnterNewBillingAddress"/>
   <command name="clickAndWait" target="id=linkAddNewBillAddr"/>
   <module name="posters.functional.modules.FillInAddressForm">

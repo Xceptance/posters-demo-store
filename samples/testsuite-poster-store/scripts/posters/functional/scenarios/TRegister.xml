@@ -8,7 +8,7 @@
   <command name="assertElementPresent" target="id=formRegister"/>
   <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
   <module name="posters.functional.modules.FillInRegistrationForm">
-    <parameter name="name" value="${name}"/>
+    <parameter name="lastName" value="${lastName}"/>
     <parameter name="firstName" value="${firstName}"/>
     <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>

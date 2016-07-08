@@ -6,7 +6,7 @@
   <action name="OpenFormToRegister"/>
   <command name="clickAndWait" target="id=linkRegister"/>
   <module name="posters.functional.modules.FillInRegistrationForm">
-    <parameter name="name" value="${name}"/>
+    <parameter name="lastName" value="${lastName}"/>
     <parameter name="firstName" value="${firstName}"/>
     <parameter name="email" value="${email}"/>
     <parameter name="password" value="${password}"/>
@@ -15,7 +15,7 @@
   <action name="TryToRegister"/>
   <command name="clickAndWait" target="id=btnRegister"/>
   <command name="assertText" target="id=errorMessage" value="× An account with this email address already exists."/>
-  <command name="assertText" target="id=name" value="${name}"/>
+  <command name="assertText" target="id=lastName" value="${lastName}"/>
   <command name="assertText" target="id=firstName" value="${firstName}"/>
   <command name="assertText" target="id=eMail" value="${email}"/>
 </testcase>
