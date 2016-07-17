@@ -69,7 +69,7 @@
 							</a>
 						</div>
 					</div>
-				</li> <#if (pro_index + 1) % 3 ==0>
+				</li> <#if (pro_index + 1) % 3 == 0>
 			</ul>
 		</div>
 		</#if> <#if !pro_has_next && (pro_index + 1) % 3 != 0>
@@ -79,6 +79,8 @@
 
 	</div>
 
+<#if totalPages gt 1 >
+<!-- paging, only if more than one result page -->
 	<!-- paging -->
 	<div class="container-fluid h4">
 		<div class="pagination pull-right">
@@ -86,8 +88,8 @@
 		</div>
 	</div>
 </fieldset>
-<!-- paging -->
 <script type="text/javascript">	
         $('#pagination-bottom').bootstrapPaginator(options);
 	</script>
+</#if>
 </@layout.myLayout>
