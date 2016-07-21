@@ -15,6 +15,8 @@
   <action name="TryToDeleteAccount"/>
   <command name="type" target="id=password" value="wrongPassword"/>
   <command name="clickAndWait" target="id=btnDeleteAccount"/>
+  <codecomment>validate</codecomment>
+  <command name="assertVisible" target="id=errorMessage"/>
   <command name="assertText" target="id=errorMessage" value="× The password you entered is incorrect. Please try again."/>
   <command name="assertElementPresent" target="id=formDeleteAccount"/>
 </testcase>

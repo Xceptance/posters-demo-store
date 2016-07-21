@@ -6,10 +6,12 @@
   <parameter name="productCount"/>
   <parameter name="productFinish"/>
   <parameter name="productSize"/>
-  <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerCartOverview"/>
-  <command name="assertText" target="id=productName@{index}" value="@{productName}"/>
-  <command name="assertValue" target="css=.productCount@{index}" value="@{productCount}"/>
-  <command name="assertText" target="id=productFinish@{index}" value="@{productFinish}"/>
-  <command name="assertText" target="id=productSize@{index}" value="@{productSize}"/>
+  <action name="goToCartOverview"/>
+  <command name="click" target="id=headerCartOverview"/>
+  <command name="clickAndWait" target="css=.goToCart"/>
+  <codecomment>validate selected product</codecomment>
+  <command name="assertText" target="css=#product0 .productName" value="@{productName}"/>
+  <command name="assertValue" target="css=#product0 .productCount" value="@{productCount}"/>
+  <command name="assertText" target="css=#product0 .productStyle" value="@{productFinish}"/>
+  <command name="assertText" target="css=#product0 .productSize" value="@{productSize}"/>
 </scriptmodule>

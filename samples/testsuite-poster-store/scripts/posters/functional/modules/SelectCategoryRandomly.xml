@@ -2,9 +2,10 @@
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
   <description>Selects one category randomly.</description>
   <action name="SelectCategoryRandomly"/>
-  <command name="storeXpathCount" target="//div[@id='sidebarNav']/ul/li" value="categoryCount"/>
+  <command name="storeXpathCount" target="//ul[@id='categoryMenu']/li" value="categoryCount"/>
   <command name="store" target="${RANDOM.Number(1,${categoryCount})}" value="categoryIndex"/>
-  <command name="storeText" target="css=.sidebar-nav li:nth-child(${categoryIndex}) a" value="categoryName"/>
-  <command name="clickAndWait" target="css=.sidebar-nav li:nth-child(${categoryIndex}) a"/>
-  <command name="assertText" target="id=titleCategoryName" value="${categoryName}"/>
+  <command name="storeXpathCount" target="//ul[@id='categoryMenu']/li[${categoryIndex}]/ul/li" value="subCategoryCount"/>
+  <command name="store" target="${RANDOM.Number(1,${subCategoryCount})}" value="subCategoryIndex"/>
+  <command name="click" target="//ul[@id='categoryMenu']/li[${categoryIndex}]/a"/>
+  <command name="clickAndWait" target="//ul[@id='categoryMenu']/li[${categoryIndex}]/ul/li[${subCategoryIndex}]/a"/>
 </scriptmodule>

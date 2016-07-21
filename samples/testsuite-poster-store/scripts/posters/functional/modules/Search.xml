@@ -8,8 +8,8 @@
   <command name="click" target="id=header-search-trigger">
     <comment>Cick the the search button to submit</comment>
   </command>
-  <command name="waitForElementPresent" target="id=searchText"/>
-  <command name="type" target="id=searchText" value="@{searchTerm}"/>
+  <command name="waitForElementPresent" target="id=header-menu-search"/>
+  <command name="type" target="id=s" value="@{searchTerm}"/>
   <command name="clickAndWait" target="id=btnSearch">
     <comment>Cick the the search button to submit</comment>
   </command>

@@ -8,32 +8,37 @@
     <parameter name="firstName" value="${firstName}"/>
   </module>
   <module name="posters.functional.modules.AddToCart"/>
-  <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerCartOverview"/>
-  <command name="storeText" target="id=productName0" value="product1Name"/>
-  <command name="assertText" target="id=btnCartOverview" value="regexp:.*1.*-.*"/>
+  <module name="posters.functional.modules.OpenCartOverview"/>
+  <command name="storeText" target="css=#product0 .productName" value="product1Name"/>
+  <command name="assertText" target="css=.headerCartProductCount" value="1"/>
   <module name="posters.functional.modules.Logout"/>
-  <command name="assertText" target="id=btnCartOverview" value="regexp:.*0.*-.*"/>
+  <command name="assertText" target="css=.headerCartProductCount" value="0"/>
   <module name="posters.functional.modules.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerCartOverview"/>
-  <command name="storeText" target="id=productName0" value="product2Name"/>
-  <command name="assertText" target="id=btnCartOverview" value="regexp:.*1.*-.*"/>
+  <module name="posters.functional.modules.OpenCartOverview"/>
+  <command name="storeText" target="css=#product0 .productName" value="product2Name"/>
+  <module name="posters.functional.modules.VerifyCartOverview">
+    <parameter name="productCount" value="1"/>
+  </module>
   <module name="posters.functional.modules.Login">
     <parameter name="email" value="${email}"/>
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
   <action name="GetMergedCart"/>
-  <command name="clickAndWait" target="id=headerCartOverview"/>
-  <command name="assertText" target="id=productName0" value="${product2Name}"/>
-  <command name="assertValue" target="css=.productCount0" value="1"/>
-  <command name="assertText" target="id=productName1" value="${product1Name}"/>
-  <command name="assertValue" target="css=.productCount1" value="1"/>
-  <command name="assertText" target="id=btnCartOverview" value="regexp:.*2.*-.*"/>
+  <module name="posters.functional.modules.OpenCartOverview"/>
+  <command name="assertText" target="css=#product0 .productName" value="${product2Name}"/>
+  <command name="assertValue" target="css=#product0 .productCount" value="1"/>
+  <command name="assertText" target="css=#product1 .productName" value="${product1Name}"/>
+  <command name="assertValue" target="css=#product1 .productCount" value="1"/>
+  <module name="posters.functional.modules.VerifyCartOverview">
+    <parameter name="productCount" value="2"/>
+  </module>
   <action name="RemoveProductFromCart"/>
-  <command name="click" target="id=btnRemoveProduct0"/>
+  <command name="clickAndWait" target="css=#product1 .btnRemoveProduct"/>
   <action name="RemoveProductFromCart"/>
-  <command name="click" target="id=btnRemoveProduct1"/>
-  <command name="waitForText" target="id=btnCartOverview" value="regexp:.*0.*-.*"/>
+  <command name="clickAndWait" target="css=#product0 .btnRemoveProduct"/>
+  <module name="posters.functional.modules.VerifyCartOverview">
+    <parameter name="productCount" value="0"/>
+  </module>
 </testcase>

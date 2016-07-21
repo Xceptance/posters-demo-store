@@ -10,19 +10,20 @@
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productSize" value="${productSize}"/>
   </module>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <module name="posters.functional.modules.VerifyCartSliderElement">
+  <command name="storeText" target="id=orderTotal" value="orderTotal">
+    <comment>totalPrice</comment>
+  </command>
+  <module name="posters.functional.modules.VerifyCartSliderElement" disabled="true">
     <parameter name="index" value="1"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productPrice" value="${productPrice}"/>
     <parameter name="productCount" value="1"/>
     <parameter name="productSize" value="${productSize}"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
+    <parameter name="totalPrice" value="${orderTotal}"/>
   </module>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="1"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
   <module name="posters.functional.modules.AddToCart"/>
   <module name="posters.functional.modules.VerifyCartItem">
@@ -32,8 +33,8 @@
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productSize" value="${productSize}"/>
   </module>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <module name="posters.functional.modules.VerifyCartSliderElement">
+  <command name="storeText" target="id=orderTotal" value="totalPrice"/>
+  <module name="posters.functional.modules.VerifyCartSliderElement" disabled="true">
     <parameter name="index" value="1"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productFinish" value="${productFinish}"/>
@@ -44,16 +45,18 @@
   </module>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="2"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
   <action name="UpdateProductCount"/>
-  <command name="type" target="css=.productCount0" value="3"/>
-  <command name="storeText" target="id=totalPrice" value="oldTotalPrice"/>
-  <command name="click" target="id=btnUpdateProdCount0"/>
-  <command name="waitForNotText" target="id=totalPrice" value="${oldTotalPrice}"/>
-  <command name="assertText" target="css=.productCount0" value="3"/>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <module name="posters.functional.modules.VerifyCartSliderElement">
+  <command name="storeText" target="id=orderTotal" value="oldOrderTotal"/>
+  <command name="type" target="css=#product0 .productCount" value="3"/>
+  <codecomment>clickUpdateButton</codecomment>
+  <command name="click" target="css=#product0 .btnUpdateProduct">
+    <comment>//tr[@id='product0']/td[3]/form/div/button[@class='btnUpdateProduct']</comment>
+  </command>
+  <command name="waitForNotText" target="id=orderTotal" value="${oldOrderTotal}"/>
+  <command name="assertText" target="css=#product0 .productCount" value="3"/>
+  <command name="storeText" target="id=orderTotal" value="totalPrice"/>
+  <module name="posters.functional.modules.VerifyCartSliderElement" disabled="true">
     <parameter name="index" value="1"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productFinish" value="${productFinish}"/>
@@ -64,28 +67,25 @@
   </module>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="4"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
   <action name="RemoveProduct"/>
-  <command name="click" target="id=btnRemoveProduct1"/>
-  <command name="waitForNotElementPresent" target="id=productName1"/>
-  <command name="assertText" target="css=.productCount0" value="3"/>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
+  <command name="clickAndWait" target="css=#product1 .btnRemoveProduct"/>
+  <command name="assertText" target="css=#product0 .productCount" value="3"/>
+  <command name="storeText" target="id=orderTotal" value="orderTotal"/>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="3"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
   <action name="ShowProductOfCart"/>
-  <command name="storeText" target="id=productName0" value="productName"/>
-  <command name="storeText" target="id=productFinish0" value="productFinish"/>
+  <command name="storeText" target="css=#product0 .productName" value="productName"/>
+  <command name="storeText" target="css=#product0 .productStyle" value="productFinish"/>
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="assertText" target="id=titleProductName" value="${productName}"/>
   <action name="AddSameProduct"/>
-  <command name="check" target="//div[@id='selectFinish']/label[${finishIndex}+1]/input"/>
+  <command name="check" target="//div[@id='selectFinish']/div[@class='radio'][${finishIndex}+1]/label/input"/>
   <command name="select" target="id=selectSize" value="label=${productSize}"/>
   <command name="click" target="id=btnAddToCart"/>
-  <command name="waitForVisible" target="//ul[@id='cartSliderElementList']/li"/>
-  <command name="waitForNotVisible" target="//ul[@id='cartSliderElementList']/li"/>
+  <command name="waitForVisible" disabled="true" target="//ul[@id='cartSliderElementList']/li"/>
+  <command name="waitForNotVisible" disabled="true" target="//ul[@id='cartSliderElementList']/li"/>
   <module name="posters.functional.modules.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -93,18 +93,17 @@
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productSize" value="${productSize}"/>
   </module>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
-  <module name="posters.functional.modules.VerifyCartSliderElement">
+  <command name="storeText" target="id=orderTotal" value="orderTotal"/>
+  <module name="posters.functional.modules.VerifyCartSliderElement" disabled="true">
     <parameter name="index" value="1"/>
     <parameter name="productName" value="${productName}"/>
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productPrice" value="${productPrice}"/>
     <parameter name="productCount" value="4"/>
     <parameter name="productSize" value="${productSize}"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
+    <parameter name="totalPrice" value="${orderTotal}"/>
   </module>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="4"/>
-    <parameter name="totalPrice" value="${totalPrice}"/>
   </module>
 </testcase>

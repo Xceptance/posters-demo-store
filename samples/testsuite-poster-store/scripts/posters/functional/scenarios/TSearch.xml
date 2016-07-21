@@ -2,20 +2,6 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080/">
   <description>Simulates storefront search.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
-  <action name="Search-NoHits"/>
-  <command name="store" target="${searchTerm_noHits}" value="searchTerm">
-    <comment>Store a search phrase that does not return any search results</comment>
-  </command>
-  <module name="posters.functional.modules.Search">
-    <comment>Execute the search (module call)</comment>
-    <parameter name="searchTerm" value="${searchTerm_noHits}"/>
-  </module>
-  <command name="assertElementPresent" target="id=errorMessage">
-    <comment>Assert presence of info maessage element</comment>
-  </command>
-  <command name="assertText" target="xpath=id('errorMessage')/div/strong" value="*Sorry! No results found matching your search. Please try again.*">
-    <comment>Validate the 'no results' message</comment>
-  </command>
   <action name="Search"/>
   <command name="store" target="${searchTerm_hits}" value="searchTerm">
     <comment>Store a search phrase that gives results</comment>

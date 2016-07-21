@@ -4,6 +4,6 @@
   <action name="Logout"/>
   <command name="assertElementPresent" target="id=btnShowLoginForm"/>
   <command name="click" target="css=#showLoginForm"/>
-  <command name="waitForElementPresent" target="css=.userMenu"/>
-  <command name="clickAndWait" target="id=goToLogout"/>
+  <command name="waitForElementPresent" target="id=userMenu"/>
+  <command name="clickAndWait" target="css=.goToLogout"/>
 </scriptmodule>

@@ -4,9 +4,9 @@
   <module name="posters.functional.modules.OpenHomepage"/>
   <module name="posters.functional.modules.AddToCart"/>
   <action name="OpenCartOverview"/>
-  <command name="clickAndWait" target="id=headerCartOverview"/>
+  <module name="posters.functional.modules.OpenCartOverview"/>
   <action name="StartCheckout"/>
-  <command name="storeText" target="id=totalPrice" value="totalPrice"/>
+  <command name="storeText" target="id=orderTotal" value="totalPrice"/>
   <command name="clickAndWait" target="id=btnStartCheckout"/>
   <action name="EnterShippingAddress"/>
   <command name="assertElementPresent" target="id=titleDelAddr"/>
@@ -51,10 +51,15 @@
     <parameter name="productSize" value="${productSize}"/>
   </module>
   <module name="posters.functional.modules.VerifyAddressAndPaymentOfOrder">
-    <parameter name="fullName" value="${fullName}"/>
-    <parameter name="company" value="${company}"/>
-    <parameter name="address" value="${address}"/>
-    <parameter name="city" value="${city}"/>
+    <parameter name="billFullName" value="${fullName}"/>
+    <parameter name="shipFullName" value="${fullName}"/>
+    <parameter name="ccFullName" value="${fullName}"/>
+    <parameter name="billCompany" value="${company}"/>
+    <parameter name="shipCompany" value="${company}"/>
+    <parameter name="billAddress" value="${address}"/>
+    <parameter name="shipAddress" value="${address}"/>
+    <parameter name="billCity" value="${city}"/>
+    <parameter name="shipCity" value="${city}"/>
     <parameter name="state" value="${state}"/>
     <parameter name="zip" value="${zip}"/>
     <parameter name="country" value="${country}"/>
@@ -64,5 +69,5 @@
   </module>
   <command name="clickAndWait" target="id=btnOrder"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="id=btnCartOverview" value="regexp:.*0.*0.*"/>
+  <command name="assertText" target="css=.headerCartProductCount" value="0"/>
 </testcase>

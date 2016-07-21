@@ -4,6 +4,6 @@
   <action name="OpenLoginForm"/>
   <command name="assertElementPresent" target="id=btnShowLoginForm"/>
   <command name="click" target="css=#showLoginForm"/>
-  <command name="waitForElementPresent" target="css=.userMenu"/>
-  <command name="clickAndWait" target="id=goToLogin"/>
+  <command name="waitForElementPresent" target="id=userMenu"/>
+  <command name="clickAndWait" target="css=#userMenu .goToLogin"/>
 </scriptmodule>

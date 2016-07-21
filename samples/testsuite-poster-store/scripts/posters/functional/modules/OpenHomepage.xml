@@ -5,5 +5,5 @@
   <command name="open" value="/posters"/>
   <command name="deleteCookie" target="NINJA_SESSION"/>
   <command name="open" value="/posters"/>
-  <command name="assertElementPresent" target="id=titleIndex"/>
+  <command name="assertElementPresent" disabled="true" target="id=titleIndex"/>
 </scriptmodule>

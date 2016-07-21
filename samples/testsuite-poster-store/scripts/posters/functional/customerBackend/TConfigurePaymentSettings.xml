@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Creates and deletes a credit card.</description>
+  <command name="store" target="xxxx xxxx xxxx 1111" value="creditCardNumberClean"/>
   <module name="posters.functional.modules.OpenHomepage"/>
+  <module name="posters.functional.modules.CreateRandomUser"/>
   <module name="posters.functional.modules.Login">
-    <parameter name="email" value="${email}"/>
+    <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
@@ -11,7 +13,6 @@
   <action name="OpenPaymentSettings"/>
   <command name="clickAndWait" target="id=linkPaymentOverview"/>
   <command name="assertElementPresent" target="id=titlePaymentOverview"/>
-  <command name="assertText" target="//*[@id='payment0']/address" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
   <action name="OpenFormToAddNewCreditCard"/>
   <command name="clickAndWait" target="id=linkAddNewPayment"/>
   <module name="posters.functional.modules.FillInPaymentForm">
@@ -23,9 +24,12 @@
   <action name="AddNewCreditCard"/>
   <command name="clickAndWait" target="id=btnAddPayment"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="//*[@id='payment1']/address" value="regexp:.*${fullName}.*${creditCardCryptic}.*${expDateMonth} ${expDateYear}"/>
+  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div[contains(@class,'paymentName')]" value="${fullName}"/>
+  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div[contains(@class,'paymentCardNumber')]" value="${creditCardNumberClean}"/>
+  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div/span[@class='expMonth']" value="${expDateMonth}"/>
+  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div/span[@class='expYear']" value="${expDateYear}"/>
   <action name="DeleteCreditCard"/>
-  <command name="clickAndWait" target="id=btnDeletePayment1"/>
+  <command name="clickAndWait" target="//li[@id='payment0']/form/button[contains(@class,'btnDeletePayment')]"/>
   <command name="type" target="id=password" value="${password}"/>
   <action name="ConfirmDeletion"/>
   <command name="clickAndWait" target="id=btnDeletePayment"/>

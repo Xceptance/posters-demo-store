@@ -7,9 +7,11 @@
   <parameter name="productFinish"/>
   <parameter name="productSize"/>
   <command name="assertElementPresent" target="id=titleOrderOverview"/>
-  <command name="assertElementPresent" target="id=product0"/>
-  <command name="assertText" target="id=product@{index}Name" value="@{productName}"/>
-  <command name="assertText" target="id=product@{index}Count" value="@{productCount}"/>
-  <command name="assertText" target="id=product@{index}Finish" value="@{productFinish}"/>
-  <command name="assertText" target="id=product@{index}Size" value="@{productSize}"/>
+  <command name="assertElementPresent" target="//table[@id='checkoutOverviewTable']/tbody/tr[last()]"/>
+  <command name="assertText" target="//tr[last()]/td[2]/div/div[@class='pName']" value="@{productName}">
+    <comment>div[@class=pName]/</comment>
+  </command>
+  <command name="assertText" target="//tr[last()]/td[@class='pCount']" value="@{productCount}"/>
+  <command name="assertText" target="//tr[last()]/td[2]/div/div[3]/small/ul/li[1]/span[@class='pStyle']" value="@{productFinish}"/>
+  <command name="assertText" target="//tr[last()]/td[2]/div/div[3]/small/ul/li[2]/span[@class='pSize']" value="@{productSize}"/>
 </scriptmodule>
