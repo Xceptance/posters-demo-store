@@ -76,6 +76,11 @@ public class PosterConstants
     public final String TEMPLATE_PAYMENT_METHOD_GUEST = "views/CheckoutController/paymentMethodGuest.ftl.html";
     
     /**
+     * The path to the template to the order confirmation page.
+     */
+    public final String TEMPLATE_ORDER_CONFIRMATION_PAGE = "views/CheckoutController/orderConfirmation.ftl.html";
+        
+    /**
      * The path to the registration template.
      */
     public final String TEMPLATE_REGISTRATION = "views/CustomerController/registration.ftl.html";

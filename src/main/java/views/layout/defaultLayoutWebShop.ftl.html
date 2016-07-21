@@ -14,19 +14,19 @@
 <link href="${contextPath}/assets/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
-<link href="${contextPath}/assets/css/cartSlider.css" rel="stylesheet" />
+<link href="${contextPath}/assets/css/posterMiniCart.css" rel="stylesheet" />
 
 <link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon"
 	type="image/x-icon">
 
-<script src="${contextPath}/assets/js/jquery-1.12.3.min.js"></script>
+<script src="${contextPath}/assets/js/jquery-2.2.4.min.js"></script>
 <script src="${contextPath}/assets/js/bootstrap.min.js"></script>
 <script src="${contextPath}/assets/js/bootstrap-paginator.min.js"></script>
 <script type="text/javascript">
 	var CONTEXT_PATH = '${contextPath}';
 </script>
-<script src="${contextPath}/assets/js/customCartSlider.js"></script>
-<script src="${contextPath}/assets/js/custom.js"></script>
+<script src="${contextPath}/assets/js/poster.js"></script>
+<script src="${contextPath}/assets/js/posterMiniCart.js"></script>
 </head>
 <body id="body">
 	<div id="wrapper">
@@ -40,47 +40,17 @@
 			"checkoutBreadcrumb.ftl.html"/></div>
 		</#if>
 		<!-- messages -->
-		<#if flash.error??>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#errorMessage").show();
-				$("#errorMessage div strong").html("${flash.error}");
-			});
-		</script>
-		</#if>
 		<div class="container-fluid" id="errorMessage">
 			<div class="text-center alert alert-danger">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
 		</div>
-		<#if flash.success??>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#successMessage").show();
-				$("#successMessage div strong").html("${flash.success}");
-			});
-		</script>
-		</#if>
 		<div class="container-fluid" id="successMessage">
 			<div class="text-center alert alert-success">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
 		</div>
-		<#if flash.info??>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#infoMessage").show();
-				$("#infoMessage div strong").html("${flash.info}");
-			});
-		</script>
-		</#if>
-		<!-- 
-		<div class="container-fluid" id="infoMessage">
-			<div class="text-center alert alert-info">
-				<a class="close" data-dismiss="alert" aria-label="close">×</a>
-			</div>
-		</div>
- -->
+
 		<!-- body -->
 		<div id="main">
 			<div class="container-fluid"><#nested/></div>
@@ -89,6 +59,31 @@
 
 	<!-- footer -->
 	<#include "footer.ftl.html"/>
+		<script src="${contextPath}/assets/js/poster.js"></script>
+		<#if flash.error??>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#errorMessage").show();
+				$("#errorMessage div strong").html("${flash.error}");
+			});
+		</script>
+		</#if>
+		<#if flash.success??>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#successMessage").show();
+				$("#successMessage div strong").html("${flash.success}");
+			});
+		</script>
+		</#if>
+		<#if flash.info??>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#infoMessage").show();
+				$("#infoMessage div strong").html("${flash.info}");
+			});
+		</script>
+		</#if>
 </body>
 </html>
 </#macro>
