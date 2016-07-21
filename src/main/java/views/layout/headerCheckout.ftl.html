@@ -28,45 +28,8 @@
 						class="glyphicon glyphicon-user"></span>
 				</a>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<div class="userMenu">
-							<!-- login -->
-							<#if isLogged == false>
-							<li><div class="userMenuHeader">${i18n('headerWelcomeGuest')}</div></li>
-							<li><div class="userMenuContent">
-									<a href="${applUrlHttps}/registration"
-										alt="${i18n('headerRegistration')}"
-										title="${i18n('headerRegistration')}"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="margin_left5"></span><span id="btnAccountNew"
-										class="text-primary">${i18n("headerRegistration")}</span>
-									</a>
-								</div></li>
-							<li><div class="userMenuContent">
-									<a id="btnShowLoginForm" href="${applUrlHttps}/login"
-										alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"><span
-										class="glyphicon glyphicon-log-in"></span> <span
-										class="margin_left5"></span><span id="btnAccountLogin"
-										class="text-primary">${i18n('headerLogin')}</span> </a>
-								</div></li> </#if> <#if isLogged == true>
-
-							<li><div class="userMenuHeader">${i18n('headerWelcome')}:
-									${customerFirstName}</div></li>
-							<li><div class="userMenuContent">
-									<a href="${applUrlHttps}/accountOverview"
-										title="${i18n('accountOverviewTitle')}"
-										alt="${i18n('accountOverviewTitle')}"><span
-										class="glyphicon glyphicon-info-sign"></span> <span
-										class="margin_left5"></span><span id="btnAccountOverview"
-										class="text-primary">${i18n("accountOverviewTitle")}</span></a>
-								</div></li>
-							<li><div class="userMenuContent">
-									<a href="${applUrlHttp}/logout" title="${i18n('headerLogout')}"
-										alt="${i18n('headerLogout')}"><span
-										class="glyphicon glyphicon-log-out"></span> <span
-										class="margin_left5"></span><span id="btnLogout"
-										class="text-primary">${i18n("headerLogout")}</span></a>
-								</div></li> </#if>
-						</div>
+						<div id="userMenu"><#include
+							'../form/userMenuForm.ftl.html'/></div>
 					</ul>
 			</ul>
 		</div>

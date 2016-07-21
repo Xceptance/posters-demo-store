@@ -1,32 +1,34 @@
-<div id="cartContainer">
-	<div id="slidingTopWrap">
-		<div id="slidingTopContent">
-			<div id="cartMiniWrap" class="cartMini">
-				<div class="cartMiniEmpty">${i18n("infoEmptyCartShort")}</div>
-				<div class="cartMiniHeader">
-					<strong><span class="cartMiniCartProductCounter">${cartProductCount}</span></strong> <#if cartProductCount != 1 >
-					${i18n("cartSliderItems")} <#else> ${i18n("cartSliderItem")} </#if>
-				</div>
-				<div id="cartSliderItemsWrap" class="cartMiniProducts">
-					<ul id="cartSliderElementList" class="list-unstyled">
-					</ul>
-				</div>
-				<div class="cartMiniTotal">
+<div id="cartMiniWrap" class="cartMini">
+	<div class="cartMiniEmpty">${i18n("infoEmptyCartShort")}</div>
 
-					<div class="cartMiniSubOrderTotal row">
-						<div class="col-sm-7 text-left labelText">${i18n("cartTableHeaderSubOrderPrice")}</div>
-						<div class="col-sm-5 text-right value">
-							<div id="cartMiniTotalSubOrderPrice" class="subOrderPrice"></div>
-						</div>
-					</div>
+	<div class="cartMiniHeader">
+		<strong><span class="cartMiniCartProductCounter">${cartProductCount}</span></strong>
+		<#if cartProductCount == 1 >
+			${i18n("miniCartItem")} 
+		<#else>
+		${i18n("miniCartItems")} </#if>
+	</div>
 
-					<div class="linkButton">
-						<a href="${applUrlHttp}/cart" class="btn btn-primary form-control goToCart">${i18n("cartOverviewTitle")}</a>
-						<span id="notificationsLoader"></span>
-					</div>
-				</div>
+	<div id="cartMiniElementListWrap">
+		<ul id="cartMiniElementList" class="list-unstyled">
+		</ul>
+	</div>
+
+	<div class="cartMiniTotal">
+
+		<div class="cartMiniSubOrderTotal row">
+			<div class="col-sm-7 text-left labelText">${i18n("cartTableHeaderSubOrderPrice")}</div>
+			<div class="col-sm-5 text-right value">
+				<div id="cartMiniTotalSubOrderPrice" class="subOrderPrice"></div>
 			</div>
 		</div>
-	</div>
-</div>
 
+		<div class="linkButton">
+			<a href="${applUrlHttp}/cart"
+				class="btn btn-primary form-control goToCart">${i18n("cartOverviewTitle")}</a>
+			<span id="notificationsLoader"></span>
+		</div>
+
+	</div>
+
+</div>
