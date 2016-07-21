@@ -61,10 +61,15 @@ public class CartController
         final double subOrderTotalTax = xcpConf.TAX * subOrderTotal;
         final double orderTotal = subOrderTotal + subOrderTotalTax + xcpConf.SHIPPING_COSTS;
 
-        data.put("tax", xcpConf.TAX);
-        data.put("shippingCosts",getDoubleAsString(xcpConf.SHIPPING_COSTS));
+        // add tax in percent
+        data.put("tax", (xcpConf.TAX * 100));
+        // add SHIPPING_COSTS
+        data.put("shippingCosts", getDoubleAsString(xcpConf.SHIPPING_COSTS));
+        // add sub order total price
         data.put("subOrderTotal", getDoubleAsString(subOrderTotal));
-        data.put("subOrderTotalTax", getDoubleAsString(subOrderTotalTax ));
+        // add sub total tax
+        data.put("subOrderTotalTax", getDoubleAsString(subOrderTotalTax));
+        // add total price
         data.put("orderTotal", getDoubleAsString(orderTotal));
 
         return Results.html().render(data).template(xcpConf.TEMPLATE_CART_OVERVIEW);
@@ -128,19 +133,17 @@ public class CartController
             }
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
-            // add totalPrice
-            //result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
             // add currency
             result.render("currency", xcpConf.CURRENCY);
             // add unit of length
             result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-            // add unit of length
-            result.render("tax", xcpConf.TAX);
+            // add tax in percent
+            result.render("tax", (xcpConf.TAX * 100));
             // add SHIPPING_COSTS
             result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
-            // add sub total price
+            // add sub order total price
             result.render("subOrderTotal", cart.getTotalPriceAsString());
-            // add sub total price
+            // add sub total tax
             result.render("subOrderTotalTax", xcpConf.TAX);
             // add total price
             result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
@@ -187,7 +190,7 @@ public class CartController
         return result;
     }
 
-    /**
+    /**result.render("tax", (xcpConf.TAX * 100));
      * Adds one product to the cart.
      * 
      * @param productId
@@ -216,12 +219,11 @@ public class CartController
         final Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("productName", cartProduct.getProduct().getName());
- //       updatedProduct.put("productDescription", cartProduct.getSize()); //@TODO
- //       updatedProduct.put("productImageSrc", cartProduct.getPriceAsString());//@TODO
         updatedProduct.put("productId", cartProduct.getProduct().getId());
         updatedProduct.put("productPrice", cartProduct.getPriceAsString());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", cartProduct.getSize());
+
         // add product to result
         result.render("product", updatedProduct);
         // add new header to result
@@ -230,8 +232,8 @@ public class CartController
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add unit of length
-        result.render("tax", xcpConf.TAX);
+        // add tax in percent
+        result.render("tax", (xcpConf.TAX * 100));
         // add SHIPPING_COSTS
         result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
         // add sub total price
@@ -240,7 +242,7 @@ public class CartController
         result.render("subOrderTotalTax", xcpConf.TAX);
         // add total price
         result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
-        
+
         return result;
     }
 
@@ -265,16 +267,15 @@ public class CartController
             cart.removeProduct(cartProduct);
         }
         final Result result = Results.json();
+
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
-        // add totalPrice
-        //result.render("totalPrice", xcpConf.CURRENCY + cart.getTotalPriceAsString());
         // add currency
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add unit of length
-        result.render("tax", xcpConf.TAX);
+        // add tax in percent
+        result.render("tax", (xcpConf.TAX * 100));
         // add SHIPPING_COSTS
         result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
         // add sub total price
@@ -326,7 +327,13 @@ public class CartController
         headerCartOverview.append(cart.getProductCount());
         return headerCartOverview.toString();
     }
-    
+
+    /**
+     * convert double into (price) string
+     * 
+     * @param price
+     * @return
+     */
     public String getDoubleAsString(final double value)
     {
         final DecimalFormat f = new DecimalFormat("#0.00");
