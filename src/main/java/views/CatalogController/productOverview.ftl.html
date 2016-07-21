@@ -29,9 +29,9 @@
 	<legend>
 		<div class="container-fluid">
 			<#if category??>
-			<div id="titleCategoryName" class="h2">${category.name}</div>
+			<div id="titleCategoryName" class="h2">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if searchText??>
-			<div id="titleSearchText" class="h2">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>'</div>
+			<div id="titleSearchText" class="h2">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if noResults??>
 			<div id="titleNoResults" class="h2">${noResults}</div>
 			</#if>

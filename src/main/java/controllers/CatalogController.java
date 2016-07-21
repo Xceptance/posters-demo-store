@@ -183,6 +183,9 @@ public class CatalogController
         final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
         final List<Product> list = page.getList();
+        
+        final int totalProductCount = pagingList.getTotalRowCount();
+        
         // remove some informations of the product list, to render a small-sized json-object
         for (int i = 0; i < list.size(); i++)
         {
@@ -199,5 +202,6 @@ public class CatalogController
         // add the page count to the data map
         data.put("totalPages", pageCount);
         data.put("currentPage", pageNumber);
+        data.put("totalProductCount", totalProductCount);
     }
 }

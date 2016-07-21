@@ -90,7 +90,7 @@ public class SearchController
      * @param pageNumber
      * @param context
      * @return
-     */
+     */                //data.put("productCounter", products.size());
     public Result getProductOfSearch(@Param("searchText") final String searchText, @Param("page") final int pageNumber,
                                      final Context context)
     {
@@ -162,6 +162,8 @@ public class SearchController
         }
         // add the page count to the data map
         data.put("totalPages", Math.ceil(totalProductCount / (double) pageSize));
+        
+        data.put("totalProductCount", totalProductCount);
 
         query.cancel();
 
