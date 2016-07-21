@@ -1,3 +1,14 @@
+$(document).ready(function() {
+	$('#header-search-trigger').click(function() {
+		$('#header-menu-search').css('display', 'block');
+		$('#header-search-trigger').css('display', 'none');
+	});
+	$('#btnSearch').click(function() {
+		$('#header-menu-search').css('display', 'none');
+		$('#header-search-trigger').css('display', 'block');
+	});
+});
+
 $(document).ready(hideMessages);
 
 function hideMessages() {

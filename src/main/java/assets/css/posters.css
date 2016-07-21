@@ -10,6 +10,11 @@
 	margin-left: 5px;
 }
 
+.titleShopText {
+	font-size: 1.8em;
+	margin-top: 5px;
+}
+
 #header a {
 	text-decoration: none;
 }
@@ -23,7 +28,7 @@
 	background-color: #eee;
 }
 
-#brand img {
+.shopLogo, .shopLogoMobile {
 	width: 55px;
 	margin-left: 5px;
 }
@@ -155,21 +160,21 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .header-menu-search {
 	margin-right: 5px;
 	margin-left: 1px;
-	margin-top: 9px
+	margin-top: 9px;
 }
 
-.userMenu{
+#userMenu {
 	width: 200px;
 	padding: 10px 20px;
 }
+
 .userMenuContent {
 	padding: 5px 0;
 }
 
 .userMenuHeader {
-	padding: 0 0 5px 0;
+	margin: 10px 0;
 }
-
 
 .carousel a {
 	color: #ffffff;
@@ -178,6 +183,12 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 
 #productList .thumbnail {
 	padding-top: 0;
+}
+.productName{
+	font-weight: bold;
+}
+#btnCartOverviewForm {
+	padding-right: 0;
 }
 
 footer {
