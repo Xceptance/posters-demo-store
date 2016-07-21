@@ -7,7 +7,7 @@
 			<!-- print shipping address -->
 			<li class="col-md-4">
 				<h3>${i18n("titleShippingAddress")}</h3>
-				<address id="delAddr">
+				<address id="shippingAddr">
 					<ul class="list-unstyled container-fluid address">
 						<li class="name" title="${i18n('addressFullName')}"><strong>${order.shippingAddress.name}</strong></li>
 						<li class="company" title="${i18n('addressCompany')}">${order.shippingAddress.company}</li>
@@ -22,7 +22,7 @@
 			<!-- print billing address -->
 			<li class="col-md-4">
 				<h3>${i18n("titleBillingAddress")}</h3>
-				<address id="billAddr">
+				<address id="billingAddr">
 					<ul class="list-unstyled container-fluid address">
 						<li class="name" title="${i18n('addressFullName')}"><strong>${order.billingAddress.name}</strong></li>
 						<li class="company" title="${i18n('addressCompany')}">${order.billingAddress.company}</li>
@@ -64,7 +64,7 @@
 			<#list orderProducts as orderProduct>
 			<tr id="product${orderProduct_index}">
 				<td>
-					<div class="visible-xs">
+					<div class="visible-xs pNameMobile">
 						<strong>${orderProduct.product.name}</strong>
 					</div> <a
 					href="productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img
@@ -74,36 +74,36 @@
 					<div class="visible-xs">
 						<div class="text-left">
 							<small><ul class="list-unstyled">
-									<li>${i18n("cartStyle")}: ${orderProduct.finish}</li>
-									<li>${i18n("cartSize")}: ${orderProduct.size.width} x
-										${orderProduct.size.height} ${unitLength}</li>
+									<li>${i18n("cartStyle")}: <span class="pStyleMobile">${orderProduct.finish}</span></li>
+									<li>${i18n("cartSize")}: <span class="pSizeMobile">${orderProduct.size.width} x
+										${orderProduct.size.height} ${unitLength}</span></li>
 								</ul> </small>
 						</div>
 					</div>
 				</td>
 				<td>
 					<div class="hidden-xs">
-						<div id="product${orderProduct_index}Name">
+						<div class="pName">
 							<strong>${orderProduct.product.name}</strong>
 						</div>
-						<div id="product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</div>
+						<div id="pDescriptionOverview">${orderProduct.product.descriptionOverview}</div>
 						<div class="text-left">
 							<small><ul class="list-unstyled">
 									<li>${i18n("cartStyle")}: <span
-										id="product${orderProduct_index}Finish">${orderProduct.finish}</span></li>
+										class="pStyle">${orderProduct.finish}</span></li>
 									<li>${i18n("cartSize")}: <span
-										id="product${orderProduct_index}Size">${orderProduct.size.width}
+										class="pSize">${orderProduct.size.width}
 											x ${orderProduct.size.height} ${unitLength}</span></li>
 								</ul> </small>
 						</div>
 					</div>
 				</td>
-				<td id="product${orderProduct_index}Count">${orderProduct.productCount}</td>
-				<td id="product${orderProduct_index}Price">
-					<div class="value text-right">${currency}${orderProduct.getPriceAsString()}</div>
+				<td class="pCount">${orderProduct.productCount}</td>
+				<td class="pPrice">
+					<div class="text-right">${currency}${orderProduct.getPriceAsString()}</div>
 				</td>
-				<td id="product${orderProduct_index}LineItemPrice"><div
-						class="value text-right">${currency}${orderProduct.getProductLineItemPriceAsString()}</div></td>
+				<td class="productLineItemPrice"><div
+						class="text-right">${currency}${orderProduct.getProductLineItemPriceAsString()}</div></td>
 			</tr>
 			</#list>
 		</tbody>

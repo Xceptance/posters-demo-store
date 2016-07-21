@@ -7,10 +7,10 @@
 	<#if (0 < cartProducts?size) >
 	<table id="cartOverviewTable" class="table" table-bordered>
 		<thead class="bgLightGrey">
-			<th colspan="2"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
-			<th colspan="2">${i18n("cartTableHeaderQuantity")}</th>
-			<th class="text-right">${i18n("cartTableHeaderUnitPrice")}</th>
-			<th class="text-right">${i18n("cartTableHeaderSubOrderPrice")}</th>
+			<th colspan="2" title="${i18n('cartTableHeaderItem')}"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
+			<th colspan="1" title="${i18n('cartTableHeaderQuantity')}">${i18n("cartTableHeaderQuantity")}</th>
+			<th class="text-right" title="${i18n('cartTableHeaderUnitPrice')}">${i18n('cartTableHeaderUnitPrice')}</th>
+			<th class="text-right" title="${i18n('cartTableHeaderSubOrderPrice')}">${i18n('cartTableHeaderSubOrderPrice')}</th>
 		</thead>
 		<tbody>
 			<#list cartProducts as cartProduct>
@@ -20,20 +20,21 @@
 					</div> <a
 					href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img
 						data-src="${contextPath}/assets/js/holder.js/150x100"
+						title="${cartProduct.product.descriptionOverview}"
 						alt="${cartProduct.product.descriptionOverview}"
 						src="${contextPath}${cartProduct.product.imageURL}" width="150"></img></a>
 					<div class="visible-xs">
 						<div class="text-left">
 							<small><ul class="list-unstyled">
-									<li>${i18n("cartStyle")}: <span class="productStyle">${cartProduct.finish}</span></li>
-									<li>${i18n("cartSize")}: <span class="productSize">${cartProduct.size.width}
+									<li>${i18n("cartStyle")}: <span class="productStyleMobile">${cartProduct.finish}</span></li>
+									<li>${i18n("cartSize")}: <span class="productSizeMobile">${cartProduct.size.width}
 											x ${cartProduct.size.height} ${unitLength}</span></li>
 								</ul> </small>
 						</div>
 					</div></td>
 				<td><div class="hidden-xs">
-						<div class="productName">
-							<strong>${cartProduct.product.name}</strong>
+						<div class="productInfo">
+							<strong><div class="productName">${cartProduct.product.name}</div></strong>
 
 							<div class="productDescriptionOverview">${cartProduct.product.descriptionOverview}</div>
 							<div class="text-left">
@@ -55,25 +56,31 @@
 						<div class="form-group">
 							<input id="productCount${cartProduct_index}"
 								name="productCount${cartProduct_index}"
-								class="form-control productCount${cartProduct_index}"
+								class="form-control productCount"
+								title="${i18n('cartTableHeaderQuantity')}"
+								alt="${i18n('cartTableHeaderQuantity')}"
 								type="text" value=${cartProduct.productCount} size="3"
 								maxlength="3">
-							<button class="btn btn-link"
+							<button 
 								id="btnUpdateProdCount${cartProduct_index}"
+								class="btn btn-link btnUpdateProduct"
 								name="btnUpdateProdCount${cartProduct_index}"
+								title="${i18n('buttonUpdate')}"
+								alt="${i18n('buttonUpdate')}"
 								onclick="updateProductCount(${cartProduct.id}, $('#productCount${cartProduct_index}').val(), ${cartProduct_index})">
 								<span class="glyphicon glyphicon-repeat"></span>
 							</button>
-							<button class="btn btn-link"
-								id="btnRemoveProduct${cartProduct_index}"
+							<button class="btn btn-link btnRemoveProduct"account
+								id="btnRemoveProdCount${cartProduct_index}"
 								name="btnRemoveProduct${cartProduct_index}"
+								title="${i18n('buttonRemove')}"
+								alt="${i18n('buttonRemove')}"
 								onclick="deleteFromCart(${cartProduct.id}, ${cartProduct_index})">
 								<span class="glyphicon glyphicon-trash"></span>
 							</button>
 						</div>
 					</form>
 				</td>
-				<td></td>
 				<td>
 					<div class="productUnitPrice text-right">${currency}${cartProduct.getPriceAsString()}</div>
 				</td>
@@ -106,7 +113,7 @@
 				<!-- print tax -->
 				<li class="bgLightGrey2 row" id="tax">
 					<div class="col-xs-6 text-left">
-						${i18n("checkoutOvervieSubTotalTax")} (${tax*100}%)</div>
+						${i18n("checkoutOvervieSubTotalTax")} (${tax}%)</div>
 					<div class="col-xs-6 text-right">
 						<span id="orderSubTotalTaxValue" class="value">${currency}${subOrderTotalTax}</span>
 					</div>
@@ -134,12 +141,12 @@
 		<div class="col-xs-12">
 			<div id="prodPrice" class="pull-right">
 				<a href="${applUrlHttps}/checkout" id="btnStartCheckout"
-					class="btn btn-primary">${i18n("cartOverviewStartCheckout")}</a>
+					class="btn btn-primary" title="${i18n('cartOverviewStartCheckout')}">${i18n("cartOverviewStartCheckout")}</a>
 			</div>
 		</div>
 	</div>
 	<#else>
-	<div class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+	<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
 	</#if>
 </fieldset>
 </@layout.myLayout>

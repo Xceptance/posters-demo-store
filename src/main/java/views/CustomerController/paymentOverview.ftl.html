@@ -10,14 +10,14 @@
       				<li class="col-xs-12 col-sm-8 col-md-4 thumbnail" id="payment${payment_index}">
       					<address>
 	      					<ul class="list-unstyled row container-fluid">
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4"><strong>${i18n("titleName")}:</strong></div><div class="col-xs-12 col-sm-6 col-md-8"><strong>${payment.name}</strong></div></li>
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-6 col-md-8">${payment.getCardNumberCryptic()}</div></li>
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8">${payment.getMonthLeadingZero()} ${payment.year}</div></li>
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4"><strong>${i18n("titleName")}:</strong></div><div class="col-xs-12 col-sm-6 col-md-8 paymentName"><strong>${payment.name}</strong></div></li>
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-6 col-md-8 paymentCardNumber">${payment.getCardNumberCryptic()}</div></li>
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8"><span class="expMonth">${payment.getMonthLeadingZero()}</span> <span class="expYear">${payment.year}</span></div></li>
 	      					</ul>
       					</address>
       					<form action="${contextPath}/confirmDeletePayment" method="post" class="container-fluid">
-							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}</button>
+							<input id="cardId${payment.id}" name="cardId" type="hidden" value=${payment.id}></input>
+							<button class="btn btn-danger btnDeletePayment" name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}</button>
 						</form>
       				</li>
 		<#if (payment_index + 1) % 3 ==0>
