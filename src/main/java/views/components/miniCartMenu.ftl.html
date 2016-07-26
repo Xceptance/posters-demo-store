@@ -7,12 +7,12 @@
 		${i18n("miniCartItems")} </#if>
 	</div>
 
-	<div id="cartMiniElementList">
+	<div id="cartMiniElementListWrap">
 
-			<ul id="cartMiniElementListWrap" class="list-unstyled">
+			<ul id="cartMiniElementList" class="list-unstyled">
 				
 				<#list cartProducts as product>
-				<li >
+				<li id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}">
 					<ul class="cartItems list-unstyled">
 						<li class="prodName">${product.product.name}</li>
 						<li>${i18n("cartTableHeaderQuantity")}: <span class="prodCount">${product.getProductCount()}</span> (<span

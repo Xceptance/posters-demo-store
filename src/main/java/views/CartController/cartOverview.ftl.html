@@ -56,7 +56,7 @@
 						<div class="form-group">
 							<input id="productCount${cartProduct_index}"
 								name="productCount${cartProduct_index}"
-								class="form-control productCount"
+								class="form-control text-right productCount"
 								title="${i18n('cartTableHeaderQuantity')}"
 								alt="${i18n('cartTableHeaderQuantity')}"
 								type="text" value=${cartProduct.productCount} size="3"
@@ -70,7 +70,7 @@
 								onclick="updateProductCount(${cartProduct.id}, $('#productCount${cartProduct_index}').val(), ${cartProduct_index})">
 								<span class="glyphicon glyphicon-repeat"></span>
 							</button>
-							<button class="btn btn-link btnRemoveProduct"account
+							<button class="btn btn-link btnRemoveProduct"
 								id="btnRemoveProdCount${cartProduct_index}"
 								name="btnRemoveProduct${cartProduct_index}"
 								title="${i18n('buttonRemove')}"

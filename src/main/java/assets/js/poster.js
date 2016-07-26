@@ -7,6 +7,7 @@ $(document).ready(function() {
 		$('#header-menu-search').css('display', 'none');
 		$('#header-search-trigger').css('display', 'block');
 	});
+	/*getMiniCartText();*/
 });
 
 $(document).ready(hideMessages);
@@ -27,7 +28,7 @@ function deleteFromCart(cartProductId, cartIndex) {
 		$("#headerCartOverview span").text(data.headerCartOverview);
 		// update total price
 		$("#totalPrice:first-child").text(data.totalPrice);
-		// update cart slider
+		// update mini cart
 		getCartSliderText();
 	});
 }
@@ -42,7 +43,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		$("#headerCartOverview span").text(data.headerCartOverview);
 		// update total price
 		$("#totalPrice:first-child").text(data.totalPrice);
-		// update cart slider
+		// update mini cart
 		getCartSliderText();
 		// update cart overview, if count was zero
 		if (count == 0) {

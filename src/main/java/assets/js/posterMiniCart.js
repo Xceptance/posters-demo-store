@@ -1,12 +1,53 @@
 function showCartSlider(show) {
 
-	getCartSliderText();
+	getMiniCartText();
 
 }
 
-function getCartSliderText() {
+function showMiniCart() {
 	var url = CONTEXT_PATH + '/getCartElementSlider';
-	$.get(url, updateCartSlider);
+	$.get(url, getMiniCartText);
+}
+
+function getMiniCartText() {
+
+	$("#notificationsLoader").html(
+			'<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
+	$('#cartMiniElementList').empty();
+	$
+			.ajax({
+				type : "GET",
+				url : CONTEXT_PATH + '/getCartElementSlider',
+				success : function(data) {
+
+					for (var i = 0; i < data.productsInCartList.length; i++) {
+
+						// create new <li> element
+						var inner = getCartSliderElementInnerHtml(
+								data.productsInCartList[i], data.currency,
+								data.unitLength);
+						var liElement = $(
+								"<li class='cartMiniProductsListItems'></li>")
+								.html(inner);
+
+						$("#cartMiniProductsList").prepend(liElement);
+
+					}
+
+					// update total sub Order Price
+					$('#cartMiniTotalSubOrderPrice').text(
+							data.currency + data.subOrderTotal);
+					$("#notificationsLoader").empty();
+
+					// update cart in header (counter)
+					$("#headerCartOverview span.headerCartProductCount").text(
+							data.headerCartOverview);
+					// update product counter in mini-cart
+					$("#cartMiniWrap span.cartMiniCartProductCounter").text(
+							data.headerCartOverview);
+				}
+			});
+
 }
 
 function updateCartSlider(data) {
@@ -15,19 +56,24 @@ function updateCartSlider(data) {
 	// add products to list
 	for (var i = 0; i < data.cartElements.length; i++) {
 
-		var inner = setCartSliderElementInnerHtml(data.cartElements[i],
+		var inner = getCartSliderElementInnerHtml(data.cartElements[i],
 				data.currency, data.unitLength);
-		var liElement = $("<li class='cartSliderElementListItems'></li>").html(
+		var liElement = $("<li class='cartMiniElementListItems'></li>").html(
 				inner);
 		$("#cartMiniElementList").append(liElement);
 	}
 
-	// update total price in cart slider
+	// update total price in mini-cart
 	$('#cartMiniTotalSubOrderPrice').text(data.currency + data.subOrderTotal);
 	// $('#cartProductCount').text(data.currency + data.subOrderTotal);
 }
 
-function setCartSliderElementInnerHtml(product, currency, unitLength) {
+function addToCart(productId, finish, size) {
+	/* add product to cart */
+	addToMiniCart(productId, finish, size);
+}
+
+function getMiniCartElementInnerHtml(product, currency, unitLength) {
 
 	return '<ul class="cartItems list-unstyled">' + '<li class="prodName">'
 			+ product.productName + '</li>'
@@ -39,33 +85,32 @@ function setCartSliderElementInnerHtml(product, currency, unitLength) {
 			+ product.productPrice + '</strong></div>' + '</li>' + '<ul>';
 }
 
-function addToCart(productId, finish, size) {
-	getCartSliderText();
-	addToCartSlider(productId, finish, size);
-}
-
-function addToCartSlider(productId, finish, size) {
+function addToMiniCart(productId, finish, size) {
 	$("#notificationsLoader").html(
 			'<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
-
+	/* $('#cartMiniElementList').empty(); */
 	$.ajax({
 		type : "GET",
 		url : CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId
 				+ '&finish=' + finish + '&size=' + size,
 		success : function(data) {
 			// create new <li> element
-			var liId = "productId" + data.product.productId
-					+ data.product.finish + data.product.size.width + "x"
-					+ data.product.size.height;
-			var inner = setCartSliderElementInnerHtml(data.product,
-					data.currency, data.unitLength);
+			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
+			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
 			var liElement = $("<li id='" + liId + "'></li>").html(inner);
-			if ($("#" + liId).length > 0) {
+			if( $("#" + liId).length > 0)
+			{
 				$("#" + liId).remove();
-				$("#cartSliderElementList").prepend(liElement);
-			} else {
-				$("#cartSliderElementList").prepend(liElement);
+				$("#cartMiniElementList").prepend(liElement);
 			}
+			else
+			{
+				$("#cartMiniElementList").prepend(liElement);
+			}
+			
+
+			$("#cartMiniElementList").prepend(liElement);
+
 			// update total sub Order Price
 			$('#cartMiniTotalSubOrderPrice').text(
 					data.currency + data.subOrderTotal);
@@ -78,6 +123,8 @@ function addToCartSlider(productId, finish, size) {
 			$("#cartMiniWrap span.cartMiniCartProductCounter").text(
 					data.headerCartOverview);
 
+			$('#miniCartMenu').dropdown().delay(1500).dropdown();
+			/*$('#miniCartMenu').fadeIn(200).delay(1500).fadeOut(200);*/
 		}
 	});
 }

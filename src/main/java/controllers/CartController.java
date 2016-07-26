@@ -61,6 +61,8 @@ public class CartController
         final double subOrderTotalTax = xcpConf.TAX * subOrderTotal;
         final double orderTotal = subOrderTotal + subOrderTotalTax + xcpConf.SHIPPING_COSTS;
 
+        // add currency
+        data.put("currency", xcpConf.CURRENCY);
         // add tax in percent
         data.put("tax", (xcpConf.TAX * 100));
         // add SHIPPING_COSTS
@@ -163,7 +165,7 @@ public class CartController
         // get cart by session
         final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
         // get all products of the cart
-        final List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+        final List<Map<String, Object>> cartElements = new ArrayList<Map<String, Object>>();
         final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
         // prepare just some attributes
         for (final CartProduct cartProduct : cartProducts)
@@ -175,22 +177,32 @@ public class CartController
             product.put("productPrice", cartProduct.getPriceAsString());
             product.put("finish", cartProduct.getFinish());
             product.put("size", cartProduct.getSize());
-            results.add(product);
+            cartElements.add(product);
         }
+
         final Result result = Results.json();
+
         // add products
-        result.render("cartElements", results);
+        result.render("productsInCartList", cartElements);
         // add currency
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
+        // add tax in percent
+        result.render("tax", (xcpConf.TAX * 100));
+        // add SHIPPING_COSTS
+        result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
         // add sub total price
         result.render("subOrderTotal", cart.getTotalPriceAsString());
-
+        // add sub total price
+        result.render("subOrderTotalTax", xcpConf.TAX);
+        // add total price
+        result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+        
         return result;
     }
 
-    /**result.render("tax", (xcpConf.TAX * 100));
+    /**
      * Adds one product to the cart.
      * 
      * @param productId

@@ -14,7 +14,8 @@
 <link href="${contextPath}/assets/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
-<link href="${contextPath}/assets/css/posterMiniCart.css" rel="stylesheet" />
+<link href="${contextPath}/assets/css/posterMiniCart.css"
+	rel="stylesheet" />
 
 <link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon"
 	type="image/x-icon">
@@ -28,18 +29,33 @@
 <script src="${contextPath}/assets/js/poster.js"></script>
 <script src="${contextPath}/assets/js/posterMiniCart.js"></script>
 </head>
-<body id="body">
-	<div id="wrapper">
+<body>
+	<div id="body-wrapper">
 		<!-- header -->
-		<div class="container-fluid"><#if checkout??> <#include
-			"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
-			</#if></div>
-		<!-- checkout breadcrumb -->
-		<#if checkout??>
+		<header>
+			<div class="container-fluid"><#if checkout??> <#include
+				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
+				</#if></div>
+		</header>
+		
+		<!-- main/content -->
+		<main>
+		
+		<!-- message: no java script -->
+		<noscript>
+			<div class="section">
+				<div class="container">
+					<div class="noscriptmsg card">
+						<p>${i18n('errorNoJavaScript')}</p>
+					</div>
+				</div>
+			</div>
+		</noscript>
+
+		<!-- checkout breadcrumb --> <#if checkout??>
 		<div class="container-fluid"><#include
-			"checkoutBreadcrumb.ftl.html"/></div>
-		</#if>
-		<!-- messages -->
+			"../components/checkoutBreadcrumb.ftl.html"/></div>
+		</#if> <!-- messages -->
 		<div class="container-fluid" id="errorMessage">
 			<div class="text-center alert alert-danger">
 				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
@@ -52,38 +68,37 @@
 		</div>
 
 		<!-- body -->
-		<div id="main">
-			<div class="container-fluid"><#nested/></div>
+		<div class="container-fluid" id="main">
+			<#nested/>
 		</div>
+		</main>
+		<!-- footer -->
+		<#include "footer.ftl.html"/>
 	</div>
 
-	<!-- footer -->
-	<#include "footer.ftl.html"/>
-		<script src="${contextPath}/assets/js/poster.js"></script>
-		<#if flash.error??>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#errorMessage").show();
-				$("#errorMessage div strong").html("${flash.error}");
-			});
-		</script>
-		</#if>
-		<#if flash.success??>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#successMessage").show();
-				$("#successMessage div strong").html("${flash.success}");
-			});
-		</script>
-		</#if>
-		<#if flash.info??>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#infoMessage").show();
-				$("#infoMessage div strong").html("${flash.info}");
-			});
-		</script>
-		</#if>
+	<script src="${contextPath}/assets/js/poster.js"></script>
+	<#if flash.error??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#errorMessage").show();
+			$("#errorMessage div strong").html("${flash.error}");
+		});
+	</script>
+	</#if> <#if flash.success??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#successMessage").show();
+			$("#successMessage div strong").html("${flash.success}");
+		});
+	</script>
+	</#if> <#if flash.info??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#infoMessage").show();
+			$("#infoMessage div strong").html("${flash.info}");
+		});
+	</script>
+	</#if>
 </body>
 </html>
 </#macro>
