@@ -11,33 +11,37 @@
 
 			<!-- Email input-->
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="email">${i18n("labelMyEmail")}
-				</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 control-label" for="email">${i18n("labelMyEmail")}*</label>
+				<div class="col-sm-9">
 					<input id="email" name="email"
 						placeholder="${i18n('registrationEmail')}" class="form-control"
-						required type="text"
+						type="text"
 						pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"
-						data-error="${i18n('errorValidEmail')}" value="${(email)!}">
+						data-error="${i18n('errorValidEmail')}" value="${(email)!}"
+						required>
 				</div>
 			</div>
 
 			<!-- Password input-->
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="password">${i18n("labelMyPassword")}
-				</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 control-label" for="password">${i18n("labelMyPassword")}*</label>
+				<div class="col-sm-9">
 					<input id="password" name="password"
 						placeholder="${i18n('registrationPassword')}" class="form-control"
-						required type="password">
+						type="password" required>
 				</div>
 			</div>
 
 			<!-- button -->
 			<div class="form-group">
-				<div class="col-sm-12">
-					<button id="btnSignIn" name="btnSignIn"
-						class="btn btn-primary pull-right" type="submit">${i18n("buttonSignIn")}</button>
+				<div class="col-sm-12 nopadding">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<span class="reqField pull-left textcolordarkgrey">*
+							${i18n('titleRequiredFields')}</span>
+						<button id="btnSignIn" class="btn btn-primary pull-right"
+							name="btnSignIn" type="submit">${i18n('buttonSignIn')}</button>
+					</div>
 				</div>
 			</div>
 

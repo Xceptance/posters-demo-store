@@ -1,6 +1,6 @@
 <!-- credit card number -->
 <div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="creditCardNumber">${i18n("titleNumber")}:</label>
+	<label class="col-xs-12 col-sm-3 control-label" for="creditCardNumber">${i18n("titleNumber")}*</label>
 	<div class="col-xs-12 col-sm-9">
 		<input id="creditCardNumber" class="form-control" name="creditCardNumber"
 			title="${i18n('paymentCardholderName')}"
@@ -14,7 +14,7 @@
 
 <!-- name -->
 <div class=form-group>
-	<label class="col-xs-12 col-sm-3 control-label" for="name">${i18n("paymentCardholderName")}:</label>
+	<label class="col-xs-12 col-sm-3 control-label" for="name">${i18n("paymentCardholderName")}*</label>
 	<div class="col-xs-12 col-sm-9">
 		<input id="name" class="form-control" name="name" type="text"
 			title="${i18n('paymentCardholderName')}"
@@ -24,10 +24,10 @@
 	</div>
 </div>
 
-<!-- Select expiration date -->
+<!-- select expiration date -->
 <div class="form-group">
 
-  <label class="col-xs-12 col-sm-3 control-label" for="expirationDate">${i18n('paymentExpiration')}:</label>
+  <label class="col-xs-12 col-sm-3 control-label" for="expirationDate">${i18n('paymentExpiration')}*</label>
   <div class="col-xs-12 col-sm-4">
     <select id="expirationDateMonth" name="expirationDateMonth" class="form-control" title="${i18n('paymentExpiration')}" alt="${i18n('paymentExpiration')}">
       	<#list 1..9 as i>

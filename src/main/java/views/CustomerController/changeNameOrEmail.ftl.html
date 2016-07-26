@@ -11,54 +11,59 @@
 
 			<!-- last name -->
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="lastName">${i18n("labelMyName")}:</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 control-label" for="lastName">${i18n("labelMyName")}*</label>
+				<div class="col-sm-9">
 					<input id="lastName" name="lastName"
 						placeholder="${i18n('registrationLastName')}" class="form-control"
-						required type="text" pattern="[A-Za-z\s]+"
-						data-error="${i18n('errorWrongName')}" value="${(customer.name)!}">
+						type="text" pattern="[A-Za-z\s]+"
+						data-error="${i18n('errorWrongName')}" value="${(customer.name)!}" required>
 				</div>
 			</div>
 
 			<!-- first name -->
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="firstName">${i18n("labelMyFirstName")}:</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 control-label" for="firstName">${i18n("labelMyFirstName")}*</label>
+				<div class="col-sm-9">
 					<input id="firstName" name="firstName"
 						placeholder="${i18n('registrationFirstName')}"
-						class="form-control" required type="text" pattern="[A-Za-z\s]+"
+						class="form-control" type="text" pattern="[A-Za-z\s]+"
 						data-error="${i18n('errorWrongName')}"
-						value="${(customer.firstName)!}">
+						value="${(customer.firstName)!}" required>
 				</div>
 			</div>
 
 			<!-- email -->
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="eMail">${i18n("labelMyEmail")}:</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 control-label" for="eMail">${i18n("labelMyEmail")}*</label>
+				<div class="col-sm-9">
 					<input id="eMail" name="eMail"
 						placeholder="${i18n('registrationEmail')}" class="form-control"
-						required type="email" data-error="${i18n('errorValidEmail')}"
-						value="${(customer.email)!}">
+						type="email" data-error="${i18n('errorValidEmail')}"
+						value="${(customer.email)!}" required>
 				</div>
 			</div>
 
 			<!-- password -->
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="password">${i18n("changeCustomerDetailEnterPassword")}:</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 control-label" for="password">${i18n("changeCustomerDetailEnterPassword")}*</label>
+				<div class="col-sm-9">
 					<input id="password" name="password"
 						placeholder="${i18n('registrationPassword')}" class="form-control"
-						required type="password">
+						type="password" required>
 				</div>
 			</div>
 
 			<!-- update button -->
 			<div class="form-group">
-				<div class="col-sm-12">
-					<button id="btnChangeNameEmail" name="btnChangeNameEmail"
-						class="btn btn-primary pull-right" type="submit">${i18n('changeCustomerDetailUpdateAccount')}</button>
+				<div class="col-sm-12 nopadding">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<span class="reqField pull-left textcolordarkgrey">*
+							${i18n('titleRequiredFields')}</span>
+						<button id="btnChangeNameEmail" class="btn btn-primary pull-right"
+							name="btnChangeNameEmail" type="submit">${i18n('changeCustomerDetailUpdateAccount')}</button>
+					</div>
 				</div>
 			</div>
 		</div>

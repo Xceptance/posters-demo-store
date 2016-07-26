@@ -7,14 +7,20 @@
 	<div id="orderOverview">
 		<table id="cartOverviewTable" class="table" table-bordered>
 			<thead class="bgLightGrey">
-				<th>order Information</th>
-				<th>order Products</th>
+				<th>${i18n("orderOverviewTabHeadOrderDetails")}</th>
+				<th>${i18n("orderOverviewTabHeadPurchasedPoster")}</th>
 			</thead>
 			<tbody>
 				<#list orderOverview as order>
 				<tr id="order${order_index}">
 					<td class="orderInfo">
+						<div class="orderDateTitle">
+							<strong>${i18n("orderOverviewOrderDate")}</strong>
+						</div>
 						<div class="orderDate">${order.orderDate}</div>
+						<div class="orderTotalCostsTitle">
+							<strong>${i18n("orderOverviewOrderTotal")}</strong>
+						</div>
 						<div class="orderTotalCosts">${currency}${order.getTotalCostsAsString()}</div>
 					</td>
 					<td class="orderProducts">
@@ -25,8 +31,8 @@
 									<td class="productImg"><a
 										href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img
 											data-src="${contextPath}/assets/js/holder.js/150x100"
-											title="${orderProduct.product.descriptionOverview}"
-											alt="${orderProduct.product.descriptionOverview}"
+											title="${orderProduct.product.name}"
+											alt="${orderProduct.product.name}"
 											src="${contextPath}${orderProduct.product.imageURL}"
 											width="150"></img></a></td>
 									<td class="productInfo">
@@ -42,7 +48,8 @@
 													</li>
 												</ul>
 											</small>
-										</div></td>
+										</div>
+									</td>
 									<td class="orderCount">${orderProduct.productCount}x</td>
 								</tr>
 								</#list>

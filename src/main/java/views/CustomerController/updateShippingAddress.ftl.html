@@ -1,21 +1,29 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop"> 
-	<form id="formUpdateDelAddr" class="form-horizontal" action="${contextPath}/updateShippingAddressCompleted" method="post">
-		<fieldset>
-			<!-- Form Name -->
-			<legend><h2>${i18n("updateShippingTitle")}</h2></legend>
-			<div class="col-md-8">
-				<!-- include form -->
-				<#include "../components/addressForm.ftl.html"/>
-				<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-				<!-- update -->
-				<div class="form-group">
-					<div class="col-sm-12">
-						<button type="submit" class="btn btn-primary pull-right" id="btnUpdateDelAddr"
-							name="btnUpdateDelAddr">${i18n('buttonSave')}</button>
+<@layout.myLayout "The ultimate webshop">
+<form id="formUpdateDelAddr" class="form-horizontal"
+	action="${contextPath}/updateShippingAddressCompleted" method="post">
+	<fieldset>
+		<!-- Form Name -->
+		<legend>
+			<h2>${i18n("updateShippingTitle")}</h2>
+		</legend>
+		<div class="col-md-12">
+			<!-- include form -->
+			<#include "../components/addressForm.ftl.html"/> <input
+				name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+			<!-- update -->
+			<div class="form-group">
+				<div class="col-sm-12 nopadding">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<span class="reqField pull-left textcolordarkgrey">*
+							${i18n('titleRequiredFields')}</span>
+						<button id="btnUpdateDelAddr" class="btn btn-primary pull-right"
+							name="btnUpdateDelAddr" type="submit">${i18n('buttonSave')}</button>
 					</div>
 				</div>
 			</div>
-		</fieldset>
-	</form>
+		</div>
+	</fieldset>
+</form>
 </@layout.myLayout>
