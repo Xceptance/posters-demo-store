@@ -3,11 +3,11 @@
 
 		<!-- add shipping address -->
 		<li id="btnToCard"><a href="${applUrlHttp}/cart">${i18n("titleCard")}</a>
-			<span class="divider"> > </span></li>
+			<span class="divider"></span></li>
 
 		<!-- add shipping address -->
 		<li id="btnShippAddr"><a href="enterShippingAddress">${i18n("titleShippingAddress")}</a>
-			<span class="divider"> > </span></li>
+			<span class="divider"></span></li>
 
 		<!-- add billing address -->
 		<#if billingAddressActive??>
@@ -15,7 +15,7 @@
 			href="${contextPath}/enterBillingAddress">${i18n("titleBillingAddress")}</a>
 			<#else>
 		<li id="btnBillAddr">${i18n("titleBillingAddress")} </#if> <span
-			class="divider"> > </span></li>
+			class="divider"></span></li>
 
 		<!-- add credit card -->
 		<#if creditCardActive??>
@@ -23,7 +23,7 @@
 			href="${contextPath}/enterPaymentMethod">${i18n("titlePayment")}</a>
 			<#else>
 		<li id="btnCreditCard">${i18n("titlePayment")} </#if> <span
-			class="divider"> > </span></li>
+			class="divider"></span></li>
 
 		<!-- place order -->
 		<#if placeOrderActive??>
