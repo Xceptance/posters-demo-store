@@ -28,6 +28,10 @@
 .cartItems {
 	border-bottom: 1px #EBEBEB solid;
 	padding: 5px 0;
+	margin: 0 20px;
+}
+.cartSliderElementListItems{
+	margin: 0 20px;
 }
 
 .emptyCartMsg {
