@@ -44,16 +44,16 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		// update total price
 		$("#totalPrice:first-child").text(data.totalPrice);
 		// update mini cart
-		getCartSliderText();
+		getMiniCartText();
 		// update cart overview, if count was zero
 		if (count == 0) {
 			// remove product from cart overview
 			$('#product' + cartIndex).remove();
 		}
 	}).error(function(data) {
-		var err = eval("(" + data.responseText + ")");
-		$("#infoMessage").show();
-		$("#infoMessage div strong").text(err.message);
+		var errMsg = eval("(" + data.responseText + ")");
+		$("#errorMessage").show();
+		$("#errorMessage div strong").text(errMsg.message);
 	});
 }
 

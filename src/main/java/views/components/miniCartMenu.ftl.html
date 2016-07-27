@@ -10,7 +10,9 @@
 	<div id="cartMiniElementListWrap">
 
 			<ul id="cartMiniElementList" class="list-unstyled">
-				
+			
+			<span id="notificationsLoader"></span>
+			
 				<#list cartProducts as product>
 				<li id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}">
 					<ul class="cartItems list-unstyled">
@@ -42,7 +44,6 @@
 		<div class="linkButton">
 			<a href="${applUrlHttp}/cart"
 				class="btn btn-primary form-control goToCart">${i18n("buttonGoToCart")}</a>
-			<span id="notificationsLoader"></span>
 		</div>
 
 	</div>

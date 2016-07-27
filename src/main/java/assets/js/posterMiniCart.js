@@ -98,6 +98,8 @@ function addToMiniCart(productId, finish, size) {
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
 			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
 			var liElement = $("<li id='" + liId + "'></li>").html(inner);
+			
+			/* exist product then replace, if not exist append product*/
 			if( $("#" + liId).length > 0)
 			{
 				$("#" + liId).remove();
@@ -108,23 +110,24 @@ function addToMiniCart(productId, finish, size) {
 				$("#cartMiniElementList").prepend(liElement);
 			}
 			
-
+			/* replace */
 			$("#cartMiniElementList").prepend(liElement);
 
-			// update total sub Order Price
+			/* update total sub Order Price */
 			$('#cartMiniTotalSubOrderPrice').text(
 					data.currency + data.subOrderTotal);
+			/* notification off */
 			$("#notificationsLoader").empty();
 
-			// update cart in header (counter)
+			/* update cart in header (counter) */
 			$("#headerCartOverview span.headerCartProductCount").text(
 					data.headerCartOverview);
-			// update product counter in mini-cart
+			/* update product counter in mini-cart */
 			$("#cartMiniWrap span.cartMiniCartProductCounter").text(
 					data.headerCartOverview);
 
-			$('#miniCartMenu').dropdown().delay(1500).dropdown();
-			/*$('#miniCartMenu').fadeIn(200).delay(1500).fadeOut(200);*/
+			/* not working correct*/
+			/*$('#miniCartMenu').dropdown("toggle").delay(1500).dropdown("toggle");*/
 		}
 	});
 }
