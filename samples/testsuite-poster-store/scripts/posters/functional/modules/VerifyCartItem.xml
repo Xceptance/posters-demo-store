@@ -10,9 +10,9 @@
   <command name="click" target="id=headerCartOverview"/>
   <command name="clickAndWait" target="css=.goToCart"/>
   <codecomment>validate selected product</codecomment>
-  <command name="assertElementPresent" target="css=#product{@{index}}"/>
-  <command name="assertText" target="css=#product{@{index}} .productName" value="@{productName}"/>
-  <command name="assertValue" target="css=#product{@{index}} .productCount" value="@{productCount}"/>
-  <command name="assertText" target="css=#product{@{index}} .productStyle" value="@{productFinish}"/>
-  <command name="assertText" target="css=#product{@{index}} .productSize" value="@{productSize}"/>
+  <command name="assertElementPresent" target="css=#product@{index}"/>
+  <command name="assertText" target="css=#product@{index} .productName" value="@{productName}"/>
+  <command name="assertValue" target="css=#product@{index} .productCount" value="@{productCount}"/>
+  <command name="assertText" target="css=#product@{index} .productStyle" value="@{productFinish}"/>
+  <command name="assertText" target="css=#product@{index} .productSize" value="@{productSize}"/>
 </scriptmodule>

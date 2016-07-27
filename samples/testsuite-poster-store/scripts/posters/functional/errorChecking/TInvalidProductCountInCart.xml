@@ -3,6 +3,7 @@
   <description>Verifies that an error is shown if the product count of the cart couldn't be updated.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <module name="posters.functional.modules.AddToCart"/>
+  <action name="OpenCartOverview"/>
   <module name="posters.functional.modules.OpenCartOverview"/>
   <action name="UpdateProductCount"/>
   <command name="assertValue" target="//input[@id='productCount0']" value="1"/>

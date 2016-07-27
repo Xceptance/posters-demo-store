@@ -12,7 +12,7 @@
   </command>
   <codecomment>validate</codecomment>
   <command name="assertVisible" target="id=errorMessage"/>
-  <command name="assertText" target="xpath=id('errorMessage')/div/strong" value="*Sorry! No results found matching your search. Please try again.*">
+  <command name="assertText" target="id=errorMessage" value="*Sorry! No results found matching your search. Please try again.*">
     <comment>Validate the 'no results' message</comment>
   </command>
 </testcase>

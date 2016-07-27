@@ -4,5 +4,6 @@
   <action name="OpenCartOverview"/>
   <command name="click" target="id=headerCartOverview"/>
   <command name="waitForElementPresent" target="id=miniCartMenu"/>
-  <command name="clickAndWait" target="css=.goToCart"/>
+  <action name="GoToCart"/>
+  <command name="clickAndWait" target="css=#miniCartMenu .goToCart"/>
 </scriptmodule>

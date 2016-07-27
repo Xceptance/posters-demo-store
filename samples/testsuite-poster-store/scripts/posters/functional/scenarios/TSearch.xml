@@ -19,6 +19,8 @@
   <command name="assertText" target="id=titleSearchText" value="glob:*Your results for your search: '${searchTerm_hits}'*">
     <comment>Validate the headline contains the search phrase</comment>
   </command>
+  <codecomment>validate result counter</codecomment>
+  <command name="assertText" target="id=totalProductCount" value="${resultProductCount}"/>
   <action name="ViewProduct"/>
   <command name="assertElementPresent" target="id=product0">
     <comment>Assert presence of one of the product thumbnails</comment>

@@ -81,7 +81,7 @@
   <command name="clickAndWait" target="//*[@id='product0']//img"/>
   <command name="assertText" target="id=titleProductName" value="${productName}"/>
   <action name="AddSameProduct"/>
-  <command name="check" target="//div[@id='selectFinish']/div[@class='radio'][${finishIndex}+1]/label/input"/>
+  <command name="check" target="//div[@id='selectStyle']/div[@class='radio'][${finishIndex}+1]/label/input"/>
   <command name="select" target="id=selectSize" value="label=${productSize}"/>
   <command name="click" target="id=btnAddToCart"/>
   <command name="waitForVisible" disabled="true" target="//ul[@id='cartSliderElementList']/li"/>
