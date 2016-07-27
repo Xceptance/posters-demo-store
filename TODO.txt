@@ -1,87 +1,15 @@
-Design
+# Bugs
 
-* Allgemein
-** Font? (X), color:#444
-** FLAT Design? z.B. Rundungen gegen Ecken tauschen
-** Fontsizes anpassen (h1, h2, h3) (X)
-** Call to action Buttons alle in der selben Farbe (blau -> btn-primary) (X)
-** Required kennzeichnen
-** i18n durchziehen
-** title tag uebergeben oder ausbauen (freemarker)
-** input fields button, links => title tag (Attribut)
+## cart
+open cart -> update "Quantity" -> wrong values and error msg is missing
+(add random product to cart with Quantity = 1, go to cart, enter eg. "22") 
 
-*Produktdetail 
-** AddToCart grün anstatt grau (X)
-** Beschreibung nicht fett (X)
-** Mehr Weißraum, wirkt gedrängt (X)
-*** Text könnte Bild umfließen (X)
-** Bildgrösse anpassen?
+## pdp
+after click on the addToCart button it doesn't show the minicart
+(posterMiniCart.js-> addToMiniCart)
 
-* Produktübersicht schöner
-** eine Höhe pro Zeile (X)
-** Rahmen gegen farbige Fläche austauschen? (X)
-** Feste Breite, wenn sichtbare Umfassung oder Bilder mit skalieren (X)
-** Produktnamen zu lang >> CSS ellipsis (X)
-** Paging oben und unten oder alternativ nur unten (X)
-** Preis rechtsbündig hevorgehoben  (X?)
-** Links vom Preis Zusatzinfo z.B Verfügbarkeit (gefaked)
-** Namen auch als Link zur Seite nutzen (X)
+# Suggestions
 
-*Header
-** Search-Box unrund (zu rund, vielleicht eine normales Input)
-** Reihenfolge
-** mobile Ansicht erweitern
-** mobile Ansicht die schwarzen divider anpassen
-** graue icons mittels CSS? (minor)
-** höhe anpassen der element
-*Mini-Cart
-** Oben Headline "Cart" einführen
-** Wording "View Cart" statt "Cart" und unten 
-** Cart-Overview wirkt nervös! Könnte schöner sein!
-** Leeren Cart Zustand einführen mit Infotext und ohne totals (Bedenke die Testfälle!)
-** Auch die zugeklappte Ansicht bedenken bei leeren Cart
-
-* Show-Cart-Bereich
-** non-breaking Space zwischen Größe und Einheit("in").
-** Bildgrößen "16 x 32" ohne Spaces? 
-** Buttons sind zu groß > Links daraus machen 
-** Anzahl rechtsbündig im input
-** Proceed to checkout als blauer Button
-** total: Schriftgröße ändern (entweder total price gross oder die anderen kleiner machen)
-
-* cardslider
-** beim hovern gib es noch probleme -> den das info feld , link ausrichten
-
-*Checkout
-** Breadcrumbs in den Context integrieren
-** Anordnung der Adressen und der Kreditkarte überdenken
-** bei angemeldeten usern die address mit abspeichern
-
-
-*Payment Settings
-** Expiration date auf das aktuelle Jahr setzten
-** Einteilung: 3 zu 4 bei date
-
-*Landing page
-** Slider Links farbe anpassen bzw hintergrund
-** Slider höher machen
-** Netter Fülltext/Willkommenstext da die Seite sonst so leer wirkt
-
-* Messagebox
-** Breite anpassen (X)
-
-Funktionalität
-
-* Page title anders? und aus messages.properties ziehen und nicht hardcoded im Template
-* Auf Show cart line item preis implementieren und ganz recht positioniern 
-* Order confirmation page anstatt message popup
-* Katalog-Navi wirklich immer anzeigen, auch auf Cart- und Account-Seiten? Nein!
-* Company nicht required im checkout
-* paging in die URL integrieren um die Browserhistory zu gewährleisten
-* Auf Hamburger-Menu verzichten, damit Testfälle auch auf mobilen Geräten unverändert laufen? Besser: If conditions nutzen!
-* Focus von Input Feldern nicht rot (Nur im Fehlerfall rot!) Anpassung überall. First focus state (minor)
-* Testfälle checken
-* Payment Settings -> Expiration date -> ein abgelaufenes Datum darf nicht auswaehlbar sein
-* address: use this address evl blau oder als select und continue anzeigen
-* Checkout: Header mit weniger Inhalt?
-* order confirmation page hinzufügen ?
+## checkout
+add order confirmation page
+add orderID in db
