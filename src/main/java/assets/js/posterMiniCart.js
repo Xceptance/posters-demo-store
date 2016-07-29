@@ -97,7 +97,7 @@ function addToMiniCart(productId, finish, size) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
 			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
-			var liElement = $("<li id='" + liId + "'></li>").html(inner);
+			var liElement = $("<li id='" + liId + "' class=\"miniCartItem\"></li>").html(inner);
 			
 			/* exist product then replace, if not exist append product*/
 			if( $("#" + liId).length > 0)

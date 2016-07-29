@@ -14,7 +14,7 @@
 			<span id="notificationsLoader"></span>
 			
 				<#list cartProducts as product>
-				<li id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}">
+				<li id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}" class="miniCartItem">
 					<ul class="cartItems list-unstyled">
 						<li class="prodName">${product.product.name}</li>
 						<li>${i18n("cartTableHeaderQuantity")}: <span class="prodCount">${product.getProductCount()}</span> (<span

@@ -7,8 +7,7 @@
   <parameter name="productFinish"/>
   <parameter name="productSize"/>
   <action name="goToCartOverview"/>
-  <command name="click" target="id=headerCartOverview"/>
-  <command name="clickAndWait" target="css=.goToCart"/>
+  <module name="posters.functional.modules.OpenCartOverview"/>
   <codecomment>validate selected product</codecomment>
   <command name="assertElementPresent" target="css=#product@{index}"/>
   <command name="assertText" target="css=#product@{index} .productName" value="@{productName}"/>

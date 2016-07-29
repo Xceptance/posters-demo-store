@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
+  <parameter name="index"/>
+  <parameter name="currency"/>
+  <parameter name="prodPrice"/>
+  <parameter name="subOrderPrice_varDynamic"/>
+  <command name="storeText" target="css=#product@{index} td .unitPriceShort" value="unitPriceShort_varDynamic"/>
+  <command name="storeText" target="css=#productCount@{index}" value="quantity_varDynamic"/>
+  <command name="storeEval" target=" &quot;$&quot;+${unitPriceShort_varDynamic} * ${quantity_varDynamic}" value="@{subOrderPrice_varDynamic}"/>
+</scriptmodule>

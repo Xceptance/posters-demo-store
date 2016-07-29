@@ -16,8 +16,4 @@
   <action name="AddProductToCart"/>
   <command name="click" target="id=btnAddToCart"/>
   <command name="storeText" target="id=prodPrice" value="productPrice"/>
-  <codecomment>validate mini-cart</codecomment>
-  <command name="waitForVisible" disabled="true" target="//ul[@id='cartMiniElementList']/li"/>
-  <command name="assertElementPresent" disabled="true" target="//ul[@id='cartSliderElementList']/li[1]"/>
-  <command name="waitForNotVisible" disabled="true" target="id=cartSliderElementList"/>
 </scriptmodule>
