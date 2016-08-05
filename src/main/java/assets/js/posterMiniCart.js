@@ -126,8 +126,10 @@ function addToMiniCart(productId, finish, size) {
 			$("#cartMiniWrap span.cartMiniCartProductCounter").text(
 					data.headerCartOverview);
 
-			/* not working correct*/
-			/*$('#miniCartMenu').dropdown("toggle").delay(1500).dropdown("toggle");*/
+			$('#headerCartOverview').dropdown("toggle");
+			window.setTimeout(function(){
+				$('#headerCartOverview').dropdown("toggle");
+			},1500);
 		}
 	});
 }

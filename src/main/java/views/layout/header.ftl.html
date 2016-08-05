@@ -89,11 +89,14 @@
 		<div class="col-sm-2 header-top-right">
 			<ul id="btnCartOverviewForm"
 				class="nav nav-pills header-menu-item col-xs-12">
-				<li role="presentation" class="dropdown"><a
-					id="headerCartOverview" class="dropdown-toggle"
+				<li class="dropdown" role="presentation">
+				<a
+					id="headerCartOverview" class="dropdown-toggle" data-target="#"
 					data-toggle="dropdown" href="#" alt="${i18n('cartOverviewTitle')}"
 					title="${i18n('cartOverviewTitle')}" role="button"
-					aria-haspopup="true" aria-expanded="false"> <span
+					aria-haspopup="true" aria-expanded="false"> 
+					
+					<span
 						class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span
 						class="headerCartProductCount">${cartProductCount}</span>
 				</a>
