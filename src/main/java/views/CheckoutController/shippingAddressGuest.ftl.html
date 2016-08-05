@@ -13,10 +13,11 @@
 		<#include "../components/addressForm.ftl.html"/>
 
 		<hr>
+
 		<!-- choose: shipping equals billing address -->
 		<div class="form-group">
 			<label class="col-sm-11 control-label text-right"
-				for="billEqualShipp">${i18n("shippingAddressEqualsBillingAddress")}?</label>
+				for="billEqualShipp">${i18n("shippingAddressEqualsBillingAddress")}?*</label>
 			<div class="col-sm-1">
 				<label for="billEqualShipp-Yes"> <input
 					name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
@@ -28,11 +29,18 @@
 			</div>
 		</div>
 
+		<hr>
+
 		<!-- continue button -->
 		<div class="form-group">
-			<div class="col-sm-12">
-				<button id="btnAddDelAddr" name="btnAddDelAddr"
-					class="btn btn-primary pull-right" type="submit">${i18n("buttonContinue")}</button>
+			<div class="col-sm-12 nopadding">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<span class="reqField pull-left textcolordarkgrey">*
+						${i18n('titleRequiredFields')}</span>
+					<button id="btnAddDelAddr" class="btn btn-primary pull-right"
+						name="btnAddDelAddr" type="submit">${i18n('buttonContinue')}</button>
+				</div>
 			</div>
 		</div>
 

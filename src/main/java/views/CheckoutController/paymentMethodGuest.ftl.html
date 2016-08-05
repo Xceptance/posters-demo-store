@@ -14,10 +14,16 @@
 
 		<!-- continue button -->
 		<div class="form-group">
-			<div class="col-sm-12">
-				<button id="btnAddPayment" name="btnAddPayment"
-					class="btn btn-primary pull-right" type="submit">${i18n("buttonContinue")}</button>
+			<div class="col-sm-12 nopadding">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<span class="reqField pull-left textcolordarkgrey">*
+						${i18n('titleRequiredFields')}</span>
+					<button id="btnAddPayment" class="btn btn-primary pull-right"
+						name="btnAddPayment" type="submit">${i18n('buttonContinue')}</button>
+				</div>
 			</div>
 		</div>
+	</form>
 </fieldset>
 </@layout.myLayout>
