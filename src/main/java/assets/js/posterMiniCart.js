@@ -23,7 +23,7 @@ function getMiniCartText() {
 					for (var i = 0; i < data.productsInCartList.length; i++) {
 
 						// create new <li> element
-						var inner = getCartSliderElementInnerHtml(
+						var inner = getMiniCartElementInnerHtml(
 								data.productsInCartList[i], data.currency,
 								data.unitLength);
 						var liElement = $(
