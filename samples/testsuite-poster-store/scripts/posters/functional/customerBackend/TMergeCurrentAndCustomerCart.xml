@@ -2,8 +2,9 @@
 <testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Simulates browsing the catalog, adding product(s) to the cart, log in and get one cart which includes the products added just now and the products of the customer's cart.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
+  <module name="posters.functional.modules.CreateRandomUser"/>
   <module name="posters.functional.modules.Login">
-    <parameter name="email" value="${email}"/>
+    <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
@@ -21,7 +22,7 @@
     <parameter name="productCount" value="1"/>
   </module>
   <module name="posters.functional.modules.Login">
-    <parameter name="email" value="${email}"/>
+    <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>
     <parameter name="firstName" value="${firstName}"/>
   </module>
@@ -35,9 +36,9 @@
     <parameter name="productCount" value="2"/>
   </module>
   <action name="RemoveProductFromCart"/>
-  <command name="clickAndWait" target="css=#product1 .btnRemoveProduct"/>
+  <command name="click" target="css=#btnRemoveProdCount0"/>
   <action name="RemoveProductFromCart"/>
-  <command name="clickAndWait" target="css=#product0 .btnRemoveProduct"/>
+  <command name="click" target="css=#btnRemoveProdCount1"/>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="0"/>
   </module>

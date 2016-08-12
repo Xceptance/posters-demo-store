@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="7" baseURL="http://localhost:8080">
   <description>Simulates browsing the catalog and adding product to cart.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <module name="posters.functional.modules.AddToCart"/>
@@ -32,7 +32,7 @@
     <parameter name="productFinish" value="${productFinish}"/>
     <parameter name="productSize" value="${productSize}"/>
   </module>
-  <module name="posters.functional.modules.calcAndStoreCartItemSubOrderPrice">
+  <module name="posters.functional.modules.CalcAndStoreCartItemTotalUnitPrice">
     <parameter name="index" value="0"/>
     <parameter name="currency" value="$"/>
     <parameter name="prodPrice" value="proPrice_new"/>
@@ -60,7 +60,7 @@
   <command name="waitForNotText" target="id=orderTotal" value="${oldOrderTotal}"/>
   <command name="assertText" target="css=#product0 .productCount" value="3"/>
   <command name="storeText" target="id=orderTotal" value="totalPrice"/>
-  <module name="posters.functional.modules.calcAndStoreCartItemSubOrderPrice">
+  <module name="posters.functional.modules.CalcAndStoreCartItemTotalUnitPrice">
     <parameter name="index" value="0"/>
     <parameter name="currency" value="$"/>
     <parameter name="prodPrice" value="proPrice_new"/>
@@ -93,8 +93,6 @@
   <command name="check" target="//div[@id='selectStyle']/div[@class='radio'][${finishIndex}+1]/label/input"/>
   <command name="select" target="id=selectSize" value="label=${productSize}"/>
   <command name="click" target="id=btnAddToCart"/>
-  <command name="waitForVisible" disabled="true" target="//ul[@id='cartSliderElementList']/li"/>
-  <command name="waitForNotVisible" disabled="true" target="//ul[@id='cartSliderElementList']/li"/>
   <module name="posters.functional.modules.VerifyCartItem">
     <parameter name="index" value="0"/>
     <parameter name="productName" value="${productName}"/>
@@ -103,14 +101,6 @@
     <parameter name="productSize" value="${productSize}"/>
   </module>
   <command name="storeText" target="id=orderTotal" value="orderTotal"/>
-  <module name="posters.functional.modules.VerifyMiniCartElement" disabled="true">
-    <parameter name="index" value="1"/>
-    <parameter name="productName" value="${productName}"/>
-    <parameter name="productStyle" value="${productFinish}"/>
-    <parameter name="productCount" value="4"/>
-    <parameter name="productSize" value="${productSize}"/>
-    <parameter name="prodTotalPrice" value="${productPrice}"/>
-  </module>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="4"/>
   </module>

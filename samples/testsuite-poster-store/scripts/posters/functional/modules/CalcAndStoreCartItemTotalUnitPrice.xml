@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
+  <description>Store a unit price and then calculate the total price (Quantity * Unit-Price)</description>
   <parameter name="index"/>
   <parameter name="currency"/>
   <parameter name="prodPrice"/>
