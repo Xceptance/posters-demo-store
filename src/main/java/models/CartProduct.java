@@ -295,11 +295,11 @@ public class CartProduct
         update();
     }
     /**
-     * Returns the line item price of the product as well formatted String.
+     * Returns the total unit price of the product as well formatted String.
      * 
      * @return the line item price of the product
      */
-    public String getProductLineItemPriceAsString()
+    public String getTotalUnitPriceAsString()
     {
         final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = price * this.productCount;

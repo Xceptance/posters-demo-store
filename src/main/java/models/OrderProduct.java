@@ -227,7 +227,7 @@ public class OrderProduct
      * 
      * @return the line item price of the product
      */
-    public String getProductLineItemPriceAsString()
+    public String getTotalUnitPriceAsString()
     {
         final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = price * this.productCount;

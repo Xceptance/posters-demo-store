@@ -178,7 +178,8 @@ public class CartController
             final Map<String, Object> product = new HashMap<String, Object>();
             product.put("productId", cartProduct.getProduct().getId());
             product.put("productName", cartProduct.getProduct().getName());
-            product.put("productPrice", cartProduct.getPriceAsString());
+            product.put("productUnitPrice", cartProduct.getPriceAsString());
+            product.put("productTotalUnitPrice", getDoubleAsString(cartProduct.getPrice()*cartProduct.getProductCount() ));
             product.put("productCount", cartProduct.getProductCount());
             product.put("finish", cartProduct.getFinish());
             product.put("size", cartProduct.getSize());
@@ -187,22 +188,20 @@ public class CartController
 
         final Result result = Results.json();
 
-        // add products
-        result.render("productsInCartList", cartElements);
         // add currency
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add tax in percent
-        result.render("tax", (xcpConf.TAX * 100));
-        // add SHIPPING_COSTS
-        result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+
+        // add products
+        result.render("productsInCartList", cartElements);
+        
+        // add product counter
+        result.render("cartProductCount", cart.getProductCount());
+
         // add sub total price
-        result.render("subOrderTotal", cart.getTotalPriceAsString());
-        // add sub total price
-        result.render("subOrderTotalTax", xcpConf.TAX);
-        // add total price
-        result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+        result.render("subTotalPrice", cart.getSubTotalPriceAsString());
+
 
         return result;
     }
@@ -234,10 +233,12 @@ public class CartController
         // get added cart product
         final CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
         final Map<String, Object> updatedProduct = new HashMap<String, Object>();
-        updatedProduct.put("productCount", cartProduct.getProductCount());
-        updatedProduct.put("productName", cartProduct.getProduct().getName());
         updatedProduct.put("productId", cartProduct.getProduct().getId());
-        updatedProduct.put("productPrice", cartProduct.getPriceAsString());
+        updatedProduct.put("productName", cartProduct.getProduct().getName());
+        //updatedProduct.put("productPrice", cartProduct.getPriceAsString());
+        updatedProduct.put("productUnitPrice", cartProduct.getPriceAsString());
+        updatedProduct.put("productTotalUnitPrice", getDoubleAsString(cartProduct.getPrice()*cartProduct.getProductCount() ));
+        updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", cartProduct.getSize());
 

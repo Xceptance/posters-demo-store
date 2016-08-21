@@ -20,7 +20,8 @@ function getMiniCartText() {
 		success : function(data) {
 			$('#cartMiniElementList').empty();
 
-			for (var i = 0; i < data.productsInCartList.length; i++) {
+			/* start with the last product*/
+			for (var i = (data.productsInCartList.length-1); i >= 0; i--) {
 
 				// create new <li> element
 				var inner = getMiniCartElementInnerHtml(
@@ -34,15 +35,12 @@ function getMiniCartText() {
 
 			}
 
-			// update cart in header (counter)
-			$("#headerCartOverview span.headerCartProductCount").text(
-					data.headerCartOverview);
 			// update product counter in mini-cart
 			$("#cartMiniProductCounter span.value").text(
-					data.headerCartOverview);
+					data.cartProductCount);
 			// update total sub Order Price
 			$('#cartMiniTotalSubOrderPrice').text(
-					data.currency + data.subOrderTotal);
+					data.currency + data.subTotalPrice);
 
 			$("#notificationsLoader").empty();
 		}
@@ -91,7 +89,7 @@ function addToMiniCart(productId, finish, size) {
 			$("#headerCartOverview span.headerCartProductCount").text(
 					data.headerCartOverview);
 			/* update product counter in mini-cart */
-			$("#cartMiniWrap span.cartMiniCartProductCounter").text(
+			$("#cartMiniProductCounter span.value").text(
 					data.headerCartOverview);
 
 			/* show minicart and than hide after 1500 ms */
@@ -113,5 +111,5 @@ function getMiniCartElementInnerHtml(product, currency, unitLength) {
 	+ '</span>, <span class="prodSize">' + product.size.width + " x "
 	+ product.size.height + " " + unitLength + '</span>)' + '</li>'
 	+ '<li>' + '<div class="prodPrice text-right"><strong>' + currency
-	+ product.productPrice + '</strong></div>' + '</li>' + '<ul>';
+	+ product.productTotalUnitPrice + '</strong></div>' + '</li>' + '<ul>';
 }
