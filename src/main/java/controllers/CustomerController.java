@@ -1083,12 +1083,12 @@ public class CustomerController
      * 
      * @param context
      */
-    private static void mergeCurrentCartAndCustomerCart(final Context context)
+    private void mergeCurrentCartAndCustomerCart(final Context context)
     {
         if (SessionHandling.isCustomerLogged(context))
         {
             // get current cart
-            final Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context));
+            final Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // get cart of customer
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getCart() == null)

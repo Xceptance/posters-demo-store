@@ -10,7 +10,7 @@
 			<th colspan="2" title="${i18n('cartTableHeaderItem')}"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
 			<th colspan="1" title="${i18n('cartTableHeaderQuantity')}">${i18n("cartTableHeaderQuantity")}</th>
 			<th class="text-right" title="${i18n('cartTableHeaderUnitPrice')}">${i18n('cartTableHeaderUnitPrice')}</th>
-			<th class="text-right" title="${i18n('cartTableHeaderSubOrderPrice')}">${i18n('cartTableHeaderSubOrderPrice')}</th>
+			<th class="text-right" title="${i18n('cartTableHeaderTotalUnitPrice')}">${i18n('cartTableHeaderTotalUnitPrice')}</th>
 		</thead>
 		<tbody>
 			<#list cartProducts as cartProduct>
@@ -20,8 +20,8 @@
 					</div> <a
 					href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img
 						data-src="${contextPath}/assets/js/holder.js/150x100"
-						title="${cartProduct.product.descriptionOverview}"
-						alt="${cartProduct.product.descriptionOverview}"
+						title="${cartProduct.product.name}"
+						alt="${cartProduct.product.name}"
 						src="${contextPath}${cartProduct.product.imageURL}" width="150"></img></a>
 					<div class="visible-xs">
 						<div class="text-left">
@@ -85,7 +85,7 @@
 					<div class="productUnitPrice text-right">${currency}<span class="unitPriceShort">${cartProduct.getPriceAsString()}</span></div>
 				</td>
 				<td>
-					<div class="productSubOrderPrice text-right">${currency}${cartProduct.getProductLineItemPriceAsString()}</div>
+					<div class="productTotalUnitPrice text-right">${currency}<span class="totalUnitPriceShort">${cartProduct.getProductLineItemPriceAsString()}</span></div>
 				</td>
 			</tr>
 			</#list>
@@ -131,7 +131,7 @@
 						<strong>${i18n("cartOverviewTotalPrice")}</strong>
 					</div>
 					<div class="col-xs-6 text-right">
-						<span id="orderTotal" class="value"><strong>${currency}${orderTotal}</strong></span>
+						<span id="orderTotal" class="value fontBold">${currency}${orderTotal}</span>
 					</div>
 				</li>
 			</ul>

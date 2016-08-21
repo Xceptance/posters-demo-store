@@ -55,7 +55,7 @@ public class CheckoutController
     public Result checkout(final Context context)
     {
         // get cart by session id
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // check, if the cart is empty
         if (cart.getProducts().size() == 0)
         {
@@ -673,7 +673,7 @@ public class CheckoutController
         // update order
         order.update();
         // get cart by session id
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // remove cart
         cart.delete();
         // remove cart from session

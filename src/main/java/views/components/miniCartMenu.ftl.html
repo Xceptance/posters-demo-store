@@ -2,32 +2,38 @@
 	<div class="cartMiniEmpty">${i18n("infoEmptyCartShort")}</div>
 
 	<div class="cartMiniHeader">
-		<strong><span class="cartMiniCartProductCounter">${cartProductCount}</span></strong>
-		<#if cartProductCount == 1 > ${i18n("miniCartItem")} <#else>
-		${i18n("miniCartItems")} </#if>
+		<div id="cartMiniProductCounter">
+			<strong><span class="value">${cartProductCount}</span></strong> 
+			<#if cartProductCount == 1 > ${i18n("miniCartItem")} <#else>
+			${i18n("miniCartItems")} </#if>
+		</div>
 	</div>
 
 	<div id="cartMiniElementListWrap">
 
-			<ul id="cartMiniElementList" class="list-unstyled">
-			
-			<span id="notificationsLoader"></span>
-			
-				<#list cartProducts as product>
-				<li id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}" class="miniCartItem">
-					<ul class="cartItems list-unstyled">
-						<li class="prodName">${product.product.name}</li>
-						<li>${i18n("cartTableHeaderQuantity")}: <span class="prodCount">${product.getProductCount()}</span> (<span
-							class="prodStyle">${product.getFinish()}</span>, <span class="prodSize">${product.size.width} x ${product.size.height} ${unitLength}</span>)
-						</li>
-						<li>
-							<div class="prodPrice text-right">
-								<strong>${currency}${product.getProductLineItemPriceAsString()}</strong>
-							</div>
-						</li>
-					</ul>
-				</li> 
-				</#list>
+		<span id="notificationsLoader"></span>
+
+		<ul id="cartMiniElementList" class="list-unstyled">
+
+			<#list cartProducts as product>
+			<li
+				id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}"
+				class="miniCartItem">
+				<ul class="cartItems list-unstyled">
+					<li class="prodName">${product.product.name}</li>
+					<li>${i18n("cartTableHeaderQuantity")}: <span
+						class="prodCount">${product.getProductCount()}</span> (<span
+						class="prodStyle">${product.getFinish()}</span>, <span
+						class="prodSize">${product.size.width} x
+							${product.size.height} ${unitLength}</span>)
+					</li>
+					<li>
+						<div class="prodPrice text-right">
+							<strong>${currency}${product.getProductLineItemPriceAsString()}</strong>
+						</div>
+					</li>
+				</ul>
+			</li> </#list>
 
 		</ul>
 	</div>

@@ -56,10 +56,10 @@ public class CartController
 
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-
-        final double subOrderTotal = Double.parseDouble(data.get("subTotalPrice").toString());
-        final double subOrderTotalTax = xcpConf.TAX * subOrderTotal;
-        final double orderTotal = subOrderTotal + subOrderTotalTax + xcpConf.SHIPPING_COSTS;
+     
+        final double subTotalPrice = Double.parseDouble(data.get("subTotalPrice").toString());
+        final double subTotalTaxPrice = xcpConf.TAX * subTotalPrice;
+        final double totalPrice = subTotalPrice + subTotalTaxPrice + xcpConf.SHIPPING_COSTS;
 
         // add currency
         data.put("currency", xcpConf.CURRENCY);
@@ -67,15 +67,14 @@ public class CartController
         data.put("tax", (xcpConf.TAX * 100));
         // add SHIPPING_COSTS
         data.put("shippingCosts", getDoubleAsString(xcpConf.SHIPPING_COSTS));
-        // add sub order total price
-        data.put("subOrderTotal", getDoubleAsString(subOrderTotal));
+        // add sub total price
+        data.put("subOrderTotal", getDoubleAsString(subTotalPrice));
         // add sub total tax
-        data.put("subOrderTotalTax", getDoubleAsString(subOrderTotalTax));
+        data.put("subOrderTotalTax", getDoubleAsString(subTotalTaxPrice));
         // add total price
-        data.put("orderTotal", getDoubleAsString(orderTotal));
-
+        data.put("orderTotal", getDoubleAsString(totalPrice));
+      
         return Results.html().render(data).template(xcpConf.TEMPLATE_CART_OVERVIEW);
-
     }
 
     /**
@@ -109,12 +108,13 @@ public class CartController
                 newProductCount = 0;
             }
             // get cart by session
-            final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+            final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // get cart product by id
             final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
             final Product product = cartProduct.getProduct();
             final int currentProductCount = cartProduct.getProductCount();
             final int difference = newProductCount - currentProductCount;
+            
             // product must be added
             if (difference > 0)
             {
@@ -133,22 +133,27 @@ public class CartController
                     cart.removeProduct(cartProduct);
                 }
             }
+
+            result.render("unitPrice", cartProduct.getPriceAsString());
+            result.render("totalUnitPrice", getDoubleAsString(cartProduct.getPrice() * newProductCount));
+
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
             // add currency
             result.render("currency", xcpConf.CURRENCY);
             // add unit of length
             result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-            // add tax in percent
-            result.render("tax", (xcpConf.TAX * 100));
-            // add SHIPPING_COSTS
-            result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+
             // add sub order total price
-            result.render("subOrderTotal", cart.getTotalPriceAsString());
+            result.render("subTotalPrice", cart.getSubTotalPriceAsString());
+            // add SHIPPING_COSTS
+            result.render("shippingCosts", cart.getShippingCostsAsString());
+            // add tax in percent
+            result.render("tax", cart.getTax());
             // add sub total tax
-            result.render("subOrderTotalTax", xcpConf.TAX);
+            result.render("totalTaxPrice", cart.getTotalTaxPriceAsString());
             // add total price
-            result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+            result.render("totalPrice", cart.getTotalPriceAsString());
 
             return result;
         }
@@ -160,10 +165,10 @@ public class CartController
      * @param context
      * @return
      */
-    public Result getCartElementSlider(final Context context)
+    public Result getMiniCartElements(final Context context)
     {
         // get cart by session
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get all products of the cart
         final List<Map<String, Object>> cartElements = new ArrayList<Map<String, Object>>();
         final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
@@ -171,10 +176,10 @@ public class CartController
         for (final CartProduct cartProduct : cartProducts)
         {
             final Map<String, Object> product = new HashMap<String, Object>();
-            product.put("productCount", cartProduct.getProductCount());
-            product.put("productName", cartProduct.getProduct().getName());
             product.put("productId", cartProduct.getProduct().getId());
+            product.put("productName", cartProduct.getProduct().getName());
             product.put("productPrice", cartProduct.getPriceAsString());
+            product.put("productCount", cartProduct.getProductCount());
             product.put("finish", cartProduct.getFinish());
             product.put("size", cartProduct.getSize());
             cartElements.add(product);
@@ -198,7 +203,7 @@ public class CartController
         result.render("subOrderTotalTax", xcpConf.TAX);
         // add total price
         result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
-        
+
         return result;
     }
 
@@ -218,7 +223,7 @@ public class CartController
         // get product by id
         final Product product = Product.getProductById(Integer.parseInt(productId));
         // get cart by session
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get poster size
         final String[] dummy = size.split(" ");
         final int width = Integer.parseInt(dummy[0]);
@@ -249,11 +254,11 @@ public class CartController
         // add SHIPPING_COSTS
         result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
         // add sub total price
-        result.render("subOrderTotal", cart.getTotalPriceAsString());
+        result.render("subOrderTotal", cart.getSubTotalPriceAsString());
         // add sub total price
         result.render("subOrderTotalTax", xcpConf.TAX);
         // add total price
-        result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+        result.render("orderTotal", cart.getTotalPriceAsString(cart.getSubTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
 
         return result;
     }
@@ -270,7 +275,7 @@ public class CartController
     {
         final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
         // get cart by session
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get count of this product
         final int countProduct = cartProduct.getProductCount();
         // delete all items of this products
@@ -292,7 +297,7 @@ public class CartController
         result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
         // add sub total price
         result.render("subOrderTotal", cart.getTotalPriceAsString());
-        // add sub total price
+        // add sub total price tax
         result.render("subOrderTotalTax", xcpConf.TAX);
         // add total price
         result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));

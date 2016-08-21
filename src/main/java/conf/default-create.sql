@@ -14,7 +14,11 @@ create table billingAddress (
 create table cart (
   id                        varchar(40) not null,
   customer_id               varchar(40),
-  total_price               double,
+  sub_Total_Price	    	double,
+  tax                       double,
+  total_Tax_Price	    	double,
+  shipping_costs            double,
+  total_Price               double,
   constraint pk_cart primary key (id))
 ;
 

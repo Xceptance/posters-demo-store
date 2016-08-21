@@ -20,7 +20,7 @@
 	margin-top: 5px;
 }
 
-#header a {
+#header a, #globalNavigation a {
 	text-decoration: none;
 }
 
@@ -52,6 +52,10 @@
 
 .margin_top7 {
 	margin-top: 7px;
+}
+
+.fontBold {
+	font-weight: bold;
 }
 
 #dropdown {

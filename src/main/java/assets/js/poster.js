@@ -25,11 +25,11 @@ function deleteFromCart(cartProductId, cartIndex) {
 		// remove product from cart overview
 		$('#product' + cartIndex).remove();
 		// update cart in header
-		$("#headerCartOverview span").text(data.headerCartOverview);
+		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
 		// update total price
 		$("#totalPrice:first-child").text(data.totalPrice);
 		// update mini cart
-		getCartSliderText();
+		getMiniCartText();
 	});
 }
 
@@ -40,9 +40,18 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		hideMessages();
 	}).done(function(data) {
 		// update cart in header
-		$("#headerCartOverview span").text(data.headerCartOverview);
+		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
+
+		// update total unit price
+		$('#product' + cartIndex +" .productTotalUnitPrice").text(data.currency + data.totalUnitPrice);
+
+		//subtotal
+		$("#orderSubTotalValue").text(data.currency + data.subTotalPrice);
+		//Tax
+		$("#orderSubTotalTaxValue").text(data.currency + data.totalTaxPrice);
 		// update total price
-		$("#totalPrice:first-child").text(data.totalPrice);
+		$("#orderTotal").text(data.currency + data.totalPrice);
+		
 		// update mini cart
 		getMiniCartText();
 		// update cart overview, if count was zero

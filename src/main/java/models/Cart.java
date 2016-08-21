@@ -37,15 +37,35 @@ public class Cart
     private Customer customer;
 
     /**
-     * The products which are in the cart.
+     * The shipping costs of the order.
      */
-    @OneToMany(mappedBy = "cart")
-    private List<CartProduct> products;
+    private double shippingCosts;
+
+    /**
+     * The sub total price of the order.
+     */
+    private double subTotalPrice;
+
+    /**
+     * The tax that will be added to the sub-total price.
+     */
+    private double tax;
+
+    /**
+     * The total tax price of the order.
+     */
+    private double totalTaxPrice;
 
     /**
      * The total price of the cart.
      */
     private double totalPrice;
+
+    /**
+     * The products which are in the cart.
+     */
+    @OneToMany(mappedBy = "cart")
+    private List<CartProduct> products;
 
     /**
      * The constructor.
@@ -77,6 +97,140 @@ public class Cart
     }
 
     /**
+     * @return the shippingCosts
+     */
+    public double getShippingCosts()
+    {
+        return shippingCosts;
+    }
+
+    /**
+     * @param shippingCosts
+     *            the shippingCosts to set
+     */
+    public void setShippingCosts(double shippingCosts)
+    {
+        this.shippingCosts = shippingCosts;
+    }
+
+    /**
+     * Returns the shipping costs of the cart as a well formatted String.
+     * 
+     * @return the shipping costs of the cart
+     */
+    public String getShippingCostsAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = shippingCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @return the subTotalPrice
+     */
+    public double getSubTotalPrice()
+    {
+        return subTotalPrice;
+    }
+
+    /**
+     * Returns Sub Total Price of the cart as a well formatted String.
+     * 
+     * @return the sub total price of the cart
+     */
+    public String getSubTotalPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = getSubTotalPrice();
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @param subTotalPrice
+     *            the subTotalPrice to set
+     */
+    public void setSubTotalPrice(double subTotalPrice)
+    {
+        this.subTotalPrice = subTotalPrice;
+    }
+
+    /**
+     * @return the tax
+     */
+    public double getTax()
+    {
+        return tax;
+    }
+
+    /**
+     * Returns tax as a well formatted String.
+     * 
+     * @return the tax
+     */
+    public String getTaxAsString()
+    {
+        return String.valueOf(tax * 100);
+    }
+
+    /**
+     * @param tax
+     *            the tax to set
+     */
+    public void setTax(double tax)
+    {
+        this.tax = tax;
+    }
+
+    /**
+     * @return the totalTaxPrice
+     */
+    public double getTotalTaxPrice()
+    {
+        // check totalTaxPrice
+        if (totalTaxPrice > 0)
+        {
+            return totalTaxPrice;
+        }
+        else
+            return -1;
+    }
+
+    /**
+     * Returns Sub Total Tax Price of the cart as a well formatted String.
+     * 
+     * @return the sub total tax price of the cart
+     */
+    public String getTotalTaxPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = totalTaxPrice;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @param totalTaxPrice
+     *            the totalTaxPrice to set
+     */
+    public void setTotalTaxPrice(double totalTaxPrice)
+    {
+        this.totalTaxPrice = totalTaxPrice;
+    }
+
+    public void calculateTotalTaxPrice()
+    {
+        setTotalTaxPrice(getTax() * getSubTotalPrice());
+    }
+
+    /**
      * Returns the total price of all products, which are in the cart.
      * 
      * @return total price of the cart
@@ -100,9 +254,10 @@ public class Cart
         temp = temp / 100;
         return f.format(temp).replace(',', '.');
     }
-    
+
     /**
-     *  Returns the total price of all products with tax, shippingCosts.
+     * Returns the total price of all products with tax, shippingCosts.
+     * 
      * @param subTotalPrice
      * @param tax
      * @param shippingCosts
@@ -111,12 +266,13 @@ public class Cart
     public String getTotalPriceAsString(double subTotalPrice, double tax, double shippingCosts)
     {
         final DecimalFormat f = new DecimalFormat("#0.00");
-        double temp = subTotalPrice + (subTotalPrice*tax) + shippingCosts;
+        double temp = subTotalPrice + (subTotalPrice * tax) + shippingCosts;
         temp = temp * 100;
         temp = Math.round(temp);
         temp = temp / 100;
         return f.format(temp).replace(',', '.');
     }
+
     /**
      * Sets the total price of the cart.
      * 
@@ -126,6 +282,14 @@ public class Cart
     public void setTotalPrice(final double totalPrice)
     {
         this.totalPrice = totalPrice;
+    }
+
+    /**
+     * Calculate the Total Price.
+     */
+    public void calculateTotalPrice()
+    {
+        setTotalPrice(getSubTotalPrice() + getTotalTaxPrice() + getShippingCosts());
     }
 
     /**
@@ -139,7 +303,7 @@ public class Cart
     }
 
     /**
-     * Sets the customer of the cart.
+     * Sets the customer of the cart.   "0.00"
      * 
      * @param customer
      *            the customer of the cart
@@ -185,6 +349,7 @@ public class Cart
         // check, whether the product with the given finish and size is in the cart
         CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
                                        .eq("size", size).findUnique();
+        
         // the product is not in the cart
         if (cartProduct == null)
         {
@@ -210,11 +375,18 @@ public class Cart
             // increment the count of the product
             cartProduct.incProductCount();
         }
-        // recalculate total price
-        setTotalPrice(getTotalPrice() + cartProduct.getPrice());
+
+        // add product price to SubTotalPrice
+        setSubTotalPrice(getSubTotalPrice() + (cartProduct.getPrice()));
+
+        // recalculate TotalTaxPrice, TotalPrice
+        calculateTotalTaxPrice();
+        calculateTotalPrice();
+
+        // update values in db
         update();
     }
-
+ 
     /**
      * Removes one of the product from the cart.
      * 
@@ -235,7 +407,9 @@ public class Cart
             products.remove(cartProduct);
         }
         // recalculate total price
-        setTotalPrice(getTotalPrice() - cartProduct.getPrice());
+        setSubTotalPrice(getSubTotalPrice() - cartProduct.getPrice());
+        calculateTotalTaxPrice();
+        calculateTotalPrice();
         update();
     }
 
@@ -281,7 +455,9 @@ public class Cart
             cartProduct.delete();
             products.remove(cartProduct);
         }
-        // adjust total price
+        // adjust price
+        setSubTotalPrice(0);
+        setTotalTaxPrice(0);
         setTotalPrice(0);
     }
 
@@ -308,7 +484,7 @@ public class Cart
     }
 
     /**
-     * Creates and returns a new {@link Cart}.
+     * Creates and returns a new cart.
      * 
      * @return a new {@link Cart}
      */
@@ -316,6 +492,35 @@ public class Cart
     {
         // create new cart
         final Cart cart = new Cart();
+
+        // save cart
+        cart.save();
+        // get new cart by id
+        final Cart newCart = Cart.getCartById(cart.getId());
+        // return new cart
+        return newCart;
+    }
+    /**
+     * Creates and returns a new cart with parameter.
+     * 
+     * @return a new {@link Cart}
+     */
+    public static Cart createNewCart(final double tax, final double shippingCosts)
+    {
+        // create new cart
+        final Cart cart = new Cart();
+
+        // start value = 0
+        cart.setSubTotalPrice(0);
+        cart.setTotalPrice(0);
+        cart.setTotalTaxPrice(0);
+
+        // set default tax
+        cart.setTax(tax);
+
+        // set default shipping costs
+        cart.setShippingCosts(shippingCosts);
+
         // save cart
         cart.save();
         // get new cart by id

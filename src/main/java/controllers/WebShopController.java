@@ -68,9 +68,9 @@ public class WebShopController
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
         // get cart by session
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // set cart stuff
-        addCartDetailToMap(cart, data);
+        addCartDetailToMap(cart, data, xcpConf);
         // a customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
@@ -93,6 +93,7 @@ public class WebShopController
         data.put("currency", xcpConf.CURRENCY);
         // add unit of length
         data.put("unitLength", xcpConf.UNIT_OF_LENGTH);
+
     }
 
     /**
@@ -101,11 +102,11 @@ public class WebShopController
      * @param cart
      * @param data
      */
-    private static void addCartDetailToMap(Cart cart, final Map<String, Object> data)
+    private static void addCartDetailToMap(Cart cart, final Map<String, Object> data, final PosterConstants xcpConf)
     {
         if (cart == null)
         {
-            cart = Cart.createNewCart();
+            cart = Cart.createNewCart(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
         }
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
@@ -116,6 +117,10 @@ public class WebShopController
             products.put(cartProduct.getProduct(), cartProduct.getProductCount());
             totalProductCount += cartProduct.getProductCount();
         }
+        
+        cart.calculateTotalTaxPrice();
+        cart.calculateTotalPrice();
+        
         // add all products of the cart
         data.put("cartProducts", cartProducts);
         // add product count of cart
@@ -123,6 +128,8 @@ public class WebShopController
         // add cart id
         data.put("cartId", cart.getId());
         // add sub total price of cart
-        data.put("subTotalPrice", cart.getTotalPriceAsString());
+        data.put("subTotalPrice", cart.getSubTotalPriceAsString());
+        data.put("subOrderTotalTax", cart.getTotalTaxPriceAsString());
+        data.put("totalPrice", cart.getTotalPriceAsString());
     }
 }

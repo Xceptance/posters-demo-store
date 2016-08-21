@@ -69,7 +69,7 @@ public class CartTest extends NinjaTest
         // verify, that cart is persistent
         Assert.assertNotNull(Ebean.find(Cart.class, cart.getId()));
         // set some data
-        cart.setTotalPrice(3.33);
+        cart.setSubTotalPrice(3.33);
         // persist again
         cart.update();
         // verify, that cart is persistent
