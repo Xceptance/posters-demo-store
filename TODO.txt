@@ -1,13 +1,5 @@
 # Bugs
 
-## cart
-open cart -> update "Quantity" -> wrong values and error msg is missing
-(add random product to cart with Quantity = 1, go to cart, enter eg. "22" than press the update button) 
-
-## pdp
-after click on the addToCart button it doesn't show the minicart
-(posterMiniCart.js-> addToMiniCart)
-
 # Suggestions
 
 ## checkout
