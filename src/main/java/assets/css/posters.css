@@ -1,12 +1,12 @@
-#body-wrapper {
+.body-wrapper {
 	max-width: 992px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
 }
 
 .navbar-brand, .titleShopText {
@@ -61,6 +61,14 @@
 #dropdown {
 	padding: 5px 0 0 0;
 }
+.navbar-default
+{
+	border:0 !important;
+}
+.navbar
+{
+	margin-bottom: 0 !important;
+}
 
 #cartOverviewTable thead th, #checkoutOverviewTable thead th {
 	color: black;
@@ -93,6 +101,7 @@
 .textcolorlightgrey {
 	color: #e7e7e7;
 }
+
 .textcolordarkgrey {
 	color: #888a85;
 }
@@ -196,13 +205,20 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 #productList .thumbnail {
 	padding-top: 0;
 }
-.productName{
+
+.productName {
 	font-weight: bold;
 }
+
 #btnCartOverviewForm {
 	padding-right: 0;
 }
 
+header {
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #d3d7cf;
+	margin-bottom: 20px;;
+}
 footer {
 	border-top: 1px solid #d3d7cf;
 	margin-top: 20px;

@@ -30,18 +30,18 @@
 <script src="${contextPath}/assets/js/posterMiniCart.js"></script>
 </head>
 <body>
-	<div id="body-wrapper">
-		<!-- header -->
-		<header>
+	<!-- header -->
+	<header>
+		<div class="body-wrapper">
 			<div class="container-fluid"><#if checkout??> <#include
 				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
 				</#if></div>
-		</header>
-		
-		<!-- main/content -->
-		<main>
-		
-		<!-- message: no java script -->
+		</div>
+	</header>
+
+	<!-- main/content -->
+	<div class="body-wrapper">
+		<main> <!-- message: no java script -->
 		<noscript>
 			<div class="section">
 				<div class="container">
@@ -68,13 +68,11 @@
 		</div>
 
 		<!-- body -->
-		<div class="container-fluid" id="main">
-			<#nested/>
-		</div>
+		<div class="container-fluid" id="main"><#nested/></div>
 		</main>
-		<!-- footer -->
-		<#include "footer.ftl.html"/>
 	</div>
+	<!-- footer -->
+	<#include "footer.ftl.html"/>
 
 	<script src="${contextPath}/assets/js/poster.js"></script>
 	<#if flash.error??>
