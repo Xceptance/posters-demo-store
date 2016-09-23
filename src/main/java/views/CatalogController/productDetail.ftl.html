@@ -30,8 +30,8 @@
 						title="${i18n('cartSelectSize')}" alt="${i18n('cartSelectSize')}"
 						onchange="updatePrice(this, ${productDetail.id});">
 						<#list productDetail.availableSizes as size>
-						<option title="${size.size.width} x ${size.size.height} ${unitLength}">${size.size.width} x ${size.size.height}
-							${unitLength}</option> </#list>
+						<option title="${size.size.width} x ${size.size.height} ${unitLength}">${size.size.width} x ${size.size.height} ${unitLength}</option>
+						</#list>
 					</select>
 				</div>
 			</div>
