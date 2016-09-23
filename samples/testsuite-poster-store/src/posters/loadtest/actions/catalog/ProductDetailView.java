@@ -3,7 +3,7 @@ package posters.loadtest.actions.catalog;
 import org.junit.Assert;
 
 import posters.loadtest.validators.HeaderValidator;
-import posters.loadtest.validators.SideNavValidator;
+import posters.loadtest.validators.NavBarValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -48,7 +48,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
 
         // Remember a random product's link URL.
-        productDetailLink = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('productOverview')/div/ul[@class='thumbnails']/li/div/a");
+        productDetailLink = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('productOverview')/div/ul/li/div/div[@class='container-fluid']/a");
         Assert.assertNotNull("No matching product detail link found.", productDetailLink);
 
     }
@@ -73,7 +73,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
-        SideNavValidator.getInstance().validate(page);
+        NavBarValidator.getInstance().validate(page);
 
         // Check it's a product detail page.
         // The product's name element in the headline is present.
@@ -81,25 +81,21 @@ public class ProductDetailView extends AbstractHtmlPageAction
 
         // The product description is there in the right presentation (h3 - h4 -span).
         Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).",
-                          HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/h3[@id='prodDescriptionOverview']"));
+                          HtmlPageUtils.isElementPresent(page, "id('main')/form/div/div[2]/h4[@id='prodDescriptionOverview']"));
         Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).",
-                          HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/h4[@id='prodDescriptionDetail']"));
-        Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).",
-                          HtmlPageUtils.isElementPresent(page, "id('main')/div/div[2]/div/div[2]/p[@id='prodFinish']"));
-
+                          HtmlPageUtils.isElementPresent(page, "id('main')/form/div/div[2]/div/div[@id='prodDescriptionDetail']"));
         // There is a price with the correct currency.
         final HtmlElement productPriceElement = HtmlPageUtils.findSingleHtmlElementByID(page, "prodPrice");
         final String productPrice = productPriceElement.getTextContent();
         Assert.assertTrue("The price does not start with $", productPrice.startsWith("$"));
 
         // Product configuration elements are present.
-        Assert.assertTrue("Product configuration element (select Finish) is not present.",
-                          HtmlPageUtils.isElementPresent(page, "id('selectFinish')"));
         Assert.assertTrue("Product configuration element (finish matte) is not present.",
                           HtmlPageUtils.isElementPresent(page, "id('finish-matte')"));
         Assert.assertTrue("Product configuration element (finish gloss) is not present.",
                           HtmlPageUtils.isElementPresent(page, "id('finish-gloss')"));
-        Assert.assertTrue("Product configuration element (size) is not present.", HtmlPageUtils.isElementPresent(page, "id('selectSize')"));
+        Assert.assertTrue("Product configuration element (size) is not present.", 
+                          HtmlPageUtils.isElementPresent(page, "id('selectSize')"));
 
         // 'Add to cart' button is available.
         Assert.assertTrue("'Add to cart' button is not available", HtmlPageUtils.isElementPresent(page, "id('btnAddToCart')"));

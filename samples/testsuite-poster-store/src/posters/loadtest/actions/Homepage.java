@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 
 import posters.loadtest.validators.HeaderValidator;
-import posters.loadtest.validators.SideNavValidator;
+import posters.loadtest.validators.NavBarValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -106,7 +106,7 @@ public class Homepage extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check the side navigation.
-        SideNavValidator.getInstance().validate(page);
+        NavBarValidator.getInstance().validate(page);
 
         // Get the homepage title.
         final HtmlElement titleElement = page.getHtmlElementById("titleIndex");
@@ -116,7 +116,7 @@ public class Homepage extends AbstractHtmlPageAction
         final String text = titleElement.asText();
 
         // Make sure we have the correct title.
-        Assert.assertEquals("Title does not match", "Check out our new panorama posters!", text);
+        Assert.assertEquals("Title does not match", "Check out our new panorama posters", text);
 
         /*
          * This section validates the responses on the network layer.

@@ -67,7 +67,7 @@ public class AddToCart extends AbstractHtmlPageAction
         addToCartForm = HtmlPageUtils.findSingleHtmlElementByID(page, "addToCartForm");
 
         // Configure the product by selecting a random finish (matte or gloss).
-        finish = HtmlPageUtils.findHtmlElementsAndPickOne(addToCartForm, "id('selectFinish')/label").getTextContent().trim();
+        finish = HtmlPageUtils.findHtmlElementsAndPickOne(addToCartForm, "id('selectStyle')/div/label").getTextContent().trim();
 
         // We choose one of the size options randomly and remember it as a string.
         // We will need it as a parameter later on in the subsequent AJAX calls
@@ -77,7 +77,7 @@ public class AddToCart extends AbstractHtmlPageAction
         size = option.getTextContent().trim();
 
         // Get the product ID. This is also needed for the AJAX calls.
-        productId = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/div/div[2]/div[@class='row']")
+        productId = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('main')/form/div[@class='row-fluid']")
                                  .getAttribute("productid");
 
         // Assert the presence of the add to cart button (even though we do not use
@@ -103,6 +103,8 @@ public class AddToCart extends AbstractHtmlPageAction
         // Perform the AJAX call and return the result.
         final WebResponse updatePriceResponse = AjaxUtils.callPost(page, "/posters/updatePrice", updatePriceParams);
 
+        System.err.println(updatePriceResponse.getContentAsString());
+        
         // Get JSON object from response.
         final JSONObject updatePriceJsonResponse = new JSONObject(updatePriceResponse.getContentAsString());
 

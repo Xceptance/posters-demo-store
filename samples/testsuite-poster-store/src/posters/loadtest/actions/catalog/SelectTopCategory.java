@@ -3,7 +3,7 @@ package posters.loadtest.actions.catalog;
 import org.junit.Assert;
 
 import posters.loadtest.validators.HeaderValidator;
-import posters.loadtest.validators.SideNavValidator;
+import posters.loadtest.validators.NavBarValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -22,6 +22,7 @@ public class SelectTopCategory extends AbstractHtmlPageAction
      * Chosen top-category.
      */
     private HtmlElement topCategoryLink;
+    private HtmlElement subCategoryLink;
 
     /**
      * Constructor.
@@ -39,8 +40,9 @@ public class SelectTopCategory extends AbstractHtmlPageAction
     {
         // Get all top category links and select one randomly.
         topCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
-                                                                   "id('sidebarNav')/ul/li[@class='topCategory']/h4/a");
-
+                                                                   "id('categoryMenu')/ul[@class='nav navbar-nav header-menu-item']/li[@class='dropdown']/a");
+        subCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
+                                                                    "id('categoryMenu')/ul[@class='nav navbar-nav header-menu-item']/li[@class='dropdown']/ul[@class='dropdown-menu']/li/a");
     }
 
     @Override
@@ -48,7 +50,7 @@ public class SelectTopCategory extends AbstractHtmlPageAction
     {
         // Click the link.
         loadPageByClick(topCategoryLink);
-
+        loadPageByClick(subCategoryLink);
     }
 
     @Override
@@ -81,7 +83,7 @@ public class SelectTopCategory extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check the side navigation.
-        SideNavValidator.getInstance().validate(page);
+        NavBarValidator.getInstance().validate(page);
 
         // The product over view element is present...
         Assert.assertTrue("Product over view element not present.", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));

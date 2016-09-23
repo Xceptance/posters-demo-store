@@ -3,7 +3,7 @@ package posters.loadtest.actions.catalog;
 import org.junit.Assert;
 
 import posters.loadtest.validators.HeaderValidator;
-import posters.loadtest.validators.SideNavValidator;
+import posters.loadtest.validators.NavBarValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -37,9 +37,9 @@ public class SelectCategory extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get all level-1 category links and select one randomly.
+        // Get all drop down item links and select one randomly.
         categoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
-                                                                "id('sidebarNav')/ul/li[@class='level-1']/a");
+                                                                "id('categoryMenu')/ul/li[@class='dropdown']/ul[@class='dropdown-menu']/li/a");
 
     }
 
@@ -66,7 +66,7 @@ public class SelectCategory extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check the side navigation.
-        SideNavValidator.getInstance().validate(page);
+        NavBarValidator.getInstance().validate(page);
 
         // The product over view element is present....
         Assert.assertTrue("Product over view element is bot present", HtmlPageUtils.isElementPresent(page, "id('productOverview')"));

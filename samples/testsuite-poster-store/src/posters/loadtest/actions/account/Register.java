@@ -72,7 +72,7 @@ public class Register extends AbstractHtmlPageAction
     protected void execute() throws Exception
     {
         // Fill in the form.
-        HtmlPageUtils.setInputValue(registrationForm, "name", account.getLastName());
+        HtmlPageUtils.setInputValue(registrationForm, "lastName", account.getLastName());
         HtmlPageUtils.setInputValue(registrationForm, "firstName", account.getFirstName());
         HtmlPageUtils.setInputValue(registrationForm, "eMail", account.getEmail());
         HtmlPageUtils.setInputValue(registrationForm, "password", account.getPassword());

@@ -41,10 +41,10 @@ public class Logout extends AbstractHtmlPageAction
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
         // Check that the customer is logged in.
-        Assert.assertTrue("No customer is logged in.", HtmlPageUtils.isElementPresent(page, "id('headerLoggedCustomer')"));
+        Assert.assertTrue("No customer is logged in.", HtmlPageUtils.isElementPresent(page, "id('btnAccountOverview')"));
 
         // Remember logout link.
-        logoutLink = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('btnLogout')/a");
+        logoutLink = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('userMenu')/li[@class='userMenuContent']/a[@id='btnLogout']");
     }
 
     @Override
@@ -75,6 +75,6 @@ public class Logout extends AbstractHtmlPageAction
         Assert.assertNotNull("Title not found", blogNameElement);
 
         // Check the title.
-        Assert.assertEquals("Title does not match", "Check out our new panorama posters!", blogNameElement.asText());
+        Assert.assertEquals("Title does not match", "Check out our new panorama posters", blogNameElement.asText());
     }
 }
