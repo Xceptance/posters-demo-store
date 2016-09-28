@@ -63,7 +63,7 @@ function addToMiniCart(productId, finish, size) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
 			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
-			var liElement = $("<li id='" + liId + "' class=\"miniCartItem\"></li>").html(inner);
+			var liElement = $("<li id='" + liId + "' class=\"miniCartItem\" prodID= '" + data.product.productId + "'></li>").html(inner);
 			
 			/* exist product then replace, if not exist append product*/
 			if( $("#" + liId).length > 0)
@@ -108,8 +108,9 @@ function getMiniCartElementInnerHtml(product, currency, unitLength) {
 	+ product.productName + '</li>'
 	+ '<li>Quantity: <span class="prodCount">' + product.productCount
 	+ '</span>' + ' (<span class="prodStyle">' + product.finish
-	+ '</span>, <span class="prodSize">' + product.size.width + " x "
-	+ product.size.height + " " + unitLength + '</span>)' + '</li>'
+	+ '</span>, <span class="prodSize">' + '<span class ="prodWidth">' + product.size.width + '</span>'  
+	+ " x " + '<span class ="prodHeight">' + product.size.height + '</span>' + '<span class = "unitLength">' + unitLength + '</span>'
+	+ " " + '</span>)' + '</li>'
 	+ '<li>' + '<div class="prodPrice text-right"><strong>' + currency
 	+ product.productTotalUnitPrice + '</strong></div>' + '</li>' + '<ul>';
 }

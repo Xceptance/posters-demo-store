@@ -3,7 +3,7 @@ package posters.loadtest.actions.order;
 import org.junit.Assert;
 
 import posters.loadtest.util.CreditCard;
-import posters.loadtest.validators.HeaderValidator;
+import posters.loadtest.validators.CheckoutHeaderValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -92,7 +92,7 @@ public class EnterPaymentMethod extends AbstractHtmlPageAction
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
-        HeaderValidator.getInstance().validate(page);
+        CheckoutHeaderValidator.getInstance().validate(page);
 
         // Check that it's the order overview page.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleOrderOverview')"));

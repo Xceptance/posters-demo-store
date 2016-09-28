@@ -103,7 +103,6 @@ public class AddToCart extends AbstractHtmlPageAction
         // Perform the AJAX call and return the result.
         final WebResponse updatePriceResponse = AjaxUtils.callPost(page, "/posters/updatePrice", updatePriceParams);
 
-        System.err.println(updatePriceResponse.getContentAsString());
         
         // Get JSON object from response.
         final JSONObject updatePriceJsonResponse = new JSONObject(updatePriceResponse.getContentAsString());
@@ -118,20 +117,36 @@ public class AddToCart extends AbstractHtmlPageAction
         // Note: This is not necessary since we just want to simulate realistic traffic for the server and normally do
         // not care about client side stuff.
         HtmlPageUtils.findSingleHtmlElementByID(page, "prodPrice").setTextContent(newPrice);
-
+        
         // (2) Get cart element slider content before adding poster to cart.
-        // Perform the AJAX call and return the result.
-        // This call doesn't have any parameters
-        final WebResponse cartElementSliderResponse = AjaxUtils.callGet(page, "/posters/getCartElementSlider", null);
-
-        // Get JSON object from response.
-        final JSONObject getCartElementSliderJsonResponse = new JSONObject(cartElementSliderResponse.getContentAsString());
-
-        // Get the keys from JSON object and do some basic validation.
-        Assert.assertEquals("Length unit is not 'in'.", "in", getCartElementSliderJsonResponse.getString("unitLength"));
-        Assert.assertFalse("The 'total price' JSON key is empty.", getCartElementSliderJsonResponse.getString("totalPrice").isEmpty());
-        Assert.assertEquals("Currency is not '$'.", "$", getCartElementSliderJsonResponse.getString("currency"));
-
+        // Read the html elements from miniCartSlider to get it's content
+        List<Integer> oldProductID = new ArrayList<Integer>();
+        List<String> oldFinish = new ArrayList<String>();
+        List<Integer> oldWidth = new ArrayList<Integer>();
+        List<Integer> oldHeight = new ArrayList<Integer>();
+        List<Integer> oldCount = new ArrayList<Integer>();        
+        final List<HtmlElement> oldCartItems = new ArrayList (page.getByXPath("id('miniCartMenu')/li/div/div/ul[@id='cartMiniElementList']/li[@class='miniCartItem']"));           
+        if (oldCartItems.size() != 0){           
+            for (HtmlElement item : oldCartItems) {
+                oldProductID.add(Integer.parseInt(item.getAttribute("prodid")));
+            }            
+            final List<HtmlElement> oldCartItemsAttr = new ArrayList (page.getByXPath("id('miniCartMenu')/li/div/div/ul[@id='cartMiniElementList']/li[@class='miniCartItem']/ul/li//span"));           
+            for (HtmlElement itemAttr : oldCartItemsAttr) {
+                if (itemAttr.getAttribute("class").equals("prodStyle")) {
+                    oldFinish.add(itemAttr.getTextContent());
+                }
+                if (itemAttr.getAttribute("class").equals("prodCount")) {
+                    oldCount.add(Integer.parseInt(itemAttr.getTextContent()));
+                }
+                if (itemAttr.getAttribute("class").equals("prodWidth")){
+                    oldWidth.add(Integer.parseInt(itemAttr.getTextContent()));
+                }
+                if (itemAttr.getAttribute("class").equals("prodHeight")){
+                    oldHeight.add(Integer.parseInt(itemAttr.getTextContent()));
+                }
+            }            
+        };
+        
         // (3) Add poster to cart.
         // Collect the request parameters.
         final List<NameValuePair> addToCartParams = new ArrayList<NameValuePair>();
@@ -149,7 +164,7 @@ public class AddToCart extends AbstractHtmlPageAction
         // was already in cart.
         final JSONObject product = addToCartJsonResponse.getJSONObject("product");
         Assert.assertEquals("The addToCart call returned the wrong finish.", finish, product.get("finish"));
-        Assert.assertEquals("The addToCart call returned the wrong price", newPrice.substring(1), product.get("productPrice"));
+        Assert.assertEquals("The addToCart call returned the wrong price", newPrice.substring(1), product.get("productUnitPrice"));
         Assert.assertEquals("The addToCart call returned the wrong product ID", Integer.parseInt(productId), product.getInt("productId"));
 
         // Get the added product's properties like ID, finish, weight, and height. This is necessary to identify the
@@ -164,23 +179,20 @@ public class AddToCart extends AbstractHtmlPageAction
         int cartItemQuantity = 0;
 
         // Now search the initial cart for the added product by comparing the product properties.
-        final JSONArray cartItems = getCartElementSliderJsonResponse.getJSONArray("cartElements");
-        for (int i = 0; i < cartItems.length(); i++)
+        for (int i = 0; i < oldCartItems.size(); i++)
         {
             // Get the initial cart product's properties.
-            final JSONObject cartItem = cartItems.getJSONObject(i);
-            final int productIdBefore = cartItem.getInt("productId");
-            final String finishBefore = cartItem.get("finish").toString();
-            final JSONObject sizeBefore = cartItem.getJSONObject("size");
-            final int widthBefore = sizeBefore.getInt("width");
-            final int heightBefore = sizeBefore.getInt("height");
+            final int productIdBefore = oldProductID.get(i);
+            final String finishBefore = oldFinish.get(i);
+            final int widthBefore = oldWidth.get(i);
+            final int heightBefore = oldHeight.get(i);
 
             // Compare with added product.
             if (productIdBefore == productIdCurrent && finishBefore.equals(finishCurrent) && widthBefore == widthCurrent &&
                 heightBefore == heightCurrent)
             {
                 // The product was in cart before so let's remember the initial count.
-                cartItemQuantity = cartItems.getJSONObject(i).getInt("productCount");
+                cartItemQuantity = oldCount.get(i);
 
                 // A product can exist in cart only once so we can stop searching.
                 break;

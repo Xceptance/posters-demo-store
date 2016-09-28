@@ -4,7 +4,7 @@ import org.junit.Assert;
 
 import posters.loadtest.util.Account;
 import posters.loadtest.util.Address;
-import posters.loadtest.validators.HeaderValidator;
+import posters.loadtest.validators.CheckoutHeaderValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -103,7 +103,7 @@ public class EnterBillingAddress extends AbstractHtmlPageAction
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
-        HeaderValidator.getInstance().validate(page);
+        CheckoutHeaderValidator.getInstance().validate(page);
 
         // Check that the resulting page is the payment page.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titlePayment')"));

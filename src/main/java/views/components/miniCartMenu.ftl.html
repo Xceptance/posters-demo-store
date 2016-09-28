@@ -17,15 +17,14 @@
 
 			<#list cartProducts as product>
 			<li
-				id="productId${product.getId()}${product.getFinish()}${product.size.width}x${product.size.height}"
-				class="miniCartItem">
+				id="productId${product.product.id}${product.getFinish()}${product.size.width}x${product.size.height}"
+				class="miniCartItem" prodID ="${product.product.id}">
 				<ul class="cartItems list-unstyled">
 					<li class="prodName">${product.product.name}</li>
-					<li>${i18n("cartTableHeaderQuantity")}: <span
-						class="prodCount">${product.getProductCount()}</span> (<span
-						class="prodStyle">${product.getFinish()}</span>, <span
-						class="prodSize">${product.size.width} x
-							${product.size.height} ${unitLength}</span>)
+					<li>${i18n("cartTableHeaderQuantity")}: 
+						<span class="prodCount">${product.getProductCount()}</span> 
+						(<span class="prodStyle">${product.getFinish()}</span>, 
+						<span class="prodSize"><span class="prodWidth">${product.size.width}</span> x <span class = "prodHeight">${product.size.height}</span> <span class = "unitLength">${unitLength}</span></span>)
 					</li>
 					<li>
 						<div class="prodPrice text-right">

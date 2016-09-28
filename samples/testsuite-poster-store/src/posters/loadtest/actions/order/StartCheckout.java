@@ -2,7 +2,7 @@ package posters.loadtest.actions.order;
 
 import org.junit.Assert;
 
-import posters.loadtest.validators.HeaderValidator;
+import posters.loadtest.validators.CheckoutHeaderValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -41,8 +41,8 @@ public class StartCheckout extends AbstractHtmlPageAction
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
         // Check that the cart is not empty.
-        final boolean cartIsEmpty = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('headerCartOverview')/span").asText()
-                                                 .matches(".*: 0 Items.*");
+        final boolean cartIsEmpty = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('cartMiniProductCounter')/strong/span").asText()
+                                                 .matches(".*: 0.*");
         Assert.assertFalse("Cart must not be empty for checkout.", cartIsEmpty);
 
         // Check that the checkout link is available.
@@ -70,7 +70,7 @@ public class StartCheckout extends AbstractHtmlPageAction
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
-        HeaderValidator.getInstance().validate(page);
+        CheckoutHeaderValidator.getInstance().validate(page);
 
         // Check that it's the page to enter or select a shipping address.
         Assert.assertTrue("Title not found.", HtmlPageUtils.isElementPresent(page, "id('titleDelAddr')"));
