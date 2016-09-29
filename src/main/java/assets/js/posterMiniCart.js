@@ -109,7 +109,7 @@ function getMiniCartElementInnerHtml(product, currency, unitLength) {
 	+ '<li>Quantity: <span class="prodCount">' + product.productCount
 	+ '</span>' + ' (<span class="prodStyle">' + product.finish
 	+ '</span>, <span class="prodSize">' + '<span class ="prodWidth">' + product.size.width + '</span>'  
-	+ " x " + '<span class ="prodHeight">' + product.size.height + '</span>' + '<span class = "unitLength">' + unitLength + '</span>'
+	+ " x " + '<span class ="prodHeight">' + product.size.height + '</span>' + " " + '<span class = "unitLength">' + unitLength + '</span>'
 	+ " " + '</span>)' + '</li>'
 	+ '<li>' + '<div class="prodPrice text-right"><strong>' + currency
 	+ product.productTotalUnitPrice + '</strong></div>' + '</li>' + '<ul>';
