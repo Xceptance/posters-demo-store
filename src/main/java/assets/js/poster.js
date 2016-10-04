@@ -7,7 +7,6 @@ $(document).ready(function() {
 		$('#header-menu-search').css('display', 'none');
 		$('#header-search-trigger').css('display', 'block');
 	});
-	/*getMiniCartText();*/
 });
 
 $(document).ready(hideMessages);

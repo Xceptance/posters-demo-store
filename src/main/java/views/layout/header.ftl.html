@@ -148,7 +148,7 @@
 			<#list topCategory as tC>
 			<ul class="nav navbar-nav header-menu-item">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#" id="topCategory${tC_index}"
+					href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" id="topCategory${tC_index}"
 					title="${tC.name}" alt="${tC.name}"> <span
 						class="topCategoryMenuItem">${tC.name}</span> <span class="caret"></span>
 				</a>
