@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="7">
   <description>Selects one category randomly.</description>
   <action name="SelectCategoryRandomly"/>
   <command name="storeXpathCount" target="//div[@id='categoryMenu']/ul" value="categoryCount"/>
   <command name="store" target="${RANDOM.Number(1,${categoryCount})}" value="categoryIndex"/>
   <command name="storeXpathCount" target="//div[@id='categoryMenu']/ul[${categoryIndex}]/li/ul/li" value="subCategoryCount"/>
   <command name="store" target="${RANDOM.Number(1,${subCategoryCount})}" value="subCategoryIndex"/>
-  <command name="click" target="//div[@id='categoryMenu']/ul[${categoryIndex}]/li/a"/>
+  <command name="mouseOver" target="//div[@id='categoryMenu']/ul[${categoryIndex}]/li/a"/>
   <command name="clickAndWait" target="//div[@id='categoryMenu']/ul[${categoryIndex}]/li/ul/li[${subCategoryIndex}]/a"/>
 </scriptmodule>
