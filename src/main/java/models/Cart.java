@@ -198,7 +198,7 @@ public class Cart
             return totalTaxPrice;
         }
         else
-            return -1;
+            return 0;
     }
 
     /**

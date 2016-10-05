@@ -58,7 +58,7 @@ public class CartController
         WebShopController.setCommonData(data, context, xcpConf);
      
         final double subTotalPrice = Double.parseDouble(data.get("subTotalPrice").toString());
-        final double subTotalTaxPrice = xcpConf.TAX * subTotalPrice;
+        final double subTotalTaxPrice = xcpConf.TAX * (subTotalPrice + xcpConf.SHIPPING_COSTS);
         final double totalPrice = subTotalPrice + subTotalTaxPrice + xcpConf.SHIPPING_COSTS;
 
         // add currency

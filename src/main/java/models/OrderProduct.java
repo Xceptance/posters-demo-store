@@ -221,7 +221,15 @@ public class OrderProduct
         temp = temp / 100;
         return f.format(temp).replace(',', '.');
     }
-
+    /**
+     * Returns the line item price of the product
+     * 
+     * @return the line item price of the product
+     */
+    public double getTotalUnitPrice(){
+        double temp = price * this.productCount;
+        return temp;
+    }
     /**
      * Returns the line item price of the product as well formatted String.
      * 

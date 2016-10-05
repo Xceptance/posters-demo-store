@@ -225,7 +225,7 @@ public class Order
             return totalTaxCosts;
         }
         else
-            return -1;
+            return 0;
     }
 
     /**
@@ -499,24 +499,18 @@ public class Order
                                        .getPrice());
             orderProduct.save();
             products.add(orderProduct);
-            
-            // first price product is now subtotalcosts
-            setSubTotalCosts(orderProduct.getPrice());
         }
         // this product is in the order at least one time
         else
         {
             // increment the count of this product
             orderProduct.incProductCount();
-            orderProduct.update();
-            
-            // recalculate subTotalCosts
-            setSubTotalCosts(getSubTotalCosts() + orderProduct.getPrice());
+            orderProduct.update();          
         }
-
+        // recalculate subTotalCosts
+        setSubTotalCosts(getSubTotalCosts() + orderProduct.getPrice());
         // recalculate totalTaxCosts
-        setTotalTaxCosts(getSubTotalCosts() * getTax());
-        
+        setTotalTaxCosts((getSubTotalCosts() + getShippingCosts()) * getTax());
         // recalculate total costs
         setTotalCosts(getSubTotalCosts() + getTotalTaxCosts() + getShippingCosts());
     }
