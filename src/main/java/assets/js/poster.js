@@ -18,18 +18,7 @@ function hideMessages() {
 }
 
 function deleteFromCart(cartProductId, cartIndex) {
-	hideMessages();
-	var url = CONTEXT_PATH + '/deleteFromCart?cartProductId=' + cartProductId;
-	$.get(url, function(data) {
-		// remove product from cart overview
-		$('#product' + cartIndex).remove();
-		// update cart in header
-		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
-		// update total price
-		$("#totalPrice:first-child").text(data.totalPrice);
-		// update mini cart
-		getMiniCartText();
-	});
+	updateProductCount(cartProductId, 0, cartIndex);
 }
 
 function updateProductCount(cartProductId, count, cartIndex) {
