@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="7" baseURL="http://localhost:8080">
   <description>Simulates browsing the catalog, adding product(s) to the cart, log in and get one cart which includes the products added just now and the products of the customer's cart.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
   <module name="posters.functional.modules.CreateRandomUser"/>
@@ -37,8 +37,10 @@
   </module>
   <action name="RemoveProductFromCart"/>
   <command name="click" target="css=#btnRemoveProdCount0"/>
+  <command name="waitForNotElementPresent" target="css=#btnRemoveProdCount0"/>
   <action name="RemoveProductFromCart"/>
   <command name="click" target="css=#btnRemoveProdCount1"/>
+  <command name="waitForNotElementPresent" target="css=#btnRemoveProdCount1"/>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="0"/>
   </module>
