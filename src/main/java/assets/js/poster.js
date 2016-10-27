@@ -46,6 +46,10 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		if (count == 0) {
 			// remove product from cart overview
 			$('#product' + cartIndex).remove();
+			//reload page to show empty cart if no products left
+			if(!$('.cartOverviewProduct').length){
+				window.location.reload();
+			}							
 		}
 	}).error(function(data) {
 		var errMsg = eval("(" + data.responseText + ")");
