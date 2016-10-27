@@ -227,7 +227,7 @@ public class Cart
 
     public void calculateTotalTaxPrice()
     {
-        setTotalTaxPrice(getTax() * getSubTotalPrice());
+        setTotalTaxPrice(getTax() * (getSubTotalPrice()+ getShippingCosts()));
     }
 
     /**
