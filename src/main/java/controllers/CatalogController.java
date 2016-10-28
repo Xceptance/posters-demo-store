@@ -142,7 +142,7 @@ public class CatalogController
         // get the given top category
         final TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
         // get the marked products, which should show in the top category
-        final PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category).eq("showInTopCategorie", true)
+        final PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category)
                                                     .findPagingList(pageSize);
         // add all products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);

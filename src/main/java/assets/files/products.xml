@@ -12,7 +12,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_1.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.00;25.50;32.95</price>
 	</product>
@@ -49,8 +48,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_4.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
-		<showInTopCategory>true</showInTopCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>10.50;15.64;20.22</price>
 	</product>
@@ -77,8 +74,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_6.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
-		<showInTopCategory>true</showInTopCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;23.99;29.99</price>
 	</product>
@@ -103,7 +98,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Animals/Animals_8.jpg
 		</imageURL>
 		<subCategory>Animals</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.87;19.99;25.99</price>
 	</product>
@@ -141,7 +135,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_1.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>0.30;1.45;5.99</price>
 	</product>
@@ -207,7 +200,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_6.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>35.70;50.00;65.89</price>
 	</product>
@@ -235,7 +227,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_8.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;24.99;38.10</price>
 	</product>
@@ -249,7 +240,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Flowers/Flowers_9.jpg
 		</imageURL>
 		<subCategory>Flowers</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;24.99;38.10</price>
 	</product>
@@ -343,7 +333,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_6.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>29.99;39.90;45.99</price>
 	</product>
@@ -356,7 +345,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_7.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;24.99;33.33</price>
 	</product>
@@ -370,7 +358,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_8.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;24.99;33.33</price>
 	</product>
@@ -385,7 +372,6 @@
 		<imageURL>/assets/img/products/Flora_and_Fauna/Trees/Trees_9.jpg
 		</imageURL>
 		<subCategory>Trees</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;24.99;33.33</price>
 	</product>
@@ -414,7 +400,6 @@
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_1.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;25.90;29.99</price>
 	</product>
@@ -427,7 +412,6 @@
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_2.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>16.89;27.90;40.00</price>
 	</product>
@@ -440,7 +424,6 @@
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_3.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>9.99;18.99;27.99</price>
 	</product>
@@ -453,7 +436,6 @@
 		<imageURL>/assets/img/products/Food/Cold_Cuts/Cold_Cuts_4.jpg
 		</imageURL>
 		<subCategory>Cold Cuts</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>16.75;28.90;54.90</price>
 	</product>
@@ -544,7 +526,6 @@
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_1.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>16.68;24.90;29.99</price>
 	</product>
@@ -557,7 +538,6 @@
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_2.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;43.00</price>
 	</product>
@@ -572,7 +552,6 @@
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_3.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>29.10;35.50;45.60</price>
 	</product>
@@ -612,7 +591,6 @@
 		<imageURL>/assets/img/products/Food/Grillables/Grillables_6.jpg
 		</imageURL>
 		<subCategory>Main Dishes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>11.12;13.14;15.16</price>
 	</product>
@@ -679,7 +657,6 @@
 		</longDescription>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_1.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>23.78;28.89;35.45</price>
 	</product>
@@ -691,7 +668,6 @@
 		</longDescription>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_2.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>11.78;21.84;29.87</price>
 	</product>
@@ -740,7 +716,6 @@
 		</longDescription>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_6.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>9.89;19.78;28.79</price>
 	</product>
@@ -753,7 +728,6 @@
 		</longDescription>
 		<imageURL>/assets/img/products/Food/Sweets/Sweets_7.jpg</imageURL>
 		<subCategory>Sweets</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;27.99;39.56</price>
 	</product>
@@ -825,7 +799,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_3.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.59;21.90;29.99</price>
 	</product>
@@ -866,7 +839,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_6.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -892,7 +864,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Airplanes/Airplanes_8.jpg
 		</imageURL>
 		<subCategory>Air Travel</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.95;27.90;38.40</price>
 	</product>
@@ -929,7 +900,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_1.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -942,7 +912,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_2.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.95;18.40;27.90</price>
 	</product>
@@ -956,7 +925,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_3.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>18.36;28.65;41.10</price>
 	</product>
@@ -1044,7 +1012,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Classic_Cars/Classic_Cars_10.jpg
 		</imageURL>
 		<subCategory>Classic Cars</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>13.65;23.67;34.78</price>
 	</product>
@@ -1059,7 +1026,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_1.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -1086,7 +1052,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_3.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.45;21.20;33.33</price>
 	</product>
@@ -1111,7 +1076,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_5.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -1177,7 +1141,6 @@
 		<imageURL>/assets/img/products/Means_of_Transportation/Railways/Railways_10.jpg
 		</imageURL>
 		<subCategory>Railways</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 	</product>
 	<!--TopCategory Panoramas -->
@@ -1193,7 +1156,6 @@
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_1.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.90;23.90;34.90</price>
 	</product>
@@ -1208,7 +1170,6 @@
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_2.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>13.78;19.90;25.90</price>
 	</product>
@@ -1223,7 +1184,6 @@
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_3.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -1239,7 +1199,6 @@
 		<imageURL>/assets/img/products/Panoramas/Buildings/Buildings_4.jpg
 		</imageURL>
 		<subCategory>Architecture</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -1339,7 +1298,6 @@
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_1.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>14.78;25.90;34.60</price>
 	</product>
@@ -1354,7 +1312,6 @@
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_2.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>15.57;23.45;45.67</price>
 	</product>
@@ -1409,7 +1366,6 @@
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_6.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -1448,7 +1404,6 @@
 		<imageURL>/assets/img/products/Panoramas/Fireworks/Fireworks_9.jpg
 		</imageURL>
 		<subCategory>Fireworks</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.90;39.90</price>
 	</product>
@@ -1494,7 +1449,6 @@
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_2.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>17.99;29.99;39.99</price>
 	</product>
@@ -1507,7 +1461,6 @@
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_3.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>15.55;23.44;34.55</price>
 	</product>
@@ -1537,7 +1490,6 @@
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_5.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>12.25;19.90;28.30</price>
 	</product>
@@ -1553,7 +1505,6 @@
 		<imageURL>/assets/img/products/Panoramas/Landscapes/Landscapes_6.jpg
 		</imageURL>
 		<subCategory>Landscapes</subCategory>
-		<showInTopCategory>true</showInTopCategory>
 		<availableSize>16x12;32x24;64x48</availableSize>
 		<price>16.00;29.98;37.90</price>
 	</product>
