@@ -214,6 +214,14 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	padding-right: 0;
 }
 
+#errorMessage {
+	display: none;
+}
+
+#successMessage {
+	display: none;
+}
+
 header {
 	background-color: #f8f8f8;
 	border-bottom: 1px solid #d3d7cf;

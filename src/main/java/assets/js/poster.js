@@ -9,14 +9,6 @@ $(document).ready(function() {
 	});
 });
 
-$(document).ready(hideMessages);
-
-function hideMessages() {
-	$("#errorMessage").hide();
-	$("#successMessage").hide();
-	$("#infoMessage").hide();
-}
-
 function deleteFromCart(cartProductId, cartIndex) {
 	updateProductCount(cartProductId, 0, cartIndex);
 }
@@ -25,7 +17,6 @@ function updateProductCount(cartProductId, count, cartIndex) {
 	var url = CONTEXT_PATH + '/updateProductCount?cartProductId=' + cartProductId
 			+ '&productCount=' + count;
 	$.get(url).always(function() {
-		hideMessages();
 	}).done(function(data) {
 		// update cart in header
 		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
