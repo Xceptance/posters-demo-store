@@ -37,10 +37,11 @@
   </module>
   <action name="RemoveProductFromCart"/>
   <command name="click" target="css=#btnRemoveProdCount0"/>
-  <command name="waitForNotElementPresent" target="css=#btnRemoveProdCount0"/>
+  <command name="waitForNotElementPresent" target="css=#product0"/>
   <action name="RemoveProductFromCart"/>
   <command name="click" target="css=#btnRemoveProdCount1"/>
-  <command name="waitForNotElementPresent" target="css=#btnRemoveProdCount1"/>
+  <command name="waitForNotElementPresent" target="css=#product1"/>
+  <command name="waitForElementPresent" target="css=#errorCartMessage"/>
   <module name="posters.functional.modules.VerifyCartOverview">
     <parameter name="productCount" value="0"/>
   </module>
