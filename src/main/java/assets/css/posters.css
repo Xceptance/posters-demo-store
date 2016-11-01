@@ -214,11 +214,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	padding-right: 0;
 }
 
-#errorMessage {
-	display: none;
-}
-
-#successMessage {
+#errorMessage, #successMessage {
 	display: none;
 }
 
