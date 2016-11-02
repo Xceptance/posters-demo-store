@@ -147,19 +147,20 @@
 		<div class="container-fluid col-xs-12" id="categoryMenu">
 			<#list topCategory as tC>
 			<ul class="nav navbar-nav header-menu-item">
-				<li class="dropdown"><a class="dropdown-toggle"
-					href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" id="topCategory${tC_index}"
-					title="${tC.name}" alt="${tC.name}"> <span
-						class="topCategoryMenuItem">${tC.name}</span> <span class="caret"></span>
-				</a>
-
-					<ul class="dropdown-menu">
-						<#list tC.subCategories as sC>
-						<li><a
-							href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}"
-							title="${sC.name}" alt="${sC.name}"><span
-								class="subCategoryMenuItem">${sC.name}</span></a></li> </#list>
-					</ul></li>
+				<li class="dropdown">
+					<span id="topCategory${tC_index}" title="${tC.name}" alt="${tC.name}">
+						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
+						<span class="caret dropdown-toggle" data-toggle="dropdown"></span>
+						<ul class="dropdown-menu">
+							<#list tC.subCategories as sC>
+							<li>
+								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}" alt="${sC.name}">
+									<span class="subCategoryMenuItem">${sC.name}</span>
+								</a>
+							</li> </#list>
+						</ul>						
+					</span>
+				</li>
 			</ul>
 			</#list>
 		</div>

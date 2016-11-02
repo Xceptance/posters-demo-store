@@ -39,7 +39,7 @@ public class SelectCategory extends AbstractHtmlPageAction
     {
         // Get all drop down item links and select one randomly.
         categoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
-                                                                "id('categoryMenu')/ul/li[@class='dropdown']/ul[@class='dropdown-menu']/li/a");
+                                                                "id('categoryMenu')//ul[@class='dropdown-menu']/li/a");
 
     }
 

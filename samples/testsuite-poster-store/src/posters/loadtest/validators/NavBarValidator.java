@@ -42,7 +42,7 @@ public class NavBarValidator
             // relative xpath to address the first sibling after the top
             // category that is a drop down item
             Assert.assertTrue("Top category is not followed by a level-1 category.",
-                              HtmlPageUtils.isElementPresent(htmlElement, "./child::li[1][@class='dropdown']/ul[@class='dropdown-menu']/li/a"));
+                              HtmlPageUtils.isElementPresent(htmlElement, "./child::li[1][@class='dropdown']/span/ul[@class='dropdown-menu']/li/a"));
         }
 
     }

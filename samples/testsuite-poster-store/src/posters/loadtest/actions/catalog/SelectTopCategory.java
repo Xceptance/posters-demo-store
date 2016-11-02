@@ -40,9 +40,9 @@ public class SelectTopCategory extends AbstractHtmlPageAction
     {
         // Get all top category links and select one randomly.
         topCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
-                                                                   "id('categoryMenu')/ul[@class='nav navbar-nav header-menu-item']/li[@class='dropdown']/a");
+                                                                   "id('categoryMenu')//a[@class='topCategoryMenuItem']");
         subCategoryLink = HtmlPageUtils.findHtmlElementsAndPickOne(getPreviousAction().getHtmlPage(),
-                                                                    "id('categoryMenu')/ul[@class='nav navbar-nav header-menu-item']/li[@class='dropdown']/ul[@class='dropdown-menu']/li/a");
+                                                                    "id('categoryMenu')//ul[@class='dropdown-menu']/li/a");
     }
 
     @Override
