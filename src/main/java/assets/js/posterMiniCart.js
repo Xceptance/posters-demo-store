@@ -18,7 +18,7 @@ function getMiniCartText() {
 		type : "GET",
 		url : CONTEXT_PATH + '/getMiniCartElements',
 		success : function(data) {
-			$('#cartMiniElementList').empty();
+			$('.cartMiniElementList').empty();
 
 			/* start with the last product*/
 			for (var i = (data.productsInCartList.length-1); i >= 0; i--) {
@@ -31,7 +31,7 @@ function getMiniCartText() {
 						"<li class='cartMiniProductsListItems'></li>")
 						.html(inner);
 
-				$("#cartMiniElementList").prepend(liElement);
+				$(".cartMiniElementList").prepend(liElement);
 
 			}
 
@@ -39,7 +39,7 @@ function getMiniCartText() {
 			$("#cartMiniProductCounter span.value").text(
 					data.cartProductCount);
 			// update total sub Order Price
-			$('#cartMiniTotalSubOrderPrice').text(
+			$('.subOrderPrice').text(
 					data.currency + data.subTotalPrice);
 
 			$("#notificationsLoader").empty();
@@ -66,21 +66,14 @@ function addToMiniCart(productId, finish, size) {
 			var liElement = $("<li id='" + liId + "' class=\"miniCartItem\" prodID= '" + data.product.productId + "'></li>").html(inner);
 			
 			/* exist product then replace, if not exist append product*/
-			if( $("#" + liId).length > 0)
-			{
+			while ($('#' + liId).length){
 				$("#" + liId).remove();
-				$("#cartMiniElementList").prepend(liElement);
-			}
-			else
-			{
-				$("#cartMiniElementList").prepend(liElement);
-			}
-			
+			}				
+		
 			/* replace */
-			$("#cartMiniElementList").prepend(liElement);
-
+			$(".cartMiniElementList").prepend(liElement);
 			/* update total sub Order Price */
-			$('#cartMiniTotalSubOrderPrice').text(
+			$('.subOrderPrice').text(
 					data.currency + data.subOrderTotal);
 			/* notification off */
 			$("#notificationsLoader").empty();
@@ -93,9 +86,9 @@ function addToMiniCart(productId, finish, size) {
 					data.headerCartOverview);
 
 			/* show minicart and than hide after 1500 ms */
-			$('#headerCartOverview').dropdown("toggle");
+			$('#headerCartOverview').parent().addClass("open");
 			window.setTimeout(function(){
-				$('#headerCartOverview').dropdown("toggle");
+				$('#headerCartOverview').parent().removeClass("open");
 			},1500);
 		}
 	});
