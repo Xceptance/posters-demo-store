@@ -150,7 +150,7 @@
 				<li class="dropdown">
 					<span id="topCategory${tC_index}" title="${tC.name}" alt="${tC.name}">
 						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-						<span class="caret dropdown-toggle" data-toggle="dropdown"></span>
+						<span class="dropdown-toggle caret-dropdown" data-toggle="dropdown"><span class="caret"></span></span>
 						<ul class="dropdown-menu">
 							<#list tC.subCategories as sC>
 							<li>

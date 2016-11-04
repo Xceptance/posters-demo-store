@@ -236,6 +236,14 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	}
 }
 
+.caret-dropdown {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+	.caret-dropdown .caret{
+		margin-left: 5px;
+	}
 
 header {
 	background-color: #f8f8f8;
