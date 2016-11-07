@@ -26,9 +26,9 @@
 	      };
 </script>
 
-<fieldset>
+<div class="col-sm-12">
 	<legend>
-		<div class="container-fluid">
+		<div>
 			<#if category??>
 			<div id="titleCategoryName" class="h2">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if searchText??>
@@ -43,7 +43,7 @@
 	<div id="productOverview" currentPage="${currentPage}">
 		<#list products as pro> <#if (pro_index + 3) % 3 == 0>
 		<div class="row">
-			<ul class="thumbnails list-unstyled">
+			<ul class="thumbnails list-unstyled row">
 				</#if>
 				<li class="col-md-4">
 					<div id="product${pro_index}" class="thumbnail">
@@ -87,7 +87,7 @@
 			<ul id="pagination-bottom"></ul>
 		</div>
 	</div>
-</fieldset>
+</div>
 <script type="text/javascript">	
         $('#pagination-bottom').bootstrapPaginator(options);
 	</script>

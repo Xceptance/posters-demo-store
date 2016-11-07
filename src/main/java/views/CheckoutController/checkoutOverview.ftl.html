@@ -1,6 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
+<div>
 	<div id="titleOrderOverview"></div>
 	<div class="row">
 		<ul class="list-unstyled">
@@ -127,20 +127,20 @@
 					</div>
 
 				</li>
-				<!-- print tax -->
-				<li class="bgLightGrey2 row" id="tax">
-					<div class="col-xs-6 text-left">
-						${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%)</div>
-					<div class="col-xs-6 text-right">
-						<span id="subTotalTaxValue" class="value">${currency}${order.getTotalTaxCostsAsString()}</span>
-					</div>
-				</li>
 				<!-- print shipping price -->
 				<li class="bgLightGrey2 row" id="shippingCosts">
 					<div class="col-xs-6 text-left">
 						${i18n("checkoutOverviewShippingCosts")}</div>
 					<div class="col-xs-6 text-right">
 						<span id="subTotalTaxValue" class="value">${currency}${order.getShippingCostsAsString()}</span>
+					</div>
+				</li>				
+				<!-- print tax -->
+				<li class="bgLightGrey2 row" id="tax">
+					<div class="col-xs-6 text-left">
+						${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%)</div>
+					<div class="col-xs-6 text-right">
+						<span id="subTotalTaxValue" class="value">${currency}${order.getTotalTaxCostsAsString()}</span>
 					</div>
 				</li>
 				<!-- print total price -->
@@ -166,5 +166,5 @@
 			</div>
 		</div>
 	</div>
-</fieldset>
+</div>
 </@layout.myLayout>
