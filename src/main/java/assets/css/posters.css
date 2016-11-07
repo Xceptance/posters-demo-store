@@ -218,19 +218,19 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 #errorMessage, #successMessage {
 	display: none;
 }
-#categoryMenu li > span{
+#categoryMenu li > span, #categoryMenuMobile li > span{
 	position: relative;
     display: block;
     padding: 10px 15px;
     color: #777;
     text-decoration: none;
 }
-#categoryMenu li > span > a{
+#categoryMenu li > span > a, #categoryMenuMobile li > span > a{
     color: inherit;
     text-decoration: inherit;
 }
 @media (min-width: 768px) {
-	#categoryMenu li > span{
+	#categoryMenu li > span, #categoryMenuMobile li > span{
 	    padding-top: 15px;
 	    padding-bottom: 15px;
 	}

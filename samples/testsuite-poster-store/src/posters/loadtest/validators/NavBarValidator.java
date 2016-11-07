@@ -31,7 +31,7 @@ public class NavBarValidator
         // Check that the category menu contains at least two top categories
         // For this purpose we get a list of all top categories and check the
         // size of the list
-        final List<HtmlElement> topCategories = HtmlPageUtils.findHtmlElements(page, "id('categoryMenu')/ul[@class='nav navbar-nav header-menu-item']");
+        final List<HtmlElement> topCategories = HtmlPageUtils.findHtmlElements(page, "id('categoryMenu')/ul[@class='nav navbar-nav header-menu-item hidden-xs']");
         Assert.assertTrue("There are less then two top categories in the side nav.", topCategories.size() >= 2);
 
         // Check that each top category has at least one drop down item
