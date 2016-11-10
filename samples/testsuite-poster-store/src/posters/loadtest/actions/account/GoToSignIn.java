@@ -41,10 +41,10 @@ public class GoToSignIn extends AbstractHtmlPageAction
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
         // Check that no customer is logged in.
-        Assert.assertTrue("A customer is already logged in.", HtmlPageUtils.isElementPresent(page, "id('btnAccountLogin')"));
+        Assert.assertTrue("A customer is already logged in.", HtmlPageUtils.isElementPresent(page, "id('userMenu')//a[@class='goToLogin']"));
 
         // Remember the sign in button.
-        signInButton = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('userMenu')/li[@class='userMenuContent']/a[@id='btnShowLoginForm']/span[@id='btnAccountLogin']");
+        signInButton = HtmlPageUtils.findSingleHtmlElementByXPath(page, "id('userMenu')//a[@class='goToLogin']");
     }
 
     @Override

@@ -81,9 +81,9 @@ public class ProductDetailView extends AbstractHtmlPageAction
 
         // The product description is there in the right presentation (h3 - h4 -span).
         Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).",
-                          HtmlPageUtils.isElementPresent(page, "id('main')/form/div/div[2]/h4[@id='prodDescriptionOverview']"));
+                          HtmlPageUtils.isElementPresent(page, "id('prodDescriptionOverview')"));
         Assert.assertTrue("Product description is not there or not in the right presentation (h3 - h4 -span).",
-                          HtmlPageUtils.isElementPresent(page, "id('main')/form/div/div[2]/div/div[@id='prodDescriptionDetail']"));
+                          HtmlPageUtils.isElementPresent(page, "id('prodDescriptionDetail')"));
         // There is a price with the correct currency.
         final HtmlElement productPriceElement = HtmlPageUtils.findSingleHtmlElementByID(page, "prodPrice");
         final String productPrice = productPriceElement.getTextContent();

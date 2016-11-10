@@ -94,7 +94,7 @@ public class Login extends AbstractHtmlPageAction
         HeaderValidator.getInstance().validate(page);
 
         // Check that the customer is logged in.
-        Assert.assertTrue("Customer is not logged in.", HtmlPageUtils.isElementPresent(page, "id('btnAccountOverview')"));
+        Assert.assertTrue("Customer is not logged in.", HtmlPageUtils.isElementPresent(page, "id('userMenu')//a[@class='goToAccountOverview']"));
 
         // Check that it's the homepage.
         final HtmlElement blogNameElement = page.getHtmlElementById("titleIndex");
