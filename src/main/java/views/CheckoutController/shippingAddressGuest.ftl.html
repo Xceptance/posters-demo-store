@@ -1,49 +1,47 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
-	<legend id="titleDelAddr">
-		<h2>${i18n("shippingAddressTitleEnter")}</h2>
-	</legend>
+<div>
+    <div id="titleDelAddr" class="header-container">
+        <h2>${i18n("shippingAddressTitleEnter")}</h2>
+    </div>
 
-	<!-- enter address -->
-	<form id="formAddDelAddr" class="form-horizontal"
-		action="${contextPath}/shippingAddressCompleted" method="post">
+    <!-- enter address -->
+    <form id="formAddDelAddr" class="form-horizontal"
+          action="${contextPath}/shippingAddressCompleted" method="post">
 
-		<!-- include form -->
-		<#include "../components/addressForm.ftl.html"/>
+        <!-- include form -->
+        <#include "../components/addressForm.ftl.html"/>
 
-		<hr>
+        <hr>
 
-		<!-- choose: shipping equals billing address -->
-		<div class="form-group">
-			<label class="col-sm-11 control-label text-right"
-				for="billEqualShipp">${i18n("shippingAddressEqualsBillingAddress")}?*</label>
-			<div class="col-sm-1">
-				<label for="billEqualShipp-Yes"> <input
-					name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
-					checked="checked" type="radio"> ${i18n("chooseYes")}
-				</label> <label for="billEqualShipp-No"> <input
-					name="billEqualShipp" id="billEqualShipp-No" value="No"
-					type="radio"> ${i18n("chooseNo")}
-				</label>
-			</div>
-		</div>
+        <!-- choose: shipping equals billing address -->
+        <div class="form-group">
+            <div class="col-sm-11 control-label text-right font-bold">${i18n("shippingAddressEqualsBillingAddress")}?*</div>
+            <div class="col-sm-1">
+                <label for="billEqualShipp-Yes"> <input
+                        name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
+                        checked="checked" type="radio"> ${i18n("chooseYes")}
+                </label> <label for="billEqualShipp-No"> <input
+                        name="billEqualShipp" id="billEqualShipp-No" value="No"
+                        type="radio"> ${i18n("chooseNo")}
+                </label>
+            </div>
+        </div>
 
-		<hr>
+        <hr>
 
-		<!-- continue button -->
-		<div class="form-group">
-			<div class="col-sm-12 nopadding">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-9">
-					<span class="reqField pull-left textcolordarkgrey">*
-						${i18n('titleRequiredFields')}</span>
-					<button id="btnAddDelAddr" class="btn btn-primary pull-right"
-						name="btnAddDelAddr" type="submit">${i18n('buttonContinue')}</button>
-				</div>
-			</div>
-		</div>
+        <!-- continue button -->
+        <div class="form-group">
+            <div class="col-sm-12 nopadding">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <span class="reqField pull-left textcolordarkgrey">* ${i18n('titleRequiredFields')}</span>
+                    <button id="btnAddDelAddr" class="btn btn-primary pull-right"
+                            name="btnAddDelAddr" type="submit">${i18n('buttonContinue')}</button>
+                </div>
+            </div>
+        </div>
 
-	</form>
-</fieldset>
+    </form>
+</div>
 </@layout.myLayout>

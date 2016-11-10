@@ -2,11 +2,11 @@
 <@layout.myLayout "Sign in">
 <form id="formLogin" class="form-horizontal"
 	action="${applUrlHttps}/login" method="post">
-	<fieldset>
+	<div>
 		<!-- Form Name -->
-		<legend>
+		<div class="header-container">
 			<h2>${i18n("titleSignIn")}</h2>
-		</legend>
+		</div>
 		<div class="col-sm-12">
 
 			<!-- Email input-->
@@ -46,14 +46,16 @@
 			</div>
 
 		</div>
-	</fieldset>
+	</div>
 </form>
 
-<fieldset>
-	<legend>${i18n("registrationNew")}</legend>
+<div>
+	<div class="header-container">
+            <span class="h3">${i18n("registrationNew")}</span>
+        </div>
 	<!-- new customer -->
 	<div>
 		<a id="linkRegister" href="${applUrlHttps}/registration">${i18n("registrationRegister")}</a>
 	</div>
-</fieldset>
+</div>
 </@layout.myLayout>

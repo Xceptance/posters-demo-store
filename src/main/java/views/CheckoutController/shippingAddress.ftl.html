@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
-	<legend id="titleDelAddr">
+<div>
+	<div id="titleDelAddr" class="header-container">
 		<h2>${i18n("shippingAddressTitleSelect")}</h2>
-	</legend>
+	</div>
 	<#if shippingAddresses??>
 	<!-- choose available address -->
 	<form action="addShippingAddressToOrder" method="post">
@@ -78,15 +78,13 @@
 									<div>
 										<label for="billEqualShipp-Yes"> <input
 											name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
-											checked="checked" type="radio" alt="${i18n('chooseYes')}"
-											title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
+											checked="checked" type="radio" title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
 										</label>
 									</div>
 									<div>
 										<label for="billEqualShipp-No"> <input
 											name="billEqualShipp" id="billEqualShipp-No" value="No"
-											type="radio" alt="${i18n('chooseNo')}"
-											title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
+											type="radio" title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
 										</label>
 									</div>
 								</div>
@@ -96,17 +94,15 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							alt="${i18n('buttonClose')}" title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
 						<!-- continue button -->
 						<button id="btnAddAddr" name="btnAddAddr"
-							class="btn btn-primary pull-right" type="submit"
-							alt="${i18n('buttonContinue')}" title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
+							class="btn btn-primary pull-right" type="submit" title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
 					</div>
 				</div>
 			</form>
 		</div>
 
 	</div>
-</fieldset>
+</div>
 </@layout.myLayout>

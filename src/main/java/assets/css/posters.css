@@ -54,7 +54,7 @@
 	margin-top: 7px;
 }
 
-.fontBold {
+.font-bold {
 	font-weight: bold;
 }
 
@@ -203,6 +203,14 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	text-decoration: none;
 }
 
+#btnCarouselPrev{
+	margin-left: 15px;
+}
+
+#btnCarouselNext{
+	margin-right: 15px;
+}
+
 #productList .thumbnail {
 	padding-top: 0;
 }
@@ -218,32 +226,43 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 #errorMessage, #successMessage {
 	display: none;
 }
-#categoryMenu li > span, #categoryMenuMobile li > span{
+#categoryMenu li > div, #categoryMenuMobile li > div{
 	position: relative;
     display: block;
     padding: 10px 15px;
     color: #777;
     text-decoration: none;
 }
-#categoryMenu li > span > a, #categoryMenuMobile li > span > a{
+#categoryMenu li > div > a, #categoryMenuMobile li > div > a{
     color: inherit;
     text-decoration: inherit;
 }
 @media (min-width: 768px) {
-	#categoryMenu li > span, #categoryMenuMobile li > span{
+	#categoryMenu li > div{
 	    padding-top: 15px;
 	    padding-bottom: 15px;
 	}
 }
 
-.caret-dropdown {
+.caret-container {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
 }
-	.caret-dropdown .caret{
+	.caret-container .caret{
 		margin-left: 5px;
 	}
+
+.header-container {
+	display: block;
+	width: 100%;
+	padding: 0px;
+	margin-bottom: 20px;
+	line-height: inherit;
+	color: #333;
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
 
 header {
 	background-color: #f8f8f8;

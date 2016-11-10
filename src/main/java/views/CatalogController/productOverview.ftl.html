@@ -26,9 +26,9 @@
 	      };
 </script>
 
-<div class="col-sm-12">
-	<legend>
-		<div>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="header-container">
 			<#if category??>
 			<div id="titleCategoryName" class="h2">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if searchText??>
@@ -37,34 +37,27 @@
 			<div id="titleNoResults" class="h2">${noResults}</div>
 			</#if>
 		</div>
-	</legend>
-
+	</div>
 	<!-- products -->
-	<div id="productOverview" currentPage="${currentPage}">
+	<div id="productOverview" class="col-xs-12">
 		<#list products as pro> <#if (pro_index + 3) % 3 == 0>
 		<div class="row">
 			<ul class="thumbnails list-unstyled row">
 				</#if>
-				<li class="col-md-4">
+				<li class="col-xs-12 col-sm-6 col-md-4">
 					<div id="product${pro_index}" class="thumbnail">
 						<div class="container-fluid">
-							<a
-								href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
-
+							<a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
 								<img data-src="${contextPath}/assets/js/holder.js/300x200"
+								alt="${pro.name}" title="${pro.name}"
 								src="${contextPath}${pro.imageURL}" class="pImage">
-
 								<div class="pInfo">
-									<div class="h4 text-primary">
-										<span class="pName">${pro.name}</span>
+									<h4 class="text-primary pName">${pro.name}</h4>
+									<div class="text-muted">
+										<p>
+											<span class="pDescriptionOverview">${pro.descriptionOverview}</span><br>${i18n("priceStart")} ${currency}<span class="font-bold pPrice">${pro.getPriceAsString()}</span>
+										</p>											
 									</div>
-									<span class="text-muted"> <span
-										class="pDescriptionOverview">${pro.descriptionOverview}</span>
-										<div>
-											${i18n("priceStart")} ${currency}<strong><span
-												class="pPrice">${pro.getPriceAsString()}</strong>
-										</div>
-									</span> </img> </span>
 								</div>
 							</a>
 						</div>
@@ -82,7 +75,7 @@
 <#if totalPages gt 1 >
 <!-- paging, only if more than one result page -->
 	<!-- paging -->
-	<div class="container-fluid h4">
+	<div class="col-xs-12 h4">
 		<div class="pagination pull-right">
 			<ul id="pagination-bottom"></ul>
 		</div>

@@ -1,7 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <fieldset>
-	<legend id="titlePaymentOverview"><h2>${i18n("titlePaymentInformation")}</h2></legend>
+    <legend id="titlePaymentOverview"><span class="h2">${i18n("titlePaymentInformation")}</span></legend>
 	<#list paymentOverview as payment>
 		<#if (payment_index + 3) % 3 ==0>
       		<div class="container-fluid">

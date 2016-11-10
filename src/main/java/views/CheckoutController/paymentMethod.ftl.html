@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
-	<legend id="titlePayment">
+<div>
+	<div id="titlePayment" class="header-container">
 		<h2>${i18n("paymentMethodTitleSelect")}</h2>
-	</legend>
+	</div>
 	<#if paymentOverview??>
 	<!-- choose available credit card -->
 	<form action="addPaymentToOrder" method="post">
@@ -71,17 +71,15 @@
 						</fieldset>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							alt="${i18n('buttonClose')}" title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
 						<!-- continue button -->
 						<button id="btnAddPayment" name="btnAddPayment"
-							class="btn btn-primary pull-right" type="submit"
-							alt="${i18n('buttonContinue')}" title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
+							class="btn btn-primary pull-right" type="submit" title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
 					</div>
 				</div>
 			</form>
 		</div>
 
 	</div>
-</fieldset>
+</div>
 </@layout.myLayout>

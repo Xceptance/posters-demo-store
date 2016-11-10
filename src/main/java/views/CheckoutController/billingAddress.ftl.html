@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
-	<legend id="titleBillAddr">
-		<h2>${i18n("billingAddressTitleSelect")}</h2>
-	</legend>
+<div>
+	<div id="titleBillAddr" class="header-container">
+            <span class="h2">${i18n("billingAddressTitleSelect")}</span>
+	</div>
 	<#if billingAddresses??>
 	<!-- choose available address -->
 	<form action="${contextPath}/addBillingAddressToOrder" method="post">
@@ -79,12 +79,11 @@
 							<span class="reqField pull-left textcolordarkgrey">*
 								${i18n('titleRequiredFields')}</span>
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal" alt="${i18n('buttonClose')}"
+								data-dismiss="modal"
 								title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
 							<!-- continue button -->
 							<button id="btnAddBillAddr" name="btnAddBillAddr"
 								class="btn btn-primary pull-right" type="submit"
-								alt="${i18n('buttonContinue')}"
 								title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
 						</div>
 					</div>
@@ -93,5 +92,5 @@
 		</div>
 
 	</div>
-</fieldset>
+</div>
 </@layout.myLayout>

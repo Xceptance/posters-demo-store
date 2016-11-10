@@ -12,7 +12,7 @@ function showMiniCart() {
 
 function getMiniCartText() {
 
-	$("#notificationsLoader").html(
+	$(".notificationsLoader").html(
 			'<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
 	$.ajax({
 		type : "GET",
@@ -36,13 +36,13 @@ function getMiniCartText() {
 			}
 
 			// update product counter in mini-cart
-			$("#cartMiniProductCounter span.value").text(
+			$(".cartMiniProductCounter span.value").text(
 					data.cartProductCount);
 			// update total sub Order Price
 			$('.subOrderPrice').text(
 					data.currency + data.subTotalPrice);
 
-			$("#notificationsLoader").empty();
+			$(".notificationsLoader").empty();
 		}
 	});
 
@@ -53,7 +53,7 @@ function addToCart(productId, finish, size) {
 	addToMiniCart(productId, finish, size);
 }
 function addToMiniCart(productId, finish, size) {
-	$("#notificationsLoader").html(
+	$(".notificationsLoader").html(
 			'<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
 	$.ajax({
 		type : "GET",
@@ -63,26 +63,23 @@ function addToMiniCart(productId, finish, size) {
 			// create new <li> element
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
 			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
-			var liElement = $("<li id='" + liId + "' class=\"miniCartItem\" prodID= '" + data.product.productId + "'></li>").html(inner);
+			var liElement = $("<li class='" + liId +  " miniCartItem'" + "></li>").html(inner);
 			
-			/* exist product then replace, if not exist append product*/
-			while ($('#' + liId).length){
-				$("#" + liId).remove();
-			}				
-		
+			/* remove existing product*/
+			$("." + liId).remove();				
 			/* replace */
 			$(".cartMiniElementList").prepend(liElement);
 			/* update total sub Order Price */
 			$('.subOrderPrice').text(
 					data.currency + data.subOrderTotal);
 			/* notification off */
-			$("#notificationsLoader").empty();
+			$(".notificationsLoader").empty();
 
 			/* update cart in header (counter) */
 			$("#headerCartOverview span.headerCartProductCount").text(
 					data.headerCartOverview);
 			/* update product counter in mini-cart */
-			$("#cartMiniProductCounter span.value").text(
+			$(".cartMiniProductCounter span.value").text(
 					data.headerCartOverview);
 
 			/* show minicart and than hide after 1500 ms */

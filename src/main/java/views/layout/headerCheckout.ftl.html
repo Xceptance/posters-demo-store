@@ -1,37 +1,27 @@
-<nav id="headerCheckout" class="navbar navbar-default navbar-static-top">
-	<div class="row">
-		<div class="navbar-header col-xs-12 col-sm-11">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
-			<!-- navbar-brand -->
-			<div class="col-xs-7 col-sm-12 navbar-brand">
-				<a id="brand" href="${applUrlHttp}/" alt="${i18n('titleShop')}"
-					title="${i18n('titleShop')}"> <img
-					src="${contextPath}/assets/img/xceptanceLogo.png"
-					title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
-				</a>
-			</div>
-		</div>
-
-		<div class="col-sm-1">
-			<!-- login form -->
-			<ul id="btnShowLoginForm"
-				class="nav nav-pills header-menu-item col-sm-2">
-				<li role="presentation" class="dropdown"><a
-					class="dropdown-toggle" data-toggle="dropdown" href="#"
-					alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"
-					role="button" aria-haspopup="true" aria-expanded="false"> <span
-						class="glyphicon glyphicon-user"></span>
-				</a>
-					<ul class="dropdown-menu dropdown-menu-right">
-						<div id="userMenu"><#include
-							'../components/userMenu.ftl.html'/></div>
-					</ul>
-			</ul>
-		</div>
-	</div>
+<nav id="headerCheckout" class="navbar navbar-default navbar-static-top container-fluid">
+    <div class="row">
+        <div class="navbar-header col-xs-10">
+            <!-- navbar-brand -->
+            <div class="navbar-brand">
+                <a id="brand" href="${applUrlHttp}/" title="${i18n('titleShop')}"> <img
+                        src="${contextPath}/assets/img/xceptanceLogo.png"
+                        title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">${i18n('titleShop')}</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <!-- login form -->
+            <ul id="showUserMenu"
+                class="nav nav-pills header-menu-item col-sm-2">
+                <li role="presentation" class="dropdown pull-right"><a
+                        class="dropdown-toggle" data-toggle="dropdown" href="#" title="${i18n('headerLogin')}"
+                        role="button" aria-haspopup="true" aria-expanded="false"> <span
+                            class="glyphicon glyphicon-user"></span>
+                    </a>
+                    <ul id="userMenu" class="dropdown-menu dropdown-menu-right">
+                        <#include
+                        '../components/userMenu.ftl.html'/>
+                    </ul>
+            </ul>
+        </div>
+    </div>
 </nav>

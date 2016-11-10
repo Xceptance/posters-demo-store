@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
-	<legend id="titlePayment">
-		<span class="h2">${i18n("paymentMethodTitlEnter")}</span>
-	</legend>
+<div>
+	<div id="titlePayment" class="header-container">
+		<h2>${i18n("paymentMethodTitlEnter")}</h2>
+	</div>
 
 	<!-- add new credit card -->
 	<form id="formAddPayment" class="form-horizontal"
@@ -25,5 +25,5 @@
 			</div>
 		</div>
 	</form>
-</fieldset>
+</div>
 </@layout.myLayout>

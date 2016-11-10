@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<fieldset>
-	<legend id="titleBillAddr">
+<div>
+	<div id="titleBillAddr" class="header-container">
 		<span class="h2">${i18n("billingAddressTitleEnter")}</span>
-	</legend>
+	</div>
 
 	<!-- enter address -->
 	<form id="formAddBillAddr" class="form-horizontal"
@@ -23,5 +23,5 @@
 			</div>
 		</div>
 	</form>
-</fieldset>
+</div>
 </@layout.myLayout>

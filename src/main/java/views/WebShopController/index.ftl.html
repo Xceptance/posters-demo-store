@@ -1,11 +1,12 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<div class="col-sm-12">
-	<legend>
-		<span id="titleIndex" class="h2">${i18n("indexTitle")}</span>
-	</legend>
-
-	<div class="col-sm-12 nopadding">
+<div class="row">
+	<div class="col-xs-12">
+		<div class="header-container">
+			<span id="titleIndex" class="h2">${i18n("indexTitle")}</span>
+		</div>
+	</div>
+	<div class="col-xs-12">
 		<div id="pShopCarousel" class="carousel slide" data-ride="carousel">
 
 			<!-- Indicators -->
@@ -50,12 +51,14 @@
 		</div>
 </div>
 
-<div class="margin_top20 col-sm-12">
-	<legend>
-		<span class="h2">${i18n("indexHotProducts")}</span>
-	</legend>
+<div class="margin_top20 row">
+	<div class="col-xs-12">
+		<div class="header-container">
+			<span class="h2">${i18n("indexHotProducts")}</span>
+		</div>
+	</div>
 	<div class="row">
-		<ul id="productList" class="thumbnails list-unstyled">
+		<ul id="productList" class="thumbnails list-unstyled col-xs-12">
 			<#list productslist as prItem>
 			<li class="col-xs-12 col-sm-6 col-md-4">
 				<div class="thumbnail">
@@ -63,7 +66,7 @@
 						href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}"><img
 						data-src="${contextPath}/assets/js/holder.js/300x200"
 						alt="${prItem.descriptionOverview}"
-						src="${contextPath}${prItem.imageURL}"></img>
+						src="${contextPath}${prItem.imageURL}">
 
 						<div class="pInfo">
 							<div class="h4 text-primary">

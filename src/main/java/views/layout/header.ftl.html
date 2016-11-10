@@ -1,22 +1,18 @@
 <nav id="globalNavigation"
 	class="navbar navbar-default navbar-static-top">
-	<div class="row">
-
+	<div class="container-fluid">
+		<div class="row">
 		<!-- bootstrap header menu for larger than mobile -->
-		<div class="hidden-xs">
-			<div class="col-sm-4">
-				<a href="${applUrlHttp}/" alt="${i18n('titleShop')}"
-					title="${i18n('titleShop')}"> <img class="shopLogo"
-					src="${contextPath}/assets/img/xceptanceLogo.png"
-					title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" /><span
-					class="titleShopText">${i18n('titleShop')}</span>
+			<div class="col-sm-4 hidden-xs">
+				<a id="brand" href="${applUrlHttp}/" title="${i18n('titleShop')}"> 
+					<img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png"
+					  title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+					<span class="titleShopText">${i18n('titleShop')}</span>
 				</a>
 			</div>
-		</div>
 
 		<!-- bootstrap header menu for mobile -->
-		<div
-			class="navbar-header header-top-left col-xs-12 col-sm-5 hidden-sm hidden-md hidden-lg">
+		<div class="navbar-header header-top-left col-xs-12 col-sm-5 hidden-sm hidden-md hidden-lg">
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#categoryMenuMobile"
 				aria-expanded="false">
@@ -25,11 +21,10 @@
 			</button>
 			<!-- navbar-brand -->
 			<div class="col-xs-8 col-sm-12 navbar-brand">
-				<a id="brandMobile" href="${applUrlHttp}/"
-					alt="${i18n('titleShop')}" title="${i18n('titleShop')}"> <img
-					class="shopLogoMobile"
-					src="${contextPath}/assets/img/xceptanceLogo.png"
-					title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}" />${i18n('titleShop')}
+				<a id="brandMobile" href="${applUrlHttp}/" title="${i18n('titleShop')}">
+					<img class="shopLogoMobile" src="${contextPath}/assets/img/xceptanceLogo.png"
+					  title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+					<span>${i18n('titleShop')}</span>
 				</a>
 			</div>
 		</div>
@@ -46,11 +41,10 @@
 							action="${applUrlHttp}/search" method="get">
 							<input id="s" name="searchText" class="form-control"
 								type="search" placeholder="${i18n('headerSearch')}"
-								title="${i18n('headerSearch')}" alt="${i18n('headerSearch')}"
+								title="${i18n('headerSearch')}"
 								value="${(searchTerm)!}">
 
-							<button id="btnSearch" class="btn btn-primary" type="submit"
-								alt="${i18n('headerSearch')}" title="${i18n('headerSearch')}">
+							<button id="btnSearch" class="btn btn-primary" type="submit" title="${i18n('headerSearch')}">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 
@@ -72,12 +66,10 @@
 					<div class="col-xs-10">
 						<input id="sMobile" name="searchText" class="form-control"
 							type="search" placeholder="${i18n('headerSearch')}"
-							title="${i18n('headerSearch')}" alt="${i18n('headerSearch')}"
-							value="${(searchTerm)!}">
+							title="${i18n('headerSearch')}" value="${(searchTerm)!}">
 					</div>
 					<div class="col-xs-2">
-						<button id="btnSearchMobile" class="btn btn-primary" type="submit"
-							alt="${i18n('headerSearch')}" title="${i18n('headerSearch')}">
+						<button id="btnSearchMobile" class="btn btn-primary" type="submit" title="${i18n('headerSearch')}">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>
@@ -90,15 +82,11 @@
 			<ul id="btnCartOverviewForm"
 				class="nav nav-pills header-menu-item col-xs-12">
 				<li class="dropdown" role="presentation">
-				<a
-					id="headerCartOverview" class="dropdown-toggle" data-target="#"
-					data-toggle="dropdown" href="#" alt="${i18n('cartOverviewTitle')}"
-					title="${i18n('cartOverviewTitle')}" role="button"
-					aria-haspopup="true" aria-expanded="false"> 
-					
-					<span
-						class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span
-						class="headerCartProductCount">${cartProductCount}</span>
+				<a id="headerCartOverview" class="dropdown-toggle" data-target="#"
+					data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button"
+					aria-haspopup="true" aria-expanded="false"> 					
+					<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span 
+					class="headerCartProductCount">${cartProductCount}</span>
 				</a>
 
 
@@ -124,14 +112,12 @@
 		<div class="col-sm-1 header-top-right">
 
 			<!-- login form -->
-			<ul id="btnShowLoginForm"
-				class="nav nav-pills header-menu-item col-xs-12 col-sm-2">
-				<li role="presentation" class="dropdown"><a id="showLoginForm"
-					class="dropdown-toggle" data-toggle="dropdown" href="#"
-					alt="${i18n('headerLogin')}" title="${i18n('headerLogin')}"
-					role="button" aria-haspopup="true" aria-expanded="false"> <span
-						class="glyphicon glyphicon-user"></span>
-				</a>
+			<ul class="nav nav-pills header-menu-item col-xs-12 col-sm-2">
+				<li role="presentation" class="dropdown">
+					<a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
+						title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false"> <span
+							class="glyphicon glyphicon-user"></span>
+					</a>
 					<ul id="userMenu"
 						class="dropdown-menu dropdown-menu-right hidden-xs">
 						<#include '../components/userMenu.ftl.html'/>
@@ -140,49 +126,52 @@
 						class="dropdown-menu hidden-sm hidden-md hidden-lg">
 						<#include '../components/userMenu.ftl.html' />
 					</ul>
+				</li>
 			</ul>
 		</div>
+	</div>
 
-
-		<div class="container-fluid col-xs-12" id="categoryMenu">
-			<#list topCategory as tC>
-			<ul class="nav navbar-nav header-menu-item hidden-xs">
-				<li class="dropdown">
-					<span class="topCategory${tC_index}" title="${tC.name}" alt="${tC.name}">
+		<!-- categoreMenu - not mobile -->
+		<div class="row hidden-xs" id="categoryMenu">
+			<ul class="nav navbar-nav">
+				<#list topCategory as tC>				
+				<li class="dropdown header-menu-item">
+					<div class="topCategory${tC_index}" title="${tC.name}">
 						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-						<span class="dropdown-toggle caret-dropdown" data-toggle="dropdown"><span class="caret"></span></span>
+						<span class="dropdown-toggle caret-container" data-toggle="dropdown"><span class="caret"></span></span>
 						<ul class="dropdown-menu">
 							<#list tC.subCategories as sC>
 							<li>
-								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}" alt="${sC.name}">
+								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
 									<span class="subCategoryMenuItem">${sC.name}</span>
 								</a>
 							</li> </#list>
 						</ul>						
-					</span>
+					</div>
 				</li>
+			</#list>				
 			</ul>
-			</#list>
 		</div>
-		<div class="container-fluid col-xs-12 collapse in hidden-sm hidden-md hidden-lg" id="categoryMenuMobile">
-			<#list topCategory as tC>
-			<ul class="nav navbar-nav header-menu-item">
-				<li class="dropdown">
-					<span class="topCategory${tC_index}" title="${tC.name}" alt="${tC.name}">
+		<!-- categoreMenu - mobile -->
+		<div class="collapse hidden-sm hidden-md hidden-lg" id="categoryMenuMobile">			
+			<ul class="nav navbar-nav">
+				<#list topCategory as tC>
+				<li class="dropdown header-menu-item">
+					<div class="topCategory${tC_index}" title="${tC.name}">
 						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-						<span class="dropdown-toggle caret-dropdown" data-toggle="dropdown"><span class="caret"></span></span>
+						<span class="dropdown-toggle caret-container" data-toggle="dropdown"><span class="caret"></span></span>
 						<ul class="dropdown-menu">
 							<#list tC.subCategories as sC>
 							<li>
-								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}" alt="${sC.name}">
+								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
 									<span class="subCategoryMenuItem">${sC.name}</span>
 								</a>
 							</li> </#list>
 						</ul>						
-					</span>
+					</div>
 				</li>
-			</ul>
-			</#list>
+				</#list>
+			</ul>			
 		</div>		
 	</div>
 </nav>
