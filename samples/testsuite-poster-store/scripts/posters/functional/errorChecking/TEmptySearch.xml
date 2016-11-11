@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Verifies that an info message is shown after a search for an empty search term.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
-  <action name="SearchEmptyString"/>
-  <command name="clickAndWait" target="id=btnSearch"/>
-  <command name="assertText" target="id=infoMessage" value="× Sorry! No results found matching your search. Please try again."/>
+  <action name="Search-NoHits"/>
+  <module name="posters.functional.modules.Search">
+    <comment>Execute the search (module call)</comment>
+    <parameter name="searchTerm" value=""/>
+  </module>
+  <command name="assertElementPresent" target="id=errorMessage">
+    <comment>Assert presence of info maessage element</comment>
+  </command>
+  <codecomment>validate</codecomment>
+  <command name="assertVisible" target="id=errorMessage"/>
+  <command name="assertText" target="id=errorMessage" value="*Sorry! No results found matching your search. Please try again.*">
+    <comment>Validate the 'no results' message</comment>
+  </command>
 </testcase>

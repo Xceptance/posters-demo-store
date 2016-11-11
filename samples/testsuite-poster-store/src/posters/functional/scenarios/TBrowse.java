@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Simulates browsing the catalog.
+ * <p>Simulates browsing the catalog.</p>
  */
 @ScriptName
 ("posters.functional.scenarios.TBrowse")

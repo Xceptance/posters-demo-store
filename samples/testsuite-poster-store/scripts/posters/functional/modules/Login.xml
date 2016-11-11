@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
+<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="6">
   <description>Logs a user in using the specified credentials.</description>
   <parameter name="email"/>
   <parameter name="password"/>
@@ -9,6 +9,4 @@
   <command name="type" target="id=email" value="@{email}"/>
   <command name="type" target="id=password" value="@{password}"/>
   <command name="clickAndWait" target="id=btnSignIn"/>
-  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
-  <command name="assertText" target="//li[@id='dropdown']/a" value="regexp:.*@{firstName}"/>
 </scriptmodule>

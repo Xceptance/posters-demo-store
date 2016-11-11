@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Creates and deletes a credit card.
+ * <p>Creates and deletes a credit card.</p>
  */
 @ScriptName
 ("posters.functional.customerBackend.TConfigurePaymentSettings")

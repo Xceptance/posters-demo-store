@@ -1,44 +1,72 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-	<form id="formChangeNameEmail" class="form-horizontal" action="${contextPath}/changeNameOrEmailCompleted" method="post">
-		<fieldset>
-			<!-- Form Name -->
-			<legend>${i18n("changeCustomerDetailTitle")}</legend>
-			<!-- name -->
-			<div class="control-group">
-				<label class="control-label">${i18n("labelMyName")}:</label>
-				<div class="controls">
-					<input id="name" name="name" placeholder="${i18n("registrationName")}" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(customer.name)!}">
+<@layout.myLayout "The ultimate webshop">
+<form id="formChangeNameEmail" class="form-horizontal"
+	action="${contextPath}/changeNameOrEmailCompleted" method="post">
+	<fieldset>
+		<!-- Form Name -->
+		<legend>
+			<span class="h2">${i18n("changeCustomerDetailTitle")}</span>
+		</legend>
+		<div class="col-sm-12">
+
+			<!-- last name -->
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="lastName">${i18n("labelMyName")}*</label>
+				<div class="col-sm-9">
+					<input id="lastName" name="lastName"
+						placeholder="${i18n('registrationLastName')}" class="form-control"
+						type="text" pattern="[A-Za-z\s]+"
+						data-error="${i18n('errorWrongName')}" value="${(customer.name)!}" required>
 				</div>
 			</div>
+
 			<!-- first name -->
-			<div class="control-group">
-				<label class="control-label">${i18n("labelMyFirstName")}:</label>
-				<div class="controls">
-					<input id="firstName" name="firstName" placeholder="${i18n("registrationFirstName")}" class="input-xlarge" required type="text" pattern="[A-Za-z\s]+" data-error="${i18n("errorWrongName")}" value="${(customer.firstName)!}">
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="firstName">${i18n("labelMyFirstName")}*</label>
+				<div class="col-sm-9">
+					<input id="firstName" name="firstName"
+						placeholder="${i18n('registrationFirstName')}"
+						class="form-control" type="text" pattern="[A-Za-z\s]+"
+						data-error="${i18n('errorWrongName')}"
+						value="${(customer.firstName)!}" required>
 				</div>
 			</div>
+
 			<!-- email -->
-			<div class="control-group">
-				<label class="control-label">${i18n("labelMyEmail")}:</label>
-				<div class="controls">
-					<input id="eMail" name="eMail" placeholder="${i18n("registrationEmail")}" class="input-xlarge" required type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}" data-error="${i18n("errorValidEmail")}" value="${(customer.email)!}">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="eMail">${i18n("labelMyEmail")}*</label>
+				<div class="col-sm-9">
+					<input id="eMail" name="eMail"
+						placeholder="${i18n('registrationEmail')}" class="form-control"
+						type="email" data-error="${i18n('errorValidEmail')}"
+						value="${(customer.email)!}" required>
 				</div>
 			</div>
+
 			<!-- password -->
-			<div class="control-group">
-				<label class="control-label">${i18n("changeCustomerDetailEnterPassword")}:</label>
-				<div class="controls">
-					<input id="password" name="password" placeholder="${i18n("registrationPassword")}" class="input-xlarge" required type="password">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="password">${i18n("changeCustomerDetailEnterPassword")}*</label>
+				<div class="col-sm-9">
+					<input id="password" name="password"
+						placeholder="${i18n('registrationPassword')}" class="form-control"
+						type="password" required>
 				</div>
 			</div>
+
 			<!-- update button -->
-			<div class="control-group">
-				<label class="control-label"></label>
-				<div class="controls">
-					<button id="btnChangeNameEmail" name="btnChangeNameEmail" class="btn btn-success" type="submit">${i18n("changeCustomerDetailUpdateAccount")}</button>
+			<div class="form-group">
+				<div class="col-sm-12 nopadding">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<span class="reqField pull-left textcolordarkgrey">*
+							${i18n('titleRequiredFields')}</span>
+						<button id="btnChangeNameEmail" class="btn btn-primary pull-right"
+							name="btnChangeNameEmail" type="submit">${i18n('changeCustomerDetailUpdateAccount')}</button>
+					</div>
 				</div>
 			</div>
-		</fieldset>
-	</form>
+		</div>
+	</fieldset>
+</form>
 </@layout.myLayout>

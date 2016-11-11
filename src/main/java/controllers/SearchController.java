@@ -52,7 +52,7 @@ public class SearchController
         if (searchText.isEmpty() || searchText.trim().isEmpty())
         {
             // show info message
-            context.getFlashScope().put("info", msg.get("infoNoSearchTerm", language).get());
+            context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
             // return index page
             return Results.redirect(context.getContextPath() + "/");
         }
@@ -65,7 +65,7 @@ public class SearchController
             if (products.isEmpty())
             {
                 // show info message
-                context.getFlashScope().put("info", msg.get("infoNoSearchTerm", language).get());
+                context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
                 // return index page
                 return Results.redirect(context.getContextPath() + "/");
             }
@@ -74,7 +74,7 @@ public class SearchController
             {
                 data.put("products", products);
                 WebShopController.setCommonData(data, context, xcpConf);
-                data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
+                data.put("searchText", searchText);//msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("searchTerm", searchText);
                 data.put("currentPage", 1);
                 // return product overview page
@@ -90,7 +90,7 @@ public class SearchController
      * @param pageNumber
      * @param context
      * @return
-     */
+     */                //data.put("productCounter", products.size());
     public Result getProductOfSearch(@Param("searchText") final String searchText, @Param("page") final int pageNumber,
                                      final Context context)
     {
@@ -162,6 +162,8 @@ public class SearchController
         }
         // add the page count to the data map
         data.put("totalPages", Math.ceil(totalProductCount / (double) pageSize));
+        
+        data.put("totalProductCount", totalProductCount);
 
         query.cancel();
 

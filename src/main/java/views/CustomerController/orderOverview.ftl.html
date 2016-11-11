@@ -1,28 +1,67 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">    	
-	<h1 id="titleOrderHistory">${i18n("titleOrderHistory")}</h1>
-	<div id="orderOverview">
-	<#list orderOverview as order>
-	<div class="row well" id="order${order_index}">
-	<div class="span2">
-		<h5 id="order${order_index}Date">${order.orderDate}</h5>
-		<h5 id="order${order_index}Costs">${currency}${order.getTotalCostsAsString()}</h5>
-	</div>
-	<div class="span8">
-		<table class="table" table-bordered>
-		<#list order.products as orderProduct>
-		<tr id="order${order_index}Product${orderProduct_index}">
-			<td><a href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img data-src="${contextPath}/assets/js/holder.js/150x100" alt="" src="${contextPath}${orderProduct.product.imageURL}" width="150"></img></a></td>
-			<td id="order${order_index}Product${orderProduct_index}Name">${orderProduct.product.name}</td>
-			<td id="order${order_index}Product${orderProduct_index}DescriptionOverview">${orderProduct.product.descriptionOverview}</td>
-			<td id="order${order_index}Product${orderProduct_index}Finish">${orderProduct.finish}</td>
-			<td id="order${order_index}Product${orderProduct_index}Size">${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</td>
-			<td id="order${order_index}Product${orderProduct_index}Count">${orderProduct.productCount}x</td>
-		</tr>
-		</#list>
-		</table>
-	</div>
-	</div>
-	</#list>
-	</div>
+<@layout.myLayout "The ultimate webshop">
+<div>
+    <div id="titleOrderHistory" class="header-container">
+        <span class="h2">${i18n("titleOrderHistory")}</span>
+    </div>
+    <div id="orderOverview">
+        <table id="cartOverviewTable" class="table">
+            <thead class="bgLightGrey">
+                <tr>
+                    <th>${i18n("orderOverviewTabHeadOrderDetails")}</th>
+                    <th>${i18n("orderOverviewTabHeadPurchasedPoster")}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <#list orderOverview as order>
+                <tr id="order${order_index}">
+                    <td class="orderInfo">
+                        <div class="orderDateTitle font-bold">
+                            ${i18n("orderOverviewOrderDate")}
+                        </div>
+                        <div class="orderDate">${order.orderDate}</div>
+                        <div class="orderTotalCostsTitle font-bold">
+                            ${i18n("orderOverviewOrderTotal")}
+                        </div>
+                        <div class="orderTotalCosts">${currency}${order.getTotalCostsAsString()}</div>
+                    </td>
+                    <td class="orderProducts">
+                        <table class="table tableOrderOverview" table-bordered>
+                            <tbody>
+                                <#list order.products as orderProduct>
+                                <tr id="order${order_index}Product${orderProduct_index}">
+                                    <td class="productImg"><a
+                                            href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}"><img
+                                                data-src="${contextPath}/assets/js/holder.js/150x100"
+                                                title="${orderProduct.product.name}"
+                                                alt="${orderProduct.product.name}"
+                                                src="${contextPath}${orderProduct.product.imageURL}"
+                                                width="150"></img></a></td>
+                                    <td class="productInfo">
+                                        <div class="productName">${orderProduct.product.name}</div>
+                                        <div class="productDescriptionOverview">${orderProduct.product.descriptionOverview}</div>
+                                        <div class="productMetaInfo text-left">
+                                            <small>
+                                                <ul class="list-unstyled">
+                                                    <li>${i18n("cartStyle")}: <span class="productStyle">${orderProduct.finish}</span>
+                                                    </li>
+                                                    <li>${i18n("cartSize")}: <span class="productSize">${orderProduct.size.width}
+                                                            x ${orderProduct.size.height} ${unitLength}</span>
+                                                    </li>
+                                                </ul>
+                                            </small>
+                                        </div>
+                                    </td>
+                                    <td class="orderCount">${orderProduct.productCount}x</td>
+                                </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </#list>
+            </tbody>
+        </table>
+    </div>
+</div>
 </@layout.myLayout>

@@ -1,20 +1,23 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<h1 id="titlePaymentOverview">${i18n("titlePaymentInformation")}</h1>
+<fieldset>
+    <legend id="titlePaymentOverview"><span class="h2">${i18n("titlePaymentInformation")}</span></legend>
 	<#list paymentOverview as payment>
 		<#if (payment_index + 3) % 3 ==0>
-      		<div class="row-fluid">
-      			<ul>
+      		<div class="container-fluid">
+      			<ul class="list-inline">
     	</#if>
-      				<li class="span4" id="payment${payment_index}">
+      				<li class="col-xs-12 col-sm-8 col-md-4 thumbnail" id="payment${payment_index}">
       					<address>
-      						<strong>${i18n("titleName")}: ${payment.name}</strong><br>
-      						${i18n("titleCreditCard")}: ${payment.getCardNumberCryptic()}<br>
-      						${i18n("titleValidTo")}: ${payment.getMonthLeadingZero()} ${payment.year}<br>
+	      					<ul class="list-unstyled row container-fluid">
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4"><strong>${i18n("titleName")}:</strong></div><div class="col-xs-12 col-sm-6 col-md-8 paymentName"><strong>${payment.name}</strong></div></li>
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-6 col-md-8 paymentCardNumber">${payment.getCardNumberCryptic()}</div></li>
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8"><span class="expMonth">${payment.getMonthLeadingZero()}</span> <span class="expYear">${payment.year}</span></div></li>
+	      					</ul>
       					</address>
-      					<form action="${contextPath}/confirmDeletePayment" method="post">
-							<input name="cardId" id="cardId" type="hidden" value=${payment.id}></input>
-							<button class="btn btn-danger" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n("buttonDelete")}</button>
+      					<form action="${contextPath}/confirmDeletePayment" method="post" class="container-fluid">
+							<input id="cardId${payment.id}" name="cardId" type="hidden" value=${payment.id}></input>
+							<button class="btn btn-danger btnDeletePayment" name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}</button>
 						</form>
       				</li>
 		<#if (payment_index + 1) % 3 ==0>
@@ -26,7 +29,9 @@
       		</div>
       	</#if>
 	</#list>
-	<div class="span4 offset6">
-		<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer">${i18n("paymentMethodAddNew")}</a>
+	<hr>
+	<div class="col-xs-12">
+		<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer" title="${i18n('paymentMethodAddNew')}">${i18n('paymentMethodAddNew')}</a>
 	</div>
+</fieldset>
 </@layout.myLayout>

@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Simulates browsing the catalog, adding product(s) to the cart, log in and get one cart which includes the products added just now and the products of the customer's cart.
+ * <p>Simulates browsing the catalog, adding product(s) to the cart, log in and get one cart which includes the products added just now and the products of the customer&#39;s cart.</p>
  */
 @ScriptName
 ("posters.functional.customerBackend.TMergeCurrentAndCustomerCart")

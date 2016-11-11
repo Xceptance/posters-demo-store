@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if a user wants to register with an email that already exist.
+ * <p>Verifies that an error is shown if a user wants to register with an email that already exist.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TRegisterEmailExist")

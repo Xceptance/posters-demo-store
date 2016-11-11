@@ -64,23 +64,23 @@ public class CheckoutFlow
      */
     public AbstractHtmlPageAction run() throws Throwable
     {
-        // Start the checkout
+        // Start the checkout.
         final StartCheckout startCheckout = new StartCheckout(previousAction);
         startCheckout.run();
 
-        // Enter the shipping address
+        // Enter the shipping address.
         final EnterShippingAddress enterShippingAddress = new EnterShippingAddress(startCheckout, account, shippingAddress);
         enterShippingAddress.run();
 
-        // Enter the billing address
+        // Enter the billing address.
         final EnterBillingAddress enterBillingAddress = new EnterBillingAddress(enterShippingAddress, account, billingAddress);
         enterBillingAddress.run();
 
-        // Enter the payment method
+        // Enter the payment method.
         final EnterPaymentMethod enterPaymentMethod = new EnterPaymentMethod(enterBillingAddress, creditCard);
         enterPaymentMethod.run();
 
-        // Return the last action of this flow to be the input for subsequent actions in a test case
+        // Return the last action of this flow to be the input for subsequent actions in a test case.
         return enterPaymentMethod;
     }
 }

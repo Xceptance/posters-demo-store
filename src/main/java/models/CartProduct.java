@@ -294,4 +294,18 @@ public class CartProduct
         setProductCount(getProductCount() - 1);
         update();
     }
+    /**
+     * Returns the total unit price of the product as well formatted String.
+     * 
+     * @return the line item price of the product
+     */
+    public String getTotalUnitPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price * this.productCount;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
 }

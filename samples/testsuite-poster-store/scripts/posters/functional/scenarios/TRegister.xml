@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="4" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
   <description>Simulates customer registration.</description>
   <module name="posters.functional.modules.OpenHomepage"/>
-  <module name="posters.functional.modules.OpenLoginForm"/>
-  <action name="StartRegistration"/>
-  <command name="clickAndWait" target="id=linkRegister"/>
-  <command name="assertElementPresent" target="id=formRegister"/>
-  <command name="store" target="${RANDOM.String(8)}@anyserver.com" value="generatedEmail"/>
-  <module name="posters.functional.modules.FillInRegistrationForm">
-    <parameter name="name" value="${name}"/>
-    <parameter name="firstName" value="${firstName}"/>
-    <parameter name="email" value="${generatedEmail}"/>
-    <parameter name="password" value="${password}"/>
-    <parameter name="passwordAgain" value="${password}"/>
-  </module>
-  <action name="Register"/>
-  <command name="clickAndWait" target="id=btnRegister"/>
-  <command name="assertElementPresent" target="id=successMessage"/>
+  <module name="posters.functional.modules.CreateRandomUser"/>
   <module name="posters.functional.modules.Login">
     <parameter name="email" value="${generatedEmail}"/>
     <parameter name="password" value="${password}"/>

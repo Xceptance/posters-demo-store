@@ -1,89 +1,94 @@
 <#macro myLayout title="Posters - The Ultimate Online Shop">
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Posters - The Ultimate Online Shop</title>
-    <link href="${contextPath}/assets/css/bootstrap-2.3.1.min.css" rel="stylesheet">
-    <link href="${contextPath}/assets/css/bootstrap-responsive-2.0.4.css" rel="stylesheet">
-	<link href="${contextPath}/assets/css/cartSlider.css" rel="stylesheet"/>
-	
-	<script src="${contextPath}/assets/js/jquery-1.9.1.min.js"></script>
-    <script src="${contextPath}/assets/js/bootstrap-2.3.1.min.js"></script>
-    <script src="${contextPath}/assets/js/bootstrap-paginator-0.5.js"></script>
-    <script type="text/javascript">
-    	var CONTEXT_PATH = '${contextPath}';
-    </script>
-	<script src="${contextPath}/assets/js/customCartSlider.js"></script>
-	<script src="${contextPath}/assets/js/custom.js"></script>
-  </head>
-  <body>
-    	<!-- header -->
-		<#include "header.ftl.html"/>
-		<!-- checkout breadcrumb -->
-		<#if checkout??>
-			<#include "checkoutBreadcrumb.ftl.html"/>
-		</#if>
-		<!-- messages -->
-		<#if flash.error??>
-			<script type="text/javascript">
-				$(document).ready(function(){ 
-					$("#errorMessage").show();
-					$("#errorMessage div strong").html("${flash.error}");
-				});
-			</script>
-		</#if>
-		<div class="row" id="errorMessage">
-			<div class="span6 offset3 text-center alert alert-error">
-  				<a class="close" data-dismiss="alert">×</a>
-  				<strong></strong>
+
+<head>
+
+<title>${i18n("titlePageShop")}</title>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="utf-8">
+
+<link href="${contextPath}/assets/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
+<link href="${contextPath}/assets/css/posterMiniCart.css"
+	rel="stylesheet" />
+
+<link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon"
+	type="image/x-icon">
+
+<script src="${contextPath}/assets/js/jquery-2.2.4.min.js"></script>
+<script src="${contextPath}/assets/js/bootstrap.min.js"></script>
+<script src="${contextPath}/assets/js/bootstrap-paginator.min.js"></script>
+<script type="text/javascript">
+	var CONTEXT_PATH = '${contextPath}';
+</script>
+<script src="${contextPath}/assets/js/poster.js"></script>
+<script src="${contextPath}/assets/js/posterMiniCart.js"></script>
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<div class="body-wrapper"><#if checkout??> <#include
+				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
+				</#if>
+		</div>
+	</header>
+
+	<!-- main/content -->
+	<div class="body-wrapper">
+		<main> <!-- message: no java script -->
+		<noscript>
+			<div class="section">
+				<div class="container">
+					<div class="noscriptmsg card">
+						<p>${i18n('errorNoJavaScript')}</p>
+					</div>
+				</div>
+			</div>
+		</noscript>
+
+		<!-- checkout breadcrumb --> <#if checkout??>
+		<div class="container-fluid"><#include
+			"../components/checkoutBreadcrumb.ftl.html"/></div>
+		</#if> <!-- messages -->
+		<div class="container-fluid" id="errorMessage">
+			<div class="text-center alert alert-danger">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
 		</div>
-		<#if flash.success??>
-			<script type="text/javascript">
-				$(document).ready(function(){ 
-					$("#successMessage").show();
-					$("#successMessage div strong").html("${flash.success}");
-				});
-			</script>
-		</#if>
-		<div class="row" id="successMessage">
-			<div class="span6 offset3 text-center alert alert-success">
-  				<a class="close" data-dismiss="alert">×</a>
-  				<strong></strong>
-			</div>
-		</div>
-		<#if flash.info??>
-			<script type="text/javascript">
-				$(document).ready(function(){ 
-					$("#infoMessage").show();
-					$("#infoMessage div strong").html("${flash.info}");
-				});
-			</script>
-		</#if>
-		<div class="row" id="infoMessage">
-			<div class="span6 offset3 text-center alert alert-info">
-  				<a class="close" data-dismiss="alert">×</a>
-  				<strong></strong>
+		<div class="container-fluid" id="successMessage">
+			<div class="text-center alert alert-success">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
 			</div>
 		</div>
 
 		<!-- body -->
-		<div id="main" class="container-fluid">
-			<div class="row-fluid">
-				<!-- sidebar -->
-				<div class="span3">
-					<#include "sidebar.ftl.html"/>
-				</div>
-				<!-- content -->
-				<div class="span9">
-					<#nested/>
-				</div>
-			</div>
-			<!-- footer -->
-			<hr>
-			<#include "footer.ftl.html"/>
-		</div>
-  </body>
+		<div class="container-fluid" id="main"><#nested/></div>
+		</main>
+	</div>
+	<!-- footer -->
+	<#include "footer.ftl.html"/>
+
+	<script src="${contextPath}/assets/js/poster.js"></script>
+	<#if flash.error??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#errorMessage").show();
+			$("#errorMessage div strong").html("${flash.error}");
+		});
+	</script>
+	</#if> <#if flash.success??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#successMessage").show();
+			$("#successMessage div strong").html("${flash.success}");
+		});
+	</script>
+	</#if>
+</body>
 </html>
 </#macro>

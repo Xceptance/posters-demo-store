@@ -14,7 +14,11 @@ create table billingAddress (
 create table cart (
   id                        varchar(40) not null,
   customer_id               varchar(40),
-  total_price               double,
+  sub_Total_Price	    	double,
+  tax                       double,
+  total_Tax_Price	    	double,
+  shipping_costs            double,
+  total_Price               double,
   constraint pk_cart primary key (id))
 ;
 
@@ -55,8 +59,10 @@ create table ordering (
   order_date                varchar(255),
   shipping_address_id       integer,
   billing_address_id        integer,
-  shipping_costs            double,
+  sub_Total_Costs		    double,
+  total_Tax_Costs		    double,
   tax                       double,
+  shipping_costs            double,
   total_costs               double,
   credit_card_id            integer,
   customer_id               varchar(40),

@@ -13,7 +13,7 @@ import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
 
 /**
- * This {@link AbstractHtmlPageAction} places the order.
+ * Places the order.
  */
 public class PlaceOrder extends AbstractHtmlPageAction
 {
@@ -36,14 +36,14 @@ public class PlaceOrder extends AbstractHtmlPageAction
     @Override
     public void preValidate() throws Exception
     {
-        // Get the result of the previous action
+        // Get the result of the previous action.
         final HtmlPage page = getPreviousAction().getHtmlPage();
         Assert.assertNotNull("Failed to get page from previous action.", page);
 
-        // check that the place order button is available
+        // Check that the place order button is available.
         Assert.assertTrue("Place order button not found.", HtmlPageUtils.isElementPresent(page, "id('btnOrder')"));
 
-        // remember the place order button
+        // Remember the place order button.
         placeOrderButton = HtmlPageUtils.findSingleHtmlElementByID(page, "btnOrder");
     }
 
@@ -57,17 +57,17 @@ public class PlaceOrder extends AbstractHtmlPageAction
     @Override
     protected void postValidate() throws Exception
     {
-        // Get the result of the action
+        // Get the result of the action.
         final HtmlPage page = getHtmlPage();
 
-        // Basic checks - see action 'Homepage' for some more details how and when to use these validators
+        // Basic checks - see action 'Homepage' for some more details how and when to use these validators.
         HttpResponseCodeValidator.getInstance().validate(page);
         ContentLengthValidator.getInstance().validate(page);
         HtmlEndTagValidator.getInstance().validate(page);
 
         HeaderValidator.getInstance().validate(page);
 
-        // check that the order was successfully placed
+        // Check that the order was successfully placed.
         final boolean successfulOrder = page.asXml().contains("Thank you for shopping with us!");
         Assert.assertTrue("Placing order failed.", successfulOrder);
     }

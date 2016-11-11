@@ -79,7 +79,7 @@ public class OrderTest extends NinjaTest
         // ...with an amount of one
         Assert.assertEquals(1, orderProducts.get(1).getProductCount());
         // verify, that total price is sum of all three product prices
-        Assert.assertEquals(18.87, order.getTotalCosts(), 0.01);
+        Assert.assertEquals(18.87, order.getSubTotalCosts(), 0.01);
     }
 
     @Test
@@ -87,17 +87,21 @@ public class OrderTest extends NinjaTest
     {
         final Order order = new Order();
         order.save();
-
+        
+        order.setShippingCosts(4.99);
+ //       order.addShippingCostsToTotalCosts();
+        order.update();
+        
         order.addProductsFromCart(cart);
         order.update();
+        
 
+        
         Order updatedOrder = Ebean.find(Order.class, order.getId());
         // total price is sum of all three product prices
-        Assert.assertEquals(18.87, updatedOrder.getTotalCosts(), 0.01);
+        Assert.assertEquals(18.87, updatedOrder.getSubTotalCosts(), 0.01);
 
-        order.setShippingCosts(4.99);
-        order.addShippingCostsToTotalCosts();
-        order.update();
+
 
         updatedOrder = Ebean.find(Order.class, order.getId());
         // total price is sum of all three product prices and shipping costs
@@ -110,19 +114,18 @@ public class OrderTest extends NinjaTest
         final Order order = new Order();
         order.save();
 
+        order.setShippingCosts(4.99);
+        order.setTax(0.10);
+        order.update();
+        
         order.addProductsFromCart(cart);
         order.update();
 
         Order updatedOrder = Ebean.find(Order.class, order.getId());
 
         // total price is sum of all three product prices
-        Assert.assertEquals(18.87, updatedOrder.getTotalCosts(), 0.01);
+        Assert.assertEquals(18.87, updatedOrder.getSubTotalCosts(), 0.01);
 
-        order.setShippingCosts(4.99);
-        order.addShippingCostsToTotalCosts();
-        order.setTax(0.10);
-        order.addTaxToTotalCosts();
-        order.update();
 
         updatedOrder = Ebean.find(Order.class, order.getId());
         // total price is sum of all three product prices and shipping costs and tax

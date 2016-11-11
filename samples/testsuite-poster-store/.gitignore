@@ -1,2 +1,4 @@
 classes/
 results/
+/target/
+.openscripts

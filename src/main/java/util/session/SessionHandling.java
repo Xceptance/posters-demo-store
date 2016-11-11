@@ -2,6 +2,7 @@ package util.session;
 
 import java.util.UUID;
 
+import conf.PosterConstants;
 import models.Cart;
 import models.Order;
 import ninja.Context;
@@ -109,14 +110,14 @@ public class SessionHandling
      * @param context
      * @return
      */
-    public static UUID getCartId(final Context context)
+    public static UUID getCartId(final Context context, final PosterConstants xcpConf)
     {
         Session cookie = context.getSession();
         // create new cart, if no cart is set
         if (cookie.get(CART) == null)
         {
             // create new cart
-            final Cart cart = Cart.createNewCart();
+            final Cart cart = Cart.createNewCart(xcpConf.TAX, xcpConf.SHIPPING_COSTS);//xcpConf.TAX, xcpConf.SHIPPING_COSTS
             // add cart id to session
             setCartId(context, cart.getId());
             // get cookie again
@@ -127,7 +128,7 @@ public class SessionHandling
         if (cart == null)
         {
             // create new cart
-            cart = Cart.createNewCart();
+            cart = Cart.createNewCart(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
             // add cart id to session
             setCartId(context, cart.getId());
             // get cookie again

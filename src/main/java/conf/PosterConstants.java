@@ -51,15 +51,35 @@ public class PosterConstants
     public final String TEMPLATE_SHIPPING_ADDRESS = "views/CheckoutController/shippingAddress.ftl.html";
 
     /**
+     * The path to the template to enter a shipping address as guest.
+     */
+    public final String TEMPLATE_SHIPPING_ADDRESS_GUEST = "views/CheckoutController/shippingAddressGuest.ftl.html";
+
+    /**
      * The path to the template to enter a billing address.
      */
     public final String TEMPLATE_BILLING_ADDRESS = "views/CheckoutController/billingAddress.ftl.html";
+
+    /**
+     * The path to the template to enter a billing address as guest.
+     */
+    public final String TEMPLATE_BILLING_ADDRESS_GUEST = "views/CheckoutController/billingAddressGuest.ftl.html";
 
     /**
      * The path to the template to enter a payment method.
      */
     public final String TEMPLATE_PAYMENT_METHOD = "views/CheckoutController/paymentMethod.ftl.html";
 
+    /**
+     * The path to the template to enter a payment method as guest.
+     */
+    public final String TEMPLATE_PAYMENT_METHOD_GUEST = "views/CheckoutController/paymentMethodGuest.ftl.html";
+    
+    /**
+     * The path to the template to the order confirmation page.
+     */
+    public final String TEMPLATE_ORDER_CONFIRMATION_PAGE = "views/CheckoutController/orderConfirmation.ftl.html";
+        
     /**
      * The path to the registration template.
      */

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +40,18 @@ public class WebShopController
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
-        final List<Product> products = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
+        final List<Product> productsCarousel = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
+
+        // add specific products to data map
+        List<Product> productsList = new ArrayList<>();
+        productsList.add(Product.getProductById(1));
+        productsList.add(Product.getProductById(23));
+        productsList.add(Product.getProductById(83));
+        
         // add products to data map
-        data.put("carousel", products);
+        data.put("carousel", productsCarousel);
+        data.put("productslist", productsList);
+        
         return Results.html().render(data);
     }
 
@@ -58,9 +68,9 @@ public class WebShopController
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
         // get cart by session
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // set cart stuff
-        addCartDetailToMap(cart, data);
+        addCartDetailToMap(cart, data, xcpConf);
         // a customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
@@ -83,6 +93,7 @@ public class WebShopController
         data.put("currency", xcpConf.CURRENCY);
         // add unit of length
         data.put("unitLength", xcpConf.UNIT_OF_LENGTH);
+
     }
 
     /**
@@ -91,11 +102,11 @@ public class WebShopController
      * @param cart
      * @param data
      */
-    private static void addCartDetailToMap(Cart cart, final Map<String, Object> data)
+    private static void addCartDetailToMap(Cart cart, final Map<String, Object> data, final PosterConstants xcpConf)
     {
         if (cart == null)
         {
-            cart = Cart.createNewCart();
+            cart = Cart.createNewCart(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
         }
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
@@ -106,13 +117,19 @@ public class WebShopController
             products.put(cartProduct.getProduct(), cartProduct.getProductCount());
             totalProductCount += cartProduct.getProductCount();
         }
+        
+        cart.calculateTotalTaxPrice();
+        cart.calculateTotalPrice();
+        
         // add all products of the cart
         data.put("cartProducts", cartProducts);
         // add product count of cart
         data.put("cartProductCount", totalProductCount);
         // add cart id
         data.put("cartId", cart.getId());
-        // add total price of cart
+        // add sub total price of cart
+        data.put("subTotalPrice", cart.getSubTotalPriceAsString());
+        data.put("subOrderTotalTax", cart.getTotalTaxPriceAsString());
         data.put("totalPrice", cart.getTotalPriceAsString());
     }
 }

@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -52,7 +55,7 @@ public class CheckoutController
     public Result checkout(final Context context)
     {
         // get cart by session id
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // check, if the cart is empty
         if (cart.getProducts().size() == 0)
         {
@@ -65,7 +68,7 @@ public class CheckoutController
         else
         {
             // create new order
-            final Order order = Order.createNewOrder();
+            final Order order = Order.createNewOrder(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
             // delete old order from session
             SessionHandling.removeOrderId(context);
             // put new order id to session
@@ -93,26 +96,53 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+
+        boolean userHasAShippingAddress = false;
+
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add all shipping addresses
-            data.put("shippingAddresses", customer.getShippingAddress());
+
+            // user has a shipping address
+            if (!customer.getShippingAddress().isEmpty())
+            {
+                // add all shipping addresses
+                data.put("shippingAddresses", customer.getShippingAddress());
+                userHasAShippingAddress = true;
+            }
             // add all billing addresses
             data.put("billingAddresses", customer.getBillingAddress());
         }
         // show checkout bread crumb
         data.put("checkout", true);
+        data.put("shippingAddressesActive", true);
+/*
         // get shipping address by order
         final ShippingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getShippingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
-            data.put("address", address);
+            //data.put("address", address);
         }
-        return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
+*/
+        // customer not sign in or user has no address
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            if (userHasAShippingAddress == true)
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
+            }
+            else
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS_GUEST);
+            }
+        }
+        else
+        {
+            return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS_GUEST);
+        }
     }
 
     /**
@@ -159,6 +189,7 @@ public class CheckoutController
             data.put("address", address);
             // show checkout bread crumb
             data.put("checkout", true);
+            data.put("shippingAddressesActive", true);
             // show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_SHIPPING_ADDRESS);
         }
@@ -267,25 +298,51 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+
+        boolean userHasBillingAddress = false;
+
         if (SessionHandling.isCustomerLogged(context))
         {
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add all shipping addresses
-            data.put("shippingAddresses", customer.getShippingAddress());
-            // add all billing addresses
-            data.put("billingAddresses", customer.getBillingAddress());
+
+            // user has a shipping address
+            if (!customer.getBillingAddress().isEmpty())
+            {
+                // add all shipping addresses
+                data.put("shippingAddresses", customer.getShippingAddress());
+                // add all billing addresses
+                data.put("billingAddresses", customer.getBillingAddress());
+
+                userHasBillingAddress = true;
+            }
         }
-        // get billing address by order
+/*        // get billing address by order
         final BillingAddress address = Order.getOrderById(SessionHandling.getOrderId(context)).getBillingAddress();
         // add address to data map, if an address was already entered
         if (address != null)
         {
             data.put("address", address);
-        }
+        }*/
         data.put("checkout", true);
         data.put("billingAddressActive", true);
+
+        // customer not sign in
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            if (userHasBillingAddress == true)
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
+            }
+            else
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS_GUEST);
+            }
+        }
+        else
+        {
+            return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS_GUEST);
+        }
         // return page to enter billing address
-        return Results.html().render(data).template(xcpConf.TEMPLATE_BILLING_ADDRESS);
     }
 
     /**
@@ -405,25 +462,63 @@ public class CheckoutController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+        
+        boolean userHasPaymentMethod = false;
+        
         if (SessionHandling.isCustomerLogged(context))
         {
             // get customer by session
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            // add payment information
-            data.put("paymentOverview", customer.getCreditCard());
+            if (!customer.getCreditCard().isEmpty())
+            {
+                // add payment information
+                data.put("paymentOverview", customer.getCreditCard());
+                userHasPaymentMethod = true;
+            }
         }
         // get payment method by order
         final CreditCard card = Order.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
+
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+        Date date = new Date();
+
         // add payment method to data map, if a payment method was already entered
         if (card != null)
         {
-            data.put("card", card);
+            //data.put("card", card);
         }
+        
+        // get current month and year
+        data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+        
+        data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
+
         data.put("checkout", true);
         data.put("billingAddressActive", true);
         data.put("creditCardActive", true);
-        // return page to enter payment method
-        return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
+        // System.out.println(data.toString());
+
+        // customer not sign in
+        if (SessionHandling.isCustomerLogged(context))
+        {
+            // return page to enter payment method
+            if (userHasPaymentMethod == true)
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD);
+            }
+            else
+            {
+                return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD_GUEST);
+            }
+
+        }
+        else
+        {
+            // return page to enter payment method
+            return Results.html().render(data).template(xcpConf.TEMPLATE_PAYMENT_METHOD_GUEST);
+        }
     }
 
     /**
@@ -545,6 +640,7 @@ public class CheckoutController
         data.put("order", order);
         // add all products of the order
         data.put("orderProducts", order.getProducts());
+
         return Results.html().render(data);
     }
 
@@ -577,7 +673,7 @@ public class CheckoutController
         // update order
         order.update();
         // get cart by session id
-        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // remove cart
         cart.delete();
         // remove cart from session
@@ -604,9 +700,11 @@ public class CheckoutController
             order.setShippingCosts(xcpConf.SHIPPING_COSTS);
             // set tax to order
             order.setTax(xcpConf.TAX);
-            // calculate total costs
-            order.addShippingCostsToTotalCosts();
-            order.addTaxToTotalCosts();
+            order.setTotalTaxCosts(order.getSubTotalCosts() * order.getTax());
+
+            // recalculate total costs
+            order.setTotalCosts(order.getSubTotalCosts() + order.getTotalTaxCosts() + order.getShippingCosts());
+
             // update order
             order.update();
         }

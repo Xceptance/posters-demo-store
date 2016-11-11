@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if the checkout is started with an empty cart.
+ * <p>Verifies that an error is shown if the checkout is started with an empty cart.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TEmptyCart")

@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,7 +170,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result registrationCompleted(@Param("name") final String name, @Param("firstName") final String firstName,
+    public Result registrationCompleted(@Param("lastName") final String name, @Param("firstName") final String firstName,
                                         @Param("eMail") final String email, @Param("password") final String password,
                                         @Param("passwordAgain") final String passwordAgain, final Context context)
     {
@@ -368,6 +371,18 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+        //@TODO
+
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+        Date date = new Date();
+
+        // get current month and year
+        data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+
+        data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
+        
         return Results.html().render(data);
     }
 
@@ -600,16 +615,16 @@ public class CustomerController
             // show error message
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
-            final Map<String, String> address = new HashMap<String, String>();
-            address.put("id", addressId);
-            address.put("name", name);
-            address.put("company", company);
-            address.put("addressLine", addressLine);
-            address.put("city", city);
-            address.put("state", state);
-            address.put("zip", zip);
-            address.put("country", country);
-            data.put("address", address);
+            //final Map<String, String> address = new HashMap<String, String>();
+            data.put("id", addressId);
+            data.put("name", name);
+            data.put("company", company);
+            data.put("addressLine", addressLine);
+            data.put("city", city);
+            data.put("state", state);
+            data.put("zip", zip);
+            data.put("country", country);
+            //data.put("address", address);
             // show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_SHIPPING_ADDRESS);
         }
@@ -899,7 +914,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result changeNameOrEmailCompleted(@Param("name") final String name, @Param("firstName") final String firstName,
+    public Result changeNameOrEmailCompleted(@Param("lastName") final String name, @Param("firstName") final String firstName,
                                              @Param("eMail") final String email, @Param("password") final String password,
                                              final Context context)
     {
@@ -1068,12 +1083,12 @@ public class CustomerController
      * 
      * @param context
      */
-    private static void mergeCurrentCartAndCustomerCart(final Context context)
+    private void mergeCurrentCartAndCustomerCart(final Context context)
     {
         if (SessionHandling.isCustomerLogged(context))
         {
             // get current cart
-            final Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context));
+            final Cart currentCart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // get cart of customer
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             if (customer.getCart() == null)

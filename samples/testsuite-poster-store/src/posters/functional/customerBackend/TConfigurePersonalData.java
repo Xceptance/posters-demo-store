@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Changes name, email address and password of a customer.
+ * <p>Changes name, email address and password of a customer.</p>
  */
 @ScriptName
 ("posters.functional.customerBackend.TConfigurePersonalData")

@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an info message is shown after a search for an empty search term.
+ * <p>Verifies that an info message is shown after a search for an empty search term.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TEmptySearch")

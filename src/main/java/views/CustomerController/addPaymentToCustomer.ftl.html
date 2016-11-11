@@ -1,18 +1,28 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-	<form id="formAddPayment" class="form-horizontal" action="${contextPath}/addPaymentToCustomer" method="post">
-		<fieldset>
-			<!-- Form Name -->
-			<legend>${i18n("titlePaymentInformation")}</legend>
+<form id="formAddPayment" class="form-horizontal"
+	action="${contextPath}/addPaymentToCustomer" method="post">
+	<fieldset>
+		<!-- Form Name -->
+		<legend>
+			<span class="h2">${i18n("titlePaymentInformation")}</span>
+		</legend>
+		<div class="col-xs-12">
 			<!-- include form -->
-			<#include "../form/paymentForm.ftl.html"/>
+			<#include "../components/paymentForm.ftl.html"/>
 			<!-- add button -->
-			<div class="control-group">
-				<label class="control-label" for="btnAddPayment"></label>
-				<div class="controls">
-					<button id="btnAddPayment" name="btnAddPayment" class="btn btn-primary" type="submit">${i18n("paymentMethodAddNew")}</button>
+			<div class="form-group">
+				<div class="col-sm-12 nopadding">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9">
+						<span class="reqField pull-left textcolordarkgrey">*
+							${i18n('titleRequiredFields')}</span>
+						<button id="btnAddPayment" class="btn btn-primary pull-right"
+							name="btnAddPayment" type="submit">${i18n('paymentMethodAddNew')}</button>
+					</div>
 				</div>
 			</div>
-		</fieldset>
-	</form>
+		</div>
+	</fieldset>
+</form>
 </@layout.myLayout>

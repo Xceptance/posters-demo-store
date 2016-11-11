@@ -38,10 +38,17 @@ public class BrowsingFlow
     private final int pagingMax;
 
     /**
+     * The probability to select a Top Category
+     */
+    private final int topCategoryProbability;
+
+    /**
      * Constructor
-     * 
+     *
      * @param previousAction
      *            The previously performed action
+     * @param topCategoryProbability
+     *            Probability to browse top categories instead of sub categories
      * @param pagingProbability
      *            The paging probability
      * @param pagingMin
@@ -49,9 +56,11 @@ public class BrowsingFlow
      * @param pagingMax
      *            The maximum number of paging rounds
      */
-    public BrowsingFlow(final AbstractHtmlPageAction previousAction, final int pagingProbability, final int pagingMin, final int pagingMax)
+    public BrowsingFlow(final AbstractHtmlPageAction previousAction, final int topCategoryProbability, final int pagingProbability,
+                        final int pagingMin, final int pagingMax)
     {
         this.previousAction = previousAction;
+        this.topCategoryProbability = topCategoryProbability;
         this.pagingProbability = pagingProbability;
         this.pagingMin = pagingMin;
         this.pagingMax = pagingMax;
@@ -62,15 +71,20 @@ public class BrowsingFlow
      */
     public AbstractHtmlPageAction run() throws Throwable
     {
-        // Select a random top category from side navigation
-        final SelectTopCategory selectTopCategory = new SelectTopCategory(previousAction);
-        selectTopCategory.run();
-        previousAction = selectTopCategory;
-
-        // Select a random level-1 category from side navigation
-        final SelectCategory selectCategory = new SelectCategory(previousAction);
-        selectCategory.run();
-        previousAction = selectCategory;
+        if (XltRandom.nextBoolean(topCategoryProbability))
+        {
+            // Select a random top category from side navigation.
+            final SelectTopCategory selectTopCategory = new SelectTopCategory(previousAction);
+            selectTopCategory.run();
+            previousAction = selectTopCategory;
+        }
+        else
+        {
+            // Select a random level-1 category from side navigation.
+            final SelectCategory selectCategory = new SelectCategory(previousAction);
+            selectCategory.run();
+            previousAction = selectCategory;
+        }
 
         // According to the configured probability perform the paging or not.
         if (XltRandom.nextBoolean(pagingProbability))
@@ -78,9 +92,9 @@ public class BrowsingFlow
             // Get current number of paging rounds determined from the configured
             // min and max value for paging.
             final int pagingRounds = XltRandom.nextInt(pagingMin, pagingMax);
-            for (int j = 0; j < pagingRounds; j++)
+            for (int round = 0; round < pagingRounds; round++)
             {
-                // perform a paging if possible
+                // Perform a paging if possible.
                 final Paging paging = new Paging(previousAction);
 
                 if (paging.preValidateSafe())
@@ -96,12 +110,12 @@ public class BrowsingFlow
             }
         }
 
-        // Select a random poster from product overview and show product detail page
+        // Select a random poster from product overview and show product detail page.
         final ProductDetailView productDetailView = new ProductDetailView(previousAction);
         productDetailView.run();
         previousAction = productDetailView;
 
-        // Return the result of the last action in this flow
+        // Return the result of the last action in this flow.
         return previousAction;
     }
 }

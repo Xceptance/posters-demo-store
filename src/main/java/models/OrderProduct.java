@@ -57,7 +57,7 @@ public class OrderProduct
     @ManyToOne
     @JoinColumn(name = "postersize_id")
     private PosterSize size;
-
+ 
     /**
      * The price of the product. The price depends on the selected {@link PosterSize}.
      */
@@ -216,6 +216,29 @@ public class OrderProduct
     {
         final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = price;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+    /**
+     * Returns the line item price of the product
+     * 
+     * @return the line item price of the product
+     */
+    public double getTotalUnitPrice(){
+        double temp = price * this.productCount;
+        return temp;
+    }
+    /**
+     * Returns the line item price of the product as well formatted String.
+     * 
+     * @return the line item price of the product
+     */
+    public String getTotalUnitPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price * this.productCount;
         temp = temp * 100;
         temp = Math.round(temp);
         temp = temp / 100;

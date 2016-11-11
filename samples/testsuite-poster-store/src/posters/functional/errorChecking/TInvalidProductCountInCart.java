@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Verifies that an error is shown if the product count of the cart couldn't be updated.
+ * <p>Verifies that an error is shown if the product count of the cart couldn&#39;t be updated.</p>
  */
 @ScriptName
 ("posters.functional.errorChecking.TInvalidProductCountInCart")

@@ -15,7 +15,6 @@ import posters.loadtest.util.SearchOption;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
 import com.xceptance.xlt.api.data.DataProvider;
 import com.xceptance.xlt.api.tests.AbstractTestCase;
-import com.xceptance.xlt.api.util.XltProperties;
 import com.xceptance.xlt.api.util.XltRandom;
 
 /**
@@ -28,7 +27,7 @@ public class TSearch extends AbstractTestCase
      * Data provider for search phrases that result in hits..
      */
     private static final DataProvider HITS_PROVIDER;
-    
+
     static
     {
         try
@@ -54,8 +53,7 @@ public class TSearch extends AbstractTestCase
         AbstractHtmlPageAction previousAction;
 
         // Read the store URL from properties.
-        final String url = XltProperties.getInstance().getProperty("posters.xlt.loadtest.tests.store-url",
-                                                                   "http://localhost:8080/posters/");
+        final String url = getProperty("store-url", "http://localhost:8080/posters/");
 
         // The probability to perform a paging during browsing the categories
         final int pagingProbability = getProperty("paging.probability", 0);
@@ -87,7 +85,7 @@ public class TSearch extends AbstractTestCase
         // Get the number of searches determined from the configured min and max
         // products.
         final int searches = XltRandom.nextInt(productsMin, productsMax);
-        for (int i = 0; i < searches; i++)
+        for (int searchRound = 0; searchRound < searches; searchRound++)
         {
             // The search option is the indicator whether to search for one of
             // the search phrases from the 'HITS_PROVIDER' that results in a hit
@@ -103,14 +101,13 @@ public class TSearch extends AbstractTestCase
             // Perform Paging and go to product detail page of a result according to the search option
             if (option == SearchOption.HITS)
             {
-                // According to the configured probability perform the paging or
-                // not.
+                // According to the configured probability perform the paging or not.
                 if (XltRandom.nextBoolean(pagingProbability))
                 {
                     // Get current number of paging rounds determined from the configured
                     // min and max value for paging.
                     final int pagingRounds = XltRandom.nextInt(pagingMin, pagingMax);
-                    for (int j = 0; j < pagingRounds; j++)
+                    for (int paginRound = 0; paginRound < pagingRounds; paginRound++)
                     {
                         // perform a paging if possible
                         final Paging paging = new Paging(previousAction);

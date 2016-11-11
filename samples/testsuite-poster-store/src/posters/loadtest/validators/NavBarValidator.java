@@ -12,12 +12,12 @@ import com.xceptance.xlt.api.util.HtmlPageUtils;
 /**
  * Checks for the correct header elements
  */
-public class SideNavValidator
+public class NavBarValidator
 {
     /**
      * Make a stateless singleton available.
      */
-    private static final SideNavValidator instance = new SideNavValidator();
+    private static final NavBarValidator instance = new NavBarValidator();
 
     /**
      * Checks the poster store side navigation elements
@@ -28,21 +28,21 @@ public class SideNavValidator
     public void validate(final HtmlPage page) throws Exception
     {
 
-        // Check that the side navigation contains at least two top categories
+        // Check that the category menu contains at least two top categories
         // For this purpose we get a list of all top categories and check the
         // size of the list
-        final List<HtmlElement> topCategories = HtmlPageUtils.findHtmlElements(page, "id('sidebarNav')/ul/li[@class='topCategory']");
+        final List<HtmlElement> topCategories = HtmlPageUtils.findHtmlElements(page, "id('categoryMenu')/ul/li[@class='dropdown header-menu-item']");
         Assert.assertTrue("There are less then two top categories in the side nav.", topCategories.size() >= 2);
 
-        // Check that each top category is followed by at least one level-1
+        // Check that each top category has at least one drop down item
         // category
         for (final Iterator<HtmlElement> iterator = topCategories.iterator(); iterator.hasNext();)
-        {
+      {
             final HtmlElement htmlElement = iterator.next();
             // relative xpath to address the first sibling after the top
-            // category that is a level-1 category
+            // category that is a drop down item
             Assert.assertTrue("Top category is not followed by a level-1 category.",
-                              HtmlPageUtils.isElementPresent(htmlElement, "./following-sibling::li[1][@class='level-1']"));
+                              HtmlPageUtils.isElementPresent(htmlElement, "./div/child::ul[@class='dropdown-menu']/li/a"));
         }
 
     }
@@ -52,7 +52,7 @@ public class SideNavValidator
      * 
      * @return the instance
      */
-    public static SideNavValidator getInstance()
+    public static NavBarValidator getInstance()
     {
         return instance;
     }

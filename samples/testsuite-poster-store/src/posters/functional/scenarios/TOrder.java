@@ -7,7 +7,7 @@ import com.xceptance.xlt.api.engine.scripting.ScriptName;
 
 
 /**
- * Simulates browsing the catalog, adding product(s) to the cart, checkout as registered customer and place the order.
+ * <p>Simulates browsing the catalog, adding product(s) to the cart, checkout as registered customer and place the order.</p>
  */
 @ScriptName
 ("posters.functional.scenarios.TOrder")
