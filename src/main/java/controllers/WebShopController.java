@@ -93,7 +93,16 @@ public class WebShopController
         data.put("currency", xcpConf.CURRENCY);
         // add unit of length
         data.put("unitLength", xcpConf.UNIT_OF_LENGTH);
-
+        // add email regex
+        data.put("regexEmail", xcpConf.REGEX_EMAIL);
+        // add name regex
+        data.put("regexName", xcpConf.REGEX_NAME);
+        // add creditcard regex
+        data.put("regexCreditCard", xcpConf.REGEX_CREDITCARD);
+        // add zip regex
+        data.put("regexZip", xcpConf.REGEX_ZIP);
+        // add product count regex
+        data.put("regexProductCount", xcpConf.REGEX_PRODUCT_COUNT);
     }
 
     /**

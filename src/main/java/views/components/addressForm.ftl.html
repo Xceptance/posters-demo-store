@@ -3,7 +3,7 @@
 <div class="form-group">
 	<label class="col-xs-12 col-sm-3 control-label" for="fullName">${i18n("addressFullName")}*</label>
 	<div class="col-xs-12 col-sm-9">
-		<input id="fullName" class="form-control" name="fullName" title="${i18n('addressFullName')}" type="text" pattern="[A-Za-z\s]+"
+		<input id="fullName" class="form-control" name="fullName" title="${i18n('addressFullName')}" type="text" pattern="${regexName}"
 			data-error="${i18n('errorWrongName')}" value="${(address.name)!}"
 			required>
 	</div>
@@ -34,7 +34,7 @@
 	<label class="col-xs-12 col-sm-3 control-label" for="city">${i18n("addressCity")}*</label>
 	<div class="col-xs-12 col-sm-9">
 		<input id="city" class="form-control" name="city" title="${i18n('addressCity')}"
-			type="text" pattern="[A-Za-z\s]+"
+			type="text" pattern="${regexName}"
 			data-error="${i18n('errorWrongCity')}" value="${(address.city)!}"
 			required>
 	</div>
@@ -45,7 +45,7 @@
 	<label class="col-xs-12 col-sm-3 control-label" for="state">${i18n("addressState")}*</label>
 	<div class="col-xs-12 col-sm-9">
 		<input id="state" class="form-control" name="state" title="${i18n('addressState')}"
-			type="text" pattern="[A-Za-z\s]+"
+			type="text" pattern="${regexName}"
 			data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
 			required>
 	</div>
@@ -57,7 +57,7 @@
 	<div class="col-xs-12 col-sm-9">
 		<input id="zip" class="form-control" name="zip"
 			title="${i18n('addressZip')}" type="text"
-			pattern="[0-9]+" data-error="${i18n('errorWrongZip')}"
+			pattern="${regexZip}" data-error="${i18n('errorWrongZip')}"
 			value="${(address.zip)!}" required>
 	</div>
 </div>

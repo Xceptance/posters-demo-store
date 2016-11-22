@@ -16,7 +16,7 @@
 					<input id="email" name="email"
 						placeholder="${i18n('registrationEmail')}" class="form-control"
 						type="text"
-						pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}"
+						pattern="${regexEmail}"
 						data-error="${i18n('errorValidEmail')}" value="${(email)!}"
 						required>
 				</div>

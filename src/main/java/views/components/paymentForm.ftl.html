@@ -5,7 +5,7 @@
 		<input id="creditCardNumber" class="form-control" name="creditCardNumber"
 			title="${i18n('paymentCardholderName')}"
 			type="text"
-			pattern="4[0-9]{12}(?:[0-9]{3})?"
+			pattern="${regexCreditCard}"
 			data-error="${i18n('errorWrongCreditCard')}"
 			value="${(card.cardNumber)!}" size="16" required>
 	</div>
@@ -17,7 +17,7 @@
 	<div class="col-xs-12 col-sm-9">
 		<input id="name" class="form-control" name="name" type="text"
 			title="${i18n('paymentCardholderName')}"
-			pattern="[A-Za-z\s]+" data-error="${i18n('errorWrongName')}"
+			pattern="${regexName}" data-error="${i18n('errorWrongName')}"
 			value="${(card.name)!}" required>
 	</div>
 </div>

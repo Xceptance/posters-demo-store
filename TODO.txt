@@ -1,10 +1,6 @@
 # Bugs
 ## addresses
 - Create an address and delete it afterwards >> the confirmation dialog button says delete account this needs to be changed (exists for billing and shipping)
-- Can't enter "Thüringen" as a state for a german address. Maybe some kind of "Umlaut" regex problem. German addresses should be able to contain "Umlaute". Same problem for cities, Fullname, company. (low prio)
-
-# Registration/login
-- Can't enter "Umlaute, ß" as first-/lastnames or email address in the registration form -> regex problem.
 
 ## credit card
 - Create a credit card delete it afterwards >> the confirmation dialog button says delete account this needs to be changed

@@ -29,7 +29,12 @@ public class PosterConstants
      * The regular expression of a valid email address.
      */
     public final String REGEX_EMAIL;
-
+    
+    /**
+     * The regular expression of a valid name.
+     */
+    public final String REGEX_NAME;
+    
     /**
      * The regular expression of a valid product count in the cart.
      */
@@ -168,6 +173,8 @@ public class PosterConstants
         REGEX_CREDITCARD = ninjaProp.getStringArray("regex.creditCard");
 
         REGEX_EMAIL = ninjaProp.getOrDie("regex.email");
+        
+        REGEX_NAME = ninjaProp.getOrDie("regex.name");
 
         REGEX_PRODUCT_COUNT = ninjaProp.getOrDie("regex.productCount");
 
