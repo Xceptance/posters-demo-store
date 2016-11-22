@@ -1,10 +1,4 @@
 # Bugs
-## addresses
-- Create an address and delete it afterwards >> the confirmation dialog button says delete account this needs to be changed (exists for billing and shipping)
-
-## credit card
-- Create a credit card delete it afterwards >> the confirmation dialog button says delete account this needs to be changed
-
 ## change password
 - Can't change password forth and back. Set a new password. Change back to the old one. Redo this. There seems to be some kind of problem.
 
