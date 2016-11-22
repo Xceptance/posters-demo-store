@@ -1,13 +1,45 @@
 # Bugs
+## addresses
+- Create an address and delete it afterwards >> the confirmation dialog button says delete account this needs to be changed (exists for billing and shipping)
+- Can't enter "Thüringen" as a state for a german address. Maybe some kind of "Umlaut" regex problem. German addresses should be able to contain "Umlaute". Same problem for cities. (low prio)
+
+## credit card
+- Create a credit card delete it afterwards >> the confirmation dialog button says delete account this needs to be changed
+
+## change password
+- Can't change password forth and back. Set a new password. Change back to the old one. Redo this. There seems to be some kind of problem.
 
 # Suggestions
+##header
+- the user icon should have different states for logged in/ logged out e.g. grey when logged out and blue when logged in.
+- after loggin in successfully a confirmation message should be shown
+- the name "Poster Store" should be in the vertical middle of the logo (e.g. add "vertical-align: middle;" to the class "titleShopText" in CSS)
+
+## addresses
+- there should be more distance between the different address types on the page
+- adjust wording address should start with a capital letter in all headlines
+
+## payment settings
+- add a headline "Credit cards" instead of the horizontal line or remove this line, since it has no purpose
+
+## change password
+- remove the clear button since we don't have this at another place
+
+## cart
+- a confirmation should be needed when deleting a line item (low prio)
+
+## search
+- no search should be triggered if the textfield is empty (e.g. just click the search icon twice)
 
 ## checkout
-add order confirmation page
-add orderID in db
+- credit card number breaks if there is one to select
+- credit card date if there is one to select: there should be a separator "/" between month and year
+- credit card date on order placement page: there should be a separator "/" between month and year instead of "."
+- add order confirmation page
+- add orderID in db
 
 ## other
-uppercase (conf->messages.properties)
-include tax's into calculation? if yes change order
-Header, Footer auf die volle Breite ?
-pixel verschiebung im Menu bei mouse-hover
+- uppercase (conf->messages.properties)
+- include tax's into calculation? if yes change order
+- Header, Footer auf die volle Breite ?
+- pixel verschiebung im Menu bei mouse-hover
