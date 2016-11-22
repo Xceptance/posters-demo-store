@@ -9,7 +9,7 @@
 	margin: 0 !important;
 }
 
-.navbar-brand, .titleShopText {
+.navbar-brand {
 	padding: 0;
 	font-size: 1.8em;
 	margin-left: 5px;
@@ -18,6 +18,8 @@
 .titleShopText {
 	font-size: 1.8em;
 	margin-top: 5px;
+	margin-left: 5px;
+	vertical-align: middle;
 }
 
 #header a, #globalNavigation a {
@@ -262,6 +264,9 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	color: #333;
 	border: 0;
 	border-bottom: 1px solid #e5e5e5;
+}
+.glyphicon-user.not-logged{
+	color: grey;
 }
 
 header {
