@@ -105,7 +105,9 @@ public class CustomerController
                 final Customer updatedCustomer = Customer.getCustomerByEmail(email);
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
+                context.getFlashScope().success(msg.get("successLogIn", language).get());
                 return Results.redirect(context.getContextPath() + "/");
+
             }
             // user exist, wrong password
             else if (emailExist && !correctPassowrd)
@@ -141,6 +143,7 @@ public class CustomerController
         // remove cart from session
         SessionHandling.removeCartId(context);
         // show home page
+        context.getFlashScope().success(msg.get("successLogOut", language).get());
         return Results.redirect(context.getContextPath() + "/");
     }
 
