@@ -3,9 +3,6 @@
 - Can't change password forth and back. Set a new password. Change back to the old one. Redo this. There seems to be some kind of problem.
 
 # Suggestions
-## change password
-- remove the clear button since we don't have this at another place
-
 ## cart
 - a confirmation should be needed when deleting a line item (low prio)
 
