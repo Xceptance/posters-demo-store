@@ -3,9 +3,9 @@
 	<label class="col-xs-12 col-sm-3 control-label" for="creditCardNumber">${i18n("titleNumber")}*</label>
 	<div class="col-xs-12 col-sm-9">
 		<input id="creditCardNumber" class="form-control" name="creditCardNumber"
-			title="${i18n('paymentCardholderName')}"
+			title="${i18n('titleNumber')}"
 			type="text"
-			pattern="${regexCreditCard}"
+			pattern="4[0-9]{12}(?:[0-9]{3})?"
 			data-error="${i18n('errorWrongCreditCard')}"
 			value="${(card.cardNumber)!}" size="16" required>
 	</div>

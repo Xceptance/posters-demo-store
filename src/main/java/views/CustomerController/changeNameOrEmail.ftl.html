@@ -15,7 +15,7 @@
 				<div class="col-sm-9">
 					<input id="lastName" name="lastName"
 						placeholder="${i18n('registrationLastName')}" class="form-control"
-						type="text" pattern="[A-Za-z\s]+"
+						type="text" pattern="${regexName}"
 						data-error="${i18n('errorWrongName')}" value="${(customer.name)!}" required>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 				<div class="col-sm-9">
 					<input id="firstName" name="firstName"
 						placeholder="${i18n('registrationFirstName')}"
-						class="form-control" type="text" pattern="[A-Za-z\s]+"
+						class="form-control" type="text" pattern="${regexName}"
 						data-error="${i18n('errorWrongName')}"
 						value="${(customer.firstName)!}" required>
 				</div>
@@ -39,6 +39,7 @@
 				<div class="col-sm-9">
 					<input id="eMail" name="eMail"
 						placeholder="${i18n('registrationEmail')}" class="form-control"
+						pattern="${regexEmail}"
 						type="email" data-error="${i18n('errorValidEmail')}"
 						value="${(customer.email)!}" required>
 				</div>
