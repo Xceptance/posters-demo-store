@@ -259,7 +259,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 	display: block;
 	width: 100%;
 	padding: 0px;
-	margin-bottom: 20px;
+	margin: 20px 0;
 	line-height: inherit;
 	color: #333;
 	border: 0;

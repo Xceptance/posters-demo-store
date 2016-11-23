@@ -3,15 +3,6 @@
 - Can't change password forth and back. Set a new password. Change back to the old one. Redo this. There seems to be some kind of problem.
 
 # Suggestions
-##header
-- the user icon should have different states for logged in/ logged out e.g. grey when logged out and blue when logged in.
-- after loggin in successfully a confirmation message should be shown
-- the name "Poster Store" should be in the vertical middle of the logo (e.g. add "vertical-align: middle;" to the class "titleShopText" in CSS)
-
-## addresses
-- there should be more distance between the different address types on the page
-- adjust wording address should start with a capital letter in all headlines
-
 ## payment settings
 - add a headline "Credit cards" instead of the horizontal line or remove this line, since it has no purpose
 
