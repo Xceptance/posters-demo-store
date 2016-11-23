@@ -3,9 +3,6 @@
 - Can't change password forth and back. Set a new password. Change back to the old one. Redo this. There seems to be some kind of problem.
 
 # Suggestions
-## payment settings
-- add a headline "Credit cards" instead of the horizontal line or remove this line, since it has no purpose
-
 ## change password
 - remove the clear button since we don't have this at another place
 
