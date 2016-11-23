@@ -11,7 +11,7 @@
 		<div class="container-fluid">
 			<ul class="list-unstyled">
 				</#if>
-				<li class="col-xs-12 col-sm-6 col-lg-3 thumbnail"
+				<li class="col-xs-12 col-sm-6 col-md-4 thumbnail"
 					id="payment${payment_index}">
 
 					<div class="col-sm-1">
@@ -25,7 +25,7 @@
 							<ul class="list-unstyled container-fluid address">
 								<li class="name" title="${i18n('titleName')}"><strong>${payment.name}</strong></li>
 								<li class="creditCard" title="${i18n('titleCreditCard')}">${payment.getCardNumberCryptic()}</li>
-								<li class="validTo" title="${i18n('titleValidTo')}">${payment.getMonthLeadingZero()} ${payment.year}</li>
+								<li class="validTo" title="${i18n('titleValidTo')}">${payment.getMonthLeadingZero()}/${payment.year}</li>
 							</ul>
 						</address>
 					</div>

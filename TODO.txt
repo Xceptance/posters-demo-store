@@ -11,8 +11,6 @@
 
 ## checkout
 - credit card number breaks if there is one to select
-- credit card date if there is one to select: there should be a separator "/" between month and year
-- credit card date on order placement page: there should be a separator "/" between month and year instead of "."
 - add order confirmation page
 - add orderID in db
 

@@ -12,7 +12,7 @@
 	      					<ul class="list-unstyled row container-fluid">
 		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4"><strong>${i18n("titleName")}:</strong></div><div class="col-xs-12 col-sm-6 col-md-8 paymentName"><strong>${payment.name}</strong></div></li>
 		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-6 col-md-8 paymentCardNumber">${payment.getCardNumberCryptic()}</div></li>
-		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8"><span class="expMonth">${payment.getMonthLeadingZero()}</span> <span class="expYear">${payment.year}</span></div></li>
+		      					<li class="row"><div class="col-xs-12 col-sm-6 col-md-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-6 col-md-8"><span class="expMonth">${payment.getMonthLeadingZero()}</span>/<span class="expYear">${payment.year}</span></div></li>
 	      					</ul>
       					</address>
       					<form action="${contextPath}/confirmDeletePayment" method="post" class="container-fluid">
