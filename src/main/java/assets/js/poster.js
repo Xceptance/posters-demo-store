@@ -1,15 +1,4 @@
-$(document).ready(function() {
-	$('#header-search-trigger').click(function() {
-		$('#header-menu-search').css('display', 'block');
-		$('#header-search-trigger').css('display', 'none');
-	});
-	$('#btnSearch').click(function() {
-		$('#header-menu-search').css('display', 'none');
-		$('#header-search-trigger').css('display', 'block');
-	});
-});
-
-function deleteFromCart(cartProductId, cartIndex) {
+function deleteFromCart(cartProductId, cartIndex) {	
 	updateProductCount(cartProductId, 0, cartIndex);
 }
 
@@ -87,3 +76,49 @@ function updateProductOverview(data) {
 	// set current page attribute
 	$('#productOverview').attr("currentPage",data.currentPage);
 }
+
+//Setup on DOM ready
+$(document).ready(function() {
+	$('#header-search-trigger').click(function() {
+		$('#header-menu-search').css('display', 'block');
+		$('#header-search-trigger').css('display', 'none');
+	});
+	$('#btnSearch').click(function() {
+		$('#header-menu-search').css('display', 'none');
+		$('#header-search-trigger').css('display', 'block');
+	});
+
+	//Setup click handler for update and delete button
+	if ($('#deleteProductModal').length){
+		$('.btnUpdateProduct').click(function(){
+			var cartProductId = $(this).data('id');
+			var cartIndex = $(this).data('index');
+			var inputValue = $('#productCount' + cartIndex).val();
+			if (inputValue == 0){
+				$(this).siblings('.btnRemoveProduct').click();
+			}
+			else{
+				$('#productCount' + cartIndex).prop("defaultValue", inputValue);
+				updateProductCount(cartProductId, inputValue, cartIndex);
+			}
+		});
+
+		//Setup handler for buttons of Confimation popup
+		$('#deleteProductModal').on('show.bs.modal', function(e){
+			var cartProductId = $(e.relatedTarget).data('id');
+			var cartIndex = $(e.relatedTarget).data('index');
+			var prodInfo = $(e.relatedTarget).closest('tr.cartOverviewProduct').find('.productInfo').clone();
+			var oldValue = $('#productCount' + $(e.relatedTarget).data('index')).prop("defaultValue");
+			//Rollback the input value if close button clicked
+			$('#buttonClose').click(function(){
+				$('#productCount' + cartIndex).val(oldValue);
+			});
+			//Delete button
+			$(this).find('.btn-danger').click(function(){
+				deleteFromCart(cartProductId, cartIndex);
+			})
+			//Bodycontent of popup
+			$(this).find('.modal-body').html(prodInfo);			
+		});
+	}	
+});
