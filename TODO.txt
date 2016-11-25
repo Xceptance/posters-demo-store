@@ -2,7 +2,7 @@
 
 # Suggestions
 ## checkout
-- credit card number breaks if there is one to select
+- credit card number breaks if there is one to select (might be fixed with this restyle)
 - add order confirmation page
 - add orderID in db
 
