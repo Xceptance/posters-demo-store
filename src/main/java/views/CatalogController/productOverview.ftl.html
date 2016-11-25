@@ -20,7 +20,7 @@
 			}
 			 // search
 			else {
-				$.post('${contextPath}/getProductOfSearch', {searchText: $('#searchText').val(), page: page}, updateProductOverview);
+				$.post('${contextPath}/getProductOfSearch', {searchText: $('#s').val(), page: page}, updateProductOverview);
 			}
 		}
 	      };

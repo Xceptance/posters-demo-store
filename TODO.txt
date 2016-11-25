@@ -3,7 +3,6 @@
 # Suggestions
 ## search
 - no search should be triggered if the textfield is empty (e.g. just click the search icon twice)
-- pagination does not work if the search result returns more than 6 products
 
 ## checkout
 - credit card number breaks if there is one to select
