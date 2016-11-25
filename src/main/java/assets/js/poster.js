@@ -74,7 +74,7 @@ function updateProductOverview(data) {
 				"href",
 				CONTEXT_PATH + "/productDetail/" + encodeURIComponent(data.products[i].name) + "?productId="
 						+ data.products[i].id);
-		$('#product' + i + " a img").attr("src", CONTEXT_PATH + data.products[i].imageURL);
+		$('#product' + i + " a img").attr("src", CONTEXT_PATH + data.products[i].imageURL).attr("title", data.products[i].name);
 		$('#product' + i + " .pDescriptionOverview").text(
 				data.products[i].descriptionOverview);
 		$('#product' + i + " .pPrice").text(data.products[i].priceAsString);

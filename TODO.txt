@@ -1,6 +1,4 @@
 # Bugs
-#Products overview
-- Every images has the same tooltip as the images of first site -> bs.paginator seems not to pass the title attribute correctly
 
 # Suggestions
 ## cart
