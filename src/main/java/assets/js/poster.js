@@ -96,6 +96,15 @@ $(document).ready(function() {
     	$("#s").val($(this).val());
 	});
 
+	//Check if searchterm is Empty
+	$('#searchForm').submit(function(e){
+		var input = $('#s').val().trim();
+		if (!input){
+			$('#s').val(input);
+			return false;
+		}
+	})
+
 	//Setup click handler for update and delete button
 	if ($('#deleteProductModal').length){
 		$('.btnUpdateProduct').click(function(){

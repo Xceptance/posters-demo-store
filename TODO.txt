@@ -1,9 +1,6 @@
 # Bugs
 
 # Suggestions
-## search
-- no search should be triggered if the textfield is empty (e.g. just click the search icon twice)
-
 ## checkout
 - credit card number breaks if there is one to select
 - add order confirmation page

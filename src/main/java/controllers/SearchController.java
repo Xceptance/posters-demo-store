@@ -46,10 +46,11 @@ public class SearchController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result searchProduct(@Param("searchText") final String searchText, final Context context)
+    public Result searchProduct(@Param("searchText") final String searchFormText, final Context context)
     {
+        String searchText = searchFormText.trim();
         // search text is empty
-        if (searchText.isEmpty() || searchText.trim().isEmpty())
+        if (searchText.isEmpty())
         {
             // show info message
             context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
