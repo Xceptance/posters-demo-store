@@ -1,6 +1,6 @@
 # Bugs
-## change password
-- Can't change password forth and back. Set a new password. Change back to the old one. Redo this. There seems to be some kind of problem.
+#Products overview
+- Every images has the same tooltip as the images of first site -> bs.paginator seems not to pass the title attribute correctly
 
 # Suggestions
 ## cart
@@ -8,11 +8,16 @@
 
 ## search
 - no search should be triggered if the textfield is empty (e.g. just click the search icon twice)
+- pagination does not work if the search result returns more than 6 products
+- enter some text in the search input field, then change size of window -> different inputs -> search field of mobile and not mobile version does not get sync'd
 
 ## checkout
 - credit card number breaks if there is one to select
 - add order confirmation page
 - add orderID in db
+
+#payment settings
+-edit button for credit cards
 
 ## other
 - uppercase (conf->messages.properties)
