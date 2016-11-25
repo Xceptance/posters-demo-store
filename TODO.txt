@@ -4,7 +4,6 @@
 ## search
 - no search should be triggered if the textfield is empty (e.g. just click the search icon twice)
 - pagination does not work if the search result returns more than 6 products
-- enter some text in the search input field, then change size of window -> different inputs -> search field of mobile and not mobile version does not get sync'd
 
 ## checkout
 - credit card number breaks if there is one to select

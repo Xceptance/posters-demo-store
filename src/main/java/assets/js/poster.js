@@ -88,6 +88,14 @@ $(document).ready(function() {
 		$('#header-search-trigger').css('display', 'block');
 	});
 
+	//Sync search input of mobile and not mobile
+	$("#s").on("keyup paste", function() {
+    	$("#sMobile").val($(this).val());
+	});
+	$("#sMobile").on("keyup paste", function() {
+    	$("#s").val($(this).val());
+	});
+
 	//Setup click handler for update and delete button
 	if ($('#deleteProductModal').length){
 		$('.btnUpdateProduct').click(function(){
