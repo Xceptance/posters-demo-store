@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="6" baseURL="http://localhost:8080">
+<testcase xmlns="http://xlt.xceptance.com/xlt-script/2" version="7" baseURL="http://localhost:8080">
   <description>Creates and deletes a credit card.</description>
   <command name="store" target="xxxx xxxx xxxx 1111" value="creditCardNumberClean"/>
   <module name="posters.functional.modules.OpenHomepage"/>
@@ -24,10 +24,10 @@
   <action name="AddNewCreditCard"/>
   <command name="clickAndWait" target="id=btnAddPayment"/>
   <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div[contains(@class,'paymentName')]" value="${fullName}"/>
-  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div[contains(@class,'paymentCardNumber')]" value="${creditCardNumberClean}"/>
-  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div/span[@class='expMonth']" value="${expDateMonth}"/>
-  <command name="assertText" target="//li[@id='payment0']/address/ul/li/div/span[@class='expYear']" value="${expDateYear}"/>
+  <command name="assertText" target="css=.paymentName &gt; strong:nth-child(1)" value="${fullName}"/>
+  <command name="assertText" target="css=.paymentCardNumber" value="${creditCardNumberClean}"/>
+  <command name="assertText" target="css=.expMonth" value="${expDateMonth}"/>
+  <command name="assertText" target="css=.expYear" value="${expDateYear}"/>
   <action name="DeleteCreditCard"/>
   <command name="clickAndWait" target="//li[@id='payment0']/form/button[contains(@class,'btnDeletePayment')]"/>
   <command name="type" target="id=password" value="${password}"/>

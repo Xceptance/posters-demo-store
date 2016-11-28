@@ -6,4 +6,6 @@
   <command name="click" target="id=showUserMenu"/>
   <command name="waitForElementPresent" target="id=userMenu"/>
   <command name="clickAndWait" target="css=.goToLogout"/>
+  <command name="assertVisible" target="id=successMessage"/>
+  <command name="assertText" target="id=successMessage" value="× Logout successful. Have a nice day and see you soon!"/>
 </scriptmodule>
