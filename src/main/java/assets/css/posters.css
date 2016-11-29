@@ -136,9 +136,12 @@
 	margin: 15px 0 15px 0;
 }
 
+ul.nav li.dropdown ul.dropdown-menu {
+	margin-top: 0px
+}
+
 ul.nav li.dropdown:hover ul.dropdown-menu {
 	display: block;
-	margin-top: 0px
 }
 
 .thumbnail {

@@ -6,4 +6,3 @@
 - uppercase (conf->messages.properties)
 - include tax's into calculation? if yes change order
 - Header, Footer auf die volle Breite ?
-- pixel verschiebung im Menu bei mouse-hover
