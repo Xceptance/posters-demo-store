@@ -3,6 +3,4 @@
 # Suggestions
 
 ## other
-- uppercase (conf->messages.properties)
-- include tax's into calculation? if yes change order
-- Header, Footer auf die volle Breite ?
+- Check wording in headlines and buttons. Adjust to uppercase where needed. (conf->messages.properties)
