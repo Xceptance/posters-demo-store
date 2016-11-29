@@ -1,12 +1,6 @@
 # Bugs
 
 # Suggestions
-## checkout
-- add order confirmation page
-- add orderID in db
-
-#payment settings
--edit button for credit cards
 
 ## other
 - uppercase (conf->messages.properties)
