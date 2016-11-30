@@ -23,13 +23,29 @@
   </module>
   <action name="AddNewCreditCard"/>
   <command name="clickAndWait" target="id=btnAddPayment"/>
-  <command name="assertElementPresent" target="id=successMessage"/>
-  <command name="assertText" target="css=.paymentName &gt; strong:nth-child(1)" value="${fullName}"/>
-  <command name="assertText" target="css=.paymentCardNumber" value="${creditCardNumberClean}"/>
-  <command name="assertText" target="css=.expMonth" value="${expDateMonth}"/>
-  <command name="assertText" target="css=.expYear" value="${expDateYear}"/>
+  <module name="posters.functional.modules.AssertCreditCard">
+    <parameter name="name" value="${fullName}"/>
+    <parameter name="number" value="${creditCardNumberClean}"/>
+    <parameter name="month" value="${expDateMonth}"/>
+    <parameter name="year" value="${expDateYear}"/>
+  </module>
+  <action name="EditCreditCard"/>
+  <command name="clickAndWait" target="css=#btnChangePayment0"/>
+  <module name="posters.functional.modules.FillInPaymentForm">
+    <parameter name="number" value="4111111111121234"/>
+    <parameter name="name" value="David Doe"/>
+    <parameter name="month" value="01"/>
+    <parameter name="year" value="2023"/>
+  </module>
+  <command name="clickAndWait" target="css=#btnUpdateDelAddr"/>
+  <module name="posters.functional.modules.AssertCreditCard">
+    <parameter name="name" value="David Doe"/>
+    <parameter name="number" value="xxxx xxxx xxxx 1234"/>
+    <parameter name="month" value="01"/>
+    <parameter name="year" value="2023"/>
+  </module>
   <action name="DeleteCreditCard"/>
-  <command name="clickAndWait" target="//li[@id='payment0']/form/button[contains(@class,'btnDeletePayment')]"/>
+  <command name="clickAndWait" target="css=#btnDeletePayment0"/>
   <command name="type" target="id=password" value="${password}"/>
   <action name="ConfirmDeletion"/>
   <command name="clickAndWait" target="id=btnDeletePayment"/>
