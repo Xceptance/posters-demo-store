@@ -57,6 +57,9 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/addPaymentToCustomer").with(CustomerController.class, "addPaymentToCustomerCompleted");
         router.POST().route("/deletePayment").with(CustomerController.class, "deletePayment");
         router.POST().route("/confirmDeletePayment").with(CustomerController.class, "confirmDeletePayment");
+        router.POST().route("/updatePaymentMethod").with(CustomerController.class, "updatePaymentMethod");
+        router.POST().route("/updatePaymentMethodCompleted").with(CustomerController.class, "updatePaymentMethodCompleted");
+
 
         // ############################################################
         // customer's addresses

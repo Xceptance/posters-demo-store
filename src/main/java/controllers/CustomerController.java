@@ -574,9 +574,86 @@ public class CustomerController
     }
 
     /**
-     * Returns the page to update a shipping address of the customer.
+     * Returns the page to update a payment method of the customer.
      * 
      * @param cardId
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionCustomerExistFilter.class)
+    public Result updatePaymentMethod(@Param("cardId") final int cardId, final Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("card", CreditCard.getCreditCardById(cardId));
+        WebShopController.setCommonData(data, context, xcpConf);
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+        Date date = new Date();
+
+        // get current month and year
+        data.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        data.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+
+        data.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
+        return Results.html().render(data);
+    }
+    
+    /**
+     * Updates a payment method of a customer.
+     * 
+     * @param creditNumber
+     * @param name
+     * @param month
+     * @param year
+     * @param cardId
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionCustomerExistFilter.class)
+    public Result updatePaymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") final String name,
+                                                @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year, 
+                                                @Param("cardId") final int cardId, final Context context)
+    {
+        // replace spaces and dashes
+        creditNumber = creditNumber.replaceAll("[ -]+", "");
+        // check input
+        for (final String regExCreditCard : xcpConf.REGEX_CREDITCARD)
+        {
+            // credit card number is correct
+            if (Pattern.matches(regExCreditCard, creditNumber))
+            {
+                // get creditCard by ID
+                final CreditCard creditCard = CreditCard.getCreditCardById(cardId);
+                creditCard.setCardNumber(creditNumber);
+                creditCard.setName(name);
+                creditCard.setMonth(month);
+                creditCard.setYear(year);
+                // update creditCard
+                creditCard.update();
+                // success message
+                context.getFlashScope().success(msg.get("successSave", language).get());
+                // show payment overview page
+                return Results.redirect(context.getContextPath() + "/paymentOverview");
+            }
+        }
+        // credit card number is not valid
+        final Map<String, Object> data = new HashMap<String, Object>();
+        WebShopController.setCommonData(data, context, xcpConf);
+        // show error message
+        context.getFlashScope().error(msg.get("errorWrongCreditCard", language).get());
+        // show inserted values in form
+        final Map<String, String> card = new HashMap<String, String>();
+        card.put("name", name);
+        card.put("cardNumber", creditNumber);
+        data.put("card", card);
+        // show page to enter payment information again
+        return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_PAYMENT_TO_CUSTOMER);
+    }
+    
+    /**
+     * Returns the page to update a shipping address of the customer.
+     * 
+     * @param addressId
      * @param context
      * @return
      */
@@ -587,8 +664,8 @@ public class CustomerController
         data.put("address", ShippingAddress.getShippingAddressById(addressId));
         WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
-    }
-
+    }    
+    
     /**
      * Updates a shipping address of the customer.
      * 

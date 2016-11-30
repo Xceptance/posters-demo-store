@@ -13,10 +13,16 @@
 		      					<li class="row"><div class="col-xs-12 col-sm-4">${i18n("titleCreditCard")}:</div><div class="col-xs-12 col-sm-8 paymentCardNumber">${payment.getCardNumberCryptic()}</div></li>
 		      					<li class="row"><div class="col-xs-12 col-sm-4">${i18n("titleValidTo")}:</div><div class="col-xs-12 col-sm-8"><span class="expMonth">${payment.getMonthLeadingZero()}</span>/<span class="expYear">${payment.year}</span></div></li>
 	      					</ul>
-      					<form action="${contextPath}/confirmDeletePayment" method="post">
-							<input id="cardId${payment.id}" name="cardId" type="hidden" value=${payment.id}>
-							<button class="btn btn-danger btnDeletePayment" name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}</button>
-						</form>
+	      				<div class="row">
+	      					<form action="${contextPath}/confirmDeletePayment" method="post" class="col-xs-12 col-sm-3">
+								<input class="cardId${payment.id}" name="cardId" type="hidden" value=${payment.id}>
+								<button class="btn btn-danger btnDeletePayment" id="btnDeletePayment${payment_index}" name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}</button>
+							</form>
+							<form action="${contextPath}/updatePaymentMethod" method="post" class="col-xs-12 col-sm-3">
+		    					<input class="cardId${payment.id}" name="cardId" type="hidden" value=${payment.id}>
+		    					<button class="btn btn-primary btnChangePayment" id="btnChangePayment${payment_index}" name="btnChangePayment${payment_index}" type="submit">${i18n("buttonEdit")}</button>
+							</form>
+						</div>
       				</li>
 		<#if (payment_index + 1) % 3 ==0>
       			</ul>
