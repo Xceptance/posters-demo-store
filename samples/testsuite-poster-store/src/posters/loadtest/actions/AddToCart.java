@@ -3,7 +3,6 @@ package posters.loadtest.actions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
 
@@ -124,27 +123,28 @@ public class AddToCart extends AbstractHtmlPageAction
         List<String> oldFinish = new ArrayList<String>();
         List<Integer> oldWidth = new ArrayList<Integer>();
         List<Integer> oldHeight = new ArrayList<Integer>();
-        List<Integer> oldCount = new ArrayList<Integer>();        
-        final List<HtmlElement> oldCartItems = new ArrayList (page.getByXPath("id('miniCartMenu')/li/div/div/ul[@id='cartMiniElementList']/li[@class='miniCartItem']"));           
+        List<Integer> oldCount = new ArrayList<Integer>();
+        final List<HtmlElement> oldCartItems = new ArrayList (page.getByXPath("id('miniCartMenu')//li[contains(@class, 'miniCartItem')]"));           
         if (oldCartItems.size() != 0){           
             for (HtmlElement item : oldCartItems) {
-                oldProductID.add(Integer.parseInt(item.getAttribute("prodid")));
+                oldProductID.add(Integer.parseInt(item.getAttribute("data-prodId")));
+                final List<HtmlElement> oldCartItemsAttr = item.getElementsByTagName("span");
+                for (HtmlElement itemAttr : oldCartItemsAttr) {
+                    if (itemAttr.getAttribute("class").equals("prodStyle")) {
+                        oldFinish.add(itemAttr.getTextContent());
+                    }
+                    if (itemAttr.getAttribute("class").equals("prodCount")) {
+                        oldCount.add(Integer.parseInt(itemAttr.getTextContent()));
+                    }
+                    if (itemAttr.getAttribute("class").equals("prodWidth")){
+                        oldWidth.add(Integer.parseInt(itemAttr.getTextContent()));
+                    }
+                    if (itemAttr.getAttribute("class").equals("prodHeight")){
+                        oldHeight.add(Integer.parseInt(itemAttr.getTextContent()));
+                    }
+                }
             }            
-            final List<HtmlElement> oldCartItemsAttr = new ArrayList (page.getByXPath("id('miniCartMenu')/li/div/div/ul[@id='cartMiniElementList']/li[@class='miniCartItem']/ul/li//span"));           
-            for (HtmlElement itemAttr : oldCartItemsAttr) {
-                if (itemAttr.getAttribute("class").equals("prodStyle")) {
-                    oldFinish.add(itemAttr.getTextContent());
-                }
-                if (itemAttr.getAttribute("class").equals("prodCount")) {
-                    oldCount.add(Integer.parseInt(itemAttr.getTextContent()));
-                }
-                if (itemAttr.getAttribute("class").equals("prodWidth")){
-                    oldWidth.add(Integer.parseInt(itemAttr.getTextContent()));
-                }
-                if (itemAttr.getAttribute("class").equals("prodHeight")){
-                    oldHeight.add(Integer.parseInt(itemAttr.getTextContent()));
-                }
-            }            
+            
         };
         
         // (3) Add poster to cart.

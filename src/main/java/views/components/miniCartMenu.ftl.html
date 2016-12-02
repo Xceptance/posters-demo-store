@@ -14,7 +14,7 @@
 		<ul class="list-unstyled cartMiniElementList">
 			<#list cartProducts as product>
 			<li
-				class="productId${product.product.id}${product.getFinish()}${product.size.width}x${product.size.height} miniCartItem">
+				class="productId${product.product.id}${product.getFinish()}${product.size.width}x${product.size.height} miniCartItem" data-prodId="${product.product.id}">
 				<ul class="cartItems list-unstyled">
 					<li class="prodName">${product.product.name}</li>
 					<li>${i18n("cartTableHeaderQuantity")}: <span 
