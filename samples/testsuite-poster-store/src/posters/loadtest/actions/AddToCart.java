@@ -144,7 +144,6 @@ public class AddToCart extends AbstractHtmlPageAction
                     }
                 }
             }            
-            
         };
         
         // (3) Add poster to cart.
