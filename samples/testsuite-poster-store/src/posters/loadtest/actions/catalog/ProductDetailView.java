@@ -48,7 +48,7 @@ public class ProductDetailView extends AbstractHtmlPageAction
         HtmlPageUtils.findHtmlElements(page, "id('productOverview')/div/ul/li/div[@class='thumbnail']");
 
         // Remember a random product's link URL.
-        productDetailLink = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('productOverview')/div/ul/li/div/div[@class='container-fluid']/a");
+        productDetailLink = HtmlPageUtils.findHtmlElementsAndPickOne(page, "id('productOverview')//div[@class='thumbnail']/div/a");
         Assert.assertNotNull("No matching product detail link found.", productDetailLink);
 
     }
