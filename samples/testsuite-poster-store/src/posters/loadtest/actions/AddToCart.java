@@ -124,7 +124,7 @@ public class AddToCart extends AbstractHtmlPageAction
         List<Integer> oldWidth = new ArrayList<Integer>();
         List<Integer> oldHeight = new ArrayList<Integer>();
         List<Integer> oldCount = new ArrayList<Integer>();
-        final List<HtmlElement> oldCartItems = new ArrayList (page.getByXPath("id('miniCartMenu')//li[contains(@class, 'miniCartItem')]"));           
+        final List<HtmlElement> oldCartItems = page.getByXPath("id('miniCartMenu')//li[contains(@class, 'miniCartItem')]");           
         if (oldCartItems.size() != 0){           
             for (HtmlElement item : oldCartItems) {
                 oldProductID.add(Integer.parseInt(item.getAttribute("data-prodId")));

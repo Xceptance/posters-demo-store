@@ -3,7 +3,7 @@ package posters.loadtest.tests;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import posters.loadtest.actions.Homepage;

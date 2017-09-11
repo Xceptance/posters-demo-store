@@ -1,20 +1,18 @@
 package posters.loadtest.actions;
 
 import java.net.URL;
-import java.util.List;
 
 import org.junit.Assert;
-
-import posters.loadtest.validators.HeaderValidator;
-import posters.loadtest.validators.NavBarValidator;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.xceptance.xlt.api.actions.AbstractHtmlPageAction;
-import com.xceptance.xlt.api.engine.NetworkData;
 import com.xceptance.xlt.api.validators.ContentLengthValidator;
 import com.xceptance.xlt.api.validators.HtmlEndTagValidator;
 import com.xceptance.xlt.api.validators.HttpResponseCodeValidator;
+
+import posters.loadtest.validators.HeaderValidator;
+import posters.loadtest.validators.NavBarValidator;
 
 /**
  * Loads the homepage from the given URL.<br/>
@@ -53,7 +51,7 @@ public class Homepage extends AbstractHtmlPageAction
         Assert.assertNotNull("Url must not be null", urlAsString);
 
         // Use the java URL class to do the final validation since it will throw
-        // an exception in case this is not a valid URL. 
+        // an exception in case this is not a valid URL.
         // We do not have to deal with the exception, the framework will do it.
         url = new URL(urlAsString);
     }
@@ -71,11 +69,11 @@ public class Homepage extends AbstractHtmlPageAction
     }
 
     /**
-     * Validate the correctness of the result. Once the homepage has been loaded, we can ensure that certain key elements
-     * are present in our previous request's responses. For example, here we are validating that the proper response
-     * code was sent, the length of the page is correct, an end tag is present, there is a head line on the page. This
-     * is all being done with the help of validators. Validators are used when we need to check the same thing after
-     * several different actions.
+     * Validate the correctness of the result. Once the homepage has been loaded, we can ensure that certain key
+     * elements are present in our previous request's responses. For example, here we are validating that the proper
+     * response code was sent, the length of the page is correct, an end tag is present, there is a head line on the
+     * page. This is all being done with the help of validators. Validators are used when we need to check the same
+     * thing after several different actions.
      */
     @Override
     protected void postValidate() throws Exception
@@ -117,28 +115,5 @@ public class Homepage extends AbstractHtmlPageAction
 
         // Make sure we have the correct title.
         Assert.assertEquals("Title does not match", "Check out our new panorama posters", text);
-
-        /*
-         * This section validates the responses on the network layer.
-         */
-        final List<NetworkData> networkData = getNetworkDataSet();
-
-        // We just look at the first request/response pair.
-        final NetworkData n0 = networkData.get(0);
-        Assert.assertEquals("/posters/", n0.getURL().getPath());
-        Assert.assertEquals("text/html", n0.getContentType());
-        Assert.assertEquals("GET", n0.getRequestMethod().toString());
-        Assert.assertEquals(200, n0.getResponseStatusCode());
-
-        // Host=localhost:8080
-        // User-Agent=Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.19; Xceptance LoadTest ?.?.?/r???)
-        // Gecko/2010031422 Firefox/3.0.19
-        // Accept-Language=en-us
-        // Accept=*/*
-        Assert.assertEquals(getHtmlPage().getWebClient().getBrowserVersion().getUserAgent(),
-                            n0.getAdditionalRequestHeaders().get("User-Agent"));
-        Assert.assertTrue(n0.getAdditionalRequestHeaders().containsKey("Host")); // check only
-        Assert.assertTrue(n0.getAdditionalRequestHeaders().containsKey("Accept-Language")); // check only
-        Assert.assertTrue(n0.getAdditionalRequestHeaders().containsKey("Accept")); // check only
     }
 }

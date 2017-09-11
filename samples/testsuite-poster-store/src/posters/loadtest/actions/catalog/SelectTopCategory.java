@@ -22,7 +22,6 @@ public class SelectTopCategory extends AbstractHtmlPageAction
      * Chosen top-category.
      */
     private HtmlElement topCategoryLink;
-    private HtmlElement subCategoryLink;
 
     /**
      * Constructor.
