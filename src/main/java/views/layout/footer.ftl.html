@@ -1,5 +1,93 @@
-<footer id="footer">
+<script>
+	function PopUpLicense() {
+ 	var popup = document.getElementById("LICENSE");
+	popup.classList.toggle("show");
+	}
+</script>
+<footer id="footer" class="bg-dark footer">
 	<div class="body-wrapper">
-		<p class="text-center muted">${i18n("footerTitle")}</p>
+			
+		
+			
+			
+		<p style="color: white" class="text-center muted">${i18n("footerTitle")} </p>
+		
+		
+				
+		<div class="text-center">
+					
+					<div class="container">
+<a href="/posters/assets/img/LICENSE">
+					<span class="white fa fa-copy" title="DownloadMitLicenseAsTXT"></span></a>
+							
+							<button type="button" class=" white btn fa fa-file-pdf" data-toggle="modal" data-target="#PDFDisplay"></button>
+					
+							<div id="PDFDisplay" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-lg">
+					
+									
+									<div class="modal-content">
+										<div class="modal-header">
+											<button id="Close-btn-top" type="button" class="text-left col-3 close pull-left" data-dismiss="modal">&times;</button>
+											<h4 class=" col-11 text-left modal-title">${i18n("PDFFilename")}</h4>
+										</div>
+										<div class="modal-body">
+					
+											<object 
+											data="/posters/assets/img/LICENSE.pdf"
+												   frameborder="0" width="100%" height="400px">
+
+											</object>
+					
+											<div class="modal-footer">
+												<button id="Close-btn-bot" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+					
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						
+			<a class="MIT-Popup">
+			<div class="popup" onclick="PopUpLicense()">
+				<img class ="MIT_License" alt="MIT-Licence" src="/posters/assets/img/MIT-License.png">
+						<span class="d-none d-md-block container-fluid popuptext text-center" id="LICENSE">
+
+								MIT License <br>
+								<br>
+								Copyright (c) 2019 Products<br>
+								<br>
+								Permission is hereby granted, free of charge, to any person obtaining a copy<br>
+								of this software and associated documentation files (the "Software"), to deal<br>
+								in the Software without restriction, including without limitation the rights<br>
+								to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br>
+								copies of the Software, and to permit persons to whom the Software is<br>
+								furnished to do so, subject to the following conditions:<br>
+								<br>
+								The above copyright notice and this permission notice shall be included in all<br>
+								copies or substantial portions of the Software.<br>
+								<br>
+								THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br>
+								IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br>
+								FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br>
+								AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br>
+								LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br>
+								OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<br>
+								SOFTWARE.<br>
+
+						</span>
+					</div>
+				</a>
+				
+				<a class="CC-link" rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+					<img class="CC_License" width="60px" height= "25px" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+				</a>
+				
+						
+			</div>
+			
 	</div>
 </footer>
