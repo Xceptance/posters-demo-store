@@ -17,7 +17,7 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2    
     - name: Build with Maven
-      run: mvn -B verify
+      run: mvn -B package
     - run: mkdir staging && cp target/*.war staging
     - uses: actions/upload-artifact@v1
       with:
