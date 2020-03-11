@@ -23,7 +23,7 @@ public class CreditCardTest extends NinjaTest
     @Test
     public void testGetCardNumberCryptic()
     {
-        CreditCard creditCard = Ebean.find(CreditCard.class, card.getId());
+        final CreditCard creditCard = Ebean.find(CreditCard.class, card.getId());
         Assert.assertEquals("xxxx xxxx xxxx 3456", creditCard.getCardNumberCryptic());
     }
 

@@ -37,13 +37,13 @@ public class OrderTest extends NinjaTest
         size.setHeight(12);
         size.save();
 
-        ProductPosterSize productPosterSize = new ProductPosterSize();
+        final ProductPosterSize productPosterSize = new ProductPosterSize();
         productPosterSize.setProduct(product1);
         productPosterSize.setSize(size);
         productPosterSize.setPrice(5.55);
         productPosterSize.save();
 
-        ProductPosterSize productPosterSize2 = new ProductPosterSize();
+        final ProductPosterSize productPosterSize2 = new ProductPosterSize();
         productPosterSize2.setProduct(product2);
         productPosterSize2.setSize(size);
         productPosterSize2.setPrice(7.77);
@@ -63,13 +63,13 @@ public class OrderTest extends NinjaTest
     public void testAddProductsFromCart()
     {
         // create new order
-        Order order = new Order();
+        final Order order = new Order();
         order.save();
         // add all products from the cart to the order
         order.addProductsFromCart(cart);
         order.update();
         // get all products from the order
-        List<OrderProduct> orderProducts = Ebean.find(OrderProduct.class).where().eq("order", order).findList();
+        final List<OrderProduct> orderProducts = Ebean.find(OrderProduct.class).where().eq("order", order).findList();
         // verify, that product one is in the order...
         Assert.assertEquals(product1.getName(), orderProducts.get(0).getProduct().getName());
         // ...with an amount of two
@@ -79,25 +79,29 @@ public class OrderTest extends NinjaTest
         // ...with an amount of one
         Assert.assertEquals(1, orderProducts.get(1).getProductCount());
         // verify, that total price is sum of all three product prices
-        Assert.assertEquals(18.87, order.getTotalCosts(), 0.01);
+        Assert.assertEquals(18.87, order.getSubTotalCosts(), 0.01);
     }
 
     @Test
     public void testAddShippingCosts()
     {
-        Order order = new Order();
+        final Order order = new Order();
         order.save();
-
+        
+        order.setShippingCosts(4.99);
+ //       order.addShippingCostsToTotalCosts();
+        order.update();
+        
         order.addProductsFromCart(cart);
         order.update();
+        
 
+        
         Order updatedOrder = Ebean.find(Order.class, order.getId());
         // total price is sum of all three product prices
-        Assert.assertEquals(18.87, updatedOrder.getTotalCosts(), 0.01);
+        Assert.assertEquals(18.87, updatedOrder.getSubTotalCosts(), 0.01);
 
-        order.setShippingCosts(4.99);
-        order.addShippingCostsToTotalCosts();
-        order.update();
+
 
         updatedOrder = Ebean.find(Order.class, order.getId());
         // total price is sum of all three product prices and shipping costs
@@ -107,26 +111,25 @@ public class OrderTest extends NinjaTest
     @Test
     public void testAddTaxToTotalCosts()
     {
-        Order order = new Order();
+        final Order order = new Order();
         order.save();
 
+        order.setShippingCosts(4.99);
+        order.setTax(0.10);
+        order.update();
+        
         order.addProductsFromCart(cart);
         order.update();
 
         Order updatedOrder = Ebean.find(Order.class, order.getId());
 
         // total price is sum of all three product prices
-        Assert.assertEquals(18.87, updatedOrder.getTotalCosts(), 0.01);
+        Assert.assertEquals(18.87, updatedOrder.getSubTotalCosts(), 0.01);
 
-        order.setShippingCosts(4.99);
-        order.addShippingCostsToTotalCosts();
-        order.setTax(0.10);
-        order.addTaxToTotalCosts();
-        order.update();
 
         updatedOrder = Ebean.find(Order.class, order.getId());
         // total price is sum of all three product prices and shipping costs and tax
-        double totalCosts = 23.86 * 1.10;
+        final double totalCosts = 23.86 * 1.10;
         Assert.assertEquals(totalCosts, updatedOrder.getTotalCosts(), 0.01);
     }
 

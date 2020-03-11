@@ -57,7 +57,7 @@ public class OrderProduct
     @ManyToOne
     @JoinColumn(name = "postersize_id")
     private PosterSize size;
-
+ 
     /**
      * The price of the product. The price depends on the selected {@link PosterSize}.
      */
@@ -79,7 +79,7 @@ public class OrderProduct
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -100,7 +100,7 @@ public class OrderProduct
      * @param product
      *            the {@link Product}
      */
-    public void setProduct(Product product)
+    public void setProduct(final Product product)
     {
         this.product = product;
     }
@@ -121,7 +121,7 @@ public class OrderProduct
      * @param order
      *            the {@link Order}
      */
-    public void setOrder(Order order)
+    public void setOrder(final Order order)
     {
         this.order = order;
     }
@@ -142,7 +142,7 @@ public class OrderProduct
      * @param productCount
      *            the product count
      */
-    public void setProductCount(int productCount)
+    public void setProductCount(final int productCount)
     {
         this.productCount = productCount;
     }
@@ -152,7 +152,7 @@ public class OrderProduct
      */
     public void incProductCount()
     {
-        this.setProductCount(this.getProductCount() + 1);
+        setProductCount(getProductCount() + 1);
     }
 
     /**
@@ -171,7 +171,7 @@ public class OrderProduct
      * @param finish
      *            the finish of the product
      */
-    public void setFinish(String finish)
+    public void setFinish(final String finish)
     {
         this.finish = finish;
     }
@@ -192,7 +192,7 @@ public class OrderProduct
      * @param size
      *            the {@link PosterSize} of the product
      */
-    public void setSize(PosterSize size)
+    public void setSize(final PosterSize size)
     {
         this.size = size;
     }
@@ -214,8 +214,31 @@ public class OrderProduct
      */
     public String getPriceAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = price;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+    /**
+     * Returns the line item price of the product
+     * 
+     * @return the line item price of the product
+     */
+    public double getTotalUnitPrice(){
+        double temp = price * this.productCount;
+        return temp;
+    }
+    /**
+     * Returns the line item price of the product as well formatted String.
+     * 
+     * @return the line item price of the product
+     */
+    public String getTotalUnitPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price * this.productCount;
         temp = temp * 100;
         temp = Math.round(temp);
         temp = temp / 100;
@@ -228,7 +251,7 @@ public class OrderProduct
      * @param price
      *            the price of the product
      */
-    public void setPrice(double price)
+    public void setPrice(final double price)
     {
         this.price = price;
     }

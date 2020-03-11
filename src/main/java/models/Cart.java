@@ -37,10 +37,24 @@ public class Cart
     private Customer customer;
 
     /**
-     * The products which are in the cart.
+     * The shipping costs of the order.
      */
-    @OneToMany(mappedBy = "cart")
-    private List<CartProduct> products;
+    private double shippingCosts;
+
+    /**
+     * The sub total price of the order.
+     */
+    private double subTotalPrice;
+
+    /**
+     * The tax that will be added to the sub-total price.
+     */
+    private double tax;
+
+    /**
+     * The total tax price of the order.
+     */
+    private double totalTaxPrice;
 
     /**
      * The total price of the cart.
@@ -48,11 +62,17 @@ public class Cart
     private double totalPrice;
 
     /**
+     * The products which are in the cart.
+     */
+    @OneToMany(mappedBy = "cart")
+    private List<CartProduct> products;
+
+    /**
      * The constructor.
      */
     public Cart()
     {
-        this.products = new ArrayList<CartProduct>();
+        products = new ArrayList<CartProduct>();
     }
 
     /**
@@ -71,9 +91,143 @@ public class Cart
      * @param id
      *            {@link UUID} of the cart.
      */
-    public void setId(UUID id)
+    public void setId(final UUID id)
     {
         this.id = id;
+    }
+
+    /**
+     * @return the shippingCosts
+     */
+    public double getShippingCosts()
+    {
+        return shippingCosts;
+    }
+
+    /**
+     * @param shippingCosts
+     *            the shippingCosts to set
+     */
+    public void setShippingCosts(double shippingCosts)
+    {
+        this.shippingCosts = shippingCosts;
+    }
+
+    /**
+     * Returns the shipping costs of the cart as a well formatted String.
+     * 
+     * @return the shipping costs of the cart
+     */
+    public String getShippingCostsAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = shippingCosts;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @return the subTotalPrice
+     */
+    public double getSubTotalPrice()
+    {
+        return subTotalPrice;
+    }
+
+    /**
+     * Returns Sub Total Price of the cart as a well formatted String.
+     * 
+     * @return the sub total price of the cart
+     */
+    public String getSubTotalPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = getSubTotalPrice();
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @param subTotalPrice
+     *            the subTotalPrice to set
+     */
+    public void setSubTotalPrice(double subTotalPrice)
+    {
+        this.subTotalPrice = subTotalPrice;
+    }
+
+    /**
+     * @return the tax
+     */
+    public double getTax()
+    {
+        return tax;
+    }
+
+    /**
+     * Returns tax as a well formatted String.
+     * 
+     * @return the tax
+     */
+    public String getTaxAsString()
+    {
+        return String.valueOf(tax * 100);
+    }
+
+    /**
+     * @param tax
+     *            the tax to set
+     */
+    public void setTax(double tax)
+    {
+        this.tax = tax;
+    }
+
+    /**
+     * @return the totalTaxPrice
+     */
+    public double getTotalTaxPrice()
+    {
+        // check totalTaxPrice
+        if (totalTaxPrice > 0)
+        {
+            return totalTaxPrice;
+        }
+        else
+            return 0;
+    }
+
+    /**
+     * Returns Sub Total Tax Price of the cart as a well formatted String.
+     * 
+     * @return the sub total tax price of the cart
+     */
+    public String getTotalTaxPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = totalTaxPrice;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * @param totalTaxPrice
+     *            the totalTaxPrice to set
+     */
+    public void setTotalTaxPrice(double totalTaxPrice)
+    {
+        this.totalTaxPrice = totalTaxPrice;
+    }
+
+    public void calculateTotalTaxPrice()
+    {
+        setTotalTaxPrice(getTax() * (getSubTotalPrice()+ getShippingCosts()));
     }
 
     /**
@@ -93,8 +247,26 @@ public class Cart
      */
     public String getTotalPriceAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = totalPrice;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
+    }
+
+    /**
+     * Returns the total price of all products with tax, shippingCosts.
+     * 
+     * @param subTotalPrice
+     * @param tax
+     * @param shippingCosts
+     * @return
+     */
+    public String getTotalPriceAsString(double subTotalPrice, double tax, double shippingCosts)
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = subTotalPrice + (subTotalPrice * tax) + shippingCosts;
         temp = temp * 100;
         temp = Math.round(temp);
         temp = temp / 100;
@@ -107,9 +279,17 @@ public class Cart
      * @param totalPrice
      *            the total price of the cart
      */
-    public void setTotalPrice(double totalPrice)
+    public void setTotalPrice(final double totalPrice)
     {
         this.totalPrice = totalPrice;
+    }
+
+    /**
+     * Calculate the Total Price.
+     */
+    public void calculateTotalPrice()
+    {
+        setTotalPrice(getSubTotalPrice() + getTotalTaxPrice() + getShippingCosts());
     }
 
     /**
@@ -123,12 +303,12 @@ public class Cart
     }
 
     /**
-     * Sets the customer of the cart.
+     * Sets the customer of the cart.   "0.00"
      * 
      * @param customer
      *            the customer of the cart
      */
-    public void setCustomer(Customer customer)
+    public void setCustomer(final Customer customer)
     {
         this.customer = customer;
     }
@@ -149,7 +329,7 @@ public class Cart
      * @param products
      *            the {@link CartProduct}s of the cart
      */
-    public void setProducts(List<CartProduct> products)
+    public void setProducts(final List<CartProduct> products)
     {
         this.products = products;
     }
@@ -164,11 +344,12 @@ public class Cart
      * @param size
      *            the {@link PosterSize} of the product
      */
-    public void addProduct(Product product, final String finish, final PosterSize size)
+    public void addProduct(final Product product, final String finish, final PosterSize size)
     {
         // check, whether the product with the given finish and size is in the cart
-        CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product)
-                                       .eq("finish", finish).eq("size", size).findUnique();
+        CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
+                                       .eq("size", size).findUnique();
+        
         // the product is not in the cart
         if (cartProduct == null)
         {
@@ -183,8 +364,8 @@ public class Cart
             // set size
             cartProduct.setSize(size);
             // set price of the product
-            cartProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size)
-                                      .findUnique().getPrice());
+            cartProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findUnique()
+                                      .getPrice());
             cartProduct.save();
             products.add(cartProduct);
         }
@@ -194,11 +375,18 @@ public class Cart
             // increment the count of the product
             cartProduct.incProductCount();
         }
-        // recalculate total price
-        this.setTotalPrice(getTotalPrice() + cartProduct.getPrice());
-        this.update();
-    }
 
+        // add product price to SubTotalPrice
+        setSubTotalPrice(getSubTotalPrice() + (cartProduct.getPrice()));
+
+        // recalculate TotalTaxPrice, TotalPrice
+        calculateTotalTaxPrice();
+        calculateTotalPrice();
+
+        // update values in db
+        update();
+    }
+ 
     /**
      * Removes one of the product from the cart.
      * 
@@ -216,11 +404,13 @@ public class Cart
         else
         {
             cartProduct.delete();
-            this.products.remove(cartProduct);
+            products.remove(cartProduct);
         }
         // recalculate total price
-        this.setTotalPrice(getTotalPrice() - cartProduct.getPrice());
-        this.update();
+        setSubTotalPrice(getSubTotalPrice() - cartProduct.getPrice());
+        calculateTotalTaxPrice();
+        calculateTotalPrice();
+        update();
     }
 
     /**
@@ -245,9 +435,9 @@ public class Cart
     public void delete()
     {
         // remove all products from the cart
-        this.clearProducts();
+        clearProducts();
         // refresh to prevent foreign key violation
-        this.update();
+        update();
         // finally delete the cart
         Ebean.delete(this);
     }
@@ -258,15 +448,17 @@ public class Cart
     public void clearProducts()
     {
         // get all products of the cart
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
+        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
         // remove each product
-        for (CartProduct cartProduct : cartProducts)
+        for (final CartProduct cartProduct : cartProducts)
         {
             cartProduct.delete();
-            this.products.remove(cartProduct);
+            products.remove(cartProduct);
         }
-        // adjust total price
-        this.setTotalPrice(0);
+        // adjust price
+        setSubTotalPrice(0);
+        setTotalTaxPrice(0);
+        setTotalPrice(0);
     }
 
     /**
@@ -276,7 +468,7 @@ public class Cart
      *            the {@link UUID} of the cart
      * @return the {@link Cart} that matches the unique id
      */
-    public static Cart getCartById(UUID id)
+    public static Cart getCartById(final UUID id)
     {
         return Ebean.find(Cart.class, id);
     }
@@ -292,18 +484,47 @@ public class Cart
     }
 
     /**
-     * Creates and returns a new {@link Cart}.
+     * Creates and returns a new cart.
      * 
      * @return a new {@link Cart}
      */
     public static Cart createNewCart()
     {
         // create new cart
-        Cart cart = new Cart();
+        final Cart cart = new Cart();
+
         // save cart
         cart.save();
         // get new cart by id
-        Cart newCart = Cart.getCartById(cart.getId());
+        final Cart newCart = Cart.getCartById(cart.getId());
+        // return new cart
+        return newCart;
+    }
+    /**
+     * Creates and returns a new cart with parameter.
+     * 
+     * @return a new {@link Cart}
+     */
+    public static Cart createNewCart(final double tax, final double shippingCosts)
+    {
+        // create new cart
+        final Cart cart = new Cart();
+
+        // start value = 0
+        cart.setSubTotalPrice(0);
+        cart.setTotalPrice(0);
+        cart.setTotalTaxPrice(0);
+
+        // set default tax
+        cart.setTax(tax);
+
+        // set default shipping costs
+        cart.setShippingCosts(shippingCosts);
+
+        // save cart
+        cart.save();
+        // get new cart by id
+        final Cart newCart = Cart.getCartById(cart.getId());
         // return new cart
         return newCart;
     }
@@ -317,9 +538,9 @@ public class Cart
     {
         int productCount = 0;
         // get all products of the cart
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
+        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
         // get the count of each product
-        for (CartProduct cartProduct : cartProducts)
+        for (final CartProduct cartProduct : cartProducts)
         {
             // add the count of the current product to total count
             productCount += cartProduct.getProductCount();
@@ -342,7 +563,7 @@ public class Cart
      */
     public CartProduct getCartProduct(final Product product, final String finish, final PosterSize size)
     {
-        return Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
-                    .eq("size", size).findUnique();
+        return Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish).eq("size", size)
+                    .findUnique();
     }
 }

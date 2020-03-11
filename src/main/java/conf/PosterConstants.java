@@ -29,7 +29,12 @@ public class PosterConstants
      * The regular expression of a valid email address.
      */
     public final String REGEX_EMAIL;
-
+    
+    /**
+     * The regular expression of a valid name.
+     */
+    public final String REGEX_NAME;
+    
     /**
      * The regular expression of a valid product count in the cart.
      */
@@ -51,15 +56,35 @@ public class PosterConstants
     public final String TEMPLATE_SHIPPING_ADDRESS = "views/CheckoutController/shippingAddress.ftl.html";
 
     /**
+     * The path to the template to enter a shipping address as guest.
+     */
+    public final String TEMPLATE_SHIPPING_ADDRESS_GUEST = "views/CheckoutController/shippingAddressGuest.ftl.html";
+
+    /**
      * The path to the template to enter a billing address.
      */
     public final String TEMPLATE_BILLING_ADDRESS = "views/CheckoutController/billingAddress.ftl.html";
+
+    /**
+     * The path to the template to enter a billing address as guest.
+     */
+    public final String TEMPLATE_BILLING_ADDRESS_GUEST = "views/CheckoutController/billingAddressGuest.ftl.html";
 
     /**
      * The path to the template to enter a payment method.
      */
     public final String TEMPLATE_PAYMENT_METHOD = "views/CheckoutController/paymentMethod.ftl.html";
 
+    /**
+     * The path to the template to enter a payment method as guest.
+     */
+    public final String TEMPLATE_PAYMENT_METHOD_GUEST = "views/CheckoutController/paymentMethodGuest.ftl.html";
+    
+    /**
+     * The path to the template to the order confirmation page.
+     */
+    public final String TEMPLATE_ORDER_CONFIRMATION_PAGE = "views/CheckoutController/orderConfirmation.ftl.html";
+        
     /**
      * The path to the registration template.
      */
@@ -141,13 +166,15 @@ public class PosterConstants
     public final String UNIT_OF_LENGTH;
 
     @Inject
-    public PosterConstants(NinjaProperties ninjaProp)
+    public PosterConstants(final NinjaProperties ninjaProp)
     {
         REGEX_ZIP = ninjaProp.getOrDie("regex.zip");
 
         REGEX_CREDITCARD = ninjaProp.getStringArray("regex.creditCard");
 
         REGEX_EMAIL = ninjaProp.getOrDie("regex.email");
+        
+        REGEX_NAME = ninjaProp.getOrDie("regex.name");
 
         REGEX_PRODUCT_COUNT = ninjaProp.getOrDie("regex.productCount");
 

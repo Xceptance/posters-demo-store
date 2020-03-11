@@ -89,7 +89,7 @@ public class ShippingAddress
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -110,7 +110,7 @@ public class ShippingAddress
      * @param company
      *            the company field of the shipping address
      */
-    public void setCompany(String company)
+    public void setCompany(final String company)
     {
         this.company = company;
     }
@@ -131,7 +131,7 @@ public class ShippingAddress
      * @param customer
      *            the customer with this shipping address
      */
-    public void setCustomer(Customer customer)
+    public void setCustomer(final Customer customer)
     {
         this.customer = customer;
     }
@@ -152,7 +152,7 @@ public class ShippingAddress
      * @param name
      *            the name field
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -173,7 +173,7 @@ public class ShippingAddress
      * @param addressLine
      *            the address line
      */
-    public void setAddressLine(String addressLine)
+    public void setAddressLine(final String addressLine)
     {
         this.addressLine = addressLine;
     }
@@ -194,7 +194,7 @@ public class ShippingAddress
      * @param city
      *            the city field
      */
-    public void setCity(String city)
+    public void setCity(final String city)
     {
         this.city = city;
     }
@@ -215,7 +215,7 @@ public class ShippingAddress
      * @param state
      *            the state field
      */
-    public void setState(String state)
+    public void setState(final String state)
     {
         this.state = state;
     }
@@ -236,7 +236,7 @@ public class ShippingAddress
      * @param country
      *            the country field
      */
-    public void setCountry(String country)
+    public void setCountry(final String country)
     {
         this.country = country;
     }
@@ -257,7 +257,7 @@ public class ShippingAddress
      * @param zip
      *            the ZIP code
      */
-    public void setZip(String zip)
+    public void setZip(final String zip)
     {
         this.zip = zip;
     }
@@ -278,7 +278,7 @@ public class ShippingAddress
      * @param orders
      *            a list of {@link Order}s
      */
-    public void setOrder(List<Order> order)
+    public void setOrder(final List<Order> order)
     {
         this.order = order;
     }
@@ -314,7 +314,7 @@ public class ShippingAddress
      *            the ID of the shipping address
      * @return the {@link ShippingAddress} that matches the given ID
      */
-    public static ShippingAddress getShippingAddressById(int id)
+    public static ShippingAddress getShippingAddressById(final int id)
     {
         return Ebean.find(ShippingAddress.class, id);
     }
@@ -325,9 +325,9 @@ public class ShippingAddress
      * @param id
      *            the ID of the shipping address
      */
-    public static void removeCustomerFromShippingAddress(int id)
+    public static void removeCustomerFromShippingAddress(final int id)
     {
-        ShippingAddress address = ShippingAddress.getShippingAddressById(id);
+        final ShippingAddress address = ShippingAddress.getShippingAddressById(id);
         address.setCustomer(null);
         address.update();
     }

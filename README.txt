@@ -1,5 +1,0 @@
-- get current version from git
-- go to src/main/java/conf and adjust the application.conf if needed
-- open a terminal inside of the folder that contains the project: type 'mvn jetty:run'
-- open a web browser and go to http://localhost:8080/
-- happy testing

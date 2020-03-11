@@ -1,8 +1,6 @@
-logs/
-database/webshop.*
-h2-create.sql
-h2-drop.sql
-bin/
-target/
-samples/testsuite-poster-store/results/
-samples/testsuite-poster-store/lib/
+/data/
+/logs/
+/target/
+/samples/testsuite-poster-store/results/
+/samples/testsuite-poster-store/classes/
+/*.sql

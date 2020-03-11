@@ -16,8 +16,6 @@ import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Page;
 import com.avaje.ebean.PagingList;
 import com.avaje.ebean.Query;
-import com.avaje.ebean.RawSql;
-import com.avaje.ebean.RawSqlBuilder;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
@@ -38,7 +36,7 @@ public class SearchController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns a product overview page with products, that matches the search text.
@@ -48,13 +46,14 @@ public class SearchController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result searchProduct(@Param("searchText") String searchText, Context context)
+    public Result searchProduct(@Param("searchText") final String searchFormText, final Context context)
     {
+        String searchText = searchFormText.trim();
         // search text is empty
-        if (searchText.isEmpty() || searchText.trim().isEmpty())
+        if (searchText.isEmpty())
         {
             // show info message
-            context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+            context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
             // return index page
             return Results.redirect(context.getContextPath() + "/");
         }
@@ -62,12 +61,12 @@ public class SearchController
         {
             final Map<String, Object> data = new HashMap<String, Object>();
             // search for products
-            List<Product> products = searchForProducts(searchText, 1, data);
+            final List<Product> products = searchForProducts(searchText, 1, data);
             // no product was found
             if (products.isEmpty())
             {
                 // show info message
-                context.getFlashCookie().put("info", msg.get("infoNoSearchTerm", language).get());
+                context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
                 // return index page
                 return Results.redirect(context.getContextPath() + "/");
             }
@@ -76,7 +75,7 @@ public class SearchController
             {
                 data.put("products", products);
                 WebShopController.setCommonData(data, context, xcpConf);
-                data.put("searchText", msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
+                data.put("searchText", searchText);//msg.get("searchProductMatch", language).get() + " '" + searchText + "'");
                 data.put("searchTerm", searchText);
                 data.put("currentPage", 1);
                 // return product overview page
@@ -92,13 +91,13 @@ public class SearchController
      * @param pageNumber
      * @param context
      * @return
-     */
-    public Result getProductOfSearch(@Param("searchText") String searchText, @Param("page") int pageNumber,
-                                     Context context)
+     */                //data.put("productCounter", products.size());
+    public Result getProductOfSearch(@Param("searchText") final String searchText, @Param("page") final int pageNumber,
+                                     final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         // search for products
-        List<Product> products = searchForProducts(searchText, pageNumber, data);
+        final List<Product> products = searchForProducts(searchText, pageNumber, data);
         // set some attributes to null to get a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {
@@ -109,6 +108,7 @@ public class SearchController
             products.get(i).setOrder(null);
         }
         data.put("products", products);
+        data.put("currentPage", pageNumber);
         return Results.json().render(data);
     }
 
@@ -120,40 +120,38 @@ public class SearchController
      * @param data
      * @return
      */
-    private List<Product> searchForProducts(String searchText, int pageNumber, final Map<String, Object> data)
+    private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data)
     {
-        // build SQL string
-        String sql = "SELECT id, name, minimum_Price, description_detail FROM product where ";
+        // build query string
+        String queryString = "find product where ";
         // divide search text by spaces
-        String[] searchTerms = searchText.split(" ");
+        final String[] searchTerms = searchText.split(" ");
         // search in description detail
-        sql += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
+        queryString += "LOWER(description_detail) LIKE LOWER('%" + searchTerms[0] + "%')";
         // search in name
-        sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
+        queryString += " OR LOWER(name) LIKE LOWER('%" + searchTerms[0] + "%')";
         if (searchTerms.length > 1)
         {
-            // add next search term to select statement
+            // add next search term to query
             for (int i = 1; i < searchTerms.length; i++)
             {
-                sql += " OR LOWER(description_detail) LIKE LOWER('%" + searchTerms[i] + "%')";
-                sql += " OR LOWER(name) LIKE LOWER('%" + searchTerms[i] + "%')";
+                queryString += " OR LOWER(description_detail) LIKE LOWER('%" + searchTerms[i] + "%')";
+                queryString += " OR LOWER(name) LIKE LOWER('%" + searchTerms[i] + "%')";
             }
         }
-        // create SQL statement
-        RawSql rawSql = RawSqlBuilder.parse(sql).create();
-        Query<Product> query = Ebean.find(Product.class);
-        query.setRawSql(rawSql);
-        int pageSize = xcpConf.PRODUCTS_PER_PAGE;
+        // create query
+        final Query<Product> query = Ebean.createQuery(Product.class, queryString);
+        final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // get paging list
-        PagingList<Product> pagingList = query.findPagingList(pageSize);
+        final PagingList<Product> pagingList = query.findPagingList(pageSize);
         // get all products to
-        int totalProductCount = query.findList().size();
+        final int totalProductCount = query.findList().size();
         // get row count in background
         pagingList.getFutureRowCount();
         // get the current page
-        Page<Product> page = pagingList.getPage(pageNumber - 1);
+        final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
-        List<Product> products = page.getList();
+        final List<Product> products = page.getList();
         // remove some data of the product list, to render a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {
@@ -165,6 +163,11 @@ public class SearchController
         }
         // add the page count to the data map
         data.put("totalPages", Math.ceil(totalProductCount / (double) pageSize));
+        
+        data.put("totalProductCount", totalProductCount);
+
+        query.cancel();
+
         return products;
     }
 }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Opens the log-in form.</description>
-  <action name="OpenLoginForm"/>
-  <command name="assertElementPresent" target="id=btnShowLoginForm"/>
-  <command name="clickAndWait" target="id=btnShowLoginForm"/>
-  <command name="assertElementPresent" target="id=formLogin"/>
-</scriptmodule>

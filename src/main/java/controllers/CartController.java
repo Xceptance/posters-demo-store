@@ -1,5 +1,6 @@
 package controllers;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class CartController
     @Inject
     PosterConstants xcpConf;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns the cart overview page.
@@ -50,11 +51,29 @@ public class CartController
      * @return The cart overview page.
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result cart(Context context)
+    public Result cart(final Context context)
     {
+
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        // return cart overview page
+     
+        final double subTotalPrice = Double.parseDouble(data.get("subTotalPrice").toString());
+        final double subTotalTaxPrice = xcpConf.TAX * (subTotalPrice + xcpConf.SHIPPING_COSTS);
+        final double totalPrice = subTotalPrice + subTotalTaxPrice + xcpConf.SHIPPING_COSTS;
+
+        // add currency
+        data.put("currency", xcpConf.CURRENCY);
+        // add tax in percent
+        data.put("tax", (xcpConf.TAX * 100));
+        // add SHIPPING_COSTS
+        data.put("shippingCosts", getDoubleAsString(xcpConf.SHIPPING_COSTS));
+        // add sub total price
+        data.put("subOrderTotal", getDoubleAsString(subTotalPrice));
+        // add sub total tax
+        data.put("subOrderTotalTax", getDoubleAsString(subTotalTaxPrice));
+        // add total price
+        data.put("orderTotal", getDoubleAsString(totalPrice));
+      
         return Results.html().render(data).template(xcpConf.TEMPLATE_CART_OVERVIEW);
     }
 
@@ -67,11 +86,11 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result updateProductCount(@Param("cartProductId") int cartProductId,
-                                     @Param("productCount") String productCount, Context context)
+    public Result updateProductCount(@Param("cartProductId") final int cartProductId, @Param("productCount") final String productCount,
+                                     final Context context)
     {
         // result is a json
-        Result result = Results.json();
+        final Result result = Results.json();
         // product count doesn't match regex
         if (!Pattern.matches(xcpConf.REGEX_PRODUCT_COUNT, productCount))
         {
@@ -89,12 +108,13 @@ public class CartController
                 newProductCount = 0;
             }
             // get cart by session
-            Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+            final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // get cart product by id
-            CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
-            Product product = cartProduct.getProduct();
-            int currentProductCount = cartProduct.getProductCount();
-            int difference = newProductCount - currentProductCount;
+            final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+            final Product product = cartProduct.getProduct();
+            final int currentProductCount = cartProduct.getProductCount();
+            final int difference = newProductCount - currentProductCount;
+            
             // product must be added
             if (difference > 0)
             {
@@ -113,10 +133,28 @@ public class CartController
                     cart.removeProduct(cartProduct);
                 }
             }
+
+            result.render("unitPrice", cartProduct.getPriceAsString());
+            result.render("totalUnitPrice", getDoubleAsString(cartProduct.getPrice() * newProductCount));
+
             // add new header
             result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
-            // add totalPrice
-            result.render("totalPrice", (cart.getTotalPriceAsString() + xcpConf.CURRENCY));
+            // add currency
+            result.render("currency", xcpConf.CURRENCY);
+            // add unit of length
+            result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
+
+            // add sub order total price
+            result.render("subTotalPrice", cart.getSubTotalPriceAsString());
+            // add SHIPPING_COSTS
+            result.render("shippingCosts", cart.getShippingCostsAsString());
+            // add tax in percent
+            result.render("tax", cart.getTax());
+            // add sub total tax
+            result.render("totalTaxPrice", cart.getTotalTaxPriceAsString());
+            // add total price
+            result.render("totalPrice", cart.getTotalPriceAsString());
+
             return result;
         }
     }
@@ -127,35 +165,44 @@ public class CartController
      * @param context
      * @return
      */
-    public Result getCartElementSlider(Context context)
+    public Result getMiniCartElements(final Context context)
     {
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get all products of the cart
-        List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
-        List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart)
-                                              .orderBy("lastUpdate desc").findList();
+        final List<Map<String, Object>> cartElements = new ArrayList<Map<String, Object>>();
+        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
         // prepare just some attributes
-        for (CartProduct cartProduct : cartProducts)
+        for (final CartProduct cartProduct : cartProducts)
         {
-            Map<String, Object> product = new HashMap<String, Object>();
-            product.put("productCount", cartProduct.getProductCount());
-            product.put("productName", cartProduct.getProduct().getName());
+            final Map<String, Object> product = new HashMap<String, Object>();
             product.put("productId", cartProduct.getProduct().getId());
-            product.put("productPrice", cartProduct.getPriceAsString());
+            product.put("productName", cartProduct.getProduct().getName());
+            product.put("productUnitPrice", cartProduct.getPriceAsString());
+            product.put("productTotalUnitPrice", getDoubleAsString(cartProduct.getPrice()*cartProduct.getProductCount() ));
+            product.put("productCount", cartProduct.getProductCount());
             product.put("finish", cartProduct.getFinish());
             product.put("size", cartProduct.getSize());
-            results.add(product);
+            cartElements.add(product);
         }
-        Result result = Results.json();
-        // add products
-        result.render("cartElements", results);
+
+        final Result result = Results.json();
+
         // add currency
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add total price
-        result.render("totalPrice", cart.getTotalPriceAsString());
+
+        // add products
+        result.render("productsInCartList", cartElements);
+        
+        // add product counter
+        result.render("cartProductCount", cart.getProductCount());
+
+        // add sub total price
+        result.render("subTotalPrice", cart.getSubTotalPriceAsString());
+
+
         return result;
     }
 
@@ -168,41 +215,52 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result addToCart(@Param("productId") String productId, @Param("finish") String finish,
-                            @Param("size") String size, Context context)
+    public Result addToCart(@Param("productId") final String productId, @Param("finish") final String finish,
+                            @Param("size") final String size, final Context context)
     {
-        Result result = Results.json();
+        final Result result = Results.json();
         // get product by id
-        Product product = Product.getProductById(Integer.parseInt(productId));
+        final Product product = Product.getProductById(Integer.parseInt(productId));
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get poster size
-        String[] dummy = size.split(" ");
-        int width = Integer.parseInt(dummy[0]);
-        int height = Integer.parseInt(dummy[2]);
-        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
-                                     .findUnique();
+        final String[] dummy = size.split(" ");
+        final int width = Integer.parseInt(dummy[0]);
+        final int height = Integer.parseInt(dummy[2]);
+        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
         // add product to cart
         cart.addProduct(product, finish, posterSize);
         // get added cart product
-        CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
-        Map<String, Object> updatedProduct = new HashMap<String, Object>();
-        updatedProduct.put("productCount", cartProduct.getProductCount());
-        updatedProduct.put("productName", cartProduct.getProduct().getName());
+        final CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
+        final Map<String, Object> updatedProduct = new HashMap<String, Object>();
         updatedProduct.put("productId", cartProduct.getProduct().getId());
-        updatedProduct.put("productPrice", cartProduct.getPriceAsString());
+        updatedProduct.put("productName", cartProduct.getProduct().getName());
+        //updatedProduct.put("productPrice", cartProduct.getPriceAsString());
+        updatedProduct.put("productUnitPrice", cartProduct.getPriceAsString());
+        updatedProduct.put("productTotalUnitPrice", getDoubleAsString(cartProduct.getPrice()*cartProduct.getProductCount() ));
+        updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", cartProduct.getSize());
+
         // add product to result
         result.render("product", updatedProduct);
+        // add new header to result
+        result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
         // add currency
         result.render("currency", xcpConf.CURRENCY);
         // add unit of length
         result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
-        // add new header to result
-        result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
+        // add tax in percent
+        result.render("tax", (xcpConf.TAX * 100));
+        // add SHIPPING_COSTS
+        result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+        // add sub total price
+        result.render("subOrderTotal", cart.getSubTotalPriceAsString());
+        // add sub total price
+        result.render("subOrderTotalTax", xcpConf.TAX);
         // add total price
-        result.render("totalPrice", cart.getTotalPriceAsString());
+        result.render("orderTotal", cart.getTotalPriceAsString(cart.getSubTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+
         return result;
     }
 
@@ -214,23 +272,37 @@ public class CartController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result deleteFromCart(@Param("cartProductId") int cartProductId, Context context)
+    public Result deleteFromCart(@Param("cartProductId") final int cartProductId, final Context context)
     {
-        CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+        final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
         // get cart by session
-        Cart cart = Cart.getCartById(SessionHandling.getCartId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get count of this product
-        int countProduct = cartProduct.getProductCount();
+        final int countProduct = cartProduct.getProductCount();
         // delete all items of this products
         for (int i = 0; i < countProduct; i++)
         {
             cart.removeProduct(cartProduct);
         }
-        Result result = Results.json();
+        final Result result = Results.json();
+
         // add new header
         result.render("headerCartOverview", prepareCartOverviewInHeader(cart));
-        // add totalPrice
-        result.render("totalPrice", (cart.getTotalPriceAsString() + xcpConf.CURRENCY));
+        // add currency
+        result.render("currency", xcpConf.CURRENCY);
+        // add unit of length
+        result.render("unitLength", xcpConf.UNIT_OF_LENGTH);
+        // add tax in percent
+        result.render("tax", (xcpConf.TAX * 100));
+        // add SHIPPING_COSTS
+        result.render("shippingCosts", xcpConf.SHIPPING_COSTS);
+        // add sub total price
+        result.render("subOrderTotal", cart.getTotalPriceAsString());
+        // add sub total price tax
+        result.render("subOrderTotalTax", xcpConf.TAX);
+        // add total price
+        result.render("orderTotal", cart.getTotalPriceAsString(cart.getTotalPrice(), xcpConf.TAX, xcpConf.SHIPPING_COSTS));
+
         return result;
     }
 
@@ -242,23 +314,22 @@ public class CartController
      * @param context
      * @return
      */
-    public Result updatePrice(@Param("size") String size, @Param("productId") int productId, Context context)
+    public Result updatePrice(@Param("size") final String size, @Param("productId") final int productId, final Context context)
     {
         // split the size to the width and height
-        String[] dummy = size.split(" ");
-        int width = Integer.parseInt(dummy[0]);
-        int height = Integer.parseInt(dummy[2]);
+        final String[] dummy = size.split(" ");
+        final int width = Integer.parseInt(dummy[0]);
+        final int height = Integer.parseInt(dummy[2]);
         // get the specified poster size
-        PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height)
-                                     .findUnique();
+        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
         // get the product
-        Product product = Product.getProductById(productId);
+        final Product product = Product.getProductById(productId);
         // get the product poster size
-        ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
-                                                   .eq("size", posterSize).findUnique();
-        Result result = Results.json();
+        final ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
+                                                         .eq("size", posterSize).findUnique();
+        final Result result = Results.json();
         // add new price
-        result.render("newPrice", productPosterSize.getPriceAsString() + xcpConf.CURRENCY);
+        result.render("newPrice", xcpConf.CURRENCY + productPosterSize.getPriceAsString());
         return result;
     }
 
@@ -268,13 +339,26 @@ public class CartController
      * @param cart
      * @return
      */
-    private String prepareCartOverviewInHeader(Cart cart)
+    private String prepareCartOverviewInHeader(final Cart cart)
     {
-        StringBuilder headerCartOverview = new StringBuilder();
-        headerCartOverview.append(" " + msg.get("cartOverviewTitle", language).get() + ": ");
+        final StringBuilder headerCartOverview = new StringBuilder();
         headerCartOverview.append(cart.getProductCount());
-        headerCartOverview.append(" " + msg.get("cartItem", language).get() + " - ");
-        headerCartOverview.append(cart.getTotalPriceAsString() + xcpConf.CURRENCY);
         return headerCartOverview.toString();
+    }
+
+    /**
+     * convert double into (price) string
+     * 
+     * @param price
+     * @return
+     */
+    public String getDoubleAsString(final double value)
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = value;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
     }
 }

@@ -62,7 +62,7 @@ public class ProductPosterSize
      * @param id
      *            the ID of the entity
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -83,7 +83,7 @@ public class ProductPosterSize
      * @param product
      *            the {@link Product} of the relationship
      */
-    public void setProduct(Product product)
+    public void setProduct(final Product product)
     {
         this.product = product;
     }
@@ -104,7 +104,7 @@ public class ProductPosterSize
      * @param size
      *            the {@link PosterSize} of the relationship
      */
-    public void setSize(PosterSize size)
+    public void setSize(final PosterSize size)
     {
         this.size = size;
     }
@@ -126,7 +126,7 @@ public class ProductPosterSize
      */
     public String getPriceAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = price;
         temp = temp * 100;
         temp = Math.round(temp);
@@ -140,7 +140,7 @@ public class ProductPosterSize
      * @param price
      *            the price of the product in the selected size
      */
-    public void setPrice(double price)
+    public void setPrice(final double price)
     {
         this.price = price;
     }

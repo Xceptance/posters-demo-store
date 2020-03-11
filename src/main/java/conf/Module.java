@@ -16,6 +16,7 @@ import controllers.JobController;
 public class Module extends AbstractModule
 {
 
+    @Override
     protected void configure()
     {
         // install ebean module

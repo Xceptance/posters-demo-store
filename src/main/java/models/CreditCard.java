@@ -84,7 +84,7 @@ public class CreditCard
      * @param id
      *            the ID
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -97,7 +97,7 @@ public class CreditCard
      */
     public String getCardNumberCryptic()
     {
-        StringBuilder cardNumber = new StringBuilder();
+        final StringBuilder cardNumber = new StringBuilder();
         if (this.cardNumber != null)
         {
             // replace the digit with an 'x'
@@ -135,7 +135,7 @@ public class CreditCard
      * @param cardNumber
      *            the credit card number
      */
-    public void setCardNumber(String cardNumber)
+    public void setCardNumber(final String cardNumber)
     {
         this.cardNumber = cardNumber;
     }
@@ -156,7 +156,7 @@ public class CreditCard
      * @param name
      *            the name field
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
         this.name = name;
     }
@@ -178,7 +178,7 @@ public class CreditCard
      */
     public String getMonthLeadingZero()
     {
-        DecimalFormat df = new DecimalFormat("00");
+        final DecimalFormat df = new DecimalFormat("00");
         return df.format(getMonth());
     }
 
@@ -188,7 +188,7 @@ public class CreditCard
      * @param month
      *            the month of the expiration date
      */
-    public void setMonth(int month)
+    public void setMonth(final int month)
     {
         this.month = month;
     }
@@ -209,7 +209,7 @@ public class CreditCard
      * @param year
      *            the year of the expiration date
      */
-    public void setYear(int year)
+    public void setYear(final int year)
     {
         this.year = year;
     }
@@ -230,7 +230,7 @@ public class CreditCard
      * @param customer
      *            the {@link Customer} with this credit card
      */
-    public void setCustomer(Customer customer)
+    public void setCustomer(final Customer customer)
     {
         this.customer = customer;
     }
@@ -251,9 +251,9 @@ public class CreditCard
      * @param orders
      *            the list of {@link Order}s
      */
-    public void setOrder(List<Order> orders)
+    public void setOrder(final List<Order> orders)
     {
-        this.order = orders;
+        order = orders;
     }
 
     /**
@@ -287,7 +287,7 @@ public class CreditCard
      *            the ID of the credit card
      * @return the {@link CreditCard} that matches the unique id
      */
-    public static CreditCard getCreditCardById(int id)
+    public static CreditCard getCreditCardById(final int id)
     {
         return Ebean.find(CreditCard.class, id);
     }
@@ -298,9 +298,9 @@ public class CreditCard
      * @param id
      *            the ID of the credit card
      */
-    public static void removeCustomerFromCreditCard(int id)
+    public static void removeCustomerFromCreditCard(final int id)
     {
-        CreditCard card = getCreditCardById(id);
+        final CreditCard card = getCreditCardById(id);
         card.setCustomer(null);
         card.update();
     }

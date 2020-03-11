@@ -23,22 +23,22 @@ public class SessionOrderExistFilter implements Filter
     @Inject
     Messages msg;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     @Override
-    public Result filter(FilterChain chain, Context context)
+    public Result filter(final FilterChain chain, final Context context)
     {
         // an order-id is set
         if (SessionHandling.isOrderIdSet(context))
         {
-            Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+            final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
             // order does not exist
             if (order == null)
             {
                 // remove order from session
                 SessionHandling.removeOrderId(context);
                 // show error message
-                context.getFlashCookie().error(msg.get("errorSessionTerminated", language).get());
+                context.getFlashScope().error(msg.get("errorSessionTerminated", language).get());
                 // show home page
                 return Results.redirect(context.getContextPath() + "/");
             }

@@ -21,16 +21,16 @@ public class SessionTerminatedFilter implements Filter
     @Inject
     Messages msg;
 
-    private Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("en");
 
     @Override
-    public Result filter(FilterChain chain, Context context)
+    public Result filter(final FilterChain chain, final Context context)
     {
         // break, if session is terminated
-        if (context.getSessionCookie().isEmpty())
+        if (context.getSession().isEmpty())
         {
             // show error message
-            context.getFlashCookie().error(msg.get("errorSessionTerminated", language).get());
+            context.getFlashScope().error(msg.get("errorSessionTerminated", language).get());
             // show home page
             return Results.redirect(context.getContextPath() + "/");
         }

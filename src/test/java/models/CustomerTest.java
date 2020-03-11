@@ -28,12 +28,12 @@ public class CustomerTest extends NinjaTest
     @Test
     public void testCreateCustomer()
     {
-        Customer customer = new Customer();
+        final Customer customer = new Customer();
         customer.setEmail("email");
         customer.hashPasswd("password");
         customer.save();
 
-        Customer savedCustomer = Ebean.find(Customer.class, customer.getId());
+        final Customer savedCustomer = Ebean.find(Customer.class, customer.getId());
         // verify, that the customer is persistent
         Assert.assertNotNull(savedCustomer);
         // verify the email of the customer
@@ -43,7 +43,7 @@ public class CustomerTest extends NinjaTest
     @Test
     public void testPasswordHash()
     {
-        Customer customer = Ebean.find(Customer.class, this.customer.getId());
+        final Customer customer = Ebean.find(Customer.class, this.customer.getId());
         // verify, that the password is not saved as plain text
         Assert.assertNotSame("password", customer.getPassword());
         // verify the password
@@ -54,14 +54,14 @@ public class CustomerTest extends NinjaTest
     public void testAddShippingAddress()
     {
         // add shipping address to the customer
-        ShippingAddress address = new ShippingAddress();
+        final ShippingAddress address = new ShippingAddress();
         address.setName("customer");
         customer.addShippingAddress(address);
         customer.update();
         // verify, that address is persistent
         Assert.assertNotNull(Ebean.find(ShippingAddress.class, address.getId()));
         // get updated customer
-        Customer newCustomer = Ebean.find(Customer.class, customer.getId());
+        final Customer newCustomer = Ebean.find(Customer.class, customer.getId());
         // verify, that customer has one shipping address
         Assert.assertEquals(1, newCustomer.getShippingAddress().size());
         // verify, that the address is trhe right one

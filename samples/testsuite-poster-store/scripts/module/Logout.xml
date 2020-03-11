@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scriptmodule xmlns="http://xlt.xceptance.com/xlt-script/2" version="4">
-  <description>Logs the current user out.</description>
-  <action name="Logout"/>
-  <command name="assertNotElementPresent" target="id=btnShowLoginForm"/>
-  <command name="click" target="//li[@id='dropdown']/a"/>
-  <command name="clickAndWait" target="//*[@id='btnLogout']/a"/>
-  <command name="assertElementPresent" target="id=btnShowLoginForm"/>
-</scriptmodule>

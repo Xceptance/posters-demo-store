@@ -61,21 +61,21 @@ public class StarterConf
      */
     public final String DROP_TABLES;
 
-    private Configuration conf;
+    private final Configuration conf;
 
     public StarterConf() throws Exception
     {
         // get the server file-location
         HOME = System.getProperty("starter.home");
         // get the config file-location
-        String confFile = System.getProperty("ninja.external.configuration");
-        PropertiesConfiguration cfg = new PropertiesConfiguration();
+        final String confFile = System.getProperty("ninja.external.configuration");
+        final PropertiesConfiguration cfg = new PropertiesConfiguration();
         cfg.setEncoding("utf-8");
         cfg.setDelimiterParsingDisabled(true);
-        String confPath = HOME + "/" + confFile;
+        final String confPath = confFile;
         // try to load the config
         cfg.load(confPath);
-        conf = (Configuration) cfg;
+        conf = cfg;
         DB_URL = conf.getString("ebean.datasource.databaseUrl");
         DB_USER = conf.getString("ebean.datasource.username");
         DB_PASS = conf.getString("ebean.datasource.password");

@@ -86,7 +86,7 @@ public class CartProduct
      * @param id
      *            the ID
      */
-    public void setId(int id)
+    public void setId(final int id)
     {
         this.id = id;
     }
@@ -107,7 +107,7 @@ public class CartProduct
      * @param product
      *            the {@link Product}
      */
-    public void setProduct(Product product)
+    public void setProduct(final Product product)
     {
         this.product = product;
     }
@@ -128,7 +128,7 @@ public class CartProduct
      * @param cart
      *            the {@link Cart}
      */
-    public void setCart(Cart cart)
+    public void setCart(final Cart cart)
     {
         this.cart = cart;
     }
@@ -149,7 +149,7 @@ public class CartProduct
      * @param productCount
      *            the product count
      */
-    public void setProductCount(int productCount)
+    public void setProductCount(final int productCount)
     {
         this.productCount = productCount;
     }
@@ -170,7 +170,7 @@ public class CartProduct
      * @param finish
      *            the finish
      */
-    public void setFinish(String finish)
+    public void setFinish(final String finish)
     {
         this.finish = finish;
     }
@@ -191,7 +191,7 @@ public class CartProduct
      * @param size
      *            the {@link PosterSize}
      */
-    public void setSize(PosterSize size)
+    public void setSize(final PosterSize size)
     {
         this.size = size;
     }
@@ -213,7 +213,7 @@ public class CartProduct
      */
     public String getPriceAsString()
     {
-        DecimalFormat f = new DecimalFormat("#0.00");
+        final DecimalFormat f = new DecimalFormat("#0.00");
         double temp = price;
         temp = temp * 100;
         temp = Math.round(temp);
@@ -227,7 +227,7 @@ public class CartProduct
      * @param price
      *            the price
      */
-    public void setPrice(double price)
+    public void setPrice(final double price)
     {
         this.price = price;
     }
@@ -248,7 +248,7 @@ public class CartProduct
      * @param lastUpdate
      *            the {@link Timestamp}
      */
-    public void setLastUpdate(Timestamp lastUpdate)
+    public void setLastUpdate(final Timestamp lastUpdate)
     {
         this.lastUpdate = lastUpdate;
     }
@@ -258,8 +258,8 @@ public class CartProduct
      */
     public void incProductCount()
     {
-        this.setProductCount(this.getProductCount() + 1);
-        this.update();
+        setProductCount(getProductCount() + 1);
+        update();
     }
 
     /**
@@ -291,7 +291,21 @@ public class CartProduct
      */
     public void decrementProductCount()
     {
-        this.setProductCount(this.getProductCount() - 1);
-        this.update();
+        setProductCount(getProductCount() - 1);
+        update();
+    }
+    /**
+     * Returns the total unit price of the product as well formatted String.
+     * 
+     * @return the line item price of the product
+     */
+    public String getTotalUnitPriceAsString()
+    {
+        final DecimalFormat f = new DecimalFormat("#0.00");
+        double temp = price * this.productCount;
+        temp = temp * 100;
+        temp = Math.round(temp);
+        temp = temp / 100;
+        return f.format(temp).replace(',', '.');
     }
 }
