@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="the-demo-poster-store">
+    <wb-module deploy-name="posters-demo-store-2.0.0-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <property name="java-output-path" value="/the-demo-poster-store/target/classes"/>
-        <property name="context-root" value="demo-poster-store"/>
+        <property name="context-root" value="posters-demo-store"/>
     </wb-module>
 </project-modules>
