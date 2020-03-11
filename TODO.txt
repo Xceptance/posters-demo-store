@@ -1,6 +1,0 @@
-# Bugs
-
-# Suggestions
-
-## other
-- Check wording in headlines and buttons. Adjust to uppercase where needed. (conf->messages.properties)
