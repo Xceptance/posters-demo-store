@@ -5,8 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
+import com.google.inject.Inject;
+
+import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
+import filters.SessionOrderExistFilter;
+import filters.SessionTerminatedFilter;
 import models.BillingAddress;
 import models.Cart;
 import models.CreditCard;
@@ -21,14 +28,6 @@ import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.date.DateUtils;
 import util.session.SessionHandling;
-
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
-
-import conf.PosterConstants;
-import filters.SessionCustomerExistFilter;
-import filters.SessionOrderExistFilter;
-import filters.SessionTerminatedFilter;
 
 /**
  * Controller class, that provides the checkout functionality.

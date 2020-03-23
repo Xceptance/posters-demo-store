@@ -1,5 +1,9 @@
 package filters;
 
+import java.util.Optional;
+
+import com.google.inject.Inject;
+
 import models.Customer;
 import ninja.Context;
 import ninja.Filter;
@@ -8,9 +12,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import util.session.SessionHandling;
-
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
 
 /**
  * This {@link Filter} breaks, if a customer is set in the session, but the customer doesn't exist in the database.

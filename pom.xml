@@ -62,9 +62,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <ninja.version>3.1.5</ninja.version>
-        <jetty.version>8.1.12.v20130726</jetty.version>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
+        <ninja.version>6.6.1</ninja.version>
     </properties>
 
     <build>
@@ -72,52 +71,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-                <configuration>
-                    <jettyXml>config/jetty.xml</jettyXml>
-                    <stopKey>stop</stopKey>
-                    <stopPort>8889</stopPort>
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
-                    <reload>manual</reload>
-                    <classesDirectory>target/classes</classesDirectory>
-                    <scanTargetPatterns>
-                        <scanTargetPattern>
-                            <directory>target/classes</directory>
-                            <includes>
-                                <include>**/*</include>
-                            </includes>
-                            <excludes>
-                                <exclude>**/*.ftl.html</exclude>
-                                <exclude>assets/**</exclude>
-                            </excludes>
-                        </scanTargetPattern>
-                    </scanTargetPatterns>
-                    <webApp>
-                        <contextPath>/posters</contextPath>
-                    </webApp>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>ninja.standalone.NinjaJetty</mainClass>
-                        </manifest>
-                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -140,6 +97,31 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.ninjaframework</groupId>
+                <artifactId>ninja-maven-plugin</artifactId>
+                <version>${ninja.version}</version>
+                <configuration>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <excludes>
+                        <exclude>(.*)ftl.html$</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>ninja.standalone.NinjaJetty</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -265,6 +247,11 @@
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-ebean-module</artifactId>
             <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
         </dependency>
     </dependencies>
 

@@ -5,8 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
+import com.avaje.ebean.Ebean;
+import com.google.inject.Inject;
+
+import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
+import filters.SessionTerminatedFilter;
 import models.Cart;
 import models.CartProduct;
 import models.PosterSize;
@@ -19,14 +26,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.session.SessionHandling;
-
-import com.avaje.ebean.Ebean;
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
-
-import conf.PosterConstants;
-import filters.SessionCustomerExistFilter;
-import filters.SessionTerminatedFilter;
 
 /**
  * Controller class, that provides the cart functionality.

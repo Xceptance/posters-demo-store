@@ -3,7 +3,16 @@ package controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Page;
+import com.avaje.ebean.PagingList;
+import com.avaje.ebean.Query;
+import com.google.inject.Inject;
+
+import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
 import models.Product;
 import ninja.Context;
 import ninja.FilterWith;
@@ -11,16 +20,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Page;
-import com.avaje.ebean.PagingList;
-import com.avaje.ebean.Query;
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
-
-import conf.PosterConstants;
-import filters.SessionCustomerExistFilter;
 
 /**
  * Controller class, that provides the search functionality.

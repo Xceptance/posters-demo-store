@@ -1,14 +1,15 @@
 package filters;
 
+import java.util.Optional;
+
+import com.google.inject.Inject;
+
 import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
-
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
 
 /**
  * This {@link Filter} breaks, if the session is terminated.

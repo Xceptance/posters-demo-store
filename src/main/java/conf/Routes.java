@@ -126,6 +126,6 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // assets
         // ############################################################
-        router.GET().route("/assets/.*").with(AssetsController.class, "serve");
+        router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
     }
 }
