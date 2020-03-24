@@ -23,6 +23,9 @@ jobs:
       - name: Run the build with Maven
         run: mvn -B package
 
+      - name: Check if gpg2 is installed
+        run: gpg2 --version --help
+
 #      - name: Add artifacts to staging area
 #        run: mkdir staging && cp target/*.war staging
 
