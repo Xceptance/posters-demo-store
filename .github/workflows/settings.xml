@@ -5,6 +5,11 @@
 
     <servers>
         <server>
+            <id>github</id>
+            <username>${env.GITHUB_ACTOR}</username>
+            <password>${env.GITHUB_TOKEN}</password>
+        </server>
+        <server>
             <id>ossrh</id>
             <username>${ossrh.username}</username>
             <password>${ossrh.password}</password>

@@ -30,7 +30,7 @@ jobs:
         run: cat ~/.m2/settings.xml
 
       - name: Copy customized settings.xml
-        run: cp ./settings.xml ~/.m2
+        run: cp .github/workflows/settings.xml ~/.m2
 
       - name: Check default settings.xml again
         run: cat ~/.m2/settings.xml
