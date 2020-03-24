@@ -20,6 +20,16 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2    
 
+      - name: Set environment variables
+        env:
+          OSSRH_USERNAME: 'ossrh-username'
+          OSSRH_PASSWORD: 'ossrh-password'
+          GPG_PASSPHRASE: 'gpg-passphrase'
+          DOCKERHUB_PASSWORD: 'dockerhub-password'
+
+      - name: Check environment variables
+        run: echo $OSSRH_USERNAME $OSSRH_PASSWORD $GPG_PASSPHRASE $DOCKERHUB_PASSWORD
+
       - name: Run the build with Maven
         run: mvn -B package
 
