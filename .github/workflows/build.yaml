@@ -21,17 +21,17 @@ jobs:
           restore-keys: ${{ runner.os }}-m2    
 
       - name: Set environment variables
-        env:
-          OSSRH_USERNAME: 'ossrh-username'
-          OSSRH_PASSWORD: 'ossrh-password'
-          GPG_PASSPHRASE: 'gpg-passphrase'
-          DOCKERHUB_PASSWORD: 'dockerhub-password'
+        run: echo "::set-env name=OSSRH_USERNAME::ossrh_username" && echo "::set-env name=OSSRH_PASSWORD::ossrh_password" %% echo "::set-env name=GPG_PASSPHRASE::gpg_passphrase" && echo "::set-env name=DOCKERHUB_PASSWORD::dockerhub_password" 
 
       - name: Check environment variables
         run: echo $OSSRH_USERNAME $OSSRH_PASSWORD $GPG_PASSPHRASE $DOCKERHUB_PASSWORD
 
       - name: Run the build with Maven
         run: mvn -B package
+        env:
+          OSSRH_USERNAME: 'ossrh_username'
+          OSSRH_PASSWORD: 'ossrh_password'
+          GPG_PASSPHRASE: 'gpg_passphrase'
 
       - name: Check if gpg is installed
         run: gpg --version --help
@@ -44,6 +44,11 @@ jobs:
 
       - name: Check default settings.xml again
         run: cat ~/.m2/settings.xml
+
+#      - name: Log in to Docker Hub
+#        run: echo $DOCKERHUB_PASSWORD | docker login --username xceptance --password-stdin
+#        env:
+#          DOCKERHUB_PASSWORD: 'dockerhub_password'
 
 #      - name: Add artifacts to staging area
 #        run: mkdir staging && cp target/*.war staging
