@@ -26,6 +26,15 @@ jobs:
       - name: Check if gpg is installed
         run: gpg --version --help
 
+      - name: Check default settings.xml
+        run: cat ~/.m2/settings.xml
+
+      - name: Copy customized settings.xml
+        run: cp ./settings.xml ~/.m2
+
+      - name: Check default settings.xml again
+        run: cat ~/.m2/settings.xml
+
 #      - name: Add artifacts to staging area
 #        run: mkdir staging && cp target/*.war staging
 
