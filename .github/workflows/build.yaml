@@ -24,11 +24,14 @@ jobs:
         run: cp .github/workflows/settings.xml ~/.m2
 
       - name: Run the build with Maven
-        run: mvn -B verify
+        run: mvn -B package
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Check default settings.xml
+        run: cat ~/.m2/settings.xml
 
       - name: Log in to Docker Hub
         run: echo -n $DOCKERHUB_PASSWORD | docker login --username xceptance --password-stdin
