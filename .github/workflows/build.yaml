@@ -24,7 +24,7 @@ jobs:
         run: cp .github/workflows/settings.xml ~/.m2
 
       - name: Run the build with Maven
-        run: mvn -B verify -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+        run: mvn -B verify "-Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}"
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
