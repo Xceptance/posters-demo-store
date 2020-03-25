@@ -23,8 +23,11 @@ jobs:
       - name: Copy customized settings.xml
         run: cp .github/workflows/settings.xml ~/.m2
 
+      - name: Install GPG key
+        run: echo ${{ secrets.GPG_KEY }} | gpg --batch --import
+
       - name: Run the build with Maven
-        run: mvn -B deploy
+        run: mvn -B verify
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
