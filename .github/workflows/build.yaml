@@ -1,5 +1,8 @@
 name: Build
-on: [push]
+on:
+  push:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -23,11 +26,17 @@ jobs:
       - name: Customize Maven repo settings
         run: cp .github/workflows/settings.xml ~/.m2
 
+      - name: Build the project with Maven
+        if: github.event_name == 'push'
+        run: mvn -B verify
+
       - name: Install GPG key
+        if: github.event_name == 'release'
         run: echo "${{ secrets.GPG_KEY }}" | gpg --batch --import
 
-      - name: Build the project with Maven
-        run: mvn -B verify
+      - name: Build and deploy the project with Maven
+        if: github.event_name == 'release'
+        run: mvn -B deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
