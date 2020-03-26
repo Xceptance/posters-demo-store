@@ -28,7 +28,7 @@ jobs:
 
       - name: Build the project with Maven
         if: github.event_name == 'push'
-        run: mvn -B verify
+        run: mvn -B package
 
       - name: Install GPG key
         if: github.event_name == 'release'
