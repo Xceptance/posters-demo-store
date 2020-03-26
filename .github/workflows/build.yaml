@@ -20,35 +20,24 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2    
 
-      - name: Copy customized settings.xml
+      - name: Customize Maven repo settings
         run: cp .github/workflows/settings.xml ~/.m2
 
       - name: Install GPG key
         run: echo "${{ secrets.GPG_KEY }}" | gpg --batch --import
 
-      - name: Run the build with Maven
+      - name: Build the project with Maven
         run: mvn -B verify
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Check signed files
-        run: ls -l target/*
+      - name: Add build artifacts to staging area
+        run: mkdir staging && cp target/*.[jw]ar staging
 
-#      - name: Check default settings.xml
-#        run: cat ~/.m2/settings.xml
-
-      - name: Log in to Docker Hub
-        run: echo -n $DOCKERHUB_PASSWORD | docker login --username xceptance --password-stdin
-        env:
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-#      - name: Add artifacts to staging area
-#        run: mkdir staging && cp target/*.war staging
-
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: MyArtifact
-#          path: staging
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: AllBuildArtifacts
+          path: staging

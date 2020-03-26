@@ -1,3 +1,12 @@
+<!-- 
+  Customized settings for the local Maven repository
+
+  This file is intended to replace the standard ~/.m2/settings.xml file created by GitHub Actions.
+
+  Additions to the original file:
+    * Add the Sonatype OSSRH repository including access credentials.
+    * Configure the GPG tool to use and the passphrase of our GPG key.
+-->
 <settings 
     xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
