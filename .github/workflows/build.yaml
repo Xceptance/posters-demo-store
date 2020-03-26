@@ -33,6 +33,9 @@ jobs:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: Check signed files
+        run: ls -l target/*
+
 #      - name: Check default settings.xml
 #        run: cat ~/.m2/settings.xml
 
