@@ -30,7 +30,10 @@ jobs:
       - name: Compile, test, and package the project with Maven
         if: github.event_name == 'push'
         run: |
+          cat ~/.m2/settings.xml
           echo "${{ secrets.GPG_KEY }}" | gpg --batch --import
+          gpg --list-secret
+          gpg2 --list-secret
           mvn -B deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
