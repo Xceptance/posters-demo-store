@@ -18,6 +18,7 @@ jobs:
           server-id: ossrh
           server-username: OSSRH_USERNAME
           server-password: OSSRH_PASSWORD
+          gpg-passphrase: GPG_PASSPHRASE
 
       - name: Prepare the Maven repo cache
         uses: actions/cache@v1
@@ -30,10 +31,11 @@ jobs:
         if: github.event_name == 'push'
         run: |
           echo "${{ secrets.GPG_KEY }}" | gpg --batch --import
-          mvn -B "-Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}" deploy
+          mvn -B deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Compile, test, package, and deploy the project with Maven
         if: github.event_name == 'release'
