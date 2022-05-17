@@ -42,7 +42,7 @@ public class CheckoutController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("de");
 
     /**
      * Starts the checkout. Returns an error page, if the cart is empty, otherwise the page to enter a shipping address.

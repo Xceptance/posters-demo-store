@@ -41,7 +41,7 @@ public class CartController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("en");
+    private final Optional<String> language = Optional.of("de");
 
     /**
      * Returns the cart overview page.

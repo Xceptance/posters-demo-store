@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Optional;
 import models.Cart;
 import models.CartProduct;
 import models.Customer;
@@ -14,6 +15,8 @@ import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.i18n.Lang;
+import ninja.i18n.Messages;
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
@@ -27,7 +30,8 @@ public class WebShopController
 
     @Inject
     PosterConstants xcpConf;
-
+    Lang lang;
+    Messages msg;
     /**
      * Returns the main page of the web shop.
      * 
@@ -37,6 +41,9 @@ public class WebShopController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result index(final Context context)
     {
+
+        Optional<String> language = Optional.of("de");
+
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
