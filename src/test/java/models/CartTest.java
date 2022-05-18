@@ -19,7 +19,7 @@ public class CartTest extends NinjaTest
 
     Cart cart = new Cart();
 
-    PosterSize size = new PosterSize();;
+    PosterSize size = new PosterSize();
 
     @Before
     public void setUp()
