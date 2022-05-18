@@ -44,7 +44,7 @@ public class CustomerController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("de");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns a page to log in to the customer backend.

@@ -35,7 +35,7 @@ public class SearchController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("de");
+    private final Optional<String> language = Optional.of("en");
 
     /**
      * Returns a product overview page with products, that matches the search text.
