@@ -22,7 +22,7 @@ public class SessionTerminatedFilter implements Filter
     @Inject
     Messages msg;
 
-    private final Optional<String> language = Optional.of("de");
+    private final Optional<String> language = Optional.of("en");
 
     @Override
     public Result filter(final FilterChain chain, final Context context)

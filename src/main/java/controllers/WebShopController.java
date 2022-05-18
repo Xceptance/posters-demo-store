@@ -14,7 +14,6 @@ import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
-
 import util.session.SessionHandling;
 
 import com.avaje.ebean.Ebean;
@@ -38,8 +37,6 @@ public class WebShopController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result index(final Context context)
     {
-
-
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
