@@ -4,7 +4,7 @@
 		<div class="row">
 		<!-- bootstrap header menu for larger than mobile -->
 			<div class="col-sm-4 hidden-xs">
-				<a id="brand" href="${applUrlHttp}/" title="${i18n('titleShop')}"> 
+				<a id="brand" href="${applUrlHttp}/" title="${i18n('titleShop')}">
 					<img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png"
 					  title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
 					<span class="titleShopText">${i18n('titleShop')}</span>
@@ -39,7 +39,7 @@
 						<!-- search -->
 						<form id="searchForm" class="navbar-form"
 							action="${applUrlHttp}/search" method="get">
-							<input id="s" name="searchText" class="form-control" 
+							<input id="s" name="searchText" class="form-control"
 								type="search" placeholder="${i18n('headerSearch')}"
 								title="${i18n('headerSearch')}"
 								value="${(searchTerm)!}">
@@ -83,8 +83,8 @@
 				<li class="dropdown" role="presentation">
 				<a id="headerCartOverview" class="dropdown-toggle" data-target="#"
 					data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button"
-					aria-haspopup="true" aria-expanded="false"> 					
-					<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span 
+					aria-haspopup="true" aria-expanded="false">
+					<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span
 					class="headerCartProductCount">${cartProductCount}</span>
 				</a>
 
@@ -113,7 +113,7 @@
 			<ul class="nav nav-pills header-menu-item">
 				<li role="presentation" class="dropdown">
 					<a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
-						title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false"> 
+						title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
 						<#if isLogged == false>
 							<span class="glyphicon glyphicon-user not-logged"></span>
 						</#if>
@@ -137,7 +137,7 @@
 		<!-- categoreMenu - not mobile -->
 		<div class="row hidden-xs" id="categoryMenu">
 			<ul class="nav navbar-nav">
-				<#list topCategory as tC>				
+				<#list topCategory as tC>
 				<li class="dropdown header-menu-item">
 					<div class="topCategory${tC_index}" title="${tC.name}">
 						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
@@ -149,14 +149,14 @@
 									<span class="subCategoryMenuItem">${sC.name}</span>
 								</a>
 							</li> </#list>
-						</ul>						
+						</ul>
 					</div>
 				</li>
-			</#list>				
+			</#list>
 			</ul>
 		</div>
 		<!-- categoreMenu - mobile -->
-		<div class="collapse hidden-sm hidden-md hidden-lg" id="categoryMenuMobile">			
+		<div class="collapse hidden-sm hidden-md hidden-lg" id="categoryMenuMobile">
 			<ul class="nav navbar-nav">
 				<#list topCategory as tC>
 				<li class="dropdown header-menu-item">
@@ -170,11 +170,11 @@
 									<span class="subCategoryMenuItem">${sC.name}</span>
 								</a>
 							</li> </#list>
-						</ul>						
+						</ul>
 					</div>
 				</li>
 				</#list>
-			</ul>			
-		</div>		
+			</ul>
+		</div>
 	</div>
 </nav>
