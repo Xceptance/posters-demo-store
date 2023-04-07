@@ -60,10 +60,11 @@
 <body>
 	<!-- header -->
 	<header>
-		<div class="body-wrapper"><#if checkout??> <#include
-				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
-				</#if>
-		</div>
+		<#if checkout??>
+			<#include "headerCheckout.ftl.html"/>
+		<#else>
+			<#include "header.ftl.html"/>
+		</#if>
 	</header>
 
 	<!-- main/content -->
