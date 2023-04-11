@@ -1,8 +1,10 @@
 
 <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>
-						<!-- bootstrap header menu for mobile -->
+
+
 
 <div id="colorlib-offcanvas">
+<!-- bootstrap header menu for mobile -->
 </div>
 
 <nav class="colorlib-nav" role="navigation">
@@ -29,28 +31,50 @@
 		 </div>
 			<div class="row" >
 						<!-- bootstrap header menu for larger than mobile -->
-				<div class="col-sm-12 text-left menu-1">
-					<ul>
+				<div class="col-sm-7 col-md-9 text-left menu-1">
+					<ul >
 						<#list topCategory as tC>
 							<li class="has-dropdown">
-									<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" >${tC.name}</a>
-									<ul class="dropdown" style="display: none;">
-										<#list tC.subCategories as sC>
-											<li>
-												<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
-													${sC.name}
-												</a>
-											</li>
-										</#list>
-									</ul>
+								<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" >${tC.name}</a>
+								<ul class="dropdown" style="display: none;">
+									<#list tC.subCategories as sC>
+										<li>
+											<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
+												${sC.name}
+											</a>
+										</li>
+									</#list>
+								</ul>
 							</li>
 						</#list>
-							<li class="cart">
-								<a href="cart.html">
-									<i class="icon-shopping-cart"></i>
-									Cart [0]
-								</a>
-							</li>
+					</ul>
+				</div>
+				<div class="col-sm-5 col-md-3 text-left menu-1" style = "position:relative; left:180px; top:-15px;">
+					<ul id="btnCartOverviewForm" class="nav nav-pills header-menu-item" >
+						<li class="dropdown " role="presentation">
+						<a id="headerCartOverview" class="dropdown-toggle" data-target="#"
+							data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button"
+							aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span
+							class="headerCartProductCount">${cartProductCount}</span>
+						</a>
+		
+							<ul id="miniCartMenu"
+								class="dropdown-menu dropdown-menu-right hidden-xs">
+								<li>
+									<!-- cart slider --> <#include
+									"../components/miniCartMenu.ftl.html" />
+								</li>
+		
+							</ul>
+							<ul id="miniCartMenuMobile"
+								class="dropdown-menu hidden-sm hidden-md hidden-lg">
+								<li>
+									<!-- cart slider --> <#include
+									"../components/miniCartMenu.ftl.html" />
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -79,6 +103,7 @@
 		</div>
 	</div>
 </nav>
+<br><br><br><br><br><br><br><br><br><br><br><br>
 
 <nav id="globalNavigation"
 	class="navbar navbar-default navbar-static-top">
@@ -184,7 +209,8 @@
 							<!-- cart slider --> <#include
 							"../components/miniCartMenu.ftl.html" />
 						</li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 
