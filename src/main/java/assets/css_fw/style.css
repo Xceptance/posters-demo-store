@@ -7139,7 +7139,7 @@ button.bg-dark:focus {
   color: #fff !important; }
 
 .text-primary {
-  color: #007bff !important; }
+  color: #000000 !important; }
 
 a.text-primary:hover, a.text-primary:focus {
   color: #0062cc !important; }
