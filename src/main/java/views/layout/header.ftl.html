@@ -22,19 +22,18 @@
 				</div>
 				<div class="col-sm-5 col-md-3">
 				<form class="search-wrap" action="${applUrlHttp}/search" method="get">
-					
 				   <div class="form-group">
 					<input id="s" name="searchText" class="form-control search"
 					type="search" placeholder="${i18n('headerSearch')}"
 					title="${i18n('headerSearch')}"
 					value="${(searchTerm)!}">
-					<button id="btnSearch" class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+					<button id="btnSearch" class="btn btn-primary submit-search text-center" type="submit">
+						<i class="icon-search"></i>
+					</button>
 				   </div>
-				   
 				</form>
-				
-			 </div>
-		 </div>
+			    </div>
+		    </div>
 			<div class="row" >
 						<!-- bootstrap header menu for larger than mobile -->
 				<div class="col-sm-7 col-md-9 text-left menu-1">
@@ -55,8 +54,28 @@
 						</#list>
 					</ul>
 				</div>
-				<div class="col-sm-5 col-md-3 text-left menu-1" style = "position:relative; left:180px; top:-15px;">
+				<div class="col-sm-5 col-md-3 text-left menu-1" style = "position:relative; left:120px; top:-15px;">
+					
 					<ul id="btnCartOverviewForm" class="nav nav-pills header-menu-item" >
+						<li role="presentation" class="dropdown">
+							<a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
+								title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
+								<#if isLogged == false>
+									<span class="glyphicon glyphicon-user not-logged"></span>
+								</#if>
+								<#if isLogged == true>
+									<span class="glyphicon glyphicon-user logged"></span>
+								</#if>
+							</a>
+							<ul id="userMenu"
+								class="dropdown-menu dropdown-menu-right hidden-xs">
+								<#include '../components/userMenu.ftl.html'/>
+							</ul>
+							<ul id="userMenuMobile"
+								class="dropdown-menu hidden-sm hidden-md hidden-lg">
+								<#include '../components/userMenu.ftl.html' />
+							</ul>
+						</li>
 						<li class="dropdown " role="presentation">
 						<a id="headerCartOverview" class="dropdown-toggle" data-target="#"
 							data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button"
