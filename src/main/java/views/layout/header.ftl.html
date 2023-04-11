@@ -21,12 +21,18 @@
 					</div>
 				</div>
 				<div class="col-sm-5 col-md-3">
-				<form action="#" class="search-wrap">
+				<form class="search-wrap" action="${applUrlHttp}/search" method="get">
+					
 				   <div class="form-group">
-					  <input type="search" class="form-control search" placeholder="Search">
-					  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
+					<input id="s" name="searchText" class="form-control search"
+					type="search" placeholder="${i18n('headerSearch')}"
+					title="${i18n('headerSearch')}"
+					value="${(searchTerm)!}">
+					<button id="btnSearch" class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
 				   </div>
+				   
 				</form>
+				
 			 </div>
 		 </div>
 			<div class="row" >
