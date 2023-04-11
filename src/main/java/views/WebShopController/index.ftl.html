@@ -1,5 +1,32 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
+<aside id="colorlib-hero">
+	<div class="flexslider">
+		<ul class="slides">
+			<#list carousel as caro>  <#if (caro_index == 0)>
+				<li class="active" style="background-image: url('${contextPath}${caro.imageURL}');" >
+					<#else>
+					<li class="" style="background-image: url('${contextPath}${caro.imageURL}');" >
+					</#if>
+					<div class="overlay"></div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-6 offset-sm-3 text-center slider-text">
+								<div class="slider-text-inner">
+									<div class="desc">
+										<h1 class="head-1">${caro.name}</h1>
+										<p><a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</#list>
+		</ul>
+	</div>
+</aside>
+<!--
 <div class="row">
 	<div class="col-xs-12">
 		<div class="header-container">
@@ -8,8 +35,10 @@
 	</div>
 	<div class="col-xs-12">
 		<div id="pShopCarousel" class="carousel slide" data-ride="carousel">
-
+-->
 			<!-- Indicators -->
+<!--
+
 			<ol class="carousel-indicators">
 				<#list carousel as caro> <#if (caro_index == 0)>
 				<li data-target="#pShopCarousel" data-slide-to="0" class="active"></li>
@@ -17,9 +46,11 @@
 				<li data-target="#pShopCarousel" data-slide-to="${caro_index}"></li>
 				</#if> </#list>
 			</ol>
+-->
 
 			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
+<!--
+		<div class="carousel-inner" role="listbox">
 				<#list carousel as caro> <#if (caro_index == 0)>
 				<div id="pShopCarouselItem${caro_index}" class="item active">
 					<#else>
@@ -36,8 +67,10 @@
 					</#list>
 				</div>
 			</div>
+		-->
 
 			<!-- Left and right controls; Carousel nav -->
+<!--
 			<a id="btnCarouselPrev" class="left carousel-control"
 				href="#pShopCarousel" role="button" data-slide="prev"> <span
 				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -48,9 +81,13 @@
 				<span class="sr-only">Next</span>
 			</a>
 
-		</div>
 </div>
 
+</div>
+-->
+
+
+<!--Homepage Product Samples-->
 <div class="margin_top20 row">
 	<div class="col-xs-12">
 		<div class="header-container">

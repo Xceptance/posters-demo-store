@@ -128,9 +128,34 @@
 		</div>
 	</div>
 </nav>
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<aside id="colorlib-hero">
+	<div class="flexslider">
+		<ul class="slides">
+			<#list carousel as caro>  <#if (caro_index == 0)>
+				<li class="active" style="background-image: url('${contextPath}${caro.imageURL}');" >
+					<#else>
+					<li class="" style="background-image: url('${contextPath}${caro.imageURL}');" >
+					</#if>
+					<div class="overlay"></div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-6 offset-sm-3 text-center slider-text">
+								<div class="slider-text-inner">
+									<div class="desc">
+										<h1 class="head-1" style="color: black;">${caro.name}</h1>
+										<p><a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</#list>
+		</ul>
+	</div>
+</aside>
 
-<nav id="globalNavigation"
+	<nav id="globalNavigation"
 	class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
 		<div class="row">
@@ -315,4 +340,4 @@
 			</ul>
 		</div>
 	</div>
-</nav>
+</nav> 
