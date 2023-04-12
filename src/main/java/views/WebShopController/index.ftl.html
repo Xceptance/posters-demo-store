@@ -54,37 +54,37 @@
 	</div>
 </div>
 
-<!--Homepage Product Samples-->
-<div class="margin_top20 row">
-	<div class="col-xs-12">
-		<div class="header-container">
-			<span class="h2">${i18n("indexHotProducts")}</span>
+
+<div class="colorlib-product">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+				<h2>Best Sellers</h2>
+			</div>
+		</div>
+		<div class="row row-pb-md">
+			<#list productslist as prItem>
+			<div class="col-lg-3 mb-4 text-center">
+				<div class="product-entry border">
+					<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="prod-img">
+						<img src="${contextPath}${prItem.imageURL}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+					</a>
+					<div class="desc">
+						<h2><a href="#">Women's Boots Shoes Maca</a></h2>
+						<span class="price">$139.00</span>
+					</div>
+				</div>
+			</div>
+			</#list>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-md-12 text-center">
+				<p><a href="#" class="btn btn-primary btn-lg">Shop All Products</a></p>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<ul id="productList" class="thumbnails list-unstyled col-xs-12">
-			<#list productslist as prItem>
-			<li class="col-xs-12 col-sm-6 col-md-4">
-				<div class="thumbnail">
-					<a
-						href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}"><img
-						data-src="${contextPath}/assets/js/holder.js/300x200"
-						alt="${prItem.descriptionOverview}"
-						src="${contextPath}${prItem.imageURL}">
-
-						<div class="pInfo">
-							<div class="h4 text-primary">
-								<span class="pName">${prItem.name}</span>
-							</div>
-							<span class="text-muted"> <span
-								class="pDescriptionOverview">${prItem.descriptionOverview}</span>
-							</span>
-						</div> </a>
-				</div>
-			</li> </#list>
-		</ul>
-
-	</div>
 </div>
+
+
 
 </@layout.myLayout>

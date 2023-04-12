@@ -44,10 +44,18 @@ public class WebShopController
 
         // add specific products to data map
         List<Product> productsList = new ArrayList<>();
-        productsList.add(Product.getProductById(1));
-        productsList.add(Product.getProductById(23));
-        productsList.add(Product.getProductById(83));
-        
+        productsList.add(Product.getProductById(6));
+        productsList.add(Product.getProductById(15));
+        productsList.add(Product.getProductById(33));
+        productsList.add(Product.getProductById(27));
+        productsList.add(Product.getProductById(44));
+        productsList.add(Product.getProductById(54));
+        productsList.add(Product.getProductById(65));
+        productsList.add(Product.getProductById(76));
+        productsList.add(Product.getProductById(81));
+        productsList.add(Product.getProductById(90));
+        productsList.add(Product.getProductById(103));
+        productsList.add(Product.getProductById(115));
         // add products to data map
         data.put("carousel", productsCarousel);
         data.put("productslist", productsList);
