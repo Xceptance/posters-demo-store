@@ -30,12 +30,29 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 text-center">
-				<h2 class="intro">It started with a simple idea: SHATATATATA!</h2>
+				<h2 class="intro">Began with a simple idea: "SHATATATATA!" - Michael Scott</h2>
 			</div>
 		</div>
 	</div>
 </div>
-
+<div class="colorlib-product">
+	<div class="container-fluid">
+		<div class="row">
+			<#list productslist as prItem>
+			  <div class="col-sm-4 text-center">
+				<div class="featured">
+				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img" style="background-image: url(${contextPath}${prItem.imageURL});"></a>
+				  <div class="desc">
+					<h2><a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="pName">${prItem.name}</a></h2>
+					<span class="text-muted"><span class="pDescriptionOverview">${prItem.descriptionOverview}</span></span>
+				  </div>
+				</div>
+			  </div>
+			</#list>
+		</div>
+		  
+	</div>
+</div>
 
 <!--Homepage Product Samples-->
 <div class="margin_top20 row">
