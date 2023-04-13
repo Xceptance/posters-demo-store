@@ -5,12 +5,16 @@ A simple e-commerce application for demoing load testing as well as test automat
 
 ### Software Requirement
 
-Maven
+Apache Maven 3.6.3+ 
 
 ### How to build the project
 
-mvn package
+- To Be Added
 
-### How to open the website
+### How to run the website locally
 
-mvn site
+run mvn ninja:run in the terminal
+
+enter https://localhost:8080/ in the browser
+
+
