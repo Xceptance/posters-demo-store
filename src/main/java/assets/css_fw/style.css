@@ -7380,14 +7380,14 @@ h1, h2, h3, h4, h5,
     top: 0;
     right: -5px;
     padding: 0;
-    background: #88c8bc;
+    background: #c91b1b;
     border: 1px solid #88c8bc; }
     .colorlib-nav .top-menu .search-wrap .submit-search i {
       padding: 0; }
 
 .colorlib-nav .sale {
   padding: 14px 0;
-  background: #88c8bc; }
+  background: #c91b1b; }
   .colorlib-nav .sale h3 {
     margin-bottom: 0;
     font-family: "Montserrat", Arial, sans-serif;
@@ -7570,7 +7570,7 @@ h1, h2, h3, h4, h5,
         #colorlib-hero .flexslider .flex-control-nav li a.flex-active {
           cursor: pointer;
           background: transparent;
-          background: #88c8bc; }
+          background: #c91b1b; }
     #colorlib-hero .flexslider .flex-direction-nav {
       display: none; }
     #colorlib-hero .flexslider .slider-text {
@@ -7620,13 +7620,14 @@ h1, h2, h3, h4, h5,
           text-transform: uppercase;
           letter-spacing: 2px;
           color: #fff;
+          background-color:#c91b1b;
           padding: 20px 30px !important;
           border: none; }
           #colorlib-hero .flexslider .slider-text > .slider-text-inner .btn.btn-learn {
             background: #616161;
             color: #fff; }
           #colorlib-hero .flexslider .slider-text > .slider-text-inner .btn:hover {
-            background: #000 !important; }
+            background: #a30000 !important; }
           @media (max-width: 767.98px) {
             #colorlib-hero .flexslider .slider-text > .slider-text-inner .btn {
               width: 100%; } }
@@ -8725,8 +8726,8 @@ input[type="text"] {
   color: #fff;
   border: 1px solid #616161; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-    background: #0d0d0d !important;
-    border-color: #0d0d0d !important; }
+    background: #c91b1b !important;
+    border-color: #a10202 !important; }
   .btn-primary.btn-outline-primary {
     background: transparent;
     color: #000 !important;
