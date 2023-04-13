@@ -38,10 +38,11 @@
 <div class="colorlib-product">
 	<div class="container-fluid">
 		<div class="row">
-			<#list productslist as prItem>
+			<#list productslistcat as prItem>
 			  <div class="col-sm-4 text-center">
 				<div class="featured">
-				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img" style="background-image: url(${contextPath}${prItem.imageURL});"></a>
+				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img" 
+				  style="background-image: url(${contextPath}${prItem.imageURL});"></a>
 				  <div class="desc">
 					<h2><a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="pName">${prItem.name}</a></h2>
 					<span class="text-muted"><span class="pDescriptionOverview">${prItem.descriptionOverview}</span></span>
