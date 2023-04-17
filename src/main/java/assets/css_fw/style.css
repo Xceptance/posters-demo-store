@@ -8736,6 +8736,22 @@ input[type="text"] {
       background: #000 !important;
       color: #fff !important; }
 
+.btn-primary-shop {
+  background: #c91b1b;
+  color: #fff;
+  border: 1px solid #616161; }
+  .btn-primary-shop:hover, .btn-primary-shop:focus, .btn-primary-shop:active {
+    background: #a30000 !important;
+    border-color: #a10202 !important; }
+  .btn-primary-shop.btn-outline-primary {
+    background: transparent;
+    color: #000 !important;
+    border: 1px solid #616161 !important; }
+    .btn-primary-shop.btn-outline-primary:hover, .btn-primary-shop.btn-outline-primary:focus, .btn-primary-shop.btn-outline-primary:active {
+      background: #000 !important;
+      color: #fff !important; }
+
+
 .btn-success {
   background: #28a745;
   color: #fff;
