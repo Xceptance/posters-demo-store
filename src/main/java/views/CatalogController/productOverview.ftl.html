@@ -1,29 +1,28 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <script type="text/javascript">
-	var options = {
-		currentPage: ${currentPage},
-	          totalPages: ${totalPages},
-	          numberOfPages: ${totalPages},
-	          bootstrapMajorVersion: 3,
-		alignment:'center',
-		onPageClicked: function(e, originalEvent, type, page) {
-			var pathname = $(location).attr('pathname');
-			var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
-			// top category
-			if(pageType == "topCategory") {
-				$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
-			}
-			// sub category
-			else if(pageType == "category"){
-				$.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
-			}
-			 // search
-			else {
-				$.post('${contextPath}/getProductOfSearch', {searchText: $('#s').val(), page: page}, updateProductOverview);
-			}
-		}
-	      };
+var options = {
+    currentPage: ${currentPage},
+    totalPages: ${totalPages},
+    bootstrapMajorVersion: 3,
+    onPageClicked: function(e, originalEvent, type, page) {
+        var pathname = $(location).attr('pathname');
+        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+        // top category
+        if (pageType == "topCategory") {
+            $.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+        }
+        // sub category
+        else if (pageType == "category") {
+            $.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+        }
+        // search
+        else {
+            $.post('${contextPath}/getProductOfSearch', {searchText: $('#s').val(), page: page}, updateProductOverview);
+        }
+    }
+};
+
 </script>
 
 <div class="row">
@@ -73,16 +72,31 @@
 	</div>
 
 <#if totalPages gt 1 >
+<div class="container">
+
 <!-- paging, only if more than one result page -->
 	<!-- paging -->
-	<div class="col-xs-12 h4">
-		<div class="pagination pull-right">
-			<ul id="pagination-bottom"></ul>
-		</div>
+	<div class="col-md-12 text-center">
+		<div class="block-27">
+			<ul id="pagination-bottom" class="text-center">
+				<li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
+				<#list 1..totalPages as i>
+          <#if i == currentPage>
+            <li class="active"><span>${i}</span></li>
+          <#else>
+            <li><a href="#" data-page="${i}">${i}</a></li>
+          </#if>
+        </#list>
+				<li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
+			</ul>
+		</div>		
 	</div>
 </div>
+</div>
+
 <script type="text/javascript">	
         $('#pagination-bottom').bootstrapPaginator(options);
+
 	</script>
 </#if>
 </@layout.myLayout>
