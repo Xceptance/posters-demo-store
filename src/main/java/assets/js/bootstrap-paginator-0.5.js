@@ -251,7 +251,7 @@
 
             this.$element.prop("class", "");
 
-            this.$element.addClass("pagination");
+            this.$element.addClass("");
 
             switch (size.toLowerCase()) {
             case "large":
