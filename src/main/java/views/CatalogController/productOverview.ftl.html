@@ -25,8 +25,17 @@ var options = {
 
 </script>
 
-	<br><br>
-	<!-- products -->
+	<div class="col-xs-12 text-center">
+		<div class="header-container">
+			<#if category??>
+			<div id="titleCategoryName" class="h2fwpr" style="font-size: 30px;">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+			</#if> <#if searchText??>
+			<div id="titleSearchText" class="h2fwpr" style="font-size: 30px;">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+			</#if> <#if noResults??>
+			<div id="titleNoResults" class="h2fwpr" style="font-size: 30px;">${noResults}</div>
+			</#if>
+		</div>
+	</div>	<!-- products -->
 	
 <div class="row">
 	
