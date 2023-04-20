@@ -10,6 +10,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/icomoon.css">
+	<!-- Ion Icon Fonts-->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/ionicons.min.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/bootstrap.min.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/owl.carousel.min.css">
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/owl.theme.default.min.css">
+
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/bootstrap-datepicker.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="${contextPath}/assets/fonts_fw/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="${contextPath}/assets/css_fw/style.css">
 
 <link href="${contextPath}/assets/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -22,7 +51,7 @@
 
 <script src="${contextPath}/assets/js/jquery-2.2.4.min.js"></script>
 <script src="${contextPath}/assets/js/bootstrap.min.js"></script>
-<script src="${contextPath}/assets/js/bootstrap-paginator.min.js"></script>
+<script src="${contextPath}/assets/js/bootstrap-paginator-0.5.js"></script>
 <script type="text/javascript">
 	var CONTEXT_PATH = '${contextPath}';
 </script>
@@ -31,14 +60,14 @@
 <body>
 	<!-- header -->
 	<header>
-		<div class="body-wrapper"><#if checkout??> <#include
-				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
-				</#if>
-		</div>
+		<#if checkout??>
+			<#include "headerCheckout.ftl.html"/>
+		<#else>
+			<#include "header.ftl.html"/>
+		</#if>
 	</header>
 
 	<!-- main/content -->
-	<div class="body-wrapper">
 		<main> <!-- message: no java script -->
 		<noscript>
 			<div class="section">
@@ -66,9 +95,9 @@
 		</div>
 
 		<!-- body -->
-		<div class="container-fluid" id="main"><#nested/></div>
+		<div class="" id="main"><#nested/></div>
 		</main>
-	</div>
+	
 	<!-- footer -->
 	<#include "footer.ftl.html"/>
 
@@ -88,6 +117,31 @@
 		});
 	</script>
 	</#if>
+
+<!-- jQuery -->
+<script src="${contextPath}/assets/js_fw/jquery.min.js"></script>
+<!-- popper -->
+<script src="${contextPath}/assets/js_fw/popper.min.js"></script>
+<!-- bootstrap 4.1 -->
+<script src="${contextPath}/assets/js_fw/bootstrap.min.js"></script>
+<!-- jQuery easing -->
+<script src="${contextPath}/assets/js_fw/jquery.easing.1.3.js"></script>
+<!-- Waypoints -->
+<script src="${contextPath}/assets/js_fw/jquery.waypoints.min.js"></script>
+<!-- Flexslider -->
+<script src="${contextPath}/assets/js_fw/jquery.flexslider-min.js"></script>
+<!-- Owl carousel -->
+<script src="${contextPath}/assets/js_fw/owl.carousel.min.js"></script>
+<!-- Magnific Popup -->
+<script src="${contextPath}/assets/js_fw/jquery.magnific-popup.min.js"></script>
+<script src="${contextPath}/assets/js_fw/magnific-popup-options.js"></script>
+<!-- Date Picker -->
+<script src="${contextPath}/assets/js_fw/bootstrap-datepicker.js"></script>
+<!-- Stellar Parallax -->
+<script src="${contextPath}/assets/js_fw/jquery.stellar.min.js"></script>
+<!-- Main -->
+<script src="${contextPath}/assets/js_fw/main.js"></script>
+
 </body>
 </html>
 </#macro>
