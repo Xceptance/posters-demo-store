@@ -1,0 +1,93 @@
+<#macro myLayout title="Posters - The Ultimate Online Shop">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<title>${i18n("titlePageShop")}</title>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="utf-8">
+
+<link href="${contextPath}/assets/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
+<link href="${contextPath}/assets/css/posterMiniCart.css"
+	rel="stylesheet" />
+
+<link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon"
+	type="image/x-icon">
+
+<script src="${contextPath}/assets/js/jquery-2.2.4.min.js"></script>
+<script src="${contextPath}/assets/js/bootstrap.min.js"></script>
+<script src="${contextPath}/assets/js/bootstrap-paginator.min.js"></script>
+<script type="text/javascript">
+	var CONTEXT_PATH = '${contextPath}';
+</script>
+<script src="${contextPath}/assets/js/posterMiniCart.js"></script>
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<div class="body-wrapper"><#if checkout??> <#include
+				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
+				</#if>
+		</div>
+	</header>
+
+	<!-- main/content -->
+	<div class="body-wrapper">
+		<main> <!-- message: no java script -->
+		<noscript>
+			<div class="section">
+				<div class="container">
+					<div class="noscriptmsg card">
+						<p>${i18n('errorNoJavaScript')}</p>
+					</div>
+				</div>
+			</div>
+		</noscript>
+
+		<!-- checkout breadcrumb --> <#if checkout??>
+		<div class="container-fluid"><#include
+			"../components/checkoutBreadcrumb.ftl.html"/></div>
+		</#if> <!-- messages -->
+		<div class="container-fluid" id="errorMessage">
+			<div class="text-center alert alert-danger">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+			</div>
+		</div>
+		<div class="container-fluid" id="successMessage">
+			<div class="text-center alert alert-success">
+				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+			</div>
+		</div>
+
+		<!-- body -->
+		<div class="container-fluid" id="main"><#nested/></div>
+		</main>
+	</div>
+	<!-- footer -->
+	<#include "footer.ftl.html"/>
+
+	<script src="${contextPath}/assets/js/poster.js"></script>
+	<#if flash.error??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#errorMessage").show();
+			$("#errorMessage div strong").html("${flash.error}");
+		});
+	</script>
+	</#if> <#if flash.success??>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#successMessage").show();
+			$("#successMessage div strong").html("${flash.success}");
+		});
+	</script>
+	</#if>
+</body>
+</html>
+</#macro>

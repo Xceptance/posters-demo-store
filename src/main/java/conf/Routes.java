@@ -9,6 +9,7 @@ import controllers.CheckoutController;
 import controllers.CustomerController;
 import controllers.SearchController;
 import controllers.WebShopController;
+import controllers_backoffice.UserController;
 
 /**
  * This class provides all routes of the application.
@@ -127,5 +128,19 @@ public class Routes implements ApplicationRoutes
         // assets
         // ############################################################
         router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
+    
+    // ############################################################
+        // ############################################################
+
+        // back office
+
+        // ############################################################
+        // ############################################################
+
+        // ############################################################
+        // login
+        // ############################################################
+        // router.GET().route("/backoffice/login").with(CustomerController.class, "loginForm");
+        router.GET().route("/backoffice/login").with(UserController.class, "loginForm");
     }
 }
