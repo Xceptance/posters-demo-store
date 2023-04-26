@@ -1,5 +1,139 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
+
+<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<th colspan="2" title="${i18n('cartTableHeaderItem')}"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
+				<th colspan="1" title="${i18n('cartTableHeaderQuantity')}">${i18n("cartTableHeaderQuantity")}</th>
+				<th class="text-right" title="${i18n('cartTableHeaderUnitPrice')}">${i18n('cartTableHeaderUnitPrice')}</th>
+				<th class="text-right" title="${i18n('cartTableHeaderTotalUnitPrice')}">${i18n('cartTableHeaderTotalUnitPrice')}</th>
+
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row row-pb-lg">
+					<div class="col-md-10 offset-md-1">
+						<div class="process-wrap">
+							<div class="process text-center active">
+								<p><span>01</span></p>
+								<h3>Shopping Cart</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>02</span></p>
+								<h3>Checkout</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>03</span></p>
+								<h3>Order Complete</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="product-name d-flex">
+							<div class="one-forth text-left px-4">
+								<span>${i18n("cartTableHeaderItem")}</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>${i18n("cartTableHeaderUnitPrice")}</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>${i18n("cartTableHeaderQuantity")}</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>${i18n("cartRemove")}</span>
+							</div>
+							<div class="one-eight text-center">
+								<span class="font-weight-bold">${i18n("cartTableHeaderTotalUnitPrice")}</span>
+							</div>
+							
+						</div>
+						<div class="product-cart d-flex">
+							<div class="one-forth">
+								<div class="product-img" style="background-image: url(images/item-6.jpg);">
+								</div>
+								<div class="display-tc">
+									<h3>Product Name</h3>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">$68.00</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<a href="#" class="closed"></a>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price font-weight-bold">$120.00</span>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="total-wrap">
+							<div class="row">
+								<div class="col-sm-8">
+									<form action="#">
+										<div class="row form-group">
+											<div class="col-sm-9">
+												<input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
+											</div>
+											<div class="col-sm-3">
+												<input type="submit" value="Apply Coupon" class="btn btn-primary">
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="col-sm-4 text-center">
+									<div class="total">
+										<div class="sub">
+											<p><span>Subtotal:</span> <span>$200.00</span></p>
+											<p><span>Delivery:</span> <span>$0.00</span></p>
+											<p><span>Discount:</span> <span>$45.00</span></p>
+										</div>
+										<div class="grand-total">
+											<p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+
+
+
+
+
+
+
+
+<br><br>
+
+
 <div>
 	<div class="header-container">
 		<span class="h2" id="titleCart">${i18n("cartOverviewTitle")}</span>
