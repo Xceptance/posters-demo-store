@@ -53,15 +53,11 @@
 								</div>
 								<div class="display-tc">
 									<h4>${cartProduct.product.name}</h4>
-									<div class="">
-									<div class="text-left">
-										<ul class="list-unstyled">
-												<li>${i18n("cartStyle")}: <small><span class="productStyleMobile">${cartProduct.finish}</span></small></li>
-												<li>${i18n("cartSize")}: <small><span class="productSizeMobile">${cartProduct.size.width}
-														x ${cartProduct.size.height} ${unitLength}</span></small></li>
-											</ul>
-									</div>
-								</div>
+									<h3 class="list-unstyled">
+										<li>${i18n("cartStyle")}: <small><span class="productStyleMobile">${cartProduct.finish}</span></small></li>
+										<li>${i18n("cartSize")}: <small><span class="productSizeMobile">${cartProduct.size.width}
+												x ${cartProduct.size.height} ${unitLength}</span></small></li>
+										</h3>
 								</div>
 								
 								
@@ -73,13 +69,33 @@
 							</div>
 							<div class="one-eight text-center">
 								<div class="display-tc">
-									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
+									<input id="productCount${cartProduct_index}"
+									name="productCount${cartProduct_index}"
+									class="form-control text-center productCount"
+									title="${i18n('cartTableHeaderQuantity')}"								
+									type="text" value=${cartProduct.productCount} size="4"
+									maxlength="4">				
 								</div>
+								
 							</div>
 							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
+								<div class="display-tc btn btn-link btnRemoveProduct"
+								id="btnRemoveProdCount${cartProduct_index}"
+								name="btnRemoveProduct${cartProduct_index}"
+								title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-index="${cartProduct_index}"
+								data-toggle="modal" data-target="#deleteProductModal">
+								<span class="closed"></span>
 								</div>
+								<div class="display-tc btn btn-link btnUpdateProduct"
+								id="btnUpdateProdCount${cartProduct_index}"
+								name="btnUpdateProdCount${cartProduct_index}"
+								title="${i18n('buttonUpdate')}"
+								data-id="${cartProduct.id}" data-index="${cartProduct_index}">
+								<span class="glyphicon glyphicon-repeat"></span>
+							</div>
+								
+							
+							
 							</div>
 							<div class="one-eight text-center">
 								<div class="display-tc">
@@ -193,7 +209,7 @@
 						<div class="form-group">
 							<input id="productCount${cartProduct_index}"
 								name="productCount${cartProduct_index}"
-								class="form-control text-right productCount"
+								class="form-control text-center productCount"
 								title="${i18n('cartTableHeaderQuantity')}"								
 								type="text" value=${cartProduct.productCount} size="4"
 								maxlength="4">
