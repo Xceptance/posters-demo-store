@@ -9,7 +9,8 @@ Apache Maven 3.6.3+
 
 ### How to build the project
 
-- To Be Added
+- mvn clean ----> used to clean the project initially
+- mvn process-classes ----> to add the Backoffice models as enhanced classes 
 
 ### How to run the website locally
 
