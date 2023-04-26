@@ -1,7 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "Sign in">
 <form id="formLogin" class="form-horizontal"
-	action="${applUrlHttps}/login" method="post">
+	action="${applUrlHttps}/backoffice/login" method="post">
 	<div>
 		<!-- Form Name -->
 		<div class="header-container">
@@ -48,14 +48,4 @@
 		</div>
 	</div>
 </form>
-
-<div>
-	<div class="header-container">
-            <span class="h3">${i18n("registrationNew")}</span>
-        </div>
-	<!-- new customer -->
-	<div>
-		<a id="linkRegister" href="${applUrlHttps}/registration">${i18n("registrationRegister")}</a>
-	</div>
-</div>
 </@layout.myLayout>
