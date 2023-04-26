@@ -56,6 +56,27 @@ public class User
     }
 
     /**
+     * Returns the {@link UUID} of the entity.
+     * 
+     * @return the {@link UUID} of the entity
+     */
+    public UUID getId()
+    {
+        return id;
+    }
+
+    /**
+     * Sets the {@link UUID} of the entity.
+     * 
+     * @param userId
+     *            the {@link UUID} of the entity
+     */
+    public void setId(final UUID userId)
+    {
+        id = userId;
+    }
+
+    /**
      * Returns the user's email address.
      * 
      * @return the user's email address
