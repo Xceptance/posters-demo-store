@@ -4,11 +4,7 @@
 <div class="colorlib-loader"></div>
 
 	<div id="page">
-		<th colspan="2" title="${i18n('cartTableHeaderItem')}"><div class="margin_left5">${i18n("cartTableHeaderItem")}</div></th>
-				<th colspan="1" title="${i18n('cartTableHeaderQuantity')}">${i18n("cartTableHeaderQuantity")}</th>
-				<th class="text-right" title="${i18n('cartTableHeaderUnitPrice')}">${i18n('cartTableHeaderUnitPrice')}</th>
-				<th class="text-right" title="${i18n('cartTableHeaderTotalUnitPrice')}">${i18n('cartTableHeaderTotalUnitPrice')}</th>
-
+		
 		<div class="colorlib-product">
 			<div class="container">
 				<div class="row row-pb-lg">
@@ -49,17 +45,30 @@
 							</div>
 							
 						</div>
+						<#list cartProducts as cartProduct>
+
 						<div class="product-cart d-flex">
 							<div class="one-forth">
 								<div class="product-img" style="background-image: url(images/item-6.jpg);">
 								</div>
 								<div class="display-tc">
-									<h3>Product Name</h3>
+									<h4>${cartProduct.product.name}</h4>
+									<div class="">
+									<div class="text-left">
+										<ul class="list-unstyled">
+												<li>${i18n("cartStyle")}: <small><span class="productStyleMobile">${cartProduct.finish}</span></small></li>
+												<li>${i18n("cartSize")}: <small><span class="productSizeMobile">${cartProduct.size.width}
+														x ${cartProduct.size.height} ${unitLength}</span></small></li>
+											</ul>
+									</div>
 								</div>
+								</div>
+								
+								
 							</div>
 							<div class="one-eight text-center">
 								<div class="display-tc">
-									<span class="price">$68.00</span>
+									<span class="unitPriceShort">${currency}${cartProduct.getPriceAsString()}</span>
 								</div>
 							</div>
 							<div class="one-eight text-center">
@@ -74,12 +83,14 @@
 							</div>
 							<div class="one-eight text-center">
 								<div class="display-tc">
-									<span class="price font-weight-bold">$120.00</span>
+									<span class="totalUnitPriceShort">${currency}${cartProduct.getTotalUnitPriceAsString()}</span>
 								</div>
 							</div>
 							
 						</div>
 						
+						</#list>
+
 					</div>
 				</div>
 				<div class="row row-pb-lg">
@@ -123,13 +134,6 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
-
-
-
-
-
-
-
 
 <br><br>
 
