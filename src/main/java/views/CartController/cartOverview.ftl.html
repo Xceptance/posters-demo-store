@@ -49,16 +49,17 @@
 
 						<div class="product-cart d-flex">
 							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-6.jpg);">
-								</div>
+								<div class="product-img" style="background-image: url(${contextPath}${cartProduct.product.imageURL});"></div>
+
 								<div class="display-tc">
-									<h4>${cartProduct.product.name}</h4>
-									<h3 class="list-unstyled">
-										<li>${i18n("cartStyle")}: <small><span class="productStyleMobile">${cartProduct.finish}</span></small></li>
-										<li>${i18n("cartSize")}: <small><span class="productSizeMobile">${cartProduct.size.width}
-												x ${cartProduct.size.height} ${unitLength}</span></small></li>
-										</h3>
+									<h3>${cartProduct.product.name}</h3>
+									<ul>
+										<li><strong>${i18n("cartStyle")}:</strong> <span class="productStyleMobile">${cartProduct.finish}</span></li>
+										<li><strong>${i18n("cartSize")}:</strong> <span class="productSizeMobile">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></li>
+									</ul>
 								</div>
+								
+								
 								
 								
 							</div>
@@ -126,6 +127,11 @@
 									</form>
 								</div>
 								<div class="col-sm-4 text-center">
+									<div class="header bgLightGrey row">
+										<div class="col-xs-12">
+											<span class="font-bold">${i18n("cartSummary")}</span>
+										</div>
+									</div>
 									<div class="total">
 										<div class="sub">
 											<p><span>Subtotal:</span> <span>$200.00</span></p>
@@ -171,7 +177,8 @@
 		<tbody>
 			<#list cartProducts as cartProduct>
 			<tr id="product${cartProduct_index}" class = "cartOverviewProduct">
-				<td><div class="visible-xs">
+				<td>
+					<div class="visible-xs">
 						<span class="font-bold">${cartProduct.product.name}</span>
 					</div> <a
 					href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img
