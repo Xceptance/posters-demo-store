@@ -7694,6 +7694,9 @@ h1, h2, h3, h4, h5,
 .colorlib-product {
   padding: 7em 0;
   clear: both; }
+.overview {
+  padding: 2em 0;
+  clear: both; }
 
 .colorlib-intro {
   padding-bottom: 0; }
