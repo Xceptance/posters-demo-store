@@ -208,4 +208,20 @@ public class SessionHandling
     {
         return UUID.fromString(context.getSession().get(ADMIN));
     }
+
+    /**
+     * Returns true, if a user is logged, otherwise false.
+     * 
+     * @param context
+     * @return
+     */
+    public static boolean isUserLogged(final Context context)
+    {
+        boolean isLogged = true;
+        if (context.getSession().get(ADMIN) == null)
+        {
+            isLogged = false;
+        }
+        return isLogged;
+    }
 }
