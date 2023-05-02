@@ -7,10 +7,8 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 
-import com.avaje.ebean.Ebean;
 import com.google.inject.Inject;
 
-import org.mindrot.jbcrypt.BCrypt;
 
 
 
@@ -24,7 +22,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-import util.session.SessionHandling_Backoffice;
+import util.session.SessionHandling;
 
 
 /**
@@ -78,7 +76,7 @@ public class UserController {
         {
             // exists the given email in the database
             final boolean emailExist = User.emailExist(email);
-            // get customer by the given email
+            // get user by the given email
             final User user = User.getUserByEmail(email);
             // is the password correct
             boolean correctPassowrd = false;
@@ -90,11 +88,11 @@ public class UserController {
             // email and password are correct
             if (emailExist && correctPassowrd)
             {
-                // put customer id to session
-                SessionHandling_Backoffice.setUserId(context, user.getId());
-                // show home page
+                // put user id to session
+                SessionHandling.setUserId(context, user.getId());
+                // show backoffice
                 context.getFlashScope().success(msg.get("successLogIn", language).get());
-                return Results.redirect(context.getContextPath() + "/");
+                return Results.redirect(context.getContextPath() + "/backoffice/");
 
             }
             // user exist, wrong password
