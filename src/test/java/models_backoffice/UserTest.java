@@ -16,7 +16,7 @@ public class UserTest extends NinjaTest
     @Before
     public void setUp() throws Exception
     {
-        // create new customer
+        // create new user
         user = new User();
         // set some data
         user.setEmail("email");
@@ -34,9 +34,9 @@ public class UserTest extends NinjaTest
         user.save();
 
         final User savedUser = Ebean.find(User.class, user.getId());
-        // verify, that the customer is persistent
+        // verify, that the user is persistent
         Assert.assertNotNull(savedUser);
-        // verify the email of the customer
+        // verify the email of the user
         Assert.assertEquals("email", savedUser.getEmail());
     }
 
