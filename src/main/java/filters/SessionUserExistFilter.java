@@ -25,7 +25,8 @@ public class SessionUserExistFilter implements Filter
     public Result filter(final FilterChain chain, final Context context)
     {
         if (!SessionHandling.isUserLogged(context)) {
-            return Results.redirect(context.getContextPath() + "/");
+            // return Results.redirect(context.getContextPath() + "/"); // redirects to homepage
+            return Results.forbidden().html().template("/views/system/403forbidden.ftl.html");
         }
         return chain.next(context);
     }
