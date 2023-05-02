@@ -1605,7 +1605,7 @@ pre {
     opacity: 1; }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.25rem + 2px); }
+  height: calc(2.25rem + 8px); }
 
 select.form-control:focus::-ms-value {
   color: #495057;
@@ -7693,6 +7693,9 @@ h1, h2, h3, h4, h5,
 .colorlib-intro,
 .colorlib-product {
   padding: 7em 0;
+  clear: both; }
+.overview {
+  padding: 2em 0;
   clear: both; }
 
 .colorlib-intro {
