@@ -22,6 +22,8 @@ public class SessionHandling
 
     private static String USER = "user";
 
+    private static String ADMIN = "admin";
+
     /**
      * Removes the user information from the session.
      * 
@@ -183,5 +185,16 @@ public class SessionHandling
     public static UUID getCustomerId(final Context context)
     {
         return UUID.fromString(context.getSession().get(USER));
+    }
+
+    /**
+     * Adds user id to the session.
+     * 
+     * @param context
+     * @param userId
+     */
+    public static void setUserId(final Context context, final UUID userId)
+    {
+        context.getSession().put(ADMIN, userId.toString());
     }
 }
