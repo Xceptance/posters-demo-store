@@ -15,34 +15,38 @@
                     <div class="one-forth text-left px-4">
                         <span>${i18n("orderOverviewTabHeadPurchasedPoster")}</span>
                     </div>
-                    
+
                     <div class="one-forth text-center">
                         <span>${i18n("orderOverviewTabHeadOrderDetails")}</span>
-                    </div> 
+                    </div>
                     <div class="one-forth text-center">
                         <span>${i18n("orderOverviewTabHeadPurchasedPosterQuantity")}</span>
                     </div>
-    
-                   
                 </div>
                 <#list orderOverview as order>
                     <#list order.products as orderProduct>
                         <div class="product-cart d-flex">
                             <div class="one-forth">
-                                <a href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}">
-                                    <div class="product-img" style="background-image: url(${contextPath}${orderProduct.product.imageURL});"></div>
+                                <a
+                                    href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}">
+                                    <div class="product-img"
+                                        style="background-image: url(${contextPath}${orderProduct.product.imageURL});">
+                                    </div>
                                 </a>
                                 <div class="display-tc">
                                     <h3>${orderProduct.product.name}</h3>
                                     <h3>${orderProduct.product.descriptionOverview}</h3>
-    
+
                                     <ul>
-                                        <li><strong>${i18n("cartStyle")}:</strong> <span class="productStyle">${orderProduct.finish}</span></li>
-                                        <li><strong>${i18n("cartSize")}:</strong> <span class="productSize">${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></li>
+                                        <li><strong>${i18n("cartStyle")}:</strong> <span
+                                                class="productStyle">${orderProduct.finish}</span></li>
+                                        <li><strong>${i18n("cartSize")}:</strong> <span
+                                                class="productSize">${orderProduct.size.width} x
+                                                ${orderProduct.size.height} ${unitLength}</span></li>
                                     </ul>
                                 </div>
                             </div>
-                           
+
                             <div class="one-forth text-center">
                                 <div class="display-tc">
                                     <div class="orderDateTitle font-bold">
@@ -55,30 +59,24 @@
                                     <div class="orderTotalCosts">${currency}${order.getTotalCostsAsString()}</div>
                                 </div>
                             </div>
-    
-                            
+
+
                             <div class="one-forth text-center">
                                 <div class="display-tc">
                                     <td class="orderCount">${orderProduct.productCount}x</td>
-    
+
                                 </div>
                             </div>
                         </div>
                     </#list>
-                    
+
                 </#list>
             </div>
         </div>
 
-        
+
     </div>
 </div>
-      
-   
-
-
-
-<br><br><br>
 
 
 
