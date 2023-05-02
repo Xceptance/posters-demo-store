@@ -9,6 +9,7 @@ import controllers.CheckoutController;
 import controllers.CustomerController;
 import controllers.SearchController;
 import controllers.WebShopController;
+import controllers_backoffice.BackofficeController;
 import controllers_backoffice.UserController;
 
 /**
@@ -143,5 +144,10 @@ public class Routes implements ApplicationRoutes
         // router.GET().route("/backoffice/login").with(CustomerController.class, "loginForm");
         router.GET().route("/backoffice/login").with(UserController.class, "loginForm");
         router.POST().route("/backoffice/login").with(UserController.class, "login");
+
+        // ############################################################
+        // homepage
+        // ############################################################
+        router.GET().route("/backoffice").with(BackofficeController.class, "homepage");
     }
 }
