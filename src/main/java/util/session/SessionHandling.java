@@ -197,4 +197,15 @@ public class SessionHandling
     {
         context.getSession().put(ADMIN, userId.toString());
     }
+
+    /**
+     * Returns user id of the session.
+     * 
+     * @param context
+     * @return
+     */
+    public static UUID getUserId(final Context context)
+    {
+        return UUID.fromString(context.getSession().get(ADMIN));
+    }
 }
