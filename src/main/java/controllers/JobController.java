@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import models.Customer;
 import models.Product;
 import models.TopCategory;
+import models_backoffice.User;
 import ninja.lifecycle.Start;
 
 import org.h2.tools.RunScript;
@@ -45,7 +46,7 @@ public class JobController
         final StarterConf config = new StarterConf();
         // prepare database
         prepareDatabase(config);
-        // import categories, products and dummy customer
+        // import categories, products, dummy customer and user
         importData(config);
     }
 
@@ -74,6 +75,7 @@ public class JobController
             boolean productTable = false;
             boolean topCategoryTable = false;
             boolean subCategoryTable = false;
+            boolean userTable = false;
             // if server has been started with the parameter "-Dstarter.droptables=true"
             // drop all tables
             if (config.DROP_TABLES != null)
@@ -134,10 +136,14 @@ public class JobController
                 {
                     subCategoryTable = true;
                 }
+                if (rs.getString(3).equals("USER"))
+                {
+                    userTable = true;
+                }
             }
             // create the tables if they not exist
             if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable && shippingAddressTable &&
-                  orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
+                  orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable && userTable))
             {
                 // simply execute the create-script
                 RunScript.execute(connection,
@@ -176,6 +182,11 @@ public class JobController
             {
                 ImportFromXMLToDB.importCustomer();
             }
+        }
+        // import users, if there is no user in DB
+        if (Ebean.find(User.class).findList().size() == 0)
+        {
+            ImportFromXMLToDB.importUser();
         }
     }
 }
