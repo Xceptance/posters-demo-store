@@ -8739,14 +8739,24 @@ input[type="text"] {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     outline: none !important; }
+  .btn.btn-account, .btn-group-lg > .btn {
+    background-color: #c91b1b;
+    border: none;
+    width: 31%;
+    height: 41px; /* change this value as desired */
+    text-align: left;}
+  .btn.btn-account:hover{
+          background-color: #a30000;
+      }
 
 .btn-primary {
   background: #616161;
-  color: #fff;
+  color: #000;
   border: 1px solid #616161; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-    background: #c91b1b !important;
-    border-color: #a10202 !important; }
+    background: #a30000 !important;
+    border-color: #a10202 !important;
+    color: #000;}
   .btn-primary.btn-outline-primary {
     background: transparent;
     color: #000 !important;
