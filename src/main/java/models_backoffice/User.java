@@ -12,8 +12,7 @@ import com.avaje.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a user of the poster store. Each user must have a unique email address and a
- * password to log in. Furthermore a user can have one or more shipping and billing addresses, a list of credit
- * cards and a list of orders.
+ * password to log in. A user has the access to the backoffice of the poster store.
  * 
  * @author kennygozali
  */
