@@ -62,7 +62,6 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/updatePaymentMethod").with(CustomerController.class, "updatePaymentMethod");
         router.POST().route("/updatePaymentMethodCompleted").with(CustomerController.class, "updatePaymentMethodCompleted");
 
-
         // ############################################################
         // customer's addresses
         // ############################################################
@@ -130,7 +129,7 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
     
-    // ############################################################
+        // ############################################################
         // ############################################################
 
         // back office
@@ -141,13 +140,18 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // user login
         // ############################################################
-        // router.GET().route("/backoffice/login").with(CustomerController.class, "loginForm");
-        router.GET().route("/backoffice/login").with(UserController.class, "loginForm");
-        router.POST().route("/backoffice/login").with(UserController.class, "login");
+        router.GET().route("/posters/backoffice/login").with(UserController.class, "loginForm");
+        router.POST().route("/posters/backoffice/login").with(UserController.class, "login");
 
         // ############################################################
         // homepage
         // ############################################################
-        router.GET().route("/backoffice").with(BackofficeController.class, "homepage");
+        router.GET().route("/posters/backoffice").with(BackofficeController.class, "homepage");
+
+        // ############################################################
+        // user registration
+        // ############################################################
+        // router.GET().route("/backoffice/registration").with(UserController.class, "registration");
+        // router.POST().route("/backoffice").with(UserController.class, "registrationCompleted");
     }
 }
