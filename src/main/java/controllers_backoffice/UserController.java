@@ -92,7 +92,7 @@ public class UserController {
                 SessionHandling.setUserId(context, user.getId());
                 // show backoffice
                 context.getFlashScope().success(msg.get("successLogIn", language).get());
-                return Results.redirect(context.getContextPath() + "/backoffice/");
+                return Results.redirect(context.getContextPath() + "/backoffice");
 
             }
             // user exist, wrong password
