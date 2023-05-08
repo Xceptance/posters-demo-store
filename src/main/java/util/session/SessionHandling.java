@@ -224,4 +224,14 @@ public class SessionHandling
         }
         return isLogged;
     }
+
+    /**
+     * Removes the user information from the session.
+     * 
+     * @param context
+     */
+    public static void removeUserId(final Context context)
+    {
+        context.getSession().remove(ADMIN);
+    }
 }

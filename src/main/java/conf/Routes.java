@@ -142,6 +142,7 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/posters/backoffice/login").with(UserController.class, "loginForm");
         router.POST().route("/posters/backoffice/login").with(UserController.class, "login");
+        router.GET().route("/posters/backoffice/logout").with(UserController.class, "logout");
 
         // ############################################################
         // homepage
@@ -152,6 +153,6 @@ public class Routes implements ApplicationRoutes
         // user registration
         // ############################################################
         router.GET().route("/posters/backoffice/registration").with(UserController.class, "registration");
-        router.POST().route("/posters/backoffice").with(UserController.class, "registrationCompleted");
+        router.POST().route("/posters/backoffice/registration").with(UserController.class, "registrationCompleted");
     }
 }
