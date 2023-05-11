@@ -123,7 +123,7 @@ public class Routes implements ApplicationRoutes
         router.GET().route("/checkoutOverview").with(CheckoutController.class, "checkoutOverview");
         //router.POST().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");
         router.POST().route("/checkoutCompleted").with(CheckoutController.class, "checkoutCompleted");
-        // ############################################################
+        router.GET().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");        // ############################################################
         // assets
         // ############################################################
         router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
