@@ -275,3 +275,9 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/*** putting footer to front ***/
+.footer-front {
+    z-index: 9998!important;
+    position:relative;
+}
