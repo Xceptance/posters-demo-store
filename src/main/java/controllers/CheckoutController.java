@@ -155,7 +155,7 @@ public class CheckoutController
      * @param state
      * @param zip
      * @param country
-     * @param billingEqualShipp
+     * @param billingEqualShipping
      * @param context
      * @return
      */
@@ -681,7 +681,19 @@ public class CheckoutController
         SessionHandling.removeOrderId(context);
         // show success message
         context.getFlashScope().success(msg.get("checkoutCompleted", language).get());
-        return Results.redirect(context.getContextPath() + "/");
+        return Results.redirect(context.getContextPath() + "/orderConfirmation");
+    }
+
+    /**
+     * Shows the confirmation page of an order
+     *
+     * @param context
+     */
+    public Result orderConfirmation(final Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        WebShopController.setCommonData(data, context, xcpConf);
+        return Results.html().render(data);
     }
 
     /**
