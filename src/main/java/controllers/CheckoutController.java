@@ -155,7 +155,7 @@ public class CheckoutController
      * @param state
      * @param zip
      * @param country
-     * @param billingEqualShipp
+     * @param billingEqualShipping
      * @param context
      * @return
      */
