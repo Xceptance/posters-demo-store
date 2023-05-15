@@ -1,6 +1,5 @@
 package controllers_backoffice;
 
-
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Optional;
@@ -8,9 +7,6 @@ import java.util.regex.Pattern;
 
 import com.avaje.ebean.Ebean;
 import com.google.inject.Inject;
-
-
-
 
 import conf.PosterConstants;
 import filters.SessionCustomerExistFilter;
@@ -25,17 +21,17 @@ import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.session.SessionHandling;
 
-
 /**
  * Controller class, that provides the user functionality.
  * 
  * @author kennygozali
  */
-public class UserController {
+public class UserController
+{
 
     @Inject
     Messages msg;
-    
+
     @Inject
     PosterConstants xcpConf;
 
@@ -100,13 +96,15 @@ public class UserController {
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+
             }
             // wrong email
             else
             {
                 // error message
-                context.getFlashScope().error(msg.get("errorEmailExist", language).get());
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+
             }
         }
         final Map<String, Object> data = new HashMap<String, Object>();
@@ -149,14 +147,12 @@ public class UserController {
         if (!Ebean.find(User.class).where().eq("email", email).findList().isEmpty())
         {
             // show error message
-            context.getFlashScope().error(msg.get("errorAccountExist", language).get());
             failure = true;
         }
         // email is not valid
         else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // show error message
-            context.getFlashScope().error(msg.get("errorValidEmail", language).get());
             failure = true;
         }
         if (failure)
