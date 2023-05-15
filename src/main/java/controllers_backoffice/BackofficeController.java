@@ -91,7 +91,7 @@ public class BackofficeController {
     }
 
     /**
-     * Shows the statistics of the poster website.
+     * List out all of the admin users.
      * 
      * 
      * @param context
@@ -199,6 +199,26 @@ public class BackofficeController {
      */
     @FilterWith(SessionUserExistFilter.class)
     public Result preferences(final Context context)
+    {   
+        Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+
+    /**
+     * Controls the import/export operations within the backoffice.
+     * 
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result dataManagement(final Context context)
     {   
         Result result = Results.html();
 
