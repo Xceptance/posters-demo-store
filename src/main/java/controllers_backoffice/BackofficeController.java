@@ -89,4 +89,23 @@ public class BackofficeController {
         
         return result;
     }
+    /**
+     * Shows the statistics of the poster website.
+     * 
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result statistics(final Context context)
+    {   
+        Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
 }
