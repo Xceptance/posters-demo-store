@@ -154,5 +154,10 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/posters/backoffice/registration").with(UserController.class, "registration");
         router.POST().route("/posters/backoffice/registration").with(UserController.class, "registrationCompleted");
+
+        // ############################################################
+        // user view
+        // ############################################################
+        router.GET().route("/posters/backoffice/user/{userId}").with(BackofficeController.class, "userView");
     }
 }
