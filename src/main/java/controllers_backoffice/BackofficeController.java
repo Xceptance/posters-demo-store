@@ -191,6 +191,26 @@ public class BackofficeController {
     }
 
     /**
+     * List out all of the customers.
+     * 
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result customerList(final Context context)
+    {   
+        Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+
+    /**
      * Creates the preference page.
      * 
      * 
