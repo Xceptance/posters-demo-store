@@ -171,7 +171,7 @@ public class BackofficeController {
     }
 
     /**
-     * List out all of the orders.
+     * List out all of the products.
      * 
      * 
      * @param context
@@ -179,6 +179,26 @@ public class BackofficeController {
      */
     @FilterWith(SessionUserExistFilter.class)
     public Result productList(final Context context)
+    {   
+        Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+
+    /**
+     * Creates the preference page.
+     * 
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result preferences(final Context context)
     {   
         Result result = Results.html();
 
