@@ -123,8 +123,14 @@ public class UserController
      */
     @FilterWith(SessionUserExistFilter.class)
     public Result registration(final Context context)
-    {
-        return Results.html();
+    {   
+        Result result = Results.html();
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
     }
 
     /**
