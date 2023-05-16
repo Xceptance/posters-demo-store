@@ -140,10 +140,6 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-
-
-
-
         boolean failure = false;
         // email is not valid
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
@@ -167,6 +163,42 @@ public class BackofficeController
             // show page to log-in
             return Results.redirect(context.getContextPath() + "/posters/backoffice");
         }
+    }
+
+    /**
+     * Edit an admin user's information and credentials.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result userDelete(final Context context, @PathParam("userId") String userId)
+    {
+
+        Result result = Results.html();
+
+        // Find user with the id from the params
+        User user = Ebean.find(User.class, userId);
+        // Render user into template
+        result.render("user", user);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        // Don't delete if it is the same as the user
+        if (currentUser.getEmail() == user.getEmail())
+        {
+            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+
+        }
+        else
+        {
+            user.delete();
+            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+        }
+
     }
 
     /**
