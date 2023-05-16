@@ -217,6 +217,11 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
+        // Find all of the admin users
+        List<User> users = Ebean.find(User.class).findList();
+        // Add all users into the back office
+        result.render("users", users);
+
         return result;
     }
 
