@@ -195,5 +195,10 @@ public class Routes implements ApplicationRoutes
         // Import/Export
         // ############################################################
         router.GET().route("/posters/backoffice/data-management").with(BackofficeController.class, "dataManagement");
+
+        // ############################################################
+        // Page Not Found
+        // ############################################################
+        router.GET().route("/posters/backoffice/.*").with(BackofficeController.class, "Error404");
     }
 }

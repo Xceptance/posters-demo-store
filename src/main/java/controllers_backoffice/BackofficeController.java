@@ -249,4 +249,24 @@ public class BackofficeController {
 
         return result;
     }
+
+    /**
+     * This response appears when a backoffice user inputted an invalid backoffice url.
+     * 
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result Error404(final Context context)
+    {   
+        Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
 }
