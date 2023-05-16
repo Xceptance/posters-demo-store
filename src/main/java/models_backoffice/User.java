@@ -245,9 +245,9 @@ public class User
      *            the {@link UUID} of the user
      * @return the {@link User} with the given {@link UUID}
      */
-    public static User getCustomerById(final UUID userId)
+    public static User getUserById(final UUID userId)
     {
-        // get customer by id
+        // get user by id
         return Ebean.find(User.class, userId);
     }
 }

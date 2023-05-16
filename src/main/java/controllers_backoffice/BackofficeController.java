@@ -91,6 +91,34 @@ public class BackofficeController {
     }
 
     /**
+     * Returns the view of a single admin user.
+     * 
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result userEdit(
+        final Context context,
+        @PathParam("userId") String userId) 
+    {
+        
+        Result result = Results.html();
+        
+        // Find user with the id from the params
+        User user = Ebean.find(User.class, userId);
+        // Render user into template
+        result.render("user", user);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        
+        return result;
+    }
+
+    /**
      * List out all of the admin users.
      * 
      * 

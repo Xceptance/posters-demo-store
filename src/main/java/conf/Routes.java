@@ -159,6 +159,7 @@ public class Routes implements ApplicationRoutes
         // admin users
         // ############################################################
         router.GET().route("/posters/backoffice/user").with(BackofficeController.class, "userList");
+        router.GET().route("/posters/backoffice/user/{userId}/edit").with(BackofficeController.class, "userEdit");
         router.GET().route("/posters/backoffice/user/{userId}").with(BackofficeController.class, "userView");
 
         // ############################################################
