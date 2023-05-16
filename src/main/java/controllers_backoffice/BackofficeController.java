@@ -166,7 +166,7 @@ public class BackofficeController
     }
 
     /**
-     * Edit an admin user's information and credentials.
+     * Deletes an admin user.
      * 
      * @param context
      * @return
