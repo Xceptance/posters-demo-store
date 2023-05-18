@@ -1,8 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 	<@layout.myLayout "The ultimate webshop">
-		<div id="titleDelAddr" class="header-container">
-			<h2 class="h2fwpr">${i18n("shippingAddressTitleSelect")}</h2>
-		</div>
+		
 
 		<div class="container">
 
@@ -13,6 +11,8 @@
 					<#if shippingAddresses??>
 						<!-- choose available address -->
 						<form action="addShippingAddressToOrder" method="post" class="colorlib-form">
+							<h2 class="text-center h2fwpr">${i18n("shippingAddressTitleSelect")}</h2>
+
 							<#list shippingAddresses as address>
 								<#if (address_index + 3) % 3==0>
 									<div class="container-fluid">
