@@ -7998,7 +7998,7 @@ h1, h2, h3, h4, h5,
 .process {
   position: relative;
   float: left;
-  width: 33.333%;
+  width: 16.333%;
   z-index: 0; }
   .process:after {
     position: absolute;
