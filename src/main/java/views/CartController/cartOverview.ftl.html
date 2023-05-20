@@ -104,8 +104,8 @@
 									id="btnUpdateProdCount${cartProduct_index}"
 									name="btnUpdateProdCount${cartProduct_index}"
 									title="${i18n('buttonUpdate')}"
-									data-id="${cartProduct.id}" data-index="${cartProduct_index}">
-									<span class="glyphicon glyphicon-repeat"></span>
+									data-id="${cartProduct.id}" data-index="${cartProduct_index}" style="text-decoration: none;">
+									<span class="icon-refresh-ccw"></span>
 								</div>
 							
 							</div>
@@ -145,9 +145,9 @@
 							</div>
 						</div>
 						<br>
-						<div id="prodPrice" class="pull-right">
+						<div id="prodPrice" class="float-right">
 							<a href="${applUrlHttps}/checkout" id="btnStartCheckout"
-								class="btn btn-primary" title="${i18n('cartOverviewStartCheckout')}">${i18n("cartOverviewStartCheckout")}</a>
+								class="btn btn-primary" style="background-color: #cb1b1b; border-color: #cb1b1b;" title="${i18n('cartOverviewStartCheckout')}">${i18n("cartOverviewStartCheckout")}</a>
 						</div>
 					</div>
 					
