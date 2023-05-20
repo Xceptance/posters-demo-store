@@ -61,39 +61,27 @@
 							<a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
 								title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
 								<#if isLogged == false>
-									<span class="glyphicon glyphicon-user not-logged"></span>
+									<span class="icon-user2"></span>
 								</#if>
 								<#if isLogged == true>
-									<span class="glyphicon glyphicon-user logged"></span>
+									<span class="icon-user2"></span>
 								</#if>
 							</a>
 							<ul id="userMenu"
 								class="dropdown-menu dropdown-menu-right hidden-xs">
 								<#include '../components/userMenu.ftl.html'/>
 							</ul>
-							<ul id="userMenuMobile"
-								class="dropdown-menu hidden-sm hidden-md hidden-lg">
-								<#include '../components/userMenu.ftl.html' />
-							</ul>
 						</li>
 						<li class="dropdown " role="presentation">
 						<a id="headerCartOverview" class="dropdown-toggle" data-target="#"
 							data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button"
-							aria-haspopup="true" aria-expanded="false">
-							<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span
+							aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
+							<span class="icon-shopping-cart"></span> &nbsp; <span
 							class="headerCartProductCount">${cartProductCount}</span>
 						</a>
 		
 							<ul id="miniCartMenu"
 								class="dropdown-menu dropdown-menu-right hidden-xs">
-								<li>
-									<!-- cart slider --> <#include
-									"../components/miniCartMenu.ftl.html" />
-								</li>
-		
-							</ul>
-							<ul id="miniCartMenuMobile"
-								class="dropdown-menu hidden-sm hidden-md hidden-lg">
 								<li>
 									<!-- cart slider --> <#include
 									"../components/miniCartMenu.ftl.html" />
