@@ -81,16 +81,21 @@
 					</div>
 					</#if> </#list> </#if>
 
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="pull-right">
-								<!-- Trigger the modal with a button -->
-								<button type="button" class="btn btn-default" data-toggle="modal"
-									data-target="#addAdressModal">${i18n("billingAddressAddNew")}</button>
-								<!-- button - continue  -->
-								<button class="btn btn-primary" id="btnUseBillAddress"
-									name="btnUseBillAddress" type="submit">${i18n("billingAddressChoose")}</button>
+					<div class="form-group">
+						<div class="col-xs-12 nopadding">
+							<div class="col-sm-3"></div>
+							<div class="col-sm-9">
+								<div class="pull-right">
+									<!-- Trigger the modal with a button -->
+									<button type="button" class="btn btn-default" data-toggle="modal"
+										data-target="#addAdressModal">${i18n("billingAddressAddNew")}</button>
+									<!-- button - continue  -->
+									<button class="btn btn-primary" id="btnUseBillAddress"
+										name="btnUseBillAddress" type="submit">${i18n("billingAddressChoose")}</button>
+								</div>
 							</div>
+
+							
 						</div>
 					</div>
 				</form>
@@ -113,13 +118,12 @@
 										<!-- include form -->
 										<#include "../components/addressForm.ftl.html"/>
 									</fieldset>
-
+									<span class="reqField pull-left textcolordarkgrey">*
+										${i18n('titleRequiredFields')}</span>
 								</div>
+								
 								<div class="modal-footer">
-									<div class="col-sm-3"></div>
-									<div class="col-sm-9 nopadding">
-										<span class="reqField pull-left textcolordarkgrey">*
-											${i18n('titleRequiredFields')}</span>
+										
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal"
 											title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>

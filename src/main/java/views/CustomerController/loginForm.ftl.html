@@ -9,7 +9,7 @@
 
 		<!-- Form Name -->
         <div class="col-lg-6">
-			<form id="formLogin" class="form-horizontal colorlib-form"
+			<form id="formLogin" class="form-horizontal colorlib-form h2fwpr"
 				action="${applUrlHttps}/login" method="post">
 				<legend>
 					<span class="h2fwpr">${i18n("titleSignIn")}</span>
@@ -39,6 +39,8 @@
 								<input id="password" name="password"
 									placeholder="${i18n('registrationPassword')}" class="form-control"
 									type="password" required>
+									<span class="reqField pull-left textcolordarkgrey">*
+										${i18n('titleRequiredFields')}</span>
 							</div>
 						</div>
 
@@ -47,8 +49,7 @@
 							<div class="col-sm-12 nopadding">
 								<div class="col-sm-3"></div>
 								<div class="col-sm-9">
-									<span class="reqField pull-left textcolordarkgrey">*
-										${i18n('titleRequiredFields')}</span>
+								
 									<button id="btnSignIn" class="btn btn-primary pull-right"
 										name="btnSignIn" type="submit">${i18n('buttonSignIn')}</button>
 								</div>

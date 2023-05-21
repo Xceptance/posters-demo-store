@@ -47,58 +47,66 @@
                         <h1 class="h2fwpr ">${i18n("titleOrderOverview")}</h1>
                     </div>
                     <div class="row total justify-content-center">
-                        
-                        <div class="col-sm-8">
-                            <ul class="list-unstyled">
-                                <!-- print shipping address -->
-                                <li class="col-md-4">
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <!-- Shipping address -->
+                                <div class="col-md-4">
                                     <h3>${i18n("titleShippingAddress")}</h3>
                                     <address id="shippingAddr">
                                         <ul class="list-unstyled container-fluid address">
                                             <li class="name font-bold" title="${i18n('addressFullName')}">${order.shippingAddress.name}</li>
                                             <li class="company" title="${i18n('addressCompany')}">${order.shippingAddress.company}</li>
                                             <li class="addressLine" title="${i18n('addressLine')}">${order.shippingAddress.addressLine}</li>
-                                            <li><span class="city" title="${i18n('addressCity')}">${order.shippingAddress.city}</span>,
+                                            <li>
+                                                <span class="city" title="${i18n('addressCity')}">${order.shippingAddress.city}</span>,
                                                 <span class="state" title="${i18n('addressState')}">${order.shippingAddress.state}</span>
-                                                <span class="zip" title="${i18n('addressZip')}">${order.shippingAddress.zip}</span></li>
+                                                <span class="zip" title="${i18n('addressZip')}">${order.shippingAddress.zip}</span>
+                                            </li>
                                             <li class="country" title="${i18n('addressCountry')}">${order.shippingAddress.country}</li>
                                         </ul>
                                     </address>
-                                </li>
-                                <!-- print billing address -->
-                                <li class="col-md-4">
+                                </div>
+                    
+                                <!-- Billing address -->
+                                <div class="col-md-4">
                                     <h3>${i18n("titleBillingAddress")}</h3>
                                     <address id="billingAddr">
                                         <ul class="list-unstyled container-fluid address">
                                             <li class="name font-bold" title="${i18n('addressFullName')}">${order.billingAddress.name}</li>
                                             <li class="company" title="${i18n('addressCompany')}">${order.billingAddress.company}</li>
                                             <li class="addressLine" title="${i18n('addressLine')}">${order.billingAddress.addressLine}</li>
-                                            <li><span class="city" title="${i18n('addressCity')}">${order.billingAddress.city}</span>,
+                                            <li>
+                                                <span class="city" title="${i18n('addressCity')}">${order.billingAddress.city}</span>,
                                                 <span class="state" title="${i18n('addressState')}">${order.billingAddress.state}</span>
-                                                <span class="zip" title="${i18n('addressZip')}">${order.billingAddress.zip}</span></li>
+                                                <span class="zip" title="${i18n('addressZip')}">${order.billingAddress.zip}</span>
+                                            </li>
                                             <li class="country" title="${i18n('addressCountry')}">${order.billingAddress.country}</li>
                                         </ul>
                                     </address>
-                                </li>
-                                <!-- print credit card -->
-                                <li class="col-md-4">
+                                </div>
+                    
+                                <!-- Payment information -->
+                                <div class="col-md-4">
                                     <h3>${i18n("titlePaymentInformation")}</h3>
                                     <address id="payment">
                                         <ul class="list-unstyled container-fluid creditCard">
-                                            <li class="name" title="${i18n('titleName')}"><span
-                                                    class="value font-bold">${order.creditCard.name}</span></li>
-                                            <li class="cardNumber" title="${i18n('titleCreditCard')}"><span
-                                                    class="value">${order.creditCard.getCardNumberCryptic()}</span></li>
-                                            <li class="exp" title="${i18n('titleValidTo')}"><span
-                                                    class="month">${order.creditCard.getMonthLeadingZero()}</span>/<span
-                                                    class="year">${order.creditCard.year}</span></li>
+                                            <li class="name" title="${i18n('titleName')}">
+                                                <span class="value font-bold">${order.creditCard.name}</span>
+                                            </li>
+                                            <li class="cardNumber" title="${i18n('titleCreditCard')}">
+                                                <span class="value">${order.creditCard.getCardNumberCryptic()}</span>
+                                            </li>
+                                            <li class="exp" title="${i18n('titleValidTo')}">
+                                                <span class="month">${order.creditCard.getMonthLeadingZero()}</span>/
+                                                <span class="year">${order.creditCard.year}</span>
+                                            </li>
                                         </ul>
                                     </address>
-                                    
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -206,13 +214,12 @@
                         </div>
                         
                         <br>
-                        <div id="prodPrice" class="pull-right">
+                        <div class="text-right">
                             <form action="${contextPath}/checkoutCompleted" method="post">
-                                <button class="btn btn-primary" id="btnOrder"
-                                    name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}
-                                </button>
+                                <button class="btn btn-primary pull-right" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
                             </form>
-                        </div> 
+                        </div>
+                        
                     </div>
                     <!-- order button -->
                    
