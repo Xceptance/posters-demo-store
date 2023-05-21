@@ -34,8 +34,8 @@
 						<!-- Size -->
 						<div class="size-wrap">
 								<span class="col-xs-12 font-bold">${i18n("cartSelectSize")}</span>
-								<div class="col-xs-12 col-sm-4">
-									<select id="selectSize" class="form-control" name="selectSize" style="padding: 3px" title="${i18n('cartSelectSize')}" style="padding-left: 0px;"onchange="updatePrice(this, ${productDetail.id});">
+								<div class="">
+									<select id="selectSize" class="" name="selectSize" style="padding: 3px" title="${i18n('cartSelectSize')}" style="padding-left: 0px;"onchange="updatePrice(this, ${productDetail.id});">
 										<#list productDetail.availableSizes as size>
 										<option title="${size.size.width} x ${size.size.height} ${unitLength}">${size.size.width} x ${size.size.height} ${unitLength}</option>
 										</#list>
@@ -59,7 +59,7 @@
 							</div>
 							<div class="col-xs-12">
 								<p class="addtocart">
-									<a onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())" style="background-color: #cb1b1b; border-color: #cb1b1b;" class="btn btn-primary btn-addtocart">
+									<a onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())" style="" class="btn btn-primary btn-addtocart">
 										<i class="icon-shopping-cart"></i> ${i18n("productDetailAddToCart")}
 									</a>
 								</p>
