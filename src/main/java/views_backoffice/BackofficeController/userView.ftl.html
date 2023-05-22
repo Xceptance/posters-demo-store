@@ -10,5 +10,8 @@
                         <li><span>User Email: ${user.email}</span></li>
                         <li><span>Password: ${user.password}</span></li>
                     </ul>
-
-<#include "../layout/footer.ftl.html">
+                    <a class="btn btn-sm btn-primary" href="/posters/backoffice/user/${user.id}/edit">Edit</a>
+                    <a class="btn btn-sm btn-warning" href="/posters/backoffice/user">Back</a>
+                    <form action="/posters/backoffice/user/${user.id}/delete" method="post">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <#include "../layout/footer.ftl.html">
