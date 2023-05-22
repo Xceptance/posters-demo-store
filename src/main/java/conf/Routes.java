@@ -180,6 +180,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/posters/backoffice/customer").with(BackofficeController.class, "customerList");
         router.GET().route("/posters/backoffice/customer/{customerId}").with(BackofficeController.class, "customerView");
+        router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController.class, "customerEdit");
+        router.POST().route("/posters/backoffice/customer/{customerId}").with(BackofficeController.class, "customerEditComplete");
 
         // ############################################################
         // Catalog
