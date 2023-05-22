@@ -236,7 +236,7 @@ public class BackofficeController
     }
 
     /**
-     * Returns the view of a order.
+     * Returns the view of an order.
      * 
      * @param context
      * @return
@@ -313,6 +313,31 @@ public class BackofficeController
     public Result productList(final Context context)
     {
         Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+
+    /**
+     * Returns the view of a customer.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result customerView(final Context context, @PathParam("customerId") String customerId)
+    {
+
+        Result result = Results.html();
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
 
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
