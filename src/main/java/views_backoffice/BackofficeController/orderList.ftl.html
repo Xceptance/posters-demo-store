@@ -1,36 +1,45 @@
 <#include "../layout/upper.ftl.html">
     <div class="bg-light text-center rounded p-4 pt-4 mt-4 mb-4">
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Order Table</h6>
+            <h1 class="mb-4">Order Table</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Customer</th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Shipping Address</th>
                         <th scope="col">Billing Address</th>
                         <th scope="col">Shipping Costs</th>
                         <th scope="col">Sub Total Costs</th>
                         <th scope="col">Total Tax Costs</th>
-                        <th scope="col">Tax</th>
                         <th scope="col">Total Cost</th>
                         <th scope="col">Credit Card Number</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <#list orders as order>
                         <tr>
-                            <th scope="row">1</th>
+                            <td>
+                                <#if order.customer??>
+                                    ${order.customer.firstName} ${order.customer.name}
+                                    <#else>
+                                        Guest
+                                </#if>
+                            </td>
                             <td>${order.orderDate}</td>
                             <td>${order.shippingAddress.addressLine} ${order.shippingAddress.zip},
                                 ${order.shippingAddress.state} ${order.shippingAddress.city}</td>
-                            <td>${order.billingAddress}</td>
+                            <td>${order.billingAddress.addressLine} ${order.billingAddress.zip},
+                                ${order.billingAddress.state} ${order.billingAddress.city}
+                            </td>
                             <td>$${order.shippingCosts}</td>
                             <td>$${order.subTotalCosts}</td>
                             <td>$${order.totalTaxCosts}</td>
-                            <td>$${order.tax}</td>
                             <td>$${order.totalCosts}</td>
                             <td>${order.creditCard.cardNumber}</td>
+                            <td><a class="btn btn-sm btn-primary"
+                                    href="/posters/backoffice/order/${order.id}">Details</a></td>
                         </tr>
                     </#list>
                 </tbody>
