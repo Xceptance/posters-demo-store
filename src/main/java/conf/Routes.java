@@ -173,6 +173,7 @@ public class Routes implements ApplicationRoutes
         // orders
         // ############################################################
         router.GET().route("/posters/backoffice/order").with(BackofficeController.class, "orderList");
+        router.GET().route("/posters/backoffice/order/{orderId}").with(BackofficeController.class, "orderView");
 
         // ############################################################
         // customers

@@ -241,6 +241,31 @@ public class BackofficeController
     }
 
     /**
+     * Returns the view of a order.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result orderView(final Context context, @PathParam("orderId") String orderId)
+    {
+
+        Result result = Results.html();
+
+        // Find order with the id from the params
+        Order order = Ebean.find(Order.class, orderId);
+        // Render order into template
+        result.render("order", order);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+
+    /**
      * List out all of the orders.
      * 
      * @param context
