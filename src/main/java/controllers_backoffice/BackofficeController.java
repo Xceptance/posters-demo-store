@@ -45,11 +45,6 @@ public class BackofficeController
     {
         Result result = Results.html();
 
-        // Find all of the customers
-        List<Customer> customers = Ebean.find(Customer.class).findList();
-        // Add orders into the back office
-        result.render("customers", customers);
-
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
         // Add current user into the back office
@@ -342,6 +337,11 @@ public class BackofficeController
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
+
+        // Find all of the customers
+        List<Customer> customers = Ebean.find(Customer.class).findList();
+        // Add orders into the back office
+        result.render("customers", customers);
 
         return result;
     }
