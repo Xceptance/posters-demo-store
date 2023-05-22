@@ -7441,9 +7441,15 @@ h1, h2, h3, h4, h5,
     .colorlib-nav .menu-1 {
       display: none; } }
 
+.prodName {
+  display: block;
+       padding-top: 10px;
+       font-size: 16px;
+
+}
 .colorlib-nav ul {
   padding: 0;
-  margin: 20px 0 0 -12px; }
+  margin: 20px 0 0 -8px; }
   .colorlib-nav ul li {
     padding: 0;
     margin: 0;
