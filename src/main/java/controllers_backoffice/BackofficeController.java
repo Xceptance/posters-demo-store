@@ -12,6 +12,7 @@ import filters.SessionUserExistFilter;
 import models.Order;
 import models.Customer;
 import models_backoffice.User;
+import models.Product;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -319,6 +320,11 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
+        // Find all of the products
+        List<Product> products = Ebean.find(Product.class).findList();
+        // Add products into the back office
+        result.render("products", products);
+
         return result;
     }
 
@@ -439,7 +445,7 @@ public class BackofficeController
 
         // Find all of the customers
         List<Customer> customers = Ebean.find(Customer.class).findList();
-        // Add orders into the back office
+        // Add customers into the back office
         result.render("customers", customers);
 
         return result;
