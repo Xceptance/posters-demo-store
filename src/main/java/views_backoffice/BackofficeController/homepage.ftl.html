@@ -1,148 +1,145 @@
-<#include "../layout/header.ftl.html">
-    <#include "../layout/sidebar.ftl.html">
-        <div class="content">
-            <#include "../layout/navbar.ftl.html">
-                <div class="container-fluid pt-4 px-4">
-                    <div class="bg-light text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Recent Sales</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Invoice</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input class="form-check-input" type="checkbox"></td>
-                                        <td>01 Jan 2045</td>
-                                        <td>INV-0123</td>
-                                        <td>${currentUser.firstName} ${currentUser.name}</td>
-                                        <td>$123</td>
-                                        <td>Paid</td>
-                                        <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-check-input" type="checkbox"></td>
-                                        <td>01 Jan 2045</td>
-                                        <td>INV-0123</td>
-                                        <td>${currentUser.firstName} ${currentUser.name}</td>
-                                        <td>$123</td>
-                                        <td>Paid</td>
-                                        <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-check-input" type="checkbox"></td>
-                                        <td>01 Jan 2045</td>
-                                        <td>INV-0123</td>
-                                        <td>${currentUser.firstName} ${currentUser.name}</td>
-                                        <td>$123</td>
-                                        <td>Paid</td>
-                                        <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-check-input" type="checkbox"></td>
-                                        <td>01 Jan 2045</td>
-                                        <td>INV-0123</td>
-                                        <td>${currentUser.firstName} ${currentUser.name}</td>
-                                        <td>$123</td>
-                                        <td>Paid</td>
-                                        <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-check-input" type="checkbox"></td>
-                                        <td>01 Jan 2045</td>
-                                        <td>INV-0123</td>
-                                        <td>${currentUser.firstName} ${currentUser.name}</td>
-                                        <td>$123</td>
-                                        <td>Paid</td>
-                                        <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Order Table Start-->
-                    <div class="bg-light text-center rounded p-4 pt-4 mt-4 mb-4">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Order Table</h6>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Order Date</th>
-                                        <th scope="col">Shipping Address</th>
-                                        <th scope="col">Billing Address</th>
-                                        <th scope="col">Shipping Costs</th>
-                                        <th scope="col">Sub Total Costs</th>
-                                        <th scope="col">Total Tax Costs</th>
-                                        <th scope="col">Tax</th>
-                                        <th scope="col">Total Cost</th>
-                                        <th scope="col">Credit Card Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <#list orders as order>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>${order.orderDate}</td>
-                                            <td>${order.shippingAddress.addressLine} ${order.shippingAddress.zip},
-                                                ${order.shippingAddress.state} ${order.shippingAddress.city}</td>
-                                            <td>${order.billingAddress}</td>
-                                            <td>$${order.shippingCosts}</td>
-                                            <td>$${order.subTotalCosts}</td>
-                                            <td>$${order.totalTaxCosts}</td>
-                                            <td>$${order.tax}</td>
-                                            <td>$${order.totalCosts}</td>
-                                            <td>${order.creditCard.cardNumber}</td>
-                                        </tr>
-                                    </#list>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Order Table End -->
-                    <!-- Customer Table-->
-                    <div class="container-fluid pt-4 px-4">
-                        <div class="bg-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Customer Table</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                    <thead>
-                                        <tr class="text-dark">
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <#list customers as customer>
-                                                <td>${customer.firstName}</td>
-                                                <td>${customer.name}</td>
-                                                <td>${customer.email}</td>
-                                                <td>Active</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Edit</a> <a
-                                                        class="btn btn-sm btn-danger" href="">Delete</a></td>
-                                            </#list>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- Customer table end-->
-                            <#include "../layout/footer.ftl.html">
+<#include "../layout/upper.ftl.html">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Recent Sales</h6>
+                <a href="">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Invoice</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>01 Jan 2045</td>
+                            <td>INV-0123</td>
+                            <td>${currentUser.firstName} ${currentUser.name}</td>
+                            <td>$123</td>
+                            <td>Paid</td>
+                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                        </tr>
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>01 Jan 2045</td>
+                            <td>INV-0123</td>
+                            <td>${currentUser.firstName} ${currentUser.name}</td>
+                            <td>$123</td>
+                            <td>Paid</td>
+                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                        </tr>
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>01 Jan 2045</td>
+                            <td>INV-0123</td>
+                            <td>${currentUser.firstName} ${currentUser.name}</td>
+                            <td>$123</td>
+                            <td>Paid</td>
+                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                        </tr>
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>01 Jan 2045</td>
+                            <td>INV-0123</td>
+                            <td>${currentUser.firstName} ${currentUser.name}</td>
+                            <td>$123</td>
+                            <td>Paid</td>
+                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                        </tr>
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>01 Jan 2045</td>
+                            <td>INV-0123</td>
+                            <td>${currentUser.firstName} ${currentUser.name}</td>
+                            <td>$123</td>
+                            <td>Paid</td>
+                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Order Table Start-->
+        <div class="bg-light text-center rounded p-4 pt-4 mt-4 mb-4">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Order Table</h6>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Shipping Address</th>
+                            <th scope="col">Billing Address</th>
+                            <th scope="col">Shipping Costs</th>
+                            <th scope="col">Sub Total Costs</th>
+                            <th scope="col">Total Tax Costs</th>
+                            <th scope="col">Tax</th>
+                            <th scope="col">Total Cost</th>
+                            <th scope="col">Credit Card Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#list orders as order>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>${order.orderDate}</td>
+                                <td>${order.shippingAddress.addressLine} ${order.shippingAddress.zip},
+                                    ${order.shippingAddress.state} ${order.shippingAddress.city}</td>
+                                <td>${order.billingAddress}</td>
+                                <td>$${order.shippingCosts}</td>
+                                <td>$${order.subTotalCosts}</td>
+                                <td>$${order.totalTaxCosts}</td>
+                                <td>$${order.tax}</td>
+                                <td>$${order.totalCosts}</td>
+                                <td>${order.creditCard.cardNumber}</td>
+                            </tr>
+                        </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Order Table End -->
+        <!-- Customer Table-->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Customer Table</h6>
+                    <a href="">Show All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <#list customers as customer>
+                                    <td>${customer.firstName}</td>
+                                    <td>${customer.name}</td>
+                                    <td>${customer.email}</td>
+                                    <td>Active</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Edit</a> <a
+                                            class="btn btn-sm btn-danger" href="">Delete</a></td>
+                                </#list>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Customer table end-->
+            <#include "../layout/footer.ftl.html">
