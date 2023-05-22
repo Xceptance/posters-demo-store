@@ -281,3 +281,14 @@
     z-index: 9998!important;
     position:relative;
 }
+
+/*** viewing list in the back office ***/
+.viewing-list {
+    list-style: none;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.viewing-list li {
+    margin-top: 10px;
+}

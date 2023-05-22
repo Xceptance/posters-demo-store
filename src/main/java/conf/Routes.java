@@ -192,6 +192,7 @@ public class Routes implements ApplicationRoutes
         // Products
         // ############################################################
         router.GET().route("/posters/backoffice/product").with(BackofficeController.class, "productList");
+        router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productView");
 
         // ############################################################
         // Preferences
