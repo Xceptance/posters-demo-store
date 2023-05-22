@@ -20,9 +20,9 @@
                     Available Sizes:
                     <ul>
                         <#list product.availableSizes as availableSize>
-                        <li>
-                            ${availableSize.size.width} x ${availableSize.size.height}
-                        </li>
+                            <li>
+                                ${availableSize.size.width} x ${availableSize.size.height}
+                            </li>
                         </#list>
                     </ul>
                 </li>
@@ -33,4 +33,5 @@
             <a class="btn btn-sm btn-primary" href="/posters/backoffice/product">Back</a>
             <a class="btn btn-sm btn-warning" href="/posters/backoffice/product/${product.id}/edit">Edit</a>
         </div>
-        <#include "../layout/footer.ftl.html">
+    </div>
+    <#include "../layout/footer.ftl.html">
