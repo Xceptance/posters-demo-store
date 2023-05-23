@@ -1,0 +1,67 @@
+<#include "../layout/upper.ftl.html">
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Edit product ${product.name}: </h6>
+            <form action="${contextPath}/posters/backoffice/product/${product.id}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                        value="${product.name}">
+                </div>
+                <div class="mb-3">
+                    <label for="imageURL" class="form-label">imageURL</label>
+                    <input type="text" class="form-control" id="imageURL" name="imageURL" value="${product.imageURL}">
+                </div>
+                <div class="mb-3">
+                    <label for="minimumPrice" class="form-label">Minimum Price</label>
+                    <input type="text" class="form-control" id="minimumPrice" name="minimumPrice"
+                        value="${product.minimumPrice}">
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionOverview" class="form-label">Description Overview</label>
+                    <input type="text" class="form-control" id="descriptionOverview" name="descriptionOverview"
+                        value="${product.descriptionOverview}">
+                </div>
+                <div class="mb-3">
+                    <label for="width1" class="form-label">Size 1</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="width1" aria-label="width1" id="width1"
+                            name="width[]">
+                        <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" placeholder="height1" aria-label="height1"
+                            name="height[]">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="width2" class="form-label">Size 2</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="width2" aria-label="width2" id="width2"
+                            name="width[]">
+                        <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" placeholder="height2" aria-label="height2"
+                            name="height[]">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="width3" class="form-label">Size 3</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="width3" aria-label="width3" id="width3"
+                            name="width[]">
+                        <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" placeholder="height3" aria-label="height3"
+                            name="height[]">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descriptionDetail">Detailed Description</label>
+                    <textarea class="form-control" placeholder="Leave a detailed description here"
+                        id="descriptionDetail" style="height: 150px;"
+                        name="descriptionDetail">${product.descriptionDetail}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">
