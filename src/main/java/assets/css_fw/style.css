@@ -7441,6 +7441,11 @@ h1, h2, h3, h4, h5,
     .colorlib-nav .menu-1 {
       display: none; } }
 
+.liBread{
+ display:inline;
+}
+
+
 .prodName {
   display: block;
        padding-top: 10px;
