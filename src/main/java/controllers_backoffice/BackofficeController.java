@@ -13,6 +13,8 @@ import models.Order;
 import models.Customer;
 import models_backoffice.User;
 import models.Product;
+import models.SubCategory;
+import models.TopCategory;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -346,12 +348,74 @@ public class BackofficeController
         // Render product into template
         result.render("product", product);
 
+        // Find subCategories with the id from the params
+        List<SubCategory> subCategories = Ebean.find(SubCategory.class).findList();
+        // Render subCategories into template
+        result.render("subCategories", subCategories);
+
+        // Find topCategories with the id from the params
+        List<TopCategory> topCategories = Ebean.find(TopCategory.class).findList();
+        // Render topCategories into template
+        result.render("topCategories", topCategories);
+
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
         return result;
+    }
+
+    /**
+     * Persist the updated product into the database.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result productEditComplete(final Context context, @PathParam("productId") String productId, @Param("name") final String name,
+                                      @Param("imageURL") final String imageURL, @Param("minimumPrice") final double minimumPrice, 
+                                      @Param("descriptionDetail") final String descriptionDetail,
+                                      @Param("descriptionOverview") final String descriptionOverview,
+                                      @Param("subCategory") final String subCategoryName,
+                                      @Param("topCategory") final String topCategoryName,
+                                      @Param("width1") final int width1, @Param("height1") final int height1,
+                                      @Param("width2") final int width2, @Param("height2") final int height2,
+                                      @Param("width3") final int width3, @Param("height3") final int height3)
+    {
+
+        Result result = Results.html();
+
+        // Find product with the id from the params
+        Product product = Ebean.find(Product.class, productId);
+        // Render product into template
+        result.render("product", product);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        // Find subcategory with the subcategory name from the params
+        SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name" , subCategoryName).findUnique();
+
+        // Find subcategory with the subcategory name from the params
+        TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("name" , topCategoryName).findUnique();
+
+        // all input fields might be correct
+
+        product.setName(name);
+        product.setImageURL(imageURL);
+        product.setMinimumPrice(minimumPrice);
+        product.setDescriptionDetail(descriptionDetail);
+        product.setDescriptionOverview(descriptionOverview);
+        product.setSubCategory(subCategory);
+        product.setTopCategory(topCategory);
+        // save product
+        product.save();
+        // show page to log-in
+        return Results.redirect(context.getContextPath() + "/posters/backoffice/product/" + productId);
+
     }
 
     /**
@@ -436,8 +500,8 @@ public class BackofficeController
      */
     @FilterWith(SessionUserExistFilter.class)
     public Result customerEditComplete(final Context context, @PathParam("customerId") String customerId, @Param("name") final String name,
-                                   @Param("firstName") final String firstName, @Param("email") final String email,
-                                   @Param("password") final String password)
+                                       @Param("firstName") final String firstName, @Param("email") final String email,
+                                       @Param("password") final String password)
     {
 
         Result result = Results.html();

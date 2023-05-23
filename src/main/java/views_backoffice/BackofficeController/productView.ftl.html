@@ -5,29 +5,38 @@
             <img src="${product.imageURL}" alt="image of the current viewed product">
             <ul class="viewing-list">
                 <li>
-                    Name: ${product.name}
+                    <h4>Name:</h4> <span>${product.name}</span>
                 </li>
                 <li>
-                    Detailed Description: ${product.descriptionDetail}
+                    <h4>Detailed Description:</h4> <p>${product.descriptionDetail}</p>
                 </li>
                 <li>
-                    Short Description: ${product.descriptionOverview}
+                    <h4>Short Description:</h4> <span>${product.descriptionOverview}</span>
                 </li>
                 <li>
-                    Image URL: ${product.imageURL}
+                    <h4>Image URL:</h4> <span>${product.imageURL}</span>
                 </li>
                 <li>
-                    Available Sizes:
+                    <h4>Sub Categories:</h4> <span>${product.subCategory.name}</span>
+                </li>
+                <li>
+                    <h3>Top Categories:</h3> <span>${product.topCategory.name}</span>
+                </li>
+                <li>
+
+                </li>
+                <li>
+                    <h4>Available Sizes:</h4>
                     <ul>
                         <#list product.availableSizes as availableSize>
                             <li>
-                                ${availableSize.size.width} x ${availableSize.size.height}
+                                <span>${availableSize.size.width} x ${availableSize.size.height}</span>
                             </li>
                         </#list>
                     </ul>
                 </li>
                 <li>
-                    Minimum Price: $${product.getPriceAsString()}
+                    <h5>Minimum Price:</h5> <span>$${product.getPriceAsString()}</span>
                 </li>
             </ul>
             <a class="btn btn-sm btn-primary" href="/posters/backoffice/product">Back</a>

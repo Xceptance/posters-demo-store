@@ -26,20 +26,20 @@
                     <label for="width1" class="form-label">Size 1</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="width1" aria-label="width1" id="width1"
-                            name="width[]">
+                            name="width1">
                         <span class="input-group-text">@</span>
                         <input type="text" class="form-control" placeholder="height1" aria-label="height1"
-                            name="height[]">
+                            name="height1">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="width2" class="form-label">Size 2</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="width2" aria-label="width2" id="width2"
-                            name="width[]">
+                            name="width2">
                         <span class="input-group-text">@</span>
                         <input type="text" class="form-control" placeholder="height2" aria-label="height2"
-                            name="height[]">
+                            name="height2">
                     </div>
                 </div>
 
@@ -47,11 +47,31 @@
                     <label for="width3" class="form-label">Size 3</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="width3" aria-label="width3" id="width3"
-                            name="width[]">
+                            name="width3">
                         <span class="input-group-text">@</span>
                         <input type="text" class="form-control" placeholder="height3" aria-label="height3"
-                            name="height[]">
+                            name="height3">
                     </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="subcategories"
+                        aria-label="Floating label select subcategories" name="subCategory">
+                        <#list subCategories as subCategory>
+                        <option value="${subCategory.name}">${subCategory.name}</option>
+                        </#list>
+                    </select>
+                    <label for="subcategories">Subcategories</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="topcategories"
+                        aria-label="Floating label select topcategories" name="topCategory">
+                        <#list topCategories as topCategory>
+                        <option value="${topCategory.name}">${topCategory.name}</option>
+                        </#list>
+                    </select>
+                    <label for="topcategories">Topcategories</label>
                 </div>
 
                 <div class="mb-3">
