@@ -305,6 +305,11 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
+        // Find topCategories with the id from the params
+        List<TopCategory> topCategories = Ebean.find(TopCategory.class).findList();
+        // Render topCategories into template
+        result.render("topCategories", topCategories);
+
         return result;
     }
 
