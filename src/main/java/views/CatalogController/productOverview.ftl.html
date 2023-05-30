@@ -84,16 +84,16 @@ var options = {
 			<div class="col-md-12 text-center">
 				<div class="block-27">
 					<ul id="pagination-bottom" class="text-center">
-						<li><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
+						<li class="pgstyle" ><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
 						<#list 1..totalPages as i>
 							<#if i==currentPage>
-								<li class="active"><span>${i}</span></li>
+								<li class="pgstyle active"><span>${i}</span></li>
 							<#else>
-								<li><a href="#" data-page="${i}">${i}</a></li>
+								<li class="pgstyle"><a href="#" data-page="${i}">${i}</a></li>
 							</#if>
 
 					</#list>
-					<li><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
+					<li class="pgstyle" ><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
 				</ul>
 			</div>
 		</div>

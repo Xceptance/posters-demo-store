@@ -52,11 +52,25 @@
 		var clone2 = $('.menu-2 > ul').clone();
 		$('#colorlib-offcanvas').append(clone2);
 
+        //shows the hidden user menu and cart menu in mobile view
+		document.getElementById("hide1").style.display = "";
+		document.getElementById("hide2").style.display = "";
+
+        //Hides the visible user menu and cart menu in mobile view
+		//document.getElementById("hide3").style.display = "none";
+
 		$('#colorlib-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
 		$('#colorlib-offcanvas')
 			.find('li')
 			.removeClass('has-dropdown');
+        // Event listener for the mobile menu dropdown
+          $('.offcanvas-has-dropdown > a').on('click', function(e) {
+            var $this = $(this).parent('.offcanvas-has-dropdown');
+            e.preventDefault();
 
+            $this.toggleClass('');
+            $this.children('ul').stop().slideToggle(100, 'easeOutExpo');
+          });
 		// Hover dropdown menu on mobile
 		$('.offcanvas-has-dropdown').mouseenter(function(){
 			var $this = $(this);
@@ -64,14 +78,14 @@
 			$this
 				.addClass('active')
 				.find('ul')
-				.slideDown(500, 'easeOutExpo');				
+				.slideDown(500, 'easeOutExpo').stop();
 		}).mouseleave(function(){
 
 			var $this = $(this);
 			$this
 				.removeClass('active')
 				.find('ul')
-				.slideUp(500, 'easeOutExpo');				
+				.slideUp(500, 'easeOutExpo');
 		});
 
 
@@ -81,29 +95,28 @@
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-				
+
 	    	}
 		});
 	};
 
 
 	var burgerMenu = function() {
+      $('body').on('click', '.js-colorlib-nav-toggle', function(event) {
+        var $this = $(this);
 
-		$('body').on('click', '.js-colorlib-nav-toggle', function(event){
-			var $this = $(this);
+        if ($('body').hasClass('offcanvas')) {
+          $('body').removeClass('offcanvas');
+          $('.js-colorlib-nav-toggle').removeClass('active');
+        } else {
+          $('body').addClass('offcanvas');
+          $('.js-colorlib-nav-toggle').addClass('active');
+        }
 
+        event.preventDefault();
+      });
+    };
 
-			if ( $('body').hasClass('overflow offcanvas') ) {
-				$('body').removeClass('overflow offcanvas');
-			} else {
-				$('body').addClass('overflow offcanvas');
-			}
-			$this.toggleClass('active');
-			event.preventDefault();
-
-		});
-	};
-	
 
 	var contentWayPoint = function() {
 		var i = 0;
