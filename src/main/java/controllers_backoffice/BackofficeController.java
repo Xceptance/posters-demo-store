@@ -9,9 +9,10 @@ import com.google.inject.Inject;
 
 import conf.PosterConstants;
 import filters.SessionUserExistFilter;
+import models_backoffice.User;
+import models_backoffice.Statistic;
 import models.Order;
 import models.Customer;
-import models_backoffice.User;
 import models.Product;
 import models.SubCategory;
 import models.TopCategory;
@@ -674,5 +675,34 @@ public class BackofficeController
         result.render("currentUser", currentUser);
 
         return result;
+    }
+
+    /**
+     * Helps with providing the JSON data for the statistics within the javascript file. It is used in the statistics page.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result statisticsJSON(final Context context)
+    {
+        Statistic statistic = new Statistic();
+
+        // Find the admin user amount
+        Integer adminUserAmount = Ebean.find(User.class).findList().size();
+        statistic.setAdminUserAmount(adminUserAmount);
+        // Find customer amount
+        Integer customerAmount = Ebean.find(Customer.class).findList().size();
+        statistic.setCustomerAmount(customerAmount);
+        // Find order amount
+        Integer orderAmount = Ebean.find(Order.class).findList().size();
+        statistic.setOrderAmount(orderAmount);
+        // Find sub category amount
+        Integer subCategoryAmount = Ebean.find(SubCategory.class).findList().size();
+        statistic.setSubCategoryAmount(subCategoryAmount);
+        // Find top category amount
+        Integer topCategoryAmount = Ebean.find(TopCategory.class).findList().size();
+        statistic.setTopCategoryAmount(topCategoryAmount);
+        return Results.json().render(statistic);
     }
 }

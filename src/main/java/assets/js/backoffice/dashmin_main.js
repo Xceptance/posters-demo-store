@@ -1,5 +1,50 @@
 (function ($) {
     "use strict";
+    // ############################################################
+    // Getting statistics from the posters backoffice
+    // ############################################################
+    async function getJSONStatistic() {
+        const response = await fetch('http://localhost:8080/posters/backoffice/JSON', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+
+        const json = await response.json();
+        return json;
+    }
+    getJSONStatistic().then(function (json) {
+        console.log(json);
+    });
+
+    $(document).ready(async function () {
+        const json = await getJSONStatistic();
+
+        // Single Bar Chart
+        var ctx4 = $("#bar-chart").get(0).getContext("2d");
+        var myChart4 = new Chart(ctx4, {
+            type: "bar",
+            data: {
+                labels: ["Admin Users", "Customers", "Orders", "Sub Categorys", "Top Categorys"],
+                datasets: [{
+                    label: "Amount",
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .5)",
+                        "rgba(0, 156, 255, .4)",
+                        "rgba(0, 156, 255, .3)"
+                    ],
+                    data: [json.adminUserAmount, json.customerAmount, json.orderAmount, json.subCategoryAmount, json.topCategoryAmount]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+    });
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -61,6 +106,7 @@
     // Worldwide Sales Chart
     var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
+
         type: "bar",
         data: {
             labels: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
@@ -133,27 +179,7 @@
     // });
 
 
-    // Single Bar Chart
-    var ctx4 = $("#bar-chart").get(0).getContext("2d");
-    var myChart4 = new Chart(ctx4, {
-        type: "bar",
-        data: {
-            labels: ["Italy", "France", "Spain", "USA", "Argentina"],
-            datasets: [{
-                backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)",
-                    "rgba(0, 156, 255, .5)",
-                    "rgba(0, 156, 255, .4)",
-                    "rgba(0, 156, 255, .3)"
-                ],
-                data: [55, 49, 44, 24, 15]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
+
 
 
     // Pie Chart
@@ -201,18 +227,7 @@
     //     }
     // });
 
-    // ############################################################
-    // Getting statistics from the posters backoffice
-    // ############################################################
 
-    fetch('https://reqbin.com/echo/get/json', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-        },
-    })
-        .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
 
 })(jQuery);
 

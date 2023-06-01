@@ -28,12 +28,12 @@ public class Statistic
     /**
      * Number of top catalog.
      */
-    private Integer topCatalogAmount;
+    private Integer topCategoryAmount;
 
     /**
      * Number of sub catalog.
      */
-    private Integer subCatalogAmount;
+    private Integer subCategoryAmount;
 
     /**
      * Constructor.
@@ -108,44 +108,44 @@ public class Statistic
     }
 
     /**
-     * Returns the number of top catalogs.
+     * Returns the number of top categories.
      * 
-     * @return the number of top catalogs.
+     * @return the number of top categories.
      */
-    public Integer getTopCatalogAmount()
+    public Integer getTopCategoryAmount()
     {
-        return topCatalogAmount;
+        return topCategoryAmount;
     }
 
     /**
-     * Sets the number of top catalogs.
+     * Sets the number of top categories.
      * 
-     * @param topCatalogAmount
-     *                  the number of top catalogs.
+     * @param topCategoryAmount
+     *                  the number of top categories.
      */
-    public void setTopCatalogAmount(final Integer topCatalogAmount)
+    public void setTopCategoryAmount(final Integer topCategoryAmount)
     {
-        this.topCatalogAmount = topCatalogAmount;
+        this.topCategoryAmount = topCategoryAmount;
     }
 
     /**
-     * Returns the number of sub catalogs.
+     * Returns the number of sub categories.
      * 
-     * @return the number of sub catalogs.
+     * @return the number of sub categories.
      */
-    public Integer getSubCatalogAmount()
+    public Integer getSubCategoryAmount()
     {
-        return subCatalogAmount;
+        return subCategoryAmount;
     }
 
     /**
-     * Sets the number of sub catalogs.
+     * Sets the number of sub categories.
      * 
-     * @param subCatalogAmount
-     *                  the number of sub catalogs.
+     * @param subCategoryAmount
+     *                  the number of sub categories.
      */
-    public void setSubCatalogAmount(final Integer subCatalogAmount)
+    public void setSubCategoryAmount(final Integer subCategoryAmount)
     {
-        this.subCatalogAmount = subCatalogAmount;
+        this.subCategoryAmount = subCategoryAmount;
     }
 }

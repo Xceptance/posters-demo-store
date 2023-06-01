@@ -206,6 +206,12 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/posters/backoffice/data-management").with(BackofficeController.class, "dataManagement");
 
+
+        // ############################################################
+        // Statistics JSON provider
+        // ############################################################
+        router.GET().route("/posters/backoffice/JSON").with(BackofficeController.class, "statisticsJSON");
+
         // ############################################################
         // Page Not Found
         // ############################################################
