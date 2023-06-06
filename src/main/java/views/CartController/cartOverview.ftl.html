@@ -174,30 +174,25 @@
 		<!-- Delete Product Modal -->
 
 		<div id="deleteProductModal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<h4 class="modal-title">Remove Product Confirmation</h4>
-
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-
-					<div class="modal-body">
-					</div>
-
-					<div class="modal-footer">
-						<div>
-							<button id="buttonClose" type="button" class="btn btn-default" data-dismiss="modal"
-								title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
-							<button id="buttonDelete" name="buttonDelete" class="btn btn-danger pull-right"
-								data-dismiss="modal" title="${i18n('buttonDelete')}">${i18n('buttonDelete')}</button>
-						</div>
-					</div>
-
+			<div class="modal-dialog modal-sm">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h4 class="modal-title">Remove Product Confirmation</h4>
+				  <button type="button" class="close" data-dismiss="modal">×</button>
 				</div>
+				
+				<div class="modal-body"></div>
+				
+				<div class="modal-footer">
+				  <div class="d-flex justify-content-start flex-wrap">
+					<button id="buttonClose" type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
+					<button id="buttonDelete" name="buttonDelete" class="btn btn-danger mt-2 mt-md-0" data-dismiss="modal" title="Delete">Delete</button>
+				  </div>
+				</div>
+			  </div>
 			</div>
-		</div>
+		  </div>
+		  
 	</div>
 
 	<div class="gototop js-top">

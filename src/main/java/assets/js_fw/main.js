@@ -301,6 +301,7 @@
     }
     //If true, modifies the process chain for the mobile view.
     if (deviceCheck()) {
+	  $('#deleteProductModal .modal-content').css('width', '50%');
 
       var processAfterStyle = document.createElement('style');
         processAfterStyle.innerHTML = ".process:after { height: 0px; }";
@@ -315,6 +316,7 @@
     }
 
 	$(function(){
+
         deviceCheck();
 		mobileMenuOutsideClick();
 		offcanvasMenu();
