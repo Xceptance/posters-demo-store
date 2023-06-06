@@ -8072,7 +8072,7 @@ h1, h2, h3, h4, h5,
        }
  a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
     cursor: pointer;
-    color: white;
+    color: #c91b1b;
 }
 .block-27 ul li.active a, .block-27 ul li.active span{
 background: #c91b1b;
@@ -8778,6 +8778,10 @@ input[type="text"] {
     box-shadow: none !important;
     outline: none !important; }
   .btn.btn-account, .btn-group-lg > .btn {
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     background-color: #c91b1b;
     border: none;
     width: 31%;
