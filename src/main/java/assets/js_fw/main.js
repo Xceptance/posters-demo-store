@@ -33,10 +33,10 @@
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-				
+
 	    	}
-	    
-	    	
+
+
 	    }
 		});
 
@@ -46,15 +46,21 @@
 	var offcanvasMenu = function() {
 
 		$('#page').prepend('<div id="colorlib-offcanvas" />');
-		$('#page').prepend('<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>');
+		//removes dual burger menu from Cart Overview
+		//$('#page').prepend('<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>');
+		
+		//clone menu for mobile view
 		var clone1 = $('.menu-1 > ul').clone();
 		$('#colorlib-offcanvas').append(clone1);
 		var clone2 = $('.menu-2 > ul').clone();
 		$('#colorlib-offcanvas').append(clone2);
 
+
+
         //shows the hidden user menu and cart menu in mobile view
-		document.getElementById("hide1").style.display = "";
-		document.getElementById("hide2").style.display = "";
+		//$('#hide1.offcanvas-has-dropdown').style.display = "";
+		document.getElementById("hide1").style.display = "block";
+		document.getElementById("hide2").style.display = "block";
 
         //Hides the visible user menu and cart menu in mobile view
 		//document.getElementById("hide3").style.display = "none";
@@ -66,6 +72,7 @@
         // Event listener for the mobile menu dropdown
           $('.offcanvas-has-dropdown > a').on('click', function(e) {
             var $this = $(this).parent('.offcanvas-has-dropdown');
+
             e.preventDefault();
 
             $this.toggleClass('');
@@ -113,7 +120,8 @@
           $('.js-colorlib-nav-toggle').addClass('active');
         }
 
-        event.preventDefault();
+        // Remove the element with the id 'btnCartOverviewForm'
+        $('#btnCartOverviewForm').remove();
       });
     };
 
@@ -296,10 +304,27 @@
 		});
 	};
 
+   // checks if the type of device is a mobile device
+   var deviceCheck = function() {
+      return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    }
+    //If true, modifies the process chain for the mobile view.
+    if (deviceCheck()) {
+
+      var processAfterStyle = document.createElement('style');
+        processAfterStyle.innerHTML = ".process:after { height: 0px; }";
+        document.head.appendChild(processAfterStyle);
+      var processElements = document.getElementsByClassName("process");
+      for (var i = 0; i < processElements.length; i++) {
+        processElements[i].style.width = "33.333%";
+      }
 
 
-	
+    } else {
+    }
+
 	$(function(){
+        deviceCheck();
 		mobileMenuOutsideClick();
 		offcanvasMenu();
 		burgerMenu();
@@ -311,7 +336,7 @@
 		owlCrouselFeatureSlide();
 		parallax();
 		datePicker();
-	});
 
+	});
 
 }());

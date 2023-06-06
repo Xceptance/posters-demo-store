@@ -161,7 +161,7 @@ a {
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
-  color: white;
+  color: #000;
   text-decoration: none; }
   a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
     color: white;
@@ -7296,7 +7296,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 /* =======================================================
 *
-* 	Template Style 
+* 	Template Style
 *
 * ======================================================= */
 body {
@@ -7571,7 +7571,7 @@ h1, h2, h3, h4, h5,
 
 #colorlib-hero {
   height: 600px;
-  background: #fff url(../images/loader.gif) no-repeat center center;
+  background: #fff url(../images_fw/loader.gif) no-repeat center center;
   width: 100%;
   float: left;
   z-index: 0; }
@@ -8020,6 +8020,8 @@ h1, h2, h3, h4, h5,
   width: 100%;
   display: block;
   float: left; }
+
+
 
 .process {
   position: relative;
@@ -8800,7 +8802,7 @@ input[type="text"] {
     color: #000 !important;
     border: 1px solid #616161 !important; }
     .btn-primary.btn-outline-primary:hover, .btn-primary.btn-outline-primary:focus, .btn-primary.btn-outline-primary:active {
-      background: #000 !important;
+      background: #c91b1b !important;
       color: #fff !important; }
 
 .btn-primary-shop {
@@ -8924,7 +8926,7 @@ input[type="text"] {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: url(../images/loader.gif) center no-repeat #fff; }
+  background: url(../images_fw/loader.gif) center no-repeat #fff; }
 
 .js .animate-box {
   opacity: 0; }
