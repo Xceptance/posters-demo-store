@@ -69,15 +69,9 @@
 		$('#colorlib-offcanvas')
 			.find('li')
 			.removeClass('has-dropdown');
-        // Event listener for the mobile menu dropdown
-          $('.offcanvas-has-dropdown > a').on('click', function(e) {
-            var $this = $(this).parent('.offcanvas-has-dropdown');
+		$(".offcanvas-has-dropdown > a").removeAttr("href");
 
-            e.preventDefault();
-
-            $this.toggleClass('');
-            $this.children('ul').stop().slideToggle(100, 'easeOutExpo');
-          });
+    
 		// Hover dropdown menu on mobile
 		$('.offcanvas-has-dropdown').mouseenter(function(){
 			var $this = $(this);
@@ -85,7 +79,7 @@
 			$this
 				.addClass('active')
 				.find('ul')
-				.slideDown(500, 'easeOutExpo').stop();
+				.slideDown(500, 'easeOutExpo');
 		}).mouseleave(function(){
 
 			var $this = $(this);
