@@ -214,27 +214,37 @@
 
 
 	var sliderMain = function() {
-		
-	  	$('#colorlib-hero .flexslider').flexslider({
-			animation: "fade",
-			slideshowSpeed: 5000,
-			directionNav: true,
-			start: function(){
-				setTimeout(function(){
-					$('.slider-text').removeClass('animated fadeInUp');
-					$('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
-				}, 500);
-			},
-			before: function(){
-				setTimeout(function(){
-					$('.slider-text').removeClass('animated fadeInUp');
-					$('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
-				}, 500);
-			}
+      // Initialize the hero slider
+      $('#colorlib-hero .flexslider').flexslider({
+        animation: "fade",
+        slideshowSpeed: 3000,
+        directionNav: true,
+        controlNav: true,
+        start: function() {
+          setTimeout(function() {
+            $('.slider-text').removeClass('animated fadeInUp');
+            $('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
+          }, 500);
+        },
+        before: function() {
+          setTimeout(function() {
+            $('.slider-text').removeClass('animated fadeInUp');
+            $('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
+          }, 500);
+        }
+      });
 
-	  	});
+      // Initialize the intro slider
+      $('.colorlib-intro .flexslider').flexslider({
+        animation: "slide",
+        slideshow: true,
+        slideshowSpeed: 6000,
+        directionNav: false,
+        controlNav: false,
 
-	};
+      });
+    };
+
 
 	// Owl Carousel
 	var owlCrouselFeatureSlide = function() {
