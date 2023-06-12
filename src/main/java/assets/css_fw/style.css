@@ -7158,6 +7158,8 @@ button.bg-dark:focus {
 .text-primary-usercart {
   color: #000000 !important; }
 
+
+
 a.text-primary:hover, a.text-primary:focus {
   color: #0062cc !important; }
 
@@ -7482,8 +7484,7 @@ h1, h2, h3, h4, h5,
       -webkit-transition: all 0.5s ease;
       -ms-transition: all 0.5s ease;
       transition: all 0.5s ease; }
-      .colorlib-nav ul li a:hover {
-        color: #000; }
+
     .colorlib-nav ul li.has-dropdown {
       position: relative; }
       .colorlib-nav ul li.has-dropdown .dropdown {
@@ -7882,10 +7883,27 @@ h1, h2, h3, h4, h5,
       color: #b3b3b3; }
       .product-detail-wrap .product-desc .price .rate i {
         color: #616161; }
-  .product-detail-wrap .product-desc .btn-addtocart i {
+
+        .btn-addtocart {
+            color: #fff;
+            font-size: 20px;
+            padding-right: 10px; }
+
+  a:not([href]):not([tabindex]) i {
     color: #fff;
     font-size: 20px;
     padding-right: 10px; }
+
+.product-detail-wrap .product-desc .btn-addtocart:hover {
+    color: #fff;
+    font-size: 20px;
+    padding-right: 10px;
+
+
+
+    }
+
+
 
 .product-detail-wrap .quantity-left-minus {
   border: 1px solid #e6e6e6;
@@ -8800,7 +8818,12 @@ input[type="text"] {
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background: #a30000 !important;
     border-color: #a10202 !important;
-    color: #fff;}
+    color: #fff;
+    .text-primary-usercart {
+     color: #fff !important;
+    }
+
+    }
   .btn-primary.btn-outline-primary {
     background: transparent;
     color: #000 !important;

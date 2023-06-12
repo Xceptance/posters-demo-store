@@ -237,7 +237,7 @@
       // Initialize the intro slider
       $('.colorlib-intro .flexslider').flexslider({
         animation: "slide",
-        slideshow: true,
+        slideshow: false,
         slideshowSpeed: 6000,
         directionNav: false,
         controlNav: false,
@@ -312,6 +312,8 @@
     //If true, modifies the process chain for the mobile view.
     if (deviceCheck()) {
 	  $('#deleteProductModal .modal-content').css('width', '50%');
+	  $('.btn.btn-account').css('width', '40%');
+
 
       var processAfterStyle = document.createElement('style');
         processAfterStyle.innerHTML = ".process:after { height: 0px; }";
