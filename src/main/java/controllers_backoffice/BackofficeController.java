@@ -23,6 +23,7 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
+import ninja.params.Params;
 import ninja.params.PathParam;
 import util.session.SessionHandling;
 
@@ -365,6 +366,10 @@ public class BackofficeController
         List<TopCategory> topCategories = Ebean.find(TopCategory.class).findList();
         // Render topCategories into template
         result.render("topCategories", topCategories);
+        
+        // Find all available sizes
+        List<PosterSize> availableSizes = Ebean.find(PosterSize.class).findList();
+        result.render("availableSizes", availableSizes); 
 
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
@@ -387,9 +392,7 @@ public class BackofficeController
                                       @Param("descriptionOverview") final String descriptionOverview,
                                       @Param("subCategory") final String subCategoryName,
                                       @Param("topCategory") final String topCategoryName,
-                                      @Param("width1") final int width1, @Param("height1") final int height1,
-                                      @Param("width2") final int width2, @Param("height2") final int height2,
-                                      @Param("width3") final int width3, @Param("height3") final int height3)
+                                      @Params("availableSizes") final Integer[] posterSizesId)
     {
 
         Result result = Results.html();
@@ -410,52 +413,22 @@ public class BackofficeController
         // Find subcategory with the subcategory name from the params
         TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("name" , topCategoryName).findUnique();
 
-        // Set new poster size
-        PosterSize posterSize1 = new PosterSize();
-        PosterSize posterSize2 = new PosterSize();
-        PosterSize posterSize3 = new PosterSize();
-
-        posterSize1.setWidth(width1);
-        posterSize2.setWidth(width2);
-        posterSize3.setWidth(width3);
-
-        posterSize1.setHeight(height1);
-        posterSize2.setHeight(height2);
-        posterSize3.setHeight(height3);
-
-        posterSize1.save();
-        posterSize2.save();
-        posterSize3.save();
-
-        // Set new poster product size
-        ProductPosterSize productPosterSize1 = new ProductPosterSize();
-        ProductPosterSize productPosterSize2 = new ProductPosterSize();
-        ProductPosterSize productPosterSize3 = new ProductPosterSize();
-
-        productPosterSize1.setSize(posterSize1);
-        productPosterSize2.setSize(posterSize2);
-        productPosterSize3.setSize(posterSize3);
-
-        productPosterSize1.setProduct(product);
-        productPosterSize2.setProduct(product);
-        productPosterSize3.setProduct(product);
-
-        // debugging purpose, setting price to 1
-
-        productPosterSize1.setPrice(1.0);
-        productPosterSize2.setPrice(1.0);
-        productPosterSize3.setPrice(1.0);
-
-
-
-        productPosterSize1.save();
-        productPosterSize2.save();
-        productPosterSize3.save();
-
-
+        // Delete all linking element product - poster sizes
+        List<ProductPosterSize> currentAvailableSizes = product.getAvailableSizes();
+        Ebean.delete(currentAvailableSizes);
+        
+        // LINK between product and poster sizes
+        ProductPosterSize currentSize = null;
+        for (int i = 0; i < posterSizesId.length; i++) 
+        {   
+            currentSize = new ProductPosterSize();
+            currentSize.setProduct(product);
+            currentSize.setPrice(minimumPrice);
+            currentSize.setSize(Ebean.find(PosterSize.class, posterSizesId[i]));
+            currentSize.save();
+        }
         // Update product available sizes
-        List<ProductPosterSize> currentAvailableSizes = List.of(productPosterSize1, productPosterSize2, productPosterSize3); 
-        product.setAvailableSizes(currentAvailableSizes);
+        // product.setAvailableSizes(availableSizes);
 
         // all input fields might be correct
 
