@@ -21,20 +21,20 @@
                                 <td>
                                     <ul>
                                         <#list topCategory.subCategories as subCategory>
-                                        <li>
-                                            ${subCategory.name}
-                                        </li>
+                                            <li>
+                                                ${subCategory.name}
+                                            </li>
                                         </#list>
                                     </ul>
                                 </td>
                                 <td>
                                     <ul>
                                         <#list topCategory.subCategories as subCategory>
-                                        <#list subCategory.products as product>
-                                        <li>
-                                            ${product.name}
-                                        </li>
-                                        </#list>
+                                            <#list subCategory.products as product>
+                                                <li>
+                                                    ${product.name}
+                                                </li>
+                                            </#list>
                                         </#list>
                                     </ul>
                                 </td>
@@ -44,4 +44,5 @@
                 </table>
             </div>
         </div>
-        <#include "../layout/footer.ftl.html">
+    </div>
+    <#include "../layout/footer.ftl.html">
