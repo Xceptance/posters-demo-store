@@ -4,7 +4,7 @@
   <!-- bootstrap header menu for mobile -->
 </div>
 
-<nav class="colorlib-nav" role="navigation">
+<nav class="colorlib-nav" role="navigation" id="globalNavigation">
   <div class="top-menu">
     <div class="container">
       <div class="row">
@@ -28,8 +28,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-7 col-md-9 text-left menu-1">
-			<ul>
+        <div id="categoryMenu" class="col-sm-7 col-md-9 text-left menu-1">
+			<ul class="navi">
 				<#list topCategory as tC>
 				  <li class="has-dropdown">
 					<a href="#" class="">${tC.name}</a>

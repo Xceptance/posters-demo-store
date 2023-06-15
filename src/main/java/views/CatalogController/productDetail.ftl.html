@@ -21,7 +21,7 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="product-desc h2fwpr">
-						<h3 title="${productDetail.name}">${productDetail.name}</h3>
+						<h3 id="titleProductName" title="${productDetail.name}">${productDetail.name}</h3>
 						<p class="price">
 							<span id="prodPrice" title="${currency}${productDetail.getPriceAsString()}">${currency}${productDetail.getPriceAsString()}</span> 
 						</p>
@@ -59,7 +59,7 @@
 							</div>
 							<div class="col-xs-12">
 								<p class="addtocart">
-									<a onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())" style="" class="btn btn-primary btn-addtocart">
+									<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, $('#addToCartForm input[name=finish]:checked').val(), $('#selectSize').val())" style="" class="btn btn-primary btn-addtocart">
 										<i class="icon-shopping-cart"></i> ${i18n("productDetailAddToCart")}
 									</a>
 								</p>

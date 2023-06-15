@@ -37,9 +37,9 @@ var options = {
 		</div>
 	</div>	<!-- products -->
 	
-<div class="row">
+<div id="productOverview" class="container">
 	
-	<div class="col-lg-6 col-xl-6 mx-auto">
+	<div id="products">
 		<div class="row row-pb-md">
 
 	<#list products as pro>
@@ -51,7 +51,7 @@ var options = {
 						<img data-src="${contextPath}/assets/js/holder.js/300x200" alt="${pro.name}"
 							title="${pro.name}" src="${contextPath}${pro.imageURL}" class="prod-img">
 						<div class="desc">
-							<h2 class="text-primary h2fwpr">${pro.name}</h2>
+							<h2 class="text-primary h2fwpr pName">${pro.name}</h2>
 							<div class="text-muted h2fwpr">
 								<p>
 									<span
