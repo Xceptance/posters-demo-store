@@ -1,7 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <aside id="colorlib-hero">
-	<div class="flexslider">
+	<div id="titleSlide"class="flexslider">
 		<ul class="slides">
 			<#list carousel as caro>  <#if (caro_index == 0)>
 				<li class="active" style="background-image: url('${contextPath}${caro.imageURL}');" >
@@ -30,11 +30,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 text-center">
-				<h2 class="intro">Began with a simple idea: "SHATATATATA!" - Michael Scott</h2>
+				<h2 class="intro">Began with a simple idea SHATATATATA!" - M. Scott</h2>
 			</div>
 		</div>
 	</div>
 </div>
+
 <div class="colorlib-product">
 	<div class="container-fluid">
 		<div class="row">
@@ -71,7 +72,7 @@
 				<h2>Hot Products</h2>
 			</div>
 		</div>
-		<div class="row row-pb-md">
+		<div id="productList" class="row row-pb-md">
 			<#list productslist as prItem>
 			<div class="col-lg-3 mb-4 text-center">
 				<div class="product-entry border">

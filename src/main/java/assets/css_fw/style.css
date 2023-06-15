@@ -85,6 +85,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   font-family: "Rokkitt", Georgia, serif; }
 
+ .btnfw {
+    background-color: #c91b1b;
+    border-color: #c91b1b; }
+
 p {
   margin-top: 0;
   margin-bottom: 1rem; }
@@ -157,10 +161,10 @@ a {
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
-  color: inherit;
+  color: #000;
   text-decoration: none; }
   a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
-    color: inherit;
+    color: white;
     text-decoration: none; }
   a:not([href]):not([tabindex]):focus {
     outline: 0; }
@@ -2014,6 +2018,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
       -o-transition: none;
       transition: none; } }
   .btn:hover, .btn:focus {
+    background: #a30000;
+    color: #fff;
     text-decoration: none; }
   .btn:focus, .btn.focus {
     outline: 0;
@@ -7149,6 +7155,11 @@ button.bg-dark:focus {
 .text-primary {
   color: #000000 !important; }
 
+.text-primary-usercart {
+  color: #000000 !important; }
+
+
+
 a.text-primary:hover, a.text-primary:focus {
   color: #0062cc !important; }
 
@@ -7287,7 +7298,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 /* =======================================================
 *
-* 	Template Style 
+* 	Template Style
 *
 * ======================================================= */
 body {
@@ -7342,7 +7353,7 @@ a {
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease; }
   a:hover, a:active, a:focus {
-    color: #616161;
+    color: #c91b1b;
     outline: none;
     text-decoration: none; }
 
@@ -7432,9 +7443,26 @@ h1, h2, h3, h4, h5,
     .colorlib-nav .menu-1 {
       display: none; } }
 
+.liBread{
+ display:inline;
+}
+
+
+.prodName {
+  display: block;
+       padding-top: 10px;
+       font-size: 16px;
+
+}
+
+.dropdownusermenu{
+ letter-spacing: 0px;
+
+}
+
 .colorlib-nav ul {
   padding: 0;
-  margin: 20px 0 0 -12px; }
+  margin: 20px 0 0 -8px; }
   .colorlib-nav ul li {
     padding: 0;
     margin: 0;
@@ -7444,7 +7472,7 @@ h1, h2, h3, h4, h5,
     font-family: "Rokkitt", Georgia, serif;
     text-transform: uppercase;
     font-size: 15px;
-    letter-spacing: 0px; }
+    letter-spacing: 2px; }
     .colorlib-nav ul li.cart {
       float: right; }
     .colorlib-nav ul li a {
@@ -7456,8 +7484,7 @@ h1, h2, h3, h4, h5,
       -webkit-transition: all 0.5s ease;
       -ms-transition: all 0.5s ease;
       transition: all 0.5s ease; }
-      .colorlib-nav ul li a:hover {
-        color: #000; }
+
     .colorlib-nav ul li.has-dropdown {
       position: relative; }
       .colorlib-nav ul li.has-dropdown .dropdown {
@@ -7545,7 +7572,7 @@ h1, h2, h3, h4, h5,
 
 #colorlib-hero {
   height: 600px;
-  background: #fff url(../images/loader.gif) no-repeat center center;
+  background: #fff url(../images_fw/loader.gif) no-repeat center center;
   width: 100%;
   float: left;
   z-index: 0; }
@@ -7856,10 +7883,27 @@ h1, h2, h3, h4, h5,
       color: #b3b3b3; }
       .product-detail-wrap .product-desc .price .rate i {
         color: #616161; }
-  .product-detail-wrap .product-desc .btn-addtocart i {
+
+        .btn-addtocart {
+            color: #fff;
+            font-size: 20px;
+            padding-right: 10px; }
+
+  a:not([href]):not([tabindex]) i {
     color: #fff;
     font-size: 20px;
     padding-right: 10px; }
+
+.product-detail-wrap .product-desc .btn-addtocart:hover {
+    color: #fff;
+    font-size: 20px;
+    padding-right: 10px;
+
+
+
+    }
+
+
 
 .product-detail-wrap .quantity-left-minus {
   border: 1px solid #e6e6e6;
@@ -7972,7 +8016,7 @@ h1, h2, h3, h4, h5,
         width: 32%; }
 
 .icon-addcart {
-  color: #88c8bc;
+  color: #c91b1b;
   display: block;
   margin-bottom: 40px; }
   .icon-addcart span {
@@ -7995,6 +8039,8 @@ h1, h2, h3, h4, h5,
   display: block;
   float: left; }
 
+
+
 .process {
   position: relative;
   float: left;
@@ -8007,7 +8053,7 @@ h1, h2, h3, h4, h5,
     content: '';
     width: 100%;
     height: 1px;
-    background: #f0f0f0;
+    background: #c91b1b;
     z-index: -1; }
   .process:last-child:after {
     display: none; }
@@ -8016,7 +8062,7 @@ h1, h2, h3, h4, h5,
     width: 80px;
     height: 80px;
     display: table;
-    border: 2px solid #fafafa;
+    border: 2px solid #c91b1b;
     margin: 0 auto;
     margin-bottom: 20px;
     background: #fff;
@@ -8037,8 +8083,18 @@ h1, h2, h3, h4, h5,
   .process.active p {
     border: 2px solid #f0f0f0; }
     .process.active p span {
-      color: #88c8bc; }
-
+      color: #fff;
+      border: #c91b1b;
+      background: #c91b1b;
+      border-radius: 50%;
+       }
+ a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
+    cursor: pointer;
+    color: #c91b1b;
+}
+.block-27 ul li.active a, .block-27 ul li.active span{
+background: #c91b1b;
+}
 .product-cart, .product-name {
   width: 100%;
   display: block;
@@ -8740,6 +8796,10 @@ input[type="text"] {
     box-shadow: none !important;
     outline: none !important; }
   .btn.btn-account, .btn-group-lg > .btn {
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     background-color: #c91b1b;
     border: none;
     width: 31%;
@@ -8750,19 +8810,26 @@ input[type="text"] {
       }
 
 .btn-primary {
-  background: #616161;
-  color: #000;
+  background-color: #cb1b1b;
+  border-color: #cb1b1b;
+  color: #fff;
+
   border: 1px solid #616161; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
     background: #a30000 !important;
     border-color: #a10202 !important;
-    color: #000;}
+    color: #fff;
+    .text-primary-usercart {
+     color: #fff !important;
+    }
+
+    }
   .btn-primary.btn-outline-primary {
     background: transparent;
     color: #000 !important;
     border: 1px solid #616161 !important; }
     .btn-primary.btn-outline-primary:hover, .btn-primary.btn-outline-primary:focus, .btn-primary.btn-outline-primary:active {
-      background: #000 !important;
+      background: #c91b1b !important;
       color: #fff !important; }
 
 .btn-primary-shop {
@@ -8886,7 +8953,7 @@ input[type="text"] {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: url(../images/loader.gif) center no-repeat #fff; }
+  background: url(../images_fw/loader.gif) center no-repeat #fff; }
 
 .js .animate-box {
   opacity: 0; }
