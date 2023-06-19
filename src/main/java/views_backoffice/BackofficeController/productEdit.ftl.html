@@ -22,18 +22,31 @@
                     <input type="text" class="form-control" id="descriptionOverview" name="descriptionOverview"
                         value="${product.descriptionOverview}">
                 </div>
+                <!--  Size start -->
                 <div class="mb-3">
                     <label for="" class="form-label">Sizes</label>
                     <#list availableSizes as availableSize>
+                    <#assign found = false>
                         <div class="form-check">
+                            <#list product.availableSizes as posterSize>
+                                <#if posterSize.size.id == availableSize.id>
+                                <input class="form-check-input" type="checkbox" value="${availableSize.id}" name="availableSizes" checked>
+                                <label class="form-check-label" for="">
+                                    ${availableSize.width} x ${availableSize.height}
+                                </label>
+                                <#assign found = true>
+                                </#if>
+                            </#list>
+                            <#if found == false>
                             <input class="form-check-input" type="checkbox" value="${availableSize.id}" name="availableSizes">
                             <label class="form-check-label" for="">
                                 ${availableSize.width} x ${availableSize.height}
                             </label>
+                            </#if>
                         </div>
                     </#list>
                 </div>
-
+                <!-- Size end -->
 
                 <div class="form-floating mb-3">
                     <select class="form-select" id="subcategories" aria-label="Floating label select subcategories"
