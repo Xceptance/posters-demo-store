@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
+import com.avaje.ebean.PagingList;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -468,6 +470,38 @@ public class BackofficeController
         result.render("products", products);
 
         return result;
+    }
+
+    /**
+     * List out all of the products.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result productPage(final Context context, @PathParam("pageNumber") int pageNumber)
+    {
+        Result result = Results.html();
+        int pageSize = 10;
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        Query<Product> query = Ebean.find(Product.class);
+
+        // Find total products and page for the pagination
+        int totalProductsCount = query.findRowCount();
+        int numberOfPage = totalProductsCount / pageSize;
+        result.render("numberOfPage", numberOfPage);
+        // Find paged product
+        PagingList<Product> pagingList = query.findPagingList(pageSize);
+        List<Product> products = pagingList.getPage(pageNumber - 1).getList();
+        // Add products into the back office
+        result.render("products", products);
+
+        return result.template("views_backoffice/BackofficeController/productList.ftl.html");
     }
 
     /**

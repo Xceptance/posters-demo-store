@@ -23,12 +23,33 @@
                                 <td>${product.descriptionDetail}</td>
                                 <td>${product.subCategory.name}</td>
                                 <td>${product.topCategory.name}</td>
-                                <td><a class="btn btn-sm btn-primary" href="/posters/backoffice/product/${product.id}/edit">Edit</a> <a class="btn btn-sm btn-warning"
-                                    href="/posters/backoffice/product/${product.id}">View</a></td>
+                                <td><a class="btn btn-sm btn-primary"
+                                        href="/posters/backoffice/product/${product.id}/edit">Edit</a> <a
+                                        class="btn btn-sm btn-warning"
+                                        href="/posters/backoffice/product/${product.id}">View</a></td>
                             </tr>
                         </#list>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p3">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
         <#include "../layout/footer.ftl.html">
