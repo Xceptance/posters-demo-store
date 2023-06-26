@@ -458,11 +458,19 @@ public class BackofficeController
     public Result productList(final Context context)
     {
         Result result = Results.html();
+        int pageSize = 10;
 
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
+
+        Query<Product> query = Ebean.find(Product.class);
+
+        // Find total products and page for the pagination
+        int totalProductsCount = query.findRowCount();
+        int numberOfPage = totalProductsCount / pageSize;
+        result.render("numberOfPage", numberOfPage);
 
         // Find all of the products
         List<Product> products = Ebean.find(Product.class).findList();
