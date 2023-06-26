@@ -44,7 +44,7 @@
 				<#if paymentOverview??>
 				<!-- choose available credit card -->
 				<form action="addPaymentToOrder" method="post" class="colorlib-form">
-					<h2 class="h2fwpr">${i18n("paymentMethodTitleSelect")}</h2>
+					<h2 id="titlePayment" class="h2fwpr">${i18n("paymentMethodTitleSelect")}</h2>
 
 					<#list paymentOverview as payment> <#if (payment_index + 3) % 3 ==0>
 					<div class="container-fluid">

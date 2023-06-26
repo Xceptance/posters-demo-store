@@ -40,7 +40,7 @@ var options = {
 <div id="productOverview" class="container">
 	
 	<div id="products">
-		<div class="row row-pb-md">
+		<div id="pRows" class="row row-pb-md">
 
 	<#list products as pro>
 		<div class="col-lg-4 mb-4 text-center">
@@ -70,7 +70,7 @@ var options = {
 		<div class="w-100"></div>
 
 </div>
-<div class="row">
+<div id="pRows" class="row row-pb-md">
 		</#if> </#list>
 </div>
 </div>

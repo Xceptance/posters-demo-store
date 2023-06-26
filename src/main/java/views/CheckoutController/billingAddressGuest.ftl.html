@@ -41,7 +41,9 @@
             
 
             <form id="formAddBillAddr" action="${contextPath}/billingAddressCompleted" method="post" class="colorlib-form">
-                <h2 class="text-center">${i18n("billingAddressTitleEnter")}</h2>
+                <div id="titleBillAddr">
+                    <h2 class="text-center">${i18n("billingAddressTitleEnter")}</h2>
+                </div>
                 <div class="row">
                     <!-- include address form -->
                     <#include "../components/addressForm.ftl.html"/>

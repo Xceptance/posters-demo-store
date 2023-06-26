@@ -8502,7 +8502,7 @@ input[type="text"] {
     max-width: 50%; } }
 
 #colorlib-footer {
-  padding: 7em 0 0 0; }
+  padding: 2em; }
   #colorlib-footer .colorlib-footer-links {
     padding: 0;
     margin: 0; }

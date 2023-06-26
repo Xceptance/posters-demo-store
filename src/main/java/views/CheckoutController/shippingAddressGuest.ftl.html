@@ -40,7 +40,10 @@
             
         
             <form id="formAddDelAddr" action="${contextPath}/shippingAddressCompleted" method="post" class="colorlib-form">
-                <h2 class="text-center">${i18n("shippingAddressTitleEnter")}</h2>
+                <div id="titleDelAddr">
+                    <h2 class="text-center">${i18n("shippingAddressTitleEnter")}</h2>
+                </div>
+                
                 <div class="row">
                     <!-- include address form -->
                     <#include "../components/addressForm.ftl.html"/>
