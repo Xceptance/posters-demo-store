@@ -5,8 +5,8 @@ A simple e-commerce application for demoing load testing as well as test automat
 
 ### Software Requirement
 
-Apache Maven 3.6.3+ 
-Java JDK Ver 11
+- Apache Maven 3.6.3+ 
+- Java JDK Ver 11
 
 ### How to build the project
 
