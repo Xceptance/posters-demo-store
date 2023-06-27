@@ -292,3 +292,8 @@
 .viewing-list li {
     margin-top: 10px;
 }
+
+.custom-form-select {
+    width: 100%;
+    height: 38px; /* Adjust the height as needed */
+  }

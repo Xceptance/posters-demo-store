@@ -6,8 +6,17 @@
         <i class="fa fa-bars"></i>
     </a>
     <form class="d-none d-md-flex ms-4">
-        <input class="form-control border-0" type="search" placeholder="Search">
-    </form>
+        <div class="input-group">
+          <input class="form-control border-0" type="search" placeholder="Search">
+          <select class="form-select custom-form-select" aria-label=".form-select-sm example">
+            <option selected>Product</option>
+            <option value="1">Customer Name</option>
+            <option value="2">Admin User Name</option>
+          </select>
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+      
     <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
