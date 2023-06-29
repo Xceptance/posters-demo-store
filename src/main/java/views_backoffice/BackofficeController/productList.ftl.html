@@ -39,9 +39,31 @@
                                 <span class="sr-only">Previous</span>
                             </a>
                         </li>
-                        <#list 1..(numberOfPage) as i>
+                        <!-- The rest of the pages -->
+                        <#if pageNumber gt 1 && pageNumber lt numberOfPage - 2>
+                        <#list (pageNumber - 1)..(pageNumber + 1) as i>
                         <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${i}">${i}</a></li>
                         </#list>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- Last Pages -->
+                        <#elseif pageNumber == numberOfPage - 1 || pageNumber == numberOfPage>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage - 2}">${numberOfPage - 2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage - 1}">${numberOfPage - 1}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <#elseif pageNumber == (numberOfPage - 2) >
+                        <#list (pageNumber - 1)..(pageNumber + 1) as i>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${i}">${i}</a></li>
+                        </#list>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- First Page -->
+                        <#else>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p3">3</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        </#if>
                         <li class="page-item">
                             <a class="page-link" href="/posters/backoffice/product/p${numberOfPage}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>

@@ -509,6 +509,9 @@ public class BackofficeController
         // Add products into the back office
         result.render("products", products);
 
+        // Add Page Number as logic value to render in freemarker
+        result.render("pageNumber", pageNumber);
+
         return result.template("views_backoffice/BackofficeController/productList.ftl.html");
     }
 
