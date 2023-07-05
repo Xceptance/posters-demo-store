@@ -20,3 +20,9 @@ run mvn ninja:run in the terminal
 enter https://localhost:8080/ in the browser
 
 
+### How to access the poster backoffice login page
+
+enter http://localhost:8080/posters/backoffice/login in the browser
+
+
+
