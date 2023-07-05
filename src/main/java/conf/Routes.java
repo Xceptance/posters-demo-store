@@ -74,8 +74,8 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/deleteShippingAddress").with(CustomerController.class, "deleteShippingAddress");
         router.POST().route("/confirmDeleteShippingAddress").with(CustomerController.class, "confirmDeleteShippingAddress");
         router.GET().route("/addShippingAddressToCustomer").with(CustomerController.class, "addShippingAddressToCustomer");
-        router.POST().route("/addShippingAddressToCustomerCompleted")
-              .with(CustomerController.class, "addShippingAddressToCustomerCompleted");
+        router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController.class,
+                                                                           "addShippingAddressToCustomerCompleted");
         router.GET().route("/addBillingAddressToCustomer").with(CustomerController.class, "addBillingAddressToCustomer");
         router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController.class, "addBillingAddressToCustomerCompleted");
 
@@ -122,13 +122,13 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/addPaymentToOrder").with(CheckoutController.class, "addPaymentToOrder");
         router.POST().route("/paymentMethodCompleted").with(CheckoutController.class, "paymentMethodCompleted");
         router.GET().route("/checkoutOverview").with(CheckoutController.class, "checkoutOverview");
-        //router.POST().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");
+        // router.POST().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");
         router.POST().route("/checkoutCompleted").with(CheckoutController.class, "checkoutCompleted");
         // ############################################################
         // assets
         // ############################################################
         router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
-    
+
         // ############################################################
         // ############################################################
 
@@ -207,11 +207,15 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/posters/backoffice/data-management").with(BackofficeController.class, "dataManagement");
 
-
         // ############################################################
         // Statistics JSON provider
         // ############################################################
         router.GET().route("/posters/backoffice/JSON").with(BackofficeController.class, "statisticsJSON");
+
+        // ############################################################
+        // Search Page
+        // ############################################################
+        router.GET().route("/posters/backoffice/search").with(BackofficeController.class, "searchList");
 
         // ############################################################
         // Page Not Found

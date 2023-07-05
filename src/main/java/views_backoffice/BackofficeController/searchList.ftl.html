@@ -1,0 +1,96 @@
+<#include "../layout/upper.ftl.html">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">${searchType} Table</h6>
+            </div>
+            <div class="table-responsive">
+                <#if searchType=="Product">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Sub Category</th>
+                                <th scope="col">Top Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <#list products as product>
+                                <tr>
+                                    <td>${product.name}</td>
+                                    <td>${product.descriptionDetail}</td>
+                                    <td>${product.subCategory.name}</td>
+                                    <td>${product.topCategory.name}</td>
+                                    <td><a class="btn btn-sm btn-primary"
+                                            href="/posters/backoffice/product/${product.id}/edit">Edit</a> <a
+                                            class="btn btn-sm btn-warning"
+                                            href="/posters/backoffice/product/${product.id}">View</a></td>
+                                </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+                    <#elseif searchType=="Customer">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <#list customers as customer>
+                                    <tr>
+                                        <td>${customer.firstName}</td>
+                                        <td>${customer.name}</td>
+                                        <td>${customer.email}</td>
+                                        <td>Active</td>
+                                        <td><a class="btn btn-sm btn-primary"
+                                                href="/posters/backoffice/customer/${customer.id}/edit">Edit</a> <a
+                                                class="btn btn-sm btn-warning"
+                                                href="/posters/backoffice/customer/${customer.id}">View</a></td>
+                                    </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                        <#elseif searchType=="User">
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">User ID</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <#list users as user>
+                                        <tr>
+                                            <td>${user.id}</td>
+                                            <td>${user.firstName}</td>
+                                            <td>${user.name}</td>
+                                            <td>${user.email}</td>
+                                            <td>Active</td>
+                                            <td><a class="btn btn-sm btn-primary"
+                                                    href="/posters/backoffice/user/${user.id}/edit">Edit</a>
+                                                <a class="btn btn-sm btn-warning"
+                                                    href="/posters/backoffice/user/${user.id}">View</a>
+                                                <form action="/posters/backoffice/user/${user.id}/delete" method="post">
+                                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                            </form>
+
+                                        </tr>
+                                    </#list>
+                                </tbody>
+                            </table>
+                </#if>
+            </div>
+        </div>
+        <#include "../layout/footer.ftl.html">

@@ -368,10 +368,10 @@ public class BackofficeController
         List<TopCategory> topCategories = Ebean.find(TopCategory.class).findList();
         // Render topCategories into template
         result.render("topCategories", topCategories);
-        
+
         // Find all available sizes
         List<PosterSize> availableSizes = Ebean.find(PosterSize.class).findList();
-        result.render("availableSizes", availableSizes); 
+        result.render("availableSizes", availableSizes);
 
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
@@ -389,7 +389,7 @@ public class BackofficeController
      */
     @FilterWith(SessionUserExistFilter.class)
     public Result productEditComplete(final Context context, @PathParam("productId") String productId, @Param("name") final String name,
-                                      @Param("imageURL") final String imageURL, @Param("minimumPrice") final double minimumPrice, 
+                                      @Param("imageURL") final String imageURL, @Param("minimumPrice") final double minimumPrice,
                                       @Param("descriptionDetail") final String descriptionDetail,
                                       @Param("descriptionOverview") final String descriptionOverview,
                                       @Param("subCategory") final String subCategoryName,
@@ -410,19 +410,19 @@ public class BackofficeController
         result.render("currentUser", currentUser);
 
         // Find subcategory with the subcategory name from the params
-        SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name" , subCategoryName).findUnique();
+        SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", subCategoryName).findUnique();
 
         // Find subcategory with the subcategory name from the params
-        TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("name" , topCategoryName).findUnique();
+        TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("name", topCategoryName).findUnique();
 
         // Delete all linking element product - poster sizes
         List<ProductPosterSize> currentAvailableSizes = product.getAvailableSizes();
         Ebean.delete(currentAvailableSizes);
-        
+
         // LINK between product and poster sizes
         ProductPosterSize currentSize = null;
-        for (int i = 0; i < posterSizesId.length; i++) 
-        {   
+        for (int i = 0; i < posterSizesId.length; i++)
+        {
             currentSize = new ProductPosterSize();
             currentSize.setProduct(product);
             currentSize.setPrice(minimumPrice);
@@ -635,6 +635,46 @@ public class BackofficeController
         // Add customers into the back office
         result.render("customers", customers);
 
+        return result;
+    }
+
+    /**
+     * Returns the search list.
+     * 
+     * @param context
+     * @return
+     */
+    @FilterWith(SessionUserExistFilter.class)
+    public Result searchList(final Context context)
+    {
+
+        String searchQuery = context.getParameter("searchQuery");
+        String searchType = context.getParameter("searchType");
+
+        Result result = Results.html();
+        result.render("searchType", searchType);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        
+        // check for search type
+        if (searchType.equals("Product"))
+        {
+            List<Product> products = Ebean.find(Product.class).where().icontains("name", searchQuery).findList();
+            result.render("products", products);
+        }
+        else if (searchType.equals("Customer"))
+        {
+            List<Customer> customers = Ebean.find(Customer.class).where().icontains("firstName", searchQuery).findList();
+            result.render("customers", customers);
+        }
+        else if (searchType.equals("User"))
+        {
+            List<User> users = Ebean.find(User.class).where().icontains("firstName", searchQuery).findList();
+            result.render("users", users);
+        }
         return result;
     }
 
