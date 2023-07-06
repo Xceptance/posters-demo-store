@@ -6,8 +6,8 @@
 <div id="page">
 
 	<div class="colorlib-product">
-		<div class="container">
-			<div class="row row-pb-lg">
+		<div id="cartPage" class="container">
+			<div class="row">
 
 				<#if (0 < cartProducts?size) >
 				<div class="col-md-10 offset-md-1">
@@ -39,8 +39,10 @@
 					</div>
 				</div>
 			</div>
-
-				<div class="row row-pb-lg">
+			<div class="header-container">
+				<span class="h2" id="titleCart">Cart</span>
+			</div>
+				<div id="cartOverviewTable" class="row row-pb-lg">
 					<div class="col-md-12">
 					<div class="product-name d-flex">
 						<div class="one-forth text-left px-4">
@@ -61,7 +63,7 @@
 					</div>
 					<#list cartProducts as cartProduct>
 
-					<div class="product-cart d-flex">
+					<div id="product${cartProduct_index}" class="product-cart d-flex">
 						<div class="one-forth">
 							<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}">
 								<div class="product-img"
@@ -69,20 +71,22 @@
 							</a>
 
 							<div class="display-tc">
-								<h3>${cartProduct.product.name}</h3>
+								<div class="productName">
+									<h3 class="productName">${cartProduct.product.name}</h3>
+								</div>
 								<ul>
 									<li><strong>${i18n("cartStyle")}:</strong> <span
-											class="productStyleMobile">${cartProduct.finish}</span></li>
+											class="productStyleMobile productStyle">${cartProduct.finish}</span></li>
 									<li><strong>${i18n("cartSize")}:</strong> <span
-											class="productSizeMobile">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span>
+											class="productSizeMobile productSize">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span>
 									</li>
 								</ul>
 							</div>
 
 						</div>
 						<div class="one-eight text-center">
-							<div class="display-tc productUnitPrice">${currency}
-								<span class="unitPriceShort">${cartProduct.getPriceAsString()}</span>
+							<div class="display-tc productUnitPrice">
+								<span class="unitPriceShort">${currency}${cartProduct.getPriceAsString()}</span>
 							</div>
 						</div>
 						<div class="one-eight text-center">
@@ -111,8 +115,8 @@
 
 						</div>
 						<div class="one-eight text-center" id="product${cartProduct_index}">
-							<div class="display-tc productTotalUnitPrice">${currency}
-								<span class="totalUnitPriceShort">${cartProduct.getTotalUnitPriceAsString()}</span>
+							<div class="display-tc productTotalUnitPrice">
+								<span class="totalUnitPriceShort">${currency}${cartProduct.getTotalUnitPriceAsString()}</span>
 							</div>
 						</div>
 
@@ -129,7 +133,7 @@
 							</div>
 							<div class="col-sm-4 text-center">
 
-								<div class="total text-left">
+								<div id="cartSummaryList" class="total text-left">
 									<div class="sub">
 										<div class="">
 											<span class="font-bold">${i18n("cartSummary")}</span>
@@ -167,6 +171,9 @@
 
 			</div>
 			<#else>
+			<div class="header-container">
+				<span class="h2" id="titleCart">Cart</span>
+			</div>
 			<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
 			</#if>
 		</div>

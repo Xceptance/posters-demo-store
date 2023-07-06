@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-sm-7 col-md-9">
           <div id="colorlib-logo">
-            <a href="${applUrlHttp}/" style="text-decoration: none">
+            <a id="brand" href="${applUrlHttp}/" style="text-decoration: none">
               <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
               ${i18n('titleShop')}
             </a>
@@ -33,7 +33,7 @@
 				<#list topCategory as tC>
 				  <li class="has-dropdown">
 					<a href="#" class="">${tC.name}</a>
-					<ul class="dropdown" style="display: none;">
+					<ul class="dropdown dropdown-menu" style="display: none;">
 					  <#list tC.subCategories as sC>
 						<li>
 						  <a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
@@ -64,7 +64,7 @@
           </li>
 			  </ul>
         </div>
-        <div class="col-sm-5 col-md-3 text-left menu-1"  style="position: relative; left: 120px; top: -15px; ">
+        <div class="col-sm-5 col-md-3 text-left menu-1"  style="float:right; ">
           <ul id="btnCartOverviewForm" id="hide3" class="nav nav-pills header-menu-item">
             <li role="presentation" class="dropdown">
               <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#" title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
@@ -72,7 +72,7 @@
                   <span class="icon-user2"></span>
                 </#if>
                 <#if isLogged == true>
-                  <span class="icon-user2"></span>
+                  <span class="icon-user2 logged"></span>
                 </#if>
               </a>
               <ul id="userMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
@@ -81,7 +81,7 @@
             </li>
             <li class="dropdown" role="presentation">
               <a id="headerCartOverview" class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
-                <span class="icon-shopping-cart"></span> &nbsp; <span class="headerCartProductCount">${cartProductCount}</span>
+                <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
               </a>
               <ul id="miniCartMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
                 <li>

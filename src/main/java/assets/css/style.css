@@ -7572,7 +7572,7 @@ h1, h2, h3, h4, h5,
 
 #colorlib-hero {
   height: 600px;
-  background: #fff url(../images_fw/loader.gif) no-repeat center center;
+  background: #fff url(../img/loader.gif) no-repeat center center;
   width: 100%;
   float: left;
   z-index: 0; }
@@ -8502,7 +8502,7 @@ input[type="text"] {
     max-width: 50%; } }
 
 #colorlib-footer {
-  padding: 7em 0 0 0; }
+  padding: 2em; }
   #colorlib-footer .colorlib-footer-links {
     padding: 0;
     margin: 0; }
@@ -8953,7 +8953,7 @@ input[type="text"] {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: url(../images_fw/loader.gif) center no-repeat #fff; }
+  background: url(../img/loader.gif) center no-repeat #fff; }
 
 .js .animate-box {
   opacity: 0; }

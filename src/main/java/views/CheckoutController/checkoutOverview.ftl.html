@@ -1,7 +1,7 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
-<div id="titleOrderOverview" class ="h2 header-container"> </div>
+<div class ="h2 header-container"> </div>
 
 <div class="container">
     <div class="row row-pb-lg  justify-content-center">
@@ -44,7 +44,7 @@
             <div class="col-md-12">
                 <div class="total-wrap total">
                     <div class="row total justify-content-center">
-                        <h1 class="h2fwpr ">${i18n("titleOrderOverview")}</h1>
+                        <h1 id="titleOrderOverview" class="h2fwpr ">${i18n("titleOrderOverview")}</h1>
                     </div>
                     <div class="row total justify-content-center">
                         <div class="col-sm-10">
@@ -121,7 +121,7 @@
             <div class="row row-pb-lg">
                 <#if (0 < cartProducts?size) >
 
-                <div class="col-md-12">
+                <div id="checkoutOverviewTable" class="col-md-12">
                     <div class="product-name d-flex">
                         <div class="one-forth text-left px-4">
                             <span>${i18n("titleProducts")}</span>
@@ -139,16 +139,16 @@
                     </div>
                     <#list cartProducts as cartProduct>
 
-                    <div class="product-cart d-flex">
+                    <div id="product${cartProduct_index}" class="product-cart d-flex">
                         <div class="one-forth">
                             <a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><div class="product-img" 
                                 style="background-image: url(${contextPath}${cartProduct.product.imageURL});"></div></a>
 
                             <div class="display-tc">
-                                <h3>${cartProduct.product.name}</h3>
+                                <h3 class="pName">${cartProduct.product.name}</h3>
                                 <ul>
-                                    <li><strong>${i18n("cartStyle")}:</strong> <span class="productStyleMobile">${cartProduct.finish}</span></li>
-                                    <li><strong>${i18n("cartSize")}:</strong> <span class="productSizeMobile">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></li>
+                                    <li><strong>${i18n("cartStyle")}:</strong> <span class="productStyleMobile productStyle">${cartProduct.finish}</span></li>
+                                    <li><strong>${i18n("cartSize")}:</strong> <span class="productSizeMobile productSize">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></li>
                                 </ul>
                             </div>
         
