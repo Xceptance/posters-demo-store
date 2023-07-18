@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="col-sm-5 col-md-3">
-          <form class="search-wrap" action="${applUrlHttp}/search" method="get">
+          <form id="search-form" class="search-wrap" action="${applUrlHttp}/search" method="get">
             <div class="form-group">
               <input id="s" name="searchText" class="form-control search" type="search" placeholder="${i18n('headerSearch')}" title="${i18n('headerSearch')}" value="${(searchTerm)!}">
               <button id="btnSearch" class="btn btn-primary submit-search text-center" type="submit">
@@ -32,7 +32,7 @@
 			<ul class="navi">
 				<#list topCategory as tC>
 				  <li class="has-dropdown">
-					<a href="#" class="">${tC.name}</a>
+					<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
 					<ul class="dropdown dropdown-menu" style="display: none;">
 					  <#list tC.subCategories as sC>
 						<li>
