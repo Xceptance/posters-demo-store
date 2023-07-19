@@ -1,20 +1,20 @@
-Posters Demo Store
-==================
+# Posters Demo Store
+>A simple e-commerce application for demoing load testing as well as test automation
 
-A simple e-commerce application for demoing load testing as well as test automation.
+## Software Requirements
+- [Apache Maven 3.6.3+](https://maven.apache.org/download.cgi)
+- [Java JDK 11](https://adoptium.net/de/temurin/archive/?version=11)
 
-### Software Requirement
-
-Apache Maven 3.6.3+ 
-
-### How to build the project
-
-- To Be Added
-
-### How to run the website locally
-
-run mvn ninja:run in the terminal
-
-enter https://localhost:8080/ in the browser
-
-
+## How to build the project
+1. Clone the current repository of posters-demo-store
+2. Add the "bin" directory of both software requirements (Java and Maven) to your "Path" enviroment variable
+3. Open a new terminal in your cloned repository (posters-demo-store)
+	3.1 Make sure the classes have not been compiled with a different Java version
+	```
+	mvn clean process-classes
+	```
+	3.2 Run the website locally
+	```
+	mvn ninja:run
+	```
+4. Open http://localhost:8080 in your browser
