@@ -35,7 +35,7 @@
 						<div class="size-wrap">
 								<span class="col-xs-12 font-bold">${i18n("cartSelectSize")}</span>
 								<div class="">
-									<select id="selectSize" class="" name="selectSize" style="padding: 3px" title="${i18n('cartSelectSize')}" style="padding-left: 0px;"onchange="updatePrice(this, ${productDetail.id});">
+									<select id="selectSize" class="" name="selectSize" style="padding: 3px" title="${i18n('cartSelectSize')}" onchange="updatePrice(this, ${productDetail.id});">
 										<#list productDetail.availableSizes as size>
 										<option title="${size.size.width} x ${size.size.height} ${unitLength}">${size.size.width} x ${size.size.height} ${unitLength}</option>
 										</#list>
@@ -44,6 +44,7 @@
 						</div>
 				
 						<!-- Select style -->
+						<div class="size-wrap">
 							<span class="col-xs-12 font-bold">${i18n("cartSelectFinish")}</span>
 							<div class="col-xs-12" id="selectStyle">
 								<div class="radio" title="${i18n('cartSelectFinishMatte')}">
@@ -53,6 +54,7 @@
 									<label><input id="finish-gloss" name="finish" type="radio" value="gloss">${i18n("cartSelectFinishGloss")}</label>
 								</div>
 							</div>
+						</div>
 							<div class="col-xs-12">
 								<span id="prodPrintInfoTitle" class="font-bold">${i18n("productDetailPrintInformation")}:</span>
 								<p class="pfwpr" id="prodPrintInfo" title="${i18n('productDetailPrintInformation')}">${i18n('productDetailPosterFinish')}</p>
