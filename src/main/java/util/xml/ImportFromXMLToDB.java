@@ -34,4 +34,13 @@ public class ImportFromXMLToDB
         final CustomerHandler customerHandler = new CustomerHandler();
         XmlUtils.readXmlFile(customerHandler, "assets/files/customer.xml");
     }
+
+    /**
+     * Reads users from xml and pushes into database.
+     */
+    public static void importUser()
+    {
+        final UserHandler userHandler = new UserHandler();
+        XmlUtils.readXmlFile(userHandler, "assets/files/user.xml");
+    }
 }

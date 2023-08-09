@@ -22,6 +22,8 @@ public class SessionHandling
 
     private static String USER = "user";
 
+    private static String ADMIN = "admin";
+
     /**
      * Removes the user information from the session.
      * 
@@ -183,5 +185,53 @@ public class SessionHandling
     public static UUID getCustomerId(final Context context)
     {
         return UUID.fromString(context.getSession().get(USER));
+    }
+
+    /**
+     * Adds user id to the session.
+     * 
+     * @param context
+     * @param userId
+     */
+    public static void setUserId(final Context context, final UUID userId)
+    {
+        context.getSession().put(ADMIN, userId.toString());
+    }
+
+    /**
+     * Returns user id of the session.
+     * 
+     * @param context
+     * @return
+     */
+    public static UUID getUserId(final Context context)
+    {
+        return UUID.fromString(context.getSession().get(ADMIN));
+    }
+
+    /**
+     * Returns true, if a user is logged, otherwise false.
+     * 
+     * @param context
+     * @return
+     */
+    public static boolean isUserLogged(final Context context)
+    {
+        boolean isLogged = true;
+        if (context.getSession().get(ADMIN) == null)
+        {
+            isLogged = false;
+        }
+        return isLogged;
+    }
+
+    /**
+     * Removes the user information from the session.
+     * 
+     * @param context
+     */
+    public static void removeUserId(final Context context)
+    {
+        context.getSession().remove(ADMIN);
     }
 }

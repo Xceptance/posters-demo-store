@@ -9,6 +9,8 @@ import controllers.CheckoutController;
 import controllers.CustomerController;
 import controllers.SearchController;
 import controllers.WebShopController;
+import controllers_backoffice.BackofficeController;
+import controllers_backoffice.UserController;
 
 /**
  * This class provides all routes of the application.
@@ -60,7 +62,6 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/updatePaymentMethod").with(CustomerController.class, "updatePaymentMethod");
         router.POST().route("/updatePaymentMethodCompleted").with(CustomerController.class, "updatePaymentMethodCompleted");
 
-
         // ############################################################
         // customer's addresses
         // ############################################################
@@ -73,8 +74,8 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/deleteShippingAddress").with(CustomerController.class, "deleteShippingAddress");
         router.POST().route("/confirmDeleteShippingAddress").with(CustomerController.class, "confirmDeleteShippingAddress");
         router.GET().route("/addShippingAddressToCustomer").with(CustomerController.class, "addShippingAddressToCustomer");
-        router.POST().route("/addShippingAddressToCustomerCompleted")
-              .with(CustomerController.class, "addShippingAddressToCustomerCompleted");
+        router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController.class,
+                                                                           "addShippingAddressToCustomerCompleted");
         router.GET().route("/addBillingAddressToCustomer").with(CustomerController.class, "addBillingAddressToCustomer");
         router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController.class, "addBillingAddressToCustomerCompleted");
 
@@ -121,6 +122,9 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/addPaymentToOrder").with(CheckoutController.class, "addPaymentToOrder");
         router.POST().route("/paymentMethodCompleted").with(CheckoutController.class, "paymentMethodCompleted");
         router.GET().route("/checkoutOverview").with(CheckoutController.class, "checkoutOverview");
+
+        // router.POST().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");
+
         router.POST().route("/checkoutCompleted").with(CheckoutController.class, "checkoutCompleted");
         router.GET().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");
         //Go to the homepage after completion of order
@@ -129,5 +133,98 @@ public class Routes implements ApplicationRoutes
         // assets
         // ############################################################
         router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
+
+        // ############################################################
+        // ############################################################
+
+        // back office
+
+        // ############################################################
+        // ############################################################
+
+        // ############################################################
+        // user login
+        // ############################################################
+        router.GET().route("/posters/backoffice/login").with(UserController.class, "loginForm");
+        router.POST().route("/posters/backoffice/login").with(UserController.class, "login");
+        router.GET().route("/posters/backoffice/logout").with(UserController.class, "logout");
+
+        // ############################################################
+        // homepage
+        // ############################################################
+        router.GET().route("/posters/backoffice").with(BackofficeController.class, "homepage");
+
+        // ############################################################
+        // user registration
+        // ############################################################
+        router.GET().route("/posters/backoffice/user/create").with(UserController.class, "registration");
+        router.POST().route("/posters/backoffice/user/create").with(UserController.class, "registrationCompleted");
+
+        // ############################################################
+        // admin users
+        // ############################################################
+        router.GET().route("/posters/backoffice/user").with(BackofficeController.class, "userList");
+        router.GET().route("/posters/backoffice/user/{userId}/edit").with(BackofficeController.class, "userEdit");
+        router.GET().route("/posters/backoffice/user/{userId}").with(BackofficeController.class, "userView");
+        router.POST().route("/posters/backoffice/user/{userId}/delete").with(BackofficeController.class, "userDelete");
+        router.POST().route("/posters/backoffice/user/{userId}").with(BackofficeController.class, "userEditComplete");
+
+        // ############################################################
+        // backoffice statistics
+        // ############################################################
+        router.GET().route("/posters/backoffice/statistics").with(BackofficeController.class, "statistics");
+
+        // ############################################################
+        // orders
+        // ############################################################
+        router.GET().route("/posters/backoffice/order").with(BackofficeController.class, "orderList");
+        router.GET().route("/posters/backoffice/order/{orderId}").with(BackofficeController.class, "orderView");
+
+        // ############################################################
+        // customers
+        // ############################################################
+        router.GET().route("/posters/backoffice/customer").with(BackofficeController.class, "customerList");
+        router.GET().route("/posters/backoffice/customer/{customerId}").with(BackofficeController.class, "customerView");
+        router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController.class, "customerEdit");
+        router.POST().route("/posters/backoffice/customer/{customerId}").with(BackofficeController.class, "customerEditComplete");
+
+        // ############################################################
+        // Catalog
+        // ############################################################
+        router.GET().route("/posters/backoffice/catalog").with(BackofficeController.class, "catalog");
+
+        // ############################################################
+        // Products
+        // ############################################################
+        router.GET().route("/posters/backoffice/product").with(BackofficeController.class, "productList");
+        router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController.class, "productPage");
+        router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productView");
+        router.GET().route("/posters/backoffice/product/{productId}/edit").with(BackofficeController.class, "productEdit");
+        router.POST().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productEditComplete");
+
+        // ############################################################
+        // Preferences
+        // ############################################################
+        router.GET().route("/posters/backoffice/preferences").with(BackofficeController.class, "preferences");
+
+        // ############################################################
+        // Import/Export
+        // ############################################################
+        router.GET().route("/posters/backoffice/data-management").with(BackofficeController.class, "dataManagement");
+
+        // ############################################################
+        // Statistics JSON provider
+        // ############################################################
+        router.GET().route("/posters/backoffice/JSON").with(BackofficeController.class, "statisticsJSON");
+
+        // ############################################################
+        // Search Page
+        // ############################################################
+        router.GET().route("/posters/backoffice/search").with(BackofficeController.class, "searchList");
+
+        // ############################################################
+        // Page Not Found
+        // ############################################################
+        router.GET().route("/posters/backoffice/.*").with(BackofficeController.class, "Error404");
     }
 }

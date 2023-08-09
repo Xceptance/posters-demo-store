@@ -89,7 +89,7 @@
                             <goal>enhance</goal>
                         </goals>
                         <configuration>
-                            <packages>models</packages>
+                            <packages>models, models_backoffice</packages>
                             <transformArgs>debug=1</transformArgs>
                             <!-- workaround against bug in ebean: https://groups.google.com/forum/?fromgroups#!topic/ebean/w2Q6PSeXKAk%5B1-25%5D -->
                             <classSource>${project.build.outputDirectory}</classSource>

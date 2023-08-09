@@ -1,0 +1,48 @@
+<#include "../layout/upper.ftl.html">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h1 class="mb-0">Catalog Relationship Table</h1>
+                <a href="">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col">Top Catagory</th>
+                            <th scope="col">Sub Catagories</th>
+                            <th scope="col">Products</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#list topCategories as topCategory>
+                            <tr>
+                                <td>${topCategory.name}</td>
+                                <td>
+                                    <ul>
+                                        <#list topCategory.subCategories as subCategory>
+                                            <li>
+                                                ${subCategory.name}
+                                            </li>
+                                        </#list>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <#list topCategory.subCategories as subCategory>
+                                            <#list subCategory.products as product>
+                                                <li>
+                                                    <a href="/posters/backoffice/product/${product.id}">${product.name}</a>
+                                                </li>
+                                            </#list>
+                                        </#list>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">

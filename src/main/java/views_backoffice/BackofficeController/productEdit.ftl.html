@@ -1,0 +1,81 @@
+<#include "../layout/upper.ftl.html">
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Edit product ${product.name}: </h6>
+            <form action="${contextPath}/posters/backoffice/product/${product.id}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                        value="${product.name}">
+                </div>
+                <div class="mb-3">
+                    <label for="imageURL" class="form-label">imageURL</label>
+                    <input type="text" class="form-control" id="imageURL" name="imageURL" value="${product.imageURL}">
+                </div>
+                <div class="mb-3">
+                    <label for="minimumPrice" class="form-label">Minimum Price</label>
+                    <input type="text" class="form-control" id="minimumPrice" name="minimumPrice"
+                        value="${product.minimumPrice}">
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionOverview" class="form-label">Description Overview</label>
+                    <input type="text" class="form-control" id="descriptionOverview" name="descriptionOverview"
+                        value="${product.descriptionOverview}">
+                </div>
+                <!--  Size start -->
+                <div class="mb-3">
+                    <label for="" class="form-label">Sizes</label>
+                    <#list availableSizes as availableSize>
+                    <#assign found = false>
+                        <div class="form-check">
+                            <#list product.availableSizes as posterSize>
+                                <#if posterSize.size.id == availableSize.id>
+                                <input class="form-check-input" type="checkbox" value="${availableSize.id}" name="availableSizes" checked>
+                                <label class="form-check-label" for="">
+                                    ${availableSize.width} x ${availableSize.height}
+                                </label>
+                                <#assign found = true>
+                                </#if>
+                            </#list>
+                            <#if found == false>
+                            <input class="form-check-input" type="checkbox" value="${availableSize.id}" name="availableSizes">
+                            <label class="form-check-label" for="">
+                                ${availableSize.width} x ${availableSize.height}
+                            </label>
+                            </#if>
+                        </div>
+                    </#list>
+                </div>
+                <!-- Size end -->
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="subcategories" aria-label="Floating label select subcategories"
+                        name="subCategory">
+                        <#list subCategories as subCategory>
+                            <option value="${subCategory.name}">${subCategory.name}</option>
+                        </#list>
+                    </select>
+                    <label for="subcategories">Subcategories</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="topcategories" aria-label="Floating label select topcategories"
+                        name="topCategory">
+                        <#list topCategories as topCategory>
+                            <option value="${topCategory.name}">${topCategory.name}</option>
+                        </#list>
+                    </select>
+                    <label for="topcategories">Topcategories</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descriptionDetail">Detailed Description</label>
+                    <textarea class="form-control" placeholder="Leave a detailed description here"
+                        id="descriptionDetail" style="height: 150px;"
+                        name="descriptionDetail">${product.descriptionDetail}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">

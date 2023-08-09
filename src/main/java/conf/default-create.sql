@@ -1,3 +1,12 @@
+create table user (
+  id                        varchar(40) not null,
+  email                     varchar(255),
+  password                  varchar(255),
+  name                      varchar(255),
+  first_name                varchar(255),
+  constraint pk_user primary key (id))
+;
+
 create table billingAddress (
   id                        integer not null,
   name                      varchar(255),

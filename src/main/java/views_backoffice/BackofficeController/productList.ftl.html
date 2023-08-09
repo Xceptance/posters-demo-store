@@ -1,0 +1,105 @@
+<#include "../layout/upper.ftl.html">
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Product Table</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Sub Category</th>
+                            <th scope="col">Top Category</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#list products as product>
+                            <tr>
+                                <td>${product.name}</td>
+                                <td>${product.descriptionDetail}</td>
+                                <td>${product.subCategory.name}</td>
+                                <td>${product.topCategory.name}</td>
+                                <td><a class="btn btn-sm btn-primary"
+                                        href="/posters/backoffice/product/${product.id}/edit">Edit</a> <a
+                                        class="btn btn-sm btn-warning"
+                                        href="/posters/backoffice/product/${product.id}">View</a></td>
+                            </tr>
+                        </#list>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/posters/backoffice/product/p1" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <!-- The rest of the pages -->
+                        <#if pageNumber gte 4 && pageNumber lt numberOfPage - 2>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${pageNumber - 1}">${pageNumber - 1}</a></li>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p${pageNumber}">${pageNumber}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${pageNumber + 1}">${pageNumber + 1}</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- Page 3 -->
+                        <#elseif pageNumber == 3>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${pageNumber - 1}">${pageNumber - 1}</a></li>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p${pageNumber}">${pageNumber}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${pageNumber + 1}">${pageNumber + 1}</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- Last Page -->
+                        <#elseif pageNumber == numberOfPage>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage - 2}">${numberOfPage - 2}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage - 1}">${numberOfPage - 1}</a></li>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- Last Page - 1 -->
+                        <#elseif pageNumber == numberOfPage - 1>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage - 2}">${numberOfPage - 2}</a></li>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage - 1}">${numberOfPage - 1}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- Last Page - 2 -->
+                        <#elseif pageNumber == (numberOfPage - 2) >
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${pageNumber - 1}">${pageNumber - 1}</a></li>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p${pageNumber}">${pageNumber}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${pageNumber + 1}">${pageNumber + 1}</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- First Page -->
+                        <#elseif pageNumber == 1>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p3">3</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        <!-- Page 2-->
+                        <#elseif pageNumber == 2>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p1">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="/posters/backoffice/product/p2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p3">3</a></li>
+                        <li class="page-item page-link">...</li>
+                        <li class="page-item"><a class="page-link" href="/posters/backoffice/product/p${numberOfPage}">${numberOfPage}</a></li>
+                        </#if>
+                        <li class="page-item">
+                            <a class="page-link" href="/posters/backoffice/product/p${numberOfPage}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <#include "../layout/footer.ftl.html">

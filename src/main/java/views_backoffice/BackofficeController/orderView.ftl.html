@@ -1,0 +1,58 @@
+<#include "../layout/upper.ftl.html">
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h1 class="mb-4">Order View</h1>
+            <ul class="viewing-list">
+                <li>Customer:<#if order.customer??>
+                        ${order.customer.firstName} ${order.customer.name}
+                        <#else>
+                            Guest
+                    </#if>
+                </li>
+                <li>
+                    Product(s):
+                    <#list order.products as product>
+                        <#if product??>
+                            ${product.getProduct().name} <!-- Look for product name -->
+                            <#else>
+                                Empty Product
+                        </#if>
+                    </#list>
+                </li>
+                <li>
+                    Order Date: ${order.orderDate}
+                </li>
+                <li>
+                    Shipping Address: ${order.shippingAddress.addressLine} ${order.shippingAddress.zip},
+                    ${order.shippingAddress.state} ${order.shippingAddress.city}
+                </li>
+                <li>
+                    Billing Address: ${order.billingAddress.addressLine} ${order.billingAddress.zip},
+                    ${order.billingAddress.state} ${order.billingAddress.city}
+                </li>
+                <li>
+                    Last Update: ${order.lastUpdate}
+                </li>
+                <li>
+                    Shipping Costs: ${order.shippingCosts}
+                </li>
+                <li>
+                    Sub Total Costs: ${order.subTotalCosts}
+                </li>
+                <li>
+                    Total Tax Costs: ${order.totalTaxCosts}
+                </li>
+                <li>
+                    Tax: ${order.tax}
+                </li>
+                <li>
+                    Total Costs: ${order.totalCosts}
+                </li>
+                <li>
+                    Credit Card Number: ${order.creditCard.cardNumber}
+                </li>
+            </ul>
+            <a class="btn btn-sm btn-primary" href="/posters/backoffice/order">Back</a>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">
