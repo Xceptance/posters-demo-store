@@ -65,8 +65,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>11</java.version>
-		<ninja.version>6.6.1</ninja.version>
+		<java.version>17</java.version>
+		<ninja.version>6.9.0</ninja.version>
 		<posters.mainClass>util.standalone.PostersMain</posters.mainClass>
 	</properties>
 
