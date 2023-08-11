@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- Default logback configuration file that is used until Ninja's logback configuration management kicks in. -->
 <configuration>
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <Pattern>[%d{HH:mm:ss.SSS}] %-5p [%t] - %m%n</Pattern>
-        </encoder>
-    </appender>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>logs/posters.log</File>
         <encoder>
@@ -19,12 +14,7 @@
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
-    <!-- Ninja Framework (uses both named logger "Ninja" and package logger "ninja.*") -->
-    <logger name="Ninja" level="debug"/>
-    <logger name="ninja" level="debug"/>
-    <!-- all other code -->
     <root level="warn">
-        <appender-ref ref="console"/>
         <appender-ref ref="file"/>
     </root>
 </configuration>

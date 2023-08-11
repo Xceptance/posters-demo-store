@@ -15,10 +15,11 @@ import controllers.JobController;
  */
 public class Module extends AbstractModule
 {
-
     @Override
     protected void configure()
     {
+        // install jul-to-SLF4j Bridge
+        install(new JulToSlf4jModule());
         // install ebean module
         install(new NinjaEbeanModule());
         // bind configuration class
