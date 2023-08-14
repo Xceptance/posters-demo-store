@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-sm-7 col-md-9">
           <div id="colorlib-logo">
-            <a id="brand" href="${applUrlHttp}/" style="text-decoration: none">
+            <a id="brand" href="${applUrlHttp}/"></a>
               <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
               ${i18n('titleShop')}
             </a>
@@ -33,7 +33,7 @@
 				<#list topCategory as tC>
 				  <li class="has-dropdown">
 					<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-					<ul class="dropdown dropdown-menu" style="display: none;">
+					<ul class="dropdown dropdown-menu">
 					  <#list tC.subCategories as sC>
 						<li>
 						  <a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
@@ -44,17 +44,17 @@
 					</ul>
 				  </li>
 				</#list>
-          <li class="has-dropdown" id="hide2" style="display: none;">
+          <li class="has-dropdown" id="hide2">
             <a href="" class="">User</a>
-            <ul class="dropdown" style="display: none;">
+            <ul class="dropdown">
               <li>
                 <#include '../components/userMenu.ftl.html'/>
               </li>
             </ul>
           </li>
-          <li class="has-dropdown" id="hide1" style="display: none;">
+          <li class="has-dropdown" id="hide1">
             <a href="" class="">Cart</a>
-            <ul class="dropdown" style="display: none;">
+            <ul class="dropdown">
               <li class="userMenuContent dropdownusermenu"><a href="${applUrlHttp}/cart"
                 class="btn btn-primary form-control  dropdownusermenu" title="${i18n('headerRegistration')}"> <span
                   class="icon-user-add-outline"></span> <span class="margin_left5"></span><span
@@ -64,7 +64,7 @@
           </li>
 			  </ul>
         </div>
-        <div class="col-sm-5 col-md-3 text-left menu-1"  style="float:right; ">
+        <div class="col-sm-5 col-md-3 text-left menu-1">
           <ul id="btnCartOverviewForm" id="hide3" class="nav nav-pills header-menu-item">
             <li role="presentation" class="dropdown">
               <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#" title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
@@ -80,7 +80,7 @@
               </ul>
             </li>
             <li class="dropdown" role="presentation">
-              <a id="headerCartOverview" class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
+              <a id="headerCartOverview" class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button" aria-haspopup="true" aria-expanded="false">
                 <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
               </a>
               <ul id="miniCartMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
