@@ -7,7 +7,7 @@
         </encoder>
     </appender>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>logs/posters.log</File>
+        <File>log/posters.log</File>
         <encoder>
             <Pattern>[%d{yyyy/MM/dd-HH:mm:ss.SSS}] %-5p [%t] %c - %m%n</Pattern>
         </encoder>
