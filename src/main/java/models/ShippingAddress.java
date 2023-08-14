@@ -275,7 +275,7 @@ public class ShippingAddress
     /**
      * Sets the list of {@link Order}s, for which this address is set as shipping address.
      * 
-     * @param orders
+     * @param order
      *            a list of {@link Order}s
      */
     public void setOrder(final List<Order> order)

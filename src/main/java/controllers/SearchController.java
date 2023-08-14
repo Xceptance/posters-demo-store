@@ -40,7 +40,7 @@ public class SearchController
     /**
      * Returns a product overview page with products, that matches the search text.
      * 
-     * @param searchText
+     * @param searchFormText
      * @param context
      * @return
      */

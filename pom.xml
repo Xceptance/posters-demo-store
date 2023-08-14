@@ -180,7 +180,6 @@
 				<configuration>
 					<author>false</author>
 					<breakiterator>true</breakiterator>
-					<failOnError>false</failOnError>
 					<notimestamp>true</notimestamp>
 					<quiet>true</quiet>
 					<release>${java.version}</release>

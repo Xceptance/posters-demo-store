@@ -465,7 +465,8 @@ public class CustomerController
     /**
      * Removes a billing address of the customer.
      * 
-     * @param cardId
+     * @param password
+     * @param addressId
      * @param context
      * @return
      */
@@ -520,7 +521,8 @@ public class CustomerController
     /**
      * Removes a shipping address of the customer.
      * 
-     * @param cardId
+     * @param password
+     * @param addressId
      * @param context
      * @return
      */
@@ -729,7 +731,7 @@ public class CustomerController
     /**
      * Returns the page to update a billing address of the customer.
      * 
-     * @param cardId
+     * @param addressId
      * @param context
      * @return
      */
@@ -962,7 +964,6 @@ public class CustomerController
     /**
      * Returns a page to update the name and the email address of a customer.
      * 
-     * @param customerId
      * @param context
      * @return
      */
@@ -1031,7 +1032,6 @@ public class CustomerController
     /**
      * Returns a page to update the current password of a customer.
      * 
-     * @param customerId
      * @param context
      * @return
      */
@@ -1107,7 +1107,7 @@ public class CustomerController
     /**
      * Deletes the current customer and all its addresses, orders and payment information.
      * 
-     * @param customerId
+     * @param password
      * @param context
      * @return
      */

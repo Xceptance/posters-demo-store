@@ -210,6 +210,7 @@ public class CartController
      * 
      * @param productId
      * @param finish
+     * @param size
      * @param context
      * @return
      */
@@ -266,7 +267,7 @@ public class CartController
     /**
      * Deletes the product from the cart.
      * 
-     * @param productId
+     * @param cartProductId
      * @param context
      * @return
      */
@@ -348,7 +349,7 @@ public class CartController
     /**
      * convert double into (price) string
      * 
-     * @param price
+     * @param value
      * @return
      */
     public String getDoubleAsString(final double value)
