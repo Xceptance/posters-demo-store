@@ -67,6 +67,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<ninja.version>6.9.0</ninja.version>
+		<copyright>Copyright (c) ${project.inceptionYear}-2023 ${project.organization.name}</copyright>
 		<posters.mainClass>util.standalone.PostersMain</posters.mainClass>
 	</properties>
 
@@ -202,6 +203,25 @@
 						<arg>--pinentry-mode</arg>
 						<arg>loopback</arg>
 					</gpgArguments>
+				</configuration>
+			</plugin>
+			<!-- Adds or updates the license header in source files. -->
+			<!-- Usage: mvn license:format -->
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>4.2</version>
+				<configuration>
+					<header>src/build/resources/license-header.txt</header>
+					<properties>
+						<copyright>${copyright}</copyright>
+					</properties>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
 				</configuration>
 			</plugin>
 		</plugins>
