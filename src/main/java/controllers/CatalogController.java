@@ -114,7 +114,7 @@ public class CatalogController
     /**
      * Returns the products of the sub category for the given page number as JSON.
      * 
-     * @param pathname
+     * @param subCategoryId
      * @param page
      * @return
      */

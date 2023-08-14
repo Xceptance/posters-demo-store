@@ -6,19 +6,19 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
-import models.Customer;
-import models.Product;
-import models.TopCategory;
-import ninja.lifecycle.Start;
+import javax.inject.Inject;
 
 import org.h2.tools.RunScript;
-
-import util.xml.ImportFromXMLToDB;
 
 import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
 
 import conf.StarterConf;
+import models.Customer;
+import models.Product;
+import models.TopCategory;
+import ninja.lifecycle.Start;
+import util.xml.ImportFromXMLToDB;
 
 /**
  * Executes some actions, before the application starts.
@@ -28,6 +28,8 @@ import conf.StarterConf;
 @Singleton
 public class JobController
 {
+    @Inject
+    StarterConf config;
 
     /**
      * Prepares the database and, if necessary, imports some data to the database.
@@ -37,14 +39,9 @@ public class JobController
     @Start(order = 90)
     public void startActions() throws Exception
     {
-        // set some system properties
-        System.setProperty("starter.home", "src/main/java");
-        System.setProperty("ninja.external.configuration", "conf/application.conf");
-        System.setProperty("ninja.mode", "prod");
-
-        final StarterConf config = new StarterConf();
         // prepare database
         prepareDatabase(config);
+
         // import categories, products and dummy customer
         importData(config);
     }
@@ -76,13 +73,10 @@ public class JobController
             boolean subCategoryTable = false;
             // if server has been started with the parameter "-Dstarter.droptables=true"
             // drop all tables
-            if (config.DROP_TABLES != null)
+            if (config.DROP_TABLES)
             {
-                if (config.DROP_TABLES.equals("true"))
-                {
-                    RunScript.execute(connection,
-                                      new InputStreamReader(getClass().getClassLoader().getResourceAsStream("conf/default-drop.sql")));
-                }
+                RunScript.execute(connection,
+                                  new InputStreamReader(getClass().getClassLoader().getResourceAsStream("conf/default-drop.sql")));
             }
             // get the DB-metadata
             final DatabaseMetaData md = connection.getMetaData();
@@ -136,8 +130,8 @@ public class JobController
                 }
             }
             // create the tables if they not exist
-            if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable && shippingAddressTable &&
-                  orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
+            if (!(cartProductTable && cartTable && billingAddressTable && creditCardTable && customerTable && shippingAddressTable
+                  && orderProductTable && orderTable && productTable && topCategoryTable && subCategoryTable))
             {
                 // simply execute the create-script
                 RunScript.execute(connection,
@@ -170,12 +164,9 @@ public class JobController
             ImportFromXMLToDB.importProduct();
         }
         // import dummy customer, if the parameter is set and no other customer is in DB
-        if (config.IMPORT_CUSTOMER != null)
+        if (config.IMPORT_CUSTOMER && Ebean.find(Customer.class).findList().size() == 0)
         {
-            if (config.IMPORT_CUSTOMER.equals("true") && Ebean.find(Customer.class).findList().size() == 0)
-            {
-                ImportFromXMLToDB.importCustomer();
-            }
+            ImportFromXMLToDB.importCustomer();
         }
     }
 }

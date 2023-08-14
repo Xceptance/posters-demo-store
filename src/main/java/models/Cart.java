@@ -225,9 +225,12 @@ public class Cart
         this.totalTaxPrice = totalTaxPrice;
     }
 
+    /**
+     * 
+     */
     public void calculateTotalTaxPrice()
     {
-        setTotalTaxPrice(getTax() * (getSubTotalPrice()+ getShippingCosts()));
+        setTotalTaxPrice(getTax() * (getSubTotalPrice() + getShippingCosts()));
     }
 
     /**
@@ -503,6 +506,8 @@ public class Cart
     /**
      * Creates and returns a new cart with parameter.
      * 
+     * @param tax
+     * @param shippingCosts
      * @return a new {@link Cart}
      */
     public static Cart createNewCart(final double tax, final double shippingCosts)
