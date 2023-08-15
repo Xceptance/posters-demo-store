@@ -195,6 +195,6 @@ public class UserController
         SessionHandling.removeUserId(context);
         // show home page
         context.getFlashScope().success(msg.get("successLogOut", language).get());
-        return Results.redirect(context.getContextPath() + "/");
+        return Results.redirect(context.getContextPath() + "posters/backoffice/login");
     }
 }

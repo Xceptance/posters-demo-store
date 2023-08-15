@@ -26,7 +26,7 @@ public class SessionUserExistFilter implements Filter
     {
         if (!SessionHandling.isUserLogged(context)) {
             // return Results.redirect(context.getContextPath() + "/"); // redirects to homepage
-            return Results.forbidden().html().template("/views/system/403forbidden.ftl.html");
+            return Results.forbidden().html().template("/views_backoffice/UserController/loginForm.ftl.html");
         }
         return chain.next(context);
     }
