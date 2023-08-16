@@ -56,12 +56,12 @@ By default, the shop is available at [http://localhost:8080/](http://localhost:8
 
 Posters stores its database and log files to the subdirectories `db` and `log`in the current directory.
 
-When Posters is started the first time, it will populate its database with a basic product catalog and with a default customer (email: ``/ password: ``). The database will grow over time if more and more customers register with the shop and place orders.
+When Posters is started the first time, it will populate its database with a basic product catalog and with a default customer (email: `john@doe.com`/ password: `topsecret`). With more and more customers registering with the shop and placing orders, the database will grow over time.
 
-If you want to start over with a clean database, simply stop the app and delete the subdirectory `db`. On next start, Posters will recreate it anew.
+If you want to start over with a clean database, simply stop the app and delete the subdirectory `db`. On next start, Posters will recreate the directory and the database anew.
 
 
-## Customize Posters
+## Customizing Posters
 
 If the default settings do not suit you, you can adjust them as needed. See below for the most important settings.
 
@@ -72,12 +72,10 @@ If the default settings do not suit you, you can adjust them as needed. See belo
 | ninja.ssl.port | 8443 | The HTTPS port. Use -1 to disable HTTPS. |
 | ninja.ssl.keystore.uri | classpath:/ninja/standalone/ninja-development.p12 | The URI to a key store with a custom server certificate. You will need to create and populate the key store. |
 | ninja.ssl.keystore.password | password | The password to open the key store/the key. |
-| ninja.context | <empty> | The context path where Posters will live, such as `/posters`. |
-| logback.configurationFile | <none> | The path to a custom configuration file for the Logback logging framework, such as `conf/logback.xml`. |
+| ninja.context | (empty) | The context path where Posters will live, such as `/posters`. |
+| logback.configurationFile | (none) | The path to a custom configuration file for the [Logback logging framework](https://logback.qos.ch/manual/configuration.html), such as `conf/logback.xml`. |
 
-See [here](https://www.ninjaframework.org/documentation/configuration_and_modes.html) for more information what else can be configured.
-
-See [application.conf](./src/main/java/conf/application.conf) for all Posters-specific settings and their defaults.
+See [here](https://www.ninjaframework.org/documentation/configuration_and_modes.html) for more information what else can be configured. Also see [application.conf](./src/main/java/conf/application.conf) for all Posters-specific settings and their defaults.
 
 To run Posters with some custom properties: 
 

@@ -26,10 +26,14 @@ Posters is built with the [Ninja framework](https://www.ninjaframework.org/). Se
     mvn clean
     ```
 1. Compile the project and enhance the database model classes:
-    ```mvn process-classes```
+    ```
+    mvn process-classes
+    ```
 1. Run the Posters application in Ninja's "SuperDevMode" (hot-reloading of modified classes and templates):
-    ```mvn ninja:run```
+    ```
+    mvn ninja:run
+    ```
 1. Open http://localhost:8080/ in a Web browser.
 1. Start changing classes or templates in your IDE. Watch the terminal to see the application being reloaded.
-1. Test your changes to the application the Web browser.
+1. Test your changes to the application in the Web browser.
 
