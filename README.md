@@ -1,6 +1,6 @@
 # Posters Demo Store
 
-Posters Demo Store, or just Posters, is a simple e-commerce application for demoing load testing as well as test automation.
+*Posters Demo Store*, or just *Posters*, is a simple e-commerce application for demoing load testing as well as test automation.
 
 
 ## Features
@@ -9,11 +9,11 @@ Posters comes with the basic functionality that you would expect from a typical 
 
 * A product catalog with categories and products, in our case, posters.
 * Customers may register with the shop.
-* Customers can manage their profile including shipping and billing addresses as well as credit cards.
+* Customers can manage their profile, including shipping and billing addresses as well as credit cards.
 * There is a shopping cart.
-* Customers may order posters as guest or as registered customer.
+* Customers may place orders as guests or as registered customers.
 
-See these screenshots to get an impression what the Posters Demo Store looks like.
+See these screenshots to get an impression of what the Posters Demo Store looks like.
 
     WIP: Insert some screenshots here.
 
@@ -22,14 +22,14 @@ Please note that this application is for demo purposes only.
 
 ## Implementation Details
 
-Posters is written in Java. It is built with the [Ninja framework](https://www.ninjaframework.org/). See their excellent documentation if you need more information on how the application is developed and configured. 
+Posters is written in Java. It is built with the [Ninja Framework](https://www.ninjaframework.org/). See their excellent documentation if you need more information on how the application is developed and configured. 
 
 Posters uses [H2](https://www.h2database.com/) as a simple file-based database and [EBean](https://ebean.io/) to map Java model classes to relational tables in the database.
 
 
 ## Getting the Posters Application
 
-The latest version of Posters can be downloaded from [Maven Central](https://search.maven.org/artifact/com.xceptance/posters-demo-store). Place the JAR file `posters-demo-store-<version>.jar` anywhere to your local disk.
+The latest version of Posters can be downloaded from [Maven Central](https://search.maven.org/artifact/com.xceptance/posters-demo-store). Place the JAR file `posters-demo-store-<version>.jar` anywhere on your local disk.
 
 
 ## Building Posters
@@ -40,15 +40,15 @@ As an alternative to downloading a prepackaged JAR file, you can build the JAR y
 mvn clean package
 ```
 
-If all went well, you will find several build artifacts in the `target` subdirectory, but the most important one is `posters-demo-store-<version>.jar`. This file contains the Posters code and also all required libraries (including a Web application server) in a single ready-to-run JAR file.
+If all went well, you will find several build artifacts in the `target` subdirectory, but the most important one is `posters-demo-store-<version>.jar`. This file contains the Posters code and all required libraries (including a Web application server) in a single, ready-to-run JAR file.
 
 
 ## Running Posters as a Console Application
 
-If you have successfully downloaded or built the Posters JAR file, you can now run Posters with default settings as follows:  
+If you have successfully downloaded or built the Posters JAR file, you can now run Posters with the default settings as follows:  
 
 ```
-java -jar posters-demo-store-<version>.jar          # download
+java -jar posters-demo-store-<version>.jar          # downloaded
 java -jar target/posters-demo-store-<version>.jar   # built yourself
 ```
 
@@ -56,9 +56,9 @@ By default, the shop is available at [http://localhost:8080/](http://localhost:8
 
 Posters stores its database and log files to the subdirectories `db` and `log`in the current directory.
 
-When Posters is started the first time, it will populate its database with a basic product catalog and with a default customer (email: `john@doe.com`/ password: `topsecret`). With more and more customers registering with the shop and placing orders, the database will grow over time.
+When Posters is started for the first time, it will populate its database with a basic product catalog and a default customer (email: `john@doe.com` / password: `topsecret`). With more and more customers registering with the shop and placing orders, the database will grow over time.
 
-If you want to start over with a clean database, simply stop the app and delete the subdirectory `db`. On next start, Posters will recreate the directory and the database anew.
+If you want to start over with a clean database, simply stop the app and delete the subdirectory `db`. On the next start, Posters will recreate the directory and the database.
 
 
 ## Customizing Posters
@@ -75,7 +75,7 @@ If the default settings do not suit you, you can adjust them as needed. See belo
 | ninja.context | (empty) | The context path where Posters will live, such as `/posters`. |
 | logback.configurationFile | (none) | The path to a custom configuration file for the [Logback logging framework](https://logback.qos.ch/manual/configuration.html), such as `conf/logback.xml`. |
 
-See [here](https://www.ninjaframework.org/documentation/configuration_and_modes.html) for more information what else can be configured. Also see [application.conf](./src/main/java/conf/application.conf) for all Posters-specific settings and their defaults.
+See [here](https://www.ninjaframework.org/documentation/configuration_and_modes.html) for more information on what else can be configured. Also see [application.conf](./src/main/java/conf/application.conf) for all Posters-specific settings and their defaults.
 
 To run Posters with some custom properties: 
 
