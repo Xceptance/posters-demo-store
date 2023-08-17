@@ -8973,10 +8973,6 @@ input[type="text"] {
   background-color: #cb1b1b; border-color: #cb1b1b;
 }
 
-.product-img {
-  background-image: url(${contextPath}${cartProduct.product.imageURL});
-}
-
 .selectSize {
   padding: 3px;
 }
@@ -8988,14 +8984,6 @@ input[type="text"] {
 .btnChangePayment,
 .adr-ov-btn {
   padding-left: 27px;
-}
-
-.header-carousel-img {
-  background-image: url('${contextPath}${caro.imageURL}');
-}
-
-.featured-img {
-  background-image: url(${contextPath}${prItem.imageURL});
 }
 
 .dropdown-hide {
