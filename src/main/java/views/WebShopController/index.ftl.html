@@ -4,9 +4,9 @@
 	<div id="titleSlide"class="flexslider">
 		<ul class="slides">
 			<#list carousel as caro>  <#if (caro_index == 0)>
-			<li class="active header-carousel-img">
+			<li class="active header-carousel-img" style="background-image: url('${contextPath}${caro.imageURL}');">
 					<#else>
-					<li class="header-carousel-img">
+					<li class="header-carousel-img" style="background-image: url('${contextPath}${caro.imageURL}');">
 					</#if>
 					<div class="overlay"></div>
 					<div class="container-fluid">
@@ -42,7 +42,7 @@
 			<#list productslistcat as prItem>
 			  <div class="col-sm-3 text-center">
 				<div class="featured">
-				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img"></a>
+				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img" style="background-image: url('${contextPath}${prItem.imageURL}');"></a>
 				 
 				</div>
 			  </div>
