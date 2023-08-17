@@ -8964,3 +8964,64 @@ input[type="text"] {
 
 .js .animate-box {
   opacity: 0; }
+
+.btnUpdateProduct {
+  text-decoration: none;
+}
+
+.btnCheckoutStart {
+  background-color: #cb1b1b; border-color: #cb1b1b;
+}
+
+.product-img {
+  background-image: url(${contextPath}${cartProduct.product.imageURL});
+}
+
+.selectSize {
+  padding: 3px;
+}
+
+.header-title {
+  font-size: 30px;
+}
+
+.btnChangePayment,
+.adr-ov-btn {
+  padding-left: 27px;
+}
+
+.header-carousel-img {
+  background-image: url('${contextPath}${caro.imageURL}');
+}
+
+.featured-img {
+  background-image: url(${contextPath}${prItem.imageURL});
+}
+
+.dropdown-hide {
+  display: none;
+}
+
+.header-brand {
+  text-decoration: none;
+}
+
+.cartMiniWrap {
+  overflow: hidden;
+}
+
+.headerCheckoutRef {
+  text-decoration: none;
+}
+
+.btnCartOverviewFormCont {
+  float:right;
+}
+
+.headerCartOverview {
+  text-decoration: none;
+}
+
+.btn-lg {
+  color:#fff
+}
