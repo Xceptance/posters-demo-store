@@ -28,11 +28,11 @@ var options = {
 	<div class="col-xs-12 text-center">
 		<div class="header-container">
 			<#if category??>
-			<div id="titleCategoryName" class="h2fwpr">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+			<div id="titleCategoryName" class="h2fwpr header-title">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if searchText??>
-			<div id="titleSearchText" class="h2fwpr">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+			<div id="titleSearchText" class="h2fwpr header-title">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if noResults??>
-			<div id="titleNoResults" class="h2fwpr">${noResults}</div>
+			<div id="titleNoResults" class="h2fwpr header-title">${noResults}</div>
 			</#if>
 		</div>
 	</div>	<!-- products -->
