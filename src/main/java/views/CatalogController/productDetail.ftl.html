@@ -35,7 +35,7 @@
 						<div class="size-wrap">
 								<span class="col-xs-12 font-bold">${i18n("cartSelectSize")}</span>
 								<div class="">
-									<select id="selectSize" class="" name="selectSize" title="${i18n('cartSelectSize')}" onchange="updatePrice(this, ${productDetail.id});">
+									<select id="selectSize" class="selectSize" name="selectSize" title="${i18n('cartSelectSize')}" onchange="updatePrice(this, ${productDetail.id});">
 										<#list productDetail.availableSizes as size>
 										<option title="${size.size.width} x ${size.size.height} ${unitLength}">${size.size.width} x ${size.size.height} ${unitLength}</option>
 										</#list>
