@@ -1,3 +1,5 @@
+/conf/*.conf
+/conf/*.xml
 /db/
 /log/
 /target/
