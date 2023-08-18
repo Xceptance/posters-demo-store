@@ -1,88 +1,109 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <script type="text/javascript">
-	var options = {
-		currentPage: ${currentPage},
-	          totalPages: ${totalPages},
-	          numberOfPages: ${totalPages},
-	          bootstrapMajorVersion: 3,
-		alignment:'center',
-		onPageClicked: function(e, originalEvent, type, page) {
-			var pathname = $(location).attr('pathname');
-			var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
-			// top category
-			if(pageType == "topCategory") {
-				$.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
-			}
-			// sub category
-			else if(pageType == "category"){
-				$.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
-			}
-			 // search
-			else {
-				$.post('${contextPath}/getProductOfSearch', {searchText: $('#s').val(), page: page}, updateProductOverview);
-			}
-		}
-	      };
+var options = {
+    currentPage: ${currentPage},
+    totalPages: ${totalPages},
+    bootstrapMajorVersion: 3,
+    onPageClicked: function(e, originalEvent, type, page) {
+        var pathname = $(location).attr('pathname');
+        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+        // top category
+        if (pageType == "topCategory") {
+            $.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+        }
+        // sub category
+        else if (pageType == "category") {
+            $.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+        }
+        // search
+        else {
+            $.post('${contextPath}/getProductOfSearch', {searchText: $('#s').val(), page: page}, updateProductOverview);
+        }
+    }
+};
+
 </script>
 
-<div class="row">
-	<div class="col-xs-12">
+	<div class="col-xs-12 text-center">
 		<div class="header-container">
 			<#if category??>
-			<div id="titleCategoryName" class="h2">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+			<div id="titleCategoryName" class="h2fwpr" style="font-size: 30px;">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if searchText??>
-			<div id="titleSearchText" class="h2">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+			<div id="titleSearchText" class="h2fwpr" style="font-size: 30px;">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 			</#if> <#if noResults??>
-			<div id="titleNoResults" class="h2">${noResults}</div>
+			<div id="titleNoResults" class="h2fwpr" style="font-size: 30px;">${noResults}</div>
 			</#if>
 		</div>
-	</div>
-	<!-- products -->
-	<div id="productOverview" class="col-xs-12">
-		<#list products as pro> <#if (pro_index + 3) % 3 == 0>
-		<div class="row">
-			<ul class="thumbnails list-unstyled row">
-				</#if>
-				<li class="col-xs-12 col-sm-6 col-md-4">
-					<div id="product${pro_index}" class="thumbnail">
-						<div class="container-fluid">
-							<a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
-								<img data-src="${contextPath}/assets/js/holder.js/300x200"
-								alt="${pro.name}" title="${pro.name}"
-								src="${contextPath}${pro.imageURL}" class="pImage">
-								<div class="pInfo">
-									<h4 class="text-primary pName">${pro.name}</h4>
-									<div class="text-muted">
-										<p>
-											<span class="pDescriptionOverview">${pro.descriptionOverview}</span><br>${i18n("priceStart")} ${currency}<span class="font-bold pPrice">${pro.getPriceAsString()}</span>
-										</p>											
-									</div>
-								</div>
-							</a>
+	</div>	<!-- products -->
+	
+<div id="productOverview" class="container">
+	
+	<div id="products">
+		<div id="pRows" class="row row-pb-md">
+
+	<#list products as pro>
+		<div class="col-lg-4 mb-4 text-center">
+			<div class="product-entry border">
+			<div id="product${pro_index}" class="thumbnail">
+				<div class="container-fluid">
+					<a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
+						<img data-src="${contextPath}/assets/js/holder.js/300x200" alt="${pro.name}"
+							title="${pro.name}" src="${contextPath}${pro.imageURL}" class="prod-img">
+						<div class="desc">
+							<h2 class="text-primary h2fwpr pName">${pro.name}</h2>
+							<div class="text-muted h2fwpr">
+								<p>
+									<span
+										class="pDescriptionOverview">${pro.descriptionOverview}</span><br>${i18n("priceStart")}
+									<span class="font-bold price">${currency}${pro.getPriceAsString()}</span>
+								</p>
+							</div>
 						</div>
-					</div>
-				</li> <#if (pro_index + 1) % 3 == 0>
-			</ul>
+					</a>
+				</div>
+			</div>
+			</div>
 		</div>
-		</#if> <#if !pro_has_next && (pro_index + 1) % 3 != 0>
-		</ul>
-	</div>
-	</#if> </#list>
+		
+		<#if (pro_index + 1) % 3 == 0 && pro_has_next>
+		<div class="w-100"></div>
 
-	</div>
-
-<#if totalPages gt 1 >
-<!-- paging, only if more than one result page -->
-	<!-- paging -->
-	<div class="col-xs-12 h4">
-		<div class="pagination pull-right">
-			<ul id="pagination-bottom"></ul>
-		</div>
-	</div>
 </div>
+<div id="pRows" class="row row-pb-md">
+		</#if> </#list>
+</div>
+</div>
+</div>
+
+	<#if totalPages gt 1>
+		<div class="container">
+
+			<!-- paging, only if more than one result page -->
+			<!-- paging -->
+			<div class="col-md-12 text-center">
+				<div class="block-27">
+					<ul id="pagination-bottom" class="text-center">
+						<li class="pgstyle" ><a href="#"><i class="ion-ios-arrow-back"></i></a></li>
+						<#list 1..totalPages as i>
+							<#if i==currentPage>
+								<li class="pgstyle active"><span>${i}</span></li>
+							<#else>
+								<li class="pgstyle"><a href="#" data-page="${i}">${i}</a></li>
+							</#if>
+
+					</#list>
+					<li class="pgstyle" ><a href="#"><i class="ion-ios-arrow-forward"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
 <script type="text/javascript">	
         $('#pagination-bottom').bootstrapPaginator(options);
+
 	</script>
 </#if>
 </@layout.myLayout>

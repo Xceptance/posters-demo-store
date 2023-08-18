@@ -79,6 +79,9 @@ function updateProductOverview(data) {
 
 //Setup on DOM ready
 $(document).ready(function() {
+ if ($('body').hasClass('process')) {
+        $('.process').style.width = "33%";
+        }
 	$('#header-search-trigger').click(function() {
 		$('#header-menu-search').css('display', 'block');
 		$('#header-search-trigger').css('display', 'none');

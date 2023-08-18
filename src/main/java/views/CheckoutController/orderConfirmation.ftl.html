@@ -1,0 +1,60 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The ultimate webshop">
+
+<div id="page">
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-sm-10 offset-md-1">
+                    <div class="process-wrap">
+                        <div class="row row-pb-lg  justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="process-wrap">
+                                    <div id="crt" class="process text-center active">
+                                        <p><span>01</span></p>
+                                        <h3>Shopping Cart</h3>
+                                    </div>
+                                    <div id="ship" class="process text-center active">
+                                        <p><span>02</span></p>
+                                        <h3>Shipping Address</h3>
+                                    </div>
+                                    <div id="bill" class="process text-center active">
+                                        <p><span>03</span></p>
+                                        <h3>Billing Address</h3>
+                                    </div>
+                                    <div id="payment" class="process text-center active">
+                                        <p><span>04</span></p>
+                                        <h3>Payment Method</h3>
+                                    </div>
+                                    <div id="chkout" class="process text-center active">
+                                        <p><span>05</span></p>
+                                        <h3>Checkout</h3>
+                                    </div>
+                                    <div id="orderCmplt" class="process text-center active">
+                                        <p><span>06</span></p>
+                                        <h3>Order Complete</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="confirmationRow" class="confirmation row">
+                <div class="col-sm-10 offset-sm-1 text-center">
+                    <p id="cnfmCheck" class="icon-addcart"><span><i class="icon-check"></i></span></p>
+                    <h2 id="tYouText" class="mb-4">Thank you for purchasing, Your order is complete</h2>
+                    <p>
+                        <a id="goHome" href="${contextPath}/"class="btn btn-primary btn-outline-primary"><i class="icon-shopping-cart"></i> Continue Shopping</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br><br>
+
+
+</@layout.myLayout>

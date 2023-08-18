@@ -1,108 +1,169 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
-<@layout.myLayout "The ultimate webshop">
-<div>
-	<div id="titleDelAddr" class="header-container">
-		<h2>${i18n("shippingAddressTitleSelect")}</h2>
-	</div>
-	<#if shippingAddresses??>
-	<!-- choose available address -->
-	<form action="addShippingAddressToOrder" method="post">
-		<#list shippingAddresses as address> <#if (address_index + 3) % 3 ==0>
-		<div class="container-fluid">
-			<ul class="list-unstyled">
-				</#if>
-				<li class="col-xs-12 col-sm-6 col-lg-3 thumbnail"
-					id="delAddr${address_index}">
-					<div class="col-sm-1">
-						<#if (address_index == 0)> <input name="addressId"
-							value="${address.id}" type="radio" checked="checked">
-						<#else> <input name="addressId" value="${address.id}" type="radio">
-						</#if>
-					</div>
-					<div class="col-sm-10">
-						<address>
-							<ul class="list-unstyled container-fluid address">
-								<li class="name" title="${i18n('addressFullName')}"><strong>${address.name}</strong></li>
-								<li class="company" title="${i18n('addressCompany')}">${address.company}</li>
-								<li class="addressLine" title="${i18n('addressLine')}">${address.addressLine}</li>
-								<li><span class="city" title="${i18n('addressCity')}">${address.city}</span>,
-									<span class="state" title="${i18n('addressState')}">${address.state}</span>
-									<span class="zip" title="${i18n('addressZip')}">${address.zip}</span></li>
-								<li class="country" title="${i18n('addressCountry')}">${address.country}</li>
-							</ul>
-						</address>
-					</div>
-				</li> <#if (address_index + 1) % 3 ==0>
-			</ul>
-		</div>
-		</#if> <#if !address_has_next && (address_index + 1) % 3 !=0>
-		</ul>
-		</div>
-		</#if> </#list> </#if>
+	<@layout.myLayout "The ultimate webshop">
+		
 
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="pull-right">
-					<!-- Trigger the modal with a button -->
-					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#addAdressModal">${i18n("shippingAddressAddNew")}</button>
-					<!-- button - continue  -->
-					<button class="btn btn-primary" id="btnUseAddressContinue"
-						name="btnUseAddressContinue" type="submit">${i18n("buttonContinue")}</button>
+		<div class="container">
+
+			<!-- Process Indicator -->
+
+			<div class="row row-pb-lg  justify-content-center">
+				<div class="col-lg-12">
+					<div class="process-wrap">
+						<div class="process text-center active">
+							<p><span>01</span></p>
+							<h3>Shopping Cart</h3>
+						</div>
+						<div class="process text-center active">
+							<p><span>02</span></p>
+							<h3>Shipping Address</h3>
+						</div>
+						<div class="process text-center">
+							<p><span>03</span></p>
+							<h3>Billing Address</h3>
+						</div>
+						<div class="process text-center">
+							<p><span>04</span></p>
+							<h3>Payment Method</h3>
+						</div>
+						<div class="process text-center">
+							<p><span>05</span></p>
+							<h3>Checkout</h3>
+						</div>
+						<div class="process text-center">
+							<p><span>06</span></p>
+							<h3>Order Complete</h3>
+						</div>
+					</div>
 				</div>
+			</div>	
+			<!-- Shipping Form -->
+			<div class="row  justify-content-center">
+
+				<div class="col-lg-6">
+					<#if shippingAddresses??>
+						<!-- choose available address -->
+						<form action="addShippingAddressToOrder" method="post" class="colorlib-form">
+							<div id="titleDelAddr">
+								<h2 class="text-center h2fwpr">${i18n("shippingAddressTitleSelect")}</h2>
+							</div>
+
+							<#list shippingAddresses as address>
+								<#if (address_index + 3) % 3==0>
+									<div class="container-fluid">
+										<ul class="list-unstyled">
+								</#if>
+								<li class="col-xs-12 thumbnail" id="delAddr${address_index}">
+									<div class="col-sm-1">
+										<#if (address_index==0)> <input name="addressId" value="${address.id}"
+												type="radio" checked="checked">
+											<#else> <input name="addressId" value="${address.id}" type="radio">
+										</#if>
+									</div>
+									<div class="col-sm-10">
+										<address>
+											<ul class="list-unstyled container-fluid address">
+												<li class="name" title="${i18n('addressFullName')}">
+													<strong>${address.name}</strong>
+												</li>
+												<li class="company" title="${i18n('addressCompany')}">
+													${address.company}</li>
+												<li class="addressLine" title="${i18n('addressLine')}">
+													${address.addressLine}</li>
+												<li><span class="city"
+														title="${i18n('addressCity')}">${address.city}</span>,
+													<span class="state"
+														title="${i18n('addressState')}">${address.state}</span>
+													<span class="zip"
+														title="${i18n('addressZip')}">${address.zip}</span>
+												</li>
+												<li class="country" title="${i18n('addressCountry')}">
+													${address.country}</li>
+											</ul>
+										</address>
+									</div>
+								</li>
+								<#if (address_index + 1) % 3==0>
+									</ul>
+				</div>
+				</#if>
+				<#if !address_has_next && (address_index + 1) % 3 !=0>
+					</ul>
+				</#if>
+				</#list>
+				</#if>
+
+
+				<div class="form-group">
+					<div class="col-sm-12 nopadding">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-9">
+							<!-- Trigger the modal with a button -->
+							<button type="button" class="btn btn-default" data-toggle="modal"
+								data-target="#addAdressModal">${i18n("shippingAddressAddNew")}</button>
+							<!-- button - continue  -->
+							<button class="btn btn-primary" id="btnUseAddressContinue" name="btnUseAddressContinue"
+								type="submit">${i18n("buttonContinue")}</button>
+						</div>
+					</div>
+				</div>
+
+				</form>
 			</div>
 		</div>
-	</form>
-
-	<!-- Modal for add new address-->
-	<div id="addAdressModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<form id="formAddAddr" class="form-horizontal"
-				action="${contextPath}/shippingAddressCompleted" method="post">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">${i18n("shippingAddressAddNew")}</h4>
-					</div>
-					<div class="modal-body">
-						<fieldset>
-							<!-- include form -->
-							<#include "../components/addressForm.ftl.html"/>
-							<hr>
-							<!-- choose: shipping equals billing address -->
-							<div class="form-group pull-right">
-								<div class="col-xs-12 col-sm-7 text-right">${i18n("shippingAddressEqualsBillingAddress")}:</div>
-								<div class="col-xs-12 col-sm-5 margin_top7">
-									<div>
-										<label for="billEqualShipp-Yes"> <input
-											name="billEqualShipp" id="billEqualShipp-Yes" value="Yes"
-											checked="checked" type="radio" title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
-										</label>
-									</div>
-									<div>
-										<label for="billEqualShipp-No"> <input
-											name="billEqualShipp" id="billEqualShipp-No" value="No"
-											type="radio" title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
-										</label>
-									</div>
-								</div>
-							</div>
-						</fieldset>
-
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
-						<!-- continue button -->
-						<button id="btnAddAddr" name="btnAddAddr"
-							class="btn btn-primary pull-right" type="submit" title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
-					</div>
-				</div>
-			</form>
 		</div>
 
-	</div>
-</div>
-</@layout.myLayout>
+
+
+		<!-- Modal for add new address-->
+		<div id="addAdressModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<form id="formAddAddr" class="form-horizontal" action="${contextPath}/shippingAddressCompleted"
+					method="post">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">${i18n("shippingAddressAddNew")}</h4>
+
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<fieldset>
+								<!-- include form -->
+								<#include "../components/addressForm.ftl.html" />
+								<hr>
+								<!-- choose: shipping equals billing address -->
+								<div class="form-group pull-right">
+									<div class="col-xs-12 col-sm-7 ">
+										${i18n("shippingAddressEqualsBillingAddress")}:</div>
+									<div class="col-xs-12 col-sm-5 margin_top7">
+										<div>
+											<label for="billEqualShipp-Yes"> <input name="billEqualShipp"
+													id="billEqualShipp-Yes" value="Yes" checked="checked" type="radio"
+													title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
+											</label>
+										</div>
+										<div>
+											<label for="billEqualShipp-No"> <input name="billEqualShipp"
+													id="billEqualShipp-No" value="No" type="radio"
+													title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
+											</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+								title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
+							<!-- continue button -->
+							<button id="btnAddAddr" name="btnAddAddr" class="btn btn-primary pull-right" type="submit"
+								title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</@layout.myLayout>

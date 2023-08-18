@@ -1,180 +1,119 @@
-<nav id="globalNavigation"
-	class="navbar navbar-default navbar-static-top">
-	<div class="container-fluid">
-		<div class="row">
-		<!-- bootstrap header menu for larger than mobile -->
-			<div class="col-sm-4 hidden-xs">
-				<a id="brand" href="${applUrlHttp}/" title="${i18n('titleShop')}"> 
-					<img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png"
-					  title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
-					<span class="titleShopText">${i18n('titleShop')}</span>
-				</a>
-			</div>
+<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>
 
-		<!-- bootstrap header menu for mobile -->
-		<div class="navbar-header header-top-left col-xs-12 col-sm-5 hidden-sm hidden-md hidden-lg">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#categoryMenuMobile"
-				aria-expanded="false">
-				<span class="sr-only"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
-			<!-- navbar-brand -->
-			<div class="col-xs-8 col-sm-12 navbar-brand">
-				<a id="brandMobile" href="${applUrlHttp}/" title="${i18n('titleShop')}">
-					<img class="shopLogoMobile" src="${contextPath}/assets/img/xceptanceLogo.png"
-					  title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
-					<span>${i18n('titleShop')}</span>
-				</a>
-			</div>
-		</div>
+<div id="colorlib-offcanvas">
+  <!-- bootstrap header menu for mobile -->
+</div>
 
-		<!-- search form - not mobile -->
-		<div class="col-sm-5 header-top-search hidden-xs">
-			<ul class="nav nav-pills">
-				<li class="pull-right">
-					<!-- search trigger -->
-					<div id="header-menu-search" class="header-menu-search"
-						style="display: none;">
-						<!-- search -->
-						<form id="searchForm" class="navbar-form"
-							action="${applUrlHttp}/search" method="get">
-							<input id="s" name="searchText" class="form-control" 
-								type="search" placeholder="${i18n('headerSearch')}"
-								title="${i18n('headerSearch')}"
-								value="${(searchTerm)!}">
-
-							<button id="btnSearch" class="btn btn-primary" type="submit" title="${i18n('headerSearch')}">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-
-						</form>
-					</div> <a id="header-search-trigger"
-					class="dropdown-toggle header-menu-item" href="#"> <span
-						class="glyphicon glyphicon-search"></span>
-				</a>
-
-				</li>
-			</ul>
-		</div>
-
-		<!-- search form - mobile -->
-		<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-			<div class="header-menu-item header-top-search">
-				<form id="searchFormMobile" class="navbar-form col-xs-12"
-					action="${applUrlHttp}/search" method="get">
-					<div class="col-xs-10">
-						<input id="sMobile" name="searchText" class="form-control"
-							type="search" placeholder="${i18n('headerSearch')}"
-							title="${i18n('headerSearch')}" value="${(searchTerm)!}">
-					</div>
-					<div class="col-xs-2">
-						<button id="btnSearchMobile" class="btn btn-primary" type="submit" title="${i18n('headerSearch')}">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-
-		<!-- mini cart -->
-		<div class="col-xs-12 col-sm-2 header-top-right">
-			<ul id="btnCartOverviewForm" class="nav nav-pills header-menu-item">
-				<li class="dropdown" role="presentation">
-				<a id="headerCartOverview" class="dropdown-toggle" data-target="#"
-					data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button"
-					aria-haspopup="true" aria-expanded="false"> 					
-					<span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; <span 
-					class="headerCartProductCount">${cartProductCount}</span>
-				</a>
-
-					<ul id="miniCartMenu"
-						class="dropdown-menu dropdown-menu-right hidden-xs">
-						<li>
-							<!-- cart slider --> <#include
-							"../components/miniCartMenu.ftl.html" />
-						</li>
-
-					</ul>
-					<ul id="miniCartMenuMobile"
-						class="dropdown-menu hidden-sm hidden-md hidden-lg">
-						<li>
-							<!-- cart slider --> <#include
-							"../components/miniCartMenu.ftl.html" />
-						</li>
-					</ul></li>
-			</ul>
-		</div>
-
-		<!-- user menu -->
-		<div class="col-xs-12 col-sm-1 header-top-right">
-
-			<!-- login form -->
-			<ul class="nav nav-pills header-menu-item">
-				<li role="presentation" class="dropdown">
-					<a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
-						title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false"> 
-						<#if isLogged == false>
-							<span class="glyphicon glyphicon-user not-logged"></span>
-						</#if>
-						<#if isLogged == true>
-							<span class="glyphicon glyphicon-user logged"></span>
-						</#if>
-					</a>
-					<ul id="userMenu"
-						class="dropdown-menu dropdown-menu-right hidden-xs">
-						<#include '../components/userMenu.ftl.html'/>
-					</ul>
-					<ul id="userMenuMobile"
-						class="dropdown-menu hidden-sm hidden-md hidden-lg">
-						<#include '../components/userMenu.ftl.html' />
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-		<!-- categoreMenu - not mobile -->
-		<div class="row hidden-xs" id="categoryMenu">
-			<ul class="nav navbar-nav">
-				<#list topCategory as tC>				
-				<li class="dropdown header-menu-item">
-					<div class="topCategory${tC_index}" title="${tC.name}">
-						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-						<span class="dropdown-toggle caret-container" data-toggle="dropdown"><span class="caret"></span></span>
-						<ul class="dropdown-menu">
-							<#list tC.subCategories as sC>
-							<li>
-								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
-									<span class="subCategoryMenuItem">${sC.name}</span>
-								</a>
-							</li> </#list>
-						</ul>						
-					</div>
-				</li>
-			</#list>				
-			</ul>
-		</div>
-		<!-- categoreMenu - mobile -->
-		<div class="collapse hidden-sm hidden-md hidden-lg" id="categoryMenuMobile">			
-			<ul class="nav navbar-nav">
+<nav class="colorlib-nav" role="navigation" id="globalNavigation">
+  <div class="top-menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-7 col-md-9">
+          <div id="colorlib-logo">
+            <a id="brand" href="${applUrlHttp}/" style="text-decoration: none">
+              <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+              ${i18n('titleShop')}
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-5 col-md-3">
+          <form id="search-form" class="search-wrap" action="${applUrlHttp}/search" method="get">
+            <div class="form-group">
+              <input id="s" name="searchText" class="form-control search" type="search" placeholder="${i18n('headerSearch')}" title="${i18n('headerSearch')}" value="${(searchTerm)!}">
+              <button id="btnSearch" class="btn btn-primary submit-search text-center" type="submit">
+                <i class="icon-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div id="categoryMenu" class="col-sm-7 col-md-9 text-left menu-1">
+			<ul class="navi">
 				<#list topCategory as tC>
-				<li class="dropdown header-menu-item">
-					<div class="topCategory${tC_index}" title="${tC.name}">
-						<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-						<span class="dropdown-toggle caret-container" data-toggle="dropdown"><span class="caret"></span></span>
-						<ul class="dropdown-menu">
-							<#list tC.subCategories as sC>
-							<li>
-								<a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
-									<span class="subCategoryMenuItem">${sC.name}</span>
-								</a>
-							</li> </#list>
-						</ul>						
-					</div>
-				</li>
+				  <li class="has-dropdown">
+					<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
+					<ul class="dropdown dropdown-menu" style="display: none;">
+					  <#list tC.subCategories as sC>
+						<li>
+						  <a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
+							${sC.name}
+						  </a>
+						</li>
+					  </#list>
+					</ul>
+				  </li>
 				</#list>
-			</ul>			
-		</div>		
-	</div>
+          <li class="has-dropdown" id="hide2" style="display: none;">
+            <a href="" class="">User</a>
+            <ul class="dropdown" style="display: none;">
+              <li>
+                <#include '../components/userMenu.ftl.html'/>
+              </li>
+            </ul>
+          </li>
+          <li class="has-dropdown" id="hide1" style="display: none;">
+            <a href="" class="">Cart</a>
+            <ul class="dropdown" style="display: none;">
+              <li class="userMenuContent dropdownusermenu"><a href="${applUrlHttp}/cart"
+                class="btn btn-primary form-control  dropdownusermenu" title="${i18n('headerRegistration')}"> <span
+                  class="icon-user-add-outline"></span> <span class="margin_left5"></span><span
+                  class="text-primary-usercart">${i18n("buttonGoToCart")}</span>
+              </a></li>
+            </ul>
+          </li>
+			  </ul>
+        </div>
+        <div class="col-sm-5 col-md-3 text-left menu-1"  style="float:right; ">
+          <ul id="btnCartOverviewForm" id="hide3" class="nav nav-pills header-menu-item">
+            <li role="presentation" class="dropdown">
+              <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#" title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
+                <#if isLogged == false>
+                  <span class="icon-user2"></span>
+                </#if>
+                <#if isLogged == true>
+                  <span class="icon-user2 logged"></span>
+                </#if>
+              </a>
+              <ul id="userMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
+                <#include '../components/userMenu.ftl.html'/>
+              </ul>
+            </li>
+            <li class="dropdown" role="presentation">
+              <a id="headerCartOverview" class="dropdown-toggle" data-target="#" data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
+                <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
+              </a>
+              <ul id="miniCartMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
+                <li>
+                  <!-- cart slider --> <#include "../components/miniCartMenu.ftl.html" />
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sale">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 offset-sm-2 text-center">
+          <div class="row">
+            <div class="owl-carousel2">
+              <div class="item">
+                <div class="col">
+                  <h3><a class="h2fwpr" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a></h3>
+                </div>
+              </div>
+              <div class="item">
+                <div class="col">
+                  <h3><a class="h2fwpr" href="#">Our biggest sale yet 50% off all Posters</a></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

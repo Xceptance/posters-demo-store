@@ -113,7 +113,6 @@
 					<excludes>
 						<exclude>(.*)ftl.html$</exclude>
 					</excludes>
-					<context>/posters</context>
 				</configuration>
 			</plugin>
 			<plugin>

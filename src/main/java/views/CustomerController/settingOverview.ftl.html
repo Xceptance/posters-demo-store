@@ -1,38 +1,57 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<div>
-	<div id="titlePersonalData" class="header-container">
-		<span class="h2">${i18n("titleSettings")}</span>
-	</div>
-	<div class="col-sm-12">
-		<div class="form-group row">
-			<div class="col-sm-12">
-				<a href="${contextPath}/confirmDeleteAccount" id="btnDeleteAccount"
-					class="btn btn-danger pull-right">${i18n("confirmDeletionTitle")}</a>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-sm-2"><strong> ${i18n("titleName")}</strong></div>
-			<div class="col-sm-10" id="customerName">
-				<span id="customerFirstName">${customer.firstName}</span> <span
-					id="customerLastName">${(customer.name)!}</span>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-sm-2"><strong>${i18n("titleEmail")}</strong></div>
-			<div class="col-sm-4" id="customerEmail">${customer.email}</div>
-			<div class="col-sm-6"></div>
-		</div>
-		<div class="form-group row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-10">
-				<a href="${contextPath}/changeNameOrEmail" id="btnChangeNameEmail">${i18n("settingsChange")}</a>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-10">
-				<a href="${contextPath}/changePassword" id="btnChangePassword">${i18n("changePasswordTitle")}</a>
+<div class="row row-pb-lg  justify-content-center">
+	
+</div>
+<div class="container">
+ 
+    <div class="row  justify-content-center">
+        <div class="col-lg-6">
+
+			<div class="col-lg-12 colorlib-form h2fwpr">
+
+				<div>
+					<div id="titlePersonalData" class="header-container">
+						<span class="h2">${i18n("titleSettings")}</span>
+					</div>
+					<div class="col-sm-12">
+						
+						<div class="form-group row">
+							<div class="col-sm-2"><strong> ${i18n("titleName")}</strong></div>
+							<div class="col-sm-10" id="customerName">
+								<span id="customerFirstName">${customer.firstName}</span> <span
+									id="customerLastName">${(customer.name)!}</span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-2"><strong>${i18n("titleEmail")}</strong></div>
+							<div class="col-sm-4" id="customerEmail">${customer.email}</div>
+							<div class="col-sm-6"></div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-10">
+								<a href="${contextPath}/changeNameOrEmail" id="btnChangeNameEmail">${i18n("settingsChange")}</a>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-10">
+								<a href="${contextPath}/changePassword" id="btnChangePassword">${i18n("changePasswordTitle")}</a>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-2"></div>
+
+							<div class="col-sm-10">
+								<a href="${contextPath}/confirmDeleteAccount" id="btnDeleteAccount"
+									class="btn btn-danger">${i18n("confirmDeletionTitle")}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>

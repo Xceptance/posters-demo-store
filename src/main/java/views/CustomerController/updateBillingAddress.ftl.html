@@ -1,29 +1,41 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<form id="formUpdateBillAddr" class="form-horizontal"
-	action="${contextPath}/updateBillingAddressCompleted" method="post">
-	<fieldset>
-		<!-- Form Name -->
-		<legend>
-                    <span class="h2">${i18n("updateBillingTitle")}</span>
-		</legend>
-		<div class="col-md-12">
-			<!-- include form -->
-			<#include "../components/addressForm.ftl.html"/> <input
-				name="addressId" id="addressId" type="hidden" value=${address.id}></input>
-			<!-- update -->
-			<div class="form-group">
-				<div class="col-sm-12 nopadding">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-9">
-						<span class="reqField pull-left textcolordarkgrey">*
-							${i18n('titleRequiredFields')}</span>
-						<button id="btnUpdateBillAddr" class="btn btn-primary pull-right"
-							name="btnUpdateBillAddr" type="submit">${i18n('buttonSave')}</button>
-					</div>
-				</div>
+<div class="row row-pb-lg  justify-content-center">	</div>
+<div class="container">
+    <div class="row  justify-content-center">
+        <div class="col-lg-6">
+			<div class="col-lg-12 colorlib-form h2fwpr">
+
+				<form id="formUpdateBillAddr" class="form-horizontal"
+					action="${contextPath}/updateBillingAddressCompleted" method="post">
+					<fieldset>
+						<!-- Form Name -->
+						<legend>
+									<span class="h2">${i18n("updateBillingTitle")}</span>
+						</legend>
+						<div class="col-md-12">
+							<!-- include form -->
+							<#include "../components/addressForm.ftl.html"/> <input
+								name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+							<!-- update -->
+							<div class="form-group">
+								<div class="col-sm-12 nopadding">
+									<div class="col-sm-4">
+										<span class="reqField pull-left textcolordarkgrey">*
+											${i18n('titleRequiredFields')}</span>
+										</div>
+									<div class="col-sm-8">
+										<button id="btnUpdateBillAddr" class="btn btn-primary pull-right"
+											name="btnUpdateBillAddr" type="submit">${i18n('buttonSave')}</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				
 			</div>
 		</div>
-	</fieldset>
-</form>
+	</div>
+</div>
 </@layout.myLayout>

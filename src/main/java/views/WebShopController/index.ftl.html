@@ -1,86 +1,101 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<div class="row">
-	<div class="col-xs-12">
-		<div class="header-container">
-			<span id="titleIndex" class="h2">${i18n("indexTitle")}</span>
-		</div>
-	</div>
-	<div class="col-xs-12">
-		<div id="pShopCarousel" class="carousel slide" data-ride="carousel">
-
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<#list carousel as caro> <#if (caro_index == 0)>
-				<li data-target="#pShopCarousel" data-slide-to="0" class="active"></li>
-				<#else>
-				<li data-target="#pShopCarousel" data-slide-to="${caro_index}"></li>
-				</#if> </#list>
-			</ol>
-
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-				<#list carousel as caro> <#if (caro_index == 0)>
-				<div id="pShopCarouselItem${caro_index}" class="item active">
+<aside id="colorlib-hero">
+	<div id="titleSlide"class="flexslider">
+		<ul class="slides">
+			<#list carousel as caro>  <#if (caro_index == 0)>
+				<li class="active" style="background-image: url('${contextPath}${caro.imageURL}');" >
 					<#else>
-					<div id="pShopCarouselItem${caro_index}" class="item">
-						</#if> <img class="image" src="${contextPath}${caro.imageURL}"
-							alt="${caro.name}" title="${caro.name}">
-						<div class="carousel-caption">
-							<a
-								href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}">
-								<span class="h3 text-center name">${caro.name}</span>
-							</a>
+					<li class="" style="background-image: url('${contextPath}${caro.imageURL}');" >
+					</#if>
+					<div class="overlay"></div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-6 offset-sm-3 text-center slider-text">
+								<div class="slider-text-inner">
+									<div class="desc">
+										<h1 class="head-1">${caro.name}</h1>
+										<p><a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a></p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</#list>
+				</li>
+			</#list>
+		</ul>
+	</div>
+</aside>
+<div id="colorlib-intro" class="colorlib-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h2 id="intro" class="intro">Began with a simple idea "SHATATATATA!" - M. Scott</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="colorlib-product">
+	<div class="container-fluid">
+		<div class="row">
+			<#list productslistcat as prItem>
+			  <div class="col-sm-3 text-center">
+				<div class="featured">
+				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img" 
+				  style="background-image: url(${contextPath}${prItem.imageURL});"></a>
+				 
+				</div>
+			  </div>
+			</#list>
+		
+			<#list topCategory as tC>
+
+			<div class="col-sm-3 text-center">
+
+
+				<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="pName">${tC.name}</a></h2>
+  
+			</div>
+			</#list>
+
+		</div>
+		
+	</div>
+</div>
+
+
+<div class="colorlib-product">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+				<h2>Hot Products</h2>
+			</div>
+		</div>
+		<div id="productList" class="row row-pb-md">
+			<#list productslist as prItem>
+			<div class="col-lg-3 mb-4 text-center">
+				<div class="product-entry border">
+					<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="prod-img">
+						<img src="${contextPath}${prItem.imageURL}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+					</a>
+					<div class="desc">
+						<h2><a href="#">${prItem.name}</a></h2>
+					<!--	<span id="prodPrice" title="${currency}" class="col-xs-12 font-bold">${currency}</span>
+					-->
+					</div>
 				</div>
 			</div>
-
-			<!-- Left and right controls; Carousel nav -->
-			<a id="btnCarouselPrev" class="left carousel-control"
-				href="#pShopCarousel" role="button" data-slide="prev"> <span
-				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a> <a id="btnCarouselNext" class="right carousel-control"
-				href="#pShopCarousel" role="button" data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-
+			</#list>
 		</div>
-</div>
-
-<div class="margin_top20 row">
-	<div class="col-xs-12">
-		<div class="header-container">
-			<span class="h2">${i18n("indexHotProducts")}</span>
+		<div class="row justify-content-center">
+			<div class="col-md-12 text-center">
+				<p><a href="#" style="color:#fff" class="btn btn-primary-shop btn-lg">Shop All Products</a></p>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<ul id="productList" class="thumbnails list-unstyled col-xs-12">
-			<#list productslist as prItem>
-			<li class="col-xs-12 col-sm-6 col-md-4">
-				<div class="thumbnail">
-					<a
-						href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}"><img
-						data-src="${contextPath}/assets/js/holder.js/300x200"
-						alt="${prItem.descriptionOverview}"
-						src="${contextPath}${prItem.imageURL}">
-
-						<div class="pInfo">
-							<div class="h4 text-primary">
-								<span class="pName">${prItem.name}</span>
-							</div>
-							<span class="text-muted"> <span
-								class="pDescriptionOverview">${prItem.descriptionOverview}</span>
-							</span>
-						</div> </a>
-				</div>
-			</li> </#list>
-		</ul>
-
-	</div>
 </div>
+
+
 
 </@layout.myLayout>
