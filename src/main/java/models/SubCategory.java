@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides a sub category in the catalog of the poster store. The sub category belongs to one
+ * This {@link Entity} provides a sub category in the catalog of the poster demo store. The sub category belongs to one
  * {@link TopCategory}. A sub category has different products.
  * 
  * @author sebastianloob
