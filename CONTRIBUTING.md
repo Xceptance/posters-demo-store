@@ -1,6 +1,6 @@
 # Contributing to the Posters Demo Store Project
 
-You want to be part of the Posters community? Report bugs or suggest improvements in the [issue tracker](issues).
+You want to be part of the Posters community? Report bugs or suggest improvements in the [issue tracker](https://github.com/Xceptance/posters-demo-store/issues).
 
 If you are a developer and want to contribute fixes or extensions, create pull requests with your changes. See below for more information on what needs to be installed and how the code is developed.
 

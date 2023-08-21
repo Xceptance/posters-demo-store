@@ -9,7 +9,7 @@ Posters comes with the basic functionality that you would expect from a typical 
 
 * A product catalog with categories and products, in our case, posters.
 * Customers may register with the shop.
-* Customers can manage their profile, including shipping and billing addresses as well as credit cards.
+* Customers can manage their account, including shipping and billing addresses as well as credit cards.
 * There is a shopping cart.
 * Customers may place orders as guests or as registered customers.
 
@@ -29,7 +29,7 @@ Posters uses [H2](https://www.h2database.com/) as a simple file-based database a
 
 ## Getting the Posters Application
 
-The latest version of Posters can be downloaded from [Maven Central](https://search.maven.org/artifact/com.xceptance/posters-demo-store). Place the JAR file `posters-demo-store-<version>.jar` anywhere on your local disk.
+The latest version of Posters can be downloaded at the [Releases](releases) page. Place the JAR file `posters-demo-store-<version>.jar` anywhere on your local disk.
 
 
 ## Building Posters
