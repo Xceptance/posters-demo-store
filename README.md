@@ -29,12 +29,14 @@ Posters uses [H2](https://www.h2database.com/) as a simple file-based database a
 
 ## Getting the Posters Application
 
-The latest version of Posters can be downloaded at the [Releases](releases) page. Place the JAR file `posters-demo-store-<version>.jar` anywhere on your local disk.
+The latest version of Posters can be downloaded at the [Releases](https://github.com/Xceptance/posters-demo-store/releases) page. Place the JAR file `posters-demo-store-<version>.jar` anywhere on your local disk.
 
 
 ## Building Posters
 
-As an alternative to downloading a prepackaged JAR file, you can build the JAR yourself. Posters Demo Store is a regular Maven project, so you will need to have Maven installed on your machine. To build the project yourself, clone this repository to your local disk and run:
+As an alternative to downloading a prepackaged JAR file, you can build the JAR yourself. You will need to have Maven and JDK 17 installed on your machine.
+
+To build the project, clone this repository to your local disk and run:
 
 ```
 mvn clean package
