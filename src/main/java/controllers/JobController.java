@@ -21,15 +21,12 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
-<<<<<<< HEAD
 import models.Customer;
 import models.Product;
 import models.TopCategory;
 import models_backoffice.User;
 import ninja.lifecycle.Start;
-=======
 import javax.inject.Inject;
->>>>>>> develop
 
 import org.h2.tools.RunScript;
 
