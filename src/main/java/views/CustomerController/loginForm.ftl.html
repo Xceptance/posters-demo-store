@@ -1,61 +1,78 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "Sign in">
-<form id="formLogin" class="form-horizontal"
-	action="${applUrlHttps}/login" method="post">
-	<div>
+<div class="row row-pb-lg  justify-content-center">
+	
+</div>
+<div class="container">
+ 
+    <div class="row  justify-content-center">
+
 		<!-- Form Name -->
-		<div class="header-container">
-			<h2>${i18n("titleSignIn")}</h2>
-		</div>
-		<div class="col-sm-12">
+        <div class="col-lg-6">
+			<form id="formLogin" class="form-horizontal colorlib-form h2fwpr"
+				action="${applUrlHttps}/login" method="post">
+				<legend>
+					<span class="h2fwpr">${i18n("titleSignIn")}</span>
+				</legend>
+				<div>
+				
+					<div class="">
+						<!-- Email input-->
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="email">${i18n("labelMyEmail")}*</label>
+							<div class="col-sm-8">
+								<input id="email" name="email"
+									placeholder="${i18n('registrationEmail')}" class="form-control"
+									type="text" title="${i18n('errorValidEmail')}"
+									pattern="${regexEmail}"
+									data-error="${i18n('errorValidEmail')}" value="${(email)!}"
+									required>
+							</div>
+						</div>
 
-			<!-- Email input-->
-			<div class="form-group">
-				<label class="col-sm-3 control-label" for="email">${i18n("labelMyEmail")}*</label>
-				<div class="col-sm-9">
-					<input id="email" name="email"
-						placeholder="${i18n('registrationEmail')}" class="form-control"
-						type="text" title="${i18n('errorValidEmail')}"
-						pattern="${regexEmail}"
-						data-error="${i18n('errorValidEmail')}" value="${(email)!}"
-						required>
-				</div>
-			</div>
 
-			<!-- Password input-->
-			<div class="form-group">
-				<label class="col-sm-3 control-label" for="password">${i18n("labelMyPassword")}*</label>
-				<div class="col-sm-9">
-					<input id="password" name="password"
-						placeholder="${i18n('registrationPassword')}" class="form-control"
-						type="password" required>
-				</div>
-			</div>
 
-			<!-- button -->
-			<div class="form-group">
-				<div class="col-sm-12 nopadding">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-9">
-						<span class="reqField pull-left textcolordarkgrey">*
-							${i18n('titleRequiredFields')}</span>
-						<button id="btnSignIn" class="btn btn-primary pull-right"
-							name="btnSignIn" type="submit">${i18n('buttonSignIn')}</button>
+						<!-- Password input-->
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="password">${i18n("labelMyPassword")}*</label>
+							<div class="col-sm-8">
+								<input id="password" name="password"
+									placeholder="${i18n('registrationPassword')}" class="form-control"
+									type="password" required>
+									<span class="reqField pull-left textcolordarkgrey">*
+										${i18n('titleRequiredFields')}</span>
+							</div>
+						</div>
+
+						<!-- button -->
+						<div class="form-group">
+							<div class="col-sm-12 nopadding">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9">
+								
+									<button id="btnSignIn" class="btn btn-primary pull-right"
+										name="btnSignIn" type="submit">${i18n('buttonSignIn')}</button>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
+			</form>
+			<div>
+				<div class="header-container">
+						<span class="h2fwpr">${i18n("registrationNew")}</span>
+					</div>
+				<!-- new customer -->
+				<div>
+					<a id="linkRegister" href="${applUrlHttps}/registration">${i18n("registrationRegister")}</a>
+				</div>
 			</div>
-
 		</div>
 	</div>
-</form>
-
-<div>
-	<div class="header-container">
-            <span class="h3">${i18n("registrationNew")}</span>
-        </div>
-	<!-- new customer -->
-	<div>
-		<a id="linkRegister" href="${applUrlHttps}/registration">${i18n("registrationRegister")}</a>
-	</div>
 </div>
+
+
+
+
 </@layout.myLayout>

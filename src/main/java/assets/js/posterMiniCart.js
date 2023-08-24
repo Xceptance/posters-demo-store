@@ -83,10 +83,14 @@ function addToMiniCart(productId, finish, size) {
 					data.headerCartOverview);
 
 			/* show minicart and than hide after 1500 ms */
-			$('#headerCartOverview').parent().addClass("open");
+			$('.top-menu #headerCartOverview').attr('aria-expanded', 'true').parent().addClass('show');
+            $('.top-menu #miniCartMenu').addClass('show');
 			window.setTimeout(function(){
-				$('#headerCartOverview').parent().removeClass("open");
-			},1500);
+			 $('.top-menu #headerCartOverview').attr('aria-expanded', 'false').parent().removeClass('show');
+			  $('.top-menu #miniCartMenu').removeClass('show');
+            }, 1500);
+
+
 		}
 	});
 }

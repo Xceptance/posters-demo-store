@@ -1,93 +1,150 @@
 <#macro myLayout title="Posters - The Ultimate Online Shop">
-<!DOCTYPE html>
-<html lang="en">
+	<!DOCTYPE html>
+	<html lang="en">
 
-<head>
+	<head>
 
-<title>${i18n("titlePageShop")}</title>
+		<title>${i18n("titlePageShop")}</title>
 
-<!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
 
-<meta charset="utf-8">
+		<!-- Animate.css -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/animate.css">
 
-<link href="${contextPath}/assets/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
-<link href="${contextPath}/assets/css/posterMiniCart.css"
-	rel="stylesheet" />
+		<!-- Icomoon Icon Fonts-->
+		<link rel="stylesheet" href="${contextPath}/assets/css/icomoon.css">
 
-<link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon"
-	type="image/x-icon">
+		<!-- Ion Icon Fonts-->
+		<link rel="stylesheet" href="${contextPath}/assets/css/ionicons.min.css">
+		<!-- Bootstrap  -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
 
-<script src="${contextPath}/assets/js/jquery-2.2.4.min.js"></script>
-<script src="${contextPath}/assets/js/bootstrap.min.js"></script>
-<script src="${contextPath}/assets/js/bootstrap-paginator.min.js"></script>
-<script type="text/javascript">
-	var CONTEXT_PATH = '${contextPath}';
-</script>
-<script src="${contextPath}/assets/js/posterMiniCart.js"></script>
-</head>
-<body>
-	<!-- header -->
-	<header>
-		<div class="body-wrapper"><#if checkout??> <#include
-				"headerCheckout.ftl.html"/> <#else> <#include "header.ftl.html"/>
-				</#if>
-		</div>
-	</header>
+		<!-- Magnific Popup -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
 
-	<!-- main/content -->
-	<div class="body-wrapper">
+		<!-- Flexslider  -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/flexslider.css">
+
+		<!-- Owl Carousel -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="${contextPath}/assets/css/owl.theme.default.min.css">
+
+		<!-- Date Picker -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/bootstrap-datepicker.css">
+
+		<!-- Flaticons  -->
+		<link rel="stylesheet" href="${contextPath}/assets/fonts/flaticon/font/flaticon.css">
+
+		<!-- Theme style  -->
+		<link rel="stylesheet" href="${contextPath}/assets/css/style.css">
+
+		<link href="${contextPath}/assets/css/posters.css" rel="stylesheet" />
+
+		<link href="${contextPath}/assets/css/posterMiniCart.css" rel="stylesheet" />
+
+		<link href="${contextPath}/assets/ico/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+		<script src="${contextPath}/assets/js/jquery.min.js"></script>
+		<script src="${contextPath}/assets/js/bootstrap-paginator-0.5.js"></script>
+		<script type="text/javascript">
+			var CONTEXT_PATH = '${contextPath}';
+		</script>
+		<script src="${contextPath}/assets/js/posterMiniCart.js"></script>
+	</head>
+
+	<body>
+		<!-- header -->
+		<header>
+			<#if checkout??>
+				<#include "headerCheckout.ftl.html" />
+				<#else>
+					<#include "header.ftl.html" />
+			</#if>
+		</header>
+
+		<!-- main/content -->
 		<main> <!-- message: no java script -->
-		<noscript>
-			<div class="section">
-				<div class="container">
-					<div class="noscriptmsg card">
-						<p>${i18n('errorNoJavaScript')}</p>
+			<noscript>
+				<div class="section">
+					<div class="container">
+						<div class="noscriptmsg card">
+							<p>${i18n('errorNoJavaScript')}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-		</noscript>
+			</noscript>
 
-		<!-- checkout breadcrumb --> <#if checkout??>
-		<div class="container-fluid"><#include
-			"../components/checkoutBreadcrumb.ftl.html"/></div>
-		</#if> <!-- messages -->
-		<div class="container-fluid" id="errorMessage">
-			<div class="text-center alert alert-danger">
-				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+			<!-- checkout breadcrumb -->
+			<#if checkout??>
+				<div class="container-fluid">
+					<#include "../components/checkoutBreadcrumb.ftl.html" />
+				</div>
+			</#if> <!-- messages -->
+			<div class="container-fluid" id="errorMessage">
+				<div class="text-center alert alert-danger">
+					<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+				</div>
 			</div>
-		</div>
-		<div class="container-fluid" id="successMessage">
-			<div class="text-center alert alert-success">
-				<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+			<div class="container-fluid" id="successMessage">
+				<div class="text-center alert alert-success">
+					<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
+				</div>
 			</div>
-		</div>
 
-		<!-- body -->
-		<div class="container-fluid" id="main"><#nested/></div>
+			<!-- body -->
+			<div class="h2fwpr" id="main">
+				<#nested />
+			</div>
 		</main>
-	</div>
-	<!-- footer -->
-	<#include "footer.ftl.html"/>
 
-	<script src="${contextPath}/assets/js/poster.js"></script>
-	<#if flash.error??>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#errorMessage").show();
-			$("#errorMessage div strong").html("${flash.error}");
-		});
-	</script>
-	</#if> <#if flash.success??>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#successMessage").show();
-			$("#successMessage div strong").html("${flash.success}");
-		});
-	</script>
-	</#if>
-</body>
-</html>
+		<!-- footer -->
+		<#include "footer.ftl.html" />
+
+		<script src="${contextPath}/assets/js/poster.js"></script>
+		<#if flash.error??>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					$("#errorMessage").show();
+					$("#errorMessage div strong").html("${flash.error}");
+				});
+			</script>
+		</#if>
+		<#if flash.success??>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					$("#successMessage").show();
+					$("#successMessage div strong").html("${flash.success}");
+				});
+			</script>
+		</#if>
+
+		<!-- jQuery -->
+		<script src="${contextPath}/assets/js/jquery.min.js"></script>
+		<!-- popper -->
+		<script src="${contextPath}/assets/js/popper.min.js"></script>
+		<!-- bootstrap 4.1 -->
+		<script src="${contextPath}/assets/js/bootstrap.min.js"></script>
+		<!-- jQuery easing -->
+		<script src="${contextPath}/assets/js/jquery.easing.1.3.js"></script>
+		<!-- Waypoints -->
+		<script src="${contextPath}/assets/js/jquery.waypoints.min.js"></script>
+		<!-- Flexslider -->
+		<script src="${contextPath}/assets/js/jquery.flexslider-min.js"></script>
+		<!-- Owl carousel -->
+		<script src="${contextPath}/assets/js/owl.carousel.min.js"></script>
+		<!-- Magnific Popup -->
+		<script src="${contextPath}/assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="${contextPath}/assets/js/magnific-popup-options.js"></script>
+		<!-- Date Picker -->
+		<script src="${contextPath}/assets/js/bootstrap-datepicker.js"></script>
+		<!-- Stellar Parallax -->
+		<script src="${contextPath}/assets/js/jquery.stellar.min.js"></script>
+		<!-- Main -->
+		<script src="${contextPath}/assets/js/main.js"></script>
+
+	</body>
+
+	</html>
 </#macro>

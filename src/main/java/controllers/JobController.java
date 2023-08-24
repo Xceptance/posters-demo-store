@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package controllers;
 
 import java.io.InputStreamReader;
@@ -6,20 +21,27 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
+<<<<<<< HEAD
 import models.Customer;
 import models.Product;
 import models.TopCategory;
 import models_backoffice.User;
 import ninja.lifecycle.Start;
+=======
+import javax.inject.Inject;
+>>>>>>> develop
 
 import org.h2.tools.RunScript;
-
-import util.xml.ImportFromXMLToDB;
 
 import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
 
 import conf.StarterConf;
+import models.Customer;
+import models.Product;
+import models.TopCategory;
+import ninja.lifecycle.Start;
+import util.xml.ImportFromXMLToDB;
 
 /**
  * Executes some actions, before the application starts.
@@ -29,6 +51,8 @@ import conf.StarterConf;
 @Singleton
 public class JobController
 {
+    @Inject
+    StarterConf config;
 
     /**
      * Prepares the database and, if necessary, imports some data to the database.
@@ -38,12 +62,6 @@ public class JobController
     @Start(order = 90)
     public void startActions() throws Exception
     {
-        // set some system properties
-        System.setProperty("starter.home", "src/main/java");
-        System.setProperty("ninja.external.configuration", "conf/application.conf");
-        System.setProperty("ninja.mode", "prod");
-
-        final StarterConf config = new StarterConf();
         // prepare database
         prepareDatabase(config);
         // import categories, products, dummy customer and user
@@ -78,13 +96,10 @@ public class JobController
             boolean userTable = false;
             // if server has been started with the parameter "-Dstarter.droptables=true"
             // drop all tables
-            if (config.DROP_TABLES != null)
+            if (config.DROP_TABLES)
             {
-                if (config.DROP_TABLES.equals("true"))
-                {
-                    RunScript.execute(connection,
-                                      new InputStreamReader(getClass().getClassLoader().getResourceAsStream("conf/default-drop.sql")));
-                }
+                RunScript.execute(connection,
+                                  new InputStreamReader(getClass().getClassLoader().getResourceAsStream("conf/default-drop.sql")));
             }
             // get the DB-metadata
             final DatabaseMetaData md = connection.getMetaData();
@@ -176,12 +191,9 @@ public class JobController
             ImportFromXMLToDB.importProduct();
         }
         // import dummy customer, if the parameter is set and no other customer is in DB
-        if (config.IMPORT_CUSTOMER != null)
+        if (config.IMPORT_CUSTOMER && Ebean.find(Customer.class).findList().size() == 0)
         {
-            if (config.IMPORT_CUSTOMER.equals("true") && Ebean.find(Customer.class).findList().size() == 0)
-            {
-                ImportFromXMLToDB.importCustomer();
-            }
+            ImportFromXMLToDB.importCustomer();
         }
         // import users, if there is no user in DB
         if (Ebean.find(User.class).findList().size() == 0)

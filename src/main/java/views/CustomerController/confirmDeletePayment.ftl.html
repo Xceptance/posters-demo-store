@@ -1,35 +1,47 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<form id="formDeletePayment" class="form-horizontal"
-	action="${contextPath}/deletePayment" method="post">
-	<fieldset>
-		<legend>
-                    <span class="h2">${i18n("confirmDeletePayment")}</span>
-		</legend>
-		<div class="col-xs-12">
-			<!-- Password input-->
-			<div class="form-group">
-				<label class="col-sm-3 control-label" for="password">${i18n("confirmDeletionPassword")}*</label>
-				<div class="col-sm-9">
-					<input id="password" name="password"
-						placeholder="${i18n('registrationPassword')}" class="form-control"
-						type="password" data-error="${i18n('errorPasswordMatch')}" required>
-				</div>
+
+<div class="container">
+ 
+    <div class="row  justify-content-center">
+        <div class="col-lg-6">
+
+			<div class="col-lg-12 colorlib-form h2fwpr">
+				<form id="formDeletePayment" class="form-horizontal"
+					action="${contextPath}/deletePayment" method="post">
+					<fieldset>
+						<legend>
+									<span class="h2">${i18n("confirmDeletePayment")}</span>
+						</legend>
+						<div class="col-xs-12">
+							<!-- Password input-->
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="password">${i18n("confirmDeletionPassword")}*</label>
+								<div class="col-sm-8">
+									<input id="password" name="password"
+										placeholder="${i18n('registrationPassword')}" class="form-control"
+										type="password" data-error="${i18n('errorPasswordMatch')}" required>
+								</div>
+							</div>
+							<!-- card id -->
+							<input name="cardId" id="cardId" type="hidden" value=${cardId}></input>
+							<div class="form-group">
+								<div class="col-sm-12 nopadding">
+									<div class="col-sm-4"></div>
+									<div class="col-sm-8">
+										<span class="reqField pull-left textcolordarkgrey">*
+											${i18n('titleRequiredFields')}</span>
+										<button id="btnDeletePayment" class="btn btn-danger pull-right"
+											name="btnDeletePayment" type="submit">${i18n('buttonDelete')}</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
 			</div>
-			<!-- card id -->
-			<input name="cardId" id="cardId" type="hidden" value=${cardId}></input>
-			<div class="form-group">
-				<div class="col-sm-12 nopadding">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-9">
-						<span class="reqField pull-left textcolordarkgrey">*
-							${i18n('titleRequiredFields')}</span>
-						<button id="btnDeletePayment" class="btn btn-danger pull-right"
-							name="btnDeletePayment" type="submit">${i18n('buttonDelete')}</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</fieldset>
-</form>
+	</div>
+</div>
+</div>
+
 </@layout.myLayout>

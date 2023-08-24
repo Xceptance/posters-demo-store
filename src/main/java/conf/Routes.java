@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package conf;
 
 import ninja.AssetsController;
@@ -26,108 +41,109 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // home page
         // ############################################################
-        router.GET().route("/").with(WebShopController.class, "index");
+        router.GET().route("/").with(WebShopController::index);
 
         // ############################################################
         // search
         // ############################################################
-        router.GET().route("/search").with(SearchController.class, "searchProduct");
-        router.POST().route("/getProductOfSearch").with(SearchController.class, "getProductOfSearch");
+        router.GET().route("/search").with(SearchController::searchProduct);
+        router.POST().route("/getProductOfSearch").with(SearchController::getProductOfSearch);
 
         // ############################################################
         // customer registration
         // ############################################################
-        router.GET().route("/login").with(CustomerController.class, "loginForm");
-        router.POST().route("/login").with(CustomerController.class, "login");
-        router.GET().route("/logout").with(CustomerController.class, "logout");
-        router.GET().route("/registration").with(CustomerController.class, "registration");
-        router.POST().route("/registration").with(CustomerController.class, "registrationCompleted");
+        router.GET().route("/login").with(CustomerController::loginForm);
+        router.POST().route("/login").with(CustomerController::login);
+        router.GET().route("/logout").with(CustomerController::logout);
+        router.GET().route("/registration").with(CustomerController::registration);
+        router.POST().route("/registration").with(CustomerController::registrationCompleted);
 
         // ############################################################
         // customer backend
         // ############################################################
-        router.GET().route("/accountOverview").with(CustomerController.class, "accountOverview");
-        router.GET().route("/paymentOverview").with(CustomerController.class, "paymentOverview");
-        router.GET().route("/addressOverview").with(CustomerController.class, "addressOverview");
-        router.GET().route("/settingOverview").with(CustomerController.class, "settingOverview");
-        router.GET().route("/orderOverview").with(CustomerController.class, "orderOverview");
+        router.GET().route("/accountOverview").with(CustomerController::accountOverview);
+        router.GET().route("/paymentOverview").with(CustomerController::paymentOverview);
+        router.GET().route("/addressOverview").with(CustomerController::addressOverview);
+        router.GET().route("/settingOverview").with(CustomerController::settingOverview);
+        router.GET().route("/orderOverview").with(CustomerController::orderOverview);
 
         // ############################################################
         // customer's payment
         // ############################################################
-        router.GET().route("/addPaymentToCustomer").with(CustomerController.class, "addPaymentToCustomer");
-        router.POST().route("/addPaymentToCustomer").with(CustomerController.class, "addPaymentToCustomerCompleted");
-        router.POST().route("/deletePayment").with(CustomerController.class, "deletePayment");
-        router.POST().route("/confirmDeletePayment").with(CustomerController.class, "confirmDeletePayment");
-        router.POST().route("/updatePaymentMethod").with(CustomerController.class, "updatePaymentMethod");
-        router.POST().route("/updatePaymentMethodCompleted").with(CustomerController.class, "updatePaymentMethodCompleted");
+        router.GET().route("/addPaymentToCustomer").with(CustomerController::addPaymentToCustomer);
+        router.POST().route("/addPaymentToCustomer").with(CustomerController::addPaymentToCustomerCompleted);
+        router.POST().route("/deletePayment").with(CustomerController::deletePayment);
+        router.POST().route("/confirmDeletePayment").with(CustomerController::confirmDeletePayment);
+        router.POST().route("/updatePaymentMethod").with(CustomerController::updatePaymentMethod);
+        router.POST().route("/updatePaymentMethodCompleted").with(CustomerController::updatePaymentMethodCompleted);
 
         // ############################################################
         // customer's addresses
         // ############################################################
-        router.POST().route("/updateShippingAddress").with(CustomerController.class, "updateShippingAddress");
-        router.POST().route("/updateShippingAddressCompleted").with(CustomerController.class, "updateShippingAddressCompleted");
-        router.POST().route("/updateBillingAddress").with(CustomerController.class, "updateBillingAddress");
-        router.POST().route("/updateBillingAddressCompleted").with(CustomerController.class, "updateBillingAddressCompleted");
-        router.POST().route("/deleteBillingAddress").with(CustomerController.class, "deleteBillingAddress");
-        router.POST().route("/confirmDeleteBillingAddress").with(CustomerController.class, "confirmDeleteBillingAddress");
-        router.POST().route("/deleteShippingAddress").with(CustomerController.class, "deleteShippingAddress");
-        router.POST().route("/confirmDeleteShippingAddress").with(CustomerController.class, "confirmDeleteShippingAddress");
-        router.GET().route("/addShippingAddressToCustomer").with(CustomerController.class, "addShippingAddressToCustomer");
-        router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController.class,
-                                                                           "addShippingAddressToCustomerCompleted");
-        router.GET().route("/addBillingAddressToCustomer").with(CustomerController.class, "addBillingAddressToCustomer");
-        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController.class, "addBillingAddressToCustomerCompleted");
+        router.POST().route("/updateShippingAddress").with(CustomerController::updateShippingAddress);
+        router.POST().route("/updateShippingAddressCompleted").with(CustomerController::updateShippingAddressCompleted);
+        router.POST().route("/updateBillingAddress").with(CustomerController::updateBillingAddress);
+        router.POST().route("/updateBillingAddressCompleted").with(CustomerController::updateBillingAddressCompleted);
+        router.POST().route("/deleteBillingAddress").with(CustomerController::deleteBillingAddress);
+        router.POST().route("/confirmDeleteBillingAddress").with(CustomerController::confirmDeleteBillingAddress);
+        router.POST().route("/deleteShippingAddress").with(CustomerController::deleteShippingAddress);
+        router.POST().route("/confirmDeleteShippingAddress").with(CustomerController::confirmDeleteShippingAddress);
+        router.GET().route("/addShippingAddressToCustomer").with(CustomerController::addShippingAddressToCustomer);
+        router.POST().route("/addShippingAddressToCustomerCompleted")
+              .with(CustomerController::addShippingAddressToCustomerCompleted);
+        router.GET().route("/addBillingAddressToCustomer").with(CustomerController::addBillingAddressToCustomer);
+        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController::addBillingAddressToCustomerCompleted);
 
         // ############################################################
         // customer's personal data
         // ############################################################
-        router.GET().route("/changeNameOrEmail").with(CustomerController.class, "changeNameOrEmail");
-        router.POST().route("/changeNameOrEmailCompleted").with(CustomerController.class, "changeNameOrEmailCompleted");
-        router.GET().route("/changePassword").with(CustomerController.class, "changePassword");
-        router.POST().route("/changePasswordCompleted").with(CustomerController.class, "changePasswordCompleted");
-        router.GET().route("/confirmDeleteAccount").with(CustomerController.class, "confirmDeleteAccount");
-        router.POST().route("/deleteAccount").with(CustomerController.class, "deleteAccount");
+        router.GET().route("/changeNameOrEmail").with(CustomerController::changeNameOrEmail);
+        router.POST().route("/changeNameOrEmailCompleted").with(CustomerController::changeNameOrEmailCompleted);
+        router.GET().route("/changePassword").with(CustomerController::changePassword);
+        router.POST().route("/changePasswordCompleted").with(CustomerController::changePasswordCompleted);
+        router.GET().route("/confirmDeleteAccount").with(CustomerController::confirmDeleteAccount);
+        router.POST().route("/deleteAccount").with(CustomerController::deleteAccount);
 
         // ############################################################
         // catalog and products
         // ############################################################
-        router.GET().route("/productDetail/{product}").with(CatalogController.class, "productDetail");
-        router.GET().route("/topCategory/{topCategory}").with(CatalogController.class, "topCategoryOverview");
-        router.GET().route("/category/{subCategory}").with(CatalogController.class, "productOverview");
-        router.POST().route("/getProductOfTopCategory").with(CatalogController.class, "getProductOfTopCategory");
-        router.POST().route("/getProductOfSubCategory").with(CatalogController.class, "getProductOfSubCategory");
+        router.GET().route("/productDetail/{product}").with(CatalogController::productDetail);
+        router.GET().route("/topCategory/{topCategory}").with(CatalogController::topCategoryOverview);
+        router.GET().route("/category/{subCategory}").with(CatalogController::productOverview);
+        router.POST().route("/getProductOfTopCategory").with(CatalogController::getProductOfTopCategory);
+        router.POST().route("/getProductOfSubCategory").with(CatalogController::getProductOfSubCategory);
 
         // ############################################################
         // cart
         // ############################################################
-        router.GET().route("/cart").with(CartController.class, "cart");
-        router.GET().route("/deleteFromCart").with(CartController.class, "deleteFromCart");
-        router.GET().route("/updateProductCount").with(CartController.class, "updateProductCount");
-        router.POST().route("/updatePrice").with(CartController.class, "updatePrice");
-        router.GET().route("/addToCartSlider").with(CartController.class, "addToCart");
-        router.GET().route("/getMiniCartElements").with(CartController.class, "getMiniCartElements");
+        router.GET().route("/cart").with(CartController::cart);
+        router.GET().route("/deleteFromCart").with(CartController::deleteFromCart);
+        router.GET().route("/updateProductCount").with(CartController::updateProductCount);
+        router.POST().route("/updatePrice").with(CartController::updatePrice);
+        router.GET().route("/addToCartSlider").with(CartController::addToCart);
+        router.GET().route("/getMiniCartElements").with(CartController::getMiniCartElements);
 
         // ############################################################
         // checkout
         // ############################################################
-        router.GET().route("/checkout").with(CheckoutController.class, "checkout");
-        router.GET().route("/enterShippingAddress").with(CheckoutController.class, "enterShippingAddress");
-        router.POST().route("/shippingAddressCompleted").with(CheckoutController.class, "shippingAddressCompleted");
-        router.GET().route("/enterBillingAddress").with(CheckoutController.class, "enterBillingAddress");
-        router.POST().route("/billingAddressCompleted").with(CheckoutController.class, "billingAddressCompleted");
-        router.POST().route("/addShippingAddressToOrder").with(CheckoutController.class, "addShippingAddressToOrder");
-        router.POST().route("/addBillingAddressToOrder").with(CheckoutController.class, "addBillingAddressToOrder");
-        router.GET().route("/enterPaymentMethod").with(CheckoutController.class, "enterPaymentMethod");
-        router.POST().route("/addPaymentToOrder").with(CheckoutController.class, "addPaymentToOrder");
-        router.POST().route("/paymentMethodCompleted").with(CheckoutController.class, "paymentMethodCompleted");
-        router.GET().route("/checkoutOverview").with(CheckoutController.class, "checkoutOverview");
-        // router.POST().route("/orderConfirmation").with(CheckoutController.class, "orderConfirmation");
-        router.POST().route("/checkoutCompleted").with(CheckoutController.class, "checkoutCompleted");
+        router.GET().route("/checkout").with(CheckoutController::checkout);
+        router.GET().route("/enterShippingAddress").with(CheckoutController::enterShippingAddress);
+        router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        router.GET().route("/enterBillingAddress").with(CheckoutController::enterBillingAddress);
+        router.POST().route("/billingAddressCompleted").with(CheckoutController::billingAddressCompleted);
+        router.POST().route("/addShippingAddressToOrder").with(CheckoutController::addShippingAddressToOrder);
+        router.POST().route("/addBillingAddressToOrder").with(CheckoutController::addBillingAddressToOrder);
+        router.GET().route("/enterPaymentMethod").with(CheckoutController::enterPaymentMethod);
+        router.POST().route("/addPaymentToOrder").with(CheckoutController::addPaymentToOrder);
+        router.POST().route("/paymentMethodCompleted").with(CheckoutController::paymentMethodCompleted);
+        router.GET().route("/checkoutOverview").with(CheckoutController::checkoutOverview);
+        router.POST().route("/checkoutCompleted").with(CheckoutController::checkoutCompleted);
+        //router.GET().route("/orderConfirmation").with(CheckoutController::orderConfirmation);
+
         // ############################################################
         // assets
         // ############################################################
-        router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
+        router.GET().route("/assets/{fileName: .*}").with(AssetsController::serveStatic);
 
         // ############################################################
         // ############################################################
@@ -221,5 +237,6 @@ public class Routes implements ApplicationRoutes
         // Page Not Found
         // ############################################################
         router.GET().route("/posters/backoffice/.*").with(BackofficeController.class, "Error404");
+
     }
 }

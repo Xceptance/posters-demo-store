@@ -1,22 +1,28 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop"> 
-<div>
-    <div id="titleAccountOverview" class="header-container">
-        <span class="h2">${i18n("accountOverviewTitle")}</span>
+
+<div class="row row-pb-lg  justify-content-center">
+</div>
+
+<div class="container">
+ 
+    <div class="row  justify-content-center h2fwpr">
+
+		<!-- Form Name -->
+        <div class="col-lg-6">
+            <div class="colorlib-form">
+                <div id="titleAccountOverview" class="header-container h2fwpr">
+                    <span class="h2 ">${i18n("accountOverviewTitle")}</span>
+                </div>
+                
+                <ul class="list-unstyled h2fwpr">
+                    <li><p><a id="linkOrderOverview" href="${contextPath}/orderOverview" class="btn btn-primary btn-account">${i18n("titleOrderHistory")}</a></p></li>
+                    <li><p><a id="linkAddressOverview" href="${contextPath}/addressOverview" class="btn btn-primary btn-account">${i18n("titleAddressOverview")}</a></p></li>
+                    <li><p><a id="linkPaymentOverview" href="${contextPath}/paymentOverview" class="btn btn-primary btn-account">${i18n("titlePaymentInformation")}</a></p></li>
+                    <li><p><a id="linkSettingOverview" href="${contextPath}/settingOverview" class="btn btn-primary btn-account">${i18n("titleSettings")}</a></p></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <ul class="list-unstyled">
-        <li>
-            <a id="linkOrderOverview" href="${contextPath}/orderOverview">${i18n("titleOrderHistory")}</a>
-        </li>
-        <li>
-            <a id="linkAddressOverview" href="${contextPath}/addressOverview">${i18n("titleAddressOverview")}</a>
-        </li>
-        <li>
-            <a id="linkPaymentOverview" href="${contextPath}/paymentOverview">${i18n("titlePaymentInformation")}</a>
-        </li>
-        <li>
-            <a id="linkPersonalData" href="${contextPath}/settingOverview">${i18n("titleSettings")}</a>
-        </li>
-    </ul>
 </div>
 </@layout.myLayout>
