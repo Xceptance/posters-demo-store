@@ -276,11 +276,11 @@
     border-color: var(--primary);
 }
 
-/*** putting footer to front ***/
+/*** putting footer to front    
 .footer-front {
     z-index: 9998!important;
     position:relative;
-}
+}  ***/
 
 /*** viewing list in the back office ***/
 .viewing-list {
