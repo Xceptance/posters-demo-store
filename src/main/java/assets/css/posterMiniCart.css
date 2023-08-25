@@ -1,10 +1,11 @@
 .cartMini {
 	width: 250px;
+	padding: 10px 25px;
 }
 
 .cartMiniHeader {
 	padding: 10px 20px;
-	border-bottom: 1px #EBEBEB solid;
+	border-bottom: 3px #000 solid;
 }
 
 .cartMiniProducts {
@@ -26,7 +27,7 @@
 }
 
 .cartItems {
-	border-bottom: 1px #EBEBEB solid;
+	border-bottom: 2px #c91b1b solid;
 	padding: 5px 0;
 	margin: 0 20px;
 }

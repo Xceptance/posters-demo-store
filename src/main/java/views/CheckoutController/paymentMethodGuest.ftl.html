@@ -1,29 +1,80 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
-<div>
-	<div id="titlePayment" class="header-container">
-		<h2>${i18n("paymentMethodTitlEnter")}</h2>
-	</div>
+
+
+<div class="container">
+    <!-- Process Indicator -->
+    <div class="row row-pb-lg  justify-content-center">
+        <div class="col-lg-12">
+            <div class="process-wrap">
+                <div class="process text-center active">
+                    <p><span>01</span></p>
+                    <h3>Shopping Cart</h3>
+                </div>
+                <div class="process text-center active">
+                    <p><span>02</span></p>
+                    <h3>Shipping Address</h3>
+                </div>
+                <div class="process text-center active">
+                    <p><span>03</span></p>
+                    <h3>Billing Address</h3>
+                </div>
+                <div class="process text-center active">
+                    <p><span>04</span></p>
+                    <h3>Payment Method</h3>
+                </div>
+                <div class="process text-center">
+                    <p><span>05</span></p>
+                    <h3>Checkout</h3>
+                </div>
+                <div class="process text-center">
+                    <p><span>06</span></p>
+                    <h3>Order Complete</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<!-- add new credit card -->
-	<form id="formAddPayment" class="form-horizontal"
-		action="${contextPath}/paymentMethodCompleted" method="post">
+    <div class="row  justify-content-center">
 
-		<!-- include form -->
-		<#include "../components/paymentForm.ftl.html"/>
+        <div class="col-lg-6">
+        
+            <form id="formAddPayment" action="${contextPath}/paymentMethodCompleted" method="post" class="colorlib-form">
+                <h2 id="titlePayment" class="text-center">${i18n("paymentMethodTitlEnter")}</h2>
+                <div class="row">
+                    <!-- include address form -->
+					<#include "../components/paymentForm.ftl.html"/>
 
-		<!-- continue button -->
-		<div class="form-group">
-			<div class="col-sm-12 nopadding">
-				<div class="col-sm-3"></div>
-				<div class="col-sm-9">
-					<span class="reqField pull-left textcolordarkgrey">*
-						${i18n('titleRequiredFields')}</span>
-					<button id="btnAddPayment" class="btn btn-primary pull-right"
-						name="btnAddPayment" type="submit">${i18n('buttonContinue')}</button>
-				</div>
-			</div>
-		</div>
-	</form>
+                    <hr>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 nopadding">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <span class="reqField pull-left textcolordarkgrey">* ${i18n('titleRequiredFields')}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button id="btnAddPayment" class="btn btn-primary pull-right" name="btnAddPayment" type="submit">${i18n('buttonContinue')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </form>
+        </div>
+
+
+        
+    </div>
+        
+    
 </div>
 </@layout.myLayout>

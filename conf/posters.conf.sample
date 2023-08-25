@@ -1,0 +1,11 @@
+
+ninja.port = -1
+ninja.ssl.port = 8443
+
+## 
+ninja.ssl.keystore.uri = classpath:/ninja/standalone/ninja-development.keystore
+ninja.ssl.keystore.password = password
+ninja.ssl.truststore.uri = classpath:/ninja/standalone/ninja-development.truststore
+ninja.ssl.truststore.password = password
+
+ninja.context = /postahs

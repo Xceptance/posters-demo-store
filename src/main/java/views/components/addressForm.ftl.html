@@ -1,71 +1,72 @@
-
 <!-- full name-->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="fullName">${i18n("addressFullName")}*</label>
-	<div class="col-xs-12 col-sm-9">
-		<input id="fullName" class="form-control" name="fullName" title="${i18n('errorWrongName')}" type="text" pattern="${regexName}"
-			data-error="${i18n('errorWrongName')}" value="${(address.name)!}"
-			required>
+<div class="col-md-12">
+	<div class="form-group h2fwpr">
+		<label for="fullName">${i18n("addressFullName")}*</label>
+		<input type="text" id="fullName" class="form-control" name="fullName" title="${i18n('errorWrongName')}" type="text" pattern="${regexName}"
+		data-error="${i18n('errorWrongName')}" value="${(address.name)!}" placeholder="Your Name" required>
 	</div>
 </div>
 
 <!-- company-->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="company">${i18n("addressCompany")}</label>
-	<div class="col-xs-12 col-sm-9">
-		<input id="company" class="form-control" name="company" title="${i18n('addressCompany')}" 
-			placeholder="${i18n('addressCompanyPlaceholder')}" type="text"
-			value="${(address.company)!}">
+<div class="col-md-12">
+	<div class="form-group h2fwpr">
+		<label for="companyname" for="company">${i18n("addressCompany")}</label>
+		 <input id="company" class="form-control" name="company" title="${i18n('addressCompany')}" 
+		 placeholder="${i18n('addressCompanyPlaceholder')}" type="text"
+		 value="${(address.company)!}">
 	</div>
 </div>
 
 <!-- address line-->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="addressLine">${i18n("addressLine")}*</label>
-	<div class="col-xs-12 col-sm-9">
+<div class="col-md-12">
+	<div class="form-group h2fwpr">
+		<label for="addressLine">${i18n("addressLine")}*</label>
 		<input id="addressLine" class="form-control" name="addressLine"
-			title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}"
-			type="text" value="${(address.addressLine)!}" required>
+		title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}"
+		type="text" value="${(address.addressLine)!}" required>
 	</div>
 </div>
 
 <!-- city-->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="city">${i18n("addressCity")}*</label>
-	<div class="col-xs-12 col-sm-9">
+<div class="col-md-12">
+	<div class="form-group h2fwpr">
+		<label for="city">
+			${i18n("addressCity")}*
+		</label>
 		<input id="city" class="form-control" name="city" title="${i18n('errorWrongCity')}"
-			type="text" pattern="${regexName}"
-			data-error="${i18n('errorWrongCity')}" value="${(address.city)!}"
-			required>
+		type="text" pattern="${regexName}"
+		data-error="${i18n('errorWrongCity')}" value="${(address.city)!}"
+		required>
 	</div>
 </div>
 
 <!-- state-->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="state">${i18n("addressState")}*</label>
-	<div class="col-xs-12 col-sm-9">
+<div class="col-md-6">
+	<div class="form-group h2fwpr">
+		<label for="state">${i18n("addressState")}*</label>
 		<input id="state" class="form-control" name="state" title="${i18n('errorWrongState')}"
-			type="text" pattern="${regexName}"
-			data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
-			required>
+		type="text" pattern="${regexName}"
+		data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
+		required>
 	</div>
+	
 </div>
 
 <!-- zip-->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="zip">${i18n('addressZip')}*</label>
-	<div class="col-xs-12 col-sm-9">
+<div class="col-md-6">
+	<div class="form-group h2fwpr">
+		<label for="zip">${i18n('addressZip')}*</label>
 		<input id="zip" class="form-control" name="zip"
-			title="${i18n('errorWrongZip')}" type="text"
-			pattern="${regexZip}" data-error="${i18n('errorWrongZip')}"
-			value="${(address.zip)!}" required>
+		title="${i18n('errorWrongZip')}" type="text"
+		pattern="${regexZip}" data-error="${i18n('errorWrongZip')}"
+		value="${(address.zip)!}" placeholder="Zip / Postal" required>
 	</div>
 </div>
 
 <!-- Select country -->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="country">${i18n("addressCountry")}*</label>
-	<div class="col-xs-12 col-sm-9">
+<div class="col-md-12 h2fwpr">
+	<label for="country">${i18n("addressCountry")}*</label>
+	<div class="form-group">
 		<select id="country" class="form-control" name="country"
 			title="${i18n('addressCountry')}">
 			<option>${i18n('countryUS')}</option>

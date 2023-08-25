@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Default logback configuration file that is used until Ninja's logback configuration management kicks in. -->
+<configuration>
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>log/posters.log</File>
+        <encoder>
+            <Pattern>[%d{yyyy/MM/dd-HH:mm:ss.SSS}] %-5p [%t] %c - %m%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <maxIndex>10</maxIndex>
+            <FileNamePattern>log/posters.log.%i</FileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <root level="warn">
+        <appender-ref ref="file"/>
+    </root>
+</configuration>

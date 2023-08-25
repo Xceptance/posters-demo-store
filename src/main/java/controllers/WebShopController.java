@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package controllers;
 
 import java.util.ArrayList;
@@ -44,15 +59,32 @@ public class WebShopController
 
         // add specific products to data map
         List<Product> productsList = new ArrayList<>();
-        productsList.add(Product.getProductById(1));
-        productsList.add(Product.getProductById(23));
-        productsList.add(Product.getProductById(83));
-        
+        productsList.add(Product.getProductById(6));
+        productsList.add(Product.getProductById(15));
+        productsList.add(Product.getProductById(33));
+        productsList.add(Product.getProductById(27));
+        productsList.add(Product.getProductById(44));
+        productsList.add(Product.getProductById(54));
+        productsList.add(Product.getProductById(65));
+        productsList.add(Product.getProductById(76));
+        productsList.add(Product.getProductById(81));
+        productsList.add(Product.getProductById(90));
+        productsList.add(Product.getProductById(103));
+        productsList.add(Product.getProductById(115));
+
+        //Add category specific products from each category
+        List<Product> productsListCat = new ArrayList<>();
+        productsListCat.add(Product.getProductById(3));
+        productsListCat.add(Product.getProductById(44));
+        productsListCat.add(Product.getProductById(76));
+        productsListCat.add(Product.getProductById(111));
+
         // add products to data map
         data.put("carousel", productsCarousel);
         data.put("productslist", productsList);
-        
+        data.put("productslistcat", productsListCat);
         return Results.html().render(data);
+
     }
 
     /**

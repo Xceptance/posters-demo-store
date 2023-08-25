@@ -1,36 +1,52 @@
-<nav id="headerCheckout" class="navbar navbar-default navbar-static-top container-fluid">
-    <div class="row">
-        <div class="navbar-header col-xs-12 col-sm-11">
-            <!-- navbar-brand -->
-                <a id="brand" href="${applUrlHttp}/" title="${i18n('titleShop')}"> 
-                    <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png"
-                      title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
-                    <span class="titleShopText">${i18n('titleShop')}</span>
-                </a>
-        </div>
-        <div class="col-xs-12 col-sm-1">
-            <!-- login form -->
-            <ul id="showUserMenu"
-                class="nav nav-pills header-menu-item">
-                <li role="presentation" class="dropdown">
-                    <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
-                        title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false"> 
-                        <#if isLogged == false>
-                            <span class="glyphicon glyphicon-user not-logged"></span>
-                        </#if>
-                        <#if isLogged == true>
-                            <span class="glyphicon glyphicon-user logged"></span>
-                        </#if>
-                    </a>
-                    <ul id="userMenu"
-                        class="dropdown-menu dropdown-menu-right hidden-xs">
-                        <#include '../components/userMenu.ftl.html'/>
+<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>
+
+
+
+
+
+<nav class="colorlib-nav" role="navigation">
+    <div class="top-menu">
+        <div class="container">
+            <div id="headerCheckout" class="row">
+                <div class="col-sm-7 col-md-9">
+                    <div id="colorlib-logo">
+                        <a href="${applUrlHttp}/" style="text-decoration: none">
+                            <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png"
+                                title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+                            ${i18n('titleShop')}
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-md-3">
+                    <!-- login form -->
+                    <ul id="showUserMenu" class="nav nav-pills header-menu-item">
+                        <li role="presentation" class="dropdown">
+                            <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
+                                <#if isLogged==false>
+                                    <span class="glyphicon glyphicon-user not-logged"></span>
+                                </#if>
+                                <#if isLogged==true>
+                                    <span class="glyphicon glyphicon-user logged"></span>
+                                </#if>
+                            </a>
+                            <ul id="userMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
+                                <#include '../components/userMenu.ftl.html' />
+                            </ul>
+                           
                     </ul>
-                    <ul id="userMenuMobile"
-                        class="dropdown-menu hidden-sm hidden-md hidden-lg">
-                        <#include '../components/userMenu.ftl.html' />
-                    </ul>
-            </ul>
+                </div>
+            </div>
+            <div class="row">
+                <!-- bootstrap header menu for larger than mobile -->
+                <div class="col-sm-7 col-md-9 text-left menu-1">
+
+                </div>
+
+                <div class="col-xs-12 col-sm-1">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </nav>

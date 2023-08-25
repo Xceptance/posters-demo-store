@@ -1,22 +1,22 @@
-<div class="cartMini cartMiniWrap">
+<div class="cartMini cartMiniWrap dropdownusermenu"style="overflow: hidden;" >
 	<div class="cartMiniEmpty">${i18n("infoEmptyCartShort")}</div>
 
 	<div class="cartMiniHeader">
-		<div class="cartMiniProductCounter">
+		<div class="cartMiniProductCounter dropdownusermenu">
 			<span class="value font-bold">${cartProductCount}</span>
 			<#if cartProductCount == 1 > ${i18n("miniCartItem")} <#else>
 			${i18n("miniCartItems")} </#if>
 		</div>
 	</div>
 
-	<div class="cartMiniElementListWrap">
+	<div class="cartMiniElementListWrap dropdownusermenu">
 		<span class="notificationsLoader"></span>
-		<ul class="list-unstyled cartMiniElementList">
+		<ul class="list-unstyled cartMiniElementList dropdownusermenu">
 			<#list cartProducts as product>
 			<li
 				class="productId${product.product.id}${product.getFinish()}${product.size.width}x${product.size.height} miniCartItem" data-prodId="${product.product.id}">
-				<ul class="cartItems list-unstyled">
-					<li class="prodName">${product.product.name}</li>
+				<ul class="cartItems list-unstyled dropdownusermenu">
+					<li class="prodName dropdownusermenu">${product.product.name}</li>
 					<li>${i18n("cartTableHeaderQuantity")}: <span 
 						class="prodCount">${product.getProductCount()}</span> (<span 
 						class="prodStyle">${product.getFinish()}</span>, <span class="prodSize"><span 

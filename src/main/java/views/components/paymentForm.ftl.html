@@ -1,63 +1,89 @@
+
+
+
 <!-- credit card number -->
-<div class="form-group">
-	<label class="col-xs-12 col-sm-3 control-label" for="creditCardNumber">${i18n("titleNumber")}*</label>
-	<div class="col-xs-12 col-sm-9">
-		<input id="creditCardNumber" class="form-control" name="creditCardNumber"
-			title="${i18n('errorWrongCreditCard')}"
-			type="text" placeholder="${i18n("titleNumber")}"
-			pattern="4[0-9]{12}(?:[0-9]{3})?"
-			data-error="${i18n('errorWrongCreditCard')}"
-			value="${(card.cardNumber)!}" size="16" required>
+<div class="col-md-12 h2fwpr">
+	<div class="form-group">
+		<label for="creditCardNumber">${i18n("titleNumber")}*</label>
+			<input id="creditCardNumber" class="form-control" name="creditCardNumber"
+				title="${i18n('errorWrongCreditCard')}"
+				type="text" placeholder="${i18n("titleNumber")}"
+				pattern="4[0-9]{12}(?:[0-9]{3})?"
+				data-error="${i18n('errorWrongCreditCard')}"
+				value="${(card.cardNumber)!}" size="16" required>
 	</div>
 </div>
 
 <!-- name -->
-<div class=form-group>
-	<label class="col-xs-12 col-sm-3 control-label" for="name">${i18n("paymentCardholderName")}*</label>
-	<div class="col-xs-12 col-sm-9">
+<div class="col-md-6 h2fwpr">
+	<div class="form-group">
+		<label for="name">${i18n("paymentCardholderName")}*</label>
 		<input id="name" class="form-control" name="name" type="text"
 			title="${i18n('errorWrongName')}" placeholder="${i18n("paymentCardholderName")}"
 			pattern="${regexName}" data-error="${i18n('errorWrongName')}"
 			value="${(card.name)!}" required>
-	</div>
+	</div>	
 </div>
 
 <!-- select expiration date -->
-<div class="form-group">
-  <label class="col-xs-12 col-sm-3 control-label" for="expirationDateMonth">${i18n('paymentExpiration')}*</label>
-  <div class="col-xs-12 col-sm-4">
-    <select id="expirationDateMonth" name="expirationDateMonth" class="form-control" title="${i18n('paymentExpiration')}">
-      	<#list 1..9 as i>
-      	<#if card??>
-      	<#if (card.month == i)><option selected="selected">0${i}</option><#else><option>0${i}</option></#if>
-     	<#else>
-		<#if (currentMonth == i)><option selected="selected">0${i}</option><#else><option>0${i}</option></#if>
-      	</#if>
-      	</#list>
-      	<#list 10..12 as i>
-      	<#if card??>
-		<#if (card.month == i)><option selected="selected">${i}</option><#else><option>${i}</option></#if>
-     	<#else>
-		<#if (currentMonth == i)><option selected="selected">${i}</option><#else><option>${i}</option></#if>
-      	</#if>
-      	</#list>
-    </select>
-    </div>
-    <div class="col-xs-12 col-sm-5">
-    <select id="expirationDateYear" name="expirationDateYear" class="form-control" title="${i18n('paymentExpiration')}">
-      <#list expirationDateStartYear..(expirationDateStartYear+10) as i>
-      	<#if card??>
-      		<#if (card.year == i)>
-      			<option selected="selected">${i}</option>
-      		<#else>
-      			<option>${i}</option></#if>
-     	<#else>
-      		<#if (currentYear == i)>
-      			<option selected="selected">${i}</option>
-      		<#else>
-      			<option>${i}</option></#if>
-      	</#if>
-      	</#list>
-    </select>
-  </div>
+<div class="col-md-6 h2fwpr">
+	<div class="form-group">
+	  <label for="expirationDateMonth">${i18n('paymentExpiration')}*</label>
+	  <div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-6">
+		  <select id="expirationDateMonth" name="expirationDateMonth" class="form-control" title="${i18n('paymentExpiration')}">
+			<#list 1..9 as i>
+			  <#if card??>
+				<#if (card.month == i)>
+				  <option selected="selected">0${i}</option>
+				<#else>
+				  <option>0${i}</option>
+				</#if>
+			  <#else>
+				<#if (currentMonth == i)>
+				  <option selected="selected">0${i}</option>
+				<#else>
+				  <option>0${i}</option>
+				</#if>
+			  </#if>
+			</#list>
+			<#list 10..12 as i>
+			  <#if card??>
+				<#if (card.month == i)>
+				  <option selected="selected">${i}</option>
+				<#else>
+				  <option>${i}</option>
+				</#if>
+			  <#else>
+				<#if (currentMonth == i)>
+				  <option selected="selected">${i}</option>
+				<#else>
+				  <option>${i}</option>
+				</#if>
+			  </#if>
+			</#list>
+		  </select>
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6">
+		  <select id="expirationDateYear" name="expirationDateYear" class="form-control" title="${i18n('paymentExpiration')}">
+			<#list expirationDateStartYear..(expirationDateStartYear+10) as i>
+			  <#if card??>
+				<#if (card.year == i)>
+				  <option selected="selected">${i}</option>
+				<#else>
+				  <option>${i}</option>
+				</#if>
+			  <#else>
+				<#if (currentYear == i)>
+				  <option selected="selected">${i}</option>
+				<#else>
+				  <option>${i}</option>
+				</#if>
+			  </#if>
+			</#list>
+		  </select>
+		</div>
+	  </div>
+	</div>
 </div>
+  

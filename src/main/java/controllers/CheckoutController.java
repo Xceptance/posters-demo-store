@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package controllers;
 
 import java.text.DateFormat;
@@ -5,8 +20,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
+import com.google.inject.Inject;
+
+import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
+import filters.SessionOrderExistFilter;
+import filters.SessionTerminatedFilter;
 import models.BillingAddress;
 import models.Cart;
 import models.CreditCard;
@@ -21,14 +43,6 @@ import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.date.DateUtils;
 import util.session.SessionHandling;
-
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
-
-import conf.PosterConstants;
-import filters.SessionCustomerExistFilter;
-import filters.SessionOrderExistFilter;
-import filters.SessionTerminatedFilter;
 
 /**
  * Controller class, that provides the checkout functionality.
@@ -156,7 +170,7 @@ public class CheckoutController
      * @param state
      * @param zip
      * @param country
-     * @param billingEqualShipp
+     * @param billingEqualShipping
      * @param context
      * @return
      */
@@ -682,7 +696,19 @@ public class CheckoutController
         SessionHandling.removeOrderId(context);
         // show success message
         context.getFlashScope().success(msg.get("checkoutCompleted", language).get());
-        return Results.redirect(context.getContextPath() + "/");
+        return Results.redirect(context.getContextPath() + "/orderConfirmation");
+    }
+
+    /**
+     * Shows the confirmation page of an order
+     *
+     * @param context
+     */
+    public Result orderConfirmation(final Context context)
+    {
+        final Map<String, Object> data = new HashMap<String, Object>();
+        WebShopController.setCommonData(data, context, xcpConf);
+        return Results.html().render(data);
     }
 
     /**

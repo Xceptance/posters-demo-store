@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package controllers;
 
 import java.text.DecimalFormat;
@@ -5,8 +20,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
+import com.avaje.ebean.Ebean;
+import com.google.inject.Inject;
+
+import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
+import filters.SessionTerminatedFilter;
 import models.Cart;
 import models.CartProduct;
 import models.PosterSize;
@@ -19,14 +41,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.session.SessionHandling;
-
-import com.avaje.ebean.Ebean;
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
-
-import conf.PosterConstants;
-import filters.SessionCustomerExistFilter;
-import filters.SessionTerminatedFilter;
 
 /**
  * Controller class, that provides the cart functionality.
@@ -211,6 +225,7 @@ public class CartController
      * 
      * @param productId
      * @param finish
+     * @param size
      * @param context
      * @return
      */
@@ -267,7 +282,7 @@ public class CartController
     /**
      * Deletes the product from the cart.
      * 
-     * @param productId
+     * @param cartProductId
      * @param context
      * @return
      */
@@ -349,7 +364,7 @@ public class CartController
     /**
      * convert double into (price) string
      * 
-     * @param price
+     * @param value
      * @return
      */
     public String getDoubleAsString(final double value)

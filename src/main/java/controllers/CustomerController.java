@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package controllers;
 
 import java.text.DateFormat;
@@ -6,8 +21,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
+import com.avaje.ebean.Ebean;
+import com.google.inject.Inject;
+
+import conf.PosterConstants;
+import filters.SessionCustomerExistFilter;
+import filters.SessionCustomerIsLoggedFilter;
 import models.BillingAddress;
 import models.Cart;
 import models.CartProduct;
@@ -22,14 +44,6 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 import util.session.SessionHandling;
-
-import com.avaje.ebean.Ebean;
-import com.google.common.base.Optional;
-import com.google.inject.Inject;
-
-import conf.PosterConstants;
-import filters.SessionCustomerExistFilter;
-import filters.SessionCustomerIsLoggedFilter;
 
 /**
  * Controller class, that provides the customer functionality.
@@ -466,7 +480,8 @@ public class CustomerController
     /**
      * Removes a billing address of the customer.
      * 
-     * @param cardId
+     * @param password
+     * @param addressId
      * @param context
      * @return
      */
@@ -521,7 +536,8 @@ public class CustomerController
     /**
      * Removes a shipping address of the customer.
      * 
-     * @param cardId
+     * @param password
+     * @param addressId
      * @param context
      * @return
      */
@@ -730,7 +746,7 @@ public class CustomerController
     /**
      * Returns the page to update a billing address of the customer.
      * 
-     * @param cardId
+     * @param addressId
      * @param context
      * @return
      */
@@ -963,7 +979,6 @@ public class CustomerController
     /**
      * Returns a page to update the name and the email address of a customer.
      * 
-     * @param customerId
      * @param context
      * @return
      */
@@ -1032,7 +1047,6 @@ public class CustomerController
     /**
      * Returns a page to update the current password of a customer.
      * 
-     * @param customerId
      * @param context
      * @return
      */
@@ -1108,7 +1122,7 @@ public class CustomerController
     /**
      * Deletes the current customer and all its addresses, orders and payment information.
      * 
-     * @param customerId
+     * @param password
      * @param context
      * @return
      */

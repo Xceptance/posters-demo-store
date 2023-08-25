@@ -1,29 +1,29 @@
 
 <!-- login -->
 <#if isLogged == false>
-<li class="userMenuHeader">${i18n('headerWelcomeGuest')}</li>
-<li class="userMenuContent"><a href="${applUrlHttps}/registration"
-	class="goToRegistration" title="${i18n('headerRegistration')}"> <span
-		class="glyphicon glyphicon-user"></span> <span class="margin_left5"></span><span
-		class="text-primary">${i18n("headerRegistration")}</span>
+<li class="userMenuHeader dropdownusermenu">${i18n('headerWelcomeGuest')}</li>
+<li class="userMenuContent dropdownusermenu"><a href="${applUrlHttps}/registration"
+	class="btn btn-primary form-control goToRegistration dropdownusermenu" title="${i18n('headerRegistration')}"> <span
+		class="icon-user-add-outline"></span> <span class="margin_left5"></span><span
+		class="text-primary-usercart">${i18n("headerRegistration")}</span>
 </a></li>
 <li class="userMenuContent"><a
-	href="${applUrlHttps}/login" class="goToLogin"
+	href="${applUrlHttps}/login" class="btn btn-primary form-control goToLogin dropdownusermenu"
 	title="${i18n('headerLogin')}"><span
-		class="glyphicon glyphicon-log-in"></span> <span class="margin_left5"></span><span
-		class="text-primary">${i18n('headerLogin')}</span>
+		class="icon-log-in"></span> <span class="margin_left5"></span><span
+		class="text-primary-usercart">${i18n('headerLogin')}</span>
 </a></li>
 </#if> <#if isLogged == true>
 
 <li class="userMenuHeader">${i18n('headerWelcome')}: <span class="firstName">${customerFirstName}</span></li>
-<li class="userMenuContent"><a
-	href="${applUrlHttps}/accountOverview" class="goToAccountOverview"
-	title="${i18n('accountOverviewTitle')}"><span
-		class="glyphicon glyphicon-info-sign"></span> <span
-		class="margin_left5"></span><span
-		class="text-primary">${i18n("accountOverviewTitle")}</span></a></li>
-<li class="userMenuContent"><a href="${applUrlHttp}/logout"
-	title="${i18n('headerLogout')}" class="goToLogout"><span
-		class="glyphicon glyphicon-log-out"></span> <span class="margin_left5"></span><span
-		class="text-primary">${i18n("headerLogout")}</span></a></li>
+<li class="userMenuContent"><a href="${applUrlHttps}/accountOverview" 
+	class="btn btn-primary form-control goToAccountOverview dropdownusermenu" title="${i18n('accountOverviewTitle')}"><span
+		class="icon-info-large logged"></span> <span class="margin_left5"></span><span
+		class="text-primary-usercart">${i18n("accountOverviewTitle")}</span>
+</a></li>
+<li class="userMenuContent"><a 
+	href="${applUrlHttp}/logout"
+	title="${i18n('headerLogout')}" class="btn btn-primary form-control goToLogout dropdownusermenu"><span
+		class="icon-log-out"></span> <span class="margin_left5"></span><span
+		class="text-primary-usercart">${i18n("headerLogout")}</span></a></li>
 </#if>
