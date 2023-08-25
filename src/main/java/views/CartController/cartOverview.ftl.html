@@ -66,8 +66,8 @@
 					<div id="product${cartProduct_index}" class="product-cart d-flex">
 						<div class="one-forth">
 							<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}">
-								<div class="product-img"
-									style="background-image: url(${contextPath}${cartProduct.product.imageURL});"></div>
+								<div class="product-img" style="background-image: url(${contextPath}${cartProduct.product.imageURL});"
+									></div>
 							</a>
 
 							<div class="display-tc">
@@ -109,7 +109,7 @@
 							<div class="display-tc btn btn-link btnUpdateProduct"
 								id="btnUpdateProdCount${cartProduct_index}" name="btnUpdateProdCount${cartProduct_index}"
 								title="${i18n('buttonUpdate')}" data-id="${cartProduct.id}"
-								data-index="${cartProduct_index}" style="text-decoration: none;">
+								data-index="${cartProduct_index}">
 								<span class="icon-refresh-ccw"></span>
 							</div>
 
@@ -163,7 +163,7 @@
 					<br>
 					<div id="prodPrice" class="float-right">
 						<a href="${applUrlHttps}/checkout" id="btnStartCheckout"
-							class="btn btn-primary" style="background-color: #cb1b1b; border-color: #cb1b1b;"
+							class="btn btn-primary"
 							title="${i18n('cartOverviewStartCheckout')}">${i18n("cartOverviewStartCheckout")}</a>
 					</div>
 				</div>
