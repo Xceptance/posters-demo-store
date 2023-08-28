@@ -28,6 +28,16 @@
     opacity: 1;
 }
 
+/*** footer ***/
+footer {
+    height: 100px;
+}
+
+/*** minimum content height ***/
+/*** To make the footer stick to the bottom of the page ***/
+.contentheight{
+    min-height: calc(100vh - 200px);
+}
 
 /*** Button ***/
 .btn {
