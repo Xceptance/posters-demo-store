@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- Default logback configuration file that is used until Ninja's logback configuration management kicks in. -->
 <configuration>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>log/posters.log</File>

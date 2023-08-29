@@ -1,6 +1,6 @@
-/data/
-/logs/
+/conf/*.conf
+/conf/*.xml
+/db/
+/log/
 /target/
-/samples/testsuite-poster-store/results/
-/samples/testsuite-poster-store/classes/
 /*.sql
