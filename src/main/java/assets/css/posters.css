@@ -225,6 +225,12 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 #errorMessage, #successMessage {
 	display: none;
 }
+
+#categoryMenu {
+	font-size: 1.1rem;
+	text-transform: uppercase;
+}
+
 #categoryMenu li > div, #categoryMenuMobile li > div{
 	position: relative;
     display: block;

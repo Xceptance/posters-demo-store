@@ -980,17 +980,23 @@ background: #c91b1b;
           width: 100px; }
 
 .colorlib-form {
-  background: whitesmoke;
+  background: var(--dialog-box-bg);
   padding: 2em;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  border-radius: 10px; }
   @media (max-width: 767.98px) {
     .colorlib-form {
       padding: 1em; } }
   .colorlib-form h2 {
+    font-size: 1.5rem;
+    color: var(--dialog-box-text-dark);
+    text-transform: uppercase;
+    text-align: left !important;
     margin-bottom: 40px; }
   .colorlib-form label {
     text-transform: uppercase;
-    color: black; }
+    font-size: 0.875rem;
+    color: var(--dialog-box-text-light); }
   .colorlib-form .form-group {
     margin-bottom: 20px; }
   .colorlib-form .form-control {
@@ -1044,6 +1050,17 @@ background: #c91b1b;
     margin-top: 28px;
     padding: 12px !important;
     color: #000; }
+  .colorlib-form input, .colorlib-form select {
+    font-family: 'Montserrat';
+    color: var(--dialog-box-text-dark);
+  }
+  .colorlib-form .btn {
+    border-radius: 5px;
+  }
+  .colorlib-form span {
+    font-family: 'Montserrat';
+    color: var(--dialog-box-text-light);
+  }
 
 .breadcrumbs-img,
 .featured-img,
@@ -1208,6 +1225,8 @@ input[type="text"] {
     max-width: 50%; } }
 
 #colorlib-footer {
+  font-family: 'Montserrat';
+  font-size: 0.875rem;
   padding: 2em; }
   #colorlib-footer .colorlib-footer-links {
     padding: 0;
@@ -1238,6 +1257,8 @@ input[type="text"] {
   #colorlib-footer h4 {
     margin-bottom: 30px;
     text-transform: uppercase;
+    font-family: 'Rokkit';
+    font-size: 1rem;
     color: #000;
     letter-spacing: 1px; }
   #colorlib-footer .copy {
@@ -1683,6 +1704,9 @@ input[type="text"] {
 
 .headerCheckoutRef {
   text-decoration: none;
+  font-size: 34px;
+  font-weight: 700;
+  font-family: 'Montserrat';
 }
 
 .btnCartOverviewFormCont {
@@ -1716,4 +1740,14 @@ input {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: white;
+  background-color: var(--xred);
+  border-color: var(--xred);
+}
+
+.btn:hover {
+  background-color: var(--button-hover);
 }
