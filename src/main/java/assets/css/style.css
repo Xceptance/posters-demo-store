@@ -8964,3 +8964,10 @@ input[type="text"] {
 
 .js .animate-box {
   opacity: 0; }
+
+.demo-disclaimer {
+  text-align: center;
+  background-color: #c91b1b;
+  color: white;
+  font-family: 'Montserrat';
+}  
