@@ -1,13 +1,16 @@
 <#include "../layout/upper.ftl.html">
-    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
-        <div class="bg-light rounded h-100 p-4">
-            <h1 class="mb-4">Customer View</h1>
-            <ul class="viewing-list">
-                <li>
-                    Customer Name: ${customer.firstName} ${customer.name}
-                </li>
-                <li>
-                    Customer shipping address(es):
+
+<div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+    <div class="bg-light rounded h-100 p-4">
+        <h2 class="mb-4">Customer View</h1>
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Name</dt>
+            <dd class="col-sm-8">
+                ${customer.firstName} ${customer.name}
+            </dd>
+
+            <dt class="col-sm-4">Shipping Address</dt>
+            <dd class="col-sm-8">
                     <#list customer.shippingAddress as shippingAddress>
                         <#if shippingAddress??>
                             ${shippingAddress.addressLine} ${shippingAddress.zip},
@@ -16,48 +19,50 @@
                                 Empty shipping address
                         </#if>
                     </#list>
-                </li>
-                <li>
-                    Customer billing address(es):
-                    <#list customer.billingAddress as billingAddress>
-                        <#if billingAddress??>
-                            ${billingAddress.addressLine} ${billingAddress.zip},
-                            ${billingAddress.state} ${billingAddress.city}
+            </dd>
+
+            <dt class="col-sm-4">Billing Address</dt>
+            <dd class="col-sm-8"> 
+                <#list customer.billingAddress as billingAddress>
+                    <#if billingAddress??>
+                        ${billingAddress.addressLine} ${billingAddress.zip},
+                        ${billingAddress.state} ${billingAddress.city}
+                        <#else>
+                            Empty billing address
+                    </#if>
+                </#list></dd>
+
+            <dt class="col-sm-4">Payment Information</dt>
+            <dd class="col-sm-8">
+                <#list customer.creditCard as creditCard>
+                    <#if creditCard??>
+                        <li>
+                            ${creditCard.cardNumber}
+                        </li>
+                        <#else>
+                            No order
+                    </#if>
+                </#list></dd>
+
+                <dt class="col-sm-4">Orders</dt>
+                <dd class="col-sm-8">
+                    <#list customer.order as order>
+                        <#if order??>
+                            <a class="btn btn-sm btn-success" href="/posters/backoffice/order/${order.id}">View</a>
                             <#else>
-                                Empty billing address
+                                <a class="btn btn-sm btn-danger" href="">None</a>
                         </#if>
                     </#list>
-                </li>
-                <li>
-                    Customer order(s):
-                    <ul>
-                        <#list customer.order as order>
-                            <#if order??>
-                                <li>
-                                    <a href="/posters/backoffice/order/${order.id}">${order.id}</a>
-                                </li>
-                                <#else>
-                                    No order
-                            </#if>
-                        </#list>
-                    </ul>
-                </li>
-                <li>
-                    Customer's Credit Card Number(s): 
-                    <ul>
-                        <#list customer.creditCard as creditCard>
-                            <#if creditCard??>
-                                <li>
-                                    ${creditCard.cardNumber}
-                                </li>
-                                <#else>
-                                    No order
-                            </#if>
-                        </#list>
-                    </ul>
-                </li>
-            </ul>
+                
+                </dd>
+
+        </dl>
+        <dl>
             <a class="btn btn-sm btn-primary" href="/posters/backoffice/customer">Back</a>
             <a class="btn btn-sm btn-warning" href="/posters/backoffice/customer/${customer.id}/edit">Edit</a>
-        </div>
+        </dl>
+    </div>
+</div>
+
+    
         <#include "../layout/footer.ftl.html">
