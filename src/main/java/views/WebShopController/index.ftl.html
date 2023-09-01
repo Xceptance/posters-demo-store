@@ -4,9 +4,9 @@
 	<div id="titleSlide"class="flexslider">
 		<ul class="slides">
 			<#list carousel as caro>  <#if (caro_index == 0)>
-				<li class="active" style="background-image: url('${contextPath}${caro.imageURL}');" >
+			<li class="active header-carousel-img" style="background-image: url('${contextPath}${caro.imageURL}');">
 					<#else>
-					<li class="" style="background-image: url('${contextPath}${caro.imageURL}');" >
+					<li class="header-carousel-img" style="background-image: url('${contextPath}${caro.imageURL}');">
 					</#if>
 					<div class="overlay"></div>
 					<div class="container-fluid">
@@ -42,7 +42,7 @@
 			<#list productslistcat as prItem>
 			  <div class="col-sm-3 text-center">
 				<div class="featured">
-				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img" 
+				  <a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="featured-img"
 				  style="background-image: url(${contextPath}${prItem.imageURL});"></a>
 				 
 				</div>
@@ -90,7 +90,7 @@
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-12 text-center">
-				<p><a href="#" style="color:#fff" class="btn btn-primary-shop btn-lg">Shop All Products</a></p>
+				<p><a href="#" class="btn btn-primary-shop btn-lg">Shop All Products</a></p>
 			</div>
 		</div>
 	</div>

@@ -51,7 +51,7 @@
 											<div class="col-xs-12 col-sm-3 text-center mb-3">
 												<form action="${contextPath}/updateShippingAddress" method="post">
 													<input name="addressId" class="shippingId${address.id}" type="hidden" value="${address.id}">
-													<button class="btn btn-primary" style="padding-left: 27px;" id="btnChangeAddr${address_index}" name="btnChangeAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
+													<button class="btn btn-primary adr-ov-btn" id="btnChangeAddr${address_index}" name="btnChangeAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 												</form>
 											</div>
 										</div>
@@ -108,7 +108,7 @@
 												<div class="col-xs-12 col-sm-3 text-center mb-3">
 													<form action="${contextPath}/updateBillingAddress" method="post">
 														<input name="addressId" class="billingId${address.id}" type="hidden" value=${address.id}>
-														<button class="btn btn-primary" style="padding-left: 27px;" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
+														<button class="btn btn-primary adr-ov-btn" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 													</form>
 												</div>
 											</div>

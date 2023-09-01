@@ -10,34 +10,6 @@
 			<div class="row">
 
 				<#if (0 < cartProducts?size) >
-				<div class="col-md-10 offset-md-1">
-					<div class="process-wrap">
-						<div class="process text-center active">
-							<p><span>01</span></p>
-							<h3>Shopping Cart</h3>
-						</div>
-						<div class="process text-center">
-							<p><span>02</span></p>
-							<h3>Shipping Address</h3>
-						</div>
-						<div class="process text-center">
-							<p><span>03</span></p>
-							<h3>Billing Address</h3>
-						</div>
-						<div class="process text-center">
-							<p><span>04</span></p>
-							<h3>Payment Method</h3>
-						</div>
-						<div class="process text-center">
-							<p><span>05</span></p>
-							<h3>Checkout</h3>
-						</div>
-						<div class="process text-center">
-							<p><span>06</span></p>
-							<h3>Order Complete</h3>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="header-container">
 				<span class="h2" id="titleCart">Cart</span>
@@ -66,8 +38,8 @@
 					<div id="product${cartProduct_index}" class="product-cart d-flex">
 						<div class="one-forth">
 							<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}">
-								<div class="product-img"
-									style="background-image: url(${contextPath}${cartProduct.product.imageURL});"></div>
+								<div class="product-img" style="background-image: url(${contextPath}${cartProduct.product.imageURL});"
+									></div>
 							</a>
 
 							<div class="display-tc">
@@ -109,7 +81,7 @@
 							<div class="display-tc btn btn-link btnUpdateProduct"
 								id="btnUpdateProdCount${cartProduct_index}" name="btnUpdateProdCount${cartProduct_index}"
 								title="${i18n('buttonUpdate')}" data-id="${cartProduct.id}"
-								data-index="${cartProduct_index}" style="text-decoration: none;">
+								data-index="${cartProduct_index}">
 								<span class="icon-refresh-ccw"></span>
 							</div>
 
@@ -163,7 +135,7 @@
 					<br>
 					<div id="prodPrice" class="float-right">
 						<a href="${applUrlHttps}/checkout" id="btnStartCheckout"
-							class="btn btn-primary" style="background-color: #cb1b1b; border-color: #cb1b1b;"
+							class="btn btn-primary"
 							title="${i18n('cartOverviewStartCheckout')}">${i18n("cartOverviewStartCheckout")}</a>
 					</div>
 				</div>
@@ -203,7 +175,7 @@
 	</div>
 
 	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>
 </div>
 
