@@ -758,7 +758,8 @@ a {
     border-radius: 50%; }
   .icon-addcart i {
     display: table-cell;
-    vertical-align: middle; }
+    vertical-align: middle;
+    font-size: 100px; }
 
 .process-wrap {
   width: 100%;
@@ -1693,4 +1694,30 @@ input {
 
 .btn:hover {
   background-color: var(--button-hover);
+}
+
+.checkout-progress {
+  color: #111;
+}
+
+.checkout-progress h3 {
+  font-size: 0.875rem;
+}
+
+.checkout-progress span {
+  font-size: 1.5rem;
+}
+
+.checkout-progress span .active {
+  color: white;
+}
+
+.checkout-progress p {
+  margin-bottom: 10px;
+  width: 60px;
+  height: 60px;
+}
+
+#goHome i {
+  margin-right: 0.5rem;
 }
