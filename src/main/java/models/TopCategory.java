@@ -26,7 +26,7 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides a top category in the catalog of the poster store. A top category is a category, which
+ * This {@link Entity} provides a top category in the catalog of the poster demo store. A top category is a category, which
  * has at least one {@link SubCategory}. A top category contains all products of the corresponding sub categories.
  * 
  * @author sebastianloob

@@ -31,7 +31,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides a customer of the poster store. Each customer must have a unique email address and a
+ * This {@link Entity} provides a customer of the poster demo store. Each customer must have a unique email address and a
  * password to log in. Furthermore a customer can have one or more shipping and billing addresses, a list of credit
  * cards and a list of orders.
  * 
