@@ -123,6 +123,8 @@ public class WebShopController
         data.put("applUrlHttps", xcpConf.APPLICATION_URL_HTTPS + context.getContextPath());
         // set currency
         data.put("currency", xcpConf.CURRENCY);
+        // add version information
+        data.put("currentVersion", xcpConf.APPLICATION_VERSION);
         // add unit of length
         data.put("unitLength", xcpConf.UNIT_OF_LENGTH);
         // add email regex
