@@ -7506,7 +7506,6 @@ h1, h2, h3, h4, h5,
         top: 4px;
         left: 0;
         text-align: left;
-        background: #000;
         padding: 20px;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
@@ -7538,7 +7537,6 @@ h1, h2, h3, h4, h5,
           .colorlib-nav ul li.has-dropdown .dropdown li a {
             padding: 2px 0;
             display: block;
-            color: #999999;
             line-height: 1.2;
             text-transform: none;
             letter-spacing: 0; }
