@@ -540,7 +540,7 @@ public class BackofficeController
     }
 
     /**
-     * Edit a customer's information and credentials.
+     * Edit a customer's information and credentials, from the Customer List view.
      * 
      * @param context
      * @return
@@ -565,7 +565,31 @@ public class BackofficeController
     }
 
     /**
-     * Persist the updated customer into the database.
+     * Edit a customer's information and credentials, from the Customer Detail view.
+     * 
+     * @param context
+     * @return
+     */
+   public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
+    {
+
+        Result result = Results.html();
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+
+    /**
+     * Update customer information in the database after edit from the customer list view.
      * 
      * @param context
      * @return
@@ -612,6 +636,55 @@ public class BackofficeController
             return Results.redirect(context.getContextPath() + "/posters/backoffice/customer");
         }
     }
+
+    /**
+     * Update customer information in the database after edit from the customer view.
+     * 
+     * @param context
+     * @return
+     */
+    public Result customerViewEditComplete(final Context context, @PathParam("customerId") String customerId, @Param("name") final String name,
+                                       @Param("firstName") final String firstName, @Param("email") final String email,
+                                       @Param("password") final String password)
+    {
+
+        Result result = Results.html();
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        boolean failure = false;
+        // email is not valid
+        if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
+        {
+            // show error message
+            failure = true;
+        }
+        if (failure)
+        {
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user/" + customerId + "/edit");
+        }
+        // all input fields might be correct
+        else
+        {
+            customer.setName(name);
+            customer.setFirstName(firstName);
+            customer.setEmail(email);
+            customer.hashPasswd(password);
+            // save customer
+            customer.save();
+            // show page to log-in
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+        }
+    }
+
 
     /**
      * List out all of the customers.
