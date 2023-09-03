@@ -524,7 +524,6 @@ public class BackofficeController
     @FilterWith(SessionUserExistFilter.class)
     public Result customerView(final Context context, @PathParam("customerId") String customerId)
     {
-
         Result result = Results.html();
 
         // Find customer with the id from the params
@@ -610,7 +609,7 @@ public class BackofficeController
             // save customer
             customer.save();
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer");
         }
     }
 
