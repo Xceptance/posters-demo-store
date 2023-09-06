@@ -36,7 +36,7 @@
 	</div>
 </div>
 
-<div class="colorlib-product">
+<div class="colorlib-product category-showcase">
 	<div class="container-fluid">
 		<div class="row">
 			<#list productslistcat as prItem>
@@ -64,23 +64,23 @@
 	</div>
 </div>
 
+<div class="product-list-header">
+	<div class="text-center">
+		<h2>Hot Products</h2>
+	</div>
+</div>
 
 <div class="colorlib-product">
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-				<h2>Hot Products</h2>
-			</div>
-		</div>
 		<div id="productList" class="row row-pb-md">
 			<#list productslist as prItem>
-			<div class="col-lg-3 mb-4 text-center">
-				<div class="product-entry border">
+			<div class="col-lg-3 mb-4 text-center border featured-product-entry">
+				<div class="product-entry">
 					<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="prod-img">
 						<img src="${contextPath}${prItem.imageURL}" class="img-fluid" alt="Free html5 bootstrap 4 template">
 					</a>
 					<div class="desc">
-						<h2><a href="#">${prItem.name}</a></h2>
+						<h2><a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}">${prItem.name}</a></h2>
 					<!--	<span id="prodPrice" title="${currency}" class="col-xs-12 font-bold">${currency}</span>
 					-->
 					</div>
