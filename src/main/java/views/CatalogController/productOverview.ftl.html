@@ -44,8 +44,8 @@ var options = {
 
 	<#list products as pro>
 		<div class="col-lg-4 mb-4 text-center">
-			<div class="product-entry border">
-			<div id="product${pro_index}" class="thumbnail">
+			<div class="product-entry">
+			<div id="product${pro_index}" class="thumbnail catalog-entry">
 				<div class="container-fluid">
 					<a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
 						<img data-src="${contextPath}/assets/js/holder.js/300x200" alt="${pro.name}"
