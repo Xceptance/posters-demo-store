@@ -685,6 +685,28 @@ public class BackofficeController
         }
     }
 
+    /**
+     * View customer order information in the database.
+     * 
+     * @param context
+     * @return
+     */
+    public Result customerViewOrders(final Context context, @PathParam("customerId") String customerId)
+    {
+        Result result = Results.html();
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
     
     /**
      * List out all of the customers.
