@@ -46,15 +46,10 @@
                                 </#if>
                             </#list></dd></td>
                             <td>
-                                <#list customer.order as order>
-                                <#if customer.order??>
-                            
-                                    <a class="btn btn-sm btn-success" href="/posters/backoffice/order/${order.id}">View</a>
 
-                                    <#else>
-                                        <a class="btn btn-sm btn-danger" href="">None</a>
-                                </#if>
-                            </#list>
+                                <a class="btn btn-sm btn-success" href="/posters/backoffice/customer/${customer.id}/view/orders">View</a>
+
+                                
                                 
                             </td>
                     </tr>

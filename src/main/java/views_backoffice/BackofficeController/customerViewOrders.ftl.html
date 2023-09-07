@@ -4,7 +4,18 @@
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Customer Orders</h6>
         </div>
+        <#list customer.order as order>
+        <#if customer.order??>
+    
+        <tr>
+            <a class="btn btn-sm btn-warning" href="/posters/backoffice/order/${order.id}">View</a>
+        </tr>
+            
 
+            <#else>
+                <a class="btn btn-sm btn-danger" href="">None</a>
+        </#if>
+    </#list>
 
     </div>
 
