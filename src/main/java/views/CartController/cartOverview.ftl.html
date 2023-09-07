@@ -30,7 +30,7 @@
 							<span>${i18n("cartRemove")}</span>
 						</div>
 						<div class="one-eight text-center">
-							<span class="font-weight-bold">${i18n("cartTableHeaderTotalUnitPrice")}</span>
+							<span>${i18n("cartTableHeaderTotalUnitPrice")}</span>
 						</div>
 					</div>
 					<#list cartProducts as cartProduct>
@@ -75,7 +75,7 @@
 								id="btnRemoveProdCount${cartProduct_index}" name="btnRemoveProduct${cartProduct_index}"
 								title="${i18n('buttonRemove')}" data-id="${cartProduct.id}"
 								data-index="${cartProduct_index}" data-toggle="modal" data-target="#deleteProductModal">
-								<span class="closed"></span>
+								<span class="icon-cross"></span>
 							</div>
 
 							<div class="btn btn-link btnUpdateProduct"
@@ -156,16 +156,14 @@
 			<div class="modal-dialog modal-sm">
 			  <div class="modal-content">
 				<div class="modal-header">
-				  <h4 class="modal-title">Remove Product Confirmation</h4>
+				  <h4 class="modal-title">Are you sure you want to remove this product?</h4>
 				  <button type="button" class="close" data-dismiss="modal">×</button>
 				</div>
 				
-				<div class="modal-body"></div>
-				
 				<div class="modal-footer">
 				  <div class="d-flex justify-content-start flex-wrap">
-					<button id="buttonClose" type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
-					<button id="buttonDelete" name="buttonDelete" class="btn btn-danger mt-2 mt-md-0" data-dismiss="modal" title="Delete">Delete</button>
+					<button id="buttonClose" type="button" class="btn btn-default" data-dismiss="modal" title="Close">No</button>
+					<button id="buttonDelete" name="buttonDelete" class="btn btn-danger mt-2 mt-md-0" data-dismiss="modal" title="Delete">Yes</button>
 				  </div>
 				</div>
 			  </div>
