@@ -1,3 +1,5 @@
+<div class="demo-disclaimer">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
+
 <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>
 
 
@@ -24,10 +26,10 @@
                             <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
                                 title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
                                 <#if isLogged==false>
-                                    <span class="glyphicon glyphicon-user not-logged"></span>
+                                    <span class="icon-user-minus"></span>
                                 </#if>
                                 <#if isLogged==true>
-                                    <span class="glyphicon glyphicon-user logged"></span>
+                                    <span class="icon-user-check"></span>
                                 </#if>
                             </a>
                             <ul id="userMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
