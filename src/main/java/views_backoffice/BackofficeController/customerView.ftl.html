@@ -2,6 +2,67 @@
 
 <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
     <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-0">Customer View</h6>
+        <div class="table-responsive">
+            <table id="" class="table display text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Name</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">Billing Address</th>
+                        <th scope="col">Payment Info</th>
+
+                        <th scope="col">Orders</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                            <td>${customer.firstName} ${customer.name}</td>
+                            <td>
+                                <address>
+                                <#list customer.shippingAddress as shippingAddress>
+                                <#if shippingAddress??>
+                                    ${shippingAddress.addressLine} ${shippingAddress.zip},
+                                    ${shippingAddress.state} ${shippingAddress.city}
+                                    <#else>
+                                        Empty shipping address
+                                </#if>
+                                </#list>
+                                </address>
+                            </td>
+                            <td><#list customer.billingAddress as billingAddress>
+                                <#if billingAddress??>
+                                    ${billingAddress.addressLine} ${billingAddress.zip},
+                                    ${billingAddress.state} ${billingAddress.city}
+                                    <#else>
+                                        Empty billing address
+                                </#if>
+                            </#list></td>
+                            <td><#list customer.creditCard as creditCard>
+                                <#if creditCard??>
+                                        ${creditCard.cardNumber}
+                                    <#else>
+                                        No order
+                                </#if>
+                            </#list></dd></td>
+                            <td>
+                                <#list customer.order as order>
+                                <#if customer.order??>
+                            
+                                    <a class="btn btn-sm btn-success" href="/posters/backoffice/order/${order.id}">View</a>
+
+                                    <#else>
+                                        <a class="btn btn-sm btn-danger" href="">None</a>
+                                </#if>
+                            </#list>
+                                
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
         <h2 class="mb-4">Customer View</h1>
         <dl class="row mb-0">
             <dt class="col-sm-4">Name</dt>
