@@ -163,7 +163,7 @@ a {
     margin: 0; } }
 
 .colorlib-nav .top-menu {
-  padding: 50px 0 50px 0; }
+  padding: 20px 0 20px 0; }
   @media (max-width: 767.98px) {
     .colorlib-nav .top-menu {
       padding: 28px 0; } }
@@ -306,8 +306,6 @@ a {
             line-height: 1.2;
             text-transform: none;
             letter-spacing: 0; }
-            .colorlib-nav ul li.has-dropdown .dropdown li a:hover {
-              color: #fff; }
       .colorlib-nav ul li.has-dropdown:hover a, .colorlib-nav ul li.has-dropdown:focus a {
         color: #000; }
     .colorlib-nav ul li.btn-cta a {
@@ -476,7 +474,7 @@ a {
 .colorlib-partner,
 .colorlib-intro,
 .category-showcase {
-  padding: 5rem 0;
+  padding: 2rem 0;
   clear: both; }
 
 .category-showcase a:hover {
@@ -1744,6 +1742,8 @@ input {
 
 .checkout-progress {
   color: #111;
+  padding-top: 2rem;
+  padding-bottom: 2rem !important;
 }
 
 .checkout-progress h3 {
