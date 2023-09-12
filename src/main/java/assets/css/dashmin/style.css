@@ -5,6 +5,20 @@
     --dark: #191C24;
 }
 
+
+.id-size {
+    max-width: 50px; overflow: auto
+}
+
+.email-size{
+    max-width: 100px; overflow: auto
+}
+.action-size {
+    max-width: 90px; overflow: auto
+}
+
+
+
 .back-to-top {
     position: fixed;
     display: none;

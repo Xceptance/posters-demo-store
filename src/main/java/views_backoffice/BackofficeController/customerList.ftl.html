@@ -6,7 +6,7 @@
             </div>
             
             <div class="table-responsive">
-                <table id="customerlist" class="table display text-start align-middle table-bordered table-hover mb-0">
+                <table id="customerlist" style="" class="table display text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
                             <th scope="col">ID</th>
@@ -20,17 +20,21 @@
                     <tbody>
                         <#list customers as customer>
                         <tr>
-                                <td>${customer.id}</td>
-                                <td>${customer.firstName}</td>
-                                <td>${customer.name}</td>
-                                <td>${customer.email}</td>
-                                <td>Active</td>
-                                <td>
-                                    <div><a class="btn btn-sm btn-primary" href="/posters/backoffice/customer/${customer.id}/edit">Edit</a></div>
-                                     <div><a class="btn btn-sm btn-warning" href="/posters/backoffice/customer/${customer.id}/view">View</a></div>
-                                     <div><a class="btn btn-sm btn-danger" href="/posters/backoffice/customer/${customer.id}/view">Delete</a></div>
-                                    
-                                </td>
+                                <td class="id-size"> ${customer.id}</td>
+                                <td  >${customer.firstName}</td>
+                                <td >${customer.name}</td>
+                                <td  class="email-size">${customer.email}</td>
+                                <td >Active</td>
+                                <td class="action-size">
+                                    <a href="/posters/backoffice/customer/${customer.id}/edit"> <button id="edit" type="button" class="btn btn-sm-square btn-outline-info m-2">   
+                                        <i class="fa fa-pen"></i></a></button> 
+                                    <a href="/posters/backoffice/customer/${customer.id}/view"> <button type="button" class="btn btn-sm-square btn-outline-info m-2">   
+                                        <i class="fa fa-user"></i></a></button>
+                                    <!-- 
+                                        <a href="/posters/backoffice/customer/${customer.id}/delete"> <button type="button" class="btn btn-sm-square btn-outline-danger m-2">   
+                                        <i class="fa fa-user-times"></i></button> </a>
+                                    -->
+                                    </td>
                         </tr>
                         </#list>
                     </tbody>
