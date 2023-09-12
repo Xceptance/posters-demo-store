@@ -17,7 +17,21 @@
     max-width: 90px; overflow: auto
 }
 
+.table {
+    --bs-table-hover-color: #000000;
+    color: #35495a;
 
+}
+
+.dataTables_wrapper, .dataTables_filter input {
+    border: 1px solid #757575;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #FFFFFF;
+    color: inherit;
+    margin-left: 3px;
+
+}
 
 .back-to-top {
     position: fixed;
