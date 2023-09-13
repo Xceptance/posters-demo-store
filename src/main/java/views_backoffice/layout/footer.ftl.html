@@ -41,7 +41,10 @@
 <!-- Data Tables -->
 <script>
     $(document).ready( function () {
-        $('#customerlist').DataTable();
+        $('#customerlist').DataTable({ 
+        // Specify multiple classes to be used
+        stripeClasses: ['stripe-1',
+                        'stripe-2']});
     } );
 
 

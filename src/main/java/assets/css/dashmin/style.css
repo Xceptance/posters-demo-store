@@ -5,6 +5,7 @@
     --dark: #191C24;
 }
 
+/********** Customer Table **********/
 
 .id-size {
     max-width: 50px; overflow: auto
@@ -32,6 +33,8 @@
     margin-left: 3px;
 
 }
+
+/*** Top Button ***/
 
 .back-to-top {
     position: fixed;
