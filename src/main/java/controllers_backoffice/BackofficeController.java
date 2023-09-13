@@ -1,7 +1,10 @@
 package controllers_backoffice;
 
 import java.util.Optional;
+import java.util.UUID;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.avaje.ebean.Ebean;
@@ -10,6 +13,7 @@ import com.avaje.ebean.PagingList;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import controllers.WebShopController;
 import filters.SessionUserExistFilter;
 import models_backoffice.User;
 import models_backoffice.Statistic;
@@ -691,9 +695,20 @@ public class BackofficeController
      * @param context
      * @return
      */
+    
     public Result customerViewOrders(final Context context, @PathParam("customerId") String customerId)
     {
         Result result = Results.html();
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        UUID customerUUID = UUID.fromString(customerId);
+        WebShopController.setCommonData(data, context, xcpConf);
+        List<Order> orders = Customer.getCustomerById(customerUUID).getAllOrders();
+
+        data.put("orderOverview", orders);
+        result.render(data);
+
 
         // Find customer with the id from the params
         Customer customer = Ebean.find(Customer.class, customerId);
