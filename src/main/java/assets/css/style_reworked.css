@@ -1,0 +1,281 @@
+/*!
+ * Bootstrap v4.1.1 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+ @font-face {
+    font-family: 'icomoon';
+    src: url("../fonts/icomoon/icomoon.eot?srf3rx");
+    src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
+    font-weight: normal;
+    font-style: normal; }
+  @font-face {
+    font-family: 'Rokkitt';
+    src: url("../fonts/rokkitt/Rokkitt-VariableFont_wght.ttf") format('truetype');
+    font-weight: 100 900;
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url("../fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format('truetype');
+    font-weight: 100 900;
+  }
+  
+  :root {
+    /* colors */
+    --xred: #cb1b1b;
+    --button-hover: #a30000;
+    --dialog-box-bg: #f9f9f9;
+    --dialog-box-text-dark: #111111;
+    --dialog-box-text-light: #555555;
+    --product-tile-hover-shadow: var(--xred);
+  }
+  
+/*  Headings
+*   - Start
+*/    
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400; }
+  
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    color: var(--dialog-box-text-dark); }
+
+  .main-section-heading {
+    background-color: var(--xred);
+    color: white;
+  }
+/*  Headings
+*   - End
+*/ 
+ 
+  a {
+
+    }
+
+/*  Header
+*   - Start
+*/
+  header {
+
+  }
+/*  Header
+*   - End
+*/
+
+/*  Carousel
+*   - Start
+*/
+  .carousel {
+
+  }
+/*  Carousel
+*   - End
+*/
+
+/*  Category display case
+*   - Start
+*/
+  .category-display-case {
+
+  }
+/*  Category display case
+*   - End
+*/
+
+/*  Category tiles
+*   - Start
+*/
+  .category-tile {
+
+  }
+/*  Category tiles
+*   - End
+*/
+
+/*  Intro text
+*   - Start
+*/
+  .intro-text {
+
+  }
+/*  Intro text
+*   - End
+*/
+
+/*  Product display case
+*   - Start
+*/
+  .product-display-case {
+
+  }
+/*  Product display case
+*   - End
+*/
+
+/*  Product tile
+*   - Start
+*/
+  .product-tile {
+
+  }
+/*  Product tile
+*   - End
+*/
+
+/*  Buttons
+*   - Start
+*/
+  button {
+
+  }
+
+  .btn-secondary {
+
+  }
+
+  .btn-tertiary {
+
+  }
+/*  Buttons
+*   - End
+*/
+
+/*  Footer
+*   - Start
+*/
+  footer {
+
+  }
+/*  Footer
+*   - End
+*/
+
+/*  Pagination
+*   - Start
+*/
+  .pagination {
+
+  }
+/*  Pagination
+*   - End
+*/
+
+/*  Image as element
+*   - Start
+*/
+  .main-image {
+
+  }
+/*  Image as element
+*   - End
+*/
+
+/*  Product details
+*   - Start
+*/
+  .product-details {
+
+  }
+/*  Product details
+*   - End
+*/
+
+/*  Product list (e.g. in cart)
+*   - Start
+*/
+  .product-list {
+
+  }
+/*  Product list
+*   - End
+*/
+
+/*  Price summary
+*   - Start
+*/
+  .price-summary {
+
+  }
+/*  Price summary
+*   - End
+*/
+
+/*  Progress bars
+*   - Start
+*/
+  .progress-bar {
+
+  }
+/*  Progress bars
+*   - End
+*/
+
+/*  Forms
+*   - Start
+*/
+  form {
+
+  }
+/*  Forms
+*   - End
+*/
+
+/*  Order overview
+*   - Start
+*/
+  .order-overview {
+
+  }
+/*  Order overview
+*   - End
+*/
+
+/*  Icons as elements
+*   - Start
+*/
+  .main-icon {
+
+  }
+/*  Icons as elements
+*   - Start
+*/
+
+/*  Special text elements
+*   - Start
+*/
+  .text-phrase {
+
+  }
+
+  .link-section {
+
+  }
+
+  .text-block {
+
+  }
+
+  .text-section {
+
+  }
+
+  .long-text {
+    font-family: Montserrat, sans-serif;
+  }
+
+  .iconBeforeText {
+
+  }
+
+  .iconAfterText {
+
+  }
+
+  .iconWithinText {
+
+  }
+/*  Special text elements
+*   - End
+*/
