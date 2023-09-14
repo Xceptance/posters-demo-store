@@ -8,11 +8,11 @@
 /********** Customer Table **********/
 
 .id-size {
-    max-width: 50px; overflow: auto
+    max-width: 300px; overflow: auto
 }
 
 .email-size{
-    max-width: 100px; overflow: auto
+    max-width: 200px; overflow: auto
 }
 .action-size {
     max-width: 90px; overflow: auto
@@ -26,11 +26,11 @@
 
  /* Define the stripe classes for datatables classes to be used in the table */
  .stripe-1 {
-    background-color: rgba(112, 207, 245, 0.397) !important;
+    background-color: #F3F6F9 !important;
   }
 
   .stripe-2 {
-    background-color: rgba(169, 209, 216, 0.349) !important;
+    background-color: #F3F6F9 !important;
   }
   
 .dataTables_wrapper, .dataTables_filter input {

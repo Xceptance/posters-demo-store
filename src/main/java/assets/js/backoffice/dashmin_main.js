@@ -72,7 +72,7 @@
 
     // Sidebar Toggler
     $('.sidebar-toggler').click(function () {
-        $('.sidebar, .content').toggleClass("open");
+        $('.sidebar').toggleClass("open");
         return false;
     });
 
@@ -80,6 +80,9 @@
     // Progress Bar
     $('.pg-bar').waypoint(function () {
         $('.progress .progress-bar').each(function () {
+            
+            //$(this).css("width, open", $(this).attr("aria-valuenow") + '%');
+
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
         });
     }, { offset: '80%' });
