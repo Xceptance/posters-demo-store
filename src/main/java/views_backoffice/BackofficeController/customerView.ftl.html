@@ -50,9 +50,10 @@
                                 </#if>
                             </#list></dd></td>
                             <td>
-
-                                <a class="btn btn-sm btn-success" href="/posters/backoffice/customer/${customer.id}/view/orders">View</a>
-
+                                <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button id="edit" type="button"
+                                    class="btn btn-sm-square btn-outline-info m-2">
+                                    <i class="fa fa-shopping-bag"></i></a></button>
+                            
                                 
                                 
                             </td>
@@ -62,8 +63,8 @@
         </div>
         <br>
         <dl>
-            <a class="btn btn-sm btn-primary" href="/posters/backoffice/customer">Back</a>
-            <a class="btn btn-sm btn-warning" href="/posters/backoffice/customer/${customer.id}/view/edit">Edit</a>
+            <a class="btn btn-sm btn-secondary" href="/posters/backoffice/customer">Back</a>
+            <a class="btn btn-sm btn-primary" href="/posters/backoffice/customer/${customer.id}/view/edit">Edit</a>
         </dl>
     </div>
 </div>

@@ -24,6 +24,15 @@
 
 }
 
+ /* Define the stripe classes for datatables classes to be used in the table */
+ .stripe-1 {
+    background-color: rgba(112, 207, 245, 0.397) !important;
+  }
+
+  .stripe-2 {
+    background-color: rgba(169, 209, 216, 0.349) !important;
+  }
+  
 .dataTables_wrapper, .dataTables_filter input {
     border: 1px solid #757575;
     border-radius: 3px;
