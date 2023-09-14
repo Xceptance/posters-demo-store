@@ -1,6 +1,6 @@
 <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
-<nav id="header-navigation-bar" class="navbar navbar-expand-lg bg-body-tertiary">
+<nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
       <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
@@ -17,7 +17,7 @@
           </a>
           <ul class="dropdown-menu">
             <#list tC.subCategories as sC>
-            <li><a id="header-sub-category-${sC.name}" class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.name}</a></li>
+            <li><a class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.name}</a></li>
             </#list>
           </ul>
         </li>
@@ -29,18 +29,18 @@
       </form>
       <ul id="header-customer-menus" class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a id="showUserMenu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="icon-user2"></span>
           </a>
-          <ul id="userMenu" class="dropdown-menu">
+          <ul id="user-menu" class="dropdown-menu">
             <li><#include '../components/userMenu.ftl.html'></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a id="headerCartOverview" class="nav-link dropdown-toggle" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a id="header-cart-overview" class="nav-link dropdown-toggle" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
           </a>
-          <ul id="miniCartMenu" class="dropdown-menu">
+          <ul id="mini-cart-menu" class="dropdown-menu">
             <li><#include "../components/miniCartMenu.ftl.html"></li>
           </ul>
         </li>
