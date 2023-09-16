@@ -24,6 +24,9 @@
 
 }
 
+/* Table icon color. Removes default blue link color */
+.discolor { color: inherit; } 
+
  /* Define the stripe classes for datatables classes to be used in the table */
  .stripe-1 {
     background-color: #F3F6F9 !important;
