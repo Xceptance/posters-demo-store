@@ -19,15 +19,15 @@
                     <tr>
                         <td>${customer.firstName} ${customer.name}</td>
                         <td>
+                           
                             <#if customer.shippingAddress?has_content>
                                 <#list customer.shippingAddress as shippingAddress>
                                     <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Address</legend>
+                                        <legend class="col-form-label col-sm-2 pt-0">${shippingAddress_index + 1}</legend>
                                         <div class="col-sm-10">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                                    value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">
+                                                <input class="form-check-input" type="radio" name="gridRadiosShip" id="gridRadiosShip${shippingAddress_index + 1}" value="option{shippingAddress_index + 1}">
+                                                <label class="form-check-label" for="gridRadiosShip${shippingAddress_index + 1}">
                                                     <address>
                                                         ${shippingAddress.addressLine}<br> ${shippingAddress.zip},
                                                         ${shippingAddress.state} <br> ${shippingAddress.city}
@@ -37,40 +37,65 @@
                                         </div>
                                     </fieldset>
                                 </#list>
-                                <#else>
-                                    NA
+                            <#else>
+                                NA
                             </#if>
-                        </td>
-                        <td>
-                            <#if customer.billingAddress?has_content>
-                                <#list customer.billingAddress as billingAddress>
-                                    <address>
-                                        ${billingAddress.addressLine} <br> ${billingAddress.zip},
-                                        ${billingAddress.state} <br> ${billingAddress.city}
-                                    </address>
-                                </#list>
-                                <#else>
-                                    NA
-                            </#if>
-                        </td>
-                        <td>
-                            <#list customer.creditCard as creditCard>
-                                <#if creditCard?has_content>
-                                    ${creditCard.cardNumber}
-                                <#else>
-                                    No order
-                                </#if>
-                            </#list>
                         </td>
                         
                         <td>
-                            <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button id="edit" type="button"
-                                    class="btn btn-sm-square btn-outline-info m-2">
-                                    <i class="fa fa-shopping-bag"></i></a></button>
-                    
-                    
-                    
+                            <#if customer.billingAddress?has_content>
+                                <#list customer.billingAddress as billingAddress>
+                                    <fieldset class="row mb-3">
+                                        <legend class="col-form-label col-sm-2 pt-0">${billingAddress_index + 1}</legend>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadiosBill" id="gridRadiosBill${billingAddress_index + 1}" value="optionbillingAddress_index + 1">
+                                                <label class="form-check-label" for="gridRadiosBill${billingAddress_index + 1}">
+                                                    <address>
+                                                        ${billingAddress.addressLine}<br> ${billingAddress.zip},
+                                                        ${billingAddress.state} <br> ${billingAddress.city}
+                                                    </address>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </#list>
+                            <#else>
+                                NA
+                            </#if>
                         </td>
+                        
+                        <td>
+                            <#if customer.creditCard?has_content>
+                                <#list customer.creditCard as creditCard>
+                                    <fieldset class="row mb-3">
+                                        <legend class="col-form-label col-sm-2 pt-0">${creditCard_index + 1}</legend>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadiosCred" id="gridRadiosCred${creditCard_index + 1}" value="option${creditCard_index + 1}">
+                                                <label class="form-check-label" for="gridRadiosCred${creditCard_index + 1}">
+                                                    ${creditCard.cardNumber}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </#list>
+                            <#else>
+                                No order
+                            </#if>
+                        </td>
+
+                        <td><#if customer.order?has_content>
+                            <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button id="edit" type="button"
+                                class="btn btn-sm-square btn-outline-info m-2">
+                                <i class="fa fa-shopping-bag"></i></a></button>
+                                               
+                            <#else>
+                                <a href="/posters/backoffice/customer/${customer.id}/view/orders" class="btn btn-square btn-outline-secondary m-2">
+                                    <i class="fa fa-shopping-bag"></i>
+                                </a>
+                            </#if>
+                          </td>
                     </tr>
                 </tbody>
             </table>
