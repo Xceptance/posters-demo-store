@@ -17,46 +17,60 @@
                 </thead>
                 <tbody>
                     <tr>
-                            <td>${customer.firstName} ${customer.name}</td>
-                            <td>
+                        <td>${customer.firstName} ${customer.name}</td>
+                        <td>
+                            <#if customer.shippingAddress?has_content>
                                 <#list customer.shippingAddress as shippingAddress>
-                                <address>
-                                
-                                <#if shippingAddress??>
-                                    ${shippingAddress.addressLine} <br> ${shippingAddress.zip},
-                                    ${shippingAddress.state} <br> ${shippingAddress.city}
-                                    <#else>
-                                        Empty shipping address
-                                </#if>
-                                </address>
-
+                                    <fieldset class="row mb-3">
+                                        <legend class="col-form-label col-sm-2 pt-0">Address</legend>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                                    value="option1" checked>
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    <address>
+                                                        ${shippingAddress.addressLine}<br> ${shippingAddress.zip},
+                                                        ${shippingAddress.state} <br> ${shippingAddress.city}
+                                                    </address>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </#list>
-                            </td>
-                            <td><#list customer.billingAddress as billingAddress>
-                                <address>
-                                <#if billingAddress??>
-                                    ${billingAddress.addressLine} <br> ${billingAddress.zip},
-                                    ${billingAddress.state} <br> ${billingAddress.city}
-                                    <#else>
-                                        Empty billing address
+                                <#else>
+                                    NA
+                            </#if>
+                        </td>
+                        <td>
+                            <#if customer.billingAddress?has_content>
+                                <#list customer.billingAddress as billingAddress>
+                                    <address>
+                                        ${billingAddress.addressLine} <br> ${billingAddress.zip},
+                                        ${billingAddress.state} <br> ${billingAddress.city}
+                                    </address>
+                                </#list>
+                                <#else>
+                                    NA
+                            </#if>
+                        </td>
+                        <td>
+                            <#list customer.creditCard as creditCard>
+                                <#if creditCard?has_content>
+                                    ${creditCard.cardNumber}
+                                <#else>
+                                    No order
                                 </#if>
-                                </address>
-                            </#list></td>
-                            <td><#list customer.creditCard as creditCard>
-                                <#if creditCard??>
-                                        ${creditCard.cardNumber}
-                                    <#else>
-                                        No order
-                                </#if>
-                            </#list></dd></td>
-                            <td>
-                                <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button id="edit" type="button"
+                            </#list>
+                        </td>
+                        
+                        <td>
+                            <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button id="edit" type="button"
                                     class="btn btn-sm-square btn-outline-info m-2">
                                     <i class="fa fa-shopping-bag"></i></a></button>
-                            
-                                
-                                
-                            </td>
+                    
+                    
+                    
+                        </td>
                     </tr>
                 </tbody>
             </table>
