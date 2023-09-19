@@ -699,12 +699,17 @@ public class BackofficeController
                                            @Param("fullName") final String fullName, @Param("company") final String company,
                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
                                            @Param("state") final String state, @Param("zip") final String zip,
-                                           @Param("country") final String country, @Param("addressIdShip") final String addressIdShip
-                                           )
+                                           @Param("country") final String country, @Param("addressIdShip") final String addressIdShip,
+                                            //Billing Info
+                                           @Param("fullNameBill") final String nameBill, @Param("companyBill") final String companyBill,
+                                           @Param("addressLineBill") final String addressLineBill, @Param("cityBill") final String cityBill,
+                                           @Param("stateBill") final String stateBill, @Param("zipBill") final String zipBill,
+                                           @Param("countryBill") final String countryBill,
+                                           @Param("addressIdBill") final String addressIdBill)
     {
 
         Result result = Results.html();
-
+//Shipping Address Section
         if (zip != null)
         {
             // check input
@@ -717,7 +722,7 @@ public class BackofficeController
                 context.getFlashScope().error(msg.get("errorWrongZip", language).get());
                 // show inserted values in form
                 // final Map<String, String> address = new HashMap<String, String>();
-                data.put("id", addressIdShip);
+                data.put("addressIdShip", addressIdShip);
                 data.put("name", name);
                 data.put("company", company);
                 data.put("addressLine", addressLine);
@@ -745,6 +750,52 @@ public class BackofficeController
                 // show success message
                 context.getFlashScope().success(msg.get("successUpdate", language).get());
                 // return Results.redirect(context.getContextPah() + "/addressOverview");
+            }
+
+        }
+
+//Billing Address Section
+
+if (zipBill != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zipBill))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdBill", addressIdBill);
+                data.put("nameBill", nameBill);
+                data.put("companyBill", companyBill);
+                data.put("addressLineBill", addressLineBill);
+                data.put("cityBill", cityBill);
+                data.put("stateBill", stateBill);
+                data.put("zipBill", zipBill);
+                data.put("countryBill", countryBill);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_BILLING_ADDRESS);
+            }
+            // all input fields might be correct
+            else
+            {
+            final BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressIdBill));
+                address.setName(nameBill);
+                address.setCompany(companyBill);
+                address.setAddressLine(addressLineBill);
+                address.setCity(cityBill);
+                address.setState(stateBill);
+                address.setZip(zipBill);
+                address.setCountry(countryBill);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                // return Results.redirect(context.getContextPath() + "/addressOverview");
             }
 
         }
