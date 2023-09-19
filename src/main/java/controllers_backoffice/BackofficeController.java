@@ -32,6 +32,7 @@ import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.i18n.Messages;
 import ninja.params.Param;
 import ninja.params.Params;
 import ninja.params.PathParam;
@@ -46,6 +47,8 @@ import util.session.SessionHandling;
 
 public class BackofficeController
 {
+     @Inject
+    Messages msg;
     @Inject
     PosterConstants xcpConf;
 
@@ -617,6 +620,7 @@ public class BackofficeController
     // Set common data using the map
     WebShopController.setCommonData(commonData, context, xcpConf);
 
+
     // Pass the list of address data to the edit view
     result.render("addressDataList", addressDataList);
 
@@ -689,12 +693,61 @@ public class BackofficeController
      * @param context
      * @return
      */
-    public Result customerViewEditComplete(final Context context, @PathParam("customerId") String customerId, @Param("name") final String name,
-                                       @Param("firstName") final String firstName, @Param("email") final String email,
-                                       @Param("password") final String password)
+    public Result customerViewEditComplete(final Context context, @PathParam("customerId") String customerId,
+                                           @Param("email") final String email, @Param("firstName") final String firstName,
+                                           @Param("name") final String name, @Param("password") final String password,
+                                           @Param("fullName") final String fullName, @Param("company") final String company,
+                                           @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                           @Param("state") final String state, @Param("zip") final String zip,
+                                           @Param("country") final String country, @Param("addressIdShip") final String addressIdShip
+                                           )
     {
 
         Result result = Results.html();
+
+        if (zip != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("id", addressIdShip);
+                data.put("name", name);
+                data.put("company", company);
+                data.put("addressLine", addressLine);
+                data.put("city", city);
+                data.put("state", state);
+                data.put("zip", zip);
+                data.put("country", country);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_SHIPPING_ADDRESS);
+            }
+            // all input fields might be correct
+            else
+            {
+                final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressIdShip));
+                address.setName(name);
+                address.setCompany(company);
+                address.setAddressLine(addressLine);
+                address.setCity(city);
+                address.setState(state);
+                address.setZip(zip);
+                address.setCountry(country);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                // return Results.redirect(context.getContextPah() + "/addressOverview");
+            }
+
+        }
 
         // Find customer with the id from the params
         Customer customer = Ebean.find(Customer.class, customerId);
