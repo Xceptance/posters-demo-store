@@ -20,14 +20,6 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <#if selectedShippingAddress?has_content>
-
-                <div class="mb-3">
-                    <label for="shippingAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="shippingAddress" name="shippingAddress" value="${selectedShippingAddress}">
-                </div>
-                <#else>
-                </#if>
                 <button type="submit" class="btn btn-primary">Confirm</button>
             </form>
         </div>
@@ -37,55 +29,102 @@
 
 	<#list addressDataList as addressData>
     <#if addressData.infoShip?has_content>
-        <!-- Display the information for Ship -->
-        <div class="card col-md-6">
-            <div class="card-body">
-                <!-- Full name -->
-                <div class="form-group">
-                    <label for="fullName">${i18n("addressFullName")}*</label>
-                </div>
-
-                <!-- Company -->
-                <div class="form-group">
-                    <label for="company">${i18n("addressCompany")}</label>
-                    <input id="company" class="form-control" name="company" title="${i18n('addressCompany')}" placeholder="${i18n('addressCompanyPlaceholder')}" type="text" value="${(addressData.infoShip.company)!}">
-                </div>
-
-                <!-- Address Line -->
-                <div class="form-group">
-                    <label for="addressLine">${i18n("addressLine")}*</label>
-                    <input id="addressLine" class="form-control" name="addressLine" title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}" type="text" value="${(addressData.infoShip.addressLine)!}" required>
-                </div>
+	<div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+		<div class="bg-light rounded h-100 p-4">
+	
+					<!-- Shipping Address Section -->
+			<div class="mb-4 rounded p-4 bg-light">
+				<h6>${i18n("updateShippingTitle")}</h6>
+				<!-- Full name -->
+				<div class="form-group">
+					<label for="fullName">${i18n("addressFullName")}*</label>
+					<input id="fullName" class="form-control" name="fullName" title="${i18n('errorWrongName')}" placeholder="${i18n('addressFullNamePlaceholder')}" data-error="${i18n('errorWrongName')}" pattern="${(addressData.infoShip.regexName)!}" type="text" value="${(addressData.infoShip.name)!}">
+				</div>		
+				<!-- Company -->
+				<div class="form-group">
+					<label for="company">${i18n("addressCompany")}</label>
+					<input id="company" class="form-control" name="company" title="${i18n('addressCompany')}" placeholder="${i18n('addressCompanyPlaceholder')}" type="text" value="${(addressData.infoShip.company)!}">
+				</div>
+				<!-- Address Line -->
+				<div class="form-group">
+					<label for="addressLine">${i18n("addressLine")}*</label>
+					<input id="addressLine" class="form-control" name="addressLine" title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}" type="text" value="${(addressData.infoShip.addressLine)!}" required>
+				</div>
 				<!-- City -->
-			<div class="form-group">
-				<label for="city">${i18n("addressCity")}*</label>
-				<input id="city" class="form-control" name="city" title="${i18n('errorWrongCity')}" type="text" pattern="${(addressData.infoShip.regexName)!}" data-error="${i18n('errorWrongCity')}" value="${(addressData.infoShip.city)!}" required>
+				<div class="form-group">
+					<label for="city">${i18n("addressCity")}*</label>
+					<input id="city" class="form-control" name="city" title="${i18n('errorWrongCity')}" type="text" pattern="${(addressData.infoShip.regexName)!}" data-error="${i18n('errorWrongCity')}" value="${(addressData.infoShip.city)!}" required>
+				</div>
+				<!-- State -->
+				<div class="form-group">
+					<label for="state">${i18n("addressState")}*</label>
+					<input id="state" class="form-control" name="state" title="${i18n('errorWrongState')}" type="text" pattern="${(addressData.infoShip.regexName)!}" data-error="${i18n('errorWrongState')}" value="${(addressData.infoShip.state)!}" required>
+				</div>
+				<!-- Zip -->
+				<div class="form-group">
+					<label for="zip">${i18n('addressZip')}*</label>
+					<input id="zip" class="form-control" name="zip" title="${i18n('errorWrongZip')}" type="text" pattern="${(addressData.infoShip.regexZip)!}" data-error="${i18n('errorWrongZip')}" value="${(addressData.infoShip.zip)!}" placeholder="${i18n('addressZipPlaceholder')}" required>
+				</div>
+				<!-- Select Country -->
+				<div class="form-group">
+					<label for="country">${i18n("addressCountry")}*</label>
+					<select id="country" class="form-control" name="country" title="${i18n('addressCountry')}">
+						<option>${i18n('countryUS')}</option>
+						<option>${i18n('countryGermany')}</option>
+					</select>
+				</div>
 			</div>
 	
-			<!-- State -->
-			<div class="form-group">
-				<label for="state">${i18n("addressState")}*</label>
-				<input id="state" class="form-control" name="state" title="${i18n('errorWrongState')}" type="text" pattern="${(addressData.infoShip.regexName)!}" data-error="${i18n('errorWrongState')}" value="${(addressData.infoShip.state)!}" required>
-			</div>
+    				</#if>
+					<#if addressData.infoBill?has_content>
 	
-			<!-- Zip -->
-			<div class="form-group">
-				<label for="zip">${i18n('addressZip')}*</label>
-				<input id="zip" class="form-control" name="zip" title="${i18n('errorWrongZip')}" type="text" pattern="${(addressData.infoShip.regexZip)!}" data-error="${i18n('errorWrongZip')}" value="${(addressData.infoShip.zip)!}" placeholder="Zip / Postal" required>
-			</div>
-	
-			<!-- Select Country -->
-			<div class="form-group">
-				<label for="country">${i18n("addressCountry")}*</label>
-				<select id="country" class="form-control" name="country" title="${i18n('addressCountry')}">
-					<option>${i18n('countryUS')}</option>
-					<option>${i18n('countryGermany')}</option>
-				</select>
+					<!-- Billing Address Section -->
+			<div class="mb-4 rounded p-4 bg-light">
+				<h6>${i18n("updateBillingTitle")}</h6>
+				<!-- Full name -->
+				<div class="form-group">
+					<label for="fullName">${i18n("addressFullName")}*</label>
+					<input id="fullName" class="form-control" name="fullName" title="${i18n('errorWrongName')}" placeholder="${i18n('addressFullNamePlaceholder')}" data-error="${i18n('errorWrongName')}" pattern="${(addressData.infoBill.regexName)!}" type="text" value="${(addressData.infoBill.name)!}">
+				</div>		
+				<!-- Company -->
+				<div class="form-group">
+					<label for="company">${i18n("addressCompany")}</label>
+					<input id="company" class="form-control" name="company" title="${i18n('addressCompany')}" placeholder="${i18n('addressCompanyPlaceholder')}" type="text" value="${(addressData.infoBill.company)!}">
+				</div>
+				<!-- Address Line -->
+				<div class="form-group">
+					<label for="addressLine">${i18n("addressLine")}*</label>
+					<input id="addressLine" class="form-control" name="addressLine" title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}" type="text" value="${(addressData.infoBill.addressLine)!}" required>
+				</div>
+				<!-- City -->
+				<div class="form-group">
+					<label for="city">${i18n("addressCity")}*</label>
+					<input id="city" class="form-control" name="city" title="${i18n('errorWrongCity')}" type="text" pattern="${(addressData.infoBill.regexName)!}" data-error="${i18n('errorWrongCity')}" value="${(addressData.infoBill.city)!}" required>
+				</div>
+				<!-- State -->
+				<div class="form-group">
+					<label for="state">${i18n("addressState")}*</label>
+					<input id="state" class="form-control" name="state" title="${i18n('errorWrongState')}" type="text" pattern="${(addressData.infoBill.regexName)!}" data-error="${i18n('errorWrongState')}" value="${(addressData.infoBill.state)!}" required>
+				</div>
+				<!-- Zip -->
+				<div class="form-group">
+					<label for="zip">${i18n('addressZip')}*</label>
+					<input id="zip" class="form-control" name="zip" title="${i18n('errorWrongZip')}" type="text" pattern="${(addressData.infoBill.regexZip)!}" data-error="${i18n('errorWrongZip')}" value="${(addressData.infoBill.zip)!}" placeholder="${i18n('addressZipPlaceholder')}" required>
+				</div>
+				<!-- Select Country -->
+				<div class="form-group">
+					<label for="country">${i18n("addressCountry")}*</label>
+					<select id="country" class="form-control" name="country" title="${i18n('addressCountry')}">
+						<option>${i18n('countryUS')}</option>
+						<option>${i18n('countryGermany')}</option>
+					</select>
+				</div>
 			</div>
 		</div>
 	</div>
     </#if>
+
 </#list>
-	
+
 <#include "../layout/footer.ftl.html">
 	
