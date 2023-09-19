@@ -8,10 +8,10 @@
 	</div>	
 	<div class="carousel-inner">
 	  	<div class="carousel-item active">
-			<a class="d-block w-100" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a>
+			<a class="carousel-content-text d-block w-100" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a>
 	  	</div>
 	  	<div class="carousel-item">
-			<a class="d-block w-100" href="#">Our biggest sale yet 50% off all Posters</a>
+			<a class="carousel-content-text d-block w-100" href="#">Our biggest sale yet 50% off all Posters</a>
 	  	</div>
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel-sale" data-bs-slide="prev">
@@ -33,11 +33,19 @@
 	</div>	
 	<div class="carousel-inner">
 		<#list carousel as caro>
+		<#if (caro_index == 0)>
+		<div class="carousel-item active">
+			<h1>${caro.name}</h1>
+			<img src="${contextPath}${caro.imageURL}" class="d-block w-100" alt="picture of ${caro.name}">
+			<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a>
+	  	</div>
+		<#else>
 	  	<div class="carousel-item">
 			<h1>${caro.name}</h1>
 			<img src="${contextPath}${caro.imageURL}" class="d-block w-100" alt="picture of ${caro.name}">
 			<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a>
 	  	</div>
+		</#if>
 		</#list>
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel-product-display" data-bs-slide="prev">
