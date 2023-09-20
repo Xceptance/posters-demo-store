@@ -4,6 +4,8 @@
         <div class="bg-light rounded h-100 p-4">
             <h2 class="mb-4">Customer View</h2>
             <p>Select an address to edit.</p>
+            
+            
             <form action="/posters/backoffice/customer/${customer.id}/view/edit" method="post">
                 <div class="table-responsive">
                     <table id="" class="table display text-start align-middle table-bordered table-hover mb-0">
@@ -20,32 +22,50 @@
                         <tbody>
                             <tr>
                                 <td valign="top">${customer.firstName} ${customer.name}</td>
-                                <td valign="top">    
-                                    <#if customer.shippingAddress?has_content>
-                                        <#list customer.shippingAddress as shippingAddress>
-                                            <fieldset class="row mb-3">
-                                                <legend class="col-form-label col-sm-2 pt-0">${shippingAddress_index +1}</legend>
-                                                <div class="col-sm-10">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="gridRadiosShip" 
-                                                            id="gridRadiosShip${shippingAddress_index + 1}" data-shipId=""
-                                                            value="${shippingAddress.id}">
-                                                            
-                                                            <label class="form-check-label"
-                                                            for="gridRadiosShip${shippingAddress_index + 1}">
-                                                            <address>
-                                                                ${shippingAddress.addressLine},<br>
-                                                                ${shippingAddress.zip}
-                                                                ${shippingAddress.state}, <br> ${shippingAddress.city}, ${shippingAddress.country}
-                                                            </address>
-                                                        </label>
+                                <td valign="top">
+                                   
+                                    <div class="row">
+                                            <#if customer.shippingAddress?has_content>
+                                            <#list customer.shippingAddress as shippingAddress>
+                                            <div class="col-lg-10">
+
+                                                <fieldset class="row mb-3">
+                                                    <legend class="col-form-label col-sm-2 pt-0">${shippingAddress_index +1}</legend>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gridRadiosShip" 
+                                                                id="gridRadiosShip${shippingAddress_index + 1}" data-shipId=""
+                                                                value="${shippingAddress.id}">
+                                                                
+                                                                <label class="form-check-label"
+                                                                for="gridRadiosShip${shippingAddress_index + 1}">
+                                                                <address>
+                                                                    ${shippingAddress.name},<br>
+                                                                    ${shippingAddress.company},<br>
+                                                                    ${shippingAddress.addressLine},<br>
+                                                                    ${shippingAddress.zip}
+                                                                    ${shippingAddress.state}, <br> ${shippingAddress.city}, ${shippingAddress.country}
+                                                                </address>
+                                                            </label>
+                                                        </div>
                                                     </div>
+                                                </fieldset>
+                                            </div>
+
+                                                <div class="col-lg-2">
+                                                    
+                                                    <a href="/posters/backoffice/customer/${customer.id}/view/orders"
+                                                    class="btn btn-square btn-outline-danger m-2">
+                                                    <i class="fa fa-trash-alt"></i>
+                                                </a>
                                                 </div>
-                                            </fieldset>
-                                        </#list>
-                                        <#else>
-                                            NA
-                                    </#if>
+                                            </#list>
+                                            <#else>
+                                                NA
+                                        </#if>
+                                           
+                                    </div>
+                                    
                                 </td>
     
                                 <td valign="top">
@@ -117,10 +137,13 @@
                     </table>
                 </div>
                 <br>
-                <dl>
+                <div>
                     <a class="btn btn-sm btn-secondary" href="/posters/backoffice/customer">Back</a>
                     <button type="submit" class="btn btn-sm btn-primary">Edit</button>
-                </dl>
+                    <a class="btn btn-sm btn-secondary" href="">Reset</a>
+
+                </div>
+           
             </form>
         </div>
     </div>
