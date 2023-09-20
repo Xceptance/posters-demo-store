@@ -19,8 +19,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>${customer.firstName} ${customer.name}</td>
-                                <td>    
+                                <td valign="top">${customer.firstName} ${customer.name}</td>
+                                <td valign="top">    
                                     <#if customer.shippingAddress?has_content>
                                         <#list customer.shippingAddress as shippingAddress>
                                             <fieldset class="row mb-3">
@@ -48,7 +48,7 @@
                                     </#if>
                                 </td>
     
-                                <td>
+                                <td valign="top">
                                     <#if customer.billingAddress?has_content>
                                         <#list customer.billingAddress as billingAddress>
                                             <fieldset class="row mb-3">
@@ -75,7 +75,7 @@
                                     </#if>
                                 </td>
     
-                                <td>
+                                <td valign="top">
                                     <#if customer.creditCard?has_content>
                                         <#list customer.creditCard as creditCard>
                                             <fieldset class="row mb-3">
@@ -99,7 +99,7 @@
                                     </#if>
                                 </td>
     
-                                <td>
+                                <td valign="top">
                                     <#if customer.order?has_content>
                                         <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button id="edit"
                                                 type="button" class="btn btn-sm-square btn-outline-info m-2">

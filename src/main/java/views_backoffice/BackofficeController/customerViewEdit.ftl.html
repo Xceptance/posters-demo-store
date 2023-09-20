@@ -1,30 +1,43 @@
 <#include "../layout/upper.ftl.html">
-<div class="bg-light rounded p-4 pt-4 mx-4 my-4">
-    <div class="bg-light rounded h-100 p-4">
-        <h6 class="mb-4">Edit Customer ${customer.firstName} ${customer.name}:</h6>
-        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/view-edit-complete" method="post">
-            <!-- Customer Information Section -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                    value="${customer.email}">
-            </div>
-            <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="name" name="firstName" value="${customer.firstName}">
-            </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="name" value="${customer.name}">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6"> <!-- Adjust the column width as needed -->
+        <!-- Centered content or container -->
+        <div class="">
+			
+									<!-- Customer Information Section -->
+
+		<div class="bg-light rounded p-4 pt-4 mx-4 my-4 ">
+			<div class="mb-4 rounded p-4 bg-light">
+				<h6 class="mb-4">Edit Customer ${customer.firstName} ${customer.name}:</h6>
+				<form action="${contextPath}/posters/backoffice/customer/${customer.id}/view-edit-complete" method="post">
+					<div class="mb-3">
+						<label for="email" class="form-label">Email address</label>
+						<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+							value="${customer.email}">
+					</div>
+					<div class="mb-3">
+						<label for="firstName" class="form-label">First Name</label>
+						<input type="text" class="form-control" id="name" name="firstName" value="${customer.firstName}">
+					</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Last Name</label>
+						<input type="text" class="form-control" id="lastName" name="name" value="${customer.name}">
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Password</label>
+						<input type="password" class="form-control" id="password" name="password">
+					</div>
+				</div>
+			</div>
 
             <!-- Shipping Address Section -->
             <#list addressDataList as addressData>
                 <#if addressData.infoShip?has_content>
+				<div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+
+				<div class="mb-4 rounded p-4 bg-light">
+
                     <h6>${i18n("updateShippingTitle")}</h6>
                     <input name="addressIdShip" id="addressId" type="hidden" value=${addressData.infoShip.id}>
 
@@ -78,12 +91,17 @@
                             <option>${i18n('countryGermany')}</option>
                         </select>
                     </div>
+				</div>
+			</div>
+
                 </#if>
             </#list>
 
             <!-- Billing Address Section -->
             <#list addressDataList as addressData>
                 <#if addressData.infoBill?has_content>
+				<div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+
                     <div class="mb-4 rounded p-4 bg-light">
                         <h6>${i18n("updateBillingTitle")}</h6>
                         <input name="addressIdBill" id="addressIdBill" type="hidden" value=${addressData.infoBill.id}>
@@ -135,12 +153,26 @@
                             </select>
                         </div>
                     </div>
+					
+				</div>
+				
                 </#if>
             </#list>
-
-            <button type="submit" class="btn btn-primary">Confirm</button>
+			<div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+			
+				<div class="mb-4 rounded p-4 bg-light">
+					<div class="mb-3">
+						<button type="submit" class="btn btn-primary">Confirm</button>
+					</div>
+				</div>
+			</div>
+    
         </form>
+
+		</div>
     </div>
 </div>
+
+
 
 	<#include "../layout/footer.ftl.html">
