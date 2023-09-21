@@ -3,7 +3,16 @@
     <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
         <div class="bg-light rounded h-100 p-4">
             <h2 class="mb-4">Customer View</h2>
-            <p>Select an address to edit.</p>
+            <div class="row align-items-center">
+                <div class="col">
+                    <p>Select an address to edit.</p>
+                </div>
+                <div class="col text-end">                    
+                        <button type="button" onclick="window.location.href=''" data-bs-toggle="tooltip" data-bs-placement="top" title="Reset Selections" class="btn btn-sm-square btn-outline-secondary m-2">
+                            <i class="fa fa-undo"></i>
+                        </button>
+                </div>
+            </div>
             
             
             <form action="/posters/backoffice/customer/${customer.id}/view/edit" method="post">
@@ -11,12 +20,12 @@
                     <table id="" class="table display text-start align-middle table-bordered table-hover mb-0">
                         <thead>
                             <tr class="text-dark">
-                                <th scope="col">Name</th>
-                                <th scope="col">Shipping Address</th>
-                                <th scope="col">Billing Address</th>
-                                <th scope="col">Payment Info</th>
+                                <th width="10%" scope="col">Name</th>
+                                <th width="30%" scope="col">Shipping Address</th>
+                                <th width="30%" scope="col">Billing Address</th>
+                                <th width="20%" scope="col">Payment Info</th>
     
-                                <th scope="col">Orders</th>
+                                <th width="10"scope="col">Orders</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,11 +47,11 @@
                                                                 <label class="form-check-label"
                                                                     for="gridRadiosShip${shippingAddress_index + 1}">
                                                                     <address>
-                                                                        ${shippingAddress.name},<br>
-                                                                        ${shippingAddress.company},<br>
+                                                                        ${shippingAddress.name},
+                                                                        ${shippingAddress.company}, <br>
                                                                         ${shippingAddress.addressLine},<br>
                                                                         ${shippingAddress.zip}
-                                                                        ${shippingAddress.state}, <br> ${shippingAddress.city}, ${shippingAddress.country}
+                                                                        ${shippingAddress.state},  ${shippingAddress.city}, ${shippingAddress.country}
                                                                     </address>
                                                                 </label>
                                                             </div>
@@ -53,9 +62,9 @@
                                                 <div class="col-lg-2">
                                                     <div class="col-xs-12 col-sm-3 text-center mb-3">
                                                         <!-- Each delete button should have its own form -->
-                                                        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del" method="post">
-                                                            <input name="addressIdShip" class="billingId101" type="hidden" value="${shippingAddress.id}">
-                                                            <button type="submit" class="btn btn-square btn-outline-danger m-2"><i class="fa fa-trash-alt"></i></button>
+                                                        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-ship-address" method="post">
+                                                            <input name="addressIdShip" class="" type="hidden" value="${shippingAddress.id}">
+                                                            <button type="submit" class="btn btn-sm-square btn-outline-danger m-2"><i class="fa fa-trash-alt"></i></button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -83,8 +92,11 @@
                                                         <label class="form-check-label"
                                                             for="gridRadiosBill${billingAddress_index + 1}">
                                                             <address>
-                                                                ${billingAddress.addressLine}<br> ${billingAddress.zip},
-                                                                ${billingAddress.state} <br> ${billingAddress.city}
+                                                                ${billingAddress.name},
+                                                                ${billingAddress.company}, <br>
+                                                                ${billingAddress.addressLine},<br>
+                                                                ${billingAddress.zip}
+                                                                ${billingAddress.state},  ${billingAddress.city}, ${billingAddress.country}
                                                             </address>
                                                         </label>
                                                     </div>
@@ -92,6 +104,13 @@
                                             </fieldset>
                                         </div>
                                         <div class="col-lg-2">
+                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                <!-- Each delete button should have its own form -->
+                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-bill-address" method="post">
+                                                    <input name="addressIdBill" class="" type="hidden" value="${billingAddress.id}">
+                                                    <button type="submit" class="btn btn-sm-square btn-outline-danger m-2"><i class="fa fa-trash-alt"></i></button>
+                                                </form>
+                                            </div>
                                         </div>
                                         </#list>
                                         <#else>
@@ -106,7 +125,7 @@
 
                                     <#if customer.creditCard?has_content>
                                         <#list customer.creditCard as creditCard>
-                                        <div class="col-lg-10">
+                                        <div class="col-lg-9">
 
                                             <fieldset class="row mb-3">
                                                 <legend class="col-form-label col-sm-2 pt-0">${creditCard_index + 1}
@@ -124,7 +143,14 @@
                                                 </div>
                                             </fieldset>
                                         </div>
-                                        <div class="col-lg-2">
+                                        <div class="col-lg-3">
+                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                <!-- Each delete button should have its own form -->
+                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-bill-address" method="post">
+                                                    <input name="IdCred" class="" type="hidden" value="${creditCard.id}">
+                                                    <button type="submit" class="btn btn-sm-square btn-outline-danger m-2"><i class="fa fa-trash-alt"></i></button>
+                                                </form>
+                                            </div>
                                         </div>
                                         </#list>
                                         <#else>
@@ -154,7 +180,6 @@
                 <div>
                     <a class="btn btn-sm btn-secondary" href="/posters/backoffice/customer">Back</a>
                     <button type="submit" class="btn btn-sm btn-primary">Edit</button>
-                    <a class="btn btn-sm btn-secondary" href="" data-toggle="tooltip" title="Reset Selections">Reset</a>
 
                 </div>
            
