@@ -696,6 +696,7 @@ public class BackofficeController
     public Result customerViewEditComplete(final Context context, @PathParam("customerId") String customerId,
                                            @Param("email") final String email, @Param("firstName") final String firstName,
                                            @Param("name") final String name, @Param("password") final String password,
+                                           //Shipping Info
                                            @Param("fullName") final String fullName, @Param("company") final String company,
                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
                                            @Param("state") final String state, @Param("zip") final String zip,
@@ -738,7 +739,7 @@ public class BackofficeController
             else
             {
                 final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressIdShip));
-                address.setName(name);
+                address.setName(fullName);
                 address.setCompany(company);
                 address.setAddressLine(addressLine);
                 address.setCity(city);
@@ -845,6 +846,17 @@ public class BackofficeController
             // show address overview page
             return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
     }
+
+    public Result customerViewBillingAddressDelete(final Context context, @Param("addressIdBill") final int addressIdBill, @PathParam("customerId") String customerId)
+    {
+            // remove Billing address
+            BillingAddress.removeCustomerFromBillingAddress(addressIdBill);
+            // show success message
+            context.getFlashScope().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+    }
+    
 
 /**
      * View customer order information in the database.
