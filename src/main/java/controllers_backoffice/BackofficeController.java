@@ -709,7 +709,7 @@ public class BackofficeController
     {
 
         Result result = Results.html();
-//Shipping Address Section
+        //Shipping Address Section
         if (zip != null)
         {
             // check input
@@ -754,10 +754,10 @@ public class BackofficeController
 
         }
 
-//Billing Address Section
+            //Billing Address Section
 
-if (zipBill != null)
-        {
+        if (zipBill != null)
+            {
             // check input
 
             if (!Pattern.matches(xcpConf.REGEX_ZIP, zipBill))
@@ -835,15 +835,25 @@ if (zipBill != null)
         }
     }
 
-    /**
+    
+     public Result customerViewShipppingAddressDelete(final Context context, @Param("addressIdShip") final int addressIdShip, @PathParam("customerId") String customerId)
+    {
+            // remove shipping address
+            ShippingAddress.removeCustomerFromShippingAddress(addressIdShip);
+            // show success message
+            context.getFlashScope().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+    }
+
+/**
      * View customer order information in the database.
      * 
      * @param context
      * @return
      */
-    
     public Result customerViewOrders(final Context context, @PathParam("customerId") String customerId)
-    {
+{
         Result result = Results.html();
 
         final Map<String, Object> data = new HashMap<String, Object>();
