@@ -311,6 +311,7 @@
 const mainCarouselElement = document.querySelector('#carousel-product-display')
 
 const mainCarousel = new bootstrap.Carousel(mainCarouselElement, {
+  wrap: true,
   interval: 5000,
   touch: true
 })
@@ -318,6 +319,7 @@ const mainCarousel = new bootstrap.Carousel(mainCarouselElement, {
 const adTextCarouselElement = document.querySelector('#carousel-sale')
 
 const adTextCarousel = new bootstrap.Carousel(adTextCarouselElement, {
+  wrap: true,
   interval: 5000,
   touch: true
 })
