@@ -8,10 +8,10 @@
 	</div>	
 	<div class="carousel-inner">
 	  	<div class="carousel-item active">
-			<a class="carousel-content-text d-block w-100" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a>
+			<a class="carousel-content-text text-center d-block w-100" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a>
 	  	</div>
 	  	<div class="carousel-item">
-			<a class="carousel-content-text d-block w-100" href="#">Our biggest sale yet 50% off all Posters</a>
+			<a class="carousel-content-text text-center d-block w-100" href="#">Our biggest sale yet 50% off all Posters</a>
 	  	</div>
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel-sale" data-bs-slide="prev">
@@ -34,16 +34,26 @@
 	<div class="carousel-inner">
 		<#list carousel as caro>
 		<#if (caro_index == 0)>
-		<div class="carousel-item active">
-			<h1>${caro.name}</h1>
-			<img src="${contextPath}${caro.imageURL}" class="d-block w-100" alt="picture of ${caro.name}">
-			<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a>
+		<div class="carousel-content-product carousel-item active" style="background-image: url('${contextPath}${caro.imageURL}');">
+			<div class="row">
+				<h1>${caro.name}</h1>
+			</div>
+			<div class="row">
+				<div class="col">
+					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a>
+				</div>
+			</div>
 	  	</div>
 		<#else>
-	  	<div class="carousel-item">
-			<h1>${caro.name}</h1>
-			<img src="${contextPath}${caro.imageURL}" class="d-block w-100" alt="picture of ${caro.name}">
-			<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a>
+	  	<div class="carousel-content-product carousel-item" style="background-image: url('${contextPath}${caro.imageURL}');">
+			<div class="row">
+				<h1>${caro.name}</h1>
+			</div>
+			<div class="row">
+				<div class="col">
+					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy</a>
+				</div>
+			</div>
 	  	</div>
 		</#if>
 		</#list>
@@ -62,29 +72,32 @@
 	<h2 id="intro-text-homepage" class="display-3">Began with a simple idea "SHATATATATA!" - M. Scott</h2>
 </div>
 
-<div class="category-showcase container-fluid">
-	<div class="row">
+<div class="container text-center">
+	<div class="row category-display-case">
 		<#list topCategory as tC>
-		<div class="col-sm-3 text-center">
+		<div class="card category-tile">
 			<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"><img src="${contextPath}${productslistcat[tC?index].imageURL}"></a>
-			<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="pName">${tC.name}</a></h2>
+			<div class="card-body">
+		  		<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.name}</a></h2>
+			</div>
 		</div>
 		</#list>
 	</div>
 </div>
 
-<div class="product-list-header container-fluid text-center">
+<div class="product-display-heading container-fluid text-center">
 	<h2>Hot Products</h2>
 </div>
 
 <div class="container text-center">
-	<div class="row">
+	<div class="row product-display-case">
 		<#list productslist as prItem>
-		<div class="card product-tile" style="width: 18rem;">
+		<div class="card product-tile">
 			<img src="${contextPath}${prItem.imageURL}" class="card-img-top" alt="picture of ${prItem.name}">
 			<div class="card-body">
 		  		<h5 class="card-title">${prItem.name}</h5>
-		  		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  		<p class="card-text product-tile-text">${prItem.descriptionOverview}</p>
+				<p class="card-text product-tile-price">$${prItem.minimumPrice}</p>
 		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary">Buy</a>
 			</div>
 		</div>
