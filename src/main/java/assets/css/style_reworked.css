@@ -59,17 +59,11 @@
 /*  Headings
 *   - End
 */ 
- 
-  a {
-
-    }
 
 /*  Header
 *   - Start
 */
-  #header-search-button {
-    
-  }
+
 /*  Header
 *   - End
 */
@@ -147,9 +141,7 @@
 /*  Intro text
 *   - Start
 */
-  .intro-text {
 
-  }
 /*  Intro text
 *   - End
 */
@@ -185,14 +177,6 @@
   .btn-primary {
     background-color: var(--xred);
     border-color: var(--xred);
-  }
-
-  .btn-secondary {
-
-  }
-
-  .btn-tertiary {
-
   }
 
   .btn:hover {
@@ -231,7 +215,23 @@
 *   - Start
 */
   .pagination {
+    justify-content: center;
+  }
 
+  .pagination .page-item a {
+    background-color: white;
+    color: var(--xred);
+  }
+
+  .pagination .page-item a.active {
+    border-color: var(--xred);
+    background-color: var(--xred);
+    color: white;
+  }
+
+  .pagination .page-item a:hover {
+    background-color: var(--button-hover);
+    color: white;
   }
 /*  Pagination
 *   - End
@@ -240,9 +240,7 @@
 /*  Image as element
 *   - Start
 */
-  .main-image {
 
-  }
 /*  Image as element
 *   - End
 */
@@ -250,9 +248,7 @@
 /*  Product details
 *   - Start
 */
-  .product-details {
 
-  }
 /*  Product details
 *   - End
 */
@@ -260,9 +256,7 @@
 /*  Product list (e.g. in cart)
 *   - Start
 */
-  .product-list {
 
-  }
 /*  Product list
 *   - End
 */
@@ -270,9 +264,7 @@
 /*  Price summary
 *   - Start
 */
-  .price-summary {
 
-  }
 /*  Price summary
 *   - End
 */
@@ -280,9 +272,7 @@
 /*  Progress bars
 *   - Start
 */
-  .progress-bar {
 
-  }
 /*  Progress bars
 *   - End
 */
@@ -290,8 +280,10 @@
 /*  Forms
 *   - Start
 */
-  form {
-
+  .form-check input:checked {
+    accent-color: var(--xred);
+    background-color: var(--xred);
+    border-color: var(--xred);
   }
 /*  Forms
 *   - End
@@ -300,9 +292,7 @@
 /*  Order overview
 *   - Start
 */
-  .order-overview {
 
-  }
 /*  Order overview
 *   - End
 */
@@ -310,9 +300,7 @@
 /*  Icons as elements
 *   - Start
 */
-  .main-icon {
 
-  }
 /*  Icons as elements
 *   - Start
 */
@@ -320,36 +308,8 @@
 /*  Special text elements
 *   - Start
 */
-  .text-phrase {
-
-  }
-
-  .link-section {
-
-  }
-
-  .text-block {
-
-  }
-
-  .text-section {
-
-  }
-
   .long-text {
     font-family: Montserrat, sans-serif;
-  }
-
-  .iconBeforeText {
-
-  }
-
-  .iconAfterText {
-
-  }
-
-  .iconWithinText {
-
   }
 
   .demo-disclaimer {
