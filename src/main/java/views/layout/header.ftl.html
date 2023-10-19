@@ -1,15 +1,15 @@
 <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
+  <div class="container-fluid justify-content-center">
+    <a id="header-brand" class="navbar-brand d-flex justify-content-center" href="${applUrlHttp}/">
       <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
       ${i18n('titleShop')}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="header-navigation-elements" class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul id="header-categories" class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div id="header-navigation-elements" class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+      <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
         <#list topCategory as tC>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
@@ -27,7 +27,7 @@
         <input id="header-search-field" class="form-control me-2" type="search" placeholder="${i18n('headerSearch')}" aria-label="${i18n('headerSearch')}" title="${i18n('headerSearch')}" value="${(searchTerm)!}">
         <button id="header-search-button" class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
       </form>
-      <ul id="header-customer-menus" class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="icon-user2"></span>
