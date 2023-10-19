@@ -63,6 +63,17 @@
 /*  Header
 *   - Start
 */
+  #header-brand-logo {
+    max-height: 2.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.8rem;
+  }
+
+  #header-customer-menus .dropdown-menu {
+    padding: 10px;
+  }
 
 /*  Header
 *   - End
@@ -79,6 +90,8 @@
     background-color: var(--xred);
     padding-top: 0.5rem;
     padding-bottom: 1.5rem;
+    color: white;
+    text-decoration: none;
   }
 
   #carousel-product-display {
@@ -191,6 +204,10 @@
 *   - Start
 */
   footer {
+    border-top: 1px solid #d3d7cf;
+	  margin-top: 20px;
+	  padding: 20px;
+
     font-size: 0.875rem;
     font-family: 'Montserrat', sans-serif;
   }
