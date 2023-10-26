@@ -73,6 +73,10 @@
 /*  Header
 *   - Start
 */
+  header {
+    border-bottom: 1px solid #d3d7cf;
+  }
+
   #header-brand-logo {
     max-height: 2.5rem;
   }
@@ -343,7 +347,13 @@
 /*  Price summary
 *   - Start
 */
+  .price-summary {
+    width: 10em;
+  }
 
+  .price-summary-value {
+    text-align: right;
+  }
 /*  Price summary
 *   - End
 */
