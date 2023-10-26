@@ -1,14 +1,14 @@
 <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid justify-content-center">
+  <div class="container">
     <a id="header-brand" class="navbar-brand d-flex justify-content-center" href="${applUrlHttp}/">
       <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
       ${i18n('titleShop')}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="header-navigation-elements" class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+    <div id="header-navigation-elements" class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
       <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
         <#list topCategory as tC>
         <li class="nav-item dropdown">
