@@ -290,6 +290,12 @@
   footer a:hover {
     color: var(--button-hover);
   }
+
+  footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 /*  Footer
 *   - End
 */
