@@ -90,6 +90,10 @@
     padding: 10px;
   }
 
+  #header-search-button {
+    padding-bottom: 4px;
+  }
+
   /*  Mini cart
   *   - Start
   */
@@ -337,7 +341,9 @@
 /*  Product details
 *   - Start
 */
-
+  .product-detail-paragraph-label {
+    display: none;
+  }
 /*  Product details
 *   - End
 */
@@ -367,7 +373,20 @@
 /*  Progress bars
 *   - Start
 */
+  .progress-bubble {
+    width: 1rem;
+    height: 1rem;
+    padding: 1rem;
+    border-width: 1px;
+    border-radius: 1.5rem;
+    border-color: #111111;
+  }
 
+  .progress-column.active .progress-bubble {
+    background-color: var(--xred);
+    border-color: var(--xred);
+    color: white;
+  }
 /*  Progress bars
 *   - End
 */
@@ -395,7 +414,29 @@
 /*  Icons as elements
 *   - Start
 */
+  .gototop {
+    /* 
+    * width, height, and border-radius assume the content will be 1rem x 1rem in size
+    * if this condition is not met content will be misaligned 
+    */
+    width: 3rem;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: var(--xred);
+    border-color: var(--xred);
+    color: white;
+    border-radius: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+  }
 
+  .gototop a {
+    color: inherit;
+    text-decoration: none;
+  }
 /*  Icons as elements
 *   - Start
 */
