@@ -4,7 +4,7 @@
 <div class="container mt-4">
 	<div class="row">
 		<img src="${contextPath}${productDetail.imageURL}" class="img-fluid col" alt="${productDetail.name}">
-		<div class="col mt-4">
+		<div class="col-lg-6 col-md-12 mt-4">
 			<form id="add-to-cart-form">
 				<div class="mb-3">
 					<h3>${productDetail.name}</h3>
@@ -16,8 +16,8 @@
 					<h4>${productDetail.descriptionOverview}</h4>
 				</div>
 				<div class="mb-3">
-					<label for="product-detail-form-description" class="form-label">${i18n("productDetailProductDescription")}</label>
-					<div id="product-detail-form-description" class="form-text">${productDetail.descriptionDetail}</div>
+					<label for="product-detail-form-description" class="form-label product-detail-paragraph-label">${i18n("productDetailProductDescription")}</label>
+					<div id="product-detail-form-description" class="">${productDetail.descriptionDetail}</div>
 				</div>
 				<div class="mb-3">
 					<label for="product-detail-form-size-selection" class="form-label" >${i18n("cartSelectSize")}</label>
@@ -46,8 +46,8 @@
 					</div>
 				</div>
 				<div class="mb-3">
-					<label for="product-detail-form-print-information" class="form-label">${i18n("productDetailPrintInformation")}</label>
-					<div id="product-detail-form-print-information" class="form-text">${i18n('productDetailPosterFinish')}</div>
+					<label for="product-detail-form-print-information" class="form-label product-detail-paragraph-label">${i18n("productDetailPrintInformation")}</label>
+					<div id="product-detail-form-print-information" class="">${i18n('productDetailPosterFinish')}</div>
 				</div>
 				<div class="mb-3 d-flex justify-content-end">
 					<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, $('#add-to-cart-form input[name=style-selection]:checked').val(), $('#product-detail-form-size-selection').val())" class="btn btn-primary">
