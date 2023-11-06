@@ -581,61 +581,125 @@ public class BackofficeController
      * @param context
      * @return
      */
-    public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId) {
-    Result result = Results.html();
+    //public Result customerViewEditShippingAddress(final Context context, @PathParam("customerId") String customerId) {
 
-    // Define an array of address types to iterate through
-    String[] radioTypes = {
-        "Ship", "Bill", "Cred"
-    };
 
-    // Create lists to hold data for each address type
-    List<Map<String, Object>> addressDataList = new ArrayList<>();
-    // Create a map to store common data
-    Map<String, Object> commonData = new HashMap<>();
+        
+    //}
 
-    for (String radioType : radioTypes) {
-        // Retrieve the selected address id value from the request
-        String selectedId = context.getParameter("gridRadios" + radioType);
+    public Result shippingAddressEdit(@Param("addressIdShip") final int shipId, final Context context, @PathParam("customerId") String customerId){
+        Result result = Results.html();
 
-        // Check if an address of this type was selected
-        if (selectedId != null) {
-            int Id = Integer.parseInt(selectedId);
-            final Map<String, Object> data = new HashMap<String, Object>();
+        final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("address", ShippingAddress.getShippingAddressById(shipId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        result.render(commondata);
 
-            // Set the appropriate data based on the address type
-            if (radioType.equals("Ship")) {
-                data.put("info" + radioType, ShippingAddress.getShippingAddressById(Id));
-            } else if (radioType.equals("Bill")) {
-                data.put("info" + radioType, BillingAddress.getBillingAddressById(Id));
-            } else if (radioType.equals("Cred")) {
-                data.put("info" + radioType, CreditCard.getCreditCardById(Id));
-            }
-
-            data.put("id" + radioType, Id); // Set addressId in the Context
-            addressDataList.add(data); // Add data to the list
-        }
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
+    
     }
 
-    // Set common data using the map
-    WebShopController.setCommonData(commonData, context, xcpConf);
+    public Result shippingAddressEditComplete( final Context context, @PathParam("customerId") String customerId, 
+                                            @Param("addressIdShip") final int shipId, @Param("fullName") final String fullName, 
+                                            @Param("company") final String company, @Param("addressLine") final String addressLine, 
+                                            @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
+                                           @Param("country") final String country, @Param("addressIdShip") final String addressIdShip)
+    {
+    Result result = Results.html();
+    
+    final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("address", ShippingAddress.getShippingAddressById(shipId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        result.render(commondata);
 
 
-    // Pass the list of address data to the edit view
-    result.render("addressDataList", addressDataList);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
 
-    // Find customer with the id from the params
-    Customer customer = Ebean.find(Customer.class, customerId);
-    // Render customer into template
-    result.render("customer", customer);
+        // Find current user
+        //User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+       // result.render("currentUser", currentUser);
 
-    // Find current user
-    User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
-    // Add current user into the back office
-    result.render("currentUser", currentUser);
+        //boolean failure = false;
+        //return Results.redirect(context.getContextPath() + "/posters/backoffice/customer");
 
-    return result;
-}
+    }
+ 
+    public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
+    {
+        Result result = Results.html();
+
+        // Define an array of address types to iterate through
+        String[] radioTypes =
+            {
+                "Ship", "Bill", "Cred"
+            };
+
+        // Create lists to hold data for each address type
+        List<Map<String, Object>> addressDataList = new ArrayList<>();
+        // Create a map to store common data
+        Map<String, Object> commonData = new HashMap<>();
+
+        for (String radioType : radioTypes)
+        {
+            // Retrieve the selected address id value from the request
+            String selectedId = context.getParameter("gridRadios" + radioType);
+
+            // Check if an address of this type was selected
+            if (selectedId != null)
+            {
+                int Id = Integer.parseInt(selectedId);
+                final Map<String, Object> data = new HashMap<String, Object>();
+
+                // Set the appropriate data based on the address type
+                if (radioType.equals("Ship"))
+                {
+                    data.put("info" + radioType, ShippingAddress.getShippingAddressById(Id));
+                }
+                else if (radioType.equals("Bill"))
+                {
+                    data.put("info" + radioType, BillingAddress.getBillingAddressById(Id));
+                }
+                else if (radioType.equals("Cred"))
+                {
+                    data.put("info" + radioType, CreditCard.getCreditCardById(Id));
+                }
+
+                data.put("id" + radioType, Id); // Set addressId in the Context
+                addressDataList.add(data); // Add data to the list
+            }
+        }
+
+        // Set common data using the map
+        WebShopController.setCommonData(commonData, context, xcpConf);
+
+        // Pass the list of address data to the edit view
+        result.render("addressDataList", addressDataList);
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
 
 
     /**
