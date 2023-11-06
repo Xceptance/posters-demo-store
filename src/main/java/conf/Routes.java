@@ -205,6 +205,8 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/posters/backoffice/customer/{customerId}/del-bill-address").with(BackofficeController.class, "customerViewBillingAddressDelete");
         router.POST().route("/posters/backoffice/customer/{customerId}/edit-ship-address").with(BackofficeController.class, "shippingAddressEdit");
         router.POST().route("/posters/backoffice/customer/{customerId}/shipping-edit-complete").with(BackofficeController.class, "shippingAddressEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/edit-billing-address").with(BackofficeController.class, "billingAddressEdit");
+        router.POST().route("/posters/backoffice/customer/{customerId}/billing-edit-complete").with(BackofficeController.class, "billingAddressEditComplete");
 
         //router.POST().route("/posters/backoffice/customer/{customerId}/del-ship-address").with(BackofficeController::customerViewShipppingAddressDelete);
 

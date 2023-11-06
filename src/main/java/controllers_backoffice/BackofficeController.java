@@ -576,16 +576,11 @@ public class BackofficeController
     }
 
     /**
-     * Edit a customer's information and credentials, from the Customer Detail view.
+     * Edit a customer's shipping information, from the Customer Detail view.
      * 
      * @param context
      * @return
      */
-    //public Result customerViewEditShippingAddress(final Context context, @PathParam("customerId") String customerId) {
-
-
-        
-    //}
 
     public Result shippingAddressEdit(@Param("addressIdShip") final int shipId, final Context context, @PathParam("customerId") String customerId){
         Result result = Results.html();
@@ -614,8 +609,6 @@ public class BackofficeController
                                            @Param("country") final String country, @Param("addressIdShip") final String addressIdShip)
     {
         Result result = Results.html();
-    
-    
 
         // Find customer with the id from the params
         Customer customer = Ebean.find(Customer.class, customerId);
@@ -668,19 +661,35 @@ public class BackofficeController
             }
 
         }
-        
-        
-        
-        
-        
-        
-        
-        
         return result;
-
-   
     }
  
+    /**
+     * Edit a customer's shipping information, from the Customer Detail view.
+     * 
+     * @param context
+     * @return
+     */
+
+    public Result billingAddressEdit(@Param("addressIdBill") final int billId, final Context context, @PathParam("customerId") String customerId){
+        Result result = Results.html();
+
+        final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("address", ShippingAddress.getShippingAddressById(billId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        result.render(commondata);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
+    
+    }
     public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
     {
         Result result = Results.html();
