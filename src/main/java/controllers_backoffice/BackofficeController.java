@@ -665,7 +665,7 @@ public class BackofficeController
     }
  
     /**
-     * Edit a customer's shipping information, from the Customer Detail view.
+     * Edit a customer's billing information, from the Customer Detail view.
      * 
      * @param context
      * @return
@@ -690,6 +690,80 @@ public class BackofficeController
         return result;
     
     }
+
+    public Result billingAddressEditComplete(final Context context, @PathParam("customerId") String customerId,
+                                             @Param("fullNameBill") final String nameBill, @Param("companyBill") final String companyBill,
+                                             @Param("addressLineBill") final String addressLineBill,
+                                             @Param("cityBill") final String cityBill, @Param("stateBill") final String stateBill,
+                                             @Param("zipBill") final String zipBill, @Param("countryBill") final String countryBill,
+                                             @Param("addressIdBill") final String addressIdBill)
+    {
+        Result result = Results.html();
+
+        if (zipBill != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zipBill))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdBill", addressIdBill);
+                data.put("nameBill", nameBill);
+                data.put("companyBill", companyBill);
+                data.put("addressLineBill", addressLineBill);
+                data.put("cityBill", cityBill);
+                data.put("stateBill", stateBill);
+                data.put("zipBill", zipBill);
+                data.put("countryBill", countryBill);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-bill-address");
+            }
+            // all input fields might be correct
+            else
+            {
+                final BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressIdBill));
+                address.setName(nameBill);
+                address.setCompany(companyBill);
+                address.setAddressLine(addressLineBill);
+                address.setCity(cityBill);
+                address.setState(stateBill);
+                address.setZip(zipBill);
+                address.setCountry(countryBill);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+            }
+        }
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+
+    }
+
+
+
+
+
+
+
+
     public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
     {
         Result result = Results.html();
