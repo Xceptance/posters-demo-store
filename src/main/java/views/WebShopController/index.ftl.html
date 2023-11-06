@@ -76,7 +76,7 @@
 	<div class="row category-display-case">
 		<#list topCategory as tC>
 		<div class="card category-tile">
-			<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"><img src="${contextPath}${productslistcat[tC?index].imageURL}"></a>
+			<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"><img class="category-tile-image" src="${contextPath}${productslistcat[tC?index].imageURL}"></a>
 			<div class="card-body">
 		  		<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.name}</a></h2>
 			</div>
@@ -98,7 +98,7 @@
 		  		<h5 class="card-title">${prItem.name}</h5>
 		  		<p class="card-text product-tile-text">${prItem.descriptionOverview}</p>
 				<p class="card-text product-tile-price">$${prItem.minimumPrice}</p>
-		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary">Buy here</a>
+		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy here</a>
 			</div>
 		</div>
 		</#list>
@@ -106,7 +106,7 @@
 </div>
 
 <div class="container text-center">
-	<a class="btn btn-primary" href="#" role="button">Shop All Products</a>
+	<a class="btn btn-primary btn-shop-all" href="#" role="button">Shop All Products</a>
 </div>
 
 </@layout.myLayout>
