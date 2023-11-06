@@ -14,45 +14,45 @@
 
                     <form action="${contextPath}/posters/backoffice/customer/${customer.id}/billing-edit-complete" method="post">
 
-                    <input name="addressIdShip" id="addressId" type="hidden" value=${address.id}>
+                    <input name="addressIdBill" id="addressId" type="hidden" value=${address.id}>
 
                     <div class="mb-3">
                         <label for="fullNameBill">${i18n("addressFullName")}*</label>
                         <input id="fullNameBill" class="form-control" name="fullNameBill" title="${i18n('errorWrongName')}"
                             placeholder="${i18n('addressFullNamePlaceholder')}"
                             data-error="${i18n('errorWrongName')}" pattern="[ÄäÖöÜüßA-Za-z ]+"
-                            type="text" value="${(addressData.infoBill.name)!}">
+                            type="text" value="${(address.name)!}">
                     </div>
                     <div class="mb-3">
                         <label for="companyBill">${i18n("addressCompany")}</label>
                         <input id="companyBill" class="form-control" name="companyBill" title="${i18n('addressCompany')}"
                             placeholder="${i18n('addressCompanyPlaceholder')}" type="text"
-                            value="${(addressData.infoBill.company)!}">
+                            value="${(address.company)!}">
                     </div>
                     <div class="mb-3">
                         <label for="addressLineBill">${i18n("addressLine")}*</label>
                         <input id="addressLineBill" class="form-control" name="addressLineBill"
                             title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}"
-                            type="text" value="${(addressData.infoBill.addressLine)!}" required>
+                            type="text" value="${(address.addressLine)!}" required>
                     </div>
                     <div class="mb-3">
                         <label for="cityBill">${i18n("addressCity")}*</label>
                         <input id="cityBill" class="form-control" name="cityBill" title="${i18n('errorWrongCity')}"
                             type="text" pattern="[ÄäÖöÜüßA-Za-z ]+"
-                            data-error="${i18n('errorWrongCity')}" value="${(addressData.infoBill.city)!}" required>
+                            data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" required>
                     </div>
                     <div class="mb-3">
                         <label for="stateBill">${i18n("addressState")}*</label>
                         <input id="stateBill" class="form-control" name="stateBill" title="${i18n('errorWrongState')}"
                             type="text" pattern="[ÄäÖöÜüßA-Za-z ]+"
-                            data-error="${i18n('errorWrongState')}" value="${(addressData.infoBill.state)!}"
+                            data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
                             required>
                     </div>
                     <div class="mb-3">
                         <label for="zipBill">${i18n('addressZip')}*</label>
                         <input id="zipBill" class="form-control" name="zipBill" title="${i18n('errorWrongZip')}" type="text"
                             pattern="[0-9]+" data-error="${i18n('errorWrongZip')}"
-                            value="${(addressData.infoBill.zip)!}" placeholder="${i18n('addressZipPlaceholder')}"
+                            value="${(address.zip)!}" placeholder="${i18n('addressZipPlaceholder')}"
                             required>
                     </div>
                     <div class="mb-3">
