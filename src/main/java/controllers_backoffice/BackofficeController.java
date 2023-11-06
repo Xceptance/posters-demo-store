@@ -675,7 +675,7 @@ public class BackofficeController
         Result result = Results.html();
 
         final Map<String, Object> commondata = new HashMap<String, Object>();
-        commondata.put("address", ShippingAddress.getShippingAddressById(billId));
+        commondata.put("address", BillingAddress.getBillingAddressById(billId));
         WebShopController.setCommonData(commondata, context, xcpConf);
         result.render(commondata);
 
@@ -721,7 +721,7 @@ public class BackofficeController
                 data.put("zipBill", zipBill);
                 data.put("countryBill", countryBill);
                 // data.put("address", address);
-                // show page to enter shipping address again
+                // show page to enter billing address again
                 return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-bill-address");
             }
             // all input fields might be correct
