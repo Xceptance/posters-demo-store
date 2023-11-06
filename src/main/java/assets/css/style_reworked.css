@@ -56,6 +56,10 @@
     background-color: var(--xred);
     color: white;
   }
+
+  .product-overview-heading {
+    font-size: 2rem;
+  }
 /*  Headings
 *   - End
 */ 
@@ -86,12 +90,16 @@
   }
 
   #user-menu {
-    width: 200px;
-    padding: 10px;
+    width: 250px;
+    padding: 15px 20px;
   }
 
   #header-search-button {
     padding-bottom: 4px;
+  }
+
+  .header-user-menu-button {
+    display: block;
   }
 
   /*  Mini cart
@@ -99,7 +107,7 @@
   */
   .cartMini {
     width: 250px;
-    padding: 10px 25px;
+    padding: 0px 10px;
   }
   
   .cartMiniHeader {
@@ -113,7 +121,7 @@
   }
   
   .cartMiniTotal {
-    padding: 20px;
+    padding: 10px;
   }
   
   .cartMiniSubOrderTotal {
@@ -162,6 +170,7 @@
     padding-bottom: 1.5rem;
     color: white;
     text-decoration: none;
+    font-size: 1.5rem;
   }
 
   #carousel-product-display {
