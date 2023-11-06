@@ -70,7 +70,7 @@
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                        <!-- Each delete button should have its own form -->
+                                                        <!-- Each edit button should have its own form -->
                                                         <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-ship-address" method="post">
                                                             <input name="addressIdShip" class="" type="hidden" value="${shippingAddress.id}">
                                                             <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
@@ -89,7 +89,7 @@
                                     <div class="row">
                                     <#if customer.billingAddress?has_content>
                                         <#list customer.billingAddress as billingAddress>
-                                        <div class="col-lg-10">
+                                        <div class="col-lg-8">
                                             <fieldset class="row mb-3">
                                                 <legend class="col-form-label col-sm-2 pt-0">${billingAddress_index + 1}
                                                 </legend>
@@ -121,6 +121,17 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="col-lg-2">
+                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                <!-- Each edit button should have its own form -->
+                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-bill-address" method="post">
+                                                    <input name="addressIdBill" class="" type="hidden" value="${billingAddress.id}">
+                                                    <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        
                                         </#list>
                                         <#else>
                                             NA
