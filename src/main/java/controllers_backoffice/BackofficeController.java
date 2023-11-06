@@ -613,28 +613,72 @@ public class BackofficeController
                                             @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
                                            @Param("country") final String country, @Param("addressIdShip") final String addressIdShip)
     {
-    Result result = Results.html();
+        Result result = Results.html();
     
-    final Map<String, Object> commondata = new HashMap<String, Object>();
-        commondata.put("address", ShippingAddress.getShippingAddressById(shipId));
-        WebShopController.setCommonData(commondata, context, xcpConf);
-        result.render(commondata);
-
+    
 
         // Find customer with the id from the params
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
+        
+        //Shipping Address Section
+        if (zip != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdShip", addressIdShip);
+                data.put("fullName", fullName);
+                data.put("company", company);
+                data.put("addressLine", addressLine);
+                data.put("city", city);
+                data.put("state", state);
+                data.put("zip", zip);
+                data.put("country", country);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-ship-address");
+            }
+            // all input fields might be correct
+            else
+            {
+                final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressIdShip));
+                address.setName(fullName);
+                address.setCompany(company);
+                address.setAddressLine(addressLine);
+                address.setCity(city);
+                address.setState(state);
+                address.setZip(zip);
+                address.setCountry(country);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                // return Results.redirect(context.getContextPah() + "/addressOverview");
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+
+            }
+
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         return result;
 
-        // Find current user
-        //User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
-        // Add current user into the back office
-       // result.render("currentUser", currentUser);
-
-        //boolean failure = false;
-        //return Results.redirect(context.getContextPath() + "/posters/backoffice/customer");
-
+   
     }
  
     public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
@@ -788,7 +832,7 @@ public class BackofficeController
                 // show inserted values in form
                 // final Map<String, String> address = new HashMap<String, String>();
                 data.put("addressIdShip", addressIdShip);
-                data.put("name", name);
+                data.put("fullName", fullName);
                 data.put("company", company);
                 data.put("addressLine", addressLine);
                 data.put("city", city);
