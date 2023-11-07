@@ -12,10 +12,8 @@
 
                     <h6>${i18n("updatePaymentTitle")}</h6>
 
-                    <form action="????????????????" method="post">
-
+                    <form action="${contextPath}/posters/backoffice/customer/${customer.id}/payment-edit-complete" method="post">
                     <input name="creditCardId" id="addressId" type="hidden" value=${creditInfo.id}>
-
                     <div class="mb-3">
                         <label for="creditCardNumber">${i18n("titleNumber")}*</label>
                         <input id="creditCardNumber" class="form-control" name="creditCardNumber"
@@ -95,9 +93,6 @@
                     <button type="button" class="btn btn btn-sm btn-secondary" onclick="javascript:history.back()"> Back </button>
                 </div>
             </div>
-            
-
-   
         </form>
     </div>
 </div>

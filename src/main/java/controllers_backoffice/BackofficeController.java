@@ -802,6 +802,68 @@ public class BackofficeController
     
     }
 
+    public Result paymentInfoEditComplete(final Context context, @PathParam("customerId") String customerId,
+                                        @Param("creditCardNumber") String creditNumber, @Param("name") final String name,
+                                        @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year, 
+                                        @Param("creditCardId") final int cardId)
+    {
+        Result result = Results.html();
+
+        // replace spaces and dashes
+        creditNumber = creditNumber.replaceAll("[ -]+", "");
+        // check input
+        for (final String regExCreditCard : xcpConf.REGEX_CREDITCARD)
+        {
+            // credit card number is correct
+            if (Pattern.matches(regExCreditCard, creditNumber))
+            {
+                // get creditCard by ID
+                final CreditCard creditCard = CreditCard.getCreditCardById(cardId);
+                creditCard.setCardNumber(creditNumber);
+                creditCard.setName(name);
+                creditCard.setMonth(month);
+                creditCard.setYear(year);
+                // update creditCard
+                creditCard.update();
+                // success message
+                context.getFlashScope().success(msg.get("successSave", language).get());
+                // show customer overview page
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+            }
+            else
+            {
+                // credit card number is not valid
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongCreditCard", language).get());
+                // show inserted values in form
+                final Map<String, String> card = new HashMap<String, String>();
+                card.put("name", name);
+                card.put("cardNumber", creditNumber);
+                data.put("card", card);
+                         result.render(data);
+
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-payment-info");
+
+        
+            }
+        }
+        
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+
+    }
+
 
 
     public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
