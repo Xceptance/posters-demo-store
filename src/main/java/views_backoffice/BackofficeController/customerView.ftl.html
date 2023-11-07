@@ -43,9 +43,14 @@
                                                         <legend class="col-form-label col-sm-2 pt-0">${shippingAddress_index +1}</legend>
                                                         <div class="col-sm-10">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="gridRadiosShip" 
+                                                                <!--  IMPORTANT!! 
+                                                                    Uncommenting will display radio buttons alongside Shipping and Billing addresses, 
+                                                                    activating radio-select-edit option for updating these addresses alongside normal updating option. 
+                                                                     
+                                                                    <input class="form-check-input" type="radio" name="gridRadiosShip" 
                                                                     id="gridRadiosShip${shippingAddress_index + 1}" data-shipId=""
-                                                                    value="${shippingAddress.id}">
+                                                                    value="${shippingAddress.id}"> 
+                                                                -->
                                                                 
                                                                 <label class="form-check-label"
                                                                     for="gridRadiosShip${shippingAddress_index + 1}">
@@ -99,9 +104,13 @@
                                                 </legend>
                                                 <div class="col-sm-10">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="gridRadiosBill"
+                                                        <!--  IMPORTANT!! 
+                                                            Uncommenting will display radio buttons alongside Shipping and Billing addresses, 
+                                                            activating radio-select-edit option for updating these addresses alongside normal updating option. 
+                                                            <input class="form-check-input" type="radio" name="gridRadiosBill"
                                                             id="gridRadiosBill${billingAddress_index + 1}"
-                                                            value="${billingAddress.id}">
+                                                            value="${billingAddress.id}"> 
+                                                        -->
                                                         <label class="form-check-label"
                                                             for="gridRadiosBill${billingAddress_index + 1}">
                                                             <address>
