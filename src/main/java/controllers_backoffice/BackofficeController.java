@@ -2,7 +2,10 @@ package controllers_backoffice;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -775,8 +778,18 @@ public class BackofficeController
         final Map<String, Object> commondata = new HashMap<String, Object>();
         commondata.put("creditInfo", CreditCard.getCreditCardById(cardId));
         WebShopController.setCommonData(commondata, context, xcpConf);
-        result.render(commondata);
+        
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        commondata.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
 
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+                // get current month and year
+        commondata.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        commondata.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+        
+        result.render(commondata);
+        
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
         // Add current user into the back office
