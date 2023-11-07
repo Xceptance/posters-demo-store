@@ -267,13 +267,14 @@
 *   - Start
 */
   .btn-primary {
-    background-color: var(--xred);
-    border-color: var(--xred);
-  }
-
-  .btn:hover {
-    background-color: var(--button-hover);
-    border-color: var(--button-hover);
+    --bs-btn-bg: var(--xred);
+    --bs-btn-border-color: var(--xred);
+    --bs-btn-hover-bg: var(--button-hover);
+    --bs-btn-hover-border-color: var(--button-hover);
+    --bs-btn-active-bg: var(--button-hover);
+    --bs-btn-active-border-color: var(--button-hover);
+    --bs-btn-disabled-bg: var(--xred);
+    --bs-btn-disabled-border-color: var(--xred);
   }
 /*  Buttons
 *   - End
