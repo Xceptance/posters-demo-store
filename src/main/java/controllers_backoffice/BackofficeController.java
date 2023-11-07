@@ -541,8 +541,7 @@ public class BackofficeController
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
-        result.render("paymentOverview", customer.getCreditCard());
-
+        //result.render("paymentOverview", customer.getCreditCard());
        // data.put("paymentOverview", customer.getCreditCard());
 
 
@@ -1052,6 +1051,16 @@ public class BackofficeController
             return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
     }
     
+
+    public Result paymentInfoDelete(final Context context, @Param("creditCardId") final int creditCardId, @PathParam("customerId") String customerId)
+    {
+            // remove Payment Method
+            CreditCard.removeCustomerFromCreditCard(creditCardId);
+            // show success message
+            context.getFlashScope().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+    }
 
 /**
      * View customer order information in the database.
