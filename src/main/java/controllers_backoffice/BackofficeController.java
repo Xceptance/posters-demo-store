@@ -541,6 +541,10 @@ public class BackofficeController
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
+        result.render("paymentOverview", customer.getCreditCard());
+
+       // data.put("paymentOverview", customer.getCreditCard());
+
 
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));

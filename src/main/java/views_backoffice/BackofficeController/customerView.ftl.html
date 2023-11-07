@@ -144,7 +144,7 @@
                                         
 
                                     <#if customer.creditCard?has_content>
-                                        <#list customer.creditCard as creditCard>
+                                        <#list paymentOverview as creditCard>
                                         <div class="col-lg-9">
 
                                             <fieldset class="row mb-3">
@@ -157,7 +157,7 @@
                                                             value="${creditCard.id}">
                                                         <label class="form-check-label"
                                                             for="gridRadiosCred${creditCard_index + 1}">
-                                                            ${creditCard.cardNumber}
+                                                            ${creditCard.getCardNumberCryptic()}
                                                         </label>
                                                     </div>
                                                 </div>
