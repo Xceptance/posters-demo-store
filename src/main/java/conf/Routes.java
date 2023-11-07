@@ -200,16 +200,16 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/posters/backoffice/customer/{customerId}/view/edit").with(BackofficeController::customerViewEdit);
         router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController::customerEdit);
         router.POST().route("/posters/backoffice/customer/{customerId}/edit-complete").with(BackofficeController::customerEditComplete);
-        router.POST().route("/posters/backoffice/customer/{customerId}/view-edit-complete").with(BackofficeController.class, "customerViewEditComplete");
         router.POST().route("/posters/backoffice/customer/{customerId}/del-ship-address").with(BackofficeController::customerViewShipppingAddressDelete);
         router.POST().route("/posters/backoffice/customer/{customerId}/del-bill-address").with(BackofficeController::customerViewBillingAddressDelete);
         router.POST().route("/posters/backoffice/customer/{customerId}/edit-ship-address").with(BackofficeController::shippingAddressEdit);
-        router.POST().route("/posters/backoffice/customer/{customerId}/shipping-edit-complete").with(BackofficeController.class, "shippingAddressEditComplete");
         router.POST().route("/posters/backoffice/customer/{customerId}/edit-bill-address").with(BackofficeController::billingAddressEdit);
-        router.POST().route("/posters/backoffice/customer/{customerId}/billing-edit-complete").with(BackofficeController.class, "billingAddressEditComplete");
         router.POST().route("/posters/backoffice/customer/{customerId}/del-payment-info").with(BackofficeController::paymentInfoDelete);
-        router.POST().route("/posters/backoffice/customer/{customerId}/edit-payment-info").with(BackofficeController.class, "paymentInfoEdit");
+        router.POST().route("/posters/backoffice/customer/{customerId}/edit-payment-info").with(BackofficeController:: paymentInfoEdit);
         router.POST().route("/posters/backoffice/customer/{customerId}/payment-edit-complete").with(BackofficeController.class, "paymentInfoEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/billing-edit-complete").with(BackofficeController.class, "billingAddressEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/shipping-edit-complete").with(BackofficeController.class, "shippingAddressEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/view-edit-complete").with(BackofficeController.class, "customerViewEditComplete");
 
         //router.POST().route("/posters/backoffice/customer/{customerId}/view-edit-complete").with((request) -> BackofficeController.customerViewEditComplete(request.routeParameter("customerId")));
   

@@ -803,9 +803,9 @@ public class BackofficeController
     }
 
     public Result paymentInfoEditComplete(final Context context, @PathParam("customerId") String customerId,
-                                        @Param("creditCardNumber") String creditNumber, @Param("name") final String name,
-                                        @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year, 
-                                        @Param("creditCardId") final int cardId)
+                                          @Param("creditCardNumber") String creditNumber, @Param("name") final String name,
+                                          @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
+                                          @Param("creditCardId") final int cardId)
     {
         Result result = Results.html();
 
@@ -842,14 +842,13 @@ public class BackofficeController
                 card.put("name", name);
                 card.put("cardNumber", creditNumber);
                 data.put("card", card);
-                         result.render(data);
+                result.render(data);
 
                 return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-payment-info");
 
-        
             }
         }
-        
+
         // Find customer with the id from the params
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
@@ -863,7 +862,6 @@ public class BackofficeController
         return result;
 
     }
-
 
 
     public Result customerViewEdit(final Context context, @PathParam("customerId") String customerId)
