@@ -762,8 +762,32 @@ public class BackofficeController
 
 
 
+    /**
+     * Edit a customer's payment information, from the Customer Detail view.
+     * 
+     * @param context
+     * @return
+     */
 
+    public Result paymentInfoEdit(@Param("creditCardId") final int cardId, final Context context, @PathParam("customerId") String customerId){
+        Result result = Results.html();
 
+        final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("creditInfo", CreditCard.getCreditCardById(cardId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        result.render(commondata);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
+    
+    }
 
 
 
@@ -1052,10 +1076,10 @@ public class BackofficeController
     }
     
 
-    public Result paymentInfoDelete(final Context context, @Param("creditCardId") final int creditCardId, @PathParam("customerId") String customerId)
+    public Result paymentInfoDelete(final Context context, @Param("creditCardId") final int cardId, @PathParam("customerId") String customerId)
     {
             // remove Payment Method
-            CreditCard.removeCustomerFromCreditCard(creditCardId);
+            CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show address overview page
