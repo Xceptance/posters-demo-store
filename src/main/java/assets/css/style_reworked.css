@@ -383,20 +383,108 @@
 /*  Progress bars
 *   - Start
 */
-  .progress-bubble {
-    width: 1rem;
-    height: 1rem;
-    padding: 1rem;
-    border-width: 1px;
-    border-radius: 1.5rem;
-    border-color: #111111;
+  .progress-column {
+    position: relative;
+    float: left;
+    width: 16.333%;
+    z-index: 0;
   }
 
-  .progress-column.active .progress-bubble {
-    background-color: var(--xred);
-    border-color: var(--xred);
-    color: white;
+  .progress-bubble-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: table;
+    border: 2px solid #c91b1b;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    z-index: 1;
+    border-radius: 50%;
   }
+
+  .progress-bubble {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .progress-bubble-caption  {
+    margin-bottom: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /*  Progress indicator change depending on progress
+  *   - Start
+  */
+    .progress-indicator.progress-1 
+      .progress-step-1 .progress-bubble-container {
+      background-color: var(--xred);
+      color: white;
+    }
+
+    .progress-indicator.progress-2 
+      .progress-step-2 .progress-bubble-container,
+    .progress-indicator.progress-2 
+      .progress-step-1 .progress-bubble-container {
+      background-color: var(--xred);
+      color: white;
+    }
+
+    .progress-indicator.progress-3 
+      .progress-step-3 .progress-bubble-container,
+    .progress-indicator.progress-3 
+      .progress-step-2 .progress-bubble-container,
+    .progress-indicator.progress-3 
+      .progress-step-1 .progress-bubble-container {
+      background-color: var(--xred);
+      color: white;
+    }
+
+    .progress-indicator.progress-4 
+      .progress-step-4 .progress-bubble-container,
+    .progress-indicator.progress-4 
+      .progress-step-3 .progress-bubble-container,
+    .progress-indicator.progress-4 
+      .progress-step-2 .progress-bubble-container,
+    .progress-indicator.progress-4 
+      .progress-step-1 .progress-bubble-container {
+      background-color: var(--xred);
+      color: white;
+    }
+
+    .progress-indicator.progress-5 
+      .progress-step-5 .progress-bubble-container,
+    .progress-indicator.progress-5 
+      .progress-step-4 .progress-bubble-container,
+    .progress-indicator.progress-5 
+      .progress-step-3 .progress-bubble-container,
+    .progress-indicator.progress-5 
+      .progress-step-2 .progress-bubble-container,
+    .progress-indicator.progress-5 
+      .progress-step-1 .progress-bubble-container {
+      background-color: var(--xred);
+      color: white;
+    }
+
+    .progress-indicator.progress-6 
+      .progress-step-6 .progress-bubble-container,
+    .progress-indicator.progress-6 
+      .progress-step-5 .progress-bubble-container,
+    .progress-indicator.progress-6 
+      .progress-step-4 .progress-bubble-container,
+    .progress-indicator.progress-6 
+      .progress-step-3 .progress-bubble-container,
+    .progress-indicator.progress-6 
+      .progress-step-2 .progress-bubble-container,
+    .progress-indicator.progress-6 
+      .progress-step-1 .progress-bubble-container {
+      background-color: var(--xred);
+      color: white;
+    }
+  /*  Progress indicator change depending on progress
+  *   - End
+  */
 /*  Progress bars
 *   - End
 */
