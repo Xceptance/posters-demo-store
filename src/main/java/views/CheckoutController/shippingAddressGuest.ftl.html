@@ -3,30 +3,9 @@
 
 <div class="container mt-3">
     <!-- Progress Indicator -->
-    <div class="progress-indicator row justify-content-center">
-        <div class="progress-column col text-center active">
-            <p><span class="progress-bubble">1</span></p>
-            <h6>${i18n("checkoutProgressIndicatorCart")}</h6>
-        </div>
-        <div class="progress-column col text-center active">
-            <p class="progress-bubble"><span>2</span></p>
-            <h6>${i18n("checkoutProgressIndicatorShipping")}</h6>
-        </div>
-        <div class="progress-column col text-center">
-            <p class="progress-bubble"><span>3</span></p>
-            <h6>${i18n("checkoutProgressIndicatorBilling")}</h6>
-        </div>
-        <div class="progress-column col text-center">
-            <p class="progress-bubble"><span>4</span></p>
-            <h6>${i18n("checkoutProgressIndicatorPayment")}</h6>
-        </div>
-        <div class="progress-column col text-center">
-            <p class="progress-bubble"><span>5</span></p>
-            <h6>${i18n("checkoutProgressIndicatorSummary")}</h6>
-        </div>
-        <div class="progress-column col text-center">
-            <p class="progress-bubble"><span>6</span></p>
-            <h6>${i18n("checkoutProgressIndicatorCompleted")}</h6>
+    <div class="d-flex justify-content-center mb-3">
+        <div class="progress-indicator row justify-content-center col-md-8 progress-2">
+            <#include "../components/checkoutProgress.ftl.html"/>
         </div>
     </div>
     <!-- Shipping Form -->
