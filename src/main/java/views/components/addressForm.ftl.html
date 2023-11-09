@@ -24,7 +24,7 @@
 <div class="mb-3">
 	<label for="address-form-input-city" class="form-label">${i18n("addressCity")}*</label>
 	<input type="text" id="address-form-input-city" class="form-control" aria-describedby="address-form-input-city-help-block" pattern="${regexName}"
-	data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" required>
+	data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" placeholder="${i18n('addressCity')}" required>
 	<div id="address-form-input-city-help-block" class="form-text">
   		
 	</div>
@@ -44,7 +44,7 @@
 		<div class="col">
 			<label for="address-form-input-zip" class="form-label">${i18n('addressZip')}*</label>
 			<input type="text" id="address-form-input-zip" class="form-control" aria-describedby="address-form-input-zip-help-block" pattern="${regexZip}"
-			data-error="${i18n('errorWrongZip')}" value="${(address.zip)!}" placeholder="Zip / Postal" required>
+			data-error="${i18n('errorWrongZip')}" value="${(address.zip)!}" placeholder="Zip / Postal" name="zip" required>
 			<div id="address-form-input-zip-help-block" class="form-text">
 				
 			</div>
