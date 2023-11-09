@@ -497,6 +497,12 @@
     background-color: var(--xred);
     border-color: var(--xred);
   }
+
+  .form-with-background {
+    background-color: rgb(245, 245, 245);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+  }
 /*  Forms
 *   - End
 */
