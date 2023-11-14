@@ -197,8 +197,9 @@ public class Routes implements ApplicationRoutes
         router.GET().route("/posters/backoffice/customer").with(BackofficeController::customerList);
         router.GET().route("/posters/backoffice/customer/{customerId}/view").with(BackofficeController::customerView);
         router.GET().route("/posters/backoffice/customer/{customerId}/view/orders").with(BackofficeController::customerViewOrders);
-        router.POST().route("/posters/backoffice/customer/{customerId}/view/edit").with(BackofficeController::customerViewEdit);
+        //router.POST().route("/posters/backoffice/customer/{customerId}/view/edit").with(BackofficeController::customerViewEdit);
         router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController::customerEdit);
+        //router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController::customerEdit);
         router.POST().route("/posters/backoffice/customer/{customerId}/edit-complete").with(BackofficeController::customerEditComplete);
         router.POST().route("/posters/backoffice/customer/{customerId}/del-ship-address").with(BackofficeController::customerViewShipppingAddressDelete);
         router.POST().route("/posters/backoffice/customer/{customerId}/del-bill-address").with(BackofficeController::customerViewBillingAddressDelete);
