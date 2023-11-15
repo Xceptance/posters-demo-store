@@ -50,10 +50,27 @@
 
 </script>
 <script>
-    document.getElementById('confirmDelete').addEventListener('click', function () {
-        document.getElementById('deleteForm').submit();
+    //Responsible for generating the confirmation dialog in the customer section 
+    //when deleting customer information
+    
+    // For Billing
+    document.getElementById('confirmDeleteBill').addEventListener('click', function () {
+        document.getElementById('deleteFormBill').submit();
+    });   
+
+    // For Shipping
+    document.getElementById('confirmDeleteShip').addEventListener('click', function () {
+        document.getElementById('deleteFormShip').submit();
+    });
+
+
+    // For Payment
+    document.getElementById('confirmDeletePayment').addEventListener('click', function () {
+        document.getElementById('deleteFormPayment').submit();
     });
 </script>
+
+
 
 <script src="${contextPath}/assets/js//backoffice/dashmin_main.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
