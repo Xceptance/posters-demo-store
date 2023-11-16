@@ -1,51 +1,18 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
-<div class ="h2 header-container"> </div>
-
-<div class="container">
-    <div class="checkout-progress row row-pb-lg  justify-content-center">
-        <div class="col-lg-12">
-            <div class="process-wrap">
-                <div class="process text-center active">
-                    <p><span>1</span></p>
-                    <h3>${i18n("checkoutProgressIndicatorCart")}</h3>
-                </div>
-                <div class="process text-center active">
-                    <p><span>2</span></p>
-                    <h3>${i18n("checkoutProgressIndicatorShipping")}</h3>
-                </div>
-                <div class="process text-center active">
-                    <p><span>3</span></p>
-                    <h3>${i18n("checkoutProgressIndicatorBilling")}</h3>
-                </div>
-                <div class="process text-center active">
-                    <p><span>4</span></p>
-                    <h3>${i18n("checkoutProgressIndicatorPayment")}</h3>
-                </div>
-                <div class="process text-center active">
-                    <p><span>5</span></p>
-                    <h3>${i18n("checkoutProgressIndicatorSummary")}</h3>
-                </div>
-                <div class="process text-center">
-                    <p><span>6</span></p>
-                    <h3>${i18n("checkoutProgressIndicatorCompleted")}</h3>
-                </div>
-            </div>
+<div class="container mt-3">
+    <!-- Progress Indicator -->
+    <div class="d-flex justify-content-center mb-3">
+        <div class="progress-indicator row justify-content-center col-md-8 progress-5">
+            <#include "../components/checkoutProgress.ftl.html"/>
         </div>
     </div>
-
     <div class="row  justify-content-center">
-
         <div class="col-lg-12">
-            <div class="total-wrap">
-            </div>
-
             <div class="col-md-12">
                 <div class="total-wrap total">
-                    <div class="row total justify-content-center">
-                        <h1 id="titleOrderOverview" class="h2fwpr ">${i18n("titleOrderOverview")}</h1>
-                    </div>
+                    <h1 id="titleOrderOverview" class="">${i18n("titleOrderOverview")}</h1>
                     <div class="row total justify-content-center">
                         <div class="col-sm-10">
                             <div class="row">
@@ -66,7 +33,6 @@
                                         </ul>
                                     </address>
                                 </div>
-                    
                                 <!-- Billing address -->
                                 <div class="col-md-4">
                                     <h3>${i18n("titleBillingAddress")}</h3>
@@ -84,7 +50,6 @@
                                         </ul>
                                     </address>
                                 </div>
-                    
                                 <!-- Payment information -->
                                 <div class="col-md-4">
                                     <h3>${i18n("titlePaymentInformation")}</h3>
@@ -106,128 +71,86 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-    <!-- print products -->
-    <div class="colorlib-product overview">
-        <div class="container">
-            <div class="row row-pb-lg">
-                <#if (0 < cartProducts?size) >
-
-                <div id="checkoutOverviewTable" class="col-md-12">
-                    <div class="product-name d-flex">
-                        <div class="one-forth text-left px-4">
-                            <span>${i18n("titleProducts")}</span>
-                        </div>
-                        <div class="one-eight text-center">
-                            <span>${i18n("cartTableHeaderUnitPrice")}</span>
-                        </div>
-                        <div class="one-eight text-center">
-                            <span>${i18n("cartTableHeaderQuantity")}</span>
-                        </div>
-                        <div class="one-eight text-center">
-                            <span>${i18n("cartTableHeaderTotalUnitPrice")}</span>
-                        </div>
-                        
-                    </div>
-                    <#list cartProducts as cartProduct>
-
-                    <div id="product${cartProduct_index}" class="product-cart d-flex">
-                        <div class="one-forth">
-                            <a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><div class="product-img" style="background-image: url(${contextPath}${cartProduct.product.imageURL});" 
-                                ></div></a>
-
-                            <div class="display-tc">
-                                <h3 class="pName">${cartProduct.product.name}</h3>
-                                <ul>
-                                    <li><strong>${i18n("cartStyle")}:</strong> <span class="productStyleMobile productStyle">${cartProduct.finish}</span></li>
-                                    <li><strong>${i18n("cartSize")}:</strong> <span class="productSizeMobile productSize">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></li>
-                                </ul>
-                            </div>
-        
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc productUnitPrice">${currency}
-                                <span class="unitPriceShort">${cartProduct.getPriceAsString()}</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <input id="productCount${cartProduct_index}"
-                                name="productCount${cartProduct_index}"
-                                class="form-control text-center productCount"
-                                title="${i18n('cartTableHeaderQuantity')}"								
-                                type="text" value=${cartProduct.productCount} size="4"
-                                maxlength="4">				
-                            </div>
-                            
-                        </div>
-                       
-                        <div class="one-eight text-center">
-                            <div class="display-tc productTotalUnitPrice">${currency}
-                                <span class="totalUnitPriceShort">${cartProduct.getTotalUnitPriceAsString()}</span>
-                            </div>
-                        </div>
-                        
-                    </div> </#list>
-                </div>
-              
-                
-            </div>
-                <#else>
-                <div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
-                </#if>
-                <div class="col-md-12">
-                    <div class="total-wrap">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                                
-                                <div class="total text-left">
-                                    <div class="sub">
-                                        <div class="">
-                                            <span class="font-bold">${i18n("cartSummary")}</span>
-                                        </div>
-                                        <!-- print sub total price -->
-                                        <p><span>${i18n("checkoutOverviewSubTotal")}:</span> <span id="SubTotalValue" class="value">${currency}${order.getSubTotalCostsAsString()}</span></p>
-                                        <!-- print shipping price -->
-                                        <p><span>${i18n("checkoutOverviewShippingCosts")}:</span> <span id="shippingCosts" class="value">${currency}${order.getShippingCostsAsString()}</span></p>
-                                        <!-- print tax -->
-                                        <p><span> ${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%)</span> <span id="SubTotalTaxValue" class="value">${currency}${order.getTotalTaxCostsAsString()}</span></p>
-                                    </div>                
-                                    <!-- print total price -->
-                                    <div class="grand-total">
-                                        <p><span><strong>${i18n("checkoutOverviewTotalCosts")}</strong></span> 
-                                            <span id="orderTotal" class="value font-bold">${currency}${order.getTotalCostsAsString()}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <br>
-                        <div class="text-right">
-                            <form action="${contextPath}/checkoutCompleted" method="post">
-                                <button class="btn btn-primary pull-right" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
-                            </form>
-                        </div>
-                        
-                    </div>
-                    <!-- order button -->
-                   
-                </div>
-        </div>
-        
-    </div>
-
-
-    
+<!-- print products -->
+<div class="container">
+    <#if (0 < cartProducts?size) >
+    <table class="table">
+		<thead>
+		  	<tr>
+				<th scope="col">#</th>
+				<th scope="col">${i18n("cartTableHeaderItem")}</th>
+				<th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
+				<th scope="col">${i18n("cartTableHeaderQuantity")}</th>
+				<th scope="col">${i18n("cartTableHeaderTotalUnitPrice")}</th>
+				<th scope="col"></th>
+		  	</tr>
+		</thead>
+		<tbody>
+		  	<#list cartProducts as cartProduct>
+			<tr>
+				<th scope="row">${cartProduct?counter}</th>
+				<td>
+					<div class="row">
+						<div class="col">
+							<img src="${contextPath}${cartProduct.product.imageURL}" class="img-thumbnail" alt="image of ${cartProduct.product.name}">
+						</div>
+						<div class="col">
+							<h3>${cartProduct.product.name}</h3>
+							<div>${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
+							<div>${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
+						</div>
+					</div>
+				</td>
+				<td>${currency}${cartProduct.getPriceAsString()}</td>
+				<td>${cartProduct.productCount}</td>
+				<td>${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+    <#else>
+    <div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+    </#if>
+	<div class="price-summary-row">
+		<ol class="list-group list-group-flush">
+			<li class="list-group-item d-flex justify-content-between align-items-end">
+			  <div class="price-summary ms-auto me-2">
+				<div class="fw-bold">${i18n("cartSummary")}</div>
+				<div class="row">
+					<div class="col price-summary-position">${i18n("checkoutOverviewSubTotal")}:</div>
+					<div class="col price-summary-value">${currency}${order.getSubTotalCostsAsString()}</div>
+				</div>
+				<div class="row">
+					<div class="col price-summary-position">${i18n("checkoutOverviewShippingCosts")}:</div>
+					<div class="col price-summary-value">${currency}${order.getShippingCostsAsString()}</div>
+				</div>
+				<div class="row">
+					<div class="col price-summary-position">${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%):</div>
+					<div class="col price-summary-value">${currency}${order.getTotalTaxCostsAsString()}</div>
+				</div>
+			  </div>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-end">
+			  <div class="price-summary ms-auto me-2">
+				<div class="row">
+					<div class="col-8 fw-bold price-summary-position">${i18n("checkoutOverviewTotalCosts")}:</div>
+					<div class="col fw-bold price-summary-value">${currency}${order.getTotalCostsAsString()}</div>
+				</div>
+			  </div>
+			</li>
+		</ol>
+	</div>
+    <br>
+    <div class="d-flex justify-content-end mt-2">
+        <form action="${contextPath}/checkoutCompleted" method="post">
+            <!-- order button -->
+             <button class="btn btn-primary" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
+        </form>
+    </div>   
+</div>    
 </@layout.myLayout>
