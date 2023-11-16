@@ -29,17 +29,15 @@
                                         Guest
                                 </#if>
                             </td>
-                            <td>${order.orderDate}</td>
-                            <td>${order.shippingAddress.addressLine} ${order.shippingAddress.zip},
-                                ${order.shippingAddress.state} ${order.shippingAddress.city}</td>
-                            <td>${order.billingAddress.addressLine} ${order.billingAddress.zip},
-                                ${order.billingAddress.state} ${order.billingAddress.city}
+                            <td></td>
+                            <td></td>
+                            <td>
                             </td>
                             <td>$${order.shippingCosts}</td>
                             <td>$${order.subTotalCosts}</td>
                             <td>$${order.totalTaxCosts}</td>
                             <td>$${order.totalCosts}</td>
-                            <td>${order.creditCard.cardNumber}</td>
+                            <td></td>
                             <td><a class="btn btn-sm btn-primary"
                                     href="/posters/backoffice/order/${order.id}">Details</a></td>
                         </tr>

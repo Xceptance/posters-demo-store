@@ -1,7 +1,47 @@
 (function ($) {
     "use strict";
+    
+    
+    
     // ############################################################
-    // Getting statistics from the posters backoffice
+    //Responsible for generating the confirmation dialog in the  
+    //customer section when deleting customer information.
+    // ############################################################
+
+
+    // For Shipping
+    $('[id^="confirmDeleteShip"]').on('click', function () {
+        var shipId = $(this).data('ship-id');
+        console.log(shipId);
+        $('#deleteFormShip_' + shipId).submit();
+    });
+
+    // For Billing
+    $('[id^="confirmDeleteBill"]').on('click', function () {
+        var billId = $(this).data('bill-id');
+        $('#deleteFormBill_' + billId).submit();
+    });
+
+    // For Payment
+    $('[id^="confirmDeletePayment"]').on('click', function () {
+        var paymentId = $(this).data('payment-id');
+        $('#deleteFormPayment_' + paymentId).submit();
+    });
+
+
+    //############################################################
+    //Initiating Customer List Table by employing 
+    //Bootstrap Data Tables.
+    // ############################################################
+    $(document).ready( function () {
+        $('#customerlist').DataTable({ 
+        // Specify multiple classes to be used
+        stripeClasses: ['stripe-1',
+                        'stripe-2']});
+    } );
+
+    // ############################################################
+    // Getting statistics from the posters backoffice.
     // ############################################################
     async function getJSONStatistic() {
         const response = await fetch('http://localhost:8080/posters/backoffice/JSON', {
@@ -72,7 +112,7 @@
 
     // Sidebar Toggler
     $('.sidebar-toggler').click(function () {
-        $('.sidebar, .content').toggleClass("open");
+        $('.sidebar').toggleClass("open");
         return false;
     });
 
@@ -80,6 +120,9 @@
     // Progress Bar
     $('.pg-bar').waypoint(function () {
         $('.progress .progress-bar').each(function () {
+            
+            //$(this).css("width, open", $(this).attr("aria-valuenow") + '%');
+
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
         });
     }, { offset: '80%' });
@@ -132,7 +175,7 @@
         }
     });
 
-
+   
     // Salse & Revenue Chart
     // var ctx2 = $("#salse-revenue").get(0).getContext("2d");
     // var myChart2 = new Chart(ctx2, {

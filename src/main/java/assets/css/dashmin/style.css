@@ -5,6 +5,49 @@
     --dark: #191C24;
 }
 
+/********** Customer Table **********/
+
+.id-size {
+    max-width: 300px; overflow: auto
+}
+
+.email-size{
+    max-width: 200px; overflow: auto
+}
+.action-size {
+    max-width: 90px; overflow: auto
+}
+
+.table {
+    --bs-table-hover-color: #000000;
+    color: #35495a;
+
+}
+
+/* Table icon color. Removes default blue link color */
+.discolor { color: inherit; } 
+
+ /* Define the stripe classes for datatables classes to be used in the table */
+ .stripe-1 {
+    background-color: #F3F6F9 !important;
+  }
+
+  .stripe-2 {
+    background-color: #F3F6F9 !important;
+  }
+  
+.dataTables_wrapper, .dataTables_filter input {
+    /* border: 1px solid #757575; */
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #FFFFFF;
+    color: inherit;
+    margin-left: 3px;
+
+}
+
+/*** Top Button ***/
+
 .back-to-top {
     position: fixed;
     display: none;

@@ -2,13 +2,14 @@
     <div class="contentheight container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Customer Table</h6>
-                <a href="">Show All</a>
+                <h4 class="mb-0">Customer Directory</h4>
             </div>
+            
             <div class="table-responsive">
-                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <table id="customerlist" style="" class="table display text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
+                            <th scope="col">ID</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
                             <th scope="col">Email</th>
@@ -19,12 +20,23 @@
                     <tbody>
                         <#list customers as customer>
                         <tr>
-                                <td>${customer.firstName}</td>
-                                <td>${customer.name}</td>
-                                <td>${customer.email}</td>
-                                <td>Active</td>
-                                <td><a class="btn btn-sm btn-primary" href="/posters/backoffice/customer/${customer.id}/edit">Edit</a> <a class="btn btn-sm btn-warning"
-                                        href="/posters/backoffice/customer/${customer.id}">View</a></td>
+                                <td class="id-size"> ${customer.id}</td>
+                                <td  >${customer.firstName}</td>
+                                <td >${customer.name}</td>
+                                <td  class="email-size">${customer.email}</td>
+                                <td >Active</td>
+                                <td class="action-size">
+                                    <a class="discolor" href="/posters/backoffice/customer/${customer.id}/edit"> <button id="edit" type="button"
+                                            class="btn btn-square btn-outline-primary m-2">
+                                            <i class="fa fa-pen"></i></a></button>
+                                    <a class="discolor" href="/posters/backoffice/customer/${customer.id}/view"> <button type="button"
+                                            class="btn btn-square btn-outline-primary m-2">
+                                            <i class="fa fa-user"></i></a></button>
+                                    <!-- <a href="/posters/backoffice/customer/${customer.id}/delete"> <button type="button"
+                                            class="btn btn-sm-square btn-outline-danger m-2">
+                                            <i class="fa fa-user-times"></i></button> </a> -->
+                                
+                                </td>
                         </tr>
                         </#list>
                     </tbody>

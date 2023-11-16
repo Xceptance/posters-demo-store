@@ -138,7 +138,7 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/paymentMethodCompleted").with(CheckoutController::paymentMethodCompleted);
         router.GET().route("/checkoutOverview").with(CheckoutController::checkoutOverview);
         router.POST().route("/checkoutCompleted").with(CheckoutController::checkoutCompleted);
-        //router.GET().route("/orderConfirmation").with(CheckoutController::orderConfirmation);
+        router.GET().route("/orderConfirmation").with(CheckoutController::orderConfirmation);
 
         // ############################################################
         // assets
@@ -156,87 +156,104 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // user login
         // ############################################################
-        router.GET().route("/posters/backoffice/login").with(UserController.class, "loginForm");
-        router.POST().route("/posters/backoffice/login").with(UserController.class, "login");
-        router.GET().route("/posters/backoffice/logout").with(UserController.class, "logout");
+        router.GET().route("/posters/backoffice/login").with(UserController::loginForm);
+        router.POST().route("/posters/backoffice/login").with(UserController::login);
+        router.GET().route("/posters/backoffice/logout").with(UserController::logout);
 
         // ############################################################
         // homepage
         // ############################################################
-        router.GET().route("/posters/backoffice").with(BackofficeController.class, "homepage");
+        router.GET().route("/posters/backoffice").with(BackofficeController::homepage);
 
         // ############################################################
         // user registration
         // ############################################################
-        router.GET().route("/posters/backoffice/user/create").with(UserController.class, "registration");
-        router.POST().route("/posters/backoffice/user/create").with(UserController.class, "registrationCompleted");
+        router.GET().route("/posters/backoffice/user/create").with(UserController::registration);
+        router.POST().route("/posters/backoffice/user/create").with(UserController::registrationCompleted);
 
         // ############################################################
         // admin users
         // ############################################################
-        router.GET().route("/posters/backoffice/user").with(BackofficeController.class, "userList");
-        router.GET().route("/posters/backoffice/user/{userId}/edit").with(BackofficeController.class, "userEdit");
-        router.GET().route("/posters/backoffice/user/{userId}").with(BackofficeController.class, "userView");
-        router.POST().route("/posters/backoffice/user/{userId}/delete").with(BackofficeController.class, "userDelete");
-        router.POST().route("/posters/backoffice/user/{userId}").with(BackofficeController.class, "userEditComplete");
+        router.GET().route("/posters/backoffice/user").with(BackofficeController::userList);
+        router.GET().route("/posters/backoffice/user/{userId}/edit").with(BackofficeController::userEdit);
+        router.GET().route("/posters/backoffice/user/{userId}").with(BackofficeController::userView);
+        router.POST().route("/posters/backoffice/user/{userId}/delete").with(BackofficeController::userDelete);
+        router.POST().route("/posters/backoffice/user/{userId}").with(BackofficeController::userEditComplete);
 
         // ############################################################
         // backoffice statistics
         // ############################################################
-        router.GET().route("/posters/backoffice/statistics").with(BackofficeController.class, "statistics");
+        router.GET().route("/posters/backoffice/statistics").with(BackofficeController::statistics);
 
         // ############################################################
         // orders
         // ############################################################
-        router.GET().route("/posters/backoffice/order").with(BackofficeController.class, "orderList");
-        router.GET().route("/posters/backoffice/order/{orderId}").with(BackofficeController.class, "orderView");
+        router.GET().route("/posters/backoffice/order").with(BackofficeController::orderList);
+        router.GET().route("/posters/backoffice/order/{orderId}").with(BackofficeController::orderView);
 
         // ############################################################
         // customers
         // ############################################################
-        router.GET().route("/posters/backoffice/customer").with(BackofficeController.class, "customerList");
-        router.GET().route("/posters/backoffice/customer/{customerId}").with(BackofficeController.class, "customerView");
-        router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController.class, "customerEdit");
-        router.POST().route("/posters/backoffice/customer/{customerId}").with(BackofficeController.class, "customerEditComplete");
+        router.GET().route("/posters/backoffice/customer").with(BackofficeController::customerList);
+        router.GET().route("/posters/backoffice/customer/{customerId}/view").with(BackofficeController::customerView);
+        router.GET().route("/posters/backoffice/customer/{customerId}/view/orders").with(BackofficeController::customerViewOrders);
+        //router.POST().route("/posters/backoffice/customer/{customerId}/view/edit").with(BackofficeController::customerViewEdit);
+        router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController::customerEdit);
+        //router.GET().route("/posters/backoffice/customer/{customerId}/edit").with(BackofficeController::customerEdit);
+        router.POST().route("/posters/backoffice/customer/{customerId}/edit-complete").with(BackofficeController::customerEditComplete);
+        router.POST().route("/posters/backoffice/customer/{customerId}/del-ship-address").with(BackofficeController::customerViewShipppingAddressDelete);
+        router.POST().route("/posters/backoffice/customer/{customerId}/del-bill-address").with(BackofficeController::customerViewBillingAddressDelete);
+        router.POST().route("/posters/backoffice/customer/{customerId}/edit-ship-address").with(BackofficeController::shippingAddressEdit);
+        router.POST().route("/posters/backoffice/customer/{customerId}/edit-bill-address").with(BackofficeController::billingAddressEdit);
+        router.POST().route("/posters/backoffice/customer/{customerId}/del-payment-info").with(BackofficeController::paymentInfoDelete);
+        router.POST().route("/posters/backoffice/customer/{customerId}/edit-payment-info").with(BackofficeController:: paymentInfoEdit);
+        router.POST().route("/posters/backoffice/customer/{customerId}/payment-edit-complete").with(BackofficeController.class, "paymentInfoEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/billing-edit-complete").with(BackofficeController.class, "billingAddressEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/shipping-edit-complete").with(BackofficeController.class, "shippingAddressEditComplete");
+        router.POST().route("/posters/backoffice/customer/{customerId}/view-edit-complete").with(BackofficeController.class, "customerViewEditComplete");
+
+        //router.POST().route("/posters/backoffice/customer/{customerId}/view-edit-complete").with((request) -> BackofficeController.customerViewEditComplete(request.routeParameter("customerId")));
+  
+        //router.POST().route("/posters/backoffice/customer/{customerId}/del-ship-address").with(BackofficeController::customerViewShipppingAddressDelete);
 
         // ############################################################
         // Catalog
         // ############################################################
-        router.GET().route("/posters/backoffice/catalog").with(BackofficeController.class, "catalog");
+        router.GET().route("/posters/backoffice/catalog").with(BackofficeController::catalog);
 
         // ############################################################
         // Products
         // ############################################################
-        router.GET().route("/posters/backoffice/product").with(BackofficeController.class, "productList");
-        router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController.class, "productPage");
-        router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productView");
-        router.GET().route("/posters/backoffice/product/{productId}/edit").with(BackofficeController.class, "productEdit");
+        router.GET().route("/posters/backoffice/product").with(BackofficeController::productList);
+        router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
+        router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController::productView);
+        router.GET().route("/posters/backoffice/product/{productId}/edit").with(BackofficeController::productEdit);
         router.POST().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productEditComplete");
 
         // ############################################################
         // Preferences
         // ############################################################
-        router.GET().route("/posters/backoffice/preferences").with(BackofficeController.class, "preferences");
+        router.GET().route("/posters/backoffice/preferences").with(BackofficeController::preferences);
 
         // ############################################################
         // Import/Export
         // ############################################################
-        router.GET().route("/posters/backoffice/data-management").with(BackofficeController.class, "dataManagement");
+        router.GET().route("/posters/backoffice/data-management").with(BackofficeController::dataManagement);
 
         // ############################################################
         // Statistics JSON provider
         // ############################################################
-        router.GET().route("/posters/backoffice/JSON").with(BackofficeController.class, "statisticsJSON");
+        router.GET().route("/posters/backoffice/JSON").with(BackofficeController::statisticsJSON);
 
         // ############################################################
         // Search Page
         // ############################################################
-        router.GET().route("/posters/backoffice/search").with(BackofficeController.class, "searchList");
+        router.GET().route("/posters/backoffice/search").with(BackofficeController::searchList);
 
         // ############################################################
         // Page Not Found
         // ############################################################
-        router.GET().route("/posters/backoffice/.*").with(BackofficeController.class, "Error404");
+        router.GET().route("/posters/backoffice/.*").with(BackofficeController::Error404);
 
     }
 }

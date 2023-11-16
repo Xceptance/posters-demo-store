@@ -19,6 +19,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.session.FlashScope;
 import util.session.SessionHandling;
 
 /**
@@ -146,7 +147,7 @@ public class UserController
      */
     @FilterWith(SessionUserExistFilter.class)
     public Result registrationCompleted(@Param("lastName") final String name, @Param("firstName") final String firstName,
-                                        @Param("eMail") final String email, @Param("password") final String password, final Context context)
+                                        @Param("eMail") final String email, @Param("password") final String password, final Context context, FlashScope flashScope)
     {
         boolean failure = false;
         // account with this email already exist
@@ -163,7 +164,8 @@ public class UserController
         }
         if (failure)
         {
-            return Results.redirect(context.getContextPath() + "/posters/backoffice/registration");
+            flashScope.error("Invalid Email, or Email exists already");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user/create");
         }
         // all input fields might be correct
         else

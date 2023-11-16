@@ -1,7 +1,14 @@
 package controllers_backoffice;
 
 import java.util.Optional;
+import java.util.UUID;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.avaje.ebean.Ebean;
@@ -10,20 +17,25 @@ import com.avaje.ebean.PagingList;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import controllers.WebShopController;
 import filters.SessionUserExistFilter;
 import models_backoffice.User;
 import models_backoffice.Statistic;
 import models.Order;
+import models.BillingAddress;
+import models.CreditCard;
 import models.Customer;
 import models.Product;
 import models.SubCategory;
 import models.TopCategory;
 import models.PosterSize;
 import models.ProductPosterSize;
+import models.ShippingAddress;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.i18n.Messages;
 import ninja.params.Param;
 import ninja.params.Params;
 import ninja.params.PathParam;
@@ -38,6 +50,8 @@ import util.session.SessionHandling;
 
 public class BackofficeController
 {
+     @Inject
+    Messages msg;
     @Inject
     PosterConstants xcpConf;
 
@@ -514,7 +528,7 @@ public class BackofficeController
 
         return result.template("views_backoffice/BackofficeController/productList.ftl.html");
     }
-
+    
     /**
      * Returns the view of a customer.
      * 
@@ -524,24 +538,20 @@ public class BackofficeController
     @FilterWith(SessionUserExistFilter.class)
     public Result customerView(final Context context, @PathParam("customerId") String customerId)
     {
-
         Result result = Results.html();
-
         // Find customer with the id from the params
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
-
         // Find current user
         User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
-
         return result;
     }
 
     /**
-     * Edit a customer's information and credentials.
+     * Edit a customer's information and credentials, from the Customer List view.
      * 
      * @param context
      * @return
@@ -565,8 +575,9 @@ public class BackofficeController
         return result;
     }
 
+    
     /**
-     * Persist the updated customer into the database.
+     * Update customer information in the database after edit from the customer list view.
      * 
      * @param context
      * @return
@@ -610,10 +621,511 @@ public class BackofficeController
             // save customer
             customer.save();
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer");
         }
     }
 
+
+
+    /**
+     * Edit a customer's shipping information, from the Customer Detail view.
+     * 
+     * @param context
+     * @return
+     */
+
+    public Result shippingAddressEdit(@Param("addressIdShip") final int shipId, final Context context, @PathParam("customerId") String customerId){
+        Result result = Results.html();
+
+        final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("address", ShippingAddress.getShippingAddressById(shipId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        result.render(commondata);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
+    
+    }
+
+    public Result shippingAddressEditComplete( final Context context, @PathParam("customerId") String customerId, 
+                                            @Param("addressIdShip") final int shipId, @Param("fullName") final String fullName, 
+                                            @Param("company") final String company, @Param("addressLine") final String addressLine, 
+                                            @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
+                                           @Param("country") final String country, @Param("addressIdShip") final String addressIdShip)
+    {
+        Result result = Results.html();
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        
+        //Shipping Address Section
+        if (zip != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdShip", addressIdShip);
+                data.put("fullName", fullName);
+                data.put("company", company);
+                data.put("addressLine", addressLine);
+                data.put("city", city);
+                data.put("state", state);
+                data.put("zip", zip);
+                data.put("country", country);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-ship-address");
+            }
+            // all input fields might be correct
+            else
+            {
+                final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressIdShip));
+                address.setName(fullName);
+                address.setCompany(company);
+                address.setAddressLine(addressLine);
+                address.setCity(city);
+                address.setState(state);
+                address.setZip(zip);
+                address.setCountry(country);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                // return Results.redirect(context.getContextPah() + "/addressOverview");
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+
+            }
+
+        }
+        return result;
+    }
+ 
+    /**
+     * Edit a customer's billing information, from the Customer Detail view.
+     * 
+     * @param context
+     * @return
+     */
+
+    public Result billingAddressEdit(@Param("addressIdBill") final int billId, final Context context, @PathParam("customerId") String customerId){
+        Result result = Results.html();
+
+        final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("address", BillingAddress.getBillingAddressById(billId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        result.render(commondata);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
+    
+    }
+
+    public Result billingAddressEditComplete(final Context context, @PathParam("customerId") String customerId,
+                                             @Param("fullNameBill") final String nameBill, @Param("companyBill") final String companyBill,
+                                             @Param("addressLineBill") final String addressLineBill,
+                                             @Param("cityBill") final String cityBill, @Param("stateBill") final String stateBill,
+                                             @Param("zipBill") final String zipBill, @Param("countryBill") final String countryBill,
+                                             @Param("addressIdBill") final String addressIdBill)
+    {
+        Result result = Results.html();
+
+        if (zipBill != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zipBill))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdBill", addressIdBill);
+                data.put("nameBill", nameBill);
+                data.put("companyBill", companyBill);
+                data.put("addressLineBill", addressLineBill);
+                data.put("cityBill", cityBill);
+                data.put("stateBill", stateBill);
+                data.put("zipBill", zipBill);
+                data.put("countryBill", countryBill);
+                // data.put("address", address);
+                // show page to enter billing address again
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-bill-address");
+            }
+            // all input fields might be correct
+            else
+            {
+                final BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressIdBill));
+                address.setName(nameBill);
+                address.setCompany(companyBill);
+                address.setAddressLine(addressLineBill);
+                address.setCity(cityBill);
+                address.setState(stateBill);
+                address.setZip(zipBill);
+                address.setCountry(countryBill);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+            }
+        }
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+
+    }
+
+
+
+    /**
+     * Edit a customer's payment information, from the Customer Detail view.
+     * 
+     * @param context
+     * @return
+     */
+
+    public Result paymentInfoEdit(@Param("creditCardId") final int cardId, final Context context, @PathParam("customerId") String customerId){
+        Result result = Results.html();
+
+        final Map<String, Object> commondata = new HashMap<String, Object>();
+        commondata.put("creditInfo", CreditCard.getCreditCardById(cardId));
+        WebShopController.setCommonData(commondata, context, xcpConf);
+        
+        DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        commondata.put("expirationDateStartYear", Integer.valueOf(dateFormatYear.format(date)));
+
+        DateFormat dateFormatMonth = new SimpleDateFormat("MM");
+                // get current month and year
+        commondata.put("currentYear", Integer.valueOf(dateFormatYear.format(date)));
+        commondata.put("currentMonth", Integer.valueOf(dateFormatMonth.format(date)));
+        
+        result.render(commondata);
+        
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+        return result;
+    
+    }
+
+    public Result paymentInfoEditComplete(final Context context, @PathParam("customerId") String customerId,
+                                          @Param("creditCardNumber") String creditNumber, @Param("name") final String name,
+                                          @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
+                                          @Param("creditCardId") final int cardId)
+    {
+        Result result = Results.html();
+
+        // replace spaces and dashes
+        creditNumber = creditNumber.replaceAll("[ -]+", "");
+        // check input
+        for (final String regExCreditCard : xcpConf.REGEX_CREDITCARD)
+        {
+            // credit card number is correct
+            if (Pattern.matches(regExCreditCard, creditNumber))
+            {
+                // get creditCard by ID
+                final CreditCard creditCard = CreditCard.getCreditCardById(cardId);
+                creditCard.setCardNumber(creditNumber);
+                creditCard.setName(name);
+                creditCard.setMonth(month);
+                creditCard.setYear(year);
+                // update creditCard
+                creditCard.update();
+                // success message
+                context.getFlashScope().success(msg.get("successSave", language).get());
+                // show customer overview page
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+            }
+            else
+            {
+                // credit card number is not valid
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongCreditCard", language).get());
+                // show inserted values in form
+                final Map<String, String> card = new HashMap<String, String>();
+                card.put("name", name);
+                card.put("cardNumber", creditNumber);
+                data.put("card", card);
+                result.render(data);
+
+                return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/edit-payment-info");
+
+            }
+        }
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+
+    }
+
+
+   
+
+    /**
+     * Update customer information in the database after edit from the customer view.
+     * 
+     * @param context
+     * @return
+     */
+    public Result customerViewEditComplete(final Context context, @PathParam("customerId") String customerId,
+                                           @Param("email") final String email, @Param("firstName") final String firstName,
+                                           @Param("name") final String name, @Param("password") final String password,
+                                           //Shipping Info
+                                           @Param("fullName") final String fullName, @Param("company") final String company,
+                                           @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                           @Param("state") final String state, @Param("zip") final String zip,
+                                           @Param("country") final String country, @Param("addressIdShip") final String addressIdShip,
+                                            //Billing Info
+                                           @Param("fullNameBill") final String nameBill, @Param("companyBill") final String companyBill,
+                                           @Param("addressLineBill") final String addressLineBill, @Param("cityBill") final String cityBill,
+                                           @Param("stateBill") final String stateBill, @Param("zipBill") final String zipBill,
+                                           @Param("countryBill") final String countryBill,
+                                           @Param("addressIdBill") final String addressIdBill)
+    {
+
+        Result result = Results.html();
+        //Shipping Address Section
+        if (zip != null)
+        {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdShip", addressIdShip);
+                data.put("fullName", fullName);
+                data.put("company", company);
+                data.put("addressLine", addressLine);
+                data.put("city", city);
+                data.put("state", state);
+                data.put("zip", zip);
+                data.put("country", country);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_SHIPPING_ADDRESS);
+            }
+            // all input fields might be correct
+            else
+            {
+                final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressIdShip));
+                address.setName(fullName);
+                address.setCompany(company);
+                address.setAddressLine(addressLine);
+                address.setCity(city);
+                address.setState(state);
+                address.setZip(zip);
+                address.setCountry(country);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                // return Results.redirect(context.getContextPah() + "/addressOverview");
+            }
+
+        }
+
+            //Billing Address Section
+
+        if (zipBill != null)
+            {
+            // check input
+
+            if (!Pattern.matches(xcpConf.REGEX_ZIP, zipBill))
+            {
+                final Map<String, Object> data = new HashMap<String, Object>();
+                WebShopController.setCommonData(data, context, xcpConf);
+                // show error message
+                context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+                // show inserted values in form
+                // final Map<String, String> address = new HashMap<String, String>();
+                data.put("addressIdBill", addressIdBill);
+                data.put("nameBill", nameBill);
+                data.put("companyBill", companyBill);
+                data.put("addressLineBill", addressLineBill);
+                data.put("cityBill", cityBill);
+                data.put("stateBill", stateBill);
+                data.put("zipBill", zipBill);
+                data.put("countryBill", countryBill);
+                // data.put("address", address);
+                // show page to enter shipping address again
+                return Results.html().render(data).template(xcpConf.TEMPLATE_UPDATE_BILLING_ADDRESS);
+            }
+            // all input fields might be correct
+            else
+            {
+            final BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressIdBill));
+                address.setName(nameBill);
+                address.setCompany(companyBill);
+                address.setAddressLine(addressLineBill);
+                address.setCity(cityBill);
+                address.setState(stateBill);
+                address.setZip(zipBill);
+                address.setCountry(countryBill);
+                // update address
+                address.update();
+                // show success message
+                context.getFlashScope().success(msg.get("successUpdate", language).get());
+                // return Results.redirect(context.getContextPath() + "/addressOverview");
+            }
+
+        }
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        boolean failure = false;
+        // email is not valid
+        if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
+        {
+            // show error message
+            failure = true;
+        }
+        if (failure)
+        {
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user/" + customerId + "/edit");
+        }
+        // all input fields might be correct
+        else
+        {
+            customer.setName(name);
+            customer.setFirstName(firstName);
+            customer.setEmail(email);
+            customer.hashPasswd(password);
+            // save customer
+            customer.save();
+            // show page to log-in
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+        }
+    }
+
+    
+     public Result customerViewShipppingAddressDelete(final Context context, @Param("addressIdShip") final int addressIdShip, @PathParam("customerId") String customerId)
+    {
+            // remove shipping address
+            ShippingAddress.removeCustomerFromShippingAddress(addressIdShip);
+            // show success message
+            context.getFlashScope().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+    }
+
+    public Result customerViewBillingAddressDelete(final Context context, @Param("addressIdBill") final int addressIdBill, @PathParam("customerId") String customerId)
+    {
+            // remove Billing address
+            BillingAddress.removeCustomerFromBillingAddress(addressIdBill);
+            // show success message
+            context.getFlashScope().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+    }
+    
+
+    public Result paymentInfoDelete(final Context context, @Param("creditCardId") final int cardId, @PathParam("customerId") String customerId)
+    {
+            // remove Payment Method
+            CreditCard.removeCustomerFromCreditCard(cardId);
+            // show success message
+            context.getFlashScope().success(msg.get("successDelete", language).get());
+            // show address overview page
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/customer/" + customerId + "/view");
+    }
+
+/**
+     * View customer order information in the database.
+     * 
+     * @param context
+     * @return
+     */
+    public Result customerViewOrders(final Context context, @PathParam("customerId") String customerId)
+{
+        Result result = Results.html();
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+
+        UUID customerUUID = UUID.fromString(customerId);
+        WebShopController.setCommonData(data, context, xcpConf);
+        List<Order> orders = Customer.getCustomerById(customerUUID).getAllOrders();
+
+        data.put("orderOverview", orders);
+        result.render(data);
+
+
+        // Find customer with the id from the params
+        Customer customer = Ebean.find(Customer.class, customerId);
+        // Render customer into template
+        result.render("customer", customer);
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        return result;
+    }
+    
     /**
      * List out all of the customers.
      * 

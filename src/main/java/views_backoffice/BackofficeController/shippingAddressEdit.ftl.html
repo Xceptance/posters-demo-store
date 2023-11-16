@@ -1,0 +1,72 @@
+<#include "../layout/upper.ftl.html">
+
+<!-- Centered content or container -->
+<div class="row justify-content-center">
+    <!-- Adjust the column width as needed -->
+    <div class="col-md-6"> 
+        <!-- Customer Shipping Information Section -->
+
+            <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+
+                <div class="mb-4 rounded p-4 bg-light">
+
+                    <h6>${i18n("updateShippingTitle")}</h6>
+
+                    <form action="${contextPath}/posters/backoffice/customer/${customer.id}/shipping-edit-complete" method="post">
+
+                    <input name="addressIdShip" id="addressId" type="hidden" value=${address.id}>
+
+                    <div class="mb-3">
+                        <label for="fullName">${i18n("addressFullName")}*</label>
+                        <input id="fullName" class="form-control" name="fullName" title="${i18n('errorWrongName')}"
+                            placeholder="${i18n('addressFullNamePlaceholder')}" data-error="${i18n('errorWrongName')}"
+                            pattern="[ÄäÖöÜüßA-Za-z ]+" type="text" value="${(address.name)!}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="company">${i18n("addressCompany")}</label>
+                        <input id="company" class="form-control" name="company" title="${i18n('addressCompany')}"
+                            placeholder="${i18n('addressCompanyPlaceholder')}" type="text" value="${(address.company)!}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="addressLine">${i18n("addressLine")}*</label>
+                        <input id="addressLine" class="form-control" name="addressLine" title="${i18n('addressLine')}"
+                            placeholder="${i18n('addressLinePlaceholder')}" type="text" value="${(address.addressLine)!}"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="city">${i18n("addressCity")}*</label>
+                        <input id="city" class="form-control" name="city" title="${i18n('errorWrongCity')}" type="text"
+                            pattern="[ÄäÖöÜüßA-Za-z ]+" data-error="${i18n('errorWrongCity')}" value="${(address.city)!}"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="state">${i18n("addressState")}*</label>
+                        <input id="state" class="form-control" name="state" title="${i18n('errorWrongState')}" type="text"
+                            pattern="[ÄäÖöÜüßA-Za-z ]+" data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="zip">${i18n('addressZip')}*</label>
+                        <input id="zip" class="form-control" name="zip" title="${i18n('errorWrongZip')}" type="text"
+                            pattern="[0-9]+" data-error="${i18n('errorWrongZip')}" value="${(address.zip)!}"
+                            placeholder="${i18n('addressZipPlaceholder')}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country">${i18n("addressCountry")}*</label>
+                        <select id="country" class="form-control" name="country" title="${i18n('addressCountry')}">
+                            <option>${i18n('countryUS')}</option>
+                            <option>${i18n('countryGermany')}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-primary">Confirm</button>
+                    <button type="button" class="btn btn btn-sm btn-secondary" onclick="javascript:history.back()"> Back </button>
+                </div>
+            </div>
+            
+
+   
+        </form>
+    </div>
+</div>
+
+<#include "../layout/footer.ftl.html">
