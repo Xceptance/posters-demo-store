@@ -1,5 +1,37 @@
 (function ($) {
     "use strict";
+    
+    
+    
+    // ############################################################
+    //Responsible for generating the confirmation dialog in the  
+    //customer section when deleting customer information 
+    // ############################################################
+
+
+    // For Shipping
+    $('[id^="confirmDeleteShip"]').on('click', function () {
+        var shipId = $(this).data('ship-id');
+        console.log(shipId);
+        $('#deleteFormShip_' + shipId).submit();
+    });
+
+    // For Billing
+    $('[id^="confirmDeleteBill"]').on('click', function () {
+        var billId = $(this).data('bill-id');
+        $('#deleteFormBill_' + billId).submit();
+    });
+
+    // For Payment
+    $('[id^="confirmDeletePayment"]').on('click', function () {
+        var paymentId = $(this).data('payment-id');
+        $('#deleteFormPayment_' + paymentId).submit();
+    });
+
+  
+
+
+
     // ############################################################
     // Getting statistics from the posters backoffice
     // ############################################################
