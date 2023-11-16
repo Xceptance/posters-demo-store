@@ -1,8 +1,8 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
-<div class="text-center">
-	<div class="header-container">
+<div class="container text-center mt-3">
+	<div class="product-overview-heading">
 		<#if category??>
 		<div id="titleCategoryName" class="header-title">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if searchText??>
@@ -35,9 +35,9 @@
 			  		<span aria-hidden="true">&laquo;</span>
 				</a>
 		  	</li>
-			<li class="page-item"><a class="page-link active" href="${contextPath}/topCategory/World%20of%20Nature?categoryId=1">1</a></li>
-			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/World%20of%20Nature?categoryId=1">2</a></li>
-			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/World%20of%20Nature?categoryId=1">3</a></li>
+			<li class="page-item"><a class="page-link active" href="${contextPath}/topCategory/{topCategory}">1</a></li>
+			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/{topCategory}">2</a></li>
+			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/{topCategory}">3</a></li>
 		  	<li class="page-item">
 				<a class="page-link" href="#" aria-label="Next">
 			 		<span aria-hidden="true">&raquo;</span>
