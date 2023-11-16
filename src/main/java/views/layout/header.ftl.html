@@ -1,120 +1,81 @@
-<div class="demo-disclaimer">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
+<div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
-<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>
-
-<div id="colorlib-offcanvas">
-  <!-- bootstrap header menu for mobile -->
-</div>
-
-<nav class="colorlib-nav" role="navigation" id="globalNavigation">
-  <div class="top-menu">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-7 col-md-9">
-          <div id="colorlib-logo">
-            <a id="brand" class="header-brand" href="${applUrlHttp}/">
-              <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
-              ${i18n('titleShop')}
-            </a>
-          </div>
-        </div>
-        <div class="col-sm-5 col-md-3">
-          <form id="search-form" class="search-wrap" action="${applUrlHttp}/search" method="get">
-            <div class="form-group">
-              <input id="s" name="searchText" class="form-control search" type="search" placeholder="${i18n('headerSearch')}" title="${i18n('headerSearch')}" value="${(searchTerm)!}">
-              <button id="btnSearch" class="btn btn-primary submit-search text-center" type="submit">
-                <i class="icon-search"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="row">
-        <div id="categoryMenu" class="col-sm-7 col-md-9 text-left menu-1">
-			<ul class="navi">
-				<#list topCategory as tC>
-				  <li class="has-dropdown">
-					<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="topCategoryMenuItem">${tC.name}</a>
-					<ul class="dropdown dropdown-menu dropdown-hide">
-					  <#list tC.subCategories as sC>
-						<li>
-						  <a href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
-							${sC.name}
-						  </a>
-						</li>
-					  </#list>
-					</ul>
-				  </li>
-				</#list>
-          <li class="has-dropdown dropdown-hide" id="hide2">
-            <a href="" class="">User</a>
-            <ul class="dropdown dropdown-hide">
-              <li>
-                <#include '../components/userMenu.ftl.html'/>
-              </li>
-            </ul>
-          </li>
-          <li class="has-dropdown dropdown-hide" id="hide1">
-            <a href="" class="">Cart</a>
-            <ul class="dropdown dropdown-hide">
-              <li class="userMenuContent dropdownusermenu"><a href="${applUrlHttp}/cart"
-                class="btn btn-primary form-control  dropdownusermenu" title="${i18n('headerRegistration')}"> <span
-                  class="icon-user-add-outline"></span> <span class="margin_left5"></span><span
-                  class="text-primary-usercart">${i18n("buttonGoToCart")}</span>
-              </a></li>
-            </ul>
-          </li>
-			  </ul>
-        </div>
-        <div class="col-sm-5 col-md-3 text-left menu-1 btnCartOverviewFormCont">
-          <ul id="btnCartOverviewForm" id="hide3" class="nav nav-pills header-menu-item">
-            <li role="presentation" class="dropdown">
-              <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#" title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
-                <#if isLogged == false>
-                  <span class="icon-user2"></span>
-                </#if>
-                <#if isLogged == true>
-                  <span class="icon-user2 logged"></span>
-                </#if>
-              </a>
-              <ul id="userMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
-                <#include '../components/userMenu.ftl.html'/>
-              </ul>
-            </li>
-            <li class="dropdown" role="presentation">
-              <a id="headerCartOverview" class="dropdown-toggle headerCartOverview" data-target="#" data-toggle="dropdown" href="#" title="${i18n('cartOverviewTitle')}" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
-              </a>
-              <ul id="miniCartMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
-                <li>
-                  <!-- cart slider --> <#include "../components/miniCartMenu.ftl.html" />
-                </li>
-              </ul>
-            </li>
+<nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
+      <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+      ${i18n('titleShop')}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="header-navigation-elements" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
+        <#list topCategory as tC>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+            ${tC.name}
+          </a>
+          <ul class="dropdown-menu">
+            <#list tC.subCategories as sC>
+            <li><a class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.name}</a></li>
+            </#list>
           </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sale">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 offset-sm-2 text-center">
-          <div class="row">
-            <div class="owl-carousel2">
-              <div class="item">
-                <div class="col">
-                  <h3><a class="h2fwpr" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a></h3>
-                </div>
-              </div>
-              <div class="item">
-                <div class="col">
-                  <h3><a class="h2fwpr" href="#">Our biggest sale yet 50% off all Posters</a></h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </li>
+        </#list>
+      </ul>
+      <div class="header-actions me-0 ms-auto d-flex">
+        <form id="header-search-form" class="d-flex" role="search">
+          <input id="header-search-field" class="form-control me-2" type="search" placeholder="${i18n('headerSearch')}" aria-label="${i18n('headerSearch')}" title="${i18n('headerSearch')}" value="${(searchTerm)!}">
+          <button id="header-search-button" class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+        </form>
+        <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="icon-user2"></span>
+            </a>
+            <ul id="user-menu" class="dropdown-menu">
+              <!-- login -->
+              <#if isLogged == false>
+              <li class="header-user-menu-heading mb-2">${i18n('headerWelcomeGuest')}</li>
+              <li class="header-user-menu-content mb-2">
+                <a href="${applUrlHttps}/registration" class="btn btn-primary header-user-menu-button" title="${i18n('headerRegistration')}">
+                  <span class="icon-user-add-outline"></span>
+                  <span>${i18n("headerRegistration")}</span>
+                </a>
+              </li>
+              <li class="header-user-menu-content">
+                <a href="${applUrlHttps}/login" class="btn btn-primary header-user-menu-button" title="${i18n('headerLogin')}">
+                  <span class="icon-log-in"></span>
+                  <span>${i18n('headerLogin')}</span>
+                </a>
+              </li>
+              </#if> 
+              <#if isLogged == true>
+              <li class="header-user-menu-heading mb-2">${i18n('headerWelcome')}: <span class="firstName">${customerFirstName}</span></li>
+              <li class="header-user-menu-content mb-2">
+                <a href="${applUrlHttps}/accountOverview" class="btn btn-primary header-user-menu-button" title="${i18n('accountOverviewTitle')}">
+                  <span class="icon-info-large logged"></span>
+                  <span>${i18n("accountOverviewTitle")}</span>
+                </a>
+              </li>
+              <li class="header-user-menu-content">
+                <a href="${applUrlHttp}/logout" title="${i18n('headerLogout')}" class="btn btn-primary header-user-menu-button">
+                  <span class="icon-log-out"></span>
+                  <span>${i18n("headerLogout")}</span>
+                </a>
+              </li>
+              </#if>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a id="header-cart-overview" class="nav-link dropdown-toggle" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
+            </a>
+            <ul id="mini-cart-menu" class="dropdown-menu">
+              <li><#include "../components/miniCartMenu.ftl.html"></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

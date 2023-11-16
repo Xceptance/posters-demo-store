@@ -1,94 +1,38 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 
-<div class="container">
-	<div class="row row-pb-lg  justify-content-center">
-        
-    </div>
-    <div class="row  justify-content-center h2fwpr">
-
-        <div class="col-lg-8">
-			<form id="formRegister" class="form-horizontal colorlib-form"
-				action="${contextPath}/registration" method="post">
-				<fieldset>
-					<!-- Form Name -->
-					<legend>
-						<span class="h2fwpr">${i18n("titleRegistration")}</span>
-					</legend>
-					<div class="col-sm-12">
-
-						<!-- last name -->
-						<div class="form-group">
-							<label class="col-sm-3 control-label" for="lastName">${i18n('registrationLastName')}*</label>
-							<div class="col-sm-9">
-								<input id="lastName" class="form-control" name="lastName"
-									placeholder="${i18n('registrationLastName')}" type="text"
-									title="${i18n('errorWrongName')}"
-									pattern="${regexName}" data-error="${i18n('errorWrongName')}"
-									value="${(registration.name)!}" required>
-							</div>
-						</div>
-
-						<!-- first name -->
-						<div class="form-group">
-							<label class="col-sm-3 control-label" for="firstName">${i18n('registrationFirstName')}*</label>
-							<div class="col-sm-9">
-								<input id="firstName" class="form-control" name="firstName"
-									placeholder="${i18n('registrationFirstName')}" type="text"
-									title="${i18n('errorWrongName')}"
-									pattern="${regexName}" data-error="${i18n('errorWrongName')}"
-									value="${(registration.firstName)!}" required>
-							</div>
-						</div>
-
-						<!-- email -->
-						<div class="form-group">
-							<label class="col-sm-3 control-label" for="eMail">${i18n('registrationEmail')}*</label>
-							<div class="col-sm-9">
-								<input id="eMail" class="form-control" name="eMail"
-									placeholder="${i18n('registrationEmail')}" type="text"
-									pattern="${regexEmail}" title="${i18n('errorValidEmail')}"
-									data-error="${i18n('errorValidEmail')}"
-									value="${(registration.email)!}" required>
-							</div>
-						</div>
-
-						<!-- password -->
-						<div class="form-group">
-							<label class="col-sm-3 control-label" for="password">${i18n('registrationPassword')}*</label>
-							<div class="col-sm-9">
-								<input id="password" name="password" class="form-control"
-									placeholder="${i18n('registrationPassword')}" type="password"
-									required>
-							</div>
-						</div>
-
-						<!-- password again -->
-						<div class="form-group">
-							<label class="col-sm-3 control-label" for="passwordAgain">${i18n('registrationPasswordAgainTitle')}*</label>
-							<div class="col-sm-9">
-								<input id="passwordAgain" class="form-control" name="passwordAgain"
-									placeholder="${i18n('registrationPasswordAgain')}" type="password"
-									required>
-							</div>
-						</div>
-
-						<!-- required fields info -->
-						<div class="form-group">
-							<div class="col-sm-12 nopadding">
-								<div class="col-sm-3"></div>
-								<div class="col-sm-9">
-									<span class="reqField pull-left textcolordarkgrey">*
-										${i18n('titleRequiredFields')}</span>
-									<button id="btnRegister" class="btn btn-primary pull-right"
-										name="btnRegister" type="submit">${i18n('registrationCreate')}</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</fieldset>
-			</form>
-		</div>
+<div class="container d-flex justify-content-center">
+	<div class="col-lg-8 mt-4">
+		<form action="${contextPath}/registration" class="form-with-background" id="acc-registration-form">
+			<legend class="mt-3">${i18n("titleRegistration")}</legend>
+			<div class="mb-3">
+				<label for="registration-form-last-name" class="form-label">${i18n('registrationLastName')}*</label>
+				<input type="text" class="form-control" id="registration-form-last-name" placeholder="${i18n('registrationLastName')}"
+				pattern="${regexName}" data-error="${i18n('errorWrongName')}" value="${(registration.name)!}" required>
+			</div>
+			<div class="mb-3">
+				<label for="registration-form-first-name" class="form-label">${i18n('registrationFirstName')}*</label>
+				<input type="text" class="form-control" id="registration-form-first-name" placeholder="${i18n('registrationFirstName')}"
+				pattern="${regexName}" data-error="${i18n('errorWrongName')}" value="${(registration.firstName)!}" required>
+			</div>
+			<div class="mb-3">
+				<label for="registration-form-e-mail" class="form-label">${i18n('registrationEmail')}*</label>
+				<input type="email" class="form-control" id="registration-form-e-mail" placeholder="${i18n('registrationEmail')}"
+				pattern="${regexEmail}" data-error="${i18n('errorValidEmail')}" value="${(registration.email)!}" required>
+			</div>
+			<div class="mb-3">
+				<label for="registration-form-password" class="form-label">${i18n('registrationPassword')}*</label>
+				<input type="password" class="form-control" id="registration-form-password" placeholder="${i18n('registrationPassword')}" required>
+			</div>
+			<div class="mb-3">
+				<label for="registration-form-password-repeat" class="form-label">${i18n('registrationPasswordAgain')}*</label>
+				<input type="password" class="form-control" id="registration-form-password-repeat" placeholder="${i18n('registrationPasswordAgain')}" required>
+			</div>
+			<div class="mb-3 d-flex">
+				<span class="ms-0 me-auto">*${i18n('titleRequiredFields')}</span>
+				<button class="btn btn-primary me-0 ms-auto" type="submit">${i18n('registrationCreate')}</button>
+			</div>
+		</form>
 	</div>
 </div>
 
