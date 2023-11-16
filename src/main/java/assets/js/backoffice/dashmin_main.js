@@ -5,7 +5,7 @@
     
     // ############################################################
     //Responsible for generating the confirmation dialog in the  
-    //customer section when deleting customer information 
+    //customer section when deleting customer information.
     // ############################################################
 
 
@@ -28,12 +28,20 @@
         $('#deleteFormPayment_' + paymentId).submit();
     });
 
-  
 
-
+    //############################################################
+    //Initiating Customer List Table by employing 
+    //Bootstrap Data Tables.
+    // ############################################################
+    $(document).ready( function () {
+        $('#customerlist').DataTable({ 
+        // Specify multiple classes to be used
+        stripeClasses: ['stripe-1',
+                        'stripe-2']});
+    } );
 
     // ############################################################
-    // Getting statistics from the posters backoffice
+    // Getting statistics from the posters backoffice.
     // ############################################################
     async function getJSONStatistic() {
         const response = await fetch('http://localhost:8080/posters/backoffice/JSON', {
