@@ -1,0 +1,27 @@
+<#include "../layout/upper.ftl.html">
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Edit User ${user.firstName} ${user.name}: </h6>
+            <form action="${contextPath}/posters/backoffice/user/${user.id}" method="post">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                        value="${user.email}">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="name" name="firstName" value="${user.firstName}">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="name" value="${user.name}">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">
