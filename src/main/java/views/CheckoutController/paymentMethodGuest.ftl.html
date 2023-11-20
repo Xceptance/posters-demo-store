@@ -14,27 +14,12 @@
         <div class="col-lg-6">
             <form id="formAddPayment" action="${contextPath}/paymentMethodCompleted" method="post" class="form-with-background">
                 <h2 id="titlePayment" class="text-center">${i18n("paymentMethodTitlEnter")}</h2>
-                <div class="row">
-                <!-- include address form -->
-					<#include "../components/paymentForm.ftl.html"/>
-                    <hr>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12 nopadding">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <span class="reqField pull-left textcolordarkgrey">* ${i18n('titleRequiredFields')}</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <button id="btnAddPayment" class="btn btn-primary pull-right" name="btnAddPayment" type="submit">${i18n('buttonContinue')}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- include payment form -->
+				<#include "../components/paymentForm.ftl.html"/>
+                <hr>
+                <div class="d-flex">
+                    <div class="me-auto">* ${i18n('titleRequiredFields')}</div>
+                    <button type="submit" class="ms-auto btn btn-primary" id="btnAddPayment" name="btnAddPayment">${i18n('buttonContinue')}</button>
                 </div>
             </form>
         </div>
