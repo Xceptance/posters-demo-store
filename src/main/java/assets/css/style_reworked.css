@@ -60,6 +60,10 @@
   .product-overview-heading {
     font-size: 2rem;
   }
+
+  #titleOrderOverview {
+    text-align: center;
+  }
 /*  Headings
 *   - End
 */ 
@@ -507,11 +511,17 @@
 *   - End
 */
 
-/*  Order overview
+/*  Order & checkout overview
 *   - Start
 */
+  .checkout-overview table {
+    --bs-table-bg: rgb(245, 245, 245);
+  }
 
-/*  Order overview
+  .checkout-overview .list-group {
+    --bs-list-group-bg: rgb(245, 245, 245);
+  }
+/*  Order & checkout overview
 *   - End
 */
 
