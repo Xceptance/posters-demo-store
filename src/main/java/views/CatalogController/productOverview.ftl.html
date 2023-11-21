@@ -28,16 +28,22 @@
 			</#list>
 	</div>
 
+	<#if totalPages gt 1>
 	<nav aria-label="Product listing page navigation">
-		<ul class="pagination">	
+		<ul class="pagination pagination-bottom">	
 		  	<li class="page-item">
 				<a class="page-link" href="#" aria-label="Previous">
 			  		<span aria-hidden="true">&laquo;</span>
 				</a>
 		  	</li>
-			<li class="page-item"><a class="page-link active" href="${contextPath}/topCategory/{topCategory}">1</a></li>
-			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/{topCategory}">2</a></li>
-			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/{topCategory}">3</a></li>
+			  <#list 1..totalPages as i>
+			  <#if i==currentPage>
+			<li class="page-item"><a class="page-link active" href="#"><span>${i}</span></a></li>
+			<#else>
+			<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
+			</#if>
+			</#list>
+
 		  	<li class="page-item">
 				<a class="page-link" href="#" aria-label="Next">
 			 		<span aria-hidden="true">&raquo;</span>
@@ -45,6 +51,8 @@
 		  	</li>
 		</ul>
 	</nav>
+	</#if>
+
 </div>
 
 </@layout.myLayout>
