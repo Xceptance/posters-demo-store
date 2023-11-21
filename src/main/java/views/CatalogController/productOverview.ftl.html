@@ -14,7 +14,7 @@
 </div>
 	
 <div id="productOverview" class="container text-center">
-	<div class="row product-display-case">
+	<div class="row product-display-case col-lg-10">
 			<#list products as pro>
 			<div class="card product-tile">
 				<img src="${contextPath}${pro.imageURL}" class="card-img-top" alt="picture of ${pro.name}">
@@ -29,7 +29,7 @@
 	</div>
 
 	<nav aria-label="Product listing page navigation">
-		<ul class="pagination">
+		<ul class="pagination">	
 		  	<li class="page-item">
 				<a class="page-link" href="#" aria-label="Previous">
 			  		<span aria-hidden="true">&laquo;</span>
