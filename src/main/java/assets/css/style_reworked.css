@@ -250,6 +250,13 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+  .product-display-case-product-overview {
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 91.333333%;
+    --bs-gutter-x: -8.5rem;
+  }
 /*  Product display case
 *   - End
 */

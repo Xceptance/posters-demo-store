@@ -1,5 +1,42 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
+<script type="text/javascript">
+    // Use delegated event handling to handle dynamically added elements
+    $(document).on('click', '#pagination-bottom a.page-link, #prev, #next', function (e) {
+        e.preventDefault();
+
+        // Remove 'active' class from all page links
+        $('#pagination-bottom a.page-link').removeClass('active');
+
+        // Add 'active' class to the clicked page link
+        if (!$(this).is('#prev') && !$(this).is('#next')) {
+            $(this).addClass('active');
+        }
+
+        var page;
+        if ($(this).is('#prev')) {
+            page = parseInt($('#pagination-bottom .page-link.active a').data('page')) - 1;
+        } else if ($(this).is('#next')) {
+            page = parseInt($('#pagination-bottom .page-link.active a').data('page')) + 1;
+        } else {
+            page = parseInt($(this).data('page'));
+        }
+
+        var pathname = $(location).attr('pathname');
+        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+
+        // AJAX request based on page type
+        if (pageType == "topCategory") {
+            $.post('${contextPath}/getProductOfTopCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
+        } else if (pageType == "category") {
+            $.post('${contextPath}/getProductOfSubCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
+        } else {
+            $.post('${contextPath}/getProductOfSearch', { searchText: $('#s').val(), page: page }, updateProductOverview);
+        }
+    });
+</script>
+
+
 
 <div class="container text-center mt-3">
 	<div class="product-overview-heading">
@@ -14,7 +51,7 @@
 </div>
 	
 <div id="productOverview" class="container text-center">
-	<div class="row product-display-case">
+	<div class="row product-display-case-product-overview">
 			<#list products as pro>
 			<div class="card product-tile">
 				<img src="${contextPath}${pro.imageURL}" class="card-img-top" alt="picture of ${pro.name}">
@@ -28,23 +65,28 @@
 			</#list>
 	</div>
 
-	<nav aria-label="Product listing page navigation">
-		<ul class="pagination">
-		  	<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-			  		<span aria-hidden="true">&laquo;</span>
-				</a>
-		  	</li>
-			<li class="page-item"><a class="page-link active" href="${contextPath}/topCategory/{topCategory}">1</a></li>
-			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/{topCategory}">2</a></li>
-			<li class="page-item"><a class="page-link" href="${contextPath}/topCategory/{topCategory}">3</a></li>
-		  	<li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-			 		<span aria-hidden="true">&raquo;</span>
-				</a>
-		  	</li>
-		</ul>
-	</nav>
 </div>
-
+<#if totalPages gt 1>
+<nav aria-label="Product listing page navigation">
+    <ul id="pagination-bottom" class="pagination pagination-bottom">
+        <li class="page-item">
+            <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <#list 1..totalPages as i>
+            <#if i==currentPage>
+                <li class="page-item"><a class="page-link active" href="#" data-page="${i}"><span>${i}</span></a></li>
+            <#else>
+                <li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
+            </#if>
+        </#list>
+        <li class="page-item">
+            <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</#if>
 </@layout.myLayout>
