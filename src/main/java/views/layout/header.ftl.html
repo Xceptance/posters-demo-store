@@ -1,7 +1,7 @@
 <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
+  <div class="container top-menu">
     <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
       <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
       ${i18n('titleShop')}</a>
@@ -68,8 +68,9 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a id="header-cart-overview" class="nav-link dropdown-toggle" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="icon-shopping-cart"></span> &nbsp; <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
+            <a id="headerCartOverview" class="dropdown-toggle headerCartOverview nav-link dropdown-toggle" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="icon-shopping-cart"></span> &nbsp; 
+              <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
             </a>
             <ul id="mini-cart-menu" class="dropdown-menu">
               <li><#include "../components/miniCartMenu.ftl.html"></li>

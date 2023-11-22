@@ -22,7 +22,6 @@
 				<div class="mb-3">
 					<label for="product-detail-form-size-selection" class="form-label" >${i18n("cartSelectSize")}</label>
 					<select id="product-detail-form-size-selection" class="form-select" aria-label="size selection">
-						<option selected>Choose a size</option>
 						<#list productDetail.availableSizes as size>
 						<option>${size.size.width} x ${size.size.height} ${unitLength}</option>
 						</#list>
