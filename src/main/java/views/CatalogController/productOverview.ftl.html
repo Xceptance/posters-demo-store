@@ -1,5 +1,32 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
+<script type="text/javascript">
+    // Use delegated event handling to handle dynamically added elements
+    $(document).on('click', '#pagination-bottom a.page-link', function (e) {
+        //e.preventDefault();
+        
+        // Remove 'active' class from all page links
+        $('#pagination-bottom a.page-link').removeClass('active');
+
+        // Add 'active' class to the clicked page link
+        $(this).addClass('active');
+
+        var page = $(this).data('page');
+        var pathname = $(location).attr('pathname');
+        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+
+        // AJAX request based on page type
+        if (pageType == "topCategory") {
+            $.post('${contextPath}/getProductOfTopCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+        } else if (pageType == "category") {
+            $.post('${contextPath}/getProductOfSubCategory', {categoryId: ${(category.id)!1}, page: page}, updateProductOverview);
+        } else {
+            $.post('${contextPath}/getProductOfSearch', {searchText: $('#s').val(), page: page}, updateProductOverview);
+        }
+    });
+</script>
+
+
 
 <div class="container text-center mt-3">
 	<div class="product-overview-heading">
@@ -28,31 +55,29 @@
 			</#list>
 	</div>
 
-	<#if totalPages gt 1>
-	<nav aria-label="Product listing page navigation">
-		<ul class="pagination pagination-bottom">	
-		  	<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-			  		<span aria-hidden="true">&laquo;</span>
-				</a>
-		  	</li>
-			  <#list 1..totalPages as i>
-			  <#if i==currentPage>
-			<li class="page-item"><a class="page-link active" href="#"><span>${i}</span></a></li>
-			<#else>
-			<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
-			</#if>
-			</#list>
-
-		  	<li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-			 		<span aria-hidden="true">&raquo;</span>
-				</a>
-		  	</li>
-		</ul>
-	</nav>
-	</#if>
-
 </div>
+<#if totalPages gt 1>
+<nav aria-label="Product listing page navigation">
+	<ul id="pagination-bottom" class="pagination pagination-bottom">	
+		  <li class="page-item">
+			<a class="page-link" href="#" aria-label="Previous">
+				  <span aria-hidden="true">&laquo;</span>
+			</a>
+		  </li>
+		  <#list 1..totalPages as i>
+		  <#if i==currentPage>
+		<li class="page-item"><a class="page-link active" href="#" data-page="${i}"><span>${i}</span></a></li>
+		<#else>
+		<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
+		</#if>
+		</#list>
 
+		  <li class="page-item">
+			<a class="page-link" href="#" aria-label="Next">
+				 <span aria-hidden="true">&raquo;</span>
+			</a>
+		  </li>
+	</ul>
+</nav>
+</#if>
 </@layout.myLayout>
