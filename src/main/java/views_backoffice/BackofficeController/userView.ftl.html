@@ -1,0 +1,16 @@
+<#include "../layout/upper.ftl.html">
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <ul class="viewing-list">
+                <li><span>Name: ${user.firstName} ${user.name}</span></li>
+                <li><span>User ID: ${user.id}</span></li>
+                <li><span>User Email: ${user.email}</span></li>
+            </ul>
+            <a class="btn btn-sm btn-primary" href="/posters/backoffice/user/${user.id}/edit">Edit</a>
+            <a class="btn btn-sm btn-warning" href="/posters/backoffice/user">Back</a>
+            <form action="/posters/backoffice/user/${user.id}/delete" method="post">
+                <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">
