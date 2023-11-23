@@ -1,52 +1,21 @@
-<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle colorlib-nav-white"><i></i></a>
+<div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
-
-
-
-
-<nav class="colorlib-nav" role="navigation">
-    <div class="top-menu">
-        <div class="container">
-            <div id="headerCheckout" class="row">
-                <div class="col-sm-7 col-md-9">
-                    <div id="colorlib-logo">
-                        <a href="${applUrlHttp}/" style="text-decoration: none">
-                            <img class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png"
-                                title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
-                            ${i18n('titleShop')}
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-5 col-md-3">
-                    <!-- login form -->
-                    <ul id="showUserMenu" class="nav nav-pills header-menu-item">
-                        <li role="presentation" class="dropdown">
-                            <a id="showUserMenu" class="dropdown-toggle" data-toggle="dropdown" href="#"
-                                title="${i18n('headerLogin')}" role="button" aria-haspopup="true" aria-expanded="false">
-                                <#if isLogged==false>
-                                    <span class="glyphicon glyphicon-user not-logged"></span>
-                                </#if>
-                                <#if isLogged==true>
-                                    <span class="glyphicon glyphicon-user logged"></span>
-                                </#if>
-                            </a>
-                            <ul id="userMenu" class="dropdown-menu dropdown-menu-right hidden-xs">
-                                <#include '../components/userMenu.ftl.html' />
-                            </ul>
-                           
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <!-- bootstrap header menu for larger than mobile -->
-                <div class="col-sm-7 col-md-9 text-left menu-1">
-
-                </div>
-
-                <div class="col-xs-12 col-sm-1">
-                    
-                </div>
-            </div>
-        </div>
+<nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
+      <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+      ${i18n('titleShop')}</a>
+    <div id="header-navigation-elements" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul id="header-customer-menus" class="navbar-nav me-0 ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="icon-user2"></span>
+          </a>
+          <ul id="user-menu" class="dropdown-menu">
+            <li><#include '../components/userMenu.ftl.html'></li>
+          </ul>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>

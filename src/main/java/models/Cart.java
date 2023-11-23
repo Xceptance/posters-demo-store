@@ -29,7 +29,7 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides a shopping cart. Each customer of the demo poster store has its own cart. A cart
+ * This {@link Entity} provides a shopping cart. Each customer of the poster demo store has its own cart. A cart
  * contains a list of {@link CartProduct}s.
  * 
  * @author sebastianloob

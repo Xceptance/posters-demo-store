@@ -248,46 +248,6 @@
       });
     };
 
-
-	// Owl Carousel
-	var owlCrouselFeatureSlide = function() {
-		var owl = $('.owl-carousel');
-		owl.owlCarousel({
-		   animateOut: 'fadeOut',
-		   animateIn: 'fadeIn',
-		   autoplay: false,
-		   autoplayHoverPause: true,
-		   loop:true,
-		   margin:0,
-		   nav:false,
-		   dots: true,
-		   autoHeight: false,
-		   items: 1,
-		   navText: [
-		      "<i class='icon-chevron-left owl-direction'></i>",
-		      "<i class='icon-chevron-right owl-direction'></i>"
-	     	]
-		});
-
-		var owl2 = $('.owl-carousel2');
-		owl2.owlCarousel({
-			animateOut: 'fadeOut',
-		   animateIn: 'fadeIn',
-		   autoplay: true,
-		   autoplayHoverPause: true,
-		   loop:true,
-		   margin:0,
-		   nav:false,
-		   dots: false,
-		   autoHeight: true,
-		   items: 1,
-		   navText: [
-		      "<i class='icon-chevron-left owl-direction'></i>",
-		      "<i class='icon-chevron-right owl-direction'></i>"
-	     	]
-		});
-	};
-
 	var parallax = function() {
 
 		if ( !isMobile.any() ) {
@@ -341,10 +301,25 @@
 		dropdown();
 		goToTop();
 		loaderPage();
-		owlCrouselFeatureSlide();
 		parallax();
 		datePicker();
 
 	});
 
 }());
+
+const mainCarouselElement = document.querySelector('#carousel-product-display')
+
+const mainCarousel = new bootstrap.Carousel(mainCarouselElement, {
+  wrap: true,
+  interval: 5000,
+  touch: true
+})
+
+const adTextCarouselElement = document.querySelector('#carousel-sale')
+
+const adTextCarousel = new bootstrap.Carousel(adTextCarouselElement, {
+  wrap: true,
+  interval: 5000,
+  touch: true
+})

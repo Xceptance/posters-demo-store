@@ -1,6 +1,6 @@
-# Posters Demo Store
+# The Poster Demo Store
 
-*Posters Demo Store*, or just *Posters*, is a simple e-commerce application for demoing load testing as well as test automation.
+*The Poster Demo Store*, or just *Posters*, is a simple e-commerce application for demoing load testing as well as test automation.
 
 
 ## Features

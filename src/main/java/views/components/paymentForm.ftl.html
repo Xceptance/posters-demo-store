@@ -2,20 +2,20 @@
 
 
 <!-- credit card number -->
-<div class="col-md-12 h2fwpr">
+<div class="col-md-12">
 	<div class="form-group">
 		<label for="creditCardNumber">${i18n("titleNumber")}*</label>
-			<input id="creditCardNumber" class="form-control" name="creditCardNumber"
-				title="${i18n('errorWrongCreditCard')}"
-				type="text" placeholder="${i18n('titleNumber')}"
-				pattern="4[0-9]{12}(?:[0-9]{3})?"
-				data-error="${i18n('errorWrongCreditCard')}"
-				value="${(card.cardNumber)!}" size="16" required>
+		<input id="creditCardNumber" class="form-control" name="creditCardNumber"
+			title="${i18n('errorWrongCreditCard')}"
+			type="text" placeholder="${i18n('titleNumber')}"
+			pattern="4[0-9]{12}(?:[0-9]{3})?"
+			data-error="${i18n('errorWrongCreditCard')}"
+			value="${(card.cardNumber)!}" size="16" required>
 	</div>
 </div>
 
 <!-- name -->
-<div class="col-md-6 h2fwpr">
+<div class="col-md-6">
 	<div class="form-group">
 		<label for="name">${i18n("paymentCardholderName")}*</label>
 		<input id="name" class="form-control" name="name" type="text"
@@ -26,12 +26,12 @@
 </div>
 
 <!-- select expiration date -->
-<div class="col-md-6 h2fwpr">
+<div class="col-md-6">
 	<div class="form-group">
 	  <label for="expirationDateMonth">${i18n('paymentExpiration')}*</label>
 	  <div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6">
-		  <select id="expirationDateMonth" name="expirationDateMonth" class="form-control" title="${i18n('paymentExpiration')}">
+		  <select id="expirationDateMonth" name="expirationDateMonth" class="form-select" title="${i18n('paymentExpiration')}">
 			<#list 1..9 as i>
 			  <#if card??>
 				<#if (card.month == i)>
@@ -65,7 +65,7 @@
 		  </select>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6">
-		  <select id="expirationDateYear" name="expirationDateYear" class="form-control" title="${i18n('paymentExpiration')}">
+		  <select id="expirationDateYear" name="expirationDateYear" class="form-select" title="${i18n('paymentExpiration')}">
 			<#list expirationDateStartYear..(expirationDateStartYear+10) as i>
 			  <#if card??>
 				<#if (card.year == i)>
