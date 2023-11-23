@@ -12,12 +12,17 @@
         if (!$(this).is('#prev') && !$(this).is('#next')) {
             $(this).addClass('active');
         }
-
-        var page;
+		var lastPage = Number(${totalPages})+1;
+		var page;
         if ($(this).is('#prev')) {
-            page = parseInt($('#pagination-bottom .page-link.active a').data('page')) - 1;
+            // Go to the first page
+            page = 1;
+			$('#pagination-bottom > li:nth-child(2) > a').addClass('active');
+			
         } else if ($(this).is('#next')) {
-            page = parseInt($('#pagination-bottom .page-link.active a').data('page')) + 1;
+            // Go to the last page
+            page = ${totalPages};
+			$('#pagination-bottom > li:nth-child('+lastPage+') > a').addClass('active');
         } else {
             page = parseInt($(this).data('page'));
         }
