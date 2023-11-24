@@ -16,7 +16,7 @@
 		</thead>
 		<tbody>
 		  	<#list cartProducts as cartProduct>
-			<tr>
+			<tr id="product${cartProduct_index}">
 				<th scope="row">${cartProduct?counter}</th>
 				<td>
 					<div class="row">
@@ -31,10 +31,14 @@
 					</div>
 				</td>
 				<td>${currency}${cartProduct.getPriceAsString()}</td>
-				<td>${cartProduct.productCount}</td>
-				<td>${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
 				<td>
-					<button class="btn" id="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" data-id="${cartProduct.id}" data-index="${cartProduct_index}"><span class="icon-refresh-ccw"></span></button>
+					<input id="productCount${cartProduct_index}" name="productCount${cartProduct_index}"
+						class="form-control text-center productCount" title="${i18n('cartTableHeaderQuantity')}" type="text"
+						value=${cartProduct.productCount} size="4" maxlength="4">
+				</td>
+				<td><div class="productTotalUnitPrice">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
+				<td>
+					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
 					<button class="btn" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-toggle="modal" data-target="#deleteProductModal"><span class="icon-cross"></span></button>
 				</td>
 			</tr>
@@ -48,7 +52,7 @@
 				<div class="fw-bold">${i18n("cartSummary")}</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewSubTotal")}:</div>
-					<div class="col price-summary-value">${currency}${subOrderTotal}</div>
+					<div id="orderSubTotalValue" class="col price-summary-value">${currency}${subOrderTotal}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewShippingCosts")}:</div>
@@ -56,7 +60,7 @@
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOvervieSubTotalTax")} (${tax}%):</div>
-					<div class="col price-summary-value">${currency}${subOrderTotalTax}</div>
+					<div id="orderSubTotalTaxValue" class="col price-summary-value">${currency}${subOrderTotalTax}</div>
 				</div>
 			  </div>
 			</li>
@@ -64,14 +68,14 @@
 			  <div class="price-summary ms-auto me-2">
 				<div class="row">
 					<div class="col fw-bold price-summary-position">${i18n("cartOverviewTotalPrice")}:</div>
-					<div class="col fw-bold price-summary-value">${currency}${orderTotal}</div>
+					<div id="orderTotal" class="col fw-bold price-summary-value">${currency}${orderTotal}</div>
 				</div>
 			  </div>
 			</li>
 		</ol>
 	</div>
 	<div class="d-flex justify-content-end mt-2">
-		<a id="btn-start-checkout" class="btn btn-primary me-0 ms-auto" href="${applUrlHttps}/checkout">${i18n("cartOverviewStartCheckout")}</a>
+		<a id="btnStartCheckout" class="btn btn-primary me-0 ms-auto" href="${applUrlHttps}/checkout">${i18n("cartOverviewStartCheckout")}</a>
 	</div>
 </div>
 
