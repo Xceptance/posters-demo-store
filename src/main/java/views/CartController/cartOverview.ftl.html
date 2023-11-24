@@ -39,7 +39,7 @@
 				<td><div class="productTotalUnitPrice">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
 				<td>
 					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
-					<button class="btn" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-toggle="modal" data-target="#deleteProductModal"><span class="icon-cross"></span></button>
+					<button class="btn" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><span class="icon-cross"></span></button>
 				</td>
 			</tr>
 			</#list>
@@ -78,24 +78,24 @@
 		<a id="btnStartCheckout" class="btn btn-primary me-0 ms-auto" href="${applUrlHttps}/checkout">${i18n("cartOverviewStartCheckout")}</a>
 	</div>
 </div>
-
 <!-- Delete Product Modal -->
 <div id="deleteProductModal" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Are you sure you want to remove this product?</h4>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>		
-			<div class="modal-footer">
-				<div class="d-flex justify-content-start flex-wrap">
-					<button id="buttonClose" type="button" class="btn btn-default" data-dismiss="modal" title="Close">No</button>
-					<button id="buttonDelete" name="buttonDelete" class="btn btn-danger mt-2 mt-md-0" data-dismiss="modal" title="Delete">Yes</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to remove this product?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-end">
+                    <button id="buttonClose" type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal" title="Close">No</button>
+                    <button id="buttonDelete" name="buttonDelete" class="btn btn-danger" data-bs-dismiss="modal" title="Delete">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <div class="gototop js-top">
 	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
