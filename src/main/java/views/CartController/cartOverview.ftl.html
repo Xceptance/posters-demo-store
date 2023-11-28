@@ -1,5 +1,6 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
+<#if (0 < cartProducts?size) >
 
 <div class="container">
 	<h2>Cart</h2>
@@ -78,6 +79,16 @@
 		<a id="btnStartCheckout" class="btn btn-primary me-0 ms-auto" href="${applUrlHttps}/checkout">${i18n("cartOverviewStartCheckout")}</a>
 	</div>
 </div>
+
+<div class="gototop js-top">
+	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+</div>
+<#else>
+			<div class="header-container">
+				<span class="h2" id="titleCart">Cart</span>
+			</div>
+			<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+			</#if>
 <!-- Delete Product Modal -->
 <div id="deleteProductModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -97,8 +108,5 @@
 </div>
 
 
-<div class="gototop js-top">
-	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
-</div>
 
 </@layout.myLayout>
