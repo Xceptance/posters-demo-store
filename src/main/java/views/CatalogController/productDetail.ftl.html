@@ -31,14 +31,14 @@
 					<label for="product-detail-form-style-selection" class="form-label">${i18n("cartSelectFinish")}</label>
 					<div id="product-detail-form-style-selection">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="style-selection" id="style-selection1" checked>
-							<label class="form-check-label" for="style-selection1">
+							<input class="form-check-input" type="radio" name="finish" id="finish-matte" value="matte" checked>
+							<label class="form-check-label" for="finish-matte">
 								${i18n("cartSelectFinishMatte")}
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="style-selection" id="style-selection2">
-							<label class="form-check-label" for="style-selection2">
+							<input class="form-check-input" type="radio" name="finish" id="finish-gloss" value="gloss">
+							<label class="form-check-label" for="finish-gloss">
 								${i18n("cartSelectFinishGloss")}
 							</label>
 						</div>
@@ -49,7 +49,7 @@
 					<div id="product-detail-form-print-information" class="">${i18n('productDetailPosterFinish')}</div>
 				</div>
 				<div class="mb-3 d-flex justify-content-end">
-					<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, $('#add-to-cart-form input[name=style-selection]:checked').val(), $('#product-detail-form-size-selection').val())" class="btn btn-primary">
+					<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, $('#add-to-cart-form input[name=finish]:checked').val(), $('#product-detail-form-size-selection').val())" class="btn btn-primary">
 						<i class="icon-shopping-cart"></i> ${i18n("productDetailAddToCart")}
 					</a>
 				</div>
