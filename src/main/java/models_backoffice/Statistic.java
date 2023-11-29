@@ -1,6 +1,10 @@
 package models_backoffice;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "statistic")
 public class Statistic
 {
     /**
