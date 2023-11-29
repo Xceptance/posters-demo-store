@@ -3,30 +3,30 @@
 
 <div class="container d-flex justify-content-center">
 	<div class="col-lg-8 mt-4">
-		<form action="${contextPath}/registration" class="form-with-background" id="acc-registration-form">
+		<form action="${contextPath}/registration" class="form-with-background" id="formRegister" method="post">
 			<legend class="mt-3">${i18n("titleRegistration")}</legend>
 			<div class="mb-3">
 				<label for="registration-form-last-name" class="form-label">${i18n('registrationLastName')}*</label>
-				<input type="text" class="form-control" id="registration-form-last-name" placeholder="${i18n('registrationLastName')}"
+				<input type="text" class="form-control" name="lastName" id="registration-form-last-name" placeholder="${i18n('registrationLastName')}"
 				pattern="${regexName}" data-error="${i18n('errorWrongName')}" value="${(registration.name)!}" required>
 			</div>
 			<div class="mb-3">
 				<label for="registration-form-first-name" class="form-label">${i18n('registrationFirstName')}*</label>
-				<input type="text" class="form-control" id="registration-form-first-name" placeholder="${i18n('registrationFirstName')}"
+				<input type="text" class="form-control" name="firstName" id="registration-form-first-name" placeholder="${i18n('registrationFirstName')}"
 				pattern="${regexName}" data-error="${i18n('errorWrongName')}" value="${(registration.firstName)!}" required>
 			</div>
 			<div class="mb-3">
 				<label for="registration-form-e-mail" class="form-label">${i18n('registrationEmail')}*</label>
-				<input type="email" class="form-control" id="registration-form-e-mail" placeholder="${i18n('registrationEmail')}"
+				<input type="email" class="form-control" name="eMail" id="registration-form-e-mail" placeholder="${i18n('registrationEmail')}"
 				pattern="${regexEmail}" data-error="${i18n('errorValidEmail')}" value="${(registration.email)!}" required>
 			</div>
 			<div class="mb-3">
 				<label for="registration-form-password" class="form-label">${i18n('registrationPassword')}*</label>
-				<input type="password" class="form-control" id="registration-form-password" placeholder="${i18n('registrationPassword')}" required>
+				<input type="password" class="form-control" name="password" id="registration-form-password" placeholder="${i18n('registrationPassword')}" required>
 			</div>
 			<div class="mb-3">
 				<label for="registration-form-password-repeat" class="form-label">${i18n('registrationPasswordAgain')}*</label>
-				<input type="password" class="form-control" id="registration-form-password-repeat" placeholder="${i18n('registrationPasswordAgain')}" required>
+				<input type="password" class="form-control" name="passwordAgain" id="registration-form-password-repeat" placeholder="${i18n('registrationPasswordAgain')}" required>
 			</div>
 			<div class="mb-3 d-flex">
 				<span class="ms-0 me-auto">*${i18n('titleRequiredFields')}</span>
