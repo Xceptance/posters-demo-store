@@ -15,10 +15,10 @@
  */
 package conf;
 
-import ninja.utils.NinjaProperties;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import ninja.utils.NinjaProperties;
 
 /**
  * Collection of template paths, regular expressions, default values and so on. Some of these values will be read from
