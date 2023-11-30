@@ -7,13 +7,13 @@
 		<div class="col-lg-6 col-md-12 mt-4">
 			<form id="add-to-cart-form">
 				<div class="mb-3">
-					<h3>${productDetail.name}</h3>
+					<h3 id="product-detail-form-name">${productDetail.name}</h3>
 				</div>
 				<div class="mb-3">
-					<p><span>${currency}${productDetail.getPriceAsString()}</span></p>
+					<p><span id="product-detail-form-price">${currency}${productDetail.getPriceAsString()}</span></p>
 				</div>
 				<div class="mb-3">
-					<h4>${productDetail.descriptionOverview}</h4>
+					<h4 id="product-detail-form-description-overview">${productDetail.descriptionOverview}</h4>
 				</div>
 				<div class="mb-3">
 					<label for="product-detail-form-description" class="form-label product-detail-paragraph-label">${i18n("productDetailProductDescription")}</label>
