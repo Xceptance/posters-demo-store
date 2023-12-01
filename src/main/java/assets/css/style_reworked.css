@@ -106,6 +106,15 @@
     display: block;
   }
 
+  /* Hover Header Categories */
+  .navbar-nav .dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+
+  .navbar-nav .nav-item.dropdown:hover > .nav-link {
+    background-color: #d1d6d6;
+  }
+
   /*  Mini cart
   *   - Start
   */
