@@ -12,7 +12,7 @@
       <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
         <#list topCategory as tC>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-auto-close="true" aria-expanded="false">
             ${tC.name}
           </a>
           <ul class="dropdown-menu">
