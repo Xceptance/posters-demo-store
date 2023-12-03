@@ -5,6 +5,7 @@
 /target/
 /*.sql
 logs/posters.log
-.vscode/settings.json
-.settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.jdt.core.prefs
+.classpath
+.vscode/settings.json
