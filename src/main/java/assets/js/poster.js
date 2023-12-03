@@ -11,7 +11,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
 
 		// update total unit price
-		$('#product' + cartIndex +" .productTotalUnitPrice").text(data.currency + data.totalUnitPrice);
+		$('#product' + cartIndex +" .product-total-unit-price").text(data.currency + data.totalUnitPrice);
 
 		//subtotal
 		$("#orderSubTotalValue").text(data.currency + data.subTotalPrice);
@@ -45,7 +45,7 @@ function updatePrice(selectedField, productId) {
 		size : selectedField.value,
 		productId : productId
 	}, function(data) {
-		$('#prodPrice').text(data.newPrice);
+		$('#product-detail-form-price').text(data.newPrice);
 	});
 }
 

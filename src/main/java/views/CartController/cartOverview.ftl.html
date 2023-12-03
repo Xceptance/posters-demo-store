@@ -6,13 +6,13 @@
 	<h2>Cart</h2>
 	<table class="table">
 		<thead>
-		  	<tr>
+		  	<tr class="coulmn-name">
 				<th scope="col">#</th>
 				<th scope="col">${i18n("cartTableHeaderItem")}</th>
 				<th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
 				<th scope="col">${i18n("cartTableHeaderQuantity")}</th>
 				<th scope="col">${i18n("cartTableHeaderTotalUnitPrice")}</th>
-				<th scope="col"></th>
+				<th scope="col">${i18n("cartRemove")}</th>
 		  	</tr>
 		</thead>
 		<tbody>
@@ -22,22 +22,22 @@
 				<td>
 					<div class="row">
 						<div class="col">
-							<img src="${contextPath}${cartProduct.product.imageURL}" class="img-thumbnail" alt="image of ${cartProduct.product.name}">
+							<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img src="${contextPath}${cartProduct.product.imageURL}" class="img-thumbnail" alt="image of ${cartProduct.product.name}"></a>
 						</div>
 						<div class="col">
-							<h3>${cartProduct.product.name}</h3>
-							<div>${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
-							<div>${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
+							<div class="product-name"><h3>${cartProduct.product.name}</h3></div>
+							<div>${i18n("cartStyle")}: <span class="product-style">${cartProduct.finish}</span></div>
+							<div>${i18n("cartSize")}: <span class="product-size">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
 						</div>
 					</div>
 				</td>
-				<td>${currency}${cartProduct.getPriceAsString()}</td>
+				<td> <div class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</div></td>
 				<td>
 					<input id="productCount${cartProduct_index}" name="productCount${cartProduct_index}"
-						class="form-control text-center productCount" title="${i18n('cartTableHeaderQuantity')}" type="text"
+						class="form-control text-center product-count" title="${i18n('cartTableHeaderQuantity')}" type="text"
 						value=${cartProduct.productCount} size="4" maxlength="4">
 				</td>
-				<td><div class="productTotalUnitPrice">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
+				<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
 				<td>
 					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
 					<button class="btn btnRemoveProduct" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><span class="icon-cross"></span></button>
@@ -57,7 +57,7 @@
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewShippingCosts")}:</div>
-					<div class="col price-summary-value">${currency}${shippingCosts}</div>
+					<div class="col price-summary-value" id="priceShippingValue">${currency}${shippingCosts}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOvervieSubTotalTax")} (${tax}%):</div>
