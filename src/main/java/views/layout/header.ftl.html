@@ -38,28 +38,28 @@
               <#if isLogged == false>
               <li class="header-user-menu-heading mb-2">${i18n('headerWelcomeGuest')}</li>
               <li class="header-user-menu-content mb-2">
-                <a href="${applUrlHttps}/registration" class="btn btn-primary header-user-menu-button" title="${i18n('headerRegistration')}">
+                <a href="${applUrlHttps}/registration" id="go-to-registration" class="btn btn-primary header-user-menu-button" title="${i18n('headerRegistration')}">
                   <span class="icon-user-add-outline"></span>
                   <span>${i18n("headerRegistration")}</span>
                 </a>
               </li>
               <li class="header-user-menu-content">
-                <a href="${applUrlHttps}/login" class="btn btn-primary header-user-menu-button" title="${i18n('headerLogin')}">
+                <a href="${applUrlHttps}/login" id="go-to-login" class="btn btn-primary header-user-menu-button" title="${i18n('headerLogin')}">
                   <span class="icon-log-in"></span>
                   <span>${i18n('headerLogin')}</span>
                 </a>
               </li>
               </#if> 
               <#if isLogged == true>
-              <li class="header-user-menu-heading mb-2">${i18n('headerWelcome')}: <span class="firstName">${customerFirstName}</span></li>
+              <li class="header-user-menu-heading mb-2">${i18n('headerWelcome')}: <span class="first-name">${customerFirstName}</span></li>
               <li class="header-user-menu-content mb-2">
-                <a href="${applUrlHttps}/accountOverview" class="btn btn-primary header-user-menu-button" title="${i18n('accountOverviewTitle')}">
+                <a href="${applUrlHttps}/accountOverview" id="go-to-account-overview" class="btn btn-primary header-user-menu-button" title="${i18n('accountOverviewTitle')}">
                   <span class="icon-info-large logged"></span>
                   <span>${i18n("accountOverviewTitle")}</span>
                 </a>
               </li>
               <li class="header-user-menu-content">
-                <a href="${applUrlHttp}/logout" title="${i18n('headerLogout')}" class="btn btn-primary header-user-menu-button">
+                <a href="${applUrlHttp}/logout" id="go-to-logout" title="${i18n('headerLogout')}" class="btn btn-primary header-user-menu-button">
                   <span class="icon-log-out"></span>
                   <span>${i18n("headerLogout")}</span>
                 </a>

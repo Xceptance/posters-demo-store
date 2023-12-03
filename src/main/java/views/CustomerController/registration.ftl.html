@@ -3,7 +3,7 @@
 
 <div class="container d-flex justify-content-center">
 	<div class="col-lg-8 mt-4">
-		<form action="${contextPath}/registration" class="form-with-background" id="formRegister" method="post">
+		<form action="${contextPath}/registration" class="form-with-background" id="form-register" method="post">
 			<legend class="mt-3">${i18n("titleRegistration")}</legend>
 			<div class="mb-3">
 				<label for="registration-form-last-name" class="form-label">${i18n('registrationLastName')}*</label>
@@ -29,8 +29,8 @@
 				<input type="password" class="form-control" name="passwordAgain" id="registration-form-password-repeat" placeholder="${i18n('registrationPasswordAgain')}" required>
 			</div>
 			<div class="mb-3 d-flex">
-				<span class="ms-0 me-auto">*${i18n('titleRequiredFields')}</span>
-				<button class="btn btn-primary me-0 ms-auto" type="submit">${i18n('registrationCreate')}</button>
+				<span class="ms-0 me-auto" id="req-field">*${i18n('titleRequiredFields')}</span>
+				<button class="btn btn-primary me-0 ms-auto" id="btn-register" type="submit">${i18n('registrationCreate')}</button>
 			</div>
 		</form>
 	</div>
