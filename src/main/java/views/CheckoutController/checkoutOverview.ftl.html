@@ -84,7 +84,7 @@
 		</thead>
 		<tbody>
 		  	<#list cartProducts as cartProduct>
-			<tr>
+			<tr id="product${cartProduct_index}">
 				<th scope="row">${cartProduct?counter}</th>
 				<td>
 					<div class="row">
@@ -92,15 +92,15 @@
 							<img src="${contextPath}${cartProduct.product.imageURL}" class="img-thumbnail" alt="image of ${cartProduct.product.name}">
 						</div>
 						<div class="col">
-							<h3>${cartProduct.product.name}</h3>
-							<div>${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
-							<div>${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
+							<h3 class="pName">${cartProduct.product.name}</h3>
+							<div class="productStyle"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
+							<div class="productSize">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
 						</div>
 					</div>
 				</td>
-				<td>${currency}${cartProduct.getPriceAsString()}</td>
-				<td>${cartProduct.productCount}</td>
-				<td>${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
+				<td class="productUnitPrice">${currency}${cartProduct.getPriceAsString()}</td>
+				<td class="productCount" value="${cartProduct.productCount}">${cartProduct.productCount}</td>
+				<td id="total-unit-price-short">${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
 			</tr>
 			</#list>
 		</tbody>
@@ -115,15 +115,15 @@
 				<div class="fw-bold">${i18n("cartSummary")}</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewSubTotal")}:</div>
-					<div class="col price-summary-value">${currency}${order.getSubTotalCostsAsString()}</div>
+					<div id="SubTotalValue" class="col price-summary-value">${currency}${order.getSubTotalCostsAsString()}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewShippingCosts")}:</div>
-					<div class="col price-summary-value">${currency}${order.getShippingCostsAsString()}</div>
+					<div id="shippingCosts" class="col price-summary-value">${currency}${order.getShippingCostsAsString()}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%):</div>
-					<div class="col price-summary-value">${currency}${order.getTotalTaxCostsAsString()}</div>
+					<div id="SubTotalTaxValue" class="col price-summary-value">${currency}${order.getTotalTaxCostsAsString()}</div>
 				</div>
 			  </div>
 			</li>
@@ -131,7 +131,7 @@
 			  <div class="price-summary ms-auto me-2">
 				<div class="row">
 					<div class="col fw-bold price-summary-position">${i18n("checkoutOverviewTotalCosts")}:</div>
-					<div class="col fw-bold price-summary-value">${currency}${order.getTotalCostsAsString()}</div>
+					<div id="orderTotal" class="col fw-bold price-summary-value">${currency}${order.getTotalCostsAsString()}</div>
 				</div>
 			  </div>
 			</li>
