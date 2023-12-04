@@ -48,6 +48,10 @@
 					<label for="product-detail-form-print-information" class="form-label product-detail-paragraph-label">${i18n("productDetailPrintInformation")}</label>
 					<div id="product-detail-form-print-information" class="">${i18n('productDetailPosterFinish')}</div>
 				</div>
+				<div class="mb-3 product-detail-product-id-container">
+					<label for="product-detail-form-product-id">ID:</label>
+					<div id="product-detail-form-product-id">${productDetail.id}</div>
+				</div>
 				<div class="mb-3 d-flex justify-content-end">
 					<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, $('#add-to-cart-form input[name=finish]:checked').val(), $('#product-detail-form-size-selection').val())" class="btn btn-primary">
 						<i class="icon-shopping-cart"></i> ${i18n("productDetailAddToCart")}
