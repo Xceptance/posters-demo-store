@@ -1130,48 +1130,66 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteAccount(@Param("password") final String password, final Context context)
-    {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
-            // remove customer from session
-            SessionHandling.removeCustomerId(context);
-            // remove cart from session
-            SessionHandling.removeCartId(context);
-            // remove customer's cart
-            final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
-            if (cart != null)
-            {
-                cart.setCustomer(null);
-                cart.update();
-            }
-            // remove customers orders --> deletes also customer --> deletes also addresses and payment information
-            final List<Order> orders = customer.getOrder();
-            for (final Order order : orders)
-            {
-                Ebean.delete(order);
-            }
-            // delete customer, if customer has no order
-            if (orders.isEmpty())
-            {
-                Ebean.delete(customer);
-            }
-            // show success message
-            context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
-            // return home page
-            return Results.redirect(context.getContextPath() + "/");
-        }
-        // incorrect password
-        else
-        {
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            // show page again
-            return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
-        }
-    }
+        public Result deleteAccount(@Param("password") final String password, final Context context) {
+            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            // get customer
+            // correct password
+            if (customer.checkPasswd(password)) {
+                // remove customer from session
+                SessionHandling.removeCustomerId(context);
+                // remove cart from session
+                SessionHandling.removeCartId(context);
+        
+                // remove customer's cart
+                final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
+                if (cart != null) {
+                    // Remove associated cart products before deleting the cart
+                    final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+                    for (final CartProduct cartProduct : cartProducts) {
+                        Ebean.delete(cartProduct);
+                    }
+                    cart.setCustomer(null);
+                    cart.update();
+                }
+        
+                // remove customers orders --> deletes also customer --> deletes also addresses and payment information
+                final List<Order> orders = customer.getOrder();
+                for (final Order order : orders) {
+                    // Remove associated cart products before deleting the order
+                    Ebean.delete(order);
+                }
 
+                // Remove associated shipping addresses before deleting the customer
+                final List<ShippingAddress> shippingAddresses = customer.getShippingAddress();
+                for (final ShippingAddress shippingAddress : shippingAddresses) {
+                    Ebean.delete(shippingAddress);
+                }
+
+                // Remove associated billing addresses before deleting the customer
+                final List<BillingAddress> billingAddresses = customer.getBillingAddress();
+                for (final BillingAddress billingAddress : billingAddresses) {
+                    Ebean.delete(billingAddress);
+                }
+                // delete customer, if customer has no order
+                if (orders.isEmpty()) {
+                    Ebean.delete(customer);
+                }
+        
+                // show success message
+                context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
+                // return home page
+                return Results.redirect(context.getContextPath() + "/");
+            } else {
+                // incorrect password
+                context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
+                // show page again
+                return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
+            }
+        }
+        
+        
+                    
+        
     /**
      * Merges the current cart from the session and the customer's cart.
      * 
