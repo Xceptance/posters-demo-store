@@ -29,20 +29,20 @@
           <button id="header-search-button" class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
         </form>
         <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown-center">
             <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-user2"></span>
             </a>
-            <ul id="user-menu" class="dropdown-menu">
+            <ul id="user-menu" class="dropdown-menu dropdown-menu-end">
               <#include '../components/userMenu.ftl.html'>
             </ul>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown-center">
             <a id="headerCartOverview" class="dropdown-toggle headerCartOverview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-shopping-cart"></span> &nbsp; 
               <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
             </a>
-            <ul id="mini-cart-menu" class="dropdown-menu">
+            <ul id="mini-cart-menu" class="dropdown-menu dropdown-menu-end">
               <li><#include "../components/miniCartMenu.ftl.html"></li>
             </ul>
           </li>
