@@ -5,7 +5,10 @@
 /target/
 /*.sql
 logs/posters.log
-.settings/org.eclipse.jdt.apt.core.prefs
-.settings/org.eclipse.jdt.core.prefs
+.project
+.settings/
 .classpath
-.vscode/settings.json
+.vscode/
+.idea/
+*.iml
+
