@@ -1162,14 +1162,29 @@ public class CustomerController
                 // Remove associated shipping addresses before deleting the customer
                 final List<ShippingAddress> shippingAddresses = customer.getShippingAddress();
                 for (final ShippingAddress shippingAddress : shippingAddresses) {
+                    // Delete referencing records in Ordering table
+                    final List<Order> relatedOrderings = Ebean.find(Order.class).where()
+                            .eq("shippingAddress", shippingAddress).findList();
+                    for (final Order relatedOrdering : relatedOrderings) {
+                        Ebean.delete(relatedOrdering);
+                    }
+                    // Then delete the shipping address
                     Ebean.delete(shippingAddress);
                 }
 
                 // Remove associated billing addresses before deleting the customer
                 final List<BillingAddress> billingAddresses = customer.getBillingAddress();
                 for (final BillingAddress billingAddress : billingAddresses) {
+                    // Delete referencing records in Ordering table
+                    final List<Order> relatedOrderings = Ebean.find(Order.class).where()
+                            .eq("billingAddress", billingAddress).findList();
+                    for (final Order relatedOrdering : relatedOrderings) {
+                        Ebean.delete(relatedOrdering);
+                    }
+                    // Then delete the billing address
                     Ebean.delete(billingAddress);
                 }
+
                 // delete customer, if customer has no order
                 if (orders.isEmpty()) {
                     Ebean.delete(customer);
