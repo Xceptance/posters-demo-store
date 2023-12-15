@@ -11,7 +11,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
 
 		// update total unit price
-		$('#product' + cartIndex +" .productTotalUnitPrice").text(data.currency + data.totalUnitPrice);
+		$('#product' + cartIndex +" .product-total-unit-price").text(data.currency + data.totalUnitPrice);
 
 		//subtotal
 		$("#orderSubTotalValue").text(data.currency + data.subTotalPrice);
@@ -45,36 +45,38 @@ function updatePrice(selectedField, productId) {
 		size : selectedField.value,
 		productId : productId
 	}, function(data) {
-		$('#prodPrice').text(data.newPrice);
+		$('#product-detail-form-price').text(data.newPrice);
 	});
 }
 
 function updateProductOverview(data) {
-	var i = 0;
-	// show all products
-	while ($('#product' + i).length) {
-		$('#product' + i).show();
-		i++;
-	}
-	// set new content of products
-	for (i = 0; i < data.products.length; i++) {
-		$('#product' + i + " .pName").text(data.products[i].name);
-		$('#product' + i + " a").attr(
-				"href",
-				CONTEXT_PATH + "/productDetail/" + encodeURIComponent(data.products[i].name) + "?productId="
-						+ data.products[i].id);
-		$('#product' + i + " a img").attr("src", CONTEXT_PATH + data.products[i].imageURL).attr("title", data.products[i].name);
-		$('#product' + i + " .pDescriptionOverview").text(
-				data.products[i].descriptionOverview);
-		$('#product' + i + " .pPrice").text(data.products[i].priceAsString);
-	}
-	// hide not updated products
-	while ($('#product' + i).length) {
-		$('#product' + i).hide();
-		i++;
-	}
-	// set current page attribute
-	$('#productOverview').attr("currentPage",data.currentPage);
+    // Clear the existing product content
+    $('#productOverview .product-display-case-product-overview').empty();
+	var contextPath = CONTEXT_PATH;
+    // Iterate over the products in the data and append the updated content
+    $.each(data.products, function (index, product) {
+        var productHTML = `
+            <div class="card product-tile">
+                <img src="${contextPath}${product.imageURL}" class="card-img-top" alt="picture of ${product.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text product-tile-text">${product.descriptionOverview}</p>
+                    <p class="card-text product-tile-price">$${product.minimumPrice}</p>
+                    <a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy here</a>
+                </div>
+            </div>
+        `;
+
+        $('#productOverview .product-display-case-product-overview').append(productHTML);
+    });
+
+    // Hide any remaining product tiles if needed
+    for (var i = data.products.length; i < $('#productOverview .product-display-case-product-overview .card').length; i++) {
+        $('#productOverview .product-display-case-product-overview .card:eq(' + i + ')').hide();
+    }
+
+    // Update the current page attribute
+    $('#productOverview').attr('currentPage', data.currentPage);
 }
 
 //Setup on DOM ready

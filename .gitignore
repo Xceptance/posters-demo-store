@@ -4,3 +4,11 @@
 /log/
 /target/
 /*.sql
+logs/posters.log
+.project
+.settings/
+.classpath
+.vscode/
+.idea/
+*.iml
+

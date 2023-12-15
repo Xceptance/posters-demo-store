@@ -1,0 +1,32 @@
+<#include "../layout/upper.ftl.html">
+
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Add User: </h6>
+            <form action="${contextPath}/posters/backoffice/user/create" method="post">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="firstName" name="firstName">
+                    <label for="firstName">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="lastName" name="lastName">
+                    <label for="lastName">Last name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="eMail" name="eMail">
+                    <label for="eMail">Email address</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="password" name="password">
+                    <label for="password">Password</label>
+                </div>
+                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Start -->
+
+
+    <!-- Sign Up End -->
+    <#include "../layout/footer.ftl.html">

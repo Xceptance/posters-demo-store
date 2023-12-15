@@ -6,7 +6,7 @@
 
 	<groupId>com.xceptance</groupId>
 	<artifactId>posters-demo-store</artifactId>
-	<version>2.0.0</version>
+	<version>2.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>Posters Demo Store</name>
@@ -82,7 +82,7 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-							<packages>models</packages>
+                            <packages>models, models_backoffice</packages>
 							<transformArgs>debug=1</transformArgs>
 							<!-- workaround against bug in ebean:
 							https://groups.google.com/forum/?fromgroups#!topic/ebean/w2Q6PSeXKAk%5B1-25%5D -->

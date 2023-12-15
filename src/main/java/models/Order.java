@@ -32,7 +32,7 @@ import javax.persistence.Version;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides an order in the poster store. The order contains a list of {@link OrderProduct}s, a
+ * This {@link Entity} provides an order in the poster demo store. The order contains a list of {@link OrderProduct}s, a
  * shipping and a billing address and some information about the shipping costs, the tax and the total price of the
  * order.
  * 

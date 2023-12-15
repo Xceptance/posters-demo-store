@@ -31,7 +31,7 @@ import javax.persistence.Table;
 import com.avaje.ebean.Ebean;
 
 /**
- * This {@link Entity} provides a product of the poster store. Each product has a name, a short and a long description,
+ * This {@link Entity} provides a product of the poster demo store. Each product has a name, a short and a long description,
  * different sizes the product is available in and the path to an image of the product.
  * 
  * @author sebastianloob

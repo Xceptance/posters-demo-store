@@ -2,33 +2,33 @@
 	<ul class="breadcrumbs text-left">
 
 		<!-- add shipping address -->
-		<li  class ="liBread" id="btnToCard"><a class="bread" href="${applUrlHttp}/cart">${i18n("titleCard")}/ </a>
+		<li  class ="liBread" id="btnToCard"><a class="bread" href="${applUrlHttp}/cart">${i18n("checkoutProgressIndicatorCart")}/ </a>
 			<span class="divider bread"></span></li>
 
 		<!-- add shipping address -->
-		<li  class ="liBread" id="btnShippAddr"><a class="bread" href="enterShippingAddress">${i18n("titleShippingAddress")} / </a>
+		<li  class ="liBread" id="btnShippAddr"><a class="bread" href="enterShippingAddress">${i18n("checkoutProgressIndicatorShipping")} / </a>
 			<span class="divider "></span></li>
 
 		<!-- add billing address -->
 		<#if billingAddressActive??>
 		<li  class ="liBread active" id="btnBillAddr"><a class="bread"
-			href="${contextPath}/enterBillingAddress">${i18n("titleBillingAddress")} / </a>
+			href="${contextPath}/enterBillingAddress">${i18n("checkoutProgressIndicatorBilling")} / </a>
 			<#else>
-		<li  class ="liBread"id="btnBillAddr">${i18n("titleBillingAddress")} /  </#if> <span
+		<li  class ="liBread"id="btnBillAddr">${i18n("checkoutProgressIndicatorBilling")} /  </#if> <span
 			class="divider"></span></li>
 
 		<!-- add credit card -->
 		<#if creditCardActive??>
 		<li  class ="liBread active" id="btnCreditCard"><a class="bread"
-			href="${contextPath}/enterPaymentMethod">${i18n("titlePayment")} / </a>
+			href="${contextPath}/enterPaymentMethod">${i18n("checkoutProgressIndicatorPayment")} / </a>
 			<#else>
-		<li  class ="liBread"id="btnCreditCard">${i18n("titlePayment")} /  </#if> <span
+		<li  class ="liBread"id="btnCreditCard">${i18n("checkoutProgressIndicatorPayment")} /  </#if> <span
 			class="divider"></span></li>
 
 		<!-- place order -->
 		<#if placeOrderActive??>
 		<li  class ="liBread active" id="btnPlaceOrder"><a class="bread"
-			href="${contextPath}/checkoutOverview">${i18n("titleCheckoutOverview")} / </a>
+			href="${contextPath}/checkoutOverview">${i18n("checkoutProgressIndicatorSummary")} / </a>
 			<#else>
 		<li  class ="liBread"id="btnPlaceOrder">${i18n("buttonPlaceOrder")} /  </#if></li>
 

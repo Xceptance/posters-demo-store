@@ -15,10 +15,10 @@
  */
 package conf;
 
-import ninja.utils.NinjaProperties;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import ninja.utils.NinjaProperties;
 
 /**
  * Collection of template paths, regular expressions, default values and so on. Some of these values will be read from
@@ -156,6 +156,11 @@ public class PosterConstants
     public final String APPLICATION_URL_HTTPS;
 
     /**
+     * The version of the application
+     */
+    public final String APPLICATION_VERSION;
+
+    /**
      * The currency, which is used in the shop.
      */
     public final String CURRENCY;
@@ -206,5 +211,7 @@ public class PosterConstants
         PRODUCTS_PER_PAGE = ninjaProp.getInteger("application.pageSize");
 
         UNIT_OF_LENGTH = ninjaProp.getOrDie("application.unitLength");
+
+        APPLICATION_VERSION = ninjaProp.getOrDie("application.version");
     }
 }

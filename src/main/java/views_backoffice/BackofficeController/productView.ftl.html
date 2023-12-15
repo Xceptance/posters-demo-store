@@ -1,0 +1,46 @@
+<#include "../layout/upper.ftl.html">
+    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h1 class="mb-4">Product View</h1>
+            <img src="${product.imageURL}" alt="image of the current viewed product">
+            <ul class="viewing-list">
+                <li>
+                    <h4>Name:</h4> <span>${product.name}</span>
+                </li>
+                <li>
+                    <h4>Detailed Description:</h4> <p>${product.descriptionDetail}</p>
+                </li>
+                <li>
+                    <h4>Short Description:</h4> <span>${product.descriptionOverview}</span>
+                </li>
+                <li>
+                    <h4>Image URL:</h4> <span>${product.imageURL}</span>
+                </li>
+                <li>
+                    <h4>Sub Categories:</h4> <span>${product.subCategory.name}</span>
+                </li>
+                <li>
+                    <h3>Top Categories:</h3> <span>${product.topCategory.name}</span>
+                </li>
+                <li>
+
+                </li>
+                <li>
+                    <h4>Available Sizes:</h4>
+                    <ul>
+                        <#list product.availableSizes as availableSize>
+                            <li>
+                                <span>${availableSize.size.width} x ${availableSize.size.height}</span>
+                            </li>
+                        </#list>
+                    </ul>
+                </li>
+                <li>
+                    <h5>Minimum Price:</h5> <span>$${product.getPriceAsString()}</span>
+                </li>
+            </ul>
+            <a class="btn btn-sm btn-primary" href="/posters/backoffice/product">Back</a>
+            <a class="btn btn-sm btn-warning" href="/posters/backoffice/product/${product.id}/edit">Edit</a>
+        </div>
+    </div>
+    <#include "../layout/footer.ftl.html">
