@@ -33,7 +33,7 @@
                                         <div class="one-forth">
                                             <a
                                                 href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}">
-                                                <div class="product-img" style="background-image: url(${contextPath}${cartProduct.product.imageURL});">
+                                                <div class="product-img" style="background-image: url(${contextPath}${orderProduct.product.imageURL});">
                                             </a>
                                             <div class="display-tc">
                                                 <h3>${orderProduct.product.name}</h3>
@@ -75,7 +75,7 @@
                                             <div class="one-forth">
                                                 <a
                                                     href="${contextPath}/productDetail/${orderProduct.product.name?url('UTF-8')}?productId=${orderProduct.product.id}">
-                                                    <div class="product-img" style="background-image: url(${contextPath}${cartProduct.product.imageURL});">
+                                                    <div class="product-img" style="background-image: url(${contextPath}${orderProduct.product.imageURL});">
                                                 </a>
                                                 <div class="display-tc">
                                                     <h3>${orderProduct.product.name}</h3>
