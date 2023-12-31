@@ -307,7 +307,7 @@
 
 }());
 
-const mainCarouselElement = document.getElementById('carousel-product-display')
+const mainCarouselElement = document.querySelector('#carousel-product-display')
 
 const mainCarousel = new bootstrap.Carousel(mainCarouselElement, {
   wrap: true,
