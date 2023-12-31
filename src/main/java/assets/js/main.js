@@ -260,13 +260,13 @@
 		}
 	};
 
-	var datePicker = function() {
-		// jQuery('#time').timepicker();
-		jQuery('.date').datepicker({
-		  'format': 'm/d/yyyy',
-		  'autoclose': true
-		});
-	};
+	// var datePicker = function() {
+	// 	// jQuery('#time').timepicker();
+	// 	jQuery('.date').datepicker({
+	// 	  'format': 'm/d/yyyy',
+	// 	  'autoclose': true
+	// 	});
+	// };
 
    // checks if the type of device is a mobile device
    var deviceCheck = function() {
@@ -302,13 +302,12 @@
 		goToTop();
 		loaderPage();
 		parallax();
-		datePicker();
 
 	});
 
 }());
 
-const mainCarouselElement = document.querySelector('#carousel-product-display')
+const mainCarouselElement = document.getElementById('carousel-product-display')
 
 const mainCarousel = new bootstrap.Carousel(mainCarouselElement, {
   wrap: true,
