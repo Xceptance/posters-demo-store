@@ -7,10 +7,10 @@
 		<button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="1" aria-label="Slide 2"></button>
 	</div>	
 	<div class="carousel-inner">
-	  	<div class="carousel-item active">
+	  	<div class="carousel-item active" data-bs-interval="5000">
 			<a class="carousel-content-text text-center d-block w-100" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a>
 	  	</div>
-	  	<div class="carousel-item">
+	  	<div class="carousel-item" data-bs-interval="5000">
 			<a class="carousel-content-text text-center d-block w-100" href="#">Our biggest sale yet 50% off all Posters</a>
 	  	</div>
 	</div>
@@ -29,12 +29,12 @@
 		<button id="carousel-btn" type="button" data-bs-target="#carousel-product-display" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 		<button id="carousel-btn" type="button" data-bs-target="#carousel-product-display" data-bs-slide-to="1" aria-label="Slide 2"></button>
 		<button id="carousel-btn" type="button" data-bs-target="#carousel-product-display" data-bs-slide-to="2" aria-label="Slide 3"></button>
-		<button id="carousel-btn" type="button" data-bs-target="#carousel-product-display" data-bs-slide-to="4" aria-label="Slide 4"></button>
+		<button id="carousel-btn" type="button" data-bs-target="#carousel-product-display" data-bs-slide-to="3" aria-label="Slide 4"></button>
 	</div>	
 	<div class="carousel-inner">
 		<#list carousel as caro>
 		<#if (caro_index == 0)>
-		<div class="carousel-content-product carousel-item active" style="background-image: url('${contextPath}${caro.imageURL}');">
+		<div class="carousel-content-product carousel-item active" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.imageURL}');">
 			<div class="row">
 				<h1>${caro.name}</h1>
 			</div>
@@ -45,7 +45,7 @@
 			</div>
 	  	</div>
 		<#else>
-	  	<div class="carousel-content-product carousel-item" style="background-image: url('${contextPath}${caro.imageURL}');">
+	  	<div class="carousel-content-product carousel-item" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.imageURL}');">
 			<div class="row">
 				<h1>${caro.name}</h1>
 			</div>
