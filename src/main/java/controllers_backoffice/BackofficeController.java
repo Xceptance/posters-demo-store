@@ -79,6 +79,25 @@ public class BackofficeController
         result.render("users", users);
         return result;
     }
+    
+    //  Homepage BackOffice ADmin LTE
+
+    @FilterWith(SessionUserExistFilter.class)
+    public Result homepageN(final Context context)
+    {
+        Result result = Results.html();
+
+        // Find current user
+        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        // Add current user into the back office
+        result.render("currentUser", currentUser);
+
+        // Find all of the admin users
+        List<User> users = Ebean.find(User.class).findList();
+        // Add all users into the back office
+        result.render("users", users);
+        return result;
+    }
 
     /**
      * Returns the view of a single admin user.

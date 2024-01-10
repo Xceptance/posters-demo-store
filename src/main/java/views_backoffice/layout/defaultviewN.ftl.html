@@ -1,0 +1,40 @@
+<#macro myLayout title="Posters Backoffice">
+
+    <!DOCTYPE html>
+  
+    <html lang="en">
+        <#include "../layout/headerN.ftl.html">
+
+        <body class="control-sidebar-slide-open layout-footer-fixed layout-navbar-fixed layout-fixed sidebar-mini">
+            
+            <div class="wrapper">
+
+                <!-- Navbar Start -->
+                <#include "../layout/navbarN.ftl.html">
+                
+                <#include "../layout/sidebarN.ftl.html">
+                
+                <!-- Nested View Start-->
+                <#nested/>
+                <!-- /.Nested View End-->
+
+                <#include "../layout/footerN.ftl.html">
+
+            </div>
+    
+            
+            <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/bootstrap.bundle.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/adminlte.min.js"></script>
+            <!-- BootStrap Tables -->
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/backoffice_adminlte.js"></script>
+
+        </body>
+
+    </html>
+</#macro>
