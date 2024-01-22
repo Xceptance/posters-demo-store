@@ -500,10 +500,10 @@ public class BackofficeController
 
         Query<Product> query = Ebean.find(Product.class);
 
-        // Find total products and page for the pagination
-        int totalProductsCount = query.findRowCount();
-        int numberOfPage = totalProductsCount / pageSize;
-        result.render("numberOfPage", numberOfPage);
+        // // Find total products and page for the pagination
+        // int totalProductsCount = query.findRowCount();
+        // int numberOfPage = totalProductsCount / pageSize;
+        // result.render("numberOfPage", numberOfPage);
 
         // Find all of the products
         List<Product> products = Ebean.find(Product.class).findList();
@@ -519,34 +519,34 @@ public class BackofficeController
      * @param context
      * @return
      */
-    @FilterWith(SessionUserExistFilter.class)
-    public Result productPage(final Context context, @PathParam("pageNumber") int pageNumber)
-    {
-        Result result = Results.html();
-        int pageSize = 10;
+    // @FilterWith(SessionUserExistFilter.class)
+    // public Result productPage(final Context context, @PathParam("pageNumber") int pageNumber)
+    // {
+    //     Result result = Results.html();
+    //     int pageSize = 10;
 
-        // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
-        // Add current user into the back office
-        result.render("currentUser", currentUser);
+    //     // Find current user
+    //     User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+    //     // Add current user into the back office
+    //     result.render("currentUser", currentUser);
 
-        Query<Product> query = Ebean.find(Product.class);
+    //     Query<Product> query = Ebean.find(Product.class);
 
-        // Find total products and page for the pagination
-        int totalProductsCount = query.findRowCount();
-        int numberOfPage = totalProductsCount / pageSize;
-        result.render("numberOfPage", numberOfPage);
-        // Find paged product
-        PagingList<Product> pagingList = query.findPagingList(pageSize);
-        List<Product> products = pagingList.getPage(pageNumber - 1).getList();
-        // Add products into the back office
-        result.render("products", products);
+    //     // Find total products and page for the pagination
+    //     int totalProductsCount = query.findRowCount();
+    //     int numberOfPage = totalProductsCount / pageSize;
+    //     result.render("numberOfPage", numberOfPage);
+    //     // Find paged product
+    //     PagingList<Product> pagingList = query.findPagingList(pageSize);
+    //     List<Product> products = pagingList.getPage(pageNumber - 1).getList();
+    //     // Add products into the back office
+    //     result.render("products", products);
 
-        // Add Page Number as logic value to render in freemarker
-        result.render("pageNumber", pageNumber);
+    //     // Add Page Number as logic value to render in freemarker
+    //     result.render("pageNumber", pageNumber);
 
-        return result.template("views_backoffice/BackofficeController/productList.ftl.html");
-    }
+    //     return result.template("views_backoffice/BackofficeController/productList.ftl.html");
+    // }
     
     /**
      * Returns the view of a customer.

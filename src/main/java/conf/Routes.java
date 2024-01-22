@@ -227,7 +227,7 @@ public class Routes implements ApplicationRoutes
         // Products
         // ############################################################
         router.GET().route("/posters/backoffice/product").with(BackofficeController::productList);
-        router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
+        // router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
         router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController::productView);
         router.GET().route("/posters/backoffice/product/{productId}/edit").with(BackofficeController::productEdit);
         router.POST().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productEditComplete");
