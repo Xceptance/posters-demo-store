@@ -194,7 +194,7 @@ public class BackofficeController
             // save user
             user.save();
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user");
         }
     }
 
