@@ -52,15 +52,17 @@
                                                     <td>${user.email}</td>
                                                     <td>Active</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-primary" href="/posters/backoffice/user/${user.id}/edit">Edit</a>
-                                                        <a class="btn btn-sm btn-warning" href="/posters/backoffice/user/${user.id}">View</a>
-                                                        <form action="/posters/backoffice/user/${user.id}/delete" method="post">
-                                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                                        </form>
+                                                        <div class="btn-group" role="group">
+                                                            <a class="btn btn-sm btn-primary" href="/posters/backoffice/user/${user.id}/edit">Edit</a>
+                                                            <a class="btn btn-sm btn-warning" href="/posters/backoffice/user/${user.id}">View</a>
+                                                            <form action="/posters/backoffice/user/${user.id}/delete" method="post" style="display:inline;">
+                                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </#list>
-                                        </tbody>
+                                        </tbody>                                        
                                     </table>
                                 </div>
                             </div>
