@@ -1,0 +1,44 @@
+<#macro myLayout title="Posters Backoffice">
+
+    <!DOCTYPE html>
+  
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Posters | Back office</title>
+          
+            <!-- Google Font: Source Sans Pro -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="${contextPath}/assets/js/backofficeNew/plugins/fontawesome-free/css/all.min.css">
+            <!-- icheck bootstrap -->
+            <link rel="stylesheet" href="${contextPath}/assets/js/backofficeNew/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+            <!-- Theme style -->
+            <link rel="stylesheet" href="${contextPath}/assets/css/backofficeNew/adminLTE/adminlte.min.css">
+          </head>
+
+        <body class="hold-transition login-page">
+            
+
+
+                
+                <!-- Nested View Start-->
+                <#nested/>
+                <!-- /.Nested View End-->
+
+    
+            
+            <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/adminlte.min.js"></script>
+            <!-- Backoffice JS-->
+            <!-- <script src="${contextPath}/assets/js/backofficeNew/adminLTE/backoffice_adminlte.js"></script> -->
+
+        </body>
+    </html>
+</#macro>

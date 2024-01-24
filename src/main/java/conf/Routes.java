@@ -164,6 +164,8 @@ public class Routes implements ApplicationRoutes
         // homepage
         // ############################################################
         router.GET().route("/posters/backoffice").with(BackofficeController::homepage);
+        // homepage Admin LTE Backoffice
+        router.GET().route("/posters/backoffice/new").with(BackofficeController::homepageN);
 
         // ############################################################
         // user registration
@@ -225,7 +227,7 @@ public class Routes implements ApplicationRoutes
         // Products
         // ############################################################
         router.GET().route("/posters/backoffice/product").with(BackofficeController::productList);
-        router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
+        // router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
         router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController::productView);
         router.GET().route("/posters/backoffice/product/{productId}/edit").with(BackofficeController::productEdit);
         router.POST().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productEditComplete");

@@ -1,76 +1,100 @@
-<#include "../layout/upper.ftl.html">
+<#import "../layout/defaultviewN.ftl.html" as layout>
+<@layout.myLayout "Backoffice User">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">${i18n("updateBillingTitle")}</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">${i18n("updateBillingTitle")}</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
 
-<!-- Centered content or container -->
-<div class="row justify-content-center">
-    <!-- Adjust the column width as needed -->
-    <div class="col-md-6"> 
-        <!-- Customer Billing Information Section -->
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">${i18n("updateBillingTitle")}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/billing-edit-complete" method="post">
 
-            <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
+                                    <input name="addressIdBill" id="addressId" type="hidden" value=${address.id}>
 
-                <div class="mb-4 rounded p-4 bg-light">
-
-                    <h6>${i18n("updateBillingTitle")}</h6>
-
-                    <form action="${contextPath}/posters/backoffice/customer/${customer.id}/billing-edit-complete" method="post">
-
-                    <input name="addressIdBill" id="addressId" type="hidden" value=${address.id}>
-
-                    <div class="mb-3">
-                        <label for="fullNameBill">${i18n("addressFullName")}*</label>
-                        <input id="fullNameBill" class="form-control" name="fullNameBill" title="${i18n('errorWrongName')}"
-                            placeholder="${i18n('addressFullNamePlaceholder')}"
-                            data-error="${i18n('errorWrongName')}" pattern="[ÄäÖöÜüßA-Za-z ]+"
-                            type="text" value="${(address.name)!}">
+                                    <div class="mb-3">
+                                        <label for="fullNameBill">${i18n("addressFullName")}*</label>
+                                        <input id="fullNameBill" class="form-control" name="fullNameBill" title="${i18n('errorWrongName')}"
+                                            placeholder="${i18n('addressFullNamePlaceholder')}"
+                                            data-error="${i18n('errorWrongName')}" pattern="[ÄäÖöÜüßA-Za-z ]+"
+                                            type="text" value="${(address.name)!}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="companyBill">${i18n("addressCompany")}</label>
+                                        <input id="companyBill" class="form-control" name="companyBill" title="${i18n('addressCompany')}"
+                                            placeholder="${i18n('addressCompanyPlaceholder')}" type="text"
+                                            value="${(address.company)!}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="addressLineBill">${i18n("addressLine")}*</label>
+                                        <input id="addressLineBill" class="form-control" name="addressLineBill"
+                                            title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}"
+                                            type="text" value="${(address.addressLine)!}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cityBill">${i18n("addressCity")}*</label>
+                                        <input id="cityBill" class="form-control" name="cityBill" title="${i18n('errorWrongCity')}"
+                                            type="text" pattern="[ÄäÖöÜüßA-Za-z ]+"
+                                            data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="stateBill">${i18n("addressState")}*</label>
+                                        <input id="stateBill" class="form-control" name="stateBill" title="${i18n('errorWrongState')}"
+                                            type="text" pattern="[ÄäÖöÜüßA-Za-z ]+"
+                                            data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="zipBill">${i18n('addressZip')}*</label>
+                                        <input id="zipBill" class="form-control" name="zipBill" title="${i18n('errorWrongZip')}" type="text"
+                                            pattern="[0-9]+" data-error="${i18n('errorWrongZip')}"
+                                            value="${(address.zip)!}" placeholder="${i18n('addressZipPlaceholder')}"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="countryBill">${i18n("addressCountry")}*</label>
+                                        <select id="countryBill" class="form-control" name="countryBill" title="${i18n('addressCountry')}">
+                                            <option>${i18n('countryUS')}</option>
+                                            <option>${i18n('countryGermany')}</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-sm btn-primary">${i18n("confirm")}</button>
+                                    <button type="button" class="btn btn btn-sm btn-secondary" onclick="javascript:history.back()"> ${i18n("back")} </button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="companyBill">${i18n("addressCompany")}</label>
-                        <input id="companyBill" class="form-control" name="companyBill" title="${i18n('addressCompany')}"
-                            placeholder="${i18n('addressCompanyPlaceholder')}" type="text"
-                            value="${(address.company)!}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="addressLineBill">${i18n("addressLine")}*</label>
-                        <input id="addressLineBill" class="form-control" name="addressLineBill"
-                            title="${i18n('addressLine')}" placeholder="${i18n('addressLinePlaceholder')}"
-                            type="text" value="${(address.addressLine)!}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cityBill">${i18n("addressCity")}*</label>
-                        <input id="cityBill" class="form-control" name="cityBill" title="${i18n('errorWrongCity')}"
-                            type="text" pattern="[ÄäÖöÜüßA-Za-z ]+"
-                            data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="stateBill">${i18n("addressState")}*</label>
-                        <input id="stateBill" class="form-control" name="stateBill" title="${i18n('errorWrongState')}"
-                            type="text" pattern="[ÄäÖöÜüßA-Za-z ]+"
-                            data-error="${i18n('errorWrongState')}" value="${(address.state)!}"
-                            required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="zipBill">${i18n('addressZip')}*</label>
-                        <input id="zipBill" class="form-control" name="zipBill" title="${i18n('errorWrongZip')}" type="text"
-                            pattern="[0-9]+" data-error="${i18n('errorWrongZip')}"
-                            value="${(address.zip)!}" placeholder="${i18n('addressZipPlaceholder')}"
-                            required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="countryBill">${i18n("addressCountry")}*</label>
-                        <select id="countryBill" class="form-control" name="countryBill" title="${i18n('addressCountry')}">
-                            <option>${i18n('countryUS')}</option>
-                            <option>${i18n('countryGermany')}</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-sm btn-primary">Confirm</button>
-                    <button type="button" class="btn btn btn-sm btn-secondary" onclick="javascript:history.back()"> Back </button>
                 </div>
             </div>
-            
-
-   
-        </form>
+        </div>
+        <!-- /.content -->
     </div>
-</div>
-
-<#include "../layout/footer.ftl.html">
+    <!-- /.content-wrapper -->
+</@layout.myLayout>

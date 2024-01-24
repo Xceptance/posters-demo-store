@@ -1,0 +1,53 @@
+<#macro myLayout title="Posters Backoffice">
+
+    <!DOCTYPE html>
+  
+    <html lang="en">
+        <#include "../layout/headerN.ftl.html">
+
+        <body class="control-sidebar-slide-open layout-footer-fixed layout-navbar-fixed layout-fixed sidebar-mini">
+            
+            <div class="wrapper">
+
+                <!-- Navbar Start -->
+                <#include "../layout/navbarN.ftl.html">
+                
+                <#include "../layout/sidebarN.ftl.html">
+                
+                <!-- Nested View Start-->
+                <#nested/>
+                <!-- /.Nested View End-->
+
+                <#include "../layout/footerN.ftl.html">
+
+            </div>
+    
+            
+            <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/adminlte.min.js"></script>
+            <!-- Backoffice JS-->
+            <script src="${contextPath}/assets/js/backofficeNew/adminLTE/backoffice_adminlte.js"></script>
+
+            <!-- DataTables  & Plugins -->
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/jszip/jszip.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/pdfmake/pdfmake.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/pdfmake/vfs_fonts.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+            <!-- Bootstrap Switch -->
+            <script src="{contextPath}/assets/js/backofficeNew/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+        </body>
+    </html>
+</#macro>

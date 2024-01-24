@@ -1,27 +1,67 @@
-<#include "../layout/upper.ftl.html">
-    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
-        <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Edit Customer ${customer.firstName} ${customer.name}: </h6>
-            <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-complete" method="post">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                        value="${customer.email}">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="name" name="firstName" value="${customer.firstName}">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="name" value="${customer.name}">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <button type="submit" class="btn btn-primary">Confirm</button>
-            </form>
+<#import "../layout/defaultviewN.ftl.html" as layout>
+<@layout.myLayout "Backoffice Customer">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Edit Customer ${customer.firstName} ${customer.name}</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Customers</a></li>
+                            <li class="breadcrumb-item active">Edit Customer</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit Customer ${customer.firstName} ${customer.name}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-complete" method="post">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="${customer.email}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" value="${customer.firstName}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" name="name" value="${customer.name}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->                    
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+
     </div>
-    <#include "../layout/footer.ftl.html">
+    <!-- /.content-wrapper -->
+</@layout.myLayout>
