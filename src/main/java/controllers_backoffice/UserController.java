@@ -97,14 +97,18 @@ public class UserController
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+                context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
+
+                //return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
 
             }
             // wrong email
             else
             {
                 // error message
-                return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+                context.getFlashScope().error(msg.get("errorEmailExist", language).get());
+
+                //return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
 
             }
         }
@@ -113,7 +117,8 @@ public class UserController
         // show entered email address
         data.put("email", email);
         // show page to log-in again
-        return Results.html().render(data).template(xcpConf.TEMPLATE_LOGIN_FORM);
+        return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+        //return Results.html().render(data).template(xcpConf.TEMPLATE_LOGIN_FORM_BO);
     }
 
     /**

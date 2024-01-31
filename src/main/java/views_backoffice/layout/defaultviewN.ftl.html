@@ -47,7 +47,43 @@
             <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.print.min.js"></script>
             <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
             <!-- Bootstrap Switch -->
-            <script src="{contextPath}/assets/js/backofficeNew/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+            <!-- <script src="{contextPath}/assets/js/backofficeNew/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script> -->
+             <!-- SweetAlert2 -->
+             <script src="${contextPath}/assets/js/backofficeNew/plugins/sweetalert2/sweetalert2.min.js"></script>
+            
+             <#if flash.error??>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: '${flash.error}'
+            });
+        });
+    </script>
+</#if>
+
+<#if flash.success??>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '${flash.success}'
+            });
+        });
+    </script>
+</#if>
         </body>
     </html>
 </#macro>
