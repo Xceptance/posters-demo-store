@@ -1,6 +1,6 @@
 package util.xml;
 
-import models_backoffice.User;
+import models_backoffice.Backofficeuser;
 
 
 import org.xml.sax.Attributes;
@@ -14,49 +14,38 @@ import org.xml.sax.helpers.DefaultHandler;
 public class UserHandler extends DefaultHandler
 {
 
-    private User user;
-
-
+    private Backofficeuser user;
     private String currentValue;
 
     @Override
-    public void startElement(final String namespaceURI, final String localName, final String qName, final Attributes atts)
-    {
-        if (localName.equals("user"))
-        {
-            user = new User();
+    public void startElement(final String namespaceURI, final String localName, final String qName, final Attributes atts) {
+        if (localName.equals("backofficeuser")) {
+            user = new Backofficeuser();
             user.save();
         }
     }
 
     @Override
-    public void endElement(final String uri, final String localName, final String qName)
-    {
-        if (localName.equals("user"))
-        {
+    public void endElement(final String uri, final String localName, final String qName) {
+        if (localName.equals("backofficeuser")) {
             user.update();
         }
-        if (localName.equals("email"))
-        {
+        if (localName.equals("email")) {
             user.setEmail(currentValue);
         }
-        if (localName.equals("password"))
-        {
+        if (localName.equals("password")) {
             user.hashPasswd(currentValue);
         }
-        if (localName.equals("name"))
-        {
+        if (localName.equals("name")) {
             user.setName(currentValue);
         }
-        if (localName.equals("firstName"))
-        {
+        if (localName.equals("firstName")) {
             user.setFirstName(currentValue);
         }
     }
 
     @Override
-    public void characters(final char[] ch, final int start, final int length)
-    {
+    public void characters(final char[] ch, final int start, final int length) {
         currentValue = new String(ch, start, length);
     }
 }

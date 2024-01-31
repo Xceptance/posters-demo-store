@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.UUID;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,14 +11,12 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Query;
-import com.avaje.ebean.PagingList;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
 import controllers.WebShopController;
 import filters.SessionUserExistFilter;
-import models_backoffice.User;
+import models_backoffice.Backofficeuser;
 import models_backoffice.Statistic;
 import models.Order;
 import models.BillingAddress;
@@ -69,12 +66,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
         // Find all of the admin users
-        List<User> users = Ebean.find(User.class).findList();
+        List<Backofficeuser> users = Ebean.find(Backofficeuser.class).findList();
         // Add all users into the back office
         result.render("users", users);
         return result;
@@ -88,12 +85,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
         // Find all of the admin users
-        List<User> users = Ebean.find(User.class).findList();
+        List<Backofficeuser> users = Ebean.find(Backofficeuser.class).findList();
         // Add all users into the back office
         result.render("users", users);
         return result;
@@ -112,12 +109,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find user with the id from the params
-        User user = Ebean.find(User.class, userId);
+        Backofficeuser user = Ebean.find(Backofficeuser.class, userId);
         // Render user into template
         result.render("user", user);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -137,12 +134,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find user with the id from the params
-        User user = Ebean.find(User.class, userId);
+        Backofficeuser user = Ebean.find(Backofficeuser.class, userId);
         // Render user into template
         result.render("user", user);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -164,12 +161,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find user with the id from the params
-        User user = Ebean.find(User.class, userId);
+        Backofficeuser user = Ebean.find(Backofficeuser.class, userId);
         // Render user into template
         result.render("user", user);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -211,12 +208,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find user with the id from the params
-        User user = Ebean.find(User.class, userId);
+        Backofficeuser user = Ebean.find(Backofficeuser.class, userId);
         // Render user into template
         result.render("user", user);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -246,12 +243,12 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
         // Find all of the admin users
-        List<User> users = Ebean.find(User.class).findList();
+        List<Backofficeuser> users = Ebean.find(Backofficeuser.class).findList();
         // Add all users into the back office
         result.render("users", users);
 
@@ -270,7 +267,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -295,7 +292,7 @@ public class BackofficeController
         result.render("order", order);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -314,7 +311,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -338,7 +335,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -368,7 +365,7 @@ public class BackofficeController
         result.render("product", product);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -407,7 +404,7 @@ public class BackofficeController
         result.render("availableSizes", availableSizes);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -438,7 +435,7 @@ public class BackofficeController
         result.render("product", product);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -491,14 +488,14 @@ public class BackofficeController
     public Result productList(final Context context)
     {
         Result result = Results.html();
-        int pageSize = 10;
+        //int pageSize = 10;
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        Query<Product> query = Ebean.find(Product.class);
+        //Query<Product> query = Ebean.find(Product.class);
 
         // // Find total products and page for the pagination
         // int totalProductsCount = query.findRowCount();
@@ -563,7 +560,7 @@ public class BackofficeController
         // Render customer into template
         result.render("customer", customer);
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
         return result;
@@ -587,7 +584,7 @@ public class BackofficeController
         result.render("customer", customer);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -615,7 +612,7 @@ public class BackofficeController
         result.render("customer", customer);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -662,7 +659,7 @@ public class BackofficeController
         result.render(commondata);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
         // Find customer with the id from the params
@@ -751,7 +748,7 @@ public class BackofficeController
         result.render(commondata);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
         // Find customer with the id from the params
@@ -820,7 +817,7 @@ public class BackofficeController
         result.render("customer", customer);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -856,7 +853,7 @@ public class BackofficeController
         result.render(commondata);
         
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
         // Find customer with the id from the params
@@ -920,7 +917,7 @@ public class BackofficeController
         result.render("customer", customer);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1051,7 +1048,7 @@ public class BackofficeController
         result.render("customer", customer);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1138,7 +1135,7 @@ public class BackofficeController
         result.render("customer", customer);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1157,7 +1154,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1186,7 +1183,7 @@ public class BackofficeController
         result.render("searchType", searchType);
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
         
@@ -1203,7 +1200,7 @@ public class BackofficeController
         }
         else if (searchType.equals("User"))
         {
-            List<User> users = Ebean.find(User.class).where().icontains("firstName", searchQuery).findList();
+            List<Backofficeuser> users = Ebean.find(Backofficeuser.class).where().icontains("firstName", searchQuery).findList();
             result.render("users", users);
         }
         return result;
@@ -1221,7 +1218,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1240,7 +1237,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1259,7 +1256,7 @@ public class BackofficeController
         Result result = Results.html();
 
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -1278,7 +1275,7 @@ public class BackofficeController
         Statistic statistic = new Statistic();
 
         // Find the admin user amount
-        Integer adminUserAmount = Ebean.find(User.class).findList().size();
+        Integer adminUserAmount = Ebean.find(Backofficeuser.class).findList().size();
         statistic.setAdminUserAmount(adminUserAmount);
         // Find customer amount
         Integer customerAmount = Ebean.find(Customer.class).findList().size();

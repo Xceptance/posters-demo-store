@@ -1,4 +1,4 @@
-create table user (
+create table backofficeuser (
   id                        varchar(40) not null,
   email                     varchar(255),
   password                  varchar(255),

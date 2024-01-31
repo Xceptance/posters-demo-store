@@ -12,7 +12,7 @@ import conf.PosterConstants;
 import filters.SessionCustomerExistFilter;
 import filters.SessionUserExistFilter;
 import controllers.WebShopController;
-import models_backoffice.User;
+import models_backoffice.Backofficeuser;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -73,9 +73,9 @@ public class UserController
         else
         {
             // exists the given email in the database
-            final boolean emailExist = User.emailExist(email);
+            final boolean emailExist = Backofficeuser.emailExist(email);
             // get user by the given email
-            final User user = User.getUserByEmail(email);
+            final Backofficeuser user = Backofficeuser.getUserByEmail(email);
             // is the password correct
             boolean correctPassowrd = false;
             // check password, if the email exist
@@ -132,7 +132,7 @@ public class UserController
     {   
         Result result = Results.html();
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
@@ -156,7 +156,7 @@ public class UserController
     {
         boolean failure = false;
         // account with this email already exist
-        if (!Ebean.find(User.class).where().eq("email", email).findList().isEmpty())
+        if (!Ebean.find(Backofficeuser.class).where().eq("email", email).findList().isEmpty())
         {
             // show error message
             failure = true;
@@ -176,7 +176,7 @@ public class UserController
         else
         {
             // create new user
-            final User user = new User();
+            final Backofficeuser user = new Backofficeuser();
             user.setName(name);
             user.setFirstName(firstName);
             user.setEmail(email);
