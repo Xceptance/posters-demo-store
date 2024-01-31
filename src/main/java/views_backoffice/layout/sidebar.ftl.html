@@ -1,52 +1,121 @@
-        <!-- Sidebar Start -->
+<!-- Main Sidebar Container -->
+<!-- Updated Sidebar Start -->
+<aside class="main-sidebar elevation-4 sidebar-dark-danger">
+  <!-- Brand Logo -->
+  <a href="/posters/backoffice" class="brand-link bg-white">
+    <img src="${contextPath}/assets/img/xceptanceLogo.png" alt="AdminLTE Logo"
+      class="brand-image img-circle elevation-1" style="opacity: .8">
+    <span class="brand-text font-weight-light">Back office</span>
+  </a>
+  <!-- Sidebar -->
+  <div class="sidebar" style="overflow-y: auto;">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="${contextPath}/assets/img/user.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">${currentUser.firstName} ${currentUser.name}</a>
+        <a href="#" class="d-block">Admin</a>
+        <span class=""></span>
+      </div>
+    </div>
 
-<div class="sidebar pe-4 pb-3">
-    <nav class="navbar bg-light navbar-light">
-        <a href="/posters/backoffice" class="navbar-brand mx-4 mb-3">
-            <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
-        </a>
-        <div class="d-flex align-items-center ms-4 mb-4">
-            <div class="position-relative">
-                <img class="rounded-circle" src="${contextPath}/assets/img/user.jpg" alt=""
-                    style="width: 40px; height: 40px;">
-                <div
-                    class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
-                </div>
-            </div>
-            <div class="ms-3">
-                <h6 class="mb-0">${currentUser.firstName} ${currentUser.name}</h6>
-                <span>Admin</span>
-            </div>
-        </div>
-        <div class="navbar-nav w-100">
-            <a href="/posters/backoffice" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-book me-2"></i>Catalog</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/posters/backoffice/catalog" class="dropdown-item">Search</a>
-                    <a href="/posters/backoffice/catalog" class="dropdown-item">Categories</a>
-                    <a href="/posters/backoffice/product/p1" class="dropdown-item">Products</a>
-                </div>
-            </div>
-            <div>    
-                <a href="/posters/backoffice/customer" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Customers</a>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Orders</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/posters/backoffice/order" class="dropdown-item">Search</a>
-                    <a href="/posters/backoffice/order" class="dropdown-item">List</a>
-                </div>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user me-2"></i>Users</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="/posters/backoffice/user" class="dropdown-item">Search</a>
-                    <a href="/posters/backoffice/user" class="dropdown-item">List</a>
-                    <a href="/posters/backoffice/user/create" class="dropdown-item">Add user</a>
-                </div>
-            </div>
-            <a href="/posters/backoffice/preferences" class="nav-item nav-link"><i class="fa fa-tag me-2"></i>Preferences</a>
-        </div>
+    <!-- Sidebar Menu -->
+    <!-- Updated Sidebar -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
+        data-accordion="false">
+
+        <!-- Dashboard -->
+        <li class="nav-item">
+          <a href="/posters/backoffice" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+
+        <!-- Catalog -->
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Catalog
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/posters/backoffice/catalog" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Categories</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/posters/backoffice/product" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Products</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Customers -->
+        <li class="nav-item">
+          <a href="/posters/backoffice/customer" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>Customers</p>
+          </a>
+        </li>
+
+        <!-- Orders -->
+        <li class="nav-item">
+          <a href="/posters/backoffice/order" class="nav-link">
+            <i class="nav-icon fas fa-briefcase"></i>
+            <p>
+              Orders
+            </p>
+          </a>
+        </li>
+
+        <!-- Users -->
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Users
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/posters/backoffice/user" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/posters/backoffice/user/create" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add user</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Preferences -->
+        <li class="nav-item">
+          <a href="/posters/backoffice/preferences" class="nav-link">
+            <i class="nav-icon fas fa-tag"></i>
+            <p>Preferences</p>
+          </a>
+        </li>
+
+      </ul>
     </nav>
-</div>
+
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+<!-- Updated Sidebar End -->
