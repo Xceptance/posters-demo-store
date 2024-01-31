@@ -56,6 +56,6 @@ public class ImportFromXMLToDB
     public static void importUser()
     {
         final UserHandler userHandler = new UserHandler();
-        XmlUtils.readXmlFile(userHandler, "assets/files/user.xml");
+        XmlUtils.readXmlFile(userHandler, "assets/files/backofficeuser.xml");
     }
 }

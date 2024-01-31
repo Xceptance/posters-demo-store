@@ -11,29 +11,29 @@ import com.avaje.ebean.Ebean;
 public class UserTest extends NinjaTest
 {
 
-    User user;
+    Backofficeuser backofficeuser;
 
     @Before
     public void setUp() throws Exception
     {
         // create new user
-        user = new User();
+        backofficeuser = new Backofficeuser();
         // set some data
-        user.setEmail("email");
-        user.hashPasswd("password");
+        backofficeuser.setEmail("email");
+        backofficeuser.hashPasswd("password");
         // persist
-        user.save();
+        backofficeuser.save();
     }
 
     @Test
     public void testCreateUser()
     {
-        final User user = new User();
-        user.setEmail("email");
-        user.hashPasswd("password");
-        user.save();
+        final Backofficeuser backofficeuser = new Backofficeuser();
+        backofficeuser.setEmail("email");
+        backofficeuser.hashPasswd("password");
+        backofficeuser.save();
 
-        final User savedUser = Ebean.find(User.class, user.getId());
+        final Backofficeuser savedUser = Ebean.find(Backofficeuser.class, backofficeuser.getId());
         // verify, that the user is persistent
         Assert.assertNotNull(savedUser);
         // verify the email of the user
@@ -43,7 +43,7 @@ public class UserTest extends NinjaTest
     @Test
     public void testPasswordHash()
     {
-        final User user = Ebean.find(User.class, this.user.getId());
+        final Backofficeuser user = Ebean.find(Backofficeuser.class, this.backofficeuser.getId());
         // verify, that the password is not saved as plain text
         Assert.assertNotSame("password", user.getPassword());
         // verify the password
