@@ -4,8 +4,14 @@
   
     <html lang="en">
         <#include "../layout/header.ftl.html">
+        <!-- comparing value of session var darkMode with the boolean controller var isDarkModeEnabled  -->
+        <#if isDarkModeEnabled==darkMode??>
+        <body class="control-sidebar-slide-open layout-footer-fixed layout-navbar-fixed layout-fixed sidebar-mini dark-mode">
 
+        </#if>
+        <#if !isDarkModeEnabled??>
         <body class="control-sidebar-slide-open layout-footer-fixed layout-navbar-fixed layout-fixed sidebar-mini">
+        </#if>
             
             <div class="wrapper">
 
@@ -48,42 +54,81 @@
             <script src="${contextPath}/assets/js/backofficeNew/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
             <!-- Bootstrap Switch -->
             <!-- <script src="{contextPath}/assets/js/backofficeNew/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script> -->
-             <!-- SweetAlert2 -->
-             <script src="${contextPath}/assets/js/backofficeNew/plugins/sweetalert2/sweetalert2.min.js"></script>
+            <!-- SweetAlert2 -->
+            <script src="${contextPath}/assets/js/backofficeNew/plugins/sweetalert2/sweetalert2.min.js"></script>
             
-             <#if flash.error??>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: '${flash.error}'
-            });
-        });
-    </script>
-</#if>
+            <#if flash.error??>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        Toast.fire({
+                            icon: 'error',
+                            title: '${flash.error}'
+                        });
+                    });
+                </script>
+            </#if>
+            
+            <#if flash.success??>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        Toast.fire({
+                            icon: 'success',
+                            title: '${flash.success}'
+                        });
+                    });
+                </script>
+            </#if>
 
-<#if flash.success??>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'success',
-                title: '${flash.success}'
+<!-- Dark mode switch script -->
+<script>
+    $(document).ready(function () {
+        // // Check if dark mode is enabled in localStorage
+        // const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        // // Set the initial mode based on the stored value
+        // if (isDarkMode) {
+        //     $('body').addClass('dark-mode');
+        // }
+
+        // Attach the toggleDarkMode function to the switch button click event
+        $(document).on('click', '#darkModeSwitch', function () {
+            const body = $('body');
+             body.toggleClass('dark-mode');
+
+            // // Store the current mode in localStorage
+            // localStorage.setItem('darkMode', body.hasClass('dark-mode'));
+
+            // Send an Ajax request to update the dark mode on the server
+            $.ajax({
+                url: '${contextPath}/posters/backoffice/dark-mode', // Replace with the actual endpoint
+                type: 'POST', // Use POST or your preferred method
+                data: { darkMode: body.hasClass('dark-mode') },
+                success: function (data) {
+                    // Handle success if needed
+                    console.log('Dark mode updated on the server.');
+                },
+                error: function (xhr, status, error) {
+                    // Handle error if needed
+                    console.error('Failed to update dark mode on the server.', error);
+                }
             });
         });
-    </script>
-</#if>
+    });
+</script>
+
+
         </body>
     </html>
 </#macro>

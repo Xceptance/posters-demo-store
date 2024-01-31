@@ -38,6 +38,7 @@ import ninja.params.Params;
 import ninja.params.PathParam;
 import util.session.SessionHandling;
 
+
 /**
  * Backoffice Controller, it controls the behaviour of the backoffice. Must be signed in as a backoffice user in order
  * to access any pages within the backoffice.
@@ -53,6 +54,16 @@ public class BackofficeController
     PosterConstants xcpConf;
 
     private final Optional<String> language = Optional.of("en");
+    
+    // Variable to store dark mode state (a simple example; might want to use a database or cache)
+    private static final String DARK_MODE_SESSION_KEY = "darkMode";
+    private static boolean isDarkModeEnabled = false;
+ // Static block to initialize the isDarkModeEnabled variable
+ static {
+    // You can set the initial state based on some condition, e.g., reading from a configuration
+    // For now, let's set it to false by default
+    isDarkModeEnabled = false;
+}
 
     /**
      * Returns the homepage of the Backoffice.
@@ -74,28 +85,35 @@ public class BackofficeController
         List<Backofficeuser> users = Ebean.find(Backofficeuser.class).findList();
         // Add all users into the back office
         result.render("users", users);
-        return result;
+
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
     
-    //  Homepage BackOffice ADmin LTE
+
+    //  Homepage BackOffice Dark Mode
 
     @FilterWith(SessionUserExistFilter.class)
-    public Result homepageN(final Context context)
+    public Result dark(final Context context)
     {
-        Result result = Results.html();
+       // Toggle dark mode state
+       isDarkModeEnabled = !isDarkModeEnabled;
 
-        // Find current user
-        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
-        // Add current user into the back office
-        result.render("currentUser", currentUser);
+       // Store the dark mode state in the session
+       context.getSession().put(DARK_MODE_SESSION_KEY, Boolean.toString(isDarkModeEnabled));
 
-        // Find all of the admin users
-        List<Backofficeuser> users = Ebean.find(Backofficeuser.class).findList();
-        // Add all users into the back office
-        result.render("users", users);
-        return result;
+       // Return a response if needed
+       return Results.ok().text().render("Dark mode updated successfully.");
+ 
+ 
     }
-
     /**
      * Returns the view of a single admin user.
      * 
@@ -118,7 +136,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -143,7 +169,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -252,7 +286,15 @@ public class BackofficeController
         // Add all users into the back office
         result.render("users", users);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -271,7 +313,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -296,7 +346,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -320,7 +378,15 @@ public class BackofficeController
         // Add orders into the back office
         result.render("orders", orders);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -344,7 +410,15 @@ public class BackofficeController
         // Render topCategories into template
         result.render("topCategories", topCategories);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -369,7 +443,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -408,7 +490,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -507,7 +597,15 @@ public class BackofficeController
         // Add products into the back office
         result.render("products", products);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -563,7 +661,15 @@ public class BackofficeController
         Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -588,7 +694,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     
@@ -666,7 +780,15 @@ public class BackofficeController
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     
     }
 
@@ -729,7 +851,15 @@ public class BackofficeController
             }
 
         }
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
  
     /**
@@ -755,7 +885,15 @@ public class BackofficeController
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     
     }
 
@@ -821,7 +959,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
 
     }
 
@@ -860,7 +1006,15 @@ public class BackofficeController
         Customer customer = Ebean.find(Customer.class, customerId);
         // Render customer into template
         result.render("customer", customer);
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     
     }
 
@@ -921,7 +1075,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
 
     }
 
@@ -1139,7 +1301,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
     
     /**
@@ -1163,7 +1333,15 @@ public class BackofficeController
         // Add customers into the back office
         result.render("customers", customers);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -1203,7 +1381,15 @@ public class BackofficeController
             List<Backofficeuser> users = Ebean.find(Backofficeuser.class).where().icontains("firstName", searchQuery).findList();
             result.render("users", users);
         }
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -1222,7 +1408,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -1241,7 +1435,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**
@@ -1260,7 +1462,15 @@ public class BackofficeController
         // Add current user into the back office
         result.render("currentUser", currentUser);
 
-        return result;
+        
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
+
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
+
+         return result;
     }
 
     /**

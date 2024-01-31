@@ -164,8 +164,6 @@ public class Routes implements ApplicationRoutes
         // homepage
         // ############################################################
         router.GET().route("/posters/backoffice").with(BackofficeController::homepage);
-        // homepage Admin LTE Backoffice
-        router.GET().route("/posters/backoffice/new").with(BackofficeController::homepageN);
 
         // ############################################################
         // user registration
@@ -256,6 +254,11 @@ public class Routes implements ApplicationRoutes
         // Page Not Found
         // ############################################################
         router.GET().route("/posters/backoffice/.*").with(BackofficeController::Error404);
+        // ############################################################
+        // Dark Mode
+        // ############################################################
+        router.POST().route("/posters/backoffice/dark-mode").with(BackofficeController::dark);
+
 
     }
 }
