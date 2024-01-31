@@ -226,7 +226,7 @@ public class BackofficeController
         else
         {
             user.delete();
-            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user");
         }
 
     }

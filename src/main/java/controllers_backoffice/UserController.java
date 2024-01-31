@@ -186,7 +186,7 @@ public class UserController
             // show success message
             context.getFlashScope().success(msg.get("successCreateAccount", language).get());
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user");
         }
     }
 
