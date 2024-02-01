@@ -39,8 +39,8 @@
 				</td>
 				<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
 				<td>
-					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
 					<button class="btn btnRemoveProduct" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><span class="icon-cross"></span></button>
+					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
 				</td>
 			</tr>
 			</#list>
