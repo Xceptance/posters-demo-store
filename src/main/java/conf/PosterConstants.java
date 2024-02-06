@@ -60,6 +60,7 @@ public class PosterConstants
      */
     public final String TEMPLATE_CART_OVERVIEW = "views/CartController/cartOverview.ftl.html";
 
+    public final String TEMPLATE_PRODUCT_NOT_FOUND = "views/noResult.ftl.html";
     /**
      * The path to the product overview template.
      */
@@ -144,10 +145,15 @@ public class PosterConstants
      * The path to the login-form template.
      */
     public final String TEMPLATE_LOGIN_FORM = "views/CustomerController/loginForm.ftl.html";
+
     /**
      * The path to the Back office login-form template.
      */
     public final String TEMPLATE_LOGIN_FORM_BO = "/views_backoffice/layout/loginN.ftl.html";
+
+    /** The path to the product overview template.
+    */
+   public final String TEMPLATE_NOT_FOUND = "views/CatalogController/noResult.ftl.html";
 
     /**
      * The URL of the application, if HTTP is used.
