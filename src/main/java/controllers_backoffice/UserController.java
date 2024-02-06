@@ -38,6 +38,10 @@ public class UserController
 
     private final Optional<String> language = Optional.of("en");
 
+    // Variable to store dark mode state (a simple example; might want to use a database or cache)
+    private static final String DARK_MODE_SESSION_KEY = "darkMode";
+    private static boolean isDarkModeEnabled = false;
+    
     /**
      * Returns a page to log in to the user backend.
      * 
@@ -135,7 +139,12 @@ public class UserController
         Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
 
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
         return result;
     }
 

@@ -48,6 +48,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/search").with(SearchController::searchProduct);
         router.POST().route("/getProductOfSearch").with(SearchController::getProductOfSearch);
+        router.GET().route("/notFound").with(SearchController::noResult);
+        router.GET().route("/noResult").with(SearchController::noResult);
 
         // ############################################################
         // customer registration
