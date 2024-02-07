@@ -1,3 +1,4 @@
+
 <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
 
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
@@ -37,6 +38,17 @@
               <#include '../components/userMenu.ftl.html'>
             </ul>
           </li>
+          <#if cartProductCount == 0>
+
+          <li class="nav-item ">
+            <a id="headerCartOverview" class="dropdown-toggle headerCartOverview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="icon-shopping-cart"></span> &nbsp; 
+              <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
+            </a>
+
+
+          </li>
+          <#else>
           <li class="nav-item dropdown">
             <a id="headerCartOverview" class="dropdown-toggle headerCartOverview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-shopping-cart"></span> &nbsp; 
@@ -46,6 +58,8 @@
               <li><#include "../components/miniCartMenu.ftl.html"></li>
             </ul>
           </li>
+          </#if>
+
         </ul>
       </div>
     </div>

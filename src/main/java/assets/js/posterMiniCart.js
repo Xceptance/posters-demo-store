@@ -61,10 +61,15 @@ function addToMiniCart(productId, finish, size) {
 				+ '&finish=' + finish + '&size=' + size,
 		success : function(data) {
 			// create new <li> element
+
 			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
 			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
 			var liElement = $("<li class='" + liId +  " miniCartItem'" + "></li>").html(inner);
-			
+			var prodCount = data.headerCartOverview;
+			if (prodCount == 1) {
+				window.location.reload();
+				document.getElementById("headerCartOverview").click();
+			}
 			/* remove existing product*/
 			$("." + liId).remove();				
 			/* replace */
@@ -80,17 +85,18 @@ function addToMiniCart(productId, finish, size) {
 					data.headerCartOverview);
 			/* update product counter in mini-cart */
 			$(".cartMiniProductCounter span.value").text(
-					data.headerCartOverview);
-
-			/* show minicart and than hide after 1500 ms */
-			$('.top-menu #headerCartOverview').attr('aria-expanded', 'true').addClass('show');
-            $('.top-menu #mini-cart-menu').addClass('show');
-			window.setTimeout(function(){
-			$('.top-menu #headerCartOverview').attr('aria-expanded', 'false').parent().removeClass('show');
-			$('.top-menu #mini-cart-menu').removeClass('show');
-            }, 1500);
-
-
+				data.headerCartOverview);
+							/* enable flyout and dropdown for non-empty cart */
+							$('#header-customer-menus > li:nth-child(2)').addClass('dropdown');
+			if (prodCount > 0) {
+				/* show minicart and than hide after 1500 ms */
+				$('.top-menu #headerCartOverview').attr('aria-expanded', 'true').addClass('show');
+				$('.top-menu #mini-cart-menu').addClass('show');
+				window.setTimeout(function () {
+					$('.top-menu #headerCartOverview').attr('aria-expanded', 'false').parent().removeClass('show');
+					$('.top-menu #mini-cart-menu').removeClass('show');
+				}, 1500);
+			}
 		}
 	});
 }
