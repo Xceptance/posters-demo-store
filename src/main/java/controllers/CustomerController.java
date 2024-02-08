@@ -120,7 +120,7 @@ public class CustomerController
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
                 context.getFlashScope().success(msg.get("successLogIn", language).get());
-                return Results.redirect(context.getContextPath() + "/");
+                return Results.redirect(context.getContextPath() + "/accountOverview");
 
             }
             // user exist, wrong password
