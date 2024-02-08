@@ -2,7 +2,7 @@
 <div class="mb-3">
 	<label for="address-form-input-full-name" class="form-label">${i18n("addressFullName")}*</label>
 	<input type="text" id="address-form-input-full-name" class="form-control" aria-describedby="address-form-input-full-name-help-block" pattern="${regexName}"
-	data-error="${i18n('errorWrongName')}" value="${(address.name)!}" placeholder="Your name" name="fullName" required>
+	data-error="${i18n('errorWrongName')}" value="${(address.name)!}" placeholder="Name" name="fullName" required>
 	<div id="address-form-input-full-name-help-block" class="form-text">
   		
 	</div>
@@ -36,7 +36,7 @@
 		<div class="col">
 			<label for="address-form-input-state" class="form-label">${i18n("addressState")}*</label>
 			<input type="text" id="address-form-input-state" class="form-control" aria-describedby="address-form-input-state-help-block" pattern="${regexName}"
-			data-error="${i18n('errorWrongState')}" value="${(address.state)!}" placeholder="Your State" name="state" required>
+			data-error="${i18n('errorWrongState')}" value="${(address.state)!}" placeholder="State" name="state" required>
 			<div id="address-form-input-state-help-block" class="form-text">
 				
 			</div>
