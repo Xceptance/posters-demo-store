@@ -135,12 +135,7 @@ public class PosterConstants
      * The path to the template to confirm a deleting of a customer's address.
      */
     public final String TEMPLATE_CONFIRM_DELETING_ADDRESS = "views/CustomerController/confirmDeleteAddress.ftl.html";
-
-    /**
-     * The path to the template to confirm a deleting of a customer's payment method.
-     */
-    public final String TEMPLATE_CONFIRM_DELETING_PAYMENT = "views/CustomerController/confirmDeletePayment.ftl.html";
-
+    
     /**
      * The path to the login-form template.
      */

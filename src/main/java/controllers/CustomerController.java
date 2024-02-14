@@ -416,43 +416,11 @@ public class CustomerController
         })
     public Result deletePayment(@Param("password") final String password, @Param("cardId") final int cardId, final Context context)
     {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
             CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show payment overview page
             return Results.redirect(context.getContextPath() + "/paymentOverview");
-        }
-        // incorrect password
-        else
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            // show error message
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("cardId", cardId);
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show page again
-            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_PAYMENT);
-        }
-    }
-
-    /**
-     * Returns the page to confirm the deletion of a payment method.
-     * 
-     * @param cardId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeletePayment(@Param("cardId") final int cardId, final Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("cardId", cardId);
-        WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
     }
 
     /**

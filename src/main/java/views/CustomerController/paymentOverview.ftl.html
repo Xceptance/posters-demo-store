@@ -42,19 +42,7 @@
 									<li>
 										<div class="row">
 											<div class="col-xs-12 col-sm-3 text-center mb-3">
-												<form action="${contextPath}/confirmDeletePayment" method="post"
-													>
-													<input class="cardId${payment.id}" name="cardId" type="hidden"
-														value=${payment.id}>
-													<button class="btn btn-danger btnDeletePayment" 
-														id="btnDeletePayment${payment_index}"
-														name="btnDeletePayment${payment_index}"
-														type="submit">${i18n('buttonDelete')}</button>
-												</form>
-											</div>
-											<div class="col-xs-12 col-sm-3 text-center mb-3">
-												<form action="${contextPath}/updatePaymentMethod" method="post"
-													>
+												<form action="${contextPath}/updatePaymentMethod" method="post">
 													<input class="cardId${payment.id}" name="cardId" type="hidden"
 														value=${payment.id}>
 													<button class="btn btn-primary btnChangePayment"
@@ -62,6 +50,12 @@
 														name="btnChangePayment${payment_index}"
 														type="submit">${i18n("buttonEdit")}</button>
 												</form>
+											</div>
+											<div class="col-xs-12 col-sm-3 text-center mb-3">
+														<button type="button" class="btn btn-danger btnDeletePayment" data-bs-toggle="modal" 
+														data-bs-target="#delModal${payment.id}">
+															${i18n('buttonDelete')}														
+														</button>
 											</div>
 										</div>
 									</li>
@@ -85,4 +79,55 @@
 		</div>
 		</div>
 		</div>
+	
+	
+	<#list paymentOverview as payment>
+
+
+
+
+			<!-- Modal -->
+			<div class="modal fade" id="delModal${payment.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">Delete following payment?</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<ul class="list-unstyled address">
+								<li class="row">
+									<div class="col-xs-12 col-sm-4"><strong>${i18n("titleName")}:</strong></div>
+									<div class="col-xs-12 col-sm-8 paymentName"><strong>${payment.name}</strong>
+									</div>
+								</li>
+								<li class="row">
+									<div class="col-xs-12 col-sm-4">${i18n("titleCreditCard")}:</div>
+									<div class="col-xs-12 col-sm-8 paymentCardNumber">
+										${payment.getCardNumberCryptic()}</div>
+								</li>
+								<li class="row">
+									<div class="col-xs-12 col-sm-4">${i18n("titleValidTo")}:</div>
+									<div class="col-xs-12 col-sm-8"><span
+											class="expMonth">${payment.getMonthLeadingZero()}</span>/<span
+											class="expYear">${payment.year}</span></div>
+								</li>
+							</ul>						
+						</div>
+														
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<form action="${contextPath}/deletePayment" method="post">
+								<input class="cardId${payment.id}" name="cardId" type="hidden" value=${payment.id}>
+								<button class="btn btn-danger btnDeletePayment" id="btnDeletePayment${payment_index}"
+									name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</#list>
+
 	</@layout.myLayout>
