@@ -86,9 +86,7 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/updateBillingAddress").with(CustomerController::updateBillingAddress);
         router.POST().route("/updateBillingAddressCompleted").with(CustomerController::updateBillingAddressCompleted);
         router.POST().route("/deleteBillingAddress").with(CustomerController::deleteBillingAddress);
-        router.POST().route("/confirmDeleteBillingAddress").with(CustomerController::confirmDeleteBillingAddress);
         router.POST().route("/deleteShippingAddress").with(CustomerController::deleteShippingAddress);
-        router.POST().route("/confirmDeleteShippingAddress").with(CustomerController::confirmDeleteShippingAddress);
         router.GET().route("/addShippingAddressToCustomer").with(CustomerController::addShippingAddressToCustomer);
         router.POST().route("/addShippingAddressToCustomerCompleted")
               .with(CustomerController::addShippingAddressToCustomerCompleted);

@@ -414,7 +414,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deletePayment(@Param("password") final String password, @Param("cardId") final int cardId, final Context context)
+    public Result deletePayment(@Param("cardId") final int cardId, final Context context)
     {
             CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
@@ -457,48 +457,15 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteBillingAddress(@Param("password") final String password, @Param("addressId") final int addressId,
+    public Result deleteBillingAddress(@Param("addressIdBill") final int addressId,
                                        final Context context)
     {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
             // remove billing address
             BillingAddress.removeCustomerFromBillingAddress(addressId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
-        }
-        // incorrect password
-        else
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show error message
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("deleteAddressURL", "deleteBillingAddress");
-            data.put("addressId", addressId);
-            // show page again
-            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
-        }
-    }
 
-    /**
-     * Returns the page to confirm the deletion of a billing address.
-     * 
-     * @param addressId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteBillingAddress(@Param("addressId") final int addressId, final Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("deleteAddressURL", "deleteBillingAddress");
-        data.put("addressId", addressId);
-        WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
     }
 
     /**
@@ -513,48 +480,14 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteShippingAddress(@Param("password") final String password, @Param("addressId") final int addressId,
-                                        final Context context)
+    public Result deleteShippingAddress(@Param("addressIdShip") final int addressId, final Context context)
     {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
             // remove shipping address
             ShippingAddress.removeCustomerFromShippingAddress(addressId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show address overview page
             return Results.redirect(context.getContextPath() + "/addressOverview");
-        }
-        // incorrect password
-        else
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show error message
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("deleteAddressURL", "deleteShippingAddress");
-            data.put("addressId", addressId);
-            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
-        }
-    }
-
-    /**
-     * Returns the page to confirm the deletion of a shipping address.
-     * 
-     * @param addressId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteShippingAddress(@Param("addressId") final int addressId, final Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("deleteAddressURL", "deleteShippingAddress");
-        data.put("addressId", addressId);
-        WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
     }
 
     /**
