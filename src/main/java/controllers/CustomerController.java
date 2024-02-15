@@ -849,68 +849,67 @@ public class CustomerController
     }
 
     /**
-     * Adds a new shipping address to a customer.
-     * 
-     * @param name
-     * @param company
-     * @param addressLine
-     * @param city
-     * @param state
-     * @param zip
-     * @param country
-     * @param addressId
-     * @param context
-     * @return
-     */
-    @FilterWith(
-        {
-            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
-        })
-    public Result addShippingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                                        @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                                        @Param("state") final String state, @Param("zip") final String zip,
-                                                        @Param("country") final String country, @Param("addressId") final String addressId,
-                                                        final Context context)
-    {
-        // check input
-        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show error message
-            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
-            // show inserted values in form
-            final Map<String, String> address = new HashMap<String, String>();
-            address.put("name", name);
-            address.put("company", company);
-            address.put("addressLine", addressLine);
-            address.put("city", city);
-            address.put("state", state);
-            address.put("zip", zip);
-            address.put("country", country);
-            data.put("address", address);
-            // show page to enter shipping address again
-            return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
-        }
-        // all input fields might be correct
-        else
-        {
-            final ShippingAddress address = new ShippingAddress();
-            address.setName(name);
-            address.setCompany(company);
-            address.setAddressLine(addressLine);
-            address.setCity(city);
-            address.setState(state);
-            address.setZip(zip);
-            address.setCountry(country);
-            // add address to customer
-            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-            customer.addShippingAddress(address);
-            // show success message
-            context.getFlashScope().success(msg.get("successSave", language).get());
-            return Results.redirect(context.getContextPath() + "/addressOverview");
-        }
+ * Adds a new shipping address to a customer.
+ * 
+ * @param firstName
+ * @param lastName
+ * @param company
+ * @param addressLine
+ * @param city
+ * @param state
+ * @param zip
+ * @param country
+ * @param addressId
+ * @param context
+ * @return
+ */
+@FilterWith({
+    SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+})
+public Result addShippingAddressToCustomerCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName,
+                                                    @Param("company") final String company, @Param("addressLine") final String addressLine,
+                                                    @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
+                                                    @Param("country") final String country, @Param("addressId") final String addressId,
+                                                    final Context context) {
+    // Check input
+    if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
+        final Map<String, Object> data = new HashMap<>();
+        WebShopController.setCommonData(data, context, xcpConf);
+        // Show error message
+        context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+        // Show inserted values in form
+        final Map<String, String> address = new HashMap<>();
+        address.put("firstName", firstName);
+        address.put("lastName", lastName);
+        address.put("company", company);
+        address.put("addressLine", addressLine);
+        address.put("city", city);
+        address.put("state", state);
+        address.put("zip", zip);
+        address.put("country", country);
+        data.put("address", address);
+        // Show page to enter shipping address again
+        return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
+    } else {
+        final ShippingAddress address = new ShippingAddress();
+        // Combine first name and last name to form full name
+        final String fullName = firstName + " " + lastName;
+        address.setName(fullName);
+        address.setCompany(company);
+        address.setAddressLine(addressLine);
+        address.setCity(city);
+        address.setState(state);
+        address.setZip(zip);
+        address.setCountry(country);
+        // Add address to customer
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        customer.addShippingAddress(address);
+        // Show success message
+        context.getFlashScope().success(msg.get("successSave", language).get());
+        return Results.redirect(context.getContextPath() + "/addressOverview");
     }
+}
+
 
     /**
      * Adds a new billing address to a customer.
@@ -930,12 +929,15 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addBillingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                                       @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                                       @Param("state") final String state, @Param("zip") final String zip,
-                                                       @Param("country") final String country, @Param("addressId") final String addressId,
-                                                       final Context context)
+        public Result addBillingAddressToCustomerCompleted(@Param("firstName") final String firstName,
+                                                            @Param("lastName") final String lastName,
+                                                            @Param("company") final String company,
+                                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                            @Param("state") final String state, @Param("zip") final String zip,
+                                                            @Param("country") final String country, @Param("addressId") final String addressId,
+                                                            final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches("[0-9]*", zip))
         {

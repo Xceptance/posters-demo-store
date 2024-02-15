@@ -178,12 +178,16 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
-    public Result shippingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                           @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                           @Param("state") final String state, @Param("zip") final String zip,
-                                           @Param("country") final String country,
-                                           @Param("billEqualShipp") final String billingEqualShipping, final Context context)
-    {
+        public Result shippingAddressCompleted(@Param("firstName") final String firstName,
+                                            @Param("lastName") final String lastName,
+                                            @Param("company") final String company,
+                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                            @Param("state") final String state, @Param("zip") final String zip,
+                                            @Param("country") final String country,
+                                            @Param("billEqualShipp") final String billingEqualShipping, final Context context) 
+        {
+
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -376,11 +380,14 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
-    public Result billingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                          @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                          @Param("state") final String state, @Param("zip") final String zip,
-                                          @Param("country") final String country, final Context context)
+    public Result billingAddressCompleted(@Param("firstName") final String firstName,
+                                            @Param("lastName") final String lastName,
+                                            @Param("company") final String company,
+                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                            @Param("state") final String state, @Param("zip") final String zip,
+                                            @Param("country") final String country, final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {

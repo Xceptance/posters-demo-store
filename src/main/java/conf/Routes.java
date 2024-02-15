@@ -91,10 +91,13 @@ public class Routes implements ApplicationRoutes
         router.POST().route("/deleteShippingAddress").with(CustomerController::deleteShippingAddress);
         router.POST().route("/confirmDeleteShippingAddress").with(CustomerController::confirmDeleteShippingAddress);
         router.GET().route("/addShippingAddressToCustomer").with(CustomerController::addShippingAddressToCustomer);
-        router.POST().route("/addShippingAddressToCustomerCompleted")
-              .with(CustomerController::addShippingAddressToCustomerCompleted);
+        //router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController::addShippingAddressToCustomerCompleted);
+        //router.POST().route("/addShippingAddressToCustomerCompleted").with((req, res) -> CustomerController.addShippingAddressToCustomerCompleted(req, res));
+        router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController.class, "addShippingAddressToCustomerCompleted");
+
         router.GET().route("/addBillingAddressToCustomer").with(CustomerController::addBillingAddressToCustomer);
-        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController::addBillingAddressToCustomerCompleted);
+        //router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController::addBillingAddressToCustomerCompleted);
+        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController.class, "addBillingAddressToCustomerCompleted");
 
         // ############################################################
         // customer's personal data
@@ -130,7 +133,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/checkout").with(CheckoutController::checkout);
         router.GET().route("/enterShippingAddress").with(CheckoutController::enterShippingAddress);
-        router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        //router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        router.POST().route("/shippingAddressCompleted").with(CheckoutController.class, "shippingAddressCompleted");
         router.GET().route("/enterBillingAddress").with(CheckoutController::enterBillingAddress);
         router.POST().route("/billingAddressCompleted").with(CheckoutController::billingAddressCompleted);
         router.POST().route("/addShippingAddressToOrder").with(CheckoutController::addShippingAddressToOrder);
