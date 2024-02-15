@@ -929,12 +929,15 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addBillingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                                       @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                                       @Param("state") final String state, @Param("zip") final String zip,
-                                                       @Param("country") final String country, @Param("addressId") final String addressId,
-                                                       final Context context)
+        public Result addBillingAddressToCustomerCompleted(@Param("firstName") final String firstName,
+                                                            @Param("lastName") final String lastName,
+                                                            @Param("company") final String company,
+                                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                            @Param("state") final String state, @Param("zip") final String zip,
+                                                            @Param("country") final String country, @Param("addressId") final String addressId,
+                                                            final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches("[0-9]*", zip))
         {
