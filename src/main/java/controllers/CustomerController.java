@@ -578,7 +578,30 @@ public class CustomerController
     public Result updateShippingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("address", ShippingAddress.getShippingAddressById(addressId));
+        
+        // Fetch the shipping address from the database
+        ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(addressId);
+    
+        //Obtain full name and split it into two
+        if (shippingAddress != null) {
+            // Split the name into first name and last name
+            String fullName = shippingAddress.getName();
+            String[] nameParts = fullName.split(" ", 2); // Split into maximum two parts (first name and last name)
+            String firstName = "";
+            String lastName = "";
+            if (nameParts.length > 0) {
+                firstName = nameParts[0];
+                if (nameParts.length > 1) {
+                    lastName = nameParts[1];
+                }
+            }
+            
+            // Add first name and last name to the data map
+            data.put("firstName", firstName);
+            data.put("lastName", lastName);
+        }
+
+        data.put("address", shippingAddress);
         WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }    
@@ -598,12 +621,14 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateShippingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
+    public Result updateShippingAddressCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName, 
+                                                 @Param("company") final String company,
                                                  @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                  @Param("state") final String state, @Param("zip") final String zip,
                                                  @Param("country") final String country, @Param("addressId") final String addressId,
                                                  final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -655,7 +680,29 @@ public class CustomerController
     public Result updateBillingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("address", BillingAddress.getBillingAddressById(addressId));
+        // Fetch the shipping address from the database
+        BillingAddress billingAddress = BillingAddress.getBillingAddressById(addressId);
+    
+        //Obtain full name and split it into two
+        if (billingAddress != null) {
+            // Split the name into first name and last name
+            String fullName = billingAddress.getName();
+            String[] nameParts = fullName.split(" ", 2); // Split into maximum two parts (first name and last name)
+            String firstName = "";
+            String lastName = "";
+            if (nameParts.length > 0) {
+                firstName = nameParts[0];
+                if (nameParts.length > 1) {
+                    lastName = nameParts[1];
+                }
+            }
+            
+            // Add first name and last name to the data map
+            data.put("firstName", firstName);
+            data.put("lastName", lastName);
+        }
+
+        data.put("address", billingAddress);
         WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
@@ -675,12 +722,14 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateBillingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
+    public Result updateBillingAddressCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName, 
+                                                @Param("company") final String company,
                                                 @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                 @Param("state") final String state, @Param("zip") final String zip,
                                                 @Param("country") final String country, @Param("addressId") final String addressId,
                                                 final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -772,6 +821,8 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
                                                     @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
                                                     @Param("country") final String country, @Param("addressId") final String addressId,
                                                     final Context context) {
+
+        final String name = firstName + " " + lastName;
     // Check input
     if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
         final Map<String, Object> data = new HashMap<>();
@@ -782,6 +833,7 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
         final Map<String, String> address = new HashMap<>();
         address.put("firstName", firstName);
         address.put("lastName", lastName);
+        address.put("name", name);
         address.put("company", company);
         address.put("addressLine", addressLine);
         address.put("city", city);
@@ -848,6 +900,8 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             final Map<String, String> address = new HashMap<String, String>();
+            address.put("firstName", firstName);
+            address.put("lastName", lastName);
             address.put("name", name);
             address.put("company", company);
             address.put("addressLine", addressLine);
