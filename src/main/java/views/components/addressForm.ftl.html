@@ -1,12 +1,20 @@
-<!-- full name-->
+<!-- last name -->
 <div class="mb-3">
-	<label for="address-form-input-full-name" class="form-label">${i18n("addressFullName")}*</label>
-	<input type="text" id="address-form-input-full-name" class="form-control" aria-describedby="address-form-input-full-name-help-block" pattern="${regexName}"
-	data-error="${i18n('errorWrongName')}" value="${(address.name)!}" placeholder="Name" name="fullName" required>
-	<div id="address-form-input-full-name-help-block" class="form-text">
-  		
-	</div>
+	<label class="form-label" for="address-form-input-last-name">${i18n("labelMyFirstName")}*</label>
+		<input id="address-form-input-last-name" name="lastName"
+			placeholder="${i18n('registrationLastName')}"
+			class="form-control" type="text" pattern="${regexName}" value="${(address.name)!}"
+			data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}" required>
 </div>
+<!-- first name -->
+<div class="mb-3">
+	<label class="form-label" for="firstName">${i18n("labelMyName")}*</label>
+		<input id="firstName" name="firstName"
+			placeholder="${i18n('registrationFirstName')}" class="form-control"
+			type="text" pattern="${regexName}" title="${i18n('errorWrongName')}"
+			data-error="${i18n('errorWrongName')}" value="${(address.firstName)!}" required>
+</div>
+
 
 <!-- company-->
 <div class="mb-3">
