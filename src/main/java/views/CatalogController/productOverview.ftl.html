@@ -77,11 +77,13 @@
 <#if totalPages gt 1>
 <nav aria-label="Product listing page navigation">
     <ul id="pagination-bottom" class="pagination pagination-bottom">
+        <#if currentPage != 1>
         <li class="page-item">
             <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
+        </#if>
         <#list 1..totalPages as i>
             <#if i==currentPage>
                 <li class="page-item"><a class="page-link active" href="#" data-page="${i}"><span>${i}</span></a></li>
@@ -89,11 +91,13 @@
                 <li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
             </#if>
         </#list>
+        <#if currentPage != totalPages>
         <li class="page-item">
             <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
+        </#if>
     </ul>
 </nav>
 </#if>
