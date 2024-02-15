@@ -893,7 +893,7 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
     } else {
         final ShippingAddress address = new ShippingAddress();
         // Combine first name and last name to form full name
-        String fullName = firstName + " " + lastName;
+        final String fullName = firstName + " " + lastName;
         address.setName(fullName);
         address.setCompany(company);
         address.setAddressLine(addressLine);

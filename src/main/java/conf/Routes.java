@@ -133,7 +133,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/checkout").with(CheckoutController::checkout);
         router.GET().route("/enterShippingAddress").with(CheckoutController::enterShippingAddress);
-        router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        //router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        router.POST().route("/shippingAddressCompleted").with(CheckoutController.class, "shippingAddressCompleted");
         router.GET().route("/enterBillingAddress").with(CheckoutController::enterBillingAddress);
         router.POST().route("/billingAddressCompleted").with(CheckoutController::billingAddressCompleted);
         router.POST().route("/addShippingAddressToOrder").with(CheckoutController::addShippingAddressToOrder);
