@@ -80,15 +80,15 @@
 	</div>
 </div>
 
-<div class="gototop js-top">
-	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
-</div>
 <#else>
-			<div class="container">
-				<h2>Cart</h2>
-			</div>
-			<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
-			</#if>
+
+<div class="container">
+	<h2 id="cart-title">Cart</h2>
+</div>
+<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+
+</#if>
+
 <!-- Delete Product Modal -->
 <div id="deleteProductModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -106,7 +106,5 @@
         </div>
     </div>
 </div>
-
-
 
 </@layout.myLayout>
