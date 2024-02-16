@@ -1,3 +1,17 @@
+const sendAlert = (messageContent, messageType) => {
+	const alertPlaceholder = document.getElementById('alertPlaceholder')
+	const alertWrapper = document.createElement('div')
+	alertWrapper.classList.add("alert");
+	alertWrapper.classList.add(messageType);
+	alertWrapper.classList.add("alert-dismissable");
+	alertWrapper.innerHTML = [
+		'	<div>'+messageContent+'</div>',
+		'	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>'
+	].join('')
+
+	alertPlaceholder.append(alertWrapper);
+}
+
 function deleteFromCart(cartProductId, cartIndex) {	
 	updateProductCount(cartProductId, 0, cartIndex);
 }
@@ -5,48 +19,55 @@ function deleteFromCart(cartProductId, cartIndex) {
 function updateProductCount(cartProductId, count, cartIndex) {
 	var url = CONTEXT_PATH + '/updateProductCount?cartProductId=' + cartProductId
 			+ '&productCount=' + count;
-	$.get(url).always(function() {
-	}).done(function(data) {
-		// update cart in header
-		$("#headerCartOverview .headerCartProductCount").text(data.headerCartOverview);
 
-		// update total unit price
-		$('#product' + cartIndex +" .product-total-unit-price").text(data.currency + data.totalUnitPrice);
+	const xhr = new XMLHttpRequest();
 
-		//subtotal
-		$("#orderSubTotalValue").text(data.currency + data.subTotalPrice);
-		//Tax
-		$("#orderSubTotalTaxValue").text(data.currency + data.totalTaxPrice);
-		// update total price
-		$("#orderTotal").text(data.currency + data.totalPrice);
-		
-		// update mini cart
-		getMiniCartText();
-		// update cart overview, if count was zero
-		if (count == 0) {
-			// remove product from cart overview
-			$('#product' + cartIndex).remove();
-			//reload page to show empty cart if no products left
-			if(!$('.cartOverviewProduct').length){
-				window.location.reload();
-			}							
+	xhr.onreadystatechange = function(data) {
+		if(xhr.readyState !== 4) return;
+
+		if(xhr.status === 200) {
+			// update cart in header
+			document.querySelector("#headerCartOverview .headerCartProductCount").textContent = data.headerCartOverview;
+
+			// update total unit price
+			document.querySelector('#product' + cartIndex +" .product-total-unit-price").textContent = data.currency + data.totalUnitPrice;
+
+			//subtotal
+			document.querySelector("#orderSubTotalValue").textContent = data.currency + data.subTotalPrice;
+			//Tax
+			document.querySelector("#orderSubTotalTaxValue").textContent = data.currency + data.totalTaxPrice;
+			// update total price
+			document.querySelector("#orderTotal").textContent = data.currency + data.totalPrice;
+			
+			// update mini cart
+		} else {
+			var errMsg = eval("(" + data.responseText + ")");
+			sendAlert(errMsg, "alert-danger");
 		}
-	}).error(function(data) {
-		var errMsg = eval("(" + data.responseText + ")");
-		$("#errorMessage").show();
-		$("#errorMessage div strong").text(errMsg.message);
-	});
+	}
+	xhr.open("GET", url);
+	xhr.send();
 }
 
 // update price of product if the selected size has changed
 function updatePrice(selectedField, productId) {
 	var url = CONTEXT_PATH + '/updatePrice';
-	$.post(url, {
-		size : selectedField.value,
-		productId : productId
-	}, function(data) {
-		$('#product-detail-form-price').text(data.newPrice);
-	});
+	
+	const xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(data) {
+		if(xhr.readyState !== 4) return;
+
+		if(xhr.status === 200) {
+			document.querySelector('#product-detail-form-price').textContent = data.newPrice;
+		} else {
+			var errMsg = eval("(" + data.responseText + ")");
+			sendAlert(errMsg, "alert-danger");
+		}
+	}
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.open("POST", url);
+	xhr.send();
 }
 
 function updateProductOverview(data) {
