@@ -31,6 +31,7 @@
         var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
 
         // AJAX request based on page type
+        // change this to get requests
         if (pageType == "topCategory") {
             $.post('${contextPath}/getProductOfTopCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
         } else if (pageType == "category") {
@@ -61,10 +62,10 @@
 			<div id="product${pro_index}" class="card product-tile">
 				<img src="${contextPath}${pro.imageURL}" class="card-img-top" alt="picture of ${pro.name}">
 				<div class="card-body">
-					  <h5 class="card-title">${pro.name}</h5>
-					  <p class="card-text product-tile-text">${pro.descriptionOverview}</p>
+					<h5 class="card-title">${pro.name}</h5>
+					<p class="card-text product-tile-text">${pro.descriptionOverview}</p>
 					<p class="card-text product-tile-price">$${pro.minimumPrice}</p>
-					  <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
+				    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
 				</div>
 			</div>
 			</#list>
