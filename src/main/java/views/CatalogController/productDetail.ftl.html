@@ -53,7 +53,7 @@
 					<div id="product-detail-form-product-id">${productDetail.id}</div>
 				</div>
 				<div class="mb-3 d-flex justify-content-end">
-					<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, $('#add-to-cart-form input[name=finish]:checked').val(), $('#product-detail-form-size-selection').val())" class="btn btn-primary">
+					<a id="btnAddToCart" onClick="addToCart(${productDetail.id}, document.querySelector('#add-to-cart-form input[name=finish]:checked').value, document.querySelector('#product-detail-form-size-selection').value)" class="btn btn-primary">
 						<i class="icon-shopping-cart"></i> ${i18n("productDetailAddToCart")}
 					</a>
 				</div>
