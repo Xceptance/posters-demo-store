@@ -65,39 +65,38 @@ function updatePrice(selectedField, productId) {
 			sendAlert(errMsg, "alert-danger");
 		}
 	}
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.open("POST", url);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.send();
 }
 
 function updateProductOverview(data) {
     // Clear the existing product content
-    $('#productOverview .product-display-case-product-overview').empty();
-	var contextPath = CONTEXT_PATH;
+	var displayCase = document.querySelector('#productOverview .product-display-case-product-overview');
+	while(displayCase.firstChild) displayCase.removeChild(displayCase.firstChild);
     // Iterate over the products in the data and append the updated content
-    $.each(data.products, function (index, product) {
-        var productHTML = `
-            <div class="card product-tile">
-                <img src="${contextPath}${product.imageURL}" class="card-img-top" alt="picture of ${product.name}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <p class="card-text product-tile-text">${product.descriptionOverview}</p>
-                    <p class="card-text product-tile-price">$${product.minimumPrice}</p>
-                    <a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy here</a>
-                </div>
-            </div>
-        `;
-
-        $('#productOverview .product-display-case-product-overview').append(productHTML);
-    });
+	data.product.array.forEach(function(product) {
+		var productCard = document.createElement('div');
+		productCard.classList.add("card");
+		productCard.classList.add("product-tile");
+		productCard.innerHTML = [
+			'<img src=${contextPath}'+product.imageURL+' class="card-img-top" alt="picture of '+product.name+'">',
+			'<div class="card-body">',
+			'	<h5 class="card-title">'+product.name+'</h5>',
+			'	<p class="card-text product-tile-text">'+product.descriptionOverview+'</p>',
+			'	<p class="card-text product-tile-price">'+product.minimumPrice+'</p>',
+			'	<a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy here</a>',
+			'</div>'
+		].join('')
+	});
 
     // Hide any remaining product tiles if needed
-    for (var i = data.products.length; i < $('#productOverview .product-display-case-product-overview .card').length; i++) {
+    /*for (var i = data.products.length; i < $('#productOverview .product-display-case-product-overview .card').length; i++) {
         $('#productOverview .product-display-case-product-overview .card:eq(' + i + ')').hide();
-    }
+    }*/
 
     // Update the current page attribute
-    $('#productOverview').attr('currentPage', data.currentPage);
+	document.getElementById("productOverview").setAttribute('currentPage', data.currentPage);
 }
 
 //Setup on DOM ready
