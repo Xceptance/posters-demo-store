@@ -50,6 +50,7 @@ function addToCart(productId, finish, size) {
 }
 function addToMiniCart(productId, finish, size) {
 	document.querySelector(".notificationsLoader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
+	var liId = "productId" + productId + finish + size.width + "x" + size.height;
 	var url = CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
 	const xhr = new XMLHttpRequest();
 
@@ -58,10 +59,17 @@ function addToMiniCart(productId, finish, size) {
 
 		if(xhr.status === 200) {
 			/* remove existing product*/
-			document.querySelector("." + liId).remove();
+			try{
+				document.querySelector("." + liId).remove();
+			}
+			catch (error) {
+
+			}
+			console.log(data);
 			/* replace */
 			minicartEntry = document.createElement("li");
-			minicartEntry.classList.add("'" + liId +  " miniCartItem'");
+			minicartEntry.classList.add(liId);
+			minicartEntry.classList.add('miniCartItem');
 			minicartEntry.innerHTML = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
 			/* update total sub Order Price */
 			document.querySelector('.subOrderPrice').textContent = data.currency + data.subOrderTotal;
