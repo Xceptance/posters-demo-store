@@ -54,7 +54,7 @@ function addToMiniCart(productId, finish, size) {
 	var url = CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
 	const xhr = new XMLHttpRequest();
 
-	xhr.onreadystatechange = function(data) {
+	xhr.onreadystatechange = function() {
 		if(xhr.readyState !== 4) return;
 
 		if(xhr.status === 200) {
@@ -65,7 +65,7 @@ function addToMiniCart(productId, finish, size) {
 			catch (error) {
 
 			}
-			console.log(data);
+			var data = JSON.parse(xhr.responseText);
 			/* replace */
 			minicartEntry = document.createElement("li");
 			minicartEntry.classList.add(liId);
