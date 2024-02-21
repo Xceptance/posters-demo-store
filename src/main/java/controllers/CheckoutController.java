@@ -706,10 +706,12 @@ public class CheckoutController
         return Results.redirect(context.getContextPath() + "/orderConfirmation");
     }
 
+
     /**
      * Shows the confirmation page of an order
-     *
+     * 
      * @param context
+     * @return
      */
     public Result orderConfirmation(final Context context)
     {
