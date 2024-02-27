@@ -2,44 +2,81 @@
 <@layout.myLayout "The ultimate webshop">
 <script type="text/javascript">
     // Use delegated event handling to handle dynamically added elements
-    $(document).on('click', '#pagination-bottom a.page-link, #prev, #next', function (e) {
-        e.preventDefault();
+    document.addEventListener('click', (e) => {
+        if (!e.target) return;
+        const el = e.target.closest('#pagination-bottom a.page-link, #prev, #next');
+        if (el) {
+            e.preventDefault();
+            // Remove 'active' class from all page links
+            document.querySelectorAll('#pagination-bottom a.page-link').classList.remove('active');
+            // Add 'active' class to the clicked page link
+            if(!el.is('#prev') && !el.is('#next')) {
+                el.addClass('active');
+            }
+            var lastPage = Number(${totalPages})+1;
+		    var page;
+            if(el.is('#prev')) {
+                // Go to the first page
+                page = 1;
+                document.querySelector('#pagination-bottom > li:nth-child(2) > a').classList.add('active');
+            } else if (el.is('#next')) {
+                // Go to the last page
+                page = ${totalPages};
+                document.querySelector('#pagination-bottom > li:nth-child('+lastPage+') > a').classList.add('active');
+            } else {
+                page = parseInt(el.data('page'));
+            }
 
-        // Remove 'active' class from all page links
-        $('#pagination-bottom a.page-link').removeClass('active');
+            var pathname = document.querySelector(location).getAttribute('pathname');
+            var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
 
-        // Add 'active' class to the clicked page link
-        if (!$(this).is('#prev') && !$(this).is('#next')) {
-            $(this).addClass('active');
+            // AJAX request based on page type
+            // change this to get requests
+            const xhr = new XMLHttpRequest();
+
+            if (pageType == "topCategory") {
+                xhr.onreadystatechange = function(data) {
+                    if(xhr.readyState !== 4) return;
+
+                    if(xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        updateProductOverview(data);
+                    } else {
+                        
+                    }
+                }
+                xhr.open("GET", '${contextPath}/getProductOfTopCategory');
+                //$.post('${contextPath}/getProductOfTopCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
+            } else if (pageType == "category") {
+                xhr.onreadystatechange = function(data) {
+                    if(xhr.readyState !== 4) return;
+
+                    if(xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        updateProductOverview(data);
+                    } else {
+                        
+                    }
+                }
+                xhr.open("GET", '${contextPath}/getProductOfSubCategory');
+                //$.post('${contextPath}/getProductOfSubCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
+            } else {
+                xhr.onreadystatechange = function(data) {
+                    if(xhr.readyState !== 4) return;
+
+                    if(xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        updateProductOverview(data);
+                    } else {
+                        
+                    }
+                }
+                xhr.open("GET", '${contextPath}/getProductOfSearch');
+                //$.post('${contextPath}/getProductOfSearch', { searchText: $('#s').val(), page: page }, updateProductOverview);
+            };
+            xhr.send();
         }
-		var lastPage = Number(${totalPages})+1;
-		var page;
-        if ($(this).is('#prev')) {
-            // Go to the first page
-            page = 1;
-			$('#pagination-bottom > li:nth-child(2) > a').addClass('active');
-			
-        } else if ($(this).is('#next')) {
-            // Go to the last page
-            page = ${totalPages};
-			$('#pagination-bottom > li:nth-child('+lastPage+') > a').addClass('active');
-        } else {
-            page = parseInt($(this).data('page'));
-        }
-
-        var pathname = $(location).attr('pathname');
-        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
-
-        // AJAX request based on page type
-        // change this to get requests
-        if (pageType == "topCategory") {
-            $.post('${contextPath}/getProductOfTopCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
-        } else if (pageType == "category") {
-            $.post('${contextPath}/getProductOfSubCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
-        } else {
-            $.post('${contextPath}/getProductOfSearch', { searchText: $('#s').val(), page: page }, updateProductOverview);
-        }
-    });
+    })
 </script>
 
 
