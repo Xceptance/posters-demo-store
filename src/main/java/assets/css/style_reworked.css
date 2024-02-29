@@ -285,6 +285,7 @@
 *   - Start
 */
   .btn-primary {
+    text-transform: capitalize;
     --bs-btn-bg: var(--xred);
     --bs-btn-border-color: var(--xred);
     --bs-btn-hover-bg: var(--button-hover);
@@ -293,6 +294,10 @@
     --bs-btn-active-border-color: var(--button-hover);
     --bs-btn-disabled-bg: var(--xred);
     --bs-btn-disabled-border-color: var(--xred);
+  }
+
+  .btn{
+    text-transform: capitalize;
   }
 /*  Buttons
 *   - End
