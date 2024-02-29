@@ -62,7 +62,7 @@ function updateProductOverview(data) {
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text product-tile-text">${product.descriptionOverview}</p>
                     <p class="card-text product-tile-price">$${product.minimumPrice}</p>
-                    <a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy here</a>
+                    <a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
                 </div>
             </div>
         `;
