@@ -26,6 +26,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		if(xhr.readyState !== 4) return;
 
 		if(xhr.status === 200) {
+			var data = JSON.parse(xhr.responseText);
 			// update cart in header
 			document.querySelector("#headerCartOverview .headerCartProductCount").textContent = data.headerCartOverview;
 
@@ -52,13 +53,14 @@ function updateProductCount(cartProductId, count, cartIndex) {
 // update price of product if the selected size has changed
 function updatePrice(selectedField, productId) {
 	var url = CONTEXT_PATH + '/updatePrice';
-	
+	console.log(productId, selectedField.value);
 	const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(data) {
 		if(xhr.readyState !== 4) return;
 
 		if(xhr.status === 200) {
+			var data = JSON.parse(xhr.responseText);
 			document.querySelector('#product-detail-form-price').textContent = data.newPrice;
 		} else {
 			var errMsg = eval("(" + data.responseText + ")");
@@ -66,8 +68,13 @@ function updatePrice(selectedField, productId) {
 		}
 	}
 	xhr.open("POST", url);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send();
+	xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+	let dataJson = JSON.stringify({
+		size: selectedField.value,
+		productId: productId
+	});
+	console.log(dataJson);
+	xhr.send(dataJson);
 }
 
 function updateProductOverview(data) {
