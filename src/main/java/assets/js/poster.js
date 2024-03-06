@@ -69,11 +69,8 @@ function updatePrice(selectedField, productId) {
 	}
 	xhr.open("POST", url);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	let dataForm = new FormData();
-	dataForm.append("size", selectedField.value);
-	dataForm.append("productId", productId);
-	console.log(dataForm);
-	xhr.send(dataForm);
+    var params = "size=" + encodeURIComponent(selectedField.value) + "&productId=" + encodeURIComponent(productId);
+    xhr.send(params);
 }
 
 function updateProductOverview(data) {
