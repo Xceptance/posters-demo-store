@@ -75,6 +75,26 @@ public class Product
      */
     private String imageURL;
 
+     /**
+     * The URL to the product small image.
+     */
+    private String smallImageURL;
+
+    /**
+     * The URL to the product medium image.
+     */
+    private String mediumImageURL;
+
+    /**
+     * The URL to the product large image.
+     */
+    private String largeImageURL;
+
+    /**
+     * The URL to the product large image.
+     */
+    private String originalImageURL;
+
     /**
      * Defines, whether or not the product is shown in the carousel on the main page.
      */
@@ -186,6 +206,91 @@ public class Product
     {
         this.imageURL = imageURL;
     }
+
+    /**
+     * Returns the URL to the product small image.
+     * 
+     * @return the URL to the product small image
+     */
+    public String getSmallImageURL()
+    {
+        return smallImageURL;
+    }
+
+     /**
+     * Sets the URL to the product small image.
+     * 
+     * @param smallImageURL
+     *            the URL to the product small image
+     */
+    public void setSmallImageURL(final String smallImageURL)
+    {
+        this.smallImageURL = smallImageURL;
+    }
+
+    /**
+     * Returns the URL to the product medium image.
+     * 
+     * @return the URL to the product medium image
+     */
+    public String getMediumImageURL()
+    {
+        return mediumImageURL;
+    }
+
+     /**
+     * Sets the URL to the product medium image.
+     * 
+     * @param mediumImageURL
+     *            the URL to the product medium image
+     */
+    public void setMediumImageURL(final String mediumImageURL)
+    {
+        this.mediumImageURL = mediumImageURL;
+    }
+
+    /**
+     * Returns the URL to the product large image.
+     * 
+     * @return the URL to the product large image
+     */
+    public String getLargeImageURL()
+    {
+        return largeImageURL;
+    }
+
+     /**
+     * Sets the URL to the product large image.
+     * 
+     * @param largeImageURL
+     *            the URL to the product large image
+     */
+    public void setLargeImageURL(final String largeImageURL)
+    {
+        this.largeImageURL = largeImageURL;
+    }
+
+     /**
+     * Returns the URL to the product original image.
+     * 
+     * @return the URL to the product original image
+     */
+    public String getOriginalImageURL()
+    {
+        return originalImageURL;
+    }
+
+     /**
+     * Sets the URL to the product large image.
+     * 
+     * @param originalImageURL
+     *            the URL to the product large image
+     */
+    public void setOriginalImageURL(final String originalImageURL)
+    {
+        this.originalImageURL = originalImageURL;
+    }
+
 
     /**
      * Returns the ID of the entity.
