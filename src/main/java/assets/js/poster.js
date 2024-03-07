@@ -57,7 +57,12 @@ function updateProductOverview(data) {
     $.each(data.products, function (index, product) {
         var productHTML = `
             <div class="card product-tile">
-                <img src="${contextPath}${product.imageURL}" class="card-img-top" alt="picture of ${product.name}">
+			<picture id="pagination-picture-${product.id}">
+				<source media="(max-width: 399px)" srcset="${contextPath}${product.smallImageURL}">
+				<source media="(max-width: 799px)" srcset="${contextPath}${product.mediumImageURL}">
+				<source media="(max-width: 1999px)" srcset="${contextPath}${product.largeImageURL}">
+				<img class="card-img-top" src="${contextPath}${product.originalImageURL}" alt="picture of ${product.name}" >
+			</picture>
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text product-tile-text">${product.descriptionOverview}</p>
