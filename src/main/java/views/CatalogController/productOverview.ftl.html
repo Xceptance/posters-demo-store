@@ -59,7 +59,12 @@
 	<div class="row product-display-case-product-overview">
 			<#list products as pro>
 			<div id="product${pro_index}" class="card product-tile">
-				<img src="${contextPath}${pro.imageURL}" class="card-img-top" alt="picture of ${pro.name}">
+                <picture id="overview-product-${pro_index}">
+                    <source media="(max-width: 399px)" srcset="${contextPath}${pro.smallImageURL}">
+                    <source media="(max-width: 799px)" srcset="${contextPath}${pro.mediumImageURL}">
+                    <source media="(max-width: 1999px)" srcset="${contextPath}${pro.largeImageURL}">
+                    <img class="card-img-top" src="${contextPath}${pro.originalImageURL}" alt="picture of ${pro.name}" >
+                </picture>
 				<div class="card-body">
 					  <h5 class="card-title">${pro.name}</h5>
 					  <p class="card-text product-tile-text">${pro.descriptionOverview}</p>

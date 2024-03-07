@@ -51,10 +51,16 @@ public class ProductHandler extends DefaultHandler
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
     {
-        if (localName.equals("product"))
-        {
+        if (localName.equals("product")) {
             product = new Product();
             product.save();
+        } else if (localName.equals("imageURL")) {
+            // Initialize product's image URLs
+            product.setImageURL("");
+            product.setSmallImageURL("");
+            product.setMediumImageURL("");
+            product.setLargeImageURL("");
+            product.setOriginalImageURL("");
         }
         currentValue = new StringBuilder();
     }
@@ -82,11 +88,27 @@ public class ProductHandler extends DefaultHandler
             // add first price as minimum price
             product.setMinimumPrice(Double.parseDouble(prices[0]));
         }
-        if (localName.equals("imageURL"))
+        else if (localName.equals("imageURL"))
         {
-            product.setImageURL(toAdd);
+            //product.setImageURL(toAdd);
         }
-        if (localName.equals("subCategory"))
+        else if (localName.equals("small"))
+        {
+            product.setSmallImageURL(toAdd);
+        }
+        else if (localName.equals("medium"))
+        {
+            product.setMediumImageURL(toAdd);
+        }
+        else if (localName.equals("large"))
+        {
+            product.setLargeImageURL(toAdd);
+        }
+        else if (localName.equals("original"))
+        {
+            product.setOriginalImageURL(toAdd);
+        }
+        else if (localName.equals("subCategory"))
         {
             SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findUnique();
             if (subCategory == null)
