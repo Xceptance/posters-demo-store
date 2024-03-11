@@ -26,21 +26,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 		if(xhr.readyState !== 4) return;
 
 		if(xhr.status === 200) {
-			var data = JSON.parse(xhr.responseText);
-			// update cart in header
-			document.querySelector("#headerCartOverview .headerCartProductCount").textContent = data.headerCartOverview;
-
-			// update total unit price
-			document.querySelector('#product' + cartIndex +" .product-total-unit-price").textContent = data.currency + data.totalUnitPrice;
-
-			//subtotal
-			document.querySelector("#orderSubTotalValue").textContent = data.currency + data.subTotalPrice;
-			//Tax
-			document.querySelector("#orderSubTotalTaxValue").textContent = data.currency + data.totalTaxPrice;
-			// update total price
-			document.querySelector("#orderTotal").textContent = data.currency + data.totalPrice;
-			
-			// update mini cart
+			location.reload();
 		} else {
 			var errMsg = eval("(" + data.responseText + ")");
 			sendAlert(errMsg, "alert-danger");
@@ -102,73 +88,70 @@ function updateProductOverview(data) {
 	document.getElementById("productOverview").setAttribute('currentPage', data.currentPage);
 }
 
+function updateProduct(productId, index, count) {
+	if(count == 0) {
+		deleteFromCart(productId, index);
+	}
+	else {
+		updateProductCount(productId, count, index);
+	};
+}
+
 //Setup on DOM ready
 function postersSetup() {
 	if(document.body.classList.contains('process')) {
 		document.querySelector('.process').style.width = "33%";
 	}
-	document.getElementById('header-search-trigger').addEventListener('click', () => {
-		document.getElementById('header-menu-search').style.display = 'block';
-		document.getElementById('header-search-trigger').style.display = 'none';
-	});
-	document.getElementById('btnSearch').addEventListener('click', () => {
-		document.getElementById('header-menu-search').style.display = 'block';
-		document.getElementById('header-search-trigger').style.display = 'none';
-	});
-	//Sync search input of mobile and not mobile
-	document.getElementById('s').addEventListener("keyup paste", () => {
-		document.getElementById('sMobile').value = this.value;
-	});
-	document.getElementById('sMobile').addEventListener("keyup paste", () => {
-		document.getElementById('s').value = this.value;
-	});
-	//Check if searchterm is Empty
-	document.getElementById('searchForm').submit(function(){
-		var input = document.getElementById('s').value.trim();
-		if (!input){
-			document.getElementById('s').value = input;
-			return false;
-		}
-	})
-	//Setup click handler for update and delete button
-	if (document.getElementById('deleteProductModal').length) {
-		document.querySelector('.btnUpdateProduct').addEventListener('click', () => {
-			var cartProductId = this.data('id');
-			var cartIndex = this.data('index');
-			var inputValue = document.querySelector('#productCount' + cartIndex).value;
-
-			if (inputValue == 0){
-				this.siblings('.btnRemoveProduct').click();
-			}
-			else {
-				document.querySelector('#productCount' + cartIndex).prop("defaultVaule", inputValue);
-				updateProductCount(cartProductId, inputValue, cartIndex)
-			}
+	if(document.getElementById('header-search-trigger')) {
+		document.getElementById('header-search-trigger').addEventListener('click', () => {
+			document.getElementById('header-menu-search').style.display = 'block';
+			document.getElementById('header-search-trigger').style.display = 'none';
 		});
-
-		//Setup handler for buttons of Confimation popup
+	}
+	if(document.getElementById('btnSearch')) {
+		document.getElementById('btnSearch').addEventListener('click', () => {
+			document.getElementById('header-menu-search').style.display = 'block';
+			document.getElementById('header-search-trigger').style.display = 'none';
+		});
+	}
+	//Sync search input of mobile and not mobile
+	if(document.getElementById('s')) {
+		document.getElementById('s').addEventListener("keyup paste", () => {
+			document.getElementById('sMobile').value = this.value;
+		});
+	}
+	if(document.getElementById('sMobile')) {
+		document.getElementById('sMobile').addEventListener("keyup paste", () => {
+			document.getElementById('s').value = this.value;
+		});
+	}
+	//Check if searchterm is Empty
+	if(document.getElementById('searchForm')) {
+		document.getElementById('searchForm').submit(function(){
+			var input = document.getElementById('s').value.trim();
+			if (!input){
+				document.getElementById('s').value = input;
+				return false;
+			}
+		})
+	}	
+	//Setup click handler for update and delete
+	if (document.getElementById('deleteProductModal')) {
+		//Setup handler for buttons of delete product confimation popup
 		document.getElementById('deleteProductModal').addEventListener('show.bs.modal', (e) => {
-			var cartProductId = document.querySelector(e.relatedTarget).data('id');
-			var cartIndex = document.querySelector(e.relatedTarget).data('index');
-			var prodInfo = document.querySelector(e.relatedTarget).closest('tr.cartOverviewProduct').find('.productInfo').clone();
-			var oldValue = document.querySelector('#productCount' + document.querySelector(e.relatedTarget).data('index')).prop("defaultValue");
-			//Rollback the input value if close button clicked
-			document.getElementById('buttonClose').addEventListener('click', () => {
-				document.querySelector('#productCount' + cartIndex).value = oldValue;
-			});
+			var cartProductId = e.relatedTarget.getAttribute('data-id');
+			var cartIndex = e.relatedTarget.getAttribute('data-index');
+			var prodInfo = e.relatedTarget.closest('tr.cart-product').querySelector('.cart-product-description').cloneNode(true);
 			//Delete button
-			this.querySelectorAll(`:scope ${'.btn-danger'}`).addEventListener('click', () => {
+			console.log(e.target);
+			console.log(e.relatedTarget);
+			e.target.querySelector("#buttonDelete").addEventListener('click', () => {
 				deleteFromCart(cartProductId, cartIndex);
 			});
 			//Bodycontent of popup
-			this.querySelectorAll(`:scope ${'.modal-body'}`).innerHTML = prodInfo;
+			e.target.querySelector(`:scope ${'.modal-body'}`).appendChild(prodInfo);
 		});
 	}
 }
-function ready(postersSetup) {
-	if (document.readyState !== 'loading') {
-	  postersSetup();
-	} else {
-	  document.addEventListener('DOMContentLoaded', postersSetup);
-	}
-}  
+
+window.addEventListener("DOMContentLoaded", postersSetup());
