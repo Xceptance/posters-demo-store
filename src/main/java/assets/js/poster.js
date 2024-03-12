@@ -64,78 +64,75 @@ function updateProductOverview(data) {
 	var displayCase = document.querySelector('#productOverview .product-display-case-product-overview');
 	while(displayCase.firstChild) displayCase.removeChild(displayCase.firstChild);
     // Iterate over the products in the data and append the updated content
-	data.product.array.forEach(function(product) {
+	data.products.forEach(function(product) {
 		var productCard = document.createElement('div');
 		productCard.classList.add("card");
 		productCard.classList.add("product-tile");
 		productCard.innerHTML = [
-			'<img src=${contextPath}'+product.imageURL+' class="card-img-top" alt="picture of '+product.name+'">',
-			'<div class="card-body">',
-			'	<h5 class="card-title">'+product.name+'</h5>',
-			'	<p class="card-text product-tile-text">'+product.descriptionOverview+'</p>',
-			'	<p class="card-text product-tile-price">'+product.minimumPrice+'</p>',
-			'	<a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy here</a>',
-			'</div>'
-		].join('')
-	});
-    $.each(data.products, function (index, product) {
-        var productHTML = `
+			`
             <div class="card product-tile">
 			<picture id="pagination-picture-${product.id}">
-				<source media="(max-width: 399px)" srcset="${contextPath}${product.smallImageURL}">
-				<source media="(max-width: 799px)" srcset="${contextPath}${product.mediumImageURL}">
-				<source media="(max-width: 1999px)" srcset="${contextPath}${product.largeImageURL}">
-				<img class="card-img-top" src="${contextPath}${product.originalImageURL}" alt="picture of ${product.name}" >
+				<source media="(max-width: 399px)" srcset="${CONTEXT_PATH}${product.smallImageURL}">
+				<source media="(max-width: 799px)" srcset="${CONTEXT_PATH}${product.mediumImageURL}">
+				<source media="(max-width: 1999px)" srcset="${CONTEXT_PATH}${product.largeImageURL}">
+				<img class="card-img-top" src="${CONTEXT_PATH}${product.originalImageURL}" alt="picture of ${product.name}" >
 			</picture>
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text product-tile-text">${product.descriptionOverview}</p>
                     <p class="card-text product-tile-price">$${product.minimumPrice}</p>
-                    <a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
+                    <a href="${CONTEXT_PATH}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
                 </div>
             </div>
-        `;
-
-        $('#productOverview .product-display-case-product-overview').append(productHTML);
-    });
+        	`
+		].join('')
+		displayCase.appendChild(productCard);
+	});
 	//------------------Next Prev Handling-------------------//
     // Remove existing "Previous" button
-    $('#pagination-bottom #prev').remove();
+	if(document.querySelector('#pagination-bottom #prev')) {
+		document.querySelector('#pagination-bottom #prev').parentElement.removeChild(document.querySelector('#pagination-bottom #prev'));
+	}
 
     // Re-append "Previous" button at the beginning of pagination buttons
-	
-    var prevPageHTML = `
-        <li class="page-item">
-            <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
+	var prevPage = document.createElement('li');
+	prevPage.classList.add('page-item');
+	var prevPageInnerHTML = `
+        <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
     `;
-    $('#pagination-bottom').prepend(prevPageHTML);
-	if (data.currentPage ==1) {
-		    // Remove existing "Previous" button
-    $('#pagination-bottom #prev').remove();
+	prevPage.innerHTML = prevPageInnerHTML;
+	document.getElementById('pagination-bottom').prepend(prevPage);
 
+	if (data.currentPage ==1) {
+		// Remove existing "Previous" button
+    	document.querySelector('#pagination-bottom #prev').parentElement.removeChild(document.querySelector('#pagination-bottom #prev'));
 	}
+
 	// Remove existing "Next" button
-    $('#pagination-bottom #next').remove();
+    if(document.querySelector('#pagination-bottom #next')) {
+		document.querySelector('#pagination-bottom #next').parentElement.removeChild(document.querySelector('#pagination-bottom #next'));
+	}
 
     // Re-append "Next" button only if not on the last page
     if (data.currentPage < data.totalPages) {
-        var nextPageHTML = `
-            <li class="page-item">
-                <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+		var nextPage = document.createElement('li');
+		nextPage.classList.add('page-item');
+        var nextPageInnerHTML = `
+            <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
         `;
-        $('#pagination-bottom').append(nextPageHTML);
+		nextPage.innerHTML = nextPageInnerHTML;
+        document.querySelector('#pagination-bottom').append(nextPage);
     }
-	$('#pagination-bottom a.page-link').removeClass('active');
 
-	    // Add 'active' class to the page link corresponding to the current page
-		var currentPageLink = $('#pagination-bottom a.page-link[data-page="' + data.currentPage + '"]');
-		currentPageLink.addClass('active');
+	document.querySelector('#pagination-bottom a.page-link').classList.remove('active');
+
+	// Add 'active' class to the page link corresponding to the current page
+	var currentPageLink = document.querySelector('#pagination-bottom a.page-link[data-page="' + data.currentPage + '"]');
+	currentPageLink.classList.add('active');
 
     // Hide any remaining product tiles if needed
     /*for (var i = data.products.length; i < $('#productOverview .product-display-case-product-overview .card').length; i++) {
