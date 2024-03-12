@@ -17,10 +17,10 @@
 		</thead>
 		<tbody>
 		  	<#list cartProducts as cartProduct>
-			<tr id="product${cartProduct_index}">
+			<tr id="product${cartProduct_index}" class="cart-product">
 				<th scope="row">${cartProduct?counter}</th>
 				<td>
-					<div class="row">
+					<div class="row cart-product-description">
 						<div class="col">
 							<picture id="cartOverview-picture-${cartProduct.id}">
                                 <source media="(max-width: 399px)" srcset="${contextPath}${cartProduct.product.smallImageURL}">
@@ -44,8 +44,8 @@
 				</td>
 				<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
 				<td>
+					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" onclick="updateProduct(${cartProduct.id}, ${cartProduct_index}, document.getElementById('productCount${cartProduct_index}').value)"><span class="icon-refresh-ccw"></span></button>
 					<button class="btn btnRemoveProduct" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><span class="icon-cross"></span></button>
-					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
 				</td>
 			</tr>
 			</#list>
@@ -85,18 +85,15 @@
 	</div>
 </div>
 
-<div class="gototop js-top">
-	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
-</div>
 <#else>
-			<div class="container">
-				<h2>Cart</h2>
-			</div>
-			<div class="container">
-			<div id="errorCartMessage" class="alert alert-warning">${i18n("infoEmptyCart")}</div>
-			</div>
 
-			</#if>
+<div class="container">
+	<h2 id="cart-title">Cart</h2>
+</div>
+<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+
+</#if>
+
 <!-- Delete Product Modal -->
 <div id="deleteProductModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -105,6 +102,7 @@
                 <h4 class="modal-title">Are you sure you want to remove this product?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+			<div class="modal-body"></div>
             <div class="modal-footer">
                 <div class="d-flex justify-content-end">
                     <button id="buttonClose" type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal" title="Close">No</button>
@@ -114,7 +112,5 @@
         </div>
     </div>
 </div>
-
-
 
 </@layout.myLayout>
