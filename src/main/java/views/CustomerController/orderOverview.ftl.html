@@ -30,8 +30,12 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <img src="${contextPath}${orderProduct.product.imageURL}" class="img-thumbnail"
-                                                                alt="image of ${orderProduct.product.name}">
+                                                            <picture id="orderOverview-picture-${orderProduct.id}">
+                                                                <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
+                                                                <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
+                                                                <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
+                                                                <img class="img-thumbnail" src="${contextPath}${orderProduct.product.originalImageURL}" alt="image of ${orderProduct.product.name}" >
+                                                            </picture>
                                                         </div>
                                                         <div class="col">
                                                             <h3 class="pName">${orderProduct.product.name}</h3>
@@ -57,8 +61,12 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <img src="${contextPath}${orderProduct.product.imageURL}" class="img-thumbnail"
-                                                            alt="image of ${orderProduct.product.name}">
+                                                        <picture id="orderOverview-picture-${orderProduct.id}">
+                                                            <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
+                                                            <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
+                                                            <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
+                                                            <img class="img-thumbnail" src="${contextPath}${orderProduct.product.originalImageURL}" alt="image of ${orderProduct.product.name}" >
+                                                        </picture>
                                                     </div>
                                                     <div class="col">
                                                         <h3 class="pName">${orderProduct.product.name}</h3>
@@ -80,6 +88,7 @@
                             </tbody>
                         </table>
                     </div>
+                            <button type="button" class="btn btn btn-sm btn-primary" onclick="javascript:history.back()"> Back </button>
                 </div>
                 
                 

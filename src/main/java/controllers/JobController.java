@@ -24,7 +24,7 @@ import java.sql.ResultSet;
 import models.Customer;
 import models.Product;
 import models.TopCategory;
-import models_backoffice.User;
+import models_backoffice.Backofficeuser;
 import ninja.lifecycle.Start;
 import javax.inject.Inject;
 
@@ -34,10 +34,6 @@ import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
 
 import conf.StarterConf;
-import models.Customer;
-import models.Product;
-import models.TopCategory;
-import ninja.lifecycle.Start;
 import util.xml.ImportFromXMLToDB;
 
 /**
@@ -148,7 +144,7 @@ public class JobController
                 {
                     subCategoryTable = true;
                 }
-                if (rs.getString(3).equals("USER"))
+                if (rs.getString(3).equals("BACKOFFICEUSER"))
                 {
                     userTable = true;
                 }
@@ -193,7 +189,7 @@ public class JobController
             ImportFromXMLToDB.importCustomer();
         }
         // import users, if there is no user in DB
-        if (Ebean.find(User.class).findList().size() == 0)
+        if (Ebean.find(Backofficeuser.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importUser();
         }

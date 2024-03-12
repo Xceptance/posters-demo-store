@@ -58,7 +58,7 @@ By default, the shop is available at [http://localhost:8080/](http://localhost:8
 
 Posters stores its database and log files to the subdirectories `db` and `log`in the current directory.
 
-When Posters is started for the first time, it will populate its database with a basic product catalog and a default customer (email: `admin@example.com` / password: `topsecret`). With more and more customers registering with the shop and placing orders, the database will grow over time.
+When Posters is started for the first time, it will populate its database with a basic product catalog and a default storefront customer (email: `johndoe@example.com` / password: `topsecret`). With more and more customers registering with the shop and placing orders, the database will grow over time.
 
 If you want to start over with a clean database, simply stop the app and delete the subdirectory `db`. On the next start, Posters will recreate the directory and the database.
 

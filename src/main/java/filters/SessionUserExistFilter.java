@@ -1,12 +1,5 @@
 package filters;
 
-import java.util.Optional;
-
-import com.google.inject.Inject;
-
-
-import models_backoffice.User;
-import conf.PosterConstants;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;

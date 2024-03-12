@@ -15,8 +15,80 @@
 						</legend>
 						<div class="col-md-12">
 							<!-- include form -->
-							<#include "../components/addressForm.ftl.html"/> <input
-								name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+							<!-- last name -->
+							<div class="mb-3">
+								<label class="form-label" for="address-form-input-last-name">${i18n("labelMyName")}*</label>
+									<input id="address-form-input-last-name" name="lastName"
+										placeholder="${i18n('registrationLastName')}"
+										class="form-control" type="text" pattern="${regexName}" value="${(lastName)!}"
+										data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}" required>
+							</div>
+							<!-- first name -->
+							<div class="mb-3">
+								<label class="form-label" for="firstName">${i18n("labelMyFirstName")}*</label>
+									<input id="firstName" name="firstName"
+										placeholder="${i18n('registrationFirstName')}" class="form-control"
+										type="text" pattern="${regexName}" title="${i18n('errorWrongName')}"
+										data-error="${i18n('errorWrongName')}" value="${(firstName)!}" required>
+							</div>
+
+
+							<!-- company-->
+							<div class="mb-3">
+							<label for="address-form-input-company" class="form-label">${i18n("addressCompany")}</label>
+							<input type="text" id="address-form-input-company" class="form-control" value="${(address.company)!}" placeholder="${i18n('addressCompanyPlaceholder')}" name="company">
+						</div>
+
+						<!-- address line-->
+						<div class="mb-3">
+							<label for="address-form-input-adress-line" class="form-label">${i18n("addressLine")}*</label>
+							<input type="text" id="address-form-input-adress-line" class="form-control" value="${(address.addressLine)!}" placeholder="${i18n('addressLinePlaceholder')}" name="addressLine" required>
+						</div>
+
+						<!-- city-->
+						<div class="mb-3">
+							<label for="address-form-input-city" class="form-label">${i18n("addressCity")}*</label>
+							<input type="text" id="address-form-input-city" class="form-control" aria-describedby="address-form-input-city-help-block" pattern="${regexName}"
+							data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" placeholder="${i18n('addressCity')}" name="city" required>
+							<div id="address-form-input-city-help-block" class="form-text">
+								
+							</div>
+						</div>
+
+						<!-- state & zip-->
+						<div class="mb-3">
+							<div class="row">
+								<div class="col">
+									<label for="address-form-input-state" class="form-label">${i18n("addressState")}*</label>
+									<input type="text" id="address-form-input-state" class="form-control" aria-describedby="address-form-input-state-help-block" pattern="${regexName}"
+									data-error="${i18n('errorWrongState')}" value="${(address.state)!}" placeholder="State" name="state" required>
+									<div id="address-form-input-state-help-block" class="form-text">
+										
+									</div>
+								</div>
+								<div class="col">
+									<label for="address-form-input-zip" class="form-label">${i18n('addressZip')}*</label>
+									<input type="text" id="address-form-input-zip" class="form-control" aria-describedby="address-form-input-zip-help-block" pattern="${regexZip}"
+									data-error="${i18n('errorWrongZip')}" value="${(address.zip)!}" placeholder="Zip / Postal" name="zip" required>
+									<div id="address-form-input-zip-help-block" class="form-text">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Select country -->
+						<div class="mb-3">
+							<label for="address-form-select-country" class="form-label">${i18n("addressCountry")}*</label>
+							<select id="address-form-select-country" class="form-select" aria-describedby="address-form-select-country-help-block" name="country">
+								<option>${i18n('countryUS')}</option>
+								<option>${i18n('countryGermany')}</option>
+							</select>
+							<div id="address-form-select-country-help-block" class="form-text">
+								We only ship to ${i18n('countryUS')} and ${i18n('countryGermany')}.
+							</div>
+						</div>								
+						<input name="addressId" id="addressId" type="hidden" value=${address.id}></input>
 							<!-- update -->
 							<div class="form-group">
 								<div class="col-sm-12 nopadding">

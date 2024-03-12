@@ -22,7 +22,12 @@
 				<td>
 					<div class="row cart-product-description">
 						<div class="col">
-							<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img src="${contextPath}${cartProduct.product.imageURL}" class="img-thumbnail" alt="image of ${cartProduct.product.name}"></a>
+							<picture id="cartOverview-picture-${cartProduct.id}">
+                                <source media="(max-width: 399px)" srcset="${contextPath}${cartProduct.product.smallImageURL}">
+                                <source media="(max-width: 799px)" srcset="${contextPath}${cartProduct.product.mediumImageURL}">
+                                <source media="(max-width: 1999px)" srcset="${contextPath}${cartProduct.product.largeImageURL}">
+                                <img class="img-thumbnail" src="${contextPath}${cartProduct.product.originalImageURL}" alt="image of ${cartProduct.product.name}" >
+                            </picture>
 						</div>
 						<div class="col">
 							<div class="product-name"><h3>${cartProduct.product.name}</h3></div>

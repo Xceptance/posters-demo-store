@@ -1,278 +1,307 @@
-<#include "../layout/upper.ftl.html">
-
-    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
-        <div class="bg-light rounded h-100 p-4">
-            <h2 class="mb-4">Customer View</h2>
-            <div class="row align-items-center">
-                <div class="col">
-                    <p>Select an address to edit.</p>
-                </div>
-            </div>
-            
-            
-            <form action="/posters/backoffice/customer/${customer.id}/view/edit" method="post">
-                <div class="table-responsive">
-                    <table id="" class="table display text-start align-middle table-bordered table-hover mb-0">
-                        <thead>
-                            <tr class="text-dark">
-                                <th width="10%" scope="col">Name</th>
-                                <th width="30%" scope="col">Shipping Address</th>
-                                <th width="30%" scope="col">Billing Address</th>
-                                <th width="28%" scope="col">Payment Info</th>
-    
-                                <th width="2%"scope="col">Orders</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td valign="top">${customer.firstName} ${customer.name}</td>
-
-                                <!--Shipping Address Info-->
-
-                                <td valign="top">
-                                    <div class="row">
-                                        <#if customer.shippingAddress?has_content>
-                                            <#list customer.shippingAddress as shippingAddress>
-                                                <div class="col-lg-8">
-                                                    <fieldset class="row mb-3">
-                                                        <legend class="col-form-label col-sm-2 pt-0">${shippingAddress_index +1}</legend>
-                                                        <div class="col-sm-10">
-                                                            <div class="form-check">
-                                                                <!--  IMPORTANT!! 
-                                                                    Uncommenting will display radio buttons alongside Shipping and Billing addresses, 
-                                                                    activating radio-select-edit option, for updating these addresses alongside normal updating option. 
-                                                                     
-                                                                    <input class="form-check-input" type="radio" name="gridRadiosShip" 
-                                                                    id="gridRadiosShip${shippingAddress_index + 1}" data-shipId=""
-                                                                    value="${shippingAddress.id}"> 
-                                                                -->
-                                                                
-                                                                <label class="form-check-label"
-                                                                    for="gridRadiosShip${shippingAddress_index + 1}">
-                                                                    <address>
-                                                                        ${shippingAddress.name},
-                                                                        ${shippingAddress.company}, <br>
-                                                                        ${shippingAddress.addressLine},<br>
-                                                                        ${shippingAddress.zip}
-                                                                        ${shippingAddress.state},  ${shippingAddress.city}, ${shippingAddress.country}
-                                                                    </address>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                                <!-- Modal for Delete Confirmation -->
-                                                <div class="modal fade" id="confirmationModalShip${shippingAddress_index}" tabindex="-1" aria-labelledby="confirmationModalLabelShip${shippingAddress_index}" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="confirmationModalLabel">Confirm Shipping Information Deletion</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                Are you sure you want to delete this address?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-ship-id="${shippingAddress.id}" id="confirmDeleteShip${shippingAddress_index}">Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                        <!-- Each delete button should have its own form -->
-                                                        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-ship-address" method="post" id="deleteFormShip_${shippingAddress.id}">
-                                                            <input name="addressIdShip" class="" type="hidden" value="${shippingAddress.id}">
-                                                            <button type="button" class="btn btn-sm-square btn-outline-danger m-2" data-bs-toggle="modal" data-bs-target="#confirmationModalShip${shippingAddress_index}" id="">
-                                                                <i class="fa fa-trash-alt"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-lg-2">
-                                                    <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                        <!-- Each edit button should have its own form -->
-                                                        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-ship-address" method="post">
-                                                            <input name="addressIdShip" class="" type="hidden" value="${shippingAddress.id}">
-                                                            <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </#list>
-                                        <#else>
-                                            NA
-                                        </#if>
-                                    </div>
-                                </td>
-                                
-                                <!--Billing Address Info-->
-
-                                <td valign="top">
-                                    <div class="row">
-                                    <#if customer.billingAddress?has_content>
-                                        <#list customer.billingAddress as billingAddress>
-                                        <div class="col-lg-8">
-                                            <fieldset class="row mb-3">
-                                                <legend class="col-form-label col-sm-2 pt-0">${billingAddress_index + 1}
-                                                </legend>
-                                                <div class="col-sm-10">
-                                                    <div class="form-check">
-                                                        <!--  IMPORTANT!! 
-                                                            Uncommenting will display radio buttons alongside Shipping and Billing addresses, 
-                                                            activating radio-select-edit option for updating these addresses alongside normal updating option. 
-                                                            <input class="form-check-input" type="radio" name="gridRadiosBill"
-                                                            id="gridRadiosBill${billingAddress_index + 1}"
-                                                            value="${billingAddress.id}"> 
-                                                        -->
-                                                        <label class="form-check-label"
-                                                            for="gridRadiosBill${billingAddress_index + 1}">
-                                                            <address>
-                                                                ${billingAddress.name},
-                                                                ${billingAddress.company}, <br>
-                                                                ${billingAddress.addressLine},<br>
-                                                                ${billingAddress.zip}
-                                                                ${billingAddress.state},  ${billingAddress.city}, ${billingAddress.country}
-                                                            </address>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="modal fade" id="confirmationModalBill${billingAddress_index}" tabindex="-1" aria-labelledby="confirmationModalLabelBill${billingAddress_index}" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Billing Information Deletion</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to delete this address?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bill-id="${billingAddress.id}" id="confirmDeleteBill${billingAddress_index}">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                <!-- Each delete button should have its own form -->
-                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-bill-address" method="post" id="deleteFormBill_${billingAddress.id}">
-                                                    <input name="addressIdBill" class="" type="hidden" value="${billingAddress.id}">
-                                                    <button type="button" class="btn btn-sm-square btn-outline-danger m-2" data-bs-toggle="modal" data-bs-target="#confirmationModalBill${billingAddress_index}" id="">
-                                                        <i class="fa fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                <!-- Each edit button should have its own form -->
-                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-bill-address" method="post">
-                                                    <input name="addressIdBill" class="" type="hidden" value="${billingAddress.id}">
-                                                    <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        </#list>
-                                        <#else>
-                                            NA
-                                    </#if>
-                                </div>
-                                </td>
-
-                                <!-- Credit Card/Payment Info -->
-                                <td valign="top">
-                                    <div class="row">
-                                    <#if customer.creditCard?has_content>
-                                        <#list customer.getCreditCard() as creditCard>
-                                        <div class="col-lg-8">
-                                            <fieldset class="row mb-3">
-                                                <legend class="col-form-label col-sm-2 pt-0">${creditCard_index + 1}</legend>
-                                                <div class="col-sm-10">
-                                                    <div class="">
-                                                        <label class="form-check-label">
-                                                            ${creditCard.getCardNumberCryptic()}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="modal fade" id="confirmationModalPayment${creditCard_index}" tabindex="-1" aria-labelledby="confirmationModalLabelPayment${creditCard_index}" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Payment Information Deletion</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you sure you want to delete this address?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-payment-id="${creditCard.id}" id="confirmDeletePayment${creditCard_index}">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                <!-- Each delete button should have its own form -->
-                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-payment-info" method="post" id="deleteFormPayment_${creditCard.id}">
-                                                    <input name="creditCardId" class="" type="hidden" value="${creditCard.id}">
-                                                    <button type="button" class="btn btn-sm-square btn-outline-danger m-2" data-bs-toggle="modal" data-bs-target="#confirmationModalPayment${creditCard_index}" id="">
-                                                        <i class="fa fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="col-xs-12 col-sm-3 text-center mb-3">
-                                                <!-- Each edit button should have its own form -->
-                                                <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-payment-info" method="post">
-                                                    <input name="creditCardId" class="" type="hidden" value="${creditCard.id}">
-                                                    <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                            </#list>
-                                        <#else>
-                                            No credit card
-                                        </#if>
-                                    </div>
-                                </td>
-
-                                <!-- Order Info -->
-                                <td valign="top">
-                                    <#if customer.order?has_content>
-                                        <a href="/posters/backoffice/customer/${customer.id}/view/orders"> <button
-                                                type="button" class="btn btn-sm-square btn-outline-info m-2">
-                                                <i class="fa fa-shopping-bag"></i></a></button>
-    
-                                        <#else>
-                                            <a href="/posters/backoffice/customer/${customer.id}/view/orders"
-                                                class="btn btn-square btn-outline-secondary m-2">
-                                                <i class="fa fa-shopping-bag"></i>
-                                            </a>
-                                    </#if>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <div>
-                    <a class="btn btn-sm btn-secondary" href="/posters/backoffice/customer">Back</a>
-                    <!-- <button type="submit" class="btn btn-sm btn-primary">Edit</button> -->
-
-                </div>
-           
-            </form>
+<#import "../layout/defaultview.ftl.html" as layout>
+<@layout.myLayout "Backoffice Customer">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Customer View</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Customers</a></li>
+                            <li class="breadcrumb-item active">Customer View</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row col-12 align-items-center justify-content-center">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h2 class="card-title mb-4">Customer View</h2>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form action="/posters/backoffice/customer/${customer.id}/view/edit" method="post">
+                                    <div class="table-responsive">
+                                        <table id="" class="table display text-start align-middle table-bordered table-hover mb-0">
+                                            <thead>
+                                                <tr class="text-dark">
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Shipping Address</th>
+                                                    <th scope="col">Billing Address</th>
+                                                    <th scope="col">Payment Info</th>
+                                                    <th scope="col">Orders</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top">${customer.firstName} ${customer.name}</td>
+
+                                                    <!-- Shipping Address Info -->
+                                                    <td valign="top">
+                                                        <div class="row">
+                                                            <#if customer.shippingAddress?has_content>
+                                                                <#list customer.shippingAddress as shippingAddress>
+                                                                    <div class="col-lg-8">
+                                                                        <fieldset class="row mb-3">
+                                                                            <legend class="col-form-label col-sm-2 pt-0">${shippingAddress_index +1}</legend>
+                                                                            <div class="col-sm-10">
+                                                                                <div class="form-check">
+                                                                                    <!--  IMPORTANT!! 
+                                                                                        Uncommenting will display radio buttons alongside Shipping and Billing addresses, 
+                                                                                        activating radio-select-edit option, for updating these addresses alongside normal updating option. 
+                                                                                        
+                                                                                        <input class="form-check-input" type="radio" name="gridRadiosShip" 
+                                                                                        id="gridRadiosShip${shippingAddress_index + 1}" data-shipId=""
+                                                                                        value="${shippingAddress.id}"> 
+                                                                                    -->
+                                                                                    
+                                                                                    <label class="form-check-label"
+                                                                                        for="gridRadiosShip${shippingAddress_index + 1}">
+                                                                                        <address>
+                                                                                            ${shippingAddress.name},
+                                                                                            ${shippingAddress.company}, <br>
+                                                                                            ${shippingAddress.addressLine},<br>
+                                                                                            ${shippingAddress.zip}
+                                                                                            ${shippingAddress.state},  ${shippingAddress.city}, ${shippingAddress.country}
+                                                                                        </address>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <!-- Modal for Delete Confirmation -->
+                                                                    <div class="modal fade" id="confirmationModalShip${shippingAddress_index}" tabindex="-1" aria-labelledby="confirmationModalLabelShip${shippingAddress_index}" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Shipping Information Deletion</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    Are you sure you want to delete this address?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-ship-id="${shippingAddress.id}" id="confirmDeleteShip${shippingAddress_index}">Delete</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                                            <!-- Each delete button should have its own form -->
+                                                                            <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-ship-address" method="post" id="deleteFormShip_${shippingAddress.id}">
+                                                                                <input name="addressIdShip" class="" type="hidden" value="${shippingAddress.id}">
+                                                                                <button type="button" class="btn btn-sm-square btn-outline-danger m-2" data-bs-toggle="modal" data-bs-target="#confirmationModalShip${shippingAddress_index}" id="">
+                                                                                    <i class="fa fa-trash-alt"></i>
+                                                                                </button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-lg-2">
+                                                                        <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                                            <!-- Each edit button should have its own form -->
+                                                                            <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-ship-address" method="post">
+                                                                                <input name="addressIdShip" class="" type="hidden" value="${shippingAddress.id}">
+                                                                                <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </#list>
+                                                            <#else>
+                                                                NA
+                                                            </#if>
+                                                        </div>
+                                                    </td>
+
+                                                    <!-- Billing Address Info -->
+                                                    <td valign="top">
+                                                        <div class="row">
+                                                            <#if customer.billingAddress?has_content>
+                                                                <#list customer.billingAddress as billingAddress>
+                                                                <div class="col-lg-8">
+                                                                    <fieldset class="row mb-3">
+                                                                        <legend class="col-form-label col-sm-2 pt-0">${billingAddress_index + 1}</legend>
+                                                                        <div class="col-sm-10">
+                                                                            <div class="form-check">
+                                                                                <!--  IMPORTANT!! Uncommenting will display radio buttons alongside Shipping and Billing addresses, activating radio-select-edit option for updating these addresses alongside normal updating option. 
+                                                                                    <input class="form-check-input" type="radio" name="gridRadiosBill"
+                                                                                    id="gridRadiosBill${billingAddress_index + 1}"
+                                                                                    value="${billingAddress.id}"> 
+                                                                                -->
+                                                                                <label class="form-check-label" for="gridRadiosBill${billingAddress_index + 1}">
+                                                                                    <address>
+                                                                                        ${billingAddress.name},
+                                                                                        ${billingAddress.company}, <br>
+                                                                                        ${billingAddress.addressLine},<br>
+                                                                                        ${billingAddress.zip}
+                                                                                        ${billingAddress.state},  ${billingAddress.city}, ${billingAddress.country}
+                                                                                    </address>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-2">
+                                                                    <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                                        <!-- Each delete button should have its own form -->
+                                                                        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-bill-address" method="post" id="deleteFormBill_${billingAddress.id}">
+                                                                            <input name="addressIdBill" class="" type="hidden" value="${billingAddress.id}">
+                                                                            <button type="button" class="btn btn-sm-square btn-outline-danger m-2" data-bs-toggle="modal" data-bs-target="#confirmationModalBill${billingAddress_index}" id="">
+                                                                                <i class="fa fa-trash-alt"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-lg-2">
+                                                                    <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                                        <!-- Each edit button should have its own form -->
+                                                                        <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-bill-address" method="post">
+                                                                            <input name="addressIdBill" class="" type="hidden" value="${billingAddress.id}">
+                                                                            <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                
+
+                                                                    <div class="modal fade" id="confirmationModalBill${billingAddress_index}" tabindex="-1" aria-labelledby="confirmationModalLabelBill${billingAddress_index}" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Billing Information Deletion</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    Are you sure you want to delete this address?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bill-id="${billingAddress.id}" id="confirmDeleteBill${billingAddress_index}">Delete</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </#list>
+                                                            <#else>
+                                                                NA
+                                                            </#if>
+                                                        </div>
+                                                    </td>
+
+                                                    <!-- Credit Card/Payment Info -->
+                                                    <td valign="top">
+                                                        <div class="row">
+                                                            <#if customer.creditCard?has_content>
+                                                                <#list customer.getCreditCard() as creditCard>
+                                                                    <div class="col-lg-8">
+                                                                        <fieldset class="row mb-3">
+                                                                            <legend class="col-form-label col-sm-2 pt-0">${creditCard_index + 1}</legend>
+                                                                            <div class="col-sm-10">
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <address>${creditCard.getCardNumberCryptic()}</address> 
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+
+                                                                    <div class="col-lg-2">
+                                                                        <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                                            <!-- Each delete button should have its own form -->
+                                                                            <form action="${contextPath}/posters/backoffice/customer/${customer.id}/del-payment-info" method="post" id="deleteFormPayment_${creditCard.id}">
+                                                                                <input name="creditCardId" class="" type="hidden" value="${creditCard.id}">
+                                                                                <button type="button" class="btn btn-sm-square btn-outline-danger m-2" data-bs-toggle="modal" data-bs-target="#confirmationModalPayment${creditCard_index}" id="">
+                                                                                    <i class="fa fa-trash-alt"></i>
+                                                                                </button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-2">
+                                                                        <div class="col-xs-12 col-sm-3 text-center mb-3">
+                                                                            <!-- Each edit button should have its own form -->
+                                                                            <form action="${contextPath}/posters/backoffice/customer/${customer.id}/edit-payment-info" method="post">
+                                                                                <input name="creditCardId" class="" type="hidden" value="${creditCard.id}">
+                                                                                <button type="submit" class="btn btn-sm-square btn-outline-primary m-2"><i class="fa fa-pencil-alt"></i></button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Modal for Payment Info Deletion -->
+                                                                    <div class="modal fade" id="confirmationModalPayment${creditCard_index}" tabindex="-1" aria-labelledby="confirmationModalLabelPayment${creditCard_index}" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Payment Information Deletion</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    Are you sure you want to delete this address?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-payment-id="${creditCard.id}" id="confirmDeletePayment${creditCard_index}">Delete</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </#list>
+                                                            <#else>
+                                                                No credit card
+                                                            </#if>
+                                                        </div>
+                                                    </td>
+
+                                                    <!-- Order Info -->
+                                                    <td valign="top">
+                                                        <#if customer.order?has_content>
+                                                            <a href="/posters/backoffice/customer/${customer.id}/view/orders">
+                                                                <button type="button" class="btn btn-sm-square btn-outline-info m-2">
+                                                                    <i class="fa fa-shopping-bag"></i>
+                                                                </button>
+                                                            </a>
+                                                        <#else>
+                                                            <a href="/posters/backoffice/customer/${customer.id}/view/orders"
+                                                                class="btn btn-square btn-outline-secondary m-2">
+                                                                <i class="fa fa-shopping-bag"></i>
+                                                            </a>
+                                                        </#if>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <div>
+                                    <a class="btn btn-sm btn-secondary" href="/posters/backoffice/customer">Back</a>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
     </div>
-
-
-    <#include "../layout/footer.ftl.html">
+    <!-- /.content-wrapper -->
+</@layout.myLayout>
+<#include "../layout/footer.ftl.html">

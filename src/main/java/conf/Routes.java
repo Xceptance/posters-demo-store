@@ -48,6 +48,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/search").with(SearchController::searchProduct);
         router.POST().route("/getProductOfSearch").with(SearchController::getProductOfSearch);
+        router.GET().route("/notFound").with(SearchController::noResult);
+        router.GET().route("/noResult").with(SearchController::noResult);
 
         // ############################################################
         // customer registration
@@ -73,7 +75,6 @@ public class Routes implements ApplicationRoutes
         router.GET().route("/addPaymentToCustomer").with(CustomerController::addPaymentToCustomer);
         router.POST().route("/addPaymentToCustomer").with(CustomerController::addPaymentToCustomerCompleted);
         router.POST().route("/deletePayment").with(CustomerController::deletePayment);
-        router.POST().route("/confirmDeletePayment").with(CustomerController::confirmDeletePayment);
         router.POST().route("/updatePaymentMethod").with(CustomerController::updatePaymentMethod);
         router.POST().route("/updatePaymentMethodCompleted").with(CustomerController::updatePaymentMethodCompleted);
 
@@ -81,18 +82,22 @@ public class Routes implements ApplicationRoutes
         // customer's addresses
         // ############################################################
         router.POST().route("/updateShippingAddress").with(CustomerController::updateShippingAddress);
-        router.POST().route("/updateShippingAddressCompleted").with(CustomerController::updateShippingAddressCompleted);
+        //router.POST().route("/updateShippingAddressCompleted").with(CustomerController::updateShippingAddressCompleted);
+        router.POST().route("/updateShippingAddressCompleted").with(CustomerController.class, "updateShippingAddressCompleted");
+
         router.POST().route("/updateBillingAddress").with(CustomerController::updateBillingAddress);
-        router.POST().route("/updateBillingAddressCompleted").with(CustomerController::updateBillingAddressCompleted);
+        //router.POST().route("/updateBillingAddressCompleted").with(CustomerController::updateBillingAddressCompleted);
+        router.POST().route("/updateBillingAddressCompleted").with(CustomerController.class, "updateBillingAddressCompleted");
         router.POST().route("/deleteBillingAddress").with(CustomerController::deleteBillingAddress);
-        router.POST().route("/confirmDeleteBillingAddress").with(CustomerController::confirmDeleteBillingAddress);
         router.POST().route("/deleteShippingAddress").with(CustomerController::deleteShippingAddress);
-        router.POST().route("/confirmDeleteShippingAddress").with(CustomerController::confirmDeleteShippingAddress);
         router.GET().route("/addShippingAddressToCustomer").with(CustomerController::addShippingAddressToCustomer);
-        router.POST().route("/addShippingAddressToCustomerCompleted")
-              .with(CustomerController::addShippingAddressToCustomerCompleted);
+        //router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController::addShippingAddressToCustomerCompleted);
+        //router.POST().route("/addShippingAddressToCustomerCompleted").with((req, res) -> CustomerController.addShippingAddressToCustomerCompleted(req, res));
+        router.POST().route("/addShippingAddressToCustomerCompleted").with(CustomerController.class, "addShippingAddressToCustomerCompleted");
+
         router.GET().route("/addBillingAddressToCustomer").with(CustomerController::addBillingAddressToCustomer);
-        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController::addBillingAddressToCustomerCompleted);
+        //router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController::addBillingAddressToCustomerCompleted);
+        router.POST().route("/addBillingAddressToCustomerCompleted").with(CustomerController.class, "addBillingAddressToCustomerCompleted");
 
         // ############################################################
         // customer's personal data
@@ -128,7 +133,8 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         router.GET().route("/checkout").with(CheckoutController::checkout);
         router.GET().route("/enterShippingAddress").with(CheckoutController::enterShippingAddress);
-        router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        //router.POST().route("/shippingAddressCompleted").with(CheckoutController::shippingAddressCompleted);
+        router.POST().route("/shippingAddressCompleted").with(CheckoutController.class, "shippingAddressCompleted");
         router.GET().route("/enterBillingAddress").with(CheckoutController::enterBillingAddress);
         router.POST().route("/billingAddressCompleted").with(CheckoutController::billingAddressCompleted);
         router.POST().route("/addShippingAddressToOrder").with(CheckoutController::addShippingAddressToOrder);
@@ -225,7 +231,7 @@ public class Routes implements ApplicationRoutes
         // Products
         // ############################################################
         router.GET().route("/posters/backoffice/product").with(BackofficeController::productList);
-        router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
+        // router.GET().route("/posters/backoffice/product/p{pageNumber}").with(BackofficeController::productPage);
         router.GET().route("/posters/backoffice/product/{productId}").with(BackofficeController::productView);
         router.GET().route("/posters/backoffice/product/{productId}/edit").with(BackofficeController::productEdit);
         router.POST().route("/posters/backoffice/product/{productId}").with(BackofficeController.class, "productEditComplete");
@@ -254,6 +260,11 @@ public class Routes implements ApplicationRoutes
         // Page Not Found
         // ############################################################
         router.GET().route("/posters/backoffice/.*").with(BackofficeController::Error404);
+        // ############################################################
+        // Dark Mode
+        // ############################################################
+        router.POST().route("/posters/backoffice/dark-mode").with(BackofficeController::dark);
+
 
     }
 }

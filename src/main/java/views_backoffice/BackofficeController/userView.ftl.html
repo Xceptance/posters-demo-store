@@ -1,16 +1,58 @@
-<#include "../layout/upper.ftl.html">
-    <div class="bg-light rounded p-4 pt-4 mx-4 my-4">
-        <div class="bg-light rounded h-100 p-4">
-            <ul class="viewing-list">
-                <li><span>Name: ${user.firstName} ${user.name}</span></li>
-                <li><span>User ID: ${user.id}</span></li>
-                <li><span>User Email: ${user.email}</span></li>
-            </ul>
-            <a class="btn btn-sm btn-primary" href="/posters/backoffice/user/${user.id}/edit">Edit</a>
-            <a class="btn btn-sm btn-warning" href="/posters/backoffice/user">Back</a>
-            <form action="/posters/backoffice/user/${user.id}/delete" method="post">
-                <button class="btn btn-sm btn-danger">Delete</button>
-            </form>
+<#import "../layout/defaultview.ftl.html" as layout>
+<@layout.myLayout "Backoffice User">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">User Details: ${user.firstName} ${user.name}</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">User Details</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">User Details: ${user.firstName} ${user.name}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>Name:</strong> ${user.firstName} ${user.name}</li>
+                                    <li class="list-group-item"><strong>User ID:</strong> ${user.id}</li>
+                                    <li class="list-group-item"><strong>User Email:</strong> ${user.email}</li>
+                                </ul>
+                                <div class="mt-3">
+                                    <a class="btn btn-primary" href="/posters/backoffice/user/${user.id}/edit">Edit</a>
+                                    <a class="btn btn-warning" href="/posters/backoffice/user">Back</a>
+                                    <form action="/posters/backoffice/user/${user.id}/delete" method="post" style="display:inline;">
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->                    
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
     </div>
-    <#include "../layout/footer.ftl.html">
+    <!-- /.content-wrapper -->
+</@layout.myLayout>

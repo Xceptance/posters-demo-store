@@ -78,6 +78,64 @@ function updateProductOverview(data) {
 			'</div>'
 		].join('')
 	});
+    $.each(data.products, function (index, product) {
+        var productHTML = `
+            <div class="card product-tile">
+			<picture id="pagination-picture-${product.id}">
+				<source media="(max-width: 399px)" srcset="${contextPath}${product.smallImageURL}">
+				<source media="(max-width: 799px)" srcset="${contextPath}${product.mediumImageURL}">
+				<source media="(max-width: 1999px)" srcset="${contextPath}${product.largeImageURL}">
+				<img class="card-img-top" src="${contextPath}${product.originalImageURL}" alt="picture of ${product.name}" >
+			</picture>
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text product-tile-text">${product.descriptionOverview}</p>
+                    <p class="card-text product-tile-price">$${product.minimumPrice}</p>
+                    <a href="${contextPath}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
+                </div>
+            </div>
+        `;
+
+        $('#productOverview .product-display-case-product-overview').append(productHTML);
+    });
+	//------------------Next Prev Handling-------------------//
+    // Remove existing "Previous" button
+    $('#pagination-bottom #prev').remove();
+
+    // Re-append "Previous" button at the beginning of pagination buttons
+	
+    var prevPageHTML = `
+        <li class="page-item">
+            <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    `;
+    $('#pagination-bottom').prepend(prevPageHTML);
+	if (data.currentPage ==1) {
+		    // Remove existing "Previous" button
+    $('#pagination-bottom #prev').remove();
+
+	}
+	// Remove existing "Next" button
+    $('#pagination-bottom #next').remove();
+
+    // Re-append "Next" button only if not on the last page
+    if (data.currentPage < data.totalPages) {
+        var nextPageHTML = `
+            <li class="page-item">
+                <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        `;
+        $('#pagination-bottom').append(nextPageHTML);
+    }
+	$('#pagination-bottom a.page-link').removeClass('active');
+
+	    // Add 'active' class to the page link corresponding to the current page
+		var currentPageLink = $('#pagination-bottom a.page-link[data-page="' + data.currentPage + '"]');
+		currentPageLink.addClass('active');
 
     // Hide any remaining product tiles if needed
     /*for (var i = data.products.length; i < $('#productOverview .product-display-case-product-overview .card').length; i++) {

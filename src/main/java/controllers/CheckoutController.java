@@ -58,6 +58,8 @@ public class CheckoutController
     PosterConstants xcpConf;
 
     private final Optional<String> language = Optional.of("en");
+    
+    public String session_form = "ship";
 
     /**
      * Starts the checkout. Returns an error page, if the cart is empty, otherwise the page to enter a shipping address.
@@ -108,11 +110,25 @@ public class CheckoutController
         })
     public Result enterShippingAddress(final Context context)
     {
+        session_form = "ship";
         final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("session_form", session_form);
         WebShopController.setCommonData(data, context, xcpConf);
 
         boolean userHasAShippingAddress = false;
+        // Check if form data exists in the session
+        //if (context.getSession().get("ses_formData").equals("TRUE")) {
+            // Add form data from session to the data map
+            data.put("ses_first_name", context.getSession().get("ses_first_name"));
+            data.put("ses_last_name", context.getSession().get("ses_last_name"));
+            data.put("ses_company", context.getSession().get("ses_company"));
+            data.put("ses_addressLine", context.getSession().get("ses_addressLine"));
+            data.put("ses_city", context.getSession().get("ses_city"));
+            data.put("ses_state", context.getSession().get("ses_state"));
+            data.put("ses_zip", context.getSession().get("ses_zip"));
+            data.put("ses_country", context.getSession().get("ses_country"));
 
+        //}
         // customer is logged
         if (SessionHandling.isCustomerLogged(context))
         {
@@ -178,12 +194,16 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
-    public Result shippingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                           @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                           @Param("state") final String state, @Param("zip") final String zip,
-                                           @Param("country") final String country,
-                                           @Param("billEqualShipp") final String billingEqualShipping, final Context context)
-    {
+        public Result shippingAddressCompleted(@Param("firstName") final String firstName,
+                                            @Param("lastName") final String lastName,
+                                            @Param("company") final String company,
+                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                            @Param("state") final String state, @Param("zip") final String zip,
+                                            @Param("country") final String country,
+                                            @Param("billEqualShipp") final String billingEqualShipping, final Context context) 
+        {
+
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -210,6 +230,19 @@ public class CheckoutController
         // all input fields might be correct
         else
         {
+
+            //store form data in session
+            context.getSession().put("ses_first_name", firstName );
+            context.getSession().put("ses_last_name", lastName );
+            context.getSession().put("ses_company", company );
+            context.getSession().put("ses_addressLine", addressLine );
+            context.getSession().put("ses_city", city );
+            context.getSession().put("ses_state", state );
+            context.getSession().put("ses_zip", zip );
+            context.getSession().put("ses_country", country );
+            context.getSession().put("ses_formData", "TRUE" );
+            session_form = "ship";
+
             // create shipping address
             final ShippingAddress shippingAddress = new ShippingAddress();
             shippingAddress.setName(name);
@@ -310,11 +343,26 @@ public class CheckoutController
         })
     public Result enterBillingAddress(final Context context)
     {
+        session_form = "bill";
+        
         final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("session_form", session_form);
         WebShopController.setCommonData(data, context, xcpConf);
 
         boolean userHasBillingAddress = false;
+        // Check if form data exists in the session
+        //if (context.getSession().get("ses_formData").equals("TRUE")) {
+            // Add form data from session to the data map
+            data.put("ses_bill_first_name", context.getSession().get("ses_bill_first_name"));
+            data.put("ses_bill_last_name", context.getSession().get("ses_bill_last_name"));
+            data.put("ses_bill_company", context.getSession().get("ses_bill_company"));
+            data.put("ses_bill_addressLine", context.getSession().get("ses_bill_addressLine"));
+            data.put("ses_bill_city", context.getSession().get("ses_bill_city"));
+            data.put("ses_bill_state", context.getSession().get("ses_bill_state"));
+            data.put("ses_bill_zip", context.getSession().get("ses_bill_zip"));
+            data.put("ses_bill_country", context.getSession().get("ses_bill_country"));
 
+        //}
         if (SessionHandling.isCustomerLogged(context))
         {
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
@@ -376,11 +424,14 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
-    public Result billingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                          @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                          @Param("state") final String state, @Param("zip") final String zip,
-                                          @Param("country") final String country, final Context context)
+    public Result billingAddressCompleted(@Param("firstName") final String firstName,
+                                            @Param("lastName") final String lastName,
+                                            @Param("company") final String company,
+                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                            @Param("state") final String state, @Param("zip") final String zip,
+                                            @Param("country") final String country, final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -407,6 +458,17 @@ public class CheckoutController
         // all input fields might be correct
         else
         {
+            //store form data in session
+            context.getSession().put("ses_bill_first_name", firstName );
+            context.getSession().put("ses_bill_last_name", lastName );
+            context.getSession().put("ses_bill_company", company );
+            context.getSession().put("ses_bill_addressLine", addressLine );
+            context.getSession().put("ses_bill_city", city );
+            context.getSession().put("ses_bill_state", state );
+            context.getSession().put("ses_bill_zip", zip );
+            context.getSession().put("ses_bill_country", country );
+            context.getSession().put("ses_bill_formData", "TRUE" );
+
             // create new billing address
             final BillingAddress billingAddress = new BillingAddress();
             billingAddress.setName(name);
@@ -699,10 +761,12 @@ public class CheckoutController
         return Results.redirect(context.getContextPath() + "/orderConfirmation");
     }
 
+
     /**
      * Shows the confirmation page of an order
-     *
+     * 
      * @param context
+     * @return
      */
     public Result orderConfirmation(final Context context)
     {

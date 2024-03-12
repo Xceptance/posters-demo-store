@@ -15,6 +15,7 @@
  */
 package controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +30,14 @@ import com.google.inject.Inject;
 import conf.PosterConstants;
 import filters.SessionCustomerExistFilter;
 import models.Product;
+import models.TopCategory;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+
 
 /**
  * Controller class, that provides the search functionality.
@@ -82,7 +85,7 @@ public class SearchController
                 // show info message
                 context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
                 // return index page
-                return Results.redirect(context.getContextPath() + "/");
+                return Results.redirect(context.getContextPath() + "/notFound");
             }
             // at least one product was found
             else
@@ -184,4 +187,34 @@ public class SearchController
 
         return products;
     }
+
+
+
+    @FilterWith(SessionCustomerExistFilter.class)
+    public Result noResult(final Context context)
+    {
+                // set categories
+
+        
+            final Map<String, Object> data = new HashMap<String, Object>();
+
+            // set categories
+            data.put("topCategory", TopCategory.getAllTopCategories());
+
+            //Add category specific products from each category
+        List<Product> productsListCat = new ArrayList<>();
+        productsListCat.add(Product.getProductById(3));
+        productsListCat.add(Product.getProductById(44));
+        productsListCat.add(Product.getProductById(76));
+        productsListCat.add(Product.getProductById(111));
+        data.put("productslistcat", productsListCat);
+
+            //final List<Product> products = searchForProducts(searchText, 1, data);
+            WebShopController.setCommonData(data, context, xcpConf);
+
+            // return no products found page
+            return Results.html().render(data).template(xcpConf.TEMPLATE_PRODUCT_NOT_FOUND);
+
+    }
+
 }
