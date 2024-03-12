@@ -70,19 +70,17 @@ function updateProductOverview(data) {
 		productCard.classList.add("product-tile");
 		productCard.innerHTML = [
 			`
-            <div class="card product-tile">
 			<picture id="pagination-picture-${product.id}">
 				<source media="(max-width: 399px)" srcset="${CONTEXT_PATH}${product.smallImageURL}">
 				<source media="(max-width: 799px)" srcset="${CONTEXT_PATH}${product.mediumImageURL}">
 				<source media="(max-width: 1999px)" srcset="${CONTEXT_PATH}${product.largeImageURL}">
 				<img class="card-img-top" src="${CONTEXT_PATH}${product.originalImageURL}" alt="picture of ${product.name}" >
 			</picture>
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <p class="card-text product-tile-text">${product.descriptionOverview}</p>
-                    <p class="card-text product-tile-price">$${product.minimumPrice}</p>
-                    <a href="${CONTEXT_PATH}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text product-tile-text">${product.descriptionOverview}</p>
+                <p class="card-text product-tile-price">$${product.minimumPrice}</p>
+                <a href="${CONTEXT_PATH}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
             </div>
         	`
 		].join('')
