@@ -40,7 +40,9 @@
               <span class="icon-shopping-cart"></span> &nbsp; 
               <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
             </a>
-
+            <ul id="mini-cart-menu" class="dropdown-menu" style="display: none;">
+              <li><#include "../components/miniCartMenu.ftl.html"></li>
+            </ul>
 
           </li>
           <#else>

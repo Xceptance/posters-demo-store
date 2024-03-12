@@ -49,6 +49,7 @@ function addToCart(productId, finish, size) {
 	addToMiniCart(productId, finish, size);
 }
 function addToMiniCart(productId, finish, size) {
+	document.getElementById('mini-cart-menu').style.display = "block";
 	document.querySelector(".notificationsLoader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
 	var liId = "productId" + productId + finish + size.width + "x" + size.height;
 	var url = CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
