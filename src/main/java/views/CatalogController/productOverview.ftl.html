@@ -42,25 +42,25 @@
             if(xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
                 updateProductOverview(data);
-                // hide/unhide previous or next functionality
+                // disable/enable previous or next functionality
                 if(pageNumber == 1) {
-                    // hide prev unhide next
-                    document.getElementById('pagfirst').style.display = "none";
-                    document.getElementById('pagprev').style.display = "none";
-                    document.getElementById('pagnext').style.display = "block";
-                    document.getElementById('paglast').style.display = "block";
+                    // disable prev - enable next
+                    document.querySelector('li:has(> #pagfirst)').classList.add("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.add("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.remove("disabled");
+                    document.querySelector('li:has(> #paglast').classList.remove("disabled");
                 } else if(pageNumber == ${totalPages}) {
-                    // hide next unhide prev
-                    document.getElementById('pagfirst').style.display = "block";
-                    document.getElementById('pagprev').style.display = "block";
-                    document.getElementById('pagnext').style.display = "none";
-                    document.getElementById('paglast').style.display = "none";
+                    // disable next - enable prev
+                    document.querySelector('li:has(> #pagfirst').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.add("disabled");
+                    document.querySelector('li:has(> #paglast').classList.add("disabled");
                 } else {
-                    // unhide both
-                    document.getElementById('pagfirst').style.display = "block";
-                    document.getElementById('pagprev').style.display = "block";
-                    document.getElementById('pagnext').style.display = "block";
-                    document.getElementById('paglast').style.display = "block";
+                    // enable both
+                    document.querySelector('li:has(> #pagfirst').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.remove("disabled");
+                    document.querySelector('li:has(> #paglast').classList.remove("disabled");
                 }
                 // shift active class
                 document.querySelector('#pagination-bottom .page-link.active').classList.remove('active');
@@ -129,6 +129,18 @@
 <#if totalPages gt 1>
 <nav aria-label="Product listing page navigation">
     <ul id="pagination-bottom" class="pagination pagination-bottom">
+        <#if currentPage == 1>
+        <li class="page-item disabled">
+            <a id="pagfirst" class="page-link" aria-label="First" onclick="paginationFirst()">
+                <i aria-hidden="true" class="icon-first"></i>
+            </a>
+        </li>
+        <li class="page-item disabled">
+            <a id="pagprev" class="page-link" aria-label="Previous" onclick="paginationBack()">
+                <i aria-hidden="true" class="icon-backward2"></i>
+            </a>
+        </li>
+        <#else>
         <li class="page-item">
             <a id="pagfirst" class="page-link" aria-label="First" onclick="paginationFirst()">
                 <i aria-hidden="true" class="icon-first"></i>
@@ -139,6 +151,7 @@
                 <i aria-hidden="true" class="icon-backward2"></i>
             </a>
         </li>
+        </#if>
         <#list 1..totalPages as i>
         <#if i==currentPage>
         <li class="page-item"><a class="page-link active" data-page="${i}" onclick="paginationNum(${i})">${i}</a></li>
