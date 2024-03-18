@@ -377,7 +377,6 @@
   }
 
   .pagination .page-item a {
-    background-color: white;
     color: var(--xred);
   }
 

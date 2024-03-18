@@ -86,59 +86,6 @@ function updateProductOverview(data) {
 		].join('')
 		displayCase.appendChild(productCard);
 	});
-	//------------------Next Prev Handling-------------------//
-    // Remove existing "Previous" button
-	if(document.querySelector('#pagination-bottom #prev')) {
-		document.querySelector('#pagination-bottom #prev').parentElement.removeChild(document.querySelector('#pagination-bottom #prev'));
-	}
-
-    // Re-append "Previous" button at the beginning of pagination buttons
-	var prevPage = document.createElement('li');
-	prevPage.classList.add('page-item');
-	var prevPageInnerHTML = `
-        <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-    `;
-	prevPage.innerHTML = prevPageInnerHTML;
-	document.getElementById('pagination-bottom').prepend(prevPage);
-
-	if (data.currentPage ==1) {
-		// Remove existing "Previous" button
-    	document.querySelector('#pagination-bottom #prev').parentElement.removeChild(document.querySelector('#pagination-bottom #prev'));
-	}
-
-	// Remove existing "Next" button
-    if(document.querySelector('#pagination-bottom #next')) {
-		document.querySelector('#pagination-bottom #next').parentElement.removeChild(document.querySelector('#pagination-bottom #next'));
-	}
-
-    // Re-append "Next" button only if not on the last page
-    if (data.currentPage < data.totalPages) {
-		var nextPage = document.createElement('li');
-		nextPage.classList.add('page-item');
-        var nextPageInnerHTML = `
-            <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        `;
-		nextPage.innerHTML = nextPageInnerHTML;
-        document.querySelector('#pagination-bottom').append(nextPage);
-    }
-
-	document.querySelector('#pagination-bottom a.page-link').classList.remove('active');
-
-	// Add 'active' class to the page link corresponding to the current page
-	var currentPageLink = document.querySelector('#pagination-bottom a.page-link[data-page="' + data.currentPage + '"]');
-	currentPageLink.classList.add('active');
-
-    // Hide any remaining product tiles if needed
-    /*for (var i = data.products.length; i < $('#productOverview .product-display-case-product-overview .card').length; i++) {
-        $('#productOverview .product-display-case-product-overview .card:eq(' + i + ')').hide();
-    }*/
-
-    // Update the current page attribute
-	document.getElementById("productOverview").setAttribute('currentPage', data.currentPage);
 }
 
 function updateProduct(productId, index, count) {
