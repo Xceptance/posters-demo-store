@@ -1,104 +1,113 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 	<@layout.myLayout "The ultimate webshop">
 
+<style>
 
+</style>
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-6">
+			<div class="col-lg-8">
 				<div class="col-lg-12 colorlib-form">
 					<div id="titleAddressOverview" class="header-container h2fwpr">
 						<span class="h2">${i18n("titleAddressOverview")}</span>
 					</div>
-					
 					<!-- Print available shipping addresses -->
 					<#if shippingAddresses??>
-						<div id="titleDelAddr" class="header-container h2fwpr">
-							<span class="h3">${i18n("titleShippingAddress")}</span>
-						</div>
-						<#list shippingAddresses as address>
-							<div class="row col-lg-12">
-								<div class="col-lg-8">
-									<ul class="list-unstyled address">
-										<!-- Address details -->
-										<li class="name" title="${i18n('addressFullName')}"><strong>${address.name}</strong></li>
-										<li class="company" title="${i18n('addressCompany')}">${address.company}</li>
-										<li class="addressLine" title="${i18n('addressLine')}">${address.addressLine}</li>
-										<li><span class="city" title="${i18n('addressCity')}">${address.city}</span>, 
-											<span class="state" title="${i18n('addressState')}">${address.state}</span> 
-											<span class="zip" title="${i18n('addressZip')}">${address.zip}</span>
-										</li>
-										<li class="country" title="${i18n('addressCountry')}">${address.country}</li>
-									</ul>
+					<!-- Card for Shipping Address -->
+					<div class="card mb-3 card-ship">
+						<div id="titleDelAddr" class="card-header"> <h5>${i18n("titleShippingAddress")}</h5></div>
+						<div class="card-body text-dark">
+							<#list shippingAddresses as address>
+							<div class="row col-lg-12 address">
+								<div class="col-lg-10">
+									<address>
+										<dl>
+											<div class="col-lg-3">
+												<dt><strong>${address.name}</strong></dt>
+											</div>
+											<div class="col-lg-9">
+												<dd>${address.company} ${address.addressLine}, ${address.city} ${address.zip}, 
+													${address.state}, ${address.country}
+												</dd>
+											</div>
+										</dl>
+									</address>
 								</div>
-								<!-- Buttons (Edit and Delete) -->
-								<div class="col-lg-4 text-center mb-3">
+								<div class="col-lg-2 d-flex justify-content-end align-items-center">
+									<!-- Edit button -->
 									<form action="${contextPath}/updateShippingAddress" method="post">
+										<button class="btn btn-outline-danger btn-sm me-2" type="submit">
+											<i class="icon-pencil"></i>
+										</button>
 										<input name="addressId" class="shippingId${address.id}" type="hidden" value="${address.id}">
-										<button class="btn btn-primary adr-ov-btn" id="btnChangeAddr${address_index}" name="btnChangeAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 									</form>
-									<br>
 									<!-- Delete button -->
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delModal${address.id}">
-										${i18n('buttonDelete')}
+									<button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#delModal${address.id}">
+										<i class="icon-trash"></i>
 									</button>
 								</div>
 							</div>
-						</#list>
+							</#list>
+						</div>
+					</div>
 					</#if>
-					
+
 					<!-- Add new shipping address -->
 					<div>
-						<a id="linkAddNewShipAddr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
+					<a class="btn btn-outline-danger btn-sm" style="float: right;" id="linkAddNewShipAddr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
 					</div>
-					
+
 					<!-- Print available billing addresses -->
 					<#if billingAddresses??>
-						<div id="titleBillAddr" class="header-container">
-							<span class="h3">${i18n("titleBillingAddress")}</span>
-						</div>
-						<#list billingAddresses as address>
-							<div class="row col-lg-12">
-								<div class="col-lg-8">
-									<ul class="list-unstyled address">
-										<!-- Address details -->
-										<li class="name" title="${i18n('addressFullName')}"><strong>${address.name}</strong></li>
-										<li class="company" title="${i18n('addressCompany')}">${address.company}</li>
-										<li class="addressLine" title="${i18n('addressLine')}">${address.addressLine}</li>
-										<li><span class="city" title="${i18n('addressCity')}">${address.city}</span>, 
-											<span class="state" title="${i18n('addressState')}">${address.state}</span> 
-											<span class="zip" title="${i18n('addressZip')}">${address.zip}</span>
-										</li>
-										<li class="country" title="${i18n('addressCountry')}">${address.country}</li>
-									</ul>
+					
+
+					<!-- Card for Billing Address -->	
+					<div class="card mb-3 card-bill" >
+						<div id="titleBillAddr" class="card-header"><h5>${i18n("titleBillingAddress")}</h5></div>
+						<div class="card-body text-dark">
+							<#list billingAddresses as address>
+							<div class="row col-lg-12 address">
+								<div class="col-lg-10">
+									<address>
+										<dl>
+											<div class="col-lg-3">
+												<dt><strong>${address.name}</strong></dt>
+											</div>
+											<div class="col-lg-9">
+												<dd>${address.company} ${address.addressLine}, ${address.city} ${address.zip}, ${address.state}, ${address.country}</dd>
+											</div>
+										</dl>
+									</address>
 								</div>
-								<!-- Buttons (Edit and Delete) -->
-								<div class="col-lg-4 text-center mb-3">
+								<div class="col-lg-2 d-flex justify-content-end align-items-center">
+									<!-- Edit button -->
 									<form action="${contextPath}/updateBillingAddress" method="post">
+										<button class="btn btn-outline-danger btn-sm me-2" type="submit">
+											<i class="icon-pencil"></i>
+										</button>
 										<input name="addressId" class="billingId${address.id}" type="hidden" value="${address.id}">
-										<button class="btn btn-primary adr-ov-btn" id="btnChangeBillAddr${address_index}" name="btnChangeBillAddr${address_index}" type="submit">${i18n("buttonEdit")}</button>
 									</form>
-									<br>
 									<!-- Delete button -->
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delModalBill${address.id}">
-										${i18n('buttonDelete')}
+									<button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#delModalBill${address.id}">
+										<i class="icon-trash"></i>
 									</button>
 								</div>
 							</div>
-						</#list>
+							</#list>
+						</div>
+					</div>
 					</#if>
-					
 					<!-- Add new billing address -->
 					<div>
-						<a id="linkAddNewBillAddr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
+						<a class="btn btn-outline-danger btn-sm" style="float: right;" id="linkAddNewShipAddr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+		<hr>
 		<!-- Back button -->
 		<div class="row justify-content-center">
-			<div class="col-md-10 offset-md-4">
-				<hr> <!-- Add a line or border -->
+			<div class="col-md-8">
 				<a href="${contextPath}/accountOverview" class="btn btn-sm btn-primary">Back</a>
 			</div>
 		</div>

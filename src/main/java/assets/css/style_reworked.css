@@ -242,12 +242,44 @@
 /*  Category tiles
 *   - End
 */
-
-/*  Intro text
+.acc-style{
+  text-decoration: none;
+  
+}
+/*  Address 
 *   - Start
 */
 
-/*  Intro text
+  .card-ship {
+    margin-top: 1rem;
+  }
+
+  .card-bill {
+    margin-top: 5rem;
+  }
+
+
+  .address {
+    background-color: #f6f6f6;
+    margin-bottom: 20px;
+    border-radius: 7px; 
+
+  }
+
+  .address dl {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .address dt {
+    flex: 0 0 auto;
+    margin-right: 10px; 
+  }
+
+  .address dd {
+    flex: 1 1 auto;
+  }
+/*  Address 
 *   - End
 */
 
