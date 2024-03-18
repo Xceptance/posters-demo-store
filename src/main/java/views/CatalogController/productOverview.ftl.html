@@ -1,90 +1,91 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <script type="text/javascript">
-    // Use delegated event handling to handle dynamically added elements
-    document.addEventListener('click', (e) => {
-        if (!e.target) return;
-        const el = e.target.closest('#pagination-bottom a.page-link, #prev, #next');
-        if (el) {
-            e.preventDefault();
-            // Remove 'active' class from all page links
-            document.querySelectorAll('#pagination-bottom a.page-link').forEach(function(link) {
-                link.classList.remove('active');
-            });
-            // Add 'active' class to the clicked page link
-            if(!el.matches('#prev') && !el.matches('#next')) {
-                el.classList.add('active');
-            }
-            var lastPage = Number(${totalPages})+1;
-		    var page;
-            if(el.matches('#prev')) {
-                // Go to the first page
-                page = 1;
-                document.querySelector('#pagination-bottom > li:nth-child(2) > a').classList.add('active');
-            } else if (el.matches('#next')) {
-                // Go to the last page
-                page = ${totalPages};
-                document.querySelector('#pagination-bottom > li:nth-child('+lastPage+') > a').classList.add('active');
-            } else {
-                page = parseInt(el.getAttribute("data-page"));
-            }
-
-            var pathname = location.pathname;
-            var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
-
-            // AJAX request based on page type
-            // change this to get requests
-            if (pageType == "topCategory") {
-                const xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function(data) {
-                    if(xhr.readyState !== 4) return;
-
-                    if(xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
-                        updateProductOverview(data);
-                    } else {
-                        
-                    }
-                }
-                xhr.open("POST", '${contextPath}/getProductOfTopCategory');
-	            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                var params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(page);
-                xhr.send(params);
-            } else if (pageType == "category") {
-                const xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function(data) {
-                    if(xhr.readyState !== 4) return;
-
-                    if(xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
-                        updateProductOverview(data);
-                    } else {
-                        
-                    }
-                }
-                xhr.open("POST", '${contextPath}/getProductOfSubCategory');
-            	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                var params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(page);
-                xhr.send(params);
-            } else {
-                const xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function(data) {
-                    if(xhr.readyState !== 4) return;
-
-                    if(xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
-                        updateProductOverview(data);
-                    } else {
-                        
-                    }
-                }
-                xhr.open("POST", '${contextPath}/getProductOfSearch');
-	            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                var params = "searchText=" + encodeURIComponent(document.getElementById('s').value) + "&page=" + encodeURIComponent(page);
-                xhr.send(params);
-            };
+    function paginationFirst() {
+        paginationNum(1);
+    }
+    function paginationBack() {
+        var page;
+        page = parseInt(document.querySelector('#pagination-bottom .page-link.active').getAttribute("data-page")) - 1;
+        paginationNum(page);
+    }
+    function paginationNum(pageNumber) {
+        // error protection
+        if(pageNumber < 1) {
+            pageNumber = 1;
+        } else if(pageNumber > ${totalPages}) {
+            pageNumber = ${totalPages};
         }
-    })
+        // AJAX call
+        var url;
+        var params;
+        var pathname = location.pathname;
+        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+
+        if(pageType == "topCategory") {
+            url = "${contextPath}/getProductOfTopCategory";
+            params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(pageNumber);
+        }
+        else if(pageType == "category") {
+            url = "${contextPath}/getProductOfSubCategory";
+            params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(pageNumber);
+        }
+        else {
+            url = "${contextPath}/getProductOfSearch";
+            params = "searchText=" + encodeURIComponent(document.getElementById('s').value) + "&page=" + encodeURIComponent(pageNumber);
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(data) {
+            if(xhr.readyState !== 4) return;
+
+            if(xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                updateProductOverview(data);
+                // disable/enable previous or next functionality
+                if(pageNumber == 1) {
+                    // disable prev - enable next
+                    document.querySelector('li:has(> #pagfirst)').classList.add("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.add("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.remove("disabled");
+                    document.querySelector('li:has(> #paglast').classList.remove("disabled");
+                } else if(pageNumber == ${totalPages}) {
+                    // disable next - enable prev
+                    document.querySelector('li:has(> #pagfirst').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.add("disabled");
+                    document.querySelector('li:has(> #paglast').classList.add("disabled");
+                } else {
+                    // enable both
+                    document.querySelector('li:has(> #pagfirst').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.remove("disabled");
+                    document.querySelector('li:has(> #paglast').classList.remove("disabled");
+                }
+                // shift active class
+                document.querySelector('#pagination-bottom .page-link.active').classList.remove('active');
+                var currentPageLink = document.querySelector('#pagination-bottom a.page-link[data-page="' + pageNumber + '"]');
+                currentPageLink.classList.add('active');
+
+                // Update the current page attribute
+                document.getElementById("productOverview").setAttribute('currentPage', pageNumber);
+            } else {
+
+            }
+        }
+        xhr.open("POST", url);
+	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(params);
+
+    }
+    function paginationForw() {
+        var page;
+        page = parseInt(document.querySelector('#pagination-bottom .page-link.active').getAttribute("data-page")) + 1;
+        paginationNum(page);
+    }
+    function paginationLast() {
+        paginationNum(${totalPages});
+    }
 </script>
 
 
@@ -128,27 +129,46 @@
 <#if totalPages gt 1>
 <nav aria-label="Product listing page navigation">
     <ul id="pagination-bottom" class="pagination pagination-bottom">
-        <#if currentPage != 1>
+        <#if currentPage == 1>
+        <li class="page-item disabled">
+            <a id="pagfirst" class="page-link" aria-label="First" onclick="paginationFirst()">
+                <i aria-hidden="true" class="icon-first"></i>
+            </a>
+        </li>
+        <li class="page-item disabled">
+            <a id="pagprev" class="page-link" aria-label="Previous" onclick="paginationBack()">
+                <i aria-hidden="true" class="icon-backward2"></i>
+            </a>
+        </li>
+        <#else>
         <li class="page-item">
-            <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
-                <span aria-hidden="true">&laquo;</span>
+            <a id="pagfirst" class="page-link" aria-label="First" onclick="paginationFirst()">
+                <i aria-hidden="true" class="icon-first"></i>
+            </a>
+        </li>
+        <li class="page-item">
+            <a id="pagprev" class="page-link" aria-label="Previous" onclick="paginationBack()">
+                <i aria-hidden="true" class="icon-backward2"></i>
             </a>
         </li>
         </#if>
         <#list 1..totalPages as i>
-            <#if i==currentPage>
-                <li class="page-item"><a class="page-link active" href="#" data-page="${i}"><span>${i}</span></a></li>
-            <#else>
-                <li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
-            </#if>
+        <#if i==currentPage>
+        <li class="page-item"><a class="page-link active" data-page="${i}" onclick="paginationNum(${i})">${i}</a></li>
+        <#else>
+        <li class="page-item"><a class="page-link" data-page="${i}" onclick="paginationNum(${i})">${i}</a></li>
+        </#if>
         </#list>
-        <#if currentPage != totalPages>
         <li class="page-item">
-            <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
-                <span aria-hidden="true">&raquo;</span>
+            <a id="pagnext" class="page-link" aria-label="Next" onclick="paginationForw()">
+                <i aria-hidden="true" class="icon-forward3"></i>
             </a>
         </li>
-        </#if>
+        <li class="page-item">
+            <a id="paglast" class="page-link" aria-label="Last" onclick="paginationLast()">
+                <i aria-hidden="true" class="icon-last"></i>
+            </a>
+        </li>
     </ul>
 </nav>
 </#if>
