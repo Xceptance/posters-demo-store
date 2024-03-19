@@ -148,6 +148,10 @@ function postersSetup() {
 			e.target.querySelector("#buttonDelete").addEventListener('click', () => {
 				deleteFromCart(cartProductId, cartIndex);
 			});
+			// dismiss button
+			e.target.querySelector("#buttonClose").addEventListener('click', () => {
+				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
+			});
 			//Bodycontent of popup
 			e.target.querySelector(`:scope ${'.modal-body'}`).appendChild(prodInfo);
 		});
