@@ -8,17 +8,17 @@
     </div>
 </div>
 <div class="container checkout-overview form-with-background">
-    <h1 id="titleOrderOverview">${i18n("titleOrderOverview")}</h1>
+    <h1 id="title-order-overview">${i18n("titleOrderOverview")}</h1>
     <div class="row">
         <!-- Shipping address -->
         <div class="col-md-4">
             <div class="checkout-overview-position">
                 <h3>${i18n("titleShippingAddress")}</h3>
-                <address id="shippingAddr">
+                <address id="shipping-addr">
                     <ul class="list-unstyled container-fluid address">
                         <li class="name font-bold" title="${i18n('addressFullName')}">${order.shippingAddress.name}</li>
                         <li class="company" title="${i18n('addressCompany')}">${order.shippingAddress.company}</li>
-                        <li class="addressLine" title="${i18n('addressLine')}">${order.shippingAddress.addressLine}</li>
+                        <li class="address-line" title="${i18n('addressLine')}">${order.shippingAddress.addressLine}</li>
                         <li>
                             <span class="city" title="${i18n('addressCity')}">${order.shippingAddress.city}</span>,
                             <span class="state" title="${i18n('addressState')}">${order.shippingAddress.state}</span>
@@ -33,11 +33,11 @@
         <div class="col-md-4">
             <div class="checkout-overview-position">
                 <h3>${i18n("titleBillingAddress")}</h3>
-                <address id="billingAddr">
+                <address id="billing-addr">
                     <ul class="list-unstyled container-fluid address">
                         <li class="name font-bold" title="${i18n('addressFullName')}">${order.billingAddress.name}</li>
                         <li class="company" title="${i18n('addressCompany')}">${order.billingAddress.company}</li>
-                        <li class="addressLine" title="${i18n('addressLine')}">${order.billingAddress.addressLine}</li>
+                        <li class="address-line" title="${i18n('addressLine')}">${order.billingAddress.addressLine}</li>
                         <li>
                             <span class="city" title="${i18n('addressCity')}">${order.billingAddress.city}</span>,
                             <span class="state" title="${i18n('addressState')}">${order.billingAddress.state}</span>
@@ -57,7 +57,7 @@
                         <li class="name" title="${i18n('titleName')}">
                             <span class="value font-bold">${order.creditCard.name}</span>
                         </li>
-                        <li class="cardNumber" title="${i18n('titleCreditCard')}">
+                        <li class="card-number" title="${i18n('titleCreditCard')}">
                             <span class="value">${order.creditCard.getCardNumberCryptic()}</span>
                         </li>
                         <li class="exp" title="${i18n('titleValidTo')}">
@@ -84,7 +84,7 @@
 		</thead>
 		<tbody>
 		  	<#list cartProducts as cartProduct>
-			<tr id="product${cartProduct_index}">
+			<tr id="product-${cartProduct_index}">
 				<th scope="row">${cartProduct?counter}</th>
 				<td>
 					<div class="row">
@@ -97,21 +97,21 @@
                             </picture>
 						</div>
 						<div class="col">
-							<h3 class="pName">${cartProduct.product.name}</h3>
-							<div class="productStyle"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
-							<div class="productSize">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
+							<h3 class="product-name">${cartProduct.product.name}</h3>
+							<div class="product-style"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
+							<div class="product-size">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
 						</div>
 					</div>
 				</td>
-				<td class="productUnitPrice">${currency}${cartProduct.getPriceAsString()}</td>
-				<td class="productCount" value="${cartProduct.productCount}">${cartProduct.productCount}</td>
+				<td class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</td>
+				<td class="product-count" value="${cartProduct.productCount}">${cartProduct.productCount}</td>
 				<td id="total-unit-price-short">${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
 			</tr>
 			</#list>
 		</tbody>
 	</table>
     <#else>
-    <div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+    <div id="error-cart-message" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
     </#if>
 	<div class="price-summary-row order-overview-position">
 		<ol class="list-group list-group-flush">
@@ -120,15 +120,15 @@
 				<div class="fw-bold">${i18n("cartSummary")}</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewSubTotal")}:</div>
-					<div id="SubTotalValue" class="col price-summary-value">${currency}${order.getSubTotalCostsAsString()}</div>
+					<div id="subtotal-value" class="col price-summary-value">${currency}${order.getSubTotalCostsAsString()}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewShippingCosts")}:</div>
-					<div id="shippingCosts" class="col price-summary-value">${currency}${order.getShippingCostsAsString()}</div>
+					<div id="shipping-costs" class="col price-summary-value">${currency}${order.getShippingCostsAsString()}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOvervieSubTotalTax")} (${order.getTaxAsString()}%):</div>
-					<div id="SubTotalTaxValue" class="col price-summary-value">${currency}${order.getTotalTaxCostsAsString()}</div>
+					<div id="subtotal-tax-value" class="col price-summary-value">${currency}${order.getTotalTaxCostsAsString()}</div>
 				</div>
 			  </div>
 			</li>
@@ -136,7 +136,7 @@
 			  <div class="price-summary ms-auto me-2">
 				<div class="row">
 					<div class="col fw-bold price-summary-position">${i18n("checkoutOverviewTotalCosts")}:</div>
-					<div id="orderTotal" class="col fw-bold price-summary-value">${currency}${order.getTotalCostsAsString()}</div>
+					<div id="order-total" class="col fw-bold price-summary-value">${currency}${order.getTotalCostsAsString()}</div>
 				</div>
 			  </div>
 			</li>
@@ -146,7 +146,7 @@
     <div class="d-flex justify-content-end mt-2">
         <form action="${contextPath}/checkoutCompleted" method="post">
             <!-- order button -->
-             <button class="btn btn-primary" id="btnOrder" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
+             <button class="btn btn-primary" id="btn-order" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
         </form>
     </div>   
 </div>    
