@@ -68,7 +68,7 @@
                 currentPageLink.classList.add('active');
 
                 // Update the current page attribute
-                document.getElementById("productOverview").setAttribute('currentPage', pageNumber);
+                document.getElementById("product-overview").setAttribute('currentPage', pageNumber);
             } else {
 
             }
@@ -93,20 +93,20 @@
 <div class="container text-center mt-3">
 	<div class="product-overview-heading">
 		<#if category??>
-		<div id="titleCategoryName" class="header-title">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-category-name" class="header-title">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if searchText??>
-		<div id="titleSearchText" class="header-title">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-search-text" class="header-title">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if noResults??>
-		<div id="titleNoResults" class="header-title">${noResults}</div>
+		<div id="title-no-results" class="header-title">${noResults}</div>
 		</#if>
 	</div>
 </div>
 	
-<div id="productOverview" class="container text-center">
-	<div class="row product-display-case-product-overview">
+<div id="product-overview" class="container text-center">
+	<div class="row product-display-case">
 			<#list products as pro>
 			<div id="product${pro_index}" class="card product-tile">
-                <picture id="overview-product-${pro_index}">
+                <picture id="t299-overview-product-${pro_index}">
                     <source media="(max-width: 399px)" srcset="${contextPath}${pro.smallImageURL}">
                     <source media="(max-width: 799px)" srcset="${contextPath}${pro.mediumImageURL}">
                     <source media="(max-width: 1999px)" srcset="${contextPath}${pro.largeImageURL}">
