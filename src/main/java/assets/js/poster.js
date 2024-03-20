@@ -136,20 +136,20 @@ function postersSetup() {
 		})
 	}	
 	//Setup click handler for update and delete
-	if (document.getElementById('deleteProductModal')) {
+	if (document.getElementById('delete-product-modal')) {
 		//Setup handler for buttons of delete product confimation popup
-		document.getElementById('deleteProductModal').addEventListener('show.bs.modal', (e) => {
+		document.getElementById('delete-product-modal').addEventListener('show.bs.modal', (e) => {
 			var cartProductId = e.relatedTarget.getAttribute('data-id');
 			var cartIndex = e.relatedTarget.getAttribute('data-index');
-			var prodInfo = e.relatedTarget.closest('tr.cart-product').querySelector('.cart-product-description').cloneNode(true);
+			var prodInfo = e.relatedTarget.closest('tr.js-cart-product').querySelector('.js-cart-product-description').cloneNode(true);
 			//Delete button
 			console.log(e.target);
 			console.log(e.relatedTarget);
-			e.target.querySelector("#buttonDelete").addEventListener('click', () => {
+			e.target.querySelector("#button-delete").addEventListener('click', () => {
 				deleteFromCart(cartProductId, cartIndex);
 			});
 			// dismiss button
-			e.target.querySelector("#buttonClose").addEventListener('click', () => {
+			e.target.querySelector("#button-close").addEventListener('click', () => {
 				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
 			});
 			//Bodycontent of popup
