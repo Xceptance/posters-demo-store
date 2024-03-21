@@ -118,35 +118,35 @@
   /*  Mini cart
   *   - Start
   */
-  .cartMini {
+  .cart-mini {
     width: 250px;
     padding: 0px 10px;
   }
   
-  .cartMiniHeader {
+  .cart-mini-header {
     padding: 10px 20px;
     border-bottom: 3px #000 solid;
   }
   
-  .cartMiniProducts {
+  .cart-mini-products {
     padding: 0 20px 0 20px;
     background-color: #ffffff;
   }
   
-  .cartMiniTotal {
+  .cart-mini-total {
     padding: 10px;
   }
   
-  .cartMiniSubOrderTotal {
+  .cart-mini-suborder-total {
     padding: 10px 0;
   }
   
-  .subOrderPrice {
+  .suborder-price {
     font-weight: bold;
     font-size: 120%;
   }
   
-  .cartItems {
+  .cart-items {
     border-bottom: 2px #c91b1b solid;
     padding: 5px 0;
     margin: 0 20px;
@@ -159,7 +159,7 @@
     margin: 10px;
   }
   
-  .cartMiniEmpty {
+  .cart-mini-empty {
     background-color: #ffffff;
     display: none;
   }
