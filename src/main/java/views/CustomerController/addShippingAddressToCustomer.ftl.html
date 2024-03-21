@@ -5,13 +5,13 @@
     <div class="row  justify-content-center">
         <div class="col-lg-6">
 			<div class="col-lg-12 colorlib-form">
-				<form id="formAddDelAddr" class="form-horizontal"
+				<form id="form-add-del-addr" class="form-horizontal"
 					action="${contextPath}/addShippingAddressToCustomerCompleted"
 					method="post">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>
-									<span class="h2">${i18n("shippingAddressAddNew")}</span>
+							<span class="h2">${i18n("shippingAddressAddNew")}</span>
 						</legend>
 							<!-- include form -->
 							<#include "../components/addressForm.ftl.html"/>
@@ -23,7 +23,7 @@
 										</span>
 									</div>
 									<div class="col-sm-8">
-										<button id="btnAddShippAddr" class="btn btn-primary pull-right btnfw"
+										<button id="btn-add-shipp-addr" class="btn btn-primary pull-right"
 											name="btnAddShippAddr" type="submit">${i18n('buttonAddNewAddress')}</button>
 									</div>
 								</div>
