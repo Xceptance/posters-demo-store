@@ -12,14 +12,14 @@
 	<!-- add new credit card -->
     <div class="row  justify-content-center">
         <div class="col-lg-6">
-            <form id="formAddPayment" action="${contextPath}/paymentMethodCompleted" method="post" class="form-with-background">
-                <h2 id="titlePayment" class="text-center">${i18n("paymentMethodTitlEnter")}</h2>
+            <form id="form-add-payment" action="${contextPath}/paymentMethodCompleted" method="post" class="form-with-background">
+                <h2 id="title-payment" class="text-center">${i18n("paymentMethodTitleEnter")}</h2>
                 <!-- include payment form -->
 				<#include "../components/paymentForm.ftl.html"/>
                 <hr>
                 <div class="d-flex">
                     <div class="me-auto">*${i18n('titleRequiredFields')}</div>
-                    <button type="submit" class="ms-auto btn btn-primary" id="btnAddPayment" name="btnAddPayment">${i18n('buttonContinue')}</button>
+                    <button type="submit" class="ms-auto btn btn-primary" id="btn-add-payment" name="btnAddPayment">${i18n('buttonContinue')}</button>
                 </div>
             </form>
         </div>
