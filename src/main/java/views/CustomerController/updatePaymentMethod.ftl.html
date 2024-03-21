@@ -7,32 +7,30 @@
 
 <div class="container">
  
-    <div class="row  justify-content-center h2fwpr">
+    <div class="row  justify-content-center">
         <div class="col-lg-6">
 
 			<div class="col-lg-12 colorlib-form">
-				<form id="formUpdatePayment" class="form-horizontal"
+				<form id="form-update-payment" class="form-horizontal"
 					action="${contextPath}/updatePaymentMethodCompleted" method="post">
 					<fieldset>
 						<!-- Form Name -->
 						<legend>
-									<span class="h2">${i18n("updatePaymentTitle")}</span>
+							<span class="h2">${i18n("updatePaymentTitle")}</span>
 						</legend>
 						<div class="col-md-12">
 							<!-- include form -->
 							<#include "../components/paymentForm.ftl.html"/> 
-							<input name="cardId" id="cardId" type="hidden" value=${card.id}>
+							<input name="cardId" id="card-id" type="hidden" value=${card.id}>
 							<!-- update -->
 							<div class="form-group">
 								<div class="col-sm-12 nopadding">
 									<div class="col-sm-4">
-										<span class="req-field me-auto">*${i18n('titleRequiredFields')}</span>
-										
+										<span class="req-field me-auto">*${i18n('titleRequiredFields')}</span>	
 									</div>
 									<div class="col-sm-8">
-										<button id="btnUpdateDelAddr" class="btn btn-primary pull-right"
-											name="btnUpdateDelAddr" type="submit">${i18n('buttonSave')}</button>
-									
+										<button id="btn-update-del-addr" class="btn btn-primary pull-right"
+											name="btnUpdateDelAddr" type="submit">${i18n('buttonSave')}</button>									
 									</div>
 								</div>
 							</div>
