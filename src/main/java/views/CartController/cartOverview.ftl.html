@@ -22,7 +22,7 @@
 				<td>
 					<div class="row js-cart-product-description">
 						<div class="col">
-							<picture id="t299cart-overview-picture-${cartProduct.id}">
+							<picture id="cart-overview-picture-${cartProduct.id}">
                                 <source media="(max-width: 399px)" srcset="${contextPath}${cartProduct.product.smallImageURL}">
                                 <source media="(max-width: 799px)" srcset="${contextPath}${cartProduct.product.mediumImageURL}">
                                 <source media="(max-width: 1999px)" srcset="${contextPath}${cartProduct.product.largeImageURL}">
@@ -38,14 +38,14 @@
 				</td>
 				<td> <div class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</div></td>
 				<td>
-					<input id="product-count-${cartProduct_index}" name="t299product-count-${cartProduct_index}"
+					<input id="product-count-${cartProduct_index}" name="product-count-${cartProduct_index}"
 						class="form-control text-center product-count" title="${i18n('cartTableHeaderQuantity')}" type="text"
 						value=${cartProduct.productCount} size="4" maxlength="4">
 				</td>
 				<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
 				<td>
-					<button class="btn btn-update-product" name="t299btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="t299-btn-update-prod-count-${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" onclick="updateProduct(${cartProduct.id}, ${cartProduct_index}, document.getElementById('productCount${cartProduct_index}').value)"><span class="icon-refresh-ccw"></span></button>
-					<button class="btn btn-remove-product" id="t299-btn-remove-prod-count-${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#delete-product-modal"><span class="icon-cross"></span></button>
+					<button class="btn btn-update-product" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btn-update-prod-count-${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" onclick="updateProduct(${cartProduct.id}, ${cartProduct_index}, document.getElementById('product-count-${cartProduct_index}').value)"><span class="icon-refresh-ccw"></span></button>
+					<button class="btn btn-remove-product" id="btn-remove-prod-count-${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#delete-product-modal"><span class="icon-cross"></span></button>
 				</td>
 			</tr>
 			</#list>

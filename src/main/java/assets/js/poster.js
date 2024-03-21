@@ -60,7 +60,7 @@ function updatePrice(selectedField, productId) {
 
 function updateProductOverview(data) {
     // Clear the existing product content
-	var displayCase = document.querySelector('#product-overview .product-display-case-product-overview');
+	var displayCase = document.querySelector('#product-overview .product-display-case');
 	while(displayCase.firstChild) displayCase.removeChild(displayCase.firstChild);
     // Iterate over the products in the data and append the updated content
 	data.products.forEach(function(product) {

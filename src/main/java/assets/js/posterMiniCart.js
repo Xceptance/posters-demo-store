@@ -78,9 +78,9 @@ function addToMiniCart(productId, finish, size) {
 			/* update cart in header (counter) */
 			document.querySelector("#header-cart-overview span.header-cart-product-count").textContent = data.headerCartOverview;
 			/* update product counter in mini-cart */
-			document.querySelector(".cartMiniProductCounter span.value").textContent = data.headerCartOverview;
+			document.querySelector(".cart-mini-product-counter span.value").textContent = data.headerCartOverview;
 			/* display the new product in the minicart */
-			document.querySelector(".cartMiniElementList").append(minicartEntry);
+			document.querySelector(".cart-mini-element-list").append(minicartEntry);
 			/* show minicart and than hide after 1500 ms */
 			document.querySelector(".top-menu #header-cart-overview").classList.add('show');
 			document.querySelector(".top-menu #mini-cart-menu").classList.add('show');
