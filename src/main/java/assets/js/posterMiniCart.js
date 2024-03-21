@@ -76,16 +76,16 @@ function addToMiniCart(productId, finish, size) {
 			document.querySelector(".notifications-loader").innerHTML = [''];
 
 			/* update cart in header (counter) */
-			document.querySelector("#headerCartOverview span.headerCartProductCount").textContent = data.headerCartOverview;
+			document.querySelector("#header-cart-overview span.header-cart-product-count").textContent = data.headerCartOverview;
 			/* update product counter in mini-cart */
 			document.querySelector(".cartMiniProductCounter span.value").textContent = data.headerCartOverview;
 			/* display the new product in the minicart */
 			document.querySelector(".cartMiniElementList").append(minicartEntry);
 			/* show minicart and than hide after 1500 ms */
-			document.querySelector(".top-menu #headerCartOverview").classList.add('show');
+			document.querySelector(".top-menu #header-cart-overview").classList.add('show');
 			document.querySelector(".top-menu #mini-cart-menu").classList.add('show');
 			window.setTimeout(function(){
-				document.querySelector(".top-menu #headerCartOverview").classList.remove('show');
+				document.querySelector(".top-menu #header-cart-overview").classList.remove('show');
 				document.querySelector(".top-menu #mini-cart-menu").classList.remove('show');
 			}, 1500);
 		} else {
