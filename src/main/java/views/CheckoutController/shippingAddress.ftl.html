@@ -15,18 +15,18 @@
 			<#if shippingAddresses??>
 			<!-- choose available address -->
 			<form action="addShippingAddressToOrder" method="post" class="colorlib-form">
-				<div id="titleDelAddr">
-					<h2 class="text-center h2fwpr">${i18n("shippingAddressTitleSelect")}</h2>
+				<div id="title-del-addr">
+					<h2 class="text-center">${i18n("shippingAddressTitleSelect")}</h2>
 				</div>
 				<#list shippingAddresses as address>
 					<#if (address_index + 3) % 3==0>
 				<div class="container-fluid">
 					<ul class="list-unstyled">
 					</#if>
-						<li class="col-xs-12 thumbnail" id="delAddr${address_index}">
+						<li class="col-xs-12 thumbnail" id="del-addr-${address_index}">
 							<div class="col-sm-1">
 								<#if (address_index==0)>
-								<input name="addressId" value="${address.id}" type="radio" checked="checked">
+								<input name="address-id" value="${address.id}" type="radio" checked="checked">
 								<#else> <input name="addressId" value="${address.id}" type="radio">
 								</#if>
 							</div>
@@ -35,7 +35,7 @@
 									<ul class="list-unstyled container-fluid address">
 										<li class="name" title="${i18n('addressFullName')}"><strong>${address.name}</strong></li>
 										<li class="company" title="${i18n('addressCompany')}">${address.company}</li>
-										<li class="addressLine" title="${i18n('addressLine')}">${address.addressLine}</li>
+										<li class="address-line" title="${i18n('addressLine')}">${address.addressLine}</li>
 										<li>
 											<span class="city" title="${i18n('addressCity')}">${address.city}</span>,
 											<span class="state" title="${i18n('addressState')}">${address.state}</span>
@@ -60,9 +60,9 @@
 						<div class="col-sm-3"></div>
 							<div class="col-sm-9">
 								<!-- Trigger the modal with a button -->
-								<button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#addAdressModal">${i18n("shippingAddressAddNew")}</button>
+								<button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#add-address-modal">${i18n("shippingAddressAddNew")}</button>
 								<!-- button - continue  -->
-								<button class="btn btn-primary" id="btnUseAddressContinue" name="btnUseAddressContinue" type="submit">${i18n("buttonContinue")}</button>
+								<button class="btn btn-primary" id="btn-use-address-continue" name="btnUseAddressContinue" type="submit">${i18n("buttonContinue")}</button>
 							</div>
 						</div>
 					</div>
@@ -72,9 +72,9 @@
 </div>
 
 <!-- Modal for add new address-->
-<div id="addAdressModal" class="modal fade" role="dialog">
+<div id="add-address-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<form id="formAddAddr" class="form-horizontal" action="${contextPath}/shippingAddressCompleted" method="post">
+		<form id="form-add-addr" class="form-horizontal" action="${contextPath}/shippingAddressCompleted" method="post">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -91,30 +91,27 @@
 							<div class="col-xs-12 col-sm-7 ">${i18n("shippingAddressEqualsBillingAddress")}:</div>
 							<div class="col-xs-12 col-sm-5 margin_top7">
 								<div>
-									<label for="billEqualShipp-Yes"> <input name="billEqualShipp"
-										id="billEqualShipp-Yes" value="Yes" checked="checked" type="radio"
+									<label for="bill-equal-shipp"> <input name="billEqualShipp"
+										id="bill-equal-shipp" value="Yes" checked="checked" type="radio"
 										title="${i18n('chooseYes')}"> ${i18n("chooseYes")}
 									</label>
 								</div>
 								<div>
-									<label for="billEqualShipp-No"> <input name="billEqualShipp"
-										id="billEqualShipp-No" value="No" type="radio"
+									<label for="bill-unequal-shipp"> <input name="billEqualShipp"
+										id="bill-unequal-shipp" value="No" type="radio"
 										title="${i18n('chooseNo')}"> ${i18n('chooseNo')}
 									</label>
 								</div>
-								<span class="reqField me-auto pull-left textcolordarkgrey">*${i18n('titleRequiredFields')}</span>
-
+								<span class="req-field me-auto pull-left">*${i18n('titleRequiredFields')}</span>
 							</div>
 						</div>
 					</fieldset>
 				</div>
-
 				<div class="modal-footer">
-
 					<button type="button" class="btn btn-default" data-bs-dismiss="modal"
 						title="${i18n('buttonClose')}">${i18n('buttonClose')}</button>
 					<!-- continue button -->
-					<button id="btnAddAddr" name="btnAddAddr" class="btn btn-primary pull-right" type="submit"
+					<button id="btn-add-addr" name="btnAddAddr" class="btn btn-primary pull-right" type="submit"
 						title="${i18n('buttonContinue')}">${i18n('buttonContinue')}</button>
 				</div>
 			</div>	
