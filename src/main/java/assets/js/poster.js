@@ -1,5 +1,5 @@
 const sendAlert = (messageContent, messageType) => {
-	const alertPlaceholder = document.getElementById('alertPlaceholder')
+	const alertPlaceholder = document.getElementById('alert-placeholder')
 	const alertWrapper = document.createElement('div')
 	alertWrapper.classList.add("alert");
 	alertWrapper.classList.add(messageType);
@@ -39,7 +39,6 @@ function updateProductCount(cartProductId, count, cartIndex) {
 // update price of product if the selected size has changed
 function updatePrice(selectedField, productId) {
 	var url = CONTEXT_PATH + '/updatePrice';
-	console.log(productId, selectedField.value);
 	const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(data) {
@@ -61,7 +60,7 @@ function updatePrice(selectedField, productId) {
 
 function updateProductOverview(data) {
     // Clear the existing product content
-	var displayCase = document.querySelector('#productOverview .product-display-case-product-overview');
+	var displayCase = document.querySelector('#product-overview .product-display-case');
 	while(displayCase.firstChild) displayCase.removeChild(displayCase.firstChild);
     // Iterate over the products in the data and append the updated content
 	data.products.forEach(function(product) {
@@ -136,20 +135,20 @@ function postersSetup() {
 		})
 	}	
 	//Setup click handler for update and delete
-	if (document.getElementById('deleteProductModal')) {
+	if (document.getElementById('delete-product-modal')) {
 		//Setup handler for buttons of delete product confimation popup
-		document.getElementById('deleteProductModal').addEventListener('show.bs.modal', (e) => {
+		document.getElementById('delete-product-modal').addEventListener('show.bs.modal', (e) => {
 			var cartProductId = e.relatedTarget.getAttribute('data-id');
 			var cartIndex = e.relatedTarget.getAttribute('data-index');
-			var prodInfo = e.relatedTarget.closest('tr.cart-product').querySelector('.cart-product-description').cloneNode(true);
+			var prodInfo = e.relatedTarget.closest('tr.js-cart-product').querySelector('.js-cart-product-description').cloneNode(true);
 			//Delete button
 			console.log(e.target);
 			console.log(e.relatedTarget);
-			e.target.querySelector("#buttonDelete").addEventListener('click', () => {
+			e.target.querySelector("#button-delete").addEventListener('click', () => {
 				deleteFromCart(cartProductId, cartIndex);
 			});
 			// dismiss button
-			e.target.querySelector("#buttonClose").addEventListener('click', () => {
+			e.target.querySelector("#button-close").addEventListener('click', () => {
 				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
 			});
 			//Bodycontent of popup

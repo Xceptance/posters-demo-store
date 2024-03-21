@@ -4,12 +4,12 @@
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
   <div class="container top-menu">
     <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
-      <img id="header-brand-logo" class="shopLogo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
+      <img id="header-brand-logo" class="shop-logo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
       ${i18n('titleShop')}</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-navigation-elements" aria-controls="header-navigation-elements" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="header-navigation-elements" class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div id="header-navigation-elements" class="collapse navbar-collapse">
       <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
         <#list topCategory as tC>
         <li class="nav-item dropdown">
@@ -36,9 +36,9 @@
           <#if cartProductCount == 0>
 
           <li class="nav-item ">
-            <a id="headerCartOverview" class="dropdown-toggle headerCartOverview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-shopping-cart"></span> &nbsp; 
-              <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
+              <span id="count-wide-view" class="header-cart-product-count">${cartProductCount}</span>
             </a>
             <ul id="mini-cart-menu" class="dropdown-menu" style="display: none;">
               <li><#include "../components/miniCartMenu.ftl.html"></li>
@@ -47,9 +47,9 @@
           </li>
           <#else>
           <li class="nav-item dropdown">
-            <a id="headerCartOverview" class="dropdown-toggle headerCartOverview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-shopping-cart"></span> &nbsp; 
-              <span id="count_wideView" class="headerCartProductCount">${cartProductCount}</span>
+              <span id="count-wide-view" class="header-cart-product-count">${cartProductCount}</span>
             </a>
             <ul id="mini-cart-menu" class="dropdown-menu">
               <li><#include "../components/miniCartMenu.ftl.html"></li>

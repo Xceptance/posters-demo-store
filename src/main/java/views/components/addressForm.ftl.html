@@ -1,7 +1,7 @@
 <!-- last name -->
 <div class="mb-3">
-    <label class="form-label" for="address-form-input-last-name">${i18n("labelMyName")}*</label>
-    <input id="address-form-input-last-name" name="lastName" placeholder="${i18n('registrationLastName')}"
+    <label class="form-label" for="address-last-name">${i18n("labelMyName")}*</label>
+    <input id="address-last-name" name="lastName" placeholder="${i18n('registrationLastName')}"
         class="form-control" type="text" pattern="${regexName}" 
         <#if session_form??><#if session_form=="bill">
         value="<#if ses_bill_last_name??>${ses_bill_last_name}<#else>${(address.name)!}</#if>"
@@ -13,8 +13,8 @@
 
 <!-- first name -->
 <div class="mb-3">
-    <label class="form-label" for="firstName">${i18n("labelMyFirstName")}*</label>
-    <input id="firstName" name="firstName" placeholder="${i18n('registrationFirstName')}" class="form-control"
+    <label class="form-label" for="address-first-name">${i18n("labelMyFirstName")}*</label>
+    <input id="address-first-name" name="firstName" placeholder="${i18n('registrationFirstName')}" class="form-control"
         type="text" pattern="${regexName}" 
         <#if session_form??><#if session_form=="bill">
         value="<#if ses_bill_first_name??>${ses_bill_first_name}<#else></#if>"
@@ -26,8 +26,8 @@
 
 <!-- company-->
 <div class="mb-3">
-    <label for="address-form-input-company" class="form-label">${i18n("addressCompany")}</label>
-    <input type="text" id="address-form-input-company" class="form-control"
+    <label for="address-company" class="form-label">${i18n("addressCompany")}</label>
+    <input type="text" id="address-company" class="form-control"
         placeholder="${i18n('addressCompanyPlaceholder')}" name="company" 
         <#if session_form??><#if session_form=="bill">
         value="<#if ses_bill_company??>${ses_bill_company}<#else>${(address.company)!}</#if>"
@@ -39,8 +39,8 @@
 
 <!-- address line-->
 <div class="mb-3">
-    <label for="address-form-input-adress-line" class="form-label">${i18n("addressLine")}*</label>
-    <input type="text" id="address-form-input-adress-line" class="form-control" 
+    <label for="address-address-line" class="form-label">${i18n("addressLine")}*</label>
+    <input type="text" id="address-address-line" class="form-control" 
         <#if session_form??><#if session_form=="bill">
         value="<#if ses_bill_addressLine??>${ses_bill_addressLine}<#else>${(address.addressLine)!}</#if>"
         <#else>
@@ -51,53 +51,53 @@
 
 <!-- city-->
 <div class="mb-3">
-    <label for="address-form-input-city" class="form-label">${i18n("addressCity")}*</label>
-    <input type="text" id="address-form-input-city" class="form-control"
-        aria-describedby="address-form-input-city-help-block" pattern="${regexName}" 
+    <label for="address-city" class="form-label">${i18n("addressCity")}*</label>
+    <input type="text" id="address-city" class="form-control"
+        aria-describedby="address-city-help" pattern="${regexName}" 
         <#if session_form??><#if session_form=="bill">
         value="<#if ses_bill_city??>${ses_bill_city}<#else>${(address.city)!}</#if>"
         <#else>
             value="<#if ses_city??>${ses_city}<#else>${(address.city)!}</#if>"
             </#if><#else>${(address.city)!}</#if>
         placeholder="${i18n('addressCity')}" name="city" required>
-        <div id="address-form-input-city-help-block" class="form-text"></div>
+        <div id="address-city-help" class="form-text"></div>
 </div>
 
 <!-- state & zip-->
 <div class="mb-3">
     <div class="row">
         <div class="col">
-            <label for="address-form-input-state" class="form-label">${i18n("addressState")}*</label>
-            <input type="text" id="address-form-input-state" class="form-control"
-                aria-describedby="address-form-input-state-help-block" pattern="${regexName}" 
+            <label for="address-state" class="form-label">${i18n("addressState")}*</label>
+            <input type="text" id="address-state" class="form-control"
+                aria-describedby="address-state-help" pattern="${regexName}" 
                 <#if session_form??><#if session_form=="bill">
                 value="<#if ses_bill_state??>${ses_bill_state}<#else>${(address.state)!}</#if>"
                 <#else>
                     value="<#if ses_state??>${ses_state}<#else>${(address.state)!}</#if>"
                     </#if><#else>${(address.state)!}</#if>
                 placeholder="State" name="state" required>
-                <div id="address-form-input-state-help-block" class="form-text"></div>
+                <div id="address-state-help" class="form-text"></div>
         </div>
         <div class="col">
-            <label for="address-form-input-zip" class="form-label">${i18n('addressZip')}*</label>
-            <input type="text" id="address-form-input-zip" class="form-control"
-                aria-describedby="address-form-input-zip-help-block" pattern="${regexZip}" 
+            <label for="address-zip" class="form-label">${i18n('addressZip')}*</label>
+            <input type="text" id="address-zip" class="form-control"
+                aria-describedby="address-zip-help" pattern="${regexZip}" 
                 <#if session_form??><#if session_form=="bill">
                 value="<#if ses_bill_zip??>${ses_bill_zip}<#else>${(address.zip)!}</#if>"
                 <#else>
                     value="<#if ses_zip??>${ses_zip}<#else>${(address.zip)!}</#if>"
                     </#if><#else>${(address.zip)!}</#if>
                 placeholder="Zip / Postal" name="zip" required>
-                <div id="address-form-input-zip-help-block" class="form-text"></div>
+                <div id="address-zip-help" class="form-text"></div>
         </div>
     </div>
 </div>
 
 <!-- Select country -->
 <div class="mb-3">
-    <label for="address-form-select-country" class="form-label">${i18n("addressCountry")}*</label>
-    <select id="address-form-select-country" class="form-select"
-        aria-describedby="address-form-select-country-help-block" name="country">
+    <label for="address-country" class="form-label">${i18n("addressCountry")}*</label>
+    <select id="address-country" class="form-select"
+        aria-describedby="address-country-help" name="country">
         <#if session_form??><#if session_form=="bill">
             <#if ses_bill_country?exists>
                 <option value="United States" <#if ses_bill_country == "United States">selected</#if>>${i18n('countryUS')}</option>
@@ -118,7 +118,7 @@
             </#if>
         </#if><#else><option></option><option>${i18n('countryUS')}</option><option>${i18n('countryGermany')}</option></#if>
     </select>
-    <div id="address-form-select-country-help-block" class="form-text">
+    <div id="address-country-help" class="form-text">
         We only ship to ${i18n('countryUS')} and ${i18n('countryGermany')}.
     </div>
 </div>

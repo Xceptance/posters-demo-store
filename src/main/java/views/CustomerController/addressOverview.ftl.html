@@ -8,14 +8,14 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-8">
 				<div class="col-lg-12 colorlib-form">
-					<div id="titleAddressOverview" class="header-container h2fwpr">
+					<div id="title-address-overview" class="header-container">
 						<span class="h2">${i18n("titleAddressOverview")}</span>
 					</div>
 					<!-- Print available shipping addresses -->
 					<#if shippingAddresses??>
 					<!-- Card for Shipping Address -->
 					<div class="card mb-3 card-ship">
-						<div id="titleDelAddr" class="card-header"> <h5>${i18n("titleShippingAddress")}</h5></div>
+						<div id="title-del-addr" class="card-header"> <h5>${i18n("titleShippingAddress")}</h5></div>
 						<div class="card-body text-dark">
 							<#list shippingAddresses as address>
 							<div class="row col-lg-12 address">
@@ -39,10 +39,10 @@
 										<button class="btn btn-outline-danger btn-sm me-2" type="submit">
 											<i class="icon-pencil"></i>
 										</button>
-										<input name="addressId" class="shippingId${address.id}" type="hidden" value="${address.id}">
+										<input name="addressId" class="shipping-id-${address.id}" type="hidden" value="${address.id}">
 									</form>
 									<!-- Delete button -->
-									<button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#delModal${address.id}">
+									<button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#del-modal-${address.id}">
 										<i class="icon-trash"></i>
 									</button>
 								</div>
@@ -54,7 +54,7 @@
 
 					<!-- Add new shipping address -->
 					<div>
-					<a class="btn btn-outline-danger btn-sm" style="float: right;" id="linkAddNewShipAddr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
+					<a class="btn btn-outline-danger btn-sm" style="float: right;" id="link-add-ship-addr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
 					</div>
 
 					<!-- Print available billing addresses -->
@@ -85,10 +85,10 @@
 										<button class="btn btn-outline-danger btn-sm me-2" type="submit">
 											<i class="icon-pencil"></i>
 										</button>
-										<input name="addressId" class="billingId${address.id}" type="hidden" value="${address.id}">
+										<input name="addressId" class="billing-id-${address.id}" type="hidden" value="${address.id}">
 									</form>
 									<!-- Delete button -->
-									<button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#delModalBill${address.id}">
+									<button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#del-modal-bill-${address.id}">
 										<i class="icon-trash"></i>
 									</button>
 								</div>
@@ -99,7 +99,7 @@
 					</#if>
 					<!-- Add new billing address -->
 					<div>
-						<a class="btn btn-outline-danger btn-sm" style="float: right;" id="linkAddNewShipAddr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
+						<a class="btn btn-outline-danger btn-sm" style="float: right;" id="link-add-ship-addr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
 					</div>
 				</div>
 			</div>
@@ -118,20 +118,20 @@
 		<!-- Shipping Info Confirmation Modal -->
 
 		<#list shippingAddresses as addressShip>
-			<div class="modal fade" id="delModal${addressShip.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+			<div class="modal fade" id="del-modal-${addressShip.id}" tabindex="-1" aria-labelledby="del-ship-label"
 				aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="exampleModalLabel">Delete the following shipping address?</h1>
+							<h1 class="modal-title fs-5" id="del-ship-label">Delete the following shipping address?</h1>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<ul class="list-unstyled address h2fwpr">
+							<ul class="list-unstyled address">
 								<li class="name" title="${i18n('addressFullName')}"><strong>${addressShip.name}</strong>
 								</li>
 								<li class="company" title="${i18n('addressCompany')}">${addressShip.company}</li>
-								<li class="addressLine" title="${i18n('addressLine')}">${addressShip.addressLine}</li>
+								<li class="address-line" title="${i18n('addressLine')}">${addressShip.addressLine}</li>
 								<li><span class="city" title="${i18n('addressCity')}">${addressShip.city}</span>, <span
 										class="state" title="${i18n('addressState')}">${addressShip.state}</span> <span
 										class="zip" title="${i18n('addressZip')}">${addressShip.zip}</span></li>
@@ -142,9 +142,9 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<form action="${contextPath}/deleteShippingAddress" method="post">
-								<input name="addressIdShip" class="shippingId${addressShip.id}" type="hidden"
+								<input name="addressIdShip" class="shipping-id-${addressShip.id}" type="hidden"
 									value="${addressShip.id}">
-								<button class="btn btn-danger" id="btnDeleteAddr${addressShip_index}"
+								<button class="btn btn-danger" id="btn-del-addr-${addressShip_index}"
 									name="btnDeleteAddr${addressShip_index}"
 									type="submit">${i18n("buttonDelete")}</button>
 							</form>
@@ -157,20 +157,20 @@
 		<!-- Billing Info Confirmation Modal -->
 		
 		<#list billingAddresses as addressBill>
-			<div class="modal fade" id="delModalBill${addressBill.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+			<div class="modal fade" id="del-modal-bill-${addressBill.id}" tabindex="-1" aria-labelledby="del-bill-label"
 				aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="exampleModalLabel">Delete the following billing address?</h1>
+							<h1 class="modal-title fs-5" id="del-bill-label">Delete the following billing address?</h1>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<ul class="list-unstyled address h2fwpr">
+							<ul class="list-unstyled address">
 								<li class="name" title="${i18n('addressFullName')}"><strong>${addressBill.name}</strong>
 								</li>
 								<li class="company" title="${i18n('addressCompany')}">${addressBill.company}</li>
-								<li class="addressLine" title="${i18n('addressLine')}">${addressBill.addressLine}</li>
+								<li class="address-line" title="${i18n('addressLine')}">${addressBill.addressLine}</li>
 								<li><span class="city" title="${i18n('addressCity')}">${addressBill.city}</span>, <span
 										class="state" title="${i18n('addressState')}">${addressBill.state}</span> <span
 										class="zip" title="${i18n('addressZip')}">${addressBill.zip}</span></li>
@@ -181,9 +181,9 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<form action="${contextPath}/deleteBillingAddress" method="post">
-								<input name="addressIdBill" class="billingId${addressBill.id}" type="hidden"
+								<input name="addressIdBill" class="billing-id-${addressBill.id}" type="hidden"
 									value="${addressBill.id}">
-								<button class="btn btn-danger" id="btnDeleteAddr${addressBill_index}"
+								<button class="btn btn-danger" id="btn-del-addr-${addressBill_index}"
 									name="btnDeleteAddr${addressBill_index}"
 									type="submit">${i18n("buttonDelete")}</button>
 							</form>
