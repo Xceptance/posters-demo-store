@@ -39,7 +39,6 @@ function updateProductCount(cartProductId, count, cartIndex) {
 // update price of product if the selected size has changed
 function updatePrice(selectedField, productId) {
 	var url = CONTEXT_PATH + '/updatePrice';
-	console.log(productId, selectedField.value);
 	const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(data) {
