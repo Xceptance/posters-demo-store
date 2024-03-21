@@ -577,7 +577,7 @@
 /*  Icons as elements
 *   - Start
 */
-  .gototop {
+  .go-to-top {
     /* 
     * width, height, and border-radius assume the content will be 1rem x 1rem in size
     * if this condition is not met content will be misaligned 
@@ -600,7 +600,7 @@
     z-index: 99; /* Make sure it does not overlap */
   }
 
-  .gototop a {
+  .go-to-top a {
     color: inherit;
     text-decoration: none;
   }

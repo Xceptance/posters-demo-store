@@ -1,5 +1,5 @@
 const sendAlert = (messageContent, messageType) => {
-	const alertPlaceholder = document.getElementById('alertPlaceholder')
+	const alertPlaceholder = document.getElementById('alert-placeholder')
 	const alertWrapper = document.createElement('div')
 	alertWrapper.classList.add("alert");
 	alertWrapper.classList.add(messageType);

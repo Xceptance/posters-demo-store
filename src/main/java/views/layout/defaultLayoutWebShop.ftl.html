@@ -51,7 +51,7 @@
 			</noscript>
 
 			<!-- messages -->
-			<div id="alertPlaceholder">
+			<div id="alert-placeholder">
 				
 			</div>
 
@@ -60,7 +60,7 @@
 				<#nested />
 			</div>
 
-			<div id="js-top" class="gototop" style="display: none;">
+			<div id="js-top" class="go-to-top" style="display: none;">
 				<a onclick="toTopFunction()" id="js-gotop"><i class="icon-arrow-up2"></i></a>
 			</div>
 		</main>
@@ -78,7 +78,7 @@
 		<#if flash.error??>
 			<script>
 				ready(() => { 
-					var alertPlaceholder = document.getElementById("alertPlaceholder");
+					var alertPlaceholder = document.getElementById("alert-placeholder");
 					var alertWrapper = document.createElement('div');
 					alertWrapper.classList.add("alert");
 					alertWrapper.classList.add("alert-danger");
@@ -94,7 +94,7 @@
 		<#if flash.success??>
 			<script>
 				ready(() => { 
-					var alertPlaceholder = document.getElementById("alertPlaceholder");
+					var alertPlaceholder = document.getElementById("alert-placeholder");
 					var alertWrapper = document.createElement('div');
 					alertWrapper.classList.add("alert");
 					alertWrapper.classList.add("alert-success");
