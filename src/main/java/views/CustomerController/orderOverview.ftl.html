@@ -4,13 +4,13 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="container">
-            <div class="colorlib-product h2fwpr">
+            <div class="colorlib-product">
 
                 <div class="col-md-10 offset-md-1">
-                    <div id="titleOrderHistory" class="header-container">
+                    <div id="title-order-history" class="header-container">
                         <span class="h2">${i18n("titleOrderHistory")}</span>
                     </div>
-                    <div id="orderOverview">
+                    <div id="order-overview">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -30,7 +30,7 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <picture id="orderOverview-picture-${orderProduct.id}">
+                                                            <picture id="order-overview-picture-${orderProduct.id}">
                                                                 <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
                                                                 <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
                                                                 <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
@@ -38,9 +38,9 @@
                                                             </picture>
                                                         </div>
                                                         <div class="col">
-                                                            <h3 class="pName">${orderProduct.product.name}</h3>
-                                                            <div class="productStyle">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
-                                                            <div class="productSize">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
+                                                            <h3 class="product-name">${orderProduct.product.name}</h3>
+                                                            <div class="product-style">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
+                                                            <div class="product-size">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -61,7 +61,7 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <picture id="orderOverview-picture-${orderProduct.id}">
+                                                        <picture id="order-overview-picture-${orderProduct.id}">
                                                             <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
                                                             <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
                                                             <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
@@ -69,9 +69,9 @@
                                                         </picture>
                                                     </div>
                                                     <div class="col">
-                                                        <h3 class="pName">${orderProduct.product.name}</h3>
-                                                        <div class="productStyle">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
-                                                        <div class="productSize">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
+                                                        <h3 class="product-name">${orderProduct.product.name}</h3>
+                                                        <div class="product-style">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
+                                                        <div class="product-size">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
                                                     </div>
                                                 </div>
                                             </td>
