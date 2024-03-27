@@ -34,7 +34,7 @@
         <#else>
             value="<#if ses_company??>${ses_company}<#else>${(address.company)!}</#if>"
             </#if><#else>${(address.company)!}</#if>
-        data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}" required>
+        data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}" >
 </div>
 
 <!-- address line-->
