@@ -55,7 +55,7 @@ create table creditCard (
 
 create table customer (
   id                        varchar(40) not null,
-  email                     varchar(255),
+  email                     varchar(255) unique,
   password                  varchar(255),
   name                      varchar(255),
   first_name                varchar(255),
