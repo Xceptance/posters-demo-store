@@ -93,9 +93,9 @@
 <div class="container text-center mt-3">
 	<div class="product-overview-heading">
 		<#if category??>
-		<div id="title-category-name" class="header-title">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-category-name" class="header-title">${category.name} (<span id="total-product-count">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if searchText??>
-		<div id="title-search-text" class="header-title">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-search-text" class="header-title">${i18n("searchProductMatch")} '<span id="search-text-value">${searchText}</span>' (<span id="total-product-count">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if noResults??>
 		<div id="title-no-results" class="header-title">${noResults}</div>
 		</#if>
