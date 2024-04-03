@@ -16,6 +16,7 @@
 package models;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -335,6 +336,20 @@ public class ShippingAddress
     }
 
     /**
+     * Returns the {@link ShippingAddress} that matches the given Customer ID.
+     * 
+     * @param id
+     *            the ID of the Customer
+     * @return the {@link ShippingAddress} that matches the given Customer ID
+     */
+    public static ShippingAddress getShippingAddressByCustomerId(final UUID customerId) {
+        return Ebean.find(ShippingAddress.class)
+                    .where()
+                    .eq("customer_id", customerId)
+                    .findUnique();
+    }
+
+    /**
      * Sets the {@link Customer} of the {@link ShippingAddress} to {@code null}.
      * 
      * @param id
@@ -346,4 +361,20 @@ public class ShippingAddress
         address.setCustomer(null);
         address.update();
     }
+
+     /**
+     * Sets the {@link Customer} of the {@link ShippingAddress} to {@code null}.
+     * 
+     * @param id
+     *            the ID of the logged in Customer
+     */
+    public static void removeCustomerFromShippingAddressByCustomerId(final UUID id){
+        final ShippingAddress address = ShippingAddress.getShippingAddressByCustomerId(id);
+        if (address != null && address.getCustomer()!=null) {
+            address.setCustomer(null);
+            address.update(); 
+        }
+
+    }
+
 }
