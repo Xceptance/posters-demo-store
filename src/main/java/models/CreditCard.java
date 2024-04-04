@@ -18,6 +18,7 @@ package models;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -307,6 +308,20 @@ public class CreditCard
         return Ebean.find(CreditCard.class, id);
     }
 
+        /**
+     * Returns the {@link CreditCard} that matches the given Customer ID.
+     * 
+     * @param id
+     *            the ID of the Customer
+     * @return the {@link CreditCard} that matches the given Customer ID
+     */
+    public static CreditCard getCreditCardByCustomerId(final UUID customerId) {
+        return Ebean.find(CreditCard.class)
+                    .where()
+                    .eq("customer_id", customerId)
+                    .findUnique();
+    }
+
     /**
      * Sets the {@link Customer} of the {@link CreditCard} to {@code null}.
      * 
@@ -318,5 +333,20 @@ public class CreditCard
         final CreditCard card = getCreditCardById(id);
         card.setCustomer(null);
         card.update();
+    }
+
+    /**
+     * Sets the {@link Customer} of the {@link CreditCard} to {@code null}.
+     * 
+     * @param id
+     *            the ID of the logged in Customer
+     */
+    public static void removeCustomerFromCreditCardByCustomerId(final UUID id){
+        final CreditCard address = CreditCard.getCreditCardByCustomerId(id);
+        if (address != null && address.getCustomer()!=null) {
+
+        address.setCustomer(null);
+        address.update();
+        }
     }
 }

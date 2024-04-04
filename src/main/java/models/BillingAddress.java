@@ -16,6 +16,7 @@
 package models;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -335,6 +336,20 @@ public class BillingAddress
     }
 
     /**
+     * Returns the {@link BillingAddress} that matches the given Customer ID.
+     * 
+     * @param id
+     *            the ID of the Customer
+     * @return the {@link BillingAddress} that matches the given Customer ID
+     */
+    public static BillingAddress getBillingAddressByCustomerId(final UUID customerId) {
+        return Ebean.find(BillingAddress.class)
+                    .where()
+                    .eq("customer_id", customerId)
+                    .findUnique();
+    }
+
+    /**
      * Sets the {@link Customer} of the {@link BillingAddress} to {@code null}.
      * 
      * @param id
@@ -350,6 +365,21 @@ public class BillingAddress
             address.setCustomer(null);
             // update billing address
             address.update();
+        }
+    }
+
+    /**
+     * Sets the {@link Customer} of the {@link BillingAddress} to {@code null}.
+     * 
+     * @param id
+     *            the ID of the logged in Customer
+     */
+    public static void removeCustomerFromBillingAddressByCustomerId(final UUID id){
+        final BillingAddress address = BillingAddress.getBillingAddressByCustomerId(id);
+        if (address != null && address.getCustomer()!=null) {
+
+        address.setCustomer(null);
+        address.update();
         }
     }
 }

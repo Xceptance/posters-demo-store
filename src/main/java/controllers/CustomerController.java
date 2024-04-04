@@ -1107,24 +1107,40 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
                     }
                     cart.setCustomer(null);
                     cart.update();
-                }
-        
-                // remove customers orders --> deletes also customer --> deletes also addresses and payment information
-                final List<Order> orders = customer.getOrder();
-                for (final Order order : orders) {
-                    // Remove associated cart products before deleting the order
+                    final List<Order> orders = customer.getOrder();
+                    for (final Order order : orders) {
                     Ebean.delete(order);
                 }
+                }
+                
+                // Remove customers' orders
+                // final List<Order> orders = customer.getOrder();
+                // for (final Order order : orders) {
+                    // Remove associated cart products before deleting the order
+                    // final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+                    // for (final CartProduct cartProduct : cartProducts) {
+                    //     Ebean.delete(cartProduct);
+                    // }
+                    //  // remove shipping address first
+                    // ShippingAddress.removeCustomerFromShippingAddressByCustomerId(customer.getId());
+                    // // remove billing address first as well
+                    // BillingAddress.removeCustomerFromBillingAddressByCustomerId(customer.getId());
+                    // // remove Credit card as well
+                    // CreditCard.removeCustomerFromCreditCardByCustomerId(customer.getId());
+
+                    // Now attempt to remove the order
+                    // Ebean.delete(order);
+                // }
 
                 // Remove associated shipping addresses before deleting the customer
                 final List<ShippingAddress> shippingAddresses = customer.getShippingAddress();
                 for (final ShippingAddress shippingAddress : shippingAddresses) {
                     // Delete referencing records in Ordering table
-                    final List<Order> relatedOrderings = Ebean.find(Order.class).where()
-                            .eq("shippingAddress", shippingAddress).findList();
-                    for (final Order relatedOrdering : relatedOrderings) {
-                        Ebean.delete(relatedOrdering);
-                    }
+                    // final List<Order> relatedOrderings = Ebean.find(Order.class).where()
+                    //         .eq("shippingAddress", shippingAddress).findList();
+                    // for (final Order relatedOrdering : relatedOrderings) {
+                    //     Ebean.delete(relatedOrdering);
+                    // }
                     // Then delete the shipping address
                     Ebean.delete(shippingAddress);
                 }
@@ -1133,19 +1149,19 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
                 final List<BillingAddress> billingAddresses = customer.getBillingAddress();
                 for (final BillingAddress billingAddress : billingAddresses) {
                     // Delete referencing records in Ordering table
-                    final List<Order> relatedOrderings = Ebean.find(Order.class).where()
-                            .eq("billingAddress", billingAddress).findList();
-                    for (final Order relatedOrdering : relatedOrderings) {
-                        Ebean.delete(relatedOrdering);
-                    }
+                    // final List<Order> relatedOrderings = Ebean.find(Order.class).where()
+                    //         .eq("billingAddress", billingAddress).findList();
+                    // for (final Order relatedOrdering : relatedOrderings) {
+                    //     Ebean.delete(relatedOrdering);
+                    // }
                     // Then delete the billing address
                     Ebean.delete(billingAddress);
                 }
 
                 // delete customer, if customer has no order
-                if (orders.isEmpty()) {
+                // if (orders.isEmpty()) {
                     Ebean.delete(customer);
-                }
+                // }
         
                 // show success message
                 context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
