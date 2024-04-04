@@ -110,7 +110,7 @@
                     <source media="(max-width: 399px)" srcset="${contextPath}${pro.smallImageURL}">
                     <source media="(max-width: 799px)" srcset="${contextPath}${pro.mediumImageURL}">
                     <source media="(max-width: 1999px)" srcset="${contextPath}${pro.largeImageURL}">
-                    <img class="card-img-top" src="${contextPath}${pro.originalImageURL}" alt="picture of ${pro.name}" >
+                    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img class="card-img-top" src="${contextPath}${pro.originalImageURL}" alt="picture of ${pro.name}" ></a>
                 </picture>
 				<div class="card-body">
 					<h5 class="card-title">${pro.name}</h5>
