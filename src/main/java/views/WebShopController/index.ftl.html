@@ -104,7 +104,8 @@
 				<source media="(max-width: 399px)" srcset="${contextPath}${prItem.smallImageURL}">
 				<source media="(max-width: 799px)" srcset="${contextPath}${prItem.mediumImageURL}">
 				<source media="(max-width: 1999px)" srcset="${contextPath}${prItem.largeImageURL}">
-				<img class="card-img-top" src="${contextPath}${prItem.originalImageURL}" alt="picture of ${prItem.name}" >
+				<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}"><img class="card-img-top" src="${contextPath}${prItem.originalImageURL}" alt="picture of ${prItem.name}" >
+				</a>
 			</picture>
 			<div class="card-body">
 		  		<h5 class="card-title">${prItem.name}</h5>
