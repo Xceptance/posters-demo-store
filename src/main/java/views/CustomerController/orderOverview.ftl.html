@@ -11,23 +11,23 @@
                         <span class="h2">${i18n("titleOrderHistory")}</span>
                     </div>
                     <div id="order-overview">
-                        <table class="table">
-                            <thead>
+                        <table id="order-overview-table" class="table">
+                            <thead id="order-table-head">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">${i18n("orderOverviewTabHeadPurchasedPoster")}</th>
-                                    <th scope="col">${i18n("orderOverviewTabHeadOrderDetails")}</th>
-                                    <th scope="col">${i18n("orderOverviewTabHeadPurchasedPosterQuantity")}</th>
+                                    <th id="order-index-col" scope="col">#</th>
+                                    <th id="order-content-col" scope="col">${i18n("orderOverviewTabHeadPurchasedPoster")}</th>
+                                    <th id="order-details-col" scope="col">${i18n("orderOverviewTabHeadOrderDetails")}</th>
+                                    <th id="order-quantity-col" scope="col">${i18n("orderOverviewTabHeadPurchasedPosterQuantity")}</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="order-table-body">
                                 <#list orderOverview as order>
                                     <#list order.products as orderProduct>
                                         <#if orderProduct_index==0>
                                         <!-- Display both order and product details only for the first product of the order -->
-                                            <tr>
-                                                <th class="fs-4" scope="row">${order_index + 1}</th>
-                                                <td>
+                                            <tr class="order-product">
+                                                <th class="fs-4 prod-index" scope="row">${order_index + 1}</th>
+                                                <td class="prod-content">
                                                     <div class="row">
                                                         <div class="col">
                                                             <picture id="order-overview-picture-${orderProduct.id}">
@@ -44,7 +44,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td class="prod-details">
                                                     <div id="order-details">
                                                         <div id="order-detail-date" class="fw-bold">${i18n("orderOverviewOrderDate")}</div>
                                                         <div id="order-detail-date-value">${order.orderDate}</div>
@@ -52,13 +52,13 @@
                                                         <div id="order-detail-total-value">${currency}${order.getTotalCostsAsString()}</div>
                                                     </div>
                                                 </td>
-                                                <td>${orderProduct.productCount}x</td>
+                                                <td class="prod-quantity">${orderProduct.productCount}x</td>
                                             </tr>
                                         <#else>
                                         <!-- Display ONLY quantitiy for the subsequent products of the order -->
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td>
+                                        <tr class="order-product">
+                                            <th class="prod-index" scope="row"></th>
+                                            <td class="prod-content">
                                                 <div class="row">
                                                     <div class="col">
                                                         <picture id="order-overview-picture-${orderProduct.id}">
@@ -75,12 +75,12 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td class="prod-details">
                                                 <div id="order-details">
                                                     
                                                 </div>
                                             </td>
-                                            <td>${orderProduct.productCount}x</td>
+                                            <td class="prod-quantity">${orderProduct.productCount}x</td>
                                         </tr>
                                         </#if>    
                                     </#list>

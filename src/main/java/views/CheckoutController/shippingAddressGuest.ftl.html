@@ -3,7 +3,7 @@
 
 <div class="container mt-3">
     <!-- Progress Indicator -->
-    <div class="d-flex justify-content-center mb-3">
+    <div id="checkout-progress-indicator" class="d-flex justify-content-center mb-3">
         <div class="progress-indicator row justify-content-center col-md-8 progress-2">
             <#include "../components/checkoutProgress.ftl.html"/>
         </div>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="d-flex">
-                    <div class="me-auto">*${i18n('titleRequiredFields')}</div>
+                    <div class="req-field me-auto">*${i18n('titleRequiredFields')}</div>
                     <button type="submit" id="button-add-shipping-address" class="ms-auto btn btn-primary">${i18n('buttonContinue')}</button>
                 </div>
             </form>

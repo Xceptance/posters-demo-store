@@ -4,7 +4,7 @@
 
 <div class="container mt-3">
 	<!-- Progress Indicator -->
-    <div class="d-flex justify-content-center mb-3">
+    <div id="checkout-progress-indicator" class="d-flex justify-content-center mb-3">
         <div class="progress-indicator row justify-content-center col-md-8 progress-2">
             <#include "../components/checkoutProgress.ftl.html"/>
         </div>
@@ -60,7 +60,7 @@
 						<div class="col-sm-3"></div>
 							<div class="col-sm-9">
 								<!-- Trigger the modal with a button -->
-								<button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#add-address-modal">${i18n("shippingAddressAddNew")}</button>
+								<button id="btn-add-new-ship-addr" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#add-address-modal">${i18n("shippingAddressAddNew")}</button>
 								<!-- button - continue  -->
 								<button class="btn btn-primary" id="btn-use-address-continue" name="btnUseAddressContinue" type="submit">${i18n("buttonContinue")}</button>
 							</div>
