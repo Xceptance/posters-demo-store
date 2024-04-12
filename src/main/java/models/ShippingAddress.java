@@ -346,7 +346,7 @@ public class ShippingAddress
         return Ebean.find(ShippingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique();
+                    .findUnique(); 
     }
 
     /**
@@ -358,8 +358,8 @@ public class ShippingAddress
     public static void removeCustomerFromShippingAddress(final int id)
     {
         final ShippingAddress address = ShippingAddress.getShippingAddressById(id);
-        address.setCustomer(null);
-        address.update();
+        Ebean.delete(address);
+
     }
 
      /**

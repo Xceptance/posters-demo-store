@@ -183,12 +183,12 @@ alter table creditCard add constraint fk_creditCard_customer_6 foreign key (cust
 create index ix_creditCard_customer_6 on creditCard (customer_id);
 alter table customer add constraint fk_customer_cart_7 foreign key (cart_id) references cart (id) on delete restrict on update restrict;
 create index ix_customer_cart_7 on customer (cart_id);
--- alter table ordering add constraint fk_ordering_shippingAddress_8 foreign key (shipping_address_id) references shippingAddress (id) on delete restrict on update restrict;
--- create index ix_ordering_shippingAddress_8 on ordering (shipping_address_id);
--- alter table ordering add constraint fk_ordering_billingAddress_9 foreign key (billing_address_id) references billingAddress (id) on delete restrict on update restrict;
--- create index ix_ordering_billingAddress_9 on ordering (billing_address_id);
--- alter table ordering add constraint fk_ordering_creditCard_10 foreign key (credit_card_id) references creditCard (id) on delete restrict on update restrict;
--- create index ix_ordering_creditCard_10 on ordering (credit_card_id);
+alter table ordering add constraint fk_ordering_shippingAddress_8 foreign key (shipping_address_id) references shippingAddress (id) on delete restrict on update restrict;
+create index ix_ordering_shippingAddress_8 on ordering (shipping_address_id);
+alter table ordering add constraint fk_ordering_billingAddress_9 foreign key (billing_address_id) references billingAddress (id) on delete restrict on update restrict;
+create index ix_ordering_billingAddress_9 on ordering (billing_address_id);
+alter table ordering add constraint fk_ordering_creditCard_10 foreign key (credit_card_id) references creditCard (id) on delete restrict on update restrict;
+create index ix_ordering_creditCard_10 on ordering (credit_card_id);
 alter table ordering add constraint fk_ordering_customer_11 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
 create index ix_ordering_customer_11 on ordering (customer_id);
 alter table orderProduct add constraint fk_orderProduct_product_12 foreign key (product_id) references product (id) on delete restrict on update restrict;
