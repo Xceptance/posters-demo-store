@@ -331,8 +331,8 @@ public class CreditCard
     public static void removeCustomerFromCreditCard(final int id)
     {
         final CreditCard card = getCreditCardById(id);
-        card.setCustomer(null);
-        card.update();
+        Ebean.delete(card);
+
     }
 
     /**

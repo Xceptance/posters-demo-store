@@ -100,7 +100,7 @@ public class Order
     /**
      * The {@link Customer} of the order. Can be {@code null}, if the order was made by a guest.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Customer customer;
 
     /**
