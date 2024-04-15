@@ -3,7 +3,7 @@
 
 <div class="container mt-3">
     <!-- Progress Indicator -->
-    <div class="d-flex justify-content-center mb-3">
+    <div id="checkout-progress-indicator" class="d-flex justify-content-center mb-3">
         <div class="progress-indicator row justify-content-center col-md-8 progress-3">
             <#include "../components/checkoutProgress.ftl.html"/>
         </div>
@@ -20,7 +20,7 @@
                 <hr>                              
 				<!-- required fields info and continue button -->
                 <div class="d-flex">
-                    <div class="me-auto">*${i18n('titleRequiredFields')}</div>
+                    <div class="me-auto req-field">*${i18n('titleRequiredFields')}</div>
                     <button type="submit" id="btn-add-bill-addr" class="ms-auto btn btn-primary">${i18n('buttonContinue')}</button>
                 </div>               
             </form>

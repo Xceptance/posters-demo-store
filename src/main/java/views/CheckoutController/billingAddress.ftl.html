@@ -3,7 +3,7 @@
 
 <div class="container">
 	<!-- Progress Indicator -->
-	<div class="d-flex justify-content-center mb-3">
+	<div id="checkout-progress-indicator" class="d-flex justify-content-center mb-3">
 		<div class="progress-indicator row justify-content-center col-md-8 progress-3">
 			<#include "../components/checkoutProgress.ftl.html"/>
 		</div>
@@ -57,7 +57,7 @@
 						<div class="col-sm-9">
 							<div class="pull-right">
 								<!-- Trigger the modal with a button -->
-								<button type="button" class="btn btn-default" data-bs-toggle="modal"
+								<button id="btn-add-new-bill-addr" type="button" class="btn btn-default" data-bs-toggle="modal"
 									data-bs-target="#add-address-modal">${i18n("billingAddressAddNew")}</button>
 								<!-- button - continue  -->
 								<button class="btn btn-primary" id="btn-use-bill-address"

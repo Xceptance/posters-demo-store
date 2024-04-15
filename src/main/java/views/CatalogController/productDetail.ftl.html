@@ -28,7 +28,7 @@
 					<label for="product-detail-form-size-selection" class="form-label" >${i18n("cartSelectSize")}</label>
 					<select id="product-detail-form-size-selection" class="form-select" aria-label="size selection" onchange="updatePrice(this, ${productDetail.id})">
 						<#list productDetail.availableSizes as size>
-						<option>${size.size.width} x ${size.size.height} ${unitLength}</option>
+						<option value="${size.size.width} x ${size.size.height} ${unitLength}">${size.size.width} x ${size.size.height} ${unitLength}</option>
 						</#list>
 					</select>
 				</div>
