@@ -813,55 +813,71 @@ public class CustomerController
  * @param context
  * @return
  */
-@FilterWith({
-    SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
-})
-public Result addShippingAddressToCustomerCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName,
-                                                    @Param("company") final String company, @Param("addressLine") final String addressLine,
-                                                    @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
-                                                    @Param("country") final String country, @Param("addressId") final String addressId,
-                                                    final Context context) {
+    @FilterWith({
+        SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+    })
+    public Result addShippingAddressToCustomerCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName,
+                                                        @Param("company") final String company, @Param("addressLine") final String addressLine,
+                                                        @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
+                                                        @Param("country") final String country, @Param("addressId") final String addressId,
+                                                        final Context context) {
 
-        final String name = firstName + " " + lastName;
-    // Check input
-    if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
-        final Map<String, Object> data = new HashMap<>();
-        WebShopController.setCommonData(data, context, xcpConf);
-        // Show error message
-        context.getFlashScope().error(msg.get("errorWrongZip", language).get());
-        // Show inserted values in form
-        final Map<String, String> address = new HashMap<>();
-        address.put("firstName", firstName);
-        address.put("lastName", lastName);
-        address.put("name", name);
-        address.put("company", company);
-        address.put("addressLine", addressLine);
-        address.put("city", city);
-        address.put("state", state);
-        address.put("zip", zip);
-        address.put("country", country);
-        data.put("address", address);
-        // Show page to enter shipping address again
-        return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
-    } else {
-        final ShippingAddress address = new ShippingAddress();
-        // Combine first name and last name to form full name
-        final String fullName = firstName + " " + lastName;
-        address.setName(fullName);
-        address.setCompany(company);
-        address.setAddressLine(addressLine);
-        address.setCity(city);
-        address.setState(state);
-        address.setZip(zip);
-        address.setCountry(country);
-        // Add address to customer
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        customer.addShippingAddress(address);
-        // Show success message
-        context.getFlashScope().success(msg.get("successSave", language).get());
-        return Results.redirect(context.getContextPath() + "/addressOverview");
+            final String name = firstName + " " + lastName;
+        // Check input
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
+            final Map<String, Object> data = new HashMap<>();
+            WebShopController.setCommonData(data, context, xcpConf);
+            // Show error message
+            context.getFlashScope().error(msg.get("errorWrongZip", language).get());
+            // Show inserted values in form
+            final Map<String, String> address = new HashMap<>();
+            address.put("firstName", firstName);
+            address.put("lastName", lastName);
+            address.put("name", name);
+            address.put("company", company);
+            address.put("addressLine", addressLine);
+            address.put("city", city);
+            address.put("state", state);
+            address.put("zip", zip);
+            address.put("country", country);
+            data.put("address", address);
+            // Show page to enter shipping address again
+            return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
+        } else {
+            final ShippingAddress address = new ShippingAddress();
+            // Combine first name and last name to form full name
+            final String fullName = firstName + " " + lastName;
+            address.setName(fullName);
+            address.setCompany(company);
+            address.setAddressLine(addressLine);
+            address.setCity(city);
+            address.setState(state);
+            address.setZip(zip);
+            address.setCountry(country);
+            // Add address to customer
+            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+            customer.addShippingAddress(address);
+
+            // // Create a copy of the shipping address with customer_id set to null
+            // final ShippingAddress copyAddress = new ShippingAddress();
+            // copyAddress.setName(address.getName());
+            // copyAddress.setCompany(address.getCompany());
+            // copyAddress.setAddressLine(address.getAddressLine());
+            // copyAddress.setCity(address.getCity());
+            // copyAddress.setState(address.getState());
+            // copyAddress.setZip(address.getZip());
+            // copyAddress.setCountry(address.getCountry());
+            // //copyAddress.setCustomer(null);
+            // //customer.addShippingAddress(copyAddress);
+            // copyAddress.setCustomer(null);
+            // //address.update();
+            // Ebean.save(copyAddress);
+
+            // Show success message
+            context.getFlashScope().success(msg.get("successSave", language).get());
+            return Results.redirect(context.getContextPath() + "/addressOverview");
+        }
     }
-}
 
 
     /**
@@ -1096,73 +1112,9 @@ public Result addShippingAddressToCustomerCompleted(@Param("firstName") final St
                 SessionHandling.removeCustomerId(context);
                 // remove cart from session
                 SessionHandling.removeCartId(context);
-        
-                // remove customer's cart
-                final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
-                if (cart != null) {
-                    // Remove associated cart products before deleting the cart
-                    final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
-                    for (final CartProduct cartProduct : cartProducts) {
-                        Ebean.delete(cartProduct);
-                    }
-                    cart.setCustomer(null);
-                    cart.update();
-                    final List<Order> orders = customer.getOrder();
-                    for (final Order order : orders) {
-                    Ebean.delete(order);
-                }
-                }
-                
-                // Remove customers' orders
-                // final List<Order> orders = customer.getOrder();
-                // for (final Order order : orders) {
-                    // Remove associated cart products before deleting the order
-                    // final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
-                    // for (final CartProduct cartProduct : cartProducts) {
-                    //     Ebean.delete(cartProduct);
-                    // }
-                    //  // remove shipping address first
-                    // ShippingAddress.removeCustomerFromShippingAddressByCustomerId(customer.getId());
-                    // // remove billing address first as well
-                    // BillingAddress.removeCustomerFromBillingAddressByCustomerId(customer.getId());
-                    // // remove Credit card as well
-                    // CreditCard.removeCustomerFromCreditCardByCustomerId(customer.getId());
+                    
+                Ebean.delete(customer);
 
-                    // Now attempt to remove the order
-                    // Ebean.delete(order);
-                // }
-
-                // Remove associated shipping addresses before deleting the customer
-                final List<ShippingAddress> shippingAddresses = customer.getShippingAddress();
-                for (final ShippingAddress shippingAddress : shippingAddresses) {
-                    // Delete referencing records in Ordering table
-                    // final List<Order> relatedOrderings = Ebean.find(Order.class).where()
-                    //         .eq("shippingAddress", shippingAddress).findList();
-                    // for (final Order relatedOrdering : relatedOrderings) {
-                    //     Ebean.delete(relatedOrdering);
-                    // }
-                    // Then delete the shipping address
-                    Ebean.delete(shippingAddress);
-                }
-
-                // Remove associated billing addresses before deleting the customer
-                final List<BillingAddress> billingAddresses = customer.getBillingAddress();
-                for (final BillingAddress billingAddress : billingAddresses) {
-                    // Delete referencing records in Ordering table
-                    // final List<Order> relatedOrderings = Ebean.find(Order.class).where()
-                    //         .eq("billingAddress", billingAddress).findList();
-                    // for (final Order relatedOrdering : relatedOrderings) {
-                    //     Ebean.delete(relatedOrdering);
-                    // }
-                    // Then delete the billing address
-                    Ebean.delete(billingAddress);
-                }
-
-                // delete customer, if customer has no order
-                // if (orders.isEmpty()) {
-                    Ebean.delete(customer);
-                // }
-        
                 // show success message
                 context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
                 // return home page

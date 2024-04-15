@@ -361,10 +361,8 @@ public class BillingAddress
         final BillingAddress address = getBillingAddressById(id);
         if (address != null)
         {
-            // set customer of the billing address to null
-            address.setCustomer(null);
-            // update billing address
-            address.update();
+            Ebean.delete(address);
+
         }
     }
 
