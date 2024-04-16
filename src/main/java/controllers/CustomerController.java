@@ -857,22 +857,7 @@ public class CustomerController
             // Add address to customer
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
-
-            // // Create a copy of the shipping address with customer_id set to null
-            // final ShippingAddress copyAddress = new ShippingAddress();
-            // copyAddress.setName(address.getName());
-            // copyAddress.setCompany(address.getCompany());
-            // copyAddress.setAddressLine(address.getAddressLine());
-            // copyAddress.setCity(address.getCity());
-            // copyAddress.setState(address.getState());
-            // copyAddress.setZip(address.getZip());
-            // copyAddress.setCountry(address.getCountry());
-            // //copyAddress.setCustomer(null);
-            // //customer.addShippingAddress(copyAddress);
-            // copyAddress.setCustomer(null);
-            // //address.update();
-            // Ebean.save(copyAddress);
-
+            
             // Show success message
             context.getFlashScope().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
@@ -1112,7 +1097,17 @@ public class CustomerController
                 SessionHandling.removeCustomerId(context);
                 // remove cart from session
                 SessionHandling.removeCartId(context);
-                    
+                    // remove customer's cart
+                final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
+                if (cart != null) {
+                    // Remove associated cart products before deleting the cart
+                    final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+                    for (final CartProduct cartProduct : cartProducts) {
+                        Ebean.delete(cartProduct);
+                    }
+                    cart.setCustomer(null);
+                    cart.update();
+                }
                 Ebean.delete(customer);
 
                 // show success message
