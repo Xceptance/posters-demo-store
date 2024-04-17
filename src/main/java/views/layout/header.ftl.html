@@ -12,13 +12,21 @@
     <div id="header-navigation-elements" class="collapse navbar-collapse">
       <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
         <#list topCategory as tC>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-auto-close="true" aria-expanded="false">
+        <li class="nav-item">
+          <a class="nav-link header-top-category" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button">
             ${tC.name}
           </a>
-          <ul class="dropdown-menu">
+        </li>
+        <li class="nav-item dropdown">
+          <button class="nav-item btn dropdown-toggle dropdown-toggle-split header-sub-cat-toggle" aria-expanded="false" data-bs-toggle="dropdown" role="button">
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
             <#list tC.subCategories as sC>
-            <li><a class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.name}</a></li>
+            <li>
+              <a class="header-sub-category dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">
+                ${sC.name}
+              </a>
+            </li>
             </#list>
           </ul>
         </li>
@@ -40,7 +48,7 @@
               <span class="icon-shopping-cart"></span> &nbsp; 
               <span id="count-wide-view" class="header-cart-product-count">${cartProductCount}</span>
             </a>
-            <ul id="mini-cart-menu" class="dropdown-menu" style="display: none;">
+            <ul id="mini-cart-menu" class="dropdown-menu dropdown-menu-end" style="display: none;">
               <li><#include "../components/miniCartMenu.ftl.html"></li>
             </ul>
 
@@ -51,7 +59,7 @@
               <span class="icon-shopping-cart"></span> &nbsp; 
               <span id="count-wide-view" class="header-cart-product-count">${cartProductCount}</span>
             </a>
-            <ul id="mini-cart-menu" class="dropdown-menu">
+            <ul id="mini-cart-menu" class="dropdown-menu dropdown-menu-end">
               <li><#include "../components/miniCartMenu.ftl.html"></li>
             </ul>
           </li>
