@@ -4,43 +4,47 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="container">
-            <div class="colorlib-product h2fwpr">
+            <div class="colorlib-product">
 
                 <div class="col-md-10 offset-md-1">
-                    <div id="titleOrderHistory" class="header-container">
+                    <div id="title-order-history" class="header-container">
                         <span class="h2">${i18n("titleOrderHistory")}</span>
                     </div>
-                    <div id="orderOverview">
-                        <table class="table">
-                            <thead>
+                    <div id="order-overview">
+                        <table id="order-overview-table" class="table">
+                            <thead id="order-table-head">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">${i18n("orderOverviewTabHeadPurchasedPoster")}</th>
-                                    <th scope="col">${i18n("orderOverviewTabHeadOrderDetails")}</th>
-                                    <th scope="col">${i18n("orderOverviewTabHeadPurchasedPosterQuantity")}</th>
+                                    <th id="order-index-col" scope="col">#</th>
+                                    <th id="order-content-col" scope="col">${i18n("orderOverviewTabHeadPurchasedPoster")}</th>
+                                    <th id="order-details-col" scope="col">${i18n("orderOverviewTabHeadOrderDetails")}</th>
+                                    <th id="order-quantity-col" scope="col">${i18n("orderOverviewTabHeadPurchasedPosterQuantity")}</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="order-table-body">
                                 <#list orderOverview as order>
                                     <#list order.products as orderProduct>
                                         <#if orderProduct_index==0>
                                         <!-- Display both order and product details only for the first product of the order -->
-                                            <tr>
-                                                <th class="fs-4" scope="row">${order_index + 1}</th>
-                                                <td>
+                                            <tr class="order-product">
+                                                <th class="fs-4 prod-index" scope="row">${order_index + 1}</th>
+                                                <td class="prod-content">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <img src="${contextPath}${orderProduct.product.imageURL}" class="img-thumbnail"
-                                                                alt="image of ${orderProduct.product.name}">
+                                                            <picture id="order-overview-picture-${orderProduct.id}">
+                                                                <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
+                                                                <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
+                                                                <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
+                                                                <img class="img-thumbnail" src="${contextPath}${orderProduct.product.originalImageURL}" alt="image of ${orderProduct.product.name}" >
+                                                            </picture>
                                                         </div>
                                                         <div class="col">
-                                                            <h3 class="pName">${orderProduct.product.name}</h3>
-                                                            <div class="productStyle">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
-                                                            <div class="productSize">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
+                                                            <h3 class="product-name">${orderProduct.product.name}</h3>
+                                                            <div class="product-style">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
+                                                            <div class="product-size">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td class="prod-details">
                                                     <div id="order-details">
                                                         <div id="order-detail-date" class="fw-bold">${i18n("orderOverviewOrderDate")}</div>
                                                         <div id="order-detail-date-value">${order.orderDate}</div>
@@ -48,31 +52,35 @@
                                                         <div id="order-detail-total-value">${currency}${order.getTotalCostsAsString()}</div>
                                                     </div>
                                                 </td>
-                                                <td>${orderProduct.productCount}x</td>
+                                                <td class="prod-quantity">${orderProduct.productCount}x</td>
                                             </tr>
                                         <#else>
                                         <!-- Display ONLY quantitiy for the subsequent products of the order -->
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td>
+                                        <tr class="order-product">
+                                            <th class="prod-index" scope="row"></th>
+                                            <td class="prod-content">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <img src="${contextPath}${orderProduct.product.imageURL}" class="img-thumbnail"
-                                                            alt="image of ${orderProduct.product.name}">
+                                                        <picture id="order-overview-picture-${orderProduct.id}">
+                                                            <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
+                                                            <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
+                                                            <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
+                                                            <img class="img-thumbnail" src="${contextPath}${orderProduct.product.originalImageURL}" alt="image of ${orderProduct.product.name}" >
+                                                        </picture>
                                                     </div>
                                                     <div class="col">
-                                                        <h3 class="pName">${orderProduct.product.name}</h3>
-                                                        <div class="productStyle">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
-                                                        <div class="productSize">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
+                                                        <h3 class="product-name">${orderProduct.product.name}</h3>
+                                                        <div class="product-style">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
+                                                        <div class="product-size">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <td class="prod-details">
                                                 <div id="order-details">
                                                     
                                                 </div>
                                             </td>
-                                            <td>${orderProduct.productCount}x</td>
+                                            <td class="prod-quantity">${orderProduct.productCount}x</td>
                                         </tr>
                                         </#if>    
                                     </#list>
@@ -80,6 +88,7 @@
                             </tbody>
                         </table>
                     </div>
+                            <button type="button" class="btn btn btn-sm btn-primary" onclick="javascript:history.back()"> Back </button>
                 </div>
                 
                 

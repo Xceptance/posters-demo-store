@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package models_backoffice;
 
 import ninja.NinjaTest;
@@ -11,29 +26,29 @@ import com.avaje.ebean.Ebean;
 public class UserTest extends NinjaTest
 {
 
-    User user;
+    Backofficeuser backofficeuser;
 
     @Before
     public void setUp() throws Exception
     {
         // create new user
-        user = new User();
+        backofficeuser = new Backofficeuser();
         // set some data
-        user.setEmail("email");
-        user.hashPasswd("password");
+        backofficeuser.setEmail("email");
+        backofficeuser.hashPasswd("password");
         // persist
-        user.save();
+        backofficeuser.save();
     }
 
     @Test
     public void testCreateUser()
     {
-        final User user = new User();
-        user.setEmail("email");
-        user.hashPasswd("password");
-        user.save();
+        final Backofficeuser backofficeuser = new Backofficeuser();
+        backofficeuser.setEmail("email");
+        backofficeuser.hashPasswd("password");
+        backofficeuser.save();
 
-        final User savedUser = Ebean.find(User.class, user.getId());
+        final Backofficeuser savedUser = Ebean.find(Backofficeuser.class, backofficeuser.getId());
         // verify, that the user is persistent
         Assert.assertNotNull(savedUser);
         // verify the email of the user
@@ -43,7 +58,7 @@ public class UserTest extends NinjaTest
     @Test
     public void testPasswordHash()
     {
-        final User user = Ebean.find(User.class, this.user.getId());
+        final Backofficeuser user = Ebean.find(Backofficeuser.class, this.backofficeuser.getId());
         // verify, that the password is not saved as plain text
         Assert.assertNotSame("password", user.getPassword());
         // verify the password

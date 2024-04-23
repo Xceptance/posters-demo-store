@@ -1,44 +1,91 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 <@layout.myLayout "The ultimate webshop">
 <script type="text/javascript">
-    // Use delegated event handling to handle dynamically added elements
-    $(document).on('click', '#pagination-bottom a.page-link, #prev, #next', function (e) {
-        e.preventDefault();
-
-        // Remove 'active' class from all page links
-        $('#pagination-bottom a.page-link').removeClass('active');
-
-        // Add 'active' class to the clicked page link
-        if (!$(this).is('#prev') && !$(this).is('#next')) {
-            $(this).addClass('active');
+    function paginationFirst() {
+        paginationNum(1);
+    }
+    function paginationBack() {
+        var page;
+        page = parseInt(document.querySelector('#pagination-bottom .page-link.active').getAttribute("data-page")) - 1;
+        paginationNum(page);
+    }
+    function paginationNum(pageNumber) {
+        // error protection
+        if(pageNumber < 1) {
+            pageNumber = 1;
+        } else if(pageNumber > ${totalPages}) {
+            pageNumber = ${totalPages};
         }
-		var lastPage = Number(${totalPages})+1;
-		var page;
-        if ($(this).is('#prev')) {
-            // Go to the first page
-            page = 1;
-			$('#pagination-bottom > li:nth-child(2) > a').addClass('active');
-			
-        } else if ($(this).is('#next')) {
-            // Go to the last page
-            page = ${totalPages};
-			$('#pagination-bottom > li:nth-child('+lastPage+') > a').addClass('active');
-        } else {
-            page = parseInt($(this).data('page'));
-        }
-
-        var pathname = $(location).attr('pathname');
+        // AJAX call
+        var url;
+        var params;
+        var pathname = location.pathname;
         var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
 
-        // AJAX request based on page type
-        if (pageType == "topCategory") {
-            $.post('${contextPath}/getProductOfTopCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
-        } else if (pageType == "category") {
-            $.post('${contextPath}/getProductOfSubCategory', { categoryId: ${(category.id)!1}, page: page }, updateProductOverview);
-        } else {
-            $.post('${contextPath}/getProductOfSearch', { searchText: $('#s').val(), page: page }, updateProductOverview);
+        if(pageType == "topCategory") {
+            url = "${contextPath}/getProductOfTopCategory";
+            params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(pageNumber);
         }
-    });
+        else if(pageType == "category") {
+            url = "${contextPath}/getProductOfSubCategory";
+            params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(pageNumber);
+        }
+        else {
+            url = "${contextPath}/getProductOfSearch";
+            params = "searchText=" + encodeURIComponent(document.getElementById('s').value) + "&page=" + encodeURIComponent(pageNumber);
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(data) {
+            if(xhr.readyState !== 4) return;
+
+            if(xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                updateProductOverview(data);
+                // disable/enable previous or next functionality
+                if(pageNumber == 1) {
+                    // disable prev - enable next
+                    document.querySelector('li:has(> #pagfirst)').classList.add("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.add("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.remove("disabled");
+                    document.querySelector('li:has(> #paglast').classList.remove("disabled");
+                } else if(pageNumber == ${totalPages}) {
+                    // disable next - enable prev
+                    document.querySelector('li:has(> #pagfirst').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.add("disabled");
+                    document.querySelector('li:has(> #paglast').classList.add("disabled");
+                } else {
+                    // enable both
+                    document.querySelector('li:has(> #pagfirst').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagprev').classList.remove("disabled");
+                    document.querySelector('li:has(> #pagnext').classList.remove("disabled");
+                    document.querySelector('li:has(> #paglast').classList.remove("disabled");
+                }
+                // shift active class
+                document.querySelector('#pagination-bottom .page-link.active').classList.remove('active');
+                var currentPageLink = document.querySelector('#pagination-bottom a.page-link[data-page="' + pageNumber + '"]');
+                currentPageLink.classList.add('active');
+
+                // Update the current page attribute
+                document.getElementById("product-overview").setAttribute('currentPage', pageNumber);
+            } else {
+
+            }
+        }
+        xhr.open("POST", url);
+	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(params);
+
+    }
+    function paginationForw() {
+        var page;
+        page = parseInt(document.querySelector('#pagination-bottom .page-link.active').getAttribute("data-page")) + 1;
+        paginationNum(page);
+    }
+    function paginationLast() {
+        paginationNum(${totalPages});
+    }
 </script>
 
 
@@ -46,25 +93,30 @@
 <div class="container text-center mt-3">
 	<div class="product-overview-heading">
 		<#if category??>
-		<div id="titleCategoryName" class="header-title">${category.name} (<span id="totalProductCount">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-category-name" class="header-title">${category.name} (<span id="total-product-count">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if searchText??>
-		<div id="titleSearchText" class="header-title">${i18n("searchProductMatch")} '<span id="searchTextValue">${searchText}</span>' (<span id="totalProductCount">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-search-text" class="header-title">${i18n("searchProductMatch")} '<span id="search-text-value">${searchText}</span>' (<span id="total-product-count">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if noResults??>
-		<div id="titleNoResults" class="header-title">${noResults}</div>
+		<div id="title-no-results" class="header-title">${noResults}</div>
 		</#if>
 	</div>
 </div>
 	
-<div id="productOverview" class="container text-center">
-	<div class="row product-display-case-product-overview">
+<div id="product-overview" class="container text-center">
+	<div class="row product-display-case">
 			<#list products as pro>
-			<div id="product${pro_index}" class="card product-tile">
-				<img src="${contextPath}${pro.imageURL}" class="card-img-top" alt="picture of ${pro.name}">
+			<div id="product-${pro_index}" class="card product-tile">
+                <picture id="overview-product-${pro_index}">
+                    <source media="(max-width: 399px)" srcset="${contextPath}${pro.smallImageURL}">
+                    <source media="(max-width: 799px)" srcset="${contextPath}${pro.mediumImageURL}">
+                    <source media="(max-width: 1999px)" srcset="${contextPath}${pro.largeImageURL}">
+                    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img class="card-img-top" src="${contextPath}${pro.originalImageURL}" alt="picture of ${pro.name}" ></a>
+                </picture>
 				<div class="card-body">
-					  <h5 class="card-title">${pro.name}</h5>
-					  <p class="card-text product-tile-text">${pro.descriptionOverview}</p>
+					<h5 class="card-title">${pro.name}</h5>
+					<p class="card-text product-tile-text">${pro.descriptionOverview}</p>
 					<p class="card-text product-tile-price">$${pro.minimumPrice}</p>
-					  <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
+				    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
 				</div>
 			</div>
 			</#list>
@@ -77,21 +129,44 @@
 <#if totalPages gt 1>
 <nav aria-label="Product listing page navigation">
     <ul id="pagination-bottom" class="pagination pagination-bottom">
-        <li class="page-item">
-            <a id="prev" class="page-link" href="#" aria-label="Previous" data-prev="">
-                <span aria-hidden="true">&laquo;</span>
+        <#if currentPage == 1>
+        <li class="page-item disabled">
+            <a id="pagfirst" class="page-link" aria-label="First" onclick="paginationFirst()">
+                <i aria-hidden="true" class="icon-first"></i>
             </a>
         </li>
+        <li class="page-item disabled">
+            <a id="pagprev" class="page-link" aria-label="Previous" onclick="paginationBack()">
+                <i aria-hidden="true" class="icon-backward2"></i>
+            </a>
+        </li>
+        <#else>
+        <li class="page-item">
+            <a id="pagfirst" class="page-link" aria-label="First" onclick="paginationFirst()">
+                <i aria-hidden="true" class="icon-first"></i>
+            </a>
+        </li>
+        <li class="page-item">
+            <a id="pagprev" class="page-link" aria-label="Previous" onclick="paginationBack()">
+                <i aria-hidden="true" class="icon-backward2"></i>
+            </a>
+        </li>
+        </#if>
         <#list 1..totalPages as i>
-            <#if i==currentPage>
-                <li class="page-item"><a class="page-link active" href="#" data-page="${i}"><span>${i}</span></a></li>
-            <#else>
-                <li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>
-            </#if>
+        <#if i==currentPage>
+        <li class="page-item"><a class="page-link active" data-page="${i}" onclick="paginationNum(${i})">${i}</a></li>
+        <#else>
+        <li class="page-item"><a class="page-link" data-page="${i}" onclick="paginationNum(${i})">${i}</a></li>
+        </#if>
         </#list>
         <li class="page-item">
-            <a id="next" class="page-link" href="#" aria-label="Next" data-next="">
-                <span aria-hidden="true">&raquo;</span>
+            <a id="pagnext" class="page-link" aria-label="Next" onclick="paginationForw()">
+                <i aria-hidden="true" class="icon-forward3"></i>
+            </a>
+        </li>
+        <li class="page-item">
+            <a id="paglast" class="page-link" aria-label="Last" onclick="paginationLast()">
+                <i aria-hidden="true" class="icon-last"></i>
             </a>
         </li>
     </ul>

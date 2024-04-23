@@ -1658,7 +1658,7 @@ input[type="text"] {
 .js .animate-box {
   opacity: 0; }
 
-.btnUpdateProduct {
+.btn-update-product {
   text-decoration: none;
 }
 
@@ -1802,16 +1802,16 @@ input {
   justify-content: center;
 }
 
-.btnRemoveProduct,
-.btnUpdateProduct {
+.btn-remove-product,
+.btn-update-product {
   width: 60px;
   height: 60px;
 }
 
-.btnRemoveProduct:hover span,
-.btnUpdateProduct:hover span,
-.btnRemoveProduct span:hover,
-.btnUpdateProduct span:hover {
+.btn-remove-product:hover span,
+.btn-update-product:hover span,
+.btn-remove-product span:hover,
+.btn-update-product span:hover {
   color: white;
 }
 
@@ -1843,15 +1843,15 @@ input {
   justify-content: center;
 }
 
-#buttonClose {
+#button-close {
   margin-right: 2.5rem;
 }
 
-#buttonDelete {
+#button-delete {
   margin-left: 2.5rem;
 }
 
-#deleteProductModal .modal-footer,
-#deleteProductModal .modal-header {
+#delete-product-modal .modal-footer,
+#delete-product-modal .modal-header {
   border-width: 0px;
 }

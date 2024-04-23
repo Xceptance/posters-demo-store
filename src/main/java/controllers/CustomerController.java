@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -120,7 +120,7 @@ public class CustomerController
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
                 context.getFlashScope().success(msg.get("successLogIn", language).get());
-                return Results.redirect(context.getContextPath() + "/");
+                return Results.redirect(context.getContextPath() + "/accountOverview");
 
             }
             // user exist, wrong password
@@ -414,45 +414,13 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deletePayment(@Param("password") final String password, @Param("cardId") final int cardId, final Context context)
+    public Result deletePayment(@Param("cardId") final int cardId, final Context context)
     {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
             CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show payment overview page
             return Results.redirect(context.getContextPath() + "/paymentOverview");
-        }
-        // incorrect password
-        else
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            // show error message
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("cardId", cardId);
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show page again
-            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_PAYMENT);
-        }
-    }
-
-    /**
-     * Returns the page to confirm the deletion of a payment method.
-     * 
-     * @param cardId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeletePayment(@Param("cardId") final int cardId, final Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("cardId", cardId);
-        WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data);
     }
 
     /**
@@ -489,48 +457,15 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteBillingAddress(@Param("password") final String password, @Param("addressId") final int addressId,
+    public Result deleteBillingAddress(@Param("addressIdBill") final int addressId,
                                        final Context context)
     {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
             // remove billing address
             BillingAddress.removeCustomerFromBillingAddress(addressId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
-        }
-        // incorrect password
-        else
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show error message
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("deleteAddressURL", "deleteBillingAddress");
-            data.put("addressId", addressId);
-            // show page again
-            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
-        }
-    }
 
-    /**
-     * Returns the page to confirm the deletion of a billing address.
-     * 
-     * @param addressId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteBillingAddress(@Param("addressId") final int addressId, final Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("deleteAddressURL", "deleteBillingAddress");
-        data.put("addressId", addressId);
-        WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
     }
 
     /**
@@ -545,48 +480,14 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteShippingAddress(@Param("password") final String password, @Param("addressId") final int addressId,
-                                        final Context context)
+    public Result deleteShippingAddress(@Param("addressIdShip") final int addressId, final Context context)
     {
-        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
-        // correct password
-        if (customer.checkPasswd(password))
-        {
             // remove shipping address
             ShippingAddress.removeCustomerFromShippingAddress(addressId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show address overview page
             return Results.redirect(context.getContextPath() + "/addressOverview");
-        }
-        // incorrect password
-        else
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
-            WebShopController.setCommonData(data, context, xcpConf);
-            // show error message
-            context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            data.put("deleteAddressURL", "deleteShippingAddress");
-            data.put("addressId", addressId);
-            return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
-        }
-    }
-
-    /**
-     * Returns the page to confirm the deletion of a shipping address.
-     * 
-     * @param addressId
-     * @param context
-     * @return
-     */
-    @FilterWith(SessionCustomerExistFilter.class)
-    public Result confirmDeleteShippingAddress(@Param("addressId") final int addressId, final Context context)
-    {
-        final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("deleteAddressURL", "deleteShippingAddress");
-        data.put("addressId", addressId);
-        WebShopController.setCommonData(data, context, xcpConf);
-        return Results.html().render(data).template(xcpConf.TEMPLATE_CONFIRM_DELETING_ADDRESS);
     }
 
     /**
@@ -677,7 +578,30 @@ public class CustomerController
     public Result updateShippingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("address", ShippingAddress.getShippingAddressById(addressId));
+        
+        // Fetch the shipping address from the database
+        ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(addressId);
+    
+        //Obtain full name and split it into two
+        if (shippingAddress != null) {
+            // Split the name into first name and last name
+            String fullName = shippingAddress.getName();
+            String[] nameParts = fullName.split(" ", 2); // Split into maximum two parts (first name and last name)
+            String firstName = "";
+            String lastName = "";
+            if (nameParts.length > 0) {
+                firstName = nameParts[0];
+                if (nameParts.length > 1) {
+                    lastName = nameParts[1];
+                }
+            }
+            
+            // Add first name and last name to the data map
+            data.put("firstName", firstName);
+            data.put("lastName", lastName);
+        }
+
+        data.put("address", shippingAddress);
         WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }    
@@ -697,12 +621,14 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateShippingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
+    public Result updateShippingAddressCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName, 
+                                                 @Param("company") final String company,
                                                  @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                  @Param("state") final String state, @Param("zip") final String zip,
                                                  @Param("country") final String country, @Param("addressId") final String addressId,
                                                  final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -754,7 +680,29 @@ public class CustomerController
     public Result updateBillingAddress(@Param("addressId") final int addressId, final Context context)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
-        data.put("address", BillingAddress.getBillingAddressById(addressId));
+        // Fetch the shipping address from the database
+        BillingAddress billingAddress = BillingAddress.getBillingAddressById(addressId);
+    
+        //Obtain full name and split it into two
+        if (billingAddress != null) {
+            // Split the name into first name and last name
+            String fullName = billingAddress.getName();
+            String[] nameParts = fullName.split(" ", 2); // Split into maximum two parts (first name and last name)
+            String firstName = "";
+            String lastName = "";
+            if (nameParts.length > 0) {
+                firstName = nameParts[0];
+                if (nameParts.length > 1) {
+                    lastName = nameParts[1];
+                }
+            }
+            
+            // Add first name and last name to the data map
+            data.put("firstName", firstName);
+            data.put("lastName", lastName);
+        }
+
+        data.put("address", billingAddress);
         WebShopController.setCommonData(data, context, xcpConf);
         return Results.html().render(data);
     }
@@ -774,12 +722,14 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result updateBillingAddressCompleted(@Param("fullName") final String name, @Param("company") final String company,
+    public Result updateBillingAddressCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName, 
+                                                @Param("company") final String company,
                                                 @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                 @Param("state") final String state, @Param("zip") final String zip,
                                                 @Param("country") final String country, @Param("addressId") final String addressId,
                                                 final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -849,38 +799,40 @@ public class CustomerController
     }
 
     /**
-     * Adds a new shipping address to a customer.
-     * 
-     * @param name
-     * @param company
-     * @param addressLine
-     * @param city
-     * @param state
-     * @param zip
-     * @param country
-     * @param addressId
-     * @param context
-     * @return
-     */
-    @FilterWith(
-        {
-            SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
-        })
-    public Result addShippingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                                        @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                                        @Param("state") final String state, @Param("zip") final String zip,
+ * Adds a new shipping address to a customer.
+ * 
+ * @param firstName
+ * @param lastName
+ * @param company
+ * @param addressLine
+ * @param city
+ * @param state
+ * @param zip
+ * @param country
+ * @param addressId
+ * @param context
+ * @return
+ */
+    @FilterWith({
+        SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
+    })
+    public Result addShippingAddressToCustomerCompleted(@Param("firstName") final String firstName, @Param("lastName") final String lastName,
+                                                        @Param("company") final String company, @Param("addressLine") final String addressLine,
+                                                        @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
                                                         @Param("country") final String country, @Param("addressId") final String addressId,
-                                                        final Context context)
-    {
-        // check input
-        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
-        {
-            final Map<String, Object> data = new HashMap<String, Object>();
+                                                        final Context context) {
+
+            final String name = firstName + " " + lastName;
+        // Check input
+        if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
+            final Map<String, Object> data = new HashMap<>();
             WebShopController.setCommonData(data, context, xcpConf);
-            // show error message
+            // Show error message
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
-            // show inserted values in form
-            final Map<String, String> address = new HashMap<String, String>();
+            // Show inserted values in form
+            final Map<String, String> address = new HashMap<>();
+            address.put("firstName", firstName);
+            address.put("lastName", lastName);
             address.put("name", name);
             address.put("company", company);
             address.put("addressLine", addressLine);
@@ -889,28 +841,29 @@ public class CustomerController
             address.put("zip", zip);
             address.put("country", country);
             data.put("address", address);
-            // show page to enter shipping address again
+            // Show page to enter shipping address again
             return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
-        }
-        // all input fields might be correct
-        else
-        {
+        } else {
             final ShippingAddress address = new ShippingAddress();
-            address.setName(name);
+            // Combine first name and last name to form full name
+            final String fullName = firstName + " " + lastName;
+            address.setName(fullName);
             address.setCompany(company);
             address.setAddressLine(addressLine);
             address.setCity(city);
             address.setState(state);
             address.setZip(zip);
             address.setCountry(country);
-            // add address to customer
+            // Add address to customer
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             customer.addShippingAddress(address);
-            // show success message
+            
+            // Show success message
             context.getFlashScope().success(msg.get("successSave", language).get());
             return Results.redirect(context.getContextPath() + "/addressOverview");
         }
     }
+
 
     /**
      * Adds a new billing address to a customer.
@@ -930,12 +883,15 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addBillingAddressToCustomerCompleted(@Param("fullName") final String name, @Param("company") final String company,
-                                                       @Param("addressLine") final String addressLine, @Param("city") final String city,
-                                                       @Param("state") final String state, @Param("zip") final String zip,
-                                                       @Param("country") final String country, @Param("addressId") final String addressId,
-                                                       final Context context)
+        public Result addBillingAddressToCustomerCompleted(@Param("firstName") final String firstName,
+                                                            @Param("lastName") final String lastName,
+                                                            @Param("company") final String company,
+                                                            @Param("addressLine") final String addressLine, @Param("city") final String city,
+                                                            @Param("state") final String state, @Param("zip") final String zip,
+                                                            @Param("country") final String country, @Param("addressId") final String addressId,
+                                                            final Context context)
     {
+        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches("[0-9]*", zip))
         {
@@ -945,6 +901,8 @@ public class CustomerController
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             final Map<String, String> address = new HashMap<String, String>();
+            address.put("firstName", firstName);
+            address.put("lastName", lastName);
             address.put("name", name);
             address.put("company", company);
             address.put("addressLine", addressLine);
@@ -1139,8 +1097,7 @@ public class CustomerController
                 SessionHandling.removeCustomerId(context);
                 // remove cart from session
                 SessionHandling.removeCartId(context);
-        
-                // remove customer's cart
+                    // remove customer's cart
                 final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
                 if (cart != null) {
                     // Remove associated cart products before deleting the cart
@@ -1151,45 +1108,8 @@ public class CustomerController
                     cart.setCustomer(null);
                     cart.update();
                 }
-        
-                // remove customers orders --> deletes also customer --> deletes also addresses and payment information
-                final List<Order> orders = customer.getOrder();
-                for (final Order order : orders) {
-                    // Remove associated cart products before deleting the order
-                    Ebean.delete(order);
-                }
+                Ebean.delete(customer);
 
-                // Remove associated shipping addresses before deleting the customer
-                final List<ShippingAddress> shippingAddresses = customer.getShippingAddress();
-                for (final ShippingAddress shippingAddress : shippingAddresses) {
-                    // Delete referencing records in Ordering table
-                    final List<Order> relatedOrderings = Ebean.find(Order.class).where()
-                            .eq("shippingAddress", shippingAddress).findList();
-                    for (final Order relatedOrdering : relatedOrderings) {
-                        Ebean.delete(relatedOrdering);
-                    }
-                    // Then delete the shipping address
-                    Ebean.delete(shippingAddress);
-                }
-
-                // Remove associated billing addresses before deleting the customer
-                final List<BillingAddress> billingAddresses = customer.getBillingAddress();
-                for (final BillingAddress billingAddress : billingAddresses) {
-                    // Delete referencing records in Ordering table
-                    final List<Order> relatedOrderings = Ebean.find(Order.class).where()
-                            .eq("billingAddress", billingAddress).findList();
-                    for (final Order relatedOrdering : relatedOrderings) {
-                        Ebean.delete(relatedOrdering);
-                    }
-                    // Then delete the billing address
-                    Ebean.delete(billingAddress);
-                }
-
-                // delete customer, if customer has no order
-                if (orders.isEmpty()) {
-                    Ebean.delete(customer);
-                }
-        
                 // show success message
                 context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
                 // return home page

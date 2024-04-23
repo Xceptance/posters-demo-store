@@ -3,7 +3,7 @@
 
 <div class="container mt-3">
     <!-- Progress Indicator -->
-    <div class="d-flex justify-content-center mb-3">
+    <div id="checkout-progress-indicator" class="d-flex justify-content-center mb-3">
         <div class="progress-indicator row justify-content-center col-md-8 progress-2">
             <#include "../components/checkoutProgress.ftl.html"/>
         </div>
@@ -11,8 +11,8 @@
     <!-- Shipping Form -->
     <div class="row justify-content-center">
         <div class="col-lg-6">
-            <form id="formAddDelAddr" action="${contextPath}/shippingAddressCompleted" method="post" class="form-with-background">
-                <div id="titleDelAddr">
+            <form id="form-add-del-addr" action="${contextPath}/shippingAddressCompleted" method="post" class="form-with-background">
+                <div id="title-del-addr">
                     <h2 class="text-center">${i18n("shippingAddressTitleEnter")}</h2>
                 </div>
                 <!-- include address form -->
@@ -25,17 +25,17 @@
                     </div>
                     <div class="d-flex">
                         <div class="form-check me-3">
-                            <input class="form-check-input" type="radio" name="billEqualShipp" id="billEqualShipp-Yes" checked="checked" value="Yes">
+                            <input class="form-check-input" type="radio" name="billEqualShipp" id="bill-equal-shipp" checked="checked" value="Yes">
                             <label class="form-check-label" for="billEqualShipp-Yes">${i18n("chooseYes")}</label>
                         </div>
                         <div class="form-check ms-3">
-                            <input class="form-check-input" type="radio" name="billEqualShipp" id="billEqualShipp-No" value="No">
+                            <input class="form-check-input" type="radio" name="billEqualShipp" id="bill-unequal-shipp" value="No">
                             <label class="form-check-label" for="billEqualShipp-No">${i18n("chooseNo")}</label>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex">
-                    <div class="me-auto">*${i18n('titleRequiredFields')}</div>
+                    <div class="req-field me-auto">*${i18n('titleRequiredFields')}</div>
                     <button type="submit" id="button-add-shipping-address" class="ms-auto btn btn-primary">${i18n('buttonContinue')}</button>
                 </div>
             </form>

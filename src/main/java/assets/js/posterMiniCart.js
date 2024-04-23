@@ -5,47 +5,41 @@ function showCartSlider(show) {
 }
 
 function showMiniCart() {
-/*	var url = CONTEXT_PATH + '/getMiniCartElements';
-	$.get(url, getMiniCartText); */
 	getMiniCartText();
 }
 
 function getMiniCartText() {
 
-	$(".notificationsLoader").html(
-			'<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
-	$.ajax({
-		type : "GET",
-		url : CONTEXT_PATH + '/getMiniCartElements',
-		success : function(data) {
-			$('.cartMiniElementList').empty();
+	document.querySelector(".notifications-loader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
+	var url = CONTEXT_PATH + '/getMiniCartElements';
+	const xhr = new XMLHttpRequest();
 
-			/* start with the last product*/
+	xhr.onreadystatechange = function(data) {
+		if(xhr.readyState !== 4) return;
+
+		if(xhr.status === 200) {
+			var minicartElementList = document.querySelector('.cart-mini-element-list')
+			minicartElementList.innerHTML = [''];
+
 			for (var i = (data.productsInCartList.length-1); i >= 0; i--) {
-
-				// create new <li> element
-				var inner = getMiniCartElementInnerHtml(
-						data.productsInCartList[i], data.currency,
-						data.unitLength);
-				var liElement = $(
-						"<li class='cartMiniProductsListItems'></li>")
-						.html(inner);
-
-				$(".cartMiniElementList").prepend(liElement);
-
+				var minicartElement = document.createElement("li");
+				minicartElement.classList.add('cart-mini-products-list-items');
+				minicartElement.innerHTML = getMiniCartElementInnerHtml(
+					data.productsInCartList[i], data.currency,
+					data.unitLength);
+				minicartElementList.append(minicartElement);
 			}
 
-			// update product counter in mini-cart
-			$(".cartMiniProductCounter span.value").text(
-					data.cartProductCount);
-			// update total sub Order Price
-			$('.subOrderPrice').text(
-					data.currency + data.subTotalPrice);
+			document.querySelector(".cart-mini-product-counter span.value").textContent = data.cartProductCount;
+			document.querySelector('.suborder-price').textContent = data.currency + data.subTotalPrice;
 
-			$(".notificationsLoader").empty();
+			document.querySelector(".notifications-loader").innerHTML = [''];
+		} else {
+			sendAlert("failed to update mini cart", "alert-danger");
 		}
-	});
-
+	}
+	xhr.open("GET", url);
+	xhr.send();
 }
 
 /* add product to cart */
@@ -53,58 +47,65 @@ function addToCart(productId, finish, size) {
 	addToMiniCart(productId, finish, size);
 }
 function addToMiniCart(productId, finish, size) {
-	$(".notificationsLoader").html(
-			'<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">');
-	$.ajax({
-		type : "GET",
-		url : CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId
-				+ '&finish=' + finish + '&size=' + size,
-		success : function(data) {
-			// create new <li> element
-			var liId = "productId" + data.product.productId + data.product.finish + data.product.size.width + "x" + data.product.size.height;
-			var inner = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
-			var liElement = $("<li class='" + liId +  " miniCartItem'" + "></li>").html(inner);
-			
+	document.getElementById('mini-cart-menu').style.display = "block";
+	document.querySelector(".notifications-loader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
+	var liId = "productId" + productId + finish + size.width + "x" + size.height;
+	var url = CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
+	const xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState !== 4) return;
+
+		if(xhr.status === 200) {
 			/* remove existing product*/
-			$("." + liId).remove();				
+			try{
+				document.querySelector("." + liId).remove();
+			}
+			catch (error) {
+
+			}
+			var data = JSON.parse(xhr.responseText);
 			/* replace */
-			$(".cartMiniElementList").prepend(liElement);
+			minicartEntry = document.createElement("li");
+			minicartEntry.classList.add(liId);
+			minicartEntry.classList.add('mini-cart-item');
+			minicartEntry.innerHTML = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
 			/* update total sub Order Price */
-			$('.subOrderPrice').text(
-					data.currency + data.subOrderTotal);
+			document.querySelector('.suborder-price').textContent = data.currency + data.subOrderTotal;
 			/* notification off */
-			$(".notificationsLoader").empty();
+			document.querySelector(".notifications-loader").innerHTML = [''];
 
 			/* update cart in header (counter) */
-			$("#headerCartOverview span.headerCartProductCount").text(
-					data.headerCartOverview);
+			document.querySelector("#header-cart-overview span.header-cart-product-count").textContent = data.headerCartOverview;
 			/* update product counter in mini-cart */
-			$(".cartMiniProductCounter span.value").text(
-					data.headerCartOverview);
-
+			document.querySelector(".cart-mini-product-counter span.value").textContent = data.headerCartOverview;
+			/* display the new product in the minicart */
+			document.querySelector(".cart-mini-element-list").append(minicartEntry);
 			/* show minicart and than hide after 1500 ms */
-			$('.top-menu #headerCartOverview').attr('aria-expanded', 'true').addClass('show');
-            $('.top-menu #mini-cart-menu').addClass('show');
+			document.querySelector(".top-menu #header-cart-overview").classList.add('show');
+			document.querySelector(".top-menu #mini-cart-menu").classList.add('show');
 			window.setTimeout(function(){
-			$('.top-menu #headerCartOverview').attr('aria-expanded', 'false').parent().removeClass('show');
-			$('.top-menu #mini-cart-menu').removeClass('show');
-            }, 1500);
-
-
+				document.querySelector(".top-menu #header-cart-overview").classList.remove('show');
+				document.querySelector(".top-menu #mini-cart-menu").classList.remove('show');
+			}, 1500);
+		} else {
+			sendAlert("failed to update mini cart", "alert-danger");
 		}
-	});
+	}
+	xhr.open("GET", url);
+	xhr.send();
 }
 
 /* return a (html)list with all products from the cart*/
 function getMiniCartElementInnerHtml(product, currency, unitLength) {
 	
-	return '<ul class="cartItems list-unstyled">' + '<li class="prodName">'
+	return '<ul class="cart-items list-unstyled">' + '<li class="prod-name">'
 	+ product.productName + '</li>'
-	+ '<li>Quantity: <span class="prodCount">' + product.productCount
-	+ '</span>' + ' (<span class="prodStyle">' + product.finish
-	+ '</span>, <span class="prodSize">' + '<span class ="prodWidth">' + product.size.width + '</span>'  
-	+ " x " + '<span class ="prodHeight">' + product.size.height + '</span>' + " " + '<span class = "unitLength">' + unitLength + '</span>'
+	+ '<li>Quantity: <span class="prod-count">' + product.productCount
+	+ '</span>' + ' (<span class="prod-style">' + product.finish
+	+ '</span>, <span class="prod-size">' + '<span class ="prod-width">' + product.size.width + '</span>'  
+	+ " x " + '<span class ="prod-height">' + product.size.height + '</span>' + " " + '<span class = "unit-length">' + unitLength + '</span>'
 	+ " " + '</span>)' + '</li>'
-	+ '<li>' + '<div class="prodPrice text-right"><strong>' + currency
+	+ '<li>' + '<div class="prod-price text-right"><strong>' + currency
 	+ product.productTotalUnitPrice + '</strong></div>' + '</li>' + '<ul>';
 }

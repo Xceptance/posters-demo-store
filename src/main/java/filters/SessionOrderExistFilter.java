@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,6 +59,14 @@ public class SessionOrderExistFilter implements Filter
                 return Results.redirect(context.getContextPath() + "/");
             }
         }
+        //Return to Homepage if Order ID UnSet, Prevents User from going back after placing orders.
+        if (!SessionHandling.isOrderIdSet(context))
+        {
+            // context.getFlashScope().error(msg.get("errorOrderSessionTerminated", language).get());
+            // show home page
+            return Results.redirect(context.getContextPath() + "/");
+        }
+
         return chain.next(context);
     }
 }

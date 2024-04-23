@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,6 @@ public class ImportFromXMLToDB
     public static void importUser()
     {
         final UserHandler userHandler = new UserHandler();
-        XmlUtils.readXmlFile(userHandler, "assets/files/user.xml");
+        XmlUtils.readXmlFile(userHandler, "assets/files/backofficeuser.xml");
     }
 }

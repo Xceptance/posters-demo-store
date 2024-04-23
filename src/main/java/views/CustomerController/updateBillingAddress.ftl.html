@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row  justify-content-center">
         <div class="col-lg-6">
-			<div class="col-lg-12 colorlib-form h2fwpr">
+			<div class="col-lg-12 colorlib-form">
 
-				<form id="formUpdateBillAddr" class="form-horizontal"
+				<form id="form-update-bill-addr" class="form-horizontal"
 					action="${contextPath}/updateBillingAddressCompleted" method="post">
 					<fieldset>
 						<!-- Form Name -->
@@ -15,16 +15,88 @@
 						</legend>
 						<div class="col-md-12">
 							<!-- include form -->
-							<#include "../components/addressForm.ftl.html"/> <input
-								name="addressId" id="addressId" type="hidden" value=${address.id}></input>
+							<!-- last name -->
+							<div class="mb-3">
+								<label class="form-label" for="address-last-name">${i18n("labelMyName")}*</label>
+									<input id="address-last-name" name="lastName"
+										placeholder="${i18n('registrationLastName')}"
+										class="form-control" type="text" pattern="${regexName}" value="${(lastName)!}"
+										data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}" required>
+							</div>
+							<!-- first name -->
+							<div class="mb-3">
+								<label class="form-label" for="address-first-name">${i18n("labelMyFirstName")}*</label>
+									<input id="address-first-name" name="firstName"
+										placeholder="${i18n('registrationFirstName')}" class="form-control"
+										type="text" pattern="${regexName}" title="${i18n('errorWrongName')}"
+										data-error="${i18n('errorWrongName')}" value="${(firstName)!}" required>
+							</div>
+
+
+							<!-- company-->
+							<div class="mb-3">
+							<label for="address-company" class="form-label">${i18n("addressCompany")}</label>
+							<input type="text" id="address-company" class="form-control" value="${(address.company)!}" placeholder="${i18n('addressCompanyPlaceholder')}" name="company">
+						</div>
+
+						<!-- address line-->
+						<div class="mb-3">
+							<label for="address-adress-line" class="form-label">${i18n("addressLine")}*</label>
+							<input type="text" id="address-adress-line" class="form-control" value="${(address.addressLine)!}" placeholder="${i18n('addressLinePlaceholder')}" name="addressLine" required>
+						</div>
+
+						<!-- city-->
+						<div class="mb-3">
+							<label for="address-city" class="form-label">${i18n("addressCity")}*</label>
+							<input type="text" id="address-city" class="form-control" aria-describedby="address-city-help" pattern="${regexName}"
+							data-error="${i18n('errorWrongCity')}" value="${(address.city)!}" placeholder="${i18n('addressCity')}" name="city" required>
+							<div id="address-city-help" class="form-text">
+								
+							</div>
+						</div>
+
+						<!-- state & zip-->
+						<div class="mb-3">
+							<div class="row">
+								<div class="col">
+									<label for="address-state" class="form-label">${i18n("addressState")}*</label>
+									<input type="text" id="address-state" class="form-control" aria-describedby="address-state-help" pattern="${regexName}"
+									data-error="${i18n('errorWrongState')}" value="${(address.state)!}" placeholder="State" name="state" required>
+									<div id="address-state-help" class="form-text">
+										
+									</div>
+								</div>
+								<div class="col">
+									<label for="address-zip" class="form-label">${i18n('addressZip')}*</label>
+									<input type="text" id="address-zip" class="form-control" aria-describedby="address-zip-help" pattern="${regexZip}"
+									data-error="${i18n('errorWrongZip')}" value="${(address.zip)!}" placeholder="Zip / Postal" name="zip" required>
+									<div id="address-zip-help" class="form-text">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Select country -->
+						<div class="mb-3">
+							<label for="address-country" class="form-label">${i18n("addressCountry")}*</label>
+							<select id="address-country" class="form-select" aria-describedby="address-country-help" name="country">
+								<option>${i18n('countryUS')}</option>
+								<option>${i18n('countryGermany')}</option>
+							</select>
+							<div id="address-country-help" class="form-text">
+								We only ship to ${i18n('countryUS')} and ${i18n('countryGermany')}.
+							</div>
+						</div>								
+						<input name="addressId" id="address-id" type="hidden" value=${address.id}></input>
 							<!-- update -->
 							<div class="form-group">
 								<div class="col-sm-12 nopadding">
 									<div class="col-sm-4">
-										<span class="reqField me-auto pull-left textcolordarkgrey">*${i18n('titleRequiredFields')}</span>
+										<span class="req-field me-auto pull-left">*${i18n('titleRequiredFields')}</span>
 										</div>
 									<div class="col-sm-8">
-										<button id="btnUpdateBillAddr" class="btn btn-primary pull-right"
+										<button id="btn-update-bill-addr" class="btn btn-primary pull-right"
 											name="btnUpdateBillAddr" type="submit">${i18n('buttonSave')}</button>
 									</div>
 								</div>

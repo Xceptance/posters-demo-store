@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ public class Order
     /**
      * The {@link Customer} of the order. Can be {@code null}, if the order was made by a guest.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Customer customer;
 
     /**

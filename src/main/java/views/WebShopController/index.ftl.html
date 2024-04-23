@@ -34,24 +34,24 @@
 	<div class="carousel-inner">
 		<#list carousel as caro>
 		<#if (caro_index == 0)>
-		<div class="carousel-content-product carousel-item active" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.imageURL}');">
+		<div class="carousel-content-product carousel-item active" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.largeImageURL}');">
 			<div class="row">
 				<h1>${caro.name}</h1>
 			</div>
 			<div class="row">
 				<div class="col">
-					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy here</a>
+					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
 				</div>
 			</div>
 	  	</div>
 		<#else>
-	  	<div class="carousel-content-product carousel-item" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.imageURL}');">
+	  	<div class="carousel-content-product carousel-item" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.largeImageURL}');">
 			<div class="row">
 				<h1>${caro.name}</h1>
 			</div>
 			<div class="row">
 				<div class="col">
-					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy here</a>
+					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
 				</div>
 			</div>
 	  	</div>
@@ -76,7 +76,14 @@
 	<div class="row category-display-case">
 		<#list topCategory as tC>
 		<div class="card category-tile">
-			<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}"><img class="category-tile-image" src="${contextPath}${productslistcat[tC?index].imageURL}"></a>
+			<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}">
+				<picture id="category-picture-${tC_index}">
+                    <source media="(max-width: 399px)" srcset="${contextPath}${productslistcat[tC_index].smallImageURL}">
+                    <source media="(max-width: 799px)" srcset="${contextPath}${productslistcat[tC_index].mediumImageURL}">
+                    <source media="(max-width: 1999px)" srcset="${contextPath}${productslistcat[tC_index].largeImageURL}">
+                    <img class="category-tile-image" src="${contextPath}${productslistcat[tC_index].originalImageURL}" alt="Category Image" >
+                </picture>
+			</a>							
 			<div class="card-body">
 		  		<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.name}</a></h2>
 			</div>
@@ -92,13 +99,19 @@
 <div class="container text-center">
 	<div class="row product-display-case">
 		<#list productslist as prItem>
-		<div class="card product-tile">
-			<img src="${contextPath}${prItem.imageURL}" class="card-img-top" alt="picture of ${prItem.name}">
+		<div class="card product-tile">	
+			<picture id="product-picture-${prItem.id}">
+				<source media="(max-width: 399px)" srcset="${contextPath}${prItem.smallImageURL}">
+				<source media="(max-width: 799px)" srcset="${contextPath}${prItem.mediumImageURL}">
+				<source media="(max-width: 1999px)" srcset="${contextPath}${prItem.largeImageURL}">
+				<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}"><img class="card-img-top" src="${contextPath}${prItem.originalImageURL}" alt="picture of ${prItem.name}" >
+				</a>
+			</picture>
 			<div class="card-body">
 		  		<h5 class="card-title">${prItem.name}</h5>
 		  		<p class="card-text product-tile-text">${prItem.descriptionOverview}</p>
 				<p class="card-text product-tile-price">$${prItem.minimumPrice}</p>
-		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy here</a>
+		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy Here</a>
 			</div>
 		</div>
 		</#list>

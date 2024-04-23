@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package models;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -335,6 +336,20 @@ public class ShippingAddress
     }
 
     /**
+     * Returns the {@link ShippingAddress} that matches the given Customer ID.
+     * 
+     * @param id
+     *            the ID of the Customer
+     * @return the {@link ShippingAddress} that matches the given Customer ID
+     */
+    public static ShippingAddress getShippingAddressByCustomerId(final UUID customerId) {
+        return Ebean.find(ShippingAddress.class)
+                    .where()
+                    .eq("customer_id", customerId)
+                    .findUnique(); 
+    }
+
+    /**
      * Sets the {@link Customer} of the {@link ShippingAddress} to {@code null}.
      * 
      * @param id
@@ -343,7 +358,23 @@ public class ShippingAddress
     public static void removeCustomerFromShippingAddress(final int id)
     {
         final ShippingAddress address = ShippingAddress.getShippingAddressById(id);
-        address.setCustomer(null);
-        address.update();
+        Ebean.delete(address);
+
     }
+
+     /**
+     * Sets the {@link Customer} of the {@link ShippingAddress} to {@code null}.
+     * 
+     * @param id
+     *            the ID of the logged in Customer
+     */
+    public static void removeCustomerFromShippingAddressByCustomerId(final UUID id){
+        final ShippingAddress address = ShippingAddress.getShippingAddressByCustomerId(id);
+        if (address != null && address.getCustomer()!=null) {
+            address.setCustomer(null);
+            address.update(); 
+        }
+
+    }
+
 }

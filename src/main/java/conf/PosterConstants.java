@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2023 Xceptance Software Technologies GmbH
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,6 +60,7 @@ public class PosterConstants
      */
     public final String TEMPLATE_CART_OVERVIEW = "views/CartController/cartOverview.ftl.html";
 
+    public final String TEMPLATE_PRODUCT_NOT_FOUND = "views/noResult.ftl.html";
     /**
      * The path to the product overview template.
      */
@@ -131,19 +132,24 @@ public class PosterConstants
     public final String TEMPLATE_UPDATE_BILLING_ADDRESS = "views/CustomerController/updateBillingAddress.ftl.html";
 
     /**
-     * The path to the template to confirm a deleting of a customer's address.
-     */
-    public final String TEMPLATE_CONFIRM_DELETING_ADDRESS = "views/CustomerController/confirmDeleteAddress.ftl.html";
-
-    /**
-     * The path to the template to confirm a deleting of a customer's payment method.
-     */
-    public final String TEMPLATE_CONFIRM_DELETING_PAYMENT = "views/CustomerController/confirmDeletePayment.ftl.html";
-
-    /**
      * The path to the login-form template.
      */
     public final String TEMPLATE_LOGIN_FORM = "views/CustomerController/loginForm.ftl.html";
+
+    /**
+     * The path to the Back office login-form template.
+     */
+    public final String TEMPLATE_LOGIN_FORM_BO = "/views_backoffice/layout/loginN.ftl.html";
+
+    /** 
+     * The path to the product overview template.
+     */
+    public final String TEMPLATE_NOT_FOUND = "views/CatalogController/noResult.ftl.html";
+
+    /** 
+     * The path to the Error 404 Not Found template.
+     */
+    public final String NOT_FOUND_404 = "views/system/404notFound.ftl.html";
 
     /**
      * The URL of the application, if HTTP is used.

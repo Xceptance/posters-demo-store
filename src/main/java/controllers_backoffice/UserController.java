@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013-2024 Xceptance Software Technologies GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package controllers_backoffice;
 
 import java.util.Map;
@@ -12,7 +27,7 @@ import conf.PosterConstants;
 import filters.SessionCustomerExistFilter;
 import filters.SessionUserExistFilter;
 import controllers.WebShopController;
-import models_backoffice.User;
+import models_backoffice.Backofficeuser;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -38,6 +53,10 @@ public class UserController
 
     private final Optional<String> language = Optional.of("en");
 
+    // Variable to store dark mode state (a simple example; might want to use a database or cache)
+    private static final String DARK_MODE_SESSION_KEY = "darkMode";
+    private static boolean isDarkModeEnabled = false;
+    
     /**
      * Returns a page to log in to the user backend.
      * 
@@ -73,9 +92,9 @@ public class UserController
         else
         {
             // exists the given email in the database
-            final boolean emailExist = User.emailExist(email);
+            final boolean emailExist = Backofficeuser.emailExist(email);
             // get user by the given email
-            final User user = User.getUserByEmail(email);
+            final Backofficeuser user = Backofficeuser.getUserByEmail(email);
             // is the password correct
             boolean correctPassowrd = false;
             // check password, if the email exist
@@ -97,14 +116,18 @@ public class UserController
             else if (emailExist && !correctPassowrd)
             {
                 // error message
-                return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+                context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
+
+                //return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
 
             }
             // wrong email
             else
             {
                 // error message
-                return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+                context.getFlashScope().error(msg.get("errorEmailExist", language).get());
+
+                //return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
 
             }
         }
@@ -113,7 +136,8 @@ public class UserController
         // show entered email address
         data.put("email", email);
         // show page to log-in again
-        return Results.html().render(data).template(xcpConf.TEMPLATE_LOGIN_FORM);
+        return Results.redirect(context.getContextPath() + "/posters/backoffice/login");
+        //return Results.html().render(data).template(xcpConf.TEMPLATE_LOGIN_FORM_BO);
     }
 
     /**
@@ -127,10 +151,15 @@ public class UserController
     {   
         Result result = Results.html();
         // Find current user
-        User currentUser = Ebean.find(User.class, SessionHandling.getUserId(context));
+        Backofficeuser currentUser = Ebean.find(Backofficeuser.class, SessionHandling.getUserId(context));
         // Add current user into the back office
         result.render("currentUser", currentUser);
+        // Retrieve the dark mode state from the session and parse it to a boolean
+        String darkModeString = context.getSession().get(DARK_MODE_SESSION_KEY);
+        isDarkModeEnabled = Boolean.parseBoolean(darkModeString);
 
+        // Pass the dark mode state to the template
+        result.render("isDarkModeEnabled", isDarkModeEnabled);
         return result;
     }
 
@@ -151,7 +180,7 @@ public class UserController
     {
         boolean failure = false;
         // account with this email already exist
-        if (!Ebean.find(User.class).where().eq("email", email).findList().isEmpty())
+        if (!Ebean.find(Backofficeuser.class).where().eq("email", email).findList().isEmpty())
         {
             // show error message
             failure = true;
@@ -171,7 +200,7 @@ public class UserController
         else
         {
             // create new user
-            final User user = new User();
+            final Backofficeuser user = new Backofficeuser();
             user.setName(name);
             user.setFirstName(firstName);
             user.setEmail(email);
@@ -181,7 +210,7 @@ public class UserController
             // show success message
             context.getFlashScope().success(msg.get("successCreateAccount", language).get());
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/posters/backoffice");
+            return Results.redirect(context.getContextPath() + "/posters/backoffice/user");
         }
     }
 

@@ -1,48 +1,84 @@
-<#include "../layout/upper.ftl.html">
-    <div class="contentheight container-fluid pt-4 px-4">
-        <div class="bg-light text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h1 class="mb-0">Catalog Relationship Table</h1>
-                <a href="">Show All</a>
-            </div>
-            <div class="table-responsive">
-                <table class="table text-start align-middle table-bordered table-hover mb-0">
-                    <thead>
-                        <tr class="text-dark">
-                            <th scope="col">Top Catagory</th>
-                            <th scope="col">Sub Catagories</th>
-                            <th scope="col">Products</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <#list topCategories as topCategory>
-                            <tr>
-                                <td>${topCategory.name}</td>
-                                <td>
-                                    <ul>
-                                        <#list topCategory.subCategories as subCategory>
-                                            <li>
-                                                ${subCategory.name}
-                                            </li>
-                                        </#list>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <#list topCategory.subCategories as subCategory>
-                                            <#list subCategory.products as product>
-                                                <li>
-                                                    <a href="/posters/backoffice/product/${product.id}">${product.name}</a>
-                                                </li>
-                                            </#list>
-                                        </#list>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </#list>
-                    </tbody>
-                </table>
-            </div>
+<#import "../layout/defaultview.ftl.html" as layout>
+<@layout.myLayout "Backoffice Catalog">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Catalog Relationship Table</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Catalog Relationship Table</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Catalog Relationship Table</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                        <thead>
+                                            <tr class="text-dark">
+                                                <th scope="col">Top Category</th>
+                                                <th scope="col">Sub Categories</th>
+                                                <th scope="col">Products</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <#list topCategories as topCategory>
+                                                <tr>
+                                                    <td>${topCategory.name}</td>
+                                                    <td>
+                                                        <ul>
+                                                            <#list topCategory.subCategories as subCategory>
+                                                                <li>
+                                                                    ${subCategory.name}
+                                                                </li>
+                                                            </#list>
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <ul>
+                                                            <#list topCategory.subCategories as subCategory>
+                                                                <#list subCategory.products as product>
+                                                                    <li>
+                                                                        <a href="/posters/backoffice/product/${product.id}">${product.name}</a>
+                                                                    </li>
+                                                                </#list>
+                                                            </#list>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </#list>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->                    
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
     </div>
-    <#include "../layout/footer.ftl.html">
+    <!-- /.content-wrapper -->
+</@layout.myLayout>

@@ -8,44 +8,44 @@
     <div class="row  justify-content-center">
         <div class="col-lg-6">
 
-			<div class="col-lg-12 colorlib-form h2fwpr">
+			<div class="col-lg-12 colorlib-form">
 
 				<div>
-					<div id="titlePersonalData" class="header-container">
+					<div id="title-personal-data" class="header-container">
 						<span class="h2">${i18n("titleSettings")}</span>
 					</div>
 					<div class="col-sm-12">
 						
 						<div class="form-group row">
 							<div class="col-sm-2"><strong> ${i18n("titleName")}</strong></div>
-							<div class="col-sm-10" id="customerName">
-								<span id="customerFirstName">${customer.firstName}</span> <span
-									id="customerLastName">${(customer.name)!}</span>
+							<div class="col-sm-10" id="customer-name">
+								<span id="customer-first-name">${customer.firstName}</span> <span
+									id="customer-last-name">${(customer.name)!}</span>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-2"><strong>${i18n("titleEmail")}</strong></div>
-							<div class="col-sm-4" id="customerEmail">${customer.email}</div>
+							<div class="col-sm-4" id="customer-email">${customer.email}</div>
 							<div class="col-sm-6"></div>
 						</div>
 						
 						<div class="form-group row">
 							<div class="col-sm-2"></div>
 							<div class="col-sm-10">
-								<a href="${contextPath}/changeNameOrEmail" id="btnChangeNameEmail">${i18n("settingsChange")}</a>
+								<a href="${contextPath}/changeNameOrEmail" id="btn-change-name-email">${i18n("settingsChange")}</a>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-2"></div>
 							<div class="col-sm-10">
-								<a href="${contextPath}/changePassword" id="btnChangePassword">${i18n("changePasswordTitle")}</a>
+								<a href="${contextPath}/changePassword" id="btn-change-password">${i18n("changePasswordTitle")}</a>
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-2"></div>
 
 							<div class="col-sm-10">
-								<a href="${contextPath}/confirmDeleteAccount" id="btnDeleteAccount"
+								<a href="${contextPath}/confirmDeleteAccount" id="btn-delete-account"
 									class="btn btn-danger">${i18n("confirmDeletionTitle")}</a>
 							</div>
 						</div>
@@ -53,6 +53,13 @@
 				</div>
 
 			</div>
+		</div>
+	</div>
+	<!-- Back button -->
+	<div class="row justify-content-center">
+		<div class="col-md-10 offset-md-4">
+			<hr> <!-- Add a line or border -->
+			<a href="${contextPath}/accountOverview" class="btn btn-sm btn-primary">Back</a>
 		</div>
 	</div>
 </div>

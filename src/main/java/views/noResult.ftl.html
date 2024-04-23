@@ -1,0 +1,38 @@
+<#import "layout/defaultLayoutWebShop.ftl.html" as layout>
+<@layout.myLayout "The Ultimate Webshop">
+
+    <div class="container text-center" style="margin-bottom: 50px">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 id="not-found-message" class="mt-5 mb-3">
+                    Sorry, we could not find a match for your search. Please check your spelling or try something less specific.
+                </h3>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <h4 class="mb-4">
+            You might want to have a look in the following categories.
+        </h4>
+        <div class="row category-display-case">
+            <#list topCategory as tC>
+                <div class="card category-tile">
+                    <a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}">
+                        <picture id="category-picture-${tC_index}">
+                            <source media="(max-width: 399px)" srcset="${contextPath}${productslistcat[tC_index].smallImageURL}">
+                            <source media="(max-width: 799px)" srcset="${contextPath}${productslistcat[tC_index].mediumImageURL}">
+                            <source media="(max-width: 1999px)" srcset="${contextPath}${productslistcat[tC_index].largeImageURL}">
+                            <img class="category-tile-image" src="${contextPath}${productslistcat[tC_index].originalImageURL}" alt="Category Image" >
+                        </picture>
+                    </a>							
+                    <div class="card-body">
+                        <h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.name}</a></h2>
+                    </div>
+                </div>
+		</#list>
+        </div>
+    </div>
+
+</@layout.myLayout>

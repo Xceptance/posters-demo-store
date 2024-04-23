@@ -1,88 +1,110 @@
 <#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
 	<@layout.myLayout "The ultimate webshop">
 
-		<div class="row row-pb-lg  justify-content-center">
-
-		</div>
 		<div class="container">
-
-			<div class="row  justify-content-center h2fwpr">
+			<div class="row justify-content-center">
 				<div class="col-lg-6">
-
 					<div class="col-lg-12 colorlib-form">
-						<div id="titlePaymentOverview" class="header-container"><span
-								class="h2">${i18n("titlePaymentInformation")}</span></div>
+						<div id="title-payment-overview" class="header-container">
+							<span class="h2">${i18n("titlePaymentInformation")}</span>
+						</div>
+						<!-- Print payment information -->
 						<#list paymentOverview as payment>
-							<#if (payment_index + 3) % 3==0>
-								<div class="container-fluid">
-									<ul class="row">
-							</#if>
-							<li class="col-xs-12 col-lg-12 col-sm-6 col-md-4 list-unstyled" id="payment${payment_index}">
-								<ul class="list-unstyled address col-lg-6">
+							<div class="row col-lg-12">
+								<div class="col-lg-8">
+									<ul class="list-unstyled address">
+										<!-- Payment details -->
 										<li class="row">
 											<div class="col-xs-12 col-sm-4"><strong>${i18n("titleName")}:</strong></div>
-											<div class="col-xs-12 col-sm-8 paymentName"><strong>${payment.name}</strong>
-											</div>
+											<div class="col-xs-12 col-sm-8 payment-name"><strong>${payment.name}</strong></div>
 										</li>
 										<li class="row">
 											<div class="col-xs-12 col-sm-4">${i18n("titleCreditCard")}:</div>
-											<div class="col-xs-12 col-sm-8 paymentCardNumber">
-												${payment.getCardNumberCryptic()}</div>
+											<div class="col-xs-12 col-sm-8 payment-card-number">${payment.getCardNumberCryptic()}</div>
 										</li>
 										<li class="row">
 											<div class="col-xs-12 col-sm-4">${i18n("titleValidTo")}:</div>
-											<div class="col-xs-12 col-sm-8"><span
-													class="expMonth">${payment.getMonthLeadingZero()}</span>/<span
-													class="expYear">${payment.year}</span></div>
+											<div class="col-xs-12 col-sm-8">
+												<span class="exp-month">${payment.getMonthLeadingZero()}</span>/
+												<span class="exp-year">${payment.year}</span>
+											</div>
 										</li>
-									
-								</ul>
-								
-								<ul class="list-unstyled address col-lg-12">
-									<li>
-										<div class="row">
-											<div class="col-xs-12 col-sm-3 text-center mb-3">
-												<form action="${contextPath}/confirmDeletePayment" method="post"
-													>
-													<input class="cardId${payment.id}" name="cardId" type="hidden"
-														value=${payment.id}>
-													<button class="btn btn-danger btnDeletePayment" 
-														id="btnDeletePayment${payment_index}"
-														name="btnDeletePayment${payment_index}"
-														type="submit">${i18n('buttonDelete')}</button>
-												</form>
-											</div>
-											<div class="col-xs-12 col-sm-3 text-center mb-3">
-												<form action="${contextPath}/updatePaymentMethod" method="post"
-													>
-													<input class="cardId${payment.id}" name="cardId" type="hidden"
-														value=${payment.id}>
-													<button class="btn btn-primary btnChangePayment"
-														id="btnChangePayment${payment_index}"
-														name="btnChangePayment${payment_index}"
-														type="submit">${i18n("buttonEdit")}</button>
-												</form>
-											</div>
-										</div>
-									</li>
-									
-								</ul>
-							</li>
-							<#if (payment_index + 1) % 3==0>
-								</ul>
+									</ul>
+								</div>
+								<!-- Buttons (Edit and Delete) -->
+								<div class="col-lg-4 text-center mb-3">
+									<form action="${contextPath}/updatePaymentMethod" method="post">
+										<input class="card-id-${payment.id}" name="cardId" type="hidden" value=${payment.id}>
+										<button class="btn btn-primary btn-change-payment" id="btn-change-payment-${payment_index}" name="btnChangePayment${payment_index}" type="submit">${i18n("buttonEdit")}</button>
+									</form>
+									<br>
+									<!-- Delete button -->
+									<button type="button" class="btn btn-danger btn-delete-payment" data-bs-toggle="modal" data-bs-target="#del-modal-${payment.id}">
+										${i18n('buttonDelete')}
+									</button>
+								</div>
+							</div>
+						</#list>
+						<!-- Add new payment method -->
+						<div class="col-xs-12">
+							<a id="link-add-new-payment" href="${contextPath}/addPaymentToCustomer" title="${i18n('paymentMethodAddNew')}">${i18n('paymentMethodAddNew')}</a>
+						</div>
 					</div>
-					</#if>
-					<#if !payment_has_next && (payment_index + 1) % 3 !=0>
-						</ul>
-				</div>
-				</#if>
-				</#list>
-				<div class="col-xs-12">
-					<a id="linkAddNewPayment" href="${contextPath}/addPaymentToCustomer"
-						title="${i18n('paymentMethodAddNew')}">${i18n('paymentMethodAddNew')}</a>
 				</div>
 			</div>
-		</div>
-		</div>
-		</div>
+			<!-- Back button -->
+			<div class="row justify-content-center">
+				<div class="col-md-10 offset-md-4">
+					<hr> <!-- Add a line or border -->
+					<a href="${contextPath}/accountOverview" class="btn btn-sm btn-primary">Back</a>
+				</div>
+			</div>
+		</div>	
+			
+	
+	<#list paymentOverview as payment>
+			<!-- Payment Info Confirmation Modal -->
+			<div class="modal fade" id="del-modal-${payment.id}" tabindex="-1" aria-labelledby="payment-del-label"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="payment-del-label">Delete the following payment?</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<ul class="list-unstyled address">
+								<li class="row">
+									<div class="col-xs-12 col-sm-4"><strong>${i18n("titleName")}:</strong></div>
+									<div class="col-xs-12 col-sm-8 payment-name"><strong>${payment.name}</strong>
+									</div>
+								</li>
+								<li class="row">
+									<div class="col-xs-12 col-sm-4">${i18n("titleCreditCard")}:</div>
+									<div class="col-xs-12 col-sm-8 payment-card-number">
+										${payment.getCardNumberCryptic()}</div>
+								</li>
+								<li class="row">
+									<div class="col-xs-12 col-sm-4">${i18n("titleValidTo")}:</div>
+									<div class="col-xs-12 col-sm-8"><span
+											class="exp-month">${payment.getMonthLeadingZero()}</span>/<span
+											class="exp-year">${payment.year}</span></div>
+								</li>
+							</ul>						
+						</div>
+														
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<form action="${contextPath}/deletePayment" method="post">
+								<input class="card-id-${payment.id}" name="cardId" type="hidden" value=${payment.id}>
+								<button class="btn btn-danger btn-delete-payment" id="btn-delete-payment-${payment_index}"
+									name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</#list>
+
 	</@layout.myLayout>

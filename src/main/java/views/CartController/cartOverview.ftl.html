@@ -4,9 +4,9 @@
 
 <div class="container">
 	<h2 id="cart-title">Cart</h2>
-	<table class="table">
+	<table id="cart-overview-table" class="table">
 		<thead>
-		  	<tr class="coulmn-name">
+		  	<tr class="column-name">
 				<th scope="col">#</th>
 				<th scope="col">${i18n("cartTableHeaderItem")}</th>
 				<th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
@@ -17,12 +17,18 @@
 		</thead>
 		<tbody>
 		  	<#list cartProducts as cartProduct>
-			<tr id="product${cartProduct_index}">
+			<tr id="product-${cartProduct_index}" class="js-cart-product">
 				<th scope="row">${cartProduct?counter}</th>
 				<td>
-					<div class="row">
+					<div class="row js-cart-product-description">
 						<div class="col">
-							<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img src="${contextPath}${cartProduct.product.imageURL}" class="img-thumbnail" alt="image of ${cartProduct.product.name}"></a>
+							<picture id="cart-overview-picture-${cartProduct.id}">
+                                <source media="(max-width: 399px)" srcset="${contextPath}${cartProduct.product.smallImageURL}">
+                                <source media="(max-width: 799px)" srcset="${contextPath}${cartProduct.product.mediumImageURL}">
+                                <source media="(max-width: 1999px)" srcset="${contextPath}${cartProduct.product.largeImageURL}">
+                                <a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img class="img-thumbnail" 
+									src="${contextPath}${cartProduct.product.originalImageURL}" alt="image of ${cartProduct.product.name}" ></a>
+                            </picture>
 						</div>
 						<div class="col">
 							<div class="product-name"><h3>${cartProduct.product.name}</h3></div>
@@ -33,14 +39,14 @@
 				</td>
 				<td> <div class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</div></td>
 				<td>
-					<input id="productCount${cartProduct_index}" name="productCount${cartProduct_index}"
+					<input id="product-count-${cartProduct_index}" name="product-count-${cartProduct_index}"
 						class="form-control text-center product-count" title="${i18n('cartTableHeaderQuantity')}" type="text"
 						value=${cartProduct.productCount} size="4" maxlength="4">
 				</td>
 				<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
 				<td>
-					<button class="btn btnUpdateProduct" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btnUpdateProdCount${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" ><span class="icon-refresh-ccw"></span></button>
-					<button class="btn btnRemoveProduct" id="btnRemoveProdCount${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#deleteProductModal"><span class="icon-cross"></span></button>
+					<button class="btn btn-update-product" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btn-update-prod-count-${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" onclick="updateProduct(${cartProduct.id}, ${cartProduct_index}, document.getElementById('product-count-${cartProduct_index}').value)"><span class="icon-refresh-ccw"></span></button>
+					<button class="btn btn-remove-product" id="btn-remove-prod-count-${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#delete-product-modal"><span class="icon-cross"></span></button>
 				</td>
 			</tr>
 			</#list>
@@ -53,15 +59,15 @@
 				<div class="fw-bold">${i18n("cartSummary")}</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewSubTotal")}:</div>
-					<div id="orderSubTotalValue" class="col price-summary-value">${currency}${subOrderTotal}</div>
+					<div id="order-sub-total-value" class="col price-summary-value">${currency}${subOrderTotal}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOverviewShippingCosts")}:</div>
-					<div class="col price-summary-value" id="priceShippingValue">${currency}${shippingCosts}</div>
+					<div class="col price-summary-value" id="price-shipping-value">${currency}${shippingCosts}</div>
 				</div>
 				<div class="row">
 					<div class="col price-summary-position">${i18n("checkoutOvervieSubTotalTax")} (${tax}%):</div>
-					<div id="orderSubTotalTaxValue" class="col price-summary-value">${currency}${subOrderTotalTax}</div>
+					<div id="order-sub-total-tax-value" class="col price-summary-value">${currency}${subOrderTotalTax}</div>
 				</div>
 			  </div>
 			</li>
@@ -69,44 +75,43 @@
 			  <div class="price-summary ms-auto me-2">
 				<div class="row">
 					<div class="col fw-bold price-summary-position">${i18n("cartOverviewTotalPrice")}:</div>
-					<div id="orderTotal" class="col fw-bold price-summary-value">${currency}${orderTotal}</div>
+					<div id="order-total" class="col fw-bold price-summary-value">${currency}${orderTotal}</div>
 				</div>
 			  </div>
 			</li>
 		</ol>
 	</div>
 	<div class="d-flex justify-content-end mt-2">
-		<a id="btnStartCheckout" class="btn btn-primary me-0 ms-auto" href="${applUrlHttps}/checkout">${i18n("cartOverviewStartCheckout")}</a>
+		<a id="btn-start-checkout" class="btn btn-primary me-0 ms-auto" href="${applUrlHttps}/checkout">${i18n("cartOverviewStartCheckout")}</a>
 	</div>
 </div>
 
-<div class="gototop js-top">
-	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
-</div>
 <#else>
-			<div class="container">
-				<h2>Cart</h2>
-			</div>
-			<div id="errorCartMessage" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
-			</#if>
+
+<div class="container">
+	<h2 id="cart-title">Cart</h2>
+</div>
+<div id="error-cart-message" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
+
+</#if>
+
 <!-- Delete Product Modal -->
-<div id="deleteProductModal" class="modal fade" role="dialog">
+<div id="delete-product-modal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Are you sure you want to remove this product?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+			<div class="modal-body"></div>
             <div class="modal-footer">
                 <div class="d-flex justify-content-end">
-                    <button id="buttonClose" type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal" title="Close">No</button>
-                    <button id="buttonDelete" name="buttonDelete" class="btn btn-danger" data-bs-dismiss="modal" title="Delete">Yes</button>
+                    <button id="button-close" type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal" title="Close">No</button>
+                    <button id="button-delete" name="buttonDelete" class="btn btn-danger" data-bs-dismiss="modal" title="Delete">Yes</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 </@layout.myLayout>

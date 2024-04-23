@@ -1,4 +1,4 @@
-create table user (
+create table backofficeuser (
   id                        varchar(40) not null,
   email                     varchar(255),
   password                  varchar(255),
@@ -55,7 +55,7 @@ create table creditCard (
 
 create table customer (
   id                        varchar(40) not null,
-  email                     varchar(255),
+  email                     varchar(255) unique,
   password                  varchar(255),
   name                      varchar(255),
   first_name                varchar(255),
@@ -103,6 +103,10 @@ create table product (
   description_detail        varchar(4096),
   description_overview      varchar(1024),
   image_url                 varchar(255),
+  small_image_url           varchar(255),
+  medium_image_url          varchar(255),
+  large_image_url           varchar(255),
+  original_image_url        varchar(255),
   show_in_carousel          boolean,
   show_in_top_categorie     boolean,
   subCategory_id            integer,

@@ -2,7 +2,7 @@
 <@layout.myLayout "The ultimate webshop">
 
 
-<div class="row row-pb-lg  justify-content-center h2fwpr">
+<div class="row row-pb-lg  justify-content-center">
 	
 </div>
 <div class="container">
@@ -13,7 +13,7 @@
 			<div class="col-lg-12 colorlib-form">
 
 
-				<form id="formChangeNameEmail" class="form-horizontal"
+				<form id="form-change-name-email" class="form-horizontal"
 					action="${contextPath}/changeNameOrEmailCompleted" method="post">
 					<fieldset>
 						<!-- Form Name -->
@@ -21,36 +21,34 @@
 							<span class="h2">${i18n("changeCustomerDetailTitle")}</span>
 						</legend>
 						<div class="col-sm-12">
-
-							<!-- last name -->
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="lastName">${i18n("labelMyName")}*</label>
-								<div class="col-sm-8">
-									<input id="lastName" name="lastName"
-										placeholder="${i18n('registrationLastName')}" class="form-control"
-										type="text" pattern="${regexName}" title="${i18n('errorWrongName')}"
-										data-error="${i18n('errorWrongName')}" value="${(customer.name)!}" required>
-								</div>
-							</div>
-
 							<!-- first name -->
 
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="firstName">${i18n("labelMyFirstName")}*</label>
+								<label class="col-sm-4 control-label" for="first-name">${i18n("labelMyFirstName")}*</label>
 								<div class="col-sm-8">
-									<input id="firstName" name="firstName"
+									<input id="first-name" name="firstName"
 										placeholder="${i18n('registrationFirstName')}"
 										class="form-control" type="text" pattern="${regexName}"
 										data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}"
 										value="${(customer.firstName)!}" required>
 								</div>
 							</div>
+							<!-- last name -->
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="last-name">${i18n("labelMyName")}*</label>
+								<div class="col-sm-8">
+									<input id="last-name" name="lastName"
+										placeholder="${i18n('registrationLastName')}" class="form-control"
+										type="text" pattern="${regexName}" title="${i18n('errorWrongName')}"
+										data-error="${i18n('errorWrongName')}" value="${(customer.name)!}" required>
+								</div>
+							</div>
 
 							<!-- email -->
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="eMail">${i18n("labelMyEmail")}*</label>
+								<label class="col-sm-4 control-label" for="e-mail">${i18n("labelMyEmail")}*</label>
 								<div class="col-sm-8">
-									<input id="eMail" name="eMail"
+									<input id="e-mail" name="eMail"
 										placeholder="${i18n('registrationEmail')}" class="form-control"
 										pattern="${regexEmail}" title="${i18n('errorValidEmail')}"
 										type="email" data-error="${i18n('errorValidEmail')}"
@@ -73,8 +71,8 @@
 								<div class="col-sm-12 nopadding">
 									<div class="col-sm-4"></div>
 									<div class="col-s8-9">
-										<span class="reqField me-auto pull-left textcolordarkgrey">*${i18n('titleRequiredFields')}</span>
-										<button id="btnChangeNameEmail" class="btn btn-primary pull-right"
+										<span class="req-field me-auto pull-left">*${i18n('titleRequiredFields')}</span>
+										<button id="btn-change-name-email" class="btn btn-primary pull-right"
 											name="btnChangeNameEmail" type="submit">${i18n('changeCustomerDetailUpdateAccount')}</button>
 									</div>
 								</div>

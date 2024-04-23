@@ -10,9 +10,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="utf-8">
 
-		<!-- Animate.css -->
-		<link rel="stylesheet" href="${contextPath}/assets/css/animate.css">
-
 		<!-- Icomoon Icon Fonts-->
 		<link rel="stylesheet" href="${contextPath}/assets/css/icomoon.css">
 
@@ -22,16 +19,9 @@
 		<link rel="stylesheet" href="${contextPath}/assets/css/bootstrap-reboot.css">
 		<link rel="stylesheet" href="${contextPath}/assets/css/bootstrap-utilities.css">
 
-		<!-- Magnific Popup -->
-		<link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
-
-		<!-- Flexslider  -->
-		<link rel="stylesheet" href="${contextPath}/assets/css/flexslider.css">
-
 		<!-- Theme style  -->
 		<link rel="stylesheet" href="${contextPath}/assets/css/style_reworked.css">
 
-		<script src="${contextPath}/assets/js/jquery.min.js"></script>
 		<script type="text/javascript">
 			var CONTEXT_PATH = '${contextPath}';
 		</script>
@@ -61,20 +51,17 @@
 			</noscript>
 
 			<!-- messages -->
-			<div class="container-fluid" id="errorMessage">
-				<div class="text-center alert alert-danger">
-					<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
-				</div>
-			</div>
-			<div class="container-fluid" id="successMessage">
-				<div class="text-center alert alert-success">
-					<a class="close" data-dismiss="alert" aria-label="close">×</a> <strong></strong>
-				</div>
+			<div id="alert-placeholder">
+				
 			</div>
 
 			<!-- body -->
-			<div class="h2fwpr" id="main">
+			<div id="main">
 				<#nested />
+			</div>
+
+			<div id="js-top" class="go-to-top" style="display: none;">
+				<a onclick="toTopFunction()" id="js-gotop"><i class="icon-arrow-up2"></i></a>
 			</div>
 		</main>
 
@@ -82,41 +69,49 @@
 		<#include "footer.ftl.html" />
 
 		<script src="${contextPath}/assets/js/poster.js"></script>
+		<script>
+			var ready = (callback) => {
+  					if (document.readyState != "loading") callback();
+  					else document.addEventListener("DOMContentLoaded", callback);
+				}
+		</script>
 		<#if flash.error??>
-			<script type="text/javascript">
-				$(document).ready(function () {
-					$("#errorMessage").show();
-					$("#errorMessage div strong").html("${flash.error}");
+			<script>
+				ready(() => { 
+					var alertPlaceholder = document.getElementById("alert-placeholder");
+					var alertWrapper = document.createElement('div');
+					alertWrapper.classList.add("alert");
+					alertWrapper.classList.add("alert-danger");
+					alertWrapper.classList.add("alert-dismissable");
+					alertWrapper.innerHTML = [
+						'	<div>'+"${flash.error}"+'</div>',
+						'	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>'
+						].join('')
+					alertPlaceholder.append(alertWrapper)
 				});
 			</script>
 		</#if>
 		<#if flash.success??>
-			<script type="text/javascript">
-				$(document).ready(function () {
-					$("#successMessage").show();
-					$("#successMessage div strong").html("${flash.success}");
+			<script>
+				ready(() => { 
+					var alertPlaceholder = document.getElementById("alert-placeholder");
+					var alertWrapper = document.createElement('div');
+					alertWrapper.classList.add("alert");
+					alertWrapper.classList.add("alert-success");
+					alertWrapper.classList.add("alert-dismissable");
+					alertWrapper.innerHTML = [
+						'	<div>'+"${flash.success}"+'</div>',
+						'	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>'
+						].join('')
+					alertPlaceholder.append(alertWrapper)
 				});
 			</script>
 		</#if>
-		<!-- jQuery -->
-		<script src="${contextPath}/assets/js/jquery.min.js"></script>
-		<!-- jQuery easing -->
-		<script src="${contextPath}/assets/js/jquery.easing.1.3.js"></script>
-		<!-- Waypoints -->
-		<script src="${contextPath}/assets/js/jquery.waypoints.min.js"></script>
-		<!-- Flexslider -->
-		<script src="${contextPath}/assets/js/jquery.flexslider-min.js"></script>
-		<!-- Magnific Popup -->
-		<script src="${contextPath}/assets/js/jquery.magnific-popup.min.js"></script>
-		<script src="${contextPath}/assets/js/magnific-popup-options.js"></script>
+
 		<!-- Bootstrap Bundle (v5.3.2 including popper)-->
 		<script src="${contextPath}/assets/js/bootstrap.bundle.js"></script>
-		<!-- Stellar Parallax -->
-		<script src="${contextPath}/assets/js/jquery.stellar.min.js"></script>
 		<!-- Main -->
 		<script src="${contextPath}/assets/js/main.js"></script>
-		<!--Header Functionality-->
-		<script src="${contextPath}/assets/js/header-functionalities.js"></script>
 	</body>
 
 	</html>

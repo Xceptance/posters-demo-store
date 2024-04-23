@@ -61,7 +61,7 @@
     font-size: 2rem;
   }
 
-  #titleOrderOverview {
+  #title-order-overview {
     text-align: center;
   }
 /*  Headings
@@ -118,35 +118,35 @@
   /*  Mini cart
   *   - Start
   */
-  .cartMini {
+  .cart-mini {
     width: 250px;
     padding: 0px 10px;
   }
   
-  .cartMiniHeader {
+  .cart-mini-header {
     padding: 10px 20px;
     border-bottom: 3px #000 solid;
   }
   
-  .cartMiniProducts {
+  .cart-mini-products {
     padding: 0 20px 0 20px;
     background-color: #ffffff;
   }
   
-  .cartMiniTotal {
+  .cart-mini-total {
     padding: 10px;
   }
   
-  .cartMiniSubOrderTotal {
+  .cart-mini-suborder-total {
     padding: 10px 0;
   }
   
-  .subOrderPrice {
+  .suborder-price {
     font-weight: bold;
     font-size: 120%;
   }
   
-  .cartItems {
+  .cart-items {
     border-bottom: 2px #c91b1b solid;
     padding: 5px 0;
     margin: 0 20px;
@@ -159,7 +159,7 @@
     margin: 10px;
   }
   
-  .cartMiniEmpty {
+  .cart-mini-empty {
     background-color: #ffffff;
     display: none;
   }
@@ -242,12 +242,44 @@
 /*  Category tiles
 *   - End
 */
-
-/*  Intro text
+.acc-style{
+  text-decoration: none;
+  
+}
+/*  Address 
 *   - Start
 */
 
-/*  Intro text
+  .card-ship {
+    margin-top: 1rem;
+  }
+
+  .card-bill {
+    margin-top: 5rem;
+  }
+
+
+  .address {
+    background-color: #f6f6f6;
+    margin-bottom: 20px;
+    border-radius: 7px; 
+
+  }
+
+  .address dl {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .address dt {
+    flex: 0 0 auto;
+    margin-right: 10px; 
+  }
+
+  .address dd {
+    flex: 1 1 auto;
+  }
+/*  Address 
 *   - End
 */
 
@@ -255,11 +287,6 @@
 *   - Start
 */
   .product-display-case {
-    justify-content: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  .product-display-case-product-overview {
     justify-content: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -285,6 +312,7 @@
 *   - Start
 */
   .btn-primary {
+    text-transform: capitalize;
     --bs-btn-bg: var(--xred);
     --bs-btn-border-color: var(--xred);
     --bs-btn-hover-bg: var(--button-hover);
@@ -293,6 +321,10 @@
     --bs-btn-active-border-color: var(--button-hover);
     --bs-btn-disabled-bg: var(--xred);
     --bs-btn-disabled-border-color: var(--xred);
+  }
+
+  .btn{
+    text-transform: capitalize;
   }
 /*  Buttons
 *   - End
@@ -340,7 +372,6 @@
   }
 
   .pagination .page-item a {
-    background-color: white;
     color: var(--xred);
   }
 
@@ -546,7 +577,7 @@
 /*  Icons as elements
 *   - Start
 */
-  .gototop {
+  .go-to-top {
     /* 
     * width, height, and border-radius assume the content will be 1rem x 1rem in size
     * if this condition is not met content will be misaligned 
@@ -563,9 +594,13 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
   }
 
-  .gototop a {
+  .go-to-top a {
     color: inherit;
     text-decoration: none;
   }

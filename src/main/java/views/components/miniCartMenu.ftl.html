@@ -1,30 +1,30 @@
-<div class="cartMini cartMiniWrap">
-	<div class="cartMiniEmpty">${i18n("infoEmptyCartShort")}</div>
+<div class="cart-mini cart-mini-wrap">
+	<div class="cart-mini-empty">${i18n("infoEmptyCartShort")}</div>
 
-	<div class="cartMiniHeader">
-		<div class="cartMiniProductCounter">
+	<div class="cart-mini-header">
+		<div class="cart-mini-product-counter">
 			<span class="value font-bold">${cartProductCount}</span>
 			<#if cartProductCount == 1 > ${i18n("miniCartItem")} <#else>
 			${i18n("miniCartItems")} </#if>
 		</div>
 	</div>
 
-	<div class="cartMiniElementListWrap">
-		<span class="notificationsLoader"></span>
-		<ul class="list-unstyled cartMiniElementList">
+	<div class="cart-mini-element-list-wrap">
+		<span class="notifications-loader"></span>
+		<ul class="list-unstyled cart-mini-element-list">
 			<#list cartProducts as product>
 			<li
-				class="productId${product.product.id}${product.getFinish()}${product.size.width}x${product.size.height} miniCartItem" data-prodId="${product.product.id}">
-				<ul class="cartItems list-unstyled">
-					<li class="prodName">${product.product.name}</li>
+				class="product-id-${product.product.id}-${product.getFinish()}-${product.size.width}x${product.size.height} mini-cart-item" data-prodId="${product.product.id}">
+				<ul class="cart-items list-unstyled">
+					<li class="prod-name">${product.product.name}</li>
 					<li>${i18n("cartTableHeaderQuantity")}: <span 
-						class="prodCount">${product.getProductCount()}</span> (<span 
-						class="prodStyle">${product.getFinish()}</span>, <span class="prodSize"><span 
-						class="prodWidth">${product.size.width}</span> x <span class = "prodHeight">${product.size.height}</span> <span 
-						class = "unitLength">${unitLength}</span></span>)
+						class="prod-count">${product.getProductCount()}</span> (<span 
+						class="prod-style">${product.getFinish()}</span>, <span class="prod-size"><span 
+						class="prod-width">${product.size.width}</span> x <span class = "prod-height">${product.size.height}</span> <span 
+						class = "unit-length">${unitLength}</span></span>)
 					</li>
 					<li>
-						<div class="prodPrice text-right">
+						<div class="prod-price text-right">
 							<strong>${currency}${product.getTotalUnitPriceAsString()}</strong>
 						</div>
 					</li>
@@ -33,16 +33,16 @@
 		</ul>
 	</div>
 
-	<div class="cartMiniTotal">
-		<div class="cartMiniSubOrderTotal row">
+	<div class="cart-mini-total">
+		<div class="cart-mini-suborder-total row">
 			<div class="col-sm-7 text-left labelText">${i18n("miniCartSubTotal")}</div>
 			<div class="col-sm-5 text-right value">
-				<div class="subOrderPrice cartMiniTotalSubOrderPrice">${currency}${subTotalPrice}</div>
+				<div class="suborder-price">${currency}${subTotalPrice}</div>
 			</div>
 		</div>
-		<div class="linkButton">
+		<div class="link-button">
 			<a href="${applUrlHttp}/cart"
-				class="btn btn-primary form-control goToCart">${i18n("buttonGoToCart")}</a>
+				class="btn btn-primary form-control go-to-cart">${i18n("buttonGoToCart")}</a>
 		</div>
 	</div>
 
