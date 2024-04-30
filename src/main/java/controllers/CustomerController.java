@@ -669,24 +669,10 @@ public class CustomerController
         // Fetch the shipping address from the database
         BillingAddress billingAddress = BillingAddress.getBillingAddressById(addressId);
     
-        //Obtain full name and split it into two
-        if (billingAddress != null) {
-            // Split the name into first name and last name
-            String fullName = billingAddress.getName();
-            String[] nameParts = fullName.split(" ", 2); // Split into maximum two parts (first name and last name)
-            String firstName = "";
-            String lastName = "";
-            if (nameParts.length > 0) {
-                firstName = nameParts[0];
-                if (nameParts.length > 1) {
-                    lastName = nameParts[1];
-                }
-            }
             
-            // Add first name and last name to the data map
-            data.put("firstName", firstName);
-            data.put("lastName", lastName);
-        }
+        // Add first name and last name to the data map
+        data.put("firstName", billingAddress.getFirstName());
+        data.put("lastName", billingAddress.getName());
 
         data.put("address", billingAddress);
         WebShopController.setCommonData(data, context, xcpConf);
@@ -715,7 +701,6 @@ public class CustomerController
                                                 @Param("country") final String country, @Param("addressId") final String addressId,
                                                 final Context context)
     {
-        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -726,7 +711,8 @@ public class CustomerController
             // show inserted values in form
             final Map<String, String> address = new HashMap<String, String>();
             address.put("id", addressId);
-            address.put("name", name);
+            address.put("name", lastName);
+            address.put("name", firstName);
             address.put("company", company);
             address.put("addressLine", addressLine);
             address.put("city", city);
@@ -742,7 +728,8 @@ public class CustomerController
         {
             final BillingAddress address = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
 
-            address.setName(name);
+            address.setName(lastName);
+            address.setFirstName(firstName);
             address.setCompany(company);
             address.setAddressLine(addressLine);
             address.setCity(city);
@@ -903,7 +890,8 @@ public class CustomerController
         else
         {
             final BillingAddress address = new BillingAddress();
-            address.setName(name);
+            address.setName(lastName);
+            address.setFirstName(firstName);            
             address.setCompany(company);
             address.setAddressLine(addressLine);
             address.setCity(city);

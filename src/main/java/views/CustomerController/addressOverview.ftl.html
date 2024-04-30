@@ -71,7 +71,7 @@
 									<address>
 										<dl>
 											<div class="col-lg-3">
-												<dt><strong>${address.name}</strong></dt>
+												<dt><strong>${address.firstName} ${address.name}</strong></dt>
 											</div>
 											<div class="col-lg-9">
 												<dd>${address.company} ${address.addressLine}, ${address.city} ${address.zip}, ${address.state}, ${address.country}</dd>
@@ -167,7 +167,7 @@
 						</div>
 						<div class="modal-body">
 							<ul class="list-unstyled address">
-								<li class="name" title="${i18n('addressFullName')}"><strong>${addressBill.name}</strong>
+								<li class="name" title="${i18n('addressFullName')}"><strong>${addressBill.firstName} ${addressBill.name}</strong>
 								</li>
 								<li class="company" title="${i18n('addressCompany')}">${addressBill.company}</li>
 								<li class="address-line" title="${i18n('addressLine')}">${addressBill.addressLine}</li>

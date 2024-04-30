@@ -505,7 +505,6 @@ public class CheckoutController
                                             @Param("state") final String state, @Param("zip") final String zip,
                                             @Param("country") final String country, final Context context)
     {
-        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -515,7 +514,8 @@ public class CheckoutController
             context.getFlashScope().error(msg.get("errorWrongZip", language).get());
             // show inserted values in form
             final Map<String, String> address = new HashMap<String, String>();
-            address.put("name", name);
+            address.put("name", lastName);
+            address.put("firstName", firstName);
             address.put("company", company);
             address.put("addressLine", addressLine);
             address.put("city", city);
@@ -545,7 +545,8 @@ public class CheckoutController
 
             // create new billing address
             final BillingAddress billingAddress = new BillingAddress();
-            billingAddress.setName(name);
+            billingAddress.setName(lastName);
+            billingAddress.setFirstName(firstName);
             billingAddress.setCompany(company);
             billingAddress.setAddressLine(addressLine);
             billingAddress.setCity(city);
@@ -559,6 +560,7 @@ public class CheckoutController
                 // Create a copy of the shipping address with customer_id set to null
                 final BillingAddress copyAddress = new BillingAddress();
                 copyAddress.setName(billingAddress.getName());
+                copyAddress.setFirstName(billingAddress.getFirstName());
                 copyAddress.setCompany(billingAddress.getCompany());
                 copyAddress.setAddressLine(billingAddress.getAddressLine());
                 copyAddress.setCity(billingAddress.getCity());
@@ -613,6 +615,7 @@ public class CheckoutController
         // Create a duplicate of the Billing address with customer_id set to null
         final BillingAddress copyAddress = new BillingAddress();
         copyAddress.setName(billingAddress.getName());
+        copyAddress.setFirstName(billingAddress.getFirstName());
         copyAddress.setCompany(billingAddress.getCompany());
         copyAddress.setAddressLine(billingAddress.getAddressLine());
         copyAddress.setCity(billingAddress.getCity());
