@@ -48,6 +48,11 @@ public class ShippingAddress
     private String name;
 
     /**
+     * The first name of the customer.
+     */
+    private String firstName;
+
+    /**
      * The company field of the address.
      */
     private String company;
@@ -173,6 +178,27 @@ public class ShippingAddress
         this.name = name;
     }
 
+     /**
+     * Returns the first name.
+     * 
+     * @return the first name
+     */
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    /**
+     * Sets the first name.
+     * 
+     * @param firstName
+     *            the first name
+     */
+    public void setFirstName(final String firstName)
+    {
+        this.firstName = firstName;
+    }
+    
     /**
      * Returns the address line of the shipping address.
      * 

@@ -33,7 +33,7 @@
 							<div class="col-sm-10">
 								<address>
 									<ul class="list-unstyled container-fluid address">
-										<li class="name" title="${i18n('addressFullName')}"><strong>${address.name}</strong></li>
+										<li class="name" title="${i18n('addressFullName')}"><strong>${address.firstName} ${address.name}</strong></li>
 										<li class="company" title="${i18n('addressCompany')}">${address.company}</li>
 										<li class="address-line" title="${i18n('addressLine')}">${address.addressLine}</li>
 										<li>
@@ -58,14 +58,16 @@
 				<div class="form-group">
 					<div class="col-sm-12 nopadding">
 						<div class="col-sm-3"></div>
-							<div class="col-sm-9">
-								<!-- Trigger the modal with a button -->
-								<button id="btn-add-new-ship-addr" type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#add-address-modal">${i18n("shippingAddressAddNew")}</button>
-								<!-- button - continue  -->
-								<button class="btn btn-primary" id="btn-use-address-continue" name="btnUseAddressContinue" type="submit">${i18n("buttonContinue")}</button>
-							</div>
+						<div class="col-sm-9">
+							<!-- Trigger the modal with a button -->
+							<button id="btn-add-new-ship-addr" type="button" class="btn btn-default" data-bs-toggle="modal"
+								data-bs-target="#add-address-modal">${i18n("shippingAddressAddNew")}</button>
+							<!-- button - continue  -->
+							<button class="btn btn-primary" id="btn-use-address-continue" name="btnUseAddressContinue"
+								type="submit">${i18n("buttonContinue")}</button>
 						</div>
 					</div>
+				</div>
 			</form>
 		</div>
 	</div>

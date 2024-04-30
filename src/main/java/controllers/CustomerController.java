@@ -581,25 +581,10 @@ public class CustomerController
         
         // Fetch the shipping address from the database
         ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(addressId);
-    
-        //Obtain full name and split it into two
-        if (shippingAddress != null) {
-            // Split the name into first name and last name
-            String fullName = shippingAddress.getName();
-            String[] nameParts = fullName.split(" ", 2); // Split into maximum two parts (first name and last name)
-            String firstName = "";
-            String lastName = "";
-            if (nameParts.length > 0) {
-                firstName = nameParts[0];
-                if (nameParts.length > 1) {
-                    lastName = nameParts[1];
-                }
-            }
             
             // Add first name and last name to the data map
-            data.put("firstName", firstName);
-            data.put("lastName", lastName);
-        }
+            data.put("firstName", shippingAddress.getFirstName());
+            data.put("lastName", shippingAddress.getName());
 
         data.put("address", shippingAddress);
         WebShopController.setCommonData(data, context, xcpConf);
@@ -628,7 +613,6 @@ public class CustomerController
                                                  @Param("country") final String country, @Param("addressId") final String addressId,
                                                  final Context context)
     {
-        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -639,7 +623,8 @@ public class CustomerController
             // show inserted values in form
             //final Map<String, String> address = new HashMap<String, String>();
             data.put("id", addressId);
-            data.put("name", name);
+            data.put("name", lastName);
+            data.put("firstName", firstName);
             data.put("company", company);
             data.put("addressLine", addressLine);
             data.put("city", city);
@@ -654,7 +639,8 @@ public class CustomerController
         else
         {
             final ShippingAddress address = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
-            address.setName(name);
+            address.setName(lastName);
+            address.setFirstName(firstName);
             address.setCompany(company);
             address.setAddressLine(addressLine);
             address.setCity(city);
@@ -845,9 +831,8 @@ public class CustomerController
             return Results.html().render(data).template(xcpConf.TEMPLATE_ADD_SHIPPING_ADDRESS_TO_CUSTOMER);
         } else {
             final ShippingAddress address = new ShippingAddress();
-            // Combine first name and last name to form full name
-            final String fullName = firstName + " " + lastName;
-            address.setName(fullName);
+            address.setName(lastName);
+            address.setFirstName(firstName);
             address.setCompany(company);
             address.setAddressLine(addressLine);
             address.setCity(city);

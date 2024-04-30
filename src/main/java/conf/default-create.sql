@@ -10,6 +10,7 @@ create table backofficeuser (
 create table billingAddress (
   id                        integer not null,
   name                      varchar(255),
+  first_name                varchar(255),
   company                   varchar(255),
   address_line              varchar(255),
   city                      varchar(255),
@@ -47,6 +48,7 @@ create table creditCard (
   id                        integer not null,
   card_number               varchar(255),
   name                      varchar(255),
+  first_name                varchar(255),
   month                     integer,
   year                      integer,
   customer_id               varchar(40),
@@ -126,6 +128,7 @@ create table productPosterSize (
 create table shippingAddress (
   id                        integer not null,
   name                      varchar(255),
+  first_name                varchar(255),
   company                   varchar(255),
   address_line              varchar(255),
   city                      varchar(255),
