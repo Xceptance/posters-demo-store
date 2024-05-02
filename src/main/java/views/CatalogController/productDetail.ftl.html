@@ -3,12 +3,17 @@
 
 <div class="container mt-4">
 	<div class="row">
-		<picture class="img-fluid col">
-			<source media="(max-width: 399px)" srcset="${contextPath}${productDetail.smallImageURL}">
-    		<source media="(max-width: 799px)" srcset="${contextPath}${productDetail.mediumImageURL}">
-    		<source media="(max-width: 1999px)" srcset="${contextPath}${productDetail.largeImageURL}">
-			<img class="img-fluid col" src="${contextPath}${productDetail.originalImageURL}" alt="${productDetail.name}" >
-		</picture>
+		<img
+            srcset="${contextPath}${productDetail.smallImageURL} 400w,
+					${contextPath}${productDetail.mediumImageURL} 800w,
+                    ${contextPath}${productDetail.largeImageURL} 2000w"
+             sizes="(min-width: 1320px) 660px,
+			 		(min-width: 1140px) 570px,
+			 		(min-width: 960px) 480px,
+					100vw"
+            src="${contextPath}${productDetail.originalImageURL}"
+            alt="${productDetail.name}"
+			class="img-fluid col-lg-6 col-md-12">
 		<div class="col-lg-6 col-md-12 mt-4">
 			<form id="add-to-cart-form">
 				<div class="mb-3">
