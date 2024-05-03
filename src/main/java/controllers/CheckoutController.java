@@ -300,6 +300,7 @@ public class CheckoutController
                 // create billing address
                 final BillingAddress billingAddress = new BillingAddress();
                 billingAddress.setName(name);
+                billingAddress.setFirstName(firstName);
                 billingAddress.setCompany(company);
                 billingAddress.setAddressLine(addressLine);
                 billingAddress.setCity(city);
@@ -314,6 +315,7 @@ public class CheckoutController
                     // Create a copy of the Billing address with customer_id set to null
                     final BillingAddress copyAddress = new BillingAddress();
                     copyAddress.setName(billingAddress.getName());
+                    copyAddress.setFirstName(billingAddress.getFirstName());
                     copyAddress.setCompany(billingAddress.getCompany());
                     copyAddress.setAddressLine(billingAddress.getAddressLine());
                     copyAddress.setCity(billingAddress.getCity());
