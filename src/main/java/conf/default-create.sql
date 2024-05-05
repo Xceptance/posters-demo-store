@@ -24,11 +24,15 @@ create table billingAddress (
 create table cart (
   id                        varchar(40) not null,
   customer_id               varchar(40),
-  sub_Total_Price	    	double,
+  order_date                varchar(255),
+  shipping_address_id       integer,
+  billing_address_id        integer,
+  sub_Total_Price	    	    double,
   tax                       double,
-  total_Tax_Price	    	double,
+  total_Tax_Price	    	    double,
   shipping_costs            double,
   total_Price               double,
+  credit_card_id            integer,
   constraint pk_cart primary key (id))
 ;
 
@@ -67,16 +71,16 @@ create table customer (
 
 create table ordering (
   id                        varchar(40) not null,
+  customer_id               varchar(40),
   order_date                varchar(255),
   shipping_address_id       integer,
   billing_address_id        integer,
-  sub_Total_Costs		    double,
-  total_Tax_Costs		    double,
+  sub_Total_Costs		        double,
   tax                       double,
+  total_Tax_Costs		        double,
   shipping_costs            double,
   total_costs               double,
   credit_card_id            integer,
-  customer_id               varchar(40),
   last_update               timestamp not null,
   constraint pk_ordering primary key (id))
 ;
