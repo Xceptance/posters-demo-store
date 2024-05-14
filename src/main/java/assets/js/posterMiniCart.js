@@ -49,7 +49,9 @@ function addToCart(productId, finish, size) {
 function addToMiniCart(productId, finish, size) {
 	document.getElementById('mini-cart-menu').style.display = "block";
 	document.querySelector(".notifications-loader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
-	var liId = "productId" + productId + finish + size.width + "x" + size.height;
+	var width = size.match(/\d+/g)[0];
+	var height = size.match(/\d+/g)[1];
+	var liId = "product-id-" + productId + '-' + finish + '-' + width + "x" + height;
 	var url = CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
 	const xhr = new XMLHttpRequest();
 
