@@ -336,6 +336,22 @@ public class CreditCard
     }
 
     /**
+     * Creates a copy of the {@link CreditCard} with null {@link Customer} ID.
+     * 
+     * @param originalCreditCard
+     *            the original credit card.
+     */
+    public static CreditCard copy(CreditCard originalCreditCard) {
+        CreditCard copyCreditCard = new CreditCard();
+        copyCreditCard.setCardNumber(originalCreditCard.getCardNumber());
+        copyCreditCard.setName(originalCreditCard.getName());
+        copyCreditCard.setMonth(originalCreditCard.getMonth());
+        copyCreditCard.setYear(originalCreditCard.getYear());
+        copyCreditCard.setCustomer(null);
+        return copyCreditCard;
+    }
+
+    /**
      * Sets the {@link Customer} of the {@link CreditCard} to {@code null}.
      * 
      * @param id
