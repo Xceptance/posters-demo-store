@@ -22,6 +22,7 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -91,6 +92,12 @@ public class Customer
      */
     @OneToMany(cascade = CascadeType.ALL)
     private List<Order> order;
+
+    // /**
+    //  * The current {@link Cart} of the customer.
+    //  */
+    // @OneToMany(cascade = CascadeType.ALL)
+    // private CartProduct cartProduct;
 
     /**
      * The current {@link Cart} of the customer.
@@ -461,5 +468,15 @@ public class Customer
     public List<Order> getAllOrders()
     {
         return Ebean.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
+    }
+
+        /**
+     * Returns all {@link Order}s, which are stored in the database.
+     * 
+     * @return {@link Order}s
+     */
+    public static List<Order> getEveryOrder()
+    {
+        return Ebean.find(Order.class).findList();
     }
 }
