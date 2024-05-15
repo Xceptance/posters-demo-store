@@ -388,6 +388,26 @@ public class ShippingAddress
 
     }
 
+    /**
+     * Creates a copy of the {@link BillingAddress} with null {@link Customer} ID.
+     * 
+     * @param originalBillingAddress
+     *            the original billing address.
+     */
+    public static ShippingAddress copy(ShippingAddress originalShippingAddress) {
+        ShippingAddress copyShippingAddress = new ShippingAddress();
+        copyShippingAddress.setName(originalShippingAddress.getName());
+        copyShippingAddress.setFirstName(originalShippingAddress.getFirstName());
+        copyShippingAddress.setCompany(originalShippingAddress.getCompany());
+        copyShippingAddress.setAddressLine(originalShippingAddress.getAddressLine());
+        copyShippingAddress.setCity(originalShippingAddress.getCity());
+        copyShippingAddress.setState(originalShippingAddress.getState());
+        copyShippingAddress.setZip(originalShippingAddress.getZip());
+        copyShippingAddress.setCountry(originalShippingAddress.getCountry());
+        copyShippingAddress.setCustomer(null);
+        return copyShippingAddress;
+    }
+
      /**
      * Sets the {@link Customer} of the {@link ShippingAddress} to {@code null}.
      * 
