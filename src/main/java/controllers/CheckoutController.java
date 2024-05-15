@@ -84,17 +84,7 @@ public class CheckoutController
         // start checkout, if the cart is not empty
         else
         {
-            // create new order
-            final Order order = Order.createNewOrder(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
-            // delete old order from session
-            SessionHandling.removeOrderId(context);
-            // put new order id to session
-            SessionHandling.setOrderId(context, order.getId());
-            // add the products from the cart to the order
-            order.addProductsFromCart(cart);
-            // update order
-            order.update();
-            // return page to enter shipping address
+            
             return Results.redirect(context.getContextPath() + "/enterShippingAddress");
         }
     }
@@ -107,7 +97,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
     public Result enterShippingAddress(final Context context)
     {
@@ -193,7 +183,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
         public Result shippingAddressCompleted(@Param("firstName") final String firstName,
                                             @Param("lastName") final String lastName,
@@ -204,7 +194,6 @@ public class CheckoutController
                                             @Param("billEqualShipp") final String billingEqualShipping, final Context context) 
         {
 
-        final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -256,42 +245,43 @@ public class CheckoutController
             shippingAddress.setZip(zip);
             shippingAddress.setCountry(country);
             
-            // set new address to customer
             if (SessionHandling.isCustomerLogged(context))
             {
                 //save shipping address in the table
                 Customer.getCustomerById(SessionHandling.getCustomerId(context)).addShippingAddress(shippingAddress);
-                // Create a copy of the shipping address with customer_id set to null
-                final ShippingAddress copyAddress = new ShippingAddress();
-                copyAddress.setName(shippingAddress.getName());
-                copyAddress.setFirstName(shippingAddress.getFirstName());
-                copyAddress.setCompany(shippingAddress.getCompany());
-                copyAddress.setAddressLine(shippingAddress.getAddressLine());
-                copyAddress.setCity(shippingAddress.getCity());
-                copyAddress.setState(shippingAddress.getState());
-                copyAddress.setZip(shippingAddress.getZip());
-                copyAddress.setCountry(shippingAddress.getCountry());
-                copyAddress.setCustomer(null);
-                Ebean.save(copyAddress);
-                //copyAddress.getId(); could be used to obtain id maybe
-                final ShippingAddress retrievedAddress = ShippingAddress.getShippingAddressById(copyAddress.getId()); 
                 // get order by session id
-                final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+                final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
                 // set shipping address to order
-                order.setShippingAddress(retrievedAddress);
+                cart.setShippingAddress(shippingAddress);
                 // update order
-                order.update();
+                cart.update();
+                // set new address to customer
+                // Create a copy of the shipping address with customer_id set to null
+                // final ShippingAddress copyAddress = new ShippingAddress();
+                // copyAddress.setName(shippingAddress.getName());
+                // copyAddress.setFirstName(shippingAddress.getFirstName());
+                // copyAddress.setCompany(shippingAddress.getCompany());
+                // copyAddress.setAddressLine(shippingAddress.getAddressLine());
+                // copyAddress.setCity(shippingAddress.getCity());
+                // copyAddress.setState(shippingAddress.getState());
+                // copyAddress.setZip(shippingAddress.getZip());
+                // copyAddress.setCountry(shippingAddress.getCountry());
+                // copyAddress.setCustomer(null);
+                // Ebean.save(copyAddress);
+                // //copyAddress.getId(); could be used to obtain id maybe
+                // final ShippingAddress retrievedAddress = ShippingAddress.getShippingAddressById(copyAddress.getId()); 
+                
             }
             // save shipping address
             else
             {
-                shippingAddress.save();
+            shippingAddress.save();
             // get order by session id
-            final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+            final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // set shipping address to order
-            order.setShippingAddress(shippingAddress);
+            cart.setShippingAddress(shippingAddress);
             // update order
-            order.update();
+            cart.update();
             }
 
             // billing address is equal to shipping address
@@ -299,7 +289,8 @@ public class CheckoutController
             {
                 // create billing address
                 final BillingAddress billingAddress = new BillingAddress();
-                billingAddress.setName(name);
+                billingAddress.setName(lastName);
+                billingAddress.setFirstName(firstName);
                 billingAddress.setCompany(company);
                 billingAddress.setAddressLine(addressLine);
                 billingAddress.setCity(city);
@@ -312,24 +303,24 @@ public class CheckoutController
                     Customer.getCustomerById(SessionHandling.getCustomerId(context)).addBillingAddress(billingAddress);
                     
                     // Create a copy of the Billing address with customer_id set to null
-                    final BillingAddress copyAddress = new BillingAddress();
-                    copyAddress.setName(billingAddress.getName());
-                    copyAddress.setCompany(billingAddress.getCompany());
-                    copyAddress.setAddressLine(billingAddress.getAddressLine());
-                    copyAddress.setCity(billingAddress.getCity());
-                    copyAddress.setState(billingAddress.getState());
-                    copyAddress.setZip(billingAddress.getZip());
-                    copyAddress.setCountry(billingAddress.getCountry());
-                    copyAddress.setCustomer(null);
-                    Ebean.save(copyAddress);
+                    // final BillingAddress copyAddress = new BillingAddress();
+                    // copyAddress.setName(billingAddress.getName());
+                    // copyAddress.setCompany(billingAddress.getCompany());
+                    // copyAddress.setAddressLine(billingAddress.getAddressLine());
+                    // copyAddress.setCity(billingAddress.getCity());
+                    // copyAddress.setState(billingAddress.getState());
+                    // copyAddress.setZip(billingAddress.getZip());
+                    // copyAddress.setCountry(billingAddress.getCountry());
+                    // copyAddress.setCustomer(null);
+                    // Ebean.save(copyAddress);
 
-                    final BillingAddress retreivedAddress = BillingAddress.getBillingAddressById(copyAddress.getId());
+                    // final BillingAddress retreivedAddress = BillingAddress.getBillingAddressById(copyAddress.getId());
                     // get order by session id
-                    final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+                    final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
                     // set billing address to order
-                    order.setBillingAddress(retreivedAddress);
+                    cart.setBillingAddress(billingAddress);
                     // update order
-                    order.update();
+                    cart.update();
                     // return page to enter payment information
                     return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
                 }
@@ -339,11 +330,11 @@ public class CheckoutController
                     billingAddress.save();
                     
                 // get order by session id
-                final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+                final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
                 // set billing address to order
-                order.setBillingAddress(billingAddress);
+                cart.setBillingAddress(billingAddress);
                 // update order
-                order.update();
+                cart.update();
                 // return page to enter payment information
                 return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
                 }
@@ -367,27 +358,27 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, 
         })
     public Result addShippingAddressToOrder(@Param("addressId") final String addressId, final Context context)
     {
         final ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
         // Create a duplicate of the shipping address with customer_id set to null
-        final ShippingAddress copyAddress = new ShippingAddress();
-        copyAddress.setName(shippingAddress.getName());
-        copyAddress.setFirstName(shippingAddress.getFirstName());
-        copyAddress.setCompany(shippingAddress.getCompany());
-        copyAddress.setAddressLine(shippingAddress.getAddressLine());
-        copyAddress.setCity(shippingAddress.getCity());
-        copyAddress.setState(shippingAddress.getState());
-        copyAddress.setZip(shippingAddress.getZip());
-        copyAddress.setCountry(shippingAddress.getCountry());
-        copyAddress.setCustomer(null);
-         Ebean.save(copyAddress);
+        // final ShippingAddress copyAddress = new ShippingAddress();
+        // copyAddress.setName(shippingAddress.getName());
+        // copyAddress.setFirstName(shippingAddress.getFirstName());
+        // copyAddress.setCompany(shippingAddress.getCompany());
+        // copyAddress.setAddressLine(shippingAddress.getAddressLine());
+        // copyAddress.setCity(shippingAddress.getCity());
+        // copyAddress.setState(shippingAddress.getState());
+        // copyAddress.setZip(shippingAddress.getZip());
+        // copyAddress.setCountry(shippingAddress.getCountry());
+        // copyAddress.setCustomer(null);
+        //  Ebean.save(copyAddress);
         //save the duplicate shipping address in the table
-        Customer.getCustomerById(SessionHandling.getCustomerId(context)).addShippingAddress(copyAddress);
+        Customer.getCustomerById(SessionHandling.getCustomerId(context)).addShippingAddress(shippingAddress);
         //retrieving copied address to add it to the order
-        final ShippingAddress retrievedAddress = ShippingAddress.getShippingAddressById(copyAddress.getId());
+        //final ShippingAddress retrievedAddress = ShippingAddress.getShippingAddressById(shippingAddress.getId());
 
         // Parse the addressId to an integer
         // int id = Integer.parseInt(addressId);
@@ -396,11 +387,11 @@ public class CheckoutController
         // get shipping address
         //final ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(id);
         // get order by session id
-        final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // set shipping address to order
-        order.setShippingAddress(retrievedAddress);
+        cart.setShippingAddress(shippingAddress);
         // update order
-        order.update();
+        cart.update();
         // return page to enter billing address
         return Results.redirect(context.getContextPath() + "/enterBillingAddress");
     }
@@ -413,7 +404,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
     public Result enterBillingAddress(final Context context)
     {
@@ -424,8 +415,8 @@ public class CheckoutController
         WebShopController.setCommonData(data, context, xcpConf);
 
         boolean userHasBillingAddress = false;
-        // Check if form data exists in the session
-        //if (context.getSession().get("ses_formData").equals("TRUE")) {
+            // Check if form data exists in the session
+            //if (context.getSession().get("ses_formData").equals("TRUE")) {
             // Add form data from session to the data map
             data.put("ses_bill_first_name", context.getSession().get("ses_bill_first_name"));
             data.put("ses_bill_last_name", context.getSession().get("ses_bill_last_name"));
@@ -496,7 +487,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
     public Result billingAddressCompleted(@Param("firstName") final String firstName,
                                             @Param("lastName") final String lastName,
@@ -558,27 +549,27 @@ public class CheckoutController
             {
                 Customer.getCustomerById(SessionHandling.getCustomerId(context)).addBillingAddress(billingAddress);
                 // Create a copy of the shipping address with customer_id set to null
-                final BillingAddress copyAddress = new BillingAddress();
-                copyAddress.setName(billingAddress.getName());
-                copyAddress.setFirstName(billingAddress.getFirstName());
-                copyAddress.setCompany(billingAddress.getCompany());
-                copyAddress.setAddressLine(billingAddress.getAddressLine());
-                copyAddress.setCity(billingAddress.getCity());
-                copyAddress.setState(billingAddress.getState());
-                copyAddress.setZip(billingAddress.getZip());
-                copyAddress.setCountry(billingAddress.getCountry());
-                copyAddress.setCustomer(null);
-                Ebean.save(copyAddress);
+                // final BillingAddress copyAddress = new BillingAddress();
+                // copyAddress.setName(billingAddress.getName());
+                // copyAddress.setFirstName(billingAddress.getFirstName());
+                // copyAddress.setCompany(billingAddress.getCompany());
+                // copyAddress.setAddressLine(billingAddress.getAddressLine());
+                // copyAddress.setCity(billingAddress.getCity());
+                // copyAddress.setState(billingAddress.getState());
+                // copyAddress.setZip(billingAddress.getZip());
+                // copyAddress.setCountry(billingAddress.getCountry());
+                // copyAddress.setCustomer(null);
+                // Ebean.save(copyAddress);
 
-                //retrieving copied address to add it to the order
-                final BillingAddress retrievedAddress = BillingAddress.getBillingAddressById(copyAddress.getId());
+                // //retrieving copied address to add it to the order
+                // final BillingAddress retrievedAddress = BillingAddress.getBillingAddressById(copyAddress.getId());
 
                 // get order by session id
-                final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+                final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
                 // set billing address to order
-                order.setBillingAddress(retrievedAddress);
+                cart.setBillingAddress(billingAddress);
                 // update order
-                order.update();
+                cart.update();
                 // return page to enter payment information
                 return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
             }
@@ -587,11 +578,11 @@ public class CheckoutController
             {
                 billingAddress.save();
             // get order by session id
-            final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+            final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // set billing address to order
-            order.setBillingAddress(billingAddress);
+            cart.setBillingAddress(billingAddress);
             // update order
-            order.update();
+            cart.update();
             // return page to enter payment information
             return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
             }
@@ -607,34 +598,34 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class
         })
     public Result addBillingAddressToOrder(@Param("addressId") final String addressId, final Context context)
     {
         final BillingAddress billingAddress = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
         // Create a duplicate of the Billing address with customer_id set to null
-        final BillingAddress copyAddress = new BillingAddress();
-        copyAddress.setName(billingAddress.getName());
-        copyAddress.setFirstName(billingAddress.getFirstName());
-        copyAddress.setCompany(billingAddress.getCompany());
-        copyAddress.setAddressLine(billingAddress.getAddressLine());
-        copyAddress.setCity(billingAddress.getCity());
-        copyAddress.setState(billingAddress.getState());
-        copyAddress.setZip(billingAddress.getZip());
-        copyAddress.setCountry(billingAddress.getCountry());
-        copyAddress.setCustomer(null);
-         Ebean.save(copyAddress);
+        // final BillingAddress copyAddress = new BillingAddress();
+        // copyAddress.setName(billingAddress.getName());
+        // copyAddress.setFirstName(billingAddress.getFirstName());
+        // copyAddress.setCompany(billingAddress.getCompany());
+        // copyAddress.setAddressLine(billingAddress.getAddressLine());
+        // copyAddress.setCity(billingAddress.getCity());
+        // copyAddress.setState(billingAddress.getState());
+        // copyAddress.setZip(billingAddress.getZip());
+        // copyAddress.setCountry(billingAddress.getCountry());
+        // copyAddress.setCustomer(null);
+        //  Ebean.save(copyAddress);
         //save the duplicate Billing address in the table
-        Customer.getCustomerById(SessionHandling.getCustomerId(context)).addBillingAddress(copyAddress);
-        //retrieving copied address to add it to the order
-        final BillingAddress retrievedAddress = BillingAddress.getBillingAddressById(copyAddress.getId());
+         Customer.getCustomerById(SessionHandling.getCustomerId(context)).addBillingAddress(billingAddress);
+        // //retrieving copied address to add it to the order
+        // final BillingAddress retrievedAddress = BillingAddress.getBillingAddressById(copyAddress.getId());
 
         // get order by session id
-        final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // set billing address to order
-        order.setBillingAddress(retrievedAddress);
+        cart.setBillingAddress(billingAddress);
         // update order
-        order.update();
+        cart.update();
         // return page to enter payment information
         return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
     }
@@ -647,7 +638,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
     public Result enterPaymentMethod(final Context context)
     {
@@ -668,7 +659,7 @@ public class CheckoutController
             }
         }
         // get payment method by order
-        final CreditCard card = Order.getOrderById(SessionHandling.getOrderId(context)).getCreditCard();
+        final CreditCard card = Cart.getCartById(SessionHandling.getCartId(context, xcpConf)).getCreditCard();
 
         DateFormat dateFormatYear = new SimpleDateFormat("yyyy");
         DateFormat dateFormatMonth = new SimpleDateFormat("MM");
@@ -724,7 +715,7 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
     public Result paymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") final String name,
                                          @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
@@ -740,8 +731,7 @@ public class CheckoutController
             {
                 // create new credit card
                 final CreditCard creditCard = new CreditCard();
-                //For creating a copy of the shipping address with customer_id set to null
-                final CreditCard copyCreditCard = new CreditCard();
+                                
                 creditCard.setCardNumber(creditNumber);
                 creditCard.setName(name);
                 creditCard.setMonth(month);
@@ -749,41 +739,102 @@ public class CheckoutController
                 // set new credit card to customer
                 if (SessionHandling.isCustomerLogged(context))
                 {
-                    Customer.getCustomerById(SessionHandling.getCustomerId(context)).addCreditCard(creditCard);
-                    // Create a copy of the shipping address with customer_id set to null
-                    copyCreditCard.setName(creditCard.getName());
-                    copyCreditCard.setCardNumber(creditCard.getCardNumber());
-                    copyCreditCard.setMonth(creditCard.getMonth());
-                    copyCreditCard.setYear(creditCard.getYear());
-                    copyCreditCard.setCustomer(null);
-                    Ebean.save(copyCreditCard);
-                
-                    // get order by session id
-                    final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
 
-                    //retrieving copied Card to add it to the order
-                    final CreditCard retrievedCard = CreditCard.getCreditCardById(copyCreditCard.getId());
-                    order.setCreditCard(retrievedCard);
+                    //Set a customer to the credit card
+                    Customer.getCustomerById(SessionHandling.getCustomerId(context)).addCreditCard(creditCard);
+
+                    // get cart by session id
+                    final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
+                    //Setting original Card to the cart
+                    cart.setCreditCard(creditCard);
+                    // update cart
+                    cart.update();
+
+                    //Creating duplicate payment information
+                
+                    //For creating a copy of the credit card with customer_id set to null
+                    final CreditCard copyCreditCard = CreditCard.copy(cart.getCreditCard());
+                    Ebean.save(copyCreditCard);
+                    //For creating a copy of the Billing Address with customer_id set to null
+                    final BillingAddress copyBillingAddress = BillingAddress.copy(cart.getBillingAddress());
+                    Ebean.save(copyBillingAddress);
+                    //For creating a copy of the Shipping Address with customer_id set to null
+                    final ShippingAddress copyShippingAddress = ShippingAddress.copy(cart.getShippingAddress());
+                    Ebean.save(copyShippingAddress);
+
+                    // create new order
+
+                    final Order order = Order.createNewOrder(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
+                    // delete old order from session
+                    SessionHandling.removeOrderId(context);
+                    // put new order id to session
+                    SessionHandling.setOrderId(context, order.getId());
+                    // add the products from the cart to the order
+                    order.addProductsFromCart(cart);
                     // update order
                     order.update();
+                
+                    // get order by session id
+                    final Order retievedOrder = Order.getOrderById(SessionHandling.getOrderId(context));
+
+                    // retrieving copied Credit Card, Billing Address, Shipping Address to add it to the order
+                    final CreditCard retrievedCard = CreditCard.getCreditCardById(copyCreditCard.getId());
+                    final BillingAddress retrievedBillingaddress = BillingAddress.getBillingAddressById(copyBillingAddress.getId());
+                    final ShippingAddress retrievedShippingaddress = ShippingAddress.getShippingAddressById(copyShippingAddress.getId());
+
+                    //Copy retrieved data to the Order
+                    retievedOrder.setCreditCard(retrievedCard);
+                    retievedOrder.update();
+
+                    retievedOrder.setBillingAddress(retrievedBillingaddress);
+                    retievedOrder.update();
+
+                    retievedOrder.setShippingAddress(retrievedShippingaddress);
+                    retievedOrder.update();
+                    retievedOrder.setOrderStatus("Pending");
+                    retievedOrder.update();
                     // return page to get an overview of the checkout
                     return Results.redirect(context.getContextPath() + "/checkoutOverview");
-
                 }
                 // save credit card
                 else
                 {
-                    creditCard.save();
+                creditCard.save();
                 // get order by session id
-                final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+                final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
                 // set credit card to order
-                order.setCreditCard(creditCard);
+                cart.setCreditCard(creditCard);
+                // update order
+                cart.update();
+
+                // create new order
+                final Order order = Order.createNewOrder(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
+                // delete old order from session
+                 SessionHandling.removeOrderId(context);
+                // put new order id to session
+                 SessionHandling.setOrderId(context, order.getId());
+                // add the products from the cart to the order
+                 order.addProductsFromCart(cart);
                 // update order
                 order.update();
+
+                //Copy Cart data to the Order
+                order.setCreditCard(creditCard);
+                order.update();
+
+                order.setBillingAddress(cart.getBillingAddress());
+                order.update();
+
+                order.setShippingAddress(cart.getShippingAddress());
+                order.update();
+
+                order.setOrderStatus("Pending");
+                order.update();
+
                 // return page to get an overview of the checkout
                 return Results.redirect(context.getContextPath() + "/checkoutOverview");
-                }
 
+                }
             }
         }
         // credit card was wrong
@@ -812,30 +863,89 @@ public class CheckoutController
      */
     @FilterWith(
         {
-            SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
+            SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
     public Result addPaymentToOrder(@Param("cardId") final String creditCardId, final Context context)
     {
 
         final CreditCard creditCard = CreditCard.getCreditCardById(Integer.parseInt(creditCardId));
         // Create a duplicate of the Card with customer_id set to null
-        final CreditCard copyCard = new CreditCard();
-        copyCard.setName(creditCard.getName());
-        copyCard.setCardNumber(creditCard.getCardNumber());
-        copyCard.setMonth(creditCard.getMonth());
-        copyCard.setYear(creditCard.getYear());
-        copyCard.setCustomer(null);
-        Ebean.save(copyCard);
-        //save the duplicate Card in the table
-        Customer.getCustomerById(SessionHandling.getCustomerId(context)).addCreditCard(copyCard);
-        //retrieving copied Card to add it to the order
-        final CreditCard retrievedCard = CreditCard.getCreditCardById(copyCard.getId());
+        // final CreditCard copyCard = new CreditCard();
+        // copyCard.setName(creditCard.getName());
+        // copyCard.setCardNumber(creditCard.getCardNumber());
+        // copyCard.setMonth(creditCard.getMonth());
+        // copyCard.setYear(creditCard.getYear());
+        // copyCard.setCustomer(null);
+        // Ebean.save(copyCard);
+        // save the duplicate Card in the table
+        // Customer.getCustomerById(SessionHandling.getCustomerId(context)).addCreditCard(copyCard);
+        // retrieving copied Card to add it to the order
+        // final CreditCard retrievedCard = CreditCard.getCreditCardById(copyCard.getId());
         // get order by session id
-        final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+        // final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // set credit card to order
-        order.setCreditCard(retrievedCard);
+        // cart.setCreditCard(retrievedCard);
+        // update order
+        // cart.update();
+        // return Results.redirect(context.getContextPath() + "/checkoutOverview");
+
+
+
+
+        //Set a customer to the credit card
+        Customer.getCustomerById(SessionHandling.getCustomerId(context)).addCreditCard(creditCard);
+
+        // get cart by session id
+        final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
+        //Setting original Card to the cart
+        cart.setCreditCard(creditCard);
+        // update cart
+        cart.update();
+
+        //Creating duplicate payment information
+    
+        //For creating a copy of the credit card with customer_id set to null
+        final CreditCard copyCreditCard = CreditCard.copy(cart.getCreditCard());
+        Ebean.save(copyCreditCard);
+        //For creating a copy of the Billing Address with customer_id set to null
+        final BillingAddress copyBillingAddress = BillingAddress.copy(cart.getBillingAddress());
+        Ebean.save(copyBillingAddress);
+        //For creating a copy of the Shipping Address with customer_id set to null
+        final ShippingAddress copyShippingAddress = ShippingAddress.copy(cart.getShippingAddress());
+        Ebean.save(copyShippingAddress);
+
+        // create new order
+
+        final Order order = Order.createNewOrder(xcpConf.TAX, xcpConf.SHIPPING_COSTS);
+        // delete old order from session
+        SessionHandling.removeOrderId(context);
+        // put new order id to session
+        SessionHandling.setOrderId(context, order.getId());
+        // add the products from the cart to the order
+        order.addProductsFromCart(cart);
         // update order
         order.update();
+    
+        // get order by session id
+        final Order retievedOrder = Order.getOrderById(SessionHandling.getOrderId(context));
+
+        // retrieving copied Credit Card, Billing Address, Shipping Address to add it to the order
+        final CreditCard retrievedCard = CreditCard.getCreditCardById(copyCreditCard.getId());
+        final BillingAddress retrievedBillingaddress = BillingAddress.getBillingAddressById(copyBillingAddress.getId());
+        final ShippingAddress retrievedShippingaddress = ShippingAddress.getShippingAddressById(copyShippingAddress.getId());
+
+        //Copy retrieved data to the Order
+        retievedOrder.setCreditCard(retrievedCard);
+        retievedOrder.update();
+
+        retievedOrder.setBillingAddress(retrievedBillingaddress);
+        retievedOrder.update();
+
+        retievedOrder.setShippingAddress(retrievedShippingaddress);
+        retievedOrder.update();
+        retievedOrder.setOrderStatus("Pending");
+        retievedOrder.update();
+        // return page to get an overview of the checkout
         return Results.redirect(context.getContextPath() + "/checkoutOverview");
     }
 
@@ -895,6 +1005,8 @@ public class CheckoutController
             // set customer to order
             order.setCustomer(customer);
         }
+        // set order status
+        order.setOrderStatus("Success");
         // update order
         order.update();
         // get cart by session id
@@ -937,9 +1049,10 @@ public class CheckoutController
         {
             // set shipping costs to order
             order.setShippingCosts(xcpConf.SHIPPING_COSTS);
+            
             // set tax to order
             order.setTax(xcpConf.TAX);
-            order.setTotalTaxCosts(order.getSubTotalCosts() * order.getTax());
+            order.setSubTotalCosts(order.getSubTotalCosts() * order.getTax());
 
             // recalculate total costs
             order.setTotalCosts(order.getSubTotalCosts() + order.getTotalTaxCosts() + order.getShippingCosts());
