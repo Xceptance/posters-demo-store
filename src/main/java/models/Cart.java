@@ -22,6 +22,7 @@ import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -50,6 +51,24 @@ public class Cart
      */
     @OneToOne
     private Customer customer;
+
+    /**
+     * The {@link ShippingAddress} of the order.
+     */
+    @ManyToOne
+    private ShippingAddress shippingAddress;
+
+    /**
+     * The {@link BillingAddress} of the order.
+     */
+    @ManyToOne
+    private BillingAddress billingAddress;
+
+    /**
+     * The {@link CreditCard}, the order is paid with.
+     */
+    @ManyToOne
+    private CreditCard creditCard;
 
     /**
      * The shipping costs of the order.
@@ -109,6 +128,69 @@ public class Cart
     public void setId(final UUID id)
     {
         this.id = id;
+    }
+
+    /**
+     * Returns the {@link ShippingAddress} of the order.
+     * 
+     * @return the {@link ShippingAddress} of the order
+     */
+    public ShippingAddress getShippingAddress()
+    {
+        return shippingAddress;
+    }
+
+    /**
+     * Sets the {@link ShippingAddress} of the order.
+     * 
+     * @param shippingAddress
+     *            the {@link ShippingAddress} of the order
+     */
+    public void setShippingAddress(final ShippingAddress shippingAddress)
+    {
+        this.shippingAddress = shippingAddress;
+    }
+
+    /**
+     * Returns the {@link BillingAddress} of the order.
+     * 
+     * @return the {@link BillingAddress} of the order
+     */
+    public BillingAddress getBillingAddress()
+    {
+        return billingAddress;
+    }
+
+    /**
+     * Sets the {@link BillingAddress} of the order.
+     * 
+     * @param billingAddress
+     *            the {@link BillingAddress} of the order
+     */
+    public void setBillingAddress(final BillingAddress billingAddress)
+    {
+        this.billingAddress = billingAddress;
+    }
+
+     /**
+     * Returns the {@link CreditCard} the order is paid with.
+     * 
+     * @return the {@link CreditCard} the order is paid with
+     */
+    public CreditCard getCreditCard()
+    {
+        return creditCard;
+    }
+
+    /**
+     * Sets the {@link CreditCard} the order is paid with
+     * 
+     * @param creditCard
+     *            the {@link CreditCard} the order is paid with
+     */
+    public void setCreditCard(final CreditCard creditCard)
+    {
+        this.creditCard = creditCard;
     }
 
     /**
