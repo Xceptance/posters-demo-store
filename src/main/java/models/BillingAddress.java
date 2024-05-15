@@ -393,6 +393,26 @@ public class BillingAddress
     }
 
     /**
+     * Creates a copy of the {@link BillingAddress} with null {@link Customer} ID.
+     * 
+     * @param originalBillingAddress
+     *            the original billing address.
+     */
+    public static BillingAddress copy(BillingAddress originalBillingAddress) {
+        BillingAddress copyBillingAddress = new BillingAddress();
+        copyBillingAddress.setName(originalBillingAddress.getName());
+        copyBillingAddress.setFirstName(originalBillingAddress.getFirstName());
+        copyBillingAddress.setCompany(originalBillingAddress.getCompany());
+        copyBillingAddress.setAddressLine(originalBillingAddress.getAddressLine());
+        copyBillingAddress.setCity(originalBillingAddress.getCity());
+        copyBillingAddress.setState(originalBillingAddress.getState());
+        copyBillingAddress.setZip(originalBillingAddress.getZip());
+        copyBillingAddress.setCountry(originalBillingAddress.getCountry());
+        copyBillingAddress.setCustomer(null);
+        return copyBillingAddress;
+    }
+
+    /**
      * Sets the {@link Customer} of the {@link BillingAddress} to {@code null}.
      * 
      * @param id
