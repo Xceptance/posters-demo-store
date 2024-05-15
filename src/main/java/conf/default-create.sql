@@ -52,7 +52,6 @@ create table creditCard (
   id                        integer not null,
   card_number               varchar(255),
   name                      varchar(255),
-  first_name                varchar(255),
   month                     integer,
   year                      integer,
   customer_id               varchar(40),
@@ -71,6 +70,7 @@ create table customer (
 
 create table ordering (
   id                        varchar(40) not null,
+  -- customer_idd               varchar(40),
   customer_id               varchar(40),
   order_date                varchar(255),
   shipping_address_id       integer,
@@ -82,6 +82,7 @@ create table ordering (
   total_costs               double,
   credit_card_id            integer,
   last_update               timestamp not null,
+  order_status              varchar,
   constraint pk_ordering primary key (id))
 ;
 
@@ -196,8 +197,8 @@ alter table ordering add constraint fk_ordering_billingAddress_9 foreign key (bi
 create index ix_ordering_billingAddress_9 on ordering (billing_address_id);
 alter table ordering add constraint fk_ordering_creditCard_10 foreign key (credit_card_id) references creditCard (id) on delete restrict on update restrict;
 create index ix_ordering_creditCard_10 on ordering (credit_card_id);
-alter table ordering add constraint fk_ordering_customer_11 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
-create index ix_ordering_customer_11 on ordering (customer_id);
+-- alter table ordering add constraint fk_ordering_customer_11 foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+-- create index ix_ordering_customer_11 on ordering (customer_id);
 alter table orderProduct add constraint fk_orderProduct_product_12 foreign key (product_id) references product (id) on delete restrict on update restrict;
 create index ix_orderProduct_product_12 on orderProduct (product_id);
 alter table orderProduct add constraint fk_orderProduct_order_13 foreign key (ordering_id) references ordering (id) on delete restrict on update restrict;

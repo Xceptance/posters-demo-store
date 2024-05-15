@@ -90,8 +90,9 @@ public class Customer
     /**
      * A list of {@link Order}s which the customer made.
      */
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Order> order;
+
 
     // /**
     //  * The current {@link Cart} of the customer.
