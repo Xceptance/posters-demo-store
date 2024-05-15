@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -48,6 +49,11 @@ public class Order
      */
     @Id
     private UUID id;
+
+    //  /**
+    //  * The date, the order was made.
+    //  */
+    // private String customerIdd;
 
     /**
      * The date, the order was made.
@@ -116,6 +122,11 @@ public class Order
     private Timestamp lastUpdate;
 
     /**
+     * Order Status: Can be Pending, Failed and Successful
+     */
+    private String orderStatus;
+
+    /**
      * Constructor.
      */
     public Order()
@@ -143,6 +154,27 @@ public class Order
     {
         this.id = id;
     }
+
+    //     /**
+    //  * Returns the {@link ShippingAddress} of the order.
+    //  * 
+    //  * @return the {@link ShippingAddress} of the order
+    //  */
+    // public String getcustomerIdd()
+    // {
+    //     return customerIdd;
+    // }
+
+    // /**
+    //  * Sets the {@link ShippingAddress} of the order.
+    //  * 
+    //  * @param shippingAddress
+    //  *            the {@link ShippingAddress} of the order
+    //  */
+    // public void setcustomerIdd(final String customerIdd)
+    // {
+    //     this.customerIdd = customerIdd;
+    // }
 
     /**
      * Returns the {@link ShippingAddress} of the order.
@@ -464,6 +496,27 @@ public class Order
     public void setLastUpdate(final Timestamp lastUpdate)
     {
         this.lastUpdate = lastUpdate;
+    }
+
+    /**
+     * Returns the date the order was made.
+     * 
+     * @return the date the order was made
+     */
+    public String getOrderStatus()
+    {
+        return orderStatus;
+    }
+
+    /**
+     * Sets the date the order was made.
+     * 
+     * @param date
+     *            the date the order was made
+     */
+    public void setOrderStatus(final String status)
+    {
+        orderStatus = status;
     }
 
     /**
