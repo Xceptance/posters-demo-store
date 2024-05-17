@@ -472,13 +472,4 @@ public class Customer
         return Ebean.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
     }
 
-        /**
-     * Returns all {@link Order}s, which are stored in the database.
-     * 
-     * @return {@link Order}s
-     */
-    public static List<Order> getEveryOrder()
-    {
-        return Ebean.find(Order.class).findList();
-    }
 }

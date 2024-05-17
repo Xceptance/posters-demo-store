@@ -18,8 +18,10 @@ package models;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,6 +33,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Query;
 
 /**
  * This {@link Entity} provides an order in the poster demo store. The order contains a list of {@link OrderProduct}s, a
@@ -661,4 +664,31 @@ public class Order
         // return new order
         return newOrder;
     }
+
+    /**
+     * Returns all {@link Order}s, which are stored in the database.
+     * 
+     * @return {@link Order}s
+     */
+    public static List<Order> getEveryOrder()
+    {
+        return Ebean.find(Order.class).findList();
+    }
+
+     /**
+     * Deletes pending orders that are older than one day.
+     */
+    public static void deleteOldPendingOrders() {
+        // Calculate the timestamp for one day ago
+        long oneDayAgoTimestamp = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
+        
+        // Convert timestamp to Date
+        Date oneDayAgo = new Date(oneDayAgoTimestamp);
+
+        // Get all orders that are pending and have creation time more than one day ago from the database irrespective of customer. 
+        // Delete those orders.
+        Ebean.delete(Ebean.find(Order.class)
+        .where().eq("orderStatus", "Pending").lt("lastUpdate", oneDayAgo).findList());
+    }
+
 }
