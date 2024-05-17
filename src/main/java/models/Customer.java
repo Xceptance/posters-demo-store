@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -52,6 +52,7 @@ public class Customer
     /**
      * The email address to log in.
      */
+    @Column(unique = true)
     private String email;
 
     /**
