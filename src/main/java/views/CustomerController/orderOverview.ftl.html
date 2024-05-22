@@ -10,7 +10,7 @@
                     <div id="title-order-history" class="header-container">
                         <span class="h2">${i18n("titleOrderHistory")}</span>
                     </div>
-                    <div id="order-overview">
+                    <div id="order-overview" class="table-responsive">
                         <table id="order-overview-table" class="table">
                             <thead id="order-table-head">
                                 <tr>
@@ -29,13 +29,16 @@
                                                 <th class="fs-4 prod-index" scope="row">${order_index + 1}</th>
                                                 <td class="prod-content">
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <picture id="order-overview-picture-${orderProduct.id}">
-                                                                <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
-                                                                <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
-                                                                <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
-                                                                <img class="img-thumbnail" src="${contextPath}${orderProduct.product.originalImageURL}" alt="image of ${orderProduct.product.name}" >
-                                                            </picture>
+                                                        <div class="col-12 col-md-6">
+                                                            <img
+                                                                srcset="${contextPath}${orderProduct.product.smallImageURL} 400w,
+                                                                        ${contextPath}${orderProduct.product.mediumImageURL} 800w,
+                                                                        ${contextPath}${orderProduct.product.largeImageURL} 2000w"
+                                                                sizes="25vw"
+                                                                src="${contextPath}${orderProduct.product.originalImageURL}"
+                                                                alt="image of ${orderProduct.product.name}"
+                                                                class="img-thumbnail"
+                                                                id="order-overview-picture-${orderProduct.id}">
                                                         </div>
                                                         <div class="col">
                                                             <h3 class="product-name">${orderProduct.product.name}</h3>
@@ -61,12 +64,15 @@
                                             <td class="prod-content">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <picture id="order-overview-picture-${orderProduct.id}">
-                                                            <source media="(max-width: 399px)" srcset="${contextPath}${orderProduct.product.smallImageURL}">
-                                                            <source media="(max-width: 799px)" srcset="${contextPath}${orderProduct.product.mediumImageURL}">
-                                                            <source media="(max-width: 1999px)" srcset="${contextPath}${orderProduct.product.largeImageURL}">
-                                                            <img class="img-thumbnail" src="${contextPath}${orderProduct.product.originalImageURL}" alt="image of ${orderProduct.product.name}" >
-                                                        </picture>
+                                                        <img
+                                                            srcset="${contextPath}${orderProduct.product.smallImageURL} 400w,
+                                                                    ${contextPath}${orderProduct.product.mediumImageURL} 800w,
+                                                                    ${contextPath}${orderProduct.product.largeImageURL} 2000w"
+                                                            sizes="25vw"
+                                                            src="${contextPath}${orderProduct.product.originalImageURL}"
+                                                            alt="image of ${orderProduct.product.name}"
+                                                            class="img-thumbnail"
+                                                            id="order-overview-picture-${orderProduct.id}">
                                                     </div>
                                                     <div class="col">
                                                         <h3 class="product-name">${orderProduct.product.name}</h3>

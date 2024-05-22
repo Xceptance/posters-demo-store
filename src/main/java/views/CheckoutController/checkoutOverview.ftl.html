@@ -71,45 +71,50 @@
     </div>
     <!-- print products -->
     <#if (0 < cartProducts?size) >
-    <table class="table order-overview-position">
-		<thead>
-		  	<tr>
-				<th scope="col">#</th>
-				<th scope="col">${i18n("cartTableHeaderItem")}</th>
-				<th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
-				<th scope="col">${i18n("cartTableHeaderQuantity")}</th>
-				<th scope="col">${i18n("cartTableHeaderTotalUnitPrice")}</th>
-				<th scope="col"></th>
-		  	</tr>
-		</thead>
-		<tbody>
-		  	<#list cartProducts as cartProduct>
-			<tr id="product-${cartProduct_index}">
-				<th scope="row">${cartProduct?counter}</th>
-				<td>
-					<div class="row">
-						<div class="col">
-                            <picture id="cart-picture-${cartProduct_index}">
-                                <source media="(max-width: 399px)" srcset="${contextPath}${cartProduct.product.smallImageURL}">
-                                <source media="(max-width: 799px)" srcset="${contextPath}${cartProduct.product.mediumImageURL}">
-                                <source media="(max-width: 1999px)" srcset="${contextPath}${cartProduct.product.largeImageURL}">
-                                <img class="img-thumbnail" src="${contextPath}${cartProduct.product.originalImageURL}" alt="image of ${cartProduct.product.name}" >
-                            </picture>
-						</div>
-						<div class="col">
-							<h3 class="product-name">${cartProduct.product.name}</h3>
-							<div class="product-style"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
-							<div class="product-size">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
-						</div>
-					</div>
-				</td>
-				<td class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</td>
-				<td class="product-count" value="${cartProduct.productCount}">${cartProduct.productCount}</td>
-				<td id="total-unit-price-short">${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
-			</tr>
-			</#list>
-		</tbody>
-	</table>
+    <div class="table-responsive">
+        <table class="table order-overview-position">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">${i18n("cartTableHeaderItem")}</th>
+                    <th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
+                    <th scope="col">${i18n("cartTableHeaderQuantity")}</th>
+                    <th scope="col">${i18n("cartTableHeaderTotalUnitPrice")}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <#list cartProducts as cartProduct>
+                <tr id="product-${cartProduct_index}">
+                    <th scope="row">${cartProduct?counter}</th>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <img
+                                    srcset="${contextPath}${cartProduct.product.smallImageURL} 400w,
+                                            ${contextPath}${cartProduct.product.mediumImageURL} 800w,
+                                            ${contextPath}${cartProduct.product.largeImageURL} 2000w"
+                                    sizes="25vw"
+                                    src="${contextPath}${cartProduct.product.originalImageURL}"
+                                    alt="image of ${cartProduct.product.name}"
+                                    class="img-thumbnail"
+                                    id="cart-picture-${cartProduct.id}">
+                            </div>
+                            <div class="col">
+                                <h3 class="product-name">${cartProduct.product.name}</h3>
+                                <div class="product-style"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
+                                <div class="product-size">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</td>
+                    <td class="product-count" value="${cartProduct.productCount}">${cartProduct.productCount}</td>
+                    <td id="total-unit-price-short">${currency}${cartProduct.getTotalUnitPriceAsString()}</td>
+                </tr>
+                </#list>
+            </tbody>
+        </table>
+    </div>
     <#else>
     <div id="error-cart-message" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
     </#if>
