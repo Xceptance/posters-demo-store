@@ -31,7 +31,7 @@ import ninja.Result;
 import ninja.Results;
 import util.session.SessionHandling;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;

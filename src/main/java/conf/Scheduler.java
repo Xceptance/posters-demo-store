@@ -19,12 +19,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import models.Cart;
-import models.Customer;
 import models.CartProduct;
 import models.Order;
 import ninja.scheduler.Schedule;
 
-import com.avaje.ebean.Ebean;
 import com.google.inject.Singleton;
 
 /**

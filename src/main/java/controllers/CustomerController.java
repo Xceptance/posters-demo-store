@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -1071,7 +1071,7 @@ public class CustomerController
                 // remove cart from session
                 SessionHandling.removeCartId(context);
                     // remove customer's cart
-                final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findUnique();
+                final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findOne();
                 if (cart != null) {
                     // Remove associated cart products before deleting the cart
                     final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();

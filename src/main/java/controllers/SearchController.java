@@ -20,11 +20,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Future;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Page;
-import com.avaje.ebean.PagingList;
-import com.avaje.ebean.Query;
+import org.h2.mvstore.Page;
+
+import io.ebean.Ebean;
+import io.ebean.PagedList;
+import io.ebean.Query;
+
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -160,15 +163,16 @@ public class SearchController
         final Query<Product> query = Ebean.createQuery(Product.class, queryString);
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // get paging list
-        final PagingList<Product> pagingList = query.findPagingList(pageSize);
+        final PagedList<Product> pagingList = query.findPagedList();
         // get all products to
         final int totalProductCount = query.findList().size();
         // get row count in background
-        pagingList.getFutureRowCount();
+
+        pagingList.getFutureCount();
         // get the current page
-        final Page<Product> page = pagingList.getPage(pageNumber - 1);
+        //final PagedList<Product> page = pagingList.getp
         // get the products of the current page
-        final List<Product> products = page.getList();
+        final List<Product> products = pagingList.getList();
         // remove some data of the product list, to render a small-sized JSON
         for (int i = 0; i < products.size(); i++)
         {

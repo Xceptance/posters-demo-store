@@ -29,9 +29,9 @@ import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Page;
-import com.avaje.ebean.PagingList;
+import io.ebean.Ebean;
+import io.ebean.PagedList;
+
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -157,8 +157,8 @@ public class CatalogController
         // get the given top category
         final TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
         // get the marked products, which should show in the top category
-        final PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category)
-                                                    .findPagingList(pageSize);
+        final PagedList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category).findPagedList();
+                                                    
         // add all products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);
     }
@@ -177,7 +177,7 @@ public class CatalogController
         // get the sub category by the given category
         final SubCategory category = SubCategory.getSubCategoryById(subCategoryId);
         // get all products of the sub category
-        final PagingList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category).findPagingList(pageSize);
+        final PagedList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category).findPagedList();
         // add the products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);
     }
@@ -189,17 +189,17 @@ public class CatalogController
      * @param pageNumber
      * @param data
      */
-    private static void createPagingListProductOverview(final PagingList<Product> pagingList, final int pageNumber,
+    private static void createPagingListProductOverview(final PagedList<Product> pagingList, final int pageNumber,
                                                         final Map<String, Object> data)
     {
         // get row count in background
-        pagingList.getFutureRowCount();
+        pagingList.getFutureCount();
         // get the current page
-        final Page<Product> page = pagingList.getPage(pageNumber - 1);
+        //final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
-        final List<Product> list = page.getList();
+        final List<Product> list = pagingList.getList();
         
-        final int totalProductCount = pagingList.getTotalRowCount();
+        final int totalProductCount = pagingList.getTotalCount();
         
         // remove some informations of the product list, to render a small-sized json-object
         for (int i = 0; i < list.size(); i++)

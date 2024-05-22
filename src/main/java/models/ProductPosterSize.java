@@ -23,7 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This entity is the relationship between the {@link Product} and the {@link PosterSize}. It provides the price of the

@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a shipping address. A shipping address can be set to at most one {@link Customer}.
@@ -372,7 +372,7 @@ public class ShippingAddress
         return Ebean.find(ShippingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique(); 
+                    .findOne(); 
     }
 
     /**

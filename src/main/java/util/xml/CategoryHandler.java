@@ -24,7 +24,7 @@ import models.TopCategory;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link DefaultHandler} parses an XML file with top and sub categories and persists them in the database.

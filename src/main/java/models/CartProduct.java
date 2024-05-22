@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} is the relationship between the {@link Cart} and the {@link Product}. It provides additional

@@ -20,13 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a credit card. A credit card can be set to at most one {@link Customer}.
@@ -34,7 +35,7 @@ import com.avaje.ebean.Ebean;
  * @author sebastianloob
  */
 @Entity
-@Table(name = "creditCard")
+@Table(name = "`creditCard`")
 public class CreditCard
 {
 
@@ -57,12 +58,12 @@ public class CreditCard
     /**
      * The month of the expiration date.
      */
-    private int month;
+    private int months;
 
     /**
      * The year of the expiration date.
      */
-    private int year;
+    private int years;
 
     /**
      * The {@link Customer} of the credit card. Can be {@code null}, if its a credit card of an unregistered customer.
@@ -184,7 +185,7 @@ public class CreditCard
      */
     public int getMonth()
     {
-        return month;
+        return months;
     }
 
     /**
@@ -206,7 +207,7 @@ public class CreditCard
      */
     public void setMonth(final int month)
     {
-        this.month = month;
+        this.months = month;
     }
 
     /**
@@ -216,7 +217,7 @@ public class CreditCard
      */
     public int getYear()
     {
-        return year;
+        return years;
     }
 
     /**
@@ -227,7 +228,7 @@ public class CreditCard
      */
     public void setYear(final int year)
     {
-        this.year = year;
+        this.years = year;
     }
 
     /**
@@ -319,7 +320,7 @@ public class CreditCard
         return Ebean.find(CreditCard.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique();
+                    .findOne();
     }
 
     /**
