@@ -57,7 +57,7 @@
 		<java.version>17</java.version>
 		<ninja.version>6.9.0</ninja.version>
 		<copyright>Copyright (c) ${project.inceptionYear}-2024 ${project.organization.name}</copyright>
-		<ebean.version>12.9.3</ebean.version>
+		<ebean-maven-plugin.version>12.9.3</ebean-maven-plugin.version>
 		<posters.mainClass>util.standalone.PostersMain</posters.mainClass>
 	</properties>
 
@@ -74,7 +74,7 @@
 			<plugin>
 				<groupId>io.ebean</groupId>
 				<artifactId>ebean-maven-plugin</artifactId>
-				<version>12.9.3</version>
+				<version>${ebean-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>main</id>
@@ -83,8 +83,9 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-                            <packages>models, models_backoffice</packages>
-							<transformArgs>debug=1</transformArgs>							<classSource>${project.build.outputDirectory}</classSource>
+							<packages>models, models_backoffice</packages>
+							<transformArgs>debug=1</transformArgs>
+							<classSource>${project.build.outputDirectory}</classSource>
 							<classDestination>${project.build.outputDirectory}</classDestination>
 						</configuration>
 					</execution>
@@ -161,34 +162,35 @@
 
 		<pluginManagement>
 			<plugins>
-				<!-- Taken Directly from: http://stackoverflow.com/questions/11996507/how-do-i-enable-ebean-enhancement-in-maven -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>io.ebean</groupId>
-                                        <artifactId>ebean-maven-plugin</artifactId>
-										<versionRange>[12.1.1,)</versionRange>
-                                        <goals>
-                                            <goal>enhance</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <execute>
-                                            <runOnConfiguration>true</runOnConfiguration>
-                                            <runOnIncremental>true</runOnIncremental>
-                                        </execute>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
+				<!-- Taken Directly from:
+				http://stackoverflow.com/questions/11996507/how-do-i-enable-ebean-enhancement-in-maven -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>io.ebean</groupId>
+										<artifactId>ebean-maven-plugin</artifactId>
+										<versionRange>[${ebean-maven-plugin.version},)</versionRange>
+										<goals>
+											<goal>enhance</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnConfiguration>true</runOnConfiguration>
+											<runOnIncremental>true</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -233,6 +235,11 @@
 			<version>3.0.1</version>
 		</dependency>
 		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.2.224</version>
+		</dependency>
+		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version>
@@ -242,20 +249,23 @@
 			<artifactId>jul-to-slf4j</artifactId>
 			<version>1.7.26</version>
 		</dependency>
-		
-		
-		<!-- <dependency>
-            <groupId>io.ebean</groupId>
-            <artifactId>ebean-ddl-generator</artifactId>
-            <version>12.16.2</version>
-            <scope>test</scope>
-        </dependency> -->
-		
+		<!-- JAXB required by Ebean DDL Generator -->
 		<dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.2.224</version>
-        </dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+
 		<!-- Test Dependencies -->
 		<dependency>
 			<groupId>org.ninjaframework</groupId>

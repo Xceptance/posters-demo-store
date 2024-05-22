@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -35,7 +34,7 @@ import io.ebean.Ebean;
  * @author sebastianloob
  */
 @Entity
-@Table(name = "`creditCard`")
+@Table(name = "creditCard")
 public class CreditCard
 {
 
