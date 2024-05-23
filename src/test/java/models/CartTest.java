@@ -23,8 +23,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import io.ebean.Ebean;
 
-import com.avaje.ebean.Ebean;
+// import com.avaje.ebean.Ebean;
 
 public class CartTest extends NinjaTest
 {

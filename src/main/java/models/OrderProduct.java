@@ -23,7 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} is the relationship between the {@link Order} and the {@link Product}. It provides additional

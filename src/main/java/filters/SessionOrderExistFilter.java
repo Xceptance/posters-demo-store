@@ -62,7 +62,7 @@ public class SessionOrderExistFilter implements Filter
         //Return to Homepage if Order ID UnSet, Prevents User from going back after placing orders.
         if (!SessionHandling.isOrderIdSet(context))
         {
-            // context.getFlashScope().error(msg.get("errorOrderSessionTerminated", language).get());
+             context.getFlashScope().error(msg.get("errorOrderSessionTerminated", language).get());
             // show home page
             return Results.redirect(context.getContextPath() + "/");
         }

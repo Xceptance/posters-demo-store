@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a billing address. A billing address can be set to at most one {@link Customer}.
@@ -372,7 +372,7 @@ public class BillingAddress
         return Ebean.find(BillingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique();
+                    .findOne();
     }
 
     /**
@@ -390,6 +390,26 @@ public class BillingAddress
             Ebean.delete(address);
 
         }
+    }
+
+    /**
+     * Creates a copy of the {@link BillingAddress} with null {@link Customer} ID.
+     * 
+     * @param originalBillingAddress
+     *            the original billing address.
+     */
+    public static BillingAddress copy(BillingAddress originalBillingAddress) {
+        BillingAddress copyBillingAddress = new BillingAddress();
+        copyBillingAddress.setName(originalBillingAddress.getName());
+        copyBillingAddress.setFirstName(originalBillingAddress.getFirstName());
+        copyBillingAddress.setCompany(originalBillingAddress.getCompany());
+        copyBillingAddress.setAddressLine(originalBillingAddress.getAddressLine());
+        copyBillingAddress.setCity(originalBillingAddress.getCity());
+        copyBillingAddress.setState(originalBillingAddress.getState());
+        copyBillingAddress.setZip(originalBillingAddress.getZip());
+        copyBillingAddress.setCountry(originalBillingAddress.getCountry());
+        copyBillingAddress.setCustomer(null);
+        return copyBillingAddress;
     }
 
     /**

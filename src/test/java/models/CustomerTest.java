@@ -21,7 +21,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 public class CustomerTest extends NinjaTest
 {
@@ -44,7 +44,7 @@ public class CustomerTest extends NinjaTest
     public void testCreateCustomer()
     {
         final Customer customer = new Customer();
-        customer.setEmail("email");
+        customer.setEmail("emailUnique");
         customer.hashPasswd("password");
         customer.save();
 
@@ -52,7 +52,7 @@ public class CustomerTest extends NinjaTest
         // verify, that the customer is persistent
         Assert.assertNotNull(savedCustomer);
         // verify the email of the customer
-        Assert.assertEquals("email", savedCustomer.getEmail());
+        Assert.assertEquals("emailUnique", savedCustomer.getEmail());
     }
 
     @Test

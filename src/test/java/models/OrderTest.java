@@ -23,7 +23,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 public class OrderTest extends NinjaTest
 {

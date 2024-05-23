@@ -35,7 +35,7 @@
                 <h3>${i18n("titleBillingAddress")}</h3>
                 <address id="billing-addr">
                     <ul class="list-unstyled container-fluid address">
-                        <li class="name font-bold" title="${i18n('addressFullName')}">${order.billingAddress.firstName} ${order.billingAddress.name}</li>
+                        <li class="name font-bold" title="${i18n('addressFullName')}">${order.shippingAddress.firstName} ${order.billingAddress.name}</li>
                         <li class="company" title="${i18n('addressCompany')}">${order.billingAddress.company}</li>
                         <li class="address-line" title="${i18n('addressLine')}">${order.billingAddress.addressLine}</li>
                         <li>
