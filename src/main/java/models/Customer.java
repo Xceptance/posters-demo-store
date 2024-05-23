@@ -29,7 +29,7 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a customer of the poster demo store. Each customer must have a unique email address and a
@@ -446,7 +446,7 @@ public class Customer
     public static Customer getCustomerByEmail(final String email)
     {
         // get customer by email address
-        return Ebean.find(Customer.class).where().eq("email", email).findUnique();
+        return Ebean.find(Customer.class).where().eq("email", email).findOne();
     }
 
     /**

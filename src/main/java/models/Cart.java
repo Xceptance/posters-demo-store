@@ -27,7 +27,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
+import io.ebean.annotation.DbForeignKey;
 
 /**
  * This {@link Entity} provides a shopping cart. Each customer of the poster demo store has its own cart. A cart
@@ -50,6 +51,7 @@ public class Cart
      * The customer of the cart.
      */
     @OneToOne
+    @DbForeignKey(noConstraint = true)
     private Customer customer;
 
     /**
@@ -448,7 +450,7 @@ public class Cart
     {
         // check, whether the product with the given finish and size is in the cart
         CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
-                                       .eq("size", size).findUnique();
+                                       .eq("size", size).findOne();
         
         // the product is not in the cart
         if (cartProduct == null)
@@ -464,7 +466,7 @@ public class Cart
             // set size
             cartProduct.setSize(size);
             // set price of the product
-            cartProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findUnique()
+            cartProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
                                       .getPrice());
             cartProduct.save();
             products.add(cartProduct);
@@ -666,6 +668,6 @@ public class Cart
     public CartProduct getCartProduct(final Product product, final String finish, final PosterSize size)
     {
         return Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish).eq("size", size)
-                    .findUnique();
+                    .findOne();
     }
 }

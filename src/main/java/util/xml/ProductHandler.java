@@ -26,7 +26,7 @@ import models.TopCategory;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link DefaultHandler} parses an XML file with product data and persists them in the database.
@@ -110,14 +110,14 @@ public class ProductHandler extends DefaultHandler
         }
         else if (localName.equals("subCategory"))
         {
-            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findUnique();
+            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findOne();
             if (subCategory == null)
             {
                 subCategory = new SubCategory();
                 subCategory.setName(toAdd);
             }
             product.setSubCategory(subCategory);
-            final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findUnique();
+            final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
             product.setTopCategory(topCategory);
         }
         if (localName.equals("carousel"))
@@ -163,7 +163,7 @@ public class ProductHandler extends DefaultHandler
                 final String[] dummy = size.split("x");
                 final int width = Integer.parseInt(dummy[0]);
                 final int height = Integer.parseInt(dummy[1]);
-                PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
+                PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
                 if (posterSize == null)
                 {
                     posterSize = new PosterSize();

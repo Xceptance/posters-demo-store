@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a billing address. A billing address can be set to at most one {@link Customer}.
@@ -372,7 +372,7 @@ public class BillingAddress
         return Ebean.find(BillingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique();
+                    .findOne();
     }
 
     /**

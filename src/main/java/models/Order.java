@@ -31,9 +31,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import io.ebean.Ebean;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.Query;
+
+import io.ebean.annotation.DbForeignKey;
 
 /**
  * This {@link Entity} provides an order in the poster demo store. The order contains a list of {@link OrderProduct}s, a
@@ -110,6 +111,7 @@ public class Order
      * The {@link Customer} of the order. Can be {@code null}, if the order was made by a guest.
      */
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @DbForeignKey(noConstraint = true)
     private Customer customer;
 
     /**
@@ -551,7 +553,7 @@ public class Order
     private void addProduct(final Product product, final String finish, final PosterSize size)
     {
         OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product).eq("finish", finish)
-                                         .eq("size", size).findUnique();
+                                         .eq("size", size).findOne();
         // this product is not in the order
         if (orderProduct == null)
         {
@@ -566,7 +568,7 @@ public class Order
             // set size
             orderProduct.setSize(size);
             // set price
-            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findUnique()
+            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
                                        .getPrice());
             orderProduct.save();
             products.add(orderProduct);

@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
