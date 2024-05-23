@@ -157,7 +157,8 @@ public class CatalogController
         // get the given top category
         final TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
         // get the marked products, which should show in the top category
-        final PagedList<Product> pagingList = Ebean.find(Product.class).where().eq("topCategory", category).findPagedList();
+        final PagedList<Product> pagingList = Ebean.find(Product.class).where()
+        .eq("topCategory", category).setFirstRow((pageNumber - 1) * pageSize).setMaxRows(pageSize).findPagedList();
                                                     
         // add all products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);
@@ -177,7 +178,7 @@ public class CatalogController
         // get the sub category by the given category
         final SubCategory category = SubCategory.getSubCategoryById(subCategoryId);
         // get all products of the sub category
-        final PagedList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category).findPagedList();
+        final PagedList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category).setFirstRow((pageNumber - 1) * pageSize).setMaxRows(pageSize).findPagedList();
         // add the products to the data map
         createPagingListProductOverview(pagingList, pageNumber, data);
     }
@@ -193,7 +194,7 @@ public class CatalogController
                                                         final Map<String, Object> data)
     {
         // get row count in background
-        pagingList.getFutureCount();
+        pagingList.loadCount();
         // get the current page
         //final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page

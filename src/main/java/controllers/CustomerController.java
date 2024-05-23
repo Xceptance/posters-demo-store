@@ -1071,16 +1071,16 @@ public class CustomerController
                 // remove cart from session
                 SessionHandling.removeCartId(context);
                     // remove customer's cart
-                final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findOne();
-                if (cart != null) {
-                    // Remove associated cart products before deleting the cart
-                    final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
-                    for (final CartProduct cartProduct : cartProducts) {
-                        Ebean.delete(cartProduct);
-                    }
-                    cart.setCustomer(null);
-                    cart.update();
-                }
+                // final Cart cart = Ebean.find(Cart.class).where().eq("customer", customer).findOne();
+                // if (cart != null) {
+                //     // Remove associated cart products before deleting the cart
+                //     final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+                //     for (final CartProduct cartProduct : cartProducts) {
+                //         Ebean.delete(cartProduct);
+                //     }
+                //     cart.setCustomer(null);
+                //     cart.update();
+                // }
                 Ebean.delete(customer);
 
                 // show success message

@@ -28,6 +28,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
+import io.ebean.annotation.DbForeignKey;
 
 /**
  * This {@link Entity} provides a shopping cart. Each customer of the poster demo store has its own cart. A cart
@@ -50,6 +51,7 @@ public class Cart
      * The customer of the cart.
      */
     @OneToOne
+    @DbForeignKey(noConstraint = true)
     private Customer customer;
 
     /**
