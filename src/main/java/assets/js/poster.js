@@ -156,6 +156,12 @@ function postersSetup() {
 			// dismiss button
 			e.target.querySelector("#button-close").addEventListener('click', () => {
 				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
+				e.target.querySelector('.modal-footer').innerHTML += '';
+			});
+			// modal close button (clone of the above since it should work the same)
+			e.target.querySelector(".btn-close").addEventListener('click', () => {
+				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
+				e.target.querySelector('.modal-footer').innerHTML += '';
 			});
 			//Bodycontent of popup
 			e.target.querySelector(`:scope ${'.modal-body'}`).appendChild(prodInfo);
