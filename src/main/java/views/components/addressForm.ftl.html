@@ -17,10 +17,10 @@
     <input id="address-first-name" name="firstName" placeholder="${i18n('registrationFirstName')}" class="form-control"
         type="text" pattern="${regexName}" 
         <#if session_form??><#if session_form=="bill">
-        value="<#if ses_bill_first_name??>${ses_bill_first_name}<#else></#if>"
+        value="<#if ses_bill_first_name??>${ses_bill_first_name}<#else>${(address.firstName)!}</#if>"
         <#else>
-            value="<#if ses_first_name??>${ses_first_name}<#else></#if>"
-            </#if><#else></#if>
+            value="<#if ses_first_name??>${ses_first_name}<#else>${(address.firstName)!}</#if>"
+            </#if><#else>${(address.firstName)!}</#if>
         data-error="${i18n('errorWrongName')}" title="${i18n('errorWrongName')}" required>
 </div>
 
