@@ -69,6 +69,12 @@ public class Customer
      * The first name of the customer.
      */
     private String firstName;
+    
+    /**
+     * The current {@link Cart} of the customer.
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart cart;
 
     /**
      * A list of {@link ShippingAddress}es which the customer can select.
@@ -101,11 +107,6 @@ public class Customer
     // @OneToMany(cascade = CascadeType.ALL)
     // private CartProduct cartProduct;
 
-    /**
-     * The current {@link Cart} of the customer.
-     */
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cart cart;
 
     /**
      * Constructor.
