@@ -20,12 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.Future;
-
-import org.h2.mvstore.Page;
 
 import io.ebean.DB;
-import io.ebean.Ebean;
 import io.ebean.PagedList;
 import io.ebean.Query;
 
