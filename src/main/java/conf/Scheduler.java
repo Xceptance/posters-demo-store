@@ -74,21 +74,7 @@ public class Scheduler
      */
     @Schedule(delay = 86400, timeUnit = TimeUnit.SECONDS) 
     public void deletePendingOrder() {
-        // // Get all orders that exist in the database irrespective of which customer orders belong to.
-        // final List<Order> orders = Customer.getEveryOrder();
-
-        // // Calculate the timestamp for one day ago
-        // long oneDayAgoTimestamp = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
-
-        // // Iterate through each order
-        // for (final Order order : orders) {
-        //     // Check if the order is pending and the creation time is more than one day ago
-        //     if (order.getOrderStatus().equals("Pending") && order.getLastUpdate().getTime() < oneDayAgoTimestamp) {
-        //         // Delete the order
-        //         Ebean.delete(order);
-        //     }
-        // }
-
+    
         Order.deleteOldPendingOrders();
     }
 
