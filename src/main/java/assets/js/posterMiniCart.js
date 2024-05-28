@@ -90,6 +90,7 @@ function addToMiniCart(productId, finish, size) {
 				document.querySelector(".top-menu #header-cart-overview").classList.remove('show');
 				document.querySelector(".top-menu #mini-cart-menu").classList.remove('show');
 				document.querySelector(".top-menu #mini-cart-menu").removeAttribute('style');
+				document.querySelector(".top-menu #mini-cart-menu").style.left='auto';
 			}, 1500);
 		} else {
 			sendAlert("failed to update mini cart", "alert-danger");
