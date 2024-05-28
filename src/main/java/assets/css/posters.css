@@ -1,3 +1,9 @@
+.dropdown-menu-c{
+	top: 100%;
+	left: auto;
+	margin-top: var(--bs-dropdown-spacer);
+  }
+
 .body-wrapper {
 	max-width: 992px;
 	margin-left: auto;
@@ -28,7 +34,7 @@
 
 #headerCartOverview {
 	margin: 0;
-	paddin: 10px 15px;
+	padding: 10px 15px;
 }
 
 #headerCartOverview:hover {
@@ -82,10 +88,6 @@
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border-bottom: 2px solid #e7e7e7;
-}
-
-#cartOverviewTable tbody tr, #checkoutOverviewTable tbody tr {
-	
 }
 
 #cartOverviewTable ul, #checkoutOverviewTable ul {
@@ -277,7 +279,6 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 header {
 	background-color: #f8f8f8;
 	border-bottom: 1px solid #d3d7cf;
-	margin-bottom: ;
 }
 footer {
 	border-top: 1px solid #d3d7cf;
