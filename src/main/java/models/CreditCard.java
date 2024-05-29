@@ -26,7 +26,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a credit card. A credit card can be set to at most one {@link Customer}.
@@ -57,12 +57,12 @@ public class CreditCard
     /**
      * The month of the expiration date.
      */
-    private int month;
+    private int months;
 
     /**
      * The year of the expiration date.
      */
-    private int year;
+    private int years;
 
     /**
      * The {@link Customer} of the credit card. Can be {@code null}, if its a credit card of an unregistered customer.
@@ -184,7 +184,7 @@ public class CreditCard
      */
     public int getMonth()
     {
-        return month;
+        return months;
     }
 
     /**
@@ -206,7 +206,7 @@ public class CreditCard
      */
     public void setMonth(final int month)
     {
-        this.month = month;
+        this.months = month;
     }
 
     /**
@@ -216,7 +216,7 @@ public class CreditCard
      */
     public int getYear()
     {
-        return year;
+        return years;
     }
 
     /**
@@ -227,7 +227,7 @@ public class CreditCard
      */
     public void setYear(final int year)
     {
-        this.year = year;
+        this.years = year;
     }
 
     /**
@@ -319,7 +319,7 @@ public class CreditCard
         return Ebean.find(CreditCard.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique();
+                    .findOne();
     }
 
     /**
@@ -333,6 +333,22 @@ public class CreditCard
         final CreditCard card = getCreditCardById(id);
         Ebean.delete(card);
 
+    }
+
+    /**
+     * Creates a copy of the {@link CreditCard} with null {@link Customer} ID.
+     * 
+     * @param originalCreditCard
+     *            the original credit card.
+     */
+    public static CreditCard copy(CreditCard originalCreditCard) {
+        CreditCard copyCreditCard = new CreditCard();
+        copyCreditCard.setCardNumber(originalCreditCard.getCardNumber());
+        copyCreditCard.setName(originalCreditCard.getName());
+        copyCreditCard.setMonth(originalCreditCard.getMonth());
+        copyCreditCard.setYear(originalCreditCard.getYear());
+        copyCreditCard.setCustomer(null);
+        return copyCreditCard;
     }
 
     /**

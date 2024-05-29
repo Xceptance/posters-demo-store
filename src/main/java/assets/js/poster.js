@@ -65,16 +65,22 @@ function updateProductOverview(data) {
     // Iterate over the products in the data and append the updated content
 	data.products.forEach(function(product) {
 		var productCard = document.createElement('div');
+		var productURI = encodeURI(product.name);
 		productCard.classList.add("card");
 		productCard.classList.add("product-tile");
 		productCard.innerHTML = [
 			`
-			<picture id="pagination-picture-${product.id}">
-				<source media="(max-width: 399px)" srcset="${CONTEXT_PATH}${product.smallImageURL}">
-				<source media="(max-width: 799px)" srcset="${CONTEXT_PATH}${product.mediumImageURL}">
-				<source media="(max-width: 1999px)" srcset="${CONTEXT_PATH}${product.largeImageURL}">
-				<img class="card-img-top" src="${CONTEXT_PATH}${product.originalImageURL}" alt="picture of ${product.name}" >
-			</picture>
+			<a href="${CONTEXT_PATH}/productDetail/${productURI}?productId=${product.id}">
+                <img
+                    srcset="${CONTEXT_PATH}${product.smallImageURL} 400w,
+                            ${CONTEXT_PATH}${product.mediumImageURL} 800w,
+                            ${CONTEXT_PATH}${product.largeImageURL} 2000w"
+                    sizes="262px"
+                    src="${CONTEXT_PATH}${product.originalImageURL}"
+                    alt="picture of ${product.name}"
+                    class="card-img-top"
+                    id="pagination-picture-${product.id}">
+            </a>
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text product-tile-text">${product.descriptionOverview}</p>
@@ -150,6 +156,12 @@ function postersSetup() {
 			// dismiss button
 			e.target.querySelector("#button-close").addEventListener('click', () => {
 				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
+				e.target.querySelector('.modal-footer').innerHTML += '';
+			});
+			// modal close button (clone of the above since it should work the same)
+			e.target.querySelector(".btn-close").addEventListener('click', () => {
+				e.target.querySelector(`:scope ${'.modal-body'}`).innerHTML = '';
+				e.target.querySelector('.modal-footer').innerHTML += '';
 			});
 			//Bodycontent of popup
 			e.target.querySelector(`:scope ${'.modal-body'}`).appendChild(prodInfo);

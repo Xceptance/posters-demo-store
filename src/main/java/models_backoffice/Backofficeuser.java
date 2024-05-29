@@ -23,7 +23,7 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a user of the poster store. Each user must have a unique email address and a
@@ -231,7 +231,7 @@ public class Backofficeuser
     public static boolean emailExist(final String email)
     {
         boolean exist = true;
-        final Backofficeuser backofficeuser = Ebean.find(Backofficeuser.class).where().eq("email", email).findUnique();
+        final Backofficeuser backofficeuser = Ebean.find(Backofficeuser.class).where().eq("email", email).findOne();
         // no user has this email address
         if (backofficeuser == null)
         {
@@ -250,7 +250,7 @@ public class Backofficeuser
     public static Backofficeuser getUserByEmail(final String email)
     {
         // get user by email address
-        return Ebean.find(Backofficeuser.class).where().eq("email", email).findUnique();
+        return Ebean.find(Backofficeuser.class).where().eq("email", email).findOne();
     }
 
     /**

@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import models.Cart;
 import models.CartProduct;
+import models.Order;
 import ninja.scheduler.Schedule;
 
 import com.google.inject.Singleton;
@@ -67,4 +68,14 @@ public class Scheduler
             }
         }
     }
+
+    /**
+     * Deletes pending orders, that have been existing for more than a day inside the database. Will be triggered every 24 hours.
+     */
+    @Schedule(delay = 86400, timeUnit = TimeUnit.SECONDS) 
+    public void deletePendingOrder() {
+    
+        Order.deleteOldPendingOrders();
+    }
+
 }

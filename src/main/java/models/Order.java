@@ -18,8 +18,10 @@ package models;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,8 +30,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import io.ebean.Ebean;
 
-import com.avaje.ebean.Ebean;
+
+import io.ebean.annotation.DbForeignKey;
 
 /**
  * This {@link Entity} provides an order in the poster demo store. The order contains a list of {@link OrderProduct}s, a
@@ -48,6 +52,11 @@ public class Order
      */
     @Id
     private UUID id;
+
+    //  /**
+    //  * The date, the order was made.
+    //  */
+    // private String customerIdd;
 
     /**
      * The date, the order was made.
@@ -101,6 +110,7 @@ public class Order
      * The {@link Customer} of the order. Can be {@code null}, if the order was made by a guest.
      */
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @DbForeignKey(noConstraint = true)
     private Customer customer;
 
     /**
@@ -114,6 +124,11 @@ public class Order
      */
     @Version
     private Timestamp lastUpdate;
+
+    /**
+     * Order Status: Can be Pending, Failed and Successful
+     */
+    private String orderStatus;
 
     /**
      * Constructor.
@@ -143,6 +158,27 @@ public class Order
     {
         this.id = id;
     }
+
+    //     /**
+    //  * Returns the {@link ShippingAddress} of the order.
+    //  * 
+    //  * @return the {@link ShippingAddress} of the order
+    //  */
+    // public String getcustomerIdd()
+    // {
+    //     return customerIdd;
+    // }
+
+    // /**
+    //  * Sets the {@link ShippingAddress} of the order.
+    //  * 
+    //  * @param shippingAddress
+    //  *            the {@link ShippingAddress} of the order
+    //  */
+    // public void setcustomerIdd(final String customerIdd)
+    // {
+    //     this.customerIdd = customerIdd;
+    // }
 
     /**
      * Returns the {@link ShippingAddress} of the order.
@@ -467,6 +503,27 @@ public class Order
     }
 
     /**
+     * Returns the date the order was made.
+     * 
+     * @return the date the order was made
+     */
+    public String getOrderStatus()
+    {
+        return orderStatus;
+    }
+
+    /**
+     * Sets the date the order was made.
+     * 
+     * @param date
+     *            the date the order was made
+     */
+    public void setOrderStatus(final String status)
+    {
+        orderStatus = status;
+    }
+
+    /**
      * Updates the entity in the database.
      */
     public void update()
@@ -495,7 +552,7 @@ public class Order
     private void addProduct(final Product product, final String finish, final PosterSize size)
     {
         OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product).eq("finish", finish)
-                                         .eq("size", size).findUnique();
+                                         .eq("size", size).findOne();
         // this product is not in the order
         if (orderProduct == null)
         {
@@ -510,7 +567,7 @@ public class Order
             // set size
             orderProduct.setSize(size);
             // set price
-            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findUnique()
+            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
                                        .getPrice());
             orderProduct.save();
             products.add(orderProduct);
@@ -608,4 +665,31 @@ public class Order
         // return new order
         return newOrder;
     }
+
+    /**
+     * Returns all {@link Order}s, which are stored in the database.
+     * 
+     * @return {@link Order}s
+     */
+    public static List<Order> getEveryOrder()
+    {
+        return Ebean.find(Order.class).findList();
+    }
+
+     /**
+     * Deletes pending orders that are older than one day.
+     */
+    public static void deleteOldPendingOrders() {
+        // Calculate the timestamp for one day ago
+        long oneDayAgoTimestamp = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
+        
+        // Convert timestamp to Date
+        Date oneDayAgo = new Date(oneDayAgoTimestamp);
+
+        // Get all orders that are pending and have creation time more than one day ago from the database irrespective of customer. 
+        // Delete those orders.
+        Ebean.delete(Ebean.find(Order.class)
+        .where().eq("orderStatus", "Pending").lt("lastUpdate", oneDayAgo).findList());
+    }
+
 }

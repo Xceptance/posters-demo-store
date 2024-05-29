@@ -6,7 +6,8 @@
 		<name>Doe</name>
 		<firstName>John</firstName>
 		<shippingAddress>
-			<delName>John Doe</delName>
+			<delName>Doe</delName>
+			<delFirstName>John</delFirstName>
 			<delCompany>John Doe Inc.</delCompany>
 			<delAddressLine>5-7 John Doe street</delAddressLine>
 			<delCity>New York</delCity>
@@ -15,7 +16,8 @@
 			<delZip>12345</delZip>
 		</shippingAddress>
 		<billingAddress>
-			<billName>John Doe</billName>
+			<billName>Doe</billName>
+			<billFirstName>John</billFirstName>
 			<billCompany>John Doe Inc.</billCompany>
 			<billAddressLine>5-7 John Doe street</billAddressLine>
 			<billCity>New York</billCity>

@@ -32,7 +32,7 @@
         }
         else {
             url = "${contextPath}/getProductOfSearch";
-            params = "searchText=" + encodeURIComponent(document.getElementById('s').value) + "&page=" + encodeURIComponent(pageNumber);
+            params = "searchText=" + encodeURIComponent(document.getElementById('header-search-text').value) + "&page=" + encodeURIComponent(pageNumber);
         }
 
         const xhr = new XMLHttpRequest();
@@ -106,12 +106,17 @@
 	<div class="row product-display-case">
 			<#list products as pro>
 			<div id="product-${pro_index}" class="card product-tile">
-                <picture id="overview-product-${pro_index}">
-                    <source media="(max-width: 399px)" srcset="${contextPath}${pro.smallImageURL}">
-                    <source media="(max-width: 799px)" srcset="${contextPath}${pro.mediumImageURL}">
-                    <source media="(max-width: 1999px)" srcset="${contextPath}${pro.largeImageURL}">
-                    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}"><img class="card-img-top" src="${contextPath}${pro.originalImageURL}" alt="picture of ${pro.name}" ></a>
-                </picture>
+                <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
+                    <img
+                        srcset="${contextPath}${pro.smallImageURL} 400w,
+                                ${contextPath}${pro.mediumImageURL} 800w,
+                                ${contextPath}${pro.largeImageURL} 2000w"
+                        sizes="262px"
+                        src="${contextPath}${pro.originalImageURL}"
+                        alt="picture of ${pro.name}"
+                        class="card-img-top"
+                        id="overview-product-${pro_index}">
+                </a>
 				<div class="card-body">
 					<h5 class="card-title">${pro.name}</h5>
 					<p class="card-text product-tile-text">${pro.descriptionOverview}</p>

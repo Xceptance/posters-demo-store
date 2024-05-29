@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a shipping address. A shipping address can be set to at most one {@link Customer}.
@@ -46,6 +46,11 @@ public class ShippingAddress
      * The name field of the address.
      */
     private String name;
+
+    /**
+     * The first name of the customer.
+     */
+    private String firstName;
 
     /**
      * The company field of the address.
@@ -173,6 +178,27 @@ public class ShippingAddress
         this.name = name;
     }
 
+     /**
+     * Returns the first name.
+     * 
+     * @return the first name
+     */
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    /**
+     * Sets the first name.
+     * 
+     * @param firstName
+     *            the first name
+     */
+    public void setFirstName(final String firstName)
+    {
+        this.firstName = firstName;
+    }
+    
     /**
      * Returns the address line of the shipping address.
      * 
@@ -346,7 +372,7 @@ public class ShippingAddress
         return Ebean.find(ShippingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
-                    .findUnique(); 
+                    .findOne(); 
     }
 
     /**
@@ -360,6 +386,26 @@ public class ShippingAddress
         final ShippingAddress address = ShippingAddress.getShippingAddressById(id);
         Ebean.delete(address);
 
+    }
+
+    /**
+     * Creates a copy of the {@link BillingAddress} with null {@link Customer} ID.
+     * 
+     * @param originalBillingAddress
+     *            the original billing address.
+     */
+    public static ShippingAddress copy(ShippingAddress originalShippingAddress) {
+        ShippingAddress copyShippingAddress = new ShippingAddress();
+        copyShippingAddress.setName(originalShippingAddress.getName());
+        copyShippingAddress.setFirstName(originalShippingAddress.getFirstName());
+        copyShippingAddress.setCompany(originalShippingAddress.getCompany());
+        copyShippingAddress.setAddressLine(originalShippingAddress.getAddressLine());
+        copyShippingAddress.setCity(originalShippingAddress.getCity());
+        copyShippingAddress.setState(originalShippingAddress.getState());
+        copyShippingAddress.setZip(originalShippingAddress.getZip());
+        copyShippingAddress.setCountry(originalShippingAddress.getCountry());
+        copyShippingAddress.setCustomer(null);
+        return copyShippingAddress;
     }
 
      /**

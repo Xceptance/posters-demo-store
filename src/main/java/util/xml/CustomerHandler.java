@@ -102,6 +102,10 @@ public class CustomerHandler extends DefaultHandler
         {
             shippingAddress.setName(currentValue);
         }
+        if (localName.equals("delFirstName"))
+        {
+            shippingAddress.setFirstName(currentValue);
+        }
         if (localName.equals("delCompany"))
         {
             shippingAddress.setCompany(currentValue);
@@ -129,6 +133,10 @@ public class CustomerHandler extends DefaultHandler
         if (localName.equals("billName"))
         {
             billingAddress.setName(currentValue);
+        }
+        if (localName.equals("billFirstName"))
+        {
+            billingAddress.setFirstName(currentValue);
         }
         if (localName.equals("billCompany"))
         {

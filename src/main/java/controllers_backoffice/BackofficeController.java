@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -545,10 +545,10 @@ public class BackofficeController
         result.render("currentUser", currentUser);
 
         // Find subcategory with the subcategory name from the params
-        SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", subCategoryName).findUnique();
+        SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", subCategoryName).findOne();
 
         // Find subcategory with the subcategory name from the params
-        TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("name", topCategoryName).findUnique();
+        TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("name", topCategoryName).findOne();
 
         // Delete all linking element product - poster sizes
         List<ProductPosterSize> currentAvailableSizes = product.getAvailableSizes();

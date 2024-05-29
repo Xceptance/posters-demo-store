@@ -30,7 +30,7 @@ import javax.inject.Inject;
 
 import org.h2.tools.RunScript;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 import com.google.inject.Singleton;
 
 import conf.StarterConf;

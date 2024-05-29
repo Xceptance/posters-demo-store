@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,7 +29,7 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a customer of the poster demo store. Each customer must have a unique email address and a
@@ -51,6 +52,7 @@ public class Customer
     /**
      * The email address to log in.
      */
+    @Column(unique = true)
     private String email;
 
     /**
@@ -67,6 +69,12 @@ public class Customer
      * The first name of the customer.
      */
     private String firstName;
+    
+    /**
+     * The current {@link Cart} of the customer.
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart cart;
 
     /**
      * A list of {@link ShippingAddress}es which the customer can select.
@@ -89,14 +97,16 @@ public class Customer
     /**
      * A list of {@link Order}s which the customer made.
      */
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Order> order;
 
-    /**
-     * The current {@link Cart} of the customer.
-     */
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cart cart;
+
+    // /**
+    //  * The current {@link Cart} of the customer.
+    //  */
+    // @OneToMany(cascade = CascadeType.ALL)
+    // private CartProduct cartProduct;
+
 
     /**
      * Constructor.
@@ -437,7 +447,7 @@ public class Customer
     public static Customer getCustomerByEmail(final String email)
     {
         // get customer by email address
-        return Ebean.find(Customer.class).where().eq("email", email).findUnique();
+        return Ebean.find(Customer.class).where().eq("email", email).findOne();
     }
 
     /**
@@ -462,4 +472,5 @@ public class Customer
     {
         return Ebean.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
     }
+
 }

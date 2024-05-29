@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -242,7 +242,7 @@ public class CartController
         final String[] dummy = size.split(" ");
         final int width = Integer.parseInt(dummy[0]);
         final int height = Integer.parseInt(dummy[2]);
-        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
+        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
         // add product to cart
         cart.addProduct(product, finish, posterSize);
         // get added cart product
@@ -336,12 +336,12 @@ public class CartController
         final int width = Integer.parseInt(dummy[0]);
         final int height = Integer.parseInt(dummy[2]);
         // get the specified poster size
-        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findUnique();
+        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
         // get the product
         final Product product = Product.getProductById(productId);
         // get the product poster size
         final ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
-                                                         .eq("size", posterSize).findUnique();
+                                                         .eq("size", posterSize).findOne();
         final Result result = Results.json();
         // add new price
         result.render("newPrice", xcpConf.CURRENCY + productPosterSize.getPriceAsString());

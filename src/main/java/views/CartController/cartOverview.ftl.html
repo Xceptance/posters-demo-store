@@ -4,54 +4,60 @@
 
 <div class="container">
 	<h2 id="cart-title">Cart</h2>
-	<table id="cart-overview-table" class="table">
-		<thead>
-		  	<tr class="column-name">
-				<th scope="col">#</th>
-				<th scope="col">${i18n("cartTableHeaderItem")}</th>
-				<th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
-				<th scope="col">${i18n("cartTableHeaderQuantity")}</th>
-				<th scope="col">${i18n("cartTableHeaderTotalUnitPrice")}</th>
-				<th scope="col">${i18n("cartRemove")}</th>
-		  	</tr>
-		</thead>
-		<tbody>
-		  	<#list cartProducts as cartProduct>
-			<tr id="product-${cartProduct_index}" class="js-cart-product">
-				<th scope="row">${cartProduct?counter}</th>
-				<td>
-					<div class="row js-cart-product-description">
-						<div class="col">
-							<picture id="cart-overview-picture-${cartProduct.id}">
-                                <source media="(max-width: 399px)" srcset="${contextPath}${cartProduct.product.smallImageURL}">
-                                <source media="(max-width: 799px)" srcset="${contextPath}${cartProduct.product.mediumImageURL}">
-                                <source media="(max-width: 1999px)" srcset="${contextPath}${cartProduct.product.largeImageURL}">
-                                <a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}"><img class="img-thumbnail" 
-									src="${contextPath}${cartProduct.product.originalImageURL}" alt="image of ${cartProduct.product.name}" ></a>
-                            </picture>
+	<div class="table-responsive">
+		<table id="cart-overview-table" class="table">
+			<thead>
+				<tr class="column-name">
+					<th scope="col">#</th>
+					<th scope="col">${i18n("cartTableHeaderItem")}</th>
+					<th scope="col">${i18n("cartTableHeaderUnitPrice")}</th>
+					<th scope="col">${i18n("cartTableHeaderQuantity")}</th>
+					<th scope="col">${i18n("cartTableHeaderTotalUnitPrice")}</th>
+					<th scope="col">${i18n("cartRemove")}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list cartProducts as cartProduct>
+				<tr id="product-${cartProduct_index}" class="js-cart-product">
+					<th scope="row">${cartProduct?counter}</th>
+					<td>
+						<div class="row js-cart-product-description">
+							<div class="col-12 col-md-6">
+								<a href="${contextPath}/productDetail/${cartProduct.product.name?url('UTF-8')}?productId=${cartProduct.product.id}">
+									<img
+										srcset="${contextPath}${cartProduct.product.smallImageURL} 400w,
+												${contextPath}${cartProduct.product.mediumImageURL} 800w,
+												${contextPath}${cartProduct.product.largeImageURL} 2000w"
+										sizes="25vw"
+										src="${contextPath}${cartProduct.product.originalImageURL}"
+										alt="image of ${cartProduct.product.name}"
+										class="img-thumbnail"
+										id="cart-overview-picture-${cartProduct.id}">
+								</a>
+							</div>
+							<div class="col">
+								<div class="product-name"><h3>${cartProduct.product.name}</h3></div>
+								<div>${i18n("cartStyle")}: <span class="product-style">${cartProduct.finish}</span></div>
+								<div>${i18n("cartSize")}: <span class="product-size">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
+							</div>
 						</div>
-						<div class="col">
-							<div class="product-name"><h3>${cartProduct.product.name}</h3></div>
-							<div>${i18n("cartStyle")}: <span class="product-style">${cartProduct.finish}</span></div>
-							<div>${i18n("cartSize")}: <span class="product-size">${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
-						</div>
-					</div>
-				</td>
-				<td> <div class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</div></td>
-				<td>
-					<input id="product-count-${cartProduct_index}" name="product-count-${cartProduct_index}"
-						class="form-control text-center product-count" title="${i18n('cartTableHeaderQuantity')}" type="text"
-						value=${cartProduct.productCount} size="4" maxlength="4">
-				</td>
-				<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
-				<td>
-					<button class="btn btn-update-product" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btn-update-prod-count-${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" onclick="updateProduct(${cartProduct.id}, ${cartProduct_index}, document.getElementById('product-count-${cartProduct_index}').value)"><span class="icon-refresh-ccw"></span></button>
-					<button class="btn btn-remove-product" id="btn-remove-prod-count-${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#delete-product-modal"><span class="icon-cross"></span></button>
-				</td>
-			</tr>
-			</#list>
-		</tbody>
-	</table>
+					</td>
+					<td> <div class="product-unit-price">${currency}${cartProduct.getPriceAsString()}</div></td>
+					<td>
+						<input id="product-count-${cartProduct_index}" name="product-count-${cartProduct_index}"
+							class="form-control text-center product-count" title="${i18n('cartTableHeaderQuantity')}" type="text"
+							value=${cartProduct.productCount} size="4" maxlength="4">
+					</td>
+					<td><div class="product-total-unit-price">${currency}${cartProduct.getTotalUnitPriceAsString()}</div></td>
+					<td>
+						<button class="btn btn-update-product" name="btnUpdateProdCount${cartProduct_index}" title="${i18n('buttonUpdate')}" id="btn-update-prod-count-${cartProduct_index}" data-id="${cartProduct.id}" 	data-index="${cartProduct_index}" onclick="updateProduct(${cartProduct.id}, ${cartProduct_index}, document.getElementById('product-count-${cartProduct_index}').value)"><span class="icon-refresh-ccw"></span></button>
+						<button class="btn btn-remove-product" id="btn-remove-prod-count-${cartProduct_index}" title="${i18n('buttonRemove')}" data-id="${cartProduct.id}" data-bs-toggle="modal" data-bs-target="#delete-product-modal"><span class="icon-cross"></span></button>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
 	<div class="price-summary-row">
 		<ol class="list-group list-group-flush">
 			<li class="list-group-item d-flex justify-content-between align-items-end">

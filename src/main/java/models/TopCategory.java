@@ -23,7 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.avaje.ebean.Ebean;
+import io.ebean.Ebean;
 
 /**
  * This {@link Entity} provides a top category in the catalog of the poster demo store. A top category is a category, which
@@ -39,7 +39,7 @@ public class TopCategory
     /**
      * The ID of the category.
      */
-    @Id
+    @Id 
     private int id;
 
     /**
