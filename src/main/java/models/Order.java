@@ -688,7 +688,7 @@ public class Order
 
         // Get all orders that are pending and have creation time more than one day ago from the database irrespective of customer. 
         // Delete those orders.
-        Ebean.delete(Ebean.find(Order.class)
+        Ebean.deleteAll(Ebean.find(Order.class)
         .where().eq("orderStatus", "Pending").lt("lastUpdate", oneDayAgo).findList());
     }
 
