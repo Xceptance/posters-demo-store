@@ -63,8 +63,22 @@ public class CatalogController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+
+        //Use the ID to acquire corresponding product
+        Product obtainedProduct = Product.getProductById(productId);
+
+        // Check if productId acquired a product
+        if (obtainedProduct !=null) 
+        { 
+            //Logger.warn("Product with ID {} not found", productId);
+            data.put("productDetail", Product.getProductById(productId));
+        } 
+        else 
+        {
+            // Handle missing productId
+            return Results.redirect(xcpConf.NOT_FOUND_404);
+        }
         // put product to data map
-        data.put("productDetail", Product.getProductById(productId));
         return Results.html().render(data);
     }
 
