@@ -21,6 +21,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 
 import controllers.JobController;
+import models.LuceneSearch;
+import models.SearchEngine;
 
 /**
  * Ninja uses Guice as injection tool. Define your bindings in this class, which you want to use via @{@link Inject} in
@@ -44,5 +46,7 @@ public class Module extends AbstractModule
         bind(JobController.class);
         // bind scheduler class
         bind(Scheduler.class);
+        // bind search engine
+        bind(SearchEngine.class).to(LuceneSearch.class).asEagerSingleton();;
     }
 }
