@@ -161,15 +161,6 @@ create table topcategory (
 create index ix_billingaddress_customer_id on billingaddress (customer_id);
 alter table billingaddress add constraint fk_billingaddress_customer_id foreign key (customer_id) references customer (id) on delete restrict on update restrict;
 
-create index ix_cart_shipping_address_id on cart (shipping_address_id);
-alter table cart add constraint fk_cart_shipping_address_id foreign key (shipping_address_id) references shippingaddress (id) on delete restrict on update restrict;
-
-create index ix_cart_billing_address_id on cart (billing_address_id);
-alter table cart add constraint fk_cart_billing_address_id foreign key (billing_address_id) references billingaddress (id) on delete restrict on update restrict;
-
-create index ix_cart_credit_card_id on cart (credit_card_id);
-alter table cart add constraint fk_cart_credit_card_id foreign key (credit_card_id) references creditcard (id) on delete restrict on update restrict;
-
 create index ix_cartproduct_product_id on cartproduct (product_id);
 alter table cartproduct add constraint fk_cartproduct_product_id foreign key (product_id) references product (id) on delete restrict on update restrict;
 

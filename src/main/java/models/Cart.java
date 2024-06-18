@@ -58,19 +58,22 @@ public class Cart
     /**
      * The {@link ShippingAddress} of the order.
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @DbForeignKey(noConstraint = true)
     private ShippingAddress shippingAddress;
 
     /**
      * The {@link BillingAddress} of the order.
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @DbForeignKey(noConstraint = true)
     private BillingAddress billingAddress;
 
     /**
      * The {@link CreditCard}, the order is paid with.
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @DbForeignKey(noConstraint = true)
     private CreditCard creditCard;
 
     /**

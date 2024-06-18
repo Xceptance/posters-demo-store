@@ -1,8 +1,6 @@
 alter table billingaddress drop constraint if exists fk_billingaddress_customer_id;
 drop index if exists ix_billingaddress_customer_id;
 
-alter table cart drop constraint if exists fk_cart_customer_id;
-
 alter table cart drop constraint if exists fk_cart_shipping_address_id;
 drop index if exists ix_cart_shipping_address_id;
 
