@@ -50,13 +50,13 @@ public class LuceneSearch implements SearchEngine {
         // setup queries
         BooleanQuery.Builder fullQuery = new BooleanQuery.Builder();
         // check names
-        Query queryN = builder.createBooleanQuery("name", searchText);
+        Query queryN = builder.createBooleanQuery("name", searchText, BooleanClause.Occur.MUST);
         fullQuery.add(queryN, BooleanClause.Occur.SHOULD);
         // check short description
-        Query querySD = builder.createBooleanQuery("overview", searchText);
+        Query querySD = builder.createBooleanQuery("overview", searchText, BooleanClause.Occur.MUST);
         fullQuery.add(querySD, BooleanClause.Occur.SHOULD);
         // check long description
-        Query queryLD = builder.createBooleanQuery("description", searchText);
+        Query queryLD = builder.createBooleanQuery("description", searchText, BooleanClause.Occur.MUST);
         fullQuery.add(queryLD, BooleanClause.Occur.SHOULD);
         // setup index reader and searcher and perform search
         try {
