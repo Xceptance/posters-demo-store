@@ -24,6 +24,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.QueryBuilder;
 
 import io.ebean.Ebean;
+import util.standalone.StemmingAnalyzer;
 
 public class LuceneSearch implements SearchEngine {
     // setup analyzer
@@ -33,7 +34,7 @@ public class LuceneSearch implements SearchEngine {
 
     // standard constructor that sets up used analyzer as a standard analyzer
     public LuceneSearch() { 
-        prodAna = new StandardAnalyzer();
+        prodAna = new StemmingAnalyzer();
         setup();
     }
 
