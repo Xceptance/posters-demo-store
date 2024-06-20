@@ -47,6 +47,6 @@ public class Module extends AbstractModule
         // bind scheduler class
         bind(Scheduler.class);
         // bind search engine
-        bind(SearchEngine.class).to(LuceneSearch.class).asEagerSingleton();;
+        bind(SearchEngine.class).to(LuceneSearch.class).asEagerSingleton();
     }
 }
