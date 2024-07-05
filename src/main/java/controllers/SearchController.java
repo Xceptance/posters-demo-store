@@ -148,9 +148,6 @@ public class SearchController
         // Add search conditions
         query.where().idIn(resultIds);
     
-        // Log the generated query
-        System.out.println("Generated query: " + query.getGeneratedSql());
-    
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
     
         // Set pagination parameters

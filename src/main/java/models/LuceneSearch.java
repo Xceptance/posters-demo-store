@@ -23,6 +23,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.QueryBuilder;
 
 import io.ebean.Ebean;
+import ninja.lifecycle.Start;
 import util.standalone.StemmingAnalyzer;
 
 public class LuceneSearch implements SearchEngine {
@@ -34,6 +35,10 @@ public class LuceneSearch implements SearchEngine {
     // standard constructor that sets up used analyzer as a standard analyzer
     public LuceneSearch() { 
         prodAna = new StemmingAnalyzer();
+    }
+
+    @Start(order = 100)
+    public void firstIndexing() {
         setup();
     }
 
