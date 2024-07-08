@@ -30,6 +30,7 @@ import com.google.inject.Inject;
 import conf.PosterConstants;
 import filters.SessionCustomerExistFilter;
 import models.Product;
+import models.SearchEngine;
 import models.TopCategory;
 import ninja.Context;
 import ninja.FilterWith;
@@ -52,6 +53,9 @@ public class SearchController
 
     @Inject
     PosterConstants xcpConf;
+
+    @Inject
+    SearchEngine searcher;
 
     private final Optional<String> language = Optional.of("en");
 
@@ -131,24 +135,18 @@ public class SearchController
      * @return A list of products that match the search text.
      */
     private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data) {
-        // Divide search text by spaces
-        final String[] searchTerms = searchText.split(" ");
-    
-        // Create the query
-        final Query<Product> query = DB.find(Product.class);
-    
-        // Add search conditions for each term
-        for (String term : searchTerms) {
-            String likePattern = "%" + term.toLowerCase() + "%";
-            query.where()
-                .or()
-                .ilike("descriptionDetail", likePattern)
-                .ilike("name", likePattern)
-                .endOr();
+        // Search products with search engine, second param is the limit for returned results
+        List<Integer> resultIds = searcher.search(searchText, 20);
+
+        if (resultIds.isEmpty()) {
+            return List.of();
         }
-    
-        // Log the generated query
-        System.out.println("Generated query: " + query.getGeneratedSql());
+        else{
+            // Create the query
+        final Query<Product> query = DB.find(Product.class);
+
+        // Add search conditions
+        query.where().idIn(resultIds);
     
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
     
@@ -186,6 +184,7 @@ public class SearchController
         data.put("currentPage", pageNumber);
 
         return products;
+        }
     }
 
     @FilterWith(SessionCustomerExistFilter.class)
