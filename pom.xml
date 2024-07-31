@@ -158,6 +158,21 @@
 					</mapping>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>10.0.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<failBuildOnCVSS>8.6</failBuildOnCVSS>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<pluginManagement>
