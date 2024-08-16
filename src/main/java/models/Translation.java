@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.ebean.annotation.Index;
+
+@Index(unique = true, columnNames = {"textId", "translationLangauge"})
 @Entity
 @Table(name = "translation")
 public class Translation {
