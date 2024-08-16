@@ -158,27 +158,6 @@ create table topcategory (
   constraint pk_topcategory primary key (id)
 );
 
-create table languages (
-  id                            integer auto_increment not null,
-  language                      varchar(50),
-  constraint pk_languages primary key (id)
-);
-
-create table texts (
-  id                            integer auto_increment not null,
-  originaltext                  varchar(4096),
-  originallanguage              varchar(50)
-  constraint pk_texts primary key (id)
-);
-
-create table translations (
-  id                            integer auto_increment not null,
-  textid                        integer,
-  translationlanguage           varchar(50),
-  translation                   varchar(4096),
-  constraint pk_translations primary key (id)
-);
-
 create index ix_billingaddress_customer_id on billingaddress (customer_id);
 alter table billingaddress add constraint fk_billingaddress_customer_id foreign key (customer_id) references customer (id) on delete restrict on update restrict;
 
