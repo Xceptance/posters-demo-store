@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.ebean.Ebean;
+
 @Entity
 @Table(name = "langauge")
 public class Language {
@@ -44,4 +46,83 @@ public class Language {
      * else than the default language (en-US), e.g. "de-DE" as fallback for "de-AT"
      */
     private String fallbackCode;
+
+    public Language() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPreciseName() {
+        return preciseName;
+    }
+
+    public void setPreciseName(String preciseName) {
+        this.preciseName = preciseName;
+    }
+
+    public String getEndonym() {
+        return endonym;
+    }
+
+    public void setEndonym(String endonym) {
+        this.endonym = endonym;
+    }
+
+    public String getDisambigousEndonym() {
+        return disambigousEndonym;
+    }
+
+    public void setDisambigousEndonym(String disambigousEndonym) {
+        this.disambigousEndonym = disambigousEndonym;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getFallbackCode() {
+        return fallbackCode;
+    }
+
+    public void setFallbackCode(String fallbackCode) {
+        this.fallbackCode = fallbackCode;
+    }
+
+    /**
+     * Updates the entity in the database.
+     */
+    public void update()
+    {
+        Ebean.update(this);
+    }
+
+    /**
+     * Saves the entity in the database.
+     */
+    public void save()
+    {
+        Ebean.save(this);
+    }
+
+    /**
+     * Deletes the entity from the database.
+     */
+    public void delete()
+    {
+        Ebean.delete(this);
+    }
 }
