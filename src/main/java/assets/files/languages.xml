@@ -6,16 +6,14 @@
         <code>en</code>
         <dialects>
             <dialect>
-                <name>english uk</name>
-                <precisename>British English</precisename>
-                <endonym>English</endonym>
+                <precisename>english uk</precisename>
+                <preciseendonym>British English</preciseendonym>
                 <disamb>English (UK)</disamb>
                 <extension>UK</extension>
             </dialect>
             <dialect>
-                <name>english us</name>
-                <precisename>US-American English</precisename>
-                <endonym>English</endonym>
+                <precisename>english us</precisename>
+                <preciseendonym>US-American English</preciseendonym>
                 <disamb>English (US)</disamb>
                 <extension>US</extension>
             </dialect>
@@ -27,9 +25,9 @@
         <code>de</code>
         <dialects>
             <dialect>
-                <name>standard high german</name>
-                <precisename>Bundesdeutsches Hochdeutsch</precisename>
-                <endonym>Deutsch</endonym>
+                <precisename>standard high german</precisename>
+                <preciseendonym>Bundesdeutsches Hochdeutsch</preciseendonym>
+                <disamb>Deutsch (DE)</disamb>
                 <extension>DE</extension>
             </dialect>
         </dialects>
