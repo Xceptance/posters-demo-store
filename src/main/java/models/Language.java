@@ -16,12 +16,12 @@ public class Language {
     private int id;
 
     /*
-     * The name of the language in the system language (english)
+     * The name of the language group in the system language (english), e.g. "english"
      */
-    private String name;
+    private String group;
 
     /*
-     * The precise name the language is natively called, e.g. "US-American English"
+     * The precise name the language is called in the system language (english), e.g. "english us"
      */
     private String preciseName;
 
@@ -29,6 +29,11 @@ public class Language {
      * The name speakers of this language commonly use for it, e.g. "English"
      */
     private String endonym;
+
+    /*
+     * The precise name the language is natively called, e.g. "US-American English"
+     */
+    private String preciseEndonym;
 
     /*
      * The endonym but annoted for disambiguity if needed, e.g. "English (US)"
@@ -54,12 +59,12 @@ public class Language {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getGroup() {
+        return group;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getPreciseName() {
@@ -76,6 +81,14 @@ public class Language {
 
     public void setEndonym(String endonym) {
         this.endonym = endonym;
+    }
+
+    public String getPreciseEndonym() {
+        return preciseEndonym;
+    }
+
+    public void setPreciseEndonym(String preciseEndonym) {
+        this.preciseEndonym = preciseEndonym;
     }
 
     public String getDisambigousEndonym() {
