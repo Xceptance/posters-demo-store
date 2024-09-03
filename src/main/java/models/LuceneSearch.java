@@ -32,7 +32,7 @@ public class LuceneSearch implements SearchEngine {
     // setup directory - for now in memory, alternative Option might be desirable
     final Directory prodIndex = new ByteBuffersDirectory();
 
-    // standard constructor that sets up used analyzer as a standard analyzer
+    // standard constructor that sets up used analyzer as a standard analyzer with stemming
     public LuceneSearch() { 
         prodAna = new StemmingAnalyzer();
     }
@@ -96,9 +96,9 @@ public class LuceneSearch implements SearchEngine {
                 Document prodDoc = new Document();
                 // Setup the fields in that document, we store the id so we can use it to retrieve search results
                 StoredField prodId = new StoredField("id", product.getId());
-                TextField prodName = new TextField("name", product.getName(), Store.NO);
-                TextField prodShortDesc = new TextField("overview", product.getDescriptionOverview(), Store.NO);
-                TextField prodLongDesc = new TextField("description", product.getDescriptionDetail(), Store.NO);
+                TextField prodName = new TextField("name", product.getDefaultName(), Store.NO);
+                TextField prodShortDesc = new TextField("overview", product.getDefaultDescriptionOverview(), Store.NO);
+                TextField prodLongDesc = new TextField("description", product.getDefaultDescriptionDetail(), Store.NO);
                 prodDoc.add(prodId);
                 prodDoc.add(prodName);
                 prodDoc.add(prodShortDesc);
