@@ -136,18 +136,6 @@ public class ProductHandler extends DefaultHandler
                     transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
-                } 
-                else 
-                {
-                    String[] codeParts = translationCode.split("-");
-                    String transBaseCode = codeParts[0];
-                    langExists = Ebean.find(Language.class).where().eq("code", transBaseCode).exists();
-                    if (langExists == true) 
-                    {
-                        transLanguage = Ebean.find(Language.class).where().eq("code", transBaseCode).findOne();
-                        transl.setTranslationLanguageId(transLanguage);
-                        transl.save();
-                    } 
                 }
             }
             
@@ -181,18 +169,6 @@ public class ProductHandler extends DefaultHandler
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
                 } 
-                else 
-                {
-                    String[] codeParts = translationCode.split("-");
-                    String transBaseCode = codeParts[0];
-                    langExists = Ebean.find(Language.class).where().eq("code", transBaseCode).exists();
-                    if (langExists == true) 
-                    {
-                        transLanguage = Ebean.find(Language.class).where().eq("code", transBaseCode).findOne();
-                        transl.setTranslationLanguageId(transLanguage);
-                        transl.save();
-                    } 
-                }
             }
         }
         if (localName.equals("longDescription"))
@@ -223,18 +199,6 @@ public class ProductHandler extends DefaultHandler
                     transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
-                } 
-                else 
-                {
-                    String[] codeParts = translationCode.split("-");
-                    String transBaseCode = codeParts[0];
-                    langExists = Ebean.find(Language.class).where().eq("code", transBaseCode).exists();
-                    if (langExists == true) 
-                    {
-                        transLanguage = Ebean.find(Language.class).where().eq("code", transBaseCode).findOne();
-                        transl.setTranslationLanguageId(transLanguage);
-                        transl.save();
-                    } 
                 }
             }
         }
@@ -268,11 +232,6 @@ public class ProductHandler extends DefaultHandler
         else if (localName.equals("subCategory"))
         {
             SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findOne();
-            if (subCategory == null)
-            {
-                subCategory = new SubCategory();
-                subCategory.setName(toAdd);
-            }
             product.setSubCategory(subCategory);
             final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
             product.setTopCategory(topCategory);
