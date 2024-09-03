@@ -27,9 +27,11 @@ public class LanguageHandler extends DefaultHandler {
     public void startElement(final String namespaceURI, final String localName, final String qName, final Attributes atts) {
         if (localName.equals("language")) {
             hasDialect = false;
-        } else if (localName.equals("dialects")) {
+        }
+        if (localName.equals("dialects")) {
             
-        } else if (localName.equals("dialect")) {
+        }
+        if (localName.equals("dialect")) {
             hasDialect = true;
             Dialect = new Language();
         }
