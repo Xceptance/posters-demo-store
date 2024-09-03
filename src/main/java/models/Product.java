@@ -177,6 +177,17 @@ public class Product
     }
 
     /**
+     * Sets the name reference of the product.
+     * 
+     * @param name
+     *            the name reference of the product
+     */
+    public void setDefaultName(final String name)
+    {
+        this.name.setOriginalText(name);
+    }
+
+    /**
      * Updates the default name of the product.
      * 
      * @param name
