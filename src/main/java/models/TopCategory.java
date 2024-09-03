@@ -21,6 +21,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
@@ -45,7 +46,8 @@ public class TopCategory
     /**
      * The name of the category.
      */
-    private String name;
+    @OneToOne
+    private DefaultText name;
 
     /**
      * The {@link SubCategory} list of the category.
@@ -87,7 +89,7 @@ public class TopCategory
      */
     public String getName()
     {
-        return name;
+        return name.getOriginalText();
     }
 
     /**
@@ -98,7 +100,7 @@ public class TopCategory
      */
     public void setName(final String name)
     {
-        this.name = name;
+        this.name.setOriginalText(name);
     }
 
     /**

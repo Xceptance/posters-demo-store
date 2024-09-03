@@ -23,6 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
@@ -47,7 +48,8 @@ public class SubCategory
     /**
      * The name of the sub category.
      */
-    private String name;
+    @OneToOne
+    private DefaultText name;
 
     /**
      * The {@link TopCategory} the sub category belongs to.
@@ -90,7 +92,7 @@ public class SubCategory
      */
     public String getName()
     {
-        return name;
+        return name.getOriginalText();
     }
 
     /**
@@ -101,7 +103,7 @@ public class SubCategory
      */
     public void setName(final String name)
     {
-        this.name = name;
+        this.name.setOriginalText(name);
     }
 
     /**

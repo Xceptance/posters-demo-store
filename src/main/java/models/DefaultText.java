@@ -1,11 +1,16 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
+import io.ebean.annotation.DbForeignKey;
 
 @Entity
 @Table(name = "defaultText")
@@ -23,9 +28,17 @@ public class DefaultText {
     private String originalText;
 
     /*
-     * The language of the text
+     * The language of the text (mapped by its ID)
      */
-    private String originalLanguage;
+    @DbForeignKey(noConstraint = true)
+    @ManyToOne
+    private Language originalLanguage;
+
+    /*
+     * The Translations available for the text
+     */
+    @OneToMany(mappedBy = "defaultText")
+    private List<Translation> translations;
 
     public DefaultText() {
     }
@@ -42,14 +55,30 @@ public class DefaultText {
         this.originalText = originalText;
     }
 
-    public String getOriginalLanguage() {
+    public Language getOriginalLanguage() {
         return originalLanguage;
     }
 
-    public void setOriginalLanguage(String originalLanguage) {
+    public void setOriginalLanguage(Language originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
+
+    public List<Translation> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
+    } 
     
+    public void addTranslation(Translation translation) {
+        this.translations.add(translation);
+    }
+
+    public void removeTranslation(Translation translation) {
+        this.translations.remove(translation);
+    }
+
     /**
      * Updates the entity in the database.
      */
@@ -72,5 +101,5 @@ public class DefaultText {
     public void delete()
     {
         Ebean.delete(this);
-    }    
+    }
 }

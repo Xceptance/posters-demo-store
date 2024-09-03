@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
@@ -50,19 +50,20 @@ public class Product
     /**
      * The name of the product.
      */
-    private String name;
+    @OneToOne(mappedBy = "product")
+    private DefaultText name;
 
     /**
      * A long description of the product.
      */
-    @Column(length = 4096)
-    private String descriptionDetail;
+    @OneToOne(mappedBy = "product")
+    private DefaultText descriptionDetail;
 
     /**
      * A short description of the product.
      */
-    @Column(length = 1024)
-    private String descriptionOverview;
+    @OneToOne(mappedBy = "product")
+    private DefaultText descriptionOverview;
 
     /**
      * The {@link ProductPosterSize}s which are available for this product.
@@ -145,43 +146,85 @@ public class Product
     }
 
     /**
-     * Returns the name of the product.
+     * Returns the default name of the product.
      * 
-     * @return the name of the product
+     * @return the default name of the product
      */
-    public String getName()
+    public String getDefaultName()
+    {
+        return name.getOriginalText();
+    }
+
+    /**
+     * Returns the name reference of the product.
+     * 
+     * @return the name reference of the product
+     */
+    public DefaultText getName()
     {
         return name;
     }
 
     /**
-     * Sets the name of the product.
+     * Sets the name reference of the product.
      * 
      * @param name
-     *            the name of the product
+     *            the name reference of the product
      */
-    public void setName(final String name)
+    public void setName(final DefaultText name)
     {
         this.name = name;
     }
 
     /**
-     * Returns the short description of the product.
+     * Updates the default name of the product.
      * 
-     * @return the short description of the product
+     * @param name
+     *            the default name of the product
      */
-    public String getDescriptionOverview()
+    public void updateName(final String name)
+    {
+        this.name.setOriginalText(name);;
+    }
+
+    /**
+     * Returns the short description reference of the product.
+     * 
+     * @return the short description reference of the product
+     */
+    public DefaultText getDescriptionOverview()
     {
         return descriptionOverview;
     }
 
     /**
-     * Sets the short description of the product
+     * Returns the default short description of the product.
+     * 
+     * @return the default short description of the product
+     */
+    public String getDefaultDescriptionOverview()
+    {
+        return descriptionOverview.getOriginalText();
+    }
+
+    /**
+     * Sets the default short description of the product
      * 
      * @param descriptionOverview
-     *            the short description of the product
+     *            the default short description of the product
      */
-    public void setDescriptionOverview(final String descriptionOverview)
+    public void setDefaultDescriptionOverview(final String descriptionOverview)
+    {
+        this.descriptionOverview.setOriginalText(descriptionOverview);
+    }
+
+    /**
+     * Sets the short description reference of the product
+     * 
+     * @param descriptionOverview
+     *            the short description reference of the product
+     */
+    public void setDescriptionOverview(final DefaultText descriptionOverview)
     {
         this.descriptionOverview = descriptionOverview;
     }
@@ -314,22 +357,43 @@ public class Product
     }
 
     /**
-     * Returns the long description of the product.
+     * Returns the default long description of the product.
      * 
-     * @return the long description of the product
+     * @return the default long description of the product
      */
-    public String getDescriptionDetail()
+    public String getDefaultDescriptionDetail()
+    {
+        return descriptionDetail.getOriginalText();
+    }
+
+    /**
+     * Returns the long description reference of the product.
+     * 
+     * @return the long description reference of the product
+     */
+    public DefaultText getDescriptionDetail()
     {
         return descriptionDetail;
     }
 
     /**
-     * Sets the long description of the product.
+     * Sets the default long description of the product.
      * 
      * @param descriptionDetail
-     *            the long description of the product
+     *            the default long description of the product
      */
-    public void setDescriptionDetail(final String descriptionDetail)
+    public void setDefaultDescriptionDetail(final String descriptionDetail)
+    {
+        this.descriptionDetail.setOriginalText(descriptionDetail);
+    }
+
+    /**
+     * Sets the long description reference of the product.
+     * 
+     * @param descriptionDetail
+     *            the long description reference of the product
+     */
+    public void setDescriptionDetail(final DefaultText descriptionDetail)
     {
         this.descriptionDetail = descriptionDetail;
     }

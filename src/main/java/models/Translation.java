@@ -3,9 +3,11 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
+import io.ebean.annotation.DbForeignKey;
 import io.ebean.annotation.Index;
 
 @Index(unique = true, columnNames = {"textId", "translationLangauge"})
@@ -19,14 +21,18 @@ public class Translation {
     private int id;
 
     /*
-     * The text id of the original text the translation is for
+     * The text (mapped by its ID) of the original text the translation is for
      */
-    private int textId;
+    @DbForeignKey(noConstraint = true)
+    @ManyToOne
+    private DefaultText text;
 
     /*
-     * The language of the translation
+     * The language of the translation (mapped by its ID)
      */
-    private String translationLanguage;
+    @DbForeignKey(noConstraint = true)
+    @ManyToOne
+    private Language translationLanguage;
 
     /*
      * The translated text
@@ -41,19 +47,19 @@ public class Translation {
         return id;
     }
 
-    public int getTextId() {
-        return textId;
+    public DefaultText getText() {
+        return text;
     }
 
-    public void setTextId(int textId) {
-        this.textId = textId;
+    public void setText(DefaultText text) {
+        this.text = text;
     }
 
-    public String getTranslationLanguage() {
+    public Language getTranslationLanguageId() {
         return translationLanguage;
     }
 
-    public void setTranslationLanguage(String translationLanguage) {
+    public void setTranslationLanguageId(Language translationLanguage) {
         this.translationLanguage = translationLanguage;
     }
 
