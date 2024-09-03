@@ -86,22 +86,43 @@ public class SubCategory
     }
 
     /**
-     * Returns the name of the category.
+     * Returns the name reference of the category.
      * 
-     * @return the name of the category
+     * @return the name reference of the category
      */
-    public String getName()
+    public DefaultText getName()
+    {
+        return name;
+    }
+
+    /**
+     * Returns the default name of the category.
+     * 
+     * @return the default name of the category
+     */
+    public String getDefaultName()
     {
         return name.getOriginalText();
     }
 
     /**
-     * Sets the name of the category.
+     * Sets the name reference of the category.
      * 
      * @param name
-     *            the name of the category
+     *            the name reference of the category
      */
-    public void setName(final String name)
+    public void setName(final DefaultText name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * Sets the default name of the category.
+     * 
+     * @param name
+     *            the default name of the category
+     */
+    public void setDefaultName(final String name)
     {
         this.name.setOriginalText(name);
     }
