@@ -24,6 +24,15 @@ public class ImportFromXMLToDB
 {
 
     /**
+     * Reads languages from xml and pushes into database.
+     */
+    public static void importLanguage()
+    {
+        final LanguageHandler contentHandler = new LanguageHandler();
+        XmlUtils.readXmlFile(contentHandler, "assets/files/languages.xml");
+    }
+
+    /**
      * Reads categories from xml and pushes into database.
      */
     public static void importCategory()
