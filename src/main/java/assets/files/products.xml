@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE product [
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT shortDescription (#PCDATA)>
+    <!ELEMENT longDescription (#PCDATA)>
+    <!ELEMENT small (#PCDATA)>
+    <!ELEMENT medium (#PCDATA)>
+    <!ELEMENT large (#PCDATA)>
+    <!ELEMENT original (#PCDATA)>
+    <!ELEMENT imageURL (small, medium, large, original)>
+    <!ELEMENT subCategory (#PCDATA)>
+    <!ELEMENT availableSize (#PCDATA)>
+    <!ELEMENT price (#PCDATA)>
+    <!ELEMENT product (name, shortDescription, longDescription, imageURL, subCategory, availableSize, price)>
+    <!ATTLIST name xml:lang NMTOKEN #IMPLIED>
+    <!ATTLIST shortDescription xml:lang NMTOKEN #IMPLIED>
+    <!ATTLIST longDescription xml:lang NMTOKEN #IMPLIED>
+]>
 <products>
 <!-- TopCategory World_of_Nature  -->
 <!-- SubCategory Animals  -->
 <product>
-<name>Grizzly Bear</name>
-<shortDescription>Bear looking tired.</shortDescription>
-<longDescription>Grizzly bears are severe predators and shouldn’t be underestimated only because of their harmless and cute looks like this picture displays them. If you happen to encounter a bear in the wild u should always try to get a way from it as fast as possible.</longDescription>
+<name xml:lang="x-default">Grizzly Bear</name>
+<name xml:lang="de-DE">Grizzlybär</name>
+<shortDescription xml:lang="x-default">Bear looking tired.</shortDescription>
+<longDescription xml:lang="x-default">Grizzly bears are severe predators and shouldn’t be underestimated only because of their harmless and cute looks like this picture displays them. If you happen to encounter a bear in the wild u should always try to get a way from it as fast as possible.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-medium.webp</medium>
@@ -17,9 +35,10 @@
 <price>17.00;25.50;32.95</price>
 </product>
 <product>
-<name>Great Grey Owl</name>
-<shortDescription>A large grey owl in the woods.</shortDescription>
-<longDescription>A very mysterious animal that stands for wisdom an intelligence is North America's largest owl, the great gray owl. This picture is going to fill your room with elegance and class.</longDescription>
+<name xml:lang="x-default">Great Grey Owl</name>
+<name xml:lang="de-DE">Bartkauz</name>
+<shortDescription xml:lang="x-default">A large grey owl in the woods.</shortDescription>
+<longDescription xml:lang="x-default">A very mysterious animal that stands for wisdom an intelligence is North America's largest owl, the great gray owl. This picture is going to fill your room with elegance and class.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-medium.webp</medium>
@@ -31,9 +50,12 @@
 <price>12.85;17.99;23.89</price>
 </product>
 <product>
-<name>Swedish Moose</name>
-<shortDescription>A mooze with antlers.</shortDescription>
-<longDescription>A moose is symbolizing determination and endurance, so this poster might be something for your personality. Also do not mistake a moose and an elk are the same animal, only the people in the different locations vary with naming the animal.</longDescription>
+<name xml:lang="x-default">Swedish Moose</name>
+<name xml:lang="de-DE">Schwedischer Elch</name>
+<shortDescription xml:lang="x-default">A mooze with antlers.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Elchbulle mit mittelgroßem Geweih</shortDescription>
+<longDescription xml:lang="x-default">A moose is symbolizing determination and endurance, so this poster might be something for your personality. Also do not mistake a moose and an elk are the same animal, only the people in the different locations vary with naming the animal.</longDescription>
+<longDescription xml:lang="de-DE">Ein Elch in freier Wildbahn in einem Wald Schwedens. Das Poster zeigt gut die Tarnung des Tieres vor dunklerem Hintergrund durch den Teil des Waldbodens der sich etwa bis zur Hälfte des Bildes erstreckt. Ein Klassiker für alle Liebhaber borealer Waldgebiete.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/swedish-moose/swedish-moose-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/swedish-moose/swedish-moose-medium.webp</medium>
