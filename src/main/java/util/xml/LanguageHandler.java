@@ -81,6 +81,7 @@ public class LanguageHandler extends DefaultHandler {
             Dialect.save();
         }
         if (localName.equals("language")) {
+            // remove the condition to generate a base language for every family if needed 
             if (hasDialect == false) {
                 Dialect = new Language();
                 Dialect.setGroup(GeneralName);
@@ -90,6 +91,7 @@ public class LanguageHandler extends DefaultHandler {
                 Dialect.setDisambigousEndonym(GeneralEndonym);
                 Dialect.setCode(GeneralCode);
                 Dialect.setFallbackCode(GeneralCode);
+                Dialect.save();
             }
         }
     }
