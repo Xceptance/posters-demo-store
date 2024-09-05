@@ -8,10 +8,12 @@
 Posters comes with the basic functionality that you would expect from a typical online shop. This includes:
 
 * A product catalog with categories and products, in our case, posters.
+* A search function in the shop using lucene
 * Customers may register with the shop.
 * Customers can manage their account, including shipping and billing addresses as well as credit cards.
 * There is a shopping cart.
 * Customers may place orders as guests or as registered customers.
+* A selection of different languages for the shop
 
 See these screenshots to get an impression of what the Posters Demo Store looks like.
 
@@ -106,4 +108,36 @@ java                                                \
   -Dninja.external.configuration=conf/posters.conf  \
   -jar posters-demo-store-<version>.jar
 ```
+
+
+## Extending Posters
+
+If you wish to extend posters here are a few points that are good to know:
+
+* Database:
+
+To extend the database's existing tables add new entries in the .xml files in the same format as the current entries
+WIP: document optional parts e.g. for languages
+
+To add new tables to the database you must:
+1 - create a model for the represented entity in the src/main/java/models package (look at exiting ones for references)
+2 - add the model to the ebean.models in application.conf in the form package.classname
+3 - compile and run the aplication
+4 - copy the content of the generated default-create-all.sql and default-drop-all.sql files in the 'target' folder into the default-create.sql and default-drop.sql files (or copy the file there and rename it) that you can find in src/main/java/conf
+5 - delete everything in the 'db' folder
+6 - compile and run again
+
+Remember that you likely also should fill that table, so create a handler to do that for you. If you follow the rest of the design you do that by:
+using xml (in src/main/java/assets/files) for the data itself and adding another handler for it in src/main/java/util/xml (look at existing ones for reference) 
+or by:
+extending existing ones if that makes more sense
+If you create a new handler and xml file you need to add a new method to call them to the class 'ImportFromXMLToDB' and then call that method in the JobController.importData
+
+
+## Viewing the database
+
+If you want to view the database you need to run the H2 database engine and use it to inspect the database. You should use (variable content is given in {}):
+- Driver Class: org.h2.Driver
+- JDBC URL: jdbc:h2:{your path to the poster demo store}/posters-demo-store/db/posters;AUTO_SERVER=TRUE
+- user name: sa
 
