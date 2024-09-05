@@ -58,13 +58,13 @@ public class Language {
     /*
      * A list of all translations into that language
      */
-    @OneToMany(mappedBy = "language")
+    @OneToMany(mappedBy = "translationLanguage")
     private List<Translation> Translations;
 
     /*
      * A list of all text original to that language
      */
-    @OneToMany(mappedBy = "language")
+    @OneToMany(mappedBy = "originalLanguage")
     private List<DefaultText> OriginalTexts;
 
     public Language() {
