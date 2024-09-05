@@ -1,7 +1,10 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
@@ -51,6 +54,18 @@ public class Language {
      * else than the default language (en-US), e.g. "de-DE" as fallback for "de-AT"
      */
     private String fallbackCode;
+
+    /*
+     * A list of all translations into that language
+     */
+    @OneToMany(mappedBy = "language")
+    private List<Translation> Translations;
+
+    /*
+     * A list of all text original to that language
+     */
+    @OneToMany(mappedBy = "language")
+    private List<DefaultText> OriginalTexts;
 
     public Language() {
     }
@@ -113,6 +128,30 @@ public class Language {
 
     public void setFallbackCode(String fallbackCode) {
         this.fallbackCode = fallbackCode;
+    }
+
+    public List<Translation> getTranslations() {
+        return Translations;
+    }
+
+    public void addTranslation(Translation translation) {
+        this.Translations.add(translation);
+    }
+
+    public void removeTranslation(Translation translation) {
+        this.Translations.remove(translation);
+    }
+
+    public List<DefaultText> getOriginalTexts() {
+        return OriginalTexts;
+    }
+
+    public void addOriginalText(DefaultText text) {
+        this.OriginalTexts.add(text);
+    }
+
+    public void removeOriginalText(DefaultText text) {
+        this.OriginalTexts.remove(text);
     }
 
     /**
