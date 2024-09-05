@@ -231,7 +231,8 @@ public class ProductHandler extends DefaultHandler
         }
         else if (localName.equals("subCategory"))
         {
-            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findOne();
+            DefaultText categoryName = Ebean.find(DefaultText.class).where().eq("originalText", toAdd).findOne(); 
+            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", categoryName).findOne();
             product.setSubCategory(subCategory);
             final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
             product.setTopCategory(topCategory);
