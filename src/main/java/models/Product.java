@@ -50,19 +50,19 @@ public class Product
     /**
      * The name of the product.
      */
-    @OneToOne(mappedBy = "product")
+    @OneToOne
     private DefaultText name;
 
     /**
      * A long description of the product.
      */
-    @OneToOne(mappedBy = "product")
+    @OneToOne
     private DefaultText descriptionDetail;
 
     /**
      * A short description of the product.
      */
-    @OneToOne(mappedBy = "product")
+    @OneToOne
     private DefaultText descriptionOverview;
 
     /**
