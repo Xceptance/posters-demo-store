@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import io.ebean.Ebean;
 
 @Entity
-@Table(name = "langauge")
+@Table(name = "supportedlanguage")
 public class Language {
     /*
      * The ID of the langauge
