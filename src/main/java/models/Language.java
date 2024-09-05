@@ -21,7 +21,7 @@ public class Language {
     /*
      * The name of the language group in the system language (english), e.g. "english"
      */
-    private String group;
+    private String languageGroup;
 
     /*
      * The precise name the language is called in the system language (english), e.g. "english us"
@@ -75,11 +75,11 @@ public class Language {
     }
 
     public String getGroup() {
-        return group;
+        return languageGroup;
     }
 
     public void setGroup(String group) {
-        this.group = group;
+        this.languageGroup = group;
     }
 
     public String getPreciseName() {
