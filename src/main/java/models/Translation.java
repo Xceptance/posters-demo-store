@@ -10,7 +10,7 @@ import io.ebean.Ebean;
 import io.ebean.annotation.DbForeignKey;
 import io.ebean.annotation.Index;
 
-@Index(unique = true, columnNames = {"textId", "translationLangauge"})
+//@Index(unique = true, columnNames = {"originalText", "translationLanguage"})
 @Entity
 @Table(name = "translation")
 public class Translation {
@@ -24,8 +24,8 @@ public class Translation {
      * The text (mapped by its ID) of the original text the translation is for
      */
     @DbForeignKey(noConstraint = true)
-    @ManyToOne
-    private DefaultText text;
+    @ManyToOne(optional=false)
+    private DefaultText originalText;
 
     /*
      * The language of the translation (mapped by its ID)
@@ -48,11 +48,11 @@ public class Translation {
     }
 
     public DefaultText getText() {
-        return text;
+        return originalText;
     }
 
     public void setText(DefaultText text) {
-        this.text = text;
+        this.originalText = text;
     }
 
     public Language getTranslationLanguageId() {

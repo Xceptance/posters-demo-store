@@ -37,7 +37,7 @@ public class DefaultText {
     /*
      * The Translations available for the text
      */
-    @OneToMany(mappedBy = "text")
+    @OneToMany(mappedBy = "originalText")
     private List<Translation> translations;
 
     public DefaultText() {
