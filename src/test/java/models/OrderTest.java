@@ -39,10 +39,10 @@ public class OrderTest extends NinjaTest
     @Before
     public void setUp() throws Exception
     {
-        product1.setName("product1");
+        product1.setDefaultName("product1");
         product1.setMinimumPrice(5.55);
         product1.save();
-        product2.setName("product2");
+        product2.setDefaultName("product2");
         product2.setMinimumPrice(7.77);
         product2.save();
         cart.save();
