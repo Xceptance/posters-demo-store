@@ -70,27 +70,18 @@ public class ProductHandler extends DefaultHandler
             product = new Product();
             product.save();
         }
-        else if (localName.equals("imageURL"))
-        {
-            // Initialize product's image URLs
-            product.setImageURL("");
-            product.setSmallImageURL("");
-            product.setMediumImageURL("");
-            product.setLargeImageURL("");
-            product.setOriginalImageURL("");
-        }
         else if (localName.equals("name") || localName.equals("shortDescription") || localName.equals("longDescription"))
         {
             String lang = atts.getValue("xml:lang");
-            if (lang.equals("x-default")) 
+            if (StringUtils.isBlank(lang)) 
             {
-                // make an entry in the default texts table
+                // error handling
                 isDefault = true;
                 dtext = new DefaultText();
             } 
-            else if (StringUtils.isBlank(lang))
+            else if (lang.equals("x-default"))
             {
-                // error handling
+                // make an entry in the default texts table
                 isDefault = true;
                 dtext = new DefaultText();
             }
@@ -118,6 +109,7 @@ public class ProductHandler extends DefaultHandler
                 dtext.setOriginalLanguage(defaultlLanguage);
                 dtext.save();
                 product.setName(dtext);
+                product.update();
             }
             else
             {
@@ -150,6 +142,7 @@ public class ProductHandler extends DefaultHandler
                 dtext.setOriginalLanguage(defaultlLanguage);
                 dtext.save();
                 product.setDescriptionOverview(dtext);
+                product.update();
             }
             else
             {
@@ -181,6 +174,7 @@ public class ProductHandler extends DefaultHandler
                 dtext.setOriginalLanguage(defaultlLanguage);
                 dtext.save();
                 product.setDescriptionDetail(dtext);
+                product.update();
             }
             else
             {
@@ -208,26 +202,31 @@ public class ProductHandler extends DefaultHandler
             prices = toAdd.split(";");
             // add first price as minimum price
             product.setMinimumPrice(Double.parseDouble(prices[0]));
+            product.update();
         }
         else if (localName.equals("imageURL"))
         {
-            //product.setImageURL(toAdd);
+            //
         }
         else if (localName.equals("small"))
         {
             product.setSmallImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("medium"))
         {
             product.setMediumImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("large"))
         {
             product.setLargeImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("original"))
         {
             product.setOriginalImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("subCategory"))
         {
@@ -236,6 +235,7 @@ public class ProductHandler extends DefaultHandler
             product.setSubCategory(subCategory);
             final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
             product.setTopCategory(topCategory);
+            product.update();
         }
         if (localName.equals("carousel"))
         {
@@ -293,6 +293,7 @@ public class ProductHandler extends DefaultHandler
                 productPosterSize.setSize(posterSize);
                 productPosterSize.save();
                 product.addAvailableSize(productPosterSize);
+                product.update();
             }
         }
     }
