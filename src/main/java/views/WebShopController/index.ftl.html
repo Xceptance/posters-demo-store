@@ -36,7 +36,7 @@
 		<#if (caro_index == 0)>
 		<div class="carousel-content-product carousel-item active" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.largeImageURL}');">
 			<div class="row">
-				<h1>${caro.name}</h1>
+				<h1>${caro.getName(lang)}</h1>
 			</div>
 			<div class="row">
 				<div class="col">
@@ -47,7 +47,7 @@
 		<#else>
 	  	<div class="carousel-content-product carousel-item" data-bs-interval="5000" style="background-image: url('${contextPath}${caro.largeImageURL}');">
 			<div class="row">
-				<h1>${caro.name}</h1>
+				<h1>${caro.getName(lang)}</h1>
 			</div>
 			<div class="row">
 				<div class="col">
@@ -83,12 +83,12 @@
 							${contextPath}${productslistcat[tC_index].largeImageURL} 2000w"
 					sizes="296px"
 					src="${contextPath}${productslistcat[tC_index].originalImageURL}"
-					alt="${tC.name} category image"
+					alt="${tC.getName(lang)} category image"
 					class="category-tile-image"
 					id="category-picture-${tC_index}">
 			</a>							
 			<div class="card-body">
-		  		<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.name}</a></h2>
+		  		<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.getName(lang)}</a></h2>
 			</div>
 		</div>
 		</#list>
@@ -115,9 +115,9 @@
 					id="product-picture-${prItem.id}">
 			</a>
 			<div class="card-body">
-		  		<h5 class="card-title">${prItem.name}</h5>
-		  		<p class="card-text product-tile-text">${prItem.descriptionOverview}</p>
-				<p class="card-text product-tile-price">$${prItem.minimumPrice}</p>
+		  		<h5 class="card-title">${prItem.getName(lang)}</h5>
+		  		<p class="card-text product-tile-text">${prItem.getDescriptionOverview(lang)}</p>
+				<p class="card-text product-tile-price">${prItem.minimumPrice}</p>
 		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy Here</a>
 			</div>
 		</div>
