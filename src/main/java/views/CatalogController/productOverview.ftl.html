@@ -93,7 +93,7 @@
 <div class="container text-center mt-3">
 	<div class="product-overview-heading">
 		<#if category??>
-		<div id="title-category-name" class="header-title">${category.name} (<span id="total-product-count">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
+		<div id="title-category-name" class="header-title">${category.getName(lang)} (<span id="total-product-count">${totalProductCount}</span>  <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if searchText??>
 		<div id="title-search-text" class="header-title">${i18n("searchProductMatch")} '<span id="search-text-value">${searchText}</span>' (<span id="total-product-count">${totalProductCount}</span> <#if totalProductCount == 1 >${i18n("searchProductPoster")}<#else>${i18n("searchProductPosters")}</#if>)</div>
 		</#if> <#if noResults??>
@@ -113,13 +113,13 @@
                                 ${contextPath}${pro.largeImageURL} 2000w"
                         sizes="262px"
                         src="${contextPath}${pro.originalImageURL}"
-                        alt="picture of ${pro.name}"
+                        alt="picture of ${pro.getName(lang)}"
                         class="card-img-top"
                         id="overview-product-${pro_index}">
                 </a>
 				<div class="card-body">
-					<h5 class="card-title">${pro.name}</h5>
-					<p class="card-text product-tile-text">${pro.descriptionOverview}</p>
+					<h5 class="card-title">${pro.getName(lang)}</h5>
+					<p class="card-text product-tile-text">${pro.getDescriptionOverview(lang)}</p>
 					<p class="card-text product-tile-price">$${pro.minimumPrice}</p>
 				    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
 				</div>
