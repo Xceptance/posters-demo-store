@@ -14,11 +14,11 @@
         <#list topCategory as tC>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-auto-close="true" aria-expanded="false">
-            ${tC.name}
+            ${tC.getName(lang)}
           </a>
           <ul class="dropdown-menu">
             <#list tC.subCategories as sC>
-            <li><a class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.name}</a></li>
+            <li><a class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.getName(lang)}</a></li>
             </#list>
           </ul>
         </li>
