@@ -101,7 +101,7 @@
                                     id="cart-picture-${cartProduct.id}">
                             </div>
                             <div class="col">
-                                <h3 class="product-name">${cartProduct.product.name}</h3>
+                                <h3 class="product-name">${cartProduct.product.getName(lang)}</h3>
                                 <div class="product-style"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
                                 <div class="product-size">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
                             </div>
