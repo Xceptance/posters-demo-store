@@ -156,6 +156,41 @@ public class Product
     }
 
     /**
+     * Returns a specific name of the product.
+     * 
+     * @return a specific name of the product
+     */
+    public String getName(Language language)
+    {
+        if (language.getCode().equals("en-US"))
+        {
+            return this.getDefaultName();
+        }
+        else
+        {
+            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+        }
+    }
+
+    /**
+     * Returns a specific name of the product.
+     * 
+     * @return a specific name of the product
+     */
+    public String getName(String code)
+    {
+        if (code.equals("en-US"))
+        {
+            return name.getOriginalText();
+        }
+        else
+        {
+            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+        }
+    }
+
+    /**
      * Returns the name reference of the product.
      * 
      * @return the name reference of the product
@@ -206,6 +241,41 @@ public class Product
     public DefaultText getDescriptionOverview()
     {
         return descriptionOverview;
+    }
+
+    /**
+     * Returns a specific short description of the product.
+     * 
+     * @return a specific short description of the product
+     */
+    public String getDescriptionOverview(Language language)
+    {
+        if (language.getCode().equals("en-US"))
+        {
+            return this.getDefaultDescriptionOverview();
+        }
+        else
+        {
+            return Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne().getTranslationText();
+        }
+    }
+
+    /**
+     * Returns a specific name of the product.
+     * 
+     * @return a specific name of the product
+     */
+    public String getDescriptionOverview(String code)
+    {
+        if (code.equals("en-US"))
+        {
+            return descriptionOverview.getOriginalText();
+        }
+        else
+        {
+            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            return Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne().getTranslationText();
+        }
     }
 
     /**
@@ -385,6 +455,41 @@ public class Product
     public DefaultText getDescriptionDetail()
     {
         return descriptionDetail;
+    }
+
+    /**
+     * Returns a specific short description of the product.
+     * 
+     * @return a specific short description of the product
+     */
+    public String getDescriptionDetail(Language language)
+    {
+        if (language.getCode().equals("en-US"))
+        {
+            return this.getDefaultDescriptionDetail();
+        }
+        else
+        {
+            return Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne().getTranslationText();
+        }
+    }
+
+    /**
+     * Returns a specific name of the product.
+     * 
+     * @return a specific name of the product
+     */
+    public String getDescriptionDetail(String code)
+    {
+        if (code.equals("en-US"))
+        {
+            return descriptionDetail.getOriginalText();
+        }
+        else
+        {
+            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            return Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne().getTranslationText();
+        }
     }
 
     /**
