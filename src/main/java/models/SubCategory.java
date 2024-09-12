@@ -96,6 +96,42 @@ public class SubCategory
     }
 
     /**
+     * Returns a specific name of the category.
+     * 
+     * @return a specific name of the category
+     */
+    public String getName(Language language)
+    {
+        if (language.getCode().equals("en-US"))
+        {
+            return this.getDefaultName();
+        }
+        else
+        {
+            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+        }
+    }
+
+    /**
+     * Returns a specific name of the category.
+     * 
+     * @return a specific name of the category
+     */
+    public String getName(String code)
+    {
+        if (code.equals("en-US"))
+        {
+            return name.getOriginalText();
+        }
+        else
+        {
+            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+        }
+    }
+
+
+    /**
      * Returns the default name of the category.
      * 
      * @return the default name of the category
