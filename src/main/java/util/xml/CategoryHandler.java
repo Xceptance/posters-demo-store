@@ -52,7 +52,7 @@ public class CategoryHandler extends DefaultHandler
 
     private Translation transl;
 
-    private Language defaultlLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
+    private Language defaultLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
 
     private String translationCode;
 
@@ -112,7 +112,7 @@ public class CategoryHandler extends DefaultHandler
             {
                 // add as default text and add reference to it to product
                 dtext.setOriginalText(currentValue);
-                dtext.setOriginalLanguage(defaultlLanguage);
+                dtext.setOriginalLanguage(defaultLanguage);
                 dtext.save();
                 category.setName(dtext);
             }
@@ -142,7 +142,7 @@ public class CategoryHandler extends DefaultHandler
             {
                 // add as default text and add reference to it to product
                 dtext.setOriginalText(currentValue);
-                dtext.setOriginalLanguage(defaultlLanguage);
+                dtext.setOriginalLanguage(defaultLanguage);
                 dtext.save();
                 subCategory.setName(dtext);
             }
