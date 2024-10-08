@@ -28,6 +28,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.StringUtils;
+
 import io.ebean.Ebean;
 
 /**
@@ -162,14 +164,19 @@ public class Product
      */
     public String getName(Language language)
     {
+        String result;
         if (language.getCode().equals("en-US"))
         {
             return this.getDefaultName();
         }
         else
         {
-            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+            result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
         }
+        if (StringUtils.isBlank(result)) {
+            result = this.getDefaultName();
+        }
+        return result;
     }
 
     /**
@@ -186,6 +193,9 @@ public class Product
         else
         {
             Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            if (language == null) {
+                return name.getOriginalText();
+            }
             return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
         }
     }
