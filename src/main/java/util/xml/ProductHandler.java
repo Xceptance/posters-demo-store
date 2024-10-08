@@ -52,7 +52,7 @@ public class ProductHandler extends DefaultHandler
 
     private Translation transl;
 
-    private Language defaultlLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
+    private Language defaultLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
 
     private String translationCode;
 
@@ -106,7 +106,7 @@ public class ProductHandler extends DefaultHandler
             {
                 // add as default text and add reference to it to product
                 dtext.setOriginalText(toAdd);
-                dtext.setOriginalLanguage(defaultlLanguage);
+                dtext.setOriginalLanguage(defaultLanguage);
                 dtext.save();
                 product.setName(dtext);
                 product.update();
@@ -139,7 +139,7 @@ public class ProductHandler extends DefaultHandler
             {
                 // add as default text and add reference to it to product
                 dtext.setOriginalText(toAdd);
-                dtext.setOriginalLanguage(defaultlLanguage);
+                dtext.setOriginalLanguage(defaultLanguage);
                 dtext.save();
                 product.setDescriptionOverview(dtext);
                 product.update();
@@ -171,7 +171,7 @@ public class ProductHandler extends DefaultHandler
             {
                 // add as default text and add reference to it to product
                 dtext.setOriginalText(toAdd);
-                dtext.setOriginalLanguage(defaultlLanguage);
+                dtext.setOriginalLanguage(defaultLanguage);
                 dtext.save();
                 product.setDescriptionDetail(dtext);
                 product.update();
