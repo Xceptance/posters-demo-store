@@ -97,8 +97,6 @@ public class WebShopController
      */
     public static void setCommonData(final Map<String, Object> data, final Context context, final PosterConstants xcpConf)
     {
-        // set language
-        data.put("lang", "en-US");
         // set categories
         data.put("topCategory", TopCategory.getAllTopCategories());
         // get cart by session
