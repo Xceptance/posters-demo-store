@@ -16,6 +16,7 @@
 package conf;
 
 import ninja.AssetsController;
+import ninja.Results;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import controllers.CartController;
@@ -42,6 +43,12 @@ public class Routes implements ApplicationRoutes
         // assets
         // ############################################################
         router.GET().route("/assets/{fileName: .*}").with(AssetsController::serveStatic);
+
+        // ############################################################
+        // site icon
+        // ############################################################
+
+        router.GET().route("/favicon.ico").with(() -> Results.redirect("/assets/ico/favicon.ico"));
 
         // ############################################################
         // ############################################################
