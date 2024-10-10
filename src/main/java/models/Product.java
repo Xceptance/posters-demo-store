@@ -28,8 +28,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.StringUtils;
-
 import io.ebean.Ebean;
 
 /**
@@ -164,19 +162,21 @@ public class Product
      */
     public String getName(Language language)
     {
-        String result;
         if (language.getCode().equals("en-US"))
         {
             return this.getDefaultName();
         }
         else
         {
-            result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            if (result == null) {
+                return this.getDefaultName();
+            }
+            else
+            {
+                return result.getTranslationText();
+            }
         }
-        if (StringUtils.isBlank(result)) {
-            result = this.getDefaultName();
-        }
-        return result;
     }
 
     /**
@@ -193,10 +193,19 @@ public class Product
         else
         {
             Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
-            if (language == null) {
+            if (language == null) 
+            {
                 return name.getOriginalText();
             }
-            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            if (result == null) 
+            {
+                return this.getDefaultName();
+            }
+            else
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
@@ -266,7 +275,15 @@ public class Product
         }
         else
         {
-            return Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne().getTranslationText();
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne();
+            if (result == null)
+            {
+                return this.getDefaultDescriptionOverview();
+            }
+            else
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
@@ -284,7 +301,18 @@ public class Product
         else
         {
             Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
-            return Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne().getTranslationText();
+            if (language == null) {
+                return this.getDefaultDescriptionOverview();
+            }
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne();
+            if (result == null) 
+            {
+                return this.getDefaultDescriptionOverview();
+            }
+            else
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
@@ -480,7 +508,15 @@ public class Product
         }
         else
         {
-            return Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne().getTranslationText();
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne();
+            if (result == null)
+            {
+                return this.getDefaultDescriptionDetail();
+            }
+            else
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
@@ -498,7 +534,18 @@ public class Product
         else
         {
             Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
-            return Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne().getTranslationText();
+            if (language == null) {
+                return this.getDefaultDescriptionDetail();
+            }
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne();
+            if (result == null) 
+            {
+                return this.getDefaultDescriptionDetail();
+            } 
+            else 
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
