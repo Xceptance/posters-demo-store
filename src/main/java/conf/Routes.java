@@ -168,8 +168,9 @@ public class Routes implements ApplicationRoutes
         // ############################################################
         // home page
         // ############################################################
-        router.GET().route("/").with(WebShopController::index);
+        router.GET().route("/").with(() -> Results.redirect("/en-US"));
         router.GET().route("/{urlLocale}/").with(WebShopController::index);
+        router.GET().route("/{urlLocale}").with(WebShopController::index);
 
         // ############################################################
         // search
