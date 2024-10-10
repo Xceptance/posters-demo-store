@@ -105,7 +105,15 @@ public class TopCategory
         }
         else
         {
-            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            if (result == null) 
+            {
+                return this.getDefaultName();
+            }
+            else 
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
@@ -123,7 +131,19 @@ public class TopCategory
         else
         {
             Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
-            return Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne().getTranslationText();
+            if (language == null) 
+            {
+                return this.getDefaultName();
+            }
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            if (result == null)
+            {
+                return this.getDefaultName();
+            } 
+            else 
+            {
+                return result.getTranslationText();
+            }
         }
     }
 
