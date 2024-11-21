@@ -13,7 +13,7 @@
 		<div class="col-lg-6">
 			<#if paymentOverview??>
 			<!-- choose available credit card -->
-			<form action="addPaymentToOrder" method="post" class="colorlib-form">
+			<form action="/${lang}/addPaymentToOrder" method="post" class="colorlib-form">
 				<h2 id="title-payment" class="">${i18n("paymentMethodTitleSelect")}</h2>
 				<#list paymentOverview as payment> <#if (payment_index + 3) % 3 ==0>
 				<div class="container-fluid">
@@ -61,7 +61,7 @@
 <!-- Modal for adding new address-->
 <div id="add-payment-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<form id="form-add-payment-modal" class="form-horizontal" action="${contextPath}/paymentMethodCompleted" method="post">
+		<form id="form-add-payment-modal" class="form-horizontal" action="${contextPath}/${lang}/paymentMethodCompleted" method="post">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
