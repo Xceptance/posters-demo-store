@@ -40,7 +40,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
+					<a href="${contextPath}/${lang}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
 				</div>
 			</div>
 	  	</div>
@@ -51,7 +51,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<a href="${contextPath}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
+					<a href="${contextPath}/${lang}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
 				</div>
 			</div>
 	  	</div>
@@ -76,7 +76,7 @@
 	<div class="row category-display-case">
 		<#list topCategory as tC>
 		<div class="card category-tile">
-			<a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}">
+			<a href="${applUrlHttp}/${lang}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}">
 				<img
 					srcset="${contextPath}${productslistcat[tC_index].smallImageURL} 400w,
 							${contextPath}${productslistcat[tC_index].mediumImageURL} 800w,
@@ -88,7 +88,7 @@
 					id="category-picture-${tC_index}">
 			</a>							
 			<div class="card-body">
-		  		<h2><a href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.getName(lang)}</a></h2>
+		  		<h2><a href="${applUrlHttp}/${lang}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" class="category-tile-title">${tC.getName(lang)}</a></h2>
 			</div>
 		</div>
 		</#list>
@@ -103,7 +103,7 @@
 	<div class="row product-display-case">
 		<#list productslist as prItem>
 		<div class="card product-tile">	
-			<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}">
+			<a href="${contextPath}/${lang}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}">
 				<img
 					srcset="${contextPath}${prItem.smallImageURL} 400w,
 							${contextPath}${prItem.mediumImageURL} 800w,
@@ -118,7 +118,7 @@
 		  		<h5 class="card-title">${prItem.getName(lang)}</h5>
 		  		<p class="card-text product-tile-text">${prItem.getDescriptionOverview(lang)}</p>
 				<p class="card-text product-tile-price">${prItem.minimumPrice}</p>
-		  		<a href="${contextPath}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy Here</a>
+		  		<a href="${contextPath}/${lang}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy Here</a>
 			</div>
 		</div>
 		</#list>
