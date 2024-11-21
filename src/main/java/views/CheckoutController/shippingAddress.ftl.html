@@ -14,7 +14,7 @@
 		<div class="col-lg-6">
 			<#if shippingAddresses??>
 			<!-- choose available address -->
-			<form action="addShippingAddressToOrder" method="post" class="colorlib-form">
+			<form action="/${lang}/addShippingAddressToOrder" method="post" class="colorlib-form">
 				<div id="title-del-addr">
 					<h2 class="text-center">${i18n("shippingAddressTitleSelect")}</h2>
 				</div>
@@ -76,7 +76,7 @@
 <!-- Modal for add new address-->
 <div id="add-address-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<form id="form-add-addr" class="form-horizontal" action="${contextPath}/shippingAddressCompleted" method="post">
+		<form id="form-add-addr" class="form-horizontal" action="${contextPath}/${lang}/shippingAddressCompleted" method="post">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
