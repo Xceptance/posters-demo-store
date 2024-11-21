@@ -35,7 +35,7 @@
 								</div>
 								<div class="col-lg-2 d-flex justify-content-end align-items-center">
 									<!-- Edit button -->
-									<form action="${contextPath}/updateShippingAddress" method="post">
+									<form action="${contextPath}/${lang}/updateShippingAddress" method="post">
 										<button class="btn btn-outline-danger btn-sm me-2" type="submit">
 											<i class="icon-pencil"></i>
 										</button>
@@ -54,7 +54,7 @@
 
 					<!-- Add new shipping address -->
 					<div>
-					<a class="btn btn-outline-danger btn-sm" style="float: right;" id="link-add-ship-addr" href="${contextPath}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
+					<a class="btn btn-outline-danger btn-sm" style="float: right;" id="link-add-ship-addr" href="${contextPath}/${lang}/addShippingAddressToCustomer">${i18n("shippingAddressAddNew")}</a>
 					</div>
 
 					<!-- Print available billing addresses -->
@@ -81,7 +81,7 @@
 								</div>
 								<div class="col-lg-2 d-flex justify-content-end align-items-center">
 									<!-- Edit button -->
-									<form action="${contextPath}/updateBillingAddress" method="post">
+									<form action="${contextPath}/${lang}/updateBillingAddress" method="post">
 										<button class="btn btn-outline-danger btn-sm me-2" type="submit">
 											<i class="icon-pencil"></i>
 										</button>
@@ -99,7 +99,7 @@
 					</#if>
 					<!-- Add new billing address -->
 					<div>
-						<a class="btn btn-outline-danger btn-sm" style="float: right;" id="link-add-bill-addr" href="${contextPath}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
+						<a class="btn btn-outline-danger btn-sm" style="float: right;" id="link-add-bill-addr" href="${contextPath}/${lang}/addBillingAddressToCustomer">${i18n("billingAddressAddNew")}</a>
 					</div>
 				</div>
 			</div>
@@ -108,7 +108,7 @@
 		<!-- Back button -->
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-				<a id="link-acc-overview" href="${contextPath}/accountOverview" class="btn btn-sm btn-primary">Back</a>
+				<a id="link-acc-overview" href="${contextPath}/${lang}/accountOverview" class="btn btn-sm btn-primary">Back</a>
 			</div>
 		</div>
 	</div>
@@ -141,7 +141,7 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<form action="${contextPath}/deleteShippingAddress" method="post">
+							<form action="${contextPath}/${lang}/deleteShippingAddress" method="post">
 								<input name="addressIdShip" class="shipping-id-${addressShip.id}" type="hidden"
 									value="${addressShip.id}">
 								<button class="btn btn-danger" id="btn-del-addr-${addressShip_index}"
@@ -180,7 +180,7 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<form action="${contextPath}/deleteBillingAddress" method="post">
+							<form action="${contextPath}/${lang}/deleteBillingAddress" method="post">
 								<input name="addressIdBill" class="billing-id-${addressBill.id}" type="hidden"
 									value="${addressBill.id}">
 								<button class="btn btn-danger" id="btn-del-addr-${addressBill_index}"
