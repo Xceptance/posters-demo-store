@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.ebean.Ebean;
 import io.ebean.annotation.DbForeignKey;
 
@@ -30,6 +32,7 @@ public class DefaultText {
     /*
      * The language of the text (mapped by its ID)
      */
+    @JsonIgnore
     @DbForeignKey(noConstraint = true)
     @ManyToOne
     private Language originalLanguage;
@@ -37,6 +40,7 @@ public class DefaultText {
     /*
      * The Translations available for the text
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "originalText")
     private List<Translation> translations;
 
