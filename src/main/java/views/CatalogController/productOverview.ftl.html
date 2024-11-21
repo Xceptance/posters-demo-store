@@ -20,18 +20,21 @@
         var url;
         var params;
         var pathname = location.pathname;
-        var pageType = pathname.substring(CONTEXT_PATH.length + 1, pathname.indexOf('/', CONTEXT_PATH.length + 1));
+        // this base part is usually something like "/en-US/"
+        var basePartLength = CONTEXT_PATH.length + 1 + LOCALE.length +  1;
+        // since string indeces start at 0 this will start right after the base parts last / and take everything until the next /
+        var pageType = pathname.substring(basePartLength, pathname.indexOf('/', basePartLength));
 
         if(pageType == "topCategory") {
-            url = "${contextPath}/getProductOfTopCategory";
+            url = "${contextPath}/${lang}/getProductOfTopCategory";
             params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(pageNumber);
         }
         else if(pageType == "category") {
-            url = "${contextPath}/getProductOfSubCategory";
+            url = "${contextPath}/${lang}/getProductOfSubCategory";
             params = "categoryId=" + encodeURIComponent(${(category.id)!1}) + "&page=" + encodeURIComponent(pageNumber);
         }
         else {
-            url = "${contextPath}/getProductOfSearch";
+            url = "${contextPath}/${lang}/getProductOfSearch";
             params = "searchText=" + encodeURIComponent(document.getElementById('header-search-text').value) + "&page=" + encodeURIComponent(pageNumber);
         }
 
@@ -106,7 +109,7 @@
 	<div class="row product-display-case">
 			<#list products as pro>
 			<div id="product-${pro_index}" class="card product-tile">
-                <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
+                <a href="${contextPath}/${lang}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}">
                     <img
                         srcset="${contextPath}${pro.smallImageURL} 400w,
                                 ${contextPath}${pro.mediumImageURL} 800w,
@@ -121,7 +124,7 @@
 					<h5 class="card-title">${pro.getName(lang)}</h5>
 					<p class="card-text product-tile-text">${pro.getDescriptionOverview(lang)}</p>
 					<p class="card-text product-tile-price">$${pro.minimumPrice}</p>
-				    <a href="${contextPath}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
+				    <a href="${contextPath}/${lang}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
 				</div>
 			</div>
 			</#list>
