@@ -33,7 +33,7 @@
 								</div>
 								<!-- Buttons (Edit and Delete) -->
 								<div class="col-lg-4 text-center mb-3">
-									<form action="${contextPath}/updatePaymentMethod" method="post">
+									<form action="${contextPath}/${lang}/updatePaymentMethod" method="post">
 										<input class="card-id-${payment.id}" name="cardId" type="hidden" value=${payment.id}>
 										<button class="btn btn-primary btn-change-payment" id="btn-change-payment-${payment_index}" name="btnChangePayment${payment_index}" type="submit">${i18n("buttonEdit")}</button>
 									</form>
@@ -47,7 +47,7 @@
 						</#list>
 						<!-- Add new payment method -->
 						<div class="col-xs-12">
-							<a id="link-add-new-payment" href="${contextPath}/addPaymentToCustomer" title="${i18n('paymentMethodAddNew')}">${i18n('paymentMethodAddNew')}</a>
+							<a id="link-add-new-payment" href="${contextPath}/${lang}/addPaymentToCustomer" title="${i18n('paymentMethodAddNew')}">${i18n('paymentMethodAddNew')}</a>
 						</div>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-10 offset-md-4">
 					<hr> <!-- Add a line or border -->
-					<a href="${contextPath}/accountOverview" class="btn btn-sm btn-primary">Back</a>
+					<a href="${contextPath}/${lang}/accountOverview" class="btn btn-sm btn-primary">Back</a>
 				</div>
 			</div>
 		</div>	
@@ -95,7 +95,7 @@
 														
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<form action="${contextPath}/deletePayment" method="post">
+							<form action="${contextPath}/${lang}/deletePayment" method="post">
 								<input class="card-id-${payment.id}" name="cardId" type="hidden" value=${payment.id}>
 								<button class="btn btn-danger btn-delete-payment" id="btn-delete-payment-${payment_index}"
 									name="btnDeletePayment${payment_index}" type="submit">${i18n('buttonDelete')}
