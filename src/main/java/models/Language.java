@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.ebean.Ebean;
 
 @Entity
@@ -58,12 +60,14 @@ public class Language {
     /*
      * A list of all translations into that language
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "translationLanguage")
     private List<Translation> Translations;
 
     /*
      * A list of all text original to that language
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "originalLanguage")
     private List<DefaultText> OriginalTexts;
 
