@@ -41,6 +41,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 import util.session.SessionHandling;
 
 /**
@@ -83,7 +84,7 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result login(@Param("email") final String email, @Param("password") final String password, final Context context)
+    public Result login(@Param("email") final String email, @Param("password") final String password, final Context context, @PathParam("urlLocale") String locale)
     {
         // email is not valid
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
@@ -118,7 +119,7 @@ public class CustomerController
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
                 context.getFlashScope().success(msg.get("successLogIn", language).get());
-                return Results.redirect(context.getContextPath() + "/accountOverview");
+                return Results.redirect(context.getContextPath() + "accountOverview");
 
             }
             // user exist, wrong password
@@ -148,7 +149,7 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result logout(final Context context)
+    public Result logout(final Context context, @PathParam("urlLocale") String locale)
     {
         // remove customer from session
         SessionHandling.removeCustomerId(context);
@@ -156,7 +157,7 @@ public class CustomerController
         SessionHandling.removeCartId(context);
         // show home page
         context.getFlashScope().success(msg.get("successLogOut", language).get());
-        return Results.redirect(context.getContextPath() + "/");
+        return Results.redirect(context.getContextPath() + "/" + locale);
     }
 
     /**
@@ -187,7 +188,8 @@ public class CustomerController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result registrationCompleted(@Param("lastName") final String name, @Param("firstName") final String firstName,
                                         @Param("eMail") final String email, @Param("password") final String password,
-                                        @Param("passwordAgain") final String passwordAgain, final Context context)
+                                        @Param("passwordAgain") final String passwordAgain, final Context context,
+                                        @PathParam("urlLocale") String locale)
     {
         boolean failure = false;
         // account with this email already exist
@@ -237,7 +239,7 @@ public class CustomerController
             // show success message
             context.getFlashScope().success(msg.get("successCreateAccount", language).get());
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/login");
+            return Results.redirect(context.getContextPath() + "login");
         }
     }
 
