@@ -22,8 +22,10 @@
 <product>
 <name xml:lang="x-default">Grizzly Bear</name>
 <name xml:lang="de-DE">Grizzlybär</name>
-<shortDescription xml:lang="x-default">Bear looking tired.</shortDescription>
+<shortDescription xml:lang="x-default">Bear looking tired</shortDescription>
+<shortDescription xml:lang="de-DE">Ein müder Bär lehnt sich auf einen Stein</shortDescription>
 <longDescription xml:lang="x-default">Grizzly bears are severe predators and shouldn’t be underestimated only because of their harmless and cute looks like this picture displays them. If you happen to encounter a bear in the wild u should always try to get a way from it as fast as possible.</longDescription>
+<longDescription xml:lang="de-DE">Grizzlybären sind äußerst gefährlich, auch wenn sie träge und kuschelig aussehen. Einem wilden Bären wie diesem sollte man sich in freier Wildbahn auf keinen Fall leichtfertig näheren sondern möglicht weit entfernt bleiben.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-medium.webp</medium>
@@ -37,8 +39,10 @@
 <product>
 <name xml:lang="x-default">Great Grey Owl</name>
 <name xml:lang="de-DE">Bartkauz</name>
-<shortDescription xml:lang="x-default">A large grey owl in the woods.</shortDescription>
+<shortDescription xml:lang="x-default">A large grey owl in the woods</shortDescription>
+<shortDescription xml:lang="de-DE">Eine große Eule im Wald</shortDescription>
 <longDescription xml:lang="x-default">A very mysterious animal that stands for wisdom an intelligence is North America's largest owl, the great gray owl. This picture is going to fill your room with elegance and class.</longDescription>
+<longDescription xml:lang="de-DE">Der Bartkauz ist die größte Eulenart Nordamerikas. Eulen gelten als Symbole für Weisheit und Intelligenz. Dieses Bild wird ihr Zimmer mit Eleganz und Klasse füllen.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-medium.webp</medium>
@@ -52,7 +56,7 @@
 <product>
 <name xml:lang="x-default">Swedish Moose</name>
 <name xml:lang="de-DE">Schwedischer Elch</name>
-<shortDescription xml:lang="x-default">A mooze with antlers.</shortDescription>
+<shortDescription xml:lang="x-default">A mooze with antlers</shortDescription>
 <shortDescription xml:lang="de-DE">Ein Elchbulle mit mittelgroßem Geweih</shortDescription>
 <longDescription xml:lang="x-default">A moose is symbolizing determination and endurance, so this poster might be something for your personality. Also do not mistake a moose and an elk are the same animal, only the people in the different locations vary with naming the animal.</longDescription>
 <longDescription xml:lang="de-DE">Ein Elch in freier Wildbahn in einem Wald Schwedens. Das Poster zeigt gut die Tarnung des Tieres vor dunklerem Hintergrund durch den Teil des Waldbodens der sich etwa bis zur Hälfte des Bildes erstreckt. Ein Klassiker für alle Liebhaber borealer Waldgebiete.</longDescription>
@@ -67,9 +71,12 @@
 <price>9.30;15.00;19.99</price>
 </product>
 <product>
-<name>European Hornet</name>
-<shortDescription>Close up shot of a hornet</shortDescription>
-<longDescription>Hornets are very scary looking insects, but their gorgeous color pattern can be a nice eye-catcher for your home. This hornet right here won't hurt if you aren't threatening her because the European hornet primarily feeds on crickets and grasshoppers.</longDescription>
+<name xml:lang="x-default">European Hornet</name>
+<name xml:lang="de-DE">Europäische Hornisse</name>
+<shortDescription xml:lang="x-default">Close up shot of a hornet</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer Hornisse</shortDescription>
+<longDescription xml:lang="x-default">Hornets are very scary looking insects, but their gorgeous color pattern can be a nice eye-catcher for your home. This hornet right here won't hurt if you aren't threatening her because the European hornet primarily feeds on crickets and grasshoppers.</longDescription>
+<longDescription xml:lang="de-DE">Die Hornisse ist in Deutschland eine geschützte Art. Sie ist friedlich solange man sie nicht verletzt oder eine Gefahr für das Nest darstellt und versucht normalerweise zu fliehen statt zu stechen. Hornissen fressen hauptsächlich Insekten und verschmähen menschliche Speisen, daher tauchen sie am Kaffeetisch eigentlich nur auf um lästige Insekten wie Wespen oder Fliegen zu jagen.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/european-hornet/european-hornet-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/european-hornet/european-hornet-medium.webp</medium>
@@ -81,9 +88,12 @@
 <price>10.50;15.64;20.22</price>
 </product>
 <product>
-<name>Roman Snail</name>
-<shortDescription>Close up of a snail sticking on the side of a tree</shortDescription>
-<longDescription>Perhaps you prefer a more leisurely pace in life, and this snail picture can embody that sentiment, adding a personal touch to your room. Roman snails, are also the largest land snails in north-West Europe, so u can also impress with some knowledge regarding this piece of art.</longDescription>
+<name xml:lang="x-default">Roman Snail</name>
+<name xml:lang="de-DE">Weinbergschnecke</name>
+<shortDescription xml:lang="x-default">Close up of a snail sticking on the side of a tree</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer Schnecke an der Seite eines Baumes</shortDescription>
+<longDescription xml:lang="x-default">Perhaps you prefer a more leisurely pace in life, and this snail picture can embody that sentiment, adding a personal touch to your room. Roman snails, are also the largest land snails in north-West Europe, so u can also impress with some knowledge regarding this piece of art.</longDescription>
+<longDescription xml:lang="de-DE">Die am weitesten verbreitete Schneckenart Europas. Weinbergschnecken sind Pflanzenfresser. In Deutschland, Österreich und der Schweiz stehen sie in der Natur unter Schutz. Zudem inzwischen auch durch eine EU-Richtlinie. Trotzdem gelten sie, besonders in Frankreich, als Delikatessen und werden dafür gezielt gezüchtet.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/roman-snail/roman-snail-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/roman-snail/roman-snail-medium.webp</medium>
@@ -95,9 +105,12 @@
 <price>23.00;30.45;38.00</price>
 </product>
 <product>
-<name>Blue Morpho Butterfly</name>
-<shortDescription>A beautiful blue and black butterfly on a leaf.</shortDescription>
-<longDescription>Butterflies are the perfect insects to get some colorful spring vibes into your house. The blue morpho butterfly is also ranking among the world's largest butterflies and is known for its numerous eye spots that camouflage it during flight.</longDescription>
+<name xml:lang="x-default">Blue Morpho Butterfly</name>
+<name xml:lang="de-DE">Blauer Morphofalter</name>
+<shortDescription xml:lang="x-default">A beautiful blue and black butterfly on a leaf</shortDescription>
+<shortDescription xml:lang="de-DE">Ein hübscher, blau-schwarzer Schmetterling auf einem Blatt</shortDescription>
+<longDescription xml:lang="x-default">Butterflies are the perfect insects to get some colorful spring vibes into your house. The blue morpho butterfly is also ranking among the world's largest butterflies and is known for its numerous eye spots that camouflage it during flight.</longDescription>
+<longDescription xml:lang="de-DE">Der blaue Morphofalter, auch Himmelsfalter genannt ist ein großer Schmetterling der wegen seines hübschen Aussehens sehr beliebt ist. Die Unterseite der Flügel ist braun und weiß mit Flecken. Die blaue Farbe der Oberseite entsteht durch Interferenz des Lichts und nicht durch blaue Pigmente.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/blue-morpho-butterfly/blue-morpho-butterfly-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/blue-morpho-butterfly/blue-morpho-butterfly-medium.webp</medium>
@@ -109,9 +122,12 @@
 <price>17.99;23.99;29.99</price>
 </product>
 <product>
-<name>Red Birdwing</name>
-<shortDescription>Looking up at a butterfly sitting on a blossom.</shortDescription>
-<longDescription>A beautiful picture of a butterfly that will fit excellent with brown/orange, and red furniture because of its wing color. If you desire to observe the Red Birdwing in its natural habitat, it is primarily found in the Solomon Islands and is commonly observed obtaining nectar from flowers during the summer months.</longDescription>
+<name xml:lang="x-default">Red Birdwing</name>
+<name xml:lang="de-DE">Schmetterling auf blauer Blüte</name>
+<shortDescription xml:lang="x-default">Looking up at a butterfly sitting on a blossom</shortDescription>
+<shortDescription xml:lang="de-DE">Blick von unten auf einen Schmetterling auf einer Blüte</shortDescription>
+<longDescription xml:lang="x-default">A beautiful picture of a butterfly that will fit excellent with brown/orange, and red furniture because of its wing color. If you desire to observe the Red Birdwing in its natural habitat, it is primarily found in the Solomon Islands and is commonly observed obtaining nectar from flowers during the summer months.</longDescription>
+<longDescription xml:lang="de-DE">Der Kontrast zwischen der dunklen Unterseite der Flügel des Schmetterlings und der blauen Blüte zieht den Blick auf das Bild. Es macht sich gut zu dunklerer Einrichtung die farblich zu dem Schmetterling passt.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/red-birdwing/red-birdwing-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/red-birdwing/red-birdwing-medium.webp</medium>
@@ -123,9 +139,12 @@
 <price>8.75;15.75;22;45</price>
 </product>
 <product>
-<name>Bird</name>
-<shortDescription>A small black bird sitting on a gutter</shortDescription>
-<longDescription>This poster looks somehow plain and quiet with the darker toned colors, but thats the beauty of this image. Worth to know: Black birds are known for their beautiful singing, the male black bird's song is one of the most complex of all British birds.</longDescription>
+<name xml:lang="x-default">Bird</name>
+<name xml:lang="de-DE">Amsel</name>
+<shortDescription xml:lang="x-default">A small black bird sitting on a gutter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine kleine Amsel auf einer Regenrinne</shortDescription>
+<longDescription xml:lang="x-default">This poster looks somehow plain and quiet with the darker toned colors, but thats the beauty of this image. Worth to know: Black birds are known for their beautiful singing, the male black bird's song is one of the most complex of all British birds.</longDescription>
+<longDescription xml:lang="de-DE">Das Poster erweckt einen herbstlichen Eindrück von Kühle und Stille. Die Amsel oder auch Schwarzdrossel ist für den wohlklingenden Reviergesang der Männchen weit bekannt.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/bird/bird-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/bird/bird-medium.webp</medium>
@@ -137,9 +156,12 @@
 <price>12.87;19.99;25.99</price>
 </product>
 <product>
-<name>Red Domestic Cat</name>
-<shortDescription>A red colored cat looking straight at you.</shortDescription>
-<longDescription>This poster is a great addition to your room if you like cute cats with red fur. It is worth knowing that the red coloring in domestic cats arises from ongoing, random genetic mixes among red domestic cats of diverse backgrounds.</longDescription>
+<name xml:lang="x-default">Red Domestic Cat</name>
+<name xml:lang="de-DE">Hauskatze mit beige-braunem Fell</name>
+<shortDescription xml:lang="x-default">A red colored cat looking straight at you.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine beige und braun getigerte Hauskatze, die den Betrachter beobachtet</shortDescription>
+<longDescription xml:lang="x-default">This poster is a great addition to your room if you like cute cats with red fur. It is worth knowing that the red coloring in domestic cats arises from ongoing, random genetic mixes among red domestic cats of diverse backgrounds.</longDescription>
+<longDescription xml:lang="de-DE">Ein Muss für Katzenliebhaber! Diese Katze schaut den Betrachter nachdenklich an. Ob sie einen Streich ausheckt? Oder vielleicht versucht sie zu entscheiden welche Maus sie heute anschleppt?</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/red-domestic-cat/red-domestic-cat-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/red-domestic-cat/red-domestic-cat-medium.webp</medium>
@@ -151,9 +173,12 @@
 <price>17.99;26.98;34.89</price>
 </product>
 <product>
-<name>Brown Domestic Cat</name>
-<shortDescription>A brownish cat looking like its about to jump at you.</shortDescription>
-<longDescription>Cats are very curious animals and this particular one seems to absorb you with its cute button like eyes. If you own a cat, you might want to purchase this poster to observe your cat's response to the image.</longDescription>
+<name xml:lang="x-default">Brown Domestic Cat</name>
+<name xml:lang="de-DE">Hauskatze mit braun-schwarzem Fell</name>
+<shortDescription xml:lang="x-default">A brownish cat looking like its about to jump at you.</shortDescription>
+<shortDescription xml:lang="de-DE">Diese Katze sieht aus als setze sie zum Sprung an</shortDescription>
+<longDescription xml:lang="x-default">Cats are very curious animals and this particular one seems to absorb you with its cute button like eyes. If you own a cat, you might want to purchase this poster to observe your cat's response to the image.</longDescription>
+<longDescription xml:lang="de-DE">Katzen sind niedlich und neugierig und haben einen starken Jagd- und Spielstrieb. Dieses Poster bringt Dynamik und gute Laune in jedes Zimmer. Katzenhalter können dieses Poster auch für ihre Katze aufhängen und deren Reaktion darauf beobachten.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/brown-domestic-cat/brown-domestic-cat-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/brown-domestic-cat/brown-domestic-cat-medium.webp</medium>
