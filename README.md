@@ -117,7 +117,6 @@ If you wish to extend posters here are a few points that are good to know:
 * Database:
 
 To extend the database's existing tables add new entries in the .xml files in the same format as the current entries
-WIP: document optional parts e.g. for languages
 
 To add new tables to the database you must:
 1 - create a model for the represented entity in the src/main/java/models package (look at exiting ones for references)
@@ -132,6 +131,22 @@ using xml (in src/main/java/assets/files) for the data itself and adding another
 or by:
 extending existing ones if that makes more sense
 If you create a new handler and xml file you need to add a new method to call them to the class 'ImportFromXMLToDB' and then call that method in the JobController.importData
+
+* Languages / Locales:
+
+To add a new language to posters you need to:
+1 - add the language (and possibly dialect(s)) to languages.xml in the same style as the ones already there
+2 - add a new messages_xx-YY.properties file where xx-YY is the code for your locale and add all the messages specified in the existing messages files in your localized version
+3 - add localized names for categories and subcategories in categories.xml in the same way as the ones already there. For every name add a new line to the block of its versions and give it the your locales code as xml-lang attribute
+4 - add texts for products in the products.xml file in the same way as the ones already there. For every name, short description or long description you have to add a new line to the block of exiting ones for that tag and give it the code corresponding to your language as xml-lang attribute
+5 - add your language as application language in application.conf by adding its code (separated by a ",") in the corresponding line
+6 - delete the database (everything in the 'db' folder)
+7 - compile and run the application
+
+You can use step 6 and 7 earlier if you want to test during development. You need to do those two steps whenever you want your changes to be applied.
+
+Search for languages / locales:
+WIP but know you will have to get a stammer, i.e. a program to reduce words to their base form, for your locale/language/dialect to make it the same as the default search. In the worst case you might have to create it yourself. You may also end up having to adjust manually which words are ignored when evaluating a search term
 
 
 ## Viewing the database
