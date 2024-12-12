@@ -11,9 +11,9 @@
     <div id="confirmation-row" class="row">
         <div class="col-sm-10 offset-sm-1 text-center">
             <p id="confirm-check" class="icon-addcart"><span><i class="icon-check"></i></span></p>
-            <h2 id="thank-you-text" class="mb-4">Thank you for your purchase, your order is being processed.</h2>
+            <h2 id="thank-you-text" class="mb-4">${i18n('orderConfirmationMessage')}</h2>
             <p>
-                <a id="go-home" href="${contextPath}/${lang}"class="btn btn-primary"><i class="icon-shopping-cart me-1"></i>Continue Shopping</a>
+                <a id="go-home" href="${contextPath}/${lang}"class="btn btn-primary"><i class="icon-shopping-cart me-1"></i>${i18n('orderConfirmationContinue')}</a>
             </p>
         </div>
     </div>
