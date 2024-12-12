@@ -3,7 +3,8 @@
 </a>
 
 <ul id="locale-menu" class="dropdown-menu">
-    <li><a id="loc-en-us" class="dropdown-item" href="/en-US${staticPath}">en-US</a></li>
-    <li><a id="loc-de-de" class="dropdown-item" href="/de-DE${staticPath}">de-DE</a></li>
+    <#list supportedLanguages as suplan>
+    <li><a id="loc-en-us" class="dropdown-item" href="/${suplan}">${suplan}</a></li>
+    </#list>
 </ul>
 
