@@ -16,6 +16,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,6 +148,11 @@ public class WebShopController
         data.put("currPath", context.getRequestPath());
         // add current request path without locale
         data.put("staticPath", context.getRequestPath().replace("/"+context.getPathParameter("urlLocale"), ""));
+        // add supported languages
+        List<String> supportedLanguages = new ArrayList<>();
+        String appLang = xcpConf.APPLICATION_LANGUAGES;
+        supportedLanguages = Arrays.asList(appLang.split(","));
+        data.put("supportedLanguages", supportedLanguages);
     }
 
     /**
