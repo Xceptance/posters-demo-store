@@ -8,19 +8,19 @@
 	</div>	
 	<div class="carousel-inner">
 	  	<div class="carousel-item active" data-bs-interval="5000">
-			<a class="carousel-content-text text-center d-block w-100" href="#">25% off (Almost) Everything! Use Code: Posters Sale</a>
+			<a class="carousel-content-text text-center d-block w-100" href="#">${i18n('indexSampleSaleOne')}</a>
 	  	</div>
 	  	<div class="carousel-item" data-bs-interval="5000">
-			<a class="carousel-content-text text-center d-block w-100" href="#">Our biggest sale yet 50% off all Posters</a>
+			<a class="carousel-content-text text-center d-block w-100" href="#">${i18n('indexSampleSaleTwo')}</a>
 	  	</div>
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel-sale" data-bs-slide="prev">
 	  	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	  	<span class="visually-hidden">Previous</span>
+	  	<span class="visually-hidden">${i18n('buttonPrevious')}</span>
 	</button>
 	<button class="carousel-control-next" type="button" data-bs-target="#carousel-sale" data-bs-slide="next">
 	  	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	  	<span class="visually-hidden">Next</span>
+	  	<span class="visually-hidden">${i18n('buttonNext')}</span>
 	</button>
 </div>
 
@@ -40,7 +40,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<a href="${contextPath}/${lang}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
+					<a href="${contextPath}/${lang}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">${i18n('buttonBuyHere')}</a>
 				</div>
 			</div>
 	  	</div>
@@ -51,7 +51,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<a href="${contextPath}/${lang}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">Buy Here</a>
+					<a href="${contextPath}/${lang}/productDetail/${caro.name?url('UTF-8')}?productId=${caro.id}" class="btn btn-primary">${i18n('buttonBuyHere')}</a>
 				</div>
 			</div>
 	  	</div>
@@ -60,11 +60,11 @@
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel-product-display" data-bs-slide="prev">
 	  	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	  	<span class="visually-hidden">Previous</span>
+	  	<span class="visually-hidden">${i18n('buttonPrevious')}</span>
 	</button>
 	<button class="carousel-control-next" type="button" data-bs-target="#carousel-product-display" data-bs-slide="next">
 	  	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	  	<span class="visually-hidden">Next</span>
+	  	<span class="visually-hidden">${i18n('buttonNext')}</span>
 	</button>
 </div>
 
@@ -96,7 +96,7 @@
 </div>
 
 <div class="product-display-heading container-fluid text-center">
-	<h2>Hot Products</h2>
+	<h2>${i18n('indexHotProducts')}</h2>
 </div>
 
 <div class="container text-center">
@@ -118,7 +118,7 @@
 		  		<h5 class="card-title">${prItem.getName(lang)}</h5>
 		  		<p class="card-text product-tile-text">${prItem.getDescriptionOverview(lang)}</p>
 				<p class="card-text product-tile-price">${prItem.minimumPrice}</p>
-		  		<a href="${contextPath}/${lang}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">Buy Here</a>
+		  		<a href="${contextPath}/${lang}/productDetail/${prItem.name?url('UTF-8')}?productId=${prItem.id}" class="btn btn-primary product-tile-btn-buy">${i18n('buttonBuyHere')}</a>
 			</div>
 		</div>
 		</#list>
@@ -126,7 +126,7 @@
 </div>
 
 <div class="container text-center">
-	<a class="btn btn-primary btn-shop-all" href="#" role="button">Shop All Products</a>
+	<a class="btn btn-primary btn-shop-all" href="#" role="button">${i18n('buttonAll')}</a>
 </div>
 
 </@layout.myLayout>
