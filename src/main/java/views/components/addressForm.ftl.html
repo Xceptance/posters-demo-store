@@ -75,7 +75,7 @@
                 <#else>
                     value="<#if ses_state??>${ses_state}<#else>${(address.state)!}</#if>"
                     </#if><#else>${(address.state)!}</#if>
-                placeholder="State" name="state" required>
+                placeholder="${i18n('addressState')}" name="state" required>
                 <div id="address-state-help" class="form-text"></div>
         </div>
         <div class="col">
@@ -87,7 +87,7 @@
                 <#else>
                     value="<#if ses_zip??>${ses_zip}<#else>${(address.zip)!}</#if>"
                     </#if><#else>${(address.zip)!}</#if>
-                placeholder="Zip / Postal" name="zip" required>
+                placeholder="${i18n('addressZip')}" name="zip" required>
                 <div id="address-zip-help" class="form-text"></div>
         </div>
     </div>
@@ -119,6 +119,6 @@
         </#if><#else><option></option><option>${i18n('countryUS')}</option><option>${i18n('countryGermany')}</option></#if>
     </select>
     <div id="address-country-help" class="form-text">
-        We only ship to ${i18n('countryUS')} and ${i18n('countryGermany')}.
+        ${i18n('addressShippRestrict')} ${i18n('countryUS')} ${i18n('and')} ${i18n('countryGermany')}.
     </div>
 </div>
