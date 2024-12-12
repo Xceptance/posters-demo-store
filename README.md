@@ -136,7 +136,7 @@ If you create a new handler and xml file you need to add a new method to call th
 
 To add a new language to posters you need to:
 1 - add the language (and possibly dialect(s)) to languages.xml in the same style as the ones already there
-2 - add a new messages_xx-YY.properties file where xx-YY is the code for your locale and add all the messages specified in the existing messages files in your localized version
+2 - add a new messages_xx-YY.properties file where xx-YY is the ISO code for your locale and add all the messages specified in the existing messages files in your localized version
 3 - add localized names for categories and subcategories in categories.xml in the same way as the ones already there. For every name add a new line to the block of its versions and give it the your locales code as xml-lang attribute
 4 - add texts for products in the products.xml file in the same way as the ones already there. For every name, short description or long description you have to add a new line to the block of exiting ones for that tag and give it the code corresponding to your language as xml-lang attribute
 5 - add your language as application language in application.conf by adding its code (separated by a ",") in the corresponding line
