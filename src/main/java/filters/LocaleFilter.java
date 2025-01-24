@@ -27,7 +27,14 @@ public class LocaleFilter implements Filter {
         String urlLoc = context.getPathParameter("urlLocale");
         // B Check cookies for NINJA_LANG
         Cookie langCookie = context.getCookie("NINJA_LANG");
-        String cookieLoc = langCookie.getValue();
+        String cookieLoc;
+        if(langCookie != null) {
+            cookieLoc = langCookie.getValue();
+        }
+        else {
+            cookieLoc = "en-US";
+        }
+        
         // Compare A and B if present, prefer A if different
         if (cookieLoc.equals(urlLoc)) 
         {
