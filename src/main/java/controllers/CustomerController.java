@@ -1061,7 +1061,7 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-        public Result deleteAccount(@Param("password") final String password, final Context context) {
+        public Result deleteAccount(@Param("password") final String password, final Context context, @PathParam("urlLocale") String locale) {
             final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // get customer
             // correct password
@@ -1081,7 +1081,7 @@ public class CustomerController
                 // incorrect password
                 context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
                 // show page again
-                return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/confirmDeleteAccount");
             }
         }
         
