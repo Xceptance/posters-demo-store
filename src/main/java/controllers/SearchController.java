@@ -38,6 +38,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 
 
 /**
@@ -67,7 +68,7 @@ public class SearchController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result searchProduct(@Param("searchText") final String searchFormText, final Context context) {
+    public Result searchProduct(@Param("searchText") final String searchFormText, final Context context, @PathParam("urlLocale") String locale) {
         String searchText = searchFormText.trim();
         // search text is empty
         if (searchText.isEmpty()) {
@@ -84,7 +85,7 @@ public class SearchController
                 // show info message
                 context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
                 // return index page
-                return Results.redirect(context.getContextPath() + "/notFound");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/notFound");
             }
             // at least one product was found
             else {
