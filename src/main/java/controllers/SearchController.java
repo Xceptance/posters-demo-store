@@ -79,7 +79,7 @@ public class SearchController
         } else {
             final Map<String, Object> data = new HashMap<String, Object>();
             // search for products
-            final List<Product> products = searchForProducts(searchText, 1, data);
+            final List<Product> products = searchForProducts(searchText, 1, data, locale);
             // no product was found
             if (products.isEmpty()) {
                 // show info message
@@ -110,10 +110,10 @@ public class SearchController
      * @return
      */ // data.put("productCounter", products.size());
     public Result getProductOfSearch(@Param("searchText") final String searchText, @Param("page") final int pageNumber,
-            final Context context) {
+            final Context context, @PathParam("urlLocale") String locale) {
         final Map<String, Object> data = new HashMap<String, Object>();
         // search for products
-        final List<Product> products = searchForProducts(searchText, pageNumber, data);
+        final List<Product> products = searchForProducts(searchText, pageNumber, data, locale);
         // set some attributes to null to get a small-sized JSON
         for (int i = 0; i < products.size(); i++) {
             products.get(i).setAvailableSizes(null);
@@ -135,9 +135,9 @@ public class SearchController
      * @param data       The data map to which pagination information will be added.
      * @return A list of products that match the search text.
      */
-    private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data) {
+    private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data, String locale) {
         // Search products with search engine, second param is the limit for returned results
-        List<Integer> resultIds = searcher.search(searchText, 20);
+        List<Integer> resultIds = searcher.search(searchText, 20, locale);
 
         if (resultIds.isEmpty()) {
             return List.of();
