@@ -146,7 +146,20 @@ To add a new language to posters you need to:
 You can use step 6 and 7 earlier if you want to test during development. You need to do those two steps whenever you want your changes to be applied.
 
 Search for languages / locales:
-WIP but know you will have to get a stammer, i.e. a program to reduce words to their base form, for your locale/language/dialect to make it the same as the default search. In the worst case you might have to create it yourself. You may also end up having to adjust manually which words are ignored when evaluating a search term
+to also add search functionality for your language you need a new search engine setup. To get it you should:
+1 - add a new stemming analyzer in util.standalone that is named after your language. You can copy an exiting one and rename it
+2 - replace the stem filter with one for your language and leave the rest alone. You can have a look in the content of the org/apache/lucene/analysis package of lucene and check whether a default version for language exists. if it does not exist unfortunately you have to use a community created one or create one yourself (Stemming means reducing words to their base form and this filter is how this is handled in this case)
+3 - in the LuceneSearch class add an Analyzer Variable in the "setup other language analyzers" section and give it an instance of your analyzer from step 1
+3a - you probably want your search to match only that specific language while it is the selected locale. In that case copy the initialization of the directory and change the name of your copy to one indicating your language. This will ensure your index is stored seperately in its own space in memory
+3b - if you wish for your language to be searchable in any locale (e.g. searching the english word "moose" in french and getting the french page for the poster that contains a moose even though the word is only there in the english version) you need only the standard directory
+4 - copy the indexData method and change your copies' name to to indexData[YourLanguage]
+5 - adjust the name of the Analyzer the index will be bound to to match your Analyzer from step 3
+5a - if you added a language specific directory for the index in 3a replace the directory the index is written to with that directory
+5b - if you do not want your index stored sperately leave the directory the index is written to as the default directory
+6 - adjust the setup of the fields within this method to load data for your langauge e.g. "product.getName("yourlanguagecode-YOURLOCALECODE")"
+7 - add a call of the method from step 4 into the "setup()" method
+8 - in the "search" method with the loce parameter expand the selection of analyzers with at least one case for your langauge and locale
+8a - if you have added a language specific directory in 3a expand the directory selection in the same way as the analyzer selection
 
 
 ## Viewing the database
