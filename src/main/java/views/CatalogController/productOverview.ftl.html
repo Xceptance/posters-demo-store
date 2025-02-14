@@ -124,7 +124,7 @@
 					<h5 class="card-title">${pro.getName(lang)}</h5>
 					<p class="card-text product-tile-text">${pro.getDescriptionOverview(lang)}</p>
 					<p class="card-text product-tile-price">$${pro.minimumPrice}</p>
-				    <a href="${contextPath}/${lang}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">Buy here</a>
+				    <a href="${contextPath}/${lang}/productDetail/${pro.name?url('UTF-8')}?productId=${pro.id}" class="btn btn-primary">${i18n('buttonBuyHere')}</a>
 				</div>
 			</div>
 			</#list>
