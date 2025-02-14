@@ -108,7 +108,7 @@
 		<!-- Back button -->
 		<div class="row justify-content-center">
 			<div class="col-md-8">
-				<a id="link-acc-overview" href="${contextPath}/${lang}/accountOverview" class="btn btn-sm btn-primary">Back</a>
+				<a id="link-acc-overview" href="${contextPath}/${lang}/accountOverview" class="btn btn-sm btn-primary">${i18n('buttonBack')}</a>
 			</div>
 		</div>
 	</div>
@@ -140,7 +140,7 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${i18n('buttonClose')}</button>
 							<form action="${contextPath}/${lang}/deleteShippingAddress" method="post">
 								<input name="addressIdShip" class="shipping-id-${addressShip.id}" type="hidden"
 									value="${addressShip.id}">
@@ -179,7 +179,7 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${i18n('buttonClose')}</button>
 							<form action="${contextPath}/${lang}/deleteBillingAddress" method="post">
 								<input name="addressIdBill" class="billing-id-${addressBill.id}" type="hidden"
 									value="${addressBill.id}">
