@@ -1510,7 +1510,7 @@
 </product>
 <product>
 <name xml:lang="x-default">Chicago L</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Chicago L</name>
 <shortDescription xml:lang="x-default">A tribute to the windy city.</shortDescription>
 <shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
 <longDescription xml:lang="x-default">Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster! </longDescription>
@@ -1544,11 +1544,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Old NYC Subway</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Alte New Yorker U-Bahn</name>
 <shortDescription xml:lang="x-default">Nothing lasts forever.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Nichts hält ewig</shortDescription>
 <longDescription xml:lang="x-default">Not even subway trains. Darn!</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Auch U-Bahnen enden eines Tages wie diese hier. Doch selbst der Verfall dieser U-Banh ist lediglich ein Wandel. Als Filmkulisse, Leinwand für Straßenkunst, geheimes Eckchen für diejenigen, die die Winkel der Stadt erkunden oder eben als Poster mit besonderem Flair hat sie nun einen neuen Zweck.</longDescription>
 <price>17.80;22.00;33.30</price>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/old-nyc-subway/old-nyc-subway-small.webp</small>
@@ -1563,11 +1563,11 @@
 <!-- SubCategory Buildings  -->
 <product>
 <name xml:lang="x-default">Niagara Ferris Wheel</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Niagara Riesenrad</name>
 <shortDescription xml:lang="x-default">Up for a night sky wheel ride?</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Bereit für eine nächtliche Fahrt?</shortDescription>
 <longDescription xml:lang="x-default">A nice way to start conversation because nobody think that there is a Ferris wheel at Niagara everybody thinks of the waterfalls</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine nette Art, ein Gespräch zu beginnen, denn niemand denkt, dass es in Niagara ein Riesenrad gibt, jeder denkt an die Wasserfälle.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/niagara-ferris-wheel/niagara-ferris-wheel-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/niagara-ferris-wheel/niagara-ferris-wheel-medium.webp</medium>
@@ -1580,11 +1580,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Swedish Cottages</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Schwedische Häuschen</name>
 <shortDescription xml:lang="x-default">Swedish cottages at a river.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Schwedische Häuschen am Fluss</shortDescription>
 <longDescription xml:lang="x-default">These Swedish cottages are well known as beautiful, with the red to brown coloring a nice way to emphasize your brown furniture.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Diese schwedischen Häuschen sind als wunderschön bekannt, und die rot-braune Farbgebung ist eine schöne Möglichkeit, Ihre braunen Möbel zu betonen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/swedish-cottages/swedish-cottages-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/swedish-cottages/swedish-cottages-medium.webp</medium>
@@ -1597,11 +1597,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Gustavianum Sweden</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gustavianum, Schweden</name>
 <shortDescription xml:lang="x-default"> A gorgeous representation of architecture.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Paradebeispiel wunderschöner Architektur</shortDescription>
 <longDescription xml:lang="x-default">A display of art in your home with this astonishing building. This will add elegance and class to your room.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Bringt Eleganz und Klasse in jeden Raum.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/gustavianum-sweden/gustavianum-sweden-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/gustavianum-sweden/gustavianum-sweden-medium.webp</medium>
@@ -1614,11 +1614,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Grochwitz Castle Germany </name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Burg Groschwitz</name>
 <shortDescription xml:lang="x-default">A beautiful castle with nature surrounding it.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine hübsche Burg in mitten der Natur</shortDescription>
 <longDescription xml:lang="x-default">A castle is great for a living room with historical books or souvenir, so you might add this poster there.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein Schloss eignet sich hervorragend für ein Wohnzimmer mit historischen Büchern oder Souvenirs, also könnten Sie dieses Poster dort unterbringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/grochwitz-castle-germany/grochwitz-castle-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/grochwitz-castle-germany/grochwitz-castle-germany-medium.webp</medium>
@@ -1631,11 +1631,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Rosebud Diner USA</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Rosebud Diner USA</name>
 <shortDescription xml:lang="x-default">The spirit of an old American dinner.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">An old-fashioned dinner in America, great to add a bit of personality to your kitchen. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Der Geist eines alten amerikanischen Restaurants</shortDescription>
+<longDescription xml:lang="x-default">An old-fashioned dinner in America, great to add a bit of personality to your kitchen.</longDescription>
+<longDescription xml:lang="de-DE">Ein altmodisches Restaurant in den USA, gut geeignet etwas Persönlichkeit in ihre eigene Küche zu bringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/rosebud-diner-usa/rosebud-diner-usa-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/rosebud-diner-usa/rosebud-diner-usa-medium.webp</medium>
@@ -1648,11 +1648,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Historic Car Factory Germany</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Historische Automobilfabrik</name>
 <shortDescription xml:lang="x-default">A destroyed car factory.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine zerstörte Autofabrik in Deutschland</shortDescription>
 <longDescription xml:lang="x-default">A destroyed car factory might not be the most common photo motive, but if you like lost places, you could add this at your home.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine zerstörte Autofabrik ist vielleicht nicht das häufigste Fotomotiv, aber wenn Sie verlorene Orte mögen, könnten Sie dies in ihr zu Hause einbauen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/historic-car-factory-germany/historic-car-factory-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/historic-car-factory-germany/historic-car-factory-germany-medium.webp</medium>
@@ -1665,11 +1665,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Coal Briquet Factory Germany</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Brikettfabrik</name>
 <shortDescription xml:lang="x-default">Coal Briquette Factory in Germany.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Fabrik für Kohlebrikette in Deutschland</shortDescription>
 <longDescription xml:lang="x-default">This darker looking factory could be nice for an office to add some glance to economic accomplishment we humans made.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Diese dunkler aussehende Fabrik könnte schön für ein Büro sein, um der wirtschaftlichen Leistung, die wir Menschen erbracht haben, etwas Glanz zu verleihen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/coal-briquet-factory-germany/coal-briquet-factory-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/coal-briquet-factory-germany/coal-briquet-factory-germany-medium.webp</medium>
@@ -1682,11 +1682,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Timber Framework Germany</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Deutsches Fachwerkaus</name>
 <shortDescription xml:lang="x-default">The German Fachwerk building.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Fachwerk Gebäude</shortDescription>
 <longDescription xml:lang="x-default">The old framework home from Germany is a milestone in engineering and architecture, a great way to pay tribute to development of man kind in your home.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Das alte Fachwerkhaus aus Deutschland ist ein Meilenstein der Ingenieurskunst und Architektur, eine großartige Möglichkeit, die Entwicklung der Menschheit in Ihrem Haus zu würdigen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/timber-framework-germany/timber-framework-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/timber-framework-germany/timber-framework-germany-medium.webp</medium>
@@ -1699,11 +1699,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Chinese Temple</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Chinesischer Tempel</name>
 <shortDescription xml:lang="x-default">An outstanding architecture shot!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine herausragende Architektur-Fotografie</shortDescription>
 <longDescription xml:lang="x-default">A historic picture of a Chinese temple adds a taste of history to your room. Worth to know this temple is known as the Bell Tower of Xi'an, its an incredible piece of art from the Ming Dynasty.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein historisches Bild eines chinesischen Tempels bringt einen Hauch von Geschichte in Ihr Zimmer. Dieser Tempel ist bekannt als der Glockenturm von Xi'an, ein unglaubliches Kunstwerk aus der Ming-Dynastie.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/chinese-temple/chinese-temple-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/chinese-temple/chinese-temple-medium.webp</medium>
@@ -1716,11 +1716,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Chinese Temple Boat</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Chinesisches Tempel Boot</name>
 <shortDescription xml:lang="x-default">Chinese Architecture.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Chinesische Baukunst</shortDescription>
 <longDescription xml:lang="x-default">A really pompous looking ship, with a dragon design, is a good display of your taste of art.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein pompöses Schiff mit Drachengestaltung. Eine gute Weise sich als Kunstliebhaber zu zeigen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/chinese-temple-boat/chinese-temple-boat-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/chinese-temple-boat/chinese-temple-boat-medium.webp</medium>
@@ -1734,9 +1734,9 @@
 <!-- SubCategory Fireworks  -->
 <product>
 <name xml:lang="x-default">New Years Fireworks I</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">Delivering all pyro effects possible! </shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<name xml:lang="de-DE">Neujahrsfeuerwerk I</name>
+<shortDescription xml:lang="x-default">Delivering all pyro effects possible!</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Meisterwerk der Pyrotechnik!</shortDescription>
 <longDescription xml:lang="x-default">Happy New Years! Captured at midnight in Jena, Germany, this poster shows an incredible mix of all sorts of fireworks effects. Just awesome how they illuminate the sky! </longDescription>
 <longDescription xml:lang="de-DE">Platzhalter</longDescription>
 <imageURL>
@@ -1751,9 +1751,9 @@
 </product>
 <product>
 <name xml:lang="x-default">New Years Fireworks II</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk II</name>
 <shortDescription xml:lang="x-default">Bouquets, Stars, and Pearls.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Bouquets, Sterne und Perlen</shortDescription>
 <longDescription xml:lang="x-default">If you want a clear-cut contrast between the night sky and the single effects. Speaking of New Year's... Please refrain from asking us if we kept last year's resolutions at this point. We don't want to talk about it. </longDescription>
 <longDescription xml:lang="de-DE">Platzhalter</longDescription>
 <imageURL>
@@ -1768,9 +1768,9 @@
 </product>
 <product>
 <name xml:lang="x-default">New Years Fireworks III</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk III</name>
 <shortDescription xml:lang="x-default">A fantastic skycolor change!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein fantastischer Farbwechsel</shortDescription>
 <longDescription xml:lang="x-default">The bright glitter in the center beautifully highlights the sky and delivers this spectacular color change effect. Picture composition at its best. Memo: there's also no use asking about our new year's resolutions. We don't have any. </longDescription>
 <longDescription xml:lang="de-DE">Platzhalter</longDescription>
 <imageURL>
@@ -1785,9 +1785,9 @@
 </product>
 <product>
 <name xml:lang="x-default">New Years Fireworks IV</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk IV</name>
 <shortDescription xml:lang="x-default">Night sky getting smoky.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein rauchiger Nachthimmel</shortDescription>
 <longDescription xml:lang="x-default">One hour past midnight. The bright crossette in the center produces a set of stars that stands out in the smoky night sky. A great picture to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep. </longDescription>
 <longDescription xml:lang="de-DE">Platzhalter</longDescription>
 <imageURL>
@@ -1802,11 +1802,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Silver Dahlias</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Silberne Dahlien</name>
 <shortDescription xml:lang="x-default">Perfectly shaped.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Wohlgeformt</shortDescription>
 <longDescription xml:lang="x-default">Looking like a starfish in the clear sky. Hang this in your bedroom and you're guaranteed to have romantic nights! </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Garantiert romantische Nächte!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/silver-dahlias/silver-dahlias-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/silver-dahlias/silver-dahlias-medium.webp</medium>
@@ -1819,11 +1819,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Crossette Silver Green</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Silber-Grüne Crossette</name>
 <shortDescription xml:lang="x-default">It can't get any better than this! </shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Besser geht es nicht!</shortDescription>
 <longDescription xml:lang="x-default">The zoomed-in view delivers spectacular details! Just look how the exploding stars leave their trails in the night sky! </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Spektakuläre Details dank der herangezoomten Ansicht! Bewunderen sie explodierende Sterne wie sie ihre Spuren durch den Nachthimmel ziehen!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/crossette-silver-green/crossette-silver-green-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/crossette-silver-green/crossette-silver-green-medium.webp</medium>
@@ -1836,11 +1836,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Purple Crossette with Stars</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">Wait... it does!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Absolutely stunning! We really don't want to show off but you just have to admit that we have a pretty darn good photographer. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<name xml:lang="de-DE">Lila Crossette mit Sternen</name>
+<shortDescription xml:lang="x-default">Celebrate with a burst of color and excitement</shortDescription>
+<shortDescription xml:lang="de-DE">Feiere mit einer Explosion voll Farben und Aufregung</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a night of celebration, where the sky is ablaze with color and light. The fireworks display, with its intricate patterns and dazzling colors, creates a mesmerizing spectacle. This image invites you to experience the thrill and excitement of a fireworks show. </longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in eine Nacht des Feierns, in der der Himmel in Farbe und Licht erstrahlt. Das Feuerwerk mit seinen verschlungenen Mustern und schillernden Farben ist ein faszinierendes Spektakel. Dieses Bild lädt Sie dazu ein, den Nervenkitzel und die Aufregung eines Feuerwerks zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/purple-crossette-with-stars/purple-crossette-with-stars-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/purple-crossette-with-stars/purple-crossette-with-stars-medium.webp</medium>
@@ -1853,11 +1853,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Golden Dahlias with Blue Stars</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Güldene Dahlien und Blaue Sterne</name>
 <shortDescription xml:lang="x-default">Be exclusive.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Seien sie exklusiv</shortDescription>
 <longDescription xml:lang="x-default">This explosion of gold is sure to add a stylish touch to your home decor. Go for this one if you want to be special! </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine beeindruckende Explosion in Gold. Dieses Poster wird ihrem Zuhuase garantiert einen stylischen Touch verpassen. Etwas für die, die Außergewöhnliches suchen!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/golden-dahlias-with-blue-stars/golden-dahlias-with-blue-stars-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/golden-dahlias-with-blue-stars/golden-dahlias-with blue-stars-medium.webp</medium>
@@ -1870,11 +1870,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Brocade Red Blue</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">100% Perfection.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Night time, a lake, and a perfectly shaped brocade that gleams in the water... The author of these lines is running out of words to describe how awesome our fireworks posters are. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<name xml:lang="de-DE">Brokat in Rot und Blau</name>
+<shortDescription xml:lang="x-default">Celebrate with a burst of color and excitement</shortDescription>
+<shortDescription xml:lang="de-DE">Feiere mit einer Explosion voll Farben und Aufregung</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a night of celebration, where the sky is ablaze with color and light. The fireworks display, with its intricate patterns and dazzling colors, creates a mesmerizing spectacle. This image invites you to experience the thrill and excitement of a fireworks show. </longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in eine Nacht des Feierns, in der der Himmel in Farbe und Licht erstrahlt. Das Feuerwerk mit seinen verschlungenen Mustern und schillernden Farben ist ein faszinierendes Spektakel. Dieses Bild lädt Sie dazu ein, den Nervenkitzel und die Aufregung eines Feuerwerks zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/brocade-red-blue/brocade-red-blue-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/brocade-red-blue/brocade-red-blue-medium.webp</medium>
@@ -1887,11 +1887,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Chrysanthemum and Brocades Red</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">One final word: marvelous.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Please forgive the author of these lines as he can't think of any more words to illustrate our... umm... marvelous fireworks posters. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<name xml:lang="de-DE">Chrysanthemen und Brokat</name>
+<shortDescription xml:lang="x-default">Celebrate with a burst of color and excitement</shortDescription>
+<shortDescription xml:lang="de-DE">Feiere mit einer Explosion voll Farben und Aufregung</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a night of celebration, where the sky is ablaze with color and light. The fireworks display, with its intricate patterns and dazzling colors, creates a mesmerizing spectacle. This image invites you to experience the thrill and excitement of a fireworks show. </longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in eine Nacht des Feierns, in der der Himmel in Farbe und Licht erstrahlt. Das Feuerwerk mit seinen verschlungenen Mustern und schillernden Farben ist ein faszinierendes Spektakel. Dieses Bild lädt Sie dazu ein, den Nervenkitzel und die Aufregung eines Feuerwerks zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/chrysanthemum-and-brocades-red/chrysanthemum-and-brocades-red-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/chrysanthemum-and-brocades-red/chrysanthemum-and-brocades-red-medium.webp</medium>
@@ -1905,11 +1905,11 @@
 <!-- SubCategory Landscapes  -->
 <product>
 <name xml:lang="x-default">Niagara Falls Canada</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">Picture editing at its best.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">The natural spectacle enhanced with the latest picture editing technologies. We're starting to think our photographer is an artist. Hang this in your home and people will simply be amazed! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<name xml:lang="de-DE">Niagarafälle</name>
+<shortDescription xml:lang="x-default">Witness the magic of Niagara Falls by night</shortDescription>
+<shortDescription xml:lang="de-DE">Bewundern sie die magische Ausstrahlung der Niagarafälle bei Nacht</shortDescription>
+<longDescription xml:lang="x-default">This breathtaking image captures the majesty of Niagara Falls illuminated at night. The cascading water, lit up in a spectrum of colors, creates a mesmerizing spectacle against the backdrop of a starry sky. The surrounding landscape, with its lush greenery and twinkling lights, adds to the beauty of this scene.</longDescription>
+<longDescription xml:lang="de-DE">Dieses atemberaubende Bild zeigt die majestätischen Niagarafälle mit Beleuchtung bei Nacht. Das in Kaskaden herabstürzende Wasser, das in einem Spektrum von Farben leuchtet, bietet ein faszinierendes Schauspiel vor dem Hintergrund des Sternenhimmels. Die umgebende Landschaft mit ihrem üppigen Grün und den funkelnden Lichtern trägt zur Schönheit dieser Szene bei.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/niagara-falls-canada/niagara-falls-canada-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/niagara-falls-canada/niagara-falls-canada-medium.webp</medium>
@@ -1922,11 +1922,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Niagara Falls Canada with City Skyline</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Niagarafälle mit Skyline</name>
 <shortDescription xml:lang="x-default">If you want it both natural and urban. </shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">This composition perfectly reenacts the coming together of nature and human culture. If you're into philosophical speculation, you can now start pondering what that could possibly mean. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Für alle die sowohl Natur als auch Stadt wollen</shortDescription>
+<longDescription xml:lang="x-default">The beautiful Niagara Falls, the lush greens of the nearby forest and the vibrant glows of the city skyline in the background form a breathtaking trio in the mystical atmosphere of the night.</longDescription>
+<longDescription xml:lang="de-DE">Die imposanten Niagarafälle, das tiefe Grün das nahen Waldes und die strahlende Skyline der Stadt im Hintergrund formen eine atemberaubende Einheit unter der mystischen Atmosphäre der Nacht.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/niagara-falls-canada-with-city-skyline/niagara-falls-canada-with-city-skyline-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/niagara-falls-canada-with-city-skyline/niagara-falls-canada-with-city-skyline-medium.webp</medium>
