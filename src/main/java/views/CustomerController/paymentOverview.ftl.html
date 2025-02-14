@@ -56,7 +56,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-10 offset-md-4">
 					<hr> <!-- Add a line or border -->
-					<a href="${contextPath}/${lang}/accountOverview" class="btn btn-sm btn-primary">Back</a>
+					<a href="${contextPath}/${lang}/accountOverview" class="btn btn-sm btn-primary">${i18n('buttonBack')}</a>
 				</div>
 			</div>
 		</div>	
@@ -94,7 +94,7 @@
 						</div>
 														
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${i18n('buttonClose')}</button>
 							<form action="${contextPath}/${lang}/deletePayment" method="post">
 								<input class="card-id-${payment.id}" name="cardId" type="hidden" value=${payment.id}>
 								<button class="btn btn-danger btn-delete-payment" id="btn-delete-payment-${payment_index}"
