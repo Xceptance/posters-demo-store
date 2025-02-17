@@ -1513,7 +1513,7 @@
 <name xml:lang="de-DE">Chicago L</name>
 <shortDescription xml:lang="x-default">A tribute to the windy city.</shortDescription>
 <shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster! </longDescription>
+<longDescription xml:lang="x-default">Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster!</longDescription>
 <longDescription xml:lang="de-DE">Platzhalter</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/chicago-l/chicago-l-small.webp</small>
@@ -1527,11 +1527,11 @@
 </product>
 <product>
 <name xml:lang="x-default">US Railway Mail Service Car</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Wagon des US-amerikanischen Bahnpostdienstes RMS</name>
 <shortDescription xml:lang="x-default">A historic train on the track.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Hard to believe the RMS carried the majority of mail in the US until the 1960s. Will look especially cool if you place it next to our FedEx Express poster. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein Stück Eisenbahngeschichte</shortDescription>
+<longDescription xml:lang="x-default">Hard to believe the RMS carried the majority of mail in the US until the 1960s. Will look especially cool if you place it next to our FedEx Express poster.</longDescription>
+<longDescription xml:lang="de-DE">Kaum zu glauben, dass die RMS bis in die 1960er Jahre den Großteil der Post in den USA beförderte. Besonders cool sieht es aus, wenn Sie es neben unser FedEx Express-Poster hängen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/us-railway-mail-service-car/us-railway-mail-service-car-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/us-railway-mail-service-car/us-railway-mail-service-car-medium.webp</medium>
