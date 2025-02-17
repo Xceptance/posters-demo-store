@@ -15,10 +15,13 @@
  */
 package controllers;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import models.Product;
 import models.ProductInfo;
@@ -139,6 +142,29 @@ public class CatalogController
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // add products of the given top category to data map
         addTopCategoryProductsToMap(topCategoryId, page, pageSize, data, locale);
+
+        // load the messages.properties file for the current locale to supply localized texts to JavaScript
+        Properties mesprop = new Properties();
+        try {
+            InputStream input = new FileInputStream("./src/main/java/conf/messages_"+locale+".properties");
+            mesprop.load(input);
+            // text for buy here button
+            data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+            input.close();
+        } catch (Exception e) {
+            // The file could not be loaded or does not exist. Fall back to the default
+            try {
+                InputStream input = new FileInputStream("./src/main/java/conf/messages.properties");
+                mesprop.load(input);
+                // text for buy here button
+                data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+                input.close();
+            } catch (Exception e2) {
+                // Fall back to a hardcoded version
+                data.put("BuyText", "Buy Here");
+            }
+        }
+
         return result.render(data);
     }
 
@@ -156,6 +182,29 @@ public class CatalogController
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // add products of the given sub category to data map
         addSubCategoryProductsToMap(subCategoryId, page, pageSize, data, locale);
+
+        // load the messages.properties file for the current locale to supply localized texts to JavaScript
+        Properties mesprop = new Properties();
+        try {
+            InputStream input = new FileInputStream("./src/main/java/conf/messages_"+locale+".properties");
+            mesprop.load(input);
+            // text for buy here button
+            data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+            input.close();
+        } catch (Exception e) {
+            // The file could not be loaded or does not exist. Fall back to the default
+            try {
+                InputStream input = new FileInputStream("./src/main/java/conf/messages.properties");
+                mesprop.load(input);
+                // text for buy here button
+                data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+                input.close();
+            } catch (Exception e2) {
+                // Fall back to a hardcoded version
+                data.put("BuyText", "Buy Here");
+            }
+        }
+
         return result.render(data);
     }
 
