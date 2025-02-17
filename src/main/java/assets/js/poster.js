@@ -85,7 +85,7 @@ function updateProductOverview(data) {
                 <h5 class="card-title">${product.localizedName}</h5>
                 <p class="card-text product-tile-text">${product.localizedDescriptionOverview}</p>
                 <p class="card-text product-tile-price">$${product.minimumPrice}</p>
-                <a href="${CONTEXT_PATH}/${LOCALE}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
+                <a href="${CONTEXT_PATH}/${LOCALE}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">${data.BuyText}</a>
             </div>
         	`
 		].join('')
