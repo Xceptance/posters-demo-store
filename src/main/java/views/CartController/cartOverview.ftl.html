@@ -3,7 +3,7 @@
 <#if (0 < cartProducts?size) >
 
 <div class="container">
-	<h2 id="cart-title">Cart</h2>
+	<h2 id="cart-title">${i18n("cartOverviewTitle")}</h2>
 	<div class="table-responsive">
 		<table id="cart-overview-table" class="table">
 			<thead>
@@ -95,7 +95,7 @@
 <#else>
 
 <div class="container">
-	<h2 id="cart-title">Cart</h2>
+	<h2 id="cart-title">${i18n("cartOverviewTitle")}</h2>
 </div>
 <div id="error-cart-message" class="alert alert-danger">${i18n("infoEmptyCart")}</div>
 

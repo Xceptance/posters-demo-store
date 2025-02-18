@@ -58,7 +58,7 @@ public class CustomerController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
      * Returns a page to log in to the customer backend.
@@ -86,6 +86,8 @@ public class CustomerController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result login(@Param("email") final String email, @Param("password") final String password, final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
+        
         // email is not valid
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
@@ -151,6 +153,7 @@ public class CustomerController
      */
     public Result logout(final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // remove customer from session
         SessionHandling.removeCustomerId(context);
         // remove cart from session
@@ -191,6 +194,7 @@ public class CustomerController
                                         @Param("passwordAgain") final String passwordAgain, final Context context,
                                         @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         boolean failure = false;
         // account with this email already exist
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
@@ -336,6 +340,7 @@ public class CustomerController
                                                 @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
                                                 final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check input
@@ -416,6 +421,7 @@ public class CustomerController
         })
     public Result deletePayment(@Param("cardId") final int cardId, final Context context, @PathParam("urlLocale") String locale)
     {
+            language = Optional.of(locale);
             CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
@@ -460,6 +466,7 @@ public class CustomerController
     public Result deleteBillingAddress(@Param("addressIdBill") final int addressId,
                                        final Context context, @PathParam("urlLocale") String locale)
     {
+            language = Optional.of(locale);
             // remove billing address
             BillingAddress.removeCustomerFromBillingAddress(addressId);
             // show success message
@@ -482,6 +489,7 @@ public class CustomerController
         })
     public Result deleteShippingAddress(@Param("addressIdShip") final int addressId, final Context context, @PathParam("urlLocale") String locale)
     {
+            language = Optional.of(locale);
             // remove shipping address
             ShippingAddress.removeCustomerFromShippingAddress(addressId);
             // show success message
@@ -531,6 +539,7 @@ public class CustomerController
                                                 @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year, 
                                                 @Param("cardId") final int cardId, final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check input
@@ -613,6 +622,7 @@ public class CustomerController
                                                  @Param("country") final String country, @Param("addressId") final String addressId,
                                                  final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -701,6 +711,7 @@ public class CustomerController
                                                 @Param("country") final String country, @Param("addressId") final String addressId,
                                                 final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -795,7 +806,8 @@ public class CustomerController
                                                         @Param("country") final String country, @Param("addressId") final String addressId,
                                                         final Context context, @PathParam("urlLocale") String locale) {
 
-            final String name = firstName + " " + lastName;
+        language = Optional.of(locale);
+        final String name = firstName + " " + lastName;
         // Check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
             final Map<String, Object> data = new HashMap<>();
@@ -863,6 +875,7 @@ public class CustomerController
                                                             @Param("country") final String country, @Param("addressId") final String addressId,
                                                             final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches("[0-9]*", zip))
@@ -944,6 +957,7 @@ public class CustomerController
                                              @Param("eMail") final String email, @Param("password") final String password,
                                              final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
         if (!customer.checkPasswd(password))
@@ -1005,6 +1019,7 @@ public class CustomerController
     public Result changePasswordCompleted(@Param("oldPassword") final String oldPassword, @Param("password") final String password,
                                           @Param("passwordAgain") final String passwordAgain, final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         boolean failure = false;
         final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
@@ -1062,7 +1077,8 @@ public class CustomerController
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
         public Result deleteAccount(@Param("password") final String password, final Context context, @PathParam("urlLocale") String locale) {
-            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        language = Optional.of(locale);    
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // get customer
             // correct password
             if (customer.checkPasswd(password)) {

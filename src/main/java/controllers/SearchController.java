@@ -61,7 +61,7 @@ public class SearchController
     @Inject
     SearchEngine searcher;
 
-    private final Optional<String> language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
      * Returns a product overview page with products, that matches the search text.
@@ -72,6 +72,7 @@ public class SearchController
      */
     @FilterWith(SessionCustomerExistFilter.class)
     public Result searchProduct(@Param("searchText") final String searchFormText, final Context context, @PathParam("urlLocale") String locale) {
+        language = Optional.of(locale);
         String searchText = searchFormText.trim();
         // search text is empty
         if (searchText.isEmpty()) {
