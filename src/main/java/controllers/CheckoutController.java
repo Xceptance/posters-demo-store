@@ -59,7 +59,7 @@ public class CheckoutController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
     
     public String session_form = "ship";
 
@@ -896,6 +896,7 @@ public class CheckoutController
         })
     public Result checkoutCompleted(final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // get order by session id
         final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // set date to order
