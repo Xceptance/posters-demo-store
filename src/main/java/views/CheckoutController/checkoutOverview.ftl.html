@@ -61,8 +61,7 @@
                             <span class="value">${order.creditCard.getCardNumberCryptic()}</span>
                         </li>
                         <li class="exp" title="${i18n('titleValidTo')}">
-                            <span class="month">${order.creditCard.getMonthLeadingZero()}</span>/
-                            <span class="year">${order.creditCard.year}</span>
+                            <span class="month">${order.creditCard.getMonthLeadingZero()}</span>/<span class="year">${order.creditCard.year}</span>
                         </li>
                     </ul>
                 </address>
@@ -101,7 +100,7 @@
                                     id="cart-picture-${cartProduct.id}">
                             </div>
                             <div class="col">
-                                <h3 class="product-name">${cartProduct.product.name}</h3>
+                                <h3 class="product-name">${cartProduct.product.getName(lang)}</h3>
                                 <div class="product-style"> ${i18n("cartStyle")}: <span>${cartProduct.finish}</span></div>
                                 <div class="product-size">${i18n("cartSize")}: <span>${cartProduct.size.width} x ${cartProduct.size.height} ${unitLength}</span></div>
                             </div>
@@ -149,7 +148,7 @@
 	</div>
     <br>
     <div class="d-flex justify-content-end mt-2">
-        <form action="${contextPath}/checkoutCompleted" method="post">
+        <form action="${contextPath}/${lang}/checkoutCompleted" method="post">
             <!-- order button -->
              <button class="btn btn-primary" id="btn-order" name="btnOrder" type="submit">${i18n("checkoutOverviewOrderWithCosts")}</button>
         </form>

@@ -41,6 +41,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 import util.session.SessionHandling;
 
 /**
@@ -57,7 +58,7 @@ public class CustomerController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
      * Returns a page to log in to the customer backend.
@@ -83,8 +84,10 @@ public class CustomerController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result login(@Param("email") final String email, @Param("password") final String password, final Context context)
+    public Result login(@Param("email") final String email, @Param("password") final String password, final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
+        
         // email is not valid
         if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
@@ -118,7 +121,7 @@ public class CustomerController
                 SessionHandling.setCartId(context, updatedCustomer.getCart().getId());
                 // show home page
                 context.getFlashScope().success(msg.get("successLogIn", language).get());
-                return Results.redirect(context.getContextPath() + "/accountOverview");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/accountOverview");
 
             }
             // user exist, wrong password
@@ -148,15 +151,16 @@ public class CustomerController
      * @param context
      * @return
      */
-    public Result logout(final Context context)
+    public Result logout(final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // remove customer from session
         SessionHandling.removeCustomerId(context);
         // remove cart from session
         SessionHandling.removeCartId(context);
         // show home page
         context.getFlashScope().success(msg.get("successLogOut", language).get());
-        return Results.redirect(context.getContextPath() + "/");
+        return Results.redirect(context.getContextPath() + "/" + locale);
     }
 
     /**
@@ -187,8 +191,10 @@ public class CustomerController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result registrationCompleted(@Param("lastName") final String name, @Param("firstName") final String firstName,
                                         @Param("eMail") final String email, @Param("password") final String password,
-                                        @Param("passwordAgain") final String passwordAgain, final Context context)
+                                        @Param("passwordAgain") final String passwordAgain, final Context context,
+                                        @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         boolean failure = false;
         // account with this email already exist
         if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
@@ -237,7 +243,7 @@ public class CustomerController
             // show success message
             context.getFlashScope().success(msg.get("successCreateAccount", language).get());
             // show page to log-in
-            return Results.redirect(context.getContextPath() + "/login");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/" + "login");
         }
     }
 
@@ -332,8 +338,9 @@ public class CustomerController
         })
     public Result addPaymentToCustomerCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") final String name,
                                                 @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
-                                                final Context context)
+                                                final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check input
@@ -355,7 +362,7 @@ public class CustomerController
                 // success message
                 context.getFlashScope().success(msg.get("successSave", language).get());
                 // show payment overview page
-                return Results.redirect(context.getContextPath() + "/paymentOverview");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/paymentOverview");
             }
         }
         // credit card number is not valid
@@ -412,13 +419,14 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deletePayment(@Param("cardId") final int cardId, final Context context)
+    public Result deletePayment(@Param("cardId") final int cardId, final Context context, @PathParam("urlLocale") String locale)
     {
+            language = Optional.of(locale);
             CreditCard.removeCustomerFromCreditCard(cardId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show payment overview page
-            return Results.redirect(context.getContextPath() + "/paymentOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/paymentOverview");
     }
 
     /**
@@ -456,13 +464,14 @@ public class CustomerController
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
     public Result deleteBillingAddress(@Param("addressIdBill") final int addressId,
-                                       final Context context)
+                                       final Context context, @PathParam("urlLocale") String locale)
     {
+            language = Optional.of(locale);
             // remove billing address
             BillingAddress.removeCustomerFromBillingAddress(addressId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
-            return Results.redirect(context.getContextPath() + "/addressOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/addressOverview");
 
     }
 
@@ -478,14 +487,15 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result deleteShippingAddress(@Param("addressIdShip") final int addressId, final Context context)
+    public Result deleteShippingAddress(@Param("addressIdShip") final int addressId, final Context context, @PathParam("urlLocale") String locale)
     {
+            language = Optional.of(locale);
             // remove shipping address
             ShippingAddress.removeCustomerFromShippingAddress(addressId);
             // show success message
             context.getFlashScope().success(msg.get("successDelete", language).get());
             // show address overview page
-            return Results.redirect(context.getContextPath() + "/addressOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/addressOverview");
     }
 
     /**
@@ -527,8 +537,9 @@ public class CustomerController
     @FilterWith(SessionCustomerExistFilter.class)
     public Result updatePaymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") final String name,
                                                 @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year, 
-                                                @Param("cardId") final int cardId, final Context context)
+                                                @Param("cardId") final int cardId, final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
         // check input
@@ -548,7 +559,7 @@ public class CustomerController
                 // success message
                 context.getFlashScope().success(msg.get("successSave", language).get());
                 // show payment overview page
-                return Results.redirect(context.getContextPath() + "/paymentOverview");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/paymentOverview");
             }
         }
         // credit card number is not valid
@@ -609,8 +620,9 @@ public class CustomerController
                                                  @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                  @Param("state") final String state, @Param("zip") final String zip,
                                                  @Param("country") final String country, @Param("addressId") final String addressId,
-                                                 final Context context)
+                                                 final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -649,7 +661,7 @@ public class CustomerController
             address.update();
             // show success message
             context.getFlashScope().success(msg.get("successUpdate", language).get());
-            return Results.redirect(context.getContextPath() + "/addressOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/addressOverview");
         }
     }
 
@@ -697,8 +709,9 @@ public class CustomerController
                                                 @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                 @Param("state") final String state, @Param("zip") final String zip,
                                                 @Param("country") final String country, @Param("addressId") final String addressId,
-                                                final Context context)
+                                                final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -737,7 +750,7 @@ public class CustomerController
             address.update();
             // show success message
             context.getFlashScope().success(msg.get("successUpdate", language).get());
-            return Results.redirect(context.getContextPath() + "/addressOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/addressOverview");
         }
     }
 
@@ -791,9 +804,10 @@ public class CustomerController
                                                         @Param("company") final String company, @Param("addressLine") final String addressLine,
                                                         @Param("city") final String city, @Param("state") final String state, @Param("zip") final String zip,
                                                         @Param("country") final String country, @Param("addressId") final String addressId,
-                                                        final Context context) {
+                                                        final Context context, @PathParam("urlLocale") String locale) {
 
-            final String name = firstName + " " + lastName;
+        language = Optional.of(locale);
+        final String name = firstName + " " + lastName;
         // Check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip)) {
             final Map<String, Object> data = new HashMap<>();
@@ -830,7 +844,7 @@ public class CustomerController
             
             // Show success message
             context.getFlashScope().success(msg.get("successSave", language).get());
-            return Results.redirect(context.getContextPath() + "/addressOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/addressOverview");
         }
     }
 
@@ -859,8 +873,9 @@ public class CustomerController
                                                             @Param("addressLine") final String addressLine, @Param("city") final String city,
                                                             @Param("state") final String state, @Param("zip") final String zip,
                                                             @Param("country") final String country, @Param("addressId") final String addressId,
-                                                            final Context context)
+                                                            final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         final String name = firstName + " " + lastName;
         // check input
         if (!Pattern.matches("[0-9]*", zip))
@@ -901,7 +916,7 @@ public class CustomerController
             customer.addBillingAddress(address);
             // show success message
             context.getFlashScope().success(msg.get("successSave", language).get());
-            return Results.redirect(context.getContextPath() + "/addressOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/addressOverview");
         }
     }
 
@@ -940,29 +955,30 @@ public class CustomerController
         })
     public Result changeNameOrEmailCompleted(@Param("lastName") final String name, @Param("firstName") final String firstName,
                                              @Param("eMail") final String email, @Param("password") final String password,
-                                             final Context context)
+                                             final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
         if (!customer.checkPasswd(password))
         {
             // show error message
             context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
-            return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/changeNameOrEmail");
         }
         // email isn't valid
         else if (!Pattern.matches(xcpConf.REGEX_EMAIL, email))
         {
             // show error message
             context.getFlashScope().error(msg.get("errorValidEmail", language).get());
-            return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/changeNameOrEmail");
         }
         // email already exist
         else if (!Ebean.find(Customer.class).where().eq("email", email).ne("id", customer.getId()).findList().isEmpty())
         {
             // show error message
             context.getFlashScope().error(msg.get("errorAccountExist", language).get());
-            return Results.redirect(context.getContextPath() + "/changeNameOrEmail");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/changeNameOrEmail");
         }
         customer.setName(name);
         customer.setFirstName(firstName);
@@ -970,7 +986,7 @@ public class CustomerController
         customer.update();
         // show success message
         context.getFlashScope().success(msg.get("successUpdate", language).get());
-        return Results.redirect(context.getContextPath() + "/settingOverview");
+        return Results.redirect(context.getContextPath() + "/" + locale + "/settingOverview");
     }
 
     /**
@@ -1001,8 +1017,9 @@ public class CustomerController
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
     public Result changePasswordCompleted(@Param("oldPassword") final String oldPassword, @Param("password") final String password,
-                                          @Param("passwordAgain") final String passwordAgain, final Context context)
+                                          @Param("passwordAgain") final String passwordAgain, final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         boolean failure = false;
         final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
         // incorrect password
@@ -1022,7 +1039,7 @@ public class CustomerController
         if (failure)
         {
             // show page to change password again
-            return Results.redirect(context.getContextPath() + "/changePassword");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/changePassword");
         }
         else
         {
@@ -1030,7 +1047,7 @@ public class CustomerController
             customer.update();
             // show success message
             context.getFlashScope().success(msg.get("successUpdate", language).get());
-            return Results.redirect(context.getContextPath() + "/settingOverview");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/settingOverview");
         }
     }
 
@@ -1059,8 +1076,9 @@ public class CustomerController
         {
             SessionCustomerIsLoggedFilter.class, SessionCustomerExistFilter.class
         })
-        public Result deleteAccount(@Param("password") final String password, final Context context) {
-            final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
+        public Result deleteAccount(@Param("password") final String password, final Context context, @PathParam("urlLocale") String locale) {
+        language = Optional.of(locale);    
+        final Customer customer = Customer.getCustomerById(SessionHandling.getCustomerId(context));
             // get customer
             // correct password
             if (customer.checkPasswd(password)) {
@@ -1074,12 +1092,12 @@ public class CustomerController
                 // show success message
                 context.getFlashScope().success(msg.get("successDeleteAccount", language).get());
                 // return home page
-                return Results.redirect(context.getContextPath() + "/");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/");
             } else {
                 // incorrect password
                 context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
                 // show page again
-                return Results.redirect(context.getContextPath() + "/confirmDeleteAccount");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/confirmDeleteAccount");
             }
         }
         

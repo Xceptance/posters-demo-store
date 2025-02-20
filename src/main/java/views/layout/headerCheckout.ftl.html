@@ -2,12 +2,15 @@
 
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
+    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/${lang}">
       <img id="header-brand-logo" class="shop-logo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
       ${i18n('titleShop')}
     </a>
     <div id="header-navigation-elements" class="collapse navbar-collapse">
       <ul id="header-customer-menus" class="navbar-nav me-0 ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <#include '../components/localeMenu.ftl.html'>
+        </li>
         <li class="nav-item dropdown">
           <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="${i18n('headerLogin')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="icon-user2"></span>

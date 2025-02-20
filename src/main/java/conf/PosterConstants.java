@@ -191,6 +191,11 @@ public class PosterConstants
      */
     public final String UNIT_OF_LENGTH;
 
+    /*
+     * The languages supported by the appliction listed by ISO code seperated by comma
+     */
+    public final String APPLICATION_LANGUAGES;
+
     @Inject
     public PosterConstants(final NinjaProperties ninjaProp)
     {
@@ -219,5 +224,7 @@ public class PosterConstants
         UNIT_OF_LENGTH = ninjaProp.getOrDie("application.unitLength");
 
         APPLICATION_VERSION = ninjaProp.getOrDie("application.version");
+
+        APPLICATION_LANGUAGES = ninjaProp.getOrDie("application.languages");
     }
 }

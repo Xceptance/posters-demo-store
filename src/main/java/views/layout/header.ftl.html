@@ -1,9 +1,9 @@
 
-<div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
+<div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">${i18n('headerDisclaimer')}</div>
 
 <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
   <div class="container top-menu">
-    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/">
+    <a id="header-brand" class="navbar-brand" href="${applUrlHttp}/${lang}">
       <img id="header-brand-logo" class="shop-logo" src="${contextPath}/assets/img/xceptanceLogo.png" title="${i18n('titleShopLogo')}" alt="${i18n('titleShopLogo')}">
       ${i18n('titleShop')}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-navigation-elements" aria-controls="header-navigation-elements" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,25 +13,28 @@
       <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
         <#list topCategory as tC>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="${applUrlHttp}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-auto-close="true" aria-expanded="false">
-            ${tC.name}
+          <a class="nav-link dropdown-toggle" href="${applUrlHttp}/${lang}/topCategory/${tC.name?url('UTF-8')}?categoryId=${tC.id}" role="button" data-bs-auto-close="true" aria-expanded="false">
+            ${tC.getName(lang)}
           </a>
           <ul class="dropdown-menu">
             <#list tC.subCategories as sC>
-            <li><a class="dropdown-item" href="${applUrlHttp}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.name}</a></li>
+            <li><a class="dropdown-item" href="${applUrlHttp}/${lang}/category/${sC.name?url('UTF-8')}?categoryId=${sC.id}" title="${sC.name}">${sC.getName(lang)}</a></li>
             </#list>
           </ul>
         </li>
         </#list>
       </ul>
       <div class="header-actions me-0 ms-auto d-flex">
-        <form id="header-search-form" class="d-flex" role="search" action="${applUrlHttp}/search" method="get">
+        <form id="header-search-form" class="d-flex" role="search" action="${applUrlHttp}/${lang}/search" method="get">
           <input id="header-search-text" name="searchText" class="form-control me-2" type="search" placeholder="${i18n('headerSearch')}" aria-label="${i18n('headerSearch')}" title="${i18n('headerSearch')}" value="${(searchTerm)!}">
           <button id="header-search-button" class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
         </form>
         <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-              <#include '../components/userMenu.ftl.html'>
+            <#include '../components/localeMenu.ftl.html'>
+          </li>
+          <li class="nav-item dropdown">
+            <#include '../components/userMenu.ftl.html'>
           </li>
           <#if cartProductCount == 0>
 

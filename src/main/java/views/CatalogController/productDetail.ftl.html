@@ -12,22 +12,22 @@
 			 		(min-width: 960px) 480px,
 					100vw"
             src="${contextPath}${productDetail.originalImageURL}"
-            alt="${productDetail.name}"
+            alt="${productDetail.getName(lang)}"
 			class="img-fluid col-lg-6 col-md-12">
 		<div class="col-lg-6 col-md-12 mt-4">
 			<form id="add-to-cart-form">
 				<div class="mb-3">
-					<h3 id="product-detail-form-name">${productDetail.name}</h3>
+					<h3 id="product-detail-form-name">${productDetail.getName(lang)}</h3>
 				</div>
 				<div class="mb-3">
 					<p><span id="product-detail-form-price">${currency}${productDetail.getPriceAsString()}</span></p>
 				</div>
 				<div class="mb-3">
-					<h4 id="product-detail-form-description-overview">${productDetail.descriptionOverview}</h4>
+					<h4 id="product-detail-form-description-overview">${productDetail.getDescriptionOverview(lang)}</h4>
 				</div>
 				<div class="mb-3">
 					<label for="product-detail-form-description" class="form-label product-detail-paragraph-label">${i18n("productDetailProductDescription")}</label>
-					<div id="product-detail-form-description" class="">${productDetail.descriptionDetail}</div>
+					<div id="product-detail-form-description" class="">${productDetail.getDescriptionDetail(lang)}</div>
 				</div>
 				<div class="mb-3">
 					<label for="product-detail-form-size-selection" class="form-label" >${i18n("cartSelectSize")}</label>
@@ -63,7 +63,7 @@
 					<div id="product-detail-form-product-id">${productDetail.id}</div>
 				</div>
 				<div class="mb-3 d-flex justify-content-end">
-					<a id="btn-add-to-cart" onClick="addToCart(${productDetail.id}, document.querySelector('#add-to-cart-form input[name=finish]:checked').value, document.querySelector('#product-detail-form-size-selection').value)" class="btn btn-primary">
+					<a id="btn-add-to-cart" onClick="addToCart(${productDetail.id}, document.querySelector('#add-to-cart-form input[name=finish]:checked').value, document.querySelector('#product-detail-form-size-selection').value, '${lang}')" class="btn btn-primary">
 						<i class="icon-shopping-cart"></i> ${i18n("productDetailAddToCart")}
 					</a>
 				</div>

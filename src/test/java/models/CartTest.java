@@ -41,11 +41,11 @@ public class CartTest extends NinjaTest
     public void setUp()
     {
         // set some data for product1
-        product1.setName("product1");
+        product1.setDefaultName("product1");
         product1.setMinimumPrice(5.55);
         product1.save();
         // set some data for product2
-        product2.setName("product2");
+        product2.setDefaultName("product2");
         product2.setMinimumPrice(7.77);
         product2.save();
         // persist cart

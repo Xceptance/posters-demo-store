@@ -42,6 +42,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 import util.date.DateUtils;
 import util.session.SessionHandling;
 
@@ -58,7 +59,7 @@ public class CheckoutController
     @Inject
     PosterConstants xcpConf;
 
-    private final Optional<String> language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
     
     public String session_form = "ship";
 
@@ -69,7 +70,7 @@ public class CheckoutController
      * @return
      */
     @FilterWith(SessionTerminatedFilter.class)
-    public Result checkout(final Context context)
+    public Result checkout(final Context context, @PathParam("urlLocale") String locale)
     {
         // get cart by session id
         final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
@@ -85,7 +86,7 @@ public class CheckoutController
         else
         {
             
-            return Results.redirect(context.getContextPath() + "/enterShippingAddress");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/enterShippingAddress");
         }
     }
 
@@ -191,7 +192,8 @@ public class CheckoutController
                                             @Param("addressLine") final String addressLine, @Param("city") final String city,
                                             @Param("state") final String state, @Param("zip") final String zip,
                                             @Param("country") final String country,
-                                            @Param("billEqualShipp") final String billingEqualShipping, final Context context) 
+                                            @Param("billEqualShipp") final String billingEqualShipping, final Context context,
+                                            @PathParam("urlLocale") String locale) 
         {
 
         // check input
@@ -293,7 +295,7 @@ public class CheckoutController
                     // update order
                     cart.update();
                     // return page to enter payment information
-                    return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
+                    return Results.redirect(context.getContextPath() + "/" + locale + "/enterPaymentMethod");
                 }
                 // save billing address
                 else
@@ -307,7 +309,7 @@ public class CheckoutController
                 // update order
                 cart.update();
                 // return page to enter payment information
-                return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/enterPaymentMethod");
                 }
              
             }
@@ -315,7 +317,7 @@ public class CheckoutController
             else
             {
                 // return page to enter billing address
-                return Results.redirect(context.getContextPath() + "/enterBillingAddress");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/enterBillingAddress");
             }
         }
     }
@@ -331,7 +333,7 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, 
         })
-    public Result addShippingAddressToOrder(@Param("addressId") final String addressId, final Context context)
+    public Result addShippingAddressToOrder(@Param("addressId") final String addressId, final Context context, @PathParam("urlLocale") String locale)
     {
         final ShippingAddress shippingAddress = ShippingAddress.getShippingAddressById(Integer.parseInt(addressId));
     
@@ -346,7 +348,7 @@ public class CheckoutController
         // update order
         cart.update();
         // return page to enter billing address
-        return Results.redirect(context.getContextPath() + "/enterBillingAddress");
+        return Results.redirect(context.getContextPath() + "/" + locale + "/enterBillingAddress");
     }
 
     /**
@@ -449,6 +451,7 @@ public class CheckoutController
                                             @Param("state") final String state, @Param("zip") final String zip,
                                             @Param("country") final String country, final Context context)
     {
+        String locale = context.getPathParameter("urlLocale");
         // check input
         if (!Pattern.matches(xcpConf.REGEX_ZIP, zip))
         {
@@ -509,7 +512,7 @@ public class CheckoutController
                 // update order
                 cart.update();
                 // return page to enter payment information
-                return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/enterPaymentMethod");
             }
             // save billing address
             else
@@ -522,7 +525,7 @@ public class CheckoutController
             // update order
             cart.update();
             // return page to enter payment information
-            return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
+            return Results.redirect(context.getContextPath() + "/" + locale + "/enterPaymentMethod");
             }
         }
     }
@@ -538,7 +541,7 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class
         })
-    public Result addBillingAddressToOrder(@Param("addressId") final String addressId, final Context context)
+    public Result addBillingAddressToOrder(@Param("addressId") final String addressId, final Context context, @PathParam("urlLocale") String locale)
     {
         final BillingAddress billingAddress = BillingAddress.getBillingAddressById(Integer.parseInt(addressId));
 
@@ -550,7 +553,7 @@ public class CheckoutController
         // update order
         cart.update();
         // return page to enter payment information
-        return Results.redirect(context.getContextPath() + "/enterPaymentMethod");
+        return Results.redirect(context.getContextPath() + "/" + locale + "/enterPaymentMethod");
     }
 
     /**
@@ -642,7 +645,8 @@ public class CheckoutController
         })
     public Result paymentMethodCompleted(@Param("creditCardNumber") String creditNumber, @Param("name") final String name,
                                          @Param("expirationDateMonth") final int month, @Param("expirationDateYear") final int year,
-                                         final Context context)
+                                         final Context context,
+                                         @PathParam("urlLocale") String locale)
     {
         // replace spaces and dashes
         creditNumber = creditNumber.replaceAll("[ -]+", "");
@@ -717,7 +721,7 @@ public class CheckoutController
                     retievedOrder.setOrderStatus("Pending");
                     retievedOrder.update();
                     // return page to get an overview of the checkout
-                    return Results.redirect(context.getContextPath() + "/checkoutOverview");
+                    return Results.redirect(context.getContextPath() + "/" + locale + "/checkoutOverview");
                 }
                 // save credit card
                 else
@@ -755,7 +759,7 @@ public class CheckoutController
                 order.update();
 
                 // return page to get an overview of the checkout
-                return Results.redirect(context.getContextPath() + "/checkoutOverview");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/checkoutOverview");
 
                 }
             }
@@ -788,7 +792,7 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, SessionCustomerExistFilter.class
         })
-    public Result addPaymentToOrder(@Param("cardId") final String creditCardId, final Context context)
+    public Result addPaymentToOrder(@Param("cardId") final String creditCardId, final Context context, @PathParam("urlLocale") String locale)
     {
 
         final CreditCard creditCard = CreditCard.getCreditCardById(Integer.parseInt(creditCardId));
@@ -846,7 +850,7 @@ public class CheckoutController
         retievedOrder.setOrderStatus("Pending");
         retievedOrder.update();
         // return page to get an overview of the checkout
-        return Results.redirect(context.getContextPath() + "/checkoutOverview");
+        return Results.redirect(context.getContextPath() + "/" + locale + "/checkoutOverview");
     }
 
     /**
@@ -890,8 +894,9 @@ public class CheckoutController
         {
             SessionTerminatedFilter.class, SessionCustomerExistFilter.class, SessionOrderExistFilter.class
         })
-    public Result checkoutCompleted(final Context context)
+    public Result checkoutCompleted(final Context context, @PathParam("urlLocale") String locale)
     {
+        language = Optional.of(locale);
         // get order by session id
         final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
         // set date to order
@@ -919,7 +924,7 @@ public class CheckoutController
         SessionHandling.removeOrderId(context);
         // show success message
         context.getFlashScope().success(msg.get("checkoutCompleted", language).get());
-        return Results.redirect(context.getContextPath() + "/orderConfirmation");
+        return Results.redirect(context.getContextPath() + "/" + locale + "/orderConfirmation");
     }
 
 

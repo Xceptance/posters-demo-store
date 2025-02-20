@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import ninja.params.PathParam;
+
 import io.ebean.Ebean;
 import com.google.inject.Inject;
 
@@ -231,7 +233,7 @@ public class CartController
      */
     @FilterWith(SessionTerminatedFilter.class)
     public Result addToCart(@Param("productId") final String productId, @Param("finish") final String finish,
-                            @Param("size") final String size, final Context context)
+                            @Param("size") final String size, final Context context, @PathParam("urlLocale") String locale)
     {
         final Result result = Results.json();
         // get product by id
@@ -256,6 +258,7 @@ public class CartController
         updatedProduct.put("productCount", cartProduct.getProductCount());
         updatedProduct.put("finish", finish);
         updatedProduct.put("size", cartProduct.getSize());
+        updatedProduct.put("localizedName", cartProduct.getProduct().getName(locale));
 
         // add product to result
         result.render("product", updatedProduct);

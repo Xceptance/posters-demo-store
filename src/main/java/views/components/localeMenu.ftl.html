@@ -1,0 +1,10 @@
+<a id="show-locale-menu" class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    ${lang}
+</a>
+
+<ul id="locale-menu" class="dropdown-menu">
+    <#list supportedLanguages as suplan>
+    <li><a id="loc-en-us" class="dropdown-item" href="/${suplan}">${suplan}</a></li>
+    </#list>
+</ul>
+

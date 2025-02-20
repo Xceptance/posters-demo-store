@@ -13,7 +13,7 @@
 		<div class="col-lg-6">
 			<#if billingAddresses??>
 			<!-- choose available address -->
-			<form action="${contextPath}/addBillingAddressToOrder" method="post" class="colorlib-form">
+			<form action="${contextPath}/${lang}/addBillingAddressToOrder" method="post" class="colorlib-form">
 				<div id="title-bill-addr">
 					<h2 class="text-center">${i18n("billingAddressTitleSelect")}</h2>
 				</div>
@@ -34,9 +34,11 @@
 										<li class="name" title="${i18n('addressFullName')}"><strong>${address.firstName} ${address.name}</strong></li>
 										<li class="company" title="${i18n('addressCompany')}">${address.company}</li>
 										<li class="address-line" title="${i18n('addressLine')}">${address.addressLine}</li>
-										<li><span class="city" title="${i18n('addressCity')}">${address.city}</span>, <span
-											class="state" title="${i18n('addressState')}">${address.state}</span><span 
-											class="zip" title="${i18n('addressZip')}">${address.zip}</span></li>
+										<li>
+											<span class="city" title="${i18n('addressCity')}">${address.city}</span>,
+											<span class="state" title="${i18n('addressState')}">${address.state}</span>,
+											<span class="zip" title="${i18n('addressZip')}">${address.zip}</span>
+										</li>
 										<li class="country" title="${i18n('addressCountry')}">${address.country}</li>
 									</ul>
 								</address>
@@ -71,7 +73,7 @@
 			<div id="add-address-modal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<form id="form-add-bill-addr" class="form-horizontal"
-						action="${contextPath}/billingAddressCompleted" method="post">
+						action="${contextPath}/${lang}/billingAddressCompleted" method="post">
 						<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">

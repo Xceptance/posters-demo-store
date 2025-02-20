@@ -17,7 +17,7 @@ function deleteFromCart(cartProductId, cartIndex) {
 }
 
 function updateProductCount(cartProductId, count, cartIndex) {
-	var url = CONTEXT_PATH + '/updateProductCount?cartProductId=' + cartProductId
+	var url = CONTEXT_PATH + '/' + LOCALE + '/updateProductCount?cartProductId=' + cartProductId
 			+ '&productCount=' + count;
 
 	const xhr = new XMLHttpRequest();
@@ -38,7 +38,7 @@ function updateProductCount(cartProductId, count, cartIndex) {
 
 // update price of product if the selected size has changed
 function updatePrice(selectedField, productId) {
-	var url = CONTEXT_PATH + '/updatePrice';
+	var url = CONTEXT_PATH + '/' + LOCALE + '/updatePrice';
 	const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(data) {
@@ -70,22 +70,22 @@ function updateProductOverview(data) {
 		productCard.classList.add("product-tile");
 		productCard.innerHTML = [
 			`
-			<a href="${CONTEXT_PATH}/productDetail/${productURI}?productId=${product.id}">
+			<a href="${CONTEXT_PATH}/${LOCALE}/productDetail/${productURI}?productId=${product.id}">
                 <img
                     srcset="${CONTEXT_PATH}${product.smallImageURL} 400w,
                             ${CONTEXT_PATH}${product.mediumImageURL} 800w,
                             ${CONTEXT_PATH}${product.largeImageURL} 2000w"
                     sizes="262px"
                     src="${CONTEXT_PATH}${product.originalImageURL}"
-                    alt="picture of ${product.name}"
+                    alt="picture of ${product.localizedName}"
                     class="card-img-top"
                     id="pagination-picture-${product.id}">
             </a>
             <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
-                <p class="card-text product-tile-text">${product.descriptionOverview}</p>
+                <h5 class="card-title">${product.localizedName}</h5>
+                <p class="card-text product-tile-text">${product.localizedDescriptionOverview}</p>
                 <p class="card-text product-tile-price">$${product.minimumPrice}</p>
-                <a href="${CONTEXT_PATH}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">Buy Here</a>
+                <a href="${CONTEXT_PATH}/${LOCALE}/productDetail/${encodeURIComponent(product.name)}?productId=${product.id}" class="btn btn-primary">${data.BuyText}</a>
             </div>
         	`
 		].join('')

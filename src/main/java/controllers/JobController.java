@@ -22,6 +22,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 import models.Customer;
+import models.Language;
 import models.Product;
 import models.TopCategory;
 import models_backoffice.Backofficeuser;
@@ -173,6 +174,11 @@ public class JobController
      */
     private void importData(final StarterConf config)
     {
+        // import languages, if there are none in the DB
+        if (Ebean.find(Language.class).findList().size() == 0)
+        {
+            ImportFromXMLToDB.importLanguage();
+        }
         // import categories, if there is no category in DB
         if (Ebean.find(TopCategory.class).findList().size() == 0)
         {

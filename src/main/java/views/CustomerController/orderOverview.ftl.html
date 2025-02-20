@@ -36,12 +36,12 @@
                                                                         ${contextPath}${orderProduct.product.largeImageURL} 2000w"
                                                                 sizes="25vw"
                                                                 src="${contextPath}${orderProduct.product.originalImageURL}"
-                                                                alt="image of ${orderProduct.product.name}"
+                                                                alt="image of ${orderProduct.product.getName(lang)}"
                                                                 class="img-thumbnail"
                                                                 id="order-overview-picture-${orderProduct.id}">
                                                         </div>
                                                         <div class="col">
-                                                            <h3 class="product-name">${orderProduct.product.name}</h3>
+                                                            <h3 class="product-name">${orderProduct.product.getName(lang)}</h3>
                                                             <div class="product-style">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
                                                             <div class="product-size">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
                                                         </div>
@@ -70,12 +70,12 @@
                                                                     ${contextPath}${orderProduct.product.largeImageURL} 2000w"
                                                             sizes="25vw"
                                                             src="${contextPath}${orderProduct.product.originalImageURL}"
-                                                            alt="image of ${orderProduct.product.name}"
+                                                            alt="image of ${orderProduct.product.getName(lang)}"
                                                             class="img-thumbnail"
                                                             id="order-overview-picture-${orderProduct.id}">
                                                     </div>
                                                     <div class="col">
-                                                        <h3 class="product-name">${orderProduct.product.name}</h3>
+                                                        <h3 class="product-name">${orderProduct.product.getName(lang)}</h3>
                                                         <div class="product-style">${i18n("cartStyle")}: <span>${orderProduct.finish}</span></div>
                                                         <div class="product-size">${i18n("cartSize")}: <span>${orderProduct.size.width} x ${orderProduct.size.height} ${unitLength}</span></div>
                                                     </div>
@@ -94,7 +94,7 @@
                             </tbody>
                         </table>
                     </div>
-                            <button type="button" class="btn btn btn-sm btn-primary" onclick="javascript:history.back()"> Back </button>
+                            <button type="button" class="btn btn btn-sm btn-primary" onclick="javascript:history.back()">${i18n('buttonBack')}</button>
                 </div>
                 
                 

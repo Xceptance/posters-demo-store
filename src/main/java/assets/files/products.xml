@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE product [
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT shortDescription (#PCDATA)>
+    <!ELEMENT longDescription (#PCDATA)>
+    <!ELEMENT small (#PCDATA)>
+    <!ELEMENT medium (#PCDATA)>
+    <!ELEMENT large (#PCDATA)>
+    <!ELEMENT original (#PCDATA)>
+    <!ELEMENT imageURL (small, medium, large, original)>
+    <!ELEMENT subCategory (#PCDATA)>
+    <!ELEMENT availableSize (#PCDATA)>
+    <!ELEMENT price (#PCDATA)>
+    <!ELEMENT product (name, shortDescription, longDescription, imageURL, subCategory, availableSize, price)>
+    <!ATTLIST name xml:lang NMTOKEN #IMPLIED>
+    <!ATTLIST shortDescription xml:lang NMTOKEN #IMPLIED>
+    <!ATTLIST longDescription xml:lang NMTOKEN #IMPLIED>
+]>
 <products>
 <!-- TopCategory World_of_Nature  -->
 <!-- SubCategory Animals  -->
 <product>
-<name>Grizzly Bear</name>
-<shortDescription>Bear looking tired.</shortDescription>
-<longDescription>Grizzly bears are severe predators and shouldn’t be underestimated only because of their harmless and cute looks like this picture displays them. If you happen to encounter a bear in the wild u should always try to get a way from it as fast as possible.</longDescription>
+<name xml:lang="x-default">Grizzly Bear</name>
+<name xml:lang="de-DE">Grizzlybär</name>
+<shortDescription xml:lang="x-default">Bear looking tired.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein müder Bär lehnt sich auf einen Stein.</shortDescription>
+<longDescription xml:lang="x-default">Grizzly bears are severe predators and shouldn’t be underestimated only because of their harmless and cute looks like this picture displays them. If you happen to encounter a bear in the wild u should always try to get a way from it as fast as possible.</longDescription>
+<longDescription xml:lang="de-DE">Grizzlybären sind äußerst gefährlich, auch wenn sie träge und kuschelig aussehen. Einem wilden Bären wie diesem sollte man sich in freier Wildbahn auf keinen Fall leichtfertig näheren sondern möglicht weit entfernt bleiben.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-medium.webp</medium>
@@ -17,9 +37,12 @@
 <price>17.00;25.50;32.95</price>
 </product>
 <product>
-<name>Great Grey Owl</name>
-<shortDescription>A large grey owl in the woods.</shortDescription>
-<longDescription>A very mysterious animal that stands for wisdom an intelligence is North America's largest owl, the great gray owl. This picture is going to fill your room with elegance and class.</longDescription>
+<name xml:lang="x-default">Great Grey Owl</name>
+<name xml:lang="de-DE">Bartkauz</name>
+<shortDescription xml:lang="x-default">A large grey owl in the woods.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine große Eule im Wald.</shortDescription>
+<longDescription xml:lang="x-default">A very mysterious animal that stands for wisdom an intelligence is North America's largest owl, the great gray owl. This picture is going to fill your room with elegance and class.</longDescription>
+<longDescription xml:lang="de-DE">Der Bartkauz ist die größte Eulenart Nordamerikas. Eulen gelten als Symbole für Weisheit und Intelligenz. Dieses Bild wird ihr Zimmer mit Eleganz und Klasse füllen.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-medium.webp</medium>
@@ -31,9 +54,12 @@
 <price>12.85;17.99;23.89</price>
 </product>
 <product>
-<name>Swedish Moose</name>
-<shortDescription>A mooze with antlers.</shortDescription>
-<longDescription>A moose is symbolizing determination and endurance, so this poster might be something for your personality. Also do not mistake a moose and an elk are the same animal, only the people in the different locations vary with naming the animal.</longDescription>
+<name xml:lang="x-default">Swedish Moose</name>
+<name xml:lang="de-DE">Schwedischer Elch</name>
+<shortDescription xml:lang="x-default">A mooze with antlers.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Elchbulle mit mittelgroßem Geweih.</shortDescription>
+<longDescription xml:lang="x-default">A moose is symbolizing determination and endurance, so this poster might be something for your personality. Also do not mistake a moose and an elk are the same animal, only the people in the different locations vary with naming the animal.</longDescription>
+<longDescription xml:lang="de-DE">Ein Elch in freier Wildbahn in einem Wald Schwedens. Das Poster zeigt gut die Tarnung des Tieres vor dunklerem Hintergrund durch den Teil des Waldbodens der sich etwa bis zur Hälfte des Bildes erstreckt. Ein Klassiker für alle Liebhaber borealer Waldgebiete.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/swedish-moose/swedish-moose-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/swedish-moose/swedish-moose-medium.webp</medium>
@@ -45,9 +71,12 @@
 <price>9.30;15.00;19.99</price>
 </product>
 <product>
-<name>European Hornet</name>
-<shortDescription>Close up shot of a hornet</shortDescription>
-<longDescription>Hornets are very scary looking insects, but their gorgeous color pattern can be a nice eye-catcher for your home. This hornet right here won't hurt if you aren't threatening her because the European hornet primarily feeds on crickets and grasshoppers.</longDescription>
+<name xml:lang="x-default">European Hornet</name>
+<name xml:lang="de-DE">Europäische Hornisse</name>
+<shortDescription xml:lang="x-default">Close up shot of a hornet.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer Hornisse.</shortDescription>
+<longDescription xml:lang="x-default">Hornets are very scary looking insects, but their gorgeous color pattern can be a nice eye-catcher for your home. This hornet right here won't hurt if you aren't threatening her because the European hornet primarily feeds on crickets and grasshoppers.</longDescription>
+<longDescription xml:lang="de-DE">Die Hornisse ist in Deutschland eine geschützte Art. Sie ist friedlich solange man sie nicht verletzt oder eine Gefahr für das Nest darstellt und versucht normalerweise zu fliehen statt zu stechen. Hornissen fressen hauptsächlich Insekten und verschmähen menschliche Speisen, daher tauchen sie am Kaffeetisch eigentlich nur auf um lästige Insekten wie Wespen oder Fliegen zu jagen.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/european-hornet/european-hornet-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/european-hornet/european-hornet-medium.webp</medium>
@@ -59,9 +88,12 @@
 <price>10.50;15.64;20.22</price>
 </product>
 <product>
-<name>Roman Snail</name>
-<shortDescription>Close up of a snail sticking on the side of a tree</shortDescription>
-<longDescription>Perhaps you prefer a more leisurely pace in life, and this snail picture can embody that sentiment, adding a personal touch to your room. Roman snails, are also the largest land snails in north-West Europe, so u can also impress with some knowledge regarding this piece of art.</longDescription>
+<name xml:lang="x-default">Roman Snail</name>
+<name xml:lang="de-DE">Weinbergschnecke</name>
+<shortDescription xml:lang="x-default">Close up of a snail sticking on the side of a tree.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer Schnecke an der Seite eines Baumes.</shortDescription>
+<longDescription xml:lang="x-default">Perhaps you prefer a more leisurely pace in life, and this snail picture can embody that sentiment, adding a personal touch to your room. Roman snails, are also the largest land snails in north-West Europe, so u can also impress with some knowledge regarding this piece of art.</longDescription>
+<longDescription xml:lang="de-DE">Die am weitesten verbreitete Schneckenart Europas. Weinbergschnecken sind Pflanzenfresser. In Deutschland, Österreich und der Schweiz stehen sie in der Natur unter Schutz. Zudem inzwischen auch durch eine EU-Richtlinie. Trotzdem gelten sie, besonders in Frankreich, als Delikatessen und werden dafür gezielt gezüchtet.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/roman-snail/roman-snail-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/roman-snail/roman-snail-medium.webp</medium>
@@ -73,9 +105,12 @@
 <price>23.00;30.45;38.00</price>
 </product>
 <product>
-<name>Blue Morpho Butterfly</name>
-<shortDescription>A beautiful blue and black butterfly on a leaf.</shortDescription>
-<longDescription>Butterflies are the perfect insects to get some colorful spring vibes into your house. The blue morpho butterfly is also ranking among the world's largest butterflies and is known for its numerous eye spots that camouflage it during flight.</longDescription>
+<name xml:lang="x-default">Blue Morpho Butterfly</name>
+<name xml:lang="de-DE">Blauer Morphofalter</name>
+<shortDescription xml:lang="x-default">A beautiful blue and black butterfly on a leaf.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein hübscher, blau-schwarzer Schmetterling auf einem Blatt.</shortDescription>
+<longDescription xml:lang="x-default">Butterflies are the perfect insects to get some colorful spring vibes into your house. The blue morpho butterfly is also ranking among the world's largest butterflies and is known for its numerous eye spots that camouflage it during flight.</longDescription>
+<longDescription xml:lang="de-DE">Der blaue Morphofalter, auch Himmelsfalter genannt ist ein großer Schmetterling der wegen seines hübschen Aussehens sehr beliebt ist. Die Unterseite der Flügel ist braun und weiß mit Flecken. Die blaue Farbe der Oberseite entsteht durch Interferenz des Lichts und nicht durch blaue Pigmente.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/blue-morpho-butterfly/blue-morpho-butterfly-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/blue-morpho-butterfly/blue-morpho-butterfly-medium.webp</medium>
@@ -87,9 +122,12 @@
 <price>17.99;23.99;29.99</price>
 </product>
 <product>
-<name>Red Birdwing</name>
-<shortDescription>Looking up at a butterfly sitting on a blossom.</shortDescription>
-<longDescription>A beautiful picture of a butterfly that will fit excellent with brown/orange, and red furniture because of its wing color. If you desire to observe the Red Birdwing in its natural habitat, it is primarily found in the Solomon Islands and is commonly observed obtaining nectar from flowers during the summer months.</longDescription>
+<name xml:lang="x-default">Red Birdwing</name>
+<name xml:lang="de-DE">Schmetterling auf blauer Blüte</name>
+<shortDescription xml:lang="x-default">Looking up at a butterfly sitting on a blossom.</shortDescription>
+<shortDescription xml:lang="de-DE">Blick von unten auf einen Schmetterling auf einer Blüte.</shortDescription>
+<longDescription xml:lang="x-default">A beautiful picture of a butterfly that will fit excellent with brown/orange, and red furniture because of its wing color. If you desire to observe the Red Birdwing in its natural habitat, it is primarily found in the Solomon Islands and is commonly observed obtaining nectar from flowers during the summer months.</longDescription>
+<longDescription xml:lang="de-DE">Der Kontrast zwischen der dunklen Unterseite der Flügel des Schmetterlings und der blauen Blüte zieht den Blick auf das Bild. Es macht sich gut zu dunklerer Einrichtung die farblich zu dem Schmetterling passt.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/red-birdwing/red-birdwing-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/red-birdwing/red-birdwing-medium.webp</medium>
@@ -101,9 +139,12 @@
 <price>8.75;15.75;22;45</price>
 </product>
 <product>
-<name>Bird</name>
-<shortDescription>A small black bird sitting on a gutter</shortDescription>
-<longDescription>This poster looks somehow plain and quiet with the darker toned colors, but thats the beauty of this image. Worth to know: Black birds are known for their beautiful singing, the male black bird's song is one of the most complex of all British birds.</longDescription>
+<name xml:lang="x-default">Bird</name>
+<name xml:lang="de-DE">Amsel</name>
+<shortDescription xml:lang="x-default">A small black bird sitting on a gutter.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine kleine Amsel auf einer Regenrinne.</shortDescription>
+<longDescription xml:lang="x-default">This poster looks somehow plain and quiet with the darker toned colors, but thats the beauty of this image. Worth to know: Black birds are known for their beautiful singing, the male black bird's song is one of the most complex of all British birds.</longDescription>
+<longDescription xml:lang="de-DE">Das Poster erweckt einen herbstlichen Eindrück von Kühle und Stille. Die Amsel oder auch Schwarzdrossel ist für den wohlklingenden Reviergesang der Männchen weit bekannt.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/bird/bird-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/bird/bird-medium.webp</medium>
@@ -115,9 +156,12 @@
 <price>12.87;19.99;25.99</price>
 </product>
 <product>
-<name>Red Domestic Cat</name>
-<shortDescription>A red colored cat looking straight at you.</shortDescription>
-<longDescription>This poster is a great addition to your room if you like cute cats with red fur. It is worth knowing that the red coloring in domestic cats arises from ongoing, random genetic mixes among red domestic cats of diverse backgrounds.</longDescription>
+<name xml:lang="x-default">Red Domestic Cat</name>
+<name xml:lang="de-DE">Hauskatze mit beige-braunem Fell</name>
+<shortDescription xml:lang="x-default">A red colored cat looking straight at you.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine beige und braun getigerte Hauskatze, die den Betrachter beobachtet.</shortDescription>
+<longDescription xml:lang="x-default">This poster is a great addition to your room if you like cute cats with red fur. It is worth knowing that the red coloring in domestic cats arises from ongoing, random genetic mixes among red domestic cats of diverse backgrounds.</longDescription>
+<longDescription xml:lang="de-DE">Ein Muss für Katzenliebhaber! Diese Katze schaut den Betrachter nachdenklich an. Ob sie einen Streich ausheckt? Oder vielleicht versucht sie zu entscheiden welche Maus sie heute anschleppt?</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/red-domestic-cat/red-domestic-cat-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/red-domestic-cat/red-domestic-cat-medium.webp</medium>
@@ -129,9 +173,12 @@
 <price>17.99;26.98;34.89</price>
 </product>
 <product>
-<name>Brown Domestic Cat</name>
-<shortDescription>A brownish cat looking like its about to jump at you.</shortDescription>
-<longDescription>Cats are very curious animals and this particular one seems to absorb you with its cute button like eyes. If you own a cat, you might want to purchase this poster to observe your cat's response to the image.</longDescription>
+<name xml:lang="x-default">Brown Domestic Cat</name>
+<name xml:lang="de-DE">Hauskatze mit braun-schwarzem Fell</name>
+<shortDescription xml:lang="x-default">A brownish cat looking like its about to jump at you.</shortDescription>
+<shortDescription xml:lang="de-DE">Diese Katze sieht aus als setze sie zum Sprung an.</shortDescription>
+<longDescription xml:lang="x-default">Cats are very curious animals and this particular one seems to absorb you with its cute button like eyes. If you own a cat, you might want to purchase this poster to observe your cat's response to the image.</longDescription>
+<longDescription xml:lang="de-DE">Katzen sind niedlich und neugierig und haben einen starken Jagd- und Spielstrieb. Dieses Poster bringt Dynamik und gute Laune in jedes Zimmer. Katzenhalter können dieses Poster auch für ihre Katze aufhängen und deren Reaktion darauf beobachten.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/animals/brown-domestic-cat/brown-domestic-cat-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/animals/brown-domestic-cat/brown-domestic-cat-medium.webp</medium>
@@ -144,9 +191,12 @@
 </product>
 <!-- SubCategory Flowers  -->
 <product>
-<name>Pink Dahlia</name>
-<shortDescription>The pink dhalia blossom close up. </shortDescription>
-<longDescription>Ideal for those seeking to brighten their room with vibrant hues, this pink blossom, known as the pink Dahlia, can be crafted in designs ranging from uncomplicated stars to intricate balls and waterlily-like blooms.</longDescription>
+<name xml:lang="x-default">Pink Dahlia</name>
+<name xml:lang="de-DE">Pinke Schmuckdahlie</name>
+<shortDescription xml:lang="x-default">A pink dhalia blossom close up.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer pinken Dahlienblüte.</shortDescription>
+<longDescription xml:lang="x-default">Ideal for those seeking to brighten their room with vibrant hues, this pink blossom, known as the pink Dahlia, can be crafted in designs ranging from uncomplicated stars to intricate balls and waterlily-like blooms.</longDescription>
+<longDescription xml:lang="de-DE">Dass perfekte Poster um einen Raum aufzuhellen und mit Farbe zu füllen. Garten-Dahlien gibt es in verschiedensten Zuchtformen mit besonderem Fokus auf hübsche Blüten und kunstvolle Blütenstände und diese ist eine davon.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/pink-dahlia/pink-dahlia-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/pink-dahlia/pink-dahlia-medium.webp</medium>
@@ -158,9 +208,12 @@
 <price>0.30;1.45;5.99</price>
 </product>
 <product>
-<name>Cactus Dahlia Pink White</name>
-<shortDescription>A pink and white dahlia blossom close up.</shortDescription>
-<longDescription>If you like a more mixed color pattern like this pink and white Dahlia u should consider this beautiful picture. A fact to know: Dahlias have no scent, making them an ideal bloom for people with allergies.</longDescription>
+<name xml:lang="x-default">Cactus Dahlia Pink White</name>
+<name xml:lang="de-DE">Pink-weiße Kaktus-Dahlie</name>
+<shortDescription xml:lang="x-default">A pink and white dahlia blossom close up.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer Kaktus-Dahlie in pink und weiß.</shortDescription>
+<longDescription xml:lang="x-default">If you like a more mixed color pattern like this pink and white Dahlia u should consider this beautiful picture. A fact to know: Dahlias have no scent, making them an ideal bloom for people with allergies.</longDescription>
+<longDescription xml:lang="de-DE">Ein wunderschönes Bild einer mehrfarbigen Blüte. Sie gehört zu einer Zuchtform von Kaktus-Dahlien. Die Blüten von Dahlien riechen weitaus weniger imposant als sie ausshenen. Der Geruch ist eher subtil und hat eine bittere Note.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-pink-white/cactus-dahlia-pink-white-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-pink-white/cactus-dahlia-pink-white-medium.webp</medium>
@@ -172,9 +225,12 @@
 <price>0.99;4.00;7.99</price>
 </product>
 <product>
-<name>Cactus Dahlia, Yellow/Pink</name>
-<shortDescription>A dahlia in a rare yellow and pink colorway</shortDescription>
-<longDescription>Another Dahlia color pattern that as a more exotic look. The bold red and yellow petals are perfectly offset by the center of the flower, and the image is going to add a touch of elegance to any room.</longDescription>
+<name xml:lang="x-default">Cactus Dahlia, Yellow/Pink</name>
+<name xml:lang="de-DE">Kaktus-Dahlie in Gelb und Rot</name>
+<shortDescription xml:lang="x-default">A dahlia in a rare yellow and pink colorway.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme einer gelb-roten Kaktus-Dahlienblüte.</shortDescription>
+<longDescription xml:lang="x-default">Another Dahlia color pattern that has a more exotic look. The bold red and yellow petals are perfectly offset by the center of the flower, and the image is going to add a touch of elegance to any room.</longDescription>
+<longDescription xml:lang="de-DE">Eine exotisch gefärbte Blüte einer Kaktus-Dahlie.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-yellow-pink/cactus-dahlia-yellow-pink-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-yellow-pink/cactus-dahlia-yellow-pink-medium.webp</medium>
@@ -186,9 +242,12 @@
 <price>17.10;24.90;29.99</price>
 </product>
 <product>
-<name>Jerusalem Artichoke</name>
-<shortDescription>The blossom of an artichoke.</shortDescription>
-<longDescription>A very elegant flower that fits in every room. This poster also serves as an excellent conversation starter, because hearing about the fact that this is an artichoke blossom will surely catch people off guard, when they discover it belongs to an artichoke. </longDescription>
+<name xml:lang="x-default">Jerusalem Artichoke</name>
+<name xml:lang="de-DE">Topinambur</name>
+<shortDescription xml:lang="x-default">The blossom of an artichoke.</shortDescription>
+<shortDescription xml:lang="de-DE">Die Blüte einer Topinambur.</shortDescription>
+<longDescription xml:lang="x-default">A very elegant flower that fits in every room. This poster also serves as an excellent conversation starter, because hearing about the fact that this is an artichoke blossom will surely catch people off guard, when they discover it belongs to an artichoke. </longDescription>
+<longDescription xml:lang="de-DE">Eine sehr elegante Blume, die in jeden Raum passt. Dieses Poster eignet sich auch hervorragend als Gesprächseinstieg, da die Blüte überraschenderweise zu den Artischocken gehört.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/jerusalem-artichoke/jerusalem-artichoke-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/jerusalem-artichoke/jerusalem-artichoke-medium.webp</medium>
@@ -200,9 +259,12 @@
 <price>23.59;31.75;38.00</price>
 </product>
 <product>
-<name>Snowdrop Anemone</name>
-<shortDescription>A blossom in all its details.</shortDescription>
-<longDescription>Whether you have a passion for flowers or just enjoy captivating photography, this poster featuring a graceful white Snowdrop Anemone is sure to satisfy your aesthetic cravings. These flowers, known for their rarity, garner even more popularity as they exclusively bloom in the spring.</longDescription>
+<name xml:lang="x-default">Snowdrop Anemone</name>
+<name xml:lang="de-DE">Schneeglöckchen</name>
+<shortDescription xml:lang="x-default">A blossom in all its details.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine Blüte mit all ihren Details.</shortDescription>
+<longDescription xml:lang="x-default">Whether you have a passion for flowers or just enjoy captivating photography, this poster featuring a graceful white Snowdrop Anemone is sure to satisfy your aesthetic cravings. These flowers, known for their rarity, garner even more popularity as they exclusively bloom in the spring.</longDescription>
+<longDescription xml:lang="de-DE">Egal, ob Sie eine Leidenschaft für Blumen haben oder einfach nur Spaß an der faszinierenden Fotografie, dieses Poster mit einem anmutigen weißen Schneeglöckchen wird Ihre ästhetischen Wünsche mit Sicherheit befriedigen. Diese für ihre Seltenheit bekannten Blumen erfreuen sich noch größerer Beliebtheit, da sie ausschließlich im Frühling blühen.</longDescription>
 <price>12.38;25.99;49.90</price>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/snowdrop-anemone/snowdrop-anemone-small.webp</small>
@@ -214,9 +276,12 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 </product>
 <product>
-<name>Violas</name>
-<shortDescription>A flower meadow in purple and yellow.</shortDescription>
-<longDescription>Looking at this field of flowers and their nicely arranged colors can be very comforting for you and the persons living with you. Having this picture in your house is going to help with bad moods and stress.</longDescription>
+<name xml:lang="x-default">Violas</name>
+<name xml:lang="de-DE">Veilchen</name>
+<shortDescription xml:lang="x-default">A flower meadow in purple and yellow.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine Blumenwiese voller Veilchen.</shortDescription>
+<longDescription xml:lang="x-default">Looking at this field of flowers and their nicely arranged colors can be very comforting for you and the persons living with you. Having this picture in your house is going to help with bad moods and stress.</longDescription>
+<longDescription xml:lang="de-DE">Der Anblick dieser Blumenwiese und ihrer schön arrangierten Farben kann für Sie und Ihre Mitbewohner sehr tröstlich sein. Wenn Sie dieses Bild in Ihrem Haus haben, können Sie schlechte Laune und Stress lindern.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/violas/violas-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/violas/violas-medium.webp</medium>
@@ -228,9 +293,12 @@
 <price>35.70;50.00;65.89</price>
 </product>
 <product>
-<name>Yellow and Orange Tulips</name>
-<shortDescription>Orange Tulips on a field shot at close.</shortDescription>
-<longDescription>"Let the spring into your home and brighten up your rooms! The beautiful yellow/orange combo will especially go well with green, brown and light yellow tones."</longDescription>
+<name xml:lang="x-default">Yellow and Orange Tulips</name>
+<name xml:lang="de-DE">Orange und gelbe Tulpen</name>
+<shortDescription xml:lang="x-default">Orange Tulips on a field shot at close.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme von einem Feld voller oranger und gelber Tulpen.</shortDescription>
+<longDescription xml:lang="x-default">"Let the spring into your home and brighten up your rooms! The beautiful yellow/orange combo will especially go well with green, brown and light yellow tones."</longDescription>
+<longDescription xml:lang="de-DE">Lassen Sie den Frühling in Ihr Zuhause einziehen und verschönern Sie Ihre Räume! Die schöne Gelb-Orange-Kombination passt besonders gut zu Grün-, Braun- und Hellgelbtönen.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/yellow-and-orange-tulips/yellow-and-orange-tulips-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/yellow-and-orange-tulips/yellow-and-orange-tulips-medium.webp</medium>
@@ -242,9 +310,12 @@
 <price>18.50;25.30;31.90</price>
 </product>
 <product>
-<name>Mixed-Colored Tulips</name>
-<shortDescription>Red, orange and pink tulips next to each other. </shortDescription>
-<longDescription>This is another tulip picture for people that like a little more color in their room. A nice way to combine with a white wall or furniture to add a bit of accents at your place.</longDescription>
+<name xml:lang="x-default">Mixed-Colored Tulips</name>
+<name xml:lang="de-DE">Verschiedenfarbige Tulpen</name>
+<shortDescription xml:lang="x-default">Red, orange and pink tulips next to each other.</shortDescription>
+<shortDescription xml:lang="de-DE">Rote, orange und pinke Tulpen nebeneinander.</shortDescription>
+<longDescription xml:lang="x-default">This is another tulip picture for people that like a little more color in their room. A nice way to combine with a white wall or furniture to add a bit of accents at your place.</longDescription>
+<longDescription xml:lang="de-DE">Dies ist ein weiteres Tulpenbild für Leute, die etwas mehr Farbe in ihrem Zimmer mögen. Eine schöne Möglichkeit, es mit einer weißen Wand oder Möbeln zu kombinieren, um bei Ihnen zu Hause ein paar Akzente zu setzen.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/mixed-colored-tulips/mixed-colored-tulips-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/mixed-colored-tulips/mixed-colored-tulips-medium.webp</medium>
@@ -256,9 +327,12 @@
 <price>17.99;24.99;38.10</price>
 </product>
 <product>
-<name>Garden Roses</name>
-<shortDescription>Roses with tinge of white in a garden.</shortDescription>
-<longDescription>Roses are on of the symbols for love and romance, so this picture would be a perfect gift for a loved one on Valentine's Day, an anniversary, or another special occasion. </longDescription>
+<name xml:lang="x-default">Garden Roses</name>
+<name xml:lang="de-DE">Gartenrosen</name>
+<shortDescription xml:lang="x-default">Roses with tinge of white in a garden.</shortDescription>
+<shortDescription xml:lang="de-DE">Rosen mit einem Hauch von weiß in einem Garten.</shortDescription>
+<longDescription xml:lang="x-default">Roses are on of the symbols for love and romance, so this picture would be a perfect gift for a loved one on Valentine's Day, an anniversary, or another special occasion.</longDescription>
+<longDescription xml:lang="de-DE">Rosen sind eines der Symbole für Liebe und Romantik, daher wäre dieses Bild ein perfektes Geschenk für einen geliebten Menschen zum Valentinstag, zum Jahrestag oder zu einem anderen besonderen Anlass.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/garden-roses/garden-roses-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/garden-roses/garden-roses-medium.webp</medium>
@@ -270,9 +344,12 @@
 <price>17.99;24.99;38.10</price>
 </product>
 <product>
-<name>Anthurium</name>
-<shortDescription>Red Anthurium shot from above.</shortDescription>
-<longDescription>A flower that is very rare due to its appearance in tropical climates, makes this close up to a more unique piece. The eye catching red color is going to attract all looks to your new poster.</longDescription>
+<name xml:lang="x-default">Anthurium</name>
+<name xml:lang="de-DE">Anthurium</name>
+<shortDescription xml:lang="x-default">Red Anthurium shot from above.</shortDescription>
+<shortDescription xml:lang="de-DE">Rote Anthurie von oben fotografiert.</shortDescription>
+<longDescription xml:lang="x-default">A flower that is very rare due to its appearance in tropical climates, makes this close up to a more unique piece. The eye catching red color is going to attract all looks to your new poster.</longDescription>
+<longDescription xml:lang="de-DE">Eine Blume, die aufgrund ihres Vorkommens in tropischen Klimazonen sehr selten ist, macht diese Nahaufnahme zu einem einzigartigeren Stück. Die auffällige rote Farbe wird alle Blicke auf Ihr neues Poster lenken.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/anthurium/anthurium-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/flowers/anthurium/anthurium-medium.webp</medium>
@@ -285,9 +362,12 @@
 </product>
 <!-- SubCategory Trees  -->
 <product>
-<name>Indian Summer Red Beeches </name>
-<shortDescription>An orange/red beech on the side of a small bridge.</shortDescription>
-<longDescription>A not so special looking picture, but for some persons this won't matter. Good to know: The beech is capable of reaching heights up to 50 meters and has a typical lifespan of 150 to 200 years.</longDescription>
+<name xml:lang="x-default">Indian Summer Red Beeches</name>
+<name xml:lang="de-DE">Indische Rotbuchen im Sommer</name>
+<shortDescription xml:lang="x-default">An orange/red beech on the side of a small bridge.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine Rotbuche an der Seite einer kleinen Brücke.</shortDescription>
+<longDescription xml:lang="x-default">Good to know: The beech is capable of reaching heights up to 50 meters and has a typical lifespan of 150 to 200 years.</longDescription>
+<longDescription xml:lang="de-DE">Gut zu wissen: Die Buche kann eine Höhe von bis zu 50 Metern erreichen und hat eine typische Lebensdauer von 150 bis 200 Jahren.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/indian-summer-red-beeches/indian-summer-red-beeches-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/indian-summer-red-beeches/indian-summer-red-beeches-medium.webp</medium>
@@ -299,9 +379,12 @@
 <price>12.89;19.99;29.99</price>
 </product>
 <product>
-<name>Indian summer orange Tree</name>
-<shortDescription>A beech next to a rail crossing sign.</shortDescription>
-<longDescription>A motive that creates wanderlust while warm colors and small details weave a story of nature's change. Adding this poster to your space brings u a nice touch of nature.</longDescription>
+<name xml:lang="x-default">Indian summer orange Tree</name>
+<name xml:lang="de-DE">Indischer Baum im Sommer</name>
+<shortDescription xml:lang="x-default">A beech next to a rail crossing sign.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine Buche neben einem Bahnübergangsschild.</shortDescription>
+<longDescription xml:lang="x-default">A motive that creates wanderlust while warm colors and small details weave a story of nature's change. Adding this poster to your space brings u a nice touch of nature.</longDescription>
+<longDescription xml:lang="de-DE">Ein Motiv, das Fernweh weckt, während warme Farben und kleine Details eine Geschichte vom Wandel der Natur erzählen. Wenn Sie dieses Poster in Ihrem Raum anbringen, verleihen Sie Ihrem Raum einen schönen Hauch von Natur.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/indian-summer-orange-tree/indian-summer-orange-tree-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/indian-summer-orange-tree/indian-summer-orange-tree-medium.webp</medium>
@@ -313,9 +396,12 @@
 <price>15.78;21.90;27.97</price>
 </product>
 <product>
-<name>Indian Summer Orange Beech</name>
-<shortDescription>The crown of an orange beech. </shortDescription>
-<longDescription>This warm colored tree motive will create a relaxed atmosphere in your home. It is going to be a good wall poster in a living room with a nice and comfortable couch. </longDescription>
+<name xml:lang="x-default">Indian Summer Orange Beech</name>
+<name xml:lang="de-DE">Indische orange Buche im Sommer</name>
+<shortDescription xml:lang="x-default">The crown of an orange beech. </shortDescription>
+<shortDescription xml:lang="de-DE">Die Baumkrone einer orangen Buche.</shortDescription>
+<longDescription xml:lang="x-default">This warm colored tree motive will create a relaxed atmosphere in your home. It is going to be a good wall poster in a living room with a nice and comfortable couch.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Baummotiv in warmen Farben sorgt für eine entspannte Atmosphäre in Ihrem Zuhause. Es wird ein gutes Wandposter in einem Wohnzimmer mit einer schönen und bequemen Couch sein.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/indian-summer-orange-beech/indian-summer-orange-beech-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/indian-summer-orange-beech/indian-summer-orange-beech-medium.webp</medium>
@@ -327,9 +413,12 @@
 <price>17.99;20.85;29.90</price>
 </product>
 <product>
-<name>Indian Summer Young Ashes</name>
-<shortDescription>4 small Ashes on a parking lot.</shortDescription>
-<longDescription>4 beautiful colored ashes standing in front of a green wood background, creating a nice contrast between the red ashes and the green trees in the back. Another fall themed poster for your home.</longDescription>
+<name xml:lang="x-default">Indian Summer Young Ashes</name>
+<name xml:lang="de-DE">Indische junge Eschen im Sommer</name>
+<shortDescription xml:lang="x-default">4 small Ashes on a parking lot.</shortDescription>
+<shortDescription xml:lang="de-DE">4 kleine Eschen auf einem Parkplatz.</shortDescription>
+<longDescription xml:lang="x-default">4 beautiful ash trees form a nice contrast to the green trees in the background. Another autumnal poster for your home.</longDescription>
+<longDescription xml:lang="de-DE">4 wunderschöne Eschen bilden einen schönen Kontrast zu den den grünen Bäumen im Hintergrund. Ein weiteres herbstliches Poster für Ihr Zuhause.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/indian-summer-young-ashes/indian-summer-young-ashes-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/indian-summer-young-ashes/indian-summer-young-ashes-medium.webp</medium>
@@ -341,9 +430,12 @@
 <price>16.67;27.90;34.00</price>
 </product>
 <product>
-<name>Indian Summer Young Birches</name>
-<shortDescription>Small trees next to a prakingspace</shortDescription>
-<longDescription>Birches are symbolizing renewal and purification, and we hope to project this through our poster into your room. Good to know: the birchbark is fantastic to create a fire, so if you are stuck in the cold or wet wildness, using birchbark will help.</longDescription>
+<name xml:lang="x-default">Indian Summer Young Birches</name>
+<name xml:lang="de-DE">Indische junge Birken im Sommer</name>
+<shortDescription xml:lang="x-default">Small trees next to a parkingspace</shortDescription>
+<shortDescription xml:lang="de-DE">Kleine Bäume neben einem Parkplatz.</shortDescription>
+<longDescription xml:lang="x-default">Birches are symbolizing renewal and purification, and we hope to project this through our poster into your room. Good to know: the birchbark is fantastic to create a fire, so if you are stuck in the cold or wet wildness, using birchbark will help.</longDescription>
+<longDescription xml:lang="de-DE">Birken symbolisieren Erneuerung und Reinigung, und wir hoffen, dies durch unser Poster in Ihr Zimmer zu projizieren. Gut zu wissen: Birkenrinde eignet sich hervorragend zum Anzünden eines Feuers. Wenn Sie also in der kalten oder nassen Wildnis festsitzen, hilft die Verwendung von Birkenrinde.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/indian-summer-young-birches/indian-summer-young-birches-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/indian-summer-young-birches/indian-summer-young-birches-medium.webp</medium>
@@ -355,9 +447,12 @@
 <price>16.98;29.99;45.50</price>
 </product>
 <product>
-<name>Indian Summer Tree Mix</name>
-<shortDescription>Green, yellow, and red trees in front of a house.</shortDescription>
-<longDescription>This poster captures the essence of autumn very beautifully. The trees standing shoulder to shoulder having the typical vibrant color palette of red orange and gold is invigorating and makes your room stand out with nature.</longDescription>
+<name xml:lang="x-default">Indian Summer Tree Mix</name>
+<name xml:lang="de-DE">Indischer Bäumemix im Sommer</name>
+<shortDescription xml:lang="x-default">Green, yellow, and red trees in front of a house.</shortDescription>
+<shortDescription xml:lang="de-DE">Grüne, gelbe und rote Bäume vor einem Haus.</shortDescription>
+<longDescription xml:lang="x-default">This poster captures the essence of autumn very beautifully. The trees standing shoulder to shoulder having the typical vibrant color palette of red orange and gold is invigorating and makes your room stand out.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Poster fängt die Essenz des Herbstes sehr schön ein. Die nebeneinander stehenden Bäume mit der typischen leuchtenden Farbpalette aus Rot, Orange und Gold wirken belebend und heben Ihren Raum hervor.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/indian-summer-tree-mix/indian-summer-tree-mix-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/indian-summer-tree-mix/indian-summer-tree-mix-medium.webp</medium>
@@ -369,9 +464,12 @@
 <price>29.99;39.90;45.99</price>
 </product>
 <product>
-<name>Fir Covered with Snow</name>
-<shortDescription>A very small fir tilted to the side, covered with snow.</shortDescription>
-<longDescription>Firs are a very popular in winter and especially during Christmas, so this might be a good present for your family or your friends in the holiday season.</longDescription>
+<name xml:lang="x-default">Fir Covered with Snow</name>
+<name xml:lang="de-DE">Schneebedeckte Tanne</name>
+<shortDescription xml:lang="x-default">A very small fir tilted to the side, covered with snow.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine sehr kleine und schneebedeckte Tanne.</shortDescription>
+<longDescription xml:lang="x-default">Firs are a very popular in winter and especially during Christmas, so this might be a good present for your family or your friends in the holiday season.</longDescription>
+<longDescription xml:lang="de-DE">Tannen erfreuen sich im Winter und vor allem zu Weihnachten großer Beliebtheit, daher könnte dies ein gutes Geschenk für Ihre Familie oder Ihre Freunde in der Weihnachtszeit sein.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/fir-covered-with-snow/fir-covered-with-snow-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/fir-covered-with-snow/fir-covered-with-snow-medium.webp</medium>
@@ -383,9 +481,12 @@
 <price>17.99;24.99;33.33</price>
 </product>
 <product>
-<name>Cherry Blossom</name>
-<shortDescription>Looking up to a branch of a white cherry blossom.</shortDescription>
-<longDescription>The white colored blossoms in this picture will give your room a touch of purity and peace.  Worth knowing: Cherry blossoms aren't always pink, as you might know from this tree, they bloom in several colors, most are light pink, while others have darker pink flowers or white flowers.</longDescription>
+<name xml:lang="x-default">Cherry Blossom</name>
+<name xml:lang="de-DE">Kirschblüten</name>
+<shortDescription xml:lang="x-default">Looking up to a branch of a white cherry blossom.</shortDescription>
+<shortDescription xml:lang="de-DE">Weiße Kirschböüten von unten.</shortDescription>
+<longDescription xml:lang="x-default">The white colored blossoms in this picture will give your room a touch of purity and peace. Worth knowing: Cherry blossoms aren't always pink, they bloom in several colors, most are light pink, while others have darker pink blossoms.</longDescription>
+<longDescription xml:lang="de-DE">Die weißen Blüten auf diesem Bild verleihen Ihrem Raum einen Hauch von Reinheit und Frieden. Wissenswertes: Kirschblüten sind nicht immer rosa, sie blühen in mehreren Farben, die meisten sind hellrosa, während andere dunklere rosa Blüten haben.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/cherry-blossom/cherry-blossom-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/cherry-blossom/cherry-blossom-medium.webp</medium>
@@ -397,9 +498,12 @@
 <price>17.99;24.99;33.33</price>
 </product>
 <product>
-<name>Fall Leaves I</name>
-<shortDescription>Pile of red leaves red shot from above.</shortDescription>
-<longDescription>Fall leaves are often seen as autumn's trademark, with its typical red and orange coloring, so if you like autumn, this is something for you. These particular ones are also colored in a brownish tone.</longDescription>
+<name xml:lang="x-default">Fall Leaves I</name>
+<name xml:lang="de-DE">Herbstblätter I</name>
+<shortDescription xml:lang="x-default">Pile of red leaves red shot from above.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Haufen roter Herbsblätter.</shortDescription>
+<longDescription xml:lang="x-default">Fall leaves are often seen as autumn's trademark, with its typical red and orange coloring, so if you like autumn, this is something for you.</longDescription>
+<longDescription xml:lang="de-DE">Herbstblätter gelten mit ihrer typischen Rot- und Orangefärbung oft als das Markenzeichen des Herbstes. Wenn Sie also den Herbst mögen, ist dies etwas für Sie.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/fall-leaves-I/fall-leaves-I-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/fall-leaves-I/fall-leaves-I-medium.webp</medium>
@@ -411,9 +515,12 @@
 <price>17.99;24.99;33.33</price>
 </product>
 <product>
-<name>Fall Leaves II</name>
-<shortDescription>Brown and red leaves on the ground.</shortDescription>
-<longDescription>Fall leaves are often seen as autumn's trademark, with its typical red and orange coloring, so if you like autumn, this is something for you. These particular ones are also colored in a brownish tone.</longDescription>
+<name xml:lang="x-default">Fall Leaves II</name>
+<name xml:lang="de-DE">Herbstblätter II</name>
+<shortDescription xml:lang="x-default">Brown and red leaves on the ground.</shortDescription>
+<shortDescription xml:lang="de-DE">Rote und braune Herbstblätter auf dem Boden.</shortDescription>
+<longDescription xml:lang="x-default">Fall leaves are often seen as autumn's trademark, with its typical red and orange coloring, so if you like autumn, this is something for you.</longDescription>
+<longDescription xml:lang="de-DE">Herbstblätter gelten mit ihrer typischen Rot- und Orangefärbung oft als das Markenzeichen des Herbstes. Wenn Sie also den Herbst mögen, ist dies etwas für Sie.</longDescription>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/trees/fall-leaves-II/fall-leaves-II-small.webp</small>
 <medium>/assets/img/products/flora_and_fauna/trees/fall-leaves-II/fall-leaves-II-medium.webp</medium>
@@ -427,9 +534,12 @@
 <!-- TopCategory Food  -->
 <!-- SubCategory Cold_Cuts  -->
 <product>
-<name>Tomato and Mozzarella Bites</name>
-<shortDescription>The Italian classic Tomato mozzarella in a close up shot.</shortDescription>
-<longDescription>Fresh, thick-sliced tomatoes, equally thick slices of mozzarella cheese, and fresh basil a very typical Italian dish. This poster gets u a very fitting motive for your kitchen or even restaurant.</longDescription>
+<name xml:lang="x-default">Tomato and Mozzarella Bites</name>
+<name xml:lang="de-DE">Tomate Mozzarella Happen</name>
+<shortDescription xml:lang="x-default">The Italian classic Tomato mozzarella in a close up shot.</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme der italienischen Spezialität Tomate Mozzarella.</shortDescription>
+<longDescription xml:lang="x-default">Fresh, thick-sliced tomatoes, equally thick slices of mozzarella cheese, and fresh basil a very typical Italian dish. This poster gets u a very fitting motive for your kitchen or even restaurant.</longDescription>
+<longDescription xml:lang="de-DE">Frische, dick geschnittene Tomaten, ebenso dicke Scheiben Mozzarella-Käse und frisches Basilikum, ein sehr typisch italienisches Gericht. Mit diesem Poster erhalten Sie ein sehr passendes Motiv für Ihre Küche oder auch Ihr Restaurant.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/tomato-and-mozzarella-bites/tomato-and-mozzarella-bites-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/tomato-and-mozzarella-bites/tomato-and-mozzarella-bites-medium.webp</medium>
@@ -441,9 +551,12 @@
 <price>17.99;25.90;29.99</price>
 </product>
 <product>
-<name>Rolled Bacon</name>
-<shortDescription>Rolled bacon arranged precisely.</shortDescription>
-<longDescription>This beautiful alignment of the rolled bacon creates a precise and careful look that should describe every good cook and his kitchen. A nice poster for you, cooks. Bacon is very popular as a typical part of breakfast, most people know it, especially from the British breakfast that contains bacon and eggs.</longDescription>
+<name xml:lang="x-default">Rolled Bacon</name>
+<name xml:lang="de-DE">Gerollter Schinken</name>
+<shortDescription xml:lang="x-default">Rolled bacon arranged precisely.</shortDescription>
+<shortDescription xml:lang="de-DE">Gerollter Schinken präzise arrangiert.</shortDescription>
+<longDescription xml:lang="x-default">This beautiful alignment of the rolled bacon creates a precise and careful look that should describe every good cook and his kitchen. Bacon is very popular as a typical part of breakfast, most people know it, especially from the British breakfast that contains bacon and eggs.</longDescription>
+<longDescription xml:lang="de-DE">Diese schöne Ausrichtung des gerollten Specks erzeugt ein präzises und sorgfältiges Aussehen, das jeden guten Koch und seine Küche beschreiben sollte. Speck ist als typischer Bestandteil des Frühstücks sehr beliebt, die meisten kennen ihn, vor allem vom britischen Frühstück, das Speck und Eier enthält.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/rolled-bacon/rolled-bacon-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/rolled-bacon/rolled-bacon-medium.webp</medium>
@@ -455,9 +568,12 @@
 <price>16.89;27.90;40.00</price>
 </product>
 <product>
-<name>Cheese Varieties</name>
-<shortDescription>A symbol of French culinary. </shortDescription>
-<longDescription>Every cheese connoisseur knows that cheese is a delicate and versatile food that comes in a lot of different shapes and tastes. But one of the most popular cheese sorts is probably the Camembert that makes this picture fit in any kitchen or restaurant.</longDescription>
+<name xml:lang="x-default">Cheese Varieties</name>
+<name xml:lang="de-DE">Verschiedene Käsesorten</name>
+<shortDescription xml:lang="x-default">A symbol of French culinary. </shortDescription>
+<shortDescription xml:lang="de-DE">Ein Symbol französischer Küche.</shortDescription>
+<longDescription xml:lang="x-default">Every cheese connoisseur knows that cheese is a delicate and versatile food that comes in a lot of different shapes and tastes. But one of the most popular cheese sorts is probably the Camembert.</longDescription>
+<longDescription xml:lang="de-DE">Jeder Käsekenner weiß, dass Käse ein delikates und vielseitiges Lebensmittel ist, das in vielen verschiedenen Formen und Geschmacksrichtungen erhältlich ist. Aber eine der beliebtesten Käsesorten ist wohl der Camembert.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/cheese-varieties/cheese-varieties-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/cheese-varieties/cheese-varieties-medium.webp</medium>
@@ -469,9 +585,12 @@
 <price>9.99;18.99;27.99</price>
 </product>
 <product>
-<name>Mixed Olives</name>
-<shortDescription>Mixed colored Olives in green, black, and brown.</shortDescription>
-<longDescription>A very delicious looking picture of seasoned black and green olives. If you look for an Italian themed room, then this is the perfect assessment.</longDescription>
+<name xml:lang="x-default">Mixed Olives</name>
+<name xml:lang="de-DE">Oliven-Mix</name>
+<shortDescription xml:lang="x-default">Mixed colored Olives in green, black, and brown.</shortDescription>
+<shortDescription xml:lang="de-DE">Grüne, schwarze und braune Oliven.</shortDescription>
+<longDescription xml:lang="x-default">A very delicious looking picture of seasoned black and green olives. If you look for an Italian themed room, then this is the perfect assessment.</longDescription>
+<longDescription xml:lang="de-DE">Ein sehr köstlich aussehendes Bild von gewürzten schwarzen und grünen Oliven. Wenn Sie auf der Suche nach einem Zimmer im italienischen Stil sind, dann ist dies das perfekte Poster.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/mixed-olives/mixed-olives-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/mixed-olives/mixed-olives-medium.webp</medium>
@@ -483,9 +602,12 @@
 <price>16.75;28.90;54.90</price>
 </product>
 <product>
-<name>Finger Food</name>
-<shortDescription>A finger food plate with a lot of variety.</shortDescription>
-<longDescription>Finger food is the perfect choice for a party with friends colleagues or family. This poster is capturing the spirit of shared moments and delectable bites, a good selection for your living room.</longDescription>
+<name xml:lang="x-default">Finger Food</name>
+<name xml:lang="de-DE">Häppchen</name>
+<shortDescription xml:lang="x-default">A finger food plate with a lot of variety.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine vielseitige Häppchen-Platte.</shortDescription>
+<longDescription xml:lang="x-default">Finger food is the perfect choice for a party with friends colleagues or family. This poster is capturing the spirit of shared moments and delectable bites, a good selection for your living room.</longDescription>
+<longDescription xml:lang="de-DE">Fingerfood ist die perfekte Wahl für eine Party mit Freunden, Kollegen oder der Familie. Dieses Poster fängt den Geist gemeinsamer Momente und köstlicher Häppchen ein und ist eine gute Wahl für Ihr Wohnzimmer.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/finger-food/finger-food-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/finger-food/finger-food-medium.webp</medium>
@@ -497,9 +619,12 @@
 <price>13.39;21.20;28.10</price>
 </product>
 <product>
-<name>Rocket Salad with Mozzarella</name>
-<shortDescription>A great starter in Italian restaurants.</shortDescription>
-<longDescription>Mozzarella with rocket salad is a very typical first course meal in Italian pizzerias. This Italian staple includes a major part of Italian ingredients, containing beautiful creamy mozzarella and extra virgin olive oil. This poster goes especially good when you're in need of something more classic and elegant.</longDescription>
+<name xml:lang="x-default">Rocket Salad with Mozzarella</name>
+<name xml:lang="de-DE">Rucolasalat mit Mozzarella</name>
+<shortDescription xml:lang="x-default">A great starter in Italian restaurants.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine leckere italienische Vorspeise.</shortDescription>
+<longDescription xml:lang="x-default">Mozzarella with rocket salad is a very typical first course meal in Italian pizzerias. This Italian staple includes a major part of Italian ingredients, containing beautiful creamy mozzarella and extra virgin olive oil. This poster goes especially good when you're in need of something more classic and elegant.</longDescription>
+<longDescription xml:lang="de-DE">Mozzarella mit Rucolasalat ist eine sehr typische Vorspeise in italienischen Pizzerien. Dieses italienisches Grundnahrungsmittel besteht zu einem Großteil aus italienischen Zutaten, darunter wunderbar cremiger Mozzarella und extra natives Olivenöl. Dieses Poster eignet sich besonders gut, wenn Sie etwas Klassischeres und Eleganteres benötigen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/rocket-salad-with-mozzarella/rocket-salad-with-mozzarella-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/rocket-salad-with-mozzarella/rocket-salad-with-mozzarella-medium.webp</medium>
@@ -511,9 +636,12 @@
 <price>17.99;27.99;37.99</price>
 </product>
 <product>
-<name>Meatfoot</name>
-<shortDescription>A minced meat foot?</shortDescription>
-<longDescription>A rather weird looking plate of minced meat, but it's a perfect gift for a friend that needs a laugh.</longDescription>
+<name xml:lang="x-default">Meatfoot</name>
+<name xml:lang="de-DE">Gehacktes</name>
+<shortDescription xml:lang="x-default">A minced meat foot?</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Fuß aus Gehacktem?</shortDescription>
+<longDescription xml:lang="x-default">A rather weird looking plate of minced meat, but it's a perfect gift for a friend that needs a laugh.</longDescription>
+<longDescription xml:lang="de-DE">A rather weird looking plate of minced meat, but it's a perfect gift for a friend that needs a laugh.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/meatfoot/meatfoot-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/meatfoot/meatfoot-medium.webp</medium>
@@ -525,9 +653,12 @@
 <price>19.99;29.90;39.80</price>
 </product>
 <product>
-<name>Peperoni Sandwich</name>
-<shortDescription>Time for lunch!</shortDescription>
-<longDescription>A typical standard meal containing two peperoni sandwiches and a coffee. It doesn't seem special, but even a normal meal can make u feel way better on a hard work day. A good poster to put in the community kitchen at work. </longDescription>
+<name xml:lang="x-default">Peperoni Sandwich</name>
+<name xml:lang="de-DE">Pepperoni-Sandwich</name>
+<shortDescription xml:lang="x-default">Time for lunch!</shortDescription>
+<shortDescription xml:lang="de-DE">Mittagspause!</shortDescription>
+<longDescription xml:lang="x-default">A typical standard meal containing two peperoni sandwiches and a coffee. It doesn't seem special, but even a normal meal can make u feel way better on a hard work day. A good poster to put in the community kitchen at work. </longDescription>
+<longDescription xml:lang="de-DE">Eine typische Standardmahlzeit, bestehend aus zwei Peperoni-Sandwiches und einem Kaffee. Es scheint nichts Besonderes zu sein, aber selbst eine normale Mahlzeit kann dafür sorgen, dass Sie sich an einem harten Arbeitstag viel besser fühlen. Ein gutes Poster für die Gemeinschaftsküche am Arbeitsplatz.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/peperoni-sandwich/peperoni-sandwich-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/peperoni-sandwich/peperoni-sandwich-medium.webp</medium>
@@ -539,9 +670,12 @@
 <price>17.99;28.10;37.90</price>
 </product>
 <product>
-<name>Chicken Teryiaki</name>
-<shortDescription>Show off as a chef.</shortDescription>
-<longDescription>Mushrooms, rice, green beans, brocoli, onions combined with chicken teriyaki aesteticly arranged makes an excellent dish. The poster is not just about the food, it's a celebration of culinary artistry.</longDescription>
+<name xml:lang="x-default">Chicken Teriyaki</name>
+<name xml:lang="de-DE">Hühnchen-Teriyaki</name>
+<shortDescription xml:lang="x-default">Show off as a chef.</shortDescription>
+<shortDescription xml:lang="de-DE">Gib an als Koch.</shortDescription>
+<longDescription xml:lang="x-default">Mushrooms, rice, green beans, brocoli, onions combined with chicken teriyaki aesteticly arranged makes an excellent dish. The poster is not just about the food, it's a celebration of culinary artistry.</longDescription>
+<longDescription xml:lang="de-DE">Pilze, Reis, grüne Bohnen, Brokkoli, Zwiebeln kombiniert mit Hühnchen-Teriyaki, ästhetisch arrangiert ergeben ein ausgezeichnetes Gericht. Auf dem Poster geht es nicht nur um das Essen, es ist eine Hommage an die Kochkunst.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/chicken-teryiaki/chicken-teryiaki-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/chicken-teryiaki/chicken-teryiaki-medium.webp</medium>
@@ -553,9 +687,12 @@
 <price>29.99;45.00;70.30</price>
 </product>
 <product>
-<name>Fried Rice</name>
-<shortDescription>For people with attention to detail. </shortDescription>
-<longDescription>Fried rice is usually considered an unhealthy fast food, but this exquisite made fried rice doesn't seem anything like that. A poster for people that love the beauty of details and excellent food.</longDescription>
+<name xml:lang="x-default">Fried Rice</name>
+<name xml:lang="de-DE">Gebratener Reis</name>
+<shortDescription xml:lang="x-default">For people with attention to detail.</shortDescription>
+<shortDescription xml:lang="de-DE">Für Menschen mit einem Auge fürs Detail.</shortDescription>
+<longDescription xml:lang="x-default">Fried rice is usually considered an unhealthy fast food, but this exquisite made fried rice doesn't seem anything like that. A poster for people that love the beauty of details and excellent food.</longDescription>
+<longDescription xml:lang="de-DE">Gebratener Reis gilt normalerweise als ungesundes Fastfood, aber dieser exquisit zubereitete gebratene Reis sieht ganz anders aus. Ein Poster für Menschen, die die Schönheit von Details und ausgezeichnetes Essen lieben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/fried-rice/fried-rice-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/fried-rice/fried-rice-medium.webp</medium>
@@ -568,9 +705,12 @@
 </product>
 <!-- SubCategory Main Dishes  -->
 <product>
-<name>Grilled Salmon with Potato Wedges</name>
-<shortDescription>Eye candy for gourmets.</shortDescription>
-<longDescription>Potato wedges seasoned and poured over with white sauce combined with the wrapped salmon looks stunning and elegant. This main course will be perfect for every gourmet's wall. </longDescription>
+<name xml:lang="x-default">Grilled Salmon with Potato Wedges</name>
+<name xml:lang="de-DE">Gegrillter Lachs mit Kartoffelecken</name>
+<shortDescription xml:lang="x-default">Eye candy for gourmets.</shortDescription>
+<shortDescription xml:lang="de-DE">Augenschmaus für Köche.</shortDescription>
+<longDescription xml:lang="x-default">Potato wedges seasoned and poured over with white sauce combined with the wrapped salmon looks stunning and elegant. This main course will be perfect for every gourmet's wall.</longDescription>
+<longDescription xml:lang="de-DE">Mit weißer Soße gewürzte und übergossene Kartoffelecken sehen in Kombination mit dem eingewickelten Lachs umwerfend und elegant aus. Dieses Hauptgericht passt perfekt auf die Wand jedes Feinschmeckers.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/grilled-salmon-with-potato-wedges/grilled-salmon-with-potato-wedges-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/grilled-salmon-with potato-wedges/grilled-salmon-with-potato-wedges-medium.webp</medium>
@@ -582,9 +722,12 @@
 <price>16.68;24.90;29.99</price>
 </product>
 <product>
-<name>Goulash with Dumplings</name>
-<shortDescription>German home-style cooking.</shortDescription>
-<longDescription>Goulash with Dumplings go very good together, combined with some lemon and broccoli is gone round the meal up to make it even more aesthetic and also tasty. People that love hearty food will love this image in their dining room. </longDescription>
+<name xml:lang="x-default">Goulash with Dumplings</name>
+<name xml:lang="de-DE">Gluasch mit Knödeln</name>
+<shortDescription xml:lang="x-default">German home-style cooking.</shortDescription>
+<shortDescription xml:lang="de-DE">Leckere deutsche Küche.</shortDescription>
+<longDescription xml:lang="x-default">Goulash with Dumplings go very good together, combined with some lemon and broccoli is gone round the meal up to make it even more aesthetic and also tasty. People that love hearty food will love this image in their dining room.</longDescription>
+<longDescription xml:lang="de-DE">Gulasch mit Knödeln passt sehr gut zusammen, kombiniert mit etwas Zitrone und Brokkoli rundet man das Gericht ab, um es noch ästhetischer und schmackhafter zu machen. Menschen, die herzhaftes Essen lieben, werden auch dieses Bild in ihrem Esszimmer lieben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/goulash-with-dumplings/goulash-with-dumplings-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/goulash-with-dumplings/goulash-with-dumplings-medium.webp</medium>
@@ -596,9 +739,12 @@
 <price>17.99;29.99;43.00</price>
 </product>
 <product>
-<name>Selfmade Mac and Cheese</name>
-<shortDescription>A fast and easy to make dish</shortDescription>
-<longDescription>This close-up view of the mac and cheese makes it look so realistic that you'll almost be able to smell it, a great adddition to everybodys kitchen. Worth to know: Mac and cheese is a very popular dish around the world and has many different recipie variations some even include meat in the dish.</longDescription>
+<name xml:lang="x-default">Selfmade Mac and Cheese</name>
+<name xml:lang="de-DE">Selbstgemachte Käsemakkaroni</name>
+<shortDescription xml:lang="x-default">A fast and easy to make dish.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein schnell und einfach zubereitetes Gericht.</shortDescription>
+<longDescription xml:lang="x-default">This close-up view of the mac and cheese makes it look so realistic that you'll almost be able to smell it, a great adddition to everybodys kitchen. Worth to know: Mac and cheese is a very popular dish around the world and has many different recipie variations some even include meat in the dish.</longDescription>
+<longDescription xml:lang="de-DE">Diese Nahaufnahme der Makkaroni mit Käse lässt sie so realistisch aussehen, dass man sie fast riechen kann – eine tolle Ergänzung für jede Küche. Gut zu wissen: Mac and Cheese ist auf der ganzen Welt ein sehr beliebtes Gericht und es gibt viele verschiedene Rezeptvarianten, bei einigen ist sogar Fleisch im Gericht enthalten.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/selfmade-mac-and-cheese/selfmade-mac-and-cheese-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/selfmade-mac-and-cheese/selfmade-mac-and-cheese-medium.webp</medium>
@@ -610,9 +756,12 @@
 <price>29.10;35.50;45.60</price>
 </product>
 <product>
-<name>Stuffed Turkey</name>
-<shortDescription>The best way to celebrate Thanksgiving.</shortDescription>
-<longDescription>If you like spending thanksgiving with your loved ones this picture will always remind you of the beautiful moments you had together. </longDescription>
+<name xml:lang="x-default">Stuffed Turkey</name>
+<name xml:lang="de-DE">Gefüllter Truthahn</name>
+<shortDescription xml:lang="x-default">The best way to celebrate Thanksgiving.</shortDescription>
+<shortDescription xml:lang="de-DE">Der beste Weg Thanksgiving zu feiern.</shortDescription>
+<longDescription xml:lang="x-default">If you like spending thanksgiving with your loved ones this picture will always remind you of the beautiful moments you had together.</longDescription>
+<longDescription xml:lang="de-DE">Wenn Sie Thanksgiving gerne mit Ihren Lieben verbringen, wird Sie dieses Bild immer an die schönen Momente erinnern, die Sie zusammen verbracht haben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/stuffed-turkey/stuffed-turkey-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/stuffed-turkey/stuffed-turkey-medium.webp</medium>
@@ -624,9 +773,12 @@
 <price>23.50;34.40;42.65</price>
 </product>
 <product>
-<name>Tuna Steak</name>
-<shortDescription>Is this really tuna?</shortDescription>
-<longDescription>Your guests will never now that this is a tuna steak it look so similar to a normal steak. Ah nice way to get a conversation going.</longDescription>
+<name xml:lang="x-default">Tuna Steak</name>
+<name xml:lang="de-DE">Thunfischsteak</name>
+<shortDescription xml:lang="x-default">Is this really tuna?</shortDescription>
+<shortDescription xml:lang="de-DE">Ist das wirklich Thunfisch?</shortDescription>
+<longDescription xml:lang="x-default">Your guests will never now that this is a tuna steak it look so similar to a normal steak. Ah nice way to get a conversation going.</longDescription>
+<longDescription xml:lang="de-DE">Ihre Gäste werden nie bemerken, dass es sich um ein Thunfischsteak handelt, das einem normalen Steak so ähnlich sieht. Ah, eine nette Art, ein Gespräch in Gang zu bringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/tuna-steak/tuna-steak-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/tuna-steak/tuna-steak-medium.webp</medium>
@@ -638,9 +790,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Frozen Pizza</name>
-<shortDescription>An honest tribute to fast food.</shortDescription>
-<longDescription>An easy to make pizza is great for partys or just for yourself when you need something unhealthy to satisfy your hunger. That is why this  poster is going to make you look down to earth but also likeable.</longDescription>
+<name xml:lang="x-default">Frozen Pizza</name>
+<name xml:lang="de-DE">Tierfgefrorene Pizza</name>
+<shortDescription xml:lang="x-default">An honest tribute to fast food.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Tribut an Fastfood.</shortDescription>
+<longDescription xml:lang="x-default">An easy to make pizza is great for partys or just for yourself when you need something unhealthy to satisfy your hunger. That is why this  poster is going to make you look down to earth but also likeable.</longDescription>
+<longDescription xml:lang="de-DE">Eine einfach zuzubereitende Pizza eignet sich hervorragend für Partys oder einfach für einen selbst, wenn Sie etwas Ungesundes brauchen, um Ihren Hunger zu stillen. Deshalb wirkt dieses Poster bodenständig, aber auch sympathisch.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/frozen-pizza/frozen-pizza-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/frozen-pizza/frozen-pizza-medium.webp</medium>
@@ -652,9 +807,12 @@
 <price>11.12;13.14;15.16</price>
 </product>
 <product>
-<name>Meatballs</name>
-<shortDescription>Yummy!</shortDescription>
-<longDescription>Meatballs and mashed potatos combined with salad and cranberries is a classic that everybody tried once in their life. </longDescription>
+<name xml:lang="x-default">Meatballs</name>
+<name xml:lang="de-DE">Fleischbällchen</name>
+<shortDescription xml:lang="x-default">Yummy!</shortDescription>
+<shortDescription xml:lang="de-DE">Lecker!</shortDescription>
+<longDescription xml:lang="x-default">Meatballs and mashed potatos combined with salad and cranberries is a classic that everybody tried once in their life. </longDescription>
+<longDescription xml:lang="de-DE">Fleischbällchen und Kartoffelpüree kombiniert mit Salat und Preiselbeeren sind ein Klassiker, den jeder einmal im Leben probiert hat.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/meatballs/meatballs-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/meatballs/meatballs-medium.webp</medium>
@@ -666,9 +824,12 @@
 <price>13.99;22.12;28.45</price>
 </product>
 <product>
-<name>XXL Burger</name>
-<shortDescription>A must-have for all burger lovers.</shortDescription>
-<longDescription>For all the fast food lovers out there you definitely need this in your dining room. Worth to know: There a many XXL burger eating contest held that use even bigger burgers than this one. </longDescription>
+<name xml:lang="x-default">XXL Burger</name>
+<name xml:lang="de-DE">XXL Burger</name>
+<shortDescription xml:lang="x-default">A must-have for all burger lovers.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Muss für alle Burgerliebhaber.</shortDescription>
+<longDescription xml:lang="x-default">For all the fast food lovers out there you definitely need this in your dining room. Worth to know: There a many XXL burger eating contest held that use even bigger burgers than this one.</longDescription>
+<longDescription xml:lang="de-DE">Für alle Fast-Food-Liebhaber da draußen: Sie brauchen das unbedingt in Ihrem Esszimmer. Wissenswertes: Es gab viele XXL-Burger-Esswettbewerbe, bei denen noch größere Burger als dieser verwendet wurden.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/xxl-burger/xxl-burger-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/xxl-burger/xxl-burger-medium.webp</medium>
@@ -680,9 +841,12 @@
 <price>17.99;29.99;39.90</price>
 </product>
 <product>
-<name>Small Burger</name>
-<shortDescription>If you need something fast, a burger always satisfies.</shortDescription>
-<longDescription>This one might be small but it looks realy tasty just looking at this image is going to make you crave a burger just like this one. A nice accesirior for your kitchen. </longDescription>
+<name xml:lang="x-default">Small Burger</name>
+<name xml:lang="de-DE">Kleiner Burger</name>
+<shortDescription xml:lang="x-default">If you need something fast, a burger always satisfies.</shortDescription>
+<shortDescription xml:lang="de-DE">Wenn man auf die Schnelle was Essbares braucht, hilft ein Burger immer.</shortDescription>
+<longDescription xml:lang="x-default">This one might be small but it looks realy tasty just looking at this image is going to make you crave a burger just like this one. A nice accesirior for your kitchen.</longDescription>
+<longDescription xml:lang="de-DE">Dieser ist vielleicht klein, aber er sieht wirklich lecker aus. Allein beim Anblick dieses Bildes werden Sie Lust auf einen Burger wie diesen bekommen. Ein schönes Accessoire für Ihre Küche.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/small-burger/small-burger-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/small-burger/small-burger-medium.webp</medium>
@@ -694,9 +858,12 @@
 <price>12.45;23.24;29.78</price>
 </product>
 <product>
-<name>Medium Burger</name>
-<shortDescription>You can’t have too many burger pictures, can you?</shortDescription>
-<longDescription>A typical burger nothing realy special but it doesnt have to be special to make and impression. </longDescription>
+<name xml:lang="x-default">Medium Burger</name>
+<name xml:lang="de-DE">Mittlerer Burger</name>
+<shortDescription xml:lang="x-default">You can’t have too many burger pictures, can you?</shortDescription>
+<shortDescription xml:lang="de-DE">Man kann nicht genug Burger-Bilder haben, oder?</shortDescription>
+<longDescription xml:lang="x-default">A typical burger nothing realy special but it doesnt have to be special to make and impression.</longDescription>
+<longDescription xml:lang="de-DE">Ein typischer Burger, nichts wirklich Besonderes, aber es muss nicht unbedingt etwas Besonderes sein, um einen Eindruck zu hinterlassen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/medium-burger/medium-burger-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/medium-burger/medium-burger-medium.webp</medium>
@@ -709,9 +876,12 @@
 </product>
 <!-- SubCategory Sweets  -->
 <product>
-<name>German Apple Pie</name>
-<shortDescription>A beautiful close up.</shortDescription>
-<longDescription>This poster of an delicouse looking apple pie closeup shot  is a good fit for your dinning room. The zoomed view is very aestecicly pleasing you can even see drops of caramel next to this masterpiece of </longDescription>
+<name xml:lang="x-default">German Apple Pie</name>
+<name xml:lang="de-DE">Deutscher Apfelkuchen</name>
+<shortDescription xml:lang="x-default">A beautiful close up.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine wunderschöne Nahaufnahme.</shortDescription>
+<longDescription xml:lang="x-default">This poster of an delicouse looking apple pie closeup shot is a good fit for your dinning room. The zoomed view is very aesthetically pleasing, you can even see drops of caramel next to this masterpiece of a dessert.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Poster mit einer Nahaufnahme eines leckeren Apfelkuchens passt gut in Ihr Esszimmer. Die vergrößerte Ansicht ist ästhetisch sehr ansprechend, man kann sogar Karamelltropfen neben diesem Meisterwerk eines Desserts erkennen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/german-apple-pie/german-apple-pie-small.webp</small>
 <medium>/assets/img/products/food/sweets/german-apple-pie/german-apple-pie-medium.webp</medium>
@@ -723,9 +893,12 @@
 <price>23.78;28.89;35.45</price>
 </product>
 <product>
-<name>Whipped Cream with Caramel</name>
-<shortDescription>A great topping for every pie.</shortDescription>
-<longDescription>This image is perfect for anyone who loves whipped cream and caramel sauce. It is also a great way to add a touch of sweetness and elegance to your home decor.</longDescription>
+<name xml:lang="x-default">Whipped Cream with Caramel</name>
+<name xml:lang="de-DE">Schlagsahne mit Karamell</name>
+<shortDescription xml:lang="x-default">A great topping for every pie.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein toller Belag für jeden Kuchen.</shortDescription>
+<longDescription xml:lang="x-default">This image is perfect for anyone who loves whipped cream and caramel sauce. It is also a great way to add a touch of sweetness and elegance to your home decor.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild ist perfekt für alle, die Schlagsahne und Karamellsauce lieben. Es ist auch eine großartige Möglichkeit, Ihrer Inneneinrichtung einen Hauch von Süße und Eleganz zu verleihen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/whipped-cream-with-caramel/whipped-cream-with-caramel-small.webp</small>
 <medium>/assets/img/products/food/sweets/whipped-cream-with-caramel/whipped-cream-with-caramel-medium.webp</medium>
@@ -737,9 +910,12 @@
 <price>11.78;21.84;29.87</price>
 </product>
 <product>
-<name>Blueberry Cake</name>
-<shortDescription>Well-made blueberry cake on a plate.</shortDescription>
-<longDescription>If you have a kitchen and need some decoration this blueberry cake poster is for you. nothing way to special about this one but maybe your room isnt all that special either.</longDescription>
+<name xml:lang="x-default">Blueberry Cake</name>
+<name xml:lang="de-DE">Blaubeerkuchen</name>
+<shortDescription xml:lang="x-default">Well-made blueberry cake on a plate.</shortDescription>
+<shortDescription xml:lang="de-DE">Blaubeerkuchen auf einem Teller.</shortDescription>
+<longDescription xml:lang="x-default">If you have a kitchen and need some decoration this blueberry cake poster is for you. Nothing way to special about this one but maybe your room isnt all that special either.</longDescription>
+<longDescription xml:lang="de-DE">Wenn Sie eine Küche haben und etwas Dekoration benötigen, ist dieses Blaubeerkuchen-Poster genau das Richtige für Sie. An diesem ist nichts besonderes, aber vielleicht ist Ihr Zimmer auch nicht so besonders.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/blueberry-cake/blueberry-cake-small.webp</small>
 <medium>/assets/img/products/food/sweets/blueberry-cake/blueberry-cake-medium.webp</medium>
@@ -751,9 +927,12 @@
 <price>18.89;29.99;39.99</price>
 </product>
 <product>
-<name>Fruit Tart with Cocoa</name>
-<shortDescription>An aesthetic fruit tart with cocoa powder.</shortDescription>
-<longDescription>Satisfy your cravings for cake without the calories with this poster of a tasty looking tart.</longDescription>
+<name xml:lang="x-default">Fruit Tart with Cocoa</name>
+<name xml:lang="de-DE">Obstkuchen mit Kakao</name>
+<shortDescription xml:lang="x-default">An aesthetic fruit tart with cocoa powder.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein sehr schöner Obstkuchen mit Kakaopulver.</shortDescription>
+<longDescription xml:lang="x-default">Satisfy your cravings for cake without the calories with this poster of a tasty looking tart.</longDescription>
+<longDescription xml:lang="de-DE">Stillen Sie Ihr Verlangen nach Kuchen ohne Kalorien mit diesem Poster einer lecker aussehenden Torte.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/fruit-tart-with-cocoa/fruit-tart-with-cocoa-small.webp</small>
 <medium>/assets/img/products/food/sweets/fruit-tart-with-cocoa/fruit-tart-with-cocoa-medium.webp</medium>
@@ -765,9 +944,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Gummy Bears on Keyboard</name>
-<shortDescription>Pimp your office!</shortDescription>
-<longDescription>A nice way to get more life in your office with funny pictures like this one of a keyboard with with gummibears on top, arent they cute?</longDescription>
+<name xml:lang="x-default">Gummy Bears on Keyboard</name>
+<name xml:lang="de-DE">Gummibärchen auf einer Tastatur</name>
+<shortDescription xml:lang="x-default">Pimp your office!</shortDescription>
+<shortDescription xml:lang="de-DE">Pimpen Sie Ihr Büro!</shortDescription>
+<longDescription xml:lang="x-default">A nice way to get more life in your office with funny pictures like this one of a keyboard with with gummibears on top, aren't they cute?</longDescription>
+<longDescription xml:lang="de-DE">Eine schöne Möglichkeit, mehr Leben in Ihr Büro zu bringen, mit lustigen Bildern wie diesem von einer Tastatur mit Gummibärchen darauf, sind die nicht süß?</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/gummy-bears-on-keyboard/gummy-bears-on-keyboard-small.webp</small>
 <medium>/assets/img/products/food/sweets/gummy-bears-on-keyboard/gummy-bears-on-keyboard-medium.webp</medium>
@@ -779,9 +961,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Colored Sprinkles</name>
-<shortDescription>How many white ones do you see?</shortDescription>
-<longDescription>A nice way to bring colors in your room and also a good choice for a child room. Your children will love this.</longDescription>
+<name xml:lang="x-default">Colored Sprinkles</name>
+<name xml:lang="de-DE">Bunte Streusel</name>
+<shortDescription xml:lang="x-default">How many white ones do you see?</shortDescription>
+<shortDescription xml:lang="de-DE">Wie viele weiße sehen Sie?</shortDescription>
+<longDescription xml:lang="x-default">A nice way to bring colors in your room and also a good choice for a child room. Your children will love this.</longDescription>
+<longDescription xml:lang="de-DE">Eine schöne Möglichkeit, Farbe in Ihr Zimmer zu bringen und auch eine gute Wahl für ein Kinderzimmer. Ihre Kinder werden es lieben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/colored-sprinkles/colored-sprinkles-small.webp</small>
 <medium>/assets/img/products/food/sweets/colored-sprinkles/colored-sprinkles-medium.webp</medium>
@@ -793,9 +978,12 @@
 <price>9.89;19.78;28.79</price>
 </product>
 <product>
-<name>Gummy Bears in Bowl</name>
-<shortDescription>Every child loves these.</shortDescription>
-<longDescription>Gummy bears come in many shrill colors, good choice to get some more excitement in your room.</longDescription>
+<name xml:lang="x-default">Gummy Bears in Bowl</name>
+<name xml:lang="de-DE">Gümmibärchen in einer Schüssel</name>
+<shortDescription xml:lang="x-default">Every child loves these.</shortDescription>
+<shortDescription xml:lang="de-DE">Jedes Kind liebt sie.</shortDescription>
+<longDescription xml:lang="x-default">Gummy bears come in many shrill colors, good choice to get some more excitement in your room.</longDescription>
+<longDescription xml:lang="de-DE">Gummibärchen gibt es in vielen schrillen Farben, eine gute Wahl, um mehr Spannung in Ihr Zimmer zu bringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/gummy-bears-in-bowl/gummy-bears-in-bowl-small.webp</small>
 <medium>/assets/img/products/food/sweets/gummy-bears-in-bowl/gummy-bears-in-bowl-medium.webp</medium>
@@ -807,9 +995,12 @@
 <price>17.99;27.99;39.56</price>
 </product>
 <product>
-<name>Raspberry Jello</name>
-<shortDescription>Two little raspberries...</shortDescription>
-<longDescription>A very red, nice looking raspberry cake, nice for your dinning room wall. The poster is also a great way to bring a touch of sweetness and indulgence indoors, even if you're on a diet.</longDescription>
+<name xml:lang="x-default">Raspberry Jello</name>
+<name xml:lang="de-DE">Himbeerkuchen</name>
+<shortDescription xml:lang="x-default">Two little raspberries...</shortDescription>
+<shortDescription xml:lang="de-DE">Zwei kleine Himbeeren...</shortDescription>
+<longDescription xml:lang="x-default">A very red, nice looking raspberry cake, nice for your dinning room wall. The poster is also a great way to bring a touch of sweetness and indulgence indoors, even if you're on a diet.</longDescription>
+<longDescription xml:lang="de-DE">Ein sehr roter, schön aussehender Himbeerkuchen, schön für die Wand Ihres Esszimmers. Das Poster ist auch eine tolle Möglichkeit, einen Hauch von Süße und Genuss ins Haus zu bringen, selbst wenn Sie auf Diät sind.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/raspberry-jello/raspberry-jello-small.webp</small>
 <medium>/assets/img/products/food/sweets/raspberry-jello/raspberry-jello-medium.webp</medium>
@@ -821,9 +1012,12 @@
 <price>12.75;18.99;27.65</price>
 </product>
 <product>
-<name>Strawberry and Grapes</name>
-<shortDescription>The calorie-conscious option.</shortDescription>
-<longDescription>A great close up of delicious red and purple fruits, adding a nice contrast to everyone's rooms. Worth to know: Strawberries aren't actually berries, the berries in reality are the small seed on the skin of the strawberry.</longDescription>
+<name xml:lang="x-default">Strawberry and Grapes</name>
+<name xml:lang="de-DE">Erdbeeren und Weintrauben</name>
+<shortDescription xml:lang="x-default">The calorie-conscious option.</shortDescription>
+<shortDescription xml:lang="de-DE">Die kalorienarme Alternative.</shortDescription>
+<longDescription xml:lang="x-default">A great close up of delicious red and purple fruits, adding a nice contrast to everyone's rooms. Worth to know: Strawberries aren't actually berries, the berries in reality are the small seed on the skin of the strawberry.</longDescription>
+<longDescription xml:lang="de-DE">Eine tolle Nahaufnahme köstlicher roter und violetter Früchte, die jedem Zimmer einen schönen Kontrast verleiht. Wissenswertes: Erdbeeren sind eigentlich keine Beeren, die Beeren sind in Wirklichkeit die kleinen Samen auf der Schale der Erdbeere.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/strawberry-and-grapes/strawberry-and-grapes-small.webp</small>
 <medium>/assets/img/products/food/sweets/strawberry-and-grapes/strawberry-and-grapes-medium.webp</medium>
@@ -835,9 +1029,12 @@
 <price>17.99;29.99;39.90</price>
 </product>
 <product>
-<name>Donut Mix</name>
-<shortDescription>Awesome! A whole box of them!</shortDescription>
-<longDescription>Maybe your friend is a police man, and you want to give him a cliché gift to make him laugh, then don't think twice and get him these donuts.</longDescription>
+<name xml:lang="x-default">Donut Mix</name>
+<name xml:lang="de-DE">Donut Mix</name>
+<shortDescription xml:lang="x-default">Awesome! A whole box of them!</shortDescription>
+<shortDescription xml:lang="de-DE">Klasse! Eine ganze Donut-Box!</shortDescription>
+<longDescription xml:lang="x-default">Maybe your friend is a police man, and you want to give him a cliché gift to make him laugh, then don't think twice and get him these donuts.</longDescription>
+<longDescription xml:lang="de-DE">Vielleicht ist Ihr Freund ein Polizist und Sie möchten ihm ein klischeehaftes Geschenk machen, um ihn zum Lachen zu bringen. Dann überlegen Sie nicht länger und besorgen Sie ihm diese Donuts.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/donut-mix/donut-mix-small.webp</small>
 <medium>/assets/img/products/food/sweets/donut-mix/donut-mix-medium.webp</medium>
@@ -851,9 +1048,12 @@
 <!-- TopCategory Means_of_Transportation  -->
 <!-- SubCategory Airplanes  -->
 <product>
-<name>Swiss Air Airbus A320</name>
-<shortDescription>Beautiful take-off.</shortDescription>
-<longDescription>Wanting to fly is a craving a lot of people have. Planes like this make it possible for humans to go beyond their limits and reach new heights in the truest sense of the word. This image is a good way to showcase this in your home.</longDescription>
+<name xml:lang="x-default">Swiss Air Airbus A320</name>
+<name xml:lang="de-DE">Swiss Air Airbus A320</name>
+<shortDescription xml:lang="x-default">Beautiful take-off.</shortDescription>
+<shortDescription xml:lang="de-DE">Schöner Start.</shortDescription>
+<longDescription xml:lang="x-default">Wanting to fly is a craving a lot of people have. Planes like this make it possible for humans to go beyond their limits and reach new heights in the truest sense of the word. This image is a good way to showcase this in your home.</longDescription>
+<longDescription xml:lang="de-DE">Der Wunsch zu fliegen ist ein Verlangen vieler Menschen. Flugzeuge wie dieses ermöglichen es dem Menschen, im wahrsten Sinne des Wortes über seine Grenzen hinauszugehen und neue Höhen zu erreichen. Dieses Bild ist eine gute Möglichkeit, dies in Ihrem Zuhause zu präsentieren.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/swiss-air-airbus-a320/swiss-air-airbus-a320-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/swiss-air-airbus-a320/swiss-air-airbus-a320-medium.webp</medium>
@@ -865,9 +1065,12 @@
 <price>12.99;23.80;31.00</price>
 </product>
 <product>
-<name>FedEx Express</name>
-<shortDescription>The plane that lost your mail.</shortDescription>
-<longDescription>Planes are a great invention for travel and also for exchange between different locations in the world. This plane is one of many planes that belong to the international delivery company FedEx. If you are into economics or just searching for a picture for your office wall, this picture will provide everything.</longDescription>
+<name xml:lang="x-default">FedEx Express</name>
+<name xml:lang="de-DE">FedEx Express</name>
+<shortDescription xml:lang="x-default">The plane that lost your mail.</shortDescription>
+<shortDescription xml:lang="de-DE">Das Flugzeug das deine Post verlor.</shortDescription>
+<longDescription xml:lang="x-default">Planes are a great invention for travel and also for exchange between different locations in the world. This plane is one of many planes that belong to the international delivery company FedEx. If you are into economics or just searching for a picture for your office wall, this picture will provide everything.</longDescription>
+<longDescription xml:lang="de-DE">Flugzeuge sind eine großartige Erfindung für Reisen und auch für den Austausch zwischen verschiedenen Orten auf der Welt. Dieses Flugzeug ist eines von vielen Flugzeugen des internationalen Lieferunternehmens FedEx. Wenn Sie sich für Wirtschaftswissenschaften interessieren oder einfach nur ein Bild für Ihre Bürowand suchen, ist dieses Bild genau das Richtige für Sie.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/fedex-express/fedex-express-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/fedex-express/fedex-express-medium.webp</medium>
@@ -879,9 +1082,12 @@
 <price>23.56;31.70;39.99</price>
 </product>
 <product>
-<name>American Airlines Boeing 737 800</name>
-<shortDescription>American airlines plane.</shortDescription>
-<longDescription>An American Airlines Boeing 737-800 is flying with its sleek silhouette and modern design in the sky. This is the start of travel and adventure for a lot of people. If you like exploring new places and visit the world, u should definitely get this poster. </longDescription>
+<name xml:lang="x-default">American Airlines Boeing 737 800</name>
+<name xml:lang="de-DE">American Airlines Boeing 737 800</name>
+<shortDescription xml:lang="x-default">American airlines plane.</shortDescription>
+<shortDescription xml:lang="de-DE">Flugzeug von American Airlines.</shortDescription>
+<longDescription xml:lang="x-default">An American Airlines Boeing 737-800 is flying with its sleek silhouette and modern design in the sky. This is the start of travel and adventure for a lot of people. If you like exploring new places and visit the world, u should definitely get this poster.</longDescription>
+<longDescription xml:lang="de-DE">Eine Boeing 737-800 der American Airlines fliegt mit ihrer schlanken Silhouette und ihrem modernen Design in den Himmel. Für viele Menschen ist dies der Beginn von Reisen und Abenteuern. Wenn Sie es lieben, neue Orte zu erkunden und die Welt zu besuchen, sollten Sie sich dieses Poster unbedingt besorgen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/american-airlines-boeing-737-800/american-airlines-boeing-737-800-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/american-airlines-boeing-737-800/american-airlines-boeing-737-800-medium.webp</medium>
@@ -893,9 +1099,12 @@
 <price>12.59;21.90;29.99</price>
 </product>
 <product>
-<name>Air Greenland Airbus A330 200</name>
-<shortDescription>Yes, there are airplanes in Greenland...</shortDescription>
-<longDescription>.The vibrant red of the airplane contrasts beautifully with the white snow, creating a striking image. For every air plain fan that wants a rather rare plain in their collection. </longDescription>
+<name xml:lang="x-default">Air Greenland Airbus A330 200</name>
+<name xml:lang="de-DE">Air Greenland Airbus A330 200</name>
+<shortDescription xml:lang="x-default">Yes, there are airplanes in Greenland...</shortDescription>
+<shortDescription xml:lang="de-DE">Genau, es gibt Flugzeuge in Grönland.</shortDescription>
+<longDescription xml:lang="x-default">The bright red of the plane contrasts wonderfully with the white snow and creates an impressive image.</longDescription>
+<longDescription xml:lang="de-DE">Das leuchtende Rot des Flugzeugs steht wunderbar in Kontrast mit dem weißen Schnee und sorgt für ein eindrucksvolles Bild.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/air-greenland-airbus-a330-200/air-greenland-airbus-a330-200-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/air-greenland-airbus-a330-200/air-greenland-airbus-a330-200-medium.webp</medium>
@@ -907,9 +1116,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Air Lingus Airbus A320</name>
-<shortDescription>Hail to Saint Patrick!</shortDescription>
-<longDescription>A turquoise painted airplane with a lucky clover on its back wing. If you need more luck in your daily life, this might provide good fortune. </longDescription>
+<name xml:lang="x-default">Air Lingus Airbus A320</name>
+<name xml:lang="de-DE">Air Lingus Airbus A320</name>
+<shortDescription xml:lang="x-default">Hail to Saint Patrick!</shortDescription>
+<shortDescription xml:lang="de-DE">Preiset Saint Patrick!</shortDescription>
+<longDescription xml:lang="x-default">A turquoise painted airplane with a lucky clover on its back wing. If you need more luck in your daily life, this might provide good fortune.</longDescription>
+<longDescription xml:lang="de-DE">Ein türkisfarbenes Flugzeug mit einem Glücksklee auf dem hinteren Flügel. Wenn Sie mehr Glück in Ihrem täglichen Leben brauchen, könnte dies ein Glücksbringer sein.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/air-lingus-airbus-a320/air-lingus-airbus-a320-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/air-lingus-airbus-a320/air-lingus-airbus-a320-medium.webp</medium>
@@ -921,9 +1133,12 @@
 <price>15.89;24.70;35.90</price>
 </product>
 <product>
-<name>US Air Force Starlifter</name>
-<shortDescription>Show off with exclusive shots from the Smithsonian in D.C.!</shortDescription>
-<longDescription>Step into the world of cutting-edge intelligence with this old school looking military airplane. For everybody that is interested in war history.</longDescription>
+<name xml:lang="x-default">US Air Force Starlifter</name>
+<name xml:lang="de-DE">Starlifter der US-Luftwaffe</name>
+<shortDescription xml:lang="x-default">Show off with exclusive shots from the Smithsonian in D.C.!</shortDescription>
+<shortDescription xml:lang="de-DE">Zeigen Sie sich mit exklusiven Aufnahmen aus dem Smithsonian in D.C.!</shortDescription>
+<longDescription xml:lang="x-default">Step into the world of cutting-edge intelligence with this old school looking military airplane. For everybody that is interested in war history.</longDescription>
+<longDescription xml:lang="de-DE">Treten Sie ein in die Welt der modernsten Geheimdienste mit diesem Militärflugzeug im Oldschool-Look. Für alle, die sich für die Kriegsgeschichte interessieren.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/us-air-force-starlifter/us-air-force-starlifter-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/us-air-force-starlifter/us-air-force-starlifter-medium.webp</medium>
@@ -935,9 +1150,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Boeing 707</name>
-<shortDescription>How it used to look like.</shortDescription>
-<longDescription>A great gift for airplane enthusiasts that love old school planes and especially Boeing. Worth to know: Mechanical issues were a common problem before the introduction of the Boeing 707 with the introduction, a new era of more sustainable jets was ushered in.</longDescription>
+<name xml:lang="x-default">Boeing 707</name>
+<name xml:lang="de-DE">Boeing 707</name>
+<shortDescription xml:lang="x-default">How it used to look like.</shortDescription>
+<shortDescription xml:lang="de-DE">Wie es einst aussah.</shortDescription>
+<longDescription xml:lang="x-default">A great gift for airplane enthusiasts that love old school planes and especially Boeing. Worth to know: Mechanical issues were a common problem before the introduction of the Boeing 707 with the introduction, a new era of more sustainable jets was ushered in.</longDescription>
+<longDescription xml:lang="de-DE">Ein tolles Geschenk für Flugzeugliebhaber, die alte Flugzeuge und insbesondere Boeing lieben. Wissenswert: Mechanische Probleme waren vor der Einführung der Boeing 707 ein häufiges Problem. Mit der Einführung wurde eine neue Ära nachhaltigerer Jets eingeläutet.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/boeing-707/boeing-707-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/boeing-707/boeing-707-medium.webp</medium>
@@ -949,9 +1167,12 @@
 <price>23.78;38.90;51.00</price>
 </product>
 <product>
-<name>Boeing 307 Stratoliner</name>
-<shortDescription>Old silvery plane.</shortDescription>
-<longDescription>The Boeing 307 Stratoliner is a beautiful and iconic airliner that is loved my many Boeing fans, If you are a fan this is a great addition to your hobby room. This picture perfectly captures the airplane's elegance and power. Good to know: The plane is painted in the airline's signature silver livery.</longDescription>
+<name xml:lang="x-default">Boeing 307 Stratoliner</name>
+<name xml:lang="de-DE">Boeing 307 Stratoliner</name>
+<shortDescription xml:lang="x-default">Old silvery plane.</shortDescription>
+<shortDescription xml:lang="de-DE">Altes silbernes Flugzeug.</shortDescription>
+<longDescription xml:lang="x-default">The Boeing 307 Stratoliner is a beautiful and iconic airliner that is loved my many Boeing fans, If you are a fan this is a great addition to your hobby room. This picture perfectly captures the airplane's elegance and power. Good to know: The plane is painted in the airline's signature silver livery.</longDescription>
+<longDescription xml:lang="de-DE">Die Boeing 307 Stratoliner ist ein schönes und ikonisches Verkehrsflugzeug, das von vielen Boeing-Fans geliebt wird. Wenn Sie ein Fan sind, ist dies eine große Bereicherung für Ihr Hobby Zimmer. Dieses Bild fängt die Eleganz und Kraft des Flugzeugs perfekt ein. Gut zu wissen: Das Flugzeug ist in der typischen Silberlackierung der Fluggesellschaft lackiert.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/boeing-307-stratoliner/boeing-307-stratoliner-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/boeing-307-stratoliner/boeing-307-stratoliner-medium.webp</medium>
@@ -963,9 +1184,12 @@
 <price>12.95;27.90;38.40</price>
 </product>
 <product>
-<name>Lufthansa JU 52</name>
-<shortDescription>Old Lufthansa airplane in a museum.</shortDescription>
-<longDescription>Whether you're an avid aviation enthusiast or simply appreciate the beauty of classic aircraft, this Lufthansa Aircraft poster is a timeless treasure that will be cherished for generations to come. </longDescription>
+<name xml:lang="x-default">Lufthansa JU 52</name>
+<name xml:lang="de-DE">Lufthansa JU 52</name>
+<shortDescription xml:lang="x-default">Old Lufthansa airplane in a museum.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein altes Lufthansa Flugzeug in einem Museum.</shortDescription>
+<longDescription xml:lang="x-default">Whether you're an avid aviation enthusiast or simply appreciate the beauty of classic aircraft, this Lufthansa Aircraft poster is a timeless treasure that will be cherished for generations to come.</longDescription>
+<longDescription xml:lang="de-DE">Egal, ob Sie ein begeisterter Luftfahrtfan sind oder einfach nur die Schönheit klassischer Flugzeuge zu schätzen wissen, dieses Poster von Lufthansa Aircraft ist ein zeitloser Schatz, den Sie über Generationen hinweg in Ehren halten werden.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/lufthansa-ju-52/lufthansa-ju-52-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/lufthansa-ju-52/lufthansa-ju-52-medium.webp</medium>
@@ -977,9 +1201,12 @@
 <price>15.97;28.90;34.65</price>
 </product>
 <product>
-<name>F4S from VMFA 232</name>
-<shortDescription>An original US Marine Corps Fighter.</shortDescription>
-<longDescription>A very patriotic picture of a US Marine Corps Fighter Jet that is going to showcase your pride for being an American. Worth to know, this specific model is part of the Marine Fighter Attack Squadron 232 that fought in numerous fight like the second world war. </longDescription>
+<name xml:lang="x-default">F4S from VMFA 232</name>
+<name xml:lang="de-DE">F4S von VMFA 232</name>
+<shortDescription xml:lang="x-default">An original US Marine Corps Fighter.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Original-Jagdflugzeug der US Marine Corp.</shortDescription>
+<longDescription xml:lang="x-default">A very patriotic picture of a US Marine Corps Fighter Jet that is going to showcase your pride for being an American. Worth to know, this specific model is part of the Marine Fighter Attack Squadron 232 that fought in numerous fight like the second world war.</longDescription>
+<longDescription xml:lang="de-DE">Ein sehr patriotisches Bild eines Kampfjets der US Marine Corp, das Ihren Stolz, Amerikaner zu sein, zeigen wird. Gut zu wissen ist, dass dieses spezielle Modell Teil der Marine Fighter Attack Squadron 232 war, die in zahlreichen Kampf wie dem Zweiten Weltkrieg gekämpft.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/f-4s-from-vmfa-232/f-4s-from-vmfa-232-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/f-4s-from-vmfa-232/f-4s-from-vmfa-232-medium.webp</medium>
@@ -992,9 +1219,12 @@
 </product>
 <!-- SubCategory Classic_Cars  -->
 <product>
-<name>Trabant P50</name>
-<shortDescription>Go, Trabi, go!</shortDescription>
-<longDescription>The Trabant p50 is the first series production model of the East German Trabant series and seen as iconic car with classic car enthusiast.  This specific one has a beautiful color arrangement with its blue top and white bottom, so it's perfect for a pleasing atmosphere in your room.  </longDescription>
+<name xml:lang="x-default">Trabant P50</name>
+<name xml:lang="de-DE">Trabant P50</name>
+<shortDescription xml:lang="x-default">Go, Trabi, go!</shortDescription>
+<shortDescription xml:lang="de-DE">Los, Trabi, los!</shortDescription>
+<longDescription xml:lang="x-default">The Trabant P50 is the first series production model of the East German Trabant series and seen as iconic car with classic car enthusiast. This specific one has a beautiful color arrangement with its blue top and white bottom, so it's perfect for a pleasing atmosphere in your room.</longDescription>
+<longDescription xml:lang="de-DE">Der Trabant P50 ist das erste Serienmodell der ostdeutschen Trabant-Baureihe und gilt bei Oldtimer-Liebhabern als Kultauto. Dieses spezielle Modell hat eine schöne Farbgebung mit seinem blauen Oberteil und weißem Unterteil, so dass es perfekt für eine angenehme Atmosphäre in Ihrem Zimmer ist.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/trabant-p50/trabant-p50-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/trabant-p50/trabant-p50-medium.webp</medium>
@@ -1006,9 +1236,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>IFA F8</name>
-<shortDescription>One of 25.000.</shortDescription>
-<longDescription>A perfect way to start a conversation with guests about your favorite cars. This old school est German car makes an impression with the sleek design and elegant curves and will make yourself way more interesting.</longDescription>
+<name xml:lang="x-default">IFA F8</name>
+<name xml:lang="de-DE">IFA F8</name>
+<shortDescription xml:lang="x-default">One of 25.000.</shortDescription>
+<shortDescription xml:lang="de-DE">Einer von 25.000.</shortDescription>
+<longDescription xml:lang="x-default">A perfect way to start a conversation with guests about your favorite cars. This old school est German car makes an impression with the sleek design and elegant curves and will make yourself way more interesting.</longDescription>
+<longDescription xml:lang="de-DE">Ein perfekter Weg, um ein Gespräch mit Gästen über Ihre Lieblingsautos zu beginnen. Dieses deutsche Auto der alten Schule beeindruckt mit seinem schnittigen Design und den eleganten Kurven und macht Sie viel interessanter.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-f8/ifa-f8-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-f8/ifa-f8-medium.webp</medium>
@@ -1020,9 +1253,12 @@
 <price>12.95;18.40;27.90</price>
 </product>
 <product>
-<name>IFA W50</name>
-<shortDescription>East German truck.</shortDescription>
-<longDescription>A blue bulky looking truck from DDR, Germany, a great gift for people that want to show off their love for trucks. </longDescription>
+<name xml:lang="x-default">IFA W50</name>
+<name xml:lang="de-DE">IFA W50</name>
+<shortDescription xml:lang="x-default">East German truck.</shortDescription>
+<shortDescription xml:lang="de-DE">Ostdeutscher LKW.</shortDescription>
+<longDescription xml:lang="x-default">A blue bulky looking truck from DDR, Germany, a great gift for people that want to show off their love for trucks.</longDescription>
+<longDescription xml:lang="de-DE">Ein blauer, sperriger Lastwagen aus der DDR, ein tolles Geschenk für Leute, die ihre Liebe zu Lastwagen zeigen wollen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-w50/ifa-w50-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-w50/ifa-w50-medium.webp</medium>
@@ -1034,9 +1270,12 @@
 <price>18.36;28.65;41.10</price>
 </product>
 <product>
-<name>IFA H6 Grey Red</name>
-<shortDescription>Not as big but quite sufficient.</shortDescription>
-<longDescription>The beauty of old technologies is something special, and putting up a picture with old cars is a good way to express the innovations from old times. This old lorry was a great truck and will be remembered in this poster. </longDescription>
+<name xml:lang="x-default">IFA H6 Grey Red</name>
+<name xml:lang="de-DE">IFA H6 Grau Rot</name>
+<shortDescription xml:lang="x-default">Not as big but quite sufficient.</shortDescription>
+<shortDescription xml:lang="de-DE">Nicht so groß, aber völlig ausreichend.</shortDescription>
+<longDescription xml:lang="x-default">The beauty of old technologies is something special, and putting up a picture with old cars is a good way to express the innovations from old times. This old lorry was a great truck and will be remembered in this poster.</longDescription>
+<longDescription xml:lang="de-DE">Die Schönheit alter Technologien ist etwas Besonderes, und ein Bild mit alten Autos ist eine gute Möglichkeit, die Innovationen aus alten Zeiten zum Ausdruck zu bringen. Dieser alte Lastwagen war ein großartiger Lastwagen und wird auf diesem Poster in Erinnerung bleiben.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-grey-red/ifa-h6-grey-red-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-grey-red/ifa-h6-grey-red-medium.webp</medium>
@@ -1048,9 +1287,12 @@
 <price>9.74;19.78;27.19</price>
 </product>
 <product>
-<name>IFA G5</name>
-<shortDescription>Water Supply for the National People's Army</shortDescription>
-<longDescription>This old looking truck is a perfect fit for somebody that's interested in German army technology. Worth to know: This particular truck was used to transport drinking water in the old times.</longDescription>
+<name xml:lang="x-default">IFA G5</name>
+<name xml:lang="de-DE">IFA G5</name>
+<shortDescription xml:lang="x-default">Water Supply for the National People's Army.</shortDescription>
+<shortDescription xml:lang="de-DE">Wasserversorgung für die Nationale Volksarmee.</shortDescription>
+<longDescription xml:lang="x-default">This old looking truck is a perfect fit for somebody that's interested in German army technology. Worth to know: This particular truck was used to transport drinking water in the old times.</longDescription>
+<longDescription xml:lang="de-DE">PlatzhDieser alt aussehende LKW ist perfekt für jemanden, der sich für deutsche Militärtechnik interessiert. Interessant zu wissen: Dieser spezielle LKW wurde früher zum Transport von Trinkwasser verwendet.alter</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-g5/ifa-g5-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-g5/ifa-g5-medium.webp</medium>
@@ -1062,9 +1304,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>IFA H6 Green</name>
-<shortDescription>A bright green truck from old times.</shortDescription>
-<longDescription>The truck's weathered exterior and rustic charm evoke a sense of simpler times, maybe a great gift for your grandparents.</longDescription>
+<name xml:lang="x-default">IFA H6 Green</name>
+<name xml:lang="de-DE">IFA H6 Grün</name>
+<shortDescription xml:lang="x-default">A bright green truck from old times.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein hellgrüner LKW von alten Zeiten.</shortDescription>
+<longDescription xml:lang="x-default">The truck's weathered exterior and rustic charm evoke a sense of simpler times, maybe a great gift for your grandparents.</longDescription>
+<longDescription xml:lang="de-DE">Das verwitterte Äußere und der rustikale Charme des Lastwagens erinnern an einfachere Zeiten und sind vielleicht ein tolles Geschenk für Ihre Großeltern.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-green/ifa-h6-green-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-green/ifa-h6-green-medium.webp</medium>
@@ -1076,9 +1321,12 @@
 <price>12.63;18.91;26.78</price>
 </product>
 <product>
-<name>IFA G5 Tank Truck</name>
-<shortDescription>An old tank truck in bright red.</shortDescription>
-<longDescription>Classic trucks are timeless icons that never go out of style, one of these in your rooms will definitely impress your friends.</longDescription>
+<name xml:lang="x-default">IFA G5 Tank Truck</name>
+<name xml:lang="de-DE">IFA G5 Tankwagen</name>
+<shortDescription xml:lang="x-default">An old tank truck in bright red.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein alter hellroter LKW.</shortDescription>
+<longDescription xml:lang="x-default">Classic trucks are timeless icons that never go out of style, one of these in your rooms will definitely impress your friends.</longDescription>
+<longDescription xml:lang="de-DE">Klassische Trucks sind zeitlose Ikonen, die nie aus der Mode kommen. Ein solcher Truck in Ihrem Zimmer wird Ihre Freunde sicher beeindrucken.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-g5-tank-truck/ifa-g5-tank-truck-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-g5-tank-truck/ifa-g5-tank-truck-medium.webp</medium>
@@ -1090,9 +1338,12 @@
 <price>15.45;22.90;29.90</price>
 </product>
 <product>
-<name>IFA Cement Truck</name>
-<shortDescription>An industrial truck for cement supplies.</shortDescription>
-<longDescription>Another old school truck in distinct blue used to help with cement supplies. A classic car, perfect for people with interest in cars in general.</longDescription>
+<name xml:lang="x-default">IFA Cement Truck</name>
+<name xml:lang="de-DE">IFA Zement-LKW</name>
+<shortDescription xml:lang="x-default">An industrial truck for cement supplies.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Industrie-LKW für Zementlieferungen.</shortDescription>
+<longDescription xml:lang="x-default">Another old school truck in distinct blue used to help with cement supplies. A classic car, perfect for people with interest in cars in general.</longDescription>
+<longDescription xml:lang="de-DE">Ein weiterer alter Lastwagen in klarem Blau, der für den Transport von Zement verwendet wird. Ein Oldtimer, perfekt für Menschen mit Interesse an Autos im Allgemeinen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-cement-truck/ifa-cement-truck-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-cement-truck/ifa-cement-truck-medium.webp</medium>
@@ -1104,9 +1355,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Ikarus 211</name>
-<shortDescription>Made in Hungary.</shortDescription>
-<longDescription>A real old school bus, your grandparents might remember this one from their childhood, a good conversation starter with old people.</longDescription>
+<name xml:lang="x-default">Ikarus 211</name>
+<name xml:lang="de-DE">Ikarus 211</name>
+<shortDescription xml:lang="x-default">Made in Hungary.</shortDescription>
+<shortDescription xml:lang="de-DE">Hergestellt in Ungarn.</shortDescription>
+<longDescription xml:lang="x-default">A real old school bus, your grandparents might remember this one from their childhood, a good conversation starter with old people.</longDescription>
+<longDescription xml:lang="de-DE">Ein echter alter Schulbus, an den sich Ihre Großeltern vielleicht noch aus ihrer Kindheit erinnern, ein guter Gesprächsanlass für alte Leute.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ikarus-211/ikarus-211-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ikarus-211/ikarus-211-medium.webp</medium>
@@ -1118,9 +1372,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>ExOmaha Transit Company Bus</name>
-<shortDescription>Absolutely unique!</shortDescription>
-<longDescription>This poor bus looks destroyed and taken away by time, a good choice to get a theme of rustically.</longDescription>
+<name xml:lang="x-default">ExOmaha Transit Company Bus</name>
+<name xml:lang="de-DE">ExOmaha Transit Gesellschaft Bus</name>
+<shortDescription xml:lang="x-default">Absolutely unique!</shortDescription>
+<shortDescription xml:lang="de-DE">Absolut einzigartig!</shortDescription>
+<longDescription xml:lang="x-default">This poor bus looks destroyed and taken away by time, a good choice to get a theme of rustically.</longDescription>
+<longDescription xml:lang="de-DE">Dieser arme Bus sieht zerstört und vom Zahn der Zeit gezeichnet aus, eine gute Wahl, um ein rustikales Thema aufzugreifen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ex-omaha-transit-company-bus/ex-omaha-transit-company-bus-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ex-omaha-transit-company-bus/ex-omaha-transit-company-bus-medium.webp</medium>
@@ -1133,9 +1390,12 @@
 </product>
 <!-- SubCategory Railways  -->
 <product>
-<name>Third Avenue Railway System</name>
-<shortDescription>The old railway system of NYC.</shortDescription>
-<longDescription>A great gift for somebody that loves trains, it's rare to see these old railways in person nowadays, and they will really like this one.</longDescription>
+<name xml:lang="x-default">Third Avenue Railway System</name>
+<name xml:lang="de-DE">Third Avenue Eisenbahnsystem</name>
+<shortDescription xml:lang="x-default">The old railway system of NYC.</shortDescription>
+<shortDescription xml:lang="de-DE">Das alte Eisenbahnsystem von NYC.</shortDescription>
+<longDescription xml:lang="x-default">A great gift for somebody that loves trains, it's rare to see these old railways in person nowadays, and they will really like this one.</longDescription>
+<longDescription xml:lang="de-DE">Ein großartiges Geschenk für jemanden, der Züge liebt. Heutzutage sieht man diese alten Eisenbahnen nur noch selten in natura, und sie werden diese hier wirklich mögen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/third-avenue-railway-system/third-avenue-railway-system-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/third-avenue-railway-system/third-avenue-railway-system-medium.webp</medium>
@@ -1147,9 +1407,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Eastern Massachussetts Street Railway</name>
-<shortDescription>The historic streetcar company of Boston. </shortDescription>
-<longDescription>This old orange trolley in Massachusetts is still working even today, maybe you were riding it and want to have a souvenir or u just like the color, either way a great picture for your anyone's home.</longDescription>
+<name xml:lang="x-default">Eastern Massachussetts Street Railway</name>
+<name xml:lang="de-DE">Ost-Massachussetts-Straßenbahn</name>
+<shortDescription xml:lang="x-default">The historic streetcar company of Boston.</shortDescription>
+<shortDescription xml:lang="de-DE">Die historische Straßenbahngesellschaft von Boston.</shortDescription>
+<longDescription xml:lang="x-default">This old orange trolley in Massachusetts is still working even today, maybe you were riding it and want to have a souvenir or u just like the color, either way a great picture for your anyone's home.</longDescription>
+<longDescription xml:lang="de-DE">Diese alte orangefarbene Draisine in Massachusetts ist auch heute noch in Betrieb. Vielleicht sind Sie damit gefahren und wollen ein Souvenir haben oder Sie mögen einfach die Farbe, so oder so ein tolles Bild für Ihr Zuhause.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/eastern-massachussetts-street-railway/eastern-massachussetts-street-railway-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/eastern-massachussetts-street-railway/eastern-massachussetts-street-railway-medium.webp</medium>
@@ -1161,9 +1424,12 @@
 <price>23.56;33.68;40.90</price>
 </product>
 <product>
-<name>Boston MBTA Wartime Pullman Green PCC Trolley</name>
-<shortDescription>An old green and white trolley.</shortDescription>
-<longDescription>This poster features a classic, rather cute and clumsy looking green and white trolley on a train track. A nice motive to gift a friend. </longDescription>
+<name xml:lang="x-default">Boston MBTA Wartime Pullman Green PCC Trolley</name>
+<name xml:lang="de-DE">Boston MBTA Wartime Pullman Grün PCC Trolley</name>
+<shortDescription xml:lang="x-default">An old green and white trolley.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein alter grün-weißer Wagen.</shortDescription>
+<longDescription xml:lang="x-default">This poster features a classic, rather cute and clumsy looking green and white trolley on a train track. A nice motive to gift a friend.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Poster zeigt einen klassischen, ziemlich niedlichen und unbeholfen aussehenden grün-weißen Wagen auf einer Bahnstrecke. Ein schönes Motiv als Geschenk für einen Freund.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/boston-mbta-wartime-pullman-green-pcc-trolley/boston-mbta-wartime-pullman-green-pcc-trolley-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/boston-mbta-wartime-pullman-green-pcc-trolley/boston-mbta-wartime-pullman-green-pcc-trolley-medium.webp</medium>
@@ -1175,9 +1441,12 @@
 <price>12.45;21.20;33.33</price>
 </product>
 <product>
-<name>Yellow and Orange Railways</name>     
-<shortDescription>An orange colored trolley in a tram depot.</shortDescription>
-<longDescription>A Diesel locomotive produced by GM-EMD from 1939 to 1970. Spotted in Bernsdorf, Germany. </longDescription>
+<name xml:lang="x-default">Yellow and Orange Railways</name>
+<name xml:lang="de-DE">Gelbe und orangene Eisenbahnwagen</name>
+<shortDescription xml:lang="x-default">An orange colored trolley in a tram depot.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein orangefarbener Wagen in einer Eisenbahnstation.</shortDescription>
+<longDescription xml:lang="x-default">A Diesel locomotive produced by GM-EMD from 1939 to 1970. Spotted in Bernsdorf, Germany.</longDescription>
+<longDescription xml:lang="de-DE">Eine von GM-EMD von 1939 bis 1970 hergestellte Diesellokomotive. Gesichtet in Bernsdorf, Deutschland.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/yellow-and-orange-railways/yellow-and-orange-railways-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/yellow-and-orange-railways/yellow-and orange-railways-medium.webp</medium>
@@ -1189,9 +1458,12 @@
 <price>12.78;20.90;34.40</price>
 </product>
 <product>
-<name>German Steam Locomotive</name>
-<shortDescription>For railway nostalgics.</shortDescription>
-<longDescription>Spotted at a German city festival and a must-have for all railway nerds. </longDescription>
+<name xml:lang="x-default">German Steam Locomotive</name>
+<name xml:lang="de-DE">Deutsche DampfLokomotive</name>
+<shortDescription xml:lang="x-default">For railway nostalgics.</shortDescription>
+<shortDescription xml:lang="de-DE">Für Eisenbahn-Nostalgiker.</shortDescription>
+<longDescription xml:lang="x-default">Spotted at a German city festival and a must-have for all railway nerds.</longDescription>
+<longDescription xml:lang="de-DE">Entdeckt auf einem deutschen Stadtfest und ein Muss für alle Eisenbahn-Nerds.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/german-steam-locomotive/german-steam-locomotive-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/german-steam-locomotive/german-steam-locomotive-medium.webp</medium>
@@ -1203,9 +1475,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>German Steam Locomotive II</name>
-<shortDescription>A good old German steam locomotive.</shortDescription>
-<longDescription> Yes, we know, we have posters of pretty much everything. </longDescription>
+<name xml:lang="x-default">German Steam Locomotive II</name>
+<name xml:lang="de-DE">Deutsche DampfLokomotive II</name>
+<shortDescription xml:lang="x-default">A good old German steam locomotive.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine gute alte deutsche Dampflokomotive.</shortDescription>
+<longDescription xml:lang="x-default">Yes, we know, we have posters of pretty much everything.</longDescription>
+<longDescription xml:lang="de-DE">Ja, wir wissen dass wir Posters von fast allem haben.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/german-steam-locomotive II/german-steam-locomotive-II-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/german-steam-locomotive-II/german-steam-locomotive-II-medium.webp</medium>
@@ -1217,9 +1492,12 @@
 <price>15.98;18.67;23.90</price>
 </product>
 <product>
-<name>East German LEW EL 2</name>
-<shortDescription>Electric coal mine railway</shortDescription>
-<longDescription>Memo: East Germany produced a total of 1384 of these from 1952 to 1988. Some of them also got shipped to Bulgaria, China, Poland, and USSR. Spotted in "Besucherbergwerk Abraumförderbrücke F60" in Brandenburg, Germany. Yeah, we also think that German is a complicated language. </longDescription>
+<name xml:lang="x-default">East German LEW EL 2</name>
+<name xml:lang="de-DE">Ostdeutsche LEW EL 2</name>
+<shortDescription xml:lang="x-default">Electric coal mine railway.</shortDescription>
+<shortDescription xml:lang="de-DE">Elektrische Kohle-Minen-Eisenbahn.</shortDescription>
+<longDescription xml:lang="x-default">Memo: East Germany produced a total of 1384 of these from 1952 to 1988. Some of them also got shipped to Bulgaria, China, Poland, and USSR. Spotted in "Besucherbergwerk Abraumförderbrücke F60" in Brandenburg, Germany. Yeah, we also think that German is a complicated language.</longDescription>
+<longDescription xml:lang="de-DE">Memo: Die DDR produzierte von 1952 bis 1988 insgesamt 1384 dieser Fahrzeuge. Einige von ihnen wurden auch nach Bulgarien, China, Polen und in die UdSSR verschifft. Entdeckt im „Besucherbergwerk Abraumförderbrücke F60“ in Brandenburg, Deutschland.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/east-german-lew-el-2/east-german-lew-el-2-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/east-german-lew-el-2/east-german-lew-el-2-medium.webp</medium>
@@ -1231,9 +1509,12 @@
 <price>17.99;39.99;56.80</price>
 </product>
 <product>
-<name>Chicago L</name>
-<shortDescription>A tribute to the windy city.</shortDescription>
-<longDescription>Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster! </longDescription>
+<name xml:lang="x-default">Chicago L</name>
+<name xml:lang="de-DE">Chicago L</name>
+<shortDescription xml:lang="x-default">A tribute to the windy city.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine Hommage an die windige Stadt.</shortDescription>
+<longDescription xml:lang="x-default">Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster!</longDescription>
+<longDescription xml:lang="de-DE">Chicagos Schnellbahn zwischen Wolkenkratzern. Der Kamerawinkel bringt die städtische Atmosphäre perfekt zum Ausdruck. Ein weiteres schickes US-Plakat!</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/chicago-l/chicago-l-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/chicago-l/chicago-l-medium.webp</medium>
@@ -1245,9 +1526,12 @@
 <price>16.99;29.70;34.50</price>
 </product>
 <product>
-<name>US Railway Mail Service Car</name>
-<shortDescription>A historic train on the track.</shortDescription>
-<longDescription>Hard to believe the RMS carried the majority of mail in the US until the 1960s. Will look especially cool if you place it next to our FedEx Express poster. </longDescription>
+<name xml:lang="x-default">US Railway Mail Service Car</name>
+<name xml:lang="de-DE">Wagon des US-amerikanischen Bahnpostdienstes RMS</name>
+<shortDescription xml:lang="x-default">A historic train on the track.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Stück Eisenbahngeschichte.</shortDescription>
+<longDescription xml:lang="x-default">Hard to believe the RMS carried the majority of mail in the US until the 1960s. Will look especially cool if you place it next to our FedEx Express poster.</longDescription>
+<longDescription xml:lang="de-DE">Kaum zu glauben, dass die RMS bis in die 1960er Jahre den Großteil der Post in den USA beförderte. Besonders cool sieht es aus, wenn Sie es neben unser FedEx Express-Poster hängen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/us-railway-mail-service-car/us-railway-mail-service-car-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/us-railway-mail-service-car/us-railway-mail-service-car-medium.webp</medium>
@@ -1259,9 +1543,12 @@
 <price>17.99;35.00;51.90</price>
 </product>
 <product>
-<name>Old NYC Subway</name>
-<shortDescription>Nothing lasts forever.</shortDescription>
-<longDescription>Not even subway trains. Darn!</longDescription>
+<name xml:lang="x-default">Old NYC Subway</name>
+<name xml:lang="de-DE">Alte New Yorker U-Bahn</name>
+<shortDescription xml:lang="x-default">Nothing lasts forever.</shortDescription>
+<shortDescription xml:lang="de-DE">Nichts hält ewig.</shortDescription>
+<longDescription xml:lang="x-default">Not even subway trains. Darn!</longDescription>
+<longDescription xml:lang="de-DE">Auch U-Bahnen enden eines Tages wie diese hier. Doch selbst der Verfall dieser U-Banh ist lediglich ein Wandel. Als Filmkulisse, Leinwand für Straßenkunst, geheimes Eckchen für diejenigen, die die Winkel der Stadt erkunden oder eben als Poster mit besonderem Flair hat sie nun einen neuen Zweck.</longDescription>
 <price>17.80;22.00;33.30</price>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/old-nyc-subway/old-nyc-subway-small.webp</small>
@@ -1275,9 +1562,12 @@
 <!-- TopCategory Panoramas  -->
 <!-- SubCategory Buildings  -->
 <product>
-<name>Niagara Ferris Wheel</name>
-<shortDescription>Up for a night sky wheel ride?</shortDescription>
-<longDescription>A nice way to start conversation because nobody think that there is a Ferris wheel at Niagara everybody thinks of the waterfalls</longDescription>
+<name xml:lang="x-default">Niagara Ferris Wheel</name>
+<name xml:lang="de-DE">Niagara Riesenrad</name>
+<shortDescription xml:lang="x-default">Up for a night sky wheel ride?</shortDescription>
+<shortDescription xml:lang="de-DE">Bereit für eine nächtliche Fahrt?</shortDescription>
+<longDescription xml:lang="x-default">A nice way to start conversation because nobody think that there is a Ferris wheel at Niagara everybody thinks of the waterfalls</longDescription>
+<longDescription xml:lang="de-DE">Eine nette Art, ein Gespräch zu beginnen, denn niemand denkt, dass es in Niagara ein Riesenrad gibt, jeder denkt an die Wasserfälle.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/niagara-ferris-wheel/niagara-ferris-wheel-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/niagara-ferris-wheel/niagara-ferris-wheel-medium.webp</medium>
@@ -1289,9 +1579,12 @@
 <price>12.90;23.90;34.90</price>
 </product>
 <product>
-<name>Swedish Cottages</name>
-<shortDescription>Swedish cottages at a river.</shortDescription>
-<longDescription>These Swedish cottages are well known a beautiful, with the red to brown coloring a nice way to emphasize your brown furniture.</longDescription>
+<name xml:lang="x-default">Swedish Cottages</name>
+<name xml:lang="de-DE">Schwedische Häuschen</name>
+<shortDescription xml:lang="x-default">Swedish cottages at a river.</shortDescription>
+<shortDescription xml:lang="de-DE">Schwedische Häuschen am Fluss.</shortDescription>
+<longDescription xml:lang="x-default">These Swedish cottages are well known as beautiful, with the red to brown coloring a nice way to emphasize your brown furniture.</longDescription>
+<longDescription xml:lang="de-DE">Diese schwedischen Häuschen sind als wunderschön bekannt, und die rot-braune Farbgebung ist eine schöne Möglichkeit, Ihre braunen Möbel zu betonen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/swedish-cottages/swedish-cottages-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/swedish-cottages/swedish-cottages-medium.webp</medium>
@@ -1303,9 +1596,12 @@
 <price>13.78;19.90;25.90</price>
 </product>
 <product>
-<name>Gustavianum Sweden</name>
-<shortDescription> A gorgeous representation of architecture.</shortDescription>
-<longDescription>A display of art in your home with this astonishing building. This will add elegance and class to your room.</longDescription>
+<name xml:lang="x-default">Gustavianum Sweden</name>
+<name xml:lang="de-DE">Gustavianum, Schweden</name>
+<shortDescription xml:lang="x-default"> A gorgeous representation of architecture.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Paradebeispiel wunderschöner Architektur.</shortDescription>
+<longDescription xml:lang="x-default">A display of art in your home with this astonishing building. This will add elegance and class to your room.</longDescription>
+<longDescription xml:lang="de-DE">Bringt Eleganz und Klasse in jeden Raum.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/gustavianum-sweden/gustavianum-sweden-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/gustavianum-sweden/gustavianum-sweden-medium.webp</medium>
@@ -1317,9 +1613,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Grochwitz Castle Germany </name>
-<shortDescription>A beautiful castle with nature surrounding it.</shortDescription>
-<longDescription>A castle is great for a living room with historical books or souvenir, so you might add this poster there.</longDescription>
+<name xml:lang="x-default">Grochwitz Castle Germany </name>
+<name xml:lang="de-DE">Burg Groschwitz</name>
+<shortDescription xml:lang="x-default">A beautiful castle with nature surrounding it.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine hübsche Burg in mitten der Natur.</shortDescription>
+<longDescription xml:lang="x-default">A castle is great for a living room with historical books or souvenir, so you might add this poster there.</longDescription>
+<longDescription xml:lang="de-DE">Ein Schloss eignet sich hervorragend für ein Wohnzimmer mit historischen Büchern oder Souvenirs, also könnten Sie dieses Poster dort unterbringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/grochwitz-castle-germany/grochwitz-castle-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/grochwitz-castle-germany/grochwitz-castle-germany-medium.webp</medium>
@@ -1331,9 +1630,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Rosebud Diner USA</name>
-<shortDescription>The spirit of an old American dinner.</shortDescription>
-<longDescription>An old-fashioned dinner in America, great to add a bit of personality to your kitchen. </longDescription>
+<name xml:lang="x-default">Rosebud Diner USA</name>
+<name xml:lang="de-DE">Rosebud Diner USA</name>
+<shortDescription xml:lang="x-default">The spirit of an old American dinner.</shortDescription>
+<shortDescription xml:lang="de-DE">Der Geist eines alten amerikanischen Restaurants.</shortDescription>
+<longDescription xml:lang="x-default">An old-fashioned dinner in America, great to add a bit of personality to your kitchen.</longDescription>
+<longDescription xml:lang="de-DE">Ein altmodisches Restaurant in den USA, gut geeignet etwas Persönlichkeit in ihre eigene Küche zu bringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/rosebud-diner-usa/rosebud-diner-usa-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/rosebud-diner-usa/rosebud-diner-usa-medium.webp</medium>
@@ -1345,9 +1647,12 @@
 <price>14.59;28.56;42.89</price>
 </product>
 <product>
-<name>Historic Car Factory Germany</name>
-<shortDescription>A destroyed car factory.</shortDescription>
-<longDescription>A destroyed car factory might not be the most common photo motive, but if you like lost places, you could add this at your home.</longDescription>
+<name xml:lang="x-default">Historic Car Factory Germany</name>
+<name xml:lang="de-DE">Historische Automobilfabrik</name>
+<shortDescription xml:lang="x-default">A destroyed car factory.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine zerstörte Autofabrik in Deutschland.</shortDescription>
+<longDescription xml:lang="x-default">A destroyed car factory might not be the most common photo motive, but if you like lost places, you could add this at your home.</longDescription>
+<longDescription xml:lang="de-DE">Eine zerstörte Autofabrik ist vielleicht nicht das häufigste Fotomotiv, aber wenn Sie verlorene Orte mögen, könnten Sie dies in ihr zu Hause einbauen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/historic-car-factory-germany/historic-car-factory-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/historic-car-factory-germany/historic-car-factory-germany-medium.webp</medium>
@@ -1359,9 +1664,12 @@
 <price>12.89;19.90;33.30</price>
 </product>
 <product>
-<name>Coal Briquet Factory Germany</name>
-<shortDescription>Coal Briquette Factory in Germany.</shortDescription>
-<longDescription>This darker looking factory could be nice for an office to add some glance to economic accomplishment we humans made.</longDescription>
+<name xml:lang="x-default">Coal Briquet Factory Germany</name>
+<name xml:lang="de-DE">Brikettfabrik</name>
+<shortDescription xml:lang="x-default">Coal Briquette Factory in Germany.</shortDescription>
+<shortDescription xml:lang="de-DE">Fabrik für Kohlebrikette in Deutschland.</shortDescription>
+<longDescription xml:lang="x-default">This darker looking factory could be nice for an office to add some glance to economic accomplishment we humans made.</longDescription>
+<longDescription xml:lang="de-DE">Diese dunkler aussehende Fabrik könnte schön für ein Büro sein, um der wirtschaftlichen Leistung, die wir Menschen erbracht haben, etwas Glanz zu verleihen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/coal-briquet-factory-germany/coal-briquet-factory-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/coal-briquet-factory-germany/coal-briquet-factory-germany-medium.webp</medium>
@@ -1373,9 +1681,12 @@
 <price>17.99;29.90;39.90</price>
 </product>
 <product>
-<name>Timber Framework Germany</name>
-<shortDescription>The German Fachwerk building.</shortDescription>
-<longDescription>The old framework home from Germany is a milestone in engineering and architecture, a great way to pay tribute to development of man kind in your home.</longDescription>
+<name xml:lang="x-default">Timber Framework Germany</name>
+<name xml:lang="de-DE">Deutsches Fachwerkaus</name>
+<shortDescription xml:lang="x-default">The German Fachwerk building.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Fachwerk Gebäude.</shortDescription>
+<longDescription xml:lang="x-default">The old framework home from Germany is a milestone in engineering and architecture, a great way to pay tribute to development of man kind in your home.</longDescription>
+<longDescription xml:lang="de-DE">Das alte Fachwerkhaus aus Deutschland ist ein Meilenstein der Ingenieurskunst und Architektur, eine großartige Möglichkeit, die Entwicklung der Menschheit in Ihrem Haus zu würdigen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/timber-framework-germany/timber-framework-germany-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/timber-framework-germany/timber-framework-germany-medium.webp</medium>
@@ -1387,9 +1698,12 @@
 <price>12.00;25.00;43.00</price>
 </product>
 <product>
-<name>Chinese Temple</name>
-<shortDescription>An outstanding architecture shot!</shortDescription>
-<longDescription>A historic picture of a Chinese temple adds a taste of history to your room. Worth to know this temple is known as the Bell Tower of Xi'an, its an incredible piece of art from the Ming Dynasty.</longDescription>
+<name xml:lang="x-default">Chinese Temple</name>
+<name xml:lang="de-DE">Chinesischer Tempel</name>
+<shortDescription xml:lang="x-default">An outstanding architecture shot!</shortDescription>
+<shortDescription xml:lang="de-DE">Eine herausragende Architektur-Fotografie!</shortDescription>
+<longDescription xml:lang="x-default">A historic picture of a Chinese temple adds a taste of history to your room. Worth to know this temple is known as the Bell Tower of Xi'an, its an incredible piece of art from the Ming Dynasty.</longDescription>
+<longDescription xml:lang="de-DE">Ein historisches Bild eines chinesischen Tempels bringt einen Hauch von Geschichte in Ihr Zimmer. Dieser Tempel ist bekannt als der Glockenturm von Xi'an, ein unglaubliches Kunstwerk aus der Ming-Dynastie.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/chinese-temple/chinese-temple-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/chinese-temple/chinese-temple-medium.webp</medium>
@@ -1401,9 +1715,12 @@
 <price>13.33;22.22;33.33</price>
 </product>
 <product>
-<name>Chinese Temple Boat</name>
-<shortDescription>Chinese Architecture.</shortDescription>
-<longDescription>A really pompous looking ship, with a dragon design, is a good display of your taste of art.</longDescription>
+<name xml:lang="x-default">Chinese Temple Boat</name>
+<name xml:lang="de-DE">Chinesisches Tempel Boot</name>
+<shortDescription xml:lang="x-default">Chinese Architecture.</shortDescription>
+<shortDescription xml:lang="de-DE">Chinesische Baukunst.</shortDescription>
+<longDescription xml:lang="x-default">A really pompous looking ship, with a dragon design, is a good display of your taste of art.</longDescription>
+<longDescription xml:lang="de-DE">Ein pompöses Schiff mit Drachengestaltung. Eine gute Weise sich als Kunstliebhaber zu zeigen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/architecture/chinese-temple-boat/chinese-temple-boat-small.webp</small>
 <medium>/assets/img/products/panoramas/architecture/chinese-temple-boat/chinese-temple-boat-medium.webp</medium>
@@ -1416,9 +1733,12 @@
 </product>
 <!-- SubCategory Fireworks  -->
 <product>
-<name>New Years Fireworks I</name>
-<shortDescription>Delivering all pyro effects possible! </shortDescription>
-<longDescription>Happy New Years! Captured at midnight in Jena, Germany, this poster shows an incredible mix of all sorts of fireworks effects. Just awesome how they illuminate the sky! </longDescription>
+<name xml:lang="x-default">New Years Fireworks I</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk I</name>
+<shortDescription xml:lang="x-default">Delivering all pyro effects possible!</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Meisterwerk der Pyrotechnik!</shortDescription>
+<longDescription xml:lang="x-default">Happy New Years! Captured at midnight in Jena, Germany, this poster shows an incredible mix of all sorts of fireworks effects. Just awesome how they illuminate the sky!</longDescription>
+<longDescription xml:lang="de-DE">Frohes neues Jahr! Dieses Poster wurde um Mitternacht in Jena, Deutschland, aufgenommen und zeigt eine unglaubliche Mischung aus allen möglichen Feuerwerkseffekten. Einfach großartig, wie sie den Himmel erhellen!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/new-years-fireworks-I/new-years-fireworks-I-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/new-years-fireworks-I/new-years-fireworks-I-medium.webp</medium>
@@ -1430,9 +1750,12 @@
 <price>14.78;25.90;34.60</price>
 </product>
 <product>
-<name>New Years Fireworks II</name>
-<shortDescription>Bouquets, Stars, and Pearls.</shortDescription>
-<longDescription>If you want a clear-cut contrast between the night sky and the single effects. Speaking of New Year's... Please refrain from asking us if we kept last year's resolutions at this point. We don't want to talk about it. </longDescription>
+<name xml:lang="x-default">New Years Fireworks II</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk II</name>
+<shortDescription xml:lang="x-default">Bouquets, Stars, and Pearls.</shortDescription>
+<shortDescription xml:lang="de-DE">Bouquets, Sterne und Perlen.</shortDescription>
+<longDescription xml:lang="x-default">If you want a clear-cut contrast between the night sky and the single effects. Speaking of New Year's... Please refrain from asking us if we kept last year's resolutions at this point. We don't want to talk about it.</longDescription>
+<longDescription xml:lang="de-DE">Wenn Sie einen klaren Kontrast zwischen dem Nachthimmel und den einzelnen Effekten wünschen. Apropos Neujahr... Bitte sehen Sie an dieser Stelle davon ab, uns zu fragen, ob wir die Vorsätze des letzten Jahres eingehalten haben. Wir wollen nicht darüber reden.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/new-years-fireworks-II/new-years-fireworks-II-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/new-years-fireworks-II/new-years-fireworks-II-medium.webp</medium>
@@ -1444,9 +1767,12 @@
 <price>15.57;23.45;45.67</price>
 </product>
 <product>
-<name>New Years Fireworks III</name>
-<shortDescription>A fantastic skycolor change!</shortDescription>
-<longDescription>The bright glitter in the center beautifully highlights the sky and delivers this spectacular color change effect. Picture composition at its best. Memo: there's also no use asking about our new year's resolutions. We don't have any. </longDescription>
+<name xml:lang="x-default">New Years Fireworks III</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk III</name>
+<shortDescription xml:lang="x-default">A fantastic skycolor change!</shortDescription>
+<shortDescription xml:lang="de-DE">Ein fantastischer Farbwechsel!</shortDescription>
+<longDescription xml:lang="x-default">The bright glitter in the center beautifully highlights the sky and delivers this spectacular color change effect. Picture composition at its best. Memo: there's also no use asking about our new year's resolutions. We don't have any.</longDescription>
+<longDescription xml:lang="de-DE">Der helle Glitzer in der Mitte hebt den Himmel wunderschön hervor und sorgt für diesen spektakulären Farbwechseleffekt. Bildkomposition vom Feinsten. Notiz: Es hat auch keinen Sinn, nach unseren Neujahrsvorsätzen zu fragen. Wir haben keine.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/new-years-fireworks-III/new-years-fireworks-III-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/new-years-fireworks-III/new-years-fireworks-III-medium.webp</medium>
@@ -1458,9 +1784,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>New Years Fireworks IV</name>
-<shortDescription>Night sky getting smoky.</shortDescription>
-<longDescription>One hour past midnight. The bright crossette in the center produces a set of stars that stands out in the smoky night sky. A great picture to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep. </longDescription>
+<name xml:lang="x-default">New Years Fireworks IV</name>
+<name xml:lang="de-DE">Neujahrsfeuerwerk IV</name>
+<shortDescription xml:lang="x-default">Night sky getting smoky.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein rauchiger Nachthimmel.</shortDescription>
+<longDescription xml:lang="x-default">One hour past midnight. The bright crossette in the center produces a set of stars that stands out in the smoky night sky. A great picture to finish off our New Year's Eve impressions. Our photographer needs to go to bed and think about New Year's resolutions he can actually keep.</longDescription>
+<longDescription xml:lang="de-DE">Eine Stunde nach Mitternacht. Das helle Kreuz in der Mitte erzeugt eine Reihe von Sternen, die am rauchigen Nachthimmel hervorstechen. Ein tolles Bild zum Abschluss unserer Silvester-Eindrücke. Unser Fotograf muss ins Bett gehen und darüber nachdenken, welche Neujahrsvorsätze er tatsächlich einhalten kann.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/new-years-fireworks-IV/new-years-fireworks-IV-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/new-years-fireworks-IV/new-years-fireworks-IV-medium.webp</medium>
@@ -1472,9 +1801,12 @@
 <price>17.99;29.99;39.90</price>
 </product>
 <product>
-<name>Silver Dahlias</name>
-<shortDescription>Perfectly shaped.</shortDescription>
-<longDescription>Looking like a starfish in the clear sky. Hang this in your bedroom and you're guaranteed to have romantic nights! </longDescription>
+<name xml:lang="x-default">Silver Dahlias</name>
+<name xml:lang="de-DE">Silberne Dahlien</name>
+<shortDescription xml:lang="x-default">Perfectly shaped.</shortDescription>
+<shortDescription xml:lang="de-DE">Wohlgeformt.</shortDescription>
+<longDescription xml:lang="x-default">Looking like a starfish in the clear sky. Hang this in your bedroom and you're guaranteed to have romantic nights! </longDescription>
+<longDescription xml:lang="de-DE">Garantiert romantische Nächte!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/silver-dahlias/silver-dahlias-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/silver-dahlias/silver-dahlias-medium.webp</medium>
@@ -1486,9 +1818,12 @@
 <price>12.50;25.60;45.00</price>
 </product>
 <product>
-<name>Crossette Silver Green</name>
-<shortDescription>It can't get any better than this! </shortDescription>
-<longDescription>The zoomed-in view delivers spectacular details! Just look how the exploding stars leave their trails in the night sky! </longDescription>
+<name xml:lang="x-default">Crossette Silver Green</name>
+<name xml:lang="de-DE">Silber-Grüne Crossette</name>
+<shortDescription xml:lang="x-default">It can't get any better than this!</shortDescription>
+<shortDescription xml:lang="de-DE">Besser geht es nicht!</shortDescription>
+<longDescription xml:lang="x-default">The zoomed-in view delivers spectacular details! Just look how the exploding stars leave their trails in the night sky! </longDescription>
+<longDescription xml:lang="de-DE">Spektakuläre Details dank der herangezoomten Ansicht! Bewunderen sie explodierende Sterne wie sie ihre Spuren durch den Nachthimmel ziehen!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/crossette-silver-green/crossette-silver-green-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/crossette-silver-green/crossette-silver-green-medium.webp</medium>
@@ -1500,9 +1835,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Purple Crossette with Stars</name>
-<shortDescription>Wait... it does!</shortDescription>
-<longDescription>Absolutely stunning! We really don't want to show off but you just have to admit that we have a pretty darn good photographer. </longDescription>
+<name xml:lang="x-default">Purple Crossette with Stars</name>
+<name xml:lang="de-DE">Lila Crossette mit Sternen</name>
+<shortDescription xml:lang="x-default">Celebrate with a burst of color and excitement.</shortDescription>
+<shortDescription xml:lang="de-DE">Feiere mit einer Explosion voll Farben und Aufregung.</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a night of celebration, where the sky is ablaze with color and light. The fireworks display, with its intricate patterns and dazzling colors, creates a mesmerizing spectacle. This image invites you to experience the thrill and excitement of a fireworks show. </longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in eine Nacht des Feierns, in der der Himmel in Farbe und Licht erstrahlt. Das Feuerwerk mit seinen verschlungenen Mustern und schillernden Farben ist ein faszinierendes Spektakel. Dieses Bild lädt Sie dazu ein, den Nervenkitzel und die Aufregung eines Feuerwerks zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/purple-crossette-with-stars/purple-crossette-with-stars-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/purple-crossette-with-stars/purple-crossette-with-stars-medium.webp</medium>
@@ -1514,9 +1852,12 @@
 <price>23.78;31.90;42.00</price>
 </product>
 <product>
-<name>Golden Dahlias with Blue Stars</name>
-<shortDescription>Be exclusive.</shortDescription>
-<longDescription>This explosion of gold is sure to add a stylish touch to your home decor. Go for this one if you want to be special! </longDescription>
+<name xml:lang="x-default">Golden Dahlias with Blue Stars</name>
+<name xml:lang="de-DE">Güldene Dahlien und Blaue Sterne</name>
+<shortDescription xml:lang="x-default">Be exclusive.</shortDescription>
+<shortDescription xml:lang="de-DE">Seien sie exklusiv.</shortDescription>
+<longDescription xml:lang="x-default">This explosion of gold is sure to add a stylish touch to your home decor. Go for this one if you want to be special! </longDescription>
+<longDescription xml:lang="de-DE">Eine beeindruckende Explosion in Gold. Dieses Poster wird ihrem Zuhuase garantiert einen stylischen Touch verpassen. Etwas für die, die Außergewöhnliches suchen!</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/golden-dahlias-with-blue-stars/golden-dahlias-with-blue-stars-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/golden-dahlias-with-blue-stars/golden-dahlias-with blue-stars-medium.webp</medium>
@@ -1528,9 +1869,12 @@
 <price>12.99;23.90;31.80</price>
 </product>
 <product>
-<name>Brocade Red Blue</name>
-<shortDescription>100% Perfection.</shortDescription>
-<longDescription>Night time, a lake, and a perfectly shaped brocade that gleams in the water... The author of these lines is running out of words to describe how awesome our fireworks posters are. </longDescription>
+<name xml:lang="x-default">Brocade Red Blue</name>
+<name xml:lang="de-DE">Brokat in Rot und Blau</name>
+<shortDescription xml:lang="x-default">Celebrate with a burst of color and excitement.</shortDescription>
+<shortDescription xml:lang="de-DE">Feiere mit einer Explosion voll Farben und Aufregung.</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a night of celebration, where the sky is ablaze with color and light. The fireworks display, with its intricate patterns and dazzling colors, creates a mesmerizing spectacle. This image invites you to experience the thrill and excitement of a fireworks show. </longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in eine Nacht des Feierns, in der der Himmel in Farbe und Licht erstrahlt. Das Feuerwerk mit seinen verschlungenen Mustern und schillernden Farben ist ein faszinierendes Spektakel. Dieses Bild lädt Sie dazu ein, den Nervenkitzel und die Aufregung eines Feuerwerks zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/brocade-red-blue/brocade-red-blue-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/brocade-red-blue/brocade-red-blue-medium.webp</medium>
@@ -1542,9 +1886,12 @@
 <price>17.99;29.90;39.90</price>
 </product>
 <product>
-<name>Chrysanthemum and Brocades Red</name>
-<shortDescription>One final word: marvelous.</shortDescription>
-<longDescription>Please forgive the author of these lines as he can't think of any more words to illustrate our... umm... marvelous fireworks posters. </longDescription>
+<name xml:lang="x-default">Chrysanthemum and Brocades Red</name>
+<name xml:lang="de-DE">Chrysanthemen und Brokat</name>
+<shortDescription xml:lang="x-default">Celebrate with a burst of color and excitement.</shortDescription>
+<shortDescription xml:lang="de-DE">Feiere mit einer Explosion voll Farben und Aufregung.</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a night of celebration, where the sky is ablaze with color and light. The fireworks display, with its intricate patterns and dazzling colors, creates a mesmerizing spectacle. This image invites you to experience the thrill and excitement of a fireworks show. </longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in eine Nacht des Feierns, in der der Himmel in Farbe und Licht erstrahlt. Das Feuerwerk mit seinen verschlungenen Mustern und schillernden Farben ist ein faszinierendes Spektakel. Dieses Bild lädt Sie dazu ein, den Nervenkitzel und die Aufregung eines Feuerwerks zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/fireworks/chrysanthemum-and-brocades-red/chrysanthemum-and-brocades-red-small.webp</small>
 <medium>/assets/img/products/panoramas/fireworks/chrysanthemum-and-brocades-red/chrysanthemum-and-brocades-red-medium.webp</medium>
@@ -1557,9 +1904,12 @@
 </product>
 <!-- SubCategory Landscapes  -->
 <product>
-<name>Niagara Falls Canada</name>
-<shortDescription>Picture editing at its best.</shortDescription>
-<longDescription>The natural spectacle enhanced with the latest picture editing technologies. We're starting to think our photographer is an artist. Hang this in your home and people will simply be amazed! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. </longDescription>
+<name xml:lang="x-default">Niagara Falls Canada</name>
+<name xml:lang="de-DE">Niagarafälle</name>
+<shortDescription xml:lang="x-default">Witness the magic of Niagara Falls by night.</shortDescription>
+<shortDescription xml:lang="de-DE">Bewundern sie die magische Ausstrahlung der Niagarafälle bei Nacht.</shortDescription>
+<longDescription xml:lang="x-default">This breathtaking image captures the majesty of Niagara Falls illuminated at night. The cascading water, lit up in a spectrum of colors, creates a mesmerizing spectacle against the backdrop of a starry sky. The surrounding landscape, with its lush greenery and twinkling lights, adds to the beauty of this scene.</longDescription>
+<longDescription xml:lang="de-DE">Dieses atemberaubende Bild zeigt die majestätischen Niagarafälle mit Beleuchtung bei Nacht. Das in Kaskaden herabstürzende Wasser, das in einem Spektrum von Farben leuchtet, bietet ein faszinierendes Schauspiel vor dem Hintergrund des Sternenhimmels. Die umgebende Landschaft mit ihrem üppigen Grün und den funkelnden Lichtern trägt zur Schönheit dieser Szene bei.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/niagara-falls-canada/niagara-falls-canada-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/niagara-falls-canada/niagara-falls-canada-medium.webp</medium>
@@ -1571,9 +1921,12 @@
 <price>12.00;24.00;48.00</price>
 </product>
 <product>
-<name>Niagara Falls Canada with City Skyline</name>
-<shortDescription>If you want it both natural and urban. </shortDescription>
-<longDescription>This composition perfectly reenacts the coming together of nature and human culture. If you're into philosophical speculation, you can now start pondering what that could possibly mean. This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. </longDescription>
+<name xml:lang="x-default">Niagara Falls Canada with City Skyline</name>
+<name xml:lang="de-DE">Niagarafälle mit Skyline</name>
+<shortDescription xml:lang="x-default">If you want it both natural and urban.</shortDescription>
+<shortDescription xml:lang="de-DE">Für alle die sowohl Natur als auch Stadt wollen.</shortDescription>
+<longDescription xml:lang="x-default">The beautiful Niagara Falls, the lush greens of the nearby forest and the vibrant glows of the city skyline in the background form a breathtaking trio in the mystical atmosphere of the night.</longDescription>
+<longDescription xml:lang="de-DE">Die imposanten Niagarafälle, das tiefe Grün das nahen Waldes und die strahlende Skyline der Stadt im Hintergrund formen eine atemberaubende Einheit unter der mystischen Atmosphäre der Nacht.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/niagara-falls-canada-with-city-skyline/niagara-falls-canada-with-city-skyline-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/niagara-falls-canada-with-city-skyline/niagara-falls-canada-with-city-skyline-medium.webp</medium>
@@ -1585,9 +1938,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Trollhättan Falls Sweden I</name>
-<shortDescription>Up for rafting? Anyone?</shortDescription>
-<longDescription>Just kidding. We prefer to look at this awesome water movement for now. </longDescription>
+<name xml:lang="x-default">Trollhättan Falls Sweden I</name>
+<name xml:lang="de-DE">Trollhättan-Fälle, Schweden I</name>
+<shortDescription xml:lang="x-default">Nature's raw power on display.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Blick auf die rohen Kräfte der Natur.</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to the heart of nature, where the sounds of rushing water and the sight of cascading falls create a sense of awe and wonder. The water, as it tumbles over the rocks, creates a mesmerizing display of light and movement. This image invites you to experience the tranquility and power of this natural wonder.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in das Herz der Natur, wo das Rauschen des Wassers und der Anblick der Wasserfälle ein Gefühl der Ehrfurcht und des Staunens hervorrufen. Das Wasser, das über die Felsen stürzt, erzeugt ein faszinierendes Schauspiel aus Licht und Bewegung. Dieses Bild lädt Sie dazu ein, die Ruhe und Kraft dieses Naturwunders zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/trollhättan-falls-sweden-I/trollhättan-falls-sweden-I-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/trollhättan-falls-sweden-I/trollhättan-falls-sweden-I-medium.webp</medium>
@@ -1599,9 +1955,12 @@
 <price>15.55;23.44;34.55</price>
 </product>
 <product>
-<name>Trollhättan Falls Sweden II</name>
-<shortDescription>The beautiful vastness of Swedish landscape. </shortDescription>
-<longDescription>Pretty much a must-have for Sweden fans since it comprises all the country is loved for: wild water, stones, hills, coniferous forests, and – don't miss them – the Falun red houses in the background. It doesn't always need to be IKEA. </longDescription>
+<name xml:lang="x-default">Trollhättan Falls Sweden II</name>
+<name xml:lang="de-DE">Trollhättan-Fälle, Schweden II</name>
+<shortDescription xml:lang="x-default">A prime example of the beauty of Sweden.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Paradebeispiel der Schönheit Schwedens.</shortDescription>
+<longDescription xml:lang="x-default">This image captures the awe-inspiring power of a waterfall, as water cascades down the rocks and crashes into the pool below. The mist rises in the air, creating a breathtaking spectacle of nature's raw energy. The surrounding landscape, with its lush greenery and towering trees, adds to the beauty of this scene.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild fängt die ehrfurchtgebietende Kraft eines Wasserfalls ein, wenn das Wasser in Kaskaden die Felsen hinabstürzt und in das Becken darunter kracht. Der Nebel steigt in die Luft und schafft ein atemberaubendes Spektakel der rohen Energie der Natur. Die umgebende Landschaft mit ihrem üppigen Grün und den hoch aufragenden Bäumen trägt zur Schönheit dieser Szene bei.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/trollhättan-falls-sweden-II/trollhättan-falls-sweden-II-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/trollhättan-falls-sweden-II/trollhättan-falls-sweden-II-medium.webp</medium>
@@ -1613,9 +1972,12 @@
 <price>13.33;22.22;44.44</price>
 </product>
 <product>
-<name>Linnaean Garden and Museum Sweden</name>
-<shortDescription>A perfect symmetry.</shortDescription>
-<longDescription>In case you didn't know: the oldest botanical garden of Uppsala University, originally planted in 1655. For everyone who prefers symmetries over chaos and tends to get nervous when things aren't as neat and perfect as they should be. </longDescription>
+<name xml:lang="x-default">Linnaean Garden and Museum Sweden</name>
+<name xml:lang="de-DE">Linneanum Garten und Museum Schweden</name>
+<shortDescription xml:lang="x-default">A perfect symmetry.</shortDescription>
+<shortDescription xml:lang="de-DE">Eine perfekte Symmetrie.</shortDescription>
+<longDescription xml:lang="x-default">In case you didn't know: the oldest botanical garden of Uppsala University, originally planted in 1655. For everyone who prefers symmetries over chaos and tends to get nervous when things aren't as neat and perfect as they should be.</longDescription>
+<longDescription xml:lang="de-DE">Falls Sie es noch nicht wussten: Der älteste Botanische Garten der Universität Uppsala wurde ursprünglich im Jahr 1655 angelegt. Für alle, die Symmetrien dem Chaos vorziehen und dazu neigen, nervös zu werden, wenn die Dinge nicht so ordentlich und perfekt sind, wie sie sein sollten.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/linnaean-garden-and-museum-sweden/linnaean-garden-and-museum-sweden-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/linnaean-garden-and-museum-sweden/linnaean-garden-and-museum-sweden-medium.webp</medium>
@@ -1627,9 +1989,12 @@
 <price>12.25;19.90;28.30</price>
 </product>
 <product>
-<name>Winter Wonderland</name>
-<shortDescription>This is exactly what the song talks about! </shortDescription>
-<longDescription>"In the lane, snow is glistening, a beautiful sight, we're happy tonight, walking in a winter wonderland." - A fantastic landscape shot! Sometimes it doesn't need much to show nature in all its beauty. A must-have for all winter weather fans! </longDescription>
+<name xml:lang="x-default">Winter Wonderland</name>
+<name xml:lang="de-DE">Winterwunderland</name>
+<shortDescription xml:lang="x-default">Escape to the snowy forest.</shortDescription>
+<shortDescription xml:lang="de-DE">Ziehe dich in den verschneiten Wald zurück.</shortDescription>
+<longDescription xml:lang="x-default">This image captures the serene beauty of a winter forest, where snow-covered trees line a winding path. The soft light filtering through the branches creates a magical atmosphere, inviting you to explore the quiet beauty of the woods. This image evokes a sense of peace and tranquility, perfect for those seeking a winter escape.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild fängt die ruhige Schönheit eines Winterwaldes ein, in dem schneebedeckte Bäume einen gewundenen Pfad säumen. Das weiche Licht, das durch die Zweige fällt, schafft eine magische Atmosphäre, die dazu einlädt, die stille Schönheit des Waldes zu erkunden. Dieses Bild erweckt ein Gefühl von Frieden und Ruhe, perfekt für alle, die vom Alltag in den Winter entfliehen wollen.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/winter-wonderland/winter-wonderland-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/winter-wonderland/winter-wonderland-medium.webp</medium>
@@ -1641,9 +2006,12 @@
 <price>16.00;29.98;37.90</price>
 </product>
 <product>
-<name>Lonesome Ski Lift in Winter Wonderland</name>
-<shortDescription>For melancholics.</shortDescription>
-<longDescription>A deserted winter landscape, no tourists whatsoever. Perfectly matches the previous poster. Go get our winter wonderland combo, hang it above your fireplace and get all cozy! </longDescription>
+<name xml:lang="x-default">Lonesome Ski Lift in Winter Wonderland</name>
+<name xml:lang="de-DE">Ski Lift im Winterwunderland</name>
+<shortDescription xml:lang="x-default">Embrace the thrill of winter on the slopes.</shortDescription>
+<shortDescription xml:lang="de-DE">Geben sie sich dem Nervenkitzel des Winters auf den Pisten hin.</shortDescription>
+<longDescription xml:lang="x-default">This image transports you to a winter wonderland, where the only sound is the gentle hum of the ski lift. The snow-covered slopes, the towering trees, and the promise of endless powder days create a sense of tranquility and adventure. This image invites you to experience the magic of winter in the mountains</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild entführt Sie in ein Winterwunderland, in dem das einzige Geräusch das leise Summen des Skilifts ist. Die schneebedeckten Hänge, die hoch aufragenden Bäume und das Versprechen endloser Pulverschneetage schaffen ein Gefühl von Ruhe und Abenteuer. Dieses Bild lädt Sie ein, die Magie des Winters in den Bergen zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/lonesome-ski-lift-in-winter-wonderland/lonesome-ski-lift-in-winter-wonderland-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/lonesome-ski-lift-in-winter-wonderland/lonesome-ski-lift-in-winter-wonderland-medium.webp</medium>
@@ -1655,9 +2023,12 @@
 <price>17.99;29.99;39.90</price>
 </product>
 <product>
-<name>Boston Skyline with Scaffolding</name>
-<shortDescription>When new and old come together...</shortDescription>
-<longDescription>...they make a pretty awesome contrast. Go for this one if you want a US skyline poster that is different. </longDescription>
+<name xml:lang="x-default">Boston Skyline with Scaffolding</name>
+<name xml:lang="de-DE">Boston Skyline mit Gerüst</name>
+<shortDescription xml:lang="x-default">When new and old come together...</shortDescription>
+<shortDescription xml:lang="de-DE">Wenn neu und alt sich vereinen...</shortDescription>
+<longDescription xml:lang="x-default">...they make a pretty awesome contrast. Go for this one if you want a US skyline poster that is different.</longDescription>
+<longDescription xml:lang="de-DE">...entsteht ein bewundernswerter Kontrast. Entscheiden sie sich für dieses Poster wenn sie eine amerikanische Skyline der besonderen Art bevorzugen</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/boston-skyline-with-scaffolding/boston-skyline-with-scaffolding-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/boston-skyline-with-scaffolding/boston-skyline-with-scaffolding-medium.webp</medium>
@@ -1669,9 +2040,12 @@
 <price>17.99;29.99;39.99</price>
 </product>
 <product>
-<name>Boston Skyline at Night</name>
-<shortDescription>The perfect water reflection.</shortDescription>
-<longDescription>Taken from the Cambridge side of the Charles River, this picture captures the most gorgeous water reflection ever. An outstanding skyline panorama for all Boston lovers! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning. </longDescription>
+<name xml:lang="x-default">Boston Skyline at Night</name>
+<name xml:lang="de-DE">Nächtliche Skyline von Boston</name>
+<shortDescription xml:lang="x-default">The perfect water reflection.</shortDescription>
+<shortDescription xml:lang="de-DE">Die perfekte Spiegelung.</shortDescription>
+<longDescription xml:lang="x-default">Taken from the Cambridge side of the Charles River, this picture captures the most gorgeous water reflection ever. An outstanding skyline panorama for all Boston lovers! This poster is an HDR image and delivers a dynamic range and color intensity that are absolutely stunning.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild wurde von der Cambridge-Seite des Charles River aus aufgenommen und zeigt die schönste Wasserspiegelung aller Zeiten. Ein herausragendes Skyline-Panorama für alle Boston-Liebhaber! Dieses Poster ist ein HDR-Bild und liefert einen Dynamikumfang und eine Farbintensität, die absolut atemberaubend sind.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/boston-skyline-at-night/boston-skyline-at-night-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/boston-skyline-at-night/boston-skyline-at-night-medium.webp</medium>
@@ -1683,9 +2057,12 @@
 <price>18.20;24.70;31.80</price>
 </product>
 <product>
-<name>Six Flags New England Water Park</name>
-<shortDescription>Yay! Great childhood memories!</shortDescription>
-<longDescription>Water parks! Aren't they just the best!? Okaaay, this one might not be the prettiest poster in our collection but it's the idea behind it that counts, isn't it? </longDescription>
+<name xml:lang="x-default">Six Flags New England Water Park</name>
+<name xml:lang="de-DE">Six Flags New England Water Park</name>
+<shortDescription xml:lang="x-default">Splash into summer fun!</shortDescription>
+<shortDescription xml:lang="de-DE">Plansche in der Hitze des Sommers!</shortDescription>
+<longDescription xml:lang="x-default">This aerial view captures the excitement and energy of a bustling water park. The vibrant colors of the water slides, the sparkling pools, and the lush greenery create a scene that is both inviting and thrilling. Whether you're seeking adrenaline-pumping rides or relaxing by the pool, this water park has something for everyone.</longDescription>
+<longDescription xml:lang="de-DE">Diese Luftaufnahme fängt die Aufregung und Energie eines belebten Wasserparks ein. Die leuchtenden Farben der Wasserrutschen, die glitzernden Becken und das üppige Grün schaffen eine Szene, die sowohl einladend als auch aufregend ist. Ob Sie nun auf der Suche nach adrenalingeladenen Fahrgeschäften sind oder sich am Pool entspannen möchten, dieser Wasserpark hat für jeden etwas zu bieten.</longDescription>
 <imageURL>
 <small>/assets/img/products/panoramas/landscapes/six-flags-new-england-water-park/six-flags-new-england-water-park-small.webp</small>
 <medium>/assets/img/products/panoramas/landscapes/six-flags-new-england-water-park/six-flags-new-england-water-park-medium.webp</medium>
@@ -1698,9 +2075,12 @@
 </product>
 <!-- SubCategory XXL  -->
 <product>
-<name>North Boston</name>
-<shortDescription>North Boston panorama.</shortDescription>
-<longDescription>The beauty of the north Boston speaks for itself and should be on your wall!</longDescription>
+<name xml:lang="x-default">North Boston</name>
+<name xml:lang="de-DE">Nord-Boston</name>
+<shortDescription xml:lang="x-default">Experience Boston's unique blend of old-world charm and urban energy.</shortDescription>
+<shortDescription xml:lang="de-DE">Erleben Sie Bostons einzigartige Mischung aus Charme der alten Welt und urbaner Energie.</shortDescription>
+<longDescription xml:lang="x-default">Boston is a city that seamlessly blends the past and the present. This image showcases its iconic landmarks, including the Freedom Trail, Fenway Park, and the historic waterfront. The city's diverse neighborhoods offer a unique experience, from the trendy Back Bay to the historic North End. Whether you're interested in history, culture, or simply enjoying the city's energy, Boston has it all.</longDescription>
+<longDescription xml:lang="de-DE">Boston ist eine Stadt, in der Vergangenheit und Gegenwart nahtlos ineinander übergehen. Dieses Bild zeigt die ikonischen Wahrzeichen der Stadt, darunter den Freedom Trail, den Fenway Park und das historische Hafenviertel. Die verschiedenen Viertel der Stadt bieten ein einzigartiges Erlebnis, von der trendigen Back Bay bis zum historischen North End. Ganz gleich, ob Sie sich für Geschichte und Kultur interessieren oder einfach nur die Energie der Stadt genießen möchten, Boston hat alles zu bieten.</longDescription>
 <imageURL>
 <small>/assets/img/products/xxl/xxl_1.jpg</small>
 <medium>/assets/img/products/xxl/xxl_1.jpg</medium>
@@ -1713,9 +2093,12 @@
 <price>34.99</price>
 </product>
 <product>
-<name>Boston Sunset</name>
-<shortDescription>The Boston sunset panorama.</shortDescription>
-<longDescription>For sunset lovers that also love great views. This one will make every cloudy day a sunny day.</longDescription>
+<name xml:lang="x-default">Boston Sunset</name>
+<name xml:lang="de-DE">Boston Sonnenuntergang</name>
+<shortDescription xml:lang="x-default">Boston's skyline: A masterpiece painted by sunset.</shortDescription>
+<shortDescription xml:lang="de-DE">Boston's skyline: Ein Meisterwerk geschaffen von der untergehenden Sonne.</shortDescription>
+<longDescription xml:lang="x-default">This stunning panorama captures the iconic Boston skyline bathed in the warm glow of sunset. The city's skyscrapers, reflecting the golden light, create a breathtaking scene against the backdrop of a tranquil river. This image invites you to experience the beauty and tranquility of Boston at twilight.</longDescription>
+<longDescription xml:lang="de-DE">Dieses atemberaubende Panorama fängt die ikonische Skyline von Boston im warmen Licht des Sonnenuntergangs ein. Die Wolkenkratzer der Stadt, die das goldene Licht reflektieren, bilden eine atemberaubende Szene vor dem Hintergrund eines ruhigen Flusses. Dieses Bild lädt Sie dazu ein, die Schönheit und Ruhe von Boston in der Dämmerung zu erleben.</longDescription>
 <imageURL>
 <small>/assets/img/products/xxl/xxl_2.jpg</small>
 <medium>/assets/img/products/xxl/xxl_2.jpg</medium>
@@ -1728,9 +2111,12 @@
 <price>36.00</price>
 </product>
 <product>
-<name>Bryce National Park, Utah I</name>
-<shortDescription>Bryce National Park, Utah Panorama.</shortDescription>
-<longDescription>A display of nature in your space, is going to look great.</longDescription>
+<name xml:lang="x-default">Bryce Canyon National Park, Utah I</name>
+<name xml:lang="de-DE">Bryce-Canyon-Nationalpark, I</name>
+<shortDescription xml:lang="x-default">Snow-kissed hoodoos and breathtaking views.</shortDescription>
+<shortDescription xml:lang="de-DE">Schneebedeckte Hoodoos und atemberaubende Ausblicke.</shortDescription>
+<longDescription xml:lang="x-default">Bryce Canyon in winter is a sight to behold. The iconic hoodoos, sculpted by erosion, are dusted with snow, creating a surreal and captivating scene. The contrast between the vibrant red rock formations and the pristine white snow is truly breathtaking. Admire the unique geological formations, and experience the tranquility of this winter wonderland.</longDescription>
+<longDescription xml:lang="de-DE">Der Bryce Canyon im Winter ist ein wahrer Augenschmaus. Die ikonischen Hoodoos, die von der Erosion geformt wurden, sind mit Schnee bedeckt, was eine surreale und fesselnde Szene ergibt. Der Kontrast zwischen den leuchtend roten Felsformationen und dem unberührten weißen Schnee ist wirklich atemberaubend. Wandern Sie auf den Pfaden des Parks, bewundern Sie die einzigartigen geologischen Formationen und erleben Sie die Ruhe dieses Winterwunderlandes.</longDescription>
 <imageURL>
 <small>/assets/img/products/xxl/xxl_3.jpg</small>
 <medium>/assets/img/products/xxl/xxl_3.jpg</medium>
@@ -1743,9 +2129,12 @@
 <price>38.90</price>
 </product>
 <product>
-<name>Bryce National Park, Utah II</name>
-<shortDescription>Bryce National Park, Utah panorama but a different motive.</shortDescription>
-<longDescription>This view is so gorgeous, there is no reason to not hang this one on your wall.</longDescription>
+<name xml:lang="x-default">Bryce Canyon National Park, Utah II</name>
+<name xml:lang="de-DE">Bryce-Canyon-Nationalpark, II</name>
+<shortDescription xml:lang="x-default">Bryce Canyon: Where winter's magic meets the desert's beauty.</shortDescription>
+<shortDescription xml:lang="de-DE">Der Bryce Canion: Wo die Magie des Winter auf die Schönheit der Wüste trifft.</shortDescription>
+<longDescription xml:lang="x-default">Discover the enchanting beauty of Bryce Canyon National Park cloaked in a blanket of snow. Witness the towering hoodoos, sculpted by time and weather, standing tall against the backdrop of a pristine white landscape. This panoramic view captures the park's grandeur, inviting you to explore its hidden trails and immerse yourself in nature's winter wonderland</longDescription>
+<longDescription xml:lang="de-DE">Entdecken Sie die bezaubernde Schönheit des Bryce Canyon National Park, der in eine Schneedecke gehüllt ist. Erleben Sie die hoch aufragenden Hoodoos, die von Zeit und Wetter geformt wurden und sich vor dem Hintergrund einer unberührten weißen Landschaft erheben. Dieser Panoramablick fängt die Großartigkeit des Parks ein und lädt Sie ein, die versteckten Pfade zu erkunden und in das Winterwunderland der Natur einzutauchen.</longDescription>
 <imageURL>
 <small>/assets/img/products/xxl/xxl_4.jpg</small>
 <medium>/assets/img/products/xxl/xxl_4.jpg</medium>

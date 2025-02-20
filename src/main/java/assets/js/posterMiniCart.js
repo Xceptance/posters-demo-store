@@ -11,7 +11,7 @@ function showMiniCart() {
 function getMiniCartText() {
 
 	document.querySelector(".notifications-loader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
-	var url = CONTEXT_PATH + '/getMiniCartElements';
+	var url = CONTEXT_PATH + '/' + LOCALE + '/getMiniCartElements';
 	const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(data) {
@@ -35,7 +35,7 @@ function getMiniCartText() {
 
 			document.querySelector(".notifications-loader").innerHTML = [''];
 		} else {
-			sendAlert("failed to update mini cart", "alert-danger");
+			sendAlert("failed to update mini cart text", "alert-danger");
 		}
 	}
 	xhr.open("GET", url);
@@ -43,16 +43,16 @@ function getMiniCartText() {
 }
 
 /* add product to cart */
-function addToCart(productId, finish, size) {
-	addToMiniCart(productId, finish, size);
+function addToCart(productId, finish, size, locale) {
+	addToMiniCart(productId, finish, size, locale);
 }
-function addToMiniCart(productId, finish, size) {
+function addToMiniCart(productId, finish, size, locale) {
 	document.getElementById('mini-cart-menu').style.display = "block";
 	document.querySelector(".notifications-loader").innerHTML = ['<img src="' + CONTEXT_PATH + '/assets/img/loader.gif">'];
 	var width = size.match(/\d+/g)[0];
 	var height = size.match(/\d+/g)[1];
 	var liId = "product-id-" + productId + '-' + finish + '-' + width + "x" + height;
-	var url = CONTEXT_PATH + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
+	var url = CONTEXT_PATH + '/' + locale + '/addToCartSlider' + '?productId=' + productId + '&finish=' + finish + '&size=' + size;
 	const xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function() {
@@ -104,7 +104,7 @@ function addToMiniCart(productId, finish, size) {
 function getMiniCartElementInnerHtml(product, currency, unitLength) {
 	
 	return '<ul class="cart-items list-unstyled">' + '<li class="prod-name">'
-	+ product.productName + '</li>'
+	+ product.localizedName + '</li>'
 	+ '<li>Quantity: <span class="prod-count">' + product.productCount
 	+ '</span>' + ' (<span class="prod-style">' + product.finish
 	+ '</span>, <span class="prod-size">' + '<span class ="prod-width">' + product.size.width + '</span>'  

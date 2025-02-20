@@ -1,15 +1,6 @@
 alter table billingaddress drop constraint if exists fk_billingaddress_customer_id;
 drop index if exists ix_billingaddress_customer_id;
 
-alter table cart drop constraint if exists fk_cart_shipping_address_id;
-drop index if exists ix_cart_shipping_address_id;
-
-alter table cart drop constraint if exists fk_cart_billing_address_id;
-drop index if exists ix_cart_billing_address_id;
-
-alter table cart drop constraint if exists fk_cart_credit_card_id;
-drop index if exists ix_cart_credit_card_id;
-
 alter table cartproduct drop constraint if exists fk_cartproduct_product_id;
 drop index if exists ix_cartproduct_product_id;
 
@@ -42,6 +33,12 @@ drop index if exists ix_orderproduct_ordering_id;
 alter table orderproduct drop constraint if exists fk_orderproduct_postersize_id;
 drop index if exists ix_orderproduct_postersize_id;
 
+alter table product drop constraint if exists fk_product_name_id;
+
+alter table product drop constraint if exists fk_product_description_detail_id;
+
+alter table product drop constraint if exists fk_product_description_overview_id;
+
 alter table product drop constraint if exists fk_product_subcategory_id;
 drop index if exists ix_product_subcategory_id;
 
@@ -57,8 +54,12 @@ drop index if exists ix_productpostersize_postersize_id;
 alter table shippingaddress drop constraint if exists fk_shippingaddress_customer_id;
 drop index if exists ix_shippingaddress_customer_id;
 
+alter table subcategory drop constraint if exists fk_subcategory_name_id;
+
 alter table subcategory drop constraint if exists fk_subcategory_topcategory_id;
 drop index if exists ix_subcategory_topcategory_id;
+
+alter table topcategory drop constraint if exists fk_topcategory_name_id;
 
 drop table if exists backofficeuser;
 
@@ -71,6 +72,10 @@ drop table if exists cartproduct;
 drop table if exists creditcard;
 
 drop table if exists customer;
+
+drop table if exists defaulttext;
+
+drop table if exists supportedlanguage;
 
 drop table if exists ordering;
 
@@ -87,3 +92,6 @@ drop table if exists shippingaddress;
 drop table if exists subcategory;
 
 drop table if exists topcategory;
+
+drop table if exists translation;
+

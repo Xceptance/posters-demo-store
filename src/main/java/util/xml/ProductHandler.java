@@ -17,12 +17,16 @@ package util.xml;
 
 import java.util.List;
 
+import models.DefaultText;
+import models.Language;
 import models.PosterSize;
 import models.Product;
 import models.ProductPosterSize;
 import models.SubCategory;
 import models.TopCategory;
+import models.Translation;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -42,6 +46,16 @@ public class ProductHandler extends DefaultHandler
 
     private String[] prices;
 
+    private boolean isDefault = true;
+
+    private DefaultText dtext;
+
+    private Translation transl;
+
+    private Language defaultLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
+
+    private String translationCode;
+
     @Override
     public void characters(final char[] ch, final int start, final int length)
     {
@@ -51,16 +65,33 @@ public class ProductHandler extends DefaultHandler
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
     {
-        if (localName.equals("product")) {
+        if (localName.equals("product"))
+        {
             product = new Product();
             product.save();
-        } else if (localName.equals("imageURL")) {
-            // Initialize product's image URLs
-            product.setImageURL("");
-            product.setSmallImageURL("");
-            product.setMediumImageURL("");
-            product.setLargeImageURL("");
-            product.setOriginalImageURL("");
+        }
+        else if (localName.equals("name") || localName.equals("shortDescription") || localName.equals("longDescription"))
+        {
+            String lang = atts.getValue("xml:lang");
+            if (StringUtils.isBlank(lang)) 
+            {
+                // error handling
+                isDefault = true;
+                dtext = new DefaultText();
+            } 
+            else if (lang.equals("x-default"))
+            {
+                // make an entry in the default texts table
+                isDefault = true;
+                dtext = new DefaultText();
+            }
+            else
+            {
+                // add as translation
+                isDefault = false;
+                transl = new Translation();
+                translationCode = lang;
+            }
         }
         currentValue = new StringBuilder();
     }
@@ -71,15 +102,99 @@ public class ProductHandler extends DefaultHandler
         final String toAdd = currentValue.toString();
         if (localName.equals("name"))
         {
-            product.setName(toAdd);
+            if (isDefault == true)
+            {
+                // add as default text and add reference to it to product
+                dtext.setOriginalText(toAdd);
+                dtext.setOriginalLanguage(defaultLanguage);
+                dtext.save();
+                product.setName(dtext);
+                product.update();
+            }
+            else
+            {
+                // or add as translation and add reference to default text
+                // NOTE: this was implemented 'quick and dirty' it assumes a default text
+                // always precedes a translation! The data model requires a default text
+                // to access a translation in the application
+                transl.setTranslationText(toAdd);
+                transl.setText(dtext);
+
+                // get the translations language
+                Language transLanguage;
+                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                if (langExists == true) 
+                {
+                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transl.setTranslationLanguageId(transLanguage);
+                    transl.save();
+                }
+            }
+            
         }
         if (localName.equals("shortDescription"))
         {
-            product.setDescriptionOverview(toAdd);
+            // product.setDescriptionOverview(toAdd);
+            if (isDefault)
+            {
+                // add as default text and add reference to it to product
+                dtext.setOriginalText(toAdd);
+                dtext.setOriginalLanguage(defaultLanguage);
+                dtext.save();
+                product.setDescriptionOverview(dtext);
+                product.update();
+            }
+            else
+            {
+                // or add as translation and add reference to default text
+                // NOTE: this was implemented 'quick and dirty' it assumes a default text
+                // always precedes a translation! The data model requires a default text
+                // to access a translation in the application
+                transl.setTranslationText(toAdd);
+                transl.setText(dtext);
+
+                // get the translations language
+                Language transLanguage;
+                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                if (langExists == true) 
+                {
+                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transl.setTranslationLanguageId(transLanguage);
+                    transl.save();
+                } 
+            }
         }
         if (localName.equals("longDescription"))
         {
-            product.setDescriptionDetail(toAdd);
+            // product.setDescriptionDetail(toAdd);
+            if (isDefault)
+            {
+                // add as default text and add reference to it to product
+                dtext.setOriginalText(toAdd);
+                dtext.setOriginalLanguage(defaultLanguage);
+                dtext.save();
+                product.setDescriptionDetail(dtext);
+                product.update();
+            }
+            else
+            {
+                // or add as translation and add reference to default text
+                // NOTE: this was implemented 'quick and dirty' it assumes a default text
+                // always precedes a translation! The data model requires a default text
+                // to access a translation in the application
+                transl.setTranslationText(toAdd);
+                transl.setText(dtext);
+
+                // get the translations language
+                Language transLanguage;
+                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                if (langExists == true) 
+                {
+                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transl.setTranslationLanguageId(transLanguage);
+                    transl.save();
+                }
+            }
         }
         if (localName.equals("price"))
         {
@@ -87,38 +202,40 @@ public class ProductHandler extends DefaultHandler
             prices = toAdd.split(";");
             // add first price as minimum price
             product.setMinimumPrice(Double.parseDouble(prices[0]));
+            product.update();
         }
         else if (localName.equals("imageURL"))
         {
-            //product.setImageURL(toAdd);
+            //
         }
         else if (localName.equals("small"))
         {
             product.setSmallImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("medium"))
         {
             product.setMediumImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("large"))
         {
             product.setLargeImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("original"))
         {
             product.setOriginalImageURL(toAdd);
+            product.update();
         }
         else if (localName.equals("subCategory"))
         {
-            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", toAdd).findOne();
-            if (subCategory == null)
-            {
-                subCategory = new SubCategory();
-                subCategory.setName(toAdd);
-            }
+            DefaultText categoryName = Ebean.find(DefaultText.class).where().eq("originalText", toAdd).findOne(); 
+            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", categoryName).findOne();
             product.setSubCategory(subCategory);
             final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
             product.setTopCategory(topCategory);
+            product.update();
         }
         if (localName.equals("carousel"))
         {
@@ -176,6 +293,7 @@ public class ProductHandler extends DefaultHandler
                 productPosterSize.setSize(posterSize);
                 productPosterSize.save();
                 product.addAvailableSize(productPosterSize);
+                product.update();
             }
         }
     }
