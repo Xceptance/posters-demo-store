@@ -535,11 +535,11 @@
 <!-- SubCategory Cold_Cuts  -->
 <product>
 <name xml:lang="x-default">Tomato and Mozzarella Bites</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Tomate Mozzarella Happen</name>
 <shortDescription xml:lang="x-default">The Italian classic Tomato mozzarella in a close up shot.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Nahaufnahme der italienischen Spezialität Tomate Mozzarella.</shortDescription>
 <longDescription xml:lang="x-default">Fresh, thick-sliced tomatoes, equally thick slices of mozzarella cheese, and fresh basil a very typical Italian dish. This poster gets u a very fitting motive for your kitchen or even restaurant.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Frische, dick geschnittene Tomaten, ebenso dicke Scheiben Mozzarella-Käse und frisches Basilikum, ein sehr typisch italienisches Gericht. Mit diesem Poster erhalten Sie ein sehr passendes Motiv für Ihre Küche oder auch Ihr Restaurant.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/tomato-and-mozzarella-bites/tomato-and-mozzarella-bites-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/tomato-and-mozzarella-bites/tomato-and-mozzarella-bites-medium.webp</medium>
@@ -552,11 +552,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Rolled Bacon</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gerollter Schinken</name>
 <shortDescription xml:lang="x-default">Rolled bacon arranged precisely.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">This beautiful alignment of the rolled bacon creates a precise and careful look that should describe every good cook and his kitchen. A nice poster for you, cooks. Bacon is very popular as a typical part of breakfast, most people know it, especially from the British breakfast that contains bacon and eggs.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Gerollter Schinken präzise arrangiert.</shortDescription>
+<longDescription xml:lang="x-default">This beautiful alignment of the rolled bacon creates a precise and careful look that should describe every good cook and his kitchen. Bacon is very popular as a typical part of breakfast, most people know it, especially from the British breakfast that contains bacon and eggs.</longDescription>
+<longDescription xml:lang="de-DE">Diese schöne Ausrichtung des gerollten Specks erzeugt ein präzises und sorgfältiges Aussehen, das jeden guten Koch und seine Küche beschreiben sollte. Speck ist als typischer Bestandteil des Frühstücks sehr beliebt, die meisten kennen ihn, vor allem vom britischen Frühstück, das Speck und Eier enthält.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/rolled-bacon/rolled-bacon-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/rolled-bacon/rolled-bacon-medium.webp</medium>
@@ -569,11 +569,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Cheese Varieties</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Verschiedene Käsesorten</name>
 <shortDescription xml:lang="x-default">A symbol of French culinary. </shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Every cheese connoisseur knows that cheese is a delicate and versatile food that comes in a lot of different shapes and tastes. But one of the most popular cheese sorts is probably the Camembert that makes this picture fit in any kitchen or restaurant.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein Symbol französischer Küche.</shortDescription>
+<longDescription xml:lang="x-default">Every cheese connoisseur knows that cheese is a delicate and versatile food that comes in a lot of different shapes and tastes. But one of the most popular cheese sorts is probably the Camembert.</longDescription>
+<longDescription xml:lang="de-DE">Jeder Käsekenner weiß, dass Käse ein delikates und vielseitiges Lebensmittel ist, das in vielen verschiedenen Formen und Geschmacksrichtungen erhältlich ist. Aber eine der beliebtesten Käsesorten ist wohl der Camembert.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/cheese-varieties/cheese-varieties-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/cheese-varieties/cheese-varieties-medium.webp</medium>
@@ -586,11 +586,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Mixed Olives</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Oliven-Mix</name>
 <shortDescription xml:lang="x-default">Mixed colored Olives in green, black, and brown.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Grüne, schwarze und braune Oliven.</shortDescription>
 <longDescription xml:lang="x-default">A very delicious looking picture of seasoned black and green olives. If you look for an Italian themed room, then this is the perfect assessment.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein sehr köstlich aussehendes Bild von gewürzten schwarzen und grünen Oliven. Wenn Sie auf der Suche nach einem Zimmer im italienischen Stil sind, dann ist dies das perfekte Poster.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/mixed-olives/mixed-olives-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/mixed-olives/mixed-olives-medium.webp</medium>
@@ -603,11 +603,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Finger Food</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Häppchen</name>
 <shortDescription xml:lang="x-default">A finger food plate with a lot of variety.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine vielseitige Häppchen-Platte.</shortDescription>
 <longDescription xml:lang="x-default">Finger food is the perfect choice for a party with friends colleagues or family. This poster is capturing the spirit of shared moments and delectable bites, a good selection for your living room.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Fingerfood ist die perfekte Wahl für eine Party mit Freunden, Kollegen oder der Familie. Dieses Poster fängt den Geist gemeinsamer Momente und köstlicher Häppchen ein und ist eine gute Wahl für Ihr Wohnzimmer.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/finger-food/finger-food-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/finger-food/finger-food-medium.webp</medium>
@@ -620,11 +620,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Rocket Salad with Mozzarella</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Rucolasalat mit Mozzarella</name>
 <shortDescription xml:lang="x-default">A great starter in Italian restaurants.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine leckere italienische Vorspeise.</shortDescription>
 <longDescription xml:lang="x-default">Mozzarella with rocket salad is a very typical first course meal in Italian pizzerias. This Italian staple includes a major part of Italian ingredients, containing beautiful creamy mozzarella and extra virgin olive oil. This poster goes especially good when you're in need of something more classic and elegant.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Mozzarella mit Rucolasalat ist eine sehr typische Vorspeise in italienischen Pizzerien. Dieses italienisches Grundnahrungsmittel besteht zu einem Großteil aus italienischen Zutaten, darunter wunderbar cremiger Mozzarella und extra natives Olivenöl. Dieses Poster eignet sich besonders gut, wenn Sie etwas Klassischeres und Eleganteres benötigen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/rocket-salad-with-mozzarella/rocket-salad-with-mozzarella-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/rocket-salad-with-mozzarella/rocket-salad-with-mozzarella-medium.webp</medium>
@@ -637,11 +637,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Meatfoot</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gehacktes</name>
 <shortDescription xml:lang="x-default">A minced meat foot?</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Fuß aus Gehacktem?</shortDescription>
 <longDescription xml:lang="x-default">A rather weird looking plate of minced meat, but it's a perfect gift for a friend that needs a laugh.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">A rather weird looking plate of minced meat, but it's a perfect gift for a friend that needs a laugh.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/meatfoot/meatfoot-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/meatfoot/meatfoot-medium.webp</medium>
@@ -654,11 +654,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Peperoni Sandwich</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Pepperoni-Sandwich</name>
 <shortDescription xml:lang="x-default">Time for lunch!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Mittagspause!</shortDescription>
 <longDescription xml:lang="x-default">A typical standard meal containing two peperoni sandwiches and a coffee. It doesn't seem special, but even a normal meal can make u feel way better on a hard work day. A good poster to put in the community kitchen at work. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine typische Standardmahlzeit, bestehend aus zwei Peperoni-Sandwiches und einem Kaffee. Es scheint nichts Besonderes zu sein, aber selbst eine normale Mahlzeit kann dafür sorgen, dass Sie sich an einem harten Arbeitstag viel besser fühlen. Ein gutes Poster für die Gemeinschaftsküche am Arbeitsplatz.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/peperoni-sandwich/peperoni-sandwich-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/peperoni-sandwich/peperoni-sandwich-medium.webp</medium>
@@ -670,12 +670,12 @@
 <price>17.99;28.10;37.90</price>
 </product>
 <product>
-<name xml:lang="x-default">Chicken Teryiaki</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="x-default">Chicken Teriyaki</name>
+<name xml:lang="de-DE">Hühnchen-Teriyaki</name>
 <shortDescription xml:lang="x-default">Show off as a chef.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Gib an als Koch.</shortDescription>
 <longDescription xml:lang="x-default">Mushrooms, rice, green beans, brocoli, onions combined with chicken teriyaki aesteticly arranged makes an excellent dish. The poster is not just about the food, it's a celebration of culinary artistry.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Pilze, Reis, grüne Bohnen, Brokkoli, Zwiebeln kombiniert mit Hühnchen-Teriyaki, ästhetisch arrangiert ergeben ein ausgezeichnetes Gericht. Auf dem Poster geht es nicht nur um das Essen, es ist eine Hommage an die Kochkunst.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/chicken-teryiaki/chicken-teryiaki-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/chicken-teryiaki/chicken-teryiaki-medium.webp</medium>
@@ -688,11 +688,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Fried Rice</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">For people with attention to detail. </shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<name xml:lang="de-DE">Gebratener Reis</name>
+<shortDescription xml:lang="x-default">For people with attention to detail.</shortDescription>
+<shortDescription xml:lang="de-DE">Für Menschen mit einem Auge fürs Detail.</shortDescription>
 <longDescription xml:lang="x-default">Fried rice is usually considered an unhealthy fast food, but this exquisite made fried rice doesn't seem anything like that. A poster for people that love the beauty of details and excellent food.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Gebratener Reis gilt normalerweise als ungesundes Fastfood, aber dieser exquisit zubereitete gebratene Reis sieht ganz anders aus. Ein Poster für Menschen, die die Schönheit von Details und ausgezeichnetes Essen lieben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/cold-cuts/fried-rice/fried-rice-small.webp</small>
 <medium>/assets/img/products/food/cold-cuts/fried-rice/fried-rice-medium.webp</medium>
@@ -706,11 +706,11 @@
 <!-- SubCategory Main Dishes  -->
 <product>
 <name xml:lang="x-default">Grilled Salmon with Potato Wedges</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gegrillter Lachs mit Kartoffelecken</name>
 <shortDescription xml:lang="x-default">Eye candy for gourmets.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Potato wedges seasoned and poured over with white sauce combined with the wrapped salmon looks stunning and elegant. This main course will be perfect for every gourmet's wall. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Augenschmaus für Köche.</shortDescription>
+<longDescription xml:lang="x-default">Potato wedges seasoned and poured over with white sauce combined with the wrapped salmon looks stunning and elegant. This main course will be perfect for every gourmet's wall.</longDescription>
+<longDescription xml:lang="de-DE">Mit weißer Soße gewürzte und übergossene Kartoffelecken sehen in Kombination mit dem eingewickelten Lachs umwerfend und elegant aus. Dieses Hauptgericht passt perfekt auf die Wand jedes Feinschmeckers.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/grilled-salmon-with-potato-wedges/grilled-salmon-with-potato-wedges-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/grilled-salmon-with potato-wedges/grilled-salmon-with-potato-wedges-medium.webp</medium>
@@ -723,11 +723,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Goulash with Dumplings</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gluasch mit Knödeln</name>
 <shortDescription xml:lang="x-default">German home-style cooking.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Goulash with Dumplings go very good together, combined with some lemon and broccoli is gone round the meal up to make it even more aesthetic and also tasty. People that love hearty food will love this image in their dining room. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Leckere deutsche Küche.</shortDescription>
+<longDescription xml:lang="x-default">Goulash with Dumplings go very good together, combined with some lemon and broccoli is gone round the meal up to make it even more aesthetic and also tasty. People that love hearty food will love this image in their dining room.</longDescription>
+<longDescription xml:lang="de-DE">Gulasch mit Knödeln passt sehr gut zusammen, kombiniert mit etwas Zitrone und Brokkoli rundet man das Gericht ab, um es noch ästhetischer und schmackhafter zu machen. Menschen, die herzhaftes Essen lieben, werden auch dieses Bild in ihrem Esszimmer lieben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/goulash-with-dumplings/goulash-with-dumplings-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/goulash-with-dumplings/goulash-with-dumplings-medium.webp</medium>
@@ -740,11 +740,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Selfmade Mac and Cheese</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">A fast and easy to make dish</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<name xml:lang="de-DE">Selbstgemachte Käsemakkaroni</name>
+<shortDescription xml:lang="x-default">A fast and easy to make dish.</shortDescription>
+<shortDescription xml:lang="de-DE">Ein schnell und einfach zubereitetes Gericht.</shortDescription>
 <longDescription xml:lang="x-default">This close-up view of the mac and cheese makes it look so realistic that you'll almost be able to smell it, a great adddition to everybodys kitchen. Worth to know: Mac and cheese is a very popular dish around the world and has many different recipie variations some even include meat in the dish.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Diese Nahaufnahme der Makkaroni mit Käse lässt sie so realistisch aussehen, dass man sie fast riechen kann – eine tolle Ergänzung für jede Küche. Gut zu wissen: Mac and Cheese ist auf der ganzen Welt ein sehr beliebtes Gericht und es gibt viele verschiedene Rezeptvarianten, bei einigen ist sogar Fleisch im Gericht enthalten.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/selfmade-mac-and-cheese/selfmade-mac-and-cheese-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/selfmade-mac-and-cheese/selfmade-mac-and-cheese-medium.webp</medium>
@@ -757,11 +757,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Stuffed Turkey</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gefüllter Truthahn</name>
 <shortDescription xml:lang="x-default">The best way to celebrate Thanksgiving.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">If you like spending thanksgiving with your loved ones this picture will always remind you of the beautiful moments you had together. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Der beste Weg Thanksgiving zu feiern.</shortDescription>
+<longDescription xml:lang="x-default">If you like spending thanksgiving with your loved ones this picture will always remind you of the beautiful moments you had together.</longDescription>
+<longDescription xml:lang="de-DE">Wenn Sie Thanksgiving gerne mit Ihren Lieben verbringen, wird Sie dieses Bild immer an die schönen Momente erinnern, die Sie zusammen verbracht haben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/stuffed-turkey/stuffed-turkey-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/stuffed-turkey/stuffed-turkey-medium.webp</medium>
@@ -774,11 +774,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Tuna Steak</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Thunfischsteak</name>
 <shortDescription xml:lang="x-default">Is this really tuna?</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ist das wirklich Thunfisch?</shortDescription>
 <longDescription xml:lang="x-default">Your guests will never now that this is a tuna steak it look so similar to a normal steak. Ah nice way to get a conversation going.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ihre Gäste werden nie bemerken, dass es sich um ein Thunfischsteak handelt, das einem normalen Steak so ähnlich sieht. Ah, eine nette Art, ein Gespräch in Gang zu bringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/tuna-steak/tuna-steak-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/tuna-steak/tuna-steak-medium.webp</medium>
@@ -791,11 +791,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Frozen Pizza</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Tierfgefrorene Pizza</name>
 <shortDescription xml:lang="x-default">An honest tribute to fast food.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Tribut an Fastfood.</shortDescription>
 <longDescription xml:lang="x-default">An easy to make pizza is great for partys or just for yourself when you need something unhealthy to satisfy your hunger. That is why this  poster is going to make you look down to earth but also likeable.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine einfach zuzubereitende Pizza eignet sich hervorragend für Partys oder einfach für einen selbst, wenn Sie etwas Ungesundes brauchen, um Ihren Hunger zu stillen. Deshalb wirkt dieses Poster bodenständig, aber auch sympathisch.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/frozen-pizza/frozen-pizza-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/frozen-pizza/frozen-pizza-medium.webp</medium>
@@ -808,11 +808,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Meatballs</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Fleischbällchen</name>
 <shortDescription xml:lang="x-default">Yummy!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Lecker!</shortDescription>
 <longDescription xml:lang="x-default">Meatballs and mashed potatos combined with salad and cranberries is a classic that everybody tried once in their life. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Fleischbällchen und Kartoffelpüree kombiniert mit Salat und Preiselbeeren sind ein Klassiker, den jeder einmal im Leben probiert hat.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/meatballs/meatballs-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/meatballs/meatballs-medium.webp</medium>
@@ -825,11 +825,11 @@
 </product>
 <product>
 <name xml:lang="x-default">XXL Burger</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">XXL Burger</name>
 <shortDescription xml:lang="x-default">A must-have for all burger lovers.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">For all the fast food lovers out there you definitely need this in your dining room. Worth to know: There a many XXL burger eating contest held that use even bigger burgers than this one. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein Muss für alle Burgerliebhaber.</shortDescription>
+<longDescription xml:lang="x-default">For all the fast food lovers out there you definitely need this in your dining room. Worth to know: There a many XXL burger eating contest held that use even bigger burgers than this one.</longDescription>
+<longDescription xml:lang="de-DE">Für alle Fast-Food-Liebhaber da draußen: Sie brauchen das unbedingt in Ihrem Esszimmer. Wissenswertes: Es gab viele XXL-Burger-Esswettbewerbe, bei denen noch größere Burger als dieser verwendet wurden.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/xxl-burger/xxl-burger-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/xxl-burger/xxl-burger-medium.webp</medium>
@@ -842,11 +842,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Small Burger</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Kleiner Burger</name>
 <shortDescription xml:lang="x-default">If you need something fast, a burger always satisfies.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">This one might be small but it looks realy tasty just looking at this image is going to make you crave a burger just like this one. A nice accesirior for your kitchen. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Wenn man auf die Schnelle was Essbares braucht, hilft ein Burger immer.</shortDescription>
+<longDescription xml:lang="x-default">This one might be small but it looks realy tasty just looking at this image is going to make you crave a burger just like this one. A nice accesirior for your kitchen.</longDescription>
+<longDescription xml:lang="de-DE">Dieser ist vielleicht klein, aber er sieht wirklich lecker aus. Allein beim Anblick dieses Bildes werden Sie Lust auf einen Burger wie diesen bekommen. Ein schönes Accessoire für Ihre Küche.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/small-burger/small-burger-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/small-burger/small-burger-medium.webp</medium>
@@ -859,11 +859,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Medium Burger</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Mittlerer Burger</name>
 <shortDescription xml:lang="x-default">You can’t have too many burger pictures, can you?</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">A typical burger nothing realy special but it doesnt have to be special to make and impression. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Man kann nicht genug Burger-Bilder haben, oder?</shortDescription>
+<longDescription xml:lang="x-default">A typical burger nothing realy special but it doesnt have to be special to make and impression.</longDescription>
+<longDescription xml:lang="de-DE">Ein typischer Burger, nichts wirklich Besonderes, aber es muss nicht unbedingt etwas Besonderes sein, um einen Eindruck zu hinterlassen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/main-dishes/medium-burger/medium-burger-small.webp</small>
 <medium>/assets/img/products/food/main-dishes/medium-burger/medium-burger-medium.webp</medium>
@@ -877,11 +877,11 @@
 <!-- SubCategory Sweets  -->
 <product>
 <name xml:lang="x-default">German Apple Pie</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Deutscher Apfelkuchen</name>
 <shortDescription xml:lang="x-default">A beautiful close up.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">This poster of an delicouse looking apple pie closeup shot  is a good fit for your dinning room. The zoomed view is very aestecicly pleasing you can even see drops of caramel next to this masterpiece of </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Eine wunderschöne Nahaufnahme.</shortDescription>
+<longDescription xml:lang="x-default">This poster of an delicouse looking apple pie closeup shot is a good fit for your dinning room. The zoomed view is very aesthetically pleasing, you can even see drops of caramel next to this masterpiece of a dessert.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Poster mit einer Nahaufnahme eines leckeren Apfelkuchens passt gut in Ihr Esszimmer. Die vergrößerte Ansicht ist ästhetisch sehr ansprechend, man kann sogar Karamelltropfen neben diesem Meisterwerk eines Desserts erkennen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/german-apple-pie/german-apple-pie-small.webp</small>
 <medium>/assets/img/products/food/sweets/german-apple-pie/german-apple-pie-medium.webp</medium>
@@ -894,11 +894,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Whipped Cream with Caramel</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Schlagsahne mit Karamell</name>
 <shortDescription xml:lang="x-default">A great topping for every pie.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein toller Belag für jeden Kuchen.</shortDescription>
 <longDescription xml:lang="x-default">This image is perfect for anyone who loves whipped cream and caramel sauce. It is also a great way to add a touch of sweetness and elegance to your home decor.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Dieses Bild ist perfekt für alle, die Schlagsahne und Karamellsauce lieben. Es ist auch eine großartige Möglichkeit, Ihrer Inneneinrichtung einen Hauch von Süße und Eleganz zu verleihen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/whipped-cream-with-caramel/whipped-cream-with-caramel-small.webp</small>
 <medium>/assets/img/products/food/sweets/whipped-cream-with-caramel/whipped-cream-with-caramel-medium.webp</medium>
@@ -911,11 +911,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Blueberry Cake</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Blaubeerkuchen</name>
 <shortDescription xml:lang="x-default">Well-made blueberry cake on a plate.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">If you have a kitchen and need some decoration this blueberry cake poster is for you. nothing way to special about this one but maybe your room isnt all that special either.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Blaubeerkuchen auf einem Teller.</shortDescription>
+<longDescription xml:lang="x-default">If you have a kitchen and need some decoration this blueberry cake poster is for you. Nothing way to special about this one but maybe your room isnt all that special either.</longDescription>
+<longDescription xml:lang="de-DE">Wenn Sie eine Küche haben und etwas Dekoration benötigen, ist dieses Blaubeerkuchen-Poster genau das Richtige für Sie. An diesem ist nichts besonderes, aber vielleicht ist Ihr Zimmer auch nicht so besonders.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/blueberry-cake/blueberry-cake-small.webp</small>
 <medium>/assets/img/products/food/sweets/blueberry-cake/blueberry-cake-medium.webp</medium>
@@ -928,11 +928,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Fruit Tart with Cocoa</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Obstkuchen mit Kakao</name>
 <shortDescription xml:lang="x-default">An aesthetic fruit tart with cocoa powder.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein sehr schöner Obstkuchen mit Kakaopulver.</shortDescription>
 <longDescription xml:lang="x-default">Satisfy your cravings for cake without the calories with this poster of a tasty looking tart.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Stillen Sie Ihr Verlangen nach Kuchen ohne Kalorien mit diesem Poster einer lecker aussehenden Torte.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/fruit-tart-with-cocoa/fruit-tart-with-cocoa-small.webp</small>
 <medium>/assets/img/products/food/sweets/fruit-tart-with-cocoa/fruit-tart-with-cocoa-medium.webp</medium>
@@ -945,11 +945,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Gummy Bears on Keyboard</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gummibärchen auf einer Tastatur</name>
 <shortDescription xml:lang="x-default">Pimp your office!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">A nice way to get more life in your office with funny pictures like this one of a keyboard with with gummibears on top, arent they cute?</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Pimpen Sie Ihr Büro!</shortDescription>
+<longDescription xml:lang="x-default">A nice way to get more life in your office with funny pictures like this one of a keyboard with with gummibears on top, aren't they cute?</longDescription>
+<longDescription xml:lang="de-DE">Eine schöne Möglichkeit, mehr Leben in Ihr Büro zu bringen, mit lustigen Bildern wie diesem von einer Tastatur mit Gummibärchen darauf, sind die nicht süß?</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/gummy-bears-on-keyboard/gummy-bears-on-keyboard-small.webp</small>
 <medium>/assets/img/products/food/sweets/gummy-bears-on-keyboard/gummy-bears-on-keyboard-medium.webp</medium>
@@ -962,11 +962,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Colored Sprinkles</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Bunte Streusel</name>
 <shortDescription xml:lang="x-default">How many white ones do you see?</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Wie viele weiße sehen Sie?</shortDescription>
 <longDescription xml:lang="x-default">A nice way to bring colors in your room and also a good choice for a child room. Your children will love this.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine schöne Möglichkeit, Farbe in Ihr Zimmer zu bringen und auch eine gute Wahl für ein Kinderzimmer. Ihre Kinder werden es lieben.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/colored-sprinkles/colored-sprinkles-small.webp</small>
 <medium>/assets/img/products/food/sweets/colored-sprinkles/colored-sprinkles-medium.webp</medium>
@@ -979,11 +979,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Gummy Bears in Bowl</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gümmibärchen in einer Schüssel</name>
 <shortDescription xml:lang="x-default">Every child loves these.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Jedes Kind liebt sie.</shortDescription>
 <longDescription xml:lang="x-default">Gummy bears come in many shrill colors, good choice to get some more excitement in your room.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Gummibärchen gibt es in vielen schrillen Farben, eine gute Wahl, um mehr Spannung in Ihr Zimmer zu bringen.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/gummy-bears-in-bowl/gummy-bears-in-bowl-small.webp</small>
 <medium>/assets/img/products/food/sweets/gummy-bears-in-bowl/gummy-bears-in-bowl-medium.webp</medium>
@@ -996,11 +996,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Raspberry Jello</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Himbeerkuchen</name>
 <shortDescription xml:lang="x-default">Two little raspberries...</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Zwei kleine Himbeeren...</shortDescription>
 <longDescription xml:lang="x-default">A very red, nice looking raspberry cake, nice for your dinning room wall. The poster is also a great way to bring a touch of sweetness and indulgence indoors, even if you're on a diet.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein sehr roter, schön aussehender Himbeerkuchen, schön für die Wand Ihres Esszimmers. Das Poster ist auch eine tolle Möglichkeit, einen Hauch von Süße und Genuss ins Haus zu bringen, selbst wenn Sie auf Diät sind.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/raspberry-jello/raspberry-jello-small.webp</small>
 <medium>/assets/img/products/food/sweets/raspberry-jello/raspberry-jello-medium.webp</medium>
@@ -1013,11 +1013,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Strawberry and Grapes</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Erdbeeren und Weintrauben</name>
 <shortDescription xml:lang="x-default">The calorie-conscious option.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Die kalorienarme Alternative.</shortDescription>
 <longDescription xml:lang="x-default">A great close up of delicious red and purple fruits, adding a nice contrast to everyone's rooms. Worth to know: Strawberries aren't actually berries, the berries in reality are the small seed on the skin of the strawberry.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Eine tolle Nahaufnahme köstlicher roter und violetter Früchte, die jedem Zimmer einen schönen Kontrast verleiht. Wissenswertes: Erdbeeren sind eigentlich keine Beeren, die Beeren sind in Wirklichkeit die kleinen Samen auf der Schale der Erdbeere.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/strawberry-and-grapes/strawberry-and-grapes-small.webp</small>
 <medium>/assets/img/products/food/sweets/strawberry-and-grapes/strawberry-and-grapes-medium.webp</medium>
@@ -1030,11 +1030,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Donut Mix</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Donut Mix</name>
 <shortDescription xml:lang="x-default">Awesome! A whole box of them!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Klasse! Eine ganze Donut-Box!</shortDescription>
 <longDescription xml:lang="x-default">Maybe your friend is a police man, and you want to give him a cliché gift to make him laugh, then don't think twice and get him these donuts.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Vielleicht ist Ihr Freund ein Polizist und Sie möchten ihm ein klischeehaftes Geschenk machen, um ihn zum Lachen zu bringen. Dann überlegen Sie nicht länger und besorgen Sie ihm diese Donuts.</longDescription>
 <imageURL>
 <small>/assets/img/products/food/sweets/donut-mix/donut-mix-small.webp</small>
 <medium>/assets/img/products/food/sweets/donut-mix/donut-mix-medium.webp</medium>
@@ -1049,11 +1049,11 @@
 <!-- SubCategory Airplanes  -->
 <product>
 <name xml:lang="x-default">Swiss Air Airbus A320</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Swiss Air Airbus A320</name>
 <shortDescription xml:lang="x-default">Beautiful take-off.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Schöner Start.</shortDescription>
 <longDescription xml:lang="x-default">Wanting to fly is a craving a lot of people have. Planes like this make it possible for humans to go beyond their limits and reach new heights in the truest sense of the word. This image is a good way to showcase this in your home.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Der Wunsch zu fliegen ist ein Verlangen vieler Menschen. Flugzeuge wie dieses ermöglichen es dem Menschen, im wahrsten Sinne des Wortes über seine Grenzen hinauszugehen und neue Höhen zu erreichen. Dieses Bild ist eine gute Möglichkeit, dies in Ihrem Zuhause zu präsentieren.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/swiss-air-airbus-a320/swiss-air-airbus-a320-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/swiss-air-airbus-a320/swiss-air-airbus-a320-medium.webp</medium>
@@ -1066,11 +1066,11 @@
 </product>
 <product>
 <name xml:lang="x-default">FedEx Express</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">FedEx Express</name>
 <shortDescription xml:lang="x-default">The plane that lost your mail.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Das Flugzeug das deine Post verlor.</shortDescription>
 <longDescription xml:lang="x-default">Planes are a great invention for travel and also for exchange between different locations in the world. This plane is one of many planes that belong to the international delivery company FedEx. If you are into economics or just searching for a picture for your office wall, this picture will provide everything.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Flugzeuge sind eine großartige Erfindung für Reisen und auch für den Austausch zwischen verschiedenen Orten auf der Welt. Dieses Flugzeug ist eines von vielen Flugzeugen des internationalen Lieferunternehmens FedEx. Wenn Sie sich für Wirtschaftswissenschaften interessieren oder einfach nur ein Bild für Ihre Bürowand suchen, ist dieses Bild genau das Richtige für Sie.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/fedex-express/fedex-express-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/fedex-express/fedex-express-medium.webp</medium>
@@ -1083,11 +1083,11 @@
 </product>
 <product>
 <name xml:lang="x-default">American Airlines Boeing 737 800</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">American Airlines Boeing 737 800</name>
 <shortDescription xml:lang="x-default">American airlines plane.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">An American Airlines Boeing 737-800 is flying with its sleek silhouette and modern design in the sky. This is the start of travel and adventure for a lot of people. If you like exploring new places and visit the world, u should definitely get this poster. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Flugzeug von American Airlines.</shortDescription>
+<longDescription xml:lang="x-default">An American Airlines Boeing 737-800 is flying with its sleek silhouette and modern design in the sky. This is the start of travel and adventure for a lot of people. If you like exploring new places and visit the world, u should definitely get this poster.</longDescription>
+<longDescription xml:lang="de-DE">Eine Boeing 737-800 der American Airlines fliegt mit ihrer schlanken Silhouette und ihrem modernen Design in den Himmel. Für viele Menschen ist dies der Beginn von Reisen und Abenteuern. Wenn Sie es lieben, neue Orte zu erkunden und die Welt zu besuchen, sollten Sie sich dieses Poster unbedingt besorgen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/american-airlines-boeing-737-800/american-airlines-boeing-737-800-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/american-airlines-boeing-737-800/american-airlines-boeing-737-800-medium.webp</medium>
@@ -1100,11 +1100,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Air Greenland Airbus A330 200</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Air Greenland Airbus A330 200</name>
 <shortDescription xml:lang="x-default">Yes, there are airplanes in Greenland...</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">The vibrant red of the airplane contrasts beautifully with the white snow, creating a striking image. For every air plain fan that wants a rather rare plain in their collection. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Genau, es gibt Flugzeuge in Grönland.</shortDescription>
+<longDescription xml:lang="x-default">The bright red of the plane contrasts wonderfully with the white snow and creates an impressive image.</longDescription>
+<longDescription xml:lang="de-DE">Das leuchtende Rot des Flugzeugs steht wunderbar in Kontrast mit dem weißen Schnee und sorgt für ein eindrucksvolles Bild.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/air-greenland-airbus-a330-200/air-greenland-airbus-a330-200-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/air-greenland-airbus-a330-200/air-greenland-airbus-a330-200-medium.webp</medium>
@@ -1117,11 +1117,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Air Lingus Airbus A320</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Air Lingus Airbus A320</name>
 <shortDescription xml:lang="x-default">Hail to Saint Patrick!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">A turquoise painted airplane with a lucky clover on its back wing. If you need more luck in your daily life, this might provide good fortune. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Preiset Saint Patrick!</shortDescription>
+<longDescription xml:lang="x-default">A turquoise painted airplane with a lucky clover on its back wing. If you need more luck in your daily life, this might provide good fortune.</longDescription>
+<longDescription xml:lang="de-DE">Ein türkisfarbenes Flugzeug mit einem Glücksklee auf dem hinteren Flügel. Wenn Sie mehr Glück in Ihrem täglichen Leben brauchen, könnte dies ein Glücksbringer sein.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/air-lingus-airbus-a320/air-lingus-airbus-a320-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/air-lingus-airbus-a320/air-lingus-airbus-a320-medium.webp</medium>
@@ -1134,11 +1134,11 @@
 </product>
 <product>
 <name xml:lang="x-default">US Air Force Starlifter</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Starlifter der US-Luftwaffe</name>
 <shortDescription xml:lang="x-default">Show off with exclusive shots from the Smithsonian in D.C.!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Zeigen Sie sich mit exklusiven Aufnahmen aus dem Smithsonian in D.C.!</shortDescription>
 <longDescription xml:lang="x-default">Step into the world of cutting-edge intelligence with this old school looking military airplane. For everybody that is interested in war history.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Treten Sie ein in die Welt der modernsten Geheimdienste mit diesem Militärflugzeug im Oldschool-Look. Für alle, die sich für die Kriegsgeschichte interessieren.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/us-air-force-starlifter/us-air-force-starlifter-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/us-air-force-starlifter/us-air-force-starlifter-medium.webp</medium>
@@ -1151,11 +1151,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Boeing 707</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Boeing 707</name>
 <shortDescription xml:lang="x-default">How it used to look like.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Wie es einst aussah.</shortDescription>
 <longDescription xml:lang="x-default">A great gift for airplane enthusiasts that love old school planes and especially Boeing. Worth to know: Mechanical issues were a common problem before the introduction of the Boeing 707 with the introduction, a new era of more sustainable jets was ushered in.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein tolles Geschenk für Flugzeugliebhaber, die alte Flugzeuge und insbesondere Boeing lieben. Wissenswert: Mechanische Probleme waren vor der Einführung der Boeing 707 ein häufiges Problem. Mit der Einführung wurde eine neue Ära nachhaltigerer Jets eingeläutet.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/boeing-707/boeing-707-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/boeing-707/boeing-707-medium.webp</medium>
@@ -1168,11 +1168,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Boeing 307 Stratoliner</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Boeing 307 Stratoliner</name>
 <shortDescription xml:lang="x-default">Old silvery plane.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Altes silbernes Flugzeug.</shortDescription>
 <longDescription xml:lang="x-default">The Boeing 307 Stratoliner is a beautiful and iconic airliner that is loved my many Boeing fans, If you are a fan this is a great addition to your hobby room. This picture perfectly captures the airplane's elegance and power. Good to know: The plane is painted in the airline's signature silver livery.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Die Boeing 307 Stratoliner ist ein schönes und ikonisches Verkehrsflugzeug, das von vielen Boeing-Fans geliebt wird. Wenn Sie ein Fan sind, ist dies eine große Bereicherung für Ihr Hobby Zimmer. Dieses Bild fängt die Eleganz und Kraft des Flugzeugs perfekt ein. Gut zu wissen: Das Flugzeug ist in der typischen Silberlackierung der Fluggesellschaft lackiert.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/boeing-307-stratoliner/boeing-307-stratoliner-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/boeing-307-stratoliner/boeing-307-stratoliner-medium.webp</medium>
@@ -1185,11 +1185,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Lufthansa JU 52</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Lufthansa JU 52</name>
 <shortDescription xml:lang="x-default">Old Lufthansa airplane in a museum.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Whether you're an avid aviation enthusiast or simply appreciate the beauty of classic aircraft, this Lufthansa Aircraft poster is a timeless treasure that will be cherished for generations to come. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein altes Lufthansa Flugzeug in einem Museum.</shortDescription>
+<longDescription xml:lang="x-default">Whether you're an avid aviation enthusiast or simply appreciate the beauty of classic aircraft, this Lufthansa Aircraft poster is a timeless treasure that will be cherished for generations to come.</longDescription>
+<longDescription xml:lang="de-DE">Egal, ob Sie ein begeisterter Luftfahrtfan sind oder einfach nur die Schönheit klassischer Flugzeuge zu schätzen wissen, dieses Poster von Lufthansa Aircraft ist ein zeitloser Schatz, den Sie über Generationen hinweg in Ehren halten werden.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/lufthansa-ju-52/lufthansa-ju-52-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/lufthansa-ju-52/lufthansa-ju-52-medium.webp</medium>
@@ -1202,11 +1202,11 @@
 </product>
 <product>
 <name xml:lang="x-default">F4S from VMFA 232</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">F4S von VMFA 232</name>
 <shortDescription xml:lang="x-default">An original US Marine Corps Fighter.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">A very patriotic picture of a US Marine Corps Fighter Jet that is going to showcase your pride for being an American. Worth to know, this specific model is part of the Marine Fighter Attack Squadron 232 that fought in numerous fight like the second world war. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein Original-Jagdflugzeug der US Marine Corp.</shortDescription>
+<longDescription xml:lang="x-default">A very patriotic picture of a US Marine Corps Fighter Jet that is going to showcase your pride for being an American. Worth to know, this specific model is part of the Marine Fighter Attack Squadron 232 that fought in numerous fight like the second world war.</longDescription>
+<longDescription xml:lang="de-DE">Ein sehr patriotisches Bild eines Kampfjets der US Marine Corp, das Ihren Stolz, Amerikaner zu sein, zeigen wird. Gut zu wissen ist, dass dieses spezielle Modell Teil der Marine Fighter Attack Squadron 232 war, die in zahlreichen Kampf wie dem Zweiten Weltkrieg gekämpft.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/air-travel/f-4s-from-vmfa-232/f-4s-from-vmfa-232-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/air-travel/f-4s-from-vmfa-232/f-4s-from-vmfa-232-medium.webp</medium>
@@ -1220,11 +1220,11 @@
 <!-- SubCategory Classic_Cars  -->
 <product>
 <name xml:lang="x-default">Trabant P50</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Trabant P50</name>
 <shortDescription xml:lang="x-default">Go, Trabi, go!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">The Trabant p50 is the first series production model of the East German Trabant series and seen as iconic car with classic car enthusiast.  This specific one has a beautiful color arrangement with its blue top and white bottom, so it's perfect for a pleasing atmosphere in your room.  </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Los, Trabi, los!</shortDescription>
+<longDescription xml:lang="x-default">The Trabant P50 is the first series production model of the East German Trabant series and seen as iconic car with classic car enthusiast. This specific one has a beautiful color arrangement with its blue top and white bottom, so it's perfect for a pleasing atmosphere in your room.</longDescription>
+<longDescription xml:lang="de-DE">Der Trabant P50 ist das erste Serienmodell der ostdeutschen Trabant-Baureihe und gilt bei Oldtimer-Liebhabern als Kultauto. Dieses spezielle Modell hat eine schöne Farbgebung mit seinem blauen Oberteil und weißem Unterteil, so dass es perfekt für eine angenehme Atmosphäre in Ihrem Zimmer ist.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/trabant-p50/trabant-p50-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/trabant-p50/trabant-p50-medium.webp</medium>
@@ -1237,11 +1237,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA F8</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">IFA F8</name>
 <shortDescription xml:lang="x-default">One of 25.000.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Einer von 25.000.</shortDescription>
 <longDescription xml:lang="x-default">A perfect way to start a conversation with guests about your favorite cars. This old school est German car makes an impression with the sleek design and elegant curves and will make yourself way more interesting.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein perfekter Weg, um ein Gespräch mit Gästen über Ihre Lieblingsautos zu beginnen. Dieses deutsche Auto der alten Schule beeindruckt mit seinem schnittigen Design und den eleganten Kurven und macht Sie viel interessanter.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-f8/ifa-f8-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-f8/ifa-f8-medium.webp</medium>
@@ -1254,11 +1254,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA W50</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">IFA W50</name>
 <shortDescription xml:lang="x-default">East German truck.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">A blue bulky looking truck from DDR, Germany, a great gift for people that want to show off their love for trucks. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ostdeutscher LKW.</shortDescription>
+<longDescription xml:lang="x-default">A blue bulky looking truck from DDR, Germany, a great gift for people that want to show off their love for trucks.</longDescription>
+<longDescription xml:lang="de-DE">Ein blauer, sperriger Lastwagen aus der DDR, ein tolles Geschenk für Leute, die ihre Liebe zu Lastwagen zeigen wollen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-w50/ifa-w50-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-w50/ifa-w50-medium.webp</medium>
@@ -1271,11 +1271,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA H6 Grey Red</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">IFA H6 Grau Rot</name>
 <shortDescription xml:lang="x-default">Not as big but quite sufficient.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">The beauty of old technologies is something special, and putting up a picture with old cars is a good way to express the innovations from old times. This old lorry was a great truck and will be remembered in this poster. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Nicht so groß, aber völlig ausreichend.</shortDescription>
+<longDescription xml:lang="x-default">The beauty of old technologies is something special, and putting up a picture with old cars is a good way to express the innovations from old times. This old lorry was a great truck and will be remembered in this poster.</longDescription>
+<longDescription xml:lang="de-DE">Die Schönheit alter Technologien ist etwas Besonderes, und ein Bild mit alten Autos ist eine gute Möglichkeit, die Innovationen aus alten Zeiten zum Ausdruck zu bringen. Dieser alte Lastwagen war ein großartiger Lastwagen und wird auf diesem Poster in Erinnerung bleiben.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-grey-red/ifa-h6-grey-red-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-grey-red/ifa-h6-grey-red-medium.webp</medium>
@@ -1288,11 +1288,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA G5</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">Water Supply for the National People's Army</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<name xml:lang="de-DE">IFA G5</name>
+<shortDescription xml:lang="x-default">Water Supply for the National People's Army.</shortDescription>
+<shortDescription xml:lang="de-DE">Wasserversorgung für die Nationale Volksarmee.</shortDescription>
 <longDescription xml:lang="x-default">This old looking truck is a perfect fit for somebody that's interested in German army technology. Worth to know: This particular truck was used to transport drinking water in the old times.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">PlatzhDieser alt aussehende LKW ist perfekt für jemanden, der sich für deutsche Militärtechnik interessiert. Interessant zu wissen: Dieser spezielle LKW wurde früher zum Transport von Trinkwasser verwendet.alter</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-g5/ifa-g5-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-g5/ifa-g5-medium.webp</medium>
@@ -1305,11 +1305,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA H6 Green</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">IFA H6 Grün</name>
 <shortDescription xml:lang="x-default">A bright green truck from old times.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein hellgrüner LKW von alten Zeiten.</shortDescription>
 <longDescription xml:lang="x-default">The truck's weathered exterior and rustic charm evoke a sense of simpler times, maybe a great gift for your grandparents.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Das verwitterte Äußere und der rustikale Charme des Lastwagens erinnern an einfachere Zeiten und sind vielleicht ein tolles Geschenk für Ihre Großeltern.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-green/ifa-h6-green-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-green/ifa-h6-green-medium.webp</medium>
@@ -1322,11 +1322,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA G5 Tank Truck</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">IFA G5 Tankwagen</name>
 <shortDescription xml:lang="x-default">An old tank truck in bright red.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein alter hellroter LKW.</shortDescription>
 <longDescription xml:lang="x-default">Classic trucks are timeless icons that never go out of style, one of these in your rooms will definitely impress your friends.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Klassische Trucks sind zeitlose Ikonen, die nie aus der Mode kommen. Ein solcher Truck in Ihrem Zimmer wird Ihre Freunde sicher beeindrucken.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-g5-tank-truck/ifa-g5-tank-truck-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-g5-tank-truck/ifa-g5-tank-truck-medium.webp</medium>
@@ -1339,11 +1339,11 @@
 </product>
 <product>
 <name xml:lang="x-default">IFA Cement Truck</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">IFA Zement-LKW</name>
 <shortDescription xml:lang="x-default">An industrial truck for cement supplies.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Industrie-LKW für Zementlieferungen.</shortDescription>
 <longDescription xml:lang="x-default">Another old school truck in distinct blue used to help with cement supplies. A classic car, perfect for people with interest in cars in general.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein weiterer alter Lastwagen in klarem Blau, der für den Transport von Zement verwendet wird. Ein Oldtimer, perfekt für Menschen mit Interesse an Autos im Allgemeinen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ifa-cement-truck/ifa-cement-truck-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ifa-cement-truck/ifa-cement-truck-medium.webp</medium>
@@ -1356,11 +1356,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Ikarus 211</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Ikarus 211</name>
 <shortDescription xml:lang="x-default">Made in Hungary.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Hergestellt in Ungarn.</shortDescription>
 <longDescription xml:lang="x-default">A real old school bus, your grandparents might remember this one from their childhood, a good conversation starter with old people.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein echter alter Schulbus, an den sich Ihre Großeltern vielleicht noch aus ihrer Kindheit erinnern, ein guter Gesprächsanlass für alte Leute.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ikarus-211/ikarus-211-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ikarus-211/ikarus-211-medium.webp</medium>
@@ -1373,11 +1373,11 @@
 </product>
 <product>
 <name xml:lang="x-default">ExOmaha Transit Company Bus</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">ExOmaha Transit Gesellschaft Bus</name>
 <shortDescription xml:lang="x-default">Absolutely unique!</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Absolut einzigartig!</shortDescription>
 <longDescription xml:lang="x-default">This poor bus looks destroyed and taken away by time, a good choice to get a theme of rustically.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Dieser arme Bus sieht zerstört und vom Zahn der Zeit gezeichnet aus, eine gute Wahl, um ein rustikales Thema aufzugreifen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/classic-cars/ex-omaha-transit-company-bus/ex-omaha-transit-company-bus-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/classic-cars/ex-omaha-transit-company-bus/ex-omaha-transit-company-bus-medium.webp</medium>
@@ -1391,11 +1391,11 @@
 <!-- SubCategory Railways  -->
 <product>
 <name xml:lang="x-default">Third Avenue Railway System</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Third Avenue Eisenbahnsystem</name>
 <shortDescription xml:lang="x-default">The old railway system of NYC.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Das alte Eisenbahnsystem von NYC.</shortDescription>
 <longDescription xml:lang="x-default">A great gift for somebody that loves trains, it's rare to see these old railways in person nowadays, and they will really like this one.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Ein großartiges Geschenk für jemanden, der Züge liebt. Heutzutage sieht man diese alten Eisenbahnen nur noch selten in natura, und sie werden diese hier wirklich mögen.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/third-avenue-railway-system/third-avenue-railway-system-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/third-avenue-railway-system/third-avenue-railway-system-medium.webp</medium>
@@ -1408,11 +1408,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Eastern Massachussetts Street Railway</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">The historic streetcar company of Boston. </shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<name xml:lang="de-DE">Ost-Massachussetts-Straßenbahn</name>
+<shortDescription xml:lang="x-default">The historic streetcar company of Boston.</shortDescription>
+<shortDescription xml:lang="de-DE">Die historische Straßenbahngesellschaft von Boston.</shortDescription>
 <longDescription xml:lang="x-default">This old orange trolley in Massachusetts is still working even today, maybe you were riding it and want to have a souvenir or u just like the color, either way a great picture for your anyone's home.</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Diese alte orangefarbene Draisine in Massachusetts ist auch heute noch in Betrieb. Vielleicht sind Sie damit gefahren und wollen ein Souvenir haben oder Sie mögen einfach die Farbe, so oder so ein tolles Bild für Ihr Zuhause.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/eastern-massachussetts-street-railway/eastern-massachussetts-street-railway-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/eastern-massachussetts-street-railway/eastern-massachussetts-street-railway-medium.webp</medium>
@@ -1425,11 +1425,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Boston MBTA Wartime Pullman Green PCC Trolley</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Boston MBTA Wartime Pullman Grün PCC Trolley</name>
 <shortDescription xml:lang="x-default">An old green and white trolley.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">This poster features a classic, rather cute and clumsy looking green and white trolley on a train track. A nice motive to gift a friend. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein alter grün-weißer Wagen.</shortDescription>
+<longDescription xml:lang="x-default">This poster features a classic, rather cute and clumsy looking green and white trolley on a train track. A nice motive to gift a friend.</longDescription>
+<longDescription xml:lang="de-DE">Dieses Poster zeigt einen klassischen, ziemlich niedlichen und unbeholfen aussehenden grün-weißen Wagen auf einer Bahnstrecke. Ein schönes Motiv als Geschenk für einen Freund.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/boston-mbta-wartime-pullman-green-pcc-trolley/boston-mbta-wartime-pullman-green-pcc-trolley-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/boston-mbta-wartime-pullman-green-pcc-trolley/boston-mbta-wartime-pullman-green-pcc-trolley-medium.webp</medium>
@@ -1442,11 +1442,11 @@
 </product>
 <product>
 <name xml:lang="x-default">Yellow and Orange Railways</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Gelbe und orangene Eisenbahnwagen</name>
 <shortDescription xml:lang="x-default">An orange colored trolley in a tram depot.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">A Diesel locomotive produced by GM-EMD from 1939 to 1970. Spotted in Bernsdorf, Germany. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Ein orangefarbener Wagen in einer Eisenbahnstation.</shortDescription>
+<longDescription xml:lang="x-default">A Diesel locomotive produced by GM-EMD from 1939 to 1970. Spotted in Bernsdorf, Germany.</longDescription>
+<longDescription xml:lang="de-DE">Eine von GM-EMD von 1939 bis 1970 hergestellte Diesellokomotive. Gesichtet in Bernsdorf, Deutschland.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/yellow-and-orange-railways/yellow-and-orange-railways-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/yellow-and-orange-railways/yellow-and orange-railways-medium.webp</medium>
@@ -1459,11 +1459,11 @@
 </product>
 <product>
 <name xml:lang="x-default">German Steam Locomotive</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Deutsche DampfLokomotive</name>
 <shortDescription xml:lang="x-default">For railway nostalgics.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Spotted at a German city festival and a must-have for all railway nerds. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Für Eisenbahn-Nostalgiker.</shortDescription>
+<longDescription xml:lang="x-default">Spotted at a German city festival and a must-have for all railway nerds.</longDescription>
+<longDescription xml:lang="de-DE">Entdeckt auf einem deutschen Stadtfest und ein Muss für alle Eisenbahn-Nerds.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/german-steam-locomotive/german-steam-locomotive-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/german-steam-locomotive/german-steam-locomotive-medium.webp</medium>
@@ -1476,11 +1476,11 @@
 </product>
 <product>
 <name xml:lang="x-default">German Steam Locomotive II</name>
-<name xml:lang="de-DE">Platzhalter</name>
+<name xml:lang="de-DE">Deutsche DampfLokomotive II</name>
 <shortDescription xml:lang="x-default">A good old German steam locomotive.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default"> Yes, we know, we have posters of pretty much everything. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<shortDescription xml:lang="de-DE">Eine gute alte deutsche Dampflokomotive.</shortDescription>
+<longDescription xml:lang="x-default">Yes, we know, we have posters of pretty much everything.</longDescription>
+<longDescription xml:lang="de-DE">Ja, wir wissen dass wir Posters von fast allem haben.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/german-steam-locomotive II/german-steam-locomotive-II-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/german-steam-locomotive-II/german-steam-locomotive-II-medium.webp</medium>
@@ -1493,11 +1493,11 @@
 </product>
 <product>
 <name xml:lang="x-default">East German LEW EL 2</name>
-<name xml:lang="de-DE">Platzhalter</name>
-<shortDescription xml:lang="x-default">Electric coal mine railway</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
-<longDescription xml:lang="x-default">Memo: East Germany produced a total of 1384 of these from 1952 to 1988. Some of them also got shipped to Bulgaria, China, Poland, and USSR. Spotted in "Besucherbergwerk Abraumförderbrücke F60" in Brandenburg, Germany. Yeah, we also think that German is a complicated language. </longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<name xml:lang="de-DE">Ostdeutsche LEW EL 2</name>
+<shortDescription xml:lang="x-default">Electric coal mine railway.</shortDescription>
+<shortDescription xml:lang="de-DE">Elektrische Kohle-Minen-Eisenbahn.</shortDescription>
+<longDescription xml:lang="x-default">Memo: East Germany produced a total of 1384 of these from 1952 to 1988. Some of them also got shipped to Bulgaria, China, Poland, and USSR. Spotted in "Besucherbergwerk Abraumförderbrücke F60" in Brandenburg, Germany. Yeah, we also think that German is a complicated language.</longDescription>
+<longDescription xml:lang="de-DE">Memo: Die DDR produzierte von 1952 bis 1988 insgesamt 1384 dieser Fahrzeuge. Einige von ihnen wurden auch nach Bulgarien, China, Polen und in die UdSSR verschifft. Entdeckt im „Besucherbergwerk Abraumförderbrücke F60“ in Brandenburg, Deutschland.</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/east-german-lew-el-2/east-german-lew-el-2-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/east-german-lew-el-2/east-german-lew-el-2-medium.webp</medium>
@@ -1512,9 +1512,9 @@
 <name xml:lang="x-default">Chicago L</name>
 <name xml:lang="de-DE">Chicago L</name>
 <shortDescription xml:lang="x-default">A tribute to the windy city.</shortDescription>
-<shortDescription xml:lang="de-DE">Platzhalter</shortDescription>
+<shortDescription xml:lang="de-DE">Eine Hommage an die windige Stadt.</shortDescription>
 <longDescription xml:lang="x-default">Chicago's rapid transit between skyscrapers. The camera angle perfectly conveys the urban atmosphere. Another fancy US poster!</longDescription>
-<longDescription xml:lang="de-DE">Platzhalter</longDescription>
+<longDescription xml:lang="de-DE">Chicagos Schnellbahn zwischen Wolkenkratzern. Der Kamerawinkel bringt die städtische Atmosphäre perfekt zum Ausdruck. Ein weiteres schickes US-Plakat!</longDescription>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/chicago-l/chicago-l-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/chicago-l/chicago-l-medium.webp</medium>
@@ -1529,7 +1529,7 @@
 <name xml:lang="x-default">US Railway Mail Service Car</name>
 <name xml:lang="de-DE">Wagon des US-amerikanischen Bahnpostdienstes RMS</name>
 <shortDescription xml:lang="x-default">A historic train on the track.</shortDescription>
-<shortDescription xml:lang="de-DE">Ein Stück Eisenbahngeschichte</shortDescription>
+<shortDescription xml:lang="de-DE">Ein Stück Eisenbahngeschichte.</shortDescription>
 <longDescription xml:lang="x-default">Hard to believe the RMS carried the majority of mail in the US until the 1960s. Will look especially cool if you place it next to our FedEx Express poster.</longDescription>
 <longDescription xml:lang="de-DE">Kaum zu glauben, dass die RMS bis in die 1960er Jahre den Großteil der Post in den USA beförderte. Besonders cool sieht es aus, wenn Sie es neben unser FedEx Express-Poster hängen.</longDescription>
 <imageURL>
@@ -1546,7 +1546,7 @@
 <name xml:lang="x-default">Old NYC Subway</name>
 <name xml:lang="de-DE">Alte New Yorker U-Bahn</name>
 <shortDescription xml:lang="x-default">Nothing lasts forever.</shortDescription>
-<shortDescription xml:lang="de-DE">Nichts hält ewig</shortDescription>
+<shortDescription xml:lang="de-DE">Nichts hält ewig.</shortDescription>
 <longDescription xml:lang="x-default">Not even subway trains. Darn!</longDescription>
 <longDescription xml:lang="de-DE">Auch U-Bahnen enden eines Tages wie diese hier. Doch selbst der Verfall dieser U-Banh ist lediglich ein Wandel. Als Filmkulisse, Leinwand für Straßenkunst, geheimes Eckchen für diejenigen, die die Winkel der Stadt erkunden oder eben als Poster mit besonderem Flair hat sie nun einen neuen Zweck.</longDescription>
 <price>17.80;22.00;33.30</price>
