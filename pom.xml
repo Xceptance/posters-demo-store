@@ -57,7 +57,7 @@
 		<java.version>17</java.version>
 		<ninja.version>7.0.0</ninja.version>
 		<copyright>Copyright (c) ${project.inceptionYear}-2024 ${project.organization.name}</copyright>
-		<ebean-maven-plugin.version>12.9.3</ebean-maven-plugin.version>
+		<ebean-maven-plugin.version>15.9.0</ebean-maven-plugin.version>
 		<posters.mainClass>util.standalone.PostersMain</posters.mainClass>
 	</properties>
 
