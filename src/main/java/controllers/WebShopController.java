@@ -32,8 +32,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.params.PathParam;
 import util.session.SessionHandling;
-
-import io.ebean.Ebean;
+import io.ebean.DB;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -61,7 +60,7 @@ public class WebShopController
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
-        final List<Product> productsCarousel = Ebean.find(Product.class).where().eq("showInCarousel", true).findList();
+        final List<Product> productsCarousel = DB.find(Product.class).where().eq("showInCarousel", true).findList();
 
         // add specific products to data map
         List<Product> productsList = new ArrayList<>();
@@ -170,7 +169,7 @@ public class WebShopController
         final Map<Product, Integer> products = new HashMap<Product, Integer>();
         int totalProductCount = 0;
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
         for (final CartProduct cartProduct : cartProducts)
         {
             products.put(cartProduct.getProduct(), cartProduct.getProductCount());

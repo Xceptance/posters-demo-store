@@ -5,7 +5,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.utils.NinjaProperties;
 import ninja.FilterChain;
-import io.ebean.Ebean;
+import io.ebean.DB;
 import models.Language;
 import ninja.Context;
 import ninja.Cookie;
@@ -87,7 +87,7 @@ public class LocaleFilter implements Filter {
         else
         {
             // Check if locale exists in database
-            Language language = Ebean.find(Language.class).where().eq("code", locale).findOne();
+            Language language = DB.find(Language.class).where().eq("code", locale).findOne();
             if(language == null)
             {
                 return false;

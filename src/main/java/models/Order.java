@@ -30,7 +30,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 
 import io.ebean.annotation.DbForeignKey;
@@ -528,7 +528,7 @@ public class Order
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -536,7 +536,15 @@ public class Order
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
+    }
+
+    /**
+     * Deletes the entity from the database.
+     */
+    public void delete()
+    {
+        DB.delete(this);
     }
 
     /**
@@ -551,7 +559,7 @@ public class Order
      */
     private void addProduct(final Product product, final String finish, final PosterSize size)
     {
-        OrderProduct orderProduct = Ebean.find(OrderProduct.class).where().eq("order", this).eq("product", product).eq("finish", finish)
+        OrderProduct orderProduct = DB.find(OrderProduct.class).where().eq("order", this).eq("product", product).eq("finish", finish)
                                          .eq("size", size).findOne();
         // this product is not in the order
         if (orderProduct == null)
@@ -567,7 +575,7 @@ public class Order
             // set size
             orderProduct.setSize(size);
             // set price
-            orderProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
+            orderProduct.setPrice(DB.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
                                        .getPrice());
             orderProduct.save();
             products.add(orderProduct);
@@ -596,7 +604,7 @@ public class Order
     public void addProductsFromCart(final Cart cart)
     {
         // get all products from cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // for each product
         for (final CartProduct cartProduct : cartProducts)
         {
@@ -617,7 +625,7 @@ public class Order
      */
     public static Order getOrderById(final UUID id)
     {
-        return Ebean.find(Order.class, id);
+        return DB.find(Order.class, id);
     }
 
     /**
@@ -632,7 +640,7 @@ public class Order
         // save order
         order.save();
         // get new order by id
-        final Order newOrder = Ebean.find(Order.class, order.getId());
+        final Order newOrder = DB.find(Order.class, order.getId());
         // return new order
         return newOrder;
     }
@@ -661,7 +669,7 @@ public class Order
         // save order
         order.save();
         // get new order by id
-        final Order newOrder = Ebean.find(Order.class, order.getId());
+        final Order newOrder = DB.find(Order.class, order.getId());
         // return new order
         return newOrder;
     }
@@ -673,7 +681,7 @@ public class Order
      */
     public static List<Order> getEveryOrder()
     {
-        return Ebean.find(Order.class).findList();
+        return DB.find(Order.class).findList();
     }
 
      /**
@@ -688,7 +696,7 @@ public class Order
 
         // Get all orders that are pending and have creation time more than one day ago from the database irrespective of customer. 
         // Delete those orders.
-        Ebean.find(Order.class)
+        DB.find(Order.class)
         .where().eq("orderStatus", "Pending").lt("lastUpdate", oneDayAgo).delete();
     }
 

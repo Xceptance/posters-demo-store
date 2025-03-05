@@ -26,7 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a sub category in the catalog of the poster demo store. The sub category belongs to one
@@ -108,7 +108,7 @@ public class SubCategory
         }
         else
         {
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
             if (result == null) 
             {
                 return this.getDefaultName();
@@ -133,11 +133,11 @@ public class SubCategory
         }
         else
         {
-            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            Language language = DB.find(Language.class).where().eq("code", code).findOne();
             if (language == null) {
                 return this.getDefaultName();
             }
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
             if (result == null) 
             {
                 return this.getDefaultName();
@@ -229,7 +229,7 @@ public class SubCategory
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -237,7 +237,7 @@ public class SubCategory
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -249,6 +249,6 @@ public class SubCategory
      */
     public static SubCategory getSubCategoryById(final int id)
     {
-        return Ebean.find(SubCategory.class, id);
+        return DB.find(SubCategory.class, id);
     }
 }

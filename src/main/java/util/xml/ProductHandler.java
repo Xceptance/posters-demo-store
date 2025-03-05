@@ -30,7 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link DefaultHandler} parses an XML file with product data and persists them in the database.
@@ -52,7 +52,7 @@ public class ProductHandler extends DefaultHandler
 
     private Translation transl;
 
-    private Language defaultLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
+    private Language defaultLanguage = DB.find(Language.class).where().eq("code", "en-US").findOne();
 
     private String translationCode;
 
@@ -122,10 +122,10 @@ public class ProductHandler extends DefaultHandler
 
                 // get the translations language
                 Language transLanguage;
-                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                Boolean langExists = DB.find(Language.class).where().eq("code", translationCode).exists();
                 if (langExists == true) 
                 {
-                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transLanguage = DB.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
                 }
@@ -155,10 +155,10 @@ public class ProductHandler extends DefaultHandler
 
                 // get the translations language
                 Language transLanguage;
-                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                Boolean langExists = DB.find(Language.class).where().eq("code", translationCode).exists();
                 if (langExists == true) 
                 {
-                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transLanguage = DB.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
                 } 
@@ -187,10 +187,10 @@ public class ProductHandler extends DefaultHandler
 
                 // get the translations language
                 Language transLanguage;
-                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                Boolean langExists = DB.find(Language.class).where().eq("code", translationCode).exists();
                 if (langExists == true) 
                 {
-                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transLanguage = DB.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
                 }
@@ -230,10 +230,10 @@ public class ProductHandler extends DefaultHandler
         }
         else if (localName.equals("subCategory"))
         {
-            DefaultText categoryName = Ebean.find(DefaultText.class).where().eq("originalText", toAdd).findOne(); 
-            SubCategory subCategory = Ebean.find(SubCategory.class).where().eq("name", categoryName).findOne();
+            DefaultText categoryName = DB.find(DefaultText.class).where().eq("originalText", toAdd).findOne(); 
+            SubCategory subCategory = DB.find(SubCategory.class).where().eq("name", categoryName).findOne();
             product.setSubCategory(subCategory);
-            final TopCategory topCategory = Ebean.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
+            final TopCategory topCategory = DB.find(TopCategory.class).where().eq("subCategories", subCategory).findOne();
             product.setTopCategory(topCategory);
             product.update();
         }
@@ -262,7 +262,7 @@ public class ProductHandler extends DefaultHandler
         if (localName.equals("product"))
         {
             // add the price for each size
-            final List<ProductPosterSize> productPosterSizes = Ebean.find(ProductPosterSize.class).where().eq("product", product)
+            final List<ProductPosterSize> productPosterSizes = DB.find(ProductPosterSize.class).where().eq("product", product)
                                                                     .findList();
             for (int i = 0; i < productPosterSizes.size(); i++)
             {
@@ -280,7 +280,7 @@ public class ProductHandler extends DefaultHandler
                 final String[] dummy = size.split("x");
                 final int width = Integer.parseInt(dummy[0]);
                 final int height = Integer.parseInt(dummy[1]);
-                PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
+                PosterSize posterSize = DB.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
                 if (posterSize == null)
                 {
                     posterSize = new PosterSize();

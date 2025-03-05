@@ -24,8 +24,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 import ninja.params.PathParam;
-
-import io.ebean.Ebean;
+import io.ebean.DB;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -126,7 +125,7 @@ public class CartController
             // get cart by session
             final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
             // get cart product by id
-            final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+            final CartProduct cartProduct = DB.find(CartProduct.class, cartProductId);
             final Product product = cartProduct.getProduct();
             final int currentProductCount = cartProduct.getProductCount();
             final int difference = newProductCount - currentProductCount;
@@ -187,7 +186,7 @@ public class CartController
         final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get all products of the cart
         final List<Map<String, Object>> cartElements = new ArrayList<Map<String, Object>>();
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).orderBy("lastUpdate desc").findList();
         // prepare just some attributes
         for (final CartProduct cartProduct : cartProducts)
         {
@@ -244,7 +243,7 @@ public class CartController
         final String[] dummy = size.split(" ");
         final int width = Integer.parseInt(dummy[0]);
         final int height = Integer.parseInt(dummy[2]);
-        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
+        final PosterSize posterSize = DB.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
         // add product to cart
         cart.addProduct(product, finish, posterSize);
         // get added cart product
@@ -292,7 +291,7 @@ public class CartController
     @FilterWith(SessionTerminatedFilter.class)
     public Result deleteFromCart(@Param("cartProductId") final int cartProductId, final Context context)
     {
-        final CartProduct cartProduct = Ebean.find(CartProduct.class, cartProductId);
+        final CartProduct cartProduct = DB.find(CartProduct.class, cartProductId);
         // get cart by session
         final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get count of this product
@@ -339,11 +338,11 @@ public class CartController
         final int width = Integer.parseInt(dummy[0]);
         final int height = Integer.parseInt(dummy[2]);
         // get the specified poster size
-        final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
+        final PosterSize posterSize = DB.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
         // get the product
         final Product product = Product.getProductById(productId);
         // get the product poster size
-        final ProductPosterSize productPosterSize = Ebean.find(ProductPosterSize.class).where().eq("product", product)
+        final ProductPosterSize productPosterSize = DB.find(ProductPosterSize.class).where().eq("product", product)
                                                          .eq("size", posterSize).findOne();
         final Result result = Results.json();
         // add new price

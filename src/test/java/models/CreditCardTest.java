@@ -17,11 +17,12 @@ package models;
 
 import ninja.NinjaTest;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 public class CreditCardTest extends NinjaTest
 {
@@ -38,8 +39,14 @@ public class CreditCardTest extends NinjaTest
     @Test
     public void testGetCardNumberCryptic()
     {
-        final CreditCard creditCard = Ebean.find(CreditCard.class, card.getId());
+        final CreditCard creditCard = DB.find(CreditCard.class, card.getId());
         Assert.assertEquals("xxxx xxxx xxxx 3456", creditCard.getCardNumberCryptic());
+    }
+
+    @After
+    public void tearDown()
+    {
+        card.delete();
     }
 
 }

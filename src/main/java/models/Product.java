@@ -28,7 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a product of the poster demo store. Each product has a name, a short and a long description,
@@ -168,7 +168,7 @@ public class Product
         }
         else
         {
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
             if (result == null) {
                 return this.getDefaultName();
             }
@@ -192,12 +192,12 @@ public class Product
         }
         else
         {
-            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            Language language = DB.find(Language.class).where().eq("code", code).findOne();
             if (language == null) 
             {
                 return name.getOriginalText();
             }
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
             if (result == null) 
             {
                 return this.getDefaultName();
@@ -275,7 +275,7 @@ public class Product
         }
         else
         {
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne();
             if (result == null)
             {
                 return this.getDefaultDescriptionOverview();
@@ -300,11 +300,11 @@ public class Product
         }
         else
         {
-            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            Language language = DB.find(Language.class).where().eq("code", code).findOne();
             if (language == null) {
                 return this.getDefaultDescriptionOverview();
             }
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", descriptionOverview).eq("translationLanguage", language).findOne();
             if (result == null) 
             {
                 return this.getDefaultDescriptionOverview();
@@ -508,7 +508,7 @@ public class Product
         }
         else
         {
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne();
             if (result == null)
             {
                 return this.getDefaultDescriptionDetail();
@@ -533,11 +533,11 @@ public class Product
         }
         else
         {
-            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            Language language = DB.find(Language.class).where().eq("code", code).findOne();
             if (language == null) {
                 return this.getDefaultDescriptionDetail();
             }
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", descriptionDetail).eq("translationLanguage", language).findOne();
             if (result == null) 
             {
                 return this.getDefaultDescriptionDetail();
@@ -770,7 +770,7 @@ public class Product
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -778,7 +778,15 @@ public class Product
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
+    }
+
+    /**
+     * Deletes the entity from the database.
+     */
+    public void delete()
+    {
+        DB.delete(this);
     }
 
     /**
@@ -791,6 +799,6 @@ public class Product
     public static Product getProductById(final int id)
     {
         // get product by id
-        return Ebean.find(Product.class, id);
+        return DB.find(Product.class, id);
     }
 }

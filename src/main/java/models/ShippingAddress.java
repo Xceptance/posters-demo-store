@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a shipping address. A shipping address can be set to at most one {@link Customer}.
@@ -330,7 +330,7 @@ public class ShippingAddress
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -338,7 +338,7 @@ public class ShippingAddress
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -346,7 +346,7 @@ public class ShippingAddress
      */
     public void delete()
     {
-        Ebean.delete(this);
+        DB.delete(this);
     }
 
     /**
@@ -358,7 +358,7 @@ public class ShippingAddress
      */
     public static ShippingAddress getShippingAddressById(final int id)
     {
-        return Ebean.find(ShippingAddress.class, id);
+        return DB.find(ShippingAddress.class, id);
     }
 
     /**
@@ -369,7 +369,7 @@ public class ShippingAddress
      * @return the {@link ShippingAddress} that matches the given Customer ID
      */
     public static ShippingAddress getShippingAddressByCustomerId(final UUID customerId) {
-        return Ebean.find(ShippingAddress.class)
+        return DB.find(ShippingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
                     .findOne(); 
@@ -384,7 +384,7 @@ public class ShippingAddress
     public static void removeCustomerFromShippingAddress(final int id)
     {
         final ShippingAddress address = ShippingAddress.getShippingAddressById(id);
-        Ebean.delete(address);
+        DB.delete(address);
 
     }
 

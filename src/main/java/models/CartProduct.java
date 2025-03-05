@@ -25,7 +25,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} is the relationship between the {@link Cart} and the {@link Product}. It provides additional
@@ -282,7 +282,7 @@ public class CartProduct
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -290,7 +290,7 @@ public class CartProduct
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -298,7 +298,7 @@ public class CartProduct
      */
     public void delete()
     {
-        Ebean.delete(this);
+        DB.delete(this);
     }
 
     /**

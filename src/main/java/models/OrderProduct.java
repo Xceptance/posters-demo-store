@@ -23,7 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} is the relationship between the {@link Order} and the {@link Product}. It provides additional
@@ -276,7 +276,7 @@ public class OrderProduct
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -284,6 +284,6 @@ public class OrderProduct
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 }

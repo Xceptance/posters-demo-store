@@ -22,7 +22,7 @@ import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.QueryBuilder;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 import ninja.lifecycle.Start;
 import util.standalone.StemmingAnalyzer;
 import util.standalone.StemmingAnalyzerDe;
@@ -256,6 +256,6 @@ public class LuceneSearch implements SearchEngine {
     }
 
     private List<Product> getAllProducts() {
-        return Ebean.find(Product.class).findList();
+        return DB.find(Product.class).findList();
     }
 }

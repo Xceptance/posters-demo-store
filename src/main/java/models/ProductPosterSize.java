@@ -23,7 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This entity is the relationship between the {@link Product} and the {@link PosterSize}. It provides the price of the
@@ -165,7 +165,7 @@ public class ProductPosterSize
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -173,6 +173,14 @@ public class ProductPosterSize
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
+    }
+
+    /**
+     * Deletes the entity from the database.
+     */
+    public void delete()
+    {
+        DB.delete(this);
     }
 }

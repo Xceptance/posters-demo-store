@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a billing address. A billing address can be set to at most one {@link Customer}.
@@ -330,7 +330,7 @@ public class BillingAddress
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -338,7 +338,7 @@ public class BillingAddress
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -346,7 +346,7 @@ public class BillingAddress
      */
     public void delete()
     {
-        Ebean.delete(this);
+        DB.delete(this);
     }
 
     /**
@@ -358,7 +358,7 @@ public class BillingAddress
      */
     public static BillingAddress getBillingAddressById(final int id)
     {
-        return Ebean.find(BillingAddress.class, id);
+        return DB.find(BillingAddress.class, id);
     }
 
     /**
@@ -369,7 +369,7 @@ public class BillingAddress
      * @return the {@link BillingAddress} that matches the given Customer ID
      */
     public static BillingAddress getBillingAddressByCustomerId(final UUID customerId) {
-        return Ebean.find(BillingAddress.class)
+        return DB.find(BillingAddress.class)
                     .where()
                     .eq("customer_id", customerId)
                     .findOne();
@@ -387,7 +387,7 @@ public class BillingAddress
         final BillingAddress address = getBillingAddressById(id);
         if (address != null)
         {
-            Ebean.delete(address);
+            DB.delete(address);
 
         }
     }

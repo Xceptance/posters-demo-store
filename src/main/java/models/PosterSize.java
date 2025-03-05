@@ -19,7 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides the size of a poster. Each poster is available in different sizes. A size is defined by
@@ -116,7 +116,7 @@ public class PosterSize
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -124,6 +124,14 @@ public class PosterSize
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
+    }
+
+    /**
+     * Deletes the entity from the database.
+     */
+    public void delete()
+    {
+        DB.delete(this);
     }
 }

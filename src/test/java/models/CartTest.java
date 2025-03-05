@@ -23,7 +23,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 // import com.avaje.ebean.Ebean;
 
@@ -41,7 +41,17 @@ public class CartTest extends NinjaTest
 
     Cart cart = new Cart();
 
-    PosterSize size = new PosterSize();;
+    PosterSize size = new PosterSize();
+
+    final ProductPosterSize productPosterSize = new ProductPosterSize();
+
+    final ProductPosterSize productPosterSize2 = new ProductPosterSize();
+
+    final Customer customer = new Customer();
+
+    final PosterSize otherSize = new PosterSize();
+
+    final ProductPosterSize productPosterSize3 = new ProductPosterSize();
 
     @Before
     public void setUp()
@@ -69,13 +79,11 @@ public class CartTest extends NinjaTest
         size.setHeight(12);
         size.save();
         // set product size of product1
-        final ProductPosterSize productPosterSize = new ProductPosterSize();
         productPosterSize.setProduct(product1);
         productPosterSize.setSize(size);
         productPosterSize.setPrice(product1.getMinimumPrice());
         productPosterSize.save();
-        // set product size of product2
-        final ProductPosterSize productPosterSize2 = new ProductPosterSize();
+        // set product size of product2       
         productPosterSize2.setProduct(product2);
         productPosterSize2.setSize(size);
         productPosterSize2.setPrice(product2.getMinimumPrice());
@@ -87,6 +95,19 @@ public class CartTest extends NinjaTest
     {
         // remove products from cart
         cart.clearProducts();
+        // clean up DB
+        defaultLanguage.delete();
+        product1.delete();
+        pr1Name.delete();
+        product2.delete();
+        pr2Name.delete();
+        cart.delete();
+        size.delete();
+        productPosterSize.delete();
+        productPosterSize2.delete();
+        otherSize.delete();
+        productPosterSize3.delete();
+        customer.delete();
     }
 
     @Test
@@ -97,13 +118,17 @@ public class CartTest extends NinjaTest
         // persist cart
         cart.save();
         // verify, that cart is persistent
-        Assert.assertNotNull(Ebean.find(Cart.class, cart.getId()));
+        Assert.assertNotNull(DB.find(Cart.class, cart.getId()));
         // set some data
         cart.setSubTotalPrice(3.33);
         // persist again
         cart.update();
         // verify, that cart is persistent
-        Assert.assertEquals(3.33, Ebean.find(Cart.class, cart.getId()).getSubTotalPrice(), 0.01);
+        Assert.assertEquals(3.33, DB.find(Cart.class, cart.getId()).getSubTotalPrice(), 0.01);
+        // empty the cart
+        cart.clearProducts();
+        // clean up
+        cart.delete();
     }
 
     @Test
@@ -112,7 +137,7 @@ public class CartTest extends NinjaTest
         // add product to cart
         addProductToCart(product1, "matte", size);
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that product one is in the cart...
         Assert.assertEquals(product1.getName(), cartProducts.get(0).getProduct().getName());
         // ...with an amount of one
@@ -129,7 +154,7 @@ public class CartTest extends NinjaTest
         // add product to cart
         addProductToCart(product1, "matte", size);
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that product one is in the cart...
         Assert.assertEquals(product1.getName(), cartProducts.get(0).getProduct().getName());
         // ...with an amount of one
@@ -139,7 +164,7 @@ public class CartTest extends NinjaTest
         // persist
         cart.update();
         // get all products of the cart
-        final List<CartProduct> cartProducts2 = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts2 = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that no product is in the cart
         Assert.assertTrue(cartProducts2.size() == 0);
     }
@@ -152,7 +177,7 @@ public class CartTest extends NinjaTest
         addProductToCart(product1, "matte", size);
         addProductToCart(product2, "matte", size);
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that product one is in the cart...
         Assert.assertEquals(product1.getName(), cartProducts.get(0).getProduct().getName());
         // ...with an amount of two
@@ -167,7 +192,7 @@ public class CartTest extends NinjaTest
         cart.update();
 
         // get all products of the cart
-        final List<CartProduct> cartProducts2 = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts2 = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that product one is in the cart...
         Assert.assertEquals(product1.getName(), cartProducts2.get(0).getProduct().getName());
         // ...with an amount of one
@@ -184,7 +209,7 @@ public class CartTest extends NinjaTest
         cart.update();
 
         // get all products of the cart
-        final List<CartProduct> cartProducts3 = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts3 = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that product one is in the cart...
         Assert.assertEquals(product1.getName(), cartProducts3.get(0).getProduct().getName());
         // ...with an amount of one
@@ -199,7 +224,7 @@ public class CartTest extends NinjaTest
         cart.update();
 
         // get all products of the cart
-        final List<CartProduct> cartProducts4 = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts4 = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that no product is in the cart
         Assert.assertTrue(cartProducts4.size() == 0);
         // verify, that total price is zero
@@ -217,7 +242,7 @@ public class CartTest extends NinjaTest
         Assert.assertEquals(1, cart.getProducts().size());
 
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", cart).findList();
 
         // verify, that product one is in the cart...
         Assert.assertEquals(product1.getName(), cartProducts.get(0).getProduct().getName());
@@ -241,16 +266,14 @@ public class CartTest extends NinjaTest
     @Test
     public void testAddSameProductDifferentSize()
     {
-        final PosterSize otherSize = new PosterSize();
         otherSize.setWidth(16);
         otherSize.setHeight(12);
         otherSize.save();
         // add product size to product1
-        final ProductPosterSize productPosterSize = new ProductPosterSize();
-        productPosterSize.setProduct(product1);
-        productPosterSize.setSize(otherSize);
-        productPosterSize.setPrice(product1.getMinimumPrice());
-        productPosterSize.save();
+        productPosterSize3.setProduct(product1);
+        productPosterSize3.setSize(otherSize);
+        productPosterSize3.setPrice(product1.getMinimumPrice());
+        productPosterSize3.save();
 
         // add products to cart
         addProductToCart(product1, "matte", size);
@@ -264,7 +287,6 @@ public class CartTest extends NinjaTest
     public void testAddCustomerToCart()
     {
         // create new customer
-        final Customer customer = new Customer();
         customer.setName("customer");
         customer.save();
         // set customer to cart
@@ -289,7 +311,7 @@ public class CartTest extends NinjaTest
         // remove all products from the cart
         cart.clearProducts();
         // get all products of the cart
-        final List<CartProduct> cartProducts2 = Ebean.find(CartProduct.class).where().eq("cart", cart).findList();
+        final List<CartProduct> cartProducts2 = DB.find(CartProduct.class).where().eq("cart", cart).findList();
         // verify, that no product is in the cart
         Assert.assertEquals(0, cartProducts2.size());
         // verify, that total price is zero

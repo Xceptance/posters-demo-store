@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 import io.ebean.annotation.DbForeignKey;
 
 @Entity
@@ -78,7 +78,7 @@ public class Translation {
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Translation {
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -94,6 +94,6 @@ public class Translation {
      */
     public void delete()
     {
-        Ebean.delete(this);
+        DB.delete(this);
     }    
 }

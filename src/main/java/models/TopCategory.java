@@ -24,7 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a top category in the catalog of the poster demo store. A top category is a category, which
@@ -105,7 +105,7 @@ public class TopCategory
         }
         else
         {
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
             if (result == null) 
             {
                 return this.getDefaultName();
@@ -130,12 +130,12 @@ public class TopCategory
         }
         else
         {
-            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            Language language = DB.find(Language.class).where().eq("code", code).findOne();
             if (language == null) 
             {
                 return this.getDefaultName();
             }
-            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            Translation result = DB.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
             if (result == null)
             {
                 return this.getDefaultName();
@@ -226,7 +226,7 @@ public class TopCategory
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -234,7 +234,7 @@ public class TopCategory
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -244,7 +244,7 @@ public class TopCategory
      */
     public static List<TopCategory> getAllTopCategories()
     {
-        return Ebean.find(TopCategory.class).findList();
+        return DB.find(TopCategory.class).findList();
     }
 
     /**
@@ -256,6 +256,6 @@ public class TopCategory
      */
     public static TopCategory getTopCategoryById(final int id)
     {
-        return Ebean.find(TopCategory.class, id);
+        return DB.find(TopCategory.class, id);
     }
 }

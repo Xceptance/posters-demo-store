@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -681,13 +681,13 @@ public class CheckoutController
                 
                     //For creating a copy of the credit card with customer_id set to null
                     final CreditCard copyCreditCard = CreditCard.copy(cart.getCreditCard());
-                    Ebean.save(copyCreditCard);
+                    DB.save(copyCreditCard);
                     //For creating a copy of the Billing Address with customer_id set to null
                     final BillingAddress copyBillingAddress = BillingAddress.copy(cart.getBillingAddress());
-                    Ebean.save(copyBillingAddress);
+                    DB.save(copyBillingAddress);
                     //For creating a copy of the Shipping Address with customer_id set to null
                     final ShippingAddress copyShippingAddress = ShippingAddress.copy(cart.getShippingAddress());
-                    Ebean.save(copyShippingAddress);
+                    DB.save(copyShippingAddress);
 
                     // create new order
 
@@ -810,13 +810,13 @@ public class CheckoutController
     
         //For creating a copy of the credit card with customer_id set to null
         final CreditCard copyCreditCard = CreditCard.copy(cart.getCreditCard());
-        Ebean.save(copyCreditCard);
+        DB.save(copyCreditCard);
         //For creating a copy of the Billing Address with customer_id set to null
         final BillingAddress copyBillingAddress = BillingAddress.copy(cart.getBillingAddress());
-        Ebean.save(copyBillingAddress);
+        DB.save(copyBillingAddress);
         //For creating a copy of the Shipping Address with customer_id set to null
         final ShippingAddress copyShippingAddress = ShippingAddress.copy(cart.getShippingAddress());
-        Ebean.save(copyShippingAddress);
+        DB.save(copyShippingAddress);
 
         // create new order
 

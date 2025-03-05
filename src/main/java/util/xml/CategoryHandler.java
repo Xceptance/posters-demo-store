@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link DefaultHandler} parses an XML file with top and sub categories and persists them in the database.
@@ -52,7 +52,7 @@ public class CategoryHandler extends DefaultHandler
 
     private Translation transl;
 
-    private Language defaultLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
+    private Language defaultLanguage = DB.find(Language.class).where().eq("code", "en-US").findOne();
 
     private String translationCode;
 
@@ -100,7 +100,7 @@ public class CategoryHandler extends DefaultHandler
         if (localName.equals("category"))
         {
             category.setSubCategories(subCategoryList);
-            Ebean.save(category);
+            DB.save(category);
         }
         if (localName.equals("subCategory"))
         {
@@ -127,10 +127,10 @@ public class CategoryHandler extends DefaultHandler
 
                 // get the translations language
                 Language transLanguage;
-                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                Boolean langExists = DB.find(Language.class).where().eq("code", translationCode).exists();
                 if (langExists == true) 
                 {
-                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transLanguage = DB.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
                 }
@@ -157,10 +157,10 @@ public class CategoryHandler extends DefaultHandler
 
                 // get the translations language
                 Language transLanguage;
-                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                Boolean langExists = DB.find(Language.class).where().eq("code", translationCode).exists();
                 if (langExists == true) 
                 {
-                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transLanguage = DB.find(Language.class).where().eq("code", translationCode).findOne();
                     transl.setTranslationLanguageId(transLanguage);
                     transl.save();
                 }

@@ -29,7 +29,7 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a customer of the poster demo store. Each customer must have a unique email address and a
@@ -393,7 +393,7 @@ public class Customer
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -401,7 +401,7 @@ public class Customer
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -409,7 +409,7 @@ public class Customer
      */
     public void delete()
     {
-        Ebean.delete(this);
+        DB.delete(this);
     }
 
     /**
@@ -423,7 +423,7 @@ public class Customer
     {
         boolean exist = true;
         // get a list of customers, which have the given email address
-        final List<Customer> loginExist = Ebean.find(Customer.class).where().eq("email", email).findList();
+        final List<Customer> loginExist = DB.find(Customer.class).where().eq("email", email).findList();
         // no customer has this email address
         if (loginExist.size() == 0)
         {
@@ -447,7 +447,7 @@ public class Customer
     public static Customer getCustomerByEmail(final String email)
     {
         // get customer by email address
-        return Ebean.find(Customer.class).where().eq("email", email).findOne();
+        return DB.find(Customer.class).where().eq("email", email).findOne();
     }
 
     /**
@@ -460,7 +460,7 @@ public class Customer
     public static Customer getCustomerById(final UUID customerId)
     {
         // get customer by id
-        return Ebean.find(Customer.class, customerId);
+        return DB.find(Customer.class, customerId);
     }
 
     /**
@@ -470,7 +470,7 @@ public class Customer
      */
     public List<Order> getAllOrders()
     {
-        return Ebean.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
+        return DB.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
     }
 
 }

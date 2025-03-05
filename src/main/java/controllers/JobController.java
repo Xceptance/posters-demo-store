@@ -31,7 +31,7 @@ import javax.inject.Inject;
 
 import org.h2.tools.RunScript;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 import com.google.inject.Singleton;
 
 import conf.StarterConf;
@@ -175,27 +175,27 @@ public class JobController
     private void importData(final StarterConf config)
     {
         // import languages, if there are none in the DB
-        if (Ebean.find(Language.class).findList().size() == 0)
+        if (DB.find(Language.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importLanguage();
         }
         // import categories, if there is no category in DB
-        if (Ebean.find(TopCategory.class).findList().size() == 0)
+        if (DB.find(TopCategory.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importCategory();
         }
         // import products, if there is no product in DB
-        if (Ebean.find(Product.class).findList().size() == 0)
+        if (DB.find(Product.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importProduct();
         }
         // import dummy customer, if the parameter is set and no other customer is in DB
-        if (config.IMPORT_CUSTOMER && Ebean.find(Customer.class).findList().size() == 0)
+        if (config.IMPORT_CUSTOMER && DB.find(Customer.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importCustomer();
         }
         // import users, if there is no user in DB
-        if (Ebean.find(Backofficeuser.class).findList().size() == 0)
+        if (DB.find(Backofficeuser.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importUser();
         }

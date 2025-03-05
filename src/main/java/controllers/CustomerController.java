@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
@@ -197,7 +197,7 @@ public class CustomerController
         language = Optional.of(locale);
         boolean failure = false;
         // account with this email already exist
-        if (!Ebean.find(Customer.class).where().eq("email", email).findList().isEmpty())
+        if (!DB.find(Customer.class).where().eq("email", email).findList().isEmpty())
         {
             // show error message
             context.getFlashScope().error(msg.get("errorAccountExist", language).get());
@@ -239,7 +239,7 @@ public class CustomerController
             customer.setEmail(email);
             customer.hashPasswd(password);
             // save customer
-            Ebean.save(customer);
+            DB.save(customer);
             // show success message
             context.getFlashScope().success(msg.get("successCreateAccount", language).get());
             // show page to log-in
@@ -974,7 +974,7 @@ public class CustomerController
             return Results.redirect(context.getContextPath() + "/" + locale + "/changeNameOrEmail");
         }
         // email already exist
-        else if (!Ebean.find(Customer.class).where().eq("email", email).ne("id", customer.getId()).findList().isEmpty())
+        else if (!DB.find(Customer.class).where().eq("email", email).ne("id", customer.getId()).findList().isEmpty())
         {
             // show error message
             context.getFlashScope().error(msg.get("errorAccountExist", language).get());
@@ -1087,7 +1087,7 @@ public class CustomerController
                 // remove cart from session
                 SessionHandling.removeCartId(context);
                    
-                Ebean.delete(customer);
+                DB.delete(customer);
 
                 // show success message
                 context.getFlashScope().success(msg.get("successDeleteAccount", language).get());

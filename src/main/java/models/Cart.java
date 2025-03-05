@@ -28,7 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 import io.ebean.annotation.DbForeignKey;
 
 /**
@@ -453,7 +453,7 @@ public class Cart
     public void addProduct(final Product product, final String finish, final PosterSize size)
     {
         // check, whether the product with the given finish and size is in the cart
-        CartProduct cartProduct = Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
+        CartProduct cartProduct = DB.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish)
                                        .eq("size", size).findOne();
         
         // the product is not in the cart
@@ -470,7 +470,7 @@ public class Cart
             // set size
             cartProduct.setSize(size);
             // set price of the product
-            cartProduct.setPrice(Ebean.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
+            cartProduct.setPrice(DB.find(ProductPosterSize.class).where().eq("product", product).eq("size", size).findOne()
                                       .getPrice());
             cartProduct.save();
             products.add(cartProduct);
@@ -524,7 +524,7 @@ public class Cart
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -532,7 +532,7 @@ public class Cart
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -545,7 +545,7 @@ public class Cart
         // refresh to prevent foreign key violation
         update();
         // finally delete the cart
-        Ebean.delete(this);
+        DB.delete(this);
     }
 
     /**
@@ -554,7 +554,7 @@ public class Cart
     public void clearProducts()
     {
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", this).findList();
         // remove each product
         for (final CartProduct cartProduct : cartProducts)
         {
@@ -576,7 +576,7 @@ public class Cart
      */
     public static Cart getCartById(final UUID id)
     {
-        return Ebean.find(Cart.class, id);
+        return DB.find(Cart.class, id);
     }
 
     /**
@@ -586,7 +586,7 @@ public class Cart
      */
     public static List<Cart> getAllCarts()
     {
-        return Ebean.find(Cart.class).findList();
+        return DB.find(Cart.class).findList();
     }
 
     /**
@@ -646,7 +646,7 @@ public class Cart
     {
         int productCount = 0;
         // get all products of the cart
-        final List<CartProduct> cartProducts = Ebean.find(CartProduct.class).where().eq("cart", this).findList();
+        final List<CartProduct> cartProducts = DB.find(CartProduct.class).where().eq("cart", this).findList();
         // get the count of each product
         for (final CartProduct cartProduct : cartProducts)
         {
@@ -671,7 +671,7 @@ public class Cart
      */
     public CartProduct getCartProduct(final Product product, final String finish, final PosterSize size)
     {
-        return Ebean.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish).eq("size", size)
+        return DB.find(CartProduct.class).where().eq("cart", this).eq("product", product).eq("finish", finish).eq("size", size)
                     .findOne();
     }
 }

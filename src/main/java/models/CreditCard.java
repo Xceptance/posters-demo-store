@@ -26,7 +26,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import io.ebean.Ebean;
+import io.ebean.DB;
 
 /**
  * This {@link Entity} provides a credit card. A credit card can be set to at most one {@link Customer}.
@@ -277,7 +277,7 @@ public class CreditCard
      */
     public void update()
     {
-        Ebean.update(this);
+        DB.update(this);
     }
 
     /**
@@ -285,7 +285,7 @@ public class CreditCard
      */
     public void save()
     {
-        Ebean.save(this);
+        DB.save(this);
     }
 
     /**
@@ -293,7 +293,7 @@ public class CreditCard
      */
     public void delete()
     {
-        Ebean.delete(this);
+        DB.delete(this);
     }
 
     /**
@@ -305,7 +305,7 @@ public class CreditCard
      */
     public static CreditCard getCreditCardById(final int id)
     {
-        return Ebean.find(CreditCard.class, id);
+        return DB.find(CreditCard.class, id);
     }
 
         /**
@@ -316,7 +316,7 @@ public class CreditCard
      * @return the {@link CreditCard} that matches the given Customer ID
      */
     public static CreditCard getCreditCardByCustomerId(final UUID customerId) {
-        return Ebean.find(CreditCard.class)
+        return DB.find(CreditCard.class)
                     .where()
                     .eq("customer_id", customerId)
                     .findOne();
@@ -331,7 +331,7 @@ public class CreditCard
     public static void removeCustomerFromCreditCard(final int id)
     {
         final CreditCard card = getCreditCardById(id);
-        Ebean.delete(card);
+        DB.delete(card);
 
     }
 
