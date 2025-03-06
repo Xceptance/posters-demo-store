@@ -25,7 +25,6 @@ import models.Customer;
 import models.Language;
 import models.Product;
 import models.TopCategory;
-import models_backoffice.Backofficeuser;
 import ninja.lifecycle.Start;
 import javax.inject.Inject;
 
@@ -193,11 +192,6 @@ public class JobController
         if (config.IMPORT_CUSTOMER && DB.find(Customer.class).findList().size() == 0)
         {
             ImportFromXMLToDB.importCustomer();
-        }
-        // import users, if there is no user in DB
-        if (DB.find(Backofficeuser.class).findList().size() == 0)
-        {
-            ImportFromXMLToDB.importUser();
         }
     }
 }

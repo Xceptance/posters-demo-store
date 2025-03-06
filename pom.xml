@@ -83,7 +83,7 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-							<packages>models, models_backoffice</packages>
+							<packages>models</packages>
 							<transformArgs>debug=1</transformArgs>
 							<classSource>${project.build.outputDirectory}</classSource>
 							<classDestination>${project.build.outputDirectory}</classDestination>
