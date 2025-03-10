@@ -15,7 +15,7 @@
  */
 package conf;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import ninja.utils.NinjaProperties;
 

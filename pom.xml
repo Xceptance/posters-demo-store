@@ -270,6 +270,14 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
 		</dependency>
+		<!-- Jakarta required by newer DBs https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+		<dependency>
+    		<groupId>jakarta.persistence</groupId>
+    		<artifactId>jakarta.persistence-api</artifactId>
+    		<version>3.2.0</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-core</artifactId>
@@ -280,6 +288,7 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.3.2</version>
 		</dependency>
+
 		<dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>

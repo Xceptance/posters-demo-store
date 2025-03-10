@@ -1,12 +1,3 @@
-create table backofficeuser (
-  id                            uuid not null,
-  email                         varchar(255),
-  password                      varchar(255),
-  name                          varchar(255),
-  first_name                    varchar(255),
-  constraint pk_backofficeuser primary key (id)
-);
-
 create table billingaddress (
   id                            integer auto_increment not null,
   name                          varchar(255),
