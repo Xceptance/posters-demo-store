@@ -246,7 +246,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ninjaframework</groupId>
-			<artifactId>ninja-ebean-module</artifactId>
+			<artifactId>ninja-ebean15-module</artifactId>
 			<version>4.0.0</version>
 		</dependency>
 		<dependency>
