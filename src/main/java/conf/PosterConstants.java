@@ -136,11 +136,6 @@ public class PosterConstants
      */
     public final String TEMPLATE_LOGIN_FORM = "views/CustomerController/loginForm.ftl.html";
 
-    /**
-     * The path to the Back office login-form template.
-     */
-    public final String TEMPLATE_LOGIN_FORM_BO = "/views_backoffice/layout/loginN.ftl.html";
-
     /** 
      * The path to the product overview template.
      */

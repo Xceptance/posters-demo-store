@@ -26,7 +26,7 @@ import models.Language;
 import models.Product;
 import models.TopCategory;
 import ninja.lifecycle.Start;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.h2.tools.RunScript;
 
@@ -143,10 +143,6 @@ public class JobController
                 if (rs.getString(3).equals("SUBCATEGORY"))
                 {
                     subCategoryTable = true;
-                }
-                if (rs.getString(3).equals("BACKOFFICEUSER"))
-                {
-                    userTable = true;
                 }
             }
             // create the tables if they not exist
