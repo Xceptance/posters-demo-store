@@ -1,0 +1,22 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+	<@layout.myLayout "The ultimate webshop">
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+		<div class="col-lg-6">
+            <form action="${applUrlHttps}/${lang}/ok3ok2ru8udqx7gZGS9n/statusUpdate" method="post" class="">
+                <div class="form-check form-switch">
+                    <#if categoriesBroken==true>
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories" checked>
+                    <#else>
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories">
+                    </#if>
+                    <label class="form-check-label" for="flexSwitchCheckBreakCategories">${i18n("labelBreakCategories")}</label>
+                </div>                  
+                <button class="btn btn-primary" id="btn-status-confirm" name="btnStatusConfirm" type="submit" value="confirm">${i18n("buttonConfirm")}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</@layout.myLayout>
