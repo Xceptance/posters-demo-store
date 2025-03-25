@@ -56,7 +56,7 @@ java -jar posters-demo-store-<version>.jar          # downloaded
 java -jar target/posters-demo-store-<version>.jar   # built yourself
 ```
 
-By default, the shop is available at [http://localhost:8080/](http://localhost:8080/) and [https://localhost:8443/](https://localhost:8443/). When opening the homepage via HTTPS, expect your browser to complain about the certificate since Posters comes with a self-signed certificate. See below for how to change that.
+By default, the shop is available at [https://localhost:8443/](https://localhost:8443/). When opening the homepage via HTTPS, expect your browser to complain about the certificate since Posters comes with a self-signed certificate. See below for how to change that.
 
 Posters stores its database and log files to the subdirectories `db` and `log`in the current directory.
 
@@ -72,7 +72,7 @@ If the default settings do not suit you, you can adjust them as needed. See belo
 | Property | Default | Description |
 | -------- | ------- | ----------- |
 | ninja.mode | prod | The application mode, one of `prod`, `test`, and `dev`. |
-| ninja.port | 8080 | The HTTP port. Use -1 to disable HTTP. |
+| ninja.port | -1 | The HTTP port. Use -1 to disable HTTP. |
 | ninja.ssl.port | 8443 | The HTTPS port. Use -1 to disable HTTPS. |
 | ninja.ssl.keystore.uri | classpath:/ninja/standalone/ninja-development.p12 | The URI to a key store with a custom server certificate. You will need to create and populate the key store. |
 | ninja.ssl.keystore.password | password | The password to open the key store/the key. |
