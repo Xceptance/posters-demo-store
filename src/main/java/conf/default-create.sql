@@ -70,6 +70,25 @@ create table customer (
   constraint pk_customer primary key (id)
 );
 
+create table defaulttext (
+  id                            integer auto_increment not null,
+  original_text                 varchar(4096),
+  original_language_id          integer,
+  constraint pk_defaulttext primary key (id)
+);
+
+create table supportedlanguage (
+  id                            integer auto_increment not null,
+  language_group                varchar(255),
+  precise_name                  varchar(255),
+  endonym                       varchar(255),
+  precise_endonym               varchar(255),
+  disambigous_endonym           varchar(255),
+  code                          varchar(255),
+  fallback_code                 varchar(255),
+  constraint pk_supportedlanguage primary key (id)
+);
+
 create table ordering (
   id                            uuid not null,
   order_date                    varchar(255),
@@ -107,9 +126,9 @@ create table postersize (
 
 create table product (
   id                            integer auto_increment not null,
-  name                          varchar(255),
-  description_detail            varchar(4096),
-  description_overview          varchar(1024),
+  name_id                       integer,
+  description_detail_id         integer,
+  description_overview_id       integer,
   image_url                     varchar(255),
   small_image_url               varchar(255),
   medium_image_url              varchar(255),
@@ -120,6 +139,9 @@ create table product (
   subcategory_id                integer,
   top_category_id               integer,
   minimum_price                 double not null,
+  constraint uq_product_name_id unique (name_id),
+  constraint uq_product_description_detail_id unique (description_detail_id),
+  constraint uq_product_description_overview_id unique (description_overview_id),
   constraint pk_product primary key (id)
 );
 
@@ -147,15 +169,25 @@ create table shippingaddress (
 
 create table subcategory (
   id                            integer auto_increment not null,
-  name                          varchar(255),
+  name_id                       integer,
   topcategory_id                integer,
+  constraint uq_subcategory_name_id unique (name_id),
   constraint pk_subcategory primary key (id)
 );
 
 create table topcategory (
   id                            integer auto_increment not null,
-  name                          varchar(255),
+  name_id                       integer,
+  constraint uq_topcategory_name_id unique (name_id),
   constraint pk_topcategory primary key (id)
+);
+
+create table translation (
+  id                            integer auto_increment not null,
+  original_text_id              integer not null,
+  translation_language_id       integer,
+  translation_text              varchar(4096),
+  constraint pk_translation primary key (id)
 );
 
 create index ix_billingaddress_customer_id on billingaddress (customer_id);
@@ -193,6 +225,12 @@ alter table orderproduct add constraint fk_orderproduct_ordering_id foreign key 
 create index ix_orderproduct_postersize_id on orderproduct (postersize_id);
 alter table orderproduct add constraint fk_orderproduct_postersize_id foreign key (postersize_id) references postersize (id) on delete restrict on update restrict;
 
+alter table product add constraint fk_product_name_id foreign key (name_id) references defaulttext (id) on delete restrict on update restrict;
+
+alter table product add constraint fk_product_description_detail_id foreign key (description_detail_id) references defaulttext (id) on delete restrict on update restrict;
+
+alter table product add constraint fk_product_description_overview_id foreign key (description_overview_id) references defaulttext (id) on delete restrict on update restrict;
+
 create index ix_product_subcategory_id on product (subcategory_id);
 alter table product add constraint fk_product_subcategory_id foreign key (subcategory_id) references subcategory (id) on delete restrict on update restrict;
 
@@ -208,6 +246,10 @@ alter table productpostersize add constraint fk_productpostersize_postersize_id 
 create index ix_shippingaddress_customer_id on shippingaddress (customer_id);
 alter table shippingaddress add constraint fk_shippingaddress_customer_id foreign key (customer_id) references customer (id) on delete restrict on update restrict;
 
+alter table subcategory add constraint fk_subcategory_name_id foreign key (name_id) references defaulttext (id) on delete restrict on update restrict;
+
 create index ix_subcategory_topcategory_id on subcategory (topcategory_id);
 alter table subcategory add constraint fk_subcategory_topcategory_id foreign key (topcategory_id) references topcategory (id) on delete restrict on update restrict;
+
+alter table topcategory add constraint fk_topcategory_name_id foreign key (name_id) references defaulttext (id) on delete restrict on update restrict;
 

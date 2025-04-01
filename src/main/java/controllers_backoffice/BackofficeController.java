@@ -569,11 +569,11 @@ public class BackofficeController
 
         // all input fields might be correct
 
-        product.setName(name);
+        product.setDefaultName(name);
         product.setImageURL(imageURL);
         product.setMinimumPrice(minimumPrice);
-        product.setDescriptionDetail(descriptionDetail);
-        product.setDescriptionOverview(descriptionOverview);
+        product.setDefaultDescriptionDetail(descriptionDetail);
+        product.setDefaultDescriptionOverview(descriptionOverview);
         product.setSubCategory(subCategory);
         product.setTopCategory(topCategory);
         // save product

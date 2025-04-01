@@ -16,7 +16,7 @@
 			<li
 				class="product-id-${product.product.id}-${product.getFinish()}-${product.size.width}x${product.size.height} mini-cart-item" data-prodId="${product.product.id}">
 				<ul class="cart-items list-unstyled">
-					<li class="prod-name">${product.product.name}</li>
+					<li class="prod-name">${product.product.getName(lang)}</li>
 					<li>${i18n("cartTableHeaderQuantity")}: <span 
 						class="prod-count">${product.getProductCount()}</span> (<span 
 						class="prod-style">${product.getFinish()}</span>, <span class="prod-size"><span 
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<div class="link-button">
-			<a href="${applUrlHttp}/cart"
+			<a href="${applUrlHttp}/${lang}/cart"
 				class="btn btn-primary form-control go-to-cart">${i18n("buttonGoToCart")}</a>
 		</div>
 	</div>

@@ -16,6 +16,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.params.PathParam;
 import util.session.SessionHandling;
 
 import io.ebean.Ebean;
@@ -50,8 +52,12 @@ public class WebShopController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result index(final Context context)
+    public Result index(final Context context, @PathParam("urlLocale") String locale)
     {
+        if(locale == null)
+        {
+            locale = "en-US";
+        }
         final Map<String, Object> data = new HashMap<String, Object>();
         setCommonData(data, context, xcpConf);
         // get all products, which should be shown in the carousel on the main page.
@@ -83,7 +89,8 @@ public class WebShopController
         data.put("carousel", productsCarousel);
         data.put("productslist", productsList);
         data.put("productslistcat", productsListCat);
-        return Results.html().render(data);
+        Result result = Results.html().render(data);
+        return result;
 
     }
 
@@ -137,6 +144,15 @@ public class WebShopController
         data.put("regexZip", xcpConf.REGEX_ZIP);
         // add product count regex
         data.put("regexProductCount", xcpConf.REGEX_PRODUCT_COUNT);
+        // add current request path
+        data.put("currPath", context.getRequestPath());
+        // add current request path without locale
+        data.put("staticPath", context.getRequestPath().replace("/"+context.getPathParameter("urlLocale"), ""));
+        // add supported languages
+        List<String> supportedLanguages = new ArrayList<>();
+        String appLang = xcpConf.APPLICATION_LANGUAGES;
+        supportedLanguages = Arrays.asList(appLang.split(","));
+        data.put("supportedLanguages", supportedLanguages);
     }
 
     /**

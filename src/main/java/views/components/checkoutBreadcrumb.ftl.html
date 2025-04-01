@@ -12,7 +12,7 @@
 		<!-- add billing address -->
 		<#if billingAddressActive??>
 		<li  class ="liBread active" id="btnBillAddr"><a class="bread"
-			href="${contextPath}/enterBillingAddress">${i18n("checkoutProgressIndicatorBilling")} / </a>
+			href="${contextPath}/${lang}/enterBillingAddress">${i18n("checkoutProgressIndicatorBilling")} / </a>
 			<#else>
 		<li  class ="liBread"id="btnBillAddr">${i18n("checkoutProgressIndicatorBilling")} /  </#if> <span
 			class="divider"></span></li>
@@ -20,7 +20,7 @@
 		<!-- add credit card -->
 		<#if creditCardActive??>
 		<li  class ="liBread active" id="btnCreditCard"><a class="bread"
-			href="${contextPath}/enterPaymentMethod">${i18n("checkoutProgressIndicatorPayment")} / </a>
+			href="${contextPath}/${lang}/enterPaymentMethod">${i18n("checkoutProgressIndicatorPayment")} / </a>
 			<#else>
 		<li  class ="liBread"id="btnCreditCard">${i18n("checkoutProgressIndicatorPayment")} /  </#if> <span
 			class="divider"></span></li>
@@ -28,7 +28,7 @@
 		<!-- place order -->
 		<#if placeOrderActive??>
 		<li  class ="liBread active" id="btnPlaceOrder"><a class="bread"
-			href="${contextPath}/checkoutOverview">${i18n("checkoutProgressIndicatorSummary")} / </a>
+			href="${contextPath}/${lang}/checkoutOverview">${i18n("checkoutProgressIndicatorSummary")} / </a>
 			<#else>
 		<li  class ="liBread"id="btnPlaceOrder">${i18n("buttonPlaceOrder")} /  </#if></li>
 

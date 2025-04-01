@@ -15,11 +15,14 @@
  */
 package controllers;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 import io.ebean.DB;
 import io.ebean.PagedList;
@@ -38,6 +41,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 
 
 /**
@@ -57,7 +61,7 @@ public class SearchController
     @Inject
     SearchEngine searcher;
 
-    private final Optional<String> language = Optional.of("en");
+    private Optional<String> language = Optional.of("en");
 
     /**
      * Returns a product overview page with products, that matches the search text.
@@ -67,7 +71,8 @@ public class SearchController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result searchProduct(@Param("searchText") final String searchFormText, final Context context) {
+    public Result searchProduct(@Param("searchText") final String searchFormText, final Context context, @PathParam("urlLocale") String locale) {
+        language = Optional.of(locale);
         String searchText = searchFormText.trim();
         // search text is empty
         if (searchText.isEmpty()) {
@@ -78,13 +83,13 @@ public class SearchController
         } else {
             final Map<String, Object> data = new HashMap<String, Object>();
             // search for products
-            final List<Product> products = searchForProducts(searchText, 1, data);
+            final List<Product> products = searchForProducts(searchText, 1, data, locale);
             // no product was found
             if (products.isEmpty()) {
                 // show info message
                 context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
                 // return index page
-                return Results.redirect(context.getContextPath() + "/notFound");
+                return Results.redirect(context.getContextPath() + "/" + locale + "/notFound");
             }
             // at least one product was found
             else {
@@ -109,10 +114,35 @@ public class SearchController
      * @return
      */ // data.put("productCounter", products.size());
     public Result getProductOfSearch(@Param("searchText") final String searchText, @Param("page") final int pageNumber,
-            final Context context) {
+            final Context context, @PathParam("urlLocale") String locale) {
+
         final Map<String, Object> data = new HashMap<String, Object>();
+
         // search for products
-        final List<Product> products = searchForProducts(searchText, pageNumber, data);
+        final List<Product> products = searchForProducts(searchText, pageNumber, data, locale);
+
+        // load the messages.properties file for the current locale to supply localized texts to JavaScript
+        Properties mesprop = new Properties();
+        try {
+            InputStream input = new FileInputStream("./src/main/java/conf/messages_"+locale+".properties");
+            mesprop.load(input);
+            // text for buy here button
+            data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+            input.close();
+        } catch (Exception e) {
+            // The file could not be loaded or does not exist. Fall back to the default
+            try {
+                InputStream input = new FileInputStream("./src/main/java/conf/messages.properties");
+                mesprop.load(input);
+                // text for buy here button
+                data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+                input.close();
+            } catch (Exception e2) {
+                // Fall back to a hardcoded version
+                data.put("BuyText", "Buy Here");
+            }
+        }
+
         // set some attributes to null to get a small-sized JSON
         for (int i = 0; i < products.size(); i++) {
             products.get(i).setAvailableSizes(null);
@@ -121,8 +151,10 @@ public class SearchController
             products.get(i).setCart(null);
             products.get(i).setOrder(null);
         }
+
         data.put("products", products);
         data.put("currentPage", pageNumber);
+
         return Results.json().render(data);
     }
 
@@ -134,9 +166,9 @@ public class SearchController
      * @param data       The data map to which pagination information will be added.
      * @return A list of products that match the search text.
      */
-    private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data) {
+    private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data, String locale) {
         // Search products with search engine, second param is the limit for returned results
-        List<Integer> resultIds = searcher.search(searchText, 20);
+        List<Integer> resultIds = searcher.search(searchText, 20, locale);
 
         if (resultIds.isEmpty()) {
             return List.of();

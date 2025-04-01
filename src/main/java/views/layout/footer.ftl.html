@@ -3,8 +3,8 @@
 	<div class="container mb-3">
 		<div class="row row-pb-md">
 			<div id="footer-section-about" class="col">
-				<h4 class="footer-section-headline">About</h4>
-				<p class="footer-text-about footer-section-text">The Poster Demo Store is a small e-commerce demo application. It is meant for functional testing, test automation, and load and performance testing. It can also help you to learn programming better. This software is licensed under Apache License 2.0.</p>
+				<h4 class="footer-section-headline">${i18n('footerAbout')}</h4>
+				<p class="footer-text-about footer-section-text">${i18n('footerAboutText')}</p>
 				<p>
 					<ul class="footer-social-icons">
 						<li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i class="icon-github"></i></a></li>
@@ -12,33 +12,33 @@
 				</p>
 			</div>
 			<div id="footer-section-support" class="col">
-				<h4 class="footer-section-headline">Customer Care</h4>
+				<h4 class="footer-section-headline">${i18n('footerSupport')}</h4>
 				<p>
 					<ul class="footer-support">
-						<li><a href="mailto:kontakt@xceptance.de">Contact</a></li>
+						<li><a href="mailto:kontakt@xceptance.de">${i18n('footerSupportText')}</a></li>
 					</ul>
 				</p>
 			</div>
 			<div id="footer-section-information" class="col">
-				<h4 class="footer-section-headline">Information</h4>
+				<h4 class="footer-section-headline">${i18n('footerInfo')}</h4>
 				<p>
 					<ul class="footer-info">
-						<li>This software is for demo and testing purposes only. Orders will not be fulfilled. Do not enter sensitive or personal data!</li>
+						<li>${i18n('footerInfoText')}</li>
 					</ul>
 				</p>
 			</div>
 			<div id="footer-section-contact" class="col">
-				<h4 class="footer-section-headline">Contact Information</h4>
+				<h4 class="footer-section-headline">${i18n('footerContact')}</h4>
 				<ul class="footer-contact">
-					<li class="footer-contact-company">Xceptance GmbH</li>
-					<li class="footer-contact-adress">Leutragraben 2-4<br>07743 Jena<br>Germany</li>
-					<li class="footer-contact-phone">Phone: <a href="tel:+49-3641-376300">+49-3641-376300</a></li>
-					<li class="footer-contact-e-mail">E-mail: <a href="mailto:kontakt@xceptance.de">kontakt@xceptance.de</a></li>
-					<li class="footer-contact-website">Website: <a href="https://www.xceptance.com">www.xceptance.com</a></li>
+					<li class="footer-contact-company">${i18n('footerCompanyShort')}</li>
+					<li class="footer-contact-adress">${i18n('footerStreet')}<br>${i18n('footerCity')}<br>${i18n('footerCountry')}</li>
+					<li class="footer-contact-phone">${i18n('footerPhone')}: <a href="tel:${i18n('footerPhoneNumber')}">${i18n('footerPhoneNumber')}</a></li>
+					<li class="footer-contact-e-mail">${i18n('footerMail')}: <a href="mailto:${i18n('footerMailAddress')}">${i18n('footerMailAddress')}</a></li>
+					<li class="footer-contact-website">${i18n('footerSite')}: <a href="${i18n('footerSiteAddress')}">${i18n('footerSiteAddress')}</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<div id="footer-copyright" class="footer-copyright text-center">Copyright 2013-2024 Xceptance Software Technologies GmbH<br>All photos by René Schwietzke under CC-BY-4.0.</div>
-	<div id="footer-version-information" class="version-info text-center">The Poster Demo Store - Version ${currentVersion}</div>
+	<div id="footer-copyright" class="footer-copyright text-center">${i18n('footerCopyright')}<br>${i18n('footerFotoCopyright')}</div>
+	<div id="footer-version-information" class="version-info text-center">${i18n('footerVersionText')} ${currentVersion}</div>
 </footer>

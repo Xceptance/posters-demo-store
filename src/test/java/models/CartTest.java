@@ -29,9 +29,15 @@ import io.ebean.Ebean;
 
 public class CartTest extends NinjaTest
 {
+    private Language defaultLanguage = new Language();
+
     Product product1 = new Product();
 
+    DefaultText pr1Name = new DefaultText();
+
     Product product2 = new Product();
+
+    DefaultText pr2Name = new DefaultText();
 
     Cart cart = new Cart();
 
@@ -41,11 +47,19 @@ public class CartTest extends NinjaTest
     public void setUp()
     {
         // set some data for product1
-        product1.setName("product1");
+        pr1Name.setOriginalText("product1");
+        pr1Name.setOriginalLanguage(defaultLanguage);
+        pr1Name.save();
+        product1.setName(pr1Name);
+        product1.setDefaultName("product1");
         product1.setMinimumPrice(5.55);
         product1.save();
         // set some data for product2
-        product2.setName("product2");
+        pr2Name.setOriginalText("product2");
+        pr2Name.setOriginalLanguage(defaultLanguage);
+        pr2Name.save();
+        product2.setName(pr2Name);
+        product2.setDefaultName("product2");
         product2.setMinimumPrice(7.77);
         product2.save();
         // persist cart

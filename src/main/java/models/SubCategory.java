@@ -23,6 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.ebean.Ebean;
@@ -47,7 +48,8 @@ public class SubCategory
     /**
      * The name of the sub category.
      */
-    private String name;
+    @OneToOne
+    private DefaultText name;
 
     /**
      * The {@link TopCategory} the sub category belongs to.
@@ -84,24 +86,100 @@ public class SubCategory
     }
 
     /**
-     * Returns the name of the category.
+     * Returns the name reference of the category.
      * 
-     * @return the name of the category
+     * @return the name reference of the category
      */
-    public String getName()
+    public DefaultText getName()
     {
         return name;
     }
 
     /**
-     * Sets the name of the category.
+     * Returns a specific name of the category.
+     * 
+     * @return a specific name of the category
+     */
+    public String getName(Language language)
+    {
+        if (language.getCode().equals("en-US"))
+        {
+            return this.getDefaultName();
+        }
+        else
+        {
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            if (result == null) 
+            {
+                return this.getDefaultName();
+            }
+            else 
+            {
+                return result.getTranslationText();
+            }
+        }
+    }
+
+    /**
+     * Returns a specific name of the category.
+     * 
+     * @return a specific name of the category
+     */
+    public String getName(String code)
+    {
+        if (code.equals("en-US"))
+        {
+            return name.getOriginalText();
+        }
+        else
+        {
+            Language language = Ebean.find(Language.class).where().eq("code", code).findOne();
+            if (language == null) {
+                return this.getDefaultName();
+            }
+            Translation result = Ebean.find(Translation.class).where().eq("originalText", name).eq("translationLanguage", language).findOne();
+            if (result == null) 
+            {
+                return this.getDefaultName();
+            }
+            else 
+            {
+                return result.getTranslationText();
+            }
+        }
+    }
+
+
+    /**
+     * Returns the default name of the category.
+     * 
+     * @return the default name of the category
+     */
+    public String getDefaultName()
+    {
+        return name.getOriginalText();
+    }
+
+    /**
+     * Sets the name reference of the category.
      * 
      * @param name
-     *            the name of the category
+     *            the name reference of the category
      */
-    public void setName(final String name)
+    public void setName(final DefaultText name)
     {
         this.name = name;
+    }
+
+    /**
+     * Sets the default name of the category.
+     * 
+     * @param name
+     *            the default name of the category
+     */
+    public void setDefaultName(final String name)
+    {
+        this.name.setOriginalText(name);
     }
 
     /**

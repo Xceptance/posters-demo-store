@@ -18,9 +18,13 @@ package util.xml;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.DefaultText;
+import models.Language;
 import models.SubCategory;
 import models.TopCategory;
+import models.Translation;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -42,6 +46,17 @@ public class CategoryHandler extends DefaultHandler
 
     private String currentValue;
 
+    private boolean isDefault = true;
+
+    private DefaultText dtext;
+
+    private Translation transl;
+
+    private Language defaultLanguage = Ebean.find(Language.class).where().eq("code", "en-US").findOne();
+
+    private String translationCode;
+
+
     @Override
     public void startElement(final String namespaceURI, final String localName, final String qName, final Attributes atts)
     {
@@ -54,27 +69,102 @@ public class CategoryHandler extends DefaultHandler
         {
             subCategory = new SubCategory();
         }
+        if (localName.equals("nameCategory") || localName.equals("nameSubCategory"))
+        {
+            String lang = atts.getValue("xml:lang");
+            if (lang.equals("x-default")) 
+            {
+                // make an entry in the default texts table
+                isDefault = true;
+                dtext = new DefaultText();
+            } 
+            else if (StringUtils.isBlank(lang))
+            {
+                // error handling
+                isDefault = true;
+                dtext = new DefaultText();
+            }
+            else
+            {
+                // add as translation
+                isDefault = false;
+                transl = new Translation();
+                translationCode = lang;
+            }
+        }
     }
 
     @Override
     public void endElement(final String uri, final String localName, final String qName)
     {
-        if (localName.equals("nameCategory"))
-        {
-            category.setName(currentValue);
-        }
         if (localName.equals("category"))
         {
             category.setSubCategories(subCategoryList);
             Ebean.save(category);
         }
-        if (localName.equals("nameSubCategory"))
-        {
-            subCategory.setName(currentValue);
-        }
         if (localName.equals("subCategory"))
         {
             subCategoryList.add(subCategory);
+        }
+        if (localName.equals("nameCategory"))
+        {
+            if (isDefault == true)
+            {
+                // add as default text and add reference to it to product
+                dtext.setOriginalText(currentValue);
+                dtext.setOriginalLanguage(defaultLanguage);
+                dtext.save();
+                category.setName(dtext);
+            }
+            else
+            {
+                // or add as translation and add reference to default text
+                // NOTE: this was implemented 'quick and dirty' it assumes a default text
+                // always precedes a translation! The data model requires a default text
+                // to access a translation in the application
+                transl.setTranslationText(currentValue);
+                transl.setText(dtext);
+
+                // get the translations language
+                Language transLanguage;
+                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                if (langExists == true) 
+                {
+                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transl.setTranslationLanguageId(transLanguage);
+                    transl.save();
+                }
+            }
+        }
+        if (localName.equals("nameSubCategory"))
+        {
+            if (isDefault == true)
+            {
+                // add as default text and add reference to it to product
+                dtext.setOriginalText(currentValue);
+                dtext.setOriginalLanguage(defaultLanguage);
+                dtext.save();
+                subCategory.setName(dtext);
+            }
+            else
+            {
+                // or add as translation and add reference to default text
+                // NOTE: this was implemented 'quick and dirty' it assumes a default text
+                // always precedes a translation! The data model requires a default text
+                // to access a translation in the application
+                transl.setTranslationText(currentValue);
+                transl.setText(dtext);
+
+                // get the translations language
+                Language transLanguage;
+                Boolean langExists = Ebean.find(Language.class).where().eq("code", translationCode).exists();
+                if (langExists == true) 
+                {
+                    transLanguage = Ebean.find(Language.class).where().eq("code", translationCode).findOne();
+                    transl.setTranslationLanguageId(transLanguage);
+                    transl.save();
+                }
+            }
         }
     }
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languages>
+    <language>
+        <name>english</name>
+        <endonym>English</endonym>
+        <code>en</code>
+        <dialects>
+            <dialect>
+                <precisename>english uk</precisename>
+                <preciseendonym>British English</preciseendonym>
+                <disamb>English (UK)</disamb>
+                <extension>UK</extension>
+            </dialect>
+            <dialect>
+                <precisename>english us</precisename>
+                <preciseendonym>US-American English</preciseendonym>
+                <disamb>English (US)</disamb>
+                <extension>US</extension>
+            </dialect>
+        </dialects>
+    </language>
+    <language>
+        <name>german</name>
+        <endonym>Deutsch</endonym>
+        <code>de</code>
+        <dialects>
+            <dialect>
+                <precisename>standard high german</precisename>
+                <preciseendonym>Bundesdeutsches Hochdeutsch</preciseendonym>
+                <disamb>Deutsch (DE)</disamb>
+                <extension>DE</extension>
+            </dialect>
+        </dialects>
+    </language>
+</languages>

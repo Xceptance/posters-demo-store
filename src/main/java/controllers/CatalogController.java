@@ -15,11 +15,16 @@
  */
 package controllers;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import models.Product;
+import models.ProductInfo;
 import models.SubCategory;
 import models.TopCategory;
 import ninja.Context;
@@ -28,7 +33,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
-
+import ninja.params.PathParam;
 import io.ebean.Ebean;
 import io.ebean.PagedList;
 
@@ -90,13 +95,13 @@ public class CatalogController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result productOverview(@Param("categoryId") final int subCategoryId, final Context context)
+    public Result productOverview(@Param("categoryId") final int subCategoryId, final Context context, @PathParam("urlLocale") String locale)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given sub category to data map
-        addSubCategoryProductsToMap(subCategoryId, 1, pageSize, data);
+        addSubCategoryProductsToMap(subCategoryId, 1, pageSize, data, locale);
         // add sub category to data map
         data.put("category", SubCategory.getSubCategoryById(subCategoryId));
         return Results.html().render(data);
@@ -110,13 +115,13 @@ public class CatalogController
      * @return
      */
     @FilterWith(SessionCustomerExistFilter.class)
-    public Result topCategoryOverview(@Param("categoryId") final int topCategoryId, final Context context)
+    public Result topCategoryOverview(@Param("categoryId") final int topCategoryId, final Context context, @PathParam("urlLocale") String locale)
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         WebShopController.setCommonData(data, context, xcpConf);
         // add products of the given top category to data map
-        addTopCategoryProductsToMap(topCategoryId, 1, pageSize, data);
+        addTopCategoryProductsToMap(topCategoryId, 1, pageSize, data, locale);
         // add top category to data map
         data.put("category", TopCategory.getTopCategoryById(topCategoryId));
         // return product overview page
@@ -130,13 +135,36 @@ public class CatalogController
      * @param page
      * @return
      */
-    public Result getProductOfTopCategory(@Param("categoryId") final int topCategoryId, @Param("page") final int page)
+    public Result getProductOfTopCategory(@Param("categoryId") final int topCategoryId, @Param("page") final int page, @PathParam("urlLocale") String locale)
     {
         final Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // add products of the given top category to data map
-        addTopCategoryProductsToMap(topCategoryId, page, pageSize, data);
+        addTopCategoryProductsToMap(topCategoryId, page, pageSize, data, locale);
+
+        // load the messages.properties file for the current locale to supply localized texts to JavaScript
+        Properties mesprop = new Properties();
+        try {
+            InputStream input = new FileInputStream("./src/main/java/conf/messages_"+locale+".properties");
+            mesprop.load(input);
+            // text for buy here button
+            data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+            input.close();
+        } catch (Exception e) {
+            // The file could not be loaded or does not exist. Fall back to the default
+            try {
+                InputStream input = new FileInputStream("./src/main/java/conf/messages.properties");
+                mesprop.load(input);
+                // text for buy here button
+                data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+                input.close();
+            } catch (Exception e2) {
+                // Fall back to a hardcoded version
+                data.put("BuyText", "Buy Here");
+            }
+        }
+
         return result.render(data);
     }
 
@@ -147,13 +175,36 @@ public class CatalogController
      * @param page
      * @return
      */
-    public Result getProductOfSubCategory(@Param("categoryId") final int subCategoryId, @Param("page") final int page)
+    public Result getProductOfSubCategory(@Param("categoryId") final int subCategoryId, @Param("page") final int page, @PathParam("urlLocale") String locale)
     {
         final Result result = Results.json();
         final Map<String, Object> data = new HashMap<String, Object>();
         final int pageSize = xcpConf.PRODUCTS_PER_PAGE;
         // add products of the given sub category to data map
-        addSubCategoryProductsToMap(subCategoryId, page, pageSize, data);
+        addSubCategoryProductsToMap(subCategoryId, page, pageSize, data, locale);
+
+        // load the messages.properties file for the current locale to supply localized texts to JavaScript
+        Properties mesprop = new Properties();
+        try {
+            InputStream input = new FileInputStream("./src/main/java/conf/messages_"+locale+".properties");
+            mesprop.load(input);
+            // text for buy here button
+            data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+            input.close();
+        } catch (Exception e) {
+            // The file could not be loaded or does not exist. Fall back to the default
+            try {
+                InputStream input = new FileInputStream("./src/main/java/conf/messages.properties");
+                mesprop.load(input);
+                // text for buy here button
+                data.put("BuyText", mesprop.getProperty("buttonBuyHere"));
+                input.close();
+            } catch (Exception e2) {
+                // Fall back to a hardcoded version
+                data.put("BuyText", "Buy Here");
+            }
+        }
+
         return result.render(data);
     }
 
@@ -166,7 +217,7 @@ public class CatalogController
      * @param data
      */
     private static void addTopCategoryProductsToMap(final int topCategoryId, final int pageNumber, final int pageSize,
-                                                    final Map<String, Object> data)
+                                                    final Map<String, Object> data, String locale)
     {
         // get the given top category
         final TopCategory category = TopCategory.getTopCategoryById(topCategoryId);
@@ -175,7 +226,7 @@ public class CatalogController
         .eq("topCategory", category).setFirstRow((pageNumber - 1) * pageSize).setMaxRows(pageSize).findPagedList();
                                                     
         // add all products to the data map
-        createPagingListProductOverview(pagingList, pageNumber, data);
+        createPagingListProductOverview(pagingList, pageNumber, data, locale);
     }
 
     /**
@@ -187,14 +238,14 @@ public class CatalogController
      * @param data
      */
     private static void addSubCategoryProductsToMap(final int subCategoryId, final int pageNumber, final int pageSize,
-                                                    final Map<String, Object> data)
+                                                    final Map<String, Object> data, String locale)
     {
         // get the sub category by the given category
         final SubCategory category = SubCategory.getSubCategoryById(subCategoryId);
         // get all products of the sub category
         final PagedList<Product> pagingList = Ebean.find(Product.class).where().eq("subCategory", category).setFirstRow((pageNumber - 1) * pageSize).setMaxRows(pageSize).findPagedList();
         // add the products to the data map
-        createPagingListProductOverview(pagingList, pageNumber, data);
+        createPagingListProductOverview(pagingList, pageNumber, data, locale);
     }
 
     /**
@@ -205,7 +256,7 @@ public class CatalogController
      * @param data
      */
     private static void createPagingListProductOverview(final PagedList<Product> pagingList, final int pageNumber,
-                                                        final Map<String, Object> data)
+                                                        final Map<String, Object> data, String locale)
     {
         // get row count in background
         pagingList.loadCount();
@@ -213,6 +264,7 @@ public class CatalogController
         //final Page<Product> page = pagingList.getPage(pageNumber - 1);
         // get the products of the current page
         final List<Product> list = pagingList.getList();
+        final List<ProductInfo> infoList = new ArrayList<ProductInfo>();
         
         final int totalProductCount = pagingList.getTotalCount();
         
@@ -224,11 +276,12 @@ public class CatalogController
             list.get(i).setTopCategory(null);
             list.get(i).setCart(null);
             list.get(i).setOrder(null);
+            infoList.add(new ProductInfo(list.get(i), locale));
         }
         // get the total page count
         final int pageCount = pagingList.getTotalPageCount();
         // add the products to the data map
-        data.put("products", list);
+        data.put("products", infoList);
         // add the page count to the data map
         data.put("totalPages", pageCount);
         data.put("currentPage", pageNumber);

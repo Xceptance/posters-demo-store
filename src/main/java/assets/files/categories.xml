@@ -1,54 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <categories>
     <category>
-		<nameCategory>World of Nature</nameCategory>
+		<nameCategory xml:lang="x-default">World of Nature</nameCategory>
+		<nameCategory xml:lang="de-DE">Welt der Natur</nameCategory>
 		<subCategory>
-			<nameSubCategory>Animals</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Animals</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Tiere</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Flowers</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Flowers</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Blumen</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Trees</nameSubCategory>
-		</subCategory>
-	</category>
-	<category>
-		<nameCategory>Dining</nameCategory>
-		<subCategory>
-			<nameSubCategory>Cold Cuts</nameSubCategory>
-		</subCategory>
-		<subCategory>
-			<nameSubCategory>Main Dishes</nameSubCategory>
-		</subCategory>
-		<subCategory>
-			<nameSubCategory>Sweets</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Trees</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Bäume</nameSubCategory>
 		</subCategory>
 	</category>
 	<category>
-		<nameCategory>Transportation</nameCategory>
+		<nameCategory xml:lang="x-default">Dining</nameCategory>
+		<nameCategory xml:lang="de-DE">Essen</nameCategory>
 		<subCategory>
-			<nameSubCategory>Air Travel</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Cold Cuts</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Aufschnitt</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Classic Cars</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Main Dishes</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Hauptgerichte</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Railways</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Sweets</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Süßes</nameSubCategory>
 		</subCategory>
 	</category>
 	<category>
-		<nameCategory>Panoramas</nameCategory>
+		<nameCategory xml:lang="x-default">Transportation</nameCategory>
+		<nameCategory xml:lang="de-DE">Verkehr</nameCategory>
 		<subCategory>
-			<nameSubCategory>Architecture</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Air Travel</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Luftverkehr</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Fireworks</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Classic Cars</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Kraftfahrzeuge</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>Landscapes</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Railways</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Schienenverkehr</nameSubCategory>
+		</subCategory>
+	</category>
+	<category>
+		<nameCategory xml:lang="x-default">Panoramas</nameCategory>
+		<nameCategory xml:lang="de-DE">Panoramen</nameCategory>
+		<subCategory>
+			<nameSubCategory xml:lang="x-default">Architecture</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Architektur</nameSubCategory>
 		</subCategory>
 		<subCategory>
-			<nameSubCategory>XXL Panoramas</nameSubCategory>
+			<nameSubCategory xml:lang="x-default">Fireworks</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Feuerwerk</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory xml:lang="x-default">Landscapes</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Landschaften</nameSubCategory>
+		</subCategory>
+		<subCategory>
+			<nameSubCategory xml:lang="x-default">XXL Panoramas</nameSubCategory>
+			<nameSubCategory xml:lang="de-DE">Extragroße Panoramen</nameSubCategory>
 		</subCategory>
 	</category>
 </categories>

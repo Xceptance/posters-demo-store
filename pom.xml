@@ -6,7 +6,7 @@
 
 	<groupId>com.xceptance</groupId>
 	<artifactId>posters-demo-store</artifactId>
-	<version>2.4.0</version>
+	<version>2.5.0</version>
 	<packaging>jar</packaging>
 
 	<name>Posters Demo Store</name>
@@ -55,9 +55,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<ninja.version>6.9.0</ninja.version>
+		<ninja.version>7.0.0</ninja.version>
 		<copyright>Copyright (c) ${project.inceptionYear}-2024 ${project.organization.name}</copyright>
-		<ebean-maven-plugin.version>12.9.3</ebean-maven-plugin.version>
+		<ebean-maven-plugin.version>15.9.0</ebean-maven-plugin.version>
 		<posters.mainClass>util.standalone.PostersMain</posters.mainClass>
 	</properties>
 
@@ -156,6 +156,23 @@
 					<mapping>
 						<java>SLASHSTAR_STYLE</java>
 					</mapping>
+				</configuration>
+			</plugin>
+			<!-- Checks dependencies for known vulnerabilities. -->
+			<!-- Usage: mvn dependency-check:aggregate -->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>12.1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<failBuildOnCVSS>8.6</failBuildOnCVSS>
 				</configuration>
 			</plugin>
 		</plugins>
