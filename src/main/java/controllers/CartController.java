@@ -29,6 +29,7 @@ import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import conf.StatusConf;
 import filters.SessionCustomerExistFilter;
 import filters.SessionTerminatedFilter;
 import models.Cart;
@@ -57,6 +58,9 @@ public class CartController
 
     @Inject
     PosterConstants xcpConf;
+
+    @Inject
+    StatusConf stsConf;
 
     private final Optional<String> language = Optional.of("en");
 
@@ -236,8 +240,21 @@ public class CartController
                             @Param("size") final String size, final Context context, @PathParam("urlLocale") String locale)
     {
         final Result result = Results.json();
-        // get product by id
-        final Product product = Product.getProductById(Integer.parseInt(productId));
+        // load status configuration
+        final Map<String, Object> status = new HashMap<String, Object>();
+        stsConf.getStatus(status);
+        final Product product;
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("cartProductMixups").equals(true))
+        {
+            int randomId = (int)(Math.random() * (124) + 1);
+            product = Product.getProductById(randomId);
+        }
+        else
+        {
+            // get product by id
+            product = Product.getProductById(Integer.parseInt(productId));
+        }
         // get cart by session
         final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get poster size
@@ -247,6 +264,15 @@ public class CartController
         final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
         // add product to cart
         cart.addProduct(product, finish, posterSize);
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("cartQuantitiesChange").equals(true))
+        {
+            int numberToAdd = (int)(Math.random() * (5));
+            for (int i = 0; i < numberToAdd; i++)
+            {
+                cart.addProduct(product, finish, posterSize);
+            }
+        }
         // get added cart product
         final CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
         final Map<String, Object> updatedProduct = new HashMap<String, Object>();

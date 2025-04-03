@@ -26,9 +26,19 @@ public class AdjustStateFilter implements Filter
         // check status Info
         config.getStatus(status);
         // react to status
-        // if category adjustment is active
-        if (status.get("categoriesBroken").equals(true)) {
-            String categoryId = context.getParameter("categoryId");
+        // category adjustment is active
+        if (status.get("categoriesBroken").equals(true))
+        {
+            result = categoryState(context, locale, result);
+        }
+        
+        
+        return result;
+    }
+
+    private Result categoryState(Context context, String locale, Result result)
+    {
+        String categoryId = context.getParameter("categoryId");
             if (categoryId == null || categoryId.isBlank()) 
             {
                 // not a category we have nothing to do here
@@ -75,11 +85,9 @@ public class AdjustStateFilter implements Filter
                     }
                     result = Results.redirect("/"+locale+"/topCategory/?categoryId="+cat);
                 }
-                // adjust context
-            }
-        }
-        
-        return result;
+                // TODO: adjust context if possible instead of firing redirect
+            }    
+            return result;
     }
     
 }

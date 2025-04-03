@@ -31,6 +31,7 @@ import io.ebean.Query;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import conf.StatusConf;
 import filters.SessionCustomerExistFilter;
 import models.Product;
 import models.SearchEngine;
@@ -60,6 +61,9 @@ public class SearchController
 
     @Inject
     SearchEngine searcher;
+
+    @Inject
+    StatusConf stsConf;
 
     private Optional<String> language = Optional.of("en");
 
@@ -167,6 +171,21 @@ public class SearchController
      * @return A list of products that match the search text.
      */
     private List<Product> searchForProducts(final String searchText, final int pageNumber, final Map<String, Object> data, String locale) {
+        // load status configuration
+        final Map<String, Object> status = new HashMap<String, Object>();
+        stsConf.getStatus(status);
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("searchResultsChanged").equals(true))
+        {
+            if (locale.equals("de-DE"))
+            {
+                locale = "en-US";
+            }
+            else
+            {
+                locale = "de-DE";
+            }
+        }
         // Search products with search engine, second param is the limit for returned results
         List<Integer> resultIds = searcher.search(searchText, 20, locale);
 

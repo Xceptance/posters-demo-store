@@ -27,6 +27,7 @@ import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import conf.StatusConf;
 import filters.SessionCustomerExistFilter;
 import filters.SessionOrderExistFilter;
 import filters.SessionTerminatedFilter;
@@ -58,6 +59,9 @@ public class CheckoutController
 
     @Inject
     PosterConstants xcpConf;
+
+    @Inject
+    StatusConf stsConf;
 
     private Optional<String> language = Optional.of("en");
     
@@ -896,6 +900,14 @@ public class CheckoutController
         })
     public Result checkoutCompleted(final Context context, @PathParam("urlLocale") String locale)
     {
+        // load status configuration
+        final Map<String, Object> status = new HashMap<String, Object>();
+        stsConf.getStatus(status);
+        // deliberatley do not trigger orders when active for testing and demo purposes
+        if (status.get("ordersBlocked").equals(true))
+        {
+            return Results.redirect(context.getContextPath() + "/" + locale + "/orderConfirmation");
+        }
         language = Optional.of(locale);
         // get order by session id
         final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
