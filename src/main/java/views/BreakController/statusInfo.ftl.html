@@ -3,72 +3,131 @@
 
 <div class="container mt-3">
     <div class="row justify-content-center">
-		<div class="col-lg-6">
-            <form action="${applUrlHttps}/${lang}/ok3ok2ru8udqx7gZGS9n/statusUpdate" method="post" class="">
-                <div class="form-check form-switch">
-                    <#if categoriesBroken==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckBreakCategories">${i18n("labelBreakCategories")}</label>
+		<div class="col">
+            <form action="${applUrlHttps}/${lang}/ok3ok2ru8udqx7gZGS9n/statusUpdate" method="post" class="row" id="statusOptionForm">
+                <div class="col-lg-6" id="staticStatusOptions">
+                    <div class="form-check form-switch">
+                        <#if categoriesBroken==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakCategories">${i18n("labelBreakCategories")}</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <#if cartQuantitiesChange==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCartQuantities" name="breakCartQuantities" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCartQuantities" name="breakCartQuantities">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakCartQuantities">${i18n("labelBreakCartQuantities")}</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <#if ordersBlocked==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlockOrders" name="blockOrders" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlockOrders" name="blockOrders">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBlockOrders">${i18n("labelBlockOrders")}</label>
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if searchResultsChanged==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakSearch" name="breakSearch" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakSearch" name="breakSearch">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakSearch">${i18n("labelBreakSearch")}</label>
+                    </div>       
+                    <div class="form-check form-switch">
+                        <#if cartProductMixups==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckMixUpAddToCart" name="mixUpAddToCart" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckMixUpAddToCart" name="mixUpAddToCart">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckMixUpAddToCart">${i18n("labelMixUpAddToCart")}</label>
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if openLogin==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckOpenLogin" name="openLogin" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckOpenLogin" name="openLogin">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckOpenLogin">${i18n("labelOpenLogin")}</label>
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if orderHistoryMessy==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakOrderHistory" name="breakOrderHistory" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakOrderHistory" name="breakOrderHistory">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakOrderHistory">${i18n("labelBreakOrderHistory")}</label>
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if wrongLocale==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelBreakLocalization")}</label>
+                    </div>   
                 </div>
-                <div class="form-check form-switch">
-                    <#if cartQuantitiesChange==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCartQuantities" name="breakCartQuantities" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCartQuantities" name="breakCartQuantities">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckBreakCartQuantities">${i18n("labelBreakCartQuantities")}</label>
+                <div class="col-lg-6" id="adjustableStatusOptions">
+                    <div class="form-check form-switch">
+                        <#if productBlock==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelProductBlock")}</label>
+                        <input type="text" class="form-control" placeholder="${i18n('placeholderProductIdSelection')}">
+                    </div>   
+
+                    <div class="form-check form-switch">
+                        <#if productOrderBlock==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelProductOrderBlock")}</label>
+                        <input type="text" class="form-control" placeholder="${i18n('placeholderProductIdSelection')}">
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if searchCounterWrong==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelSearchResultCounterWrong")}</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if blockSearch==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelBlockSearch")}</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if cartLimit==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelCartLimit")}</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>   
+                    <div class="form-check form-switch">
+                        <#if cartLimitTotal==true>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <#else>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        </#if>
+                        <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelCartLimitTotal")}</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>   
                 </div>
-                <div class="form-check form-switch">
-                    <#if ordersBlocked==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlockOrders" name="blockOrders" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlockOrders" name="blockOrders">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckBlockOrders">${i18n("labelBlockOrders")}</label>
-                </div>   
-                <div class="form-check form-switch">
-                    <#if searchResultsChanged==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakSearch" name="breakSearch" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakSearch" name="breakSearch">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckBreakSearch">${i18n("labelBreakSearch")}</label>
-                </div>       
-                <div class="form-check form-switch">
-                    <#if cartProductMixups==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckMixUpAddToCart" name="mixUpAddToCart" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckMixUpAddToCart" name="mixUpAddToCart">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckMixUpAddToCart">${i18n("labelMixUpAddToCart")}</label>
-                </div>   
-                <div class="form-check form-switch">
-                    <#if openLogin==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckOpenLogin" name="openLogin" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckOpenLogin" name="openLogin">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckOpenLogin">${i18n("labelOpenLogin")}</label>
-                </div>   
-                <div class="form-check form-switch">
-                    <#if orderHistoryMessy==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakOrderHistory" name="breakOrderHistory" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakOrderHistory" name="breakOrderHistory">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckBreakOrderHistory">${i18n("labelBreakOrderHistory")}</label>
-                </div>   
-                <div class="form-check form-switch">
-                    <#if wrongLocale==true>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
-                    <#else>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
-                    </#if>
-                    <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelBreakLocalization")}</label>
-                </div>   
                 <button class="btn btn-primary" id="btn-status-confirm" name="btnStatusConfirm" type="submit" value="confirm">${i18n("buttonConfirm")}</button>
             </form>
         </div>
