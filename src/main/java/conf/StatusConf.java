@@ -177,5 +177,28 @@ public class StatusConf {
         this.limitTotal = limitTotal;
     }
 
-    
+    public int getBlockedId() {
+        return blockedId;
+    }
+
+    public int getIncludedId() {
+        return includedId;
+    }
+
+    public int getCounterAdjustment() {
+        return counterAdjustment;
+    }
+
+    public String getBlockedTerm() {
+        return blockedTerm;
+    }
+
+    public int getLimitMax() {
+        return limitMax;
+    }
+
+    public int getLimitTotal() {
+        return limitTotal;
+    }
+
 }
