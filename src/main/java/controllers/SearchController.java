@@ -88,11 +88,20 @@ public class SearchController
             final Map<String, Object> data = new HashMap<String, Object>();
             // search for products
             final List<Product> products = searchForProducts(searchText, 1, data, locale);
+            // load status configuration
+            final Map<String, Object> status = new HashMap<String, Object>();
+            stsConf.getStatus(status);
+            // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+            if (status.get("blockSearch").equals(true)) {
+                if (status.get("blockedTerm").equals(searchText)) {
+                    return Results.redirect(context.getContextPath() + "/" + locale + "/notFound");
+                }
+            }
             // no product was found
             if (products.isEmpty()) {
                 // show info message
                 context.getFlashScope().put("error", msg.get("infoNoSearchTerm", language).get());
-                // return index page
+                // return no result page
                 return Results.redirect(context.getContextPath() + "/" + locale + "/notFound");
             }
             // at least one product was found
@@ -229,6 +238,15 @@ public class SearchController
         // Calculate total pages
         int totalPages = (int) Math.ceil((double) totalProductCount / pageSize);
     
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("searchCounterWrong").equals(true)) {
+            try {
+                totalProductCount += (int)status.get("counterAdjustment");
+            } catch (Exception e) {
+                // since we only put ints in the map this should not happen, but better be safe here
+            }
+        }
+
         // Add the page count to the data map
         data.put("totalPages", totalPages);
         data.put("totalProductCount", totalProductCount);
