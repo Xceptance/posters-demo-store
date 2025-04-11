@@ -243,6 +243,14 @@ public class CartController
         // load status configuration
         final Map<String, Object> status = new HashMap<String, Object>();
         stsConf.getStatus(status);
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("productBlock").equals(true))
+        {
+            if (status.get("blockedId").equals(Integer.parseInt(productId)))
+            {
+                return result;
+            }
+        }
         final Product product;
         // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
         if (status.get("cartProductMixups").equals(true))
@@ -262,15 +270,35 @@ public class CartController
         final int width = Integer.parseInt(dummy[0]);
         final int height = Integer.parseInt(dummy[2]);
         final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
-        // add product to cart
-        cart.addProduct(product, finish, posterSize);
-        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
-        if (status.get("cartQuantitiesChange").equals(true))
+        // deliberately limit size if enabled (for testing and demo purposes)
+        int cartSpace = 2147483647;
+        if (status.get("cartLimit").equals(true))
         {
-            int numberToAdd = (int)(Math.random() * (5));
-            for (int i = 0; i < numberToAdd; i++)
+            int currentCount;
+            try {
+                currentCount = cart.getCartProduct(product, finish, posterSize).getProductCount();
+            } catch (Exception e) {
+                currentCount = 0;
+            }
+            cartSpace = (int)status.get("limitMax") - currentCount;
+        }
+        if (status.get("cartLimitTotal").equals(true))
+        {
+            int currentSize = cart.getProductCount();
+            cartSpace = Math.min(cartSpace, (int)status.get("limitTotal") - currentSize);
+        }
+        if (cartSpace > 0) {
+            // add product to cart
+            cart.addProduct(product, finish, posterSize);
+            // deliberately create incorrect quantity if enabled (for testing and demo purposes)
+            if (status.get("cartQuantitiesChange").equals(true))
             {
-                cart.addProduct(product, finish, posterSize);
+                int numberToAdd = (int)(Math.random() * (5));
+                numberToAdd = Math.min(numberToAdd, cartSpace);
+                for (int i = 0; i < numberToAdd; i++)
+                {
+                    cart.addProduct(product, finish, posterSize);
+                }
             }
         }
         // get added cart product
