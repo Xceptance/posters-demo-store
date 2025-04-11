@@ -74,58 +74,57 @@
                 <div class="col-lg-6" id="adjustableStatusOptions">
                     <div class="form-check form-switch">
                         <#if productBlock==true>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productBlock" checked>
                         <#else>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productBlock">
                         </#if>
                         <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelProductBlock")}</label>
-                        <input type="text" class="form-control" placeholder="${i18n('placeholderProductIdSelection')}">
+                        <input type="number" class="form-control" max="124" min="1" name="productBlockId" placeholder="${i18n('placeholderProductIdSelection')} ${i18n('placeholderCurrentSelection')} ${blockedId}">
                     </div>   
-
                     <div class="form-check form-switch">
                         <#if productOrderBlock==true>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productOrderBlock" checked>
                         <#else>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productOrderBlock">
                         </#if>
                         <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelProductOrderBlock")}</label>
-                        <input type="text" class="form-control" placeholder="${i18n('placeholderProductIdSelection')}">
+                        <input type="number" class="form-control" max="124" min="1" name="productOrderBlockId" placeholder="${i18n('placeholderProductIdSelection')} ${i18n('placeholderCurrentSelection')} ${includedId}">
                     </div>   
                     <div class="form-check form-switch">
                         <#if searchCounterWrong==true>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="searchCounterWrong" checked>
                         <#else>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="searchCounterWrong">
                         </#if>
                         <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelSearchResultCounterWrong")}</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="number" class="form-control" name="searchCounterWrongBy" placeholder="${i18n('placeholderCurrentSelection')} ${counterAdjustment}">
                     </div>   
                     <div class="form-check form-switch">
                         <#if blockSearch==true>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="blockSearch" checked>
                         <#else>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="blockSearch">
                         </#if>
                         <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelBlockSearch")}</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text" class="form-control" name="blockSearchPhrase" placeholder="${i18n('placeholderCurrentSelection')} ${blockedTerm}">
                     </div>   
                     <div class="form-check form-switch">
                         <#if cartLimit==true>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimit" checked>
                         <#else>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimit">
                         </#if>
                         <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelCartLimit")}</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="number" class="form-control" name="cartLimitNum" placeholder="${i18n('placeholderCurrentSelection')} ${limitMax}">
                     </div>   
                     <div class="form-check form-switch">
                         <#if cartLimitTotal==true>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimitTotal" checked>
                         <#else>
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimitTotal">
                         </#if>
                         <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelCartLimitTotal")}</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="number" class="form-control" name="cartLimitTotalNum" placeholder="${i18n('placeholderCurrentSelection')} ${limitTotal}">
                     </div>   
                 </div>
                 <button class="btn btn-primary" id="btn-status-confirm" name="btnStatusConfirm" type="submit" value="confirm">${i18n("buttonConfirm")}</button>
