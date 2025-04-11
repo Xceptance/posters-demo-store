@@ -36,6 +36,7 @@ import models.Cart;
 import models.CreditCard;
 import models.Customer;
 import models.Order;
+import models.OrderProduct;
 import models.ShippingAddress;
 import ninja.Context;
 import ninja.FilterWith;
@@ -911,6 +912,18 @@ public class CheckoutController
         language = Optional.of(locale);
         // get order by session id
         final Order order = Order.getOrderById(SessionHandling.getOrderId(context));
+        // deliberatley do not trigger orders including a certain product when active for testing and demo purposes
+        if (status.get("productOrderBlock").equals(true))
+        {
+            int productId = 0;
+            int includedId = (int)status.get("includedId");
+            for (OrderProduct product : order.getProducts()) {
+                productId = product.getProduct().getId();
+                if (includedId == productId) {
+                    return Results.redirect(context.getContextPath() + "/" + locale + "/orderConfirmation");
+                }
+            }
+        }
         // set date to order
         order.setOrderDate(DateUtils.getCurrentDate());
         if (SessionHandling.isCustomerLogged(context))
