@@ -31,8 +31,6 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.google.inject.Inject;
-
 import conf.StatusConf;
 import io.ebean.Ebean;
 
