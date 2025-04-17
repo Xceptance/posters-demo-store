@@ -280,7 +280,9 @@ public class Routes implements ApplicationRoutes
         // cart
         // ############################################################
         router.GET().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusInfo").with(BreakController::statusInfo);
+        router.GET().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusInfoDesign2").with(BreakController::statusInfoDesign2);
         router.POST().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusUpdate").with(BreakController::statusUpdate);
+        router.POST().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusUpdateDesign2").with(BreakController::statusUpdateDesign2);
 
     }
 }

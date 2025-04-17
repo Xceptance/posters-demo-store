@@ -1,0 +1,162 @@
+<#import "../layout/defaultLayoutWebShop.ftl.html" as layout>
+	<@layout.myLayout "The ultimate webshop">
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+		<div class="col lg-8">
+            <form action="${applUrlHttps}/${lang}/ok3ok2ru8udqx7gZGS9n/statusUpdateDesign2" method="post" class="" id="statusOptionForm">
+                <div class="break-status-card form-with-background row" id="statusOptionFormCategorySection">
+                    <h4>Categories</h4>
+                    <div>
+                        <div class="form-check form-switch">
+                            <#if categoriesBroken==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCategories" name="breakCategories">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakCategories">${i18n("labelBreakCategories")}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="break-status-card form-with-background row" id="statusOptionFormSearchSection">
+                    <h4>Search</h4>
+                    <div>
+                        <div class="form-check form-switch">
+                            <#if searchResultsChanged==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakSearch" name="breakSearch" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakSearch" name="breakSearch">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakSearch">${i18n("labelBreakSearch")}</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <#if searchCounterWrong==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="searchCounterWrong" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="searchCounterWrong">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelSearchResultCounterWrong")}</label>
+                            <input type="number" class="form-control" name="searchCounterWrongBy" placeholder="${i18n('placeholderCurrentSelection')} ${counterAdjustment}">
+                        </div>   
+                        <div class="form-check form-switch">
+                            <#if blockSearch==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="blockSearch" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="blockSearch">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelBlockSearch")}</label>
+                            <input type="text" class="form-control" name="blockSearchPhrase" placeholder="${i18n('placeholderCurrentSelection')} ${blockedTerm}">
+                        </div>   
+                    </div>
+                </div>
+                <div class="break-status-card form-with-background row" id="statusOptionFormCartSection">
+                    <h4>Cart</h4>
+                    <div>
+                        <div class="form-check form-switch">
+                            <#if cartQuantitiesChange==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCartQuantities" name="breakCartQuantities" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakCartQuantities" name="breakCartQuantities">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakCartQuantities">${i18n("labelBreakCartQuantities")}</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <#if cartProductMixups==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckMixUpAddToCart" name="mixUpAddToCart" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckMixUpAddToCart" name="mixUpAddToCart">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckMixUpAddToCart">${i18n("labelMixUpAddToCart")}</label>
+                        </div>   
+                        <div class="form-check form-switch">
+                            <#if productBlock==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productBlock" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productBlock">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelProductBlock")}</label>
+                            <input type="number" class="form-control" max="124" min="1" name="productBlockId" placeholder="${i18n('placeholderProductIdSelection')} ${i18n('placeholderCurrentSelection')} ${blockedId}">
+                        </div>
+                        <div class="form-check form-switch">
+                            <#if cartLimit==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimit" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimit">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelCartLimit")}</label>
+                            <input type="number" class="form-control" name="cartLimitNum" placeholder="${i18n('placeholderCurrentSelection')} ${limitMax}">
+                        </div>   
+                        <div class="form-check form-switch">
+                            <#if cartLimitTotal==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimitTotal" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="cartLimitTotal">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelCartLimitTotal")}</label>
+                            <input type="number" class="form-control" name="cartLimitTotalNum" placeholder="${i18n('placeholderCurrentSelection')} ${limitTotal}">
+                        </div>   
+                    </div>
+                </div>
+                <div class="break-status-card form-with-background row" id="statusOptionFormCheckoutSection">
+                    <h4>Checkout</h4>
+                    <div>
+                        <div class="form-check form-switch">
+                            <#if ordersBlocked==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlockOrders" name="blockOrders" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBlockOrders" name="blockOrders">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBlockOrders">${i18n("labelBlockOrders")}</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <#if productOrderBlock==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productOrderBlock" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="productOrderBlock">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelProductOrderBlock")}</label>
+                            <input type="number" class="form-control" max="124" min="1" name="productOrderBlockId" placeholder="${i18n('placeholderProductIdSelection')} ${i18n('placeholderCurrentSelection')} ${includedId}">
+                        </div>   
+                    </div>
+                </div>
+                <div class="break-status-card form-with-background row" id="statusOptionFormAccountSection">
+                    <h4>Account</h4>
+                    <div>
+                        <div class="form-check form-switch">
+                            <#if openLogin==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckOpenLogin" name="openLogin" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckOpenLogin" name="openLogin">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckOpenLogin">${i18n("labelOpenLogin")}</label>
+                        </div>   
+                        <div class="form-check form-switch">
+                            <#if orderHistoryMessy==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakOrderHistory" name="breakOrderHistory" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakOrderHistory" name="breakOrderHistory">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakOrderHistory">${i18n("labelBreakOrderHistory")}</label>
+                        </div>  
+                    </div>
+                </div>
+                <div class="break-status-card form-with-background row" id="statusOptionFormLocalizationSection">
+                    <h4>Localization</h4>
+                    <div>
+                        <div class="form-check form-switch">
+                            <#if wrongLocale==true>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization" checked>
+                            <#else>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckBreakLocalization" name="breakLocalization">
+                            </#if>
+                            <label class="form-check-label" for="flexSwitchCheckBreakLocalization">${i18n("labelBreakLocalization")}</label>
+                        </div>   
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="btn-status-confirm" name="btnStatusConfirm" type="submit" value="confirm">${i18n("buttonConfirm")}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</@layout.myLayout>

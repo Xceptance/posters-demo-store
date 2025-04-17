@@ -142,14 +142,19 @@ public class PosterConstants
     public final String TEMPLATE_LOGIN_FORM_BO = "/views_backoffice/layout/loginN.ftl.html";
 
     /** 
-     * The path to the product overview template.
+     * The path to the no-resukt template.
      */
     public final String TEMPLATE_NOT_FOUND = "views/CatalogController/noResult.ftl.html";
 
     /** 
-     * The path to the product overview template.
+     * The path to the status info template.
      */
     public final String TEMPLATE_STATUS_INFO = "views/BreakController/statusInfo.ftl.html";
+
+    /** 
+     * The path to the status info template in alternate design.
+     */
+    public final String TEMPLATE_STATUS_INFO_D2 = "views/BreakController/statusInfoDesign2.ftl.html";
 
     /** 
      * The path to the Error 404 Not Found template.
