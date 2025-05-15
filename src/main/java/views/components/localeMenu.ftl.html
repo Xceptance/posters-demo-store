@@ -4,7 +4,7 @@
 
 <ul id="locale-menu" class="dropdown-menu">
     <#list supportedLanguages as suplan>
-    <li><a id="loc-en-us" class="dropdown-item" href="/${suplan}">${suplan}</a></li>
+    <li><a id="loc-${suplan?lower_case}" class="dropdown-item" href="/${suplan}">${suplan}</a></li>
     </#list>
 </ul>
 
