@@ -1,19 +1,18 @@
 package filters;
 
-import ninja.Filter;
-import ninja.Result;
-import ninja.Results;
-import ninja.utils.NinjaProperties;
-import ninja.FilterChain;
+import java.util.Arrays;
+
+import com.google.inject.Inject;
+
 import io.ebean.Ebean;
 import models.Language;
 import ninja.Context;
 import ninja.Cookie;
-import ninja.i18n.*;
-
-import java.util.Arrays;
-
-import com.google.inject.Inject;
+import ninja.Filter;
+import ninja.FilterChain;
+import ninja.Result;
+import ninja.i18n.Lang;
+import ninja.utils.NinjaProperties;
 
 public class LocaleFilter implements Filter {
 
@@ -32,16 +31,18 @@ public class LocaleFilter implements Filter {
             cookieLoc = langCookie.getValue();
         }
         else {
-            cookieLoc = "en-US";
+            cookieLoc = "en-US";            
         }
         
         // Compare A and B if present, prefer A if different
         if (cookieLoc.equals(urlLoc)) 
         {
-            // continue without action if same 
-            // (if cookie is null something is wrong anyways and we would almost certainly get an error no matter what we do here
-            // since (even during first load) it is auto-filled from the accept header before we arrive here if unset
-            // we can leave that to ninja error handling)
+            // According to Ninja-Docu, the cookie should not be null, as the language should be set automatically based on the request header (accept-language).
+            // However, because errors have occurred here in the past, we check the cookie again for null and set it if necessary.
+            if (langCookie == null)
+            {
+                lang.setLanguage(cookieLoc, result);
+            }
         }
         else
         {
