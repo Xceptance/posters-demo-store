@@ -11,6 +11,7 @@ import ninja.Cookie;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
+import ninja.Results;
 import ninja.i18n.Lang;
 import ninja.utils.NinjaProperties;
 
