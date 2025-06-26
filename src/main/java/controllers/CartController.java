@@ -255,7 +255,7 @@ public class CartController
         // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
         if (status.get("cartProductMixups").equals(true))
         {
-            int randomId = (int)(Math.random() * (124) + 1);
+            int randomId = (int)(Math.random() * (123) + 1);
             product = Product.getProductById(randomId);
         }
         else

@@ -55,6 +55,12 @@ public class BreakController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+        // check if the request was made through the disable all button
+        if(context.getParameter("btnStatusDisableAll")!=null && context.getParameter("btnStatusDisableAll").equals("Disable All"))
+        {
+            stsConf.disableAll();
+            return Results.redirect(context.getContextPath() + "/" + locale + "/ok3ok2ru8udqx7gZGS9n/statusInfo");
+        }
         // load current status info
         stsConf.getStatus(data);
 
@@ -114,6 +120,12 @@ public class BreakController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
+        // check if the request was made through the disable all button
+        if(context.getParameter("btnStatusDisableAll")!=null && context.getParameter("btnStatusDisableAll").equals("Disable All"))
+        {
+            stsConf.disableAll();
+            return Results.redirect(context.getContextPath() + "/" + locale + "/ok3ok2ru8udqx7gZGS9n/statusInfoDesign2");
+        }
         // load current status info
         stsConf.getStatus(data);
 
