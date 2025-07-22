@@ -19,6 +19,7 @@ import ninja.AssetsController;
 import ninja.Results;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
+import controllers.BreakController;
 import controllers.CartController;
 import controllers.CatalogController;
 import controllers.CheckoutController;
@@ -274,6 +275,14 @@ public class Routes implements ApplicationRoutes
         router.GET().route("/{urlLocale}/checkoutOverview").with(CheckoutController::checkoutOverview);
         router.POST().route("/{urlLocale}/checkoutCompleted").with(CheckoutController::checkoutCompleted);
         router.GET().route("/{urlLocale}/orderConfirmation").with(CheckoutController::orderConfirmation);
+
+        // ############################################################
+        // cart
+        // ############################################################
+        router.GET().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusInfo").with(BreakController::statusInfo);
+        router.GET().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusInfoDesign2").with(BreakController::statusInfoDesign2);
+        router.POST().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusUpdate").with(BreakController::statusUpdate);
+        router.POST().route("/{urlLocale}/ok3ok2ru8udqx7gZGS9n/statusUpdateDesign2").with(BreakController::statusUpdateDesign2);
 
     }
 }

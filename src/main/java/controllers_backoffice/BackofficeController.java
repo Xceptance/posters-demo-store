@@ -29,6 +29,7 @@ import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import conf.StatusConf;
 import controllers.WebShopController;
 import filters.SessionUserExistFilter;
 import models_backoffice.Backofficeuser;
@@ -1292,6 +1293,8 @@ public class BackofficeController
      * @param context
      * @return
      */
+    @Inject
+    StatusConf stsConf;
     public Result customerViewOrders(final Context context, @PathParam("customerId") String customerId)
 {
         Result result = Results.html();
@@ -1300,7 +1303,7 @@ public class BackofficeController
 
         UUID customerUUID = UUID.fromString(customerId);
         WebShopController.setCommonData(data, context, xcpConf);
-        List<Order> orders = Customer.getCustomerById(customerUUID).getAllOrders();
+        List<Order> orders = Customer.getCustomerById(customerUUID).getAllOrders(stsConf);
 
         data.put("orderOverview", orders);
         result.render(data);

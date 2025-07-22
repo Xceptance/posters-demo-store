@@ -102,6 +102,8 @@
   #user-menu {
     width: 250px;
     padding: 15px 20px;
+    /*open end/right aligned:*/
+    left: -201.359px;
   }
 
   #header-search-button {
@@ -127,6 +129,11 @@
   .cart-mini {
     width: 250px;
     padding: 0px 10px;
+  }
+
+  #mini-cart-menu {
+    /*open end/right aligned:*/
+    left: -184.797px;
   }
   
   .cart-mini-header {
@@ -635,5 +642,15 @@
     padding-bottom: 1.5rem;
   }
 /*  Special text elements
+*   - End
+*/
+
+/*  Status Page
+*   - Start
+*/
+  .break-status-card {
+    margin-bottom: 10px;
+  }
+/*  Status Page
 *   - End
 */
