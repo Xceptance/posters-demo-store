@@ -14,6 +14,7 @@ Posters comes with the basic functionality that you would expect from a typical 
 * There is a shopping cart.
 * Customers may place orders as guests or as registered customers.
 * A selection of different languages for the shop
+* A selection of incorrect behavior can be switched on and off at will
 
 See these screenshots to get an impression of what the Posters Demo Store looks like.
 
@@ -168,4 +169,33 @@ If you want to view the database you need to run the H2 database engine and use 
 - Driver Class: org.h2.Driver
 - JDBC URL: jdbc:h2:{your path to the poster demo store}/posters-demo-store/db/posters;AUTO_SERVER=TRUE
 - user name: sa
+
+## Enabling incorrect behavior
+
+To activate or deactivate incorrect behavior or just to view the current status of this functionality go to one of two pages.
+The content on both pages is the same. The difference between the two designs is the sorting and style of the options:
+
+The first design is compact and shows non-customizable options on the left and customizable options on the right. To access it go to:
+- [baseURL]/[YourLocale]/ok3ok2ru8udqx7gZGS9n/statusInfo
+
+The second design groups options below eachother based on the site functionality they alter. To access it go to:
+- [baseURL]/[YourLocale]/ok3ok2ru8udqx7gZGS9n/statusInfoDesign2
+
+An overview of the options that are available:
+Non-customizable:
+- Category shift - Attempting to call a category will call a different category. The resulting category will be the category with the ID of the original one increased by 1 or the first category in case of the last category's ID
+- Random quantities - Products will be added to cart in incorrect quantities. The quantity is randomized
+- Order block - Orders will not go through. Carts will not be cleared. ATTENTION: The rest of the ordering process will still flow normally!
+- Search mixup - Search will deliver results that belong to a different search locale (currently swaps between EN and DE)
+- Cart randomization - Adding to cart will add a random product. All products have an equal chance (including the one originally attempted)
+- Open login - Account logins accept anything as a valid password
+- Random history - Order history in a logged in users account will show a different random history every time it is accessed
+
+Customizable:
+- Product block - block a single product from being added to the cart. The product is specified by its ID.
+- Product blocking order - block all orders that contain a single specified product. The product is specified by its ID.
+- Falsify result conter - the number entered in the input (negatives possible) will be added to the counter of search results found. NOTE: It only falsifies the counter. It does NOT affect the actual result amount
+- Block search - Specify a search term. Searches for this term will return no results.
+- Quantity limit - Specify a maximum quantity for products in the cart. Adding to the cart will only be possible up to this limit per product.
+- Total cart limit - Specify a maximum amount of total items the cart is allowed to hold. Adding will only be possible up to this limit. Individual items are counted so multiple of the same product will count as the corresponding amount of items not just as "one product"
 
