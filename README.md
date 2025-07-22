@@ -37,9 +37,9 @@ The latest version of Posters can be downloaded at the [Releases](https://github
 
 ## Building Posters
 
-As an alternative to downloading a prepackaged JAR file, you can build the JAR yourself. You will need to have Maven and JDK 17 installed on your machine.
+As an alternative to downloading a prepackaged JAR file, you can build the JAR yourself or even work without the JAR. You will need to have Maven and JDK 17 installed on your machine.
 
-To build the project, clone this repository to your local disk and run:
+To build the project, clone this repository to your local disk and run (in the repository's directory!):
 
 ```
 mvn clean package
@@ -50,12 +50,28 @@ If all went well, you will find several build artifacts in the `target` subdirec
 
 ## Running Posters as a Console Application
 
-If you have successfully downloaded or built the Posters JAR file, you can now run Posters with the default settings as follows:  
+Target the directory of posters (repository or JAR location) in your console.
+
+If you have successfully downloaded or built the Posters JAR file, you can now run Posters with the default settings as follows:
 
 ```
 java -jar posters-demo-store-<version>.jar          # downloaded
 java -jar target/posters-demo-store-<version>.jar   # built yourself
 ```
+
+Alternatively you can directly run posters through Ninja (the Framework it is built with) if you have the repository cloned. To do that build the project by running:
+
+```
+mvn clean process-classes
+```
+
+Building is technically only necessary after changes. If your version does not change you will only need to do it once. For the sake of safety it does not hurt doing it every time though. If the build is successful you then start the application using:
+
+```
+mvn ninja:run
+```
+
+The console will remain open and parse the output of any messages sent on the server side of posters while it is running, e.g. through System.out.
 
 By default, the shop is available at [https://localhost:8443/](https://localhost:8443/). When opening the homepage via HTTPS, expect your browser to complain about the certificate since Posters comes with a self-signed certificate. See below for how to change that.
 
