@@ -30,15 +30,15 @@
           <button id="header-search-button" class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
         </form>
         <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
+          <li id="locale-switcher" class="nav-item dropdown">
             <#include '../components/localeMenu.ftl.html'>
           </li>
-          <li class="nav-item dropdown">
+          <li id="user" class=" nav-item dropdown">
             <#include '../components/userMenu.ftl.html'>
           </li>
           <#if cartProductCount == 0>
 
-          <li class="nav-item ">
+          <li id="mini-cart" class="nav-item ">
             <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-shopping-cart"></span> &nbsp; 
               <span id="count-wide-view" class="header-cart-product-count">${cartProductCount}</span>
@@ -49,7 +49,7 @@
 
           </li>
           <#else>
-          <li class="nav-item dropdown">
+          <li id="mini-cart" class="nav-item dropdown">
             <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link" href="#"  title="${i18n('cartOverviewTitle')}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="icon-shopping-cart"></span> &nbsp; 
               <span id="count-wide-view" class="header-cart-product-count">${cartProductCount}</span>

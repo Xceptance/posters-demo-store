@@ -14,6 +14,7 @@ Posters comes with the basic functionality that you would expect from a typical 
 * There is a shopping cart.
 * Customers may place orders as guests or as registered customers.
 * A selection of different languages for the shop
+* A selection of incorrect behavior can be switched on and off at will
 
 See these screenshots to get an impression of what the Posters Demo Store looks like.
 
@@ -36,9 +37,9 @@ The latest version of Posters can be downloaded at the [Releases](https://github
 
 ## Building Posters
 
-As an alternative to downloading a prepackaged JAR file, you can build the JAR yourself. You will need to have Maven and JDK 17 installed on your machine.
+As an alternative to downloading a prepackaged JAR file, you can build the JAR yourself or even work without the JAR. You will need to have Maven and JDK 17 installed on your machine.
 
-To build the project, clone this repository to your local disk and run:
+To build the project, clone this repository to your local disk and run (in the repository's directory!):
 
 ```
 mvn clean package
@@ -49,14 +50,30 @@ If all went well, you will find several build artifacts in the `target` subdirec
 
 ## Running Posters as a Console Application
 
-If you have successfully downloaded or built the Posters JAR file, you can now run Posters with the default settings as follows:  
+Target the directory of posters (repository or JAR location) in your console.
+
+If you have successfully downloaded or built the Posters JAR file, you can now run Posters with the default settings as follows:
 
 ```
 java -jar posters-demo-store-<version>.jar          # downloaded
 java -jar target/posters-demo-store-<version>.jar   # built yourself
 ```
 
-By default, the shop is available at [http://localhost:8080/](http://localhost:8080/) and [https://localhost:8443/](https://localhost:8443/). When opening the homepage via HTTPS, expect your browser to complain about the certificate since Posters comes with a self-signed certificate. See below for how to change that.
+Alternatively you can directly run posters through Ninja (the Framework it is built with) if you have the repository cloned. To do that build the project by running:
+
+```
+mvn clean process-classes
+```
+
+Building is technically only necessary after changes. If your version does not change you will only need to do it once. For the sake of safety it does not hurt doing it every time though. If the build is successful you then start the application using:
+
+```
+mvn ninja:run
+```
+
+The console will remain open and parse the output of any messages sent on the server side of posters while it is running, e.g. through System.out.
+
+By default, the shop is available at [https://localhost:8443/](https://localhost:8443/). When opening the homepage via HTTPS, expect your browser to complain about the certificate since Posters comes with a self-signed certificate. See below for how to change that.
 
 Posters stores its database and log files to the subdirectories `db` and `log`in the current directory.
 
@@ -72,7 +89,7 @@ If the default settings do not suit you, you can adjust them as needed. See belo
 | Property | Default | Description |
 | -------- | ------- | ----------- |
 | ninja.mode | prod | The application mode, one of `prod`, `test`, and `dev`. |
-| ninja.port | 8080 | The HTTP port. Use -1 to disable HTTP. |
+| ninja.port | -1 | The HTTP port. Use -1 to disable HTTP. |
 | ninja.ssl.port | 8443 | The HTTPS port. Use -1 to disable HTTPS. |
 | ninja.ssl.keystore.uri | classpath:/ninja/standalone/ninja-development.p12 | The URI to a key store with a custom server certificate. You will need to create and populate the key store. |
 | ninja.ssl.keystore.password | password | The password to open the key store/the key. |
@@ -168,4 +185,33 @@ If you want to view the database you need to run the H2 database engine and use 
 - Driver Class: org.h2.Driver
 - JDBC URL: jdbc:h2:{your path to the poster demo store}/posters-demo-store/db/posters;AUTO_SERVER=TRUE
 - user name: sa
+
+## Enabling incorrect behavior
+
+To activate or deactivate incorrect behavior or just to view the current status of this functionality go to one of two pages.
+The content on both pages is the same. The difference between the two designs is the sorting and style of the options:
+
+The first design is compact and shows non-customizable options on the left and customizable options on the right. To access it go to:
+- [baseURL]/[YourLocale]/ok3ok2ru8udqx7gZGS9n/statusInfo
+
+The second design groups options below eachother based on the site functionality they alter. To access it go to:
+- [baseURL]/[YourLocale]/ok3ok2ru8udqx7gZGS9n/statusInfoDesign2
+
+An overview of the options that are available:
+Non-customizable:
+- Category shift - Attempting to call a category will call a different category. The resulting category will be the category with the ID of the original one increased by 1 or the first category in case of the last category's ID
+- Random quantities - Products will be added to cart in incorrect quantities. The quantity is randomized
+- Order block - Orders will not go through. Carts will not be cleared. ATTENTION: The rest of the ordering process will still flow normally!
+- Search mixup - Search will deliver results that belong to a different search locale (currently swaps between EN and DE)
+- Cart randomization - Adding to cart will add a random product. All products have an equal chance (including the one originally attempted)
+- Open login - Account logins accept anything as a valid password
+- Random history - Order history in a logged in users account will show a different random history every time it is accessed
+
+Customizable:
+- Product block - block a single product from being added to the cart. The product is specified by its ID.
+- Product blocking order - block all orders that contain a single specified product. The product is specified by its ID.
+- Falsify result conter - the number entered in the input (negatives possible) will be added to the counter of search results found. NOTE: It only falsifies the counter. It does NOT affect the actual result amount
+- Block search - Specify a search term. Searches for this term will return no results.
+- Quantity limit - Specify a maximum quantity for products in the cart. Adding to the cart will only be possible up to this limit per product.
+- Total cart limit - Specify a maximum amount of total items the cart is allowed to hold. Adding will only be possible up to this limit. Individual items are counted so multiple of the same product will count as the corresponding amount of items not just as "one product"
 

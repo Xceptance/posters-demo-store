@@ -27,6 +27,7 @@ import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import conf.StatusConf;
 import filters.SessionCustomerExistFilter;
 import filters.SessionCustomerIsLoggedFilter;
 import models.BillingAddress;
@@ -58,6 +59,9 @@ public class CustomerController
     @Inject
     PosterConstants xcpConf;
 
+    @Inject
+    StatusConf stsConf;
+
     private Optional<String> language = Optional.of("en");
 
     /**
@@ -83,6 +87,8 @@ public class CustomerController
      * @param context
      * @return
      */
+    @Inject
+    StatusConf config;
     @FilterWith(SessionCustomerExistFilter.class)
     public Result login(@Param("email") final String email, @Param("password") final String password, final Context context, @PathParam("urlLocale") String locale)
     {
@@ -101,14 +107,21 @@ public class CustomerController
             // get customer by the given email
             final Customer customer = Customer.getCustomerByEmail(email);
             // is the password correct
-            boolean correctPassowrd = false;
+            boolean correctPassword = false;
             // check password, if the email exist
             if (emailExist)
             {
-                correctPassowrd = customer.checkPasswd(password);
+                correctPassword = customer.checkPasswd(password);
+                // the following is here to allow us to enable an error state at will:
+                final Map<String, Object> status = new HashMap<String, Object>();
+                config.getStatus(status);
+                if (status.get("openLogin").equals(true))
+                {
+                    correctPassword = true;
+                }
             }
             // email and password are correct
-            if (emailExist && correctPassowrd)
+            if (emailExist && correctPassword)
             {
                 // put customer id to session
                 SessionHandling.setCustomerId(context, customer.getId());
@@ -125,7 +138,7 @@ public class CustomerController
 
             }
             // user exist, wrong password
-            else if (emailExist && !correctPassowrd)
+            else if (emailExist && !correctPassword)
             {
                 // error message
                 context.getFlashScope().error(msg.get("errorIncorrectPassword", language).get());
@@ -278,7 +291,7 @@ public class CustomerController
     {
         final Map<String, Object> data = new HashMap<String, Object>();
         WebShopController.setCommonData(data, context, xcpConf);
-        data.put("orderOverview", Customer.getCustomerById(SessionHandling.getCustomerId(context)).getAllOrders());
+        data.put("orderOverview", Customer.getCustomerById(SessionHandling.getCustomerId(context)).getAllOrders(stsConf));
         return Results.html().render(data);
     }
 

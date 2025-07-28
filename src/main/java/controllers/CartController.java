@@ -29,6 +29,7 @@ import io.ebean.Ebean;
 import com.google.inject.Inject;
 
 import conf.PosterConstants;
+import conf.StatusConf;
 import filters.SessionCustomerExistFilter;
 import filters.SessionTerminatedFilter;
 import models.Cart;
@@ -57,6 +58,9 @@ public class CartController
 
     @Inject
     PosterConstants xcpConf;
+
+    @Inject
+    StatusConf stsConf;
 
     private final Optional<String> language = Optional.of("en");
 
@@ -236,8 +240,29 @@ public class CartController
                             @Param("size") final String size, final Context context, @PathParam("urlLocale") String locale)
     {
         final Result result = Results.json();
-        // get product by id
-        final Product product = Product.getProductById(Integer.parseInt(productId));
+        // load status configuration
+        final Map<String, Object> status = new HashMap<String, Object>();
+        stsConf.getStatus(status);
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("productBlock").equals(true))
+        {
+            if (status.get("blockedId").equals(Integer.parseInt(productId)))
+            {
+                return result;
+            }
+        }
+        final Product product;
+        // deliberately create incorrect behaviour if enabled (for testing and demo purposes)
+        if (status.get("cartProductMixups").equals(true))
+        {
+            int randomId = (int)(Math.random() * (123) + 1);
+            product = Product.getProductById(randomId);
+        }
+        else
+        {
+            // get product by id
+            product = Product.getProductById(Integer.parseInt(productId));
+        }
         // get cart by session
         final Cart cart = Cart.getCartById(SessionHandling.getCartId(context, xcpConf));
         // get poster size
@@ -245,8 +270,37 @@ public class CartController
         final int width = Integer.parseInt(dummy[0]);
         final int height = Integer.parseInt(dummy[2]);
         final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", width).eq("height", height).findOne();
-        // add product to cart
-        cart.addProduct(product, finish, posterSize);
+        // deliberately limit size if enabled (for testing and demo purposes)
+        int cartSpace = 2147483647;
+        if (status.get("cartLimit").equals(true))
+        {
+            int currentCount;
+            try {
+                currentCount = cart.getCartProduct(product, finish, posterSize).getProductCount();
+            } catch (Exception e) {
+                currentCount = 0;
+            }
+            cartSpace = (int)status.get("limitMax") - currentCount;
+        }
+        if (status.get("cartLimitTotal").equals(true))
+        {
+            int currentSize = cart.getProductCount();
+            cartSpace = Math.min(cartSpace, (int)status.get("limitTotal") - currentSize);
+        }
+        if (cartSpace > 0) {
+            // add product to cart
+            cart.addProduct(product, finish, posterSize);
+            // deliberately create incorrect quantity if enabled (for testing and demo purposes)
+            if (status.get("cartQuantitiesChange").equals(true))
+            {
+                int numberToAdd = (int)(Math.random() * (5));
+                numberToAdd = Math.min(numberToAdd, cartSpace);
+                for (int i = 0; i < numberToAdd; i++)
+                {
+                    cart.addProduct(product, finish, posterSize);
+                }
+            }
+        }
         // get added cart product
         final CartProduct cartProduct = cart.getCartProduct(product, finish, posterSize);
         final Map<String, Object> updatedProduct = new HashMap<String, Object>();

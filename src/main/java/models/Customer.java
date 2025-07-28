@@ -16,7 +16,9 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -29,6 +31,7 @@ import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import conf.StatusConf;
 import io.ebean.Ebean;
 
 /**
@@ -468,8 +471,56 @@ public class Customer
      * 
      * @return all {@link Order}s of the customer
      */
-    public List<Order> getAllOrders()
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public List<Order> getAllOrders(StatusConf stsConf)
     {
+        // load status configuration
+        final Map<String, Object> status = new HashMap<String, Object>();
+        stsConf.getStatus(status);
+        if (status.get("orderHistoryMessy").equals(true))
+        {
+            // amount of orders to generate
+            int orderAmount = (int)(Math.random() * (5));
+            List<Order> randomHistory = new ArrayList(orderAmount);
+            // loop through orders
+            for (int i = 0; i < orderAmount; i++) {
+                // create order
+                Order order = new Order();
+                // fill order
+                // date
+                    int day = (int)(Math.random() * (31));
+                    int month = (int)(Math.random() * (13));
+                    int year = (int)(Math.random() * (15) + 2016);
+                    order.setOrderDate(year+"-"+month+"-"+day);
+                // products
+                    int productAmount = (int)(Math.random() * (4) + 1);
+                    List<OrderProduct> products = new ArrayList(productAmount);
+                    final PosterSize posterSize = Ebean.find(PosterSize.class).where().eq("width", 16).eq("height", 12).findOne();
+                    for (int j = 0; j < productAmount; j++)
+                    {
+                        OrderProduct orderProduct = new OrderProduct();
+                        // select a random product
+                        int productId = (int)(Math.random() * (123)+1);
+                        orderProduct.setProduct(Product.getProductById(productId));
+                        // configure the product
+                        orderProduct.setFinish("matte");
+                        int amount = (int)(Math.random() * (5));
+                        orderProduct.setProductCount(amount);
+                        orderProduct.setSize(posterSize);
+                        // add it to the order
+                        products.add(orderProduct);
+                    }
+                    order.setProducts(products);
+                // random cost
+                    double cost = (Math.random() * (200));
+                    // round to 2 decimals
+                    cost = ((double)((int)(cost *100.0)))/100.0;
+                    order.setTotalCosts(cost);
+                // add order
+                randomHistory.add(order);
+            }
+            return randomHistory;
+        }
         return Ebean.find(Order.class).where().eq("customer", this).orderBy("lastUpdate  desc").findList();
     }
 

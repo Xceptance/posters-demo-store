@@ -6,7 +6,7 @@
 
 	<groupId>com.xceptance</groupId>
 	<artifactId>posters-demo-store</artifactId>
-	<version>2.5.0</version>
+	<version>2.6.0</version>
 	<packaging>jar</packaging>
 
 	<name>Posters Demo Store</name>
@@ -164,6 +164,7 @@
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
 				<version>12.1.0</version>
+				<!-- Automatic run disabled as cisa.gov rejects update requests from our build server.
 				<executions>
 					<execution>
 						<goals>
@@ -171,6 +172,7 @@
 						</goals>
 					</execution>
 				</executions>
+				-->
 				<configuration>
 					<failBuildOnCVSS>8.6</failBuildOnCVSS>
 				</configuration>
