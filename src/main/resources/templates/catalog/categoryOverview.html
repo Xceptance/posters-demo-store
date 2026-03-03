@@ -4,31 +4,39 @@
       layout:decorate="~{layout/default}">
 <head><title>Posters - Category</title></head>
 <body>
-<main layout:fragment="content">
-    <div class="container mt-4">
-        <h1 th:text="${categoryName}">Category</h1>
-        <div class="row" id="product-list">
-            <div class="col-md-3 col-sm-6 mb-4" th:each="product : ${products}">
-                <div class="card h-100" th:id="'product-' + ${product.id}">
-                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}">
-                        <img th:src="@{${product.imageURL}}" class="card-img-top"
-                             th:alt="${product.defaultName}"/>
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}"
-                               th:text="${product.defaultName}">Product</a>
-                        </h5>
-                        <p class="card-text">
-                            <span th:text="${currency}">$</span>
-                            <span th:text="${product.minimumPrice}">0.00</span>
-                        </p>
-                    </div>
-                </div>
+<div layout:fragment="content">
+
+<div class="container text-center mt-3">
+    <div class="product-overview-heading">
+        <div id="title-category-name" class="header-title"
+             th:text="${categoryName} + ' (' + ${products.size()} + ' ' + (${products.size()} == 1 ? 'poster' : 'posters') + ')'">
+            Category (0 posters)
+        </div>
+    </div>
+</div>
+
+<div id="product-overview" class="container text-center">
+    <div class="row product-display-case">
+        <div th:each="product, stat : ${products}"
+             th:id="'product-' + ${stat.index}"
+             class="card product-tile">
+            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}">
+                <img th:src="@{${product.imageURL}}"
+                     th:alt="'picture of ' + ${product.defaultName}"
+                     class="card-img-top"
+                     th:id="'overview-product-' + ${stat.index}"/>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${product.defaultName}">Product Name</h5>
+                <p class="card-text product-tile-text" th:text="${product.defaultDescriptionOverview}">Description</p>
+                <p class="card-text product-tile-price" th:text="'$' + ${product.minimumPrice}">$0.00</p>
+                <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}"
+                   class="btn btn-primary">Buy Here</a>
             </div>
         </div>
-        <p th:if="${#lists.isEmpty(products)}" th:text="#{catalog.noProducts}">No products found.</p>
     </div>
-</main>
+</div>
+
+</div>
 </body>
 </html>

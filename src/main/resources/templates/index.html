@@ -4,47 +4,124 @@
       layout:decorate="~{layout/default}">
 <head><title>Posters - Home</title></head>
 <body>
-<main layout:fragment="content">
-    <div class="container mt-4">
-        <!-- Carousel -->
-        <div id="mainCarousel" class="carousel slide mb-4" data-bs-ride="carousel" th:if="${not #lists.isEmpty(carousel)}">
-            <div class="carousel-inner">
-                <div th:each="product, stat : ${carousel}"
-                     th:classappend="${stat.first} ? 'active'"
-                     class="carousel-item">
-                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}">
-                        <img th:src="@{${product.largeImageURL}}" class="d-block w-100"
-                             th:alt="${product.defaultName}"/>
-                    </a>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
+<div layout:fragment="content">
 
-        <!-- Featured Products -->
-        <h2 th:text="#{homepage.featured}">Featured Products</h2>
-        <div class="row" id="featured-products">
-            <div class="col-md-3 col-sm-6 mb-4" th:each="product : ${productslist}">
-                <div class="card h-100" th:id="'product-' + ${product.id}">
-                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}">
-                        <img th:src="@{${product.imageURL}}" class="card-img-top"
-                             th:alt="${product.defaultName}"/>
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}"
-                               th:text="${product.defaultName}">Product</a>
-                        </h5>
-                    </div>
+<!-- Sale Carousel -->
+<div id="carousel-sale" class="carousel slide" data-bs-ride="true">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <a class="carousel-content-text text-center d-block w-100" href="#">Summer Sale - Up to 30% off!</a>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <a class="carousel-content-text text-center d-block w-100" href="#">Free shipping on orders over $50!</a>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sale" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-sale" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Product Carousel -->
+<div id="carousel-product-display" class="carousel slide" data-bs-ride="true" th:if="${not #lists.isEmpty(carousel)}">
+    <div class="carousel-indicators">
+        <button th:each="product, stat : ${carousel}"
+                type="button" data-bs-target="#carousel-product-display"
+                th:attr="data-bs-slide-to=${stat.index}"
+                th:classappend="${stat.first} ? 'active'"
+                class="carousel-btn"
+                th:aria-label="'Slide ' + ${stat.count}"></button>
+    </div>
+    <div class="carousel-inner">
+        <div th:each="product, stat : ${carousel}"
+             class="carousel-content-product carousel-item"
+             th:classappend="${stat.first} ? 'active'"
+             data-bs-interval="5000"
+             th:style="'background-image: url(' + @{${product.largeImageURL}} + ');'">
+            <div class="row">
+                <h1 th:text="${product.defaultName}">Product Name</h1>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}"
+                       class="btn btn-primary">Buy Here</a>
                 </div>
             </div>
         </div>
     </div>
-</main>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-product-display" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-product-display" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Intro text -->
+<div id="intro-text-homepage-banner" class="intro-text container-fluid text-center">
+    <h2 id="intro-text-homepage" class="display-3">Began with a simple idea "SHATATATATA!" - M. Scott</h2>
+</div>
+
+<!-- Category tiles -->
+<div class="container text-center">
+    <div class="row category-display-case">
+        <div class="card category-tile" th:each="cat, stat : ${topCategory}">
+            <a th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.defaultName} + '?categoryId=' + ${cat.id}}">
+                <img th:if="${productslistcat != null and stat.index < productslistcat.size()}"
+                     th:src="@{${productslistcat[stat.index].imageURL}}"
+                     th:alt="${cat.defaultName} + ' category image'"
+                     class="category-tile-image"
+                     th:id="'category-picture-' + ${stat.index}"/>
+            </a>
+            <div class="card-body">
+                <h2><a th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.defaultName} + '?categoryId=' + ${cat.id}}"
+                       class="category-tile-title"
+                       th:text="${cat.defaultName}">Category</a></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hot Products heading -->
+<div class="product-display-heading container-fluid text-center">
+    <h2>Hot Products</h2>
+</div>
+
+<!-- Product tiles -->
+<div class="container text-center">
+    <div class="row product-display-case">
+        <div class="card product-tile" th:each="product : ${productslist}">
+            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}">
+                <img th:src="@{${product.imageURL}}"
+                     th:alt="'picture of ' + ${product.defaultName}"
+                     class="card-img-top"
+                     th:id="'product-picture-' + ${product.id}"/>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${product.defaultName}">Product</h5>
+                <p class="card-text product-tile-text" th:text="${product.defaultDescriptionOverview}">Description</p>
+                <p class="card-text product-tile-price" th:text="${product.minimumPrice}">$0.00</p>
+                <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}"
+                   class="btn btn-primary product-tile-btn-buy">Buy Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <a class="btn btn-primary btn-shop-all" href="#" role="button">Show All</a>
+</div>
+
+</div>
 </body>
 </html>

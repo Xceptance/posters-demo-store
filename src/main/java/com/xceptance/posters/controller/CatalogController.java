@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.model.Product;
 import com.xceptance.posters.model.SubCategory;
 import com.xceptance.posters.model.TopCategory;
@@ -24,20 +25,23 @@ public class CatalogController
     private final ProductRepository productRepository;
     private final TopCategoryRepository topCategoryRepository;
     private final SubCategoryRepository subCategoryRepository;
+    private final PostersProperties props;
 
     public CatalogController(ProductRepository productRepository,
                              TopCategoryRepository topCategoryRepository,
-                             SubCategoryRepository subCategoryRepository)
+                             SubCategoryRepository subCategoryRepository,
+                             PostersProperties props)
     {
         this.productRepository = productRepository;
         this.topCategoryRepository = topCategoryRepository;
         this.subCategoryRepository = subCategoryRepository;
+        this.props = props;
     }
 
-    @GetMapping("/{locale}/topCategory/{categoryId}")
+    @GetMapping("/{locale}/topCategory/{name}")
     public String topCategory(@PathVariable String locale,
-                              @PathVariable int categoryId,
-                              @RequestParam(defaultValue = "0") int page,
+                              @PathVariable String name,
+                              @RequestParam int categoryId,
                               Model model)
     {
         TopCategory category = topCategoryRepository.findById(categoryId).orElse(null);
@@ -52,9 +56,10 @@ public class CatalogController
         return "catalog/categoryOverview";
     }
 
-    @GetMapping("/{locale}/subCategory/{categoryId}")
+    @GetMapping("/{locale}/category/{name}")
     public String subCategory(@PathVariable String locale,
-                              @PathVariable int categoryId,
+                              @PathVariable String name,
+                              @RequestParam int categoryId,
                               Model model)
     {
         SubCategory category = subCategoryRepository.findById(categoryId).orElse(null);
@@ -69,9 +74,10 @@ public class CatalogController
         return "catalog/categoryOverview";
     }
 
-    @GetMapping("/{locale}/productDetail/{productId}")
+    @GetMapping("/{locale}/productDetail/{name}")
     public String productDetail(@PathVariable String locale,
-                                @PathVariable int productId,
+                                @PathVariable String name,
+                                @RequestParam int productId,
                                 Model model)
     {
         Product product = productRepository.findById(productId).orElse(null);
@@ -80,6 +86,7 @@ public class CatalogController
             return "redirect:/" + locale + "/";
         }
         model.addAttribute("product", product);
+        model.addAttribute("unitLength", props.getUnitOfLength());
         return "catalog/productDetail";
     }
 }
