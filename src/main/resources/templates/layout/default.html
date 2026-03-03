@@ -1,112 +1,284 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:lang="${urlLocale}">
 <head>
-    <meta charset="UTF-8"/>
+    <title>The Poster Demo Store - The Ultimate Online Shop</title>
+
+    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Posters Demo Store</title>
-    <link rel="icon" th:href="@{/assets/ico/favicon.ico}" type="image/x-icon"/>
-    <!-- CSS -->
+    <meta charset="utf-8"/>
+
+    <!-- Icomoon Icon Fonts-->
     <link rel="stylesheet" th:href="@{/assets/css/icomoon.css}"/>
+
+    <!-- Bootstrap  -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap-grid.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap-reboot.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap-utilities.css}"/>
+
+    <!-- Theme style  -->
     <link rel="stylesheet" th:href="@{/assets/css/style_reworked.css}"/>
+
+    <script type="text/javascript" th:inline="javascript">
+        const CONTEXT_PATH = '';
+        const LOCALE = [[${urlLocale}]];
+    </script>
+    <script th:src="@{/assets/js/posterMiniCart.js}"></script>
 </head>
+
 <body>
-    <!-- Header / Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="header-nav">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{'/' + ${urlLocale} + '/'}">
-                <img th:src="@{/assets/img/logo.png}" alt="Posters" height="30" id="brand-logo"/>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Categories -->
-                <ul class="navbar-nav me-auto" id="category-menu">
-                    <li class="nav-item dropdown" th:each="cat : ${topCategory}">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown" th:text="${cat.defaultName}" id="top-category-link">Category</a>
-                        <ul class="dropdown-menu">
-                            <li th:each="sub : ${cat.subCategories}">
-                                <a class="dropdown-item"
-                                   th:href="@{'/' + ${urlLocale} + '/subCategory/' + ${sub.id}}"
-                                   th:text="${sub.defaultName}">SubCat</a>
+    <!-- header -->
+    <header>
+        <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">
+            This is a demo shop. No orders will be processed.
+        </div>
+
+        <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container top-menu">
+                <a id="header-brand" class="navbar-brand" th:href="@{'/' + ${urlLocale}}">
+                    <img id="header-brand-logo" class="shop-logo" th:src="@{/assets/img/xceptanceLogo.png}"
+                         title="Posters Demo Store" alt="Posters Demo Store"/>
+                    Posters
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#header-navigation-elements"
+                        aria-controls="header-navigation-elements" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="header-navigation-elements" class="collapse navbar-collapse">
+                    <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown" th:each="cat : ${topCategory}">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-auto-close="true" aria-expanded="false"
+                               th:text="${cat.defaultName}">Category</a>
+                            <ul class="dropdown-menu">
+                                <li th:each="sub : ${cat.subCategories}">
+                                    <a class="dropdown-item"
+                                       th:href="@{'/' + ${urlLocale} + '/category/' + ${sub.defaultName} + '?categoryId=' + ${sub.id}}"
+                                       th:title="${sub.defaultName}"
+                                       th:text="${sub.defaultName}">SubCat</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="header-actions me-0 ms-auto d-flex">
+                        <form id="header-search-form" class="d-flex" role="search"
+                              th:action="@{'/' + ${urlLocale} + '/search'}" method="get">
+                            <input id="header-search-text" name="searchText" class="form-control me-2"
+                                   type="search" placeholder="Search" aria-label="Search" title="Search"/>
+                            <button id="header-search-button" class="btn btn-primary" type="submit">
+                                <i class="icon-search"></i>
+                            </button>
+                        </form>
+                        <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
+                            <!-- Locale switcher -->
+                            <li id="locale-switcher" class="nav-item dropdown">
+                                <a id="show-locale-menu" class="btn btn-secondary dropdown-toggle" href="#"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                   th:text="${urlLocale}">en-US</a>
+                                <ul id="locale-menu" class="dropdown-menu">
+                                    <li th:each="lang : ${supportedLanguages}">
+                                        <a class="dropdown-item"
+                                           th:id="'loc-' + ${lang.toLowerCase()}"
+                                           th:href="@{'/' + ${lang}}"
+                                           th:text="${lang}">en-US</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- User menu -->
+                            <li id="user" class="nav-item dropdown">
+                                <!-- Not logged in -->
+                                <th:block th:if="${!isLogged}">
+                                    <a id="show-user-menu" class="nav-link dropdown-toggle" href="#"
+                                       title="Login" role="button" data-bs-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon-user2"></span>
+                                    </a>
+                                    <ul id="user-menu" class="dropdown-menu">
+                                        <li class="header-user-menu-heading mb-2">Welcome, Guest!</li>
+                                        <li class="header-user-menu-content mb-2">
+                                            <a th:href="@{'/' + ${urlLocale} + '/register'}"
+                                               id="go-to-registration" class="btn btn-primary header-user-menu-button"
+                                               title="Register">
+                                                <span class="icon-user-add-outline"></span>
+                                                <span>Register</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-user-menu-content">
+                                            <a th:href="@{'/' + ${urlLocale} + '/login'}"
+                                               id="go-to-login" class="btn btn-primary header-user-menu-button"
+                                               title="Login">
+                                                <span class="icon-log-in"></span>
+                                                <span>Login</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </th:block>
+                                <!-- Logged in -->
+                                <th:block th:if="${isLogged}">
+                                    <a id="show-user-menu" class="nav-link dropdown-toggle" href="#"
+                                       role="button" data-bs-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon-user2"></span>
+                                    </a>
+                                    <ul id="user-menu" class="dropdown-menu">
+                                        <li class="header-user-menu-heading mb-2">
+                                            Welcome: <span class="first-name" th:text="${customerFirstName}">User</span>
+                                        </li>
+                                        <li class="header-user-menu-content mb-2">
+                                            <a th:href="@{'/' + ${urlLocale} + '/accountOverview'}"
+                                               id="go-to-account-overview" class="btn btn-primary header-user-menu-button"
+                                               title="Account Overview">
+                                                <span class="icon-info-large logged"></span>
+                                                <span>Account Overview</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-user-menu-content">
+                                            <a th:href="@{'/' + ${urlLocale} + '/logout'}"
+                                               id="go-to-logout" class="btn btn-primary header-user-menu-button"
+                                               title="Logout">
+                                                <span class="icon-log-out"></span>
+                                                <span>Logout</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </th:block>
+                            </li>
+                            <!-- Mini cart -->
+                            <li id="mini-cart" class="nav-item dropdown">
+                                <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link"
+                                   href="#" title="Cart Overview" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="icon-shopping-cart"></span> &nbsp;
+                                    <span id="count-wide-view" class="header-cart-product-count"
+                                          th:text="${cartProductCount}">0</span>
+                                </a>
+                                <ul id="mini-cart-menu" class="dropdown-menu"
+                                    th:style="${cartProductCount == 0} ? 'display: none;' : ''">
+                                    <li><!-- mini cart content will be loaded dynamically --></li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
-                <!-- Search -->
-                <form class="d-flex me-3" th:action="@{'/' + ${urlLocale} + '/search'}" method="get" id="search-form">
-                    <input class="form-control me-2" type="search" name="searchText"
-                           placeholder="Search..." id="search-input"/>
-                    <button class="btn btn-outline-light" type="submit" id="btn-search">
-                        <i class="bi bi-search"></i> Search
-                    </button>
-                </form>
-                <!-- User / Cart -->
-                <ul class="navbar-nav">
-                    <li class="nav-item" th:if="${isLogged}">
-                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/accountOverview'}" id="account-link">
-                            <span th:text="${customerFirstName}">User</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" th:unless="${isLogged}">
-                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/login'}" id="login-link">Login</a>
-                    </li>
-                    <li class="nav-item" th:if="${isLogged}">
-                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/logout'}" id="logout-link">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/cart'}" id="mini-cart-link">
-                            Cart (<span th:text="${cartProductCount}" id="mini-cart-count">0</span>)
-                            <span th:text="${currency}">$</span><span th:text="${totalPrice}" id="mini-cart-total">0.00</span>
-                        </a>
-                    </li>
-                    <!-- Locale switcher -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown" th:text="${urlLocale}" id="locale-switcher">en-US</a>
-                        <ul class="dropdown-menu">
-                            <li th:each="lang : ${supportedLanguages}">
-                                <a class="dropdown-item"
-                                   th:href="@{'/' + ${lang} + ${staticPath}}"
-                                   th:text="${lang}">en-US</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- main/content -->
+    <main>
+        <!-- message: no java script -->
+        <noscript>
+            <div class="section">
+                <div class="container">
+                    <div class="noscriptmsg card">
+                        <p>Please enable JavaScript to use this site.</p>
+                    </div>
+                </div>
+            </div>
+        </noscript>
+
+        <!-- messages -->
+        <div id="alert-placeholder"></div>
+
+        <!-- body -->
+        <div id="main">
+            <div layout:fragment="content">
+                <p>Page content goes here</p>
             </div>
         </div>
-    </nav>
 
-    <!-- Flash messages -->
-    <div class="container mt-3" th:if="${error}">
-        <div class="alert alert-danger" th:text="${error}" id="flash-error"></div>
-    </div>
-    <div class="container mt-3" th:if="${success}">
-        <div class="alert alert-success" th:text="${success}" id="flash-success"></div>
-    </div>
-
-    <!-- Main content area -->
-    <main layout:fragment="content">
-        <p>Page content goes here</p>
+        <div id="js-top" class="go-to-top" style="display: none;">
+            <a onclick="toTopFunction()" id="js-gotop"><i class="icon-arrow-up2"></i></a>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5" id="footer">
-        <div class="container text-center">
-            <p class="mb-0">
-                &copy; Xceptance — Posters Demo Store v<span th:text="${currentVersion}">3.0.0</span>
-            </p>
+    <!-- footer -->
+    <footer id="footer" class="footer">
+        <div class="container mb-3">
+            <div class="row row-pb-md">
+                <div id="footer-section-about" class="col">
+                    <h4 class="footer-section-headline">About</h4>
+                    <p class="footer-text-about footer-section-text">
+                        The Posters Demo Store is a demonstration web shop by Xceptance.
+                    </p>
+                    <p>
+                    <ul class="footer-social-icons">
+                        <li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i class="icon-github"></i></a></li>
+                    </ul>
+                    </p>
+                </div>
+                <div id="footer-section-support" class="col">
+                    <h4 class="footer-section-headline">Support</h4>
+                    <p>
+                    <ul class="footer-support">
+                        <li><a href="mailto:kontakt@xceptance.de">Contact Support</a></li>
+                    </ul>
+                    </p>
+                </div>
+                <div id="footer-section-information" class="col">
+                    <h4 class="footer-section-headline">Information</h4>
+                    <p>
+                    <ul class="footer-info">
+                        <li>Terms and Conditions apply.</li>
+                    </ul>
+                    </p>
+                </div>
+                <div id="footer-section-contact" class="col">
+                    <h4 class="footer-section-headline">Contact</h4>
+                    <ul class="footer-contact">
+                        <li class="footer-contact-company">Xceptance Software Technologies GmbH</li>
+                        <li class="footer-contact-adress">Goettinger Chaussee 18<br/>30453 Hannover<br/>Germany</li>
+                        <li class="footer-contact-phone">Phone: <a href="tel:+495112254980">+49 511 22549 80</a></li>
+                        <li class="footer-contact-e-mail">E-Mail: <a href="mailto:info@xceptance.com">info@xceptance.com</a></li>
+                        <li class="footer-contact-website">Website: <a href="https://www.xceptance.com">https://www.xceptance.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="footer-copyright" class="footer-copyright text-center">
+            &copy; 2013-2024 Xceptance Software Technologies GmbH<br/>
+            Photo copyrights belong to their respective owners.
+        </div>
+        <div id="footer-version-information" class="version-info text-center">
+            Version <span th:text="${currentVersion}">3.0.0</span>
         </div>
     </footer>
 
-    <!-- JS -->
+    <script th:src="@{/assets/js/poster.js}"></script>
+    <script>
+        var ready = (callback) => {
+            if (document.readyState != "loading") callback();
+            else document.addEventListener("DOMContentLoaded", callback);
+        }
+    </script>
+
+    <!-- Flash messages via JS (matching original pattern) -->
+    <script th:if="${error}" th:inline="javascript">
+        ready(() => {
+            var alertPlaceholder = document.getElementById("alert-placeholder");
+            var alertWrapper = document.createElement('div');
+            alertWrapper.classList.add("alert", "alert-danger", "alert-dismissable");
+            alertWrapper.innerHTML = '<div>' + [[${error}]] + '</div><button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
+            alertPlaceholder.append(alertWrapper);
+        });
+    </script>
+    <script th:if="${success}" th:inline="javascript">
+        ready(() => {
+            var alertPlaceholder = document.getElementById("alert-placeholder");
+            var alertWrapper = document.createElement('div');
+            alertWrapper.classList.add("alert", "alert-success", "alert-dismissable");
+            alertWrapper.innerHTML = '<div>' + [[${success}]] + '</div><button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
+            alertPlaceholder.append(alertWrapper);
+        });
+    </script>
+
+    <!-- Bootstrap Bundle (v5.3.2 including popper)-->
     <script th:src="@{/assets/js/bootstrap.bundle.js}"></script>
+    <!-- Main -->
     <script th:src="@{/assets/js/main.js}"></script>
 </body>
 </html>
