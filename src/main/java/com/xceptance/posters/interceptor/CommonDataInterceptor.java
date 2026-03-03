@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.model.Cart;
-import com.xceptance.posters.model.Customer;
 import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.repository.TopCategoryRepository;
 import com.xceptance.posters.service.SessionService;

@@ -1,5 +1,6 @@
 package com.xceptance.posters.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,11 @@ public class CreditCard
 
     private String cardNumber;
     private String name;
+
+    @Column(name = "exp_month")
     private int month;
+
+    @Column(name = "exp_year")
     private int year;
 
     public int getId()

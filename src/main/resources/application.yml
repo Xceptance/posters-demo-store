@@ -3,12 +3,7 @@
 # ========================================
 
 server:
-  port: 8443
-  ssl:
-    enabled: true
-    key-store: classpath:ninja/standalone/ninja-development.p12
-    key-store-password: password
-    key-store-type: PKCS12
+  port: 8080
 
 # ----------------------------------------
 # Spring Data / JPA / H2

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.model.*;
 import com.xceptance.posters.repository.*;
 import com.xceptance.posters.service.SessionService;
@@ -28,19 +27,16 @@ public class CheckoutController
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final SessionService sessionService;
-    private final PostersProperties props;
 
     public CheckoutController(CartRepository cartRepository,
                               OrderRepository orderRepository,
                               CustomerRepository customerRepository,
-                              SessionService sessionService,
-                              PostersProperties props)
+                              SessionService sessionService)
     {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
-        this.props = props;
     }
 
     @GetMapping("/{locale}/checkout/shippingAddress")
