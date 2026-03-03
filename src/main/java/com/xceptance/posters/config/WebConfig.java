@@ -16,21 +16,37 @@
 package com.xceptance.posters.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.xceptance.posters.interceptor.CommonDataInterceptor;
+
 /**
  * Spring MVC configuration for the Posters application.
- * <p>
  * Registers interceptors, static resource handlers, and locale resolution.
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer
 {
+    private final CommonDataInterceptor commonDataInterceptor;
+
+    public WebConfig(CommonDataInterceptor commonDataInterceptor)
+    {
+        this.commonDataInterceptor = commonDataInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry)
+    {
+        registry.addInterceptor(commonDataInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/assets/**", "/h2-console/**", "/api/**");
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
-        // Serve static resources from /assets/** path (matching the existing URL structure)
         registry.addResourceHandler("/assets/**")
                 .addResourceLocations("classpath:/static/");
     }
