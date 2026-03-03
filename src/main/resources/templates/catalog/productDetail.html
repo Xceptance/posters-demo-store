@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title th:text="${product.defaultName}">Product Detail</title></head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4" th:if="${product != null}">
+        <div class="row">
+            <div class="col-md-6">
+                <img th:src="@{${product.largeImageURL}}" class="img-fluid"
+                     th:alt="${product.defaultName}" id="product-image"/>
+            </div>
+            <div class="col-md-6">
+                <h1 th:text="${product.defaultName}" id="product-name">Product Name</h1>
+                <p th:text="${product.defaultDescriptionOverview}" id="product-desc-short">Short description</p>
+                <div th:text="${product.defaultDescriptionDetail}" id="product-desc-detail">Detail</div>
+
+                <!-- Add to Cart form -->
+                <form id="add-to-cart-form" class="mt-3">
+                    <input type="hidden" name="productId" th:value="${product.id}"/>
+                    <div class="mb-3" th:if="${not #lists.isEmpty(product.availableSizes)}">
+                        <label for="sizeSelect" class="form-label">Size:</label>
+                        <select class="form-select" id="sizeSelect" name="sizeId">
+                            <option th:each="pps : ${product.availableSizes}"
+                                    th:value="${pps.size.id}"
+                                    th:text="${pps.size.width + 'x' + pps.size.height + ' - ' + currency + pps.price}">
+                                16x12
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="finishSelect" class="form-label">Finish:</label>
+                        <select class="form-select" id="finishSelect" name="finish">
+                            <option value="matte">Matte</option>
+                            <option value="gloss">Gloss</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btn-add-to-cart"
+                            th:onclick="'addToCart(\'' + ${urlLocale} + '\')'">
+                        Add to Cart
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        function addToCart(locale) {
+            var form = document.getElementById('add-to-cart-form');
+            var formData = new FormData(form);
+            fetch('/' + locale + '/addToCart', { method: 'POST', body: new URLSearchParams(formData) })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('mini-cart-count').textContent = data.cartProductCount;
+                        document.getElementById('mini-cart-total').textContent = data.totalPrice;
+                    }
+                });
+        }
+    </script>
+</main>
+</body>
+</html>

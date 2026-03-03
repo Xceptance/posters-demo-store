@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Posters - Home</title></head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4">
+        <!-- Carousel -->
+        <div id="mainCarousel" class="carousel slide mb-4" data-bs-ride="carousel" th:if="${not #lists.isEmpty(carousel)}">
+            <div class="carousel-inner">
+                <div th:each="product, stat : ${carousel}"
+                     th:classappend="${stat.first} ? 'active'"
+                     class="carousel-item">
+                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}">
+                        <img th:src="@{${product.largeImageURL}}" class="d-block w-100"
+                             th:alt="${product.defaultName}"/>
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <!-- Featured Products -->
+        <h2 th:text="#{homepage.featured}">Featured Products</h2>
+        <div class="row" id="featured-products">
+            <div class="col-md-3 col-sm-6 mb-4" th:each="product : ${productslist}">
+                <div class="card h-100" th:id="'product-' + ${product.id}">
+                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}">
+                        <img th:src="@{${product.imageURL}}" class="card-img-top"
+                             th:alt="${product.defaultName}"/>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}"
+                               th:text="${product.defaultName}">Product</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

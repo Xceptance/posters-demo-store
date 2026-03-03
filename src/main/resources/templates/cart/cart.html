@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Shopping Cart</title></head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4">
+        <h1>Shopping Cart</h1>
+        <div th:if="${cart != null and not #lists.isEmpty(cart.products)}">
+            <table class="table" id="cart-table">
+                <thead>
+                    <tr><th>Product</th><th>Size</th><th>Finish</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}">
+                        <td>
+                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${cp.product.id}}"
+                               th:text="${cp.product.defaultName}">Product</a>
+                        </td>
+                        <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
+                        <td th:text="${cp.finish}">matte</td>
+                        <td><span th:text="${currency}">$</span><span th:text="${cp.priceAsString}">0.00</span></td>
+                        <td>
+                            <input type="number" th:value="${cp.productCount}" min="1" max="999" class="form-control form-control-sm"
+                                   style="width:70px" th:id="'qty-' + ${cp.id}"
+                                   th:onchange="'updateQty(' + ${cp.id} + ', this.value, \'' + ${urlLocale} + '\')'"/>
+                        </td>
+                        <td><span th:text="${currency}">$</span><span th:text="${cp.totalProductPriceAsString}" th:id="'total-' + ${cp.id}">0.00</span></td>
+                        <td><button class="btn btn-sm btn-danger" th:onclick="'removeItem(' + ${cp.id} + ', \'' + ${urlLocale} + '\')'" id="btn-remove">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row justify-content-end">
+                <div class="col-md-4">
+                    <table class="table">
+                        <tr><td>Subtotal:</td><td><span th:text="${currency}">$</span><span th:text="${cart.subTotalPriceAsString}" id="cart-subtotal">0.00</span></td></tr>
+                        <tr><td>Tax (<span th:text="${cart.taxAsString}">6.0</span>%):</td><td><span th:text="${currency}">$</span><span th:text="${cart.totalTaxPriceAsString}" id="cart-tax">0.00</span></td></tr>
+                        <tr><td>Shipping:</td><td><span th:text="${currency}">$</span><span th:text="${cart.shippingCostsAsString}">0.00</span></td></tr>
+                        <tr><th>Total:</th><th><span th:text="${currency}">$</span><span th:text="${cart.totalPriceAsString}" id="cart-total">0.00</span></th></tr>
+                    </table>
+                    <a th:href="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" class="btn btn-primary" id="btn-checkout">Checkout</a>
+                </div>
+            </div>
+        </div>
+        <div th:if="${cart == null or #lists.isEmpty(cart.products)}">
+            <p>Your cart is empty.</p>
+            <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        function updateQty(cpId, qty, locale) {
+            fetch('/' + locale + '/updateProductCount', {
+                method: 'POST',
+                body: new URLSearchParams({cartProductId: cpId, productCount: qty})
+            }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
+        }
+        function removeItem(cpId, locale) {
+            fetch('/' + locale + '/deleteFromCart', {
+                method: 'POST',
+                body: new URLSearchParams({cartProductId: cpId})
+            }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
+        }
+    </script>
+</main>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Review Order</title></head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4" th:if="${cart != null}">
+        <h1>Review &amp; Place Order</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Order Items</h3>
+                <table class="table">
+                    <thead><tr><th>Product</th><th>Size</th><th>Finish</th><th>Qty</th><th>Price</th></tr></thead>
+                    <tbody>
+                        <tr th:each="cp : ${cart.products}">
+                            <td th:text="${cp.product.defaultName}">Product</td>
+                            <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
+                            <td th:text="${cp.finish}">matte</td>
+                            <td th:text="${cp.productCount}">1</td>
+                            <td><span th:text="${currency}">$</span><span th:text="${cp.totalProductPriceAsString}">0.00</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h3>Summary</h3>
+                <table class="table">
+                    <tr><td>Subtotal:</td><td><span th:text="${currency}">$</span><span th:text="${cart.subTotalPriceAsString}">0.00</span></td></tr>
+                    <tr><td>Tax:</td><td><span th:text="${currency}">$</span><span th:text="${cart.totalTaxPriceAsString}">0.00</span></td></tr>
+                    <tr><td>Shipping:</td><td><span th:text="${currency}">$</span><span th:text="${cart.shippingCostsAsString}">0.00</span></td></tr>
+                    <tr><th>Total:</th><th><span th:text="${currency}">$</span><span th:text="${cart.totalPriceAsString}">0.00</span></th></tr>
+                </table>
+                <form th:action="@{'/' + ${urlLocale} + '/checkout/placeOrder'}" method="post">
+                    <button type="submit" class="btn btn-success btn-lg w-100" id="btn-place-order">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

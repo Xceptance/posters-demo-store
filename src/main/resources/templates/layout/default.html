@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Posters Demo Store</title>
+    <link rel="icon" th:href="@{/assets/ico/favicon.ico}" type="image/x-icon"/>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/assets/lib/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="header-nav">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{'/' + ${urlLocale} + '/'}">
+                <img th:src="@{/assets/img/logo.png}" alt="Posters" height="30" id="brand-logo"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Categories -->
+                <ul class="navbar-nav me-auto" id="category-menu">
+                    <li class="nav-item dropdown" th:each="cat : ${topCategory}">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" th:text="${cat.defaultName}" id="top-category-link">Category</a>
+                        <ul class="dropdown-menu">
+                            <li th:each="sub : ${cat.subCategories}">
+                                <a class="dropdown-item"
+                                   th:href="@{'/' + ${urlLocale} + '/subCategory/' + ${sub.id}}"
+                                   th:text="${sub.defaultName}">SubCat</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Search -->
+                <form class="d-flex me-3" th:action="@{'/' + ${urlLocale} + '/search'}" method="get" id="search-form">
+                    <input class="form-control me-2" type="search" name="searchText"
+                           placeholder="Search..." id="search-input"/>
+                    <button class="btn btn-outline-light" type="submit" id="btn-search">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </form>
+                <!-- User / Cart -->
+                <ul class="navbar-nav">
+                    <li class="nav-item" th:if="${isLogged}">
+                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/accountOverview'}" id="account-link">
+                            <span th:text="${customerFirstName}">User</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" th:unless="${isLogged}">
+                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/login'}" id="login-link">Login</a>
+                    </li>
+                    <li class="nav-item" th:if="${isLogged}">
+                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/logout'}" id="logout-link">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{'/' + ${urlLocale} + '/cart'}" id="mini-cart-link">
+                            Cart (<span th:text="${cartProductCount}" id="mini-cart-count">0</span>)
+                            <span th:text="${currency}">$</span><span th:text="${totalPrice}" id="mini-cart-total">0.00</span>
+                        </a>
+                    </li>
+                    <!-- Locale switcher -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" th:text="${urlLocale}" id="locale-switcher">en-US</a>
+                        <ul class="dropdown-menu">
+                            <li th:each="lang : ${supportedLanguages}">
+                                <a class="dropdown-item"
+                                   th:href="@{'/' + ${lang} + ${staticPath}}"
+                                   th:text="${lang}">en-US</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash messages -->
+    <div class="container mt-3" th:if="${error}">
+        <div class="alert alert-danger" th:text="${error}" id="flash-error"></div>
+    </div>
+    <div class="container mt-3" th:if="${success}">
+        <div class="alert alert-success" th:text="${success}" id="flash-success"></div>
+    </div>
+
+    <!-- Main content area -->
+    <main layout:fragment="content">
+        <p>Page content goes here</p>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5" id="footer">
+        <div class="container text-center">
+            <p class="mb-0">
+                &copy; Xceptance — Posters Demo Store v<span th:text="${currentVersion}">3.0.0</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script th:src="@{/assets/lib/jquery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/assets/lib/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>

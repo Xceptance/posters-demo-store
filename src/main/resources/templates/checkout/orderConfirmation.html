@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Order Confirmation</title></head>
+<body>
+<main layout:fragment="content">
+    <div class="container mt-4">
+        <h1>Order Confirmed!</h1>
+        <div class="alert alert-success" id="order-confirmation">
+            <p>Thank you for your order. Your order has been placed successfully.</p>
+        </div>
+        <div th:if="${order != null}">
+            <p>Order ID: <strong th:text="${order.id}">uuid</strong></p>
+            <p>Order Date: <span th:text="${order.orderDate}">2024-01-01</span></p>
+            <p>Total: <span th:text="${currency}">$</span><span th:text="${order.totalCostsAsString}">0.00</span></p>
+        </div>
+        <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</main>
+</body>
+</html>
