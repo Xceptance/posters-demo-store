@@ -566,7 +566,7 @@
 
   .product-tile-price {
     font-weight: 600;
-    font-size: var(--ts-base);
+    font-size: var(--ts-md);
     color: var(--accent);
   }
 /*  Product tile
