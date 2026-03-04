@@ -6,7 +6,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
-        <h1>Order Confirmed!</h1>
+        <h1 th:text="#{titleOrderConfirmed}">Order Confirmed!</h1>
         <div class="alert alert-success" id="order-confirmation">
             <p>Thank you for your order. Your order has been placed successfully.</p>
         </div>
@@ -15,7 +15,7 @@
             <p>Order Date: <span th:text="${order.orderDate}">2024-01-01</span></p>
             <p>Total: <span th:text="${#numbers.formatCurrency(order.totalCosts)}">$0.00</span></p>
         </div>
-        <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
+        <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary" th:text="#{buttonContinueShopping}">Continue Shopping</a>
     </div>
 </div>
 </body>

@@ -108,13 +108,13 @@
                                         <span class="icon-user2"></span>
                                     </a>
                                     <ul id="user-menu" class="dropdown-menu">
-                                        <li class="header-user-menu-heading mb-2">Welcome, Guest!</li>
+                                        <li class="header-user-menu-heading mb-2" th:text="#{headerWelcomeGuest}">Welcome, Guest!</li>
                                         <li class="header-user-menu-content mb-2">
                                             <a th:href="@{'/' + ${urlLocale} + '/register'}"
                                                id="go-to-registration" class="btn btn-primary header-user-menu-button"
                                                title="Register">
                                                 <span class="icon-user-add-outline"></span>
-                                                <span>Register</span>
+                                                <span th:text="#{headerRegistration}">Register</span>
                                             </a>
                                         </li>
                                         <li class="header-user-menu-content">
@@ -122,7 +122,7 @@
                                                id="go-to-login" class="btn btn-primary header-user-menu-button"
                                                title="Login">
                                                 <span class="icon-log-in"></span>
-                                                <span>Login</span>
+                                                <span th:text="#{headerLogin}">Login</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -180,7 +180,7 @@
                                             </div>
                                             <div class="link-button">
                                                 <a th:href="@{'/' + ${urlLocale} + '/cart'}"
-                                                   class="btn btn-primary form-control go-to-cart">Go to Cart</a>
+                                                   class="btn btn-primary form-control go-to-cart" th:text="#{buttonGoToCart}">Go to Cart</a>
                                             </div>
                                         </div>
                                     </li>

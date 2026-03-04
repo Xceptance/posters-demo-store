@@ -13,13 +13,13 @@
 <!-- Main mini-cart content (swapped into #mini-cart-content) -->
 <div th:fragment="miniCartContent">
     <div th:if="${cartProducts == null or #lists.isEmpty(cartProducts)}" class="cart-mini-empty">
-        Your cart is empty.
+        <span th:text="#{miniCartEmpty}">Your cart is empty.</span>
     </div>
     <th:block th:if="${cartProducts != null and not #lists.isEmpty(cartProducts)}">
         <div class="cart-mini-header">
             <div class="cart-mini-product-counter">
                 <span class="value font-bold" th:text="${cartProductCount}">0</span>
-                <span th:text="${cartProductCount == 1} ? 'item' : 'items'">items</span>
+                <span th:text="${cartProductCount == 1} ? #{miniCartItem} : #{miniCartItems}">items</span>
             </div>
         </div>
         <div class="cart-mini-element-list-wrap">
@@ -46,14 +46,14 @@
         </div>
         <div class="cart-mini-total">
             <div class="cart-mini-suborder-total row">
-                <div class="col-sm-7 text-left labelText">Subtotal</div>
+                <div class="col-sm-7 text-left labelText" th:text="#{miniCartSubTotal}">Subtotal</div>
                 <div class="col-sm-5 text-right value">
                     <div class="suborder-price" th:text="${#numbers.formatCurrency(subTotalPrice)}">$0.00</div>
                 </div>
             </div>
             <div class="link-button">
                 <a th:href="@{'/' + ${urlLocale} + '/cart'}"
-                   class="btn btn-primary form-control go-to-cart">Go to Cart</a>
+                   class="btn btn-primary form-control go-to-cart" th:text="#{buttonGoToCart}">Go to Cart</a>
             </div>
         </div>
     </th:block>

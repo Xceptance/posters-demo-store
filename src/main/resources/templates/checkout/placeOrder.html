@@ -6,12 +6,12 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4" th:if="${cart != null}">
-        <h1>Review &amp; Place Order</h1>
+        <h1 th:text="#{titleReviewOrder}">Review &amp; Place Order</h1>
         <div class="row">
             <div class="col-md-8">
-                <h3>Order Items</h3>
+                <h3 th:text="#{labelOrderItems}">Order Items</h3>
                 <table class="table">
-                    <thead><tr><th>Product</th><th>Size</th><th>Finish</th><th>Qty</th><th>Price</th></tr></thead>
+                    <thead><tr><th th:text="#{labelProduct}">Product</th><th th:text="#{labelSize}">Size</th><th th:text="#{labelFinish}">Finish</th><th th:text="#{labelQuantity}">Qty</th><th th:text="#{labelPrice}">Price</th></tr></thead>
                     <tbody>
                         <tr th:each="cp : ${cart.products}">
                             <td th:text="${cp.product.name.getText(urlLocale)}">Product</td>
@@ -24,7 +24,7 @@
                 </table>
             </div>
             <div class="col-md-4">
-                <h3>Summary</h3>
+                <h3 th:text="#{labelSummary}">Summary</h3>
                 <table class="table">
                     <tr><td>Subtotal:</td><td th:text="${#numbers.formatCurrency(cart.subTotalPrice)}">$0.00</td></tr>
                     <tr><td>Tax:</td><td th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}">$0.00</td></tr>
@@ -32,7 +32,7 @@
                     <tr><th>Total:</th><th th:text="${#numbers.formatCurrency(cart.totalPrice)}">$0.00</th></tr>
                 </table>
                 <form th:action="@{'/' + ${urlLocale} + '/checkout/placeOrder'}" method="post">
-                    <button type="submit" class="btn btn-success btn-lg w-100" id="btn-place-order">Place Order</button>
+                    <button type="submit" class="btn btn-success btn-lg w-100" id="btn-place-order" th:text="#{buttonPlaceOrder}">Place Order</button>
                 </form>
             </div>
         </div>

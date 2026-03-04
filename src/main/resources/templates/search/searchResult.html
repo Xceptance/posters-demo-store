@@ -38,12 +38,12 @@
                 <div class="card-footer">
                     <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
                     <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
-                       class="btn btn-primary">Buy Here</a>
+                       class="btn btn-primary" th:text="#{buttonBuyHere}">Buy Here</a>
                 </div>
             </div>
         </div>
     </div>
-    <p th:if="${#lists.isEmpty(products)}" id="no-results">No products found.</p>
+    <p th:if="${#lists.isEmpty(products)}" id="no-results" th:text="#{labelNoProductsFound}">No products found.</p>
 </div>
 
 </div>

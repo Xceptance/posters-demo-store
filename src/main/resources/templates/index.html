@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="col">
                         <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
-                           class="btn btn-primary">Buy Here</a>
+                           class="btn btn-primary" th:text="#{buttonBuyHere}">Buy Here</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
 
 <!-- Hot Products heading -->
 <div class="product-display-heading container-fluid text-center">
-    <h2>Hot Products</h2>
+    <h2 th:text="#{indexHotProducts}">Hot Products</h2>
 </div>
 
 <!-- Product tiles -->
@@ -117,7 +117,7 @@
                 <div class="card-footer">
                     <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
                     <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
-                       class="btn btn-primary product-tile-btn-buy">Buy Here</a>
+                       class="btn btn-primary product-tile-btn-buy" th:text="#{buttonBuyHere}">Buy Here</a>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
 </div>
 
 <div class="container text-center">
-    <a class="btn btn-primary btn-shop-all" href="#" role="button">Show All</a>
+    <a class="btn btn-primary btn-shop-all" href="#" role="button" th:text="#{buttonAll}">Show All</a>
 </div>
 
 </div>

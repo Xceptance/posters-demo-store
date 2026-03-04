@@ -28,12 +28,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="product-detail-form-description"
-                           class="form-label product-detail-paragraph-label">Product Description</label>
+                           class="form-label product-detail-paragraph-label"
+                           th:text="#{productDetailProductDescription}">Product Description</label>
                     <div id="product-detail-form-description"
                          th:text="${product.descriptionDetail.getText(urlLocale)}">Detailed description</div>
                 </div>
                 <div class="mb-3" th:if="${not #lists.isEmpty(product.availableSizes)}">
-                    <label for="product-detail-form-size-selection" class="form-label">Select Size</label>
+                    <label for="product-detail-form-size-selection" class="form-label" th:text="#{labelSelectSize}">Select Size</label>
                     <select id="product-detail-form-size-selection" class="form-select"
                             name="size"
                             aria-label="size selection"
@@ -50,23 +51,24 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="product-detail-form-style-selection" class="form-label">Select Finish</label>
+                    <label for="product-detail-form-style-selection" class="form-label" th:text="#{labelSelectFinish}">Select Finish</label>
                     <div id="product-detail-form-style-selection">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="finish"
                                    id="finish-matte" value="matte" checked="checked"/>
-                            <label class="form-check-label" for="finish-matte">Matte</label>
+                            <label class="form-check-label" for="finish-matte" th:text="#{labelMatte}">Matte</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="finish"
                                    id="finish-gloss" value="gloss"/>
-                            <label class="form-check-label" for="finish-gloss">Gloss</label>
+                            <label class="form-check-label" for="finish-gloss" th:text="#{labelGloss}">Gloss</label>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="product-detail-form-print-information"
-                           class="form-label product-detail-paragraph-label">Print Information</label>
+                           class="form-label product-detail-paragraph-label"
+                           th:text="#{productDetailPrintInformation}">Print Information</label>
                     <div id="product-detail-form-print-information">
                         All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish.
                     </div>
@@ -81,7 +83,7 @@
                             hx-target="#mini-cart-content"
                             hx-swap="innerHTML"
                             hx-include="#product-detail-form-size-selection, #add-to-cart-form input[name=finish]:checked">
-                        <i class="icon-shopping-cart"></i> Add to Cart
+                        <i class="icon-shopping-cart"></i> <span th:text="#{buttonAddToCart}">Add to Cart</span>
                     </button>
                 </div>
             </form>

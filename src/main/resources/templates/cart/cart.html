@@ -6,12 +6,12 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
-        <h1>Shopping Cart</h1>
+        <h1 th:text="#{titleShoppingCart}">Shopping Cart</h1>
         <div id="cart-content">
             <div th:if="${cart != null and not #lists.isEmpty(cart.products)}">
                 <table class="table" id="cart-table">
                     <thead>
-                        <tr><th>Product</th><th>Size</th><th>Finish</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>
+                        <tr><th th:text="#{labelProduct}">Product</th><th th:text="#{labelSize}">Size</th><th th:text="#{labelFinish}">Finish</th><th th:text="#{labelPrice}">Price</th><th th:text="#{labelQuantity}">Qty</th><th th:text="#{labelTotal}">Total</th><th></th></tr>
                     </thead>
                     <tbody>
                         <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}" class="js-cart-product">
@@ -39,7 +39,7 @@
                                         hx-confirm="Remove this item from your cart?"
                                         th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.id}}"
                                         hx-target="#cart-content"
-                                        hx-swap="innerHTML">Remove</button>
+                                        hx-swap="innerHTML" th:text="#{buttonRemove}">Remove</button>
                             </td>
                         </tr>
                     </tbody>
@@ -47,18 +47,18 @@
                 <div class="row justify-content-end">
                     <div class="col-md-4">
                         <table class="table">
-                            <tr><td>Subtotal:</td><td><span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}" id="cart-subtotal">$0.00</span></td></tr>
+                            <tr><td th:text="#{labelSubtotal}">Subtotal:</td><td><span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}" id="cart-subtotal">$0.00</span></td></tr>
                             <tr><td>Tax (<span th:text="${cart.taxAsString}">6.0</span>%):</td><td><span th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}" id="cart-tax">$0.00</span></td></tr>
-                            <tr><td>Shipping:</td><td><span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span></td></tr>
+                            <tr><td th:text="#{labelShipping}">Shipping:</td><td><span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span></td></tr>
                             <tr><th>Total:</th><th><span th:text="${#numbers.formatCurrency(cart.totalPrice)}" id="cart-total">$0.00</span></th></tr>
                         </table>
-                        <a th:href="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" class="btn btn-primary" id="btn-checkout">Checkout</a>
+                        <a th:href="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" class="btn btn-primary" id="btn-checkout" th:text="#{buttonCheckout}">Checkout</a>
                     </div>
                 </div>
             </div>
             <div th:if="${cart == null or #lists.isEmpty(cart.products)}">
-                <p>Your cart is empty.</p>
-                <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
+                <p th:text="#{labelYourCartEmpty}">Your cart is empty.</p>
+                <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary" th:text="#{buttonContinueShopping}">Continue Shopping</a>
             </div>
         </div>
     </div>

@@ -6,32 +6,32 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
-        <h1>Payment</h1>
+        <h1 th:text="#{titlePayment}">Payment</h1>
         <form th:action="@{'/' + ${urlLocale} + '/checkout/payment'}" method="post" id="payment-form">
             <div class="mb-3">
-                <label for="cardNumber" class="form-label">Card Number</label>
+                <label for="cardNumber" class="form-label" th:text="#{labelCardNumber}">Card Number</label>
                 <input type="text" class="form-control" id="cardNumber" name="cardNumber" required
                        th:pattern="${regexCreditCard}" placeholder="4111111111111111"/>
             </div>
             <div class="mb-3">
-                <label for="cardName" class="form-label">Name on Card</label>
+                <label for="cardName" class="form-label" th:text="#{labelCardName}">Name on Card</label>
                 <input type="text" class="form-control" id="cardName" name="name" required/>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="month" class="form-label">Exp Month</label>
+                    <label for="month" class="form-label" th:text="#{labelExpMonth}">Exp Month</label>
                     <select class="form-select" id="month" name="month">
                         <option th:each="m : ${#numbers.sequence(1,12)}" th:value="${m}" th:text="${m}">1</option>
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="year" class="form-label">Exp Year</label>
+                    <label for="year" class="form-label" th:text="#{labelExpYear}">Exp Year</label>
                     <select class="form-select" id="year" name="year">
                         <option th:each="y : ${#numbers.sequence(2024,2035)}" th:value="${y}" th:text="${y}">2024</option>
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="btn-submit-payment">Continue to Review</button>
+            <button type="submit" class="btn btn-primary" id="btn-submit-payment" th:text="#{buttonContinueToReview}">Continue to Review</button>
         </form>
     </div>
 </div>

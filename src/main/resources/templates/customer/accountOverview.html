@@ -6,12 +6,12 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4" th:if="${customer != null}">
-        <h1>Account Overview</h1>
+        <h1 th:text="#{titleAccountOverview}">Account Overview</h1>
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Personal Information</h5>
+                        <h5 class="card-title" th:text="#{titlePersonalInformation}">Personal Information</h5>
                         <form th:action="@{'/' + ${urlLocale} + '/updateAccount'}" method="post" id="account-form">
                             <div class="mb-3">
                                 <label class="form-label">First Name</label>
@@ -25,7 +25,7 @@
                                 <label class="form-label">Email</label>
                                 <input type="email" class="form-control" name="email" th:value="${customer.email}"/>
                             </div>
-                            <button type="submit" class="btn btn-primary" id="btn-update-account">Update</button>
+                            <button type="submit" class="btn btn-primary" id="btn-update-account" th:text="#{buttonUpdate}">Update</button>
                         </form>
                     </div>
                 </div>
@@ -33,9 +33,9 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Order History</h5>
+                        <h5 class="card-title" th:text="#{titleOrderHistoryCard}">Order History</h5>
                         <a th:href="@{'/' + ${urlLocale} + '/orderOverview'}" class="btn btn-outline-primary" id="btn-order-history">
-                            View Orders
+                            <span th:text="#{labelViewOrders}">View Orders</span>
                         </a>
                     </div>
                 </div>
