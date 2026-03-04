@@ -9,7 +9,7 @@
 <div class="container text-center mt-3">
     <div class="product-overview-heading">
         <div id="title-category-name" class="header-title"
-             th:text="${categoryName} + ' (' + ${products.size()} + ' ' + (${products.size()} == 1 ? 'poster' : 'posters') + ')'">
+             th:text="${categoryName} + ' (' + ${totalProducts} + ' ' + (${totalProducts} == 1 ? 'poster' : 'posters') + ')'">
             Category (0 posters)
         </div>
     </div>
@@ -35,6 +35,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Pagination -->
+    <nav th:if="${totalPages > 1}" aria-label="Product page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage - 1}}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="p : ${#numbers.sequence(1, totalPages)}"
+                class="page-item"
+                th:classappend="${p == currentPage} ? 'active'">
+                <a class="page-link"
+                   th:href="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${p}}"
+                   th:text="${p}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage + 1}}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 </div>

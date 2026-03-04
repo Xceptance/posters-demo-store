@@ -22,6 +22,8 @@ import com.xceptance.posters.repository.TopCategoryRepository;
 @Controller
 public class CatalogController
 {
+    private static final int PAGE_SIZE = 12;
+
     private final ProductRepository productRepository;
     private final TopCategoryRepository topCategoryRepository;
     private final SubCategoryRepository subCategoryRepository;
@@ -42,6 +44,7 @@ public class CatalogController
     public String topCategory(@PathVariable String locale,
                               @PathVariable String name,
                               @RequestParam int categoryId,
+                              @RequestParam(defaultValue = "1") int page,
                               Model model)
     {
         TopCategory category = topCategoryRepository.findById(categoryId).orElse(null);
@@ -49,10 +52,13 @@ public class CatalogController
         {
             return "redirect:/" + locale + "/";
         }
-        List<Product> products = productRepository.findByTopCategory(category);
-        model.addAttribute("products", products);
+        List<Product> allProducts = productRepository.findByTopCategory(category);
+        addPaginatedProducts(allProducts, page, model);
         model.addAttribute("category", category);
-        model.addAttribute("categoryName", category.getDefaultName());
+        model.addAttribute("categoryName", category.getName().getText(locale));
+        model.addAttribute("categoryPath", "topCategory");
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("categorySlug", name);
         return "catalog/categoryOverview";
     }
 
@@ -60,6 +66,7 @@ public class CatalogController
     public String subCategory(@PathVariable String locale,
                               @PathVariable String name,
                               @RequestParam int categoryId,
+                              @RequestParam(defaultValue = "1") int page,
                               Model model)
     {
         SubCategory category = subCategoryRepository.findById(categoryId).orElse(null);
@@ -67,10 +74,13 @@ public class CatalogController
         {
             return "redirect:/" + locale + "/";
         }
-        List<Product> products = productRepository.findBySubCategory(category);
-        model.addAttribute("products", products);
+        List<Product> allProducts = productRepository.findBySubCategory(category);
+        addPaginatedProducts(allProducts, page, model);
         model.addAttribute("category", category);
-        model.addAttribute("categoryName", category.getDefaultName());
+        model.addAttribute("categoryName", category.getName().getText(locale));
+        model.addAttribute("categoryPath", "category");
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("categorySlug", name);
         return "catalog/categoryOverview";
     }
 
@@ -88,5 +98,28 @@ public class CatalogController
         model.addAttribute("product", product);
         model.addAttribute("unitLength", props.getUnitOfLength());
         return "catalog/product";
+    }
+
+    /**
+     * Paginate a product list and add pagination metadata to the model.
+     */
+    private void addPaginatedProducts(List<Product> allProducts, int page, Model model)
+    {
+        int totalProducts = allProducts.size();
+        int totalPages = Math.max(1, (int) Math.ceil((double) totalProducts / PAGE_SIZE));
+
+        // Clamp page to valid range
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+        int fromIndex = (page - 1) * PAGE_SIZE;
+        int toIndex = Math.min(fromIndex + PAGE_SIZE, totalProducts);
+        List<Product> pageProducts = allProducts.subList(fromIndex, toIndex);
+
+        model.addAttribute("products", pageProducts);
+        model.addAttribute("totalProducts", totalProducts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("pageSize", PAGE_SIZE);
     }
 }

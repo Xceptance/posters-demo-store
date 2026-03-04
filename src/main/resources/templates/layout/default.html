@@ -48,10 +48,17 @@
                 <div id="header-navigation-elements" class="collapse navbar-collapse">
                     <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item dropdown" th:each="cat : ${topCategory}">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-auto-close="true" aria-expanded="false"
+                            <a class="nav-link dropdown-toggle" role="button"
+                               data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false"
+                               th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.name.getText(urlLocale)} + '?categoryId=' + ${cat.id}}"
                                th:text="${cat.name.getText(urlLocale)}">Category</a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold"
+                                       th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.name.getText(urlLocale)} + '?categoryId=' + ${cat.id}}"
+                                       th:text="'Show All ' + ${cat.name.getText(urlLocale)}">Show All</a>
+                                </li>
+                                <li><hr class="dropdown-divider"/></li>
                                 <li th:each="sub : ${cat.subCategories}">
                                     <a class="dropdown-item"
                                        th:href="@{'/' + ${urlLocale} + '/category/' + ${sub.name.getText(urlLocale)} + '?categoryId=' + ${sub.id}}"
