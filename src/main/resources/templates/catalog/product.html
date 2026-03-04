@@ -11,11 +11,11 @@
         <div class="col-lg-6 col-md-12">
             <img th:src="@{${product.largeImageURL}}"
                  th:alt="${product.name.getText(urlLocale)}"
-                 class="img-fluid w-100"/>
+                 class="img-fluid w-100 product-detail-image"/>
         </div>
-        <div class="col-lg-6 col-md-12 mt-4">
+        <div class="col-lg-6 col-md-12">
             <form id="add-to-cart-form">
-                <div class="mb-3">
+                <div class="mb-1">
                     <h1 id="product-detail-form-name" th:text="${product.name.getText(urlLocale)}">Product Name</h1>
                 </div>
                 <div class="mb-3">

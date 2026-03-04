@@ -697,10 +697,17 @@
 /*  Product details
 *   - Start
 */
+  .product-detail-image {
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.75rem;
+  }
+
   #product-detail-form-name {
     font-size: var(--ts-xl);
     font-weight: 600;
     font-family: 'Rokkitt', serif;
+    margin-bottom: 0;
   }
 
   #product-detail-form-price {
