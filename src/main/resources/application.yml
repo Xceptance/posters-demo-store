@@ -53,6 +53,7 @@ posters:
   languages: "en-US,en-GB,de-DE,sv-SE"
   version: "3.0.0-SNAPSHOT"
   import-customer: true
+  lucene-index-dir: "./db/lucene-index"
   regex:
     zip: "[0-9]+"
     name: "[\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00dfA-Za-z ]+"

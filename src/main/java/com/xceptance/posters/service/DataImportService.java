@@ -44,6 +44,7 @@ public class DataImportService implements CommandLineRunner
     private final LocalizedPriceRepository localizedPriceRepository;
     private final CustomerRepository customerRepository;
     private final PostersProperties props;
+    private final LuceneSearchService luceneSearchService;
 
     // Lookup caches built during import
     private final Map<String, Language> languagesByCode = new HashMap<>();
@@ -60,7 +61,8 @@ public class DataImportService implements CommandLineRunner
                              ProductPosterSizeRepository productPosterSizeRepository,
                              LocalizedPriceRepository localizedPriceRepository,
                              CustomerRepository customerRepository,
-                             PostersProperties props)
+                             PostersProperties props,
+                             LuceneSearchService luceneSearchService)
     {
         this.languageRepository = languageRepository;
         this.defaultTextRepository = defaultTextRepository;
@@ -73,6 +75,7 @@ public class DataImportService implements CommandLineRunner
         this.localizedPriceRepository = localizedPriceRepository;
         this.customerRepository = customerRepository;
         this.props = props;
+        this.luceneSearchService = luceneSearchService;
     }
 
     @Override
@@ -82,6 +85,7 @@ public class DataImportService implements CommandLineRunner
         if (topCategoryRepository.count() > 0)
         {
             log.info("Data already loaded, skipping import.");
+            luceneSearchService.openReaders();
             return;
         }
         log.info("Starting data import...");
@@ -92,6 +96,10 @@ public class DataImportService implements CommandLineRunner
         {
             importCustomers();
         }
+
+        // Build Lucene search index from all imported products
+        luceneSearchService.buildIndex(productRepository.findAll(), languagesByCode.values());
+
         log.info("Data import complete.");
     }
 

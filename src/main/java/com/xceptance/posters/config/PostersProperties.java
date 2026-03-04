@@ -36,6 +36,7 @@ public class PostersProperties
     private String languages;
     private String version;
     private boolean importCustomer;
+    private String luceneIndexDir;
     private Regex regex = new Regex();
 
     // -- Getters and Setters --
@@ -118,6 +119,16 @@ public class PostersProperties
     public void setImportCustomer(boolean importCustomer)
     {
         this.importCustomer = importCustomer;
+    }
+
+    public String getLuceneIndexDir()
+    {
+        return luceneIndexDir;
+    }
+
+    public void setLuceneIndexDir(String luceneIndexDir)
+    {
+        this.luceneIndexDir = luceneIndexDir;
     }
 
     public Regex getRegex()
