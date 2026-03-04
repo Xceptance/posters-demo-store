@@ -14,7 +14,7 @@
                     <thead><tr><th>Product</th><th>Size</th><th>Finish</th><th>Qty</th><th>Price</th></tr></thead>
                     <tbody>
                         <tr th:each="cp : ${cart.products}">
-                            <td th:text="${cp.product.defaultName}">Product</td>
+                            <td th:text="${cp.product.name.getText(urlLocale)}">Product</td>
                             <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
                             <td th:text="${cp.finish}">matte</td>
                             <td th:text="${cp.productCount}">1</td>

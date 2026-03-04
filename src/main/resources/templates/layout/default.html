@@ -53,13 +53,13 @@
                         <li class="nav-item dropdown" th:each="cat : ${topCategory}">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-auto-close="true" aria-expanded="false"
-                               th:text="${cat.defaultName}">Category</a>
+                               th:text="${cat.name.getText(urlLocale)}">Category</a>
                             <ul class="dropdown-menu">
                                 <li th:each="sub : ${cat.subCategories}">
                                     <a class="dropdown-item"
-                                       th:href="@{'/' + ${urlLocale} + '/category/' + ${sub.defaultName} + '?categoryId=' + ${sub.id}}"
-                                       th:title="${sub.defaultName}"
-                                       th:text="${sub.defaultName}">SubCat</a>
+                                       th:href="@{'/' + ${urlLocale} + '/category/' + ${sub.name.getText(urlLocale)} + '?categoryId=' + ${sub.id}}"
+                                       th:title="${sub.name.getText(urlLocale)}"
+                                       th:text="${sub.name.getText(urlLocale)}">SubCat</a>
                                 </li>
                             </ul>
                         </li>

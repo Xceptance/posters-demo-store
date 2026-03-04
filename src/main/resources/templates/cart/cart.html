@@ -15,8 +15,8 @@
                 <tbody>
                     <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}">
                         <td>
-                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${cp.product.defaultName} + '?productId=' + ${cp.product.id}}"
-                               th:text="${cp.product.defaultName}">Product</a>
+                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${cp.product.name.getText(urlLocale)} + '?productId=' + ${cp.product.id}}"
+                               th:text="${cp.product.name.getText(urlLocale)}">Product</a>
                         </td>
                         <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
                         <td th:text="${cp.finish}">matte</td>

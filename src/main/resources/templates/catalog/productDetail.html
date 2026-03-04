@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}">
-<head><title th:text="${product.defaultName}">Product Detail</title></head>
+<head><title th:text="${product.name.getText(urlLocale)}">Product Detail</title></head>
 <body>
 <div layout:fragment="content">
 
 <div class="container mt-4" th:if="${product != null}">
     <div class="row">
         <img th:src="@{${product.largeImageURL}}"
-             th:alt="${product.defaultName}"
+             th:alt="${product.name.getText(urlLocale)}"
              class="img-fluid col-lg-6 col-md-12"/>
         <div class="col-lg-6 col-md-12 mt-4">
             <form id="add-to-cart-form">
                 <div class="mb-3">
-                    <h3 id="product-detail-form-name" th:text="${product.defaultName}">Product Name</h3>
+                    <h3 id="product-detail-form-name" th:text="${product.name.getText(urlLocale)}">Product Name</h3>
                 </div>
                 <div class="mb-3">
                     <p><span id="product-detail-form-price"
@@ -22,13 +22,13 @@
                 </div>
                 <div class="mb-3">
                     <h4 id="product-detail-form-description-overview"
-                        th:text="${product.defaultDescriptionOverview}">Short Description</h4>
+                        th:text="${product.descriptionOverview.getText(urlLocale)}">Short Description</h4>
                 </div>
                 <div class="mb-3">
                     <label for="product-detail-form-description"
                            class="form-label product-detail-paragraph-label">Product Description</label>
                     <div id="product-detail-form-description"
-                         th:text="${product.defaultDescriptionDetail}">Detailed description</div>
+                         th:text="${product.descriptionDetail.getText(urlLocale)}">Detailed description</div>
                 </div>
                 <div class="mb-3" th:if="${not #lists.isEmpty(product.availableSizes)}">
                     <label for="product-detail-form-size-selection" class="form-label">Select Size</label>

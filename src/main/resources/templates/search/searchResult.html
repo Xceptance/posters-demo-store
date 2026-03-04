@@ -25,17 +25,17 @@
         <div th:each="product, stat : ${products}"
              th:id="'product-' + ${stat.index}"
              class="card product-tile">
-            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}">
+            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}">
                 <img th:src="@{${product.imageURL}}"
-                     th:alt="'picture of ' + ${product.defaultName}"
+                     th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
                      class="card-img-top"
                      th:id="'overview-product-' + ${stat.index}"/>
             </a>
             <div class="card-body">
-                <h5 class="card-title" th:text="${product.defaultName}">Product Name</h5>
-                <p class="card-text product-tile-text" th:text="${product.defaultDescriptionOverview}">Description</p>
+                <h5 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h5>
+                <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
                 <p class="card-text product-tile-price" th:text="'$' + ${product.minimumPrice}">$0.00</p>
-                <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}"
+                <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
                    class="btn btn-primary">Buy Here</a>
             </div>
         </div>

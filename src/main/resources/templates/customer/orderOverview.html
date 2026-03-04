@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <table class="table table-sm">
                         <tr th:each="op : ${order.products}">
-                            <td th:text="${op.product.defaultName}">Product</td>
+                            <td th:text="${op.product.name.getText(urlLocale)}">Product</td>
                             <td th:text="${op.productCount}">1</td>
                             <td><span th:text="${currency}">$</span><span th:text="${op.totalProductPriceAsString}">0.00</span></td>
                         </tr>

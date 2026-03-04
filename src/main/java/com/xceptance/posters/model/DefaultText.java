@@ -80,4 +80,24 @@ public class DefaultText
     {
         this.translations.add(translation);
     }
+
+    /**
+     * Returns the translated text for the given language code (e.g. "de-DE"),
+     * or falls back to the original text if no matching translation is found.
+     */
+    public String getText(String langCode)
+    {
+        if (langCode != null && translations != null)
+        {
+            for (Translation t : translations)
+            {
+                if (t.getTranslationLanguage() != null
+                    && langCode.equals(t.getTranslationLanguage().getCode()))
+                {
+                    return t.getTranslationText();
+                }
+            }
+        }
+        return originalText;
+    }
 }
