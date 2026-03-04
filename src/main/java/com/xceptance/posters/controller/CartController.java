@@ -62,7 +62,7 @@ public class CartController
     }
 
     @GetMapping("/{locale}/cart")
-    public String viewCart(@PathVariable String locale, HttpSession session, Model model)
+    public String viewCart(@PathVariable("locale") String locale, HttpSession session, Model model)
     {
         Cart cart = sessionService.getCart(session);
         model.addAttribute("cart", cart);
@@ -75,10 +75,10 @@ public class CartController
      * mini-cart HTML fragment (with OOB header count update).
      */
     @GetMapping("/{locale}/addToCartSlider")
-    public String addToCartSlider(@PathVariable String locale,
-                                  @RequestParam int productId,
-                                  @RequestParam String finish,
-                                  @RequestParam String size,
+    public String addToCartSlider(@PathVariable("locale") String locale,
+                                  @RequestParam("productId") int productId,
+                                  @RequestParam("finish") String finish,
+                                  @RequestParam("size") String size,
                                   HttpSession session,
                                   Model model)
     {
@@ -141,7 +141,7 @@ public class CartController
      * Called when the mini-cart dropdown is opened.
      */
     @GetMapping("/{locale}/miniCart")
-    public String miniCart(@PathVariable String locale, HttpSession session, Model model)
+    public String miniCart(@PathVariable("locale") String locale, HttpSession session, Model model)
     {
         Cart cart = sessionService.getCart(session);
         return populateMiniCartModel(locale, cart, model);
@@ -152,9 +152,9 @@ public class CartController
      * Returns the cart body HTML fragment via HTMX.
      */
     @PostMapping("/{locale}/updateProductCount")
-    public String updateProductCount(@PathVariable String locale,
-                                     @RequestParam int cartProductId,
-                                     @RequestParam int productCount,
+    public String updateProductCount(@PathVariable("locale") String locale,
+                                     @RequestParam("cartProductId") int cartProductId,
+                                     @RequestParam("productCount") int productCount,
                                      HttpSession session,
                                      Model model)
     {
@@ -181,8 +181,8 @@ public class CartController
      * Returns the cart body HTML fragment via HTMX.
      */
     @PostMapping("/{locale}/deleteFromCart")
-    public String deleteFromCart(@PathVariable String locale,
-                                @RequestParam int cartProductId,
+    public String deleteFromCart(@PathVariable("locale") String locale,
+                                @RequestParam("cartProductId") int cartProductId,
                                 HttpSession session,
                                 Model model)
     {
@@ -207,9 +207,9 @@ public class CartController
      * Returns just a price span fragment via HTMX.
      */
     @PostMapping("/{locale}/updatePrice")
-    public String updatePrice(@PathVariable String locale,
-                              @RequestParam int productId,
-                              @RequestParam String size,
+    public String updatePrice(@PathVariable("locale") String locale,
+                              @RequestParam("productId") int productId,
+                              @RequestParam("size") String size,
                               Model model)
     {
         Product product = productRepository.findById(productId).orElse(null);
