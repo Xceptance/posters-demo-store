@@ -552,7 +552,7 @@
   }
 
   .product-tile-text {
-    font-size: var(--ts-sm);
+    font-size: var(--ts-base);
     color: var(--text-muted);
     line-height: 1.5;
     margin-bottom: 0;
