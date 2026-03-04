@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Billing Address</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Billing Address</h1>
         <div class="form-check mb-3" th:if="${shippingAddress != null}">
@@ -48,6 +48,6 @@
             });
         }
     </script>
-</main>
+</div>
 </body>
 </html>

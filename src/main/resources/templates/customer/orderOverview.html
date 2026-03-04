@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Order History</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Order History</h1>
         <div th:if="${not #lists.isEmpty(orders)}">
@@ -28,6 +28,6 @@
         <p th:if="${#lists.isEmpty(orders)}">No orders yet.</p>
         <a th:href="@{'/' + ${urlLocale} + '/accountOverview'}" class="btn btn-outline-primary">Back to Account</a>
     </div>
-</main>
+</div>
 </body>
 </html>

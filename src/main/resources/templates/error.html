@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Error</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Something went wrong</h1>
         <div class="alert alert-danger" id="error-message">
@@ -13,6 +13,6 @@
         </div>
         <a th:href="@{/en-US/}" class="btn btn-primary">Return to Homepage</a>
     </div>
-</main>
+</div>
 </body>
 </html>

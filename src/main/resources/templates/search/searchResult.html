@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Search Results</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Search Results</h1>
         <p th:if="${searchText != null and not searchText.isEmpty()}">
@@ -32,6 +32,6 @@
         </div>
         <p th:if="${#lists.isEmpty(products)}" id="no-results">No products found.</p>
     </div>
-</main>
+</div>
 </body>
 </html>

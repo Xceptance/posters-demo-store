@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Payment</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Payment</h1>
         <form th:action="@{'/' + ${urlLocale} + '/checkout/payment'}" method="post" id="payment-form">
@@ -34,6 +34,6 @@
             <button type="submit" class="btn btn-primary" id="btn-submit-payment">Continue to Review</button>
         </form>
     </div>
-</main>
+</div>
 </body>
 </html>

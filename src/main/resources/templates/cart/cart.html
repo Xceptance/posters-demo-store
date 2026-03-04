@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Shopping Cart</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Shopping Cart</h1>
         <div th:if="${cart != null and not #lists.isEmpty(cart.products)}">
@@ -62,6 +62,6 @@
             }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
         }
     </script>
-</main>
+</div>
 </body>
 </html>

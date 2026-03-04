@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Review Order</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4" th:if="${cart != null}">
         <h1>Review &amp; Place Order</h1>
         <div class="row">
@@ -37,6 +37,6 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 </body>
 </html>

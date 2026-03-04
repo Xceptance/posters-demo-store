@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Shipping Address</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Shipping Address</h1>
         <form th:action="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" method="post" id="shipping-form">
@@ -49,6 +49,6 @@
             <button type="submit" class="btn btn-primary" id="btn-submit-shipping">Continue to Billing</button>
         </form>
     </div>
-</main>
+</div>
 </body>
 </html>

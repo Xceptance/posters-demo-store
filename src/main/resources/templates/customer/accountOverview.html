@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>My Account</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4" th:if="${customer != null}">
         <h1>Account Overview</h1>
         <div class="row">
@@ -42,6 +42,6 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 </body>
 </html>

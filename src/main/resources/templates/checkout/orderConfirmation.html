@@ -4,7 +4,7 @@
       layout:decorate="~{layout/default}">
 <head><title>Order Confirmation</title></head>
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content">
     <div class="container mt-4">
         <h1>Order Confirmed!</h1>
         <div class="alert alert-success" id="order-confirmation">
@@ -17,6 +17,6 @@
         </div>
         <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
     </div>
-</main>
+</div>
 </body>
 </html>
