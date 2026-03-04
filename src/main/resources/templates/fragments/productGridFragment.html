@@ -17,7 +17,7 @@
                          th:id="'overview-product-' + ${stat.index}"/>
                 </a>
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h5>
+                    <h3 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h3>
                     <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
                 </div>
                 <div class="card-footer">
