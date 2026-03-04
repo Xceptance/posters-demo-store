@@ -32,4 +32,17 @@
             </dialect>
         </dialects>
     </language>
+    <language>
+        <name>swedish</name>
+        <endonym>Svenska</endonym>
+        <code>sv</code>
+        <dialects>
+            <dialect>
+                <precisename>standard swedish</precisename>
+                <preciseendonym>Rikssvenska</preciseendonym>
+                <disamb>Svenska (SE)</disamb>
+                <extension>SE</extension>
+            </dialect>
+        </dialects>
+    </language>
 </languages>

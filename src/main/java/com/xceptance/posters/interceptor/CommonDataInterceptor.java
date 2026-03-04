@@ -107,6 +107,11 @@ public class CommonDataInterceptor implements HandlerInterceptor
             currency = "£";
             unitLength = "cm";
         }
+        else if (locale.equals("sv-SE"))
+        {
+            currency = "kr";
+            unitLength = "cm";
+        }
         else
         {
             currency = props.getCurrency();

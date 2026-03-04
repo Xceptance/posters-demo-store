@@ -331,12 +331,13 @@ public class CartController
     {
         if (locale.startsWith("de")) return "€";
         if (locale.equals("en-UK")) return "£";
+        if (locale.equals("sv-SE")) return "kr";
         return props.getCurrency();
     }
 
     private String unitLengthForLocale(String locale)
     {
-        if (locale.startsWith("de") || locale.equals("en-UK")) return "cm";
+        if (locale.startsWith("de") || locale.equals("en-UK") || locale.equals("sv-SE")) return "cm";
         return props.getUnitOfLength();
     }
 }
