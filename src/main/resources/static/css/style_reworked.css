@@ -169,6 +169,21 @@
   #mini-cart-menu {
     /*open end/right aligned:*/
     left: -184.797px;
+
+    /* Smooth slide-down + fade-in animation */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    display: block !important;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  #mini-cart-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
   }
   
   .cart-mini-header {
