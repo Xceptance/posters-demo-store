@@ -5,7 +5,7 @@
     Swapped into #search-suggestions by HTMX as the user types.
 -->
 <body>
-<div th:fragment="suggestions" id="search-suggestions">
+<div th:fragment="suggestions" id="search-suggestions" class="search-suggestions-container">
     <ul th:if="${suggestions != null and not #lists.isEmpty(suggestions)}"
         class="list-group search-suggest-list">
         <li th:each="product : ${suggestions}" class="list-group-item list-group-item-action p-2">
