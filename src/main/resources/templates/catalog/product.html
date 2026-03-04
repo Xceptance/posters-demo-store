@@ -8,9 +8,11 @@
 
 <div class="container mt-4" th:if="${product != null}">
     <div class="row">
-        <img th:src="@{${product.largeImageURL}}"
-             th:alt="${product.name.getText(urlLocale)}"
-             class="img-fluid col-lg-6 col-md-12"/>
+        <div class="col-lg-6 col-md-12">
+            <img th:src="@{${product.largeImageURL}}"
+                 th:alt="${product.name.getText(urlLocale)}"
+                 class="img-fluid w-100"/>
+        </div>
         <div class="col-lg-6 col-md-12 mt-4">
             <form id="add-to-cart-form">
                 <div class="mb-3">

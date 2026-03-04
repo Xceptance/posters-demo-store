@@ -208,11 +208,11 @@
 
         <!-- messages -->
         <div id="alert-placeholder">
-            <div th:if="${error}" class="alert alert-danger alert-dismissable">
+            <div th:if="${error}" class="alert alert-danger alert-dismissible">
                 <div th:text="${error}">Error</div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
-            <div th:if="${success}" class="alert alert-success alert-dismissable">
+            <div th:if="${success}" class="alert alert-success alert-dismissible">
                 <div th:text="${success}">Success</div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -239,27 +239,21 @@
                     <p class="footer-text-about footer-section-text">
                         The Posters Demo Store is a demonstration web shop by Xceptance.
                     </p>
-                    <p>
                     <ul class="footer-social-icons">
                         <li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i class="icon-github"></i></a></li>
                     </ul>
-                    </p>
                 </div>
                 <div id="footer-section-support" class="col">
                     <h4 class="footer-section-headline">Support</h4>
-                    <p>
                     <ul class="footer-support">
                         <li><a href="mailto:kontakt@xceptance.de">Contact Support</a></li>
                     </ul>
-                    </p>
                 </div>
                 <div id="footer-section-information" class="col">
                     <h4 class="footer-section-headline">Information</h4>
-                    <p>
                     <ul class="footer-info">
                         <li>Terms and Conditions apply.</li>
                     </ul>
-                    </p>
                 </div>
                 <div id="footer-section-contact" class="col">
                     <h4 class="footer-section-headline">Contact</h4>

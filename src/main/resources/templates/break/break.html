@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Break / Testing Controls</title>
-    <link rel="stylesheet" th:href="@{/assets/lib/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
 </head>
 <body>
     <div class="container mt-4">
@@ -27,7 +27,7 @@
             <button class="btn btn-danger" onclick="disableAll()" id="btn-disable-all">Disable All</button>
         </div>
     </div>
-    <script th:src="@{/assets/lib/jquery/jquery-3.6.0.min.js}"></script>
+
     <script>
         function disableAll() {
             fetch('/break/disableAll', { method: 'POST' })
