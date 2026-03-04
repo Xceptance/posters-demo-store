@@ -19,10 +19,6 @@
                     <h1 id="product-detail-form-name" th:text="${product.name.getText(urlLocale)}">Product Name</h1>
                 </div>
                 <div class="mb-3">
-                    <p><span id="product-detail-form-price"
-                             th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</span></p>
-                </div>
-                <div class="mb-3">
                     <p id="product-detail-form-description-overview" class="lead"
                         th:text="${product.descriptionOverview.getText(urlLocale)}">Short Description</p>
                 </div>
@@ -65,19 +61,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="product-detail-form-print-information"
-                           class="form-label product-detail-paragraph-label"
-                           th:text="#{productDetailPrintInformation}">Print Information</label>
-                    <div id="product-detail-form-print-information">
-                        All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish.
-                    </div>
-                </div>
-                <div class="mb-3 product-detail-product-id-container">
-                    <label for="product-detail-form-product-id">ID:</label>
-                    <div id="product-detail-form-product-id" th:text="${product.id}">1</div>
-                </div>
-                <div class="mb-3 d-flex justify-content-end">
+                <div class="mb-4 mt-4 d-flex justify-content-between align-items-center">
+                    <p class="mb-0"><span id="product-detail-form-price"
+                             th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</span></p>
                     <button type="button" id="btn-add-to-cart" class="btn btn-primary"
                             th:hx-get="@{'/' + ${urlLocale} + '/addToCartSlider?productId=' + ${product.id}}"
                             hx-target="#mini-cart-content"
@@ -85,6 +71,18 @@
                             hx-include="#product-detail-form-size-selection, #add-to-cart-form input[name=finish]:checked">
                         <i class="bi bi-cart3"></i> <span th:text="#{buttonAddToCart}">Add to Cart</span>
                     </button>
+                </div>
+                <div class="mb-3 product-detail-product-id-container">
+                    <label for="product-detail-form-product-id">ID:</label>
+                    <div id="product-detail-form-product-id" th:text="${product.id}">1</div>
+                </div>
+                <div class="mb-3 text-muted" style="font-size: var(--ts-sm);">
+                    <label for="product-detail-form-print-information"
+                           class="form-label product-detail-paragraph-label"
+                           th:text="#{productDetailPrintInformation}">Print Information</label>
+                    <div id="product-detail-form-print-information">
+                        All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish.
+                    </div>
                 </div>
             </form>
         </div>
