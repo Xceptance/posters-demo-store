@@ -41,10 +41,10 @@ public class CatalogController
     }
 
     @GetMapping("/{locale}/topCategory/{name}")
-    public String topCategory(@PathVariable String locale,
-                              @PathVariable String name,
-                              @RequestParam int categoryId,
-                              @RequestParam(defaultValue = "1") int page,
+    public String topCategory(@PathVariable("locale") String locale,
+                              @PathVariable("name") String name,
+                              @RequestParam("categoryId") int categoryId,
+                              @RequestParam(value = "page", defaultValue = "1") int page,
                               Model model)
     {
         TopCategory category = topCategoryRepository.findById(categoryId).orElse(null);
@@ -63,10 +63,10 @@ public class CatalogController
     }
 
     @GetMapping("/{locale}/category/{name}")
-    public String subCategory(@PathVariable String locale,
-                              @PathVariable String name,
-                              @RequestParam int categoryId,
-                              @RequestParam(defaultValue = "1") int page,
+    public String subCategory(@PathVariable("locale") String locale,
+                              @PathVariable("name") String name,
+                              @RequestParam("categoryId") int categoryId,
+                              @RequestParam(value = "page", defaultValue = "1") int page,
                               Model model)
     {
         SubCategory category = subCategoryRepository.findById(categoryId).orElse(null);
@@ -85,9 +85,9 @@ public class CatalogController
     }
 
     @GetMapping("/{locale}/product/{name}")
-    public String productDetail(@PathVariable String locale,
-                                @PathVariable String name,
-                                @RequestParam int productId,
+    public String productDetail(@PathVariable("locale") String locale,
+                                @PathVariable("name") String name,
+                                @RequestParam("productId") int productId,
                                 Model model)
     {
         Product product = productRepository.findById(productId).orElse(null);
