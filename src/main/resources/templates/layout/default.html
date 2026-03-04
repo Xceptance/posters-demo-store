@@ -276,10 +276,29 @@
         </div>
     </footer>
 
+    <!-- Confirmation modal (replaces native confirm() for hx-confirm) -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel" th:text="#{confirmDialogTitle}">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="confirmModalBody">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{buttonCancel}">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalYes" th:text="#{buttonRemove}">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap Bundle (v5.3.2 including popper)-->
     <script th:src="@{/assets/js/bootstrap.bundle.js}"></script>
 
-    <!-- Scroll to top (inlined, replaces main.js) -->
+    <!-- Scroll to top + HTMX integrations -->
     <script>
         (function() {
             var top = document.getElementById('js-top');
@@ -302,6 +321,24 @@
                     }
                 });
             }
+
+            // Intercept htmx:confirm to show Bootstrap modal instead of native confirm()
+            document.body.addEventListener('htmx:confirm', function(e) {
+                e.preventDefault();
+                var modalEl = document.getElementById('confirmModal');
+                var bodyEl = document.getElementById('confirmModalBody');
+                var yesBtn = document.getElementById('confirmModalYes');
+                bodyEl.textContent = e.detail.question;
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                // Remove any old click handler
+                var newYes = yesBtn.cloneNode(true);
+                yesBtn.parentNode.replaceChild(newYes, yesBtn);
+                newYes.addEventListener('click', function() {
+                    modal.hide();
+                    e.detail.issueRequest(true);
+                });
+                modal.show();
+            });
         })();
     </script>
 </body>

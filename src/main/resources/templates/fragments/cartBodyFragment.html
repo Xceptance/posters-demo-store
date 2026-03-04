@@ -40,7 +40,7 @@
                     <td><span th:text="${#numbers.formatCurrency(cp.totalProductPrice)}" th:id="'total-' + ${cp.id}">$0.00</span></td>
                     <td>
                         <button class="btn btn-sm btn-danger cart-remove-btn"
-                                hx-confirm="Remove this item from your cart?"
+                                th:hx-confirm="#{confirmRemoveFromCart}"
                                 th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.id}}"
                                 hx-target="#cart-content"
                                 hx-swap="innerHTML" th:text="#{buttonRemove}">Remove</button>
