@@ -209,4 +209,24 @@ public class Product
     {
         this.minimumPrice = minimumPrice;
     }
+
+    /**
+     * Returns the minimum price for the given locale by checking
+     * locale-specific prices on all available sizes. Falls back to the
+     * base minimumPrice if no locale prices exist.
+     */
+    public double getMinimumPrice(String locale)
+    {
+        if (locale == null || availableSizes == null || availableSizes.isEmpty())
+        {
+            return minimumPrice;
+        }
+        double min = Double.MAX_VALUE;
+        for (ProductPosterSize pps : availableSizes)
+        {
+            double p = pps.getPrice(locale);
+            if (p < min) min = p;
+        }
+        return min < Double.MAX_VALUE ? min : minimumPrice;
+    }
 }

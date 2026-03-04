@@ -21,6 +21,9 @@ import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.model.*;
 import com.xceptance.posters.repository.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Imports initial data from XML files on application startup.
  * Replaces Ninja's DataImport utility.
@@ -38,6 +41,7 @@ public class DataImportService implements CommandLineRunner
     private final ProductRepository productRepository;
     private final PosterSizeRepository posterSizeRepository;
     private final ProductPosterSizeRepository productPosterSizeRepository;
+    private final LocalizedPriceRepository localizedPriceRepository;
     private final CustomerRepository customerRepository;
     private final PostersProperties props;
 
@@ -54,6 +58,7 @@ public class DataImportService implements CommandLineRunner
                              ProductRepository productRepository,
                              PosterSizeRepository posterSizeRepository,
                              ProductPosterSizeRepository productPosterSizeRepository,
+                             LocalizedPriceRepository localizedPriceRepository,
                              CustomerRepository customerRepository,
                              PostersProperties props)
     {
@@ -65,6 +70,7 @@ public class DataImportService implements CommandLineRunner
         this.productRepository = productRepository;
         this.posterSizeRepository = posterSizeRepository;
         this.productPosterSizeRepository = productPosterSizeRepository;
+        this.localizedPriceRepository = localizedPriceRepository;
         this.customerRepository = customerRepository;
         this.props = props;
     }
@@ -195,13 +201,29 @@ public class DataImportService implements CommandLineRunner
 
             // Parse sizes and prices
             String sizesStr = getTextContent(prodEl, "availableSize");
-            String pricesStr = getTextContent(prodEl, "price");
             product = productRepository.save(product);
 
-            if (sizesStr != null && pricesStr != null)
+            // Find the default price element (no xml:lang or x-default)
+            String defaultPricesStr = null;
+            NodeList priceNodes = prodEl.getElementsByTagName("price");
+            for (int p = 0; p < priceNodes.getLength(); p++)
+            {
+                Element priceEl = (Element) priceNodes.item(p);
+                if (!priceEl.getParentNode().equals(prodEl)) continue;
+                String lang = priceEl.getAttribute("xml:lang");
+                if (lang.isEmpty() || "x-default".equals(lang))
+                {
+                    defaultPricesStr = priceEl.getTextContent().trim();
+                    break;
+                }
+            }
+
+            // Build PosterSize list from sizes string
+            List<ProductPosterSize> ppsList = new ArrayList<>();
+            if (sizesStr != null && defaultPricesStr != null)
             {
                 String[] sizes = sizesStr.split(";");
-                String[] prices = pricesStr.split(";");
+                String[] prices = defaultPricesStr.split(";");
                 double minPrice = Double.MAX_VALUE;
 
                 for (int j = 0; j < sizes.length && j < prices.length; j++)
@@ -225,13 +247,45 @@ public class DataImportService implements CommandLineRunner
                     pps.setProduct(product);
                     pps.setSize(size);
                     pps.setPrice(price);
-                    productPosterSizeRepository.save(pps);
+                    pps = productPosterSizeRepository.save(pps);
+                    ppsList.add(pps);
                     if (price < minPrice) minPrice = price;
                 }
                 if (minPrice < Double.MAX_VALUE)
                 {
                     product.setMinimumPrice(minPrice);
                     productRepository.save(product);
+                }
+
+                // Import locale-specific prices
+                for (int p = 0; p < priceNodes.getLength(); p++)
+                {
+                    Element priceEl = (Element) priceNodes.item(p);
+                    if (!priceEl.getParentNode().equals(prodEl)) continue;
+                    String lang = priceEl.getAttribute("xml:lang");
+                    if (lang.isEmpty() || "x-default".equals(lang)) continue;
+
+                    Language language = languagesByCode.get(lang);
+                    if (language == null) continue;
+
+                    String[] localePrices = priceEl.getTextContent().trim().split(";");
+                    for (int j = 0; j < ppsList.size() && j < localePrices.length; j++)
+                    {
+                        double localePrice;
+                        try
+                        {
+                            localePrice = Double.parseDouble(localePrices[j].trim());
+                        }
+                        catch (NumberFormatException e)
+                        {
+                            continue;
+                        }
+                        LocalizedPrice lp = new LocalizedPrice();
+                        lp.setProductPosterSize(ppsList.get(j));
+                        lp.setLanguage(language);
+                        lp.setPrice(localePrice);
+                        localizedPriceRepository.save(lp);
+                    }
                 }
             }
             count++;

@@ -109,9 +109,9 @@ public class CartController
             return response;
         }
 
-        // Get price
+        // Get price (locale-aware)
         ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
-        double price = pps != null ? pps.getPrice() : 0;
+        double price = pps != null ? pps.getPrice(locale) : 0;
 
         // Check if item already in cart
         CartProduct existing = cartProductRepository.findByCartAndProductAndFinishAndSize(cart, product, finish, posterSize);

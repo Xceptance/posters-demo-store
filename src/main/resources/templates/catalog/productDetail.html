@@ -18,7 +18,7 @@
                 </div>
                 <div class="mb-3">
                     <p><span id="product-detail-form-price"
-                             th:text="${currency + product.minimumPrice}">$0.00</span></p>
+                             th:text="${currency + product.getMinimumPrice(urlLocale)}">$0.00</span></p>
                 </div>
                 <div class="mb-3">
                     <h4 id="product-detail-form-description-overview"

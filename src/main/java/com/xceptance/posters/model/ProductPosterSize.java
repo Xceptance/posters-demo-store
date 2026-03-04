@@ -1,14 +1,20 @@
 package com.xceptance.posters.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
  * Links a {@link Product} to a {@link PosterSize} with a specific price.
+ * Supports locale-specific price overrides via {@link LocalizedPrice}.
  */
 @Entity
 @Table(name = "product_poster_size")
@@ -25,6 +31,9 @@ public class ProductPosterSize
     private PosterSize size;
 
     private double price;
+
+    @OneToMany(mappedBy = "productPosterSize", fetch = FetchType.EAGER)
+    private List<LocalizedPrice> localizedPrices = new ArrayList<>();
 
     public int getId()
     {
@@ -61,8 +70,41 @@ public class ProductPosterSize
         return price;
     }
 
+    /**
+     * Returns the price for the given locale (e.g. "de-DE").
+     * Checks localizedPrices for a matching language code or fallbackCode,
+     * falls back to the base price if none found.
+     */
+    public double getPrice(String locale)
+    {
+        if (locale != null && localizedPrices != null)
+        {
+            for (LocalizedPrice lp : localizedPrices)
+            {
+                Language lang = lp.getLanguage();
+                if (lang != null
+                    && (locale.equals(lang.getCode())
+                        || locale.equals(lang.getFallbackCode())))
+                {
+                    return lp.getPrice();
+                }
+            }
+        }
+        return price;
+    }
+
     public void setPrice(double price)
     {
         this.price = price;
+    }
+
+    public List<LocalizedPrice> getLocalizedPrices()
+    {
+        return localizedPrices;
+    }
+
+    public void setLocalizedPrices(List<LocalizedPrice> localizedPrices)
+    {
+        this.localizedPrices = localizedPrices;
     }
 }
