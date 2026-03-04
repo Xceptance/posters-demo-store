@@ -110,7 +110,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${product.name.getText(urlLocale)}">Product</h5>
                 <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
-                <p class="card-text product-tile-price" th:text="${currency + product.getMinimumPrice(urlLocale)}">$0.00</p>
+                <p class="card-text product-tile-price" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
                 <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
                    class="btn btn-primary product-tile-btn-buy">Buy Here</a>
             </div>

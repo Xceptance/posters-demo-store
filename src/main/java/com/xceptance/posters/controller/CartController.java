@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xceptance.posters.config.PostersProperties;
+import com.xceptance.posters.util.PriceFormatter;
 import com.xceptance.posters.model.Cart;
 import com.xceptance.posters.model.CartProduct;
 import com.xceptance.posters.model.PosterSize;
@@ -147,7 +148,7 @@ public class CartController
         productData.put("localizedName", product.getName().getText(locale));
         productData.put("productCount", cartProduct.getProductCount());
         productData.put("finish", finish);
-        productData.put("productTotalUnitPrice", cartProduct.getTotalProductPriceAsString());
+        productData.put("productTotalUnitPrice", PriceFormatter.format(cartProduct.getPrice() * cartProduct.getProductCount(), locale));
 
         Map<String, Object> sizeData = new HashMap<>();
         sizeData.put("width", posterSize.getWidth());
@@ -155,9 +156,8 @@ public class CartController
         productData.put("size", sizeData);
 
         response.put("product", productData);
-        response.put("currency", currencyForLocale(locale));
         response.put("unitLength", unitLengthForLocale(locale));
-        response.put("subOrderTotal", cart.getSubTotalPriceAsString());
+        response.put("subOrderTotal", PriceFormatter.format(cart.getSubTotalPrice(), locale));
         response.put("headerCartOverview", cart.getProductCount());
         return response;
     }
@@ -179,7 +179,7 @@ public class CartController
             productData.put("localizedName", cp.getProduct().getName().getText(locale));
             productData.put("productCount", cp.getProductCount());
             productData.put("finish", cp.getFinish());
-            productData.put("productTotalUnitPrice", cp.getTotalProductPriceAsString());
+            productData.put("productTotalUnitPrice", PriceFormatter.format(cp.getPrice() * cp.getProductCount(), locale));
 
             Map<String, Object> sizeData = new HashMap<>();
             sizeData.put("width", cp.getSize().getWidth());
@@ -191,8 +191,7 @@ public class CartController
 
         response.put("productsInCartList", productsInCartList);
         response.put("cartProductCount", cart.getProductCount());
-        response.put("subTotalPrice", cart.getSubTotalPriceAsString());
-        response.put("currency", currencyForLocale(locale));
+        response.put("subTotalPrice", PriceFormatter.format(cart.getSubTotalPrice(), locale));
         response.put("unitLength", unitLengthForLocale(locale));
         return response;
     }
@@ -325,14 +324,6 @@ public class CartController
         response.put("subTotalPrice", cart.getSubTotalPriceAsString());
         response.put("totalPrice", cart.getTotalPriceAsString());
         return response;
-    }
-
-    private String currencyForLocale(String locale)
-    {
-        if (locale.startsWith("de")) return "€";
-        if (locale.equals("en-UK")) return "£";
-        if (locale.equals("sv-SE")) return "kr";
-        return props.getCurrency();
     }
 
     private String unitLengthForLocale(String locale)

@@ -18,7 +18,7 @@
                             <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
                             <td th:text="${cp.finish}">matte</td>
                             <td th:text="${cp.productCount}">1</td>
-                            <td><span th:text="${currency}">$</span><span th:text="${cp.totalProductPriceAsString}">0.00</span></td>
+                            <td th:text="${#numbers.formatCurrency(cp.totalProductPrice)}">$0.00</td>
                         </tr>
                     </tbody>
                 </table>
@@ -26,10 +26,10 @@
             <div class="col-md-4">
                 <h3>Summary</h3>
                 <table class="table">
-                    <tr><td>Subtotal:</td><td><span th:text="${currency}">$</span><span th:text="${cart.subTotalPriceAsString}">0.00</span></td></tr>
-                    <tr><td>Tax:</td><td><span th:text="${currency}">$</span><span th:text="${cart.totalTaxPriceAsString}">0.00</span></td></tr>
-                    <tr><td>Shipping:</td><td><span th:text="${currency}">$</span><span th:text="${cart.shippingCostsAsString}">0.00</span></td></tr>
-                    <tr><th>Total:</th><th><span th:text="${currency}">$</span><span th:text="${cart.totalPriceAsString}">0.00</span></th></tr>
+                    <tr><td>Subtotal:</td><td th:text="${#numbers.formatCurrency(cart.subTotalPrice)}">$0.00</td></tr>
+                    <tr><td>Tax:</td><td th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}">$0.00</td></tr>
+                    <tr><td>Shipping:</td><td th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</td></tr>
+                    <tr><th>Total:</th><th th:text="${#numbers.formatCurrency(cart.totalPrice)}">$0.00</th></tr>
                 </table>
                 <form th:action="@{'/' + ${urlLocale} + '/checkout/placeOrder'}" method="post">
                     <button type="submit" class="btn btn-success btn-lg w-100" id="btn-place-order">Place Order</button>

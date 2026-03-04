@@ -13,7 +13,7 @@
         <div th:if="${order != null}">
             <p>Order ID: <strong th:text="${order.id}">uuid</strong></p>
             <p>Order Date: <span th:text="${order.orderDate}">2024-01-01</span></p>
-            <p>Total: <span th:text="${currency}">$</span><span th:text="${order.totalCostsAsString}">0.00</span></p>
+            <p>Total: <span th:text="${#numbers.formatCurrency(order.totalCosts)}">$0.00</span></p>
         </div>
         <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
     </div>

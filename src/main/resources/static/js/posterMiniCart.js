@@ -25,13 +25,13 @@ function getMiniCartText() {
 				var minicartElement = document.createElement("li");
 				minicartElement.classList.add('cart-mini-products-list-items');
 				minicartElement.innerHTML = getMiniCartElementInnerHtml(
-					data.productsInCartList[i], data.currency,
+					data.productsInCartList[i],
 					data.unitLength);
 				minicartElementList.append(minicartElement);
 			}
 
 			document.querySelector(".cart-mini-product-counter span.value").textContent = data.cartProductCount;
-			document.querySelector('.suborder-price').textContent = data.currency + data.subTotalPrice;
+			document.querySelector('.suborder-price').textContent = data.subTotalPrice;
 
 			document.querySelector(".notifications-loader").innerHTML = [''];
 		} else {
@@ -71,9 +71,9 @@ function addToMiniCart(productId, finish, size, locale) {
 			minicartEntry = document.createElement("li");
 			minicartEntry.classList.add(liId);
 			minicartEntry.classList.add('mini-cart-item');
-			minicartEntry.innerHTML = getMiniCartElementInnerHtml(data.product, data.currency, data.unitLength);
+			minicartEntry.innerHTML = getMiniCartElementInnerHtml(data.product, data.unitLength);
 			/* update total sub Order Price */
-			document.querySelector('.suborder-price').textContent = data.currency + data.subOrderTotal;
+			document.querySelector('.suborder-price').textContent = data.subOrderTotal;
 			/* notification off */
 			document.querySelector(".notifications-loader").innerHTML = [''];
 
@@ -100,7 +100,7 @@ function addToMiniCart(productId, finish, size, locale) {
 }
 
 /* return a (html)list with all products from the cart*/
-function getMiniCartElementInnerHtml(product, currency, unitLength) {
+function getMiniCartElementInnerHtml(product, unitLength) {
 	
 	return '<ul class="cart-items list-unstyled">' + '<li class="prod-name">'
 	+ product.localizedName + '</li>'
@@ -109,6 +109,6 @@ function getMiniCartElementInnerHtml(product, currency, unitLength) {
 	+ '</span>, <span class="prod-size">' + '<span class ="prod-width">' + product.size.width + '</span>'  
 	+ " x " + '<span class ="prod-height">' + product.size.height + '</span>' + " " + '<span class = "unit-length">' + unitLength + '</span>'
 	+ " " + '</span>)' + '</li>'
-	+ '<li>' + '<div class="prod-price text-right"><strong>' + currency
+	+ '<li>' + '<div class="prod-price text-right"><strong>'
 	+ product.productTotalUnitPrice + '</strong></div>' + '</li>' + '<ul>';
 }
