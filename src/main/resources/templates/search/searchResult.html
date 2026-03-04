@@ -23,7 +23,7 @@
 <div id="product-overview" class="container text-center">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 product-display-case" th:if="${not #lists.isEmpty(products)}" id="search-results">
         <div class="col" th:each="product, stat : ${products}">
-            <div class="card product-tile"
+            <div class="card h-100 product-tile"
                  th:id="'product-' + ${stat.index}">
                 <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}">
                     <img th:src="@{${product.imageURL}}"
@@ -34,7 +34,9 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h5>
                     <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
-                    <p class="card-text product-tile-price" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
                     <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
                        class="btn btn-primary">Buy Here</a>
                 </div>
