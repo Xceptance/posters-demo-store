@@ -144,7 +144,7 @@ public class CartController
 
         // Build response matching posterMiniCart.js expectations
         Map<String, Object> productData = new HashMap<>();
-        productData.put("localizedName", product.getDefaultName());
+        productData.put("localizedName", product.getName().getText(locale));
         productData.put("productCount", cartProduct.getProductCount());
         productData.put("finish", finish);
         productData.put("productTotalUnitPrice", cartProduct.getTotalProductPriceAsString());
@@ -155,8 +155,8 @@ public class CartController
         productData.put("size", sizeData);
 
         response.put("product", productData);
-        response.put("currency", props.getCurrency());
-        response.put("unitLength", props.getUnitOfLength());
+        response.put("currency", currencyForLocale(locale));
+        response.put("unitLength", unitLengthForLocale(locale));
         response.put("subOrderTotal", cart.getSubTotalPriceAsString());
         response.put("headerCartOverview", cart.getProductCount());
         return response;
@@ -176,7 +176,7 @@ public class CartController
         for (CartProduct cp : cart.getProducts())
         {
             Map<String, Object> productData = new HashMap<>();
-            productData.put("localizedName", cp.getProduct().getDefaultName());
+            productData.put("localizedName", cp.getProduct().getName().getText(locale));
             productData.put("productCount", cp.getProductCount());
             productData.put("finish", cp.getFinish());
             productData.put("productTotalUnitPrice", cp.getTotalProductPriceAsString());
@@ -192,8 +192,8 @@ public class CartController
         response.put("productsInCartList", productsInCartList);
         response.put("cartProductCount", cart.getProductCount());
         response.put("subTotalPrice", cart.getSubTotalPriceAsString());
-        response.put("currency", props.getCurrency());
-        response.put("unitLength", props.getUnitOfLength());
+        response.put("currency", currencyForLocale(locale));
+        response.put("unitLength", unitLengthForLocale(locale));
         return response;
     }
 
@@ -325,5 +325,18 @@ public class CartController
         response.put("subTotalPrice", cart.getSubTotalPriceAsString());
         response.put("totalPrice", cart.getTotalPriceAsString());
         return response;
+    }
+
+    private String currencyForLocale(String locale)
+    {
+        if (locale.startsWith("de")) return "€";
+        if (locale.equals("en-UK")) return "£";
+        return props.getCurrency();
+    }
+
+    private String unitLengthForLocale(String locale)
+    {
+        if (locale.startsWith("de") || locale.equals("en-UK")) return "cm";
+        return props.getUnitOfLength();
     }
 }
