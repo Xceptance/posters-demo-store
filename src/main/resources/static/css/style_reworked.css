@@ -703,6 +703,12 @@
     font-family: 'Rokkitt', serif;
   }
 
+  #product-detail-form-price {
+    font-weight: 600;
+    font-size: var(--ts-md);
+    color: var(--accent);
+  }
+
   .product-detail-paragraph-label {
     display: none;
   }
