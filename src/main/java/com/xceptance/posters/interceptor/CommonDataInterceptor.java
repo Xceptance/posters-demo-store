@@ -1,6 +1,9 @@
 package com.xceptance.posters.interceptor;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -92,7 +95,26 @@ public class CommonDataInterceptor implements HandlerInterceptor
         mav.addObject("urlLocale", locale);
         String staticPath = requestPath.replaceFirst("/" + locale, "");
         mav.addObject("staticPath", staticPath);
-        mav.addObject("supportedLanguages", Arrays.asList(props.getLanguageArray()));
+        var langArray = props.getLanguageArray();
+        mav.addObject("supportedLanguages", Arrays.asList(langArray));
+
+        // Build maps for the language switcher
+        Map<String, String> languageNames = new LinkedHashMap<>();
+        Map<String, String> languageFlags = new LinkedHashMap<>();
+        for (String lang : langArray)
+        {
+            Locale loc = Locale.forLanguageTag(lang);
+            languageNames.put(lang, loc.getDisplayLanguage(loc)
+                + " (" + loc.getDisplayCountry(loc) + ")");
+            languageFlags.put(lang, toFlagEmoji(loc.getCountry()));
+        }
+        mav.addObject("languageNames", languageNames);
+        mav.addObject("languageFlags", languageFlags);
+        Locale currentLocale = Locale.forLanguageTag(locale);
+        mav.addObject("currentLanguageName",
+            currentLocale.getDisplayLanguage(currentLocale));
+        mav.addObject("currentLanguageFlag",
+            toFlagEmoji(currentLocale.getCountry()));
 
         // Locale-dependent config values
         String currency;
@@ -125,5 +147,20 @@ public class CommonDataInterceptor implements HandlerInterceptor
         mav.addObject("regexCreditCard", props.getRegex().getCreditCard());
         mav.addObject("regexZip", props.getRegex().getZip());
         mav.addObject("regexProductCount", props.getRegex().getProductCount());
+    }
+
+    /**
+     * Convert a 2-letter ISO country code (e.g. "US") into a flag emoji (e.g. 🇺🇸)
+     * using Unicode Regional Indicator Symbols.
+     */
+    private String toFlagEmoji(String countryCode)
+    {
+        if (countryCode == null || countryCode.length() != 2)
+        {
+            return "";
+        }
+        int firstChar = Character.codePointAt(countryCode.toUpperCase(), 0) - 0x41 + 0x1F1E6;
+        int secondChar = Character.codePointAt(countryCode.toUpperCase(), 1) - 0x41 + 0x1F1E6;
+        return new String(Character.toChars(firstChar)) + new String(Character.toChars(secondChar));
     }
 }

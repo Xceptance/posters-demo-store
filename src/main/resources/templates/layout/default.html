@@ -86,15 +86,19 @@
                         <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
                             <!-- Locale switcher -->
                             <li id="locale-switcher" class="nav-item dropdown">
-                                <a id="show-locale-menu" class="btn btn-secondary dropdown-toggle" href="#"
-                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                   th:text="${urlLocale}">en-US</a>
-                                <ul id="locale-menu" class="dropdown-menu">
+                                <a id="show-locale-menu" class="nav-link dropdown-toggle locale-trigger" href="#"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="locale-flag" th:text="${currentLanguageFlag}">🇺🇸</span>
+                                </a>
+                                <ul id="locale-menu" class="dropdown-menu dropdown-menu-end">
                                     <li th:each="lang : ${supportedLanguages}">
-                                        <a class="dropdown-item"
+                                        <a class="dropdown-item locale-item"
                                            th:id="'loc-' + ${lang.toLowerCase()}"
                                            th:href="@{'/' + ${lang} + '/'}"
-                                           th:text="${lang}">en-US</a>
+                                           th:classappend="${lang == urlLocale} ? 'active'">
+                                            <span class="locale-flag" th:text="${languageFlags.get(lang)}">🇺🇸</span>
+                                            <span th:text="${languageNames.get(lang)}">English (United States)</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
