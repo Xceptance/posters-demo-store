@@ -19,31 +19,55 @@
     src: url("../fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format('truetype');
     font-weight: 100 900;
   }
+  @font-face {
+    font-family: 'Inter';
+    src: url("../fonts/inter/InterVariable.woff2") format('woff2'),
+         url("../fonts/inter/InterVariable.ttf") format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url("../fonts/inter/InterVariable-Italic.woff2") format('woff2'),
+         url("../fonts/inter/InterVariable-Italic.ttf") format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+  }
   
   :root {
-    /* colors */
-    --xred: #cb1b1b;
-    --button-hover: #a30000;
+    /* colors — refined palette */
+    --xred: #c0392b;
+    --xred-light: #e74c3c;
+    --button-hover: #a93226;
+    --text-dark: #2c3e50;
+    --text-muted: #636e72;
+    --bg-off-white: #f8f9fa;
     --dialog-box-bg: #f9f9f9;
-    --dialog-box-text-dark: #111111;
-    --dialog-box-text-light: #555555;
+    --dialog-box-text-dark: #2c3e50;
+    --dialog-box-text-light: #636e72;
     --overlay-gray-light: rgba(150, 150, 150, 0.5);
-    --product-tile-hover-shadow: var(--xred);
+    --product-tile-hover-shadow: rgba(192, 57, 43, 0.35);
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --transition-base: 0.3s ease;
   }
 
   body {
-    font-family: 'Rokkitt', serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 16px;
     font-weight: 400;
     text-align: left;
     background-color: #fff;
-    color: black;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
 /*  Headings
 *   - Start
 */    
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rokkitt', serif;
     margin-top: 0.25rem;
     margin-bottom: 0.5rem;
   }
@@ -82,8 +106,14 @@
 *   - Start
 */
   header {
-    border-bottom: 1px solid #d3d7cf;
+    border-bottom: 1px solid rgba(211, 215, 207, 0.5);
     overflow: visible;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background-color: rgba(248, 248, 248, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   header .navbar {
@@ -256,16 +286,22 @@
 
   .carousel-content-product {
     text-align: center;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
   }
 
   .carousel-content-product h1 {
     padding-top: 1rem;
     padding-bottom: 1rem;
     margin-top: 5rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
   
   .carousel-content-product .btn {
     margin-bottom: 5rem;
+    border-radius: 2rem;
+    padding: 0.6rem 2rem;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
 /*  Carousel
 *   - End
@@ -293,14 +329,30 @@
     margin-right: 5px;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .category-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
   }
 
   .category-tile img {
     max-width: calc(20rem - 24px);
+    transition: transform var(--transition-base);
+  }
+
+  .category-tile:hover img {
+    transform: scale(1.05);
   }
 
   .category-tile-title {
     text-decoration: none;
+    font-weight: 600;
   }
 /*  Category tiles
 *   - End
@@ -360,14 +412,48 @@
 /*  Product tile
 *   - Start
 */
+  .product-tile {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    box-shadow: var(--card-shadow);
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .product-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
   .product-tile .card-img-top {
     object-fit: cover;
     aspect-ratio: 4 / 3;
+    transition: transform var(--transition-base);
+  }
+
+  .product-tile:hover .card-img-top {
+    transform: scale(1.05);
+  }
+
+  .product-tile .card-body {
+    padding: 1rem 1.25rem 0.5rem;
+  }
+
+  .product-tile .card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
   }
 
   .product-tile .card-footer {
     background: transparent;
     border-top: none;
+    padding: 0.5rem 1.25rem 1.25rem;
+  }
+
+  .product-tile-price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--xred);
   }
 /*  Product tile
 *   - End
@@ -376,8 +462,15 @@
 /*  Buttons
 *   - Start
 */
-  .btn-primary {
+  .btn {
     text-transform: capitalize;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all var(--transition-base);
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary {
     --bs-btn-bg: var(--xred);
     --bs-btn-border-color: var(--xred);
     --bs-btn-hover-bg: var(--button-hover);
@@ -388,8 +481,9 @@
     --bs-btn-disabled-border-color: var(--xred);
   }
 
-  .btn{
-    text-transform: capitalize;
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
   }
 /*  Buttons
 *   - End
@@ -399,31 +493,55 @@
 *   - Start
 */
   footer {
-    border-top: 1px solid #d3d7cf;
-	  margin-top: 20px;
-	  padding: 20px;
-
+    border-top: none;
+    margin-top: 2rem;
+    padding: 3rem 1.5rem 1.5rem;
+    background-color: #1a1a2e;
+    color: #c8c8d0;
     font-size: 0.875rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   footer h4 {
     font-family: 'Rokkitt', serif;
     text-transform: uppercase;
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
   }
 
   footer a {
-    color: var(--xred);
+    color: var(--xred-light);
+    transition: color var(--transition-base);
   }
   
   footer a:hover {
-    color: var(--button-hover);
+    color: #ffffff;
   }
 
   footer ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+  }
+
+  footer ul li {
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-copyright {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    color: #888;
+    font-size: 0.8rem;
+  }
+
+  .version-info {
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
   }
 /*  Footer
 *   - End
