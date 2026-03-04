@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="utf-8"/>
 
-    <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" th:href="@{/assets/css/icomoon.css}"/>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-icons.min.css}"/>
 
     <!-- Bootstrap  -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
@@ -79,7 +79,7 @@
                                    hx-target="#search-suggestions"
                                    hx-swap="outerHTML"/>
                             <button id="header-search-button" class="btn btn-primary" type="submit">
-                                <i class="icon-search"></i>
+                                <i class="bi bi-search"></i>
                             </button>
                             <div id="search-suggestions" class="search-suggestions-container"></div>
                         </form>
@@ -105,7 +105,7 @@
                                     <a id="show-user-menu" class="nav-link dropdown-toggle" href="#"
                                        title="Login" role="button" data-bs-toggle="dropdown"
                                        aria-haspopup="true" aria-expanded="false">
-                                        <span class="icon-user2"></span>
+                                        <span class="bi bi-person"></span>
                                     </a>
                                     <ul id="user-menu" class="dropdown-menu">
                                         <li class="header-user-menu-heading mb-2" th:text="#{headerWelcomeGuest}">Welcome, Guest!</li>
@@ -113,7 +113,7 @@
                                             <a th:href="@{'/' + ${urlLocale} + '/register'}"
                                                id="go-to-registration" class="btn btn-primary header-user-menu-button"
                                                title="Register">
-                                                <span class="icon-user-add-outline"></span>
+                                                <span class="bi bi-person-plus"></span>
                                                 <span th:text="#{headerRegistration}">Register</span>
                                             </a>
                                         </li>
@@ -121,7 +121,7 @@
                                             <a th:href="@{'/' + ${urlLocale} + '/login'}"
                                                id="go-to-login" class="btn btn-primary header-user-menu-button"
                                                title="Login">
-                                                <span class="icon-log-in"></span>
+                                                <span class="bi bi-box-arrow-in-right"></span>
                                                 <span th:text="#{headerLogin}">Login</span>
                                             </a>
                                         </li>
@@ -132,7 +132,7 @@
                                     <a id="show-user-menu" class="nav-link dropdown-toggle" href="#"
                                        role="button" data-bs-toggle="dropdown"
                                        aria-haspopup="true" aria-expanded="false">
-                                        <span class="icon-user2"></span>
+                                        <span class="bi bi-person"></span>
                                     </a>
                                     <ul id="user-menu" class="dropdown-menu">
                                         <li class="header-user-menu-heading mb-2">
@@ -142,7 +142,7 @@
                                             <a th:href="@{'/' + ${urlLocale} + '/accountOverview'}"
                                                id="go-to-account-overview" class="btn btn-primary header-user-menu-button"
                                                title="Account Overview">
-                                                <span class="icon-info-large logged"></span>
+                                                <span class="bi bi-person-circle"></span>
                                                 <span>Account Overview</span>
                                             </a>
                                         </li>
@@ -150,7 +150,7 @@
                                             <a th:href="@{'/' + ${urlLocale} + '/logout'}"
                                                id="go-to-logout" class="btn btn-primary header-user-menu-button"
                                                title="Logout">
-                                                <span class="icon-log-out"></span>
+                                                <span class="bi bi-box-arrow-right"></span>
                                                 <span>Logout</span>
                                             </a>
                                         </li>
@@ -166,7 +166,7 @@
                                    th:hx-get="@{'/' + ${urlLocale} + '/miniCart'}"
                                    hx-target="#mini-cart-content"
                                    hx-swap="innerHTML">
-                                    <span class="icon-shopping-cart"></span> &nbsp;
+                                    <span class="bi bi-cart3"></span> &nbsp;
                                     <span id="header-cart-count" class="header-cart-product-count"
                                           th:text="${cartProductCount}">0</span>
                                 </a>
@@ -226,7 +226,7 @@
         </div>
 
         <div id="js-top" class="go-to-top" style="display: none;">
-            <a onclick="toTopFunction()" id="js-gotop"><i class="icon-arrow-up2"></i></a>
+            <a onclick="toTopFunction()" id="js-gotop"><i class="bi bi-arrow-up"></i></a>
         </div>
     </main>
 
@@ -240,7 +240,7 @@
                         The Posters Demo Store is a demonstration web shop by Xceptance.
                     </p>
                     <ul class="footer-social-icons">
-                        <li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i class="icon-github"></i></a></li>
+                        <li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i class="bi bi-github"></i></a></li>
                     </ul>
                 </div>
                 <div id="footer-section-support" class="col">
