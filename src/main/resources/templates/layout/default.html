@@ -323,7 +323,9 @@
             }
 
             // Intercept htmx:confirm to show Bootstrap modal instead of native confirm()
+            // Only intercept when hx-confirm is set (detail.question is non-empty)
             document.body.addEventListener('htmx:confirm', function(e) {
+                if (!e.detail.question) return;  // no hx-confirm attr → let request proceed
                 e.preventDefault();
                 var modalEl = document.getElementById('confirmModal');
                 var bodyEl = document.getElementById('confirmModalBody');
