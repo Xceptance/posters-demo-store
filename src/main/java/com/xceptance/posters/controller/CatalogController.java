@@ -2,6 +2,8 @@ package com.xceptance.posters.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +47,7 @@ public class CatalogController
                               @PathVariable("name") String name,
                               @RequestParam("categoryId") int categoryId,
                               @RequestParam(value = "page", defaultValue = "1") int page,
+                              HttpServletRequest request,
                               Model model)
     {
         TopCategory category = topCategoryRepository.findById(categoryId).orElse(null);
@@ -59,7 +62,7 @@ public class CatalogController
         model.addAttribute("categoryPath", "topCategory");
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("categorySlug", name);
-        return "catalog/categoryOverview";
+        return isHtmxRequest(request) ? "fragments/productGridFragment" : "catalog/categoryOverview";
     }
 
     @GetMapping("/{locale}/category/{name}")
@@ -67,6 +70,7 @@ public class CatalogController
                               @PathVariable("name") String name,
                               @RequestParam("categoryId") int categoryId,
                               @RequestParam(value = "page", defaultValue = "1") int page,
+                              HttpServletRequest request,
                               Model model)
     {
         SubCategory category = subCategoryRepository.findById(categoryId).orElse(null);
@@ -81,7 +85,7 @@ public class CatalogController
         model.addAttribute("categoryPath", "category");
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("categorySlug", name);
-        return "catalog/categoryOverview";
+        return isHtmxRequest(request) ? "fragments/productGridFragment" : "catalog/categoryOverview";
     }
 
     @GetMapping("/{locale}/product/{name}")
@@ -121,5 +125,10 @@ public class CatalogController
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("pageSize", PAGE_SIZE);
+    }
+
+    private boolean isHtmxRequest(HttpServletRequest request)
+    {
+        return "true".equals(request.getHeader("HX-Request"));
     }
 }
