@@ -543,8 +543,19 @@
   }
 
   .product-tile .card-title {
+    font-size: var(--ts-xl);
+    font-weight: 700;
+    font-family: 'Rokkitt', serif;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+  }
+
+  .product-tile-text {
     font-size: var(--ts-base);
-    font-weight: 600;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0;
   }
 
   .product-tile .card-footer {
@@ -686,10 +697,29 @@
 /*  Product details
 *   - Start
 */
+  .product-detail-image {
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.75rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  #add-to-cart-form .form-label {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
   #product-detail-form-name {
     font-size: var(--ts-xl);
     font-weight: 600;
     font-family: 'Rokkitt', serif;
+    margin-bottom: 0;
+  }
+
+  #product-detail-form-price {
+    font-weight: 600;
+    font-size: var(--ts-md);
+    color: var(--accent);
   }
 
   .product-detail-paragraph-label {
