@@ -12,11 +12,13 @@ import com.xceptance.posters.model.Product;
 import com.xceptance.posters.repository.ProductRepository;
 
 /**
- * Handles product search queries.
+ * Handles product search queries and HTMX search suggestions.
  */
 @Controller
 public class SearchController
 {
+    private static final int SUGGEST_LIMIT = 5;
+
     private final ProductRepository productRepository;
 
     public SearchController(ProductRepository productRepository)
@@ -25,7 +27,7 @@ public class SearchController
     }
 
     @GetMapping("/{locale}/search")
-    public String search(@PathVariable String locale,
+    public String search(@PathVariable("locale") String locale,
                          @RequestParam(value = "q", required = false) String searchText,
                          Model model)
     {
@@ -37,17 +39,42 @@ public class SearchController
             return "search/searchResult";
         }
 
-        // Simple search: find products whose name contains the search text
-        // TODO: Replace with Lucene search in Phase 7
-        List<Product> allProducts = productRepository.findAll();
-        List<Product> results = allProducts.stream()
-                .filter(p -> p.getDefaultName() != null &&
-                        p.getDefaultName().toLowerCase().contains(searchText.toLowerCase()))
-                .toList();
-
+        List<Product> results = findByName(searchText);
         model.addAttribute("products", results);
         model.addAttribute("searchText", searchText);
         model.addAttribute("totalCount", results.size());
         return "search/searchResult";
+    }
+
+    /**
+     * HTMX search suggestions — returns a dropdown fragment with top 5 matches.
+     */
+    @GetMapping("/{locale}/searchSuggest")
+    public String searchSuggest(@PathVariable("locale") String locale,
+                                @RequestParam(value = "q", required = false) String searchText,
+                                Model model)
+    {
+        if (searchText == null || searchText.isBlank())
+        {
+            model.addAttribute("suggestions", List.of());
+            model.addAttribute("searchText", "");
+            return "fragments/searchSuggestFragment";
+        }
+
+        List<Product> results = findByName(searchText);
+        List<Product> suggestions = results.stream().limit(SUGGEST_LIMIT).toList();
+
+        model.addAttribute("suggestions", suggestions);
+        model.addAttribute("totalCount", results.size());
+        model.addAttribute("searchText", searchText);
+        return "fragments/searchSuggestFragment";
+    }
+
+    private List<Product> findByName(String searchText)
+    {
+        return productRepository.findAll().stream()
+                .filter(p -> p.getDefaultName() != null &&
+                        p.getDefaultName().toLowerCase().contains(searchText.toLowerCase()))
+                .toList();
     }
 }

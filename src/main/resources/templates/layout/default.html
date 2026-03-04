@@ -69,13 +69,19 @@
                         </li>
                     </ul>
                     <div class="header-actions me-0 ms-auto d-flex">
-                        <form id="header-search-form" class="d-flex" role="search"
+                        <form id="header-search-form" class="d-flex position-relative" role="search"
                               th:action="@{'/' + ${urlLocale} + '/search'}" method="get">
                             <input id="header-search-text" name="q" class="form-control me-2"
-                                   type="search" placeholder="Search" aria-label="Search" title="Search"/>
+                                   type="search" placeholder="Search" aria-label="Search" title="Search"
+                                   autocomplete="off"
+                                   th:hx-get="@{'/' + ${urlLocale} + '/searchSuggest'}"
+                                   hx-trigger="keyup changed delay:300ms, search"
+                                   hx-target="#search-suggestions"
+                                   hx-swap="outerHTML"/>
                             <button id="header-search-button" class="btn btn-primary" type="submit">
                                 <i class="icon-search"></i>
                             </button>
+                            <div id="search-suggestions" class="search-suggestions-container"></div>
                         </form>
                         <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
                             <!-- Locale switcher -->
