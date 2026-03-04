@@ -14,11 +14,7 @@
     src: url("../fonts/rokkitt/Rokkitt-VariableFont_wght.ttf") format('truetype');
     font-weight: 100 900;
   }
-  @font-face {
-    font-family: 'Montserrat';
-    src: url("../fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format('truetype');
-    font-weight: 100 900;
-  }
+
   @font-face {
     font-family: 'Inter';
     src: url("../fonts/inter/InterVariable.woff2") format('woff2'),
@@ -808,7 +804,7 @@
 *   - Start
 */
   .long-text {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   .demo-disclaimer {
