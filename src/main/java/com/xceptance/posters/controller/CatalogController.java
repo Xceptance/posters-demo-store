@@ -74,7 +74,7 @@ public class CatalogController
         return "catalog/categoryOverview";
     }
 
-    @GetMapping("/{locale}/productDetail/{name}")
+    @GetMapping("/{locale}/product/{name}")
     public String productDetail(@PathVariable String locale,
                                 @PathVariable String name,
                                 @RequestParam int productId,
@@ -87,6 +87,6 @@ public class CatalogController
         }
         model.addAttribute("product", product);
         model.addAttribute("unitLength", props.getUnitOfLength());
-        return "catalog/productDetail";
+        return "catalog/product";
     }
 }

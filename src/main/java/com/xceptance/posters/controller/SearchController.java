@@ -26,7 +26,7 @@ public class SearchController
 
     @GetMapping("/{locale}/search")
     public String search(@PathVariable String locale,
-                         @RequestParam(required = false) String searchText,
+                         @RequestParam(value = "q", required = false) String searchText,
                          Model model)
     {
         if (searchText == null || searchText.isBlank())

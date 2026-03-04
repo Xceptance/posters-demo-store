@@ -20,7 +20,7 @@
         <div th:each="product, stat : ${products}"
              th:id="'product-' + ${stat.index}"
              class="card product-tile">
-            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}">
+            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}">
                 <img th:src="@{${product.imageURL}}"
                      th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
                      class="card-img-top"
@@ -30,7 +30,7 @@
                 <h5 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h5>
                 <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
                 <p class="card-text product-tile-price" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
-                <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
+                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
                    class="btn btn-primary">Buy Here</a>
             </div>
         </div>
