@@ -128,7 +128,7 @@
   }
 
   .locale-flag {
-    font-size: 1.25rem;
+    font-size: var(--ts-md);
     line-height: 1;
   }
 
@@ -157,7 +157,7 @@
   }
 
   .locale-item .locale-flag {
-    font-size: 1.1rem;
+    font-size: var(--ts-base);
   }
 /*  Locale switcher
 *   - End
@@ -386,6 +386,29 @@
 /*  Carousel
 *   - End
 */
+
+/*  Intro quote
+*   - Start
+*/
+  .intro-quote {
+    font-family: 'Rokkitt', serif;
+    font-size: var(--ts-2xl);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 2rem 1rem;
+    border: none;
+  }
+/*  Intro quote
+*   - End
+*/
+
+/*  General card titles — keep h3 cards visually compact */
+  .card-title {
+    font-size: var(--ts-base);
+    font-weight: 600;
+  }
 
 /*  Category display case
 *   - Start
@@ -663,6 +686,12 @@
 /*  Product details
 *   - Start
 */
+  #product-detail-form-name {
+    font-size: var(--ts-xl);
+    font-weight: 600;
+    font-family: 'Rokkitt', serif;
+  }
+
   .product-detail-paragraph-label {
     display: none;
   }

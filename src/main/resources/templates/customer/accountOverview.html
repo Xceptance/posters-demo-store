@@ -11,7 +11,7 @@
             <div class="col-md-6">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="#{titlePersonalInformation}">Personal Information</h5>
+                        <h2 class="card-title" th:text="#{titlePersonalInformation}">Personal Information</h2>
                         <form th:action="@{'/' + ${urlLocale} + '/updateAccount'}" method="post" id="account-form">
                             <div class="mb-3">
                                 <label class="form-label">First Name</label>
@@ -33,7 +33,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="#{titleOrderHistoryCard}">Order History</h5>
+                        <h2 class="card-title" th:text="#{titleOrderHistoryCard}">Order History</h2>
                         <a th:href="@{'/' + ${urlLocale} + '/orderOverview'}" class="btn btn-outline-primary" id="btn-order-history">
                             <span th:text="#{labelViewOrders}">View Orders</span>
                         </a>
