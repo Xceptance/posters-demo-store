@@ -40,7 +40,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.00;25.50;32.95</price>
 <price xml:lang="de-DE">14.96;22.44;29.00</price>
-<price xml:lang="en-UK">13.43;20.14;26.03</price>
+<price xml:lang="en-GB">13.43;20.14;26.03</price>
 <price xml:lang="sv-SE">185.30;277.95;359.16</price>
 </product>
 <product>
@@ -63,7 +63,7 @@
 <availableSize>32x24;48x36;64x48</availableSize>
 <price>12.85;17.99;23.89</price>
 <price xml:lang="de-DE">11.31;15.83;21.02</price>
-<price xml:lang="en-UK">10.15;14.21;18.87</price>
+<price xml:lang="en-GB">10.15;14.21;18.87</price>
 <price xml:lang="sv-SE">140.06;196.09;260.40</price>
 </product>
 <product>
@@ -86,7 +86,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>9.30;15.00;19.99</price>
 <price xml:lang="de-DE">8.18;13.20;17.59</price>
-<price xml:lang="en-UK">7.35;11.85;15.79</price>
+<price xml:lang="en-GB">7.35;11.85;15.79</price>
 <price xml:lang="sv-SE">101.37;163.50;217.89</price>
 </product>
 <product>
@@ -109,7 +109,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>10.50;15.64;20.22</price>
 <price xml:lang="de-DE">9.24;13.76;17.79</price>
-<price xml:lang="en-UK">8.29;12.36;15.97</price>
+<price xml:lang="en-GB">8.29;12.36;15.97</price>
 <price xml:lang="sv-SE">114.45;170.48;220.40</price>
 </product>
 <product>
@@ -132,7 +132,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.00;30.45;38.00</price>
 <price xml:lang="de-DE">20.24;26.80;33.44</price>
-<price xml:lang="en-UK">18.17;24.06;30.02</price>
+<price xml:lang="en-GB">18.17;24.06;30.02</price>
 <price xml:lang="sv-SE">250.70;331.91;414.20</price>
 </product>
 <product>
@@ -155,7 +155,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;23.99;29.99</price>
 <price xml:lang="de-DE">15.83;21.11;26.39</price>
-<price xml:lang="en-UK">14.21;18.95;23.69</price>
+<price xml:lang="en-GB">14.21;18.95;23.69</price>
 <price xml:lang="sv-SE">196.09;261.49;326.89</price>
 </product>
 <product>
@@ -178,7 +178,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>8.75;15.75;22;45</price>
 <price xml:lang="de-DE">7.70;13.86;19.36;39.60</price>
-<price xml:lang="en-UK">6.91;12.44;17.38;35.55</price>
+<price xml:lang="en-GB">6.91;12.44;17.38;35.55</price>
 <price xml:lang="sv-SE">95.38;171.68;239.80;490.50</price>
 </product>
 <product>
@@ -201,7 +201,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.87;19.99;25.99</price>
 <price xml:lang="de-DE">11.33;17.59;22.87</price>
-<price xml:lang="en-UK">10.17;15.79;20.53</price>
+<price xml:lang="en-GB">10.17;15.79;20.53</price>
 <price xml:lang="sv-SE">140.28;217.89;283.29</price>
 </product>
 <product>
@@ -224,7 +224,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;26.98;34.89</price>
 <price xml:lang="de-DE">15.83;23.74;30.70</price>
-<price xml:lang="en-UK">14.21;21.31;27.56</price>
+<price xml:lang="en-GB">14.21;21.31;27.56</price>
 <price xml:lang="sv-SE">196.09;294.08;380.30</price>
 </product>
 <product>
@@ -247,7 +247,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.90;25.29;30.00</price>
 <price xml:lang="de-DE">15.75;22.26;26.40</price>
-<price xml:lang="en-UK">14.14;19.98;23.70</price>
+<price xml:lang="en-GB">14.14;19.98;23.70</price>
 <price xml:lang="sv-SE">195.11;275.66;327.00</price>
 </product>
 <!-- SubCategory Flowers  -->
@@ -271,7 +271,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>0.30;1.45;5.99</price>
 <price xml:lang="de-DE">0.26;1.28;5.27</price>
-<price xml:lang="en-UK">0.24;1.15;4.73</price>
+<price xml:lang="en-GB">0.24;1.15;4.73</price>
 <price xml:lang="sv-SE">3.27;15.80;65.29</price>
 </product>
 <product>
@@ -294,7 +294,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>0.99;4.00;7.99</price>
 <price xml:lang="de-DE">0.87;3.52;7.03</price>
-<price xml:lang="en-UK">0.78;3.16;6.31</price>
+<price xml:lang="en-GB">0.78;3.16;6.31</price>
 <price xml:lang="sv-SE">10.79;43.60;87.09</price>
 </product>
 <product>
@@ -317,7 +317,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.10;24.90;29.99</price>
 <price xml:lang="de-DE">15.05;21.91;26.39</price>
-<price xml:lang="en-UK">13.51;19.67;23.69</price>
+<price xml:lang="en-GB">13.51;19.67;23.69</price>
 <price xml:lang="sv-SE">186.39;271.41;326.89</price>
 </product>
 <product>
@@ -340,7 +340,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.59;31.75;38.00</price>
 <price xml:lang="de-DE">20.76;27.94;33.44</price>
-<price xml:lang="en-UK">18.64;25.08;30.02</price>
+<price xml:lang="en-GB">18.64;25.08;30.02</price>
 <price xml:lang="sv-SE">257.13;346.07;414.20</price>
 </product>
 <product>
@@ -355,7 +355,7 @@
 <longDescription xml:lang="sv-SE">Whether you have a passion for flowers or just enjoy captivating photography, this poster featuring a graceful white Snowdrop Anemone is sure to satisfy your aesthetic cravings. These flowers, known for their rarity, garner even more popularity as they exclusively bloom in the spring.</longDescription>
 <price>12.38;25.99;49.90</price>
 <price xml:lang="de-DE">10.89;22.87;43.91</price>
-<price xml:lang="en-UK">9.78;20.53;39.42</price>
+<price xml:lang="en-GB">9.78;20.53;39.42</price>
 <price xml:lang="sv-SE">134.94;283.29;543.91</price>
 <imageURL>
 <small>/assets/img/products/flora_and_fauna/flowers/snowdrop-anemone/snowdrop-anemone-small.webp</small>
@@ -386,7 +386,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>35.70;50.00;65.89</price>
 <price xml:lang="de-DE">31.42;44.00;57.98</price>
-<price xml:lang="en-UK">28.20;39.50;52.05</price>
+<price xml:lang="en-GB">28.20;39.50;52.05</price>
 <price xml:lang="sv-SE">389.13;545.00;718.20</price>
 </product>
 <product>
@@ -409,7 +409,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>18.50;25.30;31.90</price>
 <price xml:lang="de-DE">16.28;22.26;28.07</price>
-<price xml:lang="en-UK">14.62;19.99;25.20</price>
+<price xml:lang="en-GB">14.62;19.99;25.20</price>
 <price xml:lang="sv-SE">201.65;275.77;347.71</price>
 </product>
 <product>
@@ -432,7 +432,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;38.10</price>
 <price xml:lang="de-DE">15.83;21.99;33.53</price>
-<price xml:lang="en-UK">14.21;19.74;30.10</price>
+<price xml:lang="en-GB">14.21;19.74;30.10</price>
 <price xml:lang="sv-SE">196.09;272.39;415.29</price>
 </product>
 <product>
@@ -455,7 +455,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;38.10</price>
 <price xml:lang="de-DE">15.83;21.99;33.53</price>
-<price xml:lang="en-UK">14.21;19.74;30.10</price>
+<price xml:lang="en-GB">14.21;19.74;30.10</price>
 <price xml:lang="sv-SE">196.09;272.39;415.29</price>
 </product>
 <product>
@@ -478,7 +478,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.30;24.80;30.00</price>
 <price xml:lang="de-DE">14.34;21.82;26.40</price>
-<price xml:lang="en-UK">12.88;19.59;23.70</price>
+<price xml:lang="en-GB">12.88;19.59;23.70</price>
 <price xml:lang="sv-SE">177.67;270.32;327.00</price>
 </product>
 <!-- SubCategory Trees  -->
@@ -502,7 +502,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.89;19.99;29.99</price>
 <price xml:lang="de-DE">11.34;17.59;26.39</price>
-<price xml:lang="en-UK">10.18;15.79;23.69</price>
+<price xml:lang="en-GB">10.18;15.79;23.69</price>
 <price xml:lang="sv-SE">140.50;217.89;326.89</price>
 </product>
 <product>
@@ -525,7 +525,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.78;21.90;27.97</price>
 <price xml:lang="de-DE">13.89;19.27;24.61</price>
-<price xml:lang="en-UK">12.47;17.30;22.10</price>
+<price xml:lang="en-GB">12.47;17.30;22.10</price>
 <price xml:lang="sv-SE">172.00;238.71;304.87</price>
 </product>
 <product>
@@ -548,7 +548,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;20.85;29.90</price>
 <price xml:lang="de-DE">15.83;18.35;26.31</price>
-<price xml:lang="en-UK">14.21;16.47;23.62</price>
+<price xml:lang="en-GB">14.21;16.47;23.62</price>
 <price xml:lang="sv-SE">196.09;227.27;325.91</price>
 </product>
 <product>
@@ -571,7 +571,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.67;27.90;34.00</price>
 <price xml:lang="de-DE">14.67;24.55;29.92</price>
-<price xml:lang="en-UK">13.17;22.04;26.86</price>
+<price xml:lang="en-GB">13.17;22.04;26.86</price>
 <price xml:lang="sv-SE">181.70;304.11;370.60</price>
 </product>
 <product>
@@ -594,7 +594,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.98;29.99;45.50</price>
 <price xml:lang="de-DE">14.94;26.39;40.04</price>
-<price xml:lang="en-UK">13.41;23.69;35.95</price>
+<price xml:lang="en-GB">13.41;23.69;35.95</price>
 <price xml:lang="sv-SE">185.08;326.89;495.95</price>
 </product>
 <product>
@@ -617,7 +617,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>29.99;39.90;45.99</price>
 <price xml:lang="de-DE">26.39;35.11;40.47</price>
-<price xml:lang="en-UK">23.69;31.52;36.33</price>
+<price xml:lang="en-GB">23.69;31.52;36.33</price>
 <price xml:lang="sv-SE">326.89;434.91;501.29</price>
 </product>
 <product>
@@ -640,7 +640,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;33.33</price>
 <price xml:lang="de-DE">15.83;21.99;29.33</price>
-<price xml:lang="en-UK">14.21;19.74;26.33</price>
+<price xml:lang="en-GB">14.21;19.74;26.33</price>
 <price xml:lang="sv-SE">196.09;272.39;363.30</price>
 </product>
 <product>
@@ -663,7 +663,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;33.33</price>
 <price xml:lang="de-DE">15.83;21.99;29.33</price>
-<price xml:lang="en-UK">14.21;19.74;26.33</price>
+<price xml:lang="en-GB">14.21;19.74;26.33</price>
 <price xml:lang="sv-SE">196.09;272.39;363.30</price>
 </product>
 <product>
@@ -686,7 +686,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;33.33</price>
 <price xml:lang="de-DE">15.83;21.99;29.33</price>
-<price xml:lang="en-UK">14.21;19.74;26.33</price>
+<price xml:lang="en-GB">14.21;19.74;26.33</price>
 <price xml:lang="sv-SE">196.09;272.39;363.30</price>
 </product>
 <product>
@@ -709,7 +709,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.13;24.99;32.65</price>
 <price xml:lang="de-DE">14.19;21.99;28.73</price>
-<price xml:lang="en-UK">12.74;19.74;25.79</price>
+<price xml:lang="en-GB">12.74;19.74;25.79</price>
 <price xml:lang="sv-SE">175.82;272.39;355.88</price>
 </product>
 <!-- TopCategory Food  -->
@@ -734,7 +734,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;25.90;29.99</price>
 <price xml:lang="de-DE">15.83;22.79;26.39</price>
-<price xml:lang="en-UK">14.21;20.46;23.69</price>
+<price xml:lang="en-GB">14.21;20.46;23.69</price>
 <price xml:lang="sv-SE">196.09;282.31;326.89</price>
 </product>
 <product>
@@ -757,7 +757,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.89;27.90;40.00</price>
 <price xml:lang="de-DE">14.86;24.55;35.20</price>
-<price xml:lang="en-UK">13.34;22.04;31.60</price>
+<price xml:lang="en-GB">13.34;22.04;31.60</price>
 <price xml:lang="sv-SE">184.10;304.11;436.00</price>
 </product>
 <product>
@@ -780,7 +780,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>9.99;18.99;27.99</price>
 <price xml:lang="de-DE">8.79;16.71;24.63</price>
-<price xml:lang="en-UK">7.89;15.00;22.11</price>
+<price xml:lang="en-GB">7.89;15.00;22.11</price>
 <price xml:lang="sv-SE">108.89;206.99;305.09</price>
 </product>
 <product>
@@ -803,7 +803,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.75;28.90;54.90</price>
 <price xml:lang="de-DE">14.74;25.43;48.31</price>
-<price xml:lang="en-UK">13.23;22.83;43.37</price>
+<price xml:lang="en-GB">13.23;22.83;43.37</price>
 <price xml:lang="sv-SE">182.58;315.01;598.41</price>
 </product>
 <product>
@@ -826,7 +826,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.39;21.20;28.10</price>
 <price xml:lang="de-DE">11.78;18.66;24.73</price>
-<price xml:lang="en-UK">10.58;16.75;22.20</price>
+<price xml:lang="en-GB">10.58;16.75;22.20</price>
 <price xml:lang="sv-SE">145.95;231.08;306.29</price>
 </product>
 <product>
@@ -849,7 +849,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;27.99;37.99</price>
 <price xml:lang="de-DE">15.83;24.63;33.43</price>
-<price xml:lang="en-UK">14.21;22.11;30.01</price>
+<price xml:lang="en-GB">14.21;22.11;30.01</price>
 <price xml:lang="sv-SE">196.09;305.09;414.09</price>
 </product>
 <product>
@@ -872,7 +872,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>19.99;29.90;39.80</price>
 <price xml:lang="de-DE">17.59;26.31;35.02</price>
-<price xml:lang="en-UK">15.79;23.62;31.44</price>
+<price xml:lang="en-GB">15.79;23.62;31.44</price>
 <price xml:lang="sv-SE">217.89;325.91;433.82</price>
 </product>
 <product>
@@ -895,7 +895,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;28.10;37.90</price>
 <price xml:lang="de-DE">15.83;24.73;33.35</price>
-<price xml:lang="en-UK">14.21;22.20;29.94</price>
+<price xml:lang="en-GB">14.21;22.20;29.94</price>
 <price xml:lang="sv-SE">196.09;306.29;413.11</price>
 </product>
 <product>
@@ -918,7 +918,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>29.99;45.00;70.30</price>
 <price xml:lang="de-DE">26.39;39.60;61.86</price>
-<price xml:lang="en-UK">23.69;35.55;55.54</price>
+<price xml:lang="en-GB">23.69;35.55;55.54</price>
 <price xml:lang="sv-SE">326.89;490.50;766.27</price>
 </product>
 <product>
@@ -941,7 +941,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;25.90;31.70</price>
 <price xml:lang="de-DE">15.83;22.79;27.90</price>
-<price xml:lang="en-UK">14.21;20.46;25.04</price>
+<price xml:lang="en-GB">14.21;20.46;25.04</price>
 <price xml:lang="sv-SE">196.09;282.31;345.53</price>
 </product>
 <!-- SubCategory Main Dishes  -->
@@ -965,7 +965,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.68;24.90;29.99</price>
 <price xml:lang="de-DE">14.68;21.91;26.39</price>
-<price xml:lang="en-UK">13.18;19.67;23.69</price>
+<price xml:lang="en-GB">13.18;19.67;23.69</price>
 <price xml:lang="sv-SE">181.81;271.41;326.89</price>
 </product>
 <product>
@@ -988,7 +988,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;43.00</price>
 <price xml:lang="de-DE">15.83;26.39;37.84</price>
-<price xml:lang="en-UK">14.21;23.69;33.97</price>
+<price xml:lang="en-GB">14.21;23.69;33.97</price>
 <price xml:lang="sv-SE">196.09;326.89;468.70</price>
 </product>
 <product>
@@ -1011,7 +1011,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>29.10;35.50;45.60</price>
 <price xml:lang="de-DE">25.61;31.24;40.13</price>
-<price xml:lang="en-UK">22.99;28.05;36.02</price>
+<price xml:lang="en-GB">22.99;28.05;36.02</price>
 <price xml:lang="sv-SE">317.19;386.95;497.04</price>
 </product>
 <product>
@@ -1034,7 +1034,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.50;34.40;42.65</price>
 <price xml:lang="de-DE">20.68;30.27;37.53</price>
-<price xml:lang="en-UK">18.57;27.18;33.69</price>
+<price xml:lang="en-GB">18.57;27.18;33.69</price>
 <price xml:lang="sv-SE">256.15;374.96;464.88</price>
 </product>
 <product>
@@ -1057,7 +1057,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1080,7 +1080,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>11.12;13.14;15.16</price>
 <price xml:lang="de-DE">9.79;11.56;13.34</price>
-<price xml:lang="en-UK">8.78;10.38;11.98</price>
+<price xml:lang="en-GB">8.78;10.38;11.98</price>
 <price xml:lang="sv-SE">121.21;143.23;165.24</price>
 </product>
 <product>
@@ -1103,7 +1103,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.99;22.12;28.45</price>
 <price xml:lang="de-DE">12.31;19.47;25.04</price>
-<price xml:lang="en-UK">11.05;17.47;22.48</price>
+<price xml:lang="en-GB">11.05;17.47;22.48</price>
 <price xml:lang="sv-SE">152.49;241.11;310.11</price>
 </product>
 <product>
@@ -1126,7 +1126,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.90</price>
 <price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-UK">14.21;23.69;31.52</price>
+<price xml:lang="en-GB">14.21;23.69;31.52</price>
 <price xml:lang="sv-SE">196.09;326.89;434.91</price>
 </product>
 <product>
@@ -1149,7 +1149,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.45;23.24;29.78</price>
 <price xml:lang="de-DE">10.96;20.45;26.21</price>
-<price xml:lang="en-UK">9.84;18.36;23.53</price>
+<price xml:lang="en-GB">9.84;18.36;23.53</price>
 <price xml:lang="sv-SE">135.70;253.32;324.60</price>
 </product>
 <product>
@@ -1172,7 +1172,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <!-- SubCategory Sweets  -->
@@ -1196,7 +1196,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.78;28.89;35.45</price>
 <price xml:lang="de-DE">20.93;25.42;31.20</price>
-<price xml:lang="en-UK">18.79;22.82;28.01</price>
+<price xml:lang="en-GB">18.79;22.82;28.01</price>
 <price xml:lang="sv-SE">259.20;314.90;386.41</price>
 </product>
 <product>
@@ -1219,7 +1219,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>11.78;21.84;29.87</price>
 <price xml:lang="de-DE">10.37;19.22;26.29</price>
-<price xml:lang="en-UK">9.31;17.25;23.60</price>
+<price xml:lang="en-GB">9.31;17.25;23.60</price>
 <price xml:lang="sv-SE">128.40;238.06;325.58</price>
 </product>
 <product>
@@ -1242,7 +1242,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>18.89;29.99;39.99</price>
 <price xml:lang="de-DE">16.62;26.39;35.19</price>
-<price xml:lang="en-UK">14.92;23.69;31.59</price>
+<price xml:lang="en-GB">14.92;23.69;31.59</price>
 <price xml:lang="sv-SE">205.90;326.89;435.89</price>
 </product>
 <product>
@@ -1265,7 +1265,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1288,7 +1288,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1311,7 +1311,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>9.89;19.78;28.79</price>
 <price xml:lang="de-DE">8.70;17.41;25.34</price>
-<price xml:lang="en-UK">7.81;15.63;22.74</price>
+<price xml:lang="en-GB">7.81;15.63;22.74</price>
 <price xml:lang="sv-SE">107.80;215.60;313.81</price>
 </product>
 <product>
@@ -1334,7 +1334,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;27.99;39.56</price>
 <price xml:lang="de-DE">15.83;24.63;34.81</price>
-<price xml:lang="en-UK">14.21;22.11;31.25</price>
+<price xml:lang="en-GB">14.21;22.11;31.25</price>
 <price xml:lang="sv-SE">196.09;305.09;431.20</price>
 </product>
 <product>
@@ -1357,7 +1357,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.75;18.99;27.65</price>
 <price xml:lang="de-DE">11.22;16.71;24.33</price>
-<price xml:lang="en-UK">10.07;15.00;21.84</price>
+<price xml:lang="en-GB">10.07;15.00;21.84</price>
 <price xml:lang="sv-SE">138.97;206.99;301.38</price>
 </product>
 <product>
@@ -1380,7 +1380,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.90</price>
 <price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-UK">14.21;23.69;31.52</price>
+<price xml:lang="en-GB">14.21;23.69;31.52</price>
 <price xml:lang="sv-SE">196.09;326.89;434.91</price>
 </product>
 <product>
@@ -1403,7 +1403,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.89;29.99;39.99</price>
 <price xml:lang="de-DE">21.02;26.39;35.19</price>
-<price xml:lang="en-UK">18.87;23.69;31.59</price>
+<price xml:lang="en-GB">18.87;23.69;31.59</price>
 <price xml:lang="sv-SE">260.40;326.89;435.89</price>
 </product>
 <!-- TopCategory Means_of_Transportation  -->
@@ -1428,7 +1428,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.99;23.80;31.00</price>
 <price xml:lang="de-DE">11.43;20.94;27.28</price>
-<price xml:lang="en-UK">10.26;18.80;24.49</price>
+<price xml:lang="en-GB">10.26;18.80;24.49</price>
 <price xml:lang="sv-SE">141.59;259.42;337.90</price>
 </product>
 <product>
@@ -1451,7 +1451,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.56;31.70;39.99</price>
 <price xml:lang="de-DE">20.73;27.90;35.19</price>
-<price xml:lang="en-UK">18.61;25.04;31.59</price>
+<price xml:lang="en-GB">18.61;25.04;31.59</price>
 <price xml:lang="sv-SE">256.80;345.53;435.89</price>
 </product>
 <product>
@@ -1474,7 +1474,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.59;21.90;29.99</price>
 <price xml:lang="de-DE">11.08;19.27;26.39</price>
-<price xml:lang="en-UK">9.95;17.30;23.69</price>
+<price xml:lang="en-GB">9.95;17.30;23.69</price>
 <price xml:lang="sv-SE">137.23;238.71;326.89</price>
 </product>
 <product>
@@ -1497,7 +1497,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1520,7 +1520,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.89;24.70;35.90</price>
 <price xml:lang="de-DE">13.98;21.74;31.59</price>
-<price xml:lang="en-UK">12.55;19.51;28.36</price>
+<price xml:lang="en-GB">12.55;19.51;28.36</price>
 <price xml:lang="sv-SE">173.20;269.23;391.31</price>
 </product>
 <product>
@@ -1543,7 +1543,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1566,7 +1566,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.78;38.90;51.00</price>
 <price xml:lang="de-DE">20.93;34.23;44.88</price>
-<price xml:lang="en-UK">18.79;30.73;40.29</price>
+<price xml:lang="en-GB">18.79;30.73;40.29</price>
 <price xml:lang="sv-SE">259.20;424.01;555.90</price>
 </product>
 <product>
@@ -1589,7 +1589,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.95;27.90;38.40</price>
 <price xml:lang="de-DE">11.40;24.55;33.79</price>
-<price xml:lang="en-UK">10.23;22.04;30.34</price>
+<price xml:lang="en-GB">10.23;22.04;30.34</price>
 <price xml:lang="sv-SE">141.16;304.11;418.56</price>
 </product>
 <product>
@@ -1612,7 +1612,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.97;28.90;34.65</price>
 <price xml:lang="de-DE">14.05;25.43;30.49</price>
-<price xml:lang="en-UK">12.62;22.83;27.37</price>
+<price xml:lang="en-GB">12.62;22.83;27.37</price>
 <price xml:lang="sv-SE">174.07;315.01;377.69</price>
 </product>
 <product>
@@ -1635,7 +1635,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <!-- SubCategory Classic_Cars  -->
@@ -1659,7 +1659,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1682,7 +1682,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.95;18.40;27.90</price>
 <price xml:lang="de-DE">11.40;16.19;24.55</price>
-<price xml:lang="en-UK">10.23;14.54;22.04</price>
+<price xml:lang="en-GB">10.23;14.54;22.04</price>
 <price xml:lang="sv-SE">141.16;200.56;304.11</price>
 </product>
 <product>
@@ -1705,7 +1705,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>18.36;28.65;41.10</price>
 <price xml:lang="de-DE">16.16;25.21;36.17</price>
-<price xml:lang="en-UK">14.50;22.63;32.47</price>
+<price xml:lang="en-GB">14.50;22.63;32.47</price>
 <price xml:lang="sv-SE">200.12;312.28;447.99</price>
 </product>
 <product>
@@ -1728,7 +1728,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>9.74;19.78;27.19</price>
 <price xml:lang="de-DE">8.57;17.41;23.93</price>
-<price xml:lang="en-UK">7.69;15.63;21.48</price>
+<price xml:lang="en-GB">7.69;15.63;21.48</price>
 <price xml:lang="sv-SE">106.17;215.60;296.37</price>
 </product>
 <product>
@@ -1751,7 +1751,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1774,7 +1774,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.63;18.91;26.78</price>
 <price xml:lang="de-DE">11.11;16.64;23.57</price>
-<price xml:lang="en-UK">9.98;14.94;21.16</price>
+<price xml:lang="en-GB">9.98;14.94;21.16</price>
 <price xml:lang="sv-SE">137.67;206.12;291.90</price>
 </product>
 <product>
@@ -1797,7 +1797,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.45;22.90;29.90</price>
 <price xml:lang="de-DE">13.60;20.15;26.31</price>
-<price xml:lang="en-UK">12.21;18.09;23.62</price>
+<price xml:lang="en-GB">12.21;18.09;23.62</price>
 <price xml:lang="sv-SE">168.41;249.61;325.91</price>
 </product>
 <product>
@@ -1820,7 +1820,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1843,7 +1843,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1866,7 +1866,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.65;23.67;34.78</price>
 <price xml:lang="de-DE">12.01;20.83;30.61</price>
-<price xml:lang="en-UK">10.78;18.70;27.48</price>
+<price xml:lang="en-GB">10.78;18.70;27.48</price>
 <price xml:lang="sv-SE">148.78;258.00;379.10</price>
 </product>
 <!-- SubCategory Railways  -->
@@ -1890,7 +1890,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -1913,7 +1913,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.56;33.68;40.90</price>
 <price xml:lang="de-DE">20.73;29.64;35.99</price>
-<price xml:lang="en-UK">18.61;26.61;32.31</price>
+<price xml:lang="en-GB">18.61;26.61;32.31</price>
 <price xml:lang="sv-SE">256.80;367.11;445.81</price>
 </product>
 <product>
@@ -1936,7 +1936,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.45;21.20;33.33</price>
 <price xml:lang="de-DE">10.96;18.66;29.33</price>
-<price xml:lang="en-UK">9.84;16.75;26.33</price>
+<price xml:lang="en-GB">9.84;16.75;26.33</price>
 <price xml:lang="sv-SE">135.70;231.08;363.30</price>
 </product>
 <product>
@@ -1959,7 +1959,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.78;20.90;34.40</price>
 <price xml:lang="de-DE">11.25;18.39;30.27</price>
-<price xml:lang="en-UK">10.10;16.51;27.18</price>
+<price xml:lang="en-GB">10.10;16.51;27.18</price>
 <price xml:lang="sv-SE">139.30;227.81;374.96</price>
 </product>
 <product>
@@ -1982,7 +1982,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2005,7 +2005,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.98;18.67;23.90</price>
 <price xml:lang="de-DE">14.06;16.43;21.03</price>
-<price xml:lang="en-UK">12.62;14.75;18.88</price>
+<price xml:lang="en-GB">12.62;14.75;18.88</price>
 <price xml:lang="sv-SE">174.18;203.50;260.51</price>
 </product>
 <product>
@@ -2028,7 +2028,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;39.99;56.80</price>
 <price xml:lang="de-DE">15.83;35.19;49.98</price>
-<price xml:lang="en-UK">14.21;31.59;44.87</price>
+<price xml:lang="en-GB">14.21;31.59;44.87</price>
 <price xml:lang="sv-SE">196.09;435.89;619.12</price>
 </product>
 <product>
@@ -2051,7 +2051,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.99;29.70;34.50</price>
 <price xml:lang="de-DE">14.95;26.14;30.36</price>
-<price xml:lang="en-UK">13.42;23.46;27.26</price>
+<price xml:lang="en-GB">13.42;23.46;27.26</price>
 <price xml:lang="sv-SE">185.19;323.73;376.05</price>
 </product>
 <product>
@@ -2074,7 +2074,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;35.00;51.90</price>
 <price xml:lang="de-DE">15.83;30.80;45.67</price>
-<price xml:lang="en-UK">14.21;27.65;41.00</price>
+<price xml:lang="en-GB">14.21;27.65;41.00</price>
 <price xml:lang="sv-SE">196.09;381.50;565.71</price>
 </product>
 <product>
@@ -2089,7 +2089,7 @@
 <longDescription xml:lang="sv-SE">Not even subway trains. Darn!</longDescription>
 <price>17.80;22.00;33.30</price>
 <price xml:lang="de-DE">15.66;19.36;29.30</price>
-<price xml:lang="en-UK">14.06;17.38;26.31</price>
+<price xml:lang="en-GB">14.06;17.38;26.31</price>
 <price xml:lang="sv-SE">194.02;239.80;362.97</price>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/old-nyc-subway/old-nyc-subway-small.webp</small>
@@ -2122,7 +2122,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.90;23.90;34.90</price>
 <price xml:lang="de-DE">11.35;21.03;30.71</price>
-<price xml:lang="en-UK">10.19;18.88;27.57</price>
+<price xml:lang="en-GB">10.19;18.88;27.57</price>
 <price xml:lang="sv-SE">140.61;260.51;380.41</price>
 </product>
 <product>
@@ -2145,7 +2145,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.78;19.90;25.90</price>
 <price xml:lang="de-DE">12.13;17.51;22.79</price>
-<price xml:lang="en-UK">10.89;15.72;20.46</price>
+<price xml:lang="en-GB">10.89;15.72;20.46</price>
 <price xml:lang="sv-SE">150.20;216.91;282.31</price>
 </product>
 <product>
@@ -2168,7 +2168,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2191,7 +2191,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2214,7 +2214,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>14.59;28.56;42.89</price>
 <price xml:lang="de-DE">12.84;25.13;37.74</price>
-<price xml:lang="en-UK">11.53;22.56;33.88</price>
+<price xml:lang="en-GB">11.53;22.56;33.88</price>
 <price xml:lang="sv-SE">159.03;311.30;467.50</price>
 </product>
 <product>
@@ -2237,7 +2237,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.89;19.90;33.30</price>
 <price xml:lang="de-DE">11.34;17.51;29.30</price>
-<price xml:lang="en-UK">10.18;15.72;26.31</price>
+<price xml:lang="en-GB">10.18;15.72;26.31</price>
 <price xml:lang="sv-SE">140.50;216.91;362.97</price>
 </product>
 <product>
@@ -2260,7 +2260,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.90;39.90</price>
 <price xml:lang="de-DE">15.83;26.31;35.11</price>
-<price xml:lang="en-UK">14.21;23.62;31.52</price>
+<price xml:lang="en-GB">14.21;23.62;31.52</price>
 <price xml:lang="sv-SE">196.09;325.91;434.91</price>
 </product>
 <product>
@@ -2283,7 +2283,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.00;25.00;43.00</price>
 <price xml:lang="de-DE">10.56;22.00;37.84</price>
-<price xml:lang="en-UK">9.48;19.75;33.97</price>
+<price xml:lang="en-GB">9.48;19.75;33.97</price>
 <price xml:lang="sv-SE">130.80;272.50;468.70</price>
 </product>
 <product>
@@ -2306,7 +2306,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.33;22.22;33.33</price>
 <price xml:lang="de-DE">11.73;19.55;29.33</price>
-<price xml:lang="en-UK">10.53;17.55;26.33</price>
+<price xml:lang="en-GB">10.53;17.55;26.33</price>
 <price xml:lang="sv-SE">145.30;242.20;363.30</price>
 </product>
 <product>
@@ -2329,7 +2329,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.00;30.00;60.00</price>
 <price xml:lang="de-DE">13.20;26.40;52.80</price>
-<price xml:lang="en-UK">11.85;23.70;47.40</price>
+<price xml:lang="en-GB">11.85;23.70;47.40</price>
 <price xml:lang="sv-SE">163.50;327.00;654.00</price>
 </product>
 <!-- SubCategory Fireworks  -->
@@ -2353,7 +2353,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>14.78;25.90;34.60</price>
 <price xml:lang="de-DE">13.01;22.79;30.45</price>
-<price xml:lang="en-UK">11.68;20.46;27.33</price>
+<price xml:lang="en-GB">11.68;20.46;27.33</price>
 <price xml:lang="sv-SE">161.10;282.31;377.14</price>
 </product>
 <product>
@@ -2376,7 +2376,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.57;23.45;45.67</price>
 <price xml:lang="de-DE">13.70;20.64;40.19</price>
-<price xml:lang="en-UK">12.30;18.53;36.08</price>
+<price xml:lang="en-GB">12.30;18.53;36.08</price>
 <price xml:lang="sv-SE">169.71;255.60;497.80</price>
 </product>
 <product>
@@ -2399,7 +2399,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2422,7 +2422,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.90</price>
 <price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-UK">14.21;23.69;31.52</price>
+<price xml:lang="en-GB">14.21;23.69;31.52</price>
 <price xml:lang="sv-SE">196.09;326.89;434.91</price>
 </product>
 <product>
@@ -2445,7 +2445,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.50;25.60;45.00</price>
 <price xml:lang="de-DE">11.00;22.53;39.60</price>
-<price xml:lang="en-UK">9.88;20.22;35.55</price>
+<price xml:lang="en-GB">9.88;20.22;35.55</price>
 <price xml:lang="sv-SE">136.25;279.04;490.50</price>
 </product>
 <product>
@@ -2468,7 +2468,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2491,7 +2491,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.78;31.90;42.00</price>
 <price xml:lang="de-DE">20.93;28.07;36.96</price>
-<price xml:lang="en-UK">18.79;25.20;33.18</price>
+<price xml:lang="en-GB">18.79;25.20;33.18</price>
 <price xml:lang="sv-SE">259.20;347.71;457.80</price>
 </product>
 <product>
@@ -2514,7 +2514,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.99;23.90;31.80</price>
 <price xml:lang="de-DE">11.43;21.03;27.98</price>
-<price xml:lang="en-UK">10.26;18.88;25.12</price>
+<price xml:lang="en-GB">10.26;18.88;25.12</price>
 <price xml:lang="sv-SE">141.59;260.51;346.62</price>
 </product>
 <product>
@@ -2537,7 +2537,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.90;39.90</price>
 <price xml:lang="de-DE">15.83;26.31;35.11</price>
-<price xml:lang="en-UK">14.21;23.62;31.52</price>
+<price xml:lang="en-GB">14.21;23.62;31.52</price>
 <price xml:lang="sv-SE">196.09;325.91;434.91</price>
 </product>
 <product>
@@ -2560,7 +2560,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.40;26.90;37.40</price>
 <price xml:lang="de-DE">13.55;23.67;32.91</price>
-<price xml:lang="en-UK">12.17;21.25;29.55</price>
+<price xml:lang="en-GB">12.17;21.25;29.55</price>
 <price xml:lang="sv-SE">167.86;293.21;407.66</price>
 </product>
 <!-- SubCategory Landscapes  -->
@@ -2584,7 +2584,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.00;24.00;48.00</price>
 <price xml:lang="de-DE">10.56;21.12;42.24</price>
-<price xml:lang="en-UK">9.48;18.96;37.92</price>
+<price xml:lang="en-GB">9.48;18.96;37.92</price>
 <price xml:lang="sv-SE">130.80;261.60;523.20</price>
 </product>
 <product>
@@ -2607,7 +2607,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2630,7 +2630,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.55;23.44;34.55</price>
 <price xml:lang="de-DE">13.68;20.63;30.40</price>
-<price xml:lang="en-UK">12.28;18.52;27.29</price>
+<price xml:lang="en-GB">12.28;18.52;27.29</price>
 <price xml:lang="sv-SE">169.50;255.50;376.59</price>
 </product>
 <product>
@@ -2653,7 +2653,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.33;22.22;44.44</price>
 <price xml:lang="de-DE">11.73;19.55;39.11</price>
-<price xml:lang="en-UK">10.53;17.55;35.11</price>
+<price xml:lang="en-GB">10.53;17.55;35.11</price>
 <price xml:lang="sv-SE">145.30;242.20;484.40</price>
 </product>
 <product>
@@ -2676,7 +2676,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.25;19.90;28.30</price>
 <price xml:lang="de-DE">10.78;17.51;24.90</price>
-<price xml:lang="en-UK">9.68;15.72;22.36</price>
+<price xml:lang="en-GB">9.68;15.72;22.36</price>
 <price xml:lang="sv-SE">133.53;216.91;308.47</price>
 </product>
 <product>
@@ -2699,7 +2699,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>16.00;29.98;37.90</price>
 <price xml:lang="de-DE">14.08;26.38;33.35</price>
-<price xml:lang="en-UK">12.64;23.68;29.94</price>
+<price xml:lang="en-GB">12.64;23.68;29.94</price>
 <price xml:lang="sv-SE">174.40;326.78;413.11</price>
 </product>
 <product>
@@ -2722,7 +2722,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.90</price>
 <price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-UK">14.21;23.69;31.52</price>
+<price xml:lang="en-GB">14.21;23.69;31.52</price>
 <price xml:lang="sv-SE">196.09;326.89;434.91</price>
 </product>
 <product>
@@ -2745,7 +2745,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-UK">14.21;23.69;31.59</price>
+<price xml:lang="en-GB">14.21;23.69;31.59</price>
 <price xml:lang="sv-SE">196.09;326.89;435.89</price>
 </product>
 <product>
@@ -2768,7 +2768,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>18.20;24.70;31.80</price>
 <price xml:lang="de-DE">16.02;21.74;27.98</price>
-<price xml:lang="en-UK">14.38;19.51;25.12</price>
+<price xml:lang="en-GB">14.38;19.51;25.12</price>
 <price xml:lang="sv-SE">198.38;269.23;346.62</price>
 </product>
 <product>
@@ -2791,7 +2791,7 @@
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>15.45;25.00;32.10</price>
 <price xml:lang="de-DE">13.60;22.00;28.25</price>
-<price xml:lang="en-UK">12.21;19.75;25.36</price>
+<price xml:lang="en-GB">12.21;19.75;25.36</price>
 <price xml:lang="sv-SE">168.41;272.50;349.89</price>
 </product>
 <!-- SubCategory XXL  -->
@@ -2816,7 +2816,7 @@
 <availableSize>96x32</availableSize>
 <price>34.99</price>
 <price xml:lang="de-DE">30.79</price>
-<price xml:lang="en-UK">27.64</price>
+<price xml:lang="en-GB">27.64</price>
 <price xml:lang="sv-SE">381.39</price>
 </product>
 <product>
@@ -2840,7 +2840,7 @@
 <availableSize>96x32</availableSize>
 <price>36.00</price>
 <price xml:lang="de-DE">31.68</price>
-<price xml:lang="en-UK">28.44</price>
+<price xml:lang="en-GB">28.44</price>
 <price xml:lang="sv-SE">392.40</price>
 </product>
 <product>
@@ -2864,7 +2864,7 @@
 <availableSize>96x32</availableSize>
 <price>38.90</price>
 <price xml:lang="de-DE">34.23</price>
-<price xml:lang="en-UK">30.73</price>
+<price xml:lang="en-GB">30.73</price>
 <price xml:lang="sv-SE">424.01</price>
 </product>
 <product>
@@ -2888,7 +2888,7 @@
 <availableSize>96x32</availableSize>
 <price>34.78</price>
 <price xml:lang="de-DE">30.61</price>
-<price xml:lang="en-UK">27.48</price>
+<price xml:lang="en-GB">27.48</price>
 <price xml:lang="sv-SE">379.10</price>
 </product>
 </products>

@@ -328,7 +328,7 @@ public class CartController
 
     private String unitLengthForLocale(String locale)
     {
-        if (locale.startsWith("de") || locale.equals("en-UK") || locale.equals("sv-SE")) return "cm";
+        if (locale.startsWith("de") || locale.equals("en-GB") || locale.equals("sv-SE")) return "cm";
         return props.getUnitOfLength();
     }
 }

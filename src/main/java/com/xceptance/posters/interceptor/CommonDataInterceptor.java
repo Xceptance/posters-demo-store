@@ -102,7 +102,7 @@ public class CommonDataInterceptor implements HandlerInterceptor
             currency = "€";
             unitLength = "cm";
         }
-        else if (locale.equals("en-UK"))
+        else if (locale.equals("en-GB"))
         {
             currency = "£";
             unitLength = "cm";

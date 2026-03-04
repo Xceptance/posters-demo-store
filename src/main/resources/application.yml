@@ -50,7 +50,7 @@ posters:
   tax: 0.06
   unit-of-length: "in"
   page-size: 8
-  languages: "en-US,en-UK,de-DE,sv-SE"
+  languages: "en-US,en-GB,de-DE,sv-SE"
   version: "3.0.0-SNAPSHOT"
   import-customer: true
   regex:

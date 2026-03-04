@@ -6,10 +6,10 @@
         <code>en</code>
         <dialects>
             <dialect>
-                <precisename>english uk</precisename>
+                <precisename>english gb</precisename>
                 <preciseendonym>British English</preciseendonym>
-                <disamb>English (UK)</disamb>
-                <extension>UK</extension>
+                <disamb>English (GB)</disamb>
+                <extension>GB</extension>
             </dialect>
             <dialect>
                 <precisename>english us</precisename>

@@ -16,19 +16,19 @@ import jakarta.servlet.http.HttpServletResponse;
  * {@code #{key}} message expressions and {@code #numbers.formatCurrency()}
  * resolve to the correct locale automatically.</p>
  *
- * <p>Handles non-standard locale codes (e.g. "en-UK" maps to "en-GB")
+ * <p>Handles non-standard locale codes (e.g. "en-GB" maps to "en-GB")
  * for proper Java currency/number formatting.</p>
  */
 public class UrlLocaleResolver extends AbstractLocaleResolver
 {
     /**
      * Maps custom URL locale strings to proper Java Locale instances.
-     * "en-UK" is mapped to "en-GB" because ISO 3166-1 uses "GB" for
+     * "en-GB" is mapped to "en-GB" because ISO 3166-1 uses "GB" for
      * the United Kingdom, and Java's NumberFormat/Currency need this.
      */
     private static final Map<String, Locale> LOCALE_MAP = Map.of(
         "en-US", Locale.forLanguageTag("en-US"),
-        "en-UK", Locale.forLanguageTag("en-GB"),
+        "en-GB", Locale.forLanguageTag("en-GB"),
         "de-DE", Locale.forLanguageTag("de-DE"),
         "sv-SE", Locale.forLanguageTag("sv-SE")
     );
@@ -46,7 +46,7 @@ public class UrlLocaleResolver extends AbstractLocaleResolver
         if (segments.length > 1)
         {
             String localeStr = segments[1];
-            // Check our custom mapping first (handles en-UK → en-GB)
+            // Check our custom mapping first (handles en-GB → en-GB)
             Locale mapped = LOCALE_MAP.get(localeStr);
             if (mapped != null)
             {
