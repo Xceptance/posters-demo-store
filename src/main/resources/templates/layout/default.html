@@ -89,14 +89,15 @@
                                 <a id="show-locale-menu" class="nav-link dropdown-toggle locale-trigger" href="#"
                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-globe2"></i>
-                                    <span class="locale-code" th:text="${urlLocale}">en-US</span>
+                                    <span class="locale-code" th:text="${currentLanguageName}">English</span>
                                 </a>
                                 <ul id="locale-menu" class="dropdown-menu dropdown-menu-end">
                                     <li th:each="lang : ${supportedLanguages}">
                                         <a class="dropdown-item locale-item"
                                            th:id="'loc-' + ${lang.toLowerCase()}"
                                            th:href="@{'/' + ${lang} + '/'}"
-                                           th:text="${lang}">en-US</a>
+                                           th:text="${languageNames.get(lang)}"
+                                           th:classappend="${lang == urlLocale} ? 'active'">English (United States)</a>
                                     </li>
                                 </ul>
                             </li>

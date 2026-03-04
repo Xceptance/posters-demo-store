@@ -1,6 +1,9 @@
 package com.xceptance.posters.interceptor;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -92,7 +95,21 @@ public class CommonDataInterceptor implements HandlerInterceptor
         mav.addObject("urlLocale", locale);
         String staticPath = requestPath.replaceFirst("/" + locale, "");
         mav.addObject("staticPath", staticPath);
-        mav.addObject("supportedLanguages", Arrays.asList(props.getLanguageArray()));
+        var langArray = props.getLanguageArray();
+        mav.addObject("supportedLanguages", Arrays.asList(langArray));
+
+        // Build a map of locale code -> display name for the language switcher
+        Map<String, String> languageNames = new LinkedHashMap<>();
+        for (String lang : langArray)
+        {
+            Locale loc = Locale.forLanguageTag(lang);
+            languageNames.put(lang, loc.getDisplayLanguage(loc)
+                + " (" + loc.getDisplayCountry(loc) + ")");
+        }
+        mav.addObject("languageNames", languageNames);
+        Locale currentLocale = Locale.forLanguageTag(locale);
+        mav.addObject("currentLanguageName",
+            currentLocale.getDisplayLanguage(currentLocale));
 
         // Locale-dependent config values
         String currency;
