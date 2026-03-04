@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    Cart page body fragment. Swapped in by HTMX after update/delete operations.
+    Also includes OOB swap for the header cart counter.
+-->
+<body>
+<!-- OOB: update header cart count -->
+<span id="header-cart-count" class="header-cart-product-count"
+      hx-swap-oob="true"
+      th:text="${cart.productCount}">0</span>
+
+<!-- Main cart content (swapped into #cart-content) -->
+<div th:fragment="cartBody">
+    <div th:if="${cart != null and not #lists.isEmpty(cart.products)}">
+        <table class="table" id="cart-table">
+            <thead>
+                <tr><th>Product</th><th>Size</th><th>Finish</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}" class="js-cart-product">
+                    <td class="js-cart-product-description">
+                        <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.product.name.getText(urlLocale)} + '?productId=' + ${cp.product.id}}"
+                           th:text="${cp.product.name.getText(urlLocale)}">Product</a>
+                    </td>
+                    <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
+                    <td th:text="${cp.finish}">matte</td>
+                    <td th:text="${#numbers.formatCurrency(cp.price)}">$0.00</td>
+                    <td>
+                        <input type="number" th:value="${cp.productCount}" min="1" max="999"
+                               class="form-control form-control-sm cart-qty-input"
+                               style="width:70px" th:id="'qty-' + ${cp.id}"
+                               th:attr="name='productCount'"
+                               hx-trigger="change"
+                               th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.id}}"
+                               hx-target="#cart-content"
+                               hx-swap="innerHTML"
+                               hx-include="this"/>
+                    </td>
+                    <td><span th:text="${#numbers.formatCurrency(cp.totalProductPrice)}" th:id="'total-' + ${cp.id}">$0.00</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-danger cart-remove-btn"
+                                hx-confirm="Remove this item from your cart?"
+                                th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.id}}"
+                                hx-target="#cart-content"
+                                hx-swap="innerHTML">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row justify-content-end">
+            <div class="col-md-4">
+                <table class="table">
+                    <tr><td>Subtotal:</td><td><span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}" id="cart-subtotal">$0.00</span></td></tr>
+                    <tr><td>Tax (<span th:text="${cart.taxAsString}">6.0</span>%):</td><td><span th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}" id="cart-tax">$0.00</span></td></tr>
+                    <tr><td>Shipping:</td><td><span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span></td></tr>
+                    <tr><th>Total:</th><th><span th:text="${#numbers.formatCurrency(cart.totalPrice)}" id="cart-total">$0.00</span></th></tr>
+                </table>
+                <a th:href="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" class="btn btn-primary" id="btn-checkout">Checkout</a>
+            </div>
+        </div>
+    </div>
+    <div th:if="${cart == null or #lists.isEmpty(cart.products)}">
+        <p>Your cart is empty.</p>
+        <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+</body>
+</html>

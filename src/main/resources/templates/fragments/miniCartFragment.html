@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    Mini-cart dropdown fragment. Loaded via HTMX into #mini-cart-content.
+    Also includes OOB swap for the header cart counter.
+-->
+<body>
+<!-- OOB: update header cart count -->
+<span id="header-cart-count" class="header-cart-product-count"
+      hx-swap-oob="true"
+      th:text="${cartProductCount}">0</span>
+
+<!-- Main mini-cart content (swapped into #mini-cart-content) -->
+<div th:fragment="miniCartContent">
+    <div th:if="${cartProducts == null or #lists.isEmpty(cartProducts)}" class="cart-mini-empty">
+        Your cart is empty.
+    </div>
+    <th:block th:if="${cartProducts != null and not #lists.isEmpty(cartProducts)}">
+        <div class="cart-mini-header">
+            <div class="cart-mini-product-counter">
+                <span class="value font-bold" th:text="${cartProductCount}">0</span>
+                <span th:text="${cartProductCount == 1} ? 'item' : 'items'">items</span>
+            </div>
+        </div>
+        <div class="cart-mini-element-list-wrap">
+            <ul class="list-unstyled cart-mini-element-list">
+                <li th:each="cp : ${cartProducts}" class="cart-mini-products-list-items">
+                    <ul class="cart-items list-unstyled">
+                        <li class="prod-name" th:text="${cp.product.name.getText(urlLocale)}">Product</li>
+                        <li>Quantity: <span class="prod-count" th:text="${cp.productCount}">1</span>
+                            (<span class="prod-style" th:text="${cp.finish}">matte</span>,
+                            <span class="prod-size">
+                                <span class="prod-width" th:text="${cp.size.width}">16</span>
+                                x <span class="prod-height" th:text="${cp.size.height}">12</span>
+                                <span class="unit-length" th:text="${unitLength}">in</span>
+                            </span>)
+                        </li>
+                        <li>
+                            <div class="prod-price text-right">
+                                <strong th:text="${#numbers.formatCurrency(cp.price * cp.productCount)}">$0.00</strong>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="cart-mini-total">
+            <div class="cart-mini-suborder-total row">
+                <div class="col-sm-7 text-left labelText">Subtotal</div>
+                <div class="col-sm-5 text-right value">
+                    <div class="suborder-price" th:text="${#numbers.formatCurrency(subTotalPrice)}">$0.00</div>
+                </div>
+            </div>
+            <div class="link-button">
+                <a th:href="@{'/' + ${urlLocale} + '/cart'}"
+                   class="btn btn-primary form-control go-to-cart">Go to Cart</a>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

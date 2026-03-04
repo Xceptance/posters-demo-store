@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    Price fragment. Returned by the updatePrice endpoint
+    to swap the price display on the product detail page.
+-->
+<body>
+<span th:fragment="price" id="product-detail-form-price"
+      th:text="${formattedPrice}">$0.00</span>
+</body>
+</html>

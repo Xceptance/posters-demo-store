@@ -21,11 +21,8 @@
     <!-- Theme style  -->
     <link rel="stylesheet" th:href="@{/assets/css/style_reworked.css}"/>
 
-    <script type="text/javascript" th:inline="javascript">
-        const CONTEXT_PATH = '';
-        const LOCALE = [[${urlLocale}]];
-    </script>
-    <script th:src="@{/assets/js/posterMiniCart.js}"></script>
+    <!-- HTMX -->
+    <script th:src="@{/assets/js/htmx.min.js}"></script>
 </head>
 
 <body>
@@ -151,41 +148,26 @@
                             <li id="mini-cart" class="nav-item dropdown">
                                 <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link"
                                    href="#" title="Cart Overview" role="button"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                   hx-trigger="click once"
+                                   th:hx-get="@{'/' + ${urlLocale} + '/miniCart'}"
+                                   hx-target="#mini-cart-content"
+                                   hx-swap="innerHTML">
                                     <span class="icon-shopping-cart"></span> &nbsp;
-                                    <span id="count-wide-view" class="header-cart-product-count"
+                                    <span id="header-cart-count" class="header-cart-product-count"
                                           th:text="${cartProductCount}">0</span>
                                 </a>
-                                <ul id="mini-cart-menu" class="dropdown-menu"
-                                    th:style="${cartProductCount == 0} ? 'display: none;' : ''">
+                                <ul id="mini-cart-menu" class="dropdown-menu">
                                     <li>
-                                        <div class="cart-mini cart-mini-wrap">
-                                            <div class="cart-mini-empty">Your cart is empty.</div>
-                                            <div class="cart-mini-header">
-                                                <div class="cart-mini-product-counter">
-                                                    <span class="value font-bold" th:text="${cartProductCount}">0</span>
-                                                    <span th:text="${cartProductCount == 1} ? 'item' : 'items'">items</span>
-                                                </div>
+                                        <div id="mini-cart-content" class="cart-mini cart-mini-wrap">
+                                            <!-- loaded via HTMX on first dropdown open -->
+                                            <div class="cart-mini-product-counter">
+                                                <span class="value font-bold" th:text="${cartProductCount}">0</span>
+                                                <span th:text="${cartProductCount == 1} ? 'item' : 'items'">items</span>
                                             </div>
-                                            <div class="cart-mini-element-list-wrap">
-                                                <span class="notifications-loader"></span>
-                                                <ul class="list-unstyled cart-mini-element-list">
-                                                    <!-- cart items loaded dynamically by posterMiniCart.js -->
-                                                </ul>
-                                            </div>
-                                            <div class="cart-mini-total">
-                                                <div class="cart-mini-suborder-total row">
-                                                    <div class="col-sm-7 text-left labelText">Subtotal</div>
-                                                    <div class="col-sm-5 text-right value">
-                                                        <div class="suborder-price">
-                                                            <span th:text="${currency}">$</span><span th:text="${totalPrice}">0.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="link-button">
-                                                    <a th:href="@{'/' + ${urlLocale} + '/cart'}"
-                                                       class="btn btn-primary form-control go-to-cart">Go to Cart</a>
-                                                </div>
+                                            <div class="link-button">
+                                                <a th:href="@{'/' + ${urlLocale} + '/cart'}"
+                                                   class="btn btn-primary form-control go-to-cart">Go to Cart</a>
                                             </div>
                                         </div>
                                     </li>
@@ -212,7 +194,16 @@
         </noscript>
 
         <!-- messages -->
-        <div id="alert-placeholder"></div>
+        <div id="alert-placeholder">
+            <div th:if="${error}" class="alert alert-danger alert-dismissable">
+                <div th:text="${error}">Error</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div th:if="${success}" class="alert alert-success alert-dismissable">
+                <div th:text="${success}">Success</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
 
         <!-- body -->
         <div id="main">
@@ -278,37 +269,33 @@
         </div>
     </footer>
 
-    <script th:src="@{/assets/js/poster.js}"></script>
-    <script>
-        var ready = (callback) => {
-            if (document.readyState != "loading") callback();
-            else document.addEventListener("DOMContentLoaded", callback);
-        }
-    </script>
-
-    <!-- Flash messages via JS (matching original pattern) -->
-    <script th:if="${error}" th:inline="javascript">
-        ready(() => {
-            var alertPlaceholder = document.getElementById("alert-placeholder");
-            var alertWrapper = document.createElement('div');
-            alertWrapper.classList.add("alert", "alert-danger", "alert-dismissable");
-            alertWrapper.innerHTML = '<div>' + [[${error}]] + '</div><button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
-            alertPlaceholder.append(alertWrapper);
-        });
-    </script>
-    <script th:if="${success}" th:inline="javascript">
-        ready(() => {
-            var alertPlaceholder = document.getElementById("alert-placeholder");
-            var alertWrapper = document.createElement('div');
-            alertWrapper.classList.add("alert", "alert-success", "alert-dismissable");
-            alertWrapper.innerHTML = '<div>' + [[${success}]] + '</div><button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
-            alertPlaceholder.append(alertWrapper);
-        });
-    </script>
-
     <!-- Bootstrap Bundle (v5.3.2 including popper)-->
     <script th:src="@{/assets/js/bootstrap.bundle.js}"></script>
-    <!-- Main -->
-    <script th:src="@{/assets/js/main.js}"></script>
+
+    <!-- Scroll to top (inlined, replaces main.js) -->
+    <script>
+        (function() {
+            var top = document.getElementById('js-top');
+            if (top) {
+                window.addEventListener('scroll', function() {
+                    top.style.display = (document.documentElement.scrollTop > 200) ? 'block' : 'none';
+                });
+            }
+
+            // After HTMX swaps mini-cart content (e.g. add-to-cart), open the
+            // Bootstrap dropdown briefly so the user sees the update.
+            var miniCartContent = document.getElementById('mini-cart-content');
+            if (miniCartContent) {
+                miniCartContent.addEventListener('htmx:afterSwap', function() {
+                    var toggle = document.getElementById('header-cart-overview');
+                    if (toggle) {
+                        var dd = bootstrap.Dropdown.getOrCreateInstance(toggle);
+                        dd.show();
+                        setTimeout(function() { dd.hide(); }, 2000);
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>

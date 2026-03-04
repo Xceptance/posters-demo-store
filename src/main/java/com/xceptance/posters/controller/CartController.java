@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xceptance.posters.util.PriceFormatter;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.util.PriceFormatter;
 import com.xceptance.posters.model.Cart;
 import com.xceptance.posters.model.CartProduct;
 import com.xceptance.posters.model.PosterSize;
@@ -24,15 +24,14 @@ import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Handles shopping cart operations: add, update, remove products and view cart.
+ *
+ * All AJAX-style endpoints (mini-cart, add-to-cart, update, delete) return
+ * Thymeleaf HTML fragments for use with HTMX instead of JSON.
  */
 @Controller
 public class CartController
@@ -71,230 +70,124 @@ public class CartController
     }
 
     /**
-     * Add to cart via AJAX - used by posterMiniCart.js.
-     * Accepts size as a string like "16 x 12 in", parses width/height,
-     * and returns JSON matching the JS expectations.
+     * Add to cart via HTMX. Accepts size as a string like "16 x 12 in",
+     * parses width/height, adds the product to the cart, and returns the
+     * mini-cart HTML fragment (with OOB header count update).
      */
     @GetMapping("/{locale}/addToCartSlider")
-    @ResponseBody
-    public Map<String, Object> addToCartSlider(@PathVariable String locale,
-                                                @RequestParam int productId,
-                                                @RequestParam String finish,
-                                                @RequestParam String size,
-                                                HttpSession session)
+    public String addToCartSlider(@PathVariable String locale,
+                                  @RequestParam int productId,
+                                  @RequestParam String finish,
+                                  @RequestParam String size,
+                                  HttpSession session,
+                                  Model model)
     {
         Cart cart = sessionService.getCart(session);
         Product product = productRepository.findById(productId).orElse(null);
-        Map<String, Object> response = new HashMap<>();
 
-        if (product == null)
+        if (product != null)
         {
-            response.put("success", false);
-            return response;
+            // Parse size string like "16 x 12 in" to extract width and height
+            Pattern sizePattern = Pattern.compile("(\\d+)\\s*x\\s*(\\d+)");
+            Matcher matcher = sizePattern.matcher(size);
+            int width = 0, height = 0;
+            if (matcher.find())
+            {
+                width = Integer.parseInt(matcher.group(1));
+                height = Integer.parseInt(matcher.group(2));
+            }
+
+            PosterSize posterSize = posterSizeRepository.findByWidthAndHeight(width, height);
+            if (posterSize != null)
+            {
+                // Get price (locale-aware)
+                ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
+                double price = pps != null ? pps.getPrice(locale) : 0;
+
+                // Check if item already in cart
+                CartProduct existing = cartProductRepository.findByCartAndProductAndFinishAndSize(cart, product, finish, posterSize);
+                if (existing != null)
+                {
+                    existing.incProductCount();
+                    cartProductRepository.save(existing);
+                }
+                else
+                {
+                    CartProduct cp = new CartProduct();
+                    cp.setCart(cart);
+                    cp.setProduct(product);
+                    cp.setFinish(finish);
+                    cp.setSize(posterSize);
+                    cp.setProductCount(1);
+                    cp.setPrice(price);
+                    cartProductRepository.save(cp);
+                    cart.getProducts().add(cp);
+                }
+
+                // Recalculate cart totals
+                cart.setSubTotalPrice(cart.getSubTotalPrice() + price);
+                cart.calculateTotalTaxPrice();
+                cart.calculateTotalPrice();
+                cartRepository.save(cart);
+            }
         }
 
-        // Parse size string like "16 x 12 in" to extract width and height
-        Pattern sizePattern = Pattern.compile("(\\d+)\\s*x\\s*(\\d+)");
-        Matcher matcher = sizePattern.matcher(size);
-        int width = 0, height = 0;
-        if (matcher.find())
-        {
-            width = Integer.parseInt(matcher.group(1));
-            height = Integer.parseInt(matcher.group(2));
-        }
-
-        PosterSize posterSize = posterSizeRepository.findByWidthAndHeight(width, height);
-        if (posterSize == null)
-        {
-            response.put("success", false);
-            return response;
-        }
-
-        // Get price (locale-aware)
-        ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
-        double price = pps != null ? pps.getPrice(locale) : 0;
-
-        // Check if item already in cart
-        CartProduct existing = cartProductRepository.findByCartAndProductAndFinishAndSize(cart, product, finish, posterSize);
-        CartProduct cartProduct;
-        if (existing != null)
-        {
-            existing.incProductCount();
-            cartProductRepository.save(existing);
-            cartProduct = existing;
-        }
-        else
-        {
-            CartProduct cp = new CartProduct();
-            cp.setCart(cart);
-            cp.setProduct(product);
-            cp.setFinish(finish);
-            cp.setSize(posterSize);
-            cp.setProductCount(1);
-            cp.setPrice(price);
-            cartProductRepository.save(cp);
-            cart.getProducts().add(cp);
-            cartProduct = cp;
-        }
-
-        // Recalculate cart totals
-        cart.setSubTotalPrice(cart.getSubTotalPrice() + price);
-        cart.calculateTotalTaxPrice();
-        cart.calculateTotalPrice();
-        cartRepository.save(cart);
-
-        // Build response matching posterMiniCart.js expectations
-        Map<String, Object> productData = new HashMap<>();
-        productData.put("localizedName", product.getName().getText(locale));
-        productData.put("productCount", cartProduct.getProductCount());
-        productData.put("finish", finish);
-        productData.put("productTotalUnitPrice", PriceFormatter.format(cartProduct.getPrice() * cartProduct.getProductCount(), locale));
-
-        Map<String, Object> sizeData = new HashMap<>();
-        sizeData.put("width", posterSize.getWidth());
-        sizeData.put("height", posterSize.getHeight());
-        productData.put("size", sizeData);
-
-        response.put("product", productData);
-        response.put("unitLength", unitLengthForLocale(locale));
-        response.put("subOrderTotal", PriceFormatter.format(cart.getSubTotalPrice(), locale));
-        response.put("headerCartOverview", cart.getProductCount());
-        return response;
+        // Return mini-cart fragment (includes OOB header count update)
+        return populateMiniCartModel(locale, cart, model);
     }
 
     /**
-     * Get mini cart elements for the dropdown - used by posterMiniCart.js.
+     * Get mini-cart content as an HTML fragment via HTMX.
+     * Called when the mini-cart dropdown is opened.
      */
-    @GetMapping("/{locale}/getMiniCartElements")
-    @ResponseBody
-    public Map<String, Object> getMiniCartElements(@PathVariable String locale, HttpSession session)
+    @GetMapping("/{locale}/miniCart")
+    public String miniCart(@PathVariable String locale, HttpSession session, Model model)
     {
         Cart cart = sessionService.getCart(session);
-        Map<String, Object> response = new HashMap<>();
-
-        List<Map<String, Object>> productsInCartList = new ArrayList<>();
-        for (CartProduct cp : cart.getProducts())
-        {
-            Map<String, Object> productData = new HashMap<>();
-            productData.put("localizedName", cp.getProduct().getName().getText(locale));
-            productData.put("productCount", cp.getProductCount());
-            productData.put("finish", cp.getFinish());
-            productData.put("productTotalUnitPrice", PriceFormatter.format(cp.getPrice() * cp.getProductCount(), locale));
-
-            Map<String, Object> sizeData = new HashMap<>();
-            sizeData.put("width", cp.getSize().getWidth());
-            sizeData.put("height", cp.getSize().getHeight());
-            productData.put("size", sizeData);
-
-            productsInCartList.add(productData);
-        }
-
-        response.put("productsInCartList", productsInCartList);
-        response.put("cartProductCount", cart.getProductCount());
-        response.put("subTotalPrice", PriceFormatter.format(cart.getSubTotalPrice(), locale));
-        response.put("unitLength", unitLengthForLocale(locale));
-        return response;
+        return populateMiniCartModel(locale, cart, model);
     }
 
-    @PostMapping("/{locale}/addToCart")
-    @ResponseBody
-    public Map<String, Object> addToCart(@PathVariable String locale,
-                                         @RequestParam int productId,
-                                         @RequestParam String finish,
-                                         @RequestParam int sizeId,
-                                         HttpSession session)
-    {
-        Cart cart = sessionService.getCart(session);
-        Product product = productRepository.findById(productId).orElse(null);
-        PosterSize size = posterSizeRepository.findById(sizeId).orElse(null);
-        Map<String, Object> response = new HashMap<>();
-
-        if (product == null || size == null)
-        {
-            response.put("success", false);
-            return response;
-        }
-
-        // Check if item already in cart
-        CartProduct existing = cartProductRepository.findByCartAndProductAndFinishAndSize(cart, product, finish, size);
-        if (existing != null)
-        {
-            existing.incProductCount();
-            cartProductRepository.save(existing);
-        }
-        else
-        {
-            CartProduct cp = new CartProduct();
-            cp.setCart(cart);
-            cp.setProduct(product);
-            cp.setFinish(finish);
-            cp.setSize(size);
-            cp.setProductCount(1);
-            ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, size);
-            cp.setPrice(pps != null ? pps.getPrice() : 0);
-            cartProductRepository.save(cp);
-        }
-
-        // Recalculate prices
-        double itemPrice = 0;
-        ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, size);
-        itemPrice = pps != null ? pps.getPrice() : 0;
-        cart.setSubTotalPrice(cart.getSubTotalPrice() + itemPrice);
-        cart.calculateTotalTaxPrice();
-        cart.calculateTotalPrice();
-        cartRepository.save(cart);
-
-        response.put("success", true);
-        response.put("cartProductCount", cart.getProductCount());
-        response.put("subTotalPrice", cart.getSubTotalPriceAsString());
-        response.put("totalPrice", cart.getTotalPriceAsString());
-        return response;
-    }
-
+    /**
+     * Update the quantity of a product in the cart.
+     * Returns the cart body HTML fragment via HTMX.
+     */
     @PostMapping("/{locale}/updateProductCount")
-    @ResponseBody
-    public Map<String, Object> updateProductCount(@PathVariable String locale,
-                                                   @RequestParam int cartProductId,
-                                                   @RequestParam int productCount,
-                                                   HttpSession session)
+    public String updateProductCount(@PathVariable String locale,
+                                     @RequestParam int cartProductId,
+                                     @RequestParam int productCount,
+                                     HttpSession session,
+                                     Model model)
     {
         CartProduct cp = cartProductRepository.findById(cartProductId).orElse(null);
         Cart cart = sessionService.getCart(session);
-        Map<String, Object> response = new HashMap<>();
 
-        if (cp == null)
+        if (cp != null)
         {
-            response.put("success", false);
-            return response;
+            double priceDiff = cp.getPrice() * (productCount - cp.getProductCount());
+            cp.setProductCount(productCount);
+            cartProductRepository.save(cp);
+
+            cart.setSubTotalPrice(cart.getSubTotalPrice() + priceDiff);
+            cart.calculateTotalTaxPrice();
+            cart.calculateTotalPrice();
+            cartRepository.save(cart);
         }
 
-        double priceDiff = cp.getPrice() * (productCount - cp.getProductCount());
-        cp.setProductCount(productCount);
-        cartProductRepository.save(cp);
-
-        cart.setSubTotalPrice(cart.getSubTotalPrice() + priceDiff);
-        cart.calculateTotalTaxPrice();
-        cart.calculateTotalPrice();
-        cartRepository.save(cart);
-
-        response.put("success", true);
-        response.put("cartProductCount", cart.getProductCount());
-        response.put("subTotalPrice", cart.getSubTotalPriceAsString());
-        response.put("totalTaxPrice", cart.getTotalTaxPriceAsString());
-        response.put("totalPrice", cart.getTotalPriceAsString());
-        response.put("totalUnitPrice", cp.getTotalProductPriceAsString());
-        return response;
+        return populateCartBodyModel(locale, cart, model);
     }
 
+    /**
+     * Delete a product from the cart.
+     * Returns the cart body HTML fragment via HTMX.
+     */
     @PostMapping("/{locale}/deleteFromCart")
-    @ResponseBody
-    public Map<String, Object> deleteFromCart(@PathVariable String locale,
-                                              @RequestParam int cartProductId,
-                                              HttpSession session)
+    public String deleteFromCart(@PathVariable String locale,
+                                @RequestParam int cartProductId,
+                                HttpSession session,
+                                Model model)
     {
         CartProduct cp = cartProductRepository.findById(cartProductId).orElse(null);
         Cart cart = sessionService.getCart(session);
-        Map<String, Object> response = new HashMap<>();
 
         if (cp != null)
         {
@@ -306,24 +199,68 @@ public class CartController
             cartRepository.save(cart);
         }
 
-        response.put("success", true);
-        response.put("cartProductCount", cart.getProductCount());
-        response.put("subTotalPrice", cart.getSubTotalPriceAsString());
-        response.put("totalTaxPrice", cart.getTotalTaxPriceAsString());
-        response.put("totalPrice", cart.getTotalPriceAsString());
-        return response;
+        return populateCartBodyModel(locale, cart, model);
     }
 
-    @GetMapping("/{locale}/miniCart")
-    @ResponseBody
-    public Map<String, Object> miniCart(@PathVariable String locale, HttpSession session)
+    /**
+     * Update the product price when the selected size changes.
+     * Returns just a price span fragment via HTMX.
+     */
+    @PostMapping("/{locale}/updatePrice")
+    public String updatePrice(@PathVariable String locale,
+                              @RequestParam int productId,
+                              @RequestParam String size,
+                              Model model)
     {
-        Cart cart = sessionService.getCart(session);
-        Map<String, Object> response = new HashMap<>();
-        response.put("cartProductCount", cart.getProductCount());
-        response.put("subTotalPrice", cart.getSubTotalPriceAsString());
-        response.put("totalPrice", cart.getTotalPriceAsString());
-        return response;
+        Product product = productRepository.findById(productId).orElse(null);
+        String formattedPrice = "$0.00";
+
+        if (product != null)
+        {
+            // Parse size string like "16 x 12 in" to extract width and height
+            Pattern sizePattern = Pattern.compile("(\\d+)\\s*x\\s*(\\d+)");
+            Matcher matcher = sizePattern.matcher(size);
+            int width = 0, height = 0;
+            if (matcher.find())
+            {
+                width = Integer.parseInt(matcher.group(1));
+                height = Integer.parseInt(matcher.group(2));
+            }
+
+            PosterSize posterSize = posterSizeRepository.findByWidthAndHeight(width, height);
+            if (posterSize != null)
+            {
+                ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
+                if (pps != null)
+                {
+                    formattedPrice = PriceFormatter.format(pps.getPrice(locale), locale);
+                }
+            }
+        }
+
+        model.addAttribute("formattedPrice", formattedPrice);
+        return "fragments/priceFragment";
+    }
+
+    /**
+     * Populate model for the mini-cart fragment and return the view name.
+     */
+    private String populateMiniCartModel(String locale, Cart cart, Model model)
+    {
+        model.addAttribute("cartProducts", cart.getProducts());
+        model.addAttribute("cartProductCount", cart.getProductCount());
+        model.addAttribute("subTotalPrice", cart.getSubTotalPrice());
+        model.addAttribute("unitLength", unitLengthForLocale(locale));
+        return "fragments/miniCartFragment";
+    }
+
+    /**
+     * Populate model for the cart body fragment and return the view name.
+     */
+    private String populateCartBodyModel(String locale, Cart cart, Model model)
+    {
+        model.addAttribute("cart", cart);
+        return "fragments/cartBodyFragment";
     }
 
     private String unitLengthForLocale(String locale)

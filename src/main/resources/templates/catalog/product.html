@@ -33,7 +33,13 @@
                 <div class="mb-3" th:if="${not #lists.isEmpty(product.availableSizes)}">
                     <label for="product-detail-form-size-selection" class="form-label">Select Size</label>
                     <select id="product-detail-form-size-selection" class="form-select"
-                            aria-label="size selection">
+                            name="size"
+                            aria-label="size selection"
+                            hx-trigger="change"
+                            th:hx-post="@{'/' + ${urlLocale} + '/updatePrice'}"
+                            hx-target="#product-detail-form-price"
+                            hx-swap="outerHTML"
+                            th:hx-vals="'{&quot;productId&quot;: ' + ${product.id} + '}'">
                         <option th:each="pps : ${product.availableSizes}"
                                 th:value="${pps.size.width + ' x ' + pps.size.height + ' ' + unitLength}"
                                 th:text="${pps.size.width + ' x ' + pps.size.height + ' ' + unitLength}">
@@ -68,30 +74,18 @@
                     <div id="product-detail-form-product-id" th:text="${product.id}">1</div>
                 </div>
                 <div class="mb-3 d-flex justify-content-end">
-                    <a id="btn-add-to-cart" class="btn btn-primary"
-                       th:data-productid="${product.id}" th:data-locale="${urlLocale}">
+                    <button type="button" id="btn-add-to-cart" class="btn btn-primary"
+                            th:hx-get="@{'/' + ${urlLocale} + '/addToCartSlider?productId=' + ${product.id}}"
+                            hx-target="#mini-cart-content"
+                            hx-swap="innerHTML"
+                            hx-include="#product-detail-form-size-selection, #add-to-cart-form input[name=finish]:checked">
                         <i class="icon-shopping-cart"></i> Add to Cart
-                    </a>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var btn = document.getElementById('btn-add-to-cart');
-        if (btn) {
-            btn.addEventListener('click', function() {
-                var productId = this.getAttribute('data-productid');
-                var finish = document.querySelector('#add-to-cart-form input[name=finish]:checked').value;
-                var size = document.querySelector('#product-detail-form-size-selection').value;
-                var locale = this.getAttribute('data-locale');
-                addToCart(productId, finish, size, locale);
-            });
-        }
-    });
-</script>
 
 </div>
 </body>
