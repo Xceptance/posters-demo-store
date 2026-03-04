@@ -13,13 +13,13 @@
         <div class="row" th:if="${not #lists.isEmpty(products)}" id="search-results">
             <div class="col-md-3 col-sm-6 mb-4" th:each="product : ${products}">
                 <div class="card h-100" th:id="'product-' + ${product.id}">
-                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}">
+                    <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}">
                         <img th:src="@{${product.imageURL}}" class="card-img-top"
                              th:alt="${product.defaultName}"/>
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.id}}"
+                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${product.defaultName} + '?productId=' + ${product.id}}"
                                th:text="${product.defaultName}">Product</a>
                         </h5>
                         <p class="card-text">
