@@ -37,7 +37,7 @@
 
         <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
             <div class="container top-menu">
-                <a id="header-brand" class="navbar-brand" th:href="@{'/' + ${urlLocale}}">
+                <a id="header-brand" class="navbar-brand" th:href="@{'/' + ${urlLocale} + '/'}">
                     <img id="header-brand-logo" class="shop-logo" th:src="@{/assets/img/xceptanceLogo.png}"
                          title="Posters Demo Store" alt="Posters Demo Store"/>
                     Posters
@@ -158,7 +158,37 @@
                                 </a>
                                 <ul id="mini-cart-menu" class="dropdown-menu"
                                     th:style="${cartProductCount == 0} ? 'display: none;' : ''">
-                                    <li><!-- mini cart content will be loaded dynamically --></li>
+                                    <li>
+                                        <div class="cart-mini cart-mini-wrap">
+                                            <div class="cart-mini-empty">Your cart is empty.</div>
+                                            <div class="cart-mini-header">
+                                                <div class="cart-mini-product-counter">
+                                                    <span class="value font-bold" th:text="${cartProductCount}">0</span>
+                                                    <span th:text="${cartProductCount == 1} ? 'item' : 'items'">items</span>
+                                                </div>
+                                            </div>
+                                            <div class="cart-mini-element-list-wrap">
+                                                <span class="notifications-loader"></span>
+                                                <ul class="list-unstyled cart-mini-element-list">
+                                                    <!-- cart items loaded dynamically by posterMiniCart.js -->
+                                                </ul>
+                                            </div>
+                                            <div class="cart-mini-total">
+                                                <div class="cart-mini-suborder-total row">
+                                                    <div class="col-sm-7 text-left labelText">Subtotal</div>
+                                                    <div class="col-sm-5 text-right value">
+                                                        <div class="suborder-price">
+                                                            <span th:text="${currency}">$</span><span th:text="${totalPrice}">0.00</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="link-button">
+                                                    <a th:href="@{'/' + ${urlLocale} + '/cart'}"
+                                                       class="btn btn-primary form-control go-to-cart">Go to Cart</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
