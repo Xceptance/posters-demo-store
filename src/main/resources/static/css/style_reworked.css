@@ -543,8 +543,19 @@
   }
 
   .product-tile .card-title {
-    font-size: var(--ts-base);
-    font-weight: 600;
+    font-size: var(--ts-xl);
+    font-weight: 700;
+    font-family: 'Rokkitt', serif;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+  }
+
+  .product-tile-text {
+    font-size: var(--ts-sm);
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0;
   }
 
   .product-tile .card-footer {
@@ -555,7 +566,7 @@
 
   .product-tile-price {
     font-weight: 600;
-    font-size: var(--ts-md);
+    font-size: var(--ts-base);
     color: var(--accent);
   }
 /*  Product tile
