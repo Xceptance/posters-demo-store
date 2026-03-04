@@ -83,16 +83,6 @@ public class CommonDataInterceptor implements HandlerInterceptor
             mav.addObject("isLogged", false);
         }
 
-        // Config values
-        mav.addObject("currency", props.getCurrency());
-        mav.addObject("currentVersion", props.getVersion());
-        mav.addObject("unitLength", props.getUnitOfLength());
-        mav.addObject("regexEmail", props.getRegex().getEmail());
-        mav.addObject("regexName", props.getRegex().getName());
-        mav.addObject("regexCreditCard", props.getRegex().getCreditCard());
-        mav.addObject("regexZip", props.getRegex().getZip());
-        mav.addObject("regexProductCount", props.getRegex().getProductCount());
-
         // Locale / path info
         String requestPath = request.getRequestURI();
         mav.addObject("currPath", requestPath);
@@ -103,5 +93,27 @@ public class CommonDataInterceptor implements HandlerInterceptor
         String staticPath = requestPath.replaceFirst("/" + locale, "");
         mav.addObject("staticPath", staticPath);
         mav.addObject("supportedLanguages", Arrays.asList(props.getLanguageArray()));
+
+        // Locale-dependent config values
+        String currency;
+        String unitLength;
+        if (locale.startsWith("de"))
+        {
+            currency = "€";
+            unitLength = "cm";
+        }
+        else
+        {
+            currency = props.getCurrency();
+            unitLength = props.getUnitOfLength();
+        }
+        mav.addObject("currency", currency);
+        mav.addObject("currentVersion", props.getVersion());
+        mav.addObject("unitLength", unitLength);
+        mav.addObject("regexEmail", props.getRegex().getEmail());
+        mav.addObject("regexName", props.getRegex().getName());
+        mav.addObject("regexCreditCard", props.getRegex().getCreditCard());
+        mav.addObject("regexZip", props.getRegex().getZip());
+        mav.addObject("regexProductCount", props.getRegex().getProductCount());
     }
 }
