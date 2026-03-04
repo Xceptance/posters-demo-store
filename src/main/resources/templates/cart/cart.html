@@ -15,19 +15,20 @@
                 <tbody>
                     <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}">
                         <td>
-                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${cp.product.id}}"
+                            <a th:href="@{'/' + ${urlLocale} + '/productDetail/' + ${cp.product.defaultName} + '?productId=' + ${cp.product.id}}"
                                th:text="${cp.product.defaultName}">Product</a>
                         </td>
                         <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
                         <td th:text="${cp.finish}">matte</td>
                         <td><span th:text="${currency}">$</span><span th:text="${cp.priceAsString}">0.00</span></td>
                         <td>
-                            <input type="number" th:value="${cp.productCount}" min="1" max="999" class="form-control form-control-sm"
+                            <input type="number" th:value="${cp.productCount}" min="1" max="999"
+                                   class="form-control form-control-sm cart-qty-input"
                                    style="width:70px" th:id="'qty-' + ${cp.id}"
-                                   th:onchange="'updateQty(' + ${cp.id} + ', this.value, \'' + ${urlLocale} + '\')'"/>
+                                   th:data-cpid="${cp.id}"/>
                         </td>
                         <td><span th:text="${currency}">$</span><span th:text="${cp.totalProductPriceAsString}" th:id="'total-' + ${cp.id}">0.00</span></td>
-                        <td><button class="btn btn-sm btn-danger" th:onclick="'removeItem(' + ${cp.id} + ', \'' + ${urlLocale} + '\')'" id="btn-remove">Remove</button></td>
+                        <td><button class="btn btn-sm btn-danger cart-remove-btn" th:data-cpid="${cp.id}">Remove</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -49,18 +50,30 @@
         </div>
     </div>
     <script th:inline="javascript">
-        function updateQty(cpId, qty, locale) {
-            fetch('/' + locale + '/updateProductCount', {
-                method: 'POST',
-                body: new URLSearchParams({cartProductId: cpId, productCount: qty})
-            }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
-        }
-        function removeItem(cpId, locale) {
-            fetch('/' + locale + '/deleteFromCart', {
-                method: 'POST',
-                body: new URLSearchParams({cartProductId: cpId})
-            }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
-        }
+        var CART_LOCALE = [[${urlLocale}]];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quantity change handlers
+            document.querySelectorAll('.cart-qty-input').forEach(function(input) {
+                input.addEventListener('change', function() {
+                    var cpId = this.getAttribute('data-cpid');
+                    fetch('/' + CART_LOCALE + '/updateProductCount', {
+                        method: 'POST',
+                        body: new URLSearchParams({cartProductId: cpId, productCount: this.value})
+                    }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
+                });
+            });
+            // Remove button handlers
+            document.querySelectorAll('.cart-remove-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var cpId = this.getAttribute('data-cpid');
+                    fetch('/' + CART_LOCALE + '/deleteFromCart', {
+                        method: 'POST',
+                        body: new URLSearchParams({cartProductId: cpId})
+                    }).then(r => r.json()).then(data => { if(data.success) location.reload(); });
+                });
+            });
+        });
     </script>
 </div>
 </body>

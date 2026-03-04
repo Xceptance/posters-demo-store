@@ -69,7 +69,7 @@
                 </div>
                 <div class="mb-3 d-flex justify-content-end">
                     <a id="btn-add-to-cart" class="btn btn-primary"
-                       th:attr="onclick='addToCart(' + ${product.id} + ', document.querySelector(\'#add-to-cart-form input[name=finish]:checked\').value, document.querySelector(\'#product-detail-form-size-selection\').value, \'' + ${urlLocale} + '\')'">
+                       th:data-productid="${product.id}" th:data-locale="${urlLocale}">
                         <i class="icon-shopping-cart"></i> Add to Cart
                     </a>
                 </div>
@@ -78,7 +78,20 @@
     </div>
 </div>
 
-<script th:src="@{/assets/js/posterMiniCart.js}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('btn-add-to-cart');
+        if (btn) {
+            btn.addEventListener('click', function() {
+                var productId = this.getAttribute('data-productid');
+                var finish = document.querySelector('#add-to-cart-form input[name=finish]:checked').value;
+                var size = document.querySelector('#product-detail-form-size-selection').value;
+                var locale = this.getAttribute('data-locale');
+                addToCart(productId, finish, size, locale);
+            });
+        }
+    });
+</script>
 
 </div>
 </body>
