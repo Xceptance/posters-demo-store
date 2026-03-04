@@ -83,7 +83,7 @@
                                     <li th:each="lang : ${supportedLanguages}">
                                         <a class="dropdown-item"
                                            th:id="'loc-' + ${lang.toLowerCase()}"
-                                           th:href="@{'/' + ${lang}}"
+                                           th:href="@{'/' + ${lang} + '/'}"
                                            th:text="${lang}">en-US</a>
                                     </li>
                                 </ul>
