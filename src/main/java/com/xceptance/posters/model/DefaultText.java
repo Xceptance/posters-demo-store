@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class DefaultText
     @ManyToOne
     private Language originalLanguage;
 
-    @OneToMany(mappedBy = "originalText")
+    @OneToMany(mappedBy = "originalText", fetch = FetchType.EAGER)
     private List<Translation> translations = new ArrayList<>();
 
     public DefaultText()
@@ -84,6 +85,8 @@ public class DefaultText
     /**
      * Returns the translated text for the given language code (e.g. "de-DE"),
      * or falls back to the original text if no matching translation is found.
+     * Checks both Language.code (base, e.g. "de") and Language.fallbackCode
+     * (full, e.g. "de-DE") for a match.
      */
     public String getText(String langCode)
     {
@@ -91,8 +94,10 @@ public class DefaultText
         {
             for (Translation t : translations)
             {
-                if (t.getTranslationLanguage() != null
-                    && langCode.equals(t.getTranslationLanguage().getCode()))
+                Language lang = t.getTranslationLanguage();
+                if (lang != null
+                    && (langCode.equals(lang.getCode())
+                        || langCode.equals(lang.getFallbackCode())))
                 {
                     return t.getTranslationText();
                 }
