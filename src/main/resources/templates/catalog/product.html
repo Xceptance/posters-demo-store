@@ -9,9 +9,31 @@
 <div class="container mt-4" th:if="${product != null}">
     <div class="row">
         <div class="col-lg-6 col-md-12">
-            <img th:src="@{${product.largeImageURL}}"
-                 th:alt="${product.name.getText(urlLocale)}"
-                 class="img-fluid w-100 product-detail-image"/>
+            <!-- Clickable Image triggering Modal -->
+            <a href="#" data-bs-toggle="modal" data-bs-target="#imageLightboxModal" title="Click to enlarge">
+                <img th:src="@{${product.largeImageURL}}"
+                     th:alt="${product.name.getText(urlLocale)}"
+                     class="img-fluid w-100 product-detail-image"
+                     style="cursor: zoom-in;"/>
+            </a>
+
+            <!-- Bootstrap Modal for Image Lightbox -->
+            <div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-labelledby="imageLightboxModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-transparent border-0">
+                        <div class="modal-header border-0 pb-0">
+                            <button type="button" class="btn-close btn-close-white ms-auto shadow-none" data-bs-dismiss="modal" aria-label="Close" style="filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.8));"></button>
+                        </div>
+                        <div class="modal-body text-center pt-0">
+                            <img th:src="@{${product.largeImageURL}}" 
+                                 th:alt="${product.name.getText(urlLocale)}" 
+                                 class="img-fluid rounded shadow-lg" 
+                                 style="max-height: 85vh; object-fit: contain; cursor: zoom-out;"
+                                 data-bs-dismiss="modal">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-6 col-md-12">
             <form id="add-to-cart-form">

@@ -167,10 +167,10 @@ public class CatalogController
         model.addAttribute("selectedMaxPrice", maxPrice != null ? maxPrice : absoluteMaxPrice);
     }
 
-    @GetMapping("/{locale}/product/{name}")
+    @GetMapping("/{locale}/product/{name}/{productId}")
     public String productDetail(@PathVariable("locale") String locale,
                                 @PathVariable("name") String name,
-                                @RequestParam("productId") int productId,
+                                @PathVariable("productId") int productId,
                                 Model model)
     {
         Product product = productRepository.findById(productId).orElse(null);

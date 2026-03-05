@@ -37,7 +37,7 @@
         <div class="col-lg-5 col-md-6 text-center text-md-start mb-5 mb-md-0 hero-text-container">
             <h1 class="hero-title mb-4">Premium Vintage Posters.</h1>
             <p class="hero-subtitle lead mb-4 text-muted">Give your walls the art they deserve with our curated collection of high-quality prints.</p>
-            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${heroProduct.name.getText(urlLocale)} + '?productId=' + ${heroProduct.id}}" 
+            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${heroProduct.name.getText(urlLocale)} + '/' + ${heroProduct.id}}" 
                class="btn btn-primary btn-lg px-5 py-3 shadow-sm hero-btn" th:text="#{buttonBuyHere}">Shop the Collection</a>
         </div>
         <!-- Image Side -->
@@ -104,7 +104,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 product-display-case">
         <div class="col" th:each="product : ${productslist}">
             <div class="card h-100 product-tile">
-                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}">
+                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}">
                     <img th:src="@{${product.imageURL}}"
                          th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
                          class="card-img-top"
@@ -116,7 +116,7 @@
                 </div>
                 <div class="card-footer">
                     <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
-                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
+                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
                        class="btn btn-primary product-tile-btn-buy" th:text="#{buttonBuyHere}">Buy Here</a>
                 </div>
             </div>

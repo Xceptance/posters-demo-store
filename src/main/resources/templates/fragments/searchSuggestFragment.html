@@ -9,7 +9,7 @@
     <ul th:if="${suggestions != null and not #lists.isEmpty(suggestions)}"
         class="list-group search-suggest-list">
         <li th:each="product : ${suggestions}" class="list-group-item list-group-item-action p-2">
-            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '?productId=' + ${product.id}}"
+            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
                class="text-decoration-none d-flex align-items-center gap-2">
                 <img th:src="@{${product.imageURL}}" class="search-suggest-thumb"
                      th:alt="${product.name.getText(urlLocale)}" width="40" height="40"
