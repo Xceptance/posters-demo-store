@@ -463,11 +463,17 @@
 /*  Trending Header
 *   - Start
 */
+  .trending-header-band {
+    background-color: var(--accent);
+  }
   .trending-title {
     font-family: 'Rokkitt', serif;
     font-size: var(--ts-2xl);
     font-weight: 700;
-    color: var(--text-dark);
+    color: white;
+  }
+  .trending-header-band .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 /*  Trending Header
 *   - End
