@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
+      layout:decorate="~{layout/checkoutLayout}">
 <head><title>Billing Address</title></head>
 <body>
 <div layout:fragment="content">
@@ -13,25 +13,63 @@
             <label class="form-check-label" for="sameAsShipping" th:text="#{labelSameAsShipping}">Same as shipping address</label>
         </div>
         <form th:action="@{'/' + ${urlLocale} + '/checkout/billingAddress'}" method="post" id="billing-form">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" required/>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="name" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required/>
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required/>
+                                <label for="firstName" th:text="#{labelFirstName}">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Last Name" required/>
+                                <label for="name" th:text="#{labelLastName}">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="company" name="company" placeholder="Company"/>
+                                <label for="company" th:text="#{labelCompany}">Company (optional)</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="addressLine" name="addressLine" placeholder="Address" required/>
+                                <label for="addressLine" th:text="#{labelAddress}">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="City" required/>
+                                <label for="city" th:text="#{labelCity}">City</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="state" name="state" placeholder="State" required/>
+                                <label for="state" th:text="#{labelState}">State</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="ZIP" required/>
+                                <label for="zip" th:text="#{labelZip}">ZIP</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="country" name="country" placeholder="Country" required value="United States"/>
+                                <label for="country" th:text="#{labelCountry}">Country</label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-billing" th:text="#{buttonContinueToPayment}">Continue to Payment</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mb-3"><label class="form-label">Company</label><input type="text" class="form-control" id="company" name="company"/></div>
-            <div class="mb-3"><label class="form-label">Address</label><input type="text" class="form-control" id="addressLine" name="addressLine" required/></div>
-            <div class="row">
-                <div class="col-md-4 mb-3"><label class="form-label">City</label><input type="text" class="form-control" id="city" name="city" required/></div>
-                <div class="col-md-4 mb-3"><label class="form-label">State</label><input type="text" class="form-control" id="state" name="state" required/></div>
-                <div class="col-md-4 mb-3"><label class="form-label">ZIP</label><input type="text" class="form-control" id="zip" name="zip" required/></div>
-            </div>
-            <div class="mb-3"><label class="form-label">Country</label><input type="text" class="form-control" id="country" name="country" required value="United States"/></div>
-            <button type="submit" class="btn btn-primary" id="btn-submit-billing" th:text="#{buttonContinueToPayment}">Continue to Payment</button>
         </form>
     </div>
     <script th:if="${shippingAddress != null}" th:inline="javascript">

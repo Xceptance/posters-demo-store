@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
+      layout:decorate="~{layout/checkoutLayout}">
 <head><title>Shipping Address</title></head>
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
         <h1 th:text="#{titleShippingAddress}">Shipping Address</h1>
         <form th:action="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" method="post" id="shipping-form">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label" th:text="#{labelFirstName}">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" required
-                           th:value="${customer != null} ? ${customer.firstName}"/>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="name" class="form-label" th:text="#{labelLastName}">Last Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required
-                           th:value="${customer != null} ? ${customer.name}"/>
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required
+                                       th:value="${customer != null} ? ${customer.firstName}"/>
+                                <label for="firstName" th:text="#{labelFirstName}">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Last Name" required
+                                       th:value="${customer != null} ? ${customer.name}"/>
+                                <label for="name" th:text="#{labelLastName}">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="company" name="company" placeholder="Company"/>
+                                <label for="company" th:text="#{labelCompany}">Company (optional)</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="addressLine" name="addressLine" placeholder="Address" required/>
+                                <label for="addressLine" th:text="#{labelAddress}">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="City" required/>
+                                <label for="city" th:text="#{labelCity}">City</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="state" name="state" placeholder="State" required/>
+                                <label for="state" th:text="#{labelState}">State</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="ZIP" required/>
+                                <label for="zip" th:text="#{labelZip}">ZIP</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="country" name="country" placeholder="Country" required value="United States"/>
+                                <label for="country" th:text="#{labelCountry}">Country</label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-shipping" th:text="#{buttonContinueToBilling}">Continue to Billing</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="company" class="form-label" th:text="#{labelCompany}">Company (optional)</label>
-                <input type="text" class="form-control" id="company" name="company"/>
-            </div>
-            <div class="mb-3">
-                <label for="addressLine" class="form-label" th:text="#{labelAddress}">Address</label>
-                <input type="text" class="form-control" id="addressLine" name="addressLine" required/>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label for="city" class="form-label" th:text="#{labelCity}">City</label>
-                    <input type="text" class="form-control" id="city" name="city" required/>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="state" class="form-label" th:text="#{labelState}">State</label>
-                    <input type="text" class="form-control" id="state" name="state" required/>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="zip" class="form-label" th:text="#{labelZip}">ZIP</label>
-                    <input type="text" class="form-control" id="zip" name="zip" required/>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="country" class="form-label" th:text="#{labelCountry}">Country</label>
-                <input type="text" class="form-control" id="country" name="country" required value="United States"/>
-            </div>
-            <button type="submit" class="btn btn-primary" id="btn-submit-shipping" th:text="#{buttonContinueToBilling}">Continue to Billing</button>
         </form>
     </div>
 </div>
