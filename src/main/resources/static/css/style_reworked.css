@@ -259,12 +259,12 @@
     display: block;
   }
 
-  /* Hover Header Categories */
-  .navbar-nav .dropdown:hover > .dropdown-menu {
+  /* Hover Header Categories (only for the main navigation categories, not locale/user dropdowns) */
+  #header-categories > .dropdown:hover > .dropdown-menu {
     display: block;
   }
 
-  .navbar-nav .nav-item.dropdown:hover > .nav-link {
+  #header-categories > .nav-item.dropdown:hover > .nav-link {
     background-color: rgba(44, 74, 110, 0.06);
   }
 

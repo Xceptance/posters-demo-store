@@ -142,9 +142,7 @@ ul.nav li.dropdown ul.dropdown-menu {
 	margin-top: 0px
 }
 
-ul.nav li.dropdown:hover ul.dropdown-menu {
-	display: block;
-}
+/* Removed: hover-to-open dropdown was interfering with click-based Bootstrap 5 dropdowns */
 
 .thumbnail {
 	border: 0;
