@@ -268,64 +268,53 @@
     background-color: rgba(44, 74, 110, 0.06);
   }
 
-  /*  Mini cart
+  /*  Mini cart (Offcanvas Content)
   *   - Start
   */
   .cart-mini {
-    width: 250px;
-    padding: 0px 10px;
-  }
-
-  #mini-cart-menu {
-    /*open end/right aligned:*/
-    left: -184.797px;
-
-    /* Smooth slide-down + fade-in animation */
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    display: block !important;
-    pointer-events: none;
-    visibility: hidden;
-  }
-
-  #mini-cart-menu.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    visibility: visible;
+    padding: 0;
   }
   
   .cart-mini-header {
-    padding: 10px 20px;
-    border-bottom: 3px var(--text-dark) solid;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid var(--text-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .cart-mini-products {
-    padding: 0 20px 0 20px;
     background-color: #ffffff;
   }
   
   .cart-mini-total {
-    padding: 10px;
+    padding: 1.5rem;
+    background-color: var(--bg-warm);
+    border-top: 1px solid rgba(0,0,0,0.05);
   }
   
   .cart-mini-suborder-total {
-    padding: 10px 0;
+    padding-bottom: 1rem;
+    align-items: center;
   }
   
   .suborder-price {
-    font-weight: bold;
-    font-size: var(--ts-md);
+    font-weight: 700;
+    font-size: var(--ts-lg);
+    color: var(--accent);
   }
   
   .cart-items {
-    border-bottom: 2px var(--accent) solid;
-    padding: 5px 0;
-    margin: 0 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1rem 0;
+    margin: 0 1.5rem;
   }
+  .cart-items:last-child {
+    border-bottom: none;
+  }
+  
   .cartSliderElementListItems{
-    margin: 0 20px;
+    margin: 0 1.5rem;
   }
   
   .emptyCartMsg {
@@ -333,10 +322,12 @@
   }
   
   .cart-mini-empty {
-    background-color: #ffffff;
-    display: none;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: var(--ts-md);
   }
-  /*  Mini cart
+  /*  Mini cart (Offcanvas Content)
   *   - End
   */
 /*  Header

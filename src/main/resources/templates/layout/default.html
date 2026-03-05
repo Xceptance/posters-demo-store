@@ -162,10 +162,10 @@
                                 </th:block>
                             </li>
                             <!-- Mini cart -->
-                            <li id="mini-cart" class="nav-item dropdown">
-                                <a id="header-cart-overview" class="dropdown-toggle header-cart-overview nav-link"
-                                   href="#" title="Cart Overview" role="button"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            <li id="mini-cart" class="nav-item">
+                                <a id="header-cart-overview" class="nav-link"
+                                   data-bs-toggle="offcanvas" href="#miniCartOffcanvas" role="button" aria-controls="miniCartOffcanvas"
+                                   title="Cart Overview"
                                    hx-trigger="click once"
                                    th:hx-get="@{'/' + ${urlLocale} + '/miniCart'}"
                                    hx-target="#mini-cart-content"
@@ -174,21 +174,6 @@
                                     <span id="header-cart-count" class="header-cart-product-count"
                                           th:text="${cartProductCount}">0</span>
                                 </a>
-                                <ul id="mini-cart-menu" class="dropdown-menu">
-                                    <li>
-                                        <div id="mini-cart-content" class="cart-mini cart-mini-wrap">
-                                            <!-- loaded via HTMX on first dropdown open -->
-                                            <div class="cart-mini-product-counter">
-                                                <span class="value font-bold" th:text="${cartProductCount}">0</span>
-                                                <span th:text="${cartProductCount == 1} ? 'item' : 'items'">items</span>
-                                            </div>
-                                            <div class="link-button">
-                                                <a th:href="@{'/' + ${urlLocale} + '/cart'}"
-                                                   class="btn btn-primary form-control go-to-cart" th:text="#{buttonGoToCart}">Go to Cart</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -270,6 +255,23 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Mini Cart Offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="miniCartOffcanvas" aria-labelledby="miniCartOffcanvasLabel">
+            <div class="offcanvas-header bg-light border-bottom">
+                <h5 class="offcanvas-title" id="miniCartOffcanvasLabel">Shopping Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-0" id="mini-cart-content">
+                <!-- loaded via HTMX on first open -->
+                <div class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div id="footer-copyright" class="footer-copyright text-center">
             &copy; 2013-2024 Xceptance Software Technologies GmbH<br/>
             Photo copyrights belong to their respective owners.
