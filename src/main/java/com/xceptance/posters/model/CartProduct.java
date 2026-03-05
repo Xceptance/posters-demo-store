@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  * A product entry within a {@link Cart}, with quantity, size, finish, and price.
  */
 @Entity
-@Table(name = "cart_product")
+@Table(name = "cart_lineitems")
 public class CartProduct
 {
     @Id

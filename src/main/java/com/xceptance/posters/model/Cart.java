@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
  * A shopping cart containing products, pricing info, and optional checkout details (addresses, payment).
  */
 @Entity
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart
 {
     @Id

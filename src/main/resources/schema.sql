@@ -160,7 +160,7 @@ create table credit_card (
 -- Shopping Cart
 -- ----------------------------------------
 
-create table cart (
+create table carts (
   id                            uuid not null,
   customer_id                   uuid,
   shipping_address_id           integer,
@@ -171,11 +171,11 @@ create table cart (
   tax                           decimal(10,2) not null,
   total_tax_price               decimal(10,2) not null,
   total_price                   decimal(10,2) not null,
-  constraint uq_cart_customer_id unique (customer_id),
-  constraint pk_cart primary key (id)
+  constraint uq_carts_customer_id unique (customer_id),
+  constraint pk_carts primary key (id)
 );
 
-create table cart_product (
+create table cart_lineitems (
   id                            integer auto_increment not null,
   product_id                    integer,
   cart_id                       uuid,
@@ -183,14 +183,14 @@ create table cart_product (
   finish                        varchar(255),
   size_id                       integer,
   price                         decimal(10,2) not null,
-  constraint pk_cart_product primary key (id)
+  constraint pk_cart_lineitems primary key (id)
 );
 
 -- ----------------------------------------
 -- Orders
 -- ----------------------------------------
 
-create table customer_order (
+create table orders (
   id                            uuid not null,
   order_date                    timestamp,
   shipping_address_id           integer,
@@ -202,17 +202,17 @@ create table customer_order (
   total_costs                   decimal(10,2) not null,
   credit_card_id                integer,
   customer_id                   uuid,
-  constraint pk_customer_order primary key (id)
+  constraint pk_orders primary key (id)
 );
 
-create table order_product (
+create table order_lineitems (
   id                            integer auto_increment not null,
   product_id                    integer,
   product_count                 integer not null,
   finish                        varchar(255),
   size_id                       integer,
   price                         decimal(10,2) not null,
-  constraint pk_order_product primary key (id)
+  constraint pk_order_lineitems primary key (id)
 );
 
 -- ========================================
@@ -244,8 +244,8 @@ create table customer_orders (
 );
 
 -- Order → OrderProduct (OneToMany via join table)
-create table customer_order_products (
-  customer_order_id             uuid not null,
+create table orders_order_lineitems (
+  order_id                      uuid not null,
   products_id                   integer not null
 );
 
@@ -263,18 +263,18 @@ create index ix_product_poster_size_product on product_poster_size (product_id);
 create index ix_product_poster_size_size on product_poster_size (size_id);
 create index ix_localized_price_pps on localized_price (product_poster_size_id);
 create index ix_localized_price_language on localized_price (language_id);
-create index ix_cart_shipping_address on cart (shipping_address_id);
-create index ix_cart_billing_address on cart (billing_address_id);
-create index ix_cart_credit_card on cart (credit_card_id);
-create index ix_cart_product_product on cart_product (product_id);
-create index ix_cart_product_cart on cart_product (cart_id);
-create index ix_cart_product_size on cart_product (size_id);
-create index ix_customer_order_shipping_address on customer_order (shipping_address_id);
-create index ix_customer_order_billing_address on customer_order (billing_address_id);
-create index ix_customer_order_credit_card on customer_order (credit_card_id);
-create index ix_customer_order_customer on customer_order (customer_id);
-create index ix_order_product_product on order_product (product_id);
-create index ix_order_product_size on order_product (size_id);
+create index ix_carts_shipping_address on carts (shipping_address_id);
+create index ix_carts_billing_address on carts (billing_address_id);
+create index ix_carts_credit_card on carts (credit_card_id);
+create index ix_cart_lineitems_product on cart_lineitems (product_id);
+create index ix_cart_lineitems_cart on cart_lineitems (cart_id);
+create index ix_cart_lineitems_size on cart_lineitems (size_id);
+create index ix_orders_shipping_address on orders (shipping_address_id);
+create index ix_orders_billing_address on orders (billing_address_id);
+create index ix_orders_credit_card on orders (credit_card_id);
+create index ix_orders_customer on orders (customer_id);
+create index ix_order_lineitems_product on order_lineitems (product_id);
+create index ix_order_lineitems_size on order_lineitems (size_id);
 
 -- ========================================
 -- Foreign Keys
@@ -304,28 +304,28 @@ alter table localized_price add constraint fk_lp_product_poster_size foreign key
 alter table localized_price add constraint fk_lp_language foreign key (language_id) references supported_language (id);
 
 -- Customer FKs
-alter table customer add constraint fk_customer_cart foreign key (cart_id) references cart (id);
+alter table customer add constraint fk_customer_cart foreign key (cart_id) references carts (id);
 
 -- Cart FKs
-alter table cart add constraint fk_cart_customer foreign key (customer_id) references customer (id);
-alter table cart add constraint fk_cart_shipping_address foreign key (shipping_address_id) references shipping_address (id);
-alter table cart add constraint fk_cart_billing_address foreign key (billing_address_id) references billing_address (id);
-alter table cart add constraint fk_cart_credit_card foreign key (credit_card_id) references credit_card (id);
+alter table carts add constraint fk_carts_customer foreign key (customer_id) references customer (id);
+alter table carts add constraint fk_carts_shipping_address foreign key (shipping_address_id) references shipping_address (id);
+alter table carts add constraint fk_carts_billing_address foreign key (billing_address_id) references billing_address (id);
+alter table carts add constraint fk_carts_credit_card foreign key (credit_card_id) references credit_card (id);
 
--- Cart product FKs
-alter table cart_product add constraint fk_cart_product_product foreign key (product_id) references product (id);
-alter table cart_product add constraint fk_cart_product_cart foreign key (cart_id) references cart (id);
-alter table cart_product add constraint fk_cart_product_size foreign key (size_id) references poster_size (id);
+-- Cart line items FKs
+alter table cart_lineitems add constraint fk_cart_lineitems_product foreign key (product_id) references product (id);
+alter table cart_lineitems add constraint fk_cart_lineitems_cart foreign key (cart_id) references carts (id);
+alter table cart_lineitems add constraint fk_cart_lineitems_size foreign key (size_id) references poster_size (id);
 
 -- Order FKs
-alter table customer_order add constraint fk_order_shipping_address foreign key (shipping_address_id) references shipping_address (id);
-alter table customer_order add constraint fk_order_billing_address foreign key (billing_address_id) references billing_address (id);
-alter table customer_order add constraint fk_order_credit_card foreign key (credit_card_id) references credit_card (id);
-alter table customer_order add constraint fk_order_customer foreign key (customer_id) references customer (id);
+alter table orders add constraint fk_orders_shipping_address foreign key (shipping_address_id) references shipping_address (id);
+alter table orders add constraint fk_orders_billing_address foreign key (billing_address_id) references billing_address (id);
+alter table orders add constraint fk_orders_credit_card foreign key (credit_card_id) references credit_card (id);
+alter table orders add constraint fk_orders_customer foreign key (customer_id) references customer (id);
 
--- Order product FKs
-alter table order_product add constraint fk_order_product_product foreign key (product_id) references product (id);
-alter table order_product add constraint fk_order_product_size foreign key (size_id) references poster_size (id);
+-- Order line items FKs
+alter table order_lineitems add constraint fk_order_lineitems_product foreign key (product_id) references product (id);
+alter table order_lineitems add constraint fk_order_lineitems_size foreign key (size_id) references poster_size (id);
 
 -- Join table FKs
 alter table customer_shipping_addresses add constraint fk_csa_customer foreign key (customer_id) references customer (id);
@@ -335,6 +335,6 @@ alter table customer_billing_addresses add constraint fk_cba_address foreign key
 alter table customer_credit_cards add constraint fk_ccc_customer foreign key (customer_id) references customer (id);
 alter table customer_credit_cards add constraint fk_ccc_card foreign key (credit_cards_id) references credit_card (id);
 alter table customer_orders add constraint fk_co_customer foreign key (customer_id) references customer (id);
-alter table customer_orders add constraint fk_co_order foreign key (orders_id) references customer_order (id);
-alter table customer_order_products add constraint fk_cop_order foreign key (customer_order_id) references customer_order (id);
-alter table customer_order_products add constraint fk_cop_product foreign key (products_id) references order_product (id);
+alter table customer_orders add constraint fk_co_order foreign key (orders_id) references orders (id);
+alter table orders_order_lineitems add constraint fk_ooli_order foreign key (order_id) references orders (id);
+alter table orders_order_lineitems add constraint fk_ooli_lineitem foreign key (products_id) references order_lineitems (id);

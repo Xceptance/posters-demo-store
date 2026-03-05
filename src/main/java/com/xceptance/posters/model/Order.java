@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
  * A completed customer order with products, addresses, payment, and pricing.
  */
 @Entity
-@Table(name = "customer_order")
+@Table(name = "orders")
 public class Order
 {
     @Id

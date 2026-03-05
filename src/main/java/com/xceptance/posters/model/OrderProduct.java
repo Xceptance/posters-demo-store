@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  * A product entry within an {@link Order} — snapshot of the product at time of purchase.
  */
 @Entity
-@Table(name = "order_product")
+@Table(name = "order_lineitems")
 public class OrderProduct
 {
     @Id

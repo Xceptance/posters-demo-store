@@ -8,8 +8,8 @@
 -- Drop foreign key constraints first
 
 -- Join tables
-alter table customer_order_products drop constraint if exists fk_cop_order;
-alter table customer_order_products drop constraint if exists fk_cop_product;
+alter table orders_order_lineitems drop constraint if exists fk_ooli_order;
+alter table orders_order_lineitems drop constraint if exists fk_ooli_lineitem;
 alter table customer_orders drop constraint if exists fk_co_customer;
 alter table customer_orders drop constraint if exists fk_co_order;
 alter table customer_credit_cards drop constraint if exists fk_ccc_customer;
@@ -19,38 +19,38 @@ alter table customer_billing_addresses drop constraint if exists fk_cba_address;
 alter table customer_shipping_addresses drop constraint if exists fk_csa_customer;
 alter table customer_shipping_addresses drop constraint if exists fk_csa_address;
 
--- Order products
-alter table order_product drop constraint if exists fk_order_product_product;
-alter table order_product drop constraint if exists fk_order_product_size;
-drop index if exists ix_order_product_product;
-drop index if exists ix_order_product_size;
+-- Order line items
+alter table order_lineitems drop constraint if exists fk_order_lineitems_product;
+alter table order_lineitems drop constraint if exists fk_order_lineitems_size;
+drop index if exists ix_order_lineitems_product;
+drop index if exists ix_order_lineitems_size;
 
 -- Orders
-alter table customer_order drop constraint if exists fk_order_shipping_address;
-alter table customer_order drop constraint if exists fk_order_billing_address;
-alter table customer_order drop constraint if exists fk_order_credit_card;
-alter table customer_order drop constraint if exists fk_order_customer;
-drop index if exists ix_customer_order_shipping_address;
-drop index if exists ix_customer_order_billing_address;
-drop index if exists ix_customer_order_credit_card;
-drop index if exists ix_customer_order_customer;
+alter table orders drop constraint if exists fk_orders_shipping_address;
+alter table orders drop constraint if exists fk_orders_billing_address;
+alter table orders drop constraint if exists fk_orders_credit_card;
+alter table orders drop constraint if exists fk_orders_customer;
+drop index if exists ix_orders_shipping_address;
+drop index if exists ix_orders_billing_address;
+drop index if exists ix_orders_credit_card;
+drop index if exists ix_orders_customer;
 
--- Cart products
-alter table cart_product drop constraint if exists fk_cart_product_product;
-alter table cart_product drop constraint if exists fk_cart_product_cart;
-alter table cart_product drop constraint if exists fk_cart_product_size;
-drop index if exists ix_cart_product_product;
-drop index if exists ix_cart_product_cart;
-drop index if exists ix_cart_product_size;
+-- Cart line items
+alter table cart_lineitems drop constraint if exists fk_cart_lineitems_product;
+alter table cart_lineitems drop constraint if exists fk_cart_lineitems_cart;
+alter table cart_lineitems drop constraint if exists fk_cart_lineitems_size;
+drop index if exists ix_cart_lineitems_product;
+drop index if exists ix_cart_lineitems_cart;
+drop index if exists ix_cart_lineitems_size;
 
--- Cart
-alter table cart drop constraint if exists fk_cart_customer;
-alter table cart drop constraint if exists fk_cart_shipping_address;
-alter table cart drop constraint if exists fk_cart_billing_address;
-alter table cart drop constraint if exists fk_cart_credit_card;
-drop index if exists ix_cart_shipping_address;
-drop index if exists ix_cart_billing_address;
-drop index if exists ix_cart_credit_card;
+-- Carts
+alter table carts drop constraint if exists fk_carts_customer;
+alter table carts drop constraint if exists fk_carts_shipping_address;
+alter table carts drop constraint if exists fk_carts_billing_address;
+alter table carts drop constraint if exists fk_carts_credit_card;
+drop index if exists ix_carts_shipping_address;
+drop index if exists ix_carts_billing_address;
+drop index if exists ix_carts_credit_card;
 
 -- Customer
 alter table customer drop constraint if exists fk_customer_cart;
@@ -96,16 +96,16 @@ drop index if exists ix_default_text_original_language;
 -- Drop all tables
 -- ----------------------------------------
 
-drop table if exists customer_order_products;
+drop table if exists orders_order_lineitems;
 drop table if exists customer_orders;
 drop table if exists customer_credit_cards;
 drop table if exists customer_billing_addresses;
 drop table if exists customer_shipping_addresses;
 
-drop table if exists order_product;
-drop table if exists customer_order;
-drop table if exists cart_product;
-drop table if exists cart;
+drop table if exists order_lineitems;
+drop table if exists orders;
+drop table if exists cart_lineitems;
+drop table if exists carts;
 
 drop table if exists localized_price;
 drop table if exists product_poster_size;
