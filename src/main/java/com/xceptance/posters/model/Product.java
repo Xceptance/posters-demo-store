@@ -1,7 +1,9 @@
 package com.xceptance.posters.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
 /**
@@ -48,8 +51,11 @@ public class Product
 
     @ManyToOne
     private TopCategory topCategory;
-    
+
     private double minimumPrice;
+
+    @Column(name = "available_finishes")
+    private String availableFinishes = "matte,gloss";
 
     public Product()
     {
@@ -208,6 +214,30 @@ public class Product
     public void setMinimumPrice(double minimumPrice)
     {
         this.minimumPrice = minimumPrice;
+    }
+
+    public String getAvailableFinishes()
+    {
+        return availableFinishes;
+    }
+
+    public void setAvailableFinishes(String availableFinishes)
+    {
+        this.availableFinishes = availableFinishes;
+    }
+
+    /**
+     * Returns the available finishes as a list for template iteration.
+     */
+    public List<String> getAvailableFinishesList()
+    {
+        if (availableFinishes == null || availableFinishes.isBlank())
+        {
+            return List.of("matte", "gloss");
+        }
+        return Arrays.stream(availableFinishes.split(","))
+                     .map(String::trim)
+                     .collect(Collectors.toList());
     }
 
     /**

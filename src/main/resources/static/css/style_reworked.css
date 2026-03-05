@@ -819,7 +819,53 @@
 /*  Product list (e.g. in cart)
 *   - Start
 */
+  .cart-summary-title {
+    font-size: var(--ts-xl);
+    font-family: 'Rokkitt', serif;
+  }
 
+  .cart-summary-card {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+  }
+
+  .cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: var(--ts-base);
+  }
+
+  .cart-summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.25rem;
+    font-size: var(--ts-md);
+  }
+
+  .cart-summary-total-price {
+    color: var(--accent);
+    font-size: var(--ts-lg);
+  }
+
+  #cart-table {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+  }
+
+  #cart-table thead th {
+    border-bottom-width: 2px;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  #cart-table tbody td {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
 /*  Product list
 *   - End
 */

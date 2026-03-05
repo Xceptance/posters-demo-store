@@ -8,62 +8,74 @@
     <div class="container mt-4">
         <h1 th:text="#{titleShoppingCart}">Shopping Cart</h1>
         <div id="cart-content">
-            <div th:if="${cart != null and not #lists.isEmpty(cart.products)}" class="row g-4">
+            <div th:if="${cart != null and not #lists.isEmpty(cart.products)}" class="row g-4 align-items-start">
                 <!-- Left: Items -->
                 <div class="col-lg-8">
-                    <div class="table-responsive">
-                        <table class="table align-middle" id="cart-table">
-                            <thead>
-                                <tr class="text-uppercase text-muted" style="font-size: 0.85rem;"><th th:text="#{labelProduct}">Product</th><th th:text="#{labelSize}">Size</th><th th:text="#{labelFinish}">Finish</th><th th:text="#{labelPrice}">Price</th><th th:text="#{labelQuantity}">Qty</th><th th:text="#{labelTotal}">Total</th><th></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}" class="js-cart-product">
-                                    <td class="js-cart-product-description fw-bold">
-                                        <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.product.name.getText(urlLocale)} + '?productId=' + ${cp.product.id}}"
-                                           th:text="${cp.product.name.getText(urlLocale)}" class="text-dark text-decoration-none">Product</a>
-                                    </td>
-                                    <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
-                                    <td th:text="${cp.finish}">matte</td>
-                                    <td th:text="${#numbers.formatCurrency(cp.price)}">$0.00</td>
-                                    <td>
-                                        <input type="number" th:value="${cp.productCount}" min="1" max="999"
-                                               class="form-control form-control-sm cart-qty-input"
-                                               style="width:70px" th:id="'qty-' + ${cp.id}"
-                                               name="productCount"
-                                               hx-trigger="change"
-                                               th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.id}}"
-                                               hx-target="#cart-content"
-                                               hx-swap="innerHTML"
-                                               hx-include="this"/>
-                                    </td>
-                                    <td><span class="fw-bold" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}" th:id="'total-' + ${cp.id}">$0.00</span></td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-danger cart-remove-btn"
-                                                th:hx-confirm="#{confirmRemoveFromCart}"
-                                                th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.id}}"
-                                                hx-target="#cart-content"
-                                                hx-swap="innerHTML" title="Remove">
-                                            <i class="bi bi-trash3"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card border-0 shadow-sm">
+                        <div class="table-responsive mb-0">
+                            <table class="table align-middle mb-0" id="cart-table">
+                                <thead>
+                                    <tr class="text-uppercase text-muted" style="font-size: 0.85rem;"><th th:text="#{labelProduct}">Product</th><th th:text="#{labelSize}">Size</th><th th:text="#{labelFinish}">Finish</th><th th:text="#{labelPrice}">Price</th><th th:text="#{labelQuantity}">Qty</th><th th:text="#{labelTotal}">Total</th><th></th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}" class="js-cart-product">
+                                        <td class="js-cart-product-description fw-bold">
+                                            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.product.name.getText(urlLocale)} + '?productId=' + ${cp.product.id}}"
+                                               th:text="${cp.product.name.getText(urlLocale)}" class="text-dark text-decoration-none">Product</a>
+                                        </td>
+                                        <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
+                                        <td th:text="${cp.finish}">matte</td>
+                                        <td th:text="${#numbers.formatCurrency(cp.price)}">$0.00</td>
+                                        <td>
+                                            <input type="number" th:value="${cp.productCount}" min="1" max="999"
+                                                   class="form-control form-control-sm cart-qty-input"
+                                                   style="width:70px" th:id="'qty-' + ${cp.id}"
+                                                   name="productCount"
+                                                   hx-trigger="change"
+                                                   th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.id}}"
+                                                   hx-target="#cart-content"
+                                                   hx-swap="innerHTML"
+                                                   hx-include="this"/>
+                                        </td>
+                                        <td><span class="fw-bold" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}" th:id="'total-' + ${cp.id}">$0.00</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-outline-danger cart-remove-btn"
+                                                    th:hx-confirm="#{confirmRemoveFromCart}"
+                                                    th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.id}}"
+                                                    hx-target="#cart-content"
+                                                    hx-swap="innerHTML" title="Remove">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Right: Summary Card -->
                 <div class="col-lg-4">
-                    <div class="card border-0 shadow-sm bg-light" style="position: sticky; top: 100px;">
+                    <div class="card border-0 shadow-sm cart-summary-card" style="position: sticky; top: 100px;">
                         <div class="card-body p-4">
-                            <h3 class="card-title h5 mb-3 fw-bold">Order Summary</h3>
-                            <table class="table table-borderless mb-4">
-                                <tr class="border-bottom"><td class="text-muted ps-0" th:text="#{labelSubtotal}">Subtotal:</td><td class="text-end pe-0"><span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}" id="cart-subtotal">$0.00</span></td></tr>
-                                <tr><td class="text-muted ps-0">Tax (<span th:text="${cart.taxAsString}">6.0</span>%):</td><td class="text-end pe-0"><span th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}" id="cart-tax">$0.00</span></td></tr>
-                                <tr class="border-bottom"><td class="text-muted ps-0" th:text="#{labelShipping}">Shipping:</td><td class="text-end pe-0"><span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span></td></tr>
-                                <tr><th class="ps-0 fs-5 pt-3">Total:</th><th class="text-end pe-0 fs-5 pt-3"><span class="text-danger" th:text="${#numbers.formatCurrency(cart.totalPrice)}" id="cart-total">$0.00</span></th></tr>
-                            </table>
-                            <a th:href="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" class="btn btn-primary w-100 btn-lg" id="btn-checkout" th:text="#{buttonCheckout}">Checkout</a>
+                            <h3 class="card-title cart-summary-title mb-4 fw-bold" th:text="#{titleOrderSummary}">Order Summary</h3>
+                            <div class="cart-summary-row">
+                                <span class="text-muted" th:text="#{labelSubtotal}">Subtotal</span>
+                                <span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}" id="cart-subtotal">$0.00</span>
+                            </div>
+                            <div class="cart-summary-row">
+                                <span class="text-muted">Tax (<span th:text="${cart.taxAsString}">6.0</span>%)</span>
+                                <span th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}" id="cart-tax">$0.00</span>
+                            </div>
+                            <div class="cart-summary-row">
+                                <span class="text-muted" th:text="#{labelShipping}">Shipping</span>
+                                <span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span>
+                            </div>
+                            <div class="cart-summary-total">
+                                <span class="fw-bold">Total</span>
+                                <span class="fw-bold cart-summary-total-price" th:text="${#numbers.formatCurrency(cart.totalPrice)}" id="cart-total">$0.00</span>
+                            </div>
+                            <a th:href="@{'/' + ${urlLocale} + '/checkout/shippingAddress'}" class="btn btn-primary w-100 btn-lg mt-3" id="btn-checkout" th:text="#{buttonCheckout}">Checkout</a>
                         </div>
                     </div>
                 </div>

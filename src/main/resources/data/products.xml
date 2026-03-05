@@ -10,8 +10,9 @@
     <!ELEMENT imageURL (small, medium, large, original)>
     <!ELEMENT subCategory (#PCDATA)>
     <!ELEMENT availableSize (#PCDATA)>
+    <!ELEMENT availableFinishes (#PCDATA)>
     <!ELEMENT price (#PCDATA)>
-    <!ELEMENT product (name+, shortDescription+, longDescription+, imageURL, subCategory, availableSize, price+)>
+    <!ELEMENT product (name+, shortDescription+, longDescription+, imageURL, subCategory, availableFinishes?, availableSize, price+)>
     <!ATTLIST name xml:lang NMTOKEN #IMPLIED>
     <!ATTLIST shortDescription xml:lang NMTOKEN #IMPLIED>
     <!ATTLIST longDescription xml:lang NMTOKEN #IMPLIED>
@@ -37,11 +38,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.00;25.50;32.95</price>
-<price xml:lang="de-DE">14.96;22.44;29.00</price>
-<price xml:lang="en-GB">13.43;20.14;26.03</price>
-<price xml:lang="sv-SE">185.30;277.95;359.16</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.00;32.95</price>
+<price xml:lang="de-DE">14.96;29.00</price>
+<price xml:lang="en-GB">13.43;26.03</price>
+<price xml:lang="sv-SE">185.30;359.16</price>
 </product>
 <product>
 <name xml:lang="x-default">Great Grey Owl</name>
@@ -60,11 +62,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>32x24;48x36;64x48</availableSize>
-<price>12.85;17.99;23.89</price>
-<price xml:lang="de-DE">11.31;15.83;21.02</price>
-<price xml:lang="en-GB">10.15;14.21;18.87</price>
-<price xml:lang="sv-SE">140.06;196.09;260.40</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>14.78;17.99;21.50</price>
+<price xml:lang="de-DE">13.01;15.83;18.92</price>
+<price xml:lang="en-GB">11.67;14.21;16.98</price>
+<price xml:lang="sv-SE">161.07;196.09;234.36</price>
 </product>
 <product>
 <name xml:lang="x-default">Swedish Moose</name>
@@ -83,6 +86,7 @@
 <original>/assets/img/products/flora_and_fauna/animals/swedish-moose/swedish-moose-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>9.30;15.00;19.99</price>
 <price xml:lang="de-DE">8.18;13.20;17.59</price>
@@ -106,11 +110,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/european-hornet/european-hornet-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>10.50;15.64;20.22</price>
-<price xml:lang="de-DE">9.24;13.76;17.79</price>
-<price xml:lang="en-GB">8.29;12.36;15.97</price>
-<price xml:lang="sv-SE">114.45;170.48;220.40</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>15.64;17.19;20.22</price>
+<price xml:lang="de-DE">13.76;15.12;17.79</price>
+<price xml:lang="en-GB">12.36;13.57;15.97</price>
+<price xml:lang="sv-SE">170.48;187.34;220.40</price>
 </product>
 <product>
 <name xml:lang="x-default">Roman Snail</name>
@@ -129,11 +134,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/roman-snail/roman-snail-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>23.00;30.45;38.00</price>
-<price xml:lang="de-DE">20.24;26.80;33.44</price>
-<price xml:lang="en-GB">18.17;24.06;30.02</price>
-<price xml:lang="sv-SE">250.70;331.91;414.20</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>23.00;38.00</price>
+<price xml:lang="de-DE">20.24;33.44</price>
+<price xml:lang="en-GB">18.17;30.02</price>
+<price xml:lang="sv-SE">250.70;414.20</price>
 </product>
 <product>
 <name xml:lang="x-default">Blue Morpho Butterfly</name>
@@ -152,11 +158,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/blue-morpho-butterfly/blue-morpho-butterfly-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;23.99;29.99</price>
-<price xml:lang="de-DE">15.83;21.11;26.39</price>
-<price xml:lang="en-GB">14.21;18.95;23.69</price>
-<price xml:lang="sv-SE">196.09;261.49;326.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;23.99;26.99</price>
+<price xml:lang="de-DE">18.20;21.11;23.75</price>
+<price xml:lang="en-GB">16.34;18.95;21.32</price>
+<price xml:lang="sv-SE">225.50;261.49;294.20</price>
 </product>
 <product>
 <name xml:lang="x-default">Red Birdwing</name>
@@ -175,11 +182,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/red-birdwing/red-birdwing-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
-<price>8.75;15.75;22;45</price>
-<price xml:lang="de-DE">7.70;13.86;19.36;39.60</price>
-<price xml:lang="en-GB">6.91;12.44;17.38;35.55</price>
-<price xml:lang="sv-SE">95.38;171.68;239.80;490.50</price>
+<price>8.75;15.75;22</price>
+<price xml:lang="de-DE">7.70;13.86;19.36</price>
+<price xml:lang="en-GB">6.91;12.44;17.38</price>
+<price xml:lang="sv-SE">95.38;171.68;239.80</price>
 </product>
 <product>
 <name xml:lang="x-default">Bird</name>
@@ -198,11 +206,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/bird/bird-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.87;19.99;25.99</price>
-<price xml:lang="de-DE">11.33;17.59;22.87</price>
-<price xml:lang="en-GB">10.17;15.79;20.53</price>
-<price xml:lang="sv-SE">140.28;217.89;283.29</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>19.99;22.09;25.99</price>
+<price xml:lang="de-DE">17.59;19.44;22.87</price>
+<price xml:lang="en-GB">15.79;17.45;20.53</price>
+<price xml:lang="sv-SE">217.89;240.80;283.29</price>
 </product>
 <product>
 <name xml:lang="x-default">Red Domestic Cat</name>
@@ -221,11 +230,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/red-domestic-cat/red-domestic-cat-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;26.98;34.89</price>
-<price xml:lang="de-DE">15.83;23.74;30.70</price>
-<price xml:lang="en-GB">14.21;21.31;27.56</price>
-<price xml:lang="sv-SE">196.09;294.08;380.30</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;34.89</price>
+<price xml:lang="de-DE">15.83;30.70</price>
+<price xml:lang="en-GB">14.21;27.56</price>
+<price xml:lang="sv-SE">196.09;380.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Brown Domestic Cat</name>
@@ -244,11 +254,12 @@
 <original>/assets/img/products/flora_and_fauna/animals/brown-domestic-cat/brown-domestic-cat-original.webp</original>
 </imageURL>
 <subCategory>Animals</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.90;25.29;30.00</price>
-<price xml:lang="de-DE">15.75;22.26;26.40</price>
-<price xml:lang="en-GB">14.14;19.98;23.70</price>
-<price xml:lang="sv-SE">195.11;275.66;327.00</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.58;25.29;27.00</price>
+<price xml:lang="de-DE">18.11;22.26;23.76</price>
+<price xml:lang="en-GB">16.26;19.98;21.33</price>
+<price xml:lang="sv-SE">224.38;275.66;294.30</price>
 </product>
 <!-- SubCategory Flowers  -->
 <product>
@@ -268,6 +279,7 @@
 <original>/assets/img/products/flora_and_fauna/flowers/pink-dahlia/pink-dahlia-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>0.30;1.45;5.99</price>
 <price xml:lang="de-DE">0.26;1.28;5.27</price>
@@ -291,11 +303,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-pink-white/cactus-dahlia-pink-white-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>0.99;4.00;7.99</price>
-<price xml:lang="de-DE">0.87;3.52;7.03</price>
-<price xml:lang="en-GB">0.78;3.16;6.31</price>
-<price xml:lang="sv-SE">10.79;43.60;87.09</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>4.00;6.79;7.99</price>
+<price xml:lang="de-DE">3.52;5.98;7.03</price>
+<price xml:lang="en-GB">3.16;5.36;6.31</price>
+<price xml:lang="sv-SE">43.60;74.03;87.09</price>
 </product>
 <product>
 <name xml:lang="x-default">Cactus Dahlia, Yellow/Pink</name>
@@ -314,11 +327,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-yellow-pink/cactus-dahlia-yellow-pink-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.10;24.90;29.99</price>
-<price xml:lang="de-DE">15.05;21.91;26.39</price>
-<price xml:lang="en-GB">13.51;19.67;23.69</price>
-<price xml:lang="sv-SE">186.39;271.41;326.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.10;29.99</price>
+<price xml:lang="de-DE">15.05;26.39</price>
+<price xml:lang="en-GB">13.51;23.69</price>
+<price xml:lang="sv-SE">186.39;326.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Jerusalem Artichoke</name>
@@ -337,11 +351,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/jerusalem-artichoke/jerusalem-artichoke-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>23.59;31.75;38.00</price>
-<price xml:lang="de-DE">20.76;27.94;33.44</price>
-<price xml:lang="en-GB">18.64;25.08;30.02</price>
-<price xml:lang="sv-SE">257.13;346.07;414.20</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>27.13;31.75;34.20</price>
+<price xml:lang="de-DE">23.87;27.94;30.10</price>
+<price xml:lang="en-GB">21.44;25.08;27.02</price>
+<price xml:lang="sv-SE">295.70;346.07;372.78</price>
 </product>
 <product>
 <name xml:lang="x-default">Snowdrop Anemone</name>
@@ -364,6 +379,7 @@
 <original>/assets/img/products/flora_and_fauna/flowers/snowdrop-anemone/snowdrop-anemone-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 </product>
 <product>
@@ -383,11 +399,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/violas/violas-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>35.70;50.00;65.89</price>
-<price xml:lang="de-DE">31.42;44.00;57.98</price>
-<price xml:lang="en-GB">28.20;39.50;52.05</price>
-<price xml:lang="sv-SE">389.13;545.00;718.20</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>50.00;56.01;65.89</price>
+<price xml:lang="de-DE">44.00;49.28;57.98</price>
+<price xml:lang="en-GB">39.50;44.24;52.05</price>
+<price xml:lang="sv-SE">545.00;610.47;718.20</price>
 </product>
 <product>
 <name xml:lang="x-default">Yellow and Orange Tulips</name>
@@ -406,11 +423,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/yellow-and-orange-tulips/yellow-and-orange-tulips-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>18.50;25.30;31.90</price>
-<price xml:lang="de-DE">16.28;22.26;28.07</price>
-<price xml:lang="en-GB">14.62;19.99;25.20</price>
-<price xml:lang="sv-SE">201.65;275.77;347.71</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>18.50;31.90</price>
+<price xml:lang="de-DE">16.28;28.07</price>
+<price xml:lang="en-GB">14.62;25.20</price>
+<price xml:lang="sv-SE">201.65;347.71</price>
 </product>
 <product>
 <name xml:lang="x-default">Mixed-Colored Tulips</name>
@@ -429,11 +447,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/mixed-colored-tulips/mixed-colored-tulips-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;24.99;38.10</price>
-<price xml:lang="de-DE">15.83;21.99;33.53</price>
-<price xml:lang="en-GB">14.21;19.74;30.10</price>
-<price xml:lang="sv-SE">196.09;272.39;415.29</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;24.99;34.29</price>
+<price xml:lang="de-DE">18.20;21.99;30.18</price>
+<price xml:lang="en-GB">16.34;19.74;27.09</price>
+<price xml:lang="sv-SE">225.50;272.39;373.76</price>
 </product>
 <product>
 <name xml:lang="x-default">Garden Roses</name>
@@ -452,6 +471,7 @@
 <original>/assets/img/products/flora_and_fauna/flowers/garden-roses/garden-roses-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;38.10</price>
 <price xml:lang="de-DE">15.83;21.99;33.53</price>
@@ -475,11 +495,12 @@
 <original>/assets/img/products/flora_and_fauna/flowers/anthurium/anthurium-original.webp</original>
 </imageURL>
 <subCategory>Flowers</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.30;24.80;30.00</price>
-<price xml:lang="de-DE">14.34;21.82;26.40</price>
-<price xml:lang="en-GB">12.88;19.59;23.70</price>
-<price xml:lang="sv-SE">177.67;270.32;327.00</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>24.80;25.50;30.00</price>
+<price xml:lang="de-DE">21.82;22.44;26.40</price>
+<price xml:lang="en-GB">19.59;20.14;23.70</price>
+<price xml:lang="sv-SE">270.32;277.95;327.00</price>
 </product>
 <!-- SubCategory Trees  -->
 <product>
@@ -499,11 +520,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/indian-summer-red-beeches/indian-summer-red-beeches-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.89;19.99;29.99</price>
-<price xml:lang="de-DE">11.34;17.59;26.39</price>
-<price xml:lang="en-GB">10.18;15.79;23.69</price>
-<price xml:lang="sv-SE">140.50;217.89;326.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>12.89;29.99</price>
+<price xml:lang="de-DE">11.34;26.39</price>
+<price xml:lang="en-GB">10.18;23.69</price>
+<price xml:lang="sv-SE">140.50;326.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Indian summer orange Tree</name>
@@ -522,11 +544,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/indian-summer-orange-tree/indian-summer-orange-tree-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.78;21.90;27.97</price>
-<price xml:lang="de-DE">13.89;19.27;24.61</price>
-<price xml:lang="en-GB">12.47;17.30;22.10</price>
-<price xml:lang="sv-SE">172.00;238.71;304.87</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>18.15;21.90;25.17</price>
+<price xml:lang="de-DE">15.97;19.27;22.15</price>
+<price xml:lang="en-GB">14.34;17.30;19.89</price>
+<price xml:lang="sv-SE">197.80;238.71;274.38</price>
 </product>
 <product>
 <name xml:lang="x-default">Indian Summer Orange Beech</name>
@@ -545,6 +568,7 @@
 <original>/assets/img/products/flora_and_fauna/trees/indian-summer-orange-beech/indian-summer-orange-beech-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;20.85;29.90</price>
 <price xml:lang="de-DE">15.83;18.35;26.31</price>
@@ -568,11 +592,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/indian-summer-young-ashes/indian-summer-young-ashes-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.67;27.90;34.00</price>
-<price xml:lang="de-DE">14.67;24.55;29.92</price>
-<price xml:lang="en-GB">13.17;22.04;26.86</price>
-<price xml:lang="sv-SE">181.70;304.11;370.60</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>27.90;28.90;34.00</price>
+<price xml:lang="de-DE">24.55;25.43;29.92</price>
+<price xml:lang="en-GB">22.04;22.83;26.86</price>
+<price xml:lang="sv-SE">304.11;315.01;370.60</price>
 </product>
 <product>
 <name xml:lang="x-default">Indian Summer Young Birches</name>
@@ -591,11 +616,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/indian-summer-young-birches/indian-summer-young-birches-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.98;29.99;45.50</price>
-<price xml:lang="de-DE">14.94;26.39;40.04</price>
-<price xml:lang="en-GB">13.41;23.69;35.95</price>
-<price xml:lang="sv-SE">185.08;326.89;495.95</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>16.98;45.50</price>
+<price xml:lang="de-DE">14.94;40.04</price>
+<price xml:lang="en-GB">13.41;35.95</price>
+<price xml:lang="sv-SE">185.08;495.95</price>
 </product>
 <product>
 <name xml:lang="x-default">Indian Summer Tree Mix</name>
@@ -614,11 +640,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/indian-summer-tree-mix/indian-summer-tree-mix-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>29.99;39.90;45.99</price>
-<price xml:lang="de-DE">26.39;35.11;40.47</price>
-<price xml:lang="en-GB">23.69;31.52;36.33</price>
-<price xml:lang="sv-SE">326.89;434.91;501.29</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>34.49;39.90;41.39</price>
+<price xml:lang="de-DE">30.35;35.11;36.42</price>
+<price xml:lang="en-GB">27.24;31.52;32.70</price>
+<price xml:lang="sv-SE">375.92;434.91;451.16</price>
 </product>
 <product>
 <name xml:lang="x-default">Fir Covered with Snow</name>
@@ -637,6 +664,7 @@
 <original>/assets/img/products/flora_and_fauna/trees/fir-covered-with-snow/fir-covered-with-snow-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;24.99;33.33</price>
 <price xml:lang="de-DE">15.83;21.99;29.33</price>
@@ -660,11 +688,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/cherry-blossom/cherry-blossom-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;24.99;33.33</price>
-<price xml:lang="de-DE">15.83;21.99;29.33</price>
-<price xml:lang="en-GB">14.21;19.74;26.33</price>
-<price xml:lang="sv-SE">196.09;272.39;363.30</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>24.99;28.33;33.33</price>
+<price xml:lang="de-DE">21.99;24.93;29.33</price>
+<price xml:lang="en-GB">19.74;22.38;26.33</price>
+<price xml:lang="sv-SE">272.39;308.81;363.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Fall Leaves I</name>
@@ -683,11 +712,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/fall-leaves-I/fall-leaves-I-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;24.99;33.33</price>
-<price xml:lang="de-DE">15.83;21.99;29.33</price>
-<price xml:lang="en-GB">14.21;19.74;26.33</price>
-<price xml:lang="sv-SE">196.09;272.39;363.30</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;33.33</price>
+<price xml:lang="de-DE">15.83;29.33</price>
+<price xml:lang="en-GB">14.21;26.33</price>
+<price xml:lang="sv-SE">196.09;363.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Fall Leaves II</name>
@@ -706,11 +736,12 @@
 <original>/assets/img/products/flora_and_fauna/trees/fall-leaves-II/fall-leaves-II-original.webp</original>
 </imageURL>
 <subCategory>Trees</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.13;24.99;32.65</price>
-<price xml:lang="de-DE">14.19;21.99;28.73</price>
-<price xml:lang="en-GB">12.74;19.74;25.79</price>
-<price xml:lang="sv-SE">175.82;272.39;355.88</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>18.55;24.99;29.38</price>
+<price xml:lang="de-DE">16.32;21.99;25.86</price>
+<price xml:lang="en-GB">14.65;19.74;23.21</price>
+<price xml:lang="sv-SE">202.19;272.39;320.29</price>
 </product>
 <!-- TopCategory Food  -->
 <!-- SubCategory Cold_Cuts  -->
@@ -731,6 +762,7 @@
 <original>/assets/img/products/food/cold-cuts/tomato-and-mozzarella-bites/tomato-and-mozzarella-bites-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;25.90;29.99</price>
 <price xml:lang="de-DE">15.83;22.79;26.39</price>
@@ -754,11 +786,12 @@
 <original>/assets/img/products/food/cold-cuts/rolled-bacon/rolled-bacon-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.89;27.90;40.00</price>
-<price xml:lang="de-DE">14.86;24.55;35.20</price>
-<price xml:lang="en-GB">13.34;22.04;31.60</price>
-<price xml:lang="sv-SE">184.10;304.11;436.00</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>27.90;34.00;40.00</price>
+<price xml:lang="de-DE">24.55;29.92;35.20</price>
+<price xml:lang="en-GB">22.04;26.86;31.60</price>
+<price xml:lang="sv-SE">304.11;370.60;436.00</price>
 </product>
 <product>
 <name xml:lang="x-default">Cheese Varieties</name>
@@ -777,11 +810,12 @@
 <original>/assets/img/products/food/cold-cuts/cheese-varieties/cheese-varieties-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>9.99;18.99;27.99</price>
-<price xml:lang="de-DE">8.79;16.71;24.63</price>
-<price xml:lang="en-GB">7.89;15.00;22.11</price>
-<price xml:lang="sv-SE">108.89;206.99;305.09</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>9.99;27.99</price>
+<price xml:lang="de-DE">8.79;24.63</price>
+<price xml:lang="en-GB">7.89;22.11</price>
+<price xml:lang="sv-SE">108.89;305.09</price>
 </product>
 <product>
 <name xml:lang="x-default">Mixed Olives</name>
@@ -800,11 +834,12 @@
 <original>/assets/img/products/food/cold-cuts/mixed-olives/mixed-olives-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.75;28.90;54.90</price>
-<price xml:lang="de-DE">14.74;25.43;48.31</price>
-<price xml:lang="en-GB">13.23;22.83;43.37</price>
-<price xml:lang="sv-SE">182.58;315.01;598.41</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>19.26;28.90;49.41</price>
+<price xml:lang="de-DE">16.95;25.43;43.48</price>
+<price xml:lang="en-GB">15.21;22.83;39.03</price>
+<price xml:lang="sv-SE">209.97;315.01;538.57</price>
 </product>
 <product>
 <name xml:lang="x-default">Finger Food</name>
@@ -823,6 +858,7 @@
 <original>/assets/img/products/food/cold-cuts/finger-food/finger-food-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.39;21.20;28.10</price>
 <price xml:lang="de-DE">11.78;18.66;24.73</price>
@@ -846,11 +882,12 @@
 <original>/assets/img/products/food/cold-cuts/rocket-salad-with-mozzarella/rocket-salad-with-mozzarella-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;27.99;37.99</price>
-<price xml:lang="de-DE">15.83;24.63;33.43</price>
-<price xml:lang="en-GB">14.21;22.11;30.01</price>
-<price xml:lang="sv-SE">196.09;305.09;414.09</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>27.99;32.29;37.99</price>
+<price xml:lang="de-DE">24.63;28.42;33.43</price>
+<price xml:lang="en-GB">22.11;25.51;30.01</price>
+<price xml:lang="sv-SE">305.09;351.98;414.09</price>
 </product>
 <product>
 <name xml:lang="x-default">Meatfoot</name>
@@ -869,11 +906,12 @@
 <original>/assets/img/products/food/cold-cuts/meatfoot/meatfoot-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>19.99;29.90;39.80</price>
-<price xml:lang="de-DE">17.59;26.31;35.02</price>
-<price xml:lang="en-GB">15.79;23.62;31.44</price>
-<price xml:lang="sv-SE">217.89;325.91;433.82</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>19.99;39.80</price>
+<price xml:lang="de-DE">17.59;35.02</price>
+<price xml:lang="en-GB">15.79;31.44</price>
+<price xml:lang="sv-SE">217.89;433.82</price>
 </product>
 <product>
 <name xml:lang="x-default">Peperoni Sandwich</name>
@@ -892,11 +930,12 @@
 <original>/assets/img/products/food/cold-cuts/peperoni-sandwich/peperoni-sandwich-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;28.10;37.90</price>
-<price xml:lang="de-DE">15.83;24.73;33.35</price>
-<price xml:lang="en-GB">14.21;22.20;29.94</price>
-<price xml:lang="sv-SE">196.09;306.29;413.11</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;28.10;34.11</price>
+<price xml:lang="de-DE">18.20;24.73;30.02</price>
+<price xml:lang="en-GB">16.34;22.20;26.95</price>
+<price xml:lang="sv-SE">225.50;306.29;371.80</price>
 </product>
 <product>
 <name xml:lang="x-default">Chicken Teriyaki</name>
@@ -915,6 +954,7 @@
 <original>/assets/img/products/food/cold-cuts/chicken-teryiaki/chicken-teryiaki-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>29.99;45.00;70.30</price>
 <price xml:lang="de-DE">26.39;39.60;61.86</price>
@@ -938,11 +978,12 @@
 <original>/assets/img/products/food/cold-cuts/fried-rice/fried-rice-original.webp</original>
 </imageURL>
 <subCategory>Cold Cuts</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;25.90;31.70</price>
-<price xml:lang="de-DE">15.83;22.79;27.90</price>
-<price xml:lang="en-GB">14.21;20.46;25.04</price>
-<price xml:lang="sv-SE">196.09;282.31;345.53</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>25.90;26.95;31.70</price>
+<price xml:lang="de-DE">22.79;23.71;27.90</price>
+<price xml:lang="en-GB">20.46;21.28;25.04</price>
+<price xml:lang="sv-SE">282.31;293.70;345.53</price>
 </product>
 <!-- SubCategory Main Dishes  -->
 <product>
@@ -962,11 +1003,12 @@
 <original>/assets/img/products/food/main-dishes/grilled-salmon-with-potato-wedges/grilled-salmon-with-potato-wedges-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.68;24.90;29.99</price>
-<price xml:lang="de-DE">14.68;21.91;26.39</price>
-<price xml:lang="en-GB">13.18;19.67;23.69</price>
-<price xml:lang="sv-SE">181.81;271.41;326.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>16.68;29.99</price>
+<price xml:lang="de-DE">14.68;26.39</price>
+<price xml:lang="en-GB">13.18;23.69</price>
+<price xml:lang="sv-SE">181.81;326.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Goulash with Dumplings</name>
@@ -985,11 +1027,12 @@
 <original>/assets/img/products/food/main-dishes/goulash-with-dumplings/goulash-with-dumplings-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;43.00</price>
-<price xml:lang="de-DE">15.83;26.39;37.84</price>
-<price xml:lang="en-GB">14.21;23.69;33.97</price>
-<price xml:lang="sv-SE">196.09;326.89;468.70</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;38.70</price>
+<price xml:lang="de-DE">18.20;26.39;34.06</price>
+<price xml:lang="en-GB">16.34;23.69;30.57</price>
+<price xml:lang="sv-SE">225.50;326.89;421.83</price>
 </product>
 <product>
 <name xml:lang="x-default">Selfmade Mac and Cheese</name>
@@ -1008,6 +1051,7 @@
 <original>/assets/img/products/food/main-dishes/selfmade-mac-and-cheese/selfmade-mac-and-cheese-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>29.10;35.50;45.60</price>
 <price xml:lang="de-DE">25.61;31.24;40.13</price>
@@ -1031,11 +1075,12 @@
 <original>/assets/img/products/food/main-dishes/stuffed-turkey/stuffed-turkey-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>23.50;34.40;42.65</price>
-<price xml:lang="de-DE">20.68;30.27;37.53</price>
-<price xml:lang="en-GB">18.57;27.18;33.69</price>
-<price xml:lang="sv-SE">256.15;374.96;464.88</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>34.40;36.25;42.65</price>
+<price xml:lang="de-DE">30.27;31.90;37.53</price>
+<price xml:lang="en-GB">27.18;28.64;33.69</price>
+<price xml:lang="sv-SE">374.96;395.15;464.88</price>
 </product>
 <product>
 <name xml:lang="x-default">Tuna Steak</name>
@@ -1054,11 +1099,12 @@
 <original>/assets/img/products/food/main-dishes/tuna-steak/tuna-steak-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.99</price>
+<price xml:lang="de-DE">15.83;35.19</price>
+<price xml:lang="en-GB">14.21;31.59</price>
+<price xml:lang="sv-SE">196.09;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Frozen Pizza</name>
@@ -1077,11 +1123,12 @@
 <original>/assets/img/products/food/main-dishes/frozen-pizza/frozen-pizza-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>11.12;13.14;15.16</price>
-<price xml:lang="de-DE">9.79;11.56;13.34</price>
-<price xml:lang="en-GB">8.78;10.38;11.98</price>
-<price xml:lang="sv-SE">121.21;143.23;165.24</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>12.79;13.14;13.64</price>
+<price xml:lang="de-DE">11.26;11.56;12.01</price>
+<price xml:lang="en-GB">10.10;10.38;10.78</price>
+<price xml:lang="sv-SE">139.39;143.23;148.72</price>
 </product>
 <product>
 <name xml:lang="x-default">Meatballs</name>
@@ -1100,6 +1147,7 @@
 <original>/assets/img/products/food/main-dishes/meatballs/meatballs-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.99;22.12;28.45</price>
 <price xml:lang="de-DE">12.31;19.47;25.04</price>
@@ -1123,11 +1171,12 @@
 <original>/assets/img/products/food/main-dishes/xxl-burger/xxl-burger-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.90</price>
-<price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-GB">14.21;23.69;31.52</price>
-<price xml:lang="sv-SE">196.09;326.89;434.91</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.99;33.91;39.90</price>
+<price xml:lang="de-DE">26.39;29.84;35.11</price>
+<price xml:lang="en-GB">23.69;26.79;31.52</price>
+<price xml:lang="sv-SE">326.89;369.67;434.91</price>
 </product>
 <product>
 <name xml:lang="x-default">Small Burger</name>
@@ -1146,11 +1195,12 @@
 <original>/assets/img/products/food/main-dishes/small-burger/small-burger-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.45;23.24;29.78</price>
-<price xml:lang="de-DE">10.96;20.45;26.21</price>
-<price xml:lang="en-GB">9.84;18.36;23.53</price>
-<price xml:lang="sv-SE">135.70;253.32;324.60</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>12.45;29.78</price>
+<price xml:lang="de-DE">10.96;26.21</price>
+<price xml:lang="en-GB">9.84;23.53</price>
+<price xml:lang="sv-SE">135.70;324.60</price>
 </product>
 <product>
 <name xml:lang="x-default">Medium Burger</name>
@@ -1169,11 +1219,12 @@
 <original>/assets/img/products/food/main-dishes/medium-burger/medium-burger-original.webp</original>
 </imageURL>
 <subCategory>Main Dishes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <!-- SubCategory Sweets  -->
 <product>
@@ -1193,6 +1244,7 @@
 <original>/assets/img/products/food/sweets/german-apple-pie/german-apple-pie-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.78;28.89;35.45</price>
 <price xml:lang="de-DE">20.93;25.42;31.20</price>
@@ -1216,11 +1268,12 @@
 <original>/assets/img/products/food/sweets/whipped-cream-with-caramel/whipped-cream-with-caramel-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>11.78;21.84;29.87</price>
-<price xml:lang="de-DE">10.37;19.22;26.29</price>
-<price xml:lang="en-GB">9.31;17.25;23.60</price>
-<price xml:lang="sv-SE">128.40;238.06;325.58</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>21.84;25.39;29.87</price>
+<price xml:lang="de-DE">19.22;22.35;26.29</price>
+<price xml:lang="en-GB">17.25;20.06;23.60</price>
+<price xml:lang="sv-SE">238.06;276.74;325.58</price>
 </product>
 <product>
 <name xml:lang="x-default">Blueberry Cake</name>
@@ -1239,11 +1292,12 @@
 <original>/assets/img/products/food/sweets/blueberry-cake/blueberry-cake-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>18.89;29.99;39.99</price>
-<price xml:lang="de-DE">16.62;26.39;35.19</price>
-<price xml:lang="en-GB">14.92;23.69;31.59</price>
-<price xml:lang="sv-SE">205.90;326.89;435.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>18.89;39.99</price>
+<price xml:lang="de-DE">16.62;35.19</price>
+<price xml:lang="en-GB">14.92;31.59</price>
+<price xml:lang="sv-SE">205.90;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Fruit Tart with Cocoa</name>
@@ -1262,11 +1316,12 @@
 <original>/assets/img/products/food/sweets/fruit-tart-with-cocoa/fruit-tart-with-cocoa-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Gummy Bears on Keyboard</name>
@@ -1285,6 +1340,7 @@
 <original>/assets/img/products/food/sweets/gummy-bears-on-keyboard/gummy-bears-on-keyboard-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
@@ -1308,11 +1364,12 @@
 <original>/assets/img/products/food/sweets/colored-sprinkles/colored-sprinkles-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>9.89;19.78;28.79</price>
-<price xml:lang="de-DE">8.70;17.41;25.34</price>
-<price xml:lang="en-GB">7.81;15.63;22.74</price>
-<price xml:lang="sv-SE">107.80;215.60;313.81</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>19.78;24.47;28.79</price>
+<price xml:lang="de-DE">17.41;21.54;25.34</price>
+<price xml:lang="en-GB">15.63;19.33;22.74</price>
+<price xml:lang="sv-SE">215.60;266.74;313.81</price>
 </product>
 <product>
 <name xml:lang="x-default">Gummy Bears in Bowl</name>
@@ -1331,11 +1388,12 @@
 <original>/assets/img/products/food/sweets/gummy-bears-in-bowl/gummy-bears-in-bowl-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;27.99;39.56</price>
-<price xml:lang="de-DE">15.83;24.63;34.81</price>
-<price xml:lang="en-GB">14.21;22.11;31.25</price>
-<price xml:lang="sv-SE">196.09;305.09;431.20</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.56</price>
+<price xml:lang="de-DE">15.83;34.81</price>
+<price xml:lang="en-GB">14.21;31.25</price>
+<price xml:lang="sv-SE">196.09;431.20</price>
 </product>
 <product>
 <name xml:lang="x-default">Raspberry Jello</name>
@@ -1354,11 +1412,12 @@
 <original>/assets/img/products/food/sweets/raspberry-jello/raspberry-jello-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.75;18.99;27.65</price>
-<price xml:lang="de-DE">11.22;16.71;24.33</price>
-<price xml:lang="en-GB">10.07;15.00;21.84</price>
-<price xml:lang="sv-SE">138.97;206.99;301.38</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>14.66;18.99;24.88</price>
+<price xml:lang="de-DE">12.90;16.71;21.90</price>
+<price xml:lang="en-GB">11.58;15.00;19.66</price>
+<price xml:lang="sv-SE">159.82;206.99;271.24</price>
 </product>
 <product>
 <name xml:lang="x-default">Strawberry and Grapes</name>
@@ -1377,6 +1436,7 @@
 <original>/assets/img/products/food/sweets/strawberry-and-grapes/strawberry-and-grapes-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.90</price>
 <price xml:lang="de-DE">15.83;26.39;35.11</price>
@@ -1400,11 +1460,12 @@
 <original>/assets/img/products/food/sweets/donut-mix/donut-mix-original.webp</original>
 </imageURL>
 <subCategory>Sweets</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>23.89;29.99;39.99</price>
-<price xml:lang="de-DE">21.02;26.39;35.19</price>
-<price xml:lang="en-GB">18.87;23.69;31.59</price>
-<price xml:lang="sv-SE">260.40;326.89;435.89</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.99;33.99;39.99</price>
+<price xml:lang="de-DE">26.39;29.91;35.19</price>
+<price xml:lang="en-GB">23.69;26.85;31.59</price>
+<price xml:lang="sv-SE">326.89;370.51;435.89</price>
 </product>
 <!-- TopCategory Means_of_Transportation  -->
 <!-- SubCategory Airplanes  -->
@@ -1425,11 +1486,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/swiss-air-airbus-a320/swiss-air-airbus-a320-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.99;23.80;31.00</price>
-<price xml:lang="de-DE">11.43;20.94;27.28</price>
-<price xml:lang="en-GB">10.26;18.80;24.49</price>
-<price xml:lang="sv-SE">141.59;259.42;337.90</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>12.99;31.00</price>
+<price xml:lang="de-DE">11.43;27.28</price>
+<price xml:lang="en-GB">10.26;24.49</price>
+<price xml:lang="sv-SE">141.59;337.90</price>
 </product>
 <product>
 <name xml:lang="x-default">FedEx Express</name>
@@ -1448,11 +1510,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/fedex-express/fedex-express-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>23.56;31.70;39.99</price>
-<price xml:lang="de-DE">20.73;27.90;35.19</price>
-<price xml:lang="en-GB">18.61;25.04;31.59</price>
-<price xml:lang="sv-SE">256.80;345.53;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>27.09;31.70;35.99</price>
+<price xml:lang="de-DE">23.84;27.90;31.67</price>
+<price xml:lang="en-GB">21.40;25.04;28.43</price>
+<price xml:lang="sv-SE">295.32;345.53;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">American Airlines Boeing 737 800</name>
@@ -1471,6 +1534,7 @@
 <original>/assets/img/products/means_of_transportation/air-travel/american-airlines-boeing-737-800/american-airlines-boeing-737-800-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.59;21.90;29.99</price>
 <price xml:lang="de-DE">11.08;19.27;26.39</price>
@@ -1494,11 +1558,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/air-greenland-airbus-a330-200/air-greenland-airbus-a330-200-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.99;33.99;39.99</price>
+<price xml:lang="de-DE">26.39;29.91;35.19</price>
+<price xml:lang="en-GB">23.69;26.85;31.59</price>
+<price xml:lang="sv-SE">326.89;370.51;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Air Lingus Airbus A320</name>
@@ -1517,11 +1582,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/air-lingus-airbus-a320/air-lingus-airbus-a320-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.89;24.70;35.90</price>
-<price xml:lang="de-DE">13.98;21.74;31.59</price>
-<price xml:lang="en-GB">12.55;19.51;28.36</price>
-<price xml:lang="sv-SE">173.20;269.23;391.31</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>15.89;35.90</price>
+<price xml:lang="de-DE">13.98;31.59</price>
+<price xml:lang="en-GB">12.55;28.36</price>
+<price xml:lang="sv-SE">173.20;391.31</price>
 </product>
 <product>
 <name xml:lang="x-default">US Air Force Starlifter</name>
@@ -1540,11 +1606,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/us-air-force-starlifter/us-air-force-starlifter-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Boeing 707</name>
@@ -1563,6 +1630,7 @@
 <original>/assets/img/products/means_of_transportation/air-travel/boeing-707/boeing-707-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.78;38.90;51.00</price>
 <price xml:lang="de-DE">20.93;34.23;44.88</price>
@@ -1586,11 +1654,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/boeing-307-stratoliner/boeing-307-stratoliner-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.95;27.90;38.40</price>
-<price xml:lang="de-DE">11.40;24.55;33.79</price>
-<price xml:lang="en-GB">10.23;22.04;30.34</price>
-<price xml:lang="sv-SE">141.16;304.11;418.56</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>27.90;32.64;38.40</price>
+<price xml:lang="de-DE">24.55;28.72;33.79</price>
+<price xml:lang="en-GB">22.04;25.79;30.34</price>
+<price xml:lang="sv-SE">304.11;355.78;418.56</price>
 </product>
 <product>
 <name xml:lang="x-default">Lufthansa JU 52</name>
@@ -1609,11 +1678,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/lufthansa-ju-52/lufthansa-ju-52-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.97;28.90;34.65</price>
-<price xml:lang="de-DE">14.05;25.43;30.49</price>
-<price xml:lang="en-GB">12.62;22.83;27.37</price>
-<price xml:lang="sv-SE">174.07;315.01;377.69</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>15.97;34.65</price>
+<price xml:lang="de-DE">14.05;30.49</price>
+<price xml:lang="en-GB">12.62;27.37</price>
+<price xml:lang="sv-SE">174.07;377.69</price>
 </product>
 <product>
 <name xml:lang="x-default">F4S from VMFA 232</name>
@@ -1632,11 +1702,12 @@
 <original>/assets/img/products/means_of_transportation/air-travel/f-4s-from-vmfa-232/f-4s-from-vmfa-232-original.webp</original>
 </imageURL>
 <subCategory>Air Travel</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <!-- SubCategory Classic_Cars  -->
 <product>
@@ -1656,6 +1727,7 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/trabant-p50/trabant-p50-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
@@ -1679,11 +1751,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-f8/ifa-f8-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.95;18.40;27.90</price>
-<price xml:lang="de-DE">11.40;16.19;24.55</price>
-<price xml:lang="en-GB">10.23;14.54;22.04</price>
-<price xml:lang="sv-SE">141.16;200.56;304.11</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>18.40;23.71;27.90</price>
+<price xml:lang="de-DE">16.19;20.87;24.55</price>
+<price xml:lang="en-GB">14.54;18.73;22.04</price>
+<price xml:lang="sv-SE">200.56;258.49;304.11</price>
 </product>
 <product>
 <name xml:lang="x-default">IFA W50</name>
@@ -1702,11 +1775,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-w50/ifa-w50-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>18.36;28.65;41.10</price>
-<price xml:lang="de-DE">16.16;25.21;36.17</price>
-<price xml:lang="en-GB">14.50;22.63;32.47</price>
-<price xml:lang="sv-SE">200.12;312.28;447.99</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>18.36;41.10</price>
+<price xml:lang="de-DE">16.16;36.17</price>
+<price xml:lang="en-GB">14.50;32.47</price>
+<price xml:lang="sv-SE">200.12;447.99</price>
 </product>
 <product>
 <name xml:lang="x-default">IFA H6 Grey Red</name>
@@ -1725,11 +1799,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-grey-red/ifa-h6-grey-red-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>9.74;19.78;27.19</price>
-<price xml:lang="de-DE">8.57;17.41;23.93</price>
-<price xml:lang="en-GB">7.69;15.63;21.48</price>
-<price xml:lang="sv-SE">106.17;215.60;296.37</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>11.20;19.78;24.47</price>
+<price xml:lang="de-DE">9.86;17.41;21.54</price>
+<price xml:lang="en-GB">8.84;15.63;19.33</price>
+<price xml:lang="sv-SE">122.10;215.60;266.73</price>
 </product>
 <product>
 <name xml:lang="x-default">IFA G5</name>
@@ -1748,6 +1823,7 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-g5/ifa-g5-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
@@ -1771,11 +1847,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-h6-green/ifa-h6-green-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.63;18.91;26.78</price>
-<price xml:lang="de-DE">11.11;16.64;23.57</price>
-<price xml:lang="en-GB">9.98;14.94;21.16</price>
-<price xml:lang="sv-SE">137.67;206.12;291.90</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>18.91;22.76;26.78</price>
+<price xml:lang="de-DE">16.64;20.03;23.57</price>
+<price xml:lang="en-GB">14.94;17.99;21.16</price>
+<price xml:lang="sv-SE">206.12;248.11;291.90</price>
 </product>
 <product>
 <name xml:lang="x-default">IFA G5 Tank Truck</name>
@@ -1794,11 +1871,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-g5-tank-truck/ifa-g5-tank-truck-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.45;22.90;29.90</price>
-<price xml:lang="de-DE">13.60;20.15;26.31</price>
-<price xml:lang="en-GB">12.21;18.09;23.62</price>
-<price xml:lang="sv-SE">168.41;249.61;325.91</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>15.45;29.90</price>
+<price xml:lang="de-DE">13.60;26.31</price>
+<price xml:lang="en-GB">12.21;23.62</price>
+<price xml:lang="sv-SE">168.41;325.91</price>
 </product>
 <product>
 <name xml:lang="x-default">IFA Cement Truck</name>
@@ -1817,11 +1895,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ifa-cement-truck/ifa-cement-truck-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Ikarus 211</name>
@@ -1840,6 +1919,7 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ikarus-211/ikarus-211-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
@@ -1863,11 +1943,12 @@
 <original>/assets/img/products/means_of_transportation/classic-cars/ex-omaha-transit-company-bus/ex-omaha-transit-company-bus-original.webp</original>
 </imageURL>
 <subCategory>Classic Cars</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>13.65;23.67;34.78</price>
-<price xml:lang="de-DE">12.01;20.83;30.61</price>
-<price xml:lang="en-GB">10.78;18.70;27.48</price>
-<price xml:lang="sv-SE">148.78;258.00;379.10</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>23.67;29.56;34.78</price>
+<price xml:lang="de-DE">20.83;26.02;30.61</price>
+<price xml:lang="en-GB">18.70;23.36;27.48</price>
+<price xml:lang="sv-SE">258.00;322.24;379.10</price>
 </product>
 <!-- SubCategory Railways  -->
 <product>
@@ -1887,11 +1968,12 @@
 <original>/assets/img/products/means_of_transportation/railways/third-avenue-railway-system/third-avenue-railway-system-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.99</price>
+<price xml:lang="de-DE">15.83;35.19</price>
+<price xml:lang="en-GB">14.21;31.59</price>
+<price xml:lang="sv-SE">196.09;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Eastern Massachussetts Street Railway</name>
@@ -1910,11 +1992,12 @@
 <original>/assets/img/products/means_of_transportation/railways/eastern-massachussetts-street-railway/eastern-massachussetts-street-railway-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>23.56;33.68;40.90</price>
-<price xml:lang="de-DE">20.73;29.64;35.99</price>
-<price xml:lang="en-GB">18.61;26.61;32.31</price>
-<price xml:lang="sv-SE">256.80;367.11;445.81</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>27.09;33.68;36.81</price>
+<price xml:lang="de-DE">23.84;29.64;32.39</price>
+<price xml:lang="en-GB">21.40;26.61;29.08</price>
+<price xml:lang="sv-SE">295.32;367.11;401.23</price>
 </product>
 <product>
 <name xml:lang="x-default">Boston MBTA Wartime Pullman Green PCC Trolley</name>
@@ -1933,6 +2016,7 @@
 <original>/assets/img/products/means_of_transportation/railways/boston-mbta-wartime-pullman-green-pcc-trolley/boston-mbta-wartime-pullman-green-pcc-trolley-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.45;21.20;33.33</price>
 <price xml:lang="de-DE">10.96;18.66;29.33</price>
@@ -1956,11 +2040,12 @@
 <original>/assets/img/products/means_of_transportation/railways/yellow-and-orange-railways/yellow-and-orange-railways-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.78;20.90;34.40</price>
-<price xml:lang="de-DE">11.25;18.39;30.27</price>
-<price xml:lang="en-GB">10.10;16.51;27.18</price>
-<price xml:lang="sv-SE">139.30;227.81;374.96</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>20.90;29.24;34.40</price>
+<price xml:lang="de-DE">18.39;25.73;30.27</price>
+<price xml:lang="en-GB">16.51;23.10;27.18</price>
+<price xml:lang="sv-SE">227.81;318.72;374.96</price>
 </product>
 <product>
 <name xml:lang="x-default">German Steam Locomotive</name>
@@ -1979,11 +2064,12 @@
 <original>/assets/img/products/means_of_transportation/railways/german-steam-locomotive/german-steam-locomotive-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.99</price>
+<price xml:lang="de-DE">15.83;35.19</price>
+<price xml:lang="en-GB">14.21;31.59</price>
+<price xml:lang="sv-SE">196.09;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">German Steam Locomotive II</name>
@@ -2002,11 +2088,12 @@
 <original>/assets/img/products/means_of_transportation/railways/german-steam-locomotive-II/german-steam-locomotive-II-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.98;18.67;23.90</price>
-<price xml:lang="de-DE">14.06;16.43;21.03</price>
-<price xml:lang="en-GB">12.62;14.75;18.88</price>
-<price xml:lang="sv-SE">174.18;203.50;260.51</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>18.38;18.67;21.51</price>
+<price xml:lang="de-DE">16.17;16.43;18.93</price>
+<price xml:lang="en-GB">14.51;14.75;16.99</price>
+<price xml:lang="sv-SE">200.31;203.50;234.46</price>
 </product>
 <product>
 <name xml:lang="x-default">East German LEW EL 2</name>
@@ -2025,6 +2112,7 @@
 <original>/assets/img/products/means_of_transportation/railways/east-german-lew-el-2/east-german-lew-el-2-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;39.99;56.80</price>
 <price xml:lang="de-DE">15.83;35.19;49.98</price>
@@ -2048,11 +2136,12 @@
 <original>/assets/img/products/means_of_transportation/railways/chicago-l/chicago-l-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.99;29.70;34.50</price>
-<price xml:lang="de-DE">14.95;26.14;30.36</price>
-<price xml:lang="en-GB">13.42;23.46;27.26</price>
-<price xml:lang="sv-SE">185.19;323.73;376.05</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.70;29.32;34.50</price>
+<price xml:lang="de-DE">26.14;25.81;30.36</price>
+<price xml:lang="en-GB">23.46;23.17;27.26</price>
+<price xml:lang="sv-SE">323.73;319.64;376.05</price>
 </product>
 <product>
 <name xml:lang="x-default">US Railway Mail Service Car</name>
@@ -2071,11 +2160,12 @@
 <original>/assets/img/products/means_of_transportation/railways/us-railway-mail-service-car/us-railway-mail-service-car-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;35.00;51.90</price>
-<price xml:lang="de-DE">15.83;30.80;45.67</price>
-<price xml:lang="en-GB">14.21;27.65;41.00</price>
-<price xml:lang="sv-SE">196.09;381.50;565.71</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;51.90</price>
+<price xml:lang="de-DE">15.83;45.67</price>
+<price xml:lang="en-GB">14.21;41.00</price>
+<price xml:lang="sv-SE">196.09;565.71</price>
 </product>
 <product>
 <name xml:lang="x-default">Old NYC Subway</name>
@@ -2087,10 +2177,10 @@
 <longDescription xml:lang="x-default">Not even subway trains. Darn!</longDescription>
 <longDescription xml:lang="de-DE">Auch U-Bahnen enden eines Tages wie diese hier. Doch selbst der Verfall dieser U-Banh ist lediglich ein Wandel. Als Filmkulisse, Leinwand für Straßenkunst, geheimes Eckchen für diejenigen, die die Winkel der Stadt erkunden oder eben als Poster mit besonderem Flair hat sie nun einen neuen Zweck.</longDescription>
 <longDescription xml:lang="sv-SE">Inte ens tunnelbanetåg. Jösses! Vi har verkligen postrar av allt. En nostalgisk påminnelse om New Yorks transporthistoria.</longDescription>
-<price>17.80;22.00;33.30</price>
-<price xml:lang="de-DE">15.66;19.36;29.30</price>
-<price xml:lang="en-GB">14.06;17.38;26.31</price>
-<price xml:lang="sv-SE">194.02;239.80;362.97</price>
+<price>20.47;22.00;29.97</price>
+<price xml:lang="de-DE">18.01;19.36;26.37</price>
+<price xml:lang="en-GB">16.17;17.38;23.68</price>
+<price xml:lang="sv-SE">223.12;239.80;326.67</price>
 <imageURL>
 <small>/assets/img/products/means_of_transportation/railways/old-nyc-subway/old-nyc-subway-small.webp</small>
 <medium>/assets/img/products/means_of_transportation/railways/old-nyc-subway/old-nyc-subway-medium.webp</medium>
@@ -2098,7 +2188,8 @@
 <original>/assets/img/products/means_of_transportation/railways/old-nyc-subway/old-nyc-subway-original.webp</original>
 </imageURL>
 <subCategory>Railways</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
 </product>
 <!-- TopCategory Panoramas  -->
 <!-- SubCategory Buildings  -->
@@ -2119,6 +2210,7 @@
 <original>/assets/img/products/panoramas/architecture/niagara-ferris-wheel/niagara-ferris-wheel-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.90;23.90;34.90</price>
 <price xml:lang="de-DE">11.35;21.03;30.71</price>
@@ -2142,11 +2234,12 @@
 <original>/assets/img/products/panoramas/architecture/swedish-cottages/swedish-cottages-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>13.78;19.90;25.90</price>
-<price xml:lang="de-DE">12.13;17.51;22.79</price>
-<price xml:lang="en-GB">10.89;15.72;20.46</price>
-<price xml:lang="sv-SE">150.20;216.91;282.31</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>19.90;22.01;25.90</price>
+<price xml:lang="de-DE">17.51;19.37;22.79</price>
+<price xml:lang="en-GB">15.72;17.39;20.46</price>
+<price xml:lang="sv-SE">216.91;239.96;282.31</price>
 </product>
 <product>
 <name xml:lang="x-default">Gustavianum Sweden</name>
@@ -2165,11 +2258,12 @@
 <original>/assets/img/products/panoramas/architecture/gustavianum-sweden/gustavianum-sweden-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.99</price>
+<price xml:lang="de-DE">15.83;35.19</price>
+<price xml:lang="en-GB">14.21;31.59</price>
+<price xml:lang="sv-SE">196.09;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Grochwitz Castle Germany </name>
@@ -2188,11 +2282,12 @@
 <original>/assets/img/products/panoramas/architecture/grochwitz-castle-germany/grochwitz-castle-germany-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Rosebud Diner USA</name>
@@ -2211,6 +2306,7 @@
 <original>/assets/img/products/panoramas/architecture/rosebud-diner-usa/rosebud-diner-usa-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>14.59;28.56;42.89</price>
 <price xml:lang="de-DE">12.84;25.13;37.74</price>
@@ -2234,11 +2330,12 @@
 <original>/assets/img/products/panoramas/architecture/historic-car-factory-germany/historic-car-factory-germany-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.89;19.90;33.30</price>
-<price xml:lang="de-DE">11.34;17.51;29.30</price>
-<price xml:lang="en-GB">10.18;15.72;26.31</price>
-<price xml:lang="sv-SE">140.50;216.91;362.97</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>19.90;28.30;33.30</price>
+<price xml:lang="de-DE">17.51;24.91;29.30</price>
+<price xml:lang="en-GB">15.72;22.36;26.31</price>
+<price xml:lang="sv-SE">216.91;308.52;362.97</price>
 </product>
 <product>
 <name xml:lang="x-default">Coal Briquet Factory Germany</name>
@@ -2257,11 +2354,12 @@
 <original>/assets/img/products/panoramas/architecture/coal-briquet-factory-germany/coal-briquet-factory-germany-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.90;39.90</price>
-<price xml:lang="de-DE">15.83;26.31;35.11</price>
-<price xml:lang="en-GB">14.21;23.62;31.52</price>
-<price xml:lang="sv-SE">196.09;325.91;434.91</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.90</price>
+<price xml:lang="de-DE">15.83;35.11</price>
+<price xml:lang="en-GB">14.21;31.52</price>
+<price xml:lang="sv-SE">196.09;434.91</price>
 </product>
 <product>
 <name xml:lang="x-default">Timber Framework Germany</name>
@@ -2280,11 +2378,12 @@
 <original>/assets/img/products/panoramas/architecture/timber-framework-germany/timber-framework-germany-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.00;25.00;43.00</price>
-<price xml:lang="de-DE">10.56;22.00;37.84</price>
-<price xml:lang="en-GB">9.48;19.75;33.97</price>
-<price xml:lang="sv-SE">130.80;272.50;468.70</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>13.80;25.00;38.70</price>
+<price xml:lang="de-DE">12.14;22.00;34.06</price>
+<price xml:lang="en-GB">10.90;19.75;30.57</price>
+<price xml:lang="sv-SE">150.42;272.50;421.83</price>
 </product>
 <product>
 <name xml:lang="x-default">Chinese Temple</name>
@@ -2303,6 +2402,7 @@
 <original>/assets/img/products/panoramas/architecture/chinese-temple/chinese-temple-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>13.33;22.22;33.33</price>
 <price xml:lang="de-DE">11.73;19.55;29.33</price>
@@ -2326,11 +2426,12 @@
 <original>/assets/img/products/panoramas/architecture/chinese-temple-boat/chinese-temple-boat-original.webp</original>
 </imageURL>
 <subCategory>Architecture</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.00;30.00;60.00</price>
-<price xml:lang="de-DE">13.20;26.40;52.80</price>
-<price xml:lang="en-GB">11.85;23.70;47.40</price>
-<price xml:lang="sv-SE">163.50;327.00;654.00</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>30.00;51.00;60.00</price>
+<price xml:lang="de-DE">26.40;44.88;52.80</price>
+<price xml:lang="en-GB">23.70;40.29;47.40</price>
+<price xml:lang="sv-SE">327.00;555.90;654.00</price>
 </product>
 <!-- SubCategory Fireworks  -->
 <product>
@@ -2350,11 +2451,12 @@
 <original>/assets/img/products/panoramas/fireworks/new-years-fireworks-I/new-years-fireworks-I-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>14.78;25.90;34.60</price>
-<price xml:lang="de-DE">13.01;22.79;30.45</price>
-<price xml:lang="en-GB">11.68;20.46;27.33</price>
-<price xml:lang="sv-SE">161.10;282.31;377.14</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>14.78;34.60</price>
+<price xml:lang="de-DE">13.01;30.45</price>
+<price xml:lang="en-GB">11.68;27.33</price>
+<price xml:lang="sv-SE">161.10;377.14</price>
 </product>
 <product>
 <name xml:lang="x-default">New Years Fireworks II</name>
@@ -2373,11 +2475,12 @@
 <original>/assets/img/products/panoramas/fireworks/new-years-fireworks-II/new-years-fireworks-II-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.57;23.45;45.67</price>
-<price xml:lang="de-DE">13.70;20.64;40.19</price>
-<price xml:lang="en-GB">12.30;18.53;36.08</price>
-<price xml:lang="sv-SE">169.71;255.60;497.80</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>17.91;23.45;41.10</price>
+<price xml:lang="de-DE">15.75;20.64;36.17</price>
+<price xml:lang="en-GB">14.14;18.53;32.47</price>
+<price xml:lang="sv-SE">195.17;255.60;448.02</price>
 </product>
 <product>
 <name xml:lang="x-default">New Years Fireworks III</name>
@@ -2396,6 +2499,7 @@
 <original>/assets/img/products/panoramas/fireworks/new-years-fireworks-III/new-years-fireworks-III-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>17.99;29.99;39.99</price>
 <price xml:lang="de-DE">15.83;26.39;35.19</price>
@@ -2419,11 +2523,12 @@
 <original>/assets/img/products/panoramas/fireworks/new-years-fireworks-IV/new-years-fireworks-IV-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.90</price>
-<price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-GB">14.21;23.69;31.52</price>
-<price xml:lang="sv-SE">196.09;326.89;434.91</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.99;33.91;39.90</price>
+<price xml:lang="de-DE">26.39;29.84;35.11</price>
+<price xml:lang="en-GB">23.69;26.79;31.52</price>
+<price xml:lang="sv-SE">326.89;369.67;434.91</price>
 </product>
 <product>
 <name xml:lang="x-default">Silver Dahlias</name>
@@ -2442,11 +2547,12 @@
 <original>/assets/img/products/panoramas/fireworks/silver-dahlias/silver-dahlias-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.50;25.60;45.00</price>
-<price xml:lang="de-DE">11.00;22.53;39.60</price>
-<price xml:lang="en-GB">9.88;20.22;35.55</price>
-<price xml:lang="sv-SE">136.25;279.04;490.50</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>12.50;45.00</price>
+<price xml:lang="de-DE">11.00;39.60</price>
+<price xml:lang="en-GB">9.88;35.55</price>
+<price xml:lang="sv-SE">136.25;490.50</price>
 </product>
 <product>
 <name xml:lang="x-default">Crossette Silver Green</name>
@@ -2465,11 +2571,12 @@
 <original>/assets/img/products/panoramas/fireworks//crossette-silver-green/crossette-silver-green-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Purple Crossette with Stars</name>
@@ -2488,6 +2595,7 @@
 <original>/assets/img/products/panoramas/fireworks/purple-crossette-with-stars/purple-crossette-with-stars-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>23.78;31.90;42.00</price>
 <price xml:lang="de-DE">20.93;28.07;36.96</price>
@@ -2511,11 +2619,12 @@
 <original>/assets/img/products/panoramas/fireworks/golden-dahlias-with-blue-stars/golden-dahlias-with-blue-stars-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>12.99;23.90;31.80</price>
-<price xml:lang="de-DE">11.43;21.03;27.98</price>
-<price xml:lang="en-GB">10.26;18.88;25.12</price>
-<price xml:lang="sv-SE">141.59;260.51;346.62</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>23.90;27.03;31.80</price>
+<price xml:lang="de-DE">21.03;23.78;27.98</price>
+<price xml:lang="en-GB">18.88;21.35;25.12</price>
+<price xml:lang="sv-SE">260.51;294.63;346.62</price>
 </product>
 <product>
 <name xml:lang="x-default">Brocade Red Blue</name>
@@ -2534,11 +2643,12 @@
 <original>/assets/img/products/panoramas/fireworks/brocade-red-blue/brocade-red-blue-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.90;39.90</price>
-<price xml:lang="de-DE">15.83;26.31;35.11</price>
-<price xml:lang="en-GB">14.21;23.62;31.52</price>
-<price xml:lang="sv-SE">196.09;325.91;434.91</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.90</price>
+<price xml:lang="de-DE">15.83;35.11</price>
+<price xml:lang="en-GB">14.21;31.52</price>
+<price xml:lang="sv-SE">196.09;434.91</price>
 </product>
 <product>
 <name xml:lang="x-default">Chrysanthemum and Brocades Red</name>
@@ -2557,11 +2667,12 @@
 <original>/assets/img/products/panoramas/fireworks/chrysanthemum-and-brocades-red/chrysanthemum-and-brocades-red-original.webp</original>
 </imageURL>
 <subCategory>Fireworks</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.40;26.90;37.40</price>
-<price xml:lang="de-DE">13.55;23.67;32.91</price>
-<price xml:lang="en-GB">12.17;21.25;29.55</price>
-<price xml:lang="sv-SE">167.86;293.21;407.66</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>17.71;26.90;33.66</price>
+<price xml:lang="de-DE">15.58;23.67;29.62</price>
+<price xml:lang="en-GB">14.00;21.25;26.60</price>
+<price xml:lang="sv-SE">193.04;293.21;366.89</price>
 </product>
 <!-- SubCategory Landscapes  -->
 <product>
@@ -2581,6 +2692,7 @@
 <original>/assets/img/products/panoramas/landscapes/niagara-falls-canada/niagara-falls-canada-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.00;24.00;48.00</price>
 <price xml:lang="de-DE">10.56;21.12;42.24</price>
@@ -2604,11 +2716,12 @@
 <original>/assets/img/products/panoramas/landscapes/niagara-falls-canada-with-city-skyline/niagara-falls-canada-with-city-skyline-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.99;33.99;39.99</price>
+<price xml:lang="de-DE">26.39;29.91;35.19</price>
+<price xml:lang="en-GB">23.69;26.85;31.59</price>
+<price xml:lang="sv-SE">326.89;370.51;435.89</price>
 </product>
 <product>
 <name xml:lang="x-default">Trollhättan Falls Sweden I</name>
@@ -2627,11 +2740,12 @@
 <original>/assets/img/products/panoramas/landscapes/trollhättan-falls-sweden-I/trollhättan-falls-sweden-I-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.55;23.44;34.55</price>
-<price xml:lang="de-DE">13.68;20.63;30.40</price>
-<price xml:lang="en-GB">12.28;18.52;27.29</price>
-<price xml:lang="sv-SE">169.50;255.50;376.59</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>15.55;34.55</price>
+<price xml:lang="de-DE">13.68;30.40</price>
+<price xml:lang="en-GB">12.28;27.29</price>
+<price xml:lang="sv-SE">169.50;376.59</price>
 </product>
 <product>
 <name xml:lang="x-default">Trollhättan Falls Sweden II</name>
@@ -2650,11 +2764,12 @@
 <original>/assets/img/products/panoramas/landscapes/trollhättan-falls-sweden-II/trollhättan-falls-sweden-II-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>13.33;22.22;44.44</price>
-<price xml:lang="de-DE">11.73;19.55;39.11</price>
-<price xml:lang="en-GB">10.53;17.55;35.11</price>
-<price xml:lang="sv-SE">145.30;242.20;484.40</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>15.33;22.22;40.00</price>
+<price xml:lang="de-DE">13.49;19.55;35.20</price>
+<price xml:lang="en-GB">12.11;17.55;31.60</price>
+<price xml:lang="sv-SE">167.09;242.20;435.96</price>
 </product>
 <product>
 <name xml:lang="x-default">Linnaean Garden and Museum Sweden</name>
@@ -2673,6 +2788,7 @@
 <original>/assets/img/products/panoramas/landscapes/linnaean-garden-and-museum-sweden/linnaean-garden-and-museum-sweden-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>12.25;19.90;28.30</price>
 <price xml:lang="de-DE">10.78;17.51;24.90</price>
@@ -2696,11 +2812,12 @@
 <original>/assets/img/products/panoramas/landscapes/winter-wonderland/winter-wonderland-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>16.00;29.98;37.90</price>
-<price xml:lang="de-DE">14.08;26.38;33.35</price>
-<price xml:lang="en-GB">12.64;23.68;29.94</price>
-<price xml:lang="sv-SE">174.40;326.78;413.11</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>29.98;32.21;37.90</price>
+<price xml:lang="de-DE">26.38;28.35;33.35</price>
+<price xml:lang="en-GB">23.68;25.45;29.94</price>
+<price xml:lang="sv-SE">326.78;351.14;413.11</price>
 </product>
 <product>
 <name xml:lang="x-default">Lonesome Ski Lift in Winter Wonderland</name>
@@ -2719,11 +2836,12 @@
 <original>/assets/img/products/panoramas/landscapes/lonesome-ski-lift-in-winter-wonderland/lonesome-ski-lift-in-winter-wonderland-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.90</price>
-<price xml:lang="de-DE">15.83;26.39;35.11</price>
-<price xml:lang="en-GB">14.21;23.69;31.52</price>
-<price xml:lang="sv-SE">196.09;326.89;434.91</price>
+<availableFinishes>matte,gloss,satin</availableFinishes>
+<availableSize>16x12;24x18</availableSize>
+<price>17.99;39.90</price>
+<price xml:lang="de-DE">15.83;35.11</price>
+<price xml:lang="en-GB">14.21;31.52</price>
+<price xml:lang="sv-SE">196.09;434.91</price>
 </product>
 <product>
 <name xml:lang="x-default">Boston Skyline with Scaffolding</name>
@@ -2742,11 +2860,12 @@
 <original>/assets/img/products/panoramas/landscapes/boston-skyline-with-scaffolding/boston-skyline-with-scaffolding-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>17.99;29.99;39.99</price>
-<price xml:lang="de-DE">15.83;26.39;35.19</price>
-<price xml:lang="en-GB">14.21;23.69;31.59</price>
-<price xml:lang="sv-SE">196.09;326.89;435.89</price>
+<availableFinishes>matte,satin</availableFinishes>
+<availableSize>24x18;32x24;48x36</availableSize>
+<price>20.69;29.99;35.99</price>
+<price xml:lang="de-DE">18.20;26.39;31.67</price>
+<price xml:lang="en-GB">16.34;23.69;28.43</price>
+<price xml:lang="sv-SE">225.50;326.89;392.30</price>
 </product>
 <product>
 <name xml:lang="x-default">Boston Skyline at Night</name>
@@ -2765,6 +2884,7 @@
 <original>/assets/img/products/panoramas/landscapes/boston-skyline-at-night/boston-skyline-at-night-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>16x12;32x24;64x48</availableSize>
 <price>18.20;24.70;31.80</price>
 <price xml:lang="de-DE">16.02;21.74;27.98</price>
@@ -2788,11 +2908,12 @@
 <original>/assets/img/products/panoramas/landscapes/six-flags-new-england-water-park/six-flags-new-england-water-park-original.webp</original>
 </imageURL>
 <subCategory>Landscapes</subCategory>
-<availableSize>16x12;32x24;64x48</availableSize>
-<price>15.45;25.00;32.10</price>
-<price xml:lang="de-DE">13.60;22.00;28.25</price>
-<price xml:lang="en-GB">12.21;19.75;25.36</price>
-<price xml:lang="sv-SE">168.41;272.50;349.89</price>
+<availableFinishes>matte,gloss</availableFinishes>
+<availableSize>32x24;48x36;64x48</availableSize>
+<price>25.00;27.29;32.10</price>
+<price xml:lang="de-DE">22.00;24.01;28.25</price>
+<price xml:lang="en-GB">19.75;21.56;25.36</price>
+<price xml:lang="sv-SE">272.50;297.41;349.89</price>
 </product>
 <!-- SubCategory XXL  -->
 <product>
@@ -2813,6 +2934,7 @@
 </imageURL>
 <carousel>true</carousel>
 <subCategory>XXL Panoramas</subCategory>
+<availableFinishes>matte,gloss,satin</availableFinishes>
 <availableSize>96x32</availableSize>
 <price>34.99</price>
 <price xml:lang="de-DE">30.79</price>
@@ -2837,6 +2959,7 @@
 </imageURL>
 <carousel>true</carousel>
 <subCategory>XXL Panoramas</subCategory>
+<availableFinishes>matte,satin</availableFinishes>
 <availableSize>96x32</availableSize>
 <price>36.00</price>
 <price xml:lang="de-DE">31.68</price>
@@ -2861,6 +2984,7 @@
 </imageURL>
 <carousel>true</carousel>
 <subCategory>XXL Panoramas</subCategory>
+<availableFinishes>gloss,satin</availableFinishes>
 <availableSize>96x32</availableSize>
 <price>38.90</price>
 <price xml:lang="de-DE">34.23</price>
@@ -2885,6 +3009,7 @@
 </imageURL>
 <carousel>true</carousel>
 <subCategory>XXL Panoramas</subCategory>
+<availableFinishes>matte,gloss</availableFinishes>
 <availableSize>96x32</availableSize>
 <price>34.78</price>
 <price xml:lang="de-DE">30.61</price>

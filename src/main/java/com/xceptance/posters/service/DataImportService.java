@@ -201,6 +201,14 @@ public class DataImportService implements CommandLineRunner
             product.setOriginalImageURL(getTextContent(imgEl, "original"));
             product.setImageURL(getTextContent(imgEl, "medium"));
             product.setShowInCarousel(false);
+
+            // Parse available finishes (optional, defaults to "matte,gloss")
+            String finishesStr = getTextContent(prodEl, "availableFinishes");
+            if (finishesStr != null && !finishesStr.isBlank())
+            {
+                product.setAvailableFinishes(finishesStr.trim());
+            }
+
             product.setSubCategory(subCat);
             if (subCat != null)
             {

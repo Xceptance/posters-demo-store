@@ -314,15 +314,15 @@
             }
 
             // After HTMX swaps mini-cart content (e.g. add-to-cart), open the
-            // Bootstrap dropdown briefly so the user sees the update.
+            // Bootstrap offcanvas briefly so the user sees the update.
             var miniCartContent = document.getElementById('mini-cart-content');
             if (miniCartContent) {
                 miniCartContent.addEventListener('htmx:afterSwap', function() {
-                    var toggle = document.getElementById('header-cart-overview');
-                    if (toggle) {
-                        var dd = bootstrap.Dropdown.getOrCreateInstance(toggle);
-                        dd.show();
-                        setTimeout(function() { dd.hide(); }, 2000);
+                    var offcanvasEl = document.getElementById('miniCartOffcanvas');
+                    if (offcanvasEl) {
+                        var oc = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                        oc.show();
+                        setTimeout(function() { oc.hide(); }, 2000);
                     }
                 });
             }

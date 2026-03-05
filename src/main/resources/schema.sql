@@ -139,6 +139,7 @@ create table product (
   subcategory_id                integer,
   top_category_id               integer,
   minimum_price                 double not null,
+  available_finishes            varchar(255) default 'matte,gloss',
   constraint uq_product_name_id unique (name_id),
   constraint uq_product_description_detail_id unique (description_detail_id),
   constraint uq_product_description_overview_id unique (description_overview_id),

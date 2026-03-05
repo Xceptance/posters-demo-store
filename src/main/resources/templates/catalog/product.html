@@ -49,15 +49,12 @@
                 <div class="mb-3">
                     <label for="product-detail-form-style-selection" class="form-label" th:text="#{labelSelectFinish}">Select Finish</label>
                     <div id="product-detail-form-style-selection">
-                        <div class="form-check">
+                        <div class="form-check" th:each="finish, stat : ${product.availableFinishesList}">
                             <input class="form-check-input" type="radio" name="finish"
-                                   id="finish-matte" value="matte" checked="checked"/>
-                            <label class="form-check-label" for="finish-matte" th:text="#{labelMatte}">Matte</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="finish"
-                                   id="finish-gloss" value="gloss"/>
-                            <label class="form-check-label" for="finish-gloss" th:text="#{labelGloss}">Gloss</label>
+                                   th:id="'finish-' + ${finish}" th:value="${finish}"
+                                   th:checked="${stat.first}"/>
+                            <label class="form-check-label" th:for="'finish-' + ${finish}"
+                                   th:text="${#messages.msg('label' + #strings.capitalize(finish))}">Finish</label>
                         </div>
                     </div>
                 </div>
