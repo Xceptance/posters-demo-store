@@ -6,34 +6,63 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4" th:if="${cart != null}">
-        <h1 th:text="#{titleReviewOrder}">Review &amp; Place Order</h1>
-        <div class="row">
-            <div class="col-md-8">
-                <h3 th:text="#{labelOrderItems}">Order Items</h3>
-                <table class="table">
-                    <thead><tr><th th:text="#{labelProduct}">Product</th><th th:text="#{labelSize}">Size</th><th th:text="#{labelFinish}">Finish</th><th th:text="#{labelQuantity}">Qty</th><th th:text="#{labelPrice}">Price</th></tr></thead>
-                    <tbody>
-                        <tr th:each="cp : ${cart.products}">
-                            <td th:text="${cp.product.name.getText(urlLocale)}">Product</td>
-                            <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
-                            <td th:text="${cp.finish}">matte</td>
-                            <td th:text="${cp.productCount}">1</td>
-                            <td th:text="${#numbers.formatCurrency(cp.totalProductPrice)}">$0.00</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <h1 class="mb-4" th:text="#{titleReviewOrder}">Review &amp; Place Order</h1>
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
+                        <h3 class="card-title fw-bold" th:text="#{labelOrderItems}">Order Items</h3>
+                    </div>
+                    <div class="table-responsive mb-0 p-3 pt-0">
+                        <table class="table align-middle mb-0" id="checkout-table">
+                            <thead>
+                                <tr class="text-uppercase text-muted" style="font-size: 0.85rem;">
+                                    <th th:text="#{labelProduct}">Product</th>
+                                    <th th:text="#{labelSize}">Size</th>
+                                    <th th:text="#{labelFinish}">Finish</th>
+                                    <th class="text-center" th:text="#{labelQuantity}">Qty</th>
+                                    <th class="text-end" th:text="#{labelPrice}">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="cp : ${cart.products}">
+                                    <td class="fw-bold" th:text="${cp.product.name.getText(urlLocale)}">Product</td>
+                                    <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
+                                    <td th:text="${#messages.msg('label' + #strings.capitalize(cp.finish))}">Matte</td>
+                                    <td class="text-center" th:text="${cp.productCount}">1</td>
+                                    <td class="text-end fw-bold" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}">$0.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h3 th:text="#{labelSummary}">Summary</h3>
-                <table class="table">
-                    <tr><td>Subtotal:</td><td th:text="${#numbers.formatCurrency(cart.subTotalPrice)}">$0.00</td></tr>
-                    <tr><td>Tax:</td><td th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}">$0.00</td></tr>
-                    <tr><td>Shipping:</td><td th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</td></tr>
-                    <tr><th>Total:</th><th th:text="${#numbers.formatCurrency(cart.totalPrice)}">$0.00</th></tr>
-                </table>
-                <form th:action="@{'/' + ${urlLocale} + '/checkout/placeOrder'}" method="post">
-                    <button type="submit" class="btn btn-success btn-lg w-100" id="btn-place-order" th:text="#{buttonPlaceOrder}">Place Order</button>
-                </form>
+            
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm cart-summary-card" style="position: sticky; top: 100px;">
+                    <div class="card-body p-4">
+                        <h3 class="card-title cart-summary-title mb-4 fw-bold" th:text="#{labelSummary}">Summary</h3>
+                        <div class="cart-summary-row">
+                            <span class="text-muted" th:text="#{labelSubtotal}">Subtotal</span>
+                            <span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-row">
+                            <span class="text-muted">Tax (<span th:text="${cart.taxAsString}">6.0</span>%)</span>
+                            <span th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-row">
+                            <span class="text-muted" th:text="#{labelShipping}">Shipping</span>
+                            <span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-total align-items-center">
+                            <span class="fw-bold">Total</span>
+                            <span class="fw-bold cart-summary-total-price text-primary fs-3" th:text="${#numbers.formatCurrency(cart.totalPrice)}">$0.00</span>
+                        </div>
+                        <form th:action="@{'/' + ${urlLocale} + '/checkout/placeOrder'}" method="post">
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mt-3" id="btn-place-order" th:text="#{buttonPlaceOrder}">Place Order</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
