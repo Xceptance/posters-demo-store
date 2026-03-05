@@ -1,127 +1,59 @@
-create table backofficeuser (
-  id                            uuid not null,
-  email                         varchar(255),
-  password                      varchar(255),
-  name                          varchar(255),
-  first_name                    varchar(255),
-  constraint pk_backofficeuser primary key (id)
-);
+-- ========================================
+-- Posters Demo Store — Schema
+-- ========================================
+-- This file documents the database schema.
+-- Hibernate generates DDL from JPA entities (ddl-auto: update).
+-- Table/column names match the @Table/@Column annotations.
+-- ========================================
 
-create table billingaddress (
-  id                            integer auto_increment not null,
-  name                          varchar(255),
-  first_name                    varchar(255),
-  company                       varchar(255),
-  address_line                  varchar(255),
-  city                          varchar(255),
-  state                         varchar(255),
-  country                       varchar(255),
-  zip                           varchar(255),
-  customer_id                   uuid,
-  constraint pk_billingaddress primary key (id)
-);
+-- ----------------------------------------
+-- Localization
+-- ----------------------------------------
 
-create table cart (
-  id                            uuid not null,
-  customer_id                   uuid,
-  shipping_address_id           integer,
-  billing_address_id            integer,
-  credit_card_id                integer,
-  shipping_costs                double not null,
-  sub_total_price               double not null,
-  tax                           double not null,
-  total_tax_price               double not null,
-  total_price                   double not null,
-  constraint uq_cart_customer_id unique (customer_id),
-  constraint pk_cart primary key (id)
-);
-
-create table cartproduct (
-  id                            integer auto_increment not null,
-  product_id                    integer,
-  cart_id                       uuid,
-  product_count                 integer not null,
-  finish                        varchar(255),
-  postersize_id                 integer,
-  price                         double not null,
-  last_update                   timestamp not null,
-  constraint pk_cartproduct primary key (id)
-);
-
-create table creditcard (
-  id                            integer auto_increment not null,
-  card_number                   varchar(255),
-  name                          varchar(255),
-  months                        integer not null,
-  years                         integer not null,
-  customer_id                   uuid,
-  constraint pk_creditcard primary key (id)
-);
-
-create table customer (
-  id                            uuid not null,
-  email                         varchar(255),
-  password                      varchar(255),
-  name                          varchar(255),
-  first_name                    varchar(255),
-  cart_id                       uuid,
-  constraint uq_customer_email unique (email),
-  constraint uq_customer_cart_id unique (cart_id),
-  constraint pk_customer primary key (id)
-);
-
-create table defaulttext (
-  id                            integer auto_increment not null,
-  original_text                 varchar(4096),
-  original_language_id          integer,
-  constraint pk_defaulttext primary key (id)
-);
-
-create table supportedlanguage (
+create table supported_language (
   id                            integer auto_increment not null,
   language_group                varchar(255),
   precise_name                  varchar(255),
   endonym                       varchar(255),
   precise_endonym               varchar(255),
-  disambigous_endonym           varchar(255),
+  disambiguous_endonym          varchar(255),
   code                          varchar(255),
   fallback_code                 varchar(255),
-  constraint pk_supportedlanguage primary key (id)
+  constraint pk_supported_language primary key (id)
 );
 
-create table ordering (
-  id                            uuid not null,
-  order_date                    varchar(255),
-  shipping_address_id           integer,
-  billing_address_id            integer,
-  shipping_costs                double not null,
-  sub_total_costs               double not null,
-  total_tax_costs               double not null,
-  tax                           double not null,
-  total_costs                   double not null,
-  credit_card_id                integer,
-  customer_id                   uuid,
-  order_status                  varchar(255),
-  last_update                   timestamp not null,
-  constraint pk_ordering primary key (id)
-);
-
-create table orderproduct (
+create table default_text (
   id                            integer auto_increment not null,
-  product_id                    integer,
-  ordering_id                   uuid,
-  product_count                 integer not null,
-  finish                        varchar(255),
-  postersize_id                 integer,
-  price                         double not null,
-  constraint pk_orderproduct primary key (id)
+  original_text                 varchar(4096),
+  original_language_id          integer,
+  constraint pk_default_text primary key (id)
 );
 
-create table postersize (
+create table translation (
   id                            integer auto_increment not null,
-  width                         integer not null,
-  height                        integer not null,
-  constraint pk_postersize primary key (id)
+  original_text_id              integer not null,
+  translation_language_id       integer,
+  translation_text              varchar(4096),
+  constraint pk_translation primary key (id)
+);
+
+-- ----------------------------------------
+-- Product Catalog
+-- ----------------------------------------
+
+create table top_category (
+  id                            integer auto_increment not null,
+  name_id                       integer,
+  constraint uq_top_category_name_id unique (name_id),
+  constraint pk_top_category primary key (id)
+);
+
+create table sub_category (
+  id                            integer auto_increment not null,
+  name_id                       integer,
+  top_category_id               integer,
+  constraint uq_sub_category_name_id unique (name_id),
+  constraint pk_sub_category primary key (id)
 );
 
 create table product (
@@ -135,10 +67,9 @@ create table product (
   large_image_url               varchar(255),
   original_image_url            varchar(255),
   show_in_carousel              boolean default false not null,
-  show_in_top_categorie         boolean default false not null,
-  subcategory_id                integer,
+  sub_category_id               integer,
   top_category_id               integer,
-  minimum_price                 double not null,
+  minimum_price                 decimal(10,2) not null,
   available_finishes            varchar(255) default 'matte,gloss',
   constraint uq_product_name_id unique (name_id),
   constraint uq_product_description_detail_id unique (description_detail_id),
@@ -146,16 +77,51 @@ create table product (
   constraint pk_product primary key (id)
 );
 
-create table productpostersize (
+create table poster_size (
   id                            integer auto_increment not null,
-  product_id                    integer,
-  postersize_id                 integer,
-  finish                        varchar(255) default 'matte',
-  price                         double not null,
-  constraint pk_productpostersize primary key (id)
+  width                         integer not null,
+  height                        integer not null,
+  constraint pk_poster_size primary key (id)
 );
 
-create table shippingaddress (
+create table product_poster_size (
+  id                            integer auto_increment not null,
+  product_id                    integer,
+  size_id                       integer,
+  finish                        varchar(255) default 'matte',
+  price                         decimal(10,2) not null,
+  constraint pk_product_poster_size primary key (id)
+);
+
+create table localized_price (
+  id                            integer auto_increment not null,
+  product_poster_size_id        integer not null,
+  language_id                   integer not null,
+  price                         decimal(10,2) not null,
+  constraint pk_localized_price primary key (id)
+);
+
+-- ----------------------------------------
+-- Customer & Authentication
+-- ----------------------------------------
+
+create table customer (
+  id                            uuid not null,
+  email                         varchar(255),
+  password                      varchar(255),
+  name                          varchar(255),
+  first_name                    varchar(255),
+  cart_id                       uuid,
+  constraint uq_customer_email unique (email),
+  constraint uq_customer_cart_id unique (cart_id),
+  constraint pk_customer primary key (id)
+);
+
+-- ----------------------------------------
+-- Addresses & Payment
+-- ----------------------------------------
+
+create table shipping_address (
   id                            integer auto_increment not null,
   name                          varchar(255),
   first_name                    varchar(255),
@@ -165,93 +131,210 @@ create table shippingaddress (
   state                         varchar(255),
   country                       varchar(255),
   zip                           varchar(255),
+  constraint pk_shipping_address primary key (id)
+);
+
+create table billing_address (
+  id                            integer auto_increment not null,
+  name                          varchar(255),
+  first_name                    varchar(255),
+  company                       varchar(255),
+  address_line                  varchar(255),
+  city                          varchar(255),
+  state                         varchar(255),
+  country                       varchar(255),
+  zip                           varchar(255),
+  constraint pk_billing_address primary key (id)
+);
+
+create table credit_card (
+  id                            integer auto_increment not null,
+  card_number                   varchar(255),
+  name                          varchar(255),
+  exp_month                     integer not null,
+  exp_year                      integer not null,
+  constraint pk_credit_card primary key (id)
+);
+
+-- ----------------------------------------
+-- Shopping Cart
+-- ----------------------------------------
+
+create table cart (
+  id                            uuid not null,
   customer_id                   uuid,
-  constraint pk_shippingaddress primary key (id)
+  shipping_address_id           integer,
+  billing_address_id            integer,
+  credit_card_id                integer,
+  shipping_costs                decimal(10,2) not null,
+  sub_total_price               decimal(10,2) not null,
+  tax                           decimal(10,2) not null,
+  total_tax_price               decimal(10,2) not null,
+  total_price                   decimal(10,2) not null,
+  constraint uq_cart_customer_id unique (customer_id),
+  constraint pk_cart primary key (id)
 );
 
-create table subcategory (
+create table cart_product (
   id                            integer auto_increment not null,
-  name_id                       integer,
-  topcategory_id                integer,
-  constraint uq_subcategory_name_id unique (name_id),
-  constraint pk_subcategory primary key (id)
+  product_id                    integer,
+  cart_id                       uuid,
+  product_count                 integer not null,
+  finish                        varchar(255),
+  size_id                       integer,
+  price                         decimal(10,2) not null,
+  constraint pk_cart_product primary key (id)
 );
 
-create table topcategory (
+-- ----------------------------------------
+-- Orders
+-- ----------------------------------------
+
+create table customer_order (
+  id                            uuid not null,
+  order_date                    timestamp,
+  shipping_address_id           integer,
+  billing_address_id            integer,
+  shipping_costs                decimal(10,2) not null,
+  sub_total_costs               decimal(10,2) not null,
+  total_tax_costs               decimal(10,2) not null,
+  tax                           decimal(10,2) not null,
+  total_costs                   decimal(10,2) not null,
+  credit_card_id                integer,
+  customer_id                   uuid,
+  constraint pk_customer_order primary key (id)
+);
+
+create table order_product (
   id                            integer auto_increment not null,
-  name_id                       integer,
-  constraint uq_topcategory_name_id unique (name_id),
-  constraint pk_topcategory primary key (id)
+  product_id                    integer,
+  product_count                 integer not null,
+  finish                        varchar(255),
+  size_id                       integer,
+  price                         decimal(10,2) not null,
+  constraint pk_order_product primary key (id)
 );
 
-create table translation (
-  id                            integer auto_increment not null,
-  original_text_id              integer not null,
-  translation_language_id       integer,
-  translation_text              varchar(4096),
-  constraint pk_translation primary key (id)
+-- ========================================
+-- JPA join tables (managed by Hibernate)
+-- ========================================
+
+-- Customer → ShippingAddress (OneToMany via join table)
+create table customer_shipping_addresses (
+  customer_id                   uuid not null,
+  shipping_addresses_id         integer not null
 );
 
-create index ix_billingaddress_customer_id on billingaddress (customer_id);
-alter table billingaddress add constraint fk_billingaddress_customer_id foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+-- Customer → BillingAddress (OneToMany via join table)
+create table customer_billing_addresses (
+  customer_id                   uuid not null,
+  billing_addresses_id          integer not null
+);
 
-create index ix_cartproduct_product_id on cartproduct (product_id);
-alter table cartproduct add constraint fk_cartproduct_product_id foreign key (product_id) references product (id) on delete restrict on update restrict;
+-- Customer → CreditCard (OneToMany via join table)
+create table customer_credit_cards (
+  customer_id                   uuid not null,
+  credit_cards_id               integer not null
+);
 
-create index ix_cartproduct_cart_id on cartproduct (cart_id);
-alter table cartproduct add constraint fk_cartproduct_cart_id foreign key (cart_id) references cart (id) on delete restrict on update restrict;
+-- Customer → Order (OneToMany via join table)
+create table customer_orders (
+  customer_id                   uuid not null,
+  orders_id                     uuid not null
+);
 
-create index ix_cartproduct_postersize_id on cartproduct (postersize_id);
-alter table cartproduct add constraint fk_cartproduct_postersize_id foreign key (postersize_id) references postersize (id) on delete restrict on update restrict;
+-- Order → OrderProduct (OneToMany via join table)
+create table customer_order_products (
+  customer_order_id             uuid not null,
+  products_id                   integer not null
+);
 
-create index ix_creditcard_customer_id on creditcard (customer_id);
-alter table creditcard add constraint fk_creditcard_customer_id foreign key (customer_id) references customer (id) on delete restrict on update restrict;
+-- ========================================
+-- Indexes
+-- ========================================
 
-alter table customer add constraint fk_customer_cart_id foreign key (cart_id) references cart (id) on delete restrict on update restrict;
+create index ix_default_text_original_language on default_text (original_language_id);
+create index ix_translation_original_text on translation (original_text_id);
+create index ix_translation_language on translation (translation_language_id);
+create index ix_sub_category_top_category on sub_category (top_category_id);
+create index ix_product_sub_category on product (sub_category_id);
+create index ix_product_top_category on product (top_category_id);
+create index ix_product_poster_size_product on product_poster_size (product_id);
+create index ix_product_poster_size_size on product_poster_size (size_id);
+create index ix_localized_price_pps on localized_price (product_poster_size_id);
+create index ix_localized_price_language on localized_price (language_id);
+create index ix_cart_shipping_address on cart (shipping_address_id);
+create index ix_cart_billing_address on cart (billing_address_id);
+create index ix_cart_credit_card on cart (credit_card_id);
+create index ix_cart_product_product on cart_product (product_id);
+create index ix_cart_product_cart on cart_product (cart_id);
+create index ix_cart_product_size on cart_product (size_id);
+create index ix_customer_order_shipping_address on customer_order (shipping_address_id);
+create index ix_customer_order_billing_address on customer_order (billing_address_id);
+create index ix_customer_order_credit_card on customer_order (credit_card_id);
+create index ix_customer_order_customer on customer_order (customer_id);
+create index ix_order_product_product on order_product (product_id);
+create index ix_order_product_size on order_product (size_id);
 
-create index ix_ordering_shipping_address_id on ordering (shipping_address_id);
-alter table ordering add constraint fk_ordering_shipping_address_id foreign key (shipping_address_id) references shippingaddress (id) on delete restrict on update restrict;
+-- ========================================
+-- Foreign Keys
+-- ========================================
 
-create index ix_ordering_billing_address_id on ordering (billing_address_id);
-alter table ordering add constraint fk_ordering_billing_address_id foreign key (billing_address_id) references billingaddress (id) on delete restrict on update restrict;
+-- Localization FKs
+alter table default_text add constraint fk_default_text_original_language foreign key (original_language_id) references supported_language (id);
+alter table translation add constraint fk_translation_original_text foreign key (original_text_id) references default_text (id);
+alter table translation add constraint fk_translation_language foreign key (translation_language_id) references supported_language (id);
 
-create index ix_ordering_credit_card_id on ordering (credit_card_id);
-alter table ordering add constraint fk_ordering_credit_card_id foreign key (credit_card_id) references creditcard (id) on delete restrict on update restrict;
+-- Category FKs
+alter table top_category add constraint fk_top_category_name foreign key (name_id) references default_text (id);
+alter table sub_category add constraint fk_sub_category_name foreign key (name_id) references default_text (id);
+alter table sub_category add constraint fk_sub_category_top_category foreign key (top_category_id) references top_category (id);
 
-create index ix_orderproduct_product_id on orderproduct (product_id);
-alter table orderproduct add constraint fk_orderproduct_product_id foreign key (product_id) references product (id) on delete restrict on update restrict;
+-- Product FKs
+alter table product add constraint fk_product_name foreign key (name_id) references default_text (id);
+alter table product add constraint fk_product_description_detail foreign key (description_detail_id) references default_text (id);
+alter table product add constraint fk_product_description_overview foreign key (description_overview_id) references default_text (id);
+alter table product add constraint fk_product_sub_category foreign key (sub_category_id) references sub_category (id);
+alter table product add constraint fk_product_top_category foreign key (top_category_id) references top_category (id);
 
-create index ix_orderproduct_ordering_id on orderproduct (ordering_id);
-alter table orderproduct add constraint fk_orderproduct_ordering_id foreign key (ordering_id) references ordering (id) on delete restrict on update restrict;
+-- Product sizing & pricing FKs
+alter table product_poster_size add constraint fk_pps_product foreign key (product_id) references product (id);
+alter table product_poster_size add constraint fk_pps_size foreign key (size_id) references poster_size (id);
+alter table localized_price add constraint fk_lp_product_poster_size foreign key (product_poster_size_id) references product_poster_size (id);
+alter table localized_price add constraint fk_lp_language foreign key (language_id) references supported_language (id);
 
-create index ix_orderproduct_postersize_id on orderproduct (postersize_id);
-alter table orderproduct add constraint fk_orderproduct_postersize_id foreign key (postersize_id) references postersize (id) on delete restrict on update restrict;
+-- Customer FKs
+alter table customer add constraint fk_customer_cart foreign key (cart_id) references cart (id);
 
-alter table product add constraint fk_product_name_id foreign key (name_id) references defaulttext (id) on delete restrict on update restrict;
+-- Cart FKs
+alter table cart add constraint fk_cart_customer foreign key (customer_id) references customer (id);
+alter table cart add constraint fk_cart_shipping_address foreign key (shipping_address_id) references shipping_address (id);
+alter table cart add constraint fk_cart_billing_address foreign key (billing_address_id) references billing_address (id);
+alter table cart add constraint fk_cart_credit_card foreign key (credit_card_id) references credit_card (id);
 
-alter table product add constraint fk_product_description_detail_id foreign key (description_detail_id) references defaulttext (id) on delete restrict on update restrict;
+-- Cart product FKs
+alter table cart_product add constraint fk_cart_product_product foreign key (product_id) references product (id);
+alter table cart_product add constraint fk_cart_product_cart foreign key (cart_id) references cart (id);
+alter table cart_product add constraint fk_cart_product_size foreign key (size_id) references poster_size (id);
 
-alter table product add constraint fk_product_description_overview_id foreign key (description_overview_id) references defaulttext (id) on delete restrict on update restrict;
+-- Order FKs
+alter table customer_order add constraint fk_order_shipping_address foreign key (shipping_address_id) references shipping_address (id);
+alter table customer_order add constraint fk_order_billing_address foreign key (billing_address_id) references billing_address (id);
+alter table customer_order add constraint fk_order_credit_card foreign key (credit_card_id) references credit_card (id);
+alter table customer_order add constraint fk_order_customer foreign key (customer_id) references customer (id);
 
-create index ix_product_subcategory_id on product (subcategory_id);
-alter table product add constraint fk_product_subcategory_id foreign key (subcategory_id) references subcategory (id) on delete restrict on update restrict;
+-- Order product FKs
+alter table order_product add constraint fk_order_product_product foreign key (product_id) references product (id);
+alter table order_product add constraint fk_order_product_size foreign key (size_id) references poster_size (id);
 
-create index ix_product_top_category_id on product (top_category_id);
-alter table product add constraint fk_product_top_category_id foreign key (top_category_id) references topcategory (id) on delete restrict on update restrict;
-
-create index ix_productpostersize_product_id on productpostersize (product_id);
-alter table productpostersize add constraint fk_productpostersize_product_id foreign key (product_id) references product (id) on delete restrict on update restrict;
-
-create index ix_productpostersize_postersize_id on productpostersize (postersize_id);
-alter table productpostersize add constraint fk_productpostersize_postersize_id foreign key (postersize_id) references postersize (id) on delete restrict on update restrict;
-
-create index ix_shippingaddress_customer_id on shippingaddress (customer_id);
-alter table shippingaddress add constraint fk_shippingaddress_customer_id foreign key (customer_id) references customer (id) on delete restrict on update restrict;
-
-alter table subcategory add constraint fk_subcategory_name_id foreign key (name_id) references defaulttext (id) on delete restrict on update restrict;
-
-create index ix_subcategory_topcategory_id on subcategory (topcategory_id);
-alter table subcategory add constraint fk_subcategory_topcategory_id foreign key (topcategory_id) references topcategory (id) on delete restrict on update restrict;
-
-alter table topcategory add constraint fk_topcategory_name_id foreign key (name_id) references defaulttext (id) on delete restrict on update restrict;
-
+-- Join table FKs
+alter table customer_shipping_addresses add constraint fk_csa_customer foreign key (customer_id) references customer (id);
+alter table customer_shipping_addresses add constraint fk_csa_address foreign key (shipping_addresses_id) references shipping_address (id);
+alter table customer_billing_addresses add constraint fk_cba_customer foreign key (customer_id) references customer (id);
+alter table customer_billing_addresses add constraint fk_cba_address foreign key (billing_addresses_id) references billing_address (id);
+alter table customer_credit_cards add constraint fk_ccc_customer foreign key (customer_id) references customer (id);
+alter table customer_credit_cards add constraint fk_ccc_card foreign key (credit_cards_id) references credit_card (id);
+alter table customer_orders add constraint fk_co_customer foreign key (customer_id) references customer (id);
+alter table customer_orders add constraint fk_co_order foreign key (orders_id) references customer_order (id);
+alter table customer_order_products add constraint fk_cop_order foreign key (customer_order_id) references customer_order (id);
+alter table customer_order_products add constraint fk_cop_product foreign key (products_id) references order_product (id);

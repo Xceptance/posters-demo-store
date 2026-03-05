@@ -1,8 +1,10 @@
 package com.xceptance.posters.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +34,8 @@ public class ProductPosterSize
 
     private String finish = "matte";
 
-    private double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "productPosterSize", fetch = FetchType.EAGER)
     private List<LocalizedPrice> localizedPrices = new ArrayList<>();
@@ -67,7 +70,7 @@ public class ProductPosterSize
         this.size = size;
     }
 
-    public double getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
@@ -77,7 +80,7 @@ public class ProductPosterSize
      * Checks localizedPrices for a matching language code or fallbackCode,
      * falls back to the base price if none found.
      */
-    public double getPrice(String locale)
+    public BigDecimal getPrice(String locale)
     {
         if (locale != null && localizedPrices != null)
         {
@@ -95,7 +98,7 @@ public class ProductPosterSize
         return price;
     }
 
-    public void setPrice(double price)
+    public void setPrice(BigDecimal price)
     {
         this.price = price;
     }

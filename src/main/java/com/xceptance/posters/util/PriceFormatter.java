@@ -1,5 +1,6 @@
 package com.xceptance.posters.util;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
@@ -47,7 +48,7 @@ public final class PriceFormatter
      * @param urlLocale the URL locale string (e.g. "de-DE", "en-GB", "sv-SE")
      * @return formatted price string (e.g. "17,00 €", "185,30 kr")
      */
-    public static String format(double price, String urlLocale)
+    public static String format(BigDecimal price, String urlLocale)
     {
         Locale javaLocale = toJavaLocale(urlLocale);
         NumberFormat fmt = NumberFormat.getCurrencyInstance(javaLocale);

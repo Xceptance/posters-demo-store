@@ -1,11 +1,13 @@
 package com.xceptance.posters.model;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,11 +40,20 @@ public class Cart
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private CreditCard creditCard;
 
-    private double shippingCosts;
-    private double subTotalPrice;
-    private double tax;
-    private double totalTaxPrice;
-    private double totalPrice;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal shippingCosts = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal subTotalPrice = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal tax = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal totalTaxPrice = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartProduct> products = new ArrayList<>();
@@ -109,52 +120,52 @@ public class Cart
 
     // --- Pricing ---
 
-    public double getShippingCosts()
+    public BigDecimal getShippingCosts()
     {
         return shippingCosts;
     }
 
-    public void setShippingCosts(double shippingCosts)
+    public void setShippingCosts(BigDecimal shippingCosts)
     {
         this.shippingCosts = shippingCosts;
     }
 
-    public double getSubTotalPrice()
+    public BigDecimal getSubTotalPrice()
     {
         return subTotalPrice;
     }
 
-    public void setSubTotalPrice(double subTotalPrice)
+    public void setSubTotalPrice(BigDecimal subTotalPrice)
     {
         this.subTotalPrice = subTotalPrice;
     }
 
-    public double getTax()
+    public BigDecimal getTax()
     {
         return tax;
     }
 
-    public void setTax(double tax)
+    public void setTax(BigDecimal tax)
     {
         this.tax = tax;
     }
 
-    public double getTotalTaxPrice()
+    public BigDecimal getTotalTaxPrice()
     {
-        return Math.max(totalTaxPrice, 0);
+        return totalTaxPrice.max(BigDecimal.ZERO);
     }
 
-    public void setTotalTaxPrice(double totalTaxPrice)
+    public void setTotalTaxPrice(BigDecimal totalTaxPrice)
     {
         this.totalTaxPrice = totalTaxPrice;
     }
 
-    public double getTotalPrice()
+    public BigDecimal getTotalPrice()
     {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice)
+    public void setTotalPrice(BigDecimal totalPrice)
     {
         this.totalPrice = totalPrice;
     }
@@ -175,46 +186,45 @@ public class Cart
 
     public void calculateTotalTaxPrice()
     {
-        setTotalTaxPrice(getTax() * (getSubTotalPrice() + getShippingCosts()));
+        setTotalTaxPrice(
+            getTax().multiply(getSubTotalPrice().add(getShippingCosts()))
+                    .setScale(2, RoundingMode.HALF_UP)
+        );
     }
 
     public void calculateTotalPrice()
     {
-        setTotalPrice(getSubTotalPrice() + getTotalTaxPrice() + getShippingCosts());
+        setTotalPrice(
+            getSubTotalPrice().add(getTotalTaxPrice()).add(getShippingCosts())
+                              .setScale(2, RoundingMode.HALF_UP)
+        );
     }
 
     // --- Formatted Strings ---
 
-    private static String formatPrice(double value)
-    {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        double temp = Math.round(value * 100.0) / 100.0;
-        return f.format(temp).replace(',', '.');
-    }
-
     public String getShippingCostsAsString()
     {
-        return formatPrice(shippingCosts);
+        return shippingCosts.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getSubTotalPriceAsString()
     {
-        return formatPrice(subTotalPrice);
+        return subTotalPrice.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getTotalTaxPriceAsString()
     {
-        return formatPrice(totalTaxPrice);
+        return totalTaxPrice.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getTotalPriceAsString()
     {
-        return formatPrice(totalPrice);
+        return totalPrice.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getTaxAsString()
     {
-        return String.valueOf(tax * 100);
+        return tax.multiply(BigDecimal.valueOf(100)).toPlainString();
     }
 
     /**

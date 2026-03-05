@@ -249,7 +249,7 @@ public class DataImportService implements CommandLineRunner
             {
                 String[] sizes = sizesStr.split(";");
                 String[] prices = defaultPricesStr.split(";");
-                double minPrice = Double.MAX_VALUE;
+                java.math.BigDecimal minPrice = null;
 
                 for (int j = 0; j < sizes.length && j < prices.length; j++)
                 {
@@ -257,14 +257,14 @@ public class DataImportService implements CommandLineRunner
                     if (dims.length != 2) continue;
                     int w = Integer.parseInt(dims[0].trim());
                     int h = Integer.parseInt(dims[1].trim());
-                    double basePrice;
+                    java.math.BigDecimal basePrice;
                     try
                     {
-                        basePrice = Double.parseDouble(prices[j].trim());
+                        basePrice = new java.math.BigDecimal(prices[j].trim());
                     }
                     catch (NumberFormatException e)
                     {
-                        basePrice = 0;
+                        basePrice = java.math.BigDecimal.ZERO;
                     }
 
                     PosterSize size = getOrCreateSize(w, h);
@@ -274,7 +274,8 @@ public class DataImportService implements CommandLineRunner
                     {
                         String finish = finishes.get(f);
                         double bump = f < finishBumps.length ? finishBumps[f] : finishBumps[finishBumps.length - 1];
-                        double finishPrice = Math.round((basePrice + bump) * 100.0) / 100.0;
+                        java.math.BigDecimal finishPrice = basePrice.add(java.math.BigDecimal.valueOf(bump))
+                            .setScale(2, java.math.RoundingMode.HALF_UP);
 
                         ProductPosterSize pps = new ProductPosterSize();
                         pps.setProduct(product);
@@ -290,10 +291,10 @@ public class DataImportService implements CommandLineRunner
                             ppsList.add(pps);
                         }
 
-                        if (finishPrice < minPrice) minPrice = finishPrice;
+                        if (minPrice == null || finishPrice.compareTo(minPrice) < 0) minPrice = finishPrice;
                     }
                 }
-                if (minPrice < Double.MAX_VALUE)
+                if (minPrice != null)
                 {
                     product.setMinimumPrice(minPrice);
                     productRepository.save(product);
@@ -315,10 +316,10 @@ public class DataImportService implements CommandLineRunner
                     // For each size index, create localized prices for all finishes
                     for (int j = 0; j < ppsList.size() && j < localePrices.length; j++)
                     {
-                        double localeBasePrice;
+                        java.math.BigDecimal localeBasePrice;
                         try
                         {
-                            localeBasePrice = Double.parseDouble(localePrices[j].trim());
+                            localeBasePrice = new java.math.BigDecimal(localePrices[j].trim());
                         }
                         catch (NumberFormatException e)
                         {
@@ -332,7 +333,8 @@ public class DataImportService implements CommandLineRunner
                             if (allPpsIndex >= allPps.size()) break;
 
                             double bump = f < finishBumps.length ? finishBumps[f] : finishBumps[finishBumps.length - 1];
-                            double localFinishPrice = Math.round((localeBasePrice + bump) * 100.0) / 100.0;
+                            java.math.BigDecimal localFinishPrice = localeBasePrice.add(java.math.BigDecimal.valueOf(bump))
+                                .setScale(2, java.math.RoundingMode.HALF_UP);
 
                             LocalizedPrice lp = new LocalizedPrice();
                             lp.setProductPosterSize(allPps.get(allPpsIndex));

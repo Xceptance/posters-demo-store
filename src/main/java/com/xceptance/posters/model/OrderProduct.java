@@ -1,7 +1,9 @@
 package com.xceptance.posters.model;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +30,9 @@ public class OrderProduct
 
     private String finish;
     private int productCount;
-    private double price;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price = BigDecimal.ZERO;
 
     public int getId()
     {
@@ -80,31 +84,28 @@ public class OrderProduct
         this.productCount = productCount;
     }
 
-    public double getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
 
-    public void setPrice(double price)
+    public void setPrice(BigDecimal price)
     {
         this.price = price;
     }
 
     public String getPriceAsString()
     {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        return f.format(Math.round(price * 100.0) / 100.0).replace(',', '.');
+        return price.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
-    public double getTotalProductPrice()
+    public BigDecimal getTotalProductPrice()
     {
-        return Math.round(price * productCount * 100.0) / 100.0;
+        return price.multiply(BigDecimal.valueOf(productCount)).setScale(2, RoundingMode.HALF_UP);
     }
 
     public String getTotalProductPriceAsString()
     {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        double total = Math.round(price * productCount * 100.0) / 100.0;
-        return f.format(total).replace(',', '.');
+        return getTotalProductPrice().toPlainString();
     }
 }

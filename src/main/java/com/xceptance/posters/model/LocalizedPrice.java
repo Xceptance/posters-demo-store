@@ -1,5 +1,8 @@
 package com.xceptance.posters.model;
 
+import java.math.BigDecimal;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +29,8 @@ public class LocalizedPrice
     @ManyToOne(optional = false)
     private Language language;
 
-    private double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price = BigDecimal.ZERO;
 
     public LocalizedPrice()
     {
@@ -62,12 +66,12 @@ public class LocalizedPrice
         this.language = language;
     }
 
-    public double getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
 
-    public void setPrice(double price)
+    public void setPrice(BigDecimal price)
     {
         this.price = price;
     }

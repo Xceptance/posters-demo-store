@@ -14,7 +14,8 @@ import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -159,7 +160,7 @@ public class CheckoutController
         order.setShippingCosts(cart.getShippingCosts());
         order.setTotalCosts(cart.getTotalPrice());
         order.setTax(cart.getTax());
-        order.setOrderDate(LocalDate.now().toString());
+        order.setOrderDate(LocalDateTime.now());
 
         // Copy cart products to order products
         for (CartProduct cp : cart.getProducts())
@@ -191,9 +192,9 @@ public class CheckoutController
 
         // Clear cart
         cart.getProducts().clear();
-        cart.setSubTotalPrice(0);
-        cart.setTotalTaxPrice(0);
-        cart.setTotalPrice(0);
+        cart.setSubTotalPrice(BigDecimal.ZERO);
+        cart.setTotalTaxPrice(BigDecimal.ZERO);
+        cart.setTotalPrice(BigDecimal.ZERO);
         cart.setShippingAddress(null);
         cart.setBillingAddress(null);
         cart.setCreditCard(null);

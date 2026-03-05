@@ -1,10 +1,12 @@
 package com.xceptance.posters.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
 /**
@@ -52,7 +53,8 @@ public class Product
     @ManyToOne
     private TopCategory topCategory;
 
-    private double minimumPrice;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal minimumPrice = BigDecimal.ZERO;
 
     @Column(name = "available_finishes")
     private String availableFinishes = "matte,gloss";
@@ -206,12 +208,12 @@ public class Product
         this.topCategory = topCategory;
     }
 
-    public double getMinimumPrice()
+    public BigDecimal getMinimumPrice()
     {
         return minimumPrice;
     }
 
-    public void setMinimumPrice(double minimumPrice)
+    public void setMinimumPrice(BigDecimal minimumPrice)
     {
         this.minimumPrice = minimumPrice;
     }
@@ -245,19 +247,22 @@ public class Product
      * locale-specific prices on all available sizes. Falls back to the
      * base minimumPrice if no locale prices exist.
      */
-    public double getMinimumPrice(String locale)
+    public BigDecimal getMinimumPrice(String locale)
     {
         if (locale == null || availableSizes == null || availableSizes.isEmpty())
         {
             return minimumPrice;
         }
-        double min = Double.MAX_VALUE;
+        BigDecimal min = null;
         for (ProductPosterSize pps : availableSizes)
         {
-            double p = pps.getPrice(locale);
-            if (p < min) min = p;
+            BigDecimal p = pps.getPrice(locale);
+            if (min == null || p.compareTo(min) < 0)
+            {
+                min = p;
+            }
         }
-        return min < Double.MAX_VALUE ? min : minimumPrice;
+        return min != null ? min : minimumPrice;
     }
 
     /**

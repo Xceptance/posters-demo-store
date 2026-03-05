@@ -1,5 +1,6 @@
 package com.xceptance.posters.service;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -63,9 +64,9 @@ public class SessionService
     private Cart createNewCart()
     {
         Cart cart = new Cart();
-        cart.setSubTotalPrice(0);
-        cart.setTotalPrice(0);
-        cart.setTotalTaxPrice(0);
+        cart.setSubTotalPrice(BigDecimal.ZERO);
+        cart.setTotalPrice(BigDecimal.ZERO);
+        cart.setTotalTaxPrice(BigDecimal.ZERO);
         cart.setTax(props.getTax());
         cart.setShippingCosts(props.getShippingCosts());
         return cartRepository.save(cart);

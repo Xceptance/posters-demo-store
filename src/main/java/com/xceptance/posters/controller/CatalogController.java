@@ -1,5 +1,6 @@
 package com.xceptance.posters.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -106,31 +107,34 @@ public class CatalogController
     {
         java.util.Set<String> availableFinishes = new java.util.TreeSet<>();
         java.util.Set<String> availableSizes = new java.util.TreeSet<>();
-        double absoluteMinPrice = Double.MAX_VALUE;
-        double absoluteMaxPrice = 0.0;
+        BigDecimal absoluteMinPrice = null;
+        BigDecimal absoluteMaxPrice = null;
 
         for (Product p : allProducts) {
             availableFinishes.addAll(p.getAvailableFinishesList());
             for (com.xceptance.posters.model.ProductPosterSize pps : p.getAvailableSizes()) {
                 availableSizes.add(pps.getSize().getWidth() + " x " + pps.getSize().getHeight());
             }
-            double price = p.getMinimumPrice(locale);
-            if (price < absoluteMinPrice) {
+            BigDecimal price = p.getMinimumPrice(locale);
+            if (absoluteMinPrice == null || price.compareTo(absoluteMinPrice) < 0) {
                 absoluteMinPrice = price;
             }
-            if (price > absoluteMaxPrice) {
+            if (absoluteMaxPrice == null || price.compareTo(absoluteMaxPrice) > 0) {
                 absoluteMaxPrice = price;
             }
         }
 
         if (allProducts.isEmpty()) {
-            absoluteMinPrice = 0.0;
-            absoluteMaxPrice = 0.0;
+            absoluteMinPrice = BigDecimal.ZERO;
+            absoluteMaxPrice = BigDecimal.ZERO;
         }
 
-        // Use Math.floor and Math.ceil for nice bounds
-        absoluteMinPrice = Math.floor(absoluteMinPrice);
-        absoluteMaxPrice = Math.ceil(absoluteMaxPrice);
+        // Use floor and ceil for nice bounds
+        absoluteMinPrice = absoluteMinPrice.setScale(0, java.math.RoundingMode.FLOOR);
+        absoluteMaxPrice = absoluteMaxPrice.setScale(0, java.math.RoundingMode.CEILING);
+
+        final BigDecimal filterMin = absoluteMinPrice;
+        final BigDecimal filterMax = absoluteMaxPrice;
 
         List<Product> filteredProducts = allProducts;
         if ((finishes != null && !finishes.isEmpty()) || (sizes != null && !sizes.isEmpty()) || minPrice != null || maxPrice != null) {
@@ -144,11 +148,11 @@ public class CatalogController
                     matchSize = p.getAvailableSizes().stream().anyMatch(s -> sizes.contains(s.getSize().getWidth() + " x " + s.getSize().getHeight()));
                 }
                 boolean matchPrice = true;
-                double pPrice = p.getMinimumPrice(locale);
-                if (minPrice != null && pPrice < minPrice) {
+                BigDecimal pPrice = p.getMinimumPrice(locale);
+                if (minPrice != null && pPrice.compareTo(BigDecimal.valueOf(minPrice)) < 0) {
                     matchPrice = false;
                 }
-                if (maxPrice != null && pPrice > maxPrice) {
+                if (maxPrice != null && pPrice.compareTo(BigDecimal.valueOf(maxPrice)) > 0) {
                     matchPrice = false;
                 }
                 return matchFinish && matchSize && matchPrice;
@@ -163,8 +167,8 @@ public class CatalogController
         model.addAttribute("selectedSizes", sizes != null ? sizes : List.of());
         model.addAttribute("absoluteMinPrice", absoluteMinPrice);
         model.addAttribute("absoluteMaxPrice", absoluteMaxPrice);
-        model.addAttribute("selectedMinPrice", minPrice != null ? minPrice : absoluteMinPrice);
-        model.addAttribute("selectedMaxPrice", maxPrice != null ? maxPrice : absoluteMaxPrice);
+        model.addAttribute("selectedMinPrice", minPrice != null ? BigDecimal.valueOf(minPrice) : filterMin);
+        model.addAttribute("selectedMaxPrice", maxPrice != null ? BigDecimal.valueOf(maxPrice) : filterMax);
     }
 
     @GetMapping("/{locale}/product/{name}/{productId}")

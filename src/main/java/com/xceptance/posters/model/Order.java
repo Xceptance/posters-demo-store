@@ -1,11 +1,14 @@
 package com.xceptance.posters.model;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,12 +43,22 @@ public class Order
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> products = new ArrayList<>();
 
-    private double subTotalCosts;
-    private double totalTaxCosts;
-    private double shippingCosts;
-    private double totalCosts;
-    private double tax;
-    private String orderDate;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal subTotalCosts = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal totalTaxCosts = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal shippingCosts = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal totalCosts = BigDecimal.ZERO;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal tax = BigDecimal.ZERO;
+
+    private LocalDateTime orderDate;
 
     public Order()
     {
@@ -111,91 +124,85 @@ public class Order
         this.products = products;
     }
 
-    public double getSubTotalCosts()
+    public BigDecimal getSubTotalCosts()
     {
         return subTotalCosts;
     }
 
-    public void setSubTotalCosts(double subTotalCosts)
+    public void setSubTotalCosts(BigDecimal subTotalCosts)
     {
         this.subTotalCosts = subTotalCosts;
     }
 
-    public double getTotalTaxCosts()
+    public BigDecimal getTotalTaxCosts()
     {
         return totalTaxCosts;
     }
 
-    public void setTotalTaxCosts(double totalTaxCosts)
+    public void setTotalTaxCosts(BigDecimal totalTaxCosts)
     {
         this.totalTaxCosts = totalTaxCosts;
     }
 
-    public double getShippingCosts()
+    public BigDecimal getShippingCosts()
     {
         return shippingCosts;
     }
 
-    public void setShippingCosts(double shippingCosts)
+    public void setShippingCosts(BigDecimal shippingCosts)
     {
         this.shippingCosts = shippingCosts;
     }
 
-    public double getTotalCosts()
+    public BigDecimal getTotalCosts()
     {
         return totalCosts;
     }
 
-    public void setTotalCosts(double totalCosts)
+    public void setTotalCosts(BigDecimal totalCosts)
     {
         this.totalCosts = totalCosts;
     }
 
-    public double getTax()
+    public BigDecimal getTax()
     {
         return tax;
     }
 
-    public void setTax(double tax)
+    public void setTax(BigDecimal tax)
     {
         this.tax = tax;
     }
 
-    public String getOrderDate()
+    public LocalDateTime getOrderDate()
     {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate)
+    public void setOrderDate(LocalDateTime orderDate)
     {
         this.orderDate = orderDate;
     }
 
     // --- Formatted Strings ---
 
-    private static String formatPrice(double value)
-    {
-        final DecimalFormat f = new DecimalFormat("#0.00");
-        return f.format(Math.round(value * 100.0) / 100.0).replace(',', '.');
-    }
-
     public String getSubTotalCostsAsString()
     {
-        return formatPrice(subTotalCosts);
+        return subTotalCosts.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getTotalTaxCostsAsString()
     {
-        return formatPrice(totalTaxCosts);
+        return totalTaxCosts.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getShippingCostsAsString()
     {
-        return formatPrice(shippingCosts);
+        return shippingCosts.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     public String getTotalCostsAsString()
     {
-        return formatPrice(totalCosts);
+        return totalCosts.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 }

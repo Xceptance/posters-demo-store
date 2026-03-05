@@ -15,6 +15,8 @@
  */
 package com.xceptance.posters.config;
 
+import java.math.BigDecimal;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +31,8 @@ import org.springframework.stereotype.Component;
 public class PostersProperties
 {
     private String currency;
-    private double shippingCosts;
-    private double tax;
+    private BigDecimal shippingCosts = BigDecimal.ZERO;
+    private BigDecimal tax = BigDecimal.ZERO;
     private String unitOfLength;
     private int pageSize;
     private String languages;
@@ -51,22 +53,22 @@ public class PostersProperties
         this.currency = currency;
     }
 
-    public double getShippingCosts()
+    public BigDecimal getShippingCosts()
     {
         return shippingCosts;
     }
 
-    public void setShippingCosts(double shippingCosts)
+    public void setShippingCosts(BigDecimal shippingCosts)
     {
         this.shippingCosts = shippingCosts;
     }
 
-    public double getTax()
+    public BigDecimal getTax()
     {
         return tax;
     }
 
-    public void setTax(double tax)
+    public void setTax(BigDecimal tax)
     {
         this.tax = tax;
     }

@@ -1,5 +1,7 @@
 package com.xceptance.posters.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,7 +109,7 @@ public class CartController
                     // Fallback: try without finish
                     pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
                 }
-                double price = pps != null ? pps.getPrice(locale) : 0;
+                BigDecimal price = pps != null ? pps.getPrice(locale) : BigDecimal.ZERO;
 
                 // Check if item already in cart
                 CartProduct existing = cartProductRepository.findByCartAndProductAndFinishAndSize(cart, product, finish, posterSize);
@@ -130,7 +132,7 @@ public class CartController
                 }
 
                 // Recalculate cart totals
-                cart.setSubTotalPrice(cart.getSubTotalPrice() + price);
+                cart.setSubTotalPrice(cart.getSubTotalPrice().add(price));
                 cart.calculateTotalTaxPrice();
                 cart.calculateTotalPrice();
                 cartRepository.save(cart);
@@ -168,11 +170,11 @@ public class CartController
 
         if (cp != null)
         {
-            double priceDiff = cp.getPrice() * (productCount - cp.getProductCount());
+            BigDecimal priceDiff = cp.getPrice().multiply(BigDecimal.valueOf(productCount - cp.getProductCount()));
             cp.setProductCount(productCount);
             cartProductRepository.save(cp);
 
-            cart.setSubTotalPrice(cart.getSubTotalPrice() + priceDiff);
+            cart.setSubTotalPrice(cart.getSubTotalPrice().add(priceDiff));
             cart.calculateTotalTaxPrice();
             cart.calculateTotalPrice();
             cartRepository.save(cart);
@@ -196,7 +198,8 @@ public class CartController
 
         if (cp != null)
         {
-            cart.setSubTotalPrice(cart.getSubTotalPrice() - (cp.getPrice() * cp.getProductCount()));
+            BigDecimal itemTotal = cp.getPrice().multiply(BigDecimal.valueOf(cp.getProductCount()));
+            cart.setSubTotalPrice(cart.getSubTotalPrice().subtract(itemTotal));
             cart.getProducts().remove(cp);
             cartProductRepository.delete(cp);
             cart.calculateTotalTaxPrice();
