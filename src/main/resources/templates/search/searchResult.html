@@ -50,7 +50,14 @@
                         </div>
                     </div>
                 </div>
-                <p th:if="${#lists.isEmpty(products)}" id="no-results" th:text="#{labelNoProductsFound}">No products found.</p>
+                <div th:if="${#lists.isEmpty(products)}" id="no-results" class="text-center py-5">
+                    <div class="mb-4">
+                        <i class="bi bi-search text-muted" style="font-size: 5rem; opacity: 0.5;"></i>
+                    </div>
+                    <h2 class="h4 text-muted mb-3" th:text="#{labelNoProductsFound}">No products found.</h2>
+                    <p class="text-muted mb-4">We couldn't find anything matching your search. Try different keywords or browse our categories.</p>
+                    <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-outline-primary rounded-pill px-4">Continue Shopping</a>
+                </div>
             </div>
         </div>
     </div>
