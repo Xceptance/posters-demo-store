@@ -30,6 +30,8 @@ public class ProductPosterSize
     @ManyToOne
     private PosterSize size;
 
+    private String finish = "matte";
+
     private double price;
 
     @OneToMany(mappedBy = "productPosterSize", fetch = FetchType.EAGER)
@@ -96,6 +98,16 @@ public class ProductPosterSize
     public void setPrice(double price)
     {
         this.price = price;
+    }
+
+    public String getFinish()
+    {
+        return finish;
+    }
+
+    public void setFinish(String finish)
+    {
+        this.finish = finish;
     }
 
     public List<LocalizedPrice> getLocalizedPrices()

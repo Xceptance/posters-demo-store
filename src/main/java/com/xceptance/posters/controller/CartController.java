@@ -100,8 +100,13 @@ public class CartController
             PosterSize posterSize = posterSizeRepository.findByWidthAndHeight(width, height);
             if (posterSize != null)
             {
-                // Get price (locale-aware)
-                ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
+                // Get price (locale-aware, finish-aware)
+                ProductPosterSize pps = productPosterSizeRepository.findByProductAndSizeAndFinish(product, posterSize, finish);
+                if (pps == null)
+                {
+                    // Fallback: try without finish
+                    pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
+                }
                 double price = pps != null ? pps.getPrice(locale) : 0;
 
                 // Check if item already in cart
@@ -210,6 +215,7 @@ public class CartController
     public String updatePrice(@PathVariable("locale") String locale,
                               @RequestParam("productId") int productId,
                               @RequestParam("size") String size,
+                              @RequestParam(value = "finish", required = false, defaultValue = "matte") String finish,
                               Model model)
     {
         Product product = productRepository.findById(productId).orElse(null);
@@ -230,7 +236,11 @@ public class CartController
             PosterSize posterSize = posterSizeRepository.findByWidthAndHeight(width, height);
             if (posterSize != null)
             {
-                ProductPosterSize pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
+                ProductPosterSize pps = productPosterSizeRepository.findByProductAndSizeAndFinish(product, posterSize, finish);
+                if (pps == null)
+                {
+                    pps = productPosterSizeRepository.findByProductAndSize(product, posterSize);
+                }
                 if (pps != null)
                 {
                     formattedPrice = PriceFormatter.format(pps.getPrice(locale), locale);

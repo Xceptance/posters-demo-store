@@ -51,7 +51,7 @@
                     <div id="product-detail-form-description"
                          th:text="${product.descriptionDetail.getText(urlLocale)}">Detailed description</div>
                 </div>
-                <div class="mb-3" th:if="${not #lists.isEmpty(product.availableSizes)}">
+                <div class="mb-3" th:if="${not #lists.isEmpty(product.distinctSizes)}">
                     <label for="product-detail-form-size-selection" class="form-label" th:text="#{labelSelectSize}">Select Size</label>
                     <select id="product-detail-form-size-selection" class="form-select"
                             name="size"
@@ -60,8 +60,9 @@
                             th:hx-post="@{'/' + ${urlLocale} + '/updatePrice'}"
                             hx-target="#product-detail-form-price"
                             hx-swap="outerHTML"
-                            th:hx-vals="'{&quot;productId&quot;: ' + ${product.id} + '}'">
-                        <option th:each="pps : ${product.availableSizes}"
+                            hx-include="#add-to-cart-form input[name=finish]:checked"
+                            th:hx-vals="'{ &quot;productId&quot;: ' + ${product.id} + '}'">
+                        <option th:each="pps : ${product.distinctSizes}"
                                 th:value="${pps.size.width + ' x ' + pps.size.height + ' ' + unitLength}"
                                 th:text="${pps.size.width + ' x ' + pps.size.height + ' ' + unitLength}">
                             16 x 12 in
@@ -74,7 +75,13 @@
                         <div class="form-check" th:each="finish, stat : ${product.availableFinishesList}">
                             <input class="form-check-input" type="radio" name="finish"
                                    th:id="'finish-' + ${finish}" th:value="${finish}"
-                                   th:checked="${stat.first}"/>
+                                   th:checked="${stat.first}"
+                                   hx-trigger="change"
+                                   th:hx-post="@{'/' + ${urlLocale} + '/updatePrice'}"
+                                   hx-target="#product-detail-form-price"
+                                   hx-swap="outerHTML"
+                                   hx-include="#product-detail-form-size-selection"
+                                   th:hx-vals="'{ &quot;productId&quot;: ' + ${product.id} + '}'"/>
                             <label class="form-check-label" th:for="'finish-' + ${finish}"
                                    th:text="${#messages.msg('label' + #strings.capitalize(finish))}">Finish</label>
                         </div>

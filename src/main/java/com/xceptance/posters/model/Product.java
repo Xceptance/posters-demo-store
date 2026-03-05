@@ -259,4 +259,23 @@ public class Product
         }
         return min < Double.MAX_VALUE ? min : minimumPrice;
     }
+
+    /**
+     * Returns a deduplicated list of available sizes (one entry per unique PosterSize),
+     * filtering out duplicate entries caused by finish-specific pricing.
+     * Used by the product detail page size dropdown.
+     */
+    public List<ProductPosterSize> getDistinctSizes()
+    {
+        java.util.LinkedHashMap<Integer, ProductPosterSize> seen = new java.util.LinkedHashMap<>();
+        for (ProductPosterSize pps : availableSizes)
+        {
+            int sizeId = pps.getSize().getId();
+            if (!seen.containsKey(sizeId))
+            {
+                seen.put(sizeId, pps);
+            }
+        }
+        return new ArrayList<>(seen.values());
+    }
 }

@@ -234,8 +234,17 @@ public class DataImportService implements CommandLineRunner
                 }
             }
 
-            // Build PosterSize list from sizes string
+            // Build PosterSize list from sizes string — one entry per (size, finish) combo
+            // ppsList holds only the first-finish entries for locale price import mapping
             List<ProductPosterSize> ppsList = new ArrayList<>();
+            // allPps holds every entry (all finishes) for completeness
+            List<ProductPosterSize> allPps = new ArrayList<>();
+
+            // Determine finish list for this product
+            List<String> finishes = product.getAvailableFinishesList();
+            // Define price bumps for each finish position (first finish = base, +0)
+            double[] finishBumps = {0.0, 2.0, 5.0, 10.0};
+
             if (sizesStr != null && defaultPricesStr != null)
             {
                 String[] sizes = sizesStr.split(";");
@@ -248,24 +257,41 @@ public class DataImportService implements CommandLineRunner
                     if (dims.length != 2) continue;
                     int w = Integer.parseInt(dims[0].trim());
                     int h = Integer.parseInt(dims[1].trim());
-                    double price;
+                    double basePrice;
                     try
                     {
-                        price = Double.parseDouble(prices[j].trim());
+                        basePrice = Double.parseDouble(prices[j].trim());
                     }
                     catch (NumberFormatException e)
                     {
-                        price = 0;
+                        basePrice = 0;
                     }
 
                     PosterSize size = getOrCreateSize(w, h);
-                    ProductPosterSize pps = new ProductPosterSize();
-                    pps.setProduct(product);
-                    pps.setSize(size);
-                    pps.setPrice(price);
-                    pps = productPosterSizeRepository.save(pps);
-                    ppsList.add(pps);
-                    if (price < minPrice) minPrice = price;
+
+                    // Create one entry per finish
+                    for (int f = 0; f < finishes.size(); f++)
+                    {
+                        String finish = finishes.get(f);
+                        double bump = f < finishBumps.length ? finishBumps[f] : finishBumps[finishBumps.length - 1];
+                        double finishPrice = Math.round((basePrice + bump) * 100.0) / 100.0;
+
+                        ProductPosterSize pps = new ProductPosterSize();
+                        pps.setProduct(product);
+                        pps.setSize(size);
+                        pps.setFinish(finish);
+                        pps.setPrice(finishPrice);
+                        pps = productPosterSizeRepository.save(pps);
+                        allPps.add(pps);
+
+                        // Track first-finish entries for locale price import
+                        if (f == 0)
+                        {
+                            ppsList.add(pps);
+                        }
+
+                        if (finishPrice < minPrice) minPrice = finishPrice;
+                    }
                 }
                 if (minPrice < Double.MAX_VALUE)
                 {
@@ -285,22 +311,35 @@ public class DataImportService implements CommandLineRunner
                     if (language == null) continue;
 
                     String[] localePrices = priceEl.getTextContent().trim().split(";");
+
+                    // For each size index, create localized prices for all finishes
                     for (int j = 0; j < ppsList.size() && j < localePrices.length; j++)
                     {
-                        double localePrice;
+                        double localeBasePrice;
                         try
                         {
-                            localePrice = Double.parseDouble(localePrices[j].trim());
+                            localeBasePrice = Double.parseDouble(localePrices[j].trim());
                         }
                         catch (NumberFormatException e)
                         {
                             continue;
                         }
-                        LocalizedPrice lp = new LocalizedPrice();
-                        lp.setProductPosterSize(ppsList.get(j));
-                        lp.setLanguage(language);
-                        lp.setPrice(localePrice);
-                        localizedPriceRepository.save(lp);
+
+                        // Find the corresponding allPps entries for each finish at this size index
+                        for (int f = 0; f < finishes.size(); f++)
+                        {
+                            int allPpsIndex = j * finishes.size() + f;
+                            if (allPpsIndex >= allPps.size()) break;
+
+                            double bump = f < finishBumps.length ? finishBumps[f] : finishBumps[finishBumps.length - 1];
+                            double localFinishPrice = Math.round((localeBasePrice + bump) * 100.0) / 100.0;
+
+                            LocalizedPrice lp = new LocalizedPrice();
+                            lp.setProductPosterSize(allPps.get(allPpsIndex));
+                            lp.setLanguage(language);
+                            lp.setPrice(localFinishPrice);
+                            localizedPriceRepository.save(lp);
+                        }
                     }
                 }
             }

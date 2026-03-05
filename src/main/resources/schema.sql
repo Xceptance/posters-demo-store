@@ -150,6 +150,7 @@ create table productpostersize (
   id                            integer auto_increment not null,
   product_id                    integer,
   postersize_id                 integer,
+  finish                        varchar(255) default 'matte',
   price                         double not null,
   constraint pk_productpostersize primary key (id)
 );
