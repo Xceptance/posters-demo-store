@@ -824,9 +824,11 @@
     font-family: 'Rokkitt', serif;
   }
 
-  .cart-summary-card {
+  .cart-summary-card,
+  .cart-items-card {
     background-color: #ffffff;
     border-radius: 0.75rem;
+    overflow: hidden;
   }
 
   .cart-summary-row {
