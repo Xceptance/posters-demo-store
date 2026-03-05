@@ -96,6 +96,11 @@ public class OrderProduct
         return f.format(Math.round(price * 100.0) / 100.0).replace(',', '.');
     }
 
+    public double getTotalProductPrice()
+    {
+        return Math.round(price * productCount * 100.0) / 100.0;
+    }
+
     public String getTotalProductPriceAsString()
     {
         final DecimalFormat f = new DecimalFormat("#0.00");

@@ -5,17 +5,143 @@
 <head><title>Order Confirmation</title></head>
 <body>
 <div layout:fragment="content">
-    <div class="container mt-4">
-        <h1 th:text="#{titleOrderConfirmed}">Order Confirmed!</h1>
-        <div class="alert alert-success" id="order-confirmation">
-            <p>Thank you for your order. Your order has been placed successfully.</p>
+    <div class="container mt-4 mb-5">
+        <div class="row g-4 align-items-start">
+            <!-- Left Column: Items and Success Alert -->
+            <div class="col-lg-8">
+                <!-- Success Alert -->
+                <div class="alert alert-success d-flex align-items-center mb-4 border-0 shadow-sm" id="order-confirmation" style="border-radius: 0.75rem;">
+                    <i class="bi bi-check-circle-fill fs-1 me-4 text-success"></i>
+                    <div>
+                        <h3 class="alert-heading fw-bold mb-1" th:text="#{titleOrderConfirmed}">Order Confirmed!</h3>
+                        <p class="mb-0 fs-5">Thank you for your order. It has been placed successfully.</p>
+                    </div>
+                </div>
+                
+                <!-- Order Items Card -->
+                <div class="card border-0 shadow-sm cart-items-card mb-4" th:if="${order != null}">
+                    <div class="card-header bg-white border-bottom-0 pt-4 pb-0 d-flex flex-column flex-sm-row justify-content-between align-items-sm-end">
+                        <h3 class="card-title fw-bold mb-3 mb-sm-0" th:text="#{labelOrderItems}">Order Details</h3>
+                        <div class="text-muted small text-sm-end pb-1 border-sm-start ps-sm-3">
+                            <span class="text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">Order ID</span><br>
+                            <span class="fw-bold text-dark fs-6" th:text="${order.id}">uuid</span><br>
+                            <span class="text-uppercase mt-2 d-inline-block" style="font-size: 0.75rem; letter-spacing: 0.5px;">Date Placed</span><br>
+                            <span class="fw-bold text-dark" th:text="${order.orderDate}">date</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0 mt-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item p-4" th:each="op : ${order.products}">
+                                <div class="row align-items-center g-3">
+                                    <!-- Image & Product Details -->
+                                    <div class="col-12 col-sm-6 d-flex align-items-center mb-3 mb-sm-0">
+                                        <a th:href="@{'/' + ${urlLocale} + '/product/' + ${op.product.name.getText(urlLocale)} + '/' + ${op.product.id}}" class="flex-shrink-0 d-block">
+                                            <img th:src="@{${op.product.imageURL}}" th:alt="${op.product.name.getText(urlLocale)}" class="rounded shadow-sm" style="width: 80px; height: 80px; object-fit: cover;">
+                                        </a>
+                                        <div class="ms-4 flex-grow-1">
+                                            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${op.product.name.getText(urlLocale)} + '/' + ${op.product.id}}" 
+                                               class="text-decoration-none text-dark fw-bold fs-5 d-block mb-1" th:text="${op.product.name.getText(urlLocale)}">Poster Name</a>
+                                            <div class="text-muted small mb-0">
+                                                <span th:text="${op.size.width + 'x' + op.size.height}">16x12</span> &bull; 
+                                                <span th:text="${#strings.capitalize(op.finish)}">Matte</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Price -->
+                                    <div class="col-4 col-sm-2 text-sm-center">
+                                        <div class="d-sm-none text-muted small mb-1" th:text="#{labelPrice}">Price</div>
+                                        <span class="fw-medium text-muted" th:text="${#numbers.formatCurrency(op.price)}">$0.00</span>
+                                    </div>
+                                    <!-- Quantity -->
+                                    <div class="col-4 col-sm-2 text-center">
+                                        <div class="d-sm-none text-muted small mb-1" th:text="#{labelQuantity}">Qty</div>
+                                        <span class="fw-bold fs-5 bg-light rounded px-3 py-1" th:text="${op.productCount}">1</span>
+                                    </div>
+                                    <!-- Total -->
+                                    <div class="col-4 col-sm-2 text-end">
+                                        <div class="d-sm-none text-muted small mb-1" th:text="#{labelTotal}">Total</div>
+                                        <span class="fw-bold fs-5 text-dark" th:text="${#numbers.formatCurrency(op.totalProductPrice)}">$0.00</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="d-none d-lg-block mt-4">
+                    <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-outline-primary px-4 py-2" th:text="#{buttonContinueShopping}">Continue Shopping</a>
+                </div>
+            </div> <!-- /Left Column -->
+            
+            <!-- Right Column: Summary & Addresses -->
+            <div class="col-lg-4" th:if="${order != null}">
+                <div class="card border-0 shadow-sm cart-summary-card" style="position: sticky; top: 100px;">
+                    <div class="card-body p-4">
+                        <h3 class="card-title cart-summary-title mb-4 fw-bold" th:text="#{titleOrderSummary}">Order Summary</h3>
+                        
+                        <!-- Financial Summary -->
+                        <div class="cart-summary-row border-0 pb-1">
+                            <span class="text-muted" th:text="#{labelSubtotal}">Subtotal</span>
+                            <span th:text="${#numbers.formatCurrency(order.subTotalCosts)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-row border-0 py-1">
+                            <span class="text-muted">Tax (<span th:text="${#numbers.formatDecimal(order.tax * 100, 1, 1)}">6.0</span>%)</span>
+                            <span th:text="${#numbers.formatCurrency(order.totalTaxCosts)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-row border-0 pt-1 pb-3">
+                            <span class="text-muted" th:text="#{labelShipping}">Shipping</span>
+                            <span th:text="${#numbers.formatCurrency(order.shippingCosts)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-total border-top pt-3 mb-4">
+                            <span class="fw-bold fs-5">Total paid</span>
+                            <span class="fw-bold cart-summary-total-price" th:text="${#numbers.formatCurrency(order.totalCosts)}">$0.00</span>
+                        </div>
+                        
+                        <!-- Addresses and Payment -->
+                        <div class="bg-light rounded p-3 mb-0">
+                            <!-- Shipping -->
+                            <h6 class="fw-bold mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">Shipping Address</h6>
+                            <address class="text-dark small mb-3">
+                                <strong th:text="${order.shippingAddress.name}">John Doe</strong><br>
+                                <th:block th:if="${not #strings.isEmpty(order.shippingAddress.company)}">
+                                    <span th:text="${order.shippingAddress.company}">Company</span><br>
+                                </th:block>
+                                <span th:text="${order.shippingAddress.addressLine}">123 Street</span><br>
+                                <span th:text="${order.shippingAddress.city + ', ' + order.shippingAddress.state + ' ' + order.shippingAddress.zip}">City, State ZIP</span><br>
+                                <span th:text="${order.shippingAddress.country}">Country</span>
+                            </address>
+
+                            <!-- Billing -->
+                            <h6 class="fw-bold mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">Billing Address</h6>
+                            <address class="text-dark small mb-3">
+                                <strong th:text="${order.billingAddress.name}">John Doe</strong><br>
+                                <th:block th:if="${not #strings.isEmpty(order.billingAddress.company)}">
+                                    <span th:text="${order.billingAddress.company}">Company</span><br>
+                                </th:block>
+                                <span th:text="${order.billingAddress.addressLine}">123 Street</span><br>
+                                <span th:text="${order.billingAddress.city + ', ' + order.billingAddress.state + ' ' + order.billingAddress.zip}">City, State ZIP</span><br>
+                                <span th:text="${order.billingAddress.country}">Country</span>
+                            </address>
+                            
+                            <!-- Payment -->
+                            <h6 class="fw-bold mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">Payment Method</h6>
+                            <div class="text-dark small d-flex align-items-center">
+                                <i class="bi bi-credit-card fs-4 me-2 text-muted"></i>
+                                <div>
+                                    <span class="d-block fw-medium font-monospace" th:text="${order.creditCard.cardNumber}">**** **** **** 1234</span>
+                                    <span class="text-muted" style="font-size: 0.8rem;" th:text="${'Expires ' + order.creditCard.month + '/' + order.creditCard.year}">Expires 12/2030</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /Right Column -->
+            
+            <!-- Mobile Continue Shopping Button -->
+            <div class="col-12 d-lg-none mt-2">
+                <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary w-100 py-3" th:text="#{buttonContinueShopping}">Continue Shopping</a>
+            </div>
         </div>
-        <div th:if="${order != null}">
-            <p>Order ID: <strong th:text="${order.id}">uuid</strong></p>
-            <p>Order Date: <span th:text="${order.orderDate}">2024-01-01</span></p>
-            <p>Total: <span th:text="${#numbers.formatCurrency(order.totalCosts)}">$0.00</span></p>
-        </div>
-        <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-primary" th:text="#{buttonContinueShopping}">Continue Shopping</a>
     </div>
 </div>
 </body>
