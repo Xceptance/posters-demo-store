@@ -359,8 +359,7 @@
 */
   .hero-section {
     background-color: var(--bg-warm);
-    padding: 5rem 0 6rem;
-    margin-bottom: 2rem;
+    padding: 2rem 0 2rem;
   }
   .hero-title {
     font-family: 'Rokkitt', serif;
