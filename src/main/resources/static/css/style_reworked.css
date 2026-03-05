@@ -509,6 +509,40 @@
 /*  Category Cards
 *   - End
 */
+
+/*  Filter Sidebar
+*   - Start
+*/
+  .filter-accordion .accordion-button {
+    font-size: var(--ts-sm);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .filter-accordion .accordion-button::after {
+    background-size: 0.75rem;
+  }
+  .filter-pill + label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    border-color: rgba(0,0,0,0.15);
+    color: var(--text-dark);
+    transition: var(--transition-base);
+  }
+  .filter-pill:checked + label {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .filter-pill:hover + label {
+    background-color: rgba(0,0,0,0.05);
+  }
+  .filter-pill:checked:hover + label {
+    background-color: #1a2c42; /* Darker accent */
+  }
+/*  Filter Sidebar
+*   - End
+*/
 .acc-style{
   text-decoration: none;
   

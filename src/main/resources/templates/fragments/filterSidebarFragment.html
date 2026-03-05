@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="filterSidebar">
+    <div class="filter-sidebar mb-4">
+        <h4 class="mb-3 text-uppercase fs-6 fw-bold text-muted" th:text="#{labelFilter}">Filters</h4>
+        <div class="accordion accordion-flush filter-accordion" id="accordionFilters">
+            
+            <!-- Finish Filter -->
+            <div class="accordion-item bg-transparent">
+                <h2 class="accordion-header" id="headingFinish">
+                    <button class="accordion-button bg-transparent px-0 fw-bold text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinish" aria-expanded="true" aria-controls="collapseFinish" th:text="#{labelFinish}">
+                        Finish
+                    </button>
+                </h2>
+                <div id="collapseFinish" class="accordion-collapse collapse show" aria-labelledby="headingFinish">
+                    <div class="accordion-body px-0 pt-0 pb-3">
+                        <div class="d-flex flex-wrap gap-2">
+                            <!-- Placeholder filters layout for UI modernization -->
+                            <input type="checkbox" class="btn-check filter-pill" id="finish-matte" autocomplete="off">
+                            <label class="btn btn-outline-secondary btn-sm rounded-pill" for="finish-matte">Matte</label>
+
+                            <input type="checkbox" class="btn-check filter-pill" id="finish-gloss" autocomplete="off">
+                            <label class="btn btn-outline-secondary btn-sm rounded-pill" for="finish-gloss">Gloss</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Size Filter -->
+            <div class="accordion-item bg-transparent border-bottom-0">
+                <h2 class="accordion-header" id="headingSize">
+                    <button class="accordion-button bg-transparent px-0 fw-bold text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSize" aria-expanded="true" aria-controls="collapseSize" th:text="#{labelSize}">
+                        Size
+                    </button>
+                </h2>
+                <div id="collapseSize" class="accordion-collapse collapse show" aria-labelledby="headingSize">
+                    <div class="accordion-body px-0 pt-0 pb-3">
+                        <div class="d-flex flex-wrap gap-2">
+                            <input type="checkbox" class="btn-check filter-pill" id="size-16x12" autocomplete="off">
+                            <label class="btn btn-outline-secondary btn-sm rounded-pill" for="size-16x12">16 x 12</label>
+
+                            <input type="checkbox" class="btn-check filter-pill" id="size-32x24" autocomplete="off">
+                            <label class="btn btn-outline-secondary btn-sm rounded-pill" for="size-32x24">32 x 24</label>
+
+                            <input type="checkbox" class="btn-check filter-pill" id="size-64x48" autocomplete="off">
+                            <label class="btn btn-outline-secondary btn-sm rounded-pill" for="size-64x48">64 x 48</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
