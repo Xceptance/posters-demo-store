@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title th:text="${product.name.getText(urlLocale)}">Product Detail</title></head>
+<body>
+<div layout:fragment="content">
+
+<div class="container mt-4" th:if="${product != null}">
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <!-- Clickable Image triggering Modal -->
+            <a href="#" data-bs-toggle="modal" data-bs-target="#imageLightboxModal" title="Click to enlarge">
+                <img th:src="@{${product.largeImageURL}}"
+                     th:alt="${product.name.getText(urlLocale)}"
+                     class="img-fluid w-100 product-detail-image"
+                     style="cursor: zoom-in;"/>
+            </a>
+
+            <!-- Bootstrap Modal for Image Lightbox -->
+            <div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-labelledby="imageLightboxModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content bg-transparent border-0">
+                        <div class="modal-header border-0 pb-0">
+                            <button type="button" class="btn-close btn-close-white ms-auto shadow-none" data-bs-dismiss="modal" aria-label="Close" style="filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.8));"></button>
+                        </div>
+                        <div class="modal-body text-center pt-0">
+                            <img th:src="@{${product.largeImageURL}}" 
+                                 th:alt="${product.name.getText(urlLocale)}" 
+                                 class="img-fluid rounded shadow-lg" 
+                                 style="max-height: 85vh; object-fit: contain; cursor: zoom-out;"
+                                 data-bs-dismiss="modal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <form id="add-to-cart-form">
+                <div class="mb-1">
+                    <h1 id="product-detail-form-name" th:text="${product.name.getText(urlLocale)}">Product Name</h1>
+                </div>
+                <div class="mb-3">
+                    <p id="product-detail-form-description-overview" class="lead"
+                        th:text="${product.descriptionOverview.getText(urlLocale)}">Short Description</p>
+                </div>
+                <div class="mb-3">
+                    <label for="product-detail-form-description"
+                           class="form-label product-detail-paragraph-label"
+                           th:text="#{productDetailProductDescription}">Product Description</label>
+                    <div id="product-detail-form-description"
+                         th:text="${product.descriptionDetail.getText(urlLocale)}">Detailed description</div>
+                </div>
+                <div class="mb-3" th:if="${not #lists.isEmpty(product.distinctSizes)}">
+                    <label for="product-detail-form-size-selection" class="form-label" th:text="#{labelSelectSize}">Select Size</label>
+                    <select id="product-detail-form-size-selection" class="form-select"
+                            name="size"
+                            aria-label="size selection"
+                            hx-trigger="change"
+                            th:hx-post="@{'/' + ${urlLocale} + '/updatePrice'}"
+                            hx-target="#product-detail-form-price"
+                            hx-swap="outerHTML"
+                            hx-include="#add-to-cart-form input[name=finish]:checked"
+                            th:hx-vals="'{ &quot;productId&quot;: ' + ${product.id} + '}'">
+                        <option th:each="pps : ${product.distinctSizes}"
+                                th:value="${pps.size.width + ' x ' + pps.size.height + ' ' + unitLength}"
+                                th:text="${pps.size.width + ' x ' + pps.size.height + ' ' + unitLength}">
+                            16 x 12 in
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="product-detail-form-style-selection" class="form-label" th:text="#{labelSelectFinish}">Select Finish</label>
+                    <div id="product-detail-form-style-selection">
+                        <div class="form-check" th:each="finish, stat : ${product.availableFinishesList}">
+                            <input class="form-check-input" type="radio" name="finish"
+                                   th:id="'finish-' + ${finish}" th:value="${finish}"
+                                   th:checked="${stat.first}"
+                                   hx-trigger="change"
+                                   th:hx-post="@{'/' + ${urlLocale} + '/updatePrice'}"
+                                   hx-target="#product-detail-form-price"
+                                   hx-swap="outerHTML"
+                                   hx-include="#product-detail-form-size-selection"
+                                   th:hx-vals="'{ &quot;productId&quot;: ' + ${product.id} + '}'"/>
+                            <label class="form-check-label" th:for="'finish-' + ${finish}"
+                                   th:text="${#messages.msg('label' + #strings.capitalize(finish))}">Finish</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4 mt-4 d-flex justify-content-between align-items-center">
+                    <p class="mb-0"><span id="product-detail-form-price"
+                             th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</span></p>
+                    <button type="button" id="btn-add-to-cart" class="btn btn-primary"
+                            th:hx-get="@{'/' + ${urlLocale} + '/addToCartSlider?productId=' + ${product.id}}"
+                            hx-target="#mini-cart-content"
+                            hx-swap="innerHTML"
+                            hx-include="#product-detail-form-size-selection, #add-to-cart-form input[name=finish]:checked">
+                        <i class="bi bi-cart3"></i> <span th:text="#{buttonAddToCart}">Add to Cart</span>
+                    </button>
+                </div>
+                <div class="mb-3 product-detail-product-id-container">
+                    <label for="product-detail-form-product-id">ID:</label>
+                    <div id="product-detail-form-product-id" th:text="${product.id}">1</div>
+                </div>
+                <div class="mb-3 text-muted" style="font-size: var(--ts-sm);">
+                    <label for="product-detail-form-print-information"
+                           class="form-label product-detail-paragraph-label"
+                           th:text="#{productDetailPrintInformation}">Print Information</label>
+                    <div id="product-detail-form-print-information">
+                        All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish.
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

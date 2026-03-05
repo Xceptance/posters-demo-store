@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="filterSidebar">
+    <div class="filter-sidebar mb-4">
+        <h4 class="mb-3 text-uppercase fs-6 fw-bold text-muted" th:text="#{labelFilter}">Filters</h4>
+        
+        <form id="filterForm" 
+              th:hx-get="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug}}"
+              hx-target="#product-overview" 
+              hx-swap="outerHTML" 
+              hx-push-url="true"
+              hx-trigger="change">
+              
+            <!-- Hidden inputs to preserve category tracking -->
+            <input type="hidden" name="categoryId" th:value="${categoryId}">
+
+            <div class="accordion accordion-flush filter-accordion" id="accordionFilters" th:if="${not #lists.isEmpty(availableFinishes) or not #lists.isEmpty(availableSizes) or absoluteMinPrice < absoluteMaxPrice}">
+                
+                <!-- Price Filter -->
+                <div class="accordion-item bg-transparent" th:if="${absoluteMinPrice < absoluteMaxPrice}">
+                    <h2 class="accordion-header" id="headingPrice">
+                        <button class="accordion-button bg-transparent px-0 fw-bold text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice">
+                            Price
+                        </button>
+                    </h2>
+                    <div id="collapsePrice" class="accordion-collapse collapse show" aria-labelledby="headingPrice">
+                        <div class="accordion-body px-1 pt-0 pb-3">
+                            <style>
+                                /* Custom dual range slider styling */
+                                .dual-range-slider {
+                                    position: relative;
+                                    height: 30px;
+                                }
+                                .dual-range-track {
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 4px;
+                                    background: #e9ecef;
+                                    border-radius: 2px;
+                                    top: 13px;
+                                    z-index: 1;
+                                }
+                                .dual-range-slider input[type="range"] {
+                                    position: absolute;
+                                    width: 100%;
+                                    margin: 0;
+                                    top: 7px;
+                                    background: transparent;
+                                    pointer-events: none;
+                                    -webkit-appearance: none;
+                                    appearance: none;
+                                    z-index: 3;
+                                }
+                                .dual-range-slider input[type="range"]::-webkit-slider-thumb {
+                                    pointer-events: auto;
+                                    background: #0d6efd;
+                                    cursor: pointer;
+                                    -webkit-appearance: none;
+                                    width: 16px;
+                                    height: 16px;
+                                    border-radius: 50%;
+                                }
+                                .dual-range-slider input[type="range"]::-moz-range-thumb {
+                                    pointer-events: auto;
+                                    background: #0d6efd;
+                                    cursor: pointer;
+                                    width: 16px;
+                                    height: 16px;
+                                    border: none;
+                                    border-radius: 50%;
+                                }
+                            </style>
+                            
+                            <div class="dual-range-slider mb-2">
+                                <div class="dual-range-track"></div>
+                                <input type="range" class="form-range" 
+                                       name="minPrice" 
+                                       th:min="${absoluteMinPrice}" 
+                                       th:max="${absoluteMaxPrice}" 
+                                       th:value="${selectedMinPrice}" 
+                                       id="minPriceRange">
+                                       
+                                <input type="range" class="form-range" 
+                                       name="maxPrice" 
+                                       th:min="${absoluteMinPrice}" 
+                                       th:max="${absoluteMaxPrice}" 
+                                       th:value="${selectedMaxPrice}" 
+                                       id="maxPriceRange">
+                            </div>
+                            
+                            <div class="d-flex justify-content-between text-muted fs-6 mb-2">
+                                <span>$<span id="minPriceDisplay" th:text="${#numbers.formatDecimal(selectedMinPrice, 1, 0)}">0</span></span>
+                                <span>$<span id="maxPriceDisplay" th:text="${#numbers.formatDecimal(selectedMaxPrice, 1, 0)}">0</span></span>
+                            </div>
+
+                            <script>
+                                document.getElementById('minPriceRange').addEventListener('input', function() {
+                                    let maxVal = parseInt(document.getElementById('maxPriceRange').value);
+                                    if (parseInt(this.value) > maxVal) {
+                                        this.value = maxVal;
+                                    }
+                                    document.getElementById('minPriceDisplay').innerText = this.value;
+                                });
+
+                                document.getElementById('maxPriceRange').addEventListener('input', function() {
+                                    let minVal = parseInt(document.getElementById('minPriceRange').value);
+                                    if (parseInt(this.value) < minVal) {
+                                        this.value = minVal;
+                                    }
+                                    document.getElementById('maxPriceDisplay').innerText = this.value;
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Finish Filter -->
+                <div class="accordion-item bg-transparent" th:if="${not #lists.isEmpty(availableFinishes)}">
+                    <h2 class="accordion-header" id="headingFinish">
+                        <button class="accordion-button bg-transparent px-0 fw-bold text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinish" aria-expanded="true" aria-controls="collapseFinish" th:text="#{labelFinish}">
+                            Finish
+                        </button>
+                    </h2>
+                    <div id="collapseFinish" class="accordion-collapse collapse show" aria-labelledby="headingFinish">
+                        <div class="accordion-body px-0 pt-0 pb-3">
+                            <div class="d-flex flex-wrap gap-2">
+                                <th:block th:each="finish : ${availableFinishes}">
+                                    <input type="checkbox" class="btn-check filter-pill" 
+                                           name="finish"
+                                           th:value="${finish}"
+                                           th:id="'finish-' + ${finish}" 
+                                           th:checked="${#lists.contains(selectedFinishes, finish)}"
+                                           autocomplete="off">
+                                    <label class="btn btn-outline-secondary btn-sm rounded-pill" th:for="'finish-' + ${finish}" th:text="${#messages.msg('label' + #strings.capitalize(finish))}">Finish</label>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Size Filter -->
+                <div class="accordion-item bg-transparent border-bottom-0" th:if="${not #lists.isEmpty(availableSizes)}">
+                    <h2 class="accordion-header" id="headingSize">
+                        <button class="accordion-button bg-transparent px-0 fw-bold text-dark shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSize" aria-expanded="true" aria-controls="collapseSize" th:text="#{labelSize}">
+                            Size
+                        </button>
+                    </h2>
+                    <div id="collapseSize" class="accordion-collapse collapse show" aria-labelledby="headingSize">
+                        <div class="accordion-body px-0 pt-0 pb-3">
+                            <div class="d-flex flex-wrap gap-2">
+                                <th:block th:each="size : ${availableSizes}">
+                                    <input type="checkbox" class="btn-check filter-pill" 
+                                           name="size"
+                                           th:value="${size}"
+                                           th:id="'size-' + ${#strings.replace(size, ' ', '')}" 
+                                           th:checked="${#lists.contains(selectedSizes, size)}"
+                                           autocomplete="off">
+                                    <label class="btn btn-outline-secondary btn-sm rounded-pill" th:for="'size-' + ${#strings.replace(size, ' ', '')}" th:text="${size}">Size</label>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

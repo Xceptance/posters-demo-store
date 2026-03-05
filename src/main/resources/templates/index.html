@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Posters - Home</title></head>
+<body>
+<div layout:fragment="content">
+
+<!-- Sale Carousel -->
+<div id="carousel-sale" class="carousel slide" data-bs-ride="true">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <a class="carousel-content-text text-center d-block w-100" href="#">Summer Sale - Up to 30% off!</a>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <a class="carousel-content-text text-center d-block w-100" href="#">Free shipping on orders over $50!</a>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sale" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-sale" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Hero Section -->
+<div class="hero-section container-fluid" th:if="${not #lists.isEmpty(carousel)}" th:with="heroProduct=${carousel[0]}">
+    <div class="row align-items-center min-vh-50 container mx-auto">
+        <!-- Text Side -->
+        <div class="col-lg-5 col-md-6 text-center text-md-start mb-5 mb-md-0 hero-text-container">
+            <h1 class="hero-title mb-4">Premium Vintage Posters.</h1>
+            <p class="hero-subtitle lead mb-4 text-muted">Give your walls the art they deserve with our curated collection of high-quality prints.</p>
+            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${heroProduct.name.getText(urlLocale)} + '/' + ${heroProduct.id}}" 
+               class="btn btn-primary btn-lg px-5 py-3 shadow-sm hero-btn" th:text="#{buttonBuyHere}">Shop the Collection</a>
+        </div>
+        <!-- Image Side -->
+        <div class="col-lg-6 offset-lg-1 col-md-6 position-relative hero-image-container">
+            <div class="hero-image-bg"></div>
+            <img th:src="@{${heroProduct.largeImageURL}}" 
+                 th:alt="${heroProduct.name.getText(urlLocale)}" 
+                 class="img-fluid rounded shadow-lg position-relative z-1 hero-image" />
+        </div>
+    </div>
+</div>
+
+<!-- Trust Band -->
+<div class="trust-band container-fluid py-5 mb-5 text-center">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <i class="bi bi-truck trust-icon mb-3 d-block"></i>
+                <h4 class="trust-title">Free Shipping</h4>
+                <p class="trust-text text-muted mb-0">On all orders over $50</p>
+            </div>
+            <div class="col-md-4 border-md-start border-md-end">
+                <i class="bi bi-award trust-icon mb-3 d-block"></i>
+                <h4 class="trust-title">Premium Quality</h4>
+                <p class="trust-text text-muted mb-0">Archival paper & vivid inks</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-arrow-return-left trust-icon mb-3 d-block"></i>
+                <h4 class="trust-title">Easy Returns</h4>
+                <p class="trust-text text-muted mb-0">30-day money-back guarantee</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category tiles -->
+<div class="container mb-5">
+    <div class="row g-4 justify-content-center category-display-case">
+        <div class="col-md-4" th:each="cat, stat : ${topCategory}">
+            <a th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.name.getText(urlLocale)} + '?categoryId=' + ${cat.id}}" class="text-decoration-none">
+                <div class="category-card position-relative overflow-hidden rounded shadow-sm">
+                    <img th:if="${productslistcat != null and stat.index < productslistcat.size()}"
+                         th:src="@{${productslistcat[stat.index].imageURL}}"
+                         th:alt="${cat.name.getText(urlLocale)} + ' category image'"
+                         class="category-card-img w-100"
+                         th:id="'category-picture-' + ${stat.index}"/>
+                    <div class="category-card-overlay d-flex align-items-center justify-content-center">
+                        <h3 class="category-card-title text-white mb-0" th:text="${cat.name.getText(urlLocale)}">Category</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Hot Products heading -->
+<div class="product-display-heading container-fluid trending-header-band text-center py-5 mb-5">
+    <h2 class="trending-title mb-2">Trending Now</h2>
+    <p class="text-muted mb-0">Our most popular prints this week.</p>
+</div>
+
+<!-- Product tiles -->
+<div class="container text-center">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 product-display-case">
+        <div class="col" th:each="product : ${productslist}">
+            <div class="card h-100 product-tile">
+                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}">
+                    <img th:src="@{${product.imageURL}}"
+                         th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
+                         class="card-img-top"
+                         th:id="'product-picture-' + ${product.id}"/>
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title" th:text="${product.name.getText(urlLocale)}">Product</h3>
+                    <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
+                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
+                       class="btn btn-primary product-tile-btn-buy" th:text="#{buttonBuyHere}">Buy Here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <a class="btn btn-primary btn-shop-all" href="#" role="button" th:text="#{buttonAll}">Show All</a>
+</div>
+
+</div>
+</body>
+</html>

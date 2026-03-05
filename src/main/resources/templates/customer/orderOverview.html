@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Order History</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <h1 th:text="#{titleOrderHistory}">Order History</h1>
+        <div th:if="${not #lists.isEmpty(orders)}">
+            <div class="card mb-3" th:each="order : ${orders}">
+                <div class="card-header d-flex justify-content-between">
+                    <span>Order <small th:text="${order.id}">uuid</small></span>
+                    <span th:text="${order.orderDate}">2024-01-01</span>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <tr th:each="op : ${order.products}">
+                            <td th:text="${op.product.name.getText(urlLocale)}">Product</td>
+                            <td th:text="${op.productCount}">1</td>
+                            <td><span th:text="${currency}">$</span><span th:text="${op.totalProductPriceAsString}">0.00</span></td>
+                        </tr>
+                    </table>
+                    <p><strong>Total: <span th:text="${currency}">$</span><span th:text="${order.totalCostsAsString}">0.00</span></strong></p>
+                </div>
+            </div>
+        </div>
+        <p th:if="${#lists.isEmpty(orders)}" th:text="#{labelNoOrders}">No orders yet.</p>
+        <a th:href="@{'/' + ${urlLocale} + '/accountOverview'}" class="btn btn-outline-primary" th:text="#{labelBackToAccount}">Back to Account</a>
+    </div>
+</div>
+</body>
+</html>

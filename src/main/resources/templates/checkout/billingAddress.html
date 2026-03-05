@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/checkoutLayout}">
+<head><title>Billing Address</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <h1 th:text="#{titleBillingAddress}">Billing Address</h1>
+        <div class="form-check mb-3" th:if="${shippingAddress != null}">
+            <input class="form-check-input" type="checkbox" id="sameAsShipping"
+                   onclick="copyShipping()"/>
+            <label class="form-check-label" for="sameAsShipping" th:text="#{labelSameAsShipping}">Same as shipping address</label>
+        </div>
+        <form th:action="@{'/' + ${urlLocale} + '/checkout/billingAddress'}" method="post" id="billing-form">
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required/>
+                                <label for="firstName" th:text="#{labelFirstName}">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Last Name" required/>
+                                <label for="name" th:text="#{labelLastName}">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="company" name="company" placeholder="Company"/>
+                                <label for="company" th:text="#{labelCompany}">Company (optional)</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="addressLine" name="addressLine" placeholder="Address" required/>
+                                <label for="addressLine" th:text="#{labelAddress}">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="City" required/>
+                                <label for="city" th:text="#{labelCity}">City</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="state" name="state" placeholder="State" required/>
+                                <label for="state" th:text="#{labelState}">State</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="ZIP" required/>
+                                <label for="zip" th:text="#{labelZip}">ZIP</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="country" name="country" placeholder="Country" required value="United States"/>
+                                <label for="country" th:text="#{labelCountry}">Country</label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-billing" th:text="#{buttonContinueToPayment}">Continue to Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:if="${shippingAddress != null}" th:inline="javascript">
+        var shippingData = {
+            firstName: [[${shippingAddress.firstName}]], name: [[${shippingAddress.name}]],
+            company: [[${shippingAddress.company}]], addressLine: [[${shippingAddress.addressLine}]],
+            city: [[${shippingAddress.city}]], state: [[${shippingAddress.state}]],
+            zip: [[${shippingAddress.zip}]], country: [[${shippingAddress.country}]]
+        };
+        function copyShipping() {
+            var c = document.getElementById('sameAsShipping').checked;
+            ['firstName','name','company','addressLine','city','state','zip','country'].forEach(f => {
+                document.getElementById(f).value = c ? (shippingData[f] || '') : '';
+            });
+        }
+    </script>
+</div>
+</body>
+</html>

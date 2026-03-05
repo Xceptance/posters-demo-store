@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Posters - Category</title></head>
+<body>
+<div layout:fragment="content">
+
+<div class="container mt-3 mb-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 d-none d-lg-block">
+            <div th:replace="~{fragments/filterSidebarFragment :: filterSidebar}"></div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <div class="text-center mb-4">
+                <div class="product-overview-heading">
+                    <div id="title-category-name" class="header-title"
+                         th:text="${categoryName} + ' (' + ${totalProducts} + ' ' + (${totalProducts} == 1 ? 'poster' : 'posters') + ')'">
+                        Category (0 posters)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product grid + pagination (replaced by fragment on HTMX paging) -->
+            <div th:replace="~{fragments/productGridFragment :: productGrid}"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

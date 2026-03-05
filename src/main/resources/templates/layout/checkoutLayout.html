@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:lang="${urlLocale}">
+<head>
+    <title>The Poster Demo Store - The Ultimate Online Shop</title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8"/>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-icons.min.css}"/>
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-grid.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-reboot.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-utilities.css}"/>
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" th:href="@{/assets/css/style_reworked.css}"/>
+
+    <!-- HTMX -->
+    <script th:src="@{/assets/js/htmx.min.js}"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">
+            This is a demo shop. No orders will be processed.
+        </div>
+
+        <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container top-menu justify-content-center">
+                <a id="header-brand" class="navbar-brand m-0" th:href="@{'/' + ${urlLocale} + '/'}">
+                    <img id="header-brand-logo" class="shop-logo" th:src="@{/assets/img/xceptanceLogo.png}"
+                         title="Posters Demo Store" alt="Posters Demo Store"/>
+                    Posters
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- main/content -->
+    <main>
+        <!-- message: no java script -->
+        <noscript>
+            <div class="section">
+                <div class="container">
+                    <div class="noscriptmsg card">
+                        <p>Please enable JavaScript to use this site.</p>
+                    </div>
+                </div>
+            </div>
+        </noscript>
+
+        <!-- messages -->
+        <div id="alert-placeholder">
+            <div th:if="${error}" class="alert alert-danger alert-dismissible">
+                <div th:text="${error}">Error</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div th:if="${success}" class="alert alert-success alert-dismissible">
+                <div th:text="${success}">Success</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+
+        <!-- body -->
+        <div id="main">
+            <div layout:fragment="content">
+                <p>Page content goes here</p>
+            </div>
+        </div>
+
+        <div id="js-top" class="go-to-top" style="display: none;">
+            <a onclick="toTopFunction()" id="js-gotop"><i class="bi bi-arrow-up"></i></a>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer id="footer" class="footer border-top pt-4 mt-5">
+        <div class="container text-center text-muted mb-4">
+            <small>
+                &copy; 2013-2024 Xceptance Software Technologies GmbH<br/>
+                <a th:href="@{'/' + ${urlLocale} + '/'}" class="text-muted text-decoration-none">Return to Store</a>
+            </small>
+        </div>
+    </footer>
+
+    <!-- Confirmation modal (replaces native confirm() for hx-confirm) -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel" th:text="#{confirmDialogTitle}">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="confirmModalBody">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{buttonCancel}">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalYes" th:text="#{buttonRemove}">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle (v5.3.2 including popper)-->
+    <script th:src="@{/assets/js/bootstrap.bundle.js}"></script>
+
+    <!-- Scroll to top + HTMX integrations -->
+    <script>
+        (function() {
+            var top = document.getElementById('js-top');
+            if (top) {
+                window.addEventListener('scroll', function() {
+                    top.style.display = (document.documentElement.scrollTop > 200) ? 'block' : 'none';
+                });
+            }
+
+            // After HTMX swaps mini-cart content (e.g. add-to-cart), open the
+            // Bootstrap offcanvas briefly so the user sees the update.
+            var miniCartContent = document.getElementById('mini-cart-content');
+            if (miniCartContent) {
+                miniCartContent.addEventListener('htmx:afterSwap', function() {
+                    var offcanvasEl = document.getElementById('miniCartOffcanvas');
+                    if (offcanvasEl) {
+                        var oc = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                        oc.show();
+                        setTimeout(function() { oc.hide(); }, 2000);
+                    }
+                });
+            }
+
+            // Intercept htmx:confirm to show Bootstrap modal instead of native confirm()
+            // Only intercept when hx-confirm is set (detail.question is non-empty)
+            document.body.addEventListener('htmx:confirm', function(e) {
+                if (!e.detail.question) return;  // no hx-confirm attr → let request proceed
+                e.preventDefault();
+                var modalEl = document.getElementById('confirmModal');
+                var bodyEl = document.getElementById('confirmModalBody');
+                var yesBtn = document.getElementById('confirmModalYes');
+                bodyEl.textContent = e.detail.question;
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                // Remove any old click handler
+                var newYes = yesBtn.cloneNode(true);
+                yesBtn.parentNode.replaceChild(newYes, yesBtn);
+                newYes.addEventListener('click', function() {
+                    modal.hide();
+                    e.detail.issueRequest(true);
+                });
+                modal.show();
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+# ========================================
+# Posters Demo Store - Application Config
+# ========================================
+
+server:
+  port: 8080
+
+# ----------------------------------------
+# Spring Data / JPA / H2
+# ----------------------------------------
+spring:
+  datasource:
+    url: jdbc:h2:file:./db/posters;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # ----------------------------------------
+  # Thymeleaf
+  # ----------------------------------------
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+
+  # ----------------------------------------
+  # Messages / i18n
+  # ----------------------------------------
+  messages:
+    basename: messages
+    encoding: UTF-8
+
+# ----------------------------------------
+# Application-specific properties
+# ----------------------------------------
+posters:
+  currency: "$"
+  shipping-costs: 7.00
+  tax: 0.06
+  unit-of-length: "in"
+  page-size: 8
+  languages: "en-US,en-GB,de-DE,sv-SE"
+  version: "3.0.0-SNAPSHOT"
+  import-customer: true
+  lucene-index-dir: "./db/lucene-index"
+  regex:
+    zip: "[0-9]+"
+    name: "[\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00dfA-Za-z ]+"
+    credit-card: "4[0-9]{12}(?:[0-9]{3})?"
+    email: "[\\u00c4\\u00e4\\u00d6\\u00f6A\\u00dc\\u00fc\\u00dfA-Za-z0-9._%+-]+@[\\u00c4\\u00e4\\u00d6\\u00f6A\\u00dc\\u00fc\\u00dfA-Za-z0-9.-]+.[A-Za-z]{2,4}"
+    product-count: "[0-9]{1,3}"
+
+# ----------------------------------------
+# Logging (Spring Boot default: Logback)
+# ----------------------------------------
+logging:
+  level:
+    root: INFO
+    com.xceptance.posters: INFO
+    org.hibernate.SQL: WARN
+  file:
+    name: log/posters.log

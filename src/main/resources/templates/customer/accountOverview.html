@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>My Account</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-5 mb-5" th:if="${customer != null}">
+        <div class="row">
+            <!-- Dashboard Sidebar (For Future/Current Navigation) -->
+            <div class="col-lg-3 mb-4">
+                <div class="card shadow-sm border-0 bg-light">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-white shadow-sm d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-person text-primary" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h4 class="mb-1" th:text="${customer.firstName} + ' ' + ${customer.name}">John Doe</h4>
+                        <p class="text-muted small mb-0" th:text="${customer.email}">john@example.com</p>
+                    </div>
+                    <div class="list-group list-group-flush border-top">
+                        <a href="#" class="list-group-item list-group-item-action active bg-transparent text-primary fw-bold border-0 py-3"><i class="bi bi-grid me-2"></i> Dashboard</a>
+                        <a th:href="@{'/' + ${urlLocale} + '/orderOverview'}" class="list-group-item list-group-item-action bg-transparent border-0 py-3"><i class="bi bi-box-seam me-2"></i> Orders</a>
+                        <a th:href="@{'/' + ${urlLocale} + '/logout'}" class="list-group-item list-group-item-action bg-transparent border-0 py-3 text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Main Content -->
+            <div class="col-lg-9">
+                <h1 class="h3 mb-4" th:text="#{titleAccountOverview}">Account Overview</h1>
+                
+                <div class="row g-4">
+                    <!-- Personal Info Widget -->
+                    <div class="col-md-7">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-header bg-white border-0 pt-4 pb-0">
+                                <h5 class="card-title fw-bold" th:text="#{titlePersonalInformation}"><i class="bi bi-person-lines-fill text-primary me-2"></i>Personal Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{'/' + ${urlLocale} + '/updateAccount'}" method="post" id="account-form">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="firstName" name="firstName" th:value="${customer.firstName}" placeholder="First Name"/>
+                                        <label for="firstName">First Name</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name" name="name" th:value="${customer.name}" placeholder="Last Name"/>
+                                        <label for="name">Last Name</label>
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input type="email" class="form-control" id="email" name="email" th:value="${customer.email}" placeholder="Email"/>
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary rounded-pill px-4" id="btn-update-account" th:text="#{buttonUpdate}">Update Profile</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Order History Widget -->
+                    <div class="col-md-5">
+                        <div class="card shadow-sm border-0 bg-primary text-white h-100">
+                            <div class="card-body p-4 d-flex flex-column align-items-start justify-content-center position-relative overflow-hidden">
+                                <i class="bi bi-box-seam position-absolute text-white" style="font-size: 10rem; right: -2rem; bottom: -2rem; opacity: 0.1;"></i>
+                                <h3 class="mb-3 text-white" th:text="#{titleOrderHistoryCard}">Order History</h3>
+                                <p class="text-white-50 mb-4">View your recent poster purchases, track shipments, and download invoices.</p>
+                                <a th:href="@{'/' + ${urlLocale} + '/orderOverview'}" class="btn btn-light rounded-pill px-4" id="btn-order-history">
+                                    <span th:text="#{labelViewOrders}">View Orders</span> <i class="bi bi-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

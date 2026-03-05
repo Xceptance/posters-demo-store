@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    Category product grid + pagination fragment.
+    Swapped into #product-overview via HTMX when paging.
+-->
+<body>
+<div th:fragment="productGrid" id="product-overview" class="text-center">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 product-display-case">
+        <div class="col" th:each="product, stat : ${products}">
+            <div class="card h-100 product-tile"
+                 th:id="'product-' + ${stat.index}">
+                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}">
+                    <img th:src="@{${product.imageURL}}"
+                         th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
+                         class="card-img-top"
+                         th:id="'overview-product-' + ${stat.index}"/>
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h3>
+                    <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
+                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
+                       class="btn btn-primary" th:text="#{buttonBuyHere}">Buy Here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav th:if="${totalPages > 1}" aria-label="Product page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage - 1}}"
+                   th:hx-get="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage - 1}}"
+                   hx-target="#product-overview"
+                   hx-swap="outerHTML"
+                   hx-push-url="true"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="p : ${#numbers.sequence(1, totalPages)}"
+                class="page-item"
+                th:classappend="${p == currentPage} ? 'active'">
+                <a class="page-link"
+                   th:href="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${p}}"
+                   th:hx-get="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${p}}"
+                   hx-target="#product-overview"
+                   hx-swap="outerHTML"
+                   hx-push-url="true"
+                   th:text="${p}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage + 1}}"
+                   th:hx-get="@{'/' + ${urlLocale} + '/' + ${categoryPath} + '/' + ${categorySlug} + '?categoryId=' + ${categoryId} + '&page=' + ${currentPage + 1}}"
+                   hx-target="#product-overview"
+                   hx-swap="outerHTML"
+                   hx-push-url="true"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

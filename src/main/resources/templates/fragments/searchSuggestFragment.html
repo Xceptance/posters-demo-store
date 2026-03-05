@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    Search suggestion dropdown fragment.
+    Swapped into #search-suggestions by HTMX as the user types.
+-->
+<body>
+<div th:fragment="suggestions" id="search-suggestions" class="search-suggestions-container">
+    <ul th:if="${suggestions != null and not #lists.isEmpty(suggestions)}"
+        class="list-group search-suggest-list">
+        <li th:each="product : ${suggestions}" class="list-group-item list-group-item-action p-2">
+            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
+               class="text-decoration-none d-flex align-items-center gap-2">
+                <img th:src="@{${product.imageURL}}" class="search-suggest-thumb"
+                     th:alt="${product.name.getText(urlLocale)}" width="40" height="40"
+                     style="object-fit:cover; border-radius:4px;"/>
+                <div>
+                    <div class="fw-semibold" th:text="${product.name.getText(urlLocale)}">Product</div>
+                    <small class="text-muted" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</small>
+                </div>
+            </a>
+        </li>
+        <li th:if="${totalCount > 5}" class="list-group-item list-group-item-action text-center p-2">
+            <a th:href="@{'/' + ${urlLocale} + '/search?q=' + ${searchText}}"
+               class="text-decoration-none fw-bold">
+                View all <span th:text="${totalCount}">0</span> results &rarr;
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

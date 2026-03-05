@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/checkoutLayout}">
+<head><title>Payment</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <h1 th:text="#{titlePayment}">Payment</h1>
+        <form th:action="@{'/' + ${urlLocale} + '/checkout/payment'}" method="post" id="payment-form">
+            <div class="card shadow-sm border-0 mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cardNumber" name="cardNumber" required
+                                       th:pattern="${regexCreditCard}" placeholder="4111111111111111"/>
+                                <label for="cardNumber" th:text="#{labelCardNumber}">Card Number</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cardName" name="name" placeholder="Name on Card" required/>
+                                <label for="cardName" th:text="#{labelCardName}">Name on Card</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="month" name="month">
+                                    <option th:each="m : ${#numbers.sequence(1,12)}" th:value="${m}" th:text="${m}">1</option>
+                                </select>
+                                <label for="month" th:text="#{labelExpMonth}">Exp Month</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-floating">
+                                <select class="form-select" id="year" name="year">
+                                    <option th:each="y : ${#numbers.sequence(2024,2035)}" th:value="${y}" th:text="${y}">2024</option>
+                                </select>
+                                <label for="year" th:text="#{labelExpYear}">Exp Year</label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-payment" th:text="#{buttonContinueToReview}">Continue to Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

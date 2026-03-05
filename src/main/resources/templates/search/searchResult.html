@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head><title>Search Results</title></head>
+<body>
+<div layout:fragment="content">
+
+<div class="container mt-3 mb-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 d-none d-lg-block">
+            <div th:replace="~{fragments/filterSidebarFragment :: filterSidebar}"></div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-9 text-center">
+            <div class="product-overview-heading mb-4">
+                <div id="title-search-text" class="header-title"
+                     th:if="${searchText != null and not searchText.isEmpty()}"
+                     th:text="'Results for \'' + ${searchText} + '\' (' + ${totalCount} + ' ' + (${totalCount} == 1 ? 'poster' : 'posters') + ')'">
+                    Results for 'query' (0 posters)
+                </div>
+                <div id="title-no-results" class="header-title"
+                     th:if="${searchText == null or searchText.isEmpty()}">
+                    Search Results
+                </div>
+            </div>
+
+            <div id="product-overview">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 product-display-case" th:if="${not #lists.isEmpty(products)}" id="search-results">
+                    <div class="col" th:each="product, stat : ${products}">
+                        <div class="card h-100 product-tile"
+                             th:id="'product-' + ${stat.index}">
+                            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}">
+                                <img th:src="@{${product.imageURL}}"
+                                     th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
+                                     class="card-img-top"
+                                     th:id="'overview-product-' + ${stat.index}"/>
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title" th:text="${product.name.getText(urlLocale)}">Product Name</h3>
+                                <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
+                                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
+                                   class="btn btn-primary" th:text="#{buttonBuyHere}">Buy Here</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${#lists.isEmpty(products)}" id="no-results" class="text-center py-5">
+                    <div class="mb-4">
+                        <i class="bi bi-search text-muted" style="font-size: 5rem; opacity: 0.5;"></i>
+                    </div>
+                    <h2 class="h4 text-muted mb-3" th:text="#{labelNoProductsFound}">No products found.</h2>
+                    <p class="text-muted mb-4">We couldn't find anything matching your search. Try different keywords or browse our categories.</p>
+                    <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-outline-primary rounded-pill px-4">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
