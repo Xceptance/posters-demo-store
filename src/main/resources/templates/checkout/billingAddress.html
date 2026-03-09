@@ -74,10 +74,10 @@
     </div>
     <script th:if="${shippingAddress != null}" th:inline="javascript">
         var shippingData = {
-            firstName: [[${shippingAddress.firstName}]], name: [[${shippingAddress.name}]],
-            company: [[${shippingAddress.company}]], addressLine: [[${shippingAddress.addressLine}]],
+            firstName: [[${shippingAddress.recipientFirstName}]], name: [[${shippingAddress.recipientLastName}]],
+            company: [[${shippingAddress.company}]], addressLine: [[${shippingAddress.addressLine1}]],
             city: [[${shippingAddress.city}]], state: [[${shippingAddress.state}]],
-            zip: [[${shippingAddress.zip}]], country: [[${shippingAddress.country}]]
+            zip: [[${shippingAddress.postalCode}]], country: [[${shippingAddress.country}]]
         };
         function copyShipping() {
             var c = document.getElementById('sameAsShipping').checked;
