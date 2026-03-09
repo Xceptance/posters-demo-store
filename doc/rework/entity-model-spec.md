@@ -11,18 +11,20 @@
 7. **Prices** attach to purchasable SKUs only. No cross-locale fallback. N/A if missing.
 8. **Cart line items** do NOT store price — looked up from price table at runtime.
 9. **Guest checkout** supported via session + temporary cart addresses/credit cards.
+10. **Data Migration:** We do not migrate the live database. The initial import data (e.g. a set of XML files replacing the old single-file approach) must be migrated to fit the new model for initial setup.
 
 ---
 
 ## SKU Scheme
 
-Format: `[0-9]{6}-[0-9]{4}`
+Format: `[A-Z0-9]{6,10}-[0-9]{4}`
 
 | Type | SKU | Purchasable |
 |------|-----|-------------|
 | Simple product (no variations) | `XXXXXX-0000` | ✅ |
 | Master product (has variations) | `XXXXXX` prefix only, not in price table | ❌ |
 | Variant | `XXXXXX-NNNN` (sequential, N ≥ 0001) | ✅ |
+| Shipping Method | `SHIP-XXXXX` | ✅ (for price table lookup) |
 
 Master products are **data templates** — variants inherit name, description, images (unless overridden).
 
@@ -68,7 +70,7 @@ Rule: subcategory (`parent_id` not null) cannot itself have children (enforced i
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | int | PK |
-| `sku` | varchar(6) | unique prefix |
+| `sku` | varchar(10) | unique prefix |
 | `name_text_id` | int | → localized_texts |
 | `description_detail_text_id` | int | → localized_texts |
 | `description_overview_text_id` | int | → localized_texts |
@@ -90,8 +92,14 @@ Rule: subcategory (`parent_id` not null) cannot itself have children (enforced i
 | Field | Type | Notes |
 |-------|------|-------|
 | `id` | int | PK |
-| `product_id` | int FK → products | scoped to this product |
 | `name` | varchar | e.g. "Size", "Finish", "Color" |
+
+### `product_variation_attributes` (join table)
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `product_id` | int FK → products | |
+| `attribute_id` | int FK → variation_attributes | |
 
 ### `variation_attribute_values`
 
@@ -138,7 +146,7 @@ A named price container with an explicit currency.
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `sku` | varchar(11) | purchasable SKU (e.g. "123456-0001") |
+| `sku` | varchar(15) | purchasable SKU (e.g. "123456-0001") or shipping SKU |
 | `price_table_id` | int FK → price_tables | |
 | `price` | decimal(10,2) | |
 
@@ -146,7 +154,31 @@ Composite key: `(sku, price_table_id)`. No price = N/A (no fallback across price
 
 ---
 
-## 4. Site
+## 4. Taxes
+
+### `tax_tables`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | int | PK |
+| `name` | varchar | e.g. "US Default", "Germany Standard" |
+| `description` | varchar | |
+
+A named container for tax rates.
+
+### `tax_rates`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `tax_table_id` | int FK → tax_tables | |
+| `name` | varchar | e.g. "Standard Rate", "Reduced Rate" |
+| `rate` | decimal(5,4) | e.g. `0.1900` for 19%, `0.0725` for 7.25% |
+
+Composite key: `(tax_table_id, name)`.
+
+---
+
+## 5. Site
 
 ### `sites`
 
@@ -159,12 +191,53 @@ Composite key: `(sku, price_table_id)`. No price = N/A (no fallback across price
 | `fallback_locale_id` | int FK → locales | fallback for text lookups when main locale text is missing |
 | `currency` | varchar | e.g. "USD", "EUR" |
 | `price_table_id` | int FK → price_tables | which prices apply |
+| `tax_table_id` | int FK → tax_tables | which taxes apply |
+| `prices_are_net` | boolean | default true. If false, localized prices include tax. |
 
-A site is a country definition — it ties a locale, a text fallback, a currency, and a price table together. When assigning a price table to a site, the currencies must match (validated in code).
+A site is a country definition — it ties a locale, a text fallback, a currency, price/tax tables, and shipping rules together. When assigning a price table to a site, the currencies must match (validated in code).
 
 ---
 
-## 5. Customer
+## 6. Shipping & Inventory
+
+### `shipping_methods`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | int | PK |
+| `sku` | varchar | unique prefix e.g., "SHIP-STD", for price table lookups |
+| `name_text_id` | int | → localized_texts |
+| `description_text_id` | int | → localized_texts |
+
+### `site_shipping_methods` (join table)
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `site_id` | int FK → sites | |
+| `shipping_method_id` | int FK → shipping_methods | |
+| `active` | boolean | |
+
+### `inventory_tables`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | int | PK |
+| `site_id` | int FK → sites | 1:1 with site |
+| `name` | varchar | |
+
+### `inventory_entries`
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `inventory_table_id` | int FK → inventory_tables | |
+| `sku` | varchar | purchasable SKU |
+| `available_quantity` | int | |
+
+Composite key: `(inventory_table_id, sku)`. Simple transactional delta tracking. If sku missing = out of stock.
+
+---
+
+## 7. Customer
 
 ### `customers`
 
@@ -261,7 +334,7 @@ Session states:
 
 ---
 
-## 7. Cart
+## 9. Cart
 
 ### `carts`
 
@@ -272,9 +345,10 @@ Session states:
 | `shipping_address_id` | int FK → cart_addresses | nullable |
 | `billing_address_id` | int FK → cart_addresses | nullable |
 | `credit_card_id` | int FK → cart_credit_cards | nullable |
+| `shipping_method_id` | int FK → shipping_methods | nullable |
 | `shipping_costs` | decimal(10,2) | |
 | `sub_total` | decimal(10,2) | |
-| `tax_rate` | decimal(10,2) | |
+| `tax_rate` | decimal(5,4) | |
 | `total_tax` | decimal(10,2) | |
 | `total` | decimal(10,2) | |
 
@@ -319,9 +393,11 @@ No price stored — looked up from cart's price table at display time.
 | `order_date` | timestamp | |
 | `order_state` | varchar | current state (denormalized from history) |
 | `payment_state` | varchar | current state (denormalized from history) |
+| `shipping_method_sku` | varchar | |
+| `shipping_method_name` | varchar | snapshot |
 | `shipping_costs` | decimal(10,2) | |
 | `sub_total` | decimal(10,2) | |
-| `tax_rate` | decimal(10,2) | |
+| `tax_rate` | decimal(5,4) | |
 | `total_tax` | decimal(10,2) | |
 | `total` | decimal(10,2) | |
 
@@ -400,13 +476,22 @@ erDiagram
 
     CATEGORIES ||--o{ CATEGORIES : "parent/children"
     PRODUCTS }o--o{ CATEGORIES : "product_categories"
-    PRODUCTS ||--o{ VARIATION_ATTRIBUTES : defines
+    PRODUCTS }o--o{ VARIATION_ATTRIBUTES : "product_variation_attributes"
     VARIATION_ATTRIBUTES ||--o{ VARIATION_ATTRIBUTE_VALUES : has
     PRODUCTS ||--o{ VARIANTS : "has SKUs"
     VARIANTS }o--o{ VARIATION_ATTRIBUTE_VALUES : "variant_attribute_values"
 
     PRICE_TABLES ||--o{ PRICES : contains
     PRICE_TABLES ||--o{ SITES : "used by"
+
+    TAX_TABLES ||--o{ TAX_RATES : contains
+    TAX_TABLES ||--o{ SITES : "used by"
+
+    SITES ||--o{ SITE_SHIPPING_METHODS : defines
+    SHIPPING_METHODS ||--o{ SITE_SHIPPING_METHODS : available
+    
+    SITES ||--|| INVENTORY_TABLES : has
+    INVENTORY_TABLES ||--o{ INVENTORY_ENTRIES : contains
 
     CUSTOMERS ||--o{ ADDRESSES : owns
     CUSTOMERS ||--|| CUSTOMER_PROFILES : has
@@ -419,6 +504,7 @@ erDiagram
     CARTS ||--o{ CART_LINEITEMS : contains
     CARTS ||--o{ CART_ADDRESSES : has
     CARTS ||--o{ CART_CREDIT_CARDS : has
+    CARTS }o--o| SHIPPING_METHODS : "nullable"
 
     ORDERS ||--o{ ORDER_LINEITEMS : contains
     ORDERS ||--o{ ORDER_ADDRESSES : has
@@ -435,11 +521,13 @@ erDiagram
 | Domain | Tables |
 |--------|--------|
 | Localization | `locales`, `localized_texts` |
-| Product Catalog | `categories`, `products`, `product_categories`, `variation_attributes`, `variation_attribute_values`, `variants`, `variant_attribute_values` |
+| Product Catalog | `categories`, `products`, `product_categories`, `variation_attributes`, `product_variation_attributes`, `variation_attribute_values`, `variants`, `variant_attribute_values` |
 | Pricing | `price_tables`, `prices` |
+| Taxes | `tax_tables`, `tax_rates` |
 | Site | `sites` |
+| Shipping & Inventory | `shipping_methods`, `site_shipping_methods`, `inventory_tables`, `inventory_entries` |
 | Customer | `customers`, `customer_profiles`, `addresses`, `credit_cards`, `customer_credit_cards`, `customer_orders` |
 | Session | `sessions` |
 | Cart | `carts`, `cart_lineitems`, `cart_addresses`, `cart_credit_cards` |
 | Orders | `orders`, `order_customers`, `order_addresses`, `order_credit_cards`, `order_lineitems`, `order_state_history`, `order_payment_history` |
-| **Total** | **28 tables** |
+| **Total** | **36 tables** |

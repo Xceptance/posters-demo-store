@@ -1,7 +1,9 @@
 package com.xceptance.posters.interceptor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -10,9 +12,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.model.Cart;
-import com.xceptance.posters.repository.CustomerRepository;
-import com.xceptance.posters.repository.TopCategoryRepository;
+import com.xceptance.posters.entity.CatalogService;
+import com.xceptance.posters.entity.Category;
+import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CatalogCustomerRepository;
 import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,21 +30,30 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class CommonDataInterceptor implements HandlerInterceptor
 {
-    private final TopCategoryRepository topCategoryRepository;
-    private final CustomerRepository customerRepository;
+    private final CatalogService catalogService;
+    private final LocalizedTextService textService;
+    private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
     private final PostersProperties props;
 
-    public CommonDataInterceptor(TopCategoryRepository topCategoryRepository,
-                                  CustomerRepository customerRepository,
+    public CommonDataInterceptor(CatalogService catalogService,
+                                  LocalizedTextService textService,
+                                  CatalogCustomerRepository customerRepository,
                                   SessionService sessionService,
                                   PostersProperties props)
     {
-        this.topCategoryRepository = topCategoryRepository;
+        this.catalogService = catalogService;
+        this.textService = textService;
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
         this.props = props;
     }
+
+    /**
+     * Simple DTO to carry resolved category data to the template.
+     */
+    public record CategoryDto(int id, String name, List<SubCategoryDto> subCategories) {}
+    public record SubCategoryDto(int id, String name) {}
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
@@ -51,19 +64,26 @@ public class CommonDataInterceptor implements HandlerInterceptor
             return;
         }
 
-        // Categories
-        mav.addObject("topCategory", topCategoryRepository.findAll());
+        // Extract locale early (needed for category names)
+        String requestPath = request.getRequestURI();
+        String[] segments = requestPath.split("/");
+        String locale = segments.length > 1 ? segments[1] : "en-US";
+
+        // Categories (new entity model)
+        List<CategoryDto> navCategories = buildNavCategories(locale);
+        mav.addObject("topCategory", navCategories);
 
         // Cart info
-        Cart cart = sessionService.getCart(request.getSession());
-        cart.calculateTotalTaxPrice();
-        cart.calculateTotalPrice();
-        mav.addObject("cartProducts", cart.getProducts());
-        mav.addObject("cartProductCount", cart.getProductCount());
+        CatalogCart cart = sessionService.getCart(request.getSession());
+        int cartItemCount = cart.getLineItems().stream().mapToInt(li -> li.getQuantity()).sum();
+        mav.addObject("cartProductCount", cartItemCount);
         mav.addObject("cartId", cart.getId());
-        mav.addObject("subTotalPrice", cart.getSubTotalPriceAsString());
-        mav.addObject("subOrderTotalTax", cart.getTotalTaxPriceAsString());
-        mav.addObject("totalPrice", cart.getTotalPriceAsString());
+        java.math.BigDecimal subTotal = cart.getSubTotal() != null ? cart.getSubTotal() : java.math.BigDecimal.ZERO;
+        java.math.BigDecimal totalTax = cart.getTotalTax() != null ? cart.getTotalTax() : java.math.BigDecimal.ZERO;
+        java.math.BigDecimal total = cart.getTotal() != null ? cart.getTotal() : java.math.BigDecimal.ZERO;
+        mav.addObject("subTotalPrice", subTotal.toPlainString());
+        mav.addObject("subOrderTotalTax", totalTax.toPlainString());
+        mav.addObject("totalPrice", total.toPlainString());
 
         // Customer login state
         if (sessionService.isCustomerLoggedIn(request.getSession()))
@@ -87,11 +107,7 @@ public class CommonDataInterceptor implements HandlerInterceptor
         }
 
         // Locale / path info
-        String requestPath = request.getRequestURI();
         mav.addObject("currPath", requestPath);
-        // Extract locale from path (first segment after /)
-        String[] segments = requestPath.split("/");
-        String locale = segments.length > 1 ? segments[1] : "en-US";
         mav.addObject("urlLocale", locale);
         String staticPath = requestPath.replaceFirst("/" + locale, "");
         mav.addObject("staticPath", staticPath);
@@ -162,5 +178,22 @@ public class CommonDataInterceptor implements HandlerInterceptor
         int firstChar = Character.codePointAt(countryCode.toUpperCase(), 0) - 0x41 + 0x1F1E6;
         int secondChar = Character.codePointAt(countryCode.toUpperCase(), 1) - 0x41 + 0x1F1E6;
         return new String(Character.toChars(firstChar)) + new String(Character.toChars(secondChar));
+    }
+
+    /**
+     * Build navigation category DTOs with resolved, locale-specific names.
+     */
+    private List<CategoryDto> buildNavCategories(String localeCode) {
+        List<CategoryDto> result = new ArrayList<>();
+        for (Category topCat : catalogService.getTopCategories()) {
+            String topName = textService.getText(topCat.getNameTextId(), localeCode);
+            List<SubCategoryDto> subs = new ArrayList<>();
+            for (Category subCat : catalogService.getSubCategories(topCat.getId())) {
+                String subName = textService.getText(subCat.getNameTextId(), localeCode);
+                subs.add(new SubCategoryDto(subCat.getId(), subName));
+            }
+            result.add(new CategoryDto(topCat.getId(), topName, subs));
+        }
+        return result;
     }
 }

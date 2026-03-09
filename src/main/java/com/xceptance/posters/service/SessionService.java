@@ -6,14 +6,14 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.model.Cart;
-import com.xceptance.posters.repository.CartRepository;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CatalogCartRepository;
 
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Session management service — replaces the old static SessionHandling utility.
- * Uses HttpSession to store cart, order, and customer IDs.
+ * Session management service — uses HttpSession to store cart, order, and customer IDs.
+ * Now uses CatalogCart (new entity model) instead of legacy model.Cart.
  */
 @Service
 public class SessionService
@@ -22,10 +22,10 @@ public class SessionService
     private static final String ORDER_KEY = "orderId";
     private static final String CUSTOMER_KEY = "customerId";
 
-    private final CartRepository cartRepository;
+    private final CatalogCartRepository cartRepository;
     private final PostersProperties props;
 
-    public SessionService(CartRepository cartRepository, PostersProperties props)
+    public SessionService(CatalogCartRepository cartRepository, PostersProperties props)
     {
         this.cartRepository = cartRepository;
         this.props = props;
@@ -38,14 +38,14 @@ public class SessionService
         UUID cartId = (UUID) session.getAttribute(CART_KEY);
         if (cartId == null || !cartRepository.existsById(cartId))
         {
-            Cart cart = createNewCart();
+            CatalogCart cart = createNewCart();
             session.setAttribute(CART_KEY, cart.getId());
             return cart.getId();
         }
         return cartId;
     }
 
-    public Cart getCart(HttpSession session)
+    public CatalogCart getCart(HttpSession session)
     {
         UUID cartId = getCartId(session);
         return cartRepository.findById(cartId).orElseGet(this::createNewCart);
@@ -61,13 +61,13 @@ public class SessionService
         session.removeAttribute(CART_KEY);
     }
 
-    private Cart createNewCart()
+    private CatalogCart createNewCart()
     {
-        Cart cart = new Cart();
-        cart.setSubTotalPrice(BigDecimal.ZERO);
-        cart.setTotalPrice(BigDecimal.ZERO);
-        cart.setTotalTaxPrice(BigDecimal.ZERO);
-        cart.setTax(props.getTax());
+        CatalogCart cart = new CatalogCart();
+        cart.setSubTotal(BigDecimal.ZERO);
+        cart.setTotal(BigDecimal.ZERO);
+        cart.setTotalTax(BigDecimal.ZERO);
+        cart.setTaxRate(props.getTax());
         cart.setShippingCosts(props.getShippingCosts());
         return cartRepository.save(cart);
     }

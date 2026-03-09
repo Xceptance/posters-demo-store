@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Catalog Data Import Format for the new entity model.
+  This file seeds the database with locales, sites, categories, products,
+  variants, prices, taxes, inventory, and shipping methods.
+-->
+<catalog-import>
+
+  <!-- 1. Locales -->
+  <locales>
+    <locale code="en-US"/>
+    <locale code="de-DE"/>
+    <locale code="en-GB"/>
+    <locale code="sv-SE"/>
+  </locales>
+
+  <!-- 2. Shipping Methods -->
+  <shipping-methods>
+    <shipping-method sku="SHIP-STD">
+      <name xml:lang="en-US">Standard Shipping</name>
+      <name xml:lang="de-DE">Standardversand</name>
+    </shipping-method>
+    <shipping-method sku="SHIP-EXP">
+      <name xml:lang="en-US">Express Shipping</name>
+      <name xml:lang="de-DE">Expressversand</name>
+    </shipping-method>
+  </shipping-methods>
+
+  <!-- 3. Sites (references locales, creates price/tax/inventory tables) -->
+  <sites>
+    <site name="US Store" currency="USD" prices-are-net="true" main-locale="en-US">
+      <locale-ref code="en-US"/>
+      <locale-ref code="de-DE"/>
+      <locale-ref code="sv-SE"/>
+      <shipping-method-ref sku="SHIP-STD" active="true"/>
+      <shipping-method-ref sku="SHIP-EXP" active="true"/>
+    </site>
+    <site name="UK Store" currency="GBP" prices-are-net="false" main-locale="en-GB">
+      <locale-ref code="en-GB"/>
+      <shipping-method-ref sku="SHIP-STD" active="true"/>
+    </site>
+  </sites>
+
+  <!-- 4. Categories (2-level: top → sub) -->
+  <categories>
+    <category>
+      <name xml:lang="en-US">World of Nature</name>
+      <name xml:lang="de-DE">Welt der Natur</name>
+      <name xml:lang="sv-SE">Naturens värld</name>
+      <sub-category>
+        <name xml:lang="en-US">Animals</name>
+        <name xml:lang="de-DE">Tiere</name>
+        <name xml:lang="sv-SE">Djur</name>
+      </sub-category>
+      <sub-category>
+        <name xml:lang="en-US">Flowers</name>
+        <name xml:lang="de-DE">Blumen</name>
+        <name xml:lang="sv-SE">Blommor</name>
+      </sub-category>
+      <sub-category>
+        <name xml:lang="en-US">Trees</name>
+        <name xml:lang="de-DE">Bäume</name>
+        <name xml:lang="sv-SE">Träd</name>
+      </sub-category>
+    </category>
+    <category>
+      <name xml:lang="en-US">Dining</name>
+      <name xml:lang="de-DE">Essen</name>
+      <name xml:lang="sv-SE">Mat och dryck</name>
+      <sub-category>
+        <name xml:lang="en-US">Cold Cuts</name>
+        <name xml:lang="de-DE">Aufschnitt</name>
+        <name xml:lang="sv-SE">Charkuterier</name>
+      </sub-category>
+    </category>
+  </categories>
+
+  <!-- 5. Products with variants and prices -->
+  <products>
+    <product sub-category="Animals">
+      <name xml:lang="en-US">Grizzly Bear</name>
+      <name xml:lang="de-DE">Grizzlybär</name>
+      <name xml:lang="sv-SE">Grizzlybjörn</name>
+      <short-description xml:lang="en-US">Bear looking tired.</short-description>
+      <short-description xml:lang="de-DE">Ein müder Bär lehnt sich auf einen Stein.</short-description>
+      <long-description xml:lang="en-US">Grizzly bears are severe predators...</long-description>
+      <long-description xml:lang="de-DE">Grizzlybären sind äußerst gefährlich...</long-description>
+      <images>
+        <small>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-small.webp</small>
+        <medium>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-medium.webp</medium>
+        <large>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-large.webp</large>
+        <original>/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-original.webp</original>
+      </images>
+      <variation-attributes>
+        <attribute name="size" values="16x12;24x18"/>
+        <attribute name="finish" values="matte;gloss;satin"/>
+      </variation-attributes>
+      <!-- Variants: one per size (prices per variant) -->
+      <variant sku="GRBEAR-0001" size="16x12" finish="matte">
+        <price currency="USD">17.00</price>
+        <price currency="EUR">14.96</price>
+        <price currency="GBP">13.43</price>
+        <price currency="SEK">185.30</price>
+        <inventory quantity="100"/>
+      </variant>
+      <variant sku="GRBEAR-0002" size="24x18" finish="matte">
+        <price currency="USD">32.95</price>
+        <price currency="EUR">29.00</price>
+        <price currency="GBP">26.03</price>
+        <price currency="SEK">359.16</price>
+        <inventory quantity="50"/>
+      </variant>
+    </product>
+  </products>
+
+  <!-- 6. Tax Rates -->
+  <tax-tables>
+    <tax-table name="US Tax">
+      <rate sku="GRBEAR-0001" rate="0.0725"/>
+      <rate sku="GRBEAR-0002" rate="0.0725"/>
+    </tax-table>
+  </tax-tables>
+
+</catalog-import>

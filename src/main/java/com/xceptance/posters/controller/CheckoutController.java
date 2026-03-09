@@ -8,34 +8,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xceptance.posters.model.*;
-import com.xceptance.posters.repository.*;
+import com.xceptance.posters.entity.CartAddress;
+import com.xceptance.posters.entity.CartCreditCard;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CatalogCartRepository;
+import com.xceptance.posters.entity.CatalogOrder;
+import com.xceptance.posters.entity.CheckoutService;
+import com.xceptance.posters.entity.CatalogCustomer;
+import com.xceptance.posters.entity.CatalogCustomerRepository;
 import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
  * Handles the checkout flow: shipping, billing, payment, place order, order confirmation.
+ * Uses the new entity model (CatalogCart, CartAddress, CartCreditCard, CatalogOrder).
  */
 @Controller
 public class CheckoutController
 {
-    private final CartRepository cartRepository;
-    private final OrderRepository orderRepository;
-    private final CustomerRepository customerRepository;
+    private final CatalogCartRepository cartRepository;
+    private final CheckoutService checkoutService;
+    private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
 
-    public CheckoutController(CartRepository cartRepository,
-                              OrderRepository orderRepository,
-                              CustomerRepository customerRepository,
+    public CheckoutController(CatalogCartRepository cartRepository,
+                              CheckoutService checkoutService,
+                              CatalogCustomerRepository customerRepository,
                               SessionService sessionService)
     {
         this.cartRepository = cartRepository;
-        this.orderRepository = orderRepository;
+        this.checkoutService = checkoutService;
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
     }
@@ -59,18 +65,25 @@ public class CheckoutController
                                         @RequestParam String country,
                                         HttpSession session)
     {
-        Cart cart = sessionService.getCart(session);
-        ShippingAddress address = new ShippingAddress();
-        address.setName(name);
-        address.setFirstName(firstName);
+        CatalogCart cart = sessionService.getCart(session);
+
+        CartAddress address = cart.getShippingAddress();
+        if (address == null)
+        {
+            address = new CartAddress();
+            address.setCart(cart);
+        }
+        address.setRecipientLastName(name);
+        address.setRecipientFirstName(firstName);
         address.setCompany(company);
-        address.setAddressLine(addressLine);
+        address.setAddressLine1(addressLine);
         address.setCity(city);
         address.setState(state);
-        address.setZip(zip);
+        address.setPostalCode(zip);
         address.setCountry(country);
         cart.setShippingAddress(address);
         cartRepository.save(cart);
+
         return "redirect:/" + locale + "/checkout/billingAddress";
     }
 
@@ -78,7 +91,7 @@ public class CheckoutController
     public String billingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
-        Cart cart = sessionService.getCart(session);
+        CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("shippingAddress", cart.getShippingAddress());
         return "checkout/billingAddress";
     }
@@ -95,18 +108,25 @@ public class CheckoutController
                                        @RequestParam String country,
                                        HttpSession session)
     {
-        Cart cart = sessionService.getCart(session);
-        BillingAddress address = new BillingAddress();
-        address.setName(name);
-        address.setFirstName(firstName);
+        CatalogCart cart = sessionService.getCart(session);
+
+        CartAddress address = cart.getBillingAddress();
+        if (address == null)
+        {
+            address = new CartAddress();
+            address.setCart(cart);
+        }
+        address.setRecipientLastName(name);
+        address.setRecipientFirstName(firstName);
         address.setCompany(company);
-        address.setAddressLine(addressLine);
+        address.setAddressLine1(addressLine);
         address.setCity(city);
         address.setState(state);
-        address.setZip(zip);
+        address.setPostalCode(zip);
         address.setCountry(country);
         cart.setBillingAddress(address);
         cartRepository.save(cart);
+
         return "redirect:/" + locale + "/checkout/payment";
     }
 
@@ -125,21 +145,29 @@ public class CheckoutController
                                 @RequestParam int year,
                                 HttpSession session)
     {
-        Cart cart = sessionService.getCart(session);
-        CreditCard card = new CreditCard();
-        card.setCardNumber(cardNumber);
+        CatalogCart cart = sessionService.getCart(session);
+
+        CartCreditCard card = cart.getCreditCard();
+        if (card == null)
+        {
+            card = new CartCreditCard();
+            card.setCart(cart);
+        }
+        card.setNumber(cardNumber);
         card.setName(name);
-        card.setMonth(month);
-        card.setYear(year);
+        card.setVendor("Visa"); // Default vendor
+        card.setExpMonth(month);
+        card.setExpYear(year);
         cart.setCreditCard(card);
         cartRepository.save(cart);
+
         return "redirect:/" + locale + "/checkout/placeOrder";
     }
 
     @GetMapping("/{locale}/checkout/placeOrder")
     public String placeOrder(@PathVariable String locale, HttpSession session, Model model)
     {
-        Cart cart = sessionService.getCart(session);
+        CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("cart", cart);
         return "checkout/placeOrder";
     }
@@ -148,57 +176,32 @@ public class CheckoutController
     public String submitOrder(@PathVariable String locale, HttpSession session,
                               RedirectAttributes redirectAttributes)
     {
-        Cart cart = sessionService.getCart(session);
+        CatalogCart cart = sessionService.getCart(session);
 
-        // Create order from cart
-        Order order = new Order();
-        order.setShippingAddress(cart.getShippingAddress());
-        order.setBillingAddress(cart.getBillingAddress());
-        order.setCreditCard(cart.getCreditCard());
-        order.setSubTotalCosts(cart.getSubTotalPrice());
-        order.setTotalTaxCosts(cart.getTotalTaxPrice());
-        order.setShippingCosts(cart.getShippingCosts());
-        order.setTotalCosts(cart.getTotalPrice());
-        order.setTax(cart.getTax());
-        order.setOrderDate(LocalDateTime.now());
+        // Determine customer info
+        String email = "guest@example.com";
+        String firstName = "Guest";
+        String lastName = "Customer";
 
-        // Copy cart products to order products
-        for (CartProduct cp : cart.getProducts())
-        {
-            OrderProduct op = new OrderProduct();
-            op.setProduct(cp.getProduct());
-            op.setSize(cp.getSize());
-            op.setFinish(cp.getFinish());
-            op.setProductCount(cp.getProductCount());
-            op.setPrice(cp.getPrice());
-            order.getProducts().add(op);
-        }
-
-        // Associate with customer if logged in
         if (sessionService.isCustomerLoggedIn(session))
         {
             UUID customerId = sessionService.getCustomerId(session);
-            Customer customer = customerRepository.findById(customerId).orElse(null);
-            if (customer != null)
+            Optional<CatalogCustomer> customerOpt = customerRepository.findById(customerId);
+            if (customerOpt.isPresent())
             {
-                order.setCustomer(customer);
-                customer.getOrders().add(order);
-                customerRepository.save(customer);
+                CatalogCustomer c = customerOpt.get();
+                email = c.getEmail();
+                firstName = c.getFirstName();
+                lastName = c.getLastName();
             }
         }
 
-        Order savedOrder = orderRepository.save(order);
-        sessionService.setOrderId(session, savedOrder.getId());
+        // Use CheckoutService to convert cart to order and persist
+        CatalogOrder order = checkoutService.checkout(cart.getId(), email, firstName, lastName);
+        sessionService.setOrderId(session, order.getId());
 
-        // Clear cart
-        cart.getProducts().clear();
-        cart.setSubTotalPrice(BigDecimal.ZERO);
-        cart.setTotalTaxPrice(BigDecimal.ZERO);
-        cart.setTotalPrice(BigDecimal.ZERO);
-        cart.setShippingAddress(null);
-        cart.setBillingAddress(null);
-        cart.setCreditCard(null);
-        cartRepository.save(cart);
+        // Create a new empty cart for the session
+        sessionService.removeCartId(session);
 
         return "redirect:/" + locale + "/checkout/orderConfirmation";
     }
@@ -209,8 +212,9 @@ public class CheckoutController
         UUID orderId = sessionService.getOrderId(session);
         if (orderId != null)
         {
-            Order order = orderRepository.findById(orderId).orElse(null);
-            model.addAttribute("order", order);
+            checkoutService.getOrder(orderId).ifPresent(order -> {
+                model.addAttribute("order", order);
+            });
         }
         return "checkout/orderConfirmation";
     }
@@ -220,11 +224,9 @@ public class CheckoutController
         if (sessionService.isCustomerLoggedIn(session))
         {
             UUID customerId = sessionService.getCustomerId(session);
-            Customer customer = customerRepository.findById(customerId).orElse(null);
-            if (customer != null)
-            {
+            customerRepository.findById(customerId).ifPresent(customer -> {
                 model.addAttribute("customer", customer);
-            }
+            });
         }
     }
 }

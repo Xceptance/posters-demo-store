@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.de.GermanAnalyzer;
@@ -35,12 +33,16 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Service;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.model.Language;
-import com.xceptance.posters.model.Product;
+import com.xceptance.posters.entity.CatalogProductRepository;
+import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.entity.Product;
 
 /**
  * Manages per-language Lucene indices for full-text product search
  * with language-specific analyzers and stemmers.
+ *
+ * Now uses new entity model (Product from entity package, LocalizedTextService)
+ * instead of legacy model.
  */
 @Service
 public class LuceneSearchService implements DisposableBean
@@ -55,6 +57,8 @@ public class LuceneSearchService implements DisposableBean
     private static final String[] SEARCH_FIELDS = {FIELD_NAME, FIELD_DESC_OVERVIEW, FIELD_DESC_DETAIL};
 
     private final Path indexBaseDir;
+    private final CatalogProductRepository catalogProductRepository;
+    private final LocalizedTextService textService;
 
     /** Analyzer per base language code (en, de, sv). */
     private final Map<String, Analyzer> analyzers = new HashMap<>();
@@ -65,9 +69,13 @@ public class LuceneSearchService implements DisposableBean
     /** Open readers (kept for closing). */
     private final Map<String, DirectoryReader> readers = new HashMap<>();
 
-    public LuceneSearchService(PostersProperties props)
+    public LuceneSearchService(PostersProperties props,
+                               CatalogProductRepository catalogProductRepository,
+                               LocalizedTextService textService)
     {
         this.indexBaseDir = Path.of(props.getLuceneIndexDir());
+        this.catalogProductRepository = catalogProductRepository;
+        this.textService = textService;
 
         // Register language-specific analyzers (include stemmers + stop words)
         analyzers.put("en", new EnglishAnalyzer());
@@ -95,37 +103,44 @@ public class LuceneSearchService implements DisposableBean
     }
 
     // ---------------------------------------------------------------
-    // Index building (called during data import)
+    // Index building (new entity model)
     // ---------------------------------------------------------------
 
     /**
-     * Builds the Lucene index from scratch for all languages.
+     * Builds the Lucene index from all catalog products using the new entity model.
      * Each base language gets its own sub-directory under the index base.
+     * Texts are resolved via LocalizedTextService using locale codes like "en-US", "de-DE", "sv-SE".
      *
-     * @param products   all products to index
-     * @param languages  all imported Language entities (used to derive base language codes)
+     * @param localeCodes  the locale codes to build indices for (e.g. {"en-US", "de-DE", "sv-SE"})
      */
-    public void buildIndex(List<Product> products, Collection<Language> languages) throws IOException
+    public void buildIndex(Set<String> localeCodes) throws IOException
     {
-        // Collect unique base language codes
-        Set<String> baseLangs = languages.stream()
-                .map(Language::getCode)
-                .collect(Collectors.toSet());
+        List<Product> products = catalogProductRepository.findAll();
 
-        // Always include English as it is the default / original text language
-        baseLangs.add("en");
+        // Derive base language codes from locale codes
+        Map<String, String> baseLangToLocale = new HashMap<>();
+        for (String locale : localeCodes)
+        {
+            String base = baseLang(locale);
+            baseLangToLocale.putIfAbsent(base, locale);
+        }
+        // Always include English
+        baseLangToLocale.putIfAbsent("en", "en-US");
 
-        log.info("Building Lucene index for languages: {}", baseLangs);
+        log.info("Building Lucene index for languages: {} ({} products)", baseLangToLocale.keySet(), products.size());
 
         // Close any previously open readers
         closeReaders();
 
-        for (String lang : baseLangs)
+        for (Map.Entry<String, String> entry : baseLangToLocale.entrySet())
         {
-            Path langDir = indexBaseDir.resolve(lang);
+            String baseLang = entry.getKey();
+            String locale = entry.getValue();
+
+            Path langDir = indexBaseDir.resolve(baseLang);
             Files.createDirectories(langDir);
 
-            Analyzer analyzer = analyzerFor(lang);
+            Analyzer analyzer = analyzerFor(baseLang);
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
             config.setOpenMode(IndexWriterConfig.OpenMode.CREATE); // wipe + recreate
 
@@ -139,23 +154,20 @@ public class LuceneSearchService implements DisposableBean
                     // Stored field for retrieval
                     doc.add(new StoredField(FIELD_PRODUCT_ID, product.getId()));
 
-                    // Resolve text for this language via the i18n system.
-                    // DefaultText.getText(langCode) falls back to original text
-                    // if no translation exists.
-                    // We try with both the base code and common fallback codes.
-                    String name = resolveText(product.getName(), lang);
-                    String descOverview = resolveText(product.getDescriptionOverview(), lang);
-                    String descDetail = resolveText(product.getDescriptionDetail(), lang);
+                    // Resolve text for this locale via LocalizedTextService
+                    String name = resolveText(product.getNameTextId(), locale);
+                    String descOverview = resolveText(product.getDescriptionOverviewTextId(), locale);
+                    String descDetail = resolveText(product.getDescriptionDetailTextId(), locale);
 
-                    if (name != null)
+                    if (name != null && !name.isBlank())
                     {
                         doc.add(new TextField(FIELD_NAME, name, Field.Store.NO));
                     }
-                    if (descOverview != null)
+                    if (descOverview != null && !descOverview.isBlank())
                     {
                         doc.add(new TextField(FIELD_DESC_OVERVIEW, descOverview, Field.Store.NO));
                     }
-                    if (descDetail != null)
+                    if (descDetail != null && !descDetail.isBlank())
                     {
                         doc.add(new TextField(FIELD_DESC_DETAIL, descDetail, Field.Store.NO));
                     }
@@ -163,7 +175,7 @@ public class LuceneSearchService implements DisposableBean
                     writer.addDocument(doc);
                 }
                 writer.commit();
-                log.info("Indexed {} products for language '{}'.", products.size(), lang);
+                log.info("Indexed {} products for language '{}' (locale: {}).", products.size(), baseLang, locale);
             }
         }
 
@@ -172,14 +184,12 @@ public class LuceneSearchService implements DisposableBean
     }
 
     /**
-     * Resolves the text for a DefaultText using the base language code.
-     * Tries the base code first, then common fallback patterns.
+     * Resolves text for a text ID using the LocalizedTextService.
      */
-    private String resolveText(com.xceptance.posters.model.DefaultText dt, String baseLang)
+    private String resolveText(Integer textId, String locale)
     {
-        if (dt == null) return null;
-        // getText checks Language.code and Language.fallbackCode
-        return dt.getText(baseLang);
+        if (textId == null) return null;
+        return textService.getText(textId, locale);
     }
 
     // ---------------------------------------------------------------

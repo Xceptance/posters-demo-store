@@ -26,18 +26,14 @@
             <ul class="list-unstyled cart-mini-element-list">
                 <li th:each="cp : ${cartProducts}" class="cart-mini-products-list-items">
                     <ul class="cart-items list-unstyled">
-                        <li class="prod-name" th:text="${cp.product.name.getText(urlLocale)}">Product</li>
+                        <li class="prod-name" th:text="${cp.productName}">Product</li>
                         <li>Quantity: <span class="prod-count" th:text="${cp.productCount}">1</span>
                             (<span class="prod-style" th:text="${cp.finish}">matte</span>,
-                            <span class="prod-size">
-                                <span class="prod-width" th:text="${cp.size.width}">16</span>
-                                x <span class="prod-height" th:text="${cp.size.height}">12</span>
-                                <span class="unit-length" th:text="${unitLength}">in</span>
-                            </span>)
+                            <span class="prod-size" th:text="${cp.sizeLabel}">16 x 12 in</span>)
                         </li>
                         <li>
                             <div class="prod-price text-right">
-                                <strong th:text="${#numbers.formatCurrency(cp.price * cp.productCount)}">$0.00</strong>
+                                <strong th:text="${#numbers.formatCurrency(cp.totalProductPrice)}">$0.00</strong>
                             </div>
                         </li>
                     </ul>

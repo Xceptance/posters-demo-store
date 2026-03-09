@@ -37,14 +37,14 @@
         <div class="col-lg-5 col-md-6 text-center text-md-start mb-5 mb-md-0 hero-text-container">
             <h1 class="hero-title mb-4">Premium Vintage Posters.</h1>
             <p class="hero-subtitle lead mb-4 text-muted">Give your walls the art they deserve with our curated collection of high-quality prints.</p>
-            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${heroProduct.name.getText(urlLocale)} + '/' + ${heroProduct.id}}" 
+            <a th:href="@{'/' + ${urlLocale} + '/product/' + ${heroProduct.name} + '/' + ${heroProduct.id}}" 
                class="btn btn-primary btn-lg px-5 py-3 shadow-sm hero-btn" th:text="#{buttonBuyHere}">Shop the Collection</a>
         </div>
         <!-- Image Side -->
         <div class="col-lg-6 offset-lg-1 col-md-6 position-relative hero-image-container">
             <div class="hero-image-bg"></div>
             <img th:src="@{${heroProduct.largeImageURL}}" 
-                 th:alt="${heroProduct.name.getText(urlLocale)}" 
+                 th:alt="${heroProduct.name}" 
                  class="img-fluid rounded shadow-lg position-relative z-1 hero-image" />
         </div>
     </div>
@@ -76,16 +76,16 @@
 <!-- Category tiles -->
 <div class="container mb-5">
     <div class="row g-4 justify-content-center category-display-case">
-        <div class="col-md-4" th:each="cat, stat : ${topCategory}">
-            <a th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.name.getText(urlLocale)} + '?categoryId=' + ${cat.id}}" class="text-decoration-none">
+        <div class="col-md-4" th:each="cat, stat : ${categoryTiles}">
+            <a th:href="@{'/' + ${urlLocale} + '/topCategory/' + ${cat.name} + '?categoryId=' + ${cat.id}}" class="text-decoration-none">
                 <div class="category-card position-relative overflow-hidden rounded shadow-sm">
-                    <img th:if="${productslistcat != null and stat.index < productslistcat.size()}"
-                         th:src="@{${productslistcat[stat.index].imageURL}}"
-                         th:alt="${cat.name.getText(urlLocale)} + ' category image'"
+                    <img th:if="${cat.imagePath != null}"
+                         th:src="@{${cat.imagePath}}"
+                         th:alt="${cat.name} + ' category image'"
                          class="category-card-img w-100"
                          th:id="'category-picture-' + ${stat.index}"/>
                     <div class="category-card-overlay d-flex align-items-center justify-content-center">
-                        <h3 class="category-card-title text-white mb-0" th:text="${cat.name.getText(urlLocale)}">Category</h3>
+                        <h3 class="category-card-title text-white mb-0" th:text="${cat.name}">Category</h3>
                     </div>
                 </div>
             </a>
@@ -104,19 +104,19 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 product-display-case">
         <div class="col" th:each="product : ${productslist}">
             <div class="card h-100 product-tile">
-                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}">
+                <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name} + '/' + ${product.id}}">
                     <img th:src="@{${product.imageURL}}"
-                         th:alt="'picture of ' + ${product.name.getText(urlLocale)}"
+                         th:alt="'picture of ' + ${product.name}"
                          class="card-img-top"
                          th:id="'product-picture-' + ${product.id}"/>
                 </a>
                 <div class="card-body">
-                    <h3 class="card-title" th:text="${product.name.getText(urlLocale)}">Product</h3>
-                    <p class="card-text product-tile-text" th:text="${product.descriptionOverview.getText(urlLocale)}">Description</p>
+                    <h3 class="card-title" th:text="${product.name}">Product</h3>
+                    <p class="card-text product-tile-text" th:text="${product.descriptionOverview}">Description</p>
                 </div>
                 <div class="card-footer">
-                    <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.getMinimumPrice(urlLocale))}">$0.00</p>
-                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name.getText(urlLocale)} + '/' + ${product.id}}"
+                    <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.minimumPrice)}">$0.00</p>
+                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name} + '/' + ${product.id}}"
                        class="btn btn-primary product-tile-btn-buy" th:text="#{buttonBuyHere}">Buy Here</a>
                 </div>
             </div>

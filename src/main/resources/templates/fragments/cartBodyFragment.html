@@ -21,18 +21,18 @@
                 </div>
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush" id="cart-item-list">
-                        <li class="list-group-item p-4 js-cart-product" th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.id}">
+                        <li class="list-group-item p-4 js-cart-product" th:each="cp : ${cart.products}" th:id="'cart-item-' + ${cp.lineItemId}">
                             <div class="row align-items-center g-3">
                                 <!-- Image & Product Details -->
                                 <div class="col-12 col-md-5 d-flex align-items-center mb-3 mb-md-0">
-                                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.product.name.getText(urlLocale)} + '/' + ${cp.product.id}}" class="flex-shrink-0 d-block">
-                                        <img th:src="@{${cp.product.imageURL}}" th:alt="${cp.product.name.getText(urlLocale)}" class="rounded shadow-sm" style="width: 80px; height: 80px; object-fit: cover;">
+                                    <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.productName} + '/' + ${cp.productId}}" class="flex-shrink-0 d-block">
+                                        <img th:src="@{${cp.imageURL}}" th:alt="${cp.productName}" class="rounded shadow-sm" style="width: 80px; height: 80px; object-fit: cover;">
                                     </a>
                                     <div class="ms-4 flex-grow-1">
-                                        <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.product.name.getText(urlLocale)} + '/' + ${cp.product.id}}" 
-                                           class="text-decoration-none text-dark fw-bold fs-5 d-block mb-1" th:text="${cp.product.name.getText(urlLocale)}">Poster Name</a>
+                                        <a th:href="@{'/' + ${urlLocale} + '/product/' + ${cp.productName} + '/' + ${cp.productId}}" 
+                                           class="text-decoration-none text-dark fw-bold fs-5 d-block mb-1" th:text="${cp.productName}">Poster Name</a>
                                         <div class="text-muted small mb-0">
-                                            <span th:text="${cp.size.width + 'x' + cp.size.height}">16x12</span> &bull; 
+                                            <span th:text="${cp.sizeLabel}">16 x 12 in</span> &bull; 
                                             <span th:text="${#strings.capitalize(cp.finish)}">Matte</span>
                                         </div>
                                     </div>
@@ -49,10 +49,10 @@
                                     <div class="d-md-none text-muted small mb-1 d-none" th:text="#{labelQuantity}">Qty</div>
                                     <input type="number" th:value="${cp.productCount}" min="1" max="999"
                                            class="form-control form-control-sm cart-qty-input text-center fw-bold"
-                                           style="width: 70px; border-radius: 0.5rem;" th:id="'qty-' + ${cp.id}"
+                                           style="width: 70px; border-radius: 0.5rem;" th:id="'qty-' + ${cp.lineItemId}"
                                            name="productCount"
                                            hx-trigger="change"
-                                           th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.id}}"
+                                           th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.lineItemId}}"
                                            hx-target="#cart-content"
                                            hx-swap="innerHTML"
                                            hx-include="this"/>
@@ -61,10 +61,10 @@
                                 <!-- Total & Remove -->
                                 <div class="col-4 col-md-3 text-end d-flex flex-column align-items-end justify-content-center">
                                     <div class="d-md-none text-muted small mb-1" th:text="#{labelTotal}">Total</div>
-                                    <span class="fw-bold fs-5 text-dark mb-2" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}" th:id="'total-' + ${cp.id}">$0.00</span>
+                                    <span class="fw-bold fs-5 text-dark mb-2" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}" th:id="'total-' + ${cp.lineItemId}">$0.00</span>
                                     <button class="btn btn-sm btn-link text-danger text-decoration-none p-0 cart-remove-btn opacity-75 hover-opacity-100"
                                             th:hx-confirm="#{confirmRemoveFromCart}"
-                                            th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.id}}"
+                                            th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.lineItemId}}"
                                             hx-target="#cart-content"
                                             hx-swap="innerHTML" title="Remove">
                                         <i class="bi bi-trash3 me-1"></i> <small th:text="#{buttonRemove}">Remove</small>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<users>
-	<backofficeuser>
-		<email>admin@example.com</email>
-		<password>topsecret</password>
-		<name>Admin</name>
-		<firstName>X</firstName>
-	</backofficeuser>
-</users>
