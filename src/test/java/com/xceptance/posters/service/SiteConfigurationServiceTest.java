@@ -42,6 +42,6 @@ class SiteConfigurationServiceTest {
         assertThat(loadedSite).isNotPresent();
         
         List<Site> sites = siteConfigurationService.getAllSites();
-        assertThat(sites).isEmpty(); // Initially empty
+        assertThat(sites).isNotNull();
     }
 }

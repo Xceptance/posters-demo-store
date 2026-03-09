@@ -11,6 +11,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  sql:
+    init:
+      mode: never
   h2:
     console:
       enabled: false
