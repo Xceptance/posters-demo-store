@@ -74,16 +74,17 @@ public class CheckoutService {
             customerEmail, customerFirstName, customerLastName);
         orderRepository.save(order);
 
-        // Delete child entities first to avoid NOT NULL constraint on cart_id
+        // 1. Clear FK references on cart so child rows can be deleted
+        entityManager.createNativeQuery("UPDATE catalog_carts SET shipping_address_id = NULL, billing_address_id = NULL, credit_card_id = NULL WHERE id = :cid")
+            .setParameter("cid", cart.getId()).executeUpdate();
+        // 2. Delete child entities
         entityManager.createNativeQuery("DELETE FROM catalog_cart_lineitems WHERE cart_id = :cid")
             .setParameter("cid", cart.getId()).executeUpdate();
         entityManager.createNativeQuery("DELETE FROM catalog_cart_credit_cards WHERE cart_id = :cid")
             .setParameter("cid", cart.getId()).executeUpdate();
-        // Clear FK references on cart before deleting addresses
-        entityManager.createNativeQuery("UPDATE catalog_carts SET shipping_address_id = NULL, billing_address_id = NULL, credit_card_id = NULL WHERE id = :cid")
-            .setParameter("cid", cart.getId()).executeUpdate();
         entityManager.createNativeQuery("DELETE FROM catalog_cart_addresses WHERE cart_id = :cid")
             .setParameter("cid", cart.getId()).executeUpdate();
+        // 3. Delete the cart itself
         entityManager.createNativeQuery("DELETE FROM catalog_carts WHERE id = :cid")
             .setParameter("cid", cart.getId()).executeUpdate();
         entityManager.flush();
