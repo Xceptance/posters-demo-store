@@ -86,6 +86,8 @@ public class CheckoutService {
             .setParameter("cid", cart.getId()).executeUpdate();
         entityManager.createNativeQuery("DELETE FROM catalog_carts WHERE id = :cid")
             .setParameter("cid", cart.getId()).executeUpdate();
+        entityManager.flush();
+        entityManager.clear();
 
         log.info("Checkout complete: cart {} → order {}", cartId, order.getOrderNumber());
         return order;
