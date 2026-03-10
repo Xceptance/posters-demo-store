@@ -25,12 +25,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="cp : ${cart.products}">
-                                    <td class="fw-bold" th:text="${cp.product.name.getText(urlLocale)}">Product</td>
-                                    <td th:text="${cp.size.width + 'x' + cp.size.height}">16x12</td>
-                                    <td th:text="${#messages.msg('label' + #strings.capitalize(cp.finish))}">Matte</td>
-                                    <td class="text-center" th:text="${cp.productCount}">1</td>
-                                    <td class="text-end fw-bold" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}">$0.00</td>
+                                <tr th:each="cp : ${cart.lineItems}">
+                                    <td class="fw-bold" th:text="${cp.sku}">Product</td>
+                                    <td th:text="'-'">16x12</td>
+                                    <td th:text="'-'">Matte</td>
+                                    <td class="text-center" th:text="${cp.quantity}">1</td>
+                                    <td class="text-end fw-bold" th:text="'-'">$0.00</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -44,11 +44,11 @@
                         <h3 class="card-title cart-summary-title mb-4 fw-bold" th:text="#{labelSummary}">Summary</h3>
                         <div class="cart-summary-row">
                             <span class="text-muted" th:text="#{labelSubtotal}">Subtotal</span>
-                            <span th:text="${#numbers.formatCurrency(cart.subTotalPrice)}">$0.00</span>
+                            <span th:text="${#numbers.formatCurrency(cart.subTotal)}">$0.00</span>
                         </div>
                         <div class="cart-summary-row">
-                            <span class="text-muted">Tax (<span th:text="${cart.taxAsString}">6.0</span>%)</span>
-                            <span th:text="${#numbers.formatCurrency(cart.totalTaxPrice)}">$0.00</span>
+                            <span class="text-muted">Tax (<span th:text="${cart.taxRate * 100 + '%'}">6.0%</span>)</span>
+                            <span th:text="${#numbers.formatCurrency(cart.totalTax)}">$0.00</span>
                         </div>
                         <div class="cart-summary-row">
                             <span class="text-muted" th:text="#{labelShipping}">Shipping</span>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="cart-summary-total align-items-center">
                             <span class="fw-bold">Total</span>
-                            <span class="fw-bold cart-summary-total-price text-primary fs-3" th:text="${#numbers.formatCurrency(cart.totalPrice)}">$0.00</span>
+                            <span class="fw-bold cart-summary-total-price text-primary fs-3" th:text="${#numbers.formatCurrency(cart.total)}">$0.00</span>
                         </div>
                         <form th:action="@{'/' + ${urlLocale} + '/checkout/placeOrder'}" method="post">
                             <button type="submit" class="btn btn-primary btn-lg w-100 mt-3" id="btn-place-order" th:text="#{buttonPlaceOrder}">Place Order</button>
