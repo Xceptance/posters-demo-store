@@ -99,7 +99,6 @@ public class CartToOrderConverter {
 
     private static void snapshotAddress(CatalogOrder order, CartAddress source, String type) {
         OrderAddress addr = new OrderAddress();
-        addr.setOrder(order);
         addr.setType(type);
         addr.setRecipientFirstName(source.getRecipientFirstName());
         addr.setRecipientLastName(source.getRecipientLastName());
@@ -111,5 +110,6 @@ public class CartToOrderConverter {
         addr.setPostalCode(source.getPostalCode());
         addr.setCountry(source.getCountry());
         addr.setPhone(source.getPhone());
+        order.addAddress(addr);
     }
 }

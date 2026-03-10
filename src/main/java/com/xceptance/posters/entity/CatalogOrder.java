@@ -69,6 +69,9 @@ public class CatalogOrder {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderPaymentHistory> paymentHistory = new ArrayList<>();
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderAddress> addresses = new ArrayList<>();
+
     @PrePersist
     private void onCreate() {
         if (orderDate == null) orderDate = LocalDateTime.now();
@@ -118,8 +121,20 @@ public class CatalogOrder {
     public List<OrderLineItem> getLineItems() { return lineItems; }
     public List<OrderStateHistory> getStateHistory() { return stateHistory; }
     public List<OrderPaymentHistory> getPaymentHistory() { return paymentHistory; }
+    public List<OrderAddress> getAddresses() { return addresses; }
 
     public void addLineItem(OrderLineItem item) { lineItems.add(item); item.setOrder(this); }
     public void addStateHistoryEntry(OrderStateHistory entry) { stateHistory.add(entry); entry.setOrder(this); }
+    public void addAddress(OrderAddress addr) { addresses.add(addr); addr.setOrder(this); }
+
+    /** Returns the SHIPPING address snapshot, or null. */
+    public OrderAddress getShippingAddress() {
+        return addresses.stream().filter(a -> "SHIPPING".equals(a.getType())).findFirst().orElse(null);
+    }
+
+    /** Returns the BILLING address snapshot, or null. */
+    public OrderAddress getBillingAddress() {
+        return addresses.stream().filter(a -> "BILLING".equals(a.getType())).findFirst().orElse(null);
+    }
     public void addPaymentHistoryEntry(OrderPaymentHistory entry) { paymentHistory.add(entry); entry.setOrder(this); }
 }
