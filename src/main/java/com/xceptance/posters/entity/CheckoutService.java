@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
+
 import java.util.Optional;
 
 /**
@@ -18,11 +20,14 @@ public class CheckoutService {
 
     private final CatalogCartRepository cartRepository;
     private final CatalogOrderRepository orderRepository;
+    private final EntityManager entityManager;
 
     public CheckoutService(CatalogCartRepository cartRepository,
-                           CatalogOrderRepository orderRepository) {
+                           CatalogOrderRepository orderRepository,
+                           EntityManager entityManager) {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
+        this.entityManager = entityManager;
     }
 
     /**
@@ -69,7 +74,18 @@ public class CheckoutService {
             customerEmail, customerFirstName, customerLastName);
         orderRepository.save(order);
 
-        cartRepository.delete(cart);
+        // Delete child entities first to avoid NOT NULL constraint on cart_id
+        entityManager.createNativeQuery("DELETE FROM catalog_cart_lineitems WHERE cart_id = :cid")
+            .setParameter("cid", cart.getId()).executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM catalog_cart_credit_cards WHERE cart_id = :cid")
+            .setParameter("cid", cart.getId()).executeUpdate();
+        // Clear FK references on cart before deleting addresses
+        entityManager.createNativeQuery("UPDATE catalog_carts SET shipping_address_id = NULL, billing_address_id = NULL, credit_card_id = NULL WHERE id = :cid")
+            .setParameter("cid", cart.getId()).executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM catalog_cart_addresses WHERE cart_id = :cid")
+            .setParameter("cid", cart.getId()).executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM catalog_carts WHERE id = :cid")
+            .setParameter("cid", cart.getId()).executeUpdate();
 
         log.info("Checkout complete: cart {} → order {}", cartId, order.getOrderNumber());
         return order;
