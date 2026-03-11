@@ -55,11 +55,8 @@
                                 <label for="zip" th:text="#{labelZip}">ZIP</label>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="country" name="country" placeholder="Country" required value="United States"/>
-                                <label for="country" th:text="#{labelCountry}">Country</label>
-                            </div>
+                        <div th:replace="~{fragments/countrySelectFragment :: countrySelect(${countries}, 'US')}">
+                            <!-- country select fragment -->
                         </div>
                         <div class="col-12 text-end">
                             <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-shipping" th:text="#{buttonContinueToBilling}">Continue to Billing</button>

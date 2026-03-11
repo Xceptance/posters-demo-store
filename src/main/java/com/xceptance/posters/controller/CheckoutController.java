@@ -17,6 +17,7 @@ import com.xceptance.posters.entity.CheckoutService;
 import com.xceptance.posters.entity.CatalogCustomer;
 import com.xceptance.posters.entity.CatalogCustomerRepository;
 import com.xceptance.posters.service.SessionService;
+import com.xceptance.posters.util.CountryList;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -50,6 +51,7 @@ public class CheckoutController
     public String shippingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
+        model.addAttribute("countries", CountryList.getCountries());
         return "checkout/shippingAddress";
     }
 
@@ -91,6 +93,7 @@ public class CheckoutController
     public String billingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
+        model.addAttribute("countries", CountryList.getCountries());
         CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("shippingAddress", cart.getShippingAddress());
         return "checkout/billingAddress";

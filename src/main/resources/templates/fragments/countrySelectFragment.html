@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--
+    Reusable country select dropdown fragment.
+    Parameters:
+      - countries:       List<CountryEntry> from CountryList.getCountries()
+      - selectedCountry: (optional) the country code to pre-select, defaults to "US"
+-->
+<div th:fragment="countrySelect(countries, selectedCountry)" class="col-12">
+    <div class="form-floating mb-4">
+        <select class="form-select" id="country" name="country" required>
+            <option value="" disabled
+                    th:selected="${selectedCountry == null}"
+                    th:text="#{labelSelectCountry}">Select a country</option>
+            <option th:each="c : ${countries}"
+                    th:value="${c.code()}"
+                    th:text="${c.name()}"
+                    th:selected="${c.code() == (selectedCountry != null ? selectedCountry : 'US')}">Country</option>
+        </select>
+        <label for="country" th:text="#{labelCountry}">Country</label>
+    </div>
+</div>
+</body>
+</html>
