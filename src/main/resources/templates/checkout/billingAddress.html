@@ -60,7 +60,13 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="country" name="country" placeholder="Country" required value="United States"/>
+                                <select class="form-select" id="country" name="country" required>
+                                    <option th:each="c : ${countries}"
+                                            th:value="${c.code}"
+                                            th:text="${c.name}"
+                                            th:selected="${c.code == defaultCountryCode}">
+                                    </option>
+                                </select>
                                 <label for="country" th:text="#{labelCountry}">Country</label>
                             </div>
                         </div>

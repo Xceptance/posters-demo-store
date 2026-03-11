@@ -3,10 +3,13 @@ package com.xceptance.posters.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
@@ -59,6 +62,9 @@ public class CatalogOrder {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal total;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private OrderCreditCard creditCard;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderLineItem> lineItems = new ArrayList<>();
@@ -126,6 +132,9 @@ public class CatalogOrder {
     public void addLineItem(OrderLineItem item) { lineItems.add(item); item.setOrder(this); }
     public void addStateHistoryEntry(OrderStateHistory entry) { stateHistory.add(entry); entry.setOrder(this); }
     public void addAddress(OrderAddress addr) { addresses.add(addr); addr.setOrder(this); }
+
+    public OrderCreditCard getCreditCard() { return creditCard; }
+    public void setCreditCard(OrderCreditCard cc) { this.creditCard = cc; cc.setOrder(this); }
 
     /** Returns the SHIPPING address snapshot, or null. */
     public OrderAddress getShippingAddress() {
