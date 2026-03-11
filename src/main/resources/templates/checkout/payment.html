@@ -2,52 +2,108 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/checkoutLayout}">
-<head><title>Payment</title></head>
+<head>
+    <title>Payment</title>
+    <link rel="stylesheet" th:href="@{/assets/css/credit-card.css}"/>
+</head>
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
         <h1 th:text="#{titlePayment}">Payment</h1>
-        <form th:action="@{'/' + ${urlLocale} + '/checkout/payment'}" method="post" id="payment-form">
+
+        <!-- Server-side validation errors (displayed if JS is disabled) -->
+        <div th:if="${validationErrors}" class="alert alert-danger mb-4">
+            <ul class="mb-0">
+                <li th:each="err : ${validationErrors}" th:text="${#strings.substringAfter(err, ':')}">Error</li>
+            </ul>
+        </div>
+
+        <form th:action="@{'/' + ${urlLocale} + '/checkout/payment'}" method="post" id="payment-form" novalidate>
             <div class="card shadow-sm border-0 mb-5">
                 <div class="card-body p-4 p-md-5">
+                    <!-- Header row: title + vendor badge -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="mb-0">
+                            <i class="bi bi-credit-card-2-front me-2 text-primary"></i>
+                            <span th:text="#{titleCreditCard}">Credit Card</span>
+                        </h5>
+                        <div id="vendor-display" class="cc-vendor-area">
+                            <span class="cc-vendor-badge">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span id="vendor-name"></span>
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="row g-3">
+                        <!-- Card Number -->
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="cardNumber" name="cardNumber" required
-                                       th:pattern="${regexCreditCard}" placeholder="4111111111111111"/>
+                                <input type="text" class="form-control" id="cardNumber" name="cardNumber"
+                                       placeholder="4111 1111 1111 1111" required
+                                       autocomplete="cc-number" inputmode="numeric"
+                                       maxlength="23"
+                                       aria-label="Credit card number"/>
                                 <label for="cardNumber" th:text="#{labelCardNumber}">Card Number</label>
                             </div>
                         </div>
+
+                        <!-- Cardholder Name -->
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="cardName" name="name" placeholder="Name on Card" required/>
+                                <input type="text" class="form-control" id="cardName" name="name"
+                                       placeholder="Name on Card" required
+                                       autocomplete="cc-name"
+                                       th:value="${cardName}"
+                                       aria-label="Cardholder name"/>
                                 <label for="cardName" th:text="#{labelCardName}">Name on Card</label>
                             </div>
                         </div>
+
+                        <!-- Expiry MM/YY -->
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <select class="form-select" id="month" name="month">
-                                    <option th:each="m : ${#numbers.sequence(1,12)}" th:value="${m}" th:text="${m}">1</option>
-                                </select>
-                                <label for="month" th:text="#{labelExpMonth}">Exp Month</label>
+                                <input type="text" class="form-control" id="expiry" name="expiry"
+                                       placeholder="MM/YY" required
+                                       autocomplete="cc-exp" inputmode="numeric"
+                                       maxlength="5"
+                                       th:value="${expiry}"
+                                       aria-label="Expiry date in MM/YY format"/>
+                                <label for="expiry">MM/YY</label>
                             </div>
                         </div>
+
+                        <!-- CVV -->
                         <div class="col-md-6 mb-4">
                             <div class="form-floating">
-                                <select class="form-select" id="year" name="year">
-                                    <option th:each="y : ${#numbers.sequence(2024,2035)}" th:value="${y}" th:text="${y}">2024</option>
-                                </select>
-                                <label for="year" th:text="#{labelExpYear}">Exp Year</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv"
+                                       placeholder="123" required
+                                       autocomplete="cc-csc" inputmode="numeric"
+                                       maxlength="4"
+                                       aria-label="Security code"/>
+                                <label for="cvv">CVV</label>
                             </div>
                         </div>
-                        <div class="col-12 text-end">
-                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-payment" th:text="#{buttonContinueToReview}">Continue to Review</button>
+
+                        <!-- Trust badge + submit -->
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <div class="cc-trust-badge">
+                                <i class="bi bi-shield-lock-fill me-1"></i> Secure Payment
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm"
+                                    id="btn-submit-payment" th:text="#{buttonContinueToReview}">Continue to Review</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+
+    <!-- ARIA live region for vendor announcements -->
+    <div id="cc-aria-live" class="cc-sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Credit card JS — loaded only on this page -->
+    <script th:src="@{/assets/js/credit-card.js}"></script>
 </div>
 </body>
 </html>

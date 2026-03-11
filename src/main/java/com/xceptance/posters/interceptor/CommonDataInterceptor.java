@@ -1,11 +1,13 @@
 package com.xceptance.posters.interceptor;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -163,6 +165,10 @@ public class CommonDataInterceptor implements HandlerInterceptor
         mav.addObject("regexCreditCard", props.getRegex().getCreditCard());
         mav.addObject("regexZip", props.getRegex().getZip());
         mav.addObject("regexProductCount", props.getRegex().getProductCount());
+
+        // Build localized country list for checkout address forms
+        mav.addObject("countries", buildLocalizedCountries(currentLocale));
+        mav.addObject("defaultCountryCode", "United States");
     }
 
     /**
@@ -193,6 +199,44 @@ public class CommonDataInterceptor implements HandlerInterceptor
                 subs.add(new SubCategoryDto(subCat.getId(), subName));
             }
             result.add(new CategoryDto(topCat.getId(), topName, subs));
+        }
+        return result;
+    }
+
+    /**
+     * ISO country codes for the countries we want in the checkout dropdown.
+     */
+    private static final String[] COUNTRY_CODES = {
+        "AR", "AU", "AT", "BE", "BR", "CA", "CL", "CN", "CO", "CZ",
+        "DK", "FI", "FR", "DE", "GR", "HU", "IN", "ID", "IE", "IL",
+        "IT", "JP", "LU", "MY", "MX", "NL", "NZ", "NO", "PE", "PH",
+        "PL", "PT", "RO", "SG", "ZA", "KR", "ES", "SE", "CH", "TW",
+        "TH", "TR", "AE", "GB", "US", "VN"
+    };
+
+    /**
+     * Build a list of countries with English value (for form submission) and
+     * localized display name (for the dropdown label), sorted alphabetically
+     * in the given locale.
+     */
+    private List<Map<String, String>> buildLocalizedCountries(Locale displayLocale)
+    {
+        // Use a TreeMap with locale-aware collation to sort by display name
+        Collator collator = Collator.getInstance(displayLocale);
+        Map<String, String> sorted = new TreeMap<>(collator);
+
+        for (String code : COUNTRY_CODES)
+        {
+            Locale countryLocale = Locale.of("", code);
+            String englishName = countryLocale.getDisplayCountry(Locale.ENGLISH);
+            String localizedName = countryLocale.getDisplayCountry(displayLocale);
+            sorted.put(localizedName, englishName);
+        }
+
+        List<Map<String, String>> result = new ArrayList<>();
+        for (var entry : sorted.entrySet())
+        {
+            result.add(Map.of("code", entry.getValue(), "name", entry.getKey()));
         }
         return result;
     }

@@ -123,7 +123,8 @@
                             <div class="text-dark small d-flex align-items-center">
                                 <i class="bi bi-credit-card fs-4 me-2 text-muted"></i>
                                 <div>
-                                    <span class="d-block fw-medium">Payment authorized</span>
+                                    <span class="d-block fw-medium" th:text="${cardVendor != null ? cardVendor : 'Payment authorized'}" >Payment authorized</span>
+                                    <span class="text-muted" th:if="${maskedCardNumber != null}" th:text="${maskedCardNumber}">411111******1111</span>
                                 </div>
                             </div>
                         </div>
