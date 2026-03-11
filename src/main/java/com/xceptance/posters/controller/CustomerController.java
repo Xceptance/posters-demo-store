@@ -74,7 +74,7 @@ public class CustomerController
                            @RequestParam String email,
                            @RequestParam String password,
                            @RequestParam String firstName,
-                           @RequestParam String name,
+                           @RequestParam String lastName,
                            HttpSession session,
                            RedirectAttributes redirectAttributes)
     {
@@ -87,7 +87,7 @@ public class CustomerController
         customer.setEmail(email);
         customer.hashPassword(password);
         customer.setFirstName(firstName);
-        customer.setLastName(name);
+        customer.setLastName(lastName);
         customer = customerRepository.save(customer);
         sessionService.setCustomerId(session, customer.getId());
         return "redirect:/" + locale + "/";
@@ -133,7 +133,7 @@ public class CustomerController
     @PostMapping("/{locale}/updateAccount")
     public String updateAccount(@PathVariable String locale,
                                 @RequestParam String firstName,
-                                @RequestParam String name,
+                                @RequestParam String lastName,
                                 @RequestParam String email,
                                 HttpSession session,
                                 RedirectAttributes redirectAttributes)
@@ -147,7 +147,7 @@ public class CustomerController
         if (customer != null)
         {
             customer.setFirstName(firstName);
-            customer.setLastName(name);
+            customer.setLastName(lastName);
             customer.setEmail(email);
             customerRepository.save(customer);
             redirectAttributes.addFlashAttribute("success", "Account updated.");
