@@ -4,6 +4,7 @@
 
 - [ ] Backoffice
 - [ ] Coupons
+- [ ] Testing backoffice for manipulation of behavior
 
 ## Feature
 
