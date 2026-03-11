@@ -14,7 +14,7 @@
                         <div class="rounded-circle bg-white shadow-sm d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                             <i class="bi bi-person text-primary" style="font-size: 2.5rem;"></i>
                         </div>
-                        <h4 class="mb-1" th:text="${customer.firstName} + ' ' + ${customer.name}">John Doe</h4>
+                        <h4 class="mb-1" th:text="${customer.firstName} + ' ' + ${customer.lastName}">John Doe</h4>
                         <p class="text-muted small mb-0" th:text="${customer.email}">john@example.com</p>
                     </div>
                     <div class="list-group list-group-flush border-top">
@@ -43,7 +43,7 @@
                                         <label for="firstName">First Name</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="name" name="name" th:value="${customer.name}" placeholder="Last Name"/>
+                                        <input type="text" class="form-control" id="name" name="name" th:value="${customer.lastName}" placeholder="Last Name"/>
                                         <label for="name">Last Name</label>
                                     </div>
                                     <div class="form-floating mb-4">
