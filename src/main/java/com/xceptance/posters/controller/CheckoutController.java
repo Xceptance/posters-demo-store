@@ -19,6 +19,8 @@ import com.xceptance.posters.entity.CatalogCustomerRepository;
 import com.xceptance.posters.service.SessionService;
 import com.xceptance.posters.util.CountryList;
 
+import org.springframework.context.i18n.LocaleContextHolder;
+
 import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
@@ -51,7 +53,7 @@ public class CheckoutController
     public String shippingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
-        model.addAttribute("countries", CountryList.getCountries());
+        model.addAttribute("countries", CountryList.getCountries(LocaleContextHolder.getLocale()));
         return "checkout/shippingAddress";
     }
 
@@ -93,7 +95,7 @@ public class CheckoutController
     public String billingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
-        model.addAttribute("countries", CountryList.getCountries());
+        model.addAttribute("countries", CountryList.getCountries(LocaleContextHolder.getLocale()));
         CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("shippingAddress", cart.getShippingAddress());
         return "checkout/billingAddress";

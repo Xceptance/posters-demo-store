@@ -62,4 +62,34 @@ class CountryListTest
             () -> countries.add(new CountryList.CountryEntry("XX", "Test"))
         );
     }
+
+    @Test
+    void localizedCountryNamesInGerman()
+    {
+        List<CountryList.CountryEntry> countries = CountryList.getCountries(java.util.Locale.GERMAN);
+        assertThat(countries)
+            .anyMatch(c -> "DE".equals(c.code()) && "Deutschland".equals(c.name()));
+        assertThat(countries)
+            .anyMatch(c -> "US".equals(c.code()) && "Vereinigte Staaten".equals(c.name()));
+    }
+
+    @Test
+    void localizedCountryNamesInSwedish()
+    {
+        java.util.Locale swedish = java.util.Locale.forLanguageTag("sv");
+        List<CountryList.CountryEntry> countries = CountryList.getCountries(swedish);
+        assertThat(countries)
+            .anyMatch(c -> "SE".equals(c.code()) && "Sverige".equals(c.name()));
+    }
+
+    @Test
+    void localizedListIsSortedByLocalizedName()
+    {
+        List<CountryList.CountryEntry> countries = CountryList.getCountries(java.util.Locale.GERMAN);
+        for (int i = 1; i < countries.size(); i++)
+        {
+            assertThat(countries.get(i).name())
+                .isGreaterThanOrEqualTo(countries.get(i - 1).name());
+        }
+    }
 }
