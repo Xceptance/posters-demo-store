@@ -8,7 +8,7 @@
 
 ## Feature
 
-- [ ] Footer checkout
+- [x] Footer checkout
 - [ ] Hero header image category
 - [ ] Steps Checkout
 - [ ] Sorting
