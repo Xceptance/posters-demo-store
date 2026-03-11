@@ -4,10 +4,11 @@
 
 - [ ] Backoffice
 - [ ] Coupons
+- [ ] Testing backoffice for manipulation of behavior
 
 ## Feature
 
-- [ ] Footer checkout
+- [x] Footer checkout
 - [ ] Hero header image category
 - [ ] Steps Checkout
 - [ ] Sorting

@@ -16,6 +16,9 @@ import com.xceptance.posters.entity.CatalogOrder;
 import com.xceptance.posters.entity.CheckoutService;
 import com.xceptance.posters.entity.CatalogCustomer;
 import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.entity.CreditCardMasker;
+import com.xceptance.posters.entity.CreditCardValidator;
+import com.xceptance.posters.entity.CreditCardVendor;
 import com.xceptance.posters.service.SessionService;
 import com.xceptance.posters.util.CountryList;
 
@@ -23,6 +26,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 import jakarta.servlet.http.HttpSession;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,16 +42,19 @@ public class CheckoutController
     private final CheckoutService checkoutService;
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
+    private final CreditCardValidator creditCardValidator;
 
     public CheckoutController(CatalogCartRepository cartRepository,
                               CheckoutService checkoutService,
                               CatalogCustomerRepository customerRepository,
-                              SessionService sessionService)
+                              SessionService sessionService,
+                              CreditCardValidator creditCardValidator)
     {
         this.cartRepository = cartRepository;
         this.checkoutService = checkoutService;
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
+        this.creditCardValidator = creditCardValidator;
     }
 
     @GetMapping("/{locale}/checkout/shippingAddress")
@@ -150,25 +158,96 @@ public class CheckoutController
     public String submitPayment(@PathVariable String locale,
                                 @RequestParam String cardNumber,
                                 @RequestParam String name,
-                                @RequestParam int month,
-                                @RequestParam int year,
-                                HttpSession session)
+                                @RequestParam String expiry,
+                                @RequestParam(required = false) String cvv,
+                                HttpSession session,
+                                Model model)
     {
-        CatalogCart cart = sessionService.getCart(session);
+        // Strip non-digits from card number (spaces from auto-formatting)
+        String digits = cardNumber.replaceAll("\\D", "");
 
+        // Auto-detect vendor from BIN prefix
+        CreditCardVendor vendor = CreditCardVendor.detect(digits);
+
+        // Parse MM/YY expiry
+        int month = 0;
+        int year = 0;
+        boolean expiryParsed = false;
+        if (expiry != null && expiry.matches("\\d{2}/\\d{2}"))
+        {
+            month = Integer.parseInt(expiry.substring(0, 2));
+            year = Integer.parseInt(expiry.substring(3, 5));
+            expiryParsed = true;
+        }
+
+        // Server-side validation
+        List<String> errors = new ArrayList<>();
+
+        if (digits.isEmpty())
+        {
+            errors.add("cardNumber:Please enter a card number.");
+        }
+        else
+        {
+            if (!creditCardValidator.isLuhnValid(digits))
+            {
+                errors.add("cardNumber:Please enter a valid credit card number.");
+            }
+            if (vendor != null && !creditCardValidator.isValidLength(digits, vendor))
+            {
+                errors.add("cardNumber:Card number length is invalid for " + vendor.getDisplayName() + ".");
+            }
+        }
+
+        if (name == null || name.isBlank())
+        {
+            errors.add("name:Please enter the cardholder name.");
+        }
+
+        if (!expiryParsed)
+        {
+            errors.add("expiry:Please enter expiry in MM/YY format.");
+        }
+        else if (!creditCardValidator.isExpiryValid(month, year))
+        {
+            errors.add("expiry:Card is expired or expiry date is invalid.");
+        }
+
+        if (!creditCardValidator.isCvvValid(cvv, vendor))
+        {
+            int expectedLen = vendor != null ? vendor.getCvvLength() : 3;
+            errors.add("cvv:CVV must be " + expectedLen + " digits.");
+        }
+
+        // If validation fails, re-render with errors and masked card
+        if (!errors.isEmpty())
+        {
+            addCustomerDataToModel(session, model);
+            model.addAttribute("validationErrors", errors);
+            model.addAttribute("maskedCardNumber", CreditCardMasker.mask(digits));
+            model.addAttribute("cardName", name);
+            model.addAttribute("expiry", expiry);
+            model.addAttribute("detectedVendor", vendor != null ? vendor.getDisplayName() : null);
+            return "checkout/payment";
+        }
+
+        // Save to cart
+        CatalogCart cart = sessionService.getCart(session);
         CartCreditCard card = cart.getCreditCard();
         if (card == null)
         {
             card = new CartCreditCard();
             card.setCart(cart);
         }
-        card.setNumber(cardNumber);
+        card.setNumber(digits);
         card.setName(name);
-        card.setVendor("Visa"); // Default vendor
+        card.setVendor(vendor != null ? vendor.getDisplayName() : "Unknown");
         card.setExpMonth(month);
-        card.setExpYear(year);
+        card.setExpYear(2000 + year);
         cart.setCreditCard(card);
         cartRepository.save(cart);
+
+        // CVV is intentionally NOT stored
 
         return "redirect:/" + locale + "/checkout/placeOrder";
     }
@@ -178,6 +257,13 @@ public class CheckoutController
     {
         CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("cart", cart);
+
+        // Add masked card number for display
+        if (cart.getCreditCard() != null)
+        {
+            model.addAttribute("maskedCardNumber", CreditCardMasker.mask(cart.getCreditCard().getNumber()));
+        }
+
         return "checkout/placeOrder";
     }
 
@@ -223,6 +309,13 @@ public class CheckoutController
         {
             checkoutService.getOrder(orderId).ifPresent(order -> {
                 model.addAttribute("order", order);
+
+                // Add masked card number for display
+                if (order.getCreditCard() != null)
+                {
+                    model.addAttribute("maskedCardNumber", CreditCardMasker.mask(order.getCreditCard().getNumber()));
+                    model.addAttribute("cardVendor", order.getCreditCard().getVendor());
+                }
             });
         }
         return "checkout/orderConfirmation";
@@ -239,3 +332,4 @@ public class CheckoutController
         }
     }
 }
+

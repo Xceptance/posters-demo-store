@@ -58,8 +58,17 @@
                                 <label for="zip" th:text="#{labelZip}">ZIP</label>
                             </div>
                         </div>
-                        <div th:replace="~{fragments/countrySelectFragment :: countrySelect(${countries}, ${defaultCountry})}">
-                            <!-- country select fragment -->
+                        <div class="col-12">
+                            <div class="form-floating mb-4">
+                                <select class="form-select" id="country" name="country" required>
+                                    <option th:each="c : ${countries}"
+                                            th:value="${c.code}"
+                                            th:text="${c.name}"
+                                            th:selected="${c.code == defaultCountryCode}">
+                                    </option>
+                                </select>
+                                <label for="country" th:text="#{labelCountry}">Country</label>
+                            </div>
                         </div>
                         <div class="col-12 text-end">
                             <button type="submit" class="btn btn-primary btn-lg px-5 shadow-sm" id="btn-submit-billing" th:text="#{buttonContinueToPayment}">Continue to Payment</button>

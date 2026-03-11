@@ -87,6 +87,18 @@ public class CartToOrderConverter {
         paymentEntry.setNewState("authorized");
         order.addPaymentHistoryEntry(paymentEntry);
 
+        // Snapshot credit card
+        if (cart.getCreditCard() != null) {
+            CartCreditCard cartCard = cart.getCreditCard();
+            OrderCreditCard orderCard = new OrderCreditCard();
+            orderCard.setNumber(cartCard.getNumber());
+            orderCard.setVendor(cartCard.getVendor());
+            orderCard.setName(cartCard.getName());
+            orderCard.setExpMonth(cartCard.getExpMonth());
+            orderCard.setExpYear(cartCard.getExpYear());
+            order.setCreditCard(orderCard);
+        }
+
         return order;
     }
 

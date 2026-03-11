@@ -1,0 +1,67 @@
+/* ---------------------------------------------------------------
+   Credit Card Form — Styling consistent with store design system
+   Loaded only on the checkout payment page.
+   --------------------------------------------------------------- */
+
+/* Vendor detection area — subtle animated badge */
+.cc-vendor-area {
+    min-height: 2rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-4px);
+}
+
+.cc-vendor-area.cc-vendor-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cc-vendor-badge {
+    background: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Invalid state — Bootstrap already handles .is-invalid, add subtle emphasis */
+.invalid-feedback {
+    font-size: 0.82rem;
+    margin-top: 0.3rem;
+}
+
+/* Trust badge */
+.cc-trust-badge {
+    color: #6c757d;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+.cc-trust-badge i {
+    color: #198754;
+}
+
+/* Card number — slight monospace feel for readability */
+#cardNumber {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.1em;
+    font-size: 1.05rem;
+}
+
+/* ARIA live region — visually hidden but screen-reader accessible */
+.cc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
