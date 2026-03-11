@@ -58,7 +58,7 @@
                                 <label for="zip" th:text="#{labelZip}">ZIP</label>
                             </div>
                         </div>
-                        <div th:replace="~{fragments/countrySelectFragment :: countrySelect(${countries}, 'US')}">
+                        <div th:replace="~{fragments/countrySelectFragment :: countrySelect(${countries}, ${defaultCountry})}">
                             <!-- country select fragment -->
                         </div>
                         <div class="col-12 text-end">

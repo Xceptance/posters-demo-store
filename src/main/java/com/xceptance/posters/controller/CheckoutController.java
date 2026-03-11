@@ -53,7 +53,9 @@ public class CheckoutController
     public String shippingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
-        model.addAttribute("countries", CountryList.getCountries(LocaleContextHolder.getLocale()));
+        java.util.Locale resolved = LocaleContextHolder.getLocale();
+        model.addAttribute("countries", CountryList.getCountries(resolved));
+        model.addAttribute("defaultCountry", resolved.getCountry());
         return "checkout/shippingAddress";
     }
 
@@ -95,7 +97,9 @@ public class CheckoutController
     public String billingAddress(@PathVariable String locale, HttpSession session, Model model)
     {
         addCustomerDataToModel(session, model);
-        model.addAttribute("countries", CountryList.getCountries(LocaleContextHolder.getLocale()));
+        java.util.Locale resolved = LocaleContextHolder.getLocale();
+        model.addAttribute("countries", CountryList.getCountries(resolved));
+        model.addAttribute("defaultCountry", resolved.getCountry());
         CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("shippingAddress", cart.getShippingAddress());
         return "checkout/billingAddress";
