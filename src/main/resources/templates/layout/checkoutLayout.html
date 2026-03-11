@@ -81,12 +81,47 @@
     </main>
 
     <!-- footer -->
-    <footer id="footer" class="footer border-top pt-4 mt-5">
-        <div class="container text-center text-muted mb-4">
-            <small>
-                &copy; 2013-2024 Xceptance Software Technologies GmbH<br/>
-                <a th:href="@{'/' + ${urlLocale} + '/'}" class="text-muted text-decoration-none">Return to Store</a>
-            </small>
+    <footer id="footer" class="footer">
+        <div class="container mb-3">
+            <div class="row row-pb-md">
+                <div id="footer-section-about" class="col">
+                    <h3 class="footer-section-headline">About</h3>
+                    <p class="footer-text-about footer-section-text">
+                        The Posters Demo Store is a demonstration web shop by Xceptance.
+                    </p>
+                    <ul class="footer-social-icons">
+                        <li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i class="bi bi-github"></i></a></li>
+                    </ul>
+                </div>
+                <div id="footer-section-support" class="col">
+                    <h3 class="footer-section-headline">Support</h3>
+                    <ul class="footer-support">
+                        <li><a href="mailto:kontakt@xceptance.de">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div id="footer-section-information" class="col">
+                    <h3 class="footer-section-headline">Information</h3>
+                    <ul class="footer-info">
+                        <li>Terms and Conditions apply.</li>
+                    </ul>
+                </div>
+                <div id="footer-section-contact" class="col">
+                    <h3 class="footer-section-headline">Contact</h3>
+                    <ul class="footer-contact">
+                        <li class="footer-contact-company">Xceptance Software Technologies GmbH</li>
+                        <li class="footer-contact-adress">Leutragraben 2-4<br/>07743 Jena<br/>Germany</li>
+                        <li class="footer-contact-e-mail">E-Mail: <a href="mailto:kontakt@xceptance.de">kontakt@xceptance.de</a></li>
+                        <li class="footer-contact-website">Website: <a href="https://www.xceptance.com">https://www.xceptance.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="footer-copyright" class="footer-copyright text-center">
+            &copy; 2013-2024 Xceptance Software Technologies GmbH<br/>
+            Photo copyrights belong to their respective owners.
+        </div>
+        <div id="footer-version-information" class="version-info text-center">
+            Version <span th:text="${currentVersion}">3.0.0</span>
         </div>
     </footer>
 
