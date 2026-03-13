@@ -161,6 +161,47 @@
     font-size: 18px;
 }
 
+/* Collapsible submodule list */
+.bo-nav-sub {
+    list-style: none;
+    padding: 2px 0 4px 12px;
+    margin: 0;
+}
+
+.bo-nav-sublink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    color: var(--bo-sidebar-text);
+    text-decoration: none;
+    font-size: 13px;
+    transition: background var(--bo-transition), color var(--bo-transition);
+    margin-bottom: 2px;
+}
+
+.bo-nav-sublink:hover {
+    background: var(--bo-sidebar-hover);
+    color: var(--bo-sidebar-text-active);
+}
+
+.bo-nav-sublink.active {
+    background: rgba(99, 102, 241, 0.18);
+    color: var(--bo-sidebar-text-active);
+    font-weight: 500;
+}
+
+.bo-nav-sublink .material-symbols-outlined {
+    font-size: 17px;
+    opacity: 0.8;
+}
+
+/* Chevron rotation when group is open */
+.bo-nav-group-toggle[aria-expanded="true"] .bo-nav-chevron {
+    transform: rotate(90deg);
+}
+
 .bo-sidebar-footer {
     padding: 16px 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);

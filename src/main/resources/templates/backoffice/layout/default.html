@@ -20,36 +20,97 @@
             <span class="bo-brand-text">Posters</span>
         </div>
         <ul class="bo-nav">
+
+            <!-- Dashboard -->
             <li class="bo-nav-item">
                 <a th:href="@{/backoffice/}" class="bo-nav-link">
                     <span class="material-symbols-outlined">dashboard</span>
                     <span>Dashboard</span>
                 </a>
             </li>
+
+            <!-- Security -->
             <li class="bo-nav-item">
-                <a th:href="@{/backoffice/admin/users}" class="bo-nav-link">
-                    <span class="material-symbols-outlined">manage_accounts</span>
-                    <span>Admin Users</span>
-                </a>
-            </li>
-            <li class="bo-nav-item">
-                <a th:href="@{/backoffice/admin/roles}" class="bo-nav-link">
-                    <span class="material-symbols-outlined">shield</span>
-                    <span>Roles</span>
-                </a>
-            </li>
-            <li class="bo-nav-item">
-                <a th:href="@{/backoffice/admin/audit-log}" class="bo-nav-link">
-                    <span class="material-symbols-outlined">history</span>
-                    <span>Audit Log</span>
-                </a>
-            </li>
-            <li class="bo-nav-item">
-                <a th:href="@{/backoffice/admin/security}" class="bo-nav-link">
-                    <span class="material-symbols-outlined">security</span>
+                <a href="#nav-security" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse" aria-expanded="false">
+                    <span class="material-symbols-outlined">admin_panel_settings</span>
                     <span>Security</span>
+                    <span class="material-symbols-outlined bo-nav-chevron ms-auto">chevron_right</span>
                 </a>
+                <ul class="collapse bo-nav-sub" id="nav-security">
+                    <li><a th:href="@{/backoffice/security/users}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">person</span><span>Users</span></a></li>
+                    <li><a th:href="@{/backoffice/security/audit-log}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">history</span><span>Audit Log</span></a></li>
+                    <li><a th:href="@{/backoffice/security/roles}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">shield_person</span><span>Roles</span></a></li>
+                    <li><a th:href="@{/backoffice/security/import-export}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">sync_alt</span><span>Import / Export</span></a></li>
+                    <li><a th:href="@{/backoffice/security/settings}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">settings</span><span>Settings</span></a></li>
+                </ul>
             </li>
+
+            <!-- Catalog -->
+            <li class="bo-nav-item">
+                <a href="#nav-catalog" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse" aria-expanded="false">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>Catalog</span>
+                    <span class="material-symbols-outlined bo-nav-chevron ms-auto">chevron_right</span>
+                </a>
+                <ul class="collapse bo-nav-sub" id="nav-catalog">
+                    <li><a th:href="@{/backoffice/catalog/dashboard}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a></li>
+                    <li><a th:href="@{/backoffice/catalog/categories}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">category</span><span>Categories</span></a></li>
+                    <li><a th:href="@{/backoffice/catalog/products}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">deployed_code</span><span>Products</span></a></li>
+                    <li><a th:href="@{/backoffice/catalog/variations}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">tune</span><span>Variations &amp; Attributes</span></a></li>
+                    <li><a th:href="@{/backoffice/catalog/pricing}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">sell</span><span>Pricing</span></a></li>
+                    <li><a th:href="@{/backoffice/catalog/import-export}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">sync_alt</span><span>Import / Export</span></a></li>
+                    <li><a th:href="@{/backoffice/catalog/settings}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">settings</span><span>Settings</span></a></li>
+                </ul>
+            </li>
+
+            <!-- Customers -->
+            <li class="bo-nav-item">
+                <a href="#nav-customers" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse" aria-expanded="false">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Customers</span>
+                    <span class="material-symbols-outlined bo-nav-chevron ms-auto">chevron_right</span>
+                </a>
+                <ul class="collapse bo-nav-sub" id="nav-customers">
+                    <li><a th:href="@{/backoffice/customers/dashboard}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a></li>
+                    <li><a th:href="@{/backoffice/customers/list}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">manage_accounts</span><span>Customers</span></a></li>
+                    <li><a th:href="@{/backoffice/customers/import-export}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">sync_alt</span><span>Import / Export</span></a></li>
+                    <li><a th:href="@{/backoffice/customers/settings}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">settings</span><span>Settings</span></a></li>
+                </ul>
+            </li>
+
+            <!-- Orders -->
+            <li class="bo-nav-item">
+                <a href="#nav-orders" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse" aria-expanded="false">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span>Orders</span>
+                    <span class="material-symbols-outlined bo-nav-chevron ms-auto">chevron_right</span>
+                </a>
+                <ul class="collapse bo-nav-sub" id="nav-orders">
+                    <li><a th:href="@{/backoffice/orders/dashboard}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a></li>
+                    <li><a th:href="@{/backoffice/orders/list}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">list_alt</span><span>Orders</span></a></li>
+                    <li><a th:href="@{/backoffice/orders/export}" class="bo-nav-sublink">
+                        <span class="material-symbols-outlined">download</span><span>Export</span></a></li>
+                </ul>
+            </li>
+
         </ul>
         <div class="bo-sidebar-footer">
             <span class="bo-version">v3.0.0</span>
