@@ -63,13 +63,14 @@ public class AdminUserController extends AbstractBackofficeController {
                          @RequestParam String displayName,
                          @RequestParam String password,
                          @RequestParam(name = "roleIds", required = false) Set<Long> roleIds,
+                         @AuthenticationPrincipal AdminUserPrincipal principal,
                          RedirectAttributes redirectAttributes) {
         try {
             if (roleIds == null || roleIds.isEmpty()) {
                 redirectAttributes.addFlashAttribute("error", "At least one role must be assigned");
                 return "redirect:/backoffice/admin/users/new";
             }
-            adminUserService.createUser(username, displayName, password, roleIds);
+            adminUserService.createUser(username, displayName, password, roleIds, principal);
             redirectAttributes.addFlashAttribute("success", "User created successfully");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
@@ -125,13 +126,14 @@ public class AdminUserController extends AbstractBackofficeController {
     public String resetPassword(@PathVariable Long id,
                                 @RequestParam String newPassword,
                                 @RequestParam String confirmPassword,
+                                @AuthenticationPrincipal AdminUserPrincipal principal,
                                 RedirectAttributes redirectAttributes) {
         if (!newPassword.equals(confirmPassword)) {
             redirectAttributes.addFlashAttribute("error", "Passwords do not match");
             return "redirect:/backoffice/admin/users/" + id + "/edit";
         }
         try {
-            adminUserService.resetPassword(id, newPassword);
+            adminUserService.resetPassword(id, newPassword, principal);
             redirectAttributes.addFlashAttribute("success", "Password reset successfully");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
