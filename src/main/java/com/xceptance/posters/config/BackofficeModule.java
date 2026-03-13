@@ -5,24 +5,44 @@ import java.util.List;
 
 /**
  * Registry of all backoffice modules. Each top-level sidebar entry is a module;
- * submodules reference their parent. Access control is at the module level.
+ * submodules reference their parent. Access control is at the top-level module level only
+ * (all-or-nothing: a role grants a top-level module AND all its submodules).
  */
 public enum BackofficeModule {
 
-    // Top-level modules
+    // --- Dashboard (no submodules) ---
     DASHBOARD("dashboard", "Dashboard", "dashboard", "/backoffice/", 0, null),
-    PRODUCTS("products", "Products", "inventory_2", "/backoffice/products", 10, null),
-    CATEGORIES("categories", "Categories", "category", "/backoffice/categories", 20, null),
-    CUSTOMERS("customers", "Customers", "group", "/backoffice/customers", 30, null),
-    ORDERS("orders", "Orders", "receipt_long", "/backoffice/orders", 40, null),
-    SETTINGS("settings", "Settings", "settings", "/backoffice/settings", 50, null),
-    ADMIN("admin", "Admin", "admin_panel_settings", "/backoffice/admin", 60, null),
 
-    // Admin submodules
-    ADMIN_USERS("admin-users", "Users", "person", "/backoffice/admin/users", 61, ADMIN),
-    ADMIN_ROLES("admin-roles", "Roles", "shield_person", "/backoffice/admin/roles", 62, ADMIN),
-    ADMIN_SECURITY("admin-security", "Security Settings", "security", "/backoffice/admin/security", 63, ADMIN),
-    ADMIN_AUDIT_LOG("admin-audit-log", "Audit Log", "history", "/backoffice/admin/audit-log", 64, ADMIN);
+    // --- Security ---
+    SECURITY("security", "Security", "admin_panel_settings", "/backoffice/security", 10, null),
+    SECURITY_USERS("security-users", "Users", "person", "/backoffice/security/users", 11, SECURITY),
+    SECURITY_AUDIT_LOG("security-audit-log", "Audit Log", "history", "/backoffice/security/audit-log", 12, SECURITY),
+    SECURITY_ROLES("security-roles", "Roles", "shield_person", "/backoffice/security/roles", 13, SECURITY),
+    SECURITY_IMPORT_EXPORT("security-import-export", "Import / Export", "sync_alt", "/backoffice/security/import-export", 14, SECURITY),
+    SECURITY_SETTINGS("security-settings", "Settings", "settings", "/backoffice/security/settings", 15, SECURITY),
+
+    // --- Catalog ---
+    CATALOG("catalog", "Catalog", "inventory_2", "/backoffice/catalog", 20, null),
+    CATALOG_DASHBOARD("catalog-dashboard", "Dashboard", "dashboard", "/backoffice/catalog/dashboard", 21, CATALOG),
+    CATALOG_CATEGORIES("catalog-categories", "Categories", "category", "/backoffice/catalog/categories", 22, CATALOG),
+    CATALOG_PRODUCTS("catalog-products", "Products", "deployed_code", "/backoffice/catalog/products", 23, CATALOG),
+    CATALOG_VARIATIONS("catalog-variations", "Variations & Attributes", "tune", "/backoffice/catalog/variations", 24, CATALOG),
+    CATALOG_PRICING("catalog-pricing", "Pricing", "sell", "/backoffice/catalog/pricing", 25, CATALOG),
+    CATALOG_IMPORT_EXPORT("catalog-import-export", "Import / Export", "sync_alt", "/backoffice/catalog/import-export", 26, CATALOG),
+    CATALOG_SETTINGS("catalog-settings", "Settings", "settings", "/backoffice/catalog/settings", 27, CATALOG),
+
+    // --- Customers ---
+    CUSTOMERS("customers", "Customers", "group", "/backoffice/customers", 30, null),
+    CUSTOMERS_DASHBOARD("customers-dashboard", "Dashboard", "dashboard", "/backoffice/customers/dashboard", 31, CUSTOMERS),
+    CUSTOMERS_LIST("customers-list", "Customers", "manage_accounts", "/backoffice/customers/list", 32, CUSTOMERS),
+    CUSTOMERS_IMPORT_EXPORT("customers-import-export", "Import / Export", "sync_alt", "/backoffice/customers/import-export", 33, CUSTOMERS),
+    CUSTOMERS_SETTINGS("customers-settings", "Settings", "settings", "/backoffice/customers/settings", 34, CUSTOMERS),
+
+    // --- Orders ---
+    ORDERS("orders", "Orders", "receipt_long", "/backoffice/orders", 40, null),
+    ORDERS_DASHBOARD("orders-dashboard", "Dashboard", "dashboard", "/backoffice/orders/dashboard", 41, ORDERS),
+    ORDERS_LIST("orders-list", "Orders", "list_alt", "/backoffice/orders/list", 42, ORDERS),
+    ORDERS_EXPORT("orders-export", "Export", "download", "/backoffice/orders/export", 43, ORDERS);
 
     private final String id;
     private final String displayName;
@@ -50,7 +70,7 @@ public enum BackofficeModule {
     public boolean isTopLevel() { return parent == null; }
 
     /**
-     * Returns the submodules of this module.
+     * Returns the submodules of this module, sorted by order.
      */
     public List<BackofficeModule> getSubmodules() {
         return Arrays.stream(values())
@@ -71,7 +91,7 @@ public enum BackofficeModule {
 
     /**
      * Finds the module whose URL prefix best matches the given path.
-     * Longest prefix match wins (so /backoffice/admin/users beats /backoffice/admin).
+     * Longest prefix match wins (so /backoffice/security/users beats /backoffice/security).
      */
     public static BackofficeModule fromPath(String path) {
         BackofficeModule best = null;
@@ -86,7 +106,7 @@ public enum BackofficeModule {
     }
 
     /**
-     * Returns the effective module for access checking.
+     * Returns the top-level module for access checking.
      * Submodules inherit access from their parent.
      */
     public BackofficeModule getAccessModule() {

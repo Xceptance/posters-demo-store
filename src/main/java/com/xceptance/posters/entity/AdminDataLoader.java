@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * Seeds default roles and admin user on startup if none exist.
- * Idempotent — does nothing if data already exists.
+ * On upgrade from old module IDs (pre-Security rename), re-seeds role_modules entries.
  */
 @Component
 public class AdminDataLoader implements ApplicationRunner {
@@ -41,36 +41,69 @@ public class AdminDataLoader implements ApplicationRunner {
 
     private void seedRoles() {
         if (roleRepository.count() > 0) {
-            log.info("Roles already exist, skipping seed.");
+            // Migration guard: if no role has the 'security' module ID, re-seed role_modules
+            boolean needsMigration = roleRepository.findAll().stream()
+                    .noneMatch(r -> r.getModuleIds().contains("security"));
+            if (needsMigration) {
+                log.info("Detected old module IDs (pre-hierarchy rename). Re-seeding role_modules...");
+                reseedRoleModules();
+            } else {
+                log.info("Roles already exist with current module IDs, skipping seed.");
+            }
             return;
         }
 
-        // All module IDs for reference
+        createRoles();
+        log.info("Seeded 4 default roles: Admin, Super User, Catalog User, Order User");
+    }
+
+    private void createRoles() {
+        // All top-level module IDs
         Set<String> allModuleIds = Arrays.stream(BackofficeModule.values())
                 .filter(BackofficeModule::isTopLevel)
                 .map(BackofficeModule::getId)
                 .collect(Collectors.toSet());
 
-        // Admin — full access to all modules including Admin
-        createRole("Admin", "Full access to all modules including administration",
-                allModuleIds);
+        // Admin — full access to all modules including Security
+        createRole("Admin", "Full access to all modules including security administration", allModuleIds);
 
-        // Super User — everything except Admin module
+        // Super User — everything except Security
         Set<String> superUserModules = allModuleIds.stream()
-                .filter(id -> !id.equals("admin"))
+                .filter(id -> !id.equals("security"))
                 .collect(Collectors.toSet());
-        createRole("Super User", "Access to all modules except administration",
-                superUserModules);
+        createRole("Super User", "Access to all modules except security administration", superUserModules);
 
-        // Catalog User — dashboard + products + categories
+        // Catalog User — dashboard + catalog
         createRole("Catalog User", "Access to product and catalog management",
-                Set.of("dashboard", "products", "categories"));
+                Set.of("dashboard", "catalog"));
 
-        // Order User — dashboard + orders + customers
-        createRole("Order User", "Access to order management and customer data",
-                Set.of("dashboard", "orders", "customers"));
+        // Order User — dashboard + orders
+        createRole("Order User", "Access to order management",
+                Set.of("dashboard", "orders"));
+    }
 
-        log.info("Seeded 4 default roles: Admin, Super User, Catalog User, Order User");
+    private void reseedRoleModules() {
+        // Clear all role_modules entries and re-seed with updated module IDs
+        roleRepository.findAll().forEach(role -> {
+            switch (role.getName()) {
+                case "Admin" -> {
+                    Set<String> all = Arrays.stream(BackofficeModule.values())
+                            .filter(BackofficeModule::isTopLevel)
+                            .map(BackofficeModule::getId)
+                            .collect(Collectors.toSet());
+                    role.setModuleIds(all);
+                }
+                case "Super User" -> role.setModuleIds(
+                        Set.of("dashboard", "catalog", "customers", "orders"));
+                case "Catalog User" -> role.setModuleIds(
+                        Set.of("dashboard", "catalog"));
+                case "Order User" -> role.setModuleIds(
+                        Set.of("dashboard", "orders"));
+                default -> log.warn("Unknown role '{}' during migration, clearing module IDs", role.getName());
+            }
+            roleRepository.save(role);
+        });
+        log.info("Re-seeded role_modules with updated module IDs");
     }
 
     private Role createRole(String name, String description, Set<String> moduleIds) {

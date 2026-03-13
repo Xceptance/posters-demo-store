@@ -23,7 +23,7 @@ import java.util.Set;
  * Controller for the Admin > Users submodule.
  */
 @Controller
-@RequestMapping("/backoffice/admin/users")
+@RequestMapping("/backoffice/security/users")
 public class AdminUserController extends AbstractBackofficeController {
 
     private final AdminUserService adminUserService;

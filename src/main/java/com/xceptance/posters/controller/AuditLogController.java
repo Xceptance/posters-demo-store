@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Controller for the Admin > Audit Log submodule.
  */
 @Controller
-@RequestMapping("/backoffice/admin/audit-log")
+@RequestMapping("/backoffice/security/audit-log")
 public class AuditLogController extends AbstractBackofficeController {
 
     private final AuditLogService auditLogService;

@@ -18,7 +18,7 @@ import java.util.Map;
  * Controller for the Admin > Roles submodule. Read-only — roles are seeded and immutable.
  */
 @Controller
-@RequestMapping("/backoffice/admin/roles")
+@RequestMapping("/backoffice/security/roles")
 public class RoleController extends AbstractBackofficeController {
 
     private final RoleRepository roleRepository;
