@@ -22,7 +22,7 @@
                         <small class="text-muted d-block mb-1">Permitted Modules:</small>
                         <span th:each="moduleId : ${role.moduleIds}"
                               class="badge bg-outline-primary border border-primary text-primary me-1 mb-1"
-                              th:text="${moduleId}"></span>
+                              th:text="${moduleDisplayNames.containsKey(moduleId) ? moduleDisplayNames[moduleId] : moduleId}"></span>
                     </div>
                 </div>
             </div>

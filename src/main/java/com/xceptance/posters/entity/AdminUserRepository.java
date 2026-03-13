@@ -20,4 +20,6 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {
 
     @Query("SELECT COUNT(u) FROM AdminUser u JOIN u.roles r WHERE r = :role")
     long countByRolesContaining(@Param("role") Role role);
+
+    Page<AdminUser> findByRolesId(Long roleId, Pageable pageable);
 }

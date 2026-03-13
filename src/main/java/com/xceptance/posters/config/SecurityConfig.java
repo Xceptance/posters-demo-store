@@ -18,6 +18,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final AuditLoginHandler auditLoginHandler;
+
+    public SecurityConfig(AuditLoginHandler auditLoginHandler) {
+        this.auditLoginHandler = auditLoginHandler;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -39,14 +45,14 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/backoffice/login")
                 .loginProcessingUrl("/backoffice/login")
-                .defaultSuccessUrl("/backoffice/", true)
+                .successHandler(auditLoginHandler)   // records LOGIN + redirects
                 .failureUrl("/backoffice/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
             )
             .logout(logout -> logout
                 .logoutUrl("/backoffice/logout")
-                .logoutSuccessUrl("/backoffice/login?logout")
+                .logoutSuccessHandler(auditLoginHandler)  // records LOGOUT + redirects
             )
             .exceptionHandling(ex -> ex
                 .accessDeniedPage("/backoffice/access-denied")

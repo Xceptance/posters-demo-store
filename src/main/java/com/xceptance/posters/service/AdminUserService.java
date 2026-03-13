@@ -44,6 +44,9 @@ public class AdminUserService {
             String q = "%" + search.toLowerCase() + "%";
             return adminUserRepository.findBySearch(q, pageable);
         }
+        if (roleId != null) {
+            return adminUserRepository.findByRolesId(roleId, pageable);
+        }
         return adminUserRepository.findAll(pageable);
     }
 
