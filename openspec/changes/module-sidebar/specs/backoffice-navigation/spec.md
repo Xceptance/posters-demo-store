@@ -34,11 +34,11 @@ The sidebar SHALL be rendered server-side by iterating a model attribute (`sideb
 - **THEN** `sidebarModules` contains only Dashboard and Catalog
 - **AND** the sidebar renders those two entries only
 
-#### Scenario: Dashboard always visible
+#### Scenario: Dashboard visible because it is in all roles
 
 - **WHEN** any authenticated user loads a backoffice page
-- **THEN** the Dashboard module is always included in `sidebarModules` regardless of roles
-- **AND** the Dashboard link is always visible in the sidebar
+- **THEN** the Dashboard module is visible in the sidebar because `dashboard` is included in every default role
+- **AND** access to `/backoffice/` is still checked by `ModuleAccessInterceptor` like any other module
 
 #### Scenario: Active module is highlighted
 

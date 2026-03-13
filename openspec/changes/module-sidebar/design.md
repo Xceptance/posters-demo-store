@@ -12,6 +12,7 @@ The backoffice uses Thymeleaf Layout Dialect (`layout:decorate`) for all pages. 
 - Updated `BackofficeModule` enum reflecting the final module hierarchy (Dashboard, Security, Catalog, Customers, Orders — each with their own submodules)
 - Dynamic sidebar rendered from the user's role-permitted modules, hierarchically
 - All-or-nothing role access: a role's `moduleIds` contains only top-level module IDs; all submodules of that module are automatically granted
+- Dashboard is **role-gated like every other module** — it is included in all four default roles so all users see it, but access is still interceptor-checked
 - Role seeding updated to match new module IDs
 - Active module highlighted server-side; parent group auto-expanded when submodule is active
 
