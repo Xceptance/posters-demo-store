@@ -31,31 +31,33 @@ The system SHALL maintain a registry of all backoffice modules. Each module has 
 - **WHEN** querying a module by its id
 - **THEN** it returns a `urlPrefix` that matches the corresponding backoffice URL pattern
 
-### Requirement: Default Roles SHALL Be Seeded at Startup
+### Requirement: Default Roles SHALL Be Re-Seeded with Updated Module IDs
 
-The system SHALL seed default roles on startup if no roles exist. Default roles are immutable — they cannot be edited or deleted via the UI, only assigned to users. The Backoffice Admin module permission is reserved for the built-in Admin role and cannot be set or unset via the UI.
+The default roles SHALL be updated to use the new top-level module IDs. The `AdminDataLoader` SHALL detect and re-seed `role_modules` entries if they contain outdated module IDs (i.e. if the `security` module ID is absent from all role entries).
 
-#### Scenario: Default roles seeded on first startup
+#### Default Role Definitions (updated)
+
+| Role | Module IDs |
+|---|---|
+| Admin | `dashboard`, `security`, `catalog`, `customers`, `orders` |
+| Super User | `dashboard`, `catalog`, `customers`, `orders` |
+| Catalog User | `dashboard`, `catalog` |
+| Order User | `dashboard`, `orders` |
+
+#### Scenario: Roles seeded with new module IDs on fresh start
 
 - **WHEN** the application starts for the first time
 - **AND** the `roles` table is empty
-- **THEN** the following roles are created:
-  - **Admin** — access to all modules including the Admin module (Backoffice Admin)
-  - **Super User** — access to all modules except the Admin module
-  - **Catalog User** — access to product/catalog-related modules
-  - **Order User** — access to order-related modules
+- **THEN** roles are seeded with the module IDs from the table above
+- **AND** `security` is only included in the Admin role
 
-#### Scenario: Default roles are immutable
+#### Scenario: Role_modules re-seeded on upgrade from old module IDs
 
-- **WHEN** an admin views the roles list in the Admin > Roles submodule
-- **THEN** each role displays its name, description, and permitted modules
-- **AND** no edit or delete actions are available for default roles
-
-#### Scenario: Subsequent startup does not duplicate roles
-
-- **WHEN** the application starts again
-- **AND** the `roles` table already contains roles
-- **THEN** no additional roles are created
+- **WHEN** the application starts
+- **AND** the `roles` table has entries
+- **AND** no role contains the `security` module ID
+- **THEN** all `role_modules` entries are cleared and re-seeded with updated IDs
+- **AND** the roles themselves (name, description, builtIn) are preserved
 
 ### Requirement: Roles Submodule SHALL List All Roles
 
