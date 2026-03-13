@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title th:text="${user.id != null ? 'Edit User' : 'New User'} + ' - Backoffice'">User Form - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle" th:text="${user.id != null ? 'Edit User' : 'New User'}">User Form</div>
+    <div layout:fragment="content">
+
+        <!-- Flash messages -->
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bo-module-card">
+                    <form method="post"
+                          th:action="${user.id != null
+                              ? '/backoffice/admin/users/' + user.id + '/edit'
+                              : '/backoffice/admin/users/new'}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username"
+                                   th:value="${user.username}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Display Name</label>
+                            <input type="text" class="form-control" name="displayName"
+                                   th:value="${user.displayName}" required>
+                        </div>
+
+                        <div th:if="${user.id == null}" class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Roles</label>
+                            <div th:each="r : ${allRoles}" class="form-check">
+                                <input class="form-check-input" type="checkbox" name="roleIds"
+                                       th:value="${r.id}"
+                                       th:id="'role-' + ${r.id}"
+                                       th:checked="${user.roles != null && user.roles.contains(r)}">
+                                <label class="form-check-label" th:for="'role-' + ${r.id}">
+                                    <span th:text="${r.name}"></span>
+                                    <small class="text-muted" th:text="' — ' + ${r.description}"></small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <span th:text="${user.id != null ? 'Update User' : 'Create User'}"></span>
+                            </button>
+                            <a th:href="@{/backoffice/admin/users}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Password Reset (edit only) -->
+                <div th:if="${user.id != null}" class="bo-module-card mt-4">
+                    <h5 class="mb-3">Reset Password</h5>
+                    <form method="post" th:action="@{/backoffice/admin/users/{id}/reset-password(id=${user.id})}">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" name="newPassword" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" name="confirmPassword" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning mt-3">
+                            <span class="material-symbols-outlined me-1" style="vertical-align: middle; font-size: 18px;">lock_reset</span>
+                            Reset Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

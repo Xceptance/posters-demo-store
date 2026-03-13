@@ -1,0 +1,54 @@
+<nav class="bo-sidebar" th:fragment="sidebar(sidebarModules, adminDisplayName)">
+    <div class="bo-sidebar-brand">
+        <span class="material-symbols-outlined bo-brand-icon">storefront</span>
+        <span class="bo-brand-text">Posters</span>
+    </div>
+
+    <ul class="bo-nav">
+        <th:block th:each="mod : ${sidebarModules}">
+            <!-- Module without submodules: simple link -->
+            <li th:if="${!mod.hasSubmodules()}"
+                class="bo-nav-item"
+                th:classappend="${mod.active()} ? ' active'">
+                <a th:href="${mod.getUrlPrefix()}" class="bo-nav-link">
+                    <span class="material-symbols-outlined" th:text="${mod.getIcon()}"></span>
+                    <span th:text="${mod.getDisplayName()}"></span>
+                </a>
+            </li>
+
+            <!-- Module with submodules: collapsible group -->
+            <li th:if="${mod.hasSubmodules()}"
+                class="bo-nav-item bo-nav-group"
+                th:classappend="${mod.active()} ? ' active'">
+                <a class="bo-nav-link bo-nav-toggle"
+                   data-bs-toggle="collapse"
+                   th:href="'#collapse-' + ${mod.getId()}"
+                   role="button"
+                   th:attr="aria-expanded=${mod.expanded()}"
+                   th:attrappend="aria-controls='collapse-' + ${mod.getId()}">
+                    <span class="material-symbols-outlined" th:text="${mod.getIcon()}"></span>
+                    <span th:text="${mod.getDisplayName()}"></span>
+                    <span class="material-symbols-outlined bo-nav-chevron">expand_more</span>
+                </a>
+                <div class="collapse"
+                     th:classappend="${mod.expanded()} ? ' show'"
+                     th:id="'collapse-' + ${mod.getId()}">
+                    <ul class="bo-nav bo-subnav">
+                        <li th:each="sub : ${mod.submodules()}"
+                            class="bo-nav-item"
+                            th:classappend="${sub.active()} ? ' active'">
+                            <a th:href="${sub.getUrlPrefix()}" class="bo-nav-link">
+                                <span class="material-symbols-outlined" th:text="${sub.getIcon()}"></span>
+                                <span th:text="${sub.getDisplayName()}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </th:block>
+    </ul>
+
+    <div class="bo-sidebar-footer">
+        <span class="bo-version">v3.0.0</span>
+    </div>
+</nav>

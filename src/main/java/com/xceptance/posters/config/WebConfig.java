@@ -49,7 +49,7 @@ public class WebConfig implements WebMvcConfigurer
     {
         registry.addInterceptor(commonDataInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/assets/**", "/h2-console/**", "/api/**");
+                .excludePathPatterns("/assets/**", "/h2-console/**", "/api/**", "/backoffice/**");
     }
 
     @Override

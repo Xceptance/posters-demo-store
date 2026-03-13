@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Roles - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Roles</div>
+    <div layout:fragment="content">
+
+        <div class="row g-4">
+            <div th:each="role : ${roles}" class="col-md-6 col-xl-4">
+                <div class="bo-module-card">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="material-symbols-outlined text-primary me-2">shield_person</span>
+                        <h5 class="mb-0" th:text="${role.name}"></h5>
+                        <span th:if="${role.builtIn}" class="badge bg-secondary ms-2">Built-in</span>
+                    </div>
+                    <p class="text-muted mb-3" th:text="${role.description}"></p>
+                    <div>
+                        <small class="text-muted d-block mb-1">Permitted Modules:</small>
+                        <span th:each="moduleId : ${role.moduleIds}"
+                              class="badge bg-outline-primary border border-primary text-primary me-1 mb-1"
+                              th:text="${moduleId}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

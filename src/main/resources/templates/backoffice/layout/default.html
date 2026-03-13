@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$CONTENT_TITLE - Backoffice">Backoffice</title>
+    <link th:href="@{/assets/css/backoffice-fonts.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/backoffice.css}" rel="stylesheet">
+    <link th:href="@{/assets/lib/bootstrap/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/assets/lib/htmx.min.js}" defer></script>
+    <script th:src="@{/assets/lib/bootstrap/bootstrap.bundle.min.js}" defer></script>
+</head>
+<body class="bo-body">
+
+    <!-- Sidebar -->
+    <nav class="bo-sidebar">
+        <div class="bo-sidebar-brand">
+            <span class="material-symbols-outlined bo-brand-icon">storefront</span>
+            <span class="bo-brand-text">Posters</span>
+        </div>
+        <ul class="bo-nav">
+            <li class="bo-nav-item">
+                <a th:href="@{/backoffice/}" class="bo-nav-link">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="bo-nav-item">
+                <a th:href="@{/backoffice/admin/users}" class="bo-nav-link">
+                    <span class="material-symbols-outlined">manage_accounts</span>
+                    <span>Admin Users</span>
+                </a>
+            </li>
+            <li class="bo-nav-item">
+                <a th:href="@{/backoffice/admin/roles}" class="bo-nav-link">
+                    <span class="material-symbols-outlined">shield</span>
+                    <span>Roles</span>
+                </a>
+            </li>
+            <li class="bo-nav-item">
+                <a th:href="@{/backoffice/admin/audit-log}" class="bo-nav-link">
+                    <span class="material-symbols-outlined">history</span>
+                    <span>Audit Log</span>
+                </a>
+            </li>
+            <li class="bo-nav-item">
+                <a th:href="@{/backoffice/admin/security}" class="bo-nav-link">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Security</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bo-sidebar-footer">
+            <span class="bo-version">v3.0.0</span>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="bo-main">
+        <header class="bo-topbar">
+            <div class="bo-topbar-left">
+                <h1 class="bo-page-title" layout:fragment="pageTitle">Backoffice</h1>
+            </div>
+            <div class="bo-topbar-right">
+                <span class="bo-admin-name" th:text="${adminDisplayName} ?: 'Admin'">Admin</span>
+                <form th:action="@{/backoffice/logout}" method="post" class="d-inline">
+                    <button type="submit" class="bo-logout-btn" title="Logout">
+                        <span class="material-symbols-outlined">logout</span>
+                    </button>
+                </form>
+            </div>
+        </header>
+        <main class="bo-content">
+            <div layout:fragment="content"><!-- content here --></div>
+        </main>
+    </div>
+
+</body>
+</html>
