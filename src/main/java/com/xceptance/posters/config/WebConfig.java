@@ -32,10 +32,13 @@ import com.xceptance.posters.interceptor.CommonDataInterceptor;
 public class WebConfig implements WebMvcConfigurer
 {
     private final CommonDataInterceptor commonDataInterceptor;
+    private final BackofficeReadinessInterceptor backofficeReadinessInterceptor;
 
-    public WebConfig(CommonDataInterceptor commonDataInterceptor)
+    public WebConfig(CommonDataInterceptor commonDataInterceptor,
+                     BackofficeReadinessInterceptor backofficeReadinessInterceptor)
     {
         this.commonDataInterceptor = commonDataInterceptor;
+        this.backofficeReadinessInterceptor = backofficeReadinessInterceptor;
     }
 
     @Bean
@@ -50,6 +53,10 @@ public class WebConfig implements WebMvcConfigurer
         registry.addInterceptor(commonDataInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/assets/**", "/h2-console/**", "/api/**", "/backoffice/**");
+
+        registry.addInterceptor(backofficeReadinessInterceptor)
+                .addPathPatterns("/backoffice/**")
+                .excludePathPatterns("/backoffice/starting", "/assets/**");
     }
 
     @Override

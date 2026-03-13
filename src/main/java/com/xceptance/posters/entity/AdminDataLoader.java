@@ -1,6 +1,7 @@
 package com.xceptance.posters.entity;
 
 import com.xceptance.posters.config.BackofficeModule;
+import com.xceptance.posters.config.BackofficeReadinessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -24,19 +25,23 @@ public class AdminDataLoader implements ApplicationRunner {
     private final AdminUserRepository adminUserRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final BackofficeReadinessService readinessService;
 
     public AdminDataLoader(AdminUserRepository adminUserRepository,
                            RoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder,
+                           BackofficeReadinessService readinessService) {
         this.adminUserRepository = adminUserRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.readinessService = readinessService;
     }
 
     @Override
     public void run(ApplicationArguments args) {
         seedRoles();
         seedAdminUser();
+        readinessService.markReady();
     }
 
     private void seedRoles() {

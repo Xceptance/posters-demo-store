@@ -39,7 +39,7 @@ public class SecurityConfig {
         http
             .securityMatcher("/backoffice/**", "/error")
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/backoffice/login", "/error").permitAll()
+                .requestMatchers("/backoffice/login", "/backoffice/starting", "/error").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
