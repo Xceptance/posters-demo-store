@@ -322,12 +322,22 @@
     padding: 28px;
     box-shadow: var(--bo-card-shadow);
     transition: all var(--bo-transition);
-    height: 100%;
 }
 
-.bo-module-card:hover {
-    box-shadow: var(--bo-card-shadow-hover);
-    transform: translateY(-2px);
+.bo-module-card .table thead th {
+    background: #f8f9fa;
+    border-bottom: 2px solid var(--bo-card-border);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bo-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.bo-module-card .table td {
+    color: var(--bo-text-secondary);
+    font-size: 14px;
+    vertical-align: middle;
 }
 
 .bo-module-icon {

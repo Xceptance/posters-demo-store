@@ -55,11 +55,12 @@ public class AdminUserService {
     }
 
     @Transactional
-    public AdminUser createUser(String username, String displayName, String password,
+    public AdminUser createUser(String username, String displayName, String email, String password,
                                 Set<Long> roleIds, AdminUserPrincipal caller) {
         AdminUser user = new AdminUser();
         user.setUsername(username);
         user.setDisplayName(displayName);
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         user.setRoles(resolveRoles(roleIds));
         AdminUser saved = adminUserRepository.save(user);
@@ -74,25 +75,26 @@ public class AdminUserService {
     }
 
     @Transactional
-    public AdminUser updateUser(Long id, String username, String displayName,
+    public AdminUser updateUser(Long id, String username, String displayName, String email,
                                 Set<Long> roleIds, AdminUserPrincipal caller) {
         AdminUser user = adminUserRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + id));
 
         Set<Role> newRoles = resolveRoles(roleIds);
 
-        // Last-admin protection: if removing Admin role from this user, check if they are the last
-        Role adminRole = roleRepository.findByName("Admin").orElse(null);
+        // Last-admin protection: if removing System Admin role from this user, check if they are the last
+        Role adminRole = roleRepository.findByName("System Admin").orElse(null);
         if (adminRole != null && user.getRoles().contains(adminRole) && !newRoles.contains(adminRole)) {
             long adminCount = adminUserRepository.countByRolesContaining(adminRole);
             if (adminCount <= 1) {
-                throw new IllegalStateException("Cannot remove Admin role from the last admin user");
+                throw new IllegalStateException("Cannot remove System Admin role from the last admin user");
             }
         }
 
         String oldUsername = user.getUsername();
         user.setUsername(username);
         user.setDisplayName(displayName);
+        user.setEmail(email);
         user.setRoles(newRoles);
         AdminUser saved = adminUserRepository.save(user);
 
@@ -116,7 +118,7 @@ public class AdminUserService {
         }
 
         // Last-admin protection
-        Role adminRole = roleRepository.findByName("Admin").orElse(null);
+        Role adminRole = roleRepository.findByName("System Admin").orElse(null);
         if (adminRole != null && user.getRoles().contains(adminRole)) {
             long adminCount = adminUserRepository.countByRolesContaining(adminRole);
             if (adminCount <= 1) {

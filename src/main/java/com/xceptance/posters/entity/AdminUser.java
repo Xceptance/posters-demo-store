@@ -36,6 +36,9 @@ public class AdminUser {
     @Column(name = "display_name", nullable = false)
     private String displayName;
 
+    @Column(nullable = false)
+    private String email;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -67,6 +70,9 @@ public class AdminUser {
 
     public String getDisplayName() { return displayName; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
 

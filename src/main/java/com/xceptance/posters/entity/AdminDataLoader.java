@@ -59,7 +59,7 @@ public class AdminDataLoader implements ApplicationRunner {
         }
 
         createRoles();
-        log.info("Seeded 4 default roles: Admin, Super User, Catalog User, Order User");
+        log.info("Seeded 4 default roles: System Admin, Business Admin, Catalog User, Order User");
     }
 
     private void createRoles() {
@@ -69,14 +69,14 @@ public class AdminDataLoader implements ApplicationRunner {
                 .map(BackofficeModule::getId)
                 .collect(Collectors.toSet());
 
-        // Admin — full access to all modules including Security
-        createRole("Admin", "Full access to all modules including security administration", allModuleIds);
+        // System Admin — full access to all modules including Security
+        createRole("System Admin", "Full access to all modules including security administration", allModuleIds);
 
-        // Super User — everything except Security
-        Set<String> superUserModules = allModuleIds.stream()
+        // Business Admin — everything except Security
+        Set<String> businessAdminModules = allModuleIds.stream()
                 .filter(id -> !id.equals("security"))
                 .collect(Collectors.toSet());
-        createRole("Super User", "Access to all modules except security administration", superUserModules);
+        createRole("Business Admin", "Access to all modules except security administration", businessAdminModules);
 
         // Catalog User — dashboard + catalog
         createRole("Catalog User", "Access to product and catalog management",
@@ -91,14 +91,14 @@ public class AdminDataLoader implements ApplicationRunner {
         // Clear all role_modules entries and re-seed with updated module IDs
         roleRepository.findAll().forEach(role -> {
             switch (role.getName()) {
-                case "Admin" -> {
+                case "System Admin" -> {
                     Set<String> all = Arrays.stream(BackofficeModule.values())
                             .filter(BackofficeModule::isTopLevel)
                             .map(BackofficeModule::getId)
                             .collect(Collectors.toSet());
                     role.setModuleIds(all);
                 }
-                case "Super User" -> role.setModuleIds(
+                case "Business Admin" -> role.setModuleIds(
                         Set.of("dashboard", "catalog", "customers", "orders"));
                 case "Catalog User" -> role.setModuleIds(
                         Set.of("dashboard", "catalog"));
@@ -126,15 +126,16 @@ public class AdminDataLoader implements ApplicationRunner {
             return;
         }
 
-        Role adminRole = roleRepository.findByName("Admin")
-                .orElseThrow(() -> new IllegalStateException("Admin role must be seeded before admin user"));
+        Role adminRole = roleRepository.findByName("System Admin")
+                .orElseThrow(() -> new IllegalStateException("System Admin role must be seeded before admin user"));
 
         AdminUser admin = new AdminUser();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin-2026!"));
         admin.setDisplayName("Administrator");
+        admin.setEmail("admin@posters-demo.local");
         admin.setRoles(Set.of(adminRole));
         adminUserRepository.save(admin);
-        log.info("Seeded default admin user: admin (with Admin role)");
+        log.info("Seeded default admin user: admin (with System Admin role)");
     }
 }

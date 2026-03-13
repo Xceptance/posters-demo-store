@@ -1,0 +1,97 @@
+<!-- User table results fragment - returned by HTMX search -->
+<div id="user-results" xmlns:th="http://www.thymeleaf.org">
+    <div class="bo-module-card p-0">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Display Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Created</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="u : ${users.content}">
+                    <td>
+                        <a th:href="@{/backoffice/security/users/{id}/edit(id=${u.id})}"
+                           class="fw-semibold text-decoration-none" th:text="${u.username}"></a>
+                    </td>
+                    <td th:text="${u.displayName}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td>
+                        <span th:each="r : ${u.roles}" class="badge bg-primary me-1" th:text="${r.name}"></span>
+                    </td>
+                    <td th:text="${#temporals.format(u.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td class="text-end">
+                        <a th:href="@{/backoffice/security/users/{id}/edit(id=${u.id})}"
+                           class="btn btn-sm btn-outline-secondary" title="Edit">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button th:if="${u.id != currentUserId}"
+                                type="button" class="btn btn-sm btn-outline-danger" title="Delete"
+                                data-bs-toggle="modal"
+                                th:data-bs-target="'#deleteUserModal-' + ${u.id}">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr th:if="${users.content.isEmpty()}">
+                    <td colspan="6" class="text-center text-muted py-4">No users found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav th:if="${users.totalPages > 1}" class="mt-3">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${users.first} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/backoffice/security/users(search=${search}, roleId=${roleId}, page=${users.number - 1})}"
+                   hx-get th:hx-get="@{/backoffice/security/users(search=${search}, roleId=${roleId}, page=${users.number - 1})}"
+                   hx-target="#user-results" hx-swap="outerHTML">Previous</a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, users.totalPages - 1)}"
+                class="page-item" th:classappend="${i == users.number} ? 'active'">
+                <a class="page-link"
+                   th:href="@{/backoffice/security/users(search=${search}, roleId=${roleId}, page=${i})}"
+                   hx-get th:hx-get="@{/backoffice/security/users(search=${search}, roleId=${roleId}, page=${i})}"
+                   hx-target="#user-results" hx-swap="outerHTML"
+                   th:text="${i + 1}"></a>
+            </li>
+            <li class="page-item" th:classappend="${users.last} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/backoffice/security/users(search=${search}, roleId=${roleId}, page=${users.number + 1})}"
+                   hx-get th:hx-get="@{/backoffice/security/users(search=${search}, roleId=${roleId}, page=${users.number + 1})}"
+                   hx-target="#user-results" hx-swap="outerHTML">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Delete confirmation modals -->
+    <div th:each="u : ${users.content}" th:if="${u.id != currentUserId}">
+        <div class="modal fade" th:id="'deleteUserModal-' + ${u.id}" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete user "<strong th:text="${u.username}"></strong>"?</p>
+                        <p class="text-muted mb-0">This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form th:action="@{/backoffice/security/users/{id}/delete(id=${u.id})}"
+                              method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

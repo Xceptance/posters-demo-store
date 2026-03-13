@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,6 +40,8 @@ public class AdminUserController extends AbstractBackofficeController {
                        @RequestParam(required = false) Long roleId,
                        @RequestParam(defaultValue = "0") int page,
                        @RequestParam(defaultValue = "20") int size,
+                       @AuthenticationPrincipal AdminUserPrincipal principal,
+                       @RequestHeader(value = "HX-Request", required = false) String hxRequest,
                        Model model) {
         Page<AdminUser> users = adminUserService.findAll(
                 search.isBlank() ? null : search, roleId,
@@ -47,7 +50,12 @@ public class AdminUserController extends AbstractBackofficeController {
         model.addAttribute("users", users);
         model.addAttribute("search", search);
         model.addAttribute("roleId", roleId);
+        model.addAttribute("currentUserId", principal.getUserId());
         model.addAttribute("allRoles", roleRepository.findAll());
+
+        if ("true".equals(hxRequest)) {
+            return "backoffice/admin/users/results";
+        }
         return "backoffice/admin/users/list";
     }
 
@@ -61,22 +69,28 @@ public class AdminUserController extends AbstractBackofficeController {
     @PostMapping("/new")
     public String create(@RequestParam String username,
                          @RequestParam String displayName,
+                         @RequestParam String email,
                          @RequestParam String password,
-                         @RequestParam(name = "roleIds", required = false) Set<Long> roleIds,
+                         @RequestParam String confirmPassword,
+                         @RequestParam(name = "roleId", required = false) Long roleId,
                          @AuthenticationPrincipal AdminUserPrincipal principal,
                          RedirectAttributes redirectAttributes) {
         try {
-            if (roleIds == null || roleIds.isEmpty()) {
-                redirectAttributes.addFlashAttribute("error", "At least one role must be assigned");
-                return "redirect:/backoffice/admin/users/new";
+            if (!password.equals(confirmPassword)) {
+                redirectAttributes.addFlashAttribute("error", "Passwords do not match");
+                return "redirect:/backoffice/security/users/new";
             }
-            adminUserService.createUser(username, displayName, password, roleIds, principal);
+            if (roleId == null) {
+                redirectAttributes.addFlashAttribute("error", "A role must be assigned");
+                return "redirect:/backoffice/security/users/new";
+            }
+            adminUserService.createUser(username, displayName, email, password, Set.of(roleId), principal);
             redirectAttributes.addFlashAttribute("success", "User created successfully");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/backoffice/admin/users/new";
+            return "redirect:/backoffice/security/users/new";
         }
-        return "redirect:/backoffice/admin/users";
+        return "redirect:/backoffice/security/users";
     }
 
     @GetMapping("/{id}/edit")
@@ -92,21 +106,22 @@ public class AdminUserController extends AbstractBackofficeController {
     public String update(@PathVariable Long id,
                          @RequestParam String username,
                          @RequestParam String displayName,
-                         @RequestParam(name = "roleIds", required = false) Set<Long> roleIds,
+                         @RequestParam String email,
+                         @RequestParam(name = "roleId", required = false) Long roleId,
                          @AuthenticationPrincipal AdminUserPrincipal principal,
                          RedirectAttributes redirectAttributes) {
         try {
-            if (roleIds == null || roleIds.isEmpty()) {
-                redirectAttributes.addFlashAttribute("error", "At least one role must be assigned");
-                return "redirect:/backoffice/admin/users/" + id + "/edit";
+            if (roleId == null) {
+                redirectAttributes.addFlashAttribute("error", "A role must be assigned");
+                return "redirect:/backoffice/security/users/" + id + "/edit";
             }
-            adminUserService.updateUser(id, username, displayName, roleIds, principal);
+            adminUserService.updateUser(id, username, displayName, email, Set.of(roleId), principal);
             redirectAttributes.addFlashAttribute("success", "User updated successfully");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/backoffice/admin/users/" + id + "/edit";
+            return "redirect:/backoffice/security/users/" + id + "/edit";
         }
-        return "redirect:/backoffice/admin/users";
+        return "redirect:/backoffice/security/users";
     }
 
     @PostMapping("/{id}/delete")
@@ -119,7 +134,7 @@ public class AdminUserController extends AbstractBackofficeController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/backoffice/admin/users";
+        return "redirect:/backoffice/security/users";
     }
 
     @PostMapping("/{id}/reset-password")
@@ -130,7 +145,7 @@ public class AdminUserController extends AbstractBackofficeController {
                                 RedirectAttributes redirectAttributes) {
         if (!newPassword.equals(confirmPassword)) {
             redirectAttributes.addFlashAttribute("error", "Passwords do not match");
-            return "redirect:/backoffice/admin/users/" + id + "/edit";
+            return "redirect:/backoffice/security/users/" + id + "/edit";
         }
         try {
             adminUserService.resetPassword(id, newPassword, principal);
@@ -138,6 +153,6 @@ public class AdminUserController extends AbstractBackofficeController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/backoffice/admin/users/" + id + "/edit";
+        return "redirect:/backoffice/security/users/" + id + "/edit";
     }
 }
