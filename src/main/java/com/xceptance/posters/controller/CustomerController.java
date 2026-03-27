@@ -1,7 +1,10 @@
 package com.xceptance.posters.controller;
 
+import java.util.Locale;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +28,15 @@ public class CustomerController
 {
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
+    private final MessageSource messageSource;
 
     public CustomerController(CatalogCustomerRepository customerRepository,
-                              SessionService sessionService)
+                              SessionService sessionService,
+                              MessageSource messageSource)
     {
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
+        this.messageSource = messageSource;
     }
 
     @GetMapping("/{locale}/login")
@@ -69,15 +75,42 @@ public class CustomerController
         return "customer/register";
     }
 
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d\\s])\\S{10,}$"
+    );
+
     @PostMapping("/{locale}/register")
     public String register(@PathVariable String locale,
                            @RequestParam String email,
                            @RequestParam String password,
+                           @RequestParam String passwordConfirm,
                            @RequestParam String firstName,
                            @RequestParam String name,
                            HttpSession session,
                            RedirectAttributes redirectAttributes)
     {
+        Locale resolvedLocale = Locale.forLanguageTag(locale.replace("_", "-"));
+
+        if (firstName.isBlank() || name.isBlank() || email.isBlank()
+            || password.isBlank() || passwordConfirm.isBlank())
+        {
+            String msg = messageSource.getMessage("errorFieldsRequired", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
+
+        if (!PASSWORD_PATTERN.matcher(password).matches())
+        {
+            String msg = messageSource.getMessage("errorPasswordTooWeak", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
+        if (!password.equals(passwordConfirm))
+        {
+            String msg = messageSource.getMessage("errorPasswordMatch", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
         if (customerRepository.existsByEmail(email))
         {
             redirectAttributes.addFlashAttribute("error", "Email already in use.");
