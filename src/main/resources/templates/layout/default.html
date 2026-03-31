@@ -23,6 +23,35 @@
 
     <!-- HTMX -->
     <script th:src="@{/assets/js/htmx.min.js}"></script>
+
+    <!-- WebMCP: Browser Native Agent API Registry -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          if (window.navigator && window.navigator.modelContext) {
+              window.navigator.modelContext.registerTool({
+                  name: "search_catalog",
+                  description: "Searches the store catalog for products matching a given query. Use this to find specific items, brands, or categories.",
+                  parameters: {
+                      type: "object",
+                      properties: {
+                          query: {
+                              type: "string",
+                              description: "The search term to look for, e.g., 'laptop' or 'shoes'"
+                          }
+                      },
+                      required: ["query"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/search?q=${encodeURIComponent(params.query)}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      if (!response.ok) throw new Error("Search failed with status " + response.status);
+                      return await response.json();
+                  }
+              });
+              console.log("🤖 WebMCP tools registered for AI agents.");
+          }
+      });
+    </script>
 </head>
 
 <body>
