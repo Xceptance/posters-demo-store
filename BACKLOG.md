@@ -33,7 +33,7 @@
 - [ ] Translation: Full `ja-JP` translation of Backoffice admin UI
 ## Defect
 
-- [ ] Scroll up button does not work
+- [x] Scroll up button does not work
 - [ ] Design login screen
 - [ ] Design create an account
 - [ ] No price updates for change of size defect

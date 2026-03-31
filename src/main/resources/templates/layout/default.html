@@ -341,6 +341,9 @@
 
     <!-- Scroll to top + HTMX integrations -->
     <script>
+        function toTopFunction() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         (function() {
             var top = document.getElementById('js-top');
             if (top) {
