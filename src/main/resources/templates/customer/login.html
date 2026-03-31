@@ -16,8 +16,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label" th:text="#{labelPassword}">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required/>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" required/>
+                            <button class="btn btn-outline-secondary" type="button" id="btn-toggle-password"
+                                    aria-label="Show password">
+                                <i class="bi bi-eye" id="icon-toggle-password"></i>
+                            </button>
+                        </div>
                     </div>
+                    <script>
+                        document.getElementById('btn-toggle-password').addEventListener('click', function() {
+                            var input = document.getElementById('password');
+                            var icon = document.getElementById('icon-toggle-password');
+                            var isHidden = input.type === 'password';
+                            input.type = isHidden ? 'text' : 'password';
+                            icon.classList.toggle('bi-eye', !isHidden);
+                            icon.classList.toggle('bi-eye-slash', isHidden);
+                            this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+                        });
+                    </script>
                     <button type="submit" class="btn btn-primary" id="btn-login" th:text="#{titleLogin}">Login</button>
                 </form>
                 <p class="mt-3" th:text="#{labelNoAccount}">Don't have an account?
