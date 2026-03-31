@@ -21,6 +21,13 @@
     <!-- Theme style  -->
     <link rel="stylesheet" th:href="@{/assets/css/style_reworked.css}"/>
 
+    <!-- Japanese font fallback (conditionally loaded) -->
+    <th:block th:if="${urlLocale == 'ja-JP'}">
+        <style>
+            body { font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important; }
+            h1, h2, h3, h4, h5, h6 { font-family: 'Rokkitt', 'Noto Sans JP', serif !important; }
+        </style>
+    </th:block>
     <!-- HTMX -->
     <script th:src="@{/assets/js/htmx.min.js}"></script>
 

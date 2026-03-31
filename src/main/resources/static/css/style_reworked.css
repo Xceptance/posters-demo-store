@@ -24,6 +24,14 @@
     font-weight: 100 900;
     font-style: italic;
   }
+
+  @font-face {
+    font-family: 'Noto Sans JP';
+    src: url("../fonts/noto-sans-jp/NotoSansJP-Variable.woff2") format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
   
   :root {
     /* Typographic scale — Major Third (1.25)
