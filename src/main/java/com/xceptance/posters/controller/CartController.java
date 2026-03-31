@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.CartLineItem;
@@ -58,6 +60,11 @@ public class CartController
         this.props = props;
     }
 
+    // ─── DTOs for JSON Agents ──────────────────────────────────────────
+
+    public record AddToCartRequestDto(int productId, Integer quantity, String size, String finish) {}
+    public record AddToCartResponseDto(boolean success, String message, int cartCount) {}
+
     // ─── DTOs for templates ────────────────────────────────────────────
 
     /**
@@ -100,6 +107,90 @@ public class CartController
         String currency = getCurrencyForLocale(locale);
         model.addAttribute("cart", toCartDto(cart, locale, currency));
         return "cart/cart";
+    }
+
+    // ─── Add to Cart (WebMCP / JSON API) ───────────────────────────────
+
+    /**
+     * Dedicated JSON endpoint for the AI agent to add items to the cart securely.
+     */
+    @PostMapping(value = "/api/v2/cart/add", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public AddToCartResponseDto addJsonToCart(@RequestBody AddToCartRequestDto payload,
+                                              HttpSession session,
+                                              @RequestParam(value = "locale", required = false, defaultValue = "en-US") String locale)
+    {
+        // 1. SECURITY: Validate payload string length (prevent ReDOS or memory bloat)
+        String safeSize = payload.size() != null && payload.size().length() <= 50 ? payload.size() : null;
+        String safeFinish = payload.finish() != null && payload.finish().length() <= 50 ? payload.finish() : null;
+
+        CatalogCart cart = sessionService.getCart(session);
+        String currency = getCurrencyForLocale(locale);
+
+        Product product = catalogProductRepository.findById(payload.productId()).orElse(null);
+        if (product == null)
+        {
+            int currentQty = cart.getLineItems().stream().mapToInt(CartLineItem::getQuantity).sum();
+            return new AddToCartResponseDto(false, "Failed to add to cart: Product not found.", currentQty);
+        }
+
+        // Attempt to find a specific variant if the AI provided size/finish preferences
+        Variant matchedVariant = null;
+        if (safeSize != null || safeFinish != null)
+        {
+            matchedVariant = findVariant(product, safeFinish, safeSize);
+        }
+
+        // Securely fallback to the first default variant if no preferences provided or if the exact combo doesn't exist
+        if (matchedVariant == null)
+        {
+            matchedVariant = product.getVariants().isEmpty() ? null : product.getVariants().get(0);
+        }
+
+        if (matchedVariant == null)
+        {
+            int currentQty = cart.getLineItems().stream().mapToInt(CartLineItem::getQuantity).sum();
+            return new AddToCartResponseDto(false, "Failed to add to cart: Product has no purchasable variations.", currentQty);
+        }
+
+        String variantSku = matchedVariant.getFullSku();
+        int qtyToAdd = payload.quantity() != null && payload.quantity() > 0 ? payload.quantity() : 1;
+        
+        // 2. SECURITY: Cap maximum quantity to prevent DOS, OOM crashes, or database numeric overflow limit errors.
+        if (qtyToAdd > 99) 
+        {
+            qtyToAdd = 99;
+        }
+
+        CartLineItem existing = null;
+        for (CartLineItem li : cart.getLineItems())
+        {
+            if (li.getSku().equals(variantSku))
+            {
+                existing = li;
+                break;
+            }
+        }
+
+        if (existing != null)
+        {
+            existing.setQuantity(existing.getQuantity() + qtyToAdd);
+        }
+        else
+        {
+            CartLineItem li = new CartLineItem();
+            li.setSku(variantSku);
+            li.setQuantity(qtyToAdd);
+            cart.addLineItem(li);
+        }
+
+        // Recalculate totals and hit the database
+        recalculateTotals(cart, currency);
+        cartRepository.save(cart);
+
+        int newTotal = cart.getLineItems().stream().mapToInt(CartLineItem::getQuantity).sum();
+        String name = textService.getText(product.getNameTextId(), locale);
+        return new AddToCartResponseDto(true, "Successfully added " + name + " to the shopping cart.", newTotal);
     }
 
     // ─── Add to Cart (HTMX) ────────────────────────────────────────────

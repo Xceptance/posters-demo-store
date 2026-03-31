@@ -13,6 +13,7 @@ Posters comes with the basic functionality that you would expect from a typical 
 * There is a shopping cart
 * Customers may place orders as guests or as registered customers
 * A selection of different languages for the shop (EN-US, EN-GB, DE-DE, SV-SE)
+* 🤖 **AI-Ready WebMCP Integration**: Browser-native tool schemas allowing AI agents to seamlessly search the catalog and add products to the shopping cart
 * A selection of incorrect behavior can be switched on and off at will
 
 Please note that this application is for demo purposes only.
