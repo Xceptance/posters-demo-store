@@ -79,6 +79,10 @@ public class CustomerController
         "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d\\s])\\S{10,}$"
     );
 
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+        "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    );
+
     @PostMapping("/{locale}/register")
     public String register(@PathVariable String locale,
                            @RequestParam String email,
@@ -95,6 +99,13 @@ public class CustomerController
             || password.isBlank() || passwordConfirm.isBlank())
         {
             String msg = messageSource.getMessage("errorFieldsRequired", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
+
+        if (!EMAIL_PATTERN.matcher(email).matches())
+        {
+            String msg = messageSource.getMessage("errorValidEmail", null, resolvedLocale);
             redirectAttributes.addFlashAttribute("error", msg);
             return "redirect:/" + locale + "/register";
         }
