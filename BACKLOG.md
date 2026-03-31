@@ -27,8 +27,10 @@
 
 ## Task
 
-*(No tasks yet)*
-
+- [ ] Formatting: Japanese address checkout routing (Prefecture → City → Block)
+- [ ] Logic: Yen-specific UI formatting and backend tax calculators
+- [ ] Layout: Support for Right-To-Left / Vertical text directions 
+- [ ] Translation: Full `ja-JP` translation of Backoffice admin UI
 ## Defect
 
 - [ ] Scroll up button does not work
