@@ -37,4 +37,5 @@
 - [ ] Design login screen
 - [ ] Design create an account
 - [ ] No price updates for change of size defect
+- [ ] clearing a quantity field on the cart, breaks the cart page completely 
 - [ ] Account overview broken with template parsing error (`customer/accountOverview.html`)
