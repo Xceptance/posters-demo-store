@@ -55,6 +55,60 @@
                       return await response.json();
                   }
               });
+              
+              window.navigator.modelContext.registerTool({
+                  name: "add_to_cart",
+                  description: "Adds a specific product to the user's shopping cart.",
+                  parameters: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The ID of the product to add to the cart (obtained from search_catalog)."
+                          },
+                          quantity: {
+                              type: "number",
+                              description: "The optional amount to add (defaults to 1)."
+                          },
+                          size: {
+                              type: "string",
+                              description: "The optional physical size of the product (e.g., '16 x 12 in', '36 x 24 in')."
+                          },
+                          finish: {
+                              type: "string",
+                              description: "The optional finish style (e.g., 'matte' or 'gloss')."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      // Dynamically detect CSRF tokens if Spring Security is enabled in the future
+                      const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+                      const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+                      
+                      const headers = { 
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json' 
+                      };
+                      if (csrfToken && csrfHeader) {
+                          headers[csrfHeader] = csrfToken;
+                      }
+
+                      const response = await fetch('/api/v2/cart/add', {
+                          method: 'POST',
+                          headers: headers,
+                          body: JSON.stringify({ 
+                              productId: params.productId, 
+                              quantity: params.quantity,
+                              size: params.size,
+                              finish: params.finish
+                          })
+                      });
+                      if (!response.ok) throw new Error("Add to cart failed with status " + response.status);
+                      return await response.json();
+                  }
+              });
+
               console.log("🤖 WebMCP tools registered for AI agents.");
           }
       });
