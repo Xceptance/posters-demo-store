@@ -2,40 +2,46 @@
 
 ## EPIC
 
-- [ ] Backoffice
-- [ ] Coupons
-- [ ] Testing backoffice for manipulation of behavior
+- [ ] EPIC-1: Backoffice
+- [ ] EPIC-2: Coupons
+- [ ] EPIC-3: Testing backoffice for manipulation of behavior
+- [ ] EPIC-4: Inventory
 
 ## Feature
 
-- [x] Footer checkout
-- [ ] Hero header image category
-- [ ] Steps Checkout
-- [ ] Sorting
-- [ ] Refinements for search
-- [ ] Markdown styling of product and other texts
+- [x] FEAT-1: Footer checkout
+- [ ] FEAT-2: Hero header image category
+- [ ] FEAT-3: Steps Checkout
+- [ ] FEAT-4: Sorting
+- [ ] FEAT-5: Refinements for search
+- [ ] FEAT-6: Markdown styling of product and other texts
+- [ ] FEAT-7: Template concepts and standardized API for using of templates
+- [ ] FEAT-8: Themes for templates
+- [ ] FEAT-9: Autoimage scaling via url service includes image transformation
 
 ## Improvement
 
-- [ ] Localization of messages such as "this is a demo store", also the homepage message
-- [ ] Localization of ad banner
-- [ ] Styling pagination including colors
-- [ ] Show rest count when refining
-- [ ] Double password when setting account
-- [ ] Cart should not close when mouse hovers over it and stay open longer
-- [ ] Close X for enlarged images needs contrast
+- [ ] IMPR-1: Localization of messages such as "this is a demo store", also the homepage message
+- [ ] IMPR-2: Localization of ad banner
+- [ ] IMPR-3: Styling pagination including colors
+- [ ] IMPR-4: Show rest count when refining
+- [ ] IMPR-5: Double password when setting account
+- [ ] IMPR-6: Cart should not close when mouse hovers over it and stay open longer
+- [ ] IMPR-7: Close X for enlarged images needs contrast
+- [ ] IMPR-8: Add "progress" indicator for the storefront while the server starts
 
 ## Task
 
-- [ ] Formatting: Japanese address checkout routing (Prefecture → City → Block)
-- [ ] Logic: Yen-specific UI formatting and backend tax calculators
-- [ ] Layout: Support for Right-To-Left / Vertical text directions 
-- [ ] Translation: Full `ja-JP` translation of Backoffice admin UI
+- [ ] TASK-1: Formatting: Japanese address checkout routing (Prefecture → City → Block)
+- [ ] TASK-2: Logic: Yen-specific UI formatting and backend tax calculators
+- [ ] TASK-3: Layout: Support for Right-To-Left / Vertical text directions 
+- [ ] TASK-4: Translation: Full `ja-JP` translation of Backoffice admin UI
 ## Defect
 
-- [x] Scroll up button does not work
-- [ ] Design login screen
-- [ ] Design create an account
-- [ ] No price updates for change of size defect
-- [ ] clearing a quantity field on the cart, breaks the cart page completely 
-- [ ] Account overview broken with template parsing error (`customer/accountOverview.html`)
+- [x] DEFECT-1: Scroll up button does not work
+- [ ] DEFECT-2: Design login screen
+- [ ] DEFECT-3: Design create an account
+- [x] DEFECT-4: No price updates for change of size defect
+- [ ] DEFECT-5: clearing a quantity field on the cart, breaks the cart page completely 
+- [ ] DEFECT-6: Account overview broken with template parsing error (`customer/accountOverview.html`)
+- [ ] DEFECT-7: Catalog import data only has one finish per product

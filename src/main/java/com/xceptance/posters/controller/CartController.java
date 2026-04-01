@@ -255,7 +255,7 @@ public class CartController
         }
 
         model.addAttribute("formattedPrice", formattedPrice);
-        return "fragments/priceFragment";
+        return "fragments/priceFragment :: price";
     }
 
     // ─── Helpers ────────────────────────────────────────────────────────
