@@ -73,7 +73,7 @@ public class DataImportService implements CommandLineRunner
         }
 
         // Build Lucene search index from catalog products
-        luceneSearchService.buildIndex(java.util.Set.of("en-US", "de-DE", "sv-SE"));
+        luceneSearchService.buildIndex(java.util.Set.of("en-US", "de-DE", "sv-SE", "ja-JP"));
 
         log.info("Data import complete.");
     }

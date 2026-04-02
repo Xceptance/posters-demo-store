@@ -1,0 +1,4 @@
+- Don't implement anything unless told and confirmed
+- Prefer Allman code style
+- Always comment code
+- If you use an open source library, write that into NOTICE.md including license references in doc/3rd-party-licenses

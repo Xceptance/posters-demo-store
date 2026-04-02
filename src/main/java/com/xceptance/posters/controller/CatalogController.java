@@ -71,7 +71,7 @@ public class CatalogController
                                     List<SizeDto> distinctSizes) {}
 
     public record VariantDto(int id, String sku, String size, String finish, BigDecimal price) {}
-    public record SizeDto(String label) {}
+    public record SizeDto(String value, String label) {}
 
     // ─── Category browsing ───
 
@@ -309,7 +309,7 @@ public class CatalogController
 
         // Build distinct size list for the dropdown
         List<SizeDto> distinctSizes = sizeSet.stream()
-            .map(s -> new SizeDto(s + " " + unitLength))
+            .map(s -> new SizeDto(s, s + " " + unitLength))
             .collect(Collectors.toList());
 
         ProductDetailDto dto = new ProductDetailDto(

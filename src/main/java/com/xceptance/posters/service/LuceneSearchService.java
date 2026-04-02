@@ -12,6 +12,7 @@ import java.util.Set;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.sv.SwedishAnalyzer;
 import org.apache.lucene.document.Document;
@@ -81,6 +82,7 @@ public class LuceneSearchService implements DisposableBean
         analyzers.put("en", new EnglishAnalyzer());
         analyzers.put("de", new GermanAnalyzer());
         analyzers.put("sv", new SwedishAnalyzer());
+        analyzers.put("ja", new JapaneseAnalyzer());
     }
 
     /**

@@ -50,13 +50,13 @@ posters:
   tax: 0.06
   unit-of-length: "in"
   page-size: 8
-  languages: "en-US,en-GB,de-DE,sv-SE"
+  languages: "en-US,en-GB,de-DE,sv-SE,ja-JP"
   version: "3.0.0-SNAPSHOT"
   import-customer: true
   lucene-index-dir: "./db/lucene-index"
   regex:
     zip: "[0-9]+"
-    name: "[\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00dfA-Za-z ]+"
+    name: "[\\u00c4\\u00e4\\u00d6\\u00f6\\u00dc\\u00fc\\u00dfA-Za-z \\u3040-\\u30FF\\u4E00-\\u9FAF]+"
     credit-card: "4[0-9]{12}(?:[0-9]{3})?"
     email: "[\\u00c4\\u00e4\\u00d6\\u00f6A\\u00dc\\u00fc\\u00dfA-Za-z0-9._%+-]+@[\\u00c4\\u00e4\\u00d6\\u00f6A\\u00dc\\u00fc\\u00dfA-Za-z0-9.-]+.[A-Za-z]{2,4}"
     product-count: "[0-9]{1,3}"

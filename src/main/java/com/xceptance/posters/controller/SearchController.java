@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xceptance.posters.entity.CatalogProductRepository;
 import com.xceptance.posters.entity.LocalizedTextService;
@@ -69,6 +70,23 @@ public class SearchController
         model.addAttribute("searchText", searchText);
         model.addAttribute("totalCount", results.size());
         return "search/searchResult";
+    }
+
+    /**
+     * JSON search API for WebMCP agents and dynamic frontends.
+     */
+    @GetMapping(value = "/api/v2/catalog/search", produces = "application/json")
+    @ResponseBody
+    public List<SearchProductDto> searchJson(@RequestParam("q") String searchText,
+                                             @RequestParam(value = "locale", defaultValue = "en-US") String locale)
+    {
+        if (searchText == null || searchText.isBlank())
+        {
+            return List.of();
+        }
+
+        String currency = getCurrencyForLocale(locale);
+        return findByLucene(searchText, locale, currency, 100);
     }
 
     /**

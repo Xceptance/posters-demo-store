@@ -63,7 +63,7 @@
                             hx-include="#add-to-cart-form input[name=finish]:checked"
                             th:hx-vals="'{ &quot;productId&quot;: ' + ${product.id} + '}'">
                         <option th:each="sz : ${product.distinctSizes}"
-                                th:value="${sz.label}"
+                                th:value="${sz.value}"
                                 th:text="${sz.label}">
                             16 x 12 in
                         </option>
