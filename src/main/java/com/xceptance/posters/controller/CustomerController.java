@@ -2,7 +2,6 @@ package com.xceptance.posters.controller;
 
 import java.util.Locale;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -86,9 +85,16 @@ public class CustomerController
         return true;
     }
 
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(
-        "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
-    );
+    private static boolean isEmailValid(String email)
+    {
+        if (email.contains(" ")) return false;
+        int atIndex = email.indexOf('@');
+        if (atIndex < 1) return false;                          // must have text before @
+        String domain = email.substring(atIndex + 1);
+        int dotIndex = domain.indexOf('.');
+        if (dotIndex < 1 || dotIndex >= domain.length() - 1) return false; // dot in domain, not at edges
+        return true;
+    }
 
     @PostMapping("/{locale}/register")
     public String register(@PathVariable String locale,
@@ -110,7 +116,7 @@ public class CustomerController
             return "redirect:/" + locale + "/register";
         }
 
-        if (!EMAIL_PATTERN.matcher(email).matches())
+        if (!isEmailValid(email))
         {
             String msg = messageSource.getMessage("errorValidEmail", null, resolvedLocale);
             redirectAttributes.addFlashAttribute("error", msg);
