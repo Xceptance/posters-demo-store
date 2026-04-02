@@ -75,9 +75,16 @@ public class CustomerController
         return "customer/register";
     }
 
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d\\s])\\S{10,}$"
-    );
+    private static boolean isPasswordStrong(String password)
+    {
+        if (password.length() < 10) return false;
+        if (password.contains(" ")) return false;
+        if (!password.chars().anyMatch(Character::isLowerCase)) return false;
+        if (!password.chars().anyMatch(Character::isUpperCase)) return false;
+        if (!password.chars().anyMatch(Character::isDigit)) return false;
+        if (password.chars().allMatch(c -> Character.isLetterOrDigit(c) || c == ' ')) return false;
+        return true;
+    }
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
         "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
@@ -110,7 +117,7 @@ public class CustomerController
             return "redirect:/" + locale + "/register";
         }
 
-        if (!PASSWORD_PATTERN.matcher(password).matches())
+        if (!isPasswordStrong(password))
         {
             String msg = messageSource.getMessage("errorPasswordTooWeak", null, resolvedLocale);
             redirectAttributes.addFlashAttribute("error", msg);
