@@ -137,7 +137,8 @@ public class CustomerController
         }
         if (customerRepository.existsByEmail(email))
         {
-            redirectAttributes.addFlashAttribute("error", "Email already in use.");
+            String msg = messageSource.getMessage("errorEmailInUse", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
             return "redirect:/" + locale + "/register";
         }
         CatalogCustomer customer = new CatalogCustomer();
