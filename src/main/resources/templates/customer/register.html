@@ -62,7 +62,20 @@
 
     <script>
         (function() {
-            var PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s])\S{10,}$/;
+            /**
+             * Mirrors the server-side isPasswordStrong() check.
+             * Each test is a single-class scan — O(n), no backtracking, no ReDoS risk.
+             */
+            function isPasswordStrong(pw)
+            {
+                if (pw.length < 10)              return false;
+                if (pw.includes(' '))            return false;
+                if (!/[a-z]/.test(pw))           return false;
+                if (!/[A-Z]/.test(pw))           return false;
+                if (!/[0-9]/.test(pw))           return false;
+                if (!/[^a-zA-Z0-9\s]/.test(pw)) return false;
+                return true;
+            }
 
             // Toggle password visibility
             function setupToggle(toggleBtnId, inputId, iconId) {
@@ -110,7 +123,7 @@
                     }
 
                     // Check password strength
-                    if (!PASSWORD_REGEX.test(pw)) {
+                    if (!isPasswordStrong(pw)) {
                         e.preventDefault();
                         strengthErrorDiv.style.display = 'block';
                         document.getElementById('password').focus();
