@@ -23,6 +23,8 @@
                     <div class="mb-3">
                         <label for="email" class="form-label"><span th:text="#{labelEmail}">Email</span> <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="email" name="email" required/>
+                        <div id="email-format-error" class="text-danger mt-1" style="display: none;"
+                             th:text="#{errorValidEmail}">Please enter a valid email address.</div>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label"><span th:text="#{labelPassword}">Password</span> <span class="text-danger">*</span></label>
@@ -63,6 +65,21 @@
     <script>
         (function() {
             /**
+             * Mirrors the server-side isEmailValid() check.
+             * No regex — plain string operations only.
+             */
+            function isEmailValid(email)
+            {
+                if (email.includes(' '))       return false;
+                var atIndex = email.indexOf('@');
+                if (atIndex < 1)               return false; // must have text before @
+                var domain = email.substring(atIndex + 1);
+                var dotIndex = domain.indexOf('.');
+                if (dotIndex < 1 || dotIndex >= domain.length - 1) return false; // dot in domain, not at edges
+                return true;
+            }
+
+            /**
              * Mirrors the server-side isPasswordStrong() check.
              * Each test is a single-class scan — O(n), no backtracking, no ReDoS risk.
              */
@@ -102,9 +119,10 @@
             // Client-side validation
             var form = document.getElementById('register-form');
             var fieldsRequiredErrorDiv = document.getElementById('fields-required-error');
+            var emailErrorDiv = document.getElementById('email-format-error');
             var strengthErrorDiv = document.getElementById('password-strength-error');
             var mismatchErrorDiv = document.getElementById('password-mismatch-error');
-            if (form && fieldsRequiredErrorDiv && strengthErrorDiv && mismatchErrorDiv) {
+            if (form && fieldsRequiredErrorDiv && emailErrorDiv && strengthErrorDiv && mismatchErrorDiv) {
                 form.addEventListener('submit', function(e) {
                     var firstName = document.getElementById('firstName').value.trim();
                     var lastName = document.getElementById('name').value.trim();
@@ -120,6 +138,15 @@
                         hasError = true;
                     } else {
                         fieldsRequiredErrorDiv.style.display = 'none';
+                    }
+
+                    // Check email format
+                    if (email && !isEmailValid(email)) {
+                        e.preventDefault();
+                        emailErrorDiv.style.display = 'block';
+                        hasError = true;
+                    } else {
+                        emailErrorDiv.style.display = 'none';
                     }
 
                     // Check password strength
@@ -143,12 +170,57 @@
                         mismatchErrorDiv.style.display = 'none';
                     }
                 });
-                // Hide errors on input
-                document.getElementById('password').addEventListener('input', function() {
-                    strengthErrorDiv.style.display = 'none';
+                // Validate email format on blur
+                document.getElementById('email').addEventListener('blur', function() {
+                    var val = this.value.trim();
+                    if (val.length > 0 && !isEmailValid(val)) {
+                        emailErrorDiv.style.display = 'block';
+                    } else {
+                        emailErrorDiv.style.display = 'none';
+                    }
                 });
+
+                // Clear email error as user types a valid address
+                document.getElementById('email').addEventListener('input', function() {
+                    if (isEmailValid(this.value.trim())) {
+                        emailErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Validate password strength on blur (tab away)
+                document.getElementById('password').addEventListener('blur', function() {
+                    var pw = this.value;
+                    if (pw.length > 0 && !isPasswordStrong(pw)) {
+                        strengthErrorDiv.style.display = 'block';
+                    } else {
+                        strengthErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Clear strength error as user types corrections
+                document.getElementById('password').addEventListener('input', function() {
+                    if (isPasswordStrong(this.value)) {
+                        strengthErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Validate mismatch on blur of confirm field (only when not empty)
+                document.getElementById('passwordConfirm').addEventListener('blur', function() {
+                    var pw = document.getElementById('password').value;
+                    var pwConfirm = this.value;
+                    if (pwConfirm.length > 0 && pw !== pwConfirm) {
+                        mismatchErrorDiv.style.display = 'block';
+                    } else {
+                        mismatchErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Clear mismatch error as user types corrections
                 document.getElementById('passwordConfirm').addEventListener('input', function() {
-                    mismatchErrorDiv.style.display = 'none';
+                    var pw = document.getElementById('password').value;
+                    if (this.value === pw) {
+                        mismatchErrorDiv.style.display = 'none';
+                    }
                 });
             }
         })();
