@@ -29,6 +29,8 @@
 - [ ] IMPR-6: Cart should not close when mouse hovers over it and stay open longer
 - [ ] IMPR-7: Close X for enlarged images needs contrast
 - [ ] IMPR-8: Add "progress" indicator for the storefront while the server starts
+- [ ] IMPR-9: Convert application and test suites into a Maven Multi-Module project to unify CI/CD and feature PRs
+- [ ] IMPR-10: Account verification via email confirmation link (double opt-in) after registration
 
 ## Task
 
@@ -36,6 +38,9 @@
 - [ ] TASK-2: Logic: Yen-specific UI formatting and backend tax calculators
 - [ ] TASK-3: Layout: Support for Right-To-Left / Vertical text directions 
 - [ ] TASK-4: Translation: Full `ja-JP` translation of Backoffice admin UI
+- [ ] TASK-5: Security: Regenerate HTTP session ID after successful login to prevent session fixation attacks
+- [ ] TASK-6: Security: Add IP-based component to login throttling to counter credential spraying across many emails from one source
+
 ## Defect
 
 - [x] DEFECT-1: Scroll up button does not work

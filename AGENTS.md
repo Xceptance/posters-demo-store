@@ -2,3 +2,5 @@
 - Prefer Allman code style
 - Always comment code
 - If you use an open source library, write that into NOTICE.md including license references in doc/3rd-party-licenses
+- Prefer TDD development.
+- Never remove a test case without explicit user approval.
