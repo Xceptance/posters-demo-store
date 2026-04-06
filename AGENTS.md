@@ -15,3 +15,8 @@ Please adhere to the following rules when contributing to this repository:
 
 ## Third-Party Dependencies
 - **Attribution:** If you use an open-source library, document it in `NOTICE.md` and include the appropriate license references inside `doc/3rd-party-licenses`.
+
+## GIT
+
+- **Merge:** Never fast-forward, never stash.
+- **Stashing:** Ask for permission every time. 
