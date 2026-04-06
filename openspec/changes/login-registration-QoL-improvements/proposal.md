@@ -1,4 +1,4 @@
-# Registration Validation Proposal
+# Login and Registration QoL Improvements
 
 ## Why
 

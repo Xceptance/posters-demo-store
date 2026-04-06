@@ -1,4 +1,4 @@
-# Test Cases: Sign-Up & Login Validation
+# Test Cases: Login & Registration QoL Improvements
 
 ## Part A: Automated Server-Side Unit Tests
 
