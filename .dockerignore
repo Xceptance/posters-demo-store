@@ -1,0 +1,11 @@
+.git
+.vscode
+target/
+db/
+log/
+.checkstyle
+.pmd
+.idea
+*.log
+*.iml
+.DS_Store

@@ -14,7 +14,7 @@ Posters comes with the basic functionality that you would expect from a typical 
 * Customers may place orders as guests or as registered customers
 * A selection of different languages for the shop (EN-US, EN-GB, DE-DE, SV-SE)
 * 🤖 **AI-Ready WebMCP Integration**: Browser-native tool schemas allowing AI agents to seamlessly search the catalog and add products to the shopping cart
-* A selection of incorrect behavior can be switched on and off at will
+* A selection of incorrect behavior can be switched on and off at will (not yet implemented again)
 
 Please note that this application is for demo purposes only.
 
@@ -24,8 +24,8 @@ Posters is built with the following technologies:
 
 | Component | Technology |
 | --------- | ---------- |
-| Framework | [Spring Boot](https://spring.io/projects/spring-boot) 3.4.3 |
-| Language | Java 21 |
+| Framework | [Spring Boot](https://spring.io/projects/spring-boot) 4.0.5    |
+| Language | Java 25 |
 | Template Engine | [Thymeleaf](https://www.thymeleaf.org/) with Layout Dialect |
 | Database | [H2](https://www.h2database.com/) (file-based) |
 | ORM | JPA / Hibernate |
@@ -35,7 +35,7 @@ Posters is built with the following technologies:
 
 ## Prerequisites
 
-* **JDK 21** or later
+* **JDK 25** or later
 * **Maven** 3.9+ (if building from source)
 
 ## Getting the Posters Application
@@ -73,6 +73,47 @@ For development, you can run Posters directly with the Spring Boot Maven plugin:
 ```bash
 mvn spring-boot:run
 ```
+
+### Using Docker
+
+You can run the application in an isolated container using Docker/Docker Compose. This does not require Java or Maven to be installed locally.
+
+#### Using Docker Compose (Recommended)
+
+To build and start the application in the background:
+
+```bash
+docker-compose up -d
+```
+
+This will automatically mount `./db` and `./log` to your host machine for persistence. To stop it:
+
+```bash
+docker-compose down
+```
+
+#### Using Docker CLI
+
+To build the image manually from the Dockerfile:
+
+```bash
+docker build -t posters-demo-store .
+```
+
+To run the container:
+
+```bash
+docker run -p 8080:8080 -v ./db:/app/db -v ./log:/app/log posters-demo-store
+```
+
+#### Using Spring Boot Buildpacks (Alternative)
+
+Instead of the Dockerfile, you can utilize Spring Boot's built-in Paketo Cloud Native Buildpacks to automatically construct a highly-optimized layered image directly from Maven:
+
+```bash
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=posters-demo-store
+```
+
 
 ### Accessing the Application
 

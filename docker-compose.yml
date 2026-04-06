@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: posters-demo-store:latest
+    container_name: posters-demo-store
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./db:/app/db
+      - ./log:/app/log
+    restart: unless-stopped
