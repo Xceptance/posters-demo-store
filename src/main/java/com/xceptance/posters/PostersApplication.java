@@ -17,12 +17,14 @@ package com.xceptance.posters;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * Main entry point for the Posters Demo Store application.
  * Replaces the Ninja Framework's standalone server with Spring Boot's embedded Tomcat.
  */
 @SpringBootApplication
+@EnableScheduling
 public class PostersApplication
 {
     public static void main(String[] args)

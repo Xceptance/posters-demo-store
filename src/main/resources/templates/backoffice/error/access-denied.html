@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Access Denied - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Access Denied</div>
+    <div layout:fragment="content">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px;">
+            <span class="material-symbols-outlined text-danger" style="font-size: 4rem;">block</span>
+            <h2 class="mt-3 mb-2">Insufficient Permissions</h2>
+            <p class="text-muted mb-4">You do not have the required permissions to access this module.</p>
+            <a href="/backoffice/" class="btn btn-outline-light">
+                <span class="material-symbols-outlined me-1" style="vertical-align: middle;">arrow_back</span>
+                Back to Dashboard
+            </a>
+        </div>
+    </div>
+</body>
+</html>
