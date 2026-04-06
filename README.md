@@ -2,6 +2,21 @@
 
 *The Poster Demo Store*, or just *Posters*, is a simple e-commerce application for demoing load testing as well as test automation.
 
+## JFR Demo Purposes
+
+This application is built to demonstrate powerful Java Flight Recorder (JFR) functionality for business-level transactions. It contains custom `jdk.jfr.Event` integrations designed specifically for profiling eCommerce workflows. 
+
+For instance, the **Order Processing** function will emit custom events (`com.xceptance.posters.OrderProcessing`) encompassing parameters like `orderId`, `itemCount`, and `totalAmount`. It also deliberately injects exponentially increasing latency into large orders or specific credit card processors to show how JVM tooling (JMC) can be utilized to trace application-level business bottlenecks across millions of events.
+
+To ensure these events are recorded offline, launch the application with JFR enabled:
+
+```bash
+java -XX:StartFlightRecording=filename=recording.jfr,settings=profile -jar target/posters-demo-store-3.0.0-SNAPSHOT.jar
+```
+
+**Real-Time Event Streaming:**
+This demo also natively utilizes the **JFR Event Streaming API** (`jdk.jfr.consumer.RecordingStream`) via the `JfrEventStreamer` component. It continuously monitors the internal system for our custom `OrderProcessing` event in real-time, completely in-memory. If an order processing event exceeds 3 seconds (simulating an anomaly, such as placing an order with 10+ items using an Amex card), it automatically outputs a severe `[JFR ALERT]` directly to the application logs—perfectly fusing diagnostics with real-time alerting without generating massive log overhead.
+
 ## Features
 
 Posters comes with the basic functionality that you would expect from a typical online shop. This includes:
