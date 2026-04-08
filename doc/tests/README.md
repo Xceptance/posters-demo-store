@@ -54,6 +54,7 @@ Define the high-level attributes of the test case to allow easy filtering.
   - `🧪 Full`: Complete execution including edge cases and alternate flows.
   - `⚡ Performance`: Execution focused on response times and load behavior.
   - `🔒 Security`: Execution focused on authentication, authorization, and input safety.
+  - `♿ Accessibility`: Execution focused on keyboard navigation, screen reader compatibility, and WCAG standards.
 - **Requirements:** Traceability links to the requirements or backlog items this test covers. Use a sub-list for multiple entries, e.g.:
   - `BACKLOG-42` or a relative file link `[BACKLOG-42](path/to/item.md)`
 - **Tags:** A list of markdown backticked keywords (e.g., `cart`, `pricing`, `tax`, `guest`).

@@ -21,3 +21,8 @@ Please adhere to the following rules when contributing to this repository:
 
 - **Merge:** Never fast-forward, never stash.
 - **Stashing:** Ask for permission every time. 
+
+## Testing & Specifications
+- **Manual & Automated Tests:** You MUST create test cases as part of any specification process or implementation work.
+- **Maintenance:** You MUST review existing test cases and update them to reflect any logic, UI, or specification changes made during implementation.
+- **Format & Standards:** All functional test documentation MUST explicitly adhere to the standards outlined in `doc/tests/README.md`. When creating new test cases, you MUST use `doc/tests/TEMPLATE.md` as your starting point.

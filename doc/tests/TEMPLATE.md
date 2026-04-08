@@ -11,7 +11,7 @@
 - **Priority:** [🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low]
 - **Status:** [📝 Draft / ✅ Active / 🗄️ Deprecated]
 - **Execution Type:** Manual
-- **Suite:** [🚀 Smoke / 🔄 Regression / 🧠 Sanity / 🧪 Full / ⚡ Performance / 🔒 Security]
+- **Suite:** [🚀 Smoke / 🔄 Regression / 🧠 Sanity / 🧪 Full / ⚡ Performance / 🔒 Security / ♿ Accessibility]
 - **Requirements:**
   - [REQ-ID or link to backlog item]
 - **Tags:** `tag1`, `tag2`
