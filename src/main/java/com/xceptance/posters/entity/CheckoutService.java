@@ -21,13 +21,16 @@ public class CheckoutService {
     private final CatalogCartRepository cartRepository;
     private final CatalogOrderRepository orderRepository;
     private final EntityManager entityManager;
+    private final com.xceptance.posters.jmx.OrderProcessingMetrics orderProcessingMetrics;
 
     public CheckoutService(CatalogCartRepository cartRepository,
                            CatalogOrderRepository orderRepository,
-                           EntityManager entityManager) {
+                           EntityManager entityManager,
+                           com.xceptance.posters.jmx.OrderProcessingMetrics orderProcessingMetrics) {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
         this.entityManager = entityManager;
+        this.orderProcessingMetrics = orderProcessingMetrics;
     }
 
     /**
@@ -88,6 +91,14 @@ public class CheckoutService {
             {
                 jfrEvent.creditCardVendor = order.getCreditCard().getVendor();
             }
+
+            // JMX MBean Data Population
+            orderProcessingMetrics.recordOrder(
+                jfrEvent.orderId, 
+                jfrEvent.itemCount, 
+                jfrEvent.totalAmount, 
+                jfrEvent.creditCardVendor == null ? "" : jfrEvent.creditCardVendor
+            );
 
             // Artificial demo delays
             simulateProcessingDelay(jfrEvent.itemCount, jfrEvent.creditCardVendor);

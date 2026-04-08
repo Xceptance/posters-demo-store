@@ -9,6 +9,8 @@ server:
 # Spring Data / JPA / H2
 # ----------------------------------------
 spring:
+  jmx:
+    enabled: true
   datasource:
     url: jdbc:h2:file:./db/posters;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
     username: sa
