@@ -2,38 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}">
-<head><title>Register</title></head>
+<head><title th:text="#{titleCreateAccount}">Create Account</title></head>
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1 th:text="#{titleCreateAccount}">Create Account</h1>
-                <form th:action="@{'/' + ${urlLocale} + '/register'}" method="post" id="register-form">
+
+                <!-- Flash validation errors list (Task 2.3) -->
+                <div th:if="${errors}" class="alert alert-danger" role="alert" id="alert-errors">
+                    <ul class="mb-0">
+                        <li th:each="err : ${errors}" th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <form th:action="@{'/' + ${urlLocale} + '/register'}" method="post" id="register-form"
+                      novalidate>
                     <div class="row">
+                        <!-- First Name -->
                         <div class="col-md-6 mb-3">
+                            <!-- Task 3.1: proper for/id and aria-label -->
                             <label for="firstName" class="form-label" th:text="#{labelFirstName}">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" required/>
+                            <input type="text" class="form-control" id="firstName" name="firstName"
+                                   required
+                                   th:value="${prefillFirstName}"
+                                   autocomplete="given-name"/>
                         </div>
+                        <!-- Last Name -->
                         <div class="col-md-6 mb-3">
                             <label for="name" class="form-label" th:text="#{labelLastName}">Last Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required/>
+                            <input type="text" class="form-control" id="name" name="name"
+                                   required
+                                   th:value="${prefillLastName}"
+                                   autocomplete="family-name"/>
                         </div>
                     </div>
+
+                    <!-- Email (Task 3.2: type="email", Task 3.9: autocomplete="email") -->
                     <div class="mb-3">
                         <label for="email" class="form-label" th:text="#{labelEmail}">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required/>
+                        <input type="email" class="form-control" id="email" name="email"
+                               required
+                               aria-describedby="email-feedback"
+                               autocomplete="email"
+                               th:value="${prefillEmail}"
+                               th:hx-post="@{'/' + ${urlLocale} + '/validate'}"
+                               hx-trigger="blur, keyup changed delay:500ms"
+                               hx-target="#email-feedback"
+                               hx-swap="innerHTML"
+                               hx-vals='js:{"field": "email", "value": document.getElementById("email").value}'/>
+                        <!-- Task 3.3: aria-live for screen reader announcements -->
+                        <div id="email-feedback" class="form-text" aria-live="polite"></div>
                     </div>
+
+                    <!-- Password (Task 3.4/3.5: eye-icon toggle, Task 3.9: autocomplete) -->
                     <div class="mb-3">
                         <label for="password" class="form-label" th:text="#{labelPassword}">Password</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" id="password" name="password" required minlength="6"/>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   required minlength="8"
+                                   aria-describedby="password-feedback"
+                                   autocomplete="new-password"
+                                   th:hx-post="@{'/' + ${urlLocale} + '/validate'}"
+                                   hx-trigger="blur, keyup changed delay:500ms"
+                                   hx-target="#password-feedback"
+                                   hx-swap="innerHTML"
+                                   hx-vals='js:{"field": "password", "value": document.getElementById("password").value}'/>
+                            <!-- Task 3.4: Eye-icon toggle button -->
                             <button class="btn btn-outline-secondary" type="button" id="btn-toggle-password"
-                                    aria-label="Show password">
+                                    aria-label="Show password" aria-pressed="false">
                                 <i class="bi bi-eye" id="icon-toggle-password"></i>
                             </button>
                         </div>
+                        <!-- Task 3.3: aria-live region for password feedback -->
+                        <div id="password-feedback" class="form-text" aria-live="polite"></div>
                     </div>
+
+                    <!-- Task 3.5: Password toggle script with aria-pressed binding -->
                     <script>
                         document.getElementById('btn-toggle-password').addEventListener('click', function() {
                             var input = document.getElementById('password');
@@ -43,12 +89,27 @@
                             icon.classList.toggle('bi-eye', !isHidden);
                             icon.classList.toggle('bi-eye-slash', isHidden);
                             this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+                            this.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
                         });
+
+
                     </script>
-                    <button type="submit" class="btn btn-primary" id="btn-register" th:text="#{headerRegistration}">Register</button>
+
+                    <button type="submit" class="btn btn-primary w-100" id="btn-register"
+                            th:text="#{headerRegistration}">Create Account</button>
                 </form>
-                <p class="mt-3" th:text="#{labelHaveAccount}">Already have an account?
-                    <a th:href="@{'/' + ${urlLocale} + '/login'}" id="login-link" th:text="#{titleLogin}">Login</a>
+
+                <!-- Task 3.7: "Already a member? Log in" link -->
+                <p class="mt-3 text-center">
+                    <span th:text="#{labelHaveAccount}">Already have an account?</span>
+                    <a th:href="@{'/' + ${urlLocale} + '/login'}" id="login-link"
+                       class="fw-semibold" th:text="#{titleLogin}">Login</a>
+                </p>
+
+                <!-- Task 3.8: "Forgot Password?" link -->
+                <p class="text-center">
+                    <a th:href="@{'/' + ${urlLocale} + '/forgotPassword'}" id="forgot-password-link"
+                       class="text-muted">Forgot Password?</a>
                 </p>
             </div>
         </div>

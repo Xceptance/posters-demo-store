@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Verify Your Email</title>
+</head>
+<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h1 style="color: #333;">Welcome to the Poster Demo Store!</h1>
+    <p>Hi <span th:text="${firstName}">Customer</span>,</p>
+    <p>Thank you for creating an account. Please verify your email address by clicking the button below:</p>
+    <p style="text-align: center; margin: 30px 0;">
+        <a th:href="${activationLink}"
+           style="display: inline-block; padding: 12px 24px; background-color: #0d6efd;
+                  color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold;">
+            Verify Email Address
+        </a>
+    </p>
+    <p>Or copy and paste this link into your browser:</p>
+    <p style="word-break: break-all; color: #666;" th:text="${activationLink}">
+        https://example.com/en/activate?token=xxx
+    </p>
+    <p style="color: #999; font-size: 12px;">
+        This link expires in 24 hours. If you did not create an account, you can safely ignore this email.
+    </p>
+</body>
+</html>

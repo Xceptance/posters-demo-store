@@ -1,0 +1,9 @@
+Welcome to the Poster Demo Store!
+
+Hi [(${firstName})],
+
+Thank you for creating an account. Please verify your email address by clicking the link below:
+
+[(${activationLink})]
+
+This link expires in 24 hours. If you did not create an account, you can safely ignore this email.

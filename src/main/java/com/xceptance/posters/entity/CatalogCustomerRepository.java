@@ -15,4 +15,6 @@ public interface CatalogCustomerRepository extends JpaRepository<CatalogCustomer
     Optional<CatalogCustomer> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    Optional<CatalogCustomer> findByVerificationToken(String verificationToken);
 }
