@@ -29,6 +29,7 @@
 - [ ] IMPR-6: Cart should not close when mouse hovers over it and stay open longer
 - [ ] IMPR-7: Close X for enlarged images needs contrast
 - [ ] IMPR-8: Add "progress" indicator for the storefront while the server starts
+- [ ] IMPR-9: Integrate jOOQ for type-safe query building — replace ~13 raw JPQL strings (em.createQuery) across WebShopController, CatalogController, SearchController, CartController, CartService, LocalizedTextService, and CatalogDataLoader with jOOQ fluent API. Use JPA+jOOQ hybrid: keep Spring Data repos for CRUD, use jOOQ for complex reads. Requires spring-boot-starter-jooq + codegen Maven plugin.
 
 ## Task
 
