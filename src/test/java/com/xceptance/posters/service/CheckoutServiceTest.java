@@ -1,5 +1,6 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.service;
 
+import com.xceptance.posters.entity.*;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * Integration test for CheckoutService — verifies cart management and checkout flow.
  */
 @DataJpaTest
-@Import(CheckoutService.class)
+@Import({CheckoutService.class, CreditCardValidator.class})
 class CheckoutServiceTest {
 
     @Autowired
