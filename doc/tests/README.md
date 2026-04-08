@@ -1,29 +1,142 @@
 # Posters Demo Store - Manual Test Suite
 
-This directory contains the manual functional test suite for the Posters Demo Store. Tests are grouped by business domain (e.g., checkout, catalog, account).
+This directory contains the manual functional test suite for the Posters Demo Store. Tests are grouped by business domain (e.g., checkout, catalog, account) to ensure features are easily locatable and maintainable.
 
 ## Directory Structure
 
-- `search/`: Exact matches, broad terms, and result handling.
-- `catalog/`: Category browsing, product detail views, and pagination.
-- `cart/`: Adding, removing, and updating item quantities.
-- `checkout/`: Guest and registered user checkout flows.
 - `account/`: Registration, login, and profile management.
+- `cart/`: Adding, removing, and updating item quantities.
+- `catalog/`: Category browsing, product detail views, and pagination.
+- `checkout/`: Guest and registered user checkout flows.
+- `localization/`: Multi-language, currency toggles, locale testing.
+- `search/`: Exact matches, broad terms, and result handling.
 - `images/`: Put all screenshot/reference images in this folder to keep your test cases clean. 
 
 ## Test Case Format
 
-Each test case is a Markdown file following a strict template:
-1. **Metadata & Tags** (`## Metadata`) - Priority, Status, Execution Targets (Locales, Viewports), and Tags.
-2. **Tester Notes** - Special hints and visual cues for testers.
-3. **Preconditions** - State requirements before beginning.
-4. **Test Data** - Data requirements, specifically parametrized by language/locale.
-5. **Steps** - The execution table.
-6. **Postconditions** - What to verify in the DB or session state after execution.
+Each test case is written as a Markdown file and strictly follows a standard template to ensure consistency. Use the following structures when writing or updating tests.
+
+The document should flow in the following order:
+
+1. **Title (**`#`**)** & Description paragraph.
+2. `## Metadata`
+3. `## Comments`
+4. `## Preconditions`
+5. `## Test Data`
+6. `## Execution Targets`
+7. `## Steps`
+8. `## Pass/Fail Criteria`
+9. `## Postconditions`
+10. `## Related Cases`
+
+### 1. Metadata
+
+Define the high-level attributes of the test case to allow easy filtering.
+
+- **Test ID:** The unique identifier for the test, e.g., `TC_CRT_001` (Test Case - Domain - Number).
+- **Version:** The version of the test case, e.g., `1.0`.
+- **Software Version:** The software version this test applies to, e.g., `>= 1.0.0`.
+- **Domains:** One or more business domains this test touches (e.g., `Cart`, `Cart, Checkout`).
+- **Priority:** Valid values are:
+  - `🔴 Critical`: Core flows (must pass for release).
+  - `🟠 High`: Important features, high visibility.
+  - `🟡 Medium`: Standard edge cases and alternate flows.
+  - `🟢 Low`: Cosmetic or highly unlikely scenarios.
+- **Status:** Valid values are:
+  - `📝 Draft`: Currently being written or reviewed.
+  - `✅ Active`: Actively maintained and used for execution.
+  - `🗄️ Deprecated`: No longer relevant (should be archived eventually).
+- **Execution Type:** Typically `Manual` for tests in this directory.
+- **Suite:** Which test suites this case belongs to. Multiple values allowed. Valid values are:
+  - `🚀 Smoke`: Fast go/no-go check before and after a deployment.
+  - `🔄 Regression`: Run after any change to ensure nothing is broken.
+  - `🧠 Sanity`: Lightweight check that the most critical path still works.
+  - `🧪 Full`: Complete execution including edge cases and alternate flows.
+  - `⚡ Performance`: Execution focused on response times and load behavior.
+  - `🔒 Security`: Execution focused on authentication, authorization, and input safety.
+- **Requirements:** Traceability links to the requirements or backlog items this test covers. Use a sub-list for multiple entries, e.g.:
+  - `BACKLOG-42` or a relative file link `[BACKLOG-42](path/to/item.md)`
+- **Tags:** A list of markdown backticked keywords (e.g., `cart`, `pricing`, `tax`, `guest`).
+- **Author:** The original creator of the test case, including date, e.g., `Jane Tester (2026-04-08)`.
+- **Reviewers:** People or AI models who reviewed the test case, including dates. Use a sub-list for multiple entries:
+  - `John QA (2026-04-09)`
+  - `Gemini 3.1 (2026-04-09)`
+
+### 2. Comments
+
+Use GitHub alerts to provide special hints or visual cues for the tester (e.g., specific currency formats or things to watch out for).
+```markdown
+> [!CAUTION]
+> Watch out for X when verifying Y.
+```
+
+### 3. Preconditions
+
+The state the application or the session must be in before step 1 can begin. This is also where you must list **Inter-test case dependencies** (i.e. another test case that must be run prior to this one).
+- e.g., "The Posters Demo Store is running."
+- e.g., "The browser cart is empty."
+- e.g., "Test case TC_ACC_001 must be completed first to create the user account."
+
+### 4. Test Data
+
+List any required input data (e.g. search terms, product prices). Parametrize data if needed across locales (e.g., `$10.00` or `100 kr`) using a Markdown table as the single source of truth.
+
+### 5. Execution Targets
+
+Specify the locales and viewports the test should be executed against. Use checkboxes `- [x]` to indicate targets.
+
+**Target Locales:**
+- [ ] EN-US
+- [ ] DE-DE
+- [ ] SV-SE
+
+**Target Viewports:**
+- [ ] Desktop (Large)
+- [ ] Mobile (Small)
+
+### 6. Steps
+
+A structured set of headings and bullet points using the `Action`, `Verify`, and `Data` flags. Test Data properties should be referenced from the Test Data table to keep the file DRY, unless the value is heavily used, then an `e.g.,` value is acceptable. Ensure step numbers are present.
+
+```markdown
+### 1. Step Name Here
+
+- **Action:** What the tester does.
+- **Data:** Value to input or select. Use Test Data keys if defined.
+- **Verify:** Exact math or expectation of what should happen in response.
+```
+
+### 8. Pass/Fail Criteria
+
+Explicit criteria for evaluating the outcome of the entire test case.
+
+- **Pass:** The overarching condition that means the test is a success.
+- **Fail:** Specific critical conditions that immediately fail the test.
+
+### 9. Postconditions
+
+Verification of the final state after execution (e.g., "The cart only contains Item 2.").
+
+### 10. Related Cases
+
+A bulleted list of links to other test cases that might be logically executed next or provide exploratory testing value (e.g., "Guest Checkout", "Item Availability").
 
 ## Embedding Screenshots
 
 When writing a new test case, if you need to provide a visual hint, place the image in the `doc/tests/images/` directory and link it natively in Markdown:
+
 ```markdown
 ![Hint Description](../images/login_error.png)
+```
+
+You can also create image directories for each domain, e.g.:
+
+```markdown
+![Hint Description](../images/checkout/billing-toggle-hint.png)
+```
+
+or even put the images right into the domain folder, e.g.:
+
+```markdown
+![Hint Description](./checkout/images/billing-toggle-hint.png)
 ```
