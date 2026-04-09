@@ -20,7 +20,7 @@ doc/test-runs/
 
 You must NEVER execute a test by directly modifying the file in `doc/tests/`. To execute a test suite:
 1. Define your execution footprint in a `run-plan.md` file (use `TEMPLATE_RUN_PLAN.md`).
-2. Copy the relevant test cases from `doc/tests/` into the `results/` folder for your execution session to create a permanent snapshot.
+2. Copy the relevant test cases from `doc/tests/` into the `results/` folder for your execution session to create a permanent snapshot. Keep the structure intact (directories and naming).
 3. Add an `Execution Result` metadata block to the top of the copied markdown case.
 4. Run the test, modifying the `[ ]` checkboxes to `[x]` strictly within the `results/` copy.
 5. Update your `run-plan.md` statistics upon completion.

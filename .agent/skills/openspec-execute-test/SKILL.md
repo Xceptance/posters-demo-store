@@ -21,10 +21,12 @@ Follow these instructions when the user wants to execute test cases or plan a ne
 6. For each copied test case, inject the "Execution Result" metadata block immediately after the main Title:
    ```markdown
    ## Execution Result
-   - **Result:** `⏳ PENDING`
-   - **Tester:** [User Name / AI]
-   - **Date:** [Current Date]
-   - **Notes:** (Leave blank initially)
+
+   | Who | When | Result | Where |
+   | :--- | :--- | :--- | :--- |
+   | [Name/AI] | [YYYY-MM-DD] | `⏳ PENDING` | [Context/Browser] |
+
+   **Notes:** (Leave blank initially)
    ```
 7. Populate the `run-plan.md` statistics and checklist.
 
