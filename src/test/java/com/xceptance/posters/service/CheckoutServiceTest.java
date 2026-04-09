@@ -112,4 +112,24 @@ class CheckoutServiceTest {
         assertThat(found).isPresent();
         assertThat(found.get().getOrderNumber()).isEqualTo(order.getOrderNumber());
     }
+
+    @Test
+    void testCheckoutWithEmptyCartThrowsError() {
+        CatalogCart cart = new CatalogCart(); // Note: no line items added
+        em.persist(cart);
+        em.flush();
+        UUID cartId = cart.getId();
+        em.clear();
+
+        assertThatThrownBy(() -> checkoutService.checkout(cartId, "a@b.com", "A", "B"))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining("Cannot place an order for an empty cart");
+    }
+
+    @Test
+    void testCheckoutWithNullCartIdThrowsError() {
+        assertThatThrownBy(() -> checkoutService.checkout(null, "a@b.com", "A", "B"))
+            .isInstanceOf(org.springframework.dao.InvalidDataAccessApiUsageException.class)
+            .hasMessageContaining("The given id must not be null");
+    }
 }

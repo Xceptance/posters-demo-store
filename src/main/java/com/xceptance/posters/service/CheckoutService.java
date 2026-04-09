@@ -233,6 +233,10 @@ public class CheckoutService {
                 return new RuntimeException(msg);
             });
 
+        if (cart.getLineItems().isEmpty()) {
+            throw new IllegalStateException("Cannot place an order for an empty cart.");
+        }
+
         CatalogOrder order = CartToOrderConverter.convert(cart, "USD",
             customerEmail, customerFirstName, customerLastName);
 

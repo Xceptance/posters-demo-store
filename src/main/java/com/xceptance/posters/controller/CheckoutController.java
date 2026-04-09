@@ -168,6 +168,8 @@ public class CheckoutController
             sessionService.setOrderId(session, order.getId());
             sessionService.removeCartId(session);
             return org.springframework.http.ResponseEntity.ok(new CheckoutResponseDto(true, java.util.List.of(), order.getOrderNumber()));
+        } catch (IllegalStateException e) {
+            return org.springframework.http.ResponseEntity.badRequest().body(new CheckoutResponseDto(false, java.util.List.of("cart:" + e.getMessage()), null));
         } catch (Exception e) {
             return org.springframework.http.ResponseEntity.badRequest().body(new CheckoutResponseDto(false, java.util.List.of("checkout:Failed to checkout - " + e.getMessage()), null));
         }

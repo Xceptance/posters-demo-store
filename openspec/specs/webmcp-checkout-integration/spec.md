@@ -40,3 +40,10 @@ The system SHALL correctly bind authenticated customer identity and session deta
 #### Scenario: Registered user completes checkout
 - **WHEN** an authenticated human user or agent initiates a checkout flow
 - **THEN** the system seamlessly retrieves their registered profile, bypassing manual reassignment, and successfully converts the cart into an order linked directly to their customer account.
+
+### Requirement: Empty Cart Prevention
+The system SHALL prevent the conversion of an empty cart into an order. If an authenticated user or agent attempts to complete the checkout flow without any line items in their active cart session, the `CheckoutService` MUST vigorously abort the operation by throwing an `IllegalStateException`.
+
+#### Scenario: Agent attempts checkout with 0 items
+- **WHEN** the agent or human invokes the checkout endpoint with an empty cart
+- **THEN** the API returns a structured JSON error payload `{"success": false, "errors": ["cart:Cannot place an order for an empty cart."]}` and no database order entity is created.

@@ -217,4 +217,27 @@ class WebMcpIntegrationTest {
             .andExpect(jsonPath("$.errors", hasItem(containsString("shippingAddress.firstName:Missing field."))))
             .andExpect(jsonPath("$.errors", hasItem(containsString("shippingAddress.state:Missing field."))));
     }
+
+    @Test
+    void testJsonCheckoutEmptyCart() throws Exception {
+        final MockHttpSession session = new MockHttpSession();
+        // Notice we do NOT add any products to the session cart
+
+        final String checkoutJson = """
+        {
+            "shippingAddress": { "name": "Doe", "firstName": "John", "addressLine": "123 Main St", "city": "Anytown", "state": "CA", "zip": "90210", "country": "USA" },
+            "billingAddress": { "name": "Doe", "firstName": "John", "addressLine": "123 Main St", "city": "Anytown", "state": "CA", "zip": "90210", "country": "USA" },
+            "payment": { "cardNumber": "4242424242424242", "name": "John Doe", "expiry": "12/30", "cvv": "123" },
+            "customer": { "email": "john.doe@example.com", "firstName": "John", "lastName": "Doe" }
+        }
+        """;
+
+        mockMvc.perform(post("/api/v2/checkout")
+                .session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(checkoutJson))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.success").value(false))
+            .andExpect(jsonPath("$.errors", hasItem(containsString("cart:Cannot place an order for an empty cart."))));
+    }
 }
