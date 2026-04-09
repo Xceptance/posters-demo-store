@@ -9,7 +9,7 @@
 - **Software Version:** >= 1.0.0
 - **Domains:** [Domain Name, Domain Name]
 - **Priority:** [🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low]
-- **Status:** [📝 Draft / ✅ Active / 🗄️ Deprecated]
+- **Status:** [📝 Draft / 👀 To Be Reviewed / ✅ Active / 🗄️ Deprecated]
 - **Execution Type:** Manual
 - **Suite:** [🚀 Smoke / 🔄 Regression / 🧠 Sanity / 🧪 Full / ⚡ Performance / 🔒 Security / ♿ Accessibility]
 - **Requirements:**
@@ -84,3 +84,11 @@
 ## Related Cases
 
 - [TC_XXX_NUM: Title of related test case](./path.md)
+
+---
+
+## Change History
+
+| Date | Version | Author | Description |
+| :--- | :--- | :--- | :--- |
+| YYYY-MM-DD | 1.0 | [Author] | Initial creation |

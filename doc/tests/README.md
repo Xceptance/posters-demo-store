@@ -17,6 +17,23 @@ Tests are organized into business domain directories (e.g., `account/`, `cart/`)
 - `search/`: Exact matches, broad terms, and result handling.
 - `images/`: Put all screenshot/reference images in this folder to keep your test cases clean. 
 
+> [!TIP]
+> **Out of Scope?** If a test scenario is proposed during planning but requires an aspirational feature or is too complex without test automation, **do not discard it**. Log it in [test-backlog.md](./test-backlog.md) to anchor it for the future without polluting the active test domains!
+
+## Test Case Creation Protocol
+
+To ensure the highest enterprise quality, prevent aspirational testing, and guarantee alignment, all new domain test cases in this repository MUST be subjected to an exhaustive 9-step lifecycle during creation:
+
+1. **AI Suggests:** Present the baseline scenarios.
+2. **Joint Refinement:** Validate, refine, and change scenarios collaboratively.
+3. **AI Builds:** Write the initial markdown files.
+4. **ISTQB Validation:** Automatically run coverage grades against standard quality models.
+5. **Business Analyst Review:** Verify alignment to e-commerce business needs.
+6. **Senior Tester Review:** Verify boundary values, partitions, and edge cases.
+7. **Test Manager Review:** Verify coverage, traceability, and execution efficiency.
+8. **End Consumer Review:** Verify usability, clarity, and real-world alignment.
+9. **Finalize:** Explicit sign-off before merging or moving to the next domain.
+
 ## Test Case Format
 
 Each test case is written as a Markdown file and strictly follows a standard template to ensure consistency. Use the following structures when writing or updating tests.
@@ -33,6 +50,7 @@ The document should flow in the following order:
 8. `## Pass/Fail Criteria`
 9. `## Postconditions`
 10. `## Related Cases`
+11. `## Change History`
 
 ### 1. Metadata
 
@@ -48,7 +66,8 @@ Define the high-level attributes of the test case to allow easy filtering.
   - `🟡 Medium`: Standard edge cases and alternate flows.
   - `🟢 Low`: Cosmetic or highly unlikely scenarios.
 - **Status:** Valid values are:
-  - `📝 Draft`: Currently being written or reviewed.
+  - `📝 Draft`: Currently being written.
+  - `👀 To Be Reviewed`: Written and awaiting peer or business sign-off.
   - `✅ Active`: Actively maintained and used for execution.
   - `🗄️ Deprecated`: No longer relevant (should be archived eventually).
 - **Execution Type:** Typically `Manual` for tests in this directory.
@@ -126,6 +145,16 @@ Verification of the final state after execution (e.g., "The cart only contains I
 ### 10. Related Cases
 
 A bulleted list of links to other test cases that might be logically executed next or provide exploratory testing value (e.g., "Guest Checkout", "Item Availability").
+
+### 11. Change History
+
+A markdown table located at the very end of the document.
+
+> [!IMPORTANT]
+> **Instructions for AI Agents:**
+> Whenever you modify a test case, you MUST:
+> 1. Increment the `Version` number in the `## Metadata` section.
+> 2. Append a new row to the `## Change History` table with the current Date, the new Version, your identity as the Author (e.g., `Antigravity (AI)`), and a concise description of what you changed.
 
 ## Embedding Screenshots
 
