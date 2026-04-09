@@ -5,7 +5,7 @@ This test validates the standard registration flow, ensuring a user can successf
 ## Metadata
 
 - **Test ID:** TC_ACC_001
-- **Version:** 1.0
+- **Version:** 1.1
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🔴 Critical
@@ -84,3 +84,12 @@ This test validates the standard registration flow, ensuring a user can successf
 
 - [TC_ACC_004: Login Success and Logout](./TC_ACC_004_Login_Success_And_Logout.md)
 - [TC_ACC_006: Account Overview and Update](./TC_ACC_006_Account_Overview_And_Update.md)
+
+---
+
+## Change History
+
+| Date | Version | Author | Description |
+| :--- | :--- | :--- | :--- |
+| 2026-04-08 | 1.0 | Antigravity (AI) | Initial creation |
+| 2026-04-09 | 1.1 | Antigravity (AI) | Added Change History section for manual test auditing. |

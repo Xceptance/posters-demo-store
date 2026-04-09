@@ -50,6 +50,7 @@ The document should flow in the following order:
 8. `## Pass/Fail Criteria`
 9. `## Postconditions`
 10. `## Related Cases`
+11. `## Change History`
 
 ### 1. Metadata
 
@@ -65,7 +66,8 @@ Define the high-level attributes of the test case to allow easy filtering.
   - `🟡 Medium`: Standard edge cases and alternate flows.
   - `🟢 Low`: Cosmetic or highly unlikely scenarios.
 - **Status:** Valid values are:
-  - `📝 Draft`: Currently being written or reviewed.
+  - `📝 Draft`: Currently being written.
+  - `👀 To Be Reviewed`: Written and awaiting peer or business sign-off.
   - `✅ Active`: Actively maintained and used for execution.
   - `🗄️ Deprecated`: No longer relevant (should be archived eventually).
 - **Execution Type:** Typically `Manual` for tests in this directory.
@@ -143,6 +145,16 @@ Verification of the final state after execution (e.g., "The cart only contains I
 ### 10. Related Cases
 
 A bulleted list of links to other test cases that might be logically executed next or provide exploratory testing value (e.g., "Guest Checkout", "Item Availability").
+
+### 11. Change History
+
+A markdown table located at the very end of the document.
+
+> [!IMPORTANT]
+> **Instructions for AI Agents:**
+> Whenever you modify a test case, you MUST:
+> 1. Increment the `Version` number in the `## Metadata` section.
+> 2. Append a new row to the `## Change History` table with the current Date, the new Version, your identity as the Author (e.g., `Antigravity (AI)`), and a concise description of what you changed.
 
 ## Embedding Screenshots
 
