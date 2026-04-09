@@ -1,5 +1,5 @@
 ---
-name: openspec-execute-test
+name: testmanagement-execute-tests
 description: Execute a manual functional test case, updating its status dynamically and managing the test session immutability.
 license: MIT
 metadata:
@@ -9,7 +9,7 @@ metadata:
 
 # Test Execution Workflow
 
-Follow these instructions when the user wants to execute test cases or plan a new test run session through the `/opsx-execute` workflow.
+Follow these instructions when the user wants to execute test cases or plan a new test run session through the `/test-execute` workflow.
 
 ## If the User wants to PLAN a new test run:
 
