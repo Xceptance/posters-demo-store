@@ -87,4 +87,74 @@ class CartServiceTest {
         // Ensure cart subtotal is correctly based on persisted unit price
         assertThat(cart.getSubTotal()).isEqualByComparingTo(new BigDecimal("19.99"));
     }
+
+    @Test
+    void testToCartDtoMapsRichProductData() {
+        // 1. Setup mock database records
+        final Locale locale = new Locale();
+        locale.setLocale("en-US");
+        em.persist(locale);
+
+        final LocalizedText nameText = new LocalizedText();
+        nameText.setTextId(101);
+        nameText.setLocale(locale);
+        nameText.setText("Rich Poster");
+        em.persist(nameText);
+
+        final Product product = new Product();
+        product.setSku("RICH-001");
+        product.setNameTextId(nameText.getTextId());
+        product.setMediumImageUrl("/images/rich/medium.jpg");
+        em.persist(product);
+
+        final VariationAttribute finishAttr = new VariationAttribute();
+        finishAttr.setName("Finish");
+        em.persist(finishAttr);
+
+        final Variant variant = new Variant();
+        variant.setProduct(product);
+        variant.setVariantNumber(1);
+        product.getVariants().add(variant);
+        em.persist(variant);
+
+        final VariationAttributeValue finishValue = new VariationAttributeValue();
+        finishValue.setAttribute(finishAttr);
+        finishValue.setValue("Glossy");
+        em.persist(finishValue);
+        variant.getAttributeValues().add(finishValue);
+
+        final Site site = new Site();
+        site.setName("Dto Site");
+        site.setCurrency("EUR");
+        site.setMainLocale(locale);
+        site.setFallbackLocale(locale);
+        em.persist(site);
+
+        final CatalogCart cart = new CatalogCart();
+        em.persist(cart);
+        
+        final CartLineItem li = new CartLineItem();
+        li.setSku("RICH-001-0001");
+        li.setQuantity(2);
+        li.setUnitPrice(new BigDecimal("10.00"));
+        li.setProductName("Rich Poster");
+        cart.addLineItem(li);
+        
+        em.flush();
+        em.clear();
+
+        // 2. Map the DTO
+        final com.xceptance.posters.dto.CartDto cartDto = cartService.toCartDto(cart, "en-US", "EUR");
+
+        // 3. Verify exact mapping logic and rich product bindings
+        assertThat(cartDto.products()).hasSize(1);
+        final com.xceptance.posters.dto.CartItemDto itemDto = cartDto.products().get(0);
+
+        assertThat(itemDto.productName()).isEqualTo("Rich Poster");
+        assertThat(itemDto.imageURL()).isEqualTo("/images/rich/medium.jpg");
+        assertThat(itemDto.finish()).isEqualTo("Glossy");
+        assertThat(itemDto.price()).isEqualByComparingTo(new BigDecimal("10.00"));
+        assertThat(itemDto.totalProductPrice()).isEqualByComparingTo(new BigDecimal("20.00"));
+        assertThat(itemDto.productCount()).isEqualTo(2);
+    }
 }

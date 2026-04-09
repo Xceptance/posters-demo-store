@@ -9,7 +9,16 @@ import org.springframework.mock.web.MockHttpSession;
 
 import com.xceptance.posters.entity.CatalogCustomer;
 import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CartLineItem;
+import com.xceptance.posters.entity.CatalogOrder;
+import com.xceptance.posters.entity.OrderLineItem;
+import com.xceptance.posters.entity.CatalogOrderRepository;
+import com.xceptance.posters.entity.CatalogCartRepository;
 import com.xceptance.posters.service.SessionService;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -102,7 +111,7 @@ public class CheckoutControllerUiTest
         customer.hashPassword("testpass");
         customerRepository.save(customer);
 
-        final com.xceptance.posters.entity.CatalogOrder order = new com.xceptance.posters.entity.CatalogOrder();
+        final CatalogOrder order = new CatalogOrder();
         order.setOrderNumber("ORD-TEST1234");
         order.setOrderDate(java.time.LocalDateTime.now());
         order.setCurrency("USD");
@@ -110,7 +119,7 @@ public class CheckoutControllerUiTest
         order.setPaymentState("authorized");
         order.setTotal(new java.math.BigDecimal("100.00"));
 
-        final com.xceptance.posters.entity.OrderLineItem item = new com.xceptance.posters.entity.OrderLineItem();
+        final OrderLineItem item = new OrderLineItem();
         item.setSku("MYPOSTER-1");
         item.setProductName("Test Poster Name");
         item.setQuantity(2);
@@ -118,8 +127,8 @@ public class CheckoutControllerUiTest
         item.setTotalPrice(new java.math.BigDecimal("100.00"));
         order.addLineItem(item);
 
-        org.springframework.beans.factory.BeanFactory beanFactory = org.springframework.web.context.support.WebApplicationContextUtils.getRequiredWebApplicationContext(mockMvc.getDispatcherServlet().getServletContext());
-        com.xceptance.posters.entity.CatalogOrderRepository orderRepo = beanFactory.getBean(com.xceptance.posters.entity.CatalogOrderRepository.class);
+        BeanFactory beanFactory = WebApplicationContextUtils.getRequiredWebApplicationContext(mockMvc.getDispatcherServlet().getServletContext());
+        CatalogOrderRepository orderRepo = beanFactory.getBean(CatalogOrderRepository.class);
         orderRepo.save(order);
 
         final MockHttpSession session = new MockHttpSession();
@@ -131,5 +140,40 @@ public class CheckoutControllerUiTest
                .andExpect(view().name("checkout/orderConfirmation"))
                .andExpect(content().string(containsString("ORD-TEST1234")))    // Should render the explicit order number (currently it renders UUID)
                .andExpect(content().string(containsString("Test Poster Name"))); // Should render the product name (currently it renders SKU only)
+    }
+
+    @Test
+    public void testPlaceOrderRendersRichCartItems() throws Exception 
+    {
+        final CatalogCustomer customer = new CatalogCustomer();
+        customer.setEmail("tdd-placeorder@example.com");
+        customer.setFirstName("TddFirst");
+        customer.setLastName("TddLast");
+        customer.hashPassword("testpass");
+        customerRepository.save(customer);
+
+        final MockHttpSession session = new MockHttpSession();
+        sessionService.setCustomerId(session, customer.getId());
+
+        // We simulate a basic cart state 
+        final CatalogCart cart = sessionService.getCart(session);
+        final CartLineItem item = new CartLineItem();
+        item.setSku("RICH-IMG-TEST");
+        item.setProductName("Rich Item GUI Test");
+        item.setQuantity(2);
+        item.setUnitPrice(new java.math.BigDecimal("15.50"));
+        cart.addLineItem(item);
+        
+        BeanFactory beanFactory = WebApplicationContextUtils.getRequiredWebApplicationContext(mockMvc.getDispatcherServlet().getServletContext());
+        CatalogCartRepository cartRepo = beanFactory.getBean(CatalogCartRepository.class);
+        cartRepo.save(cart);
+
+        mockMvc.perform(get("/en-US/checkout/placeOrder").session(session))
+               .andExpect(status().isOk())
+               .andExpect(view().name("checkout/placeOrder"))
+               .andExpect(model().attributeExists("cartDto"))
+               .andExpect(content().string(containsString("<img ")))
+               .andExpect(content().string(containsString("src=\"/images/placeholder.jpg\""))) // DTO will default to placeholder because product mock isn't in DB natively
+               .andExpect(content().string(containsString("Rich Item GUI Test")));
     }
 }

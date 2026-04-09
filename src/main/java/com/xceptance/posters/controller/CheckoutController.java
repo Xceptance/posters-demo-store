@@ -18,6 +18,7 @@ import com.xceptance.posters.entity.CreditCardMasker;
 import com.xceptance.posters.entity.CreditCardVendor;
 import com.xceptance.posters.service.CheckoutService;
 import com.xceptance.posters.service.SessionService;
+import com.xceptance.posters.service.CartService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,14 +36,17 @@ public class CheckoutController
     private final CheckoutService checkoutService;
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
+    private final CartService cartService;
 
     public CheckoutController(CheckoutService checkoutService,
                               CatalogCustomerRepository customerRepository,
-                              SessionService sessionService)
+                              SessionService sessionService,
+                              CartService cartService)
     {
         this.checkoutService = checkoutService;
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
+        this.cartService = cartService;
     }
 
     // ─── DTOs for JSON Agents ──────────────────────────────────────────
@@ -268,6 +272,9 @@ public class CheckoutController
     {
         CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("cart", cart);
+
+        final String currency = cartService.getCurrencyForLocale(locale);
+        model.addAttribute("cartDto", cartService.toCartDto(cart, locale, currency));
 
         // Add masked card number for display
         if (cart.getCreditCard() != null)
