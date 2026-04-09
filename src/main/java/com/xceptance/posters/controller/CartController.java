@@ -301,7 +301,7 @@ public class CartController
     private CartItemDto toCartItemDto(final CartLineItem li, final String locale, final String currency)
     {
         final String sku = li.getSku();
-        final BigDecimal unitPrice = cartService.lookupPrice(sku, currency);
+        final BigDecimal unitPrice = li.getUnitPrice() != null ? li.getUnitPrice() : cartService.lookupPrice(sku, currency);
 
         // Derive product SKU from variant SKU: "PRD-0001-0001" → "PRD-0001"
         final String productSku = sku.contains("-") ? sku.substring(0, sku.lastIndexOf('-')) : sku;
@@ -317,7 +317,7 @@ public class CartController
         if (product != null)
         {
             productId = product.getId();
-            name = textService.getText(product.getNameTextId(), locale);
+            name = li.getProductName() != null ? li.getProductName() : textService.getText(product.getNameTextId(), locale);
             imageURL = product.getMediumImageUrl();
 
             // Find the variant to get attribute details

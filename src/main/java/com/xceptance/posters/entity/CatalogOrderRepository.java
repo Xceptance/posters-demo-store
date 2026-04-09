@@ -15,4 +15,6 @@ public interface CatalogOrderRepository extends JpaRepository<CatalogOrder, java
      * Find an order by its order number.
      */
     Optional<CatalogOrder> findByOrderNumber(String orderNumber);
+
+    java.util.List<CatalogOrder> findByCustomer_EmailOrderByOrderDateDesc(String email);
 }

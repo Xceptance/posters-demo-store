@@ -301,13 +301,18 @@ public class CheckoutController
         }
 
         // Use CheckoutService to convert cart to order and persist
-        CatalogOrder order = checkoutService.checkout(cart.getId(), email, firstName, lastName);
-        sessionService.setOrderId(session, order.getId());
+        try {
+            CatalogOrder order = checkoutService.checkout(cart.getId(), email, firstName, lastName);
+            sessionService.setOrderId(session, order.getId());
 
-        // Create a new empty cart for the session
-        sessionService.removeCartId(session);
+            // Create a new empty cart for the session
+            sessionService.removeCartId(session);
 
-        return "redirect:/" + locale + "/checkout/orderConfirmation";
+            return "redirect:/" + locale + "/checkout/orderConfirmation";
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/" + locale + "/cart";
+        }
     }
 
     @GetMapping("/{locale}/checkout/orderConfirmation")

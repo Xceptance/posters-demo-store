@@ -28,6 +28,12 @@ public class CartLineItem {
     @Column(nullable = false)
     private Integer quantity;
 
+    @Column(name = "unit_price", precision = 10, scale = 2)
+    private java.math.BigDecimal unitPrice;
+
+    @Column(name = "product_name")
+    private String productName;
+
     // Getters and Setters
 
     public Integer getId() { return id; }
@@ -41,4 +47,10 @@ public class CartLineItem {
 
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
+
+    public java.math.BigDecimal getUnitPrice() { return unitPrice; }
+    public void setUnitPrice(java.math.BigDecimal unitPrice) { this.unitPrice = unitPrice; }
+
+    public String getProductName() { return productName; }
+    public void setProductName(String productName) { this.productName = productName; }
 }

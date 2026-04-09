@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xceptance.posters.entity.CatalogCustomer;
 import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.entity.CatalogOrder;
+import com.xceptance.posters.entity.CatalogOrderRepository;
 import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,11 +27,14 @@ public class CustomerController
 {
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
+    private final CatalogOrderRepository orderRepository;
 
     public CustomerController(CatalogCustomerRepository customerRepository,
+                              CatalogOrderRepository orderRepository,
                               SessionService sessionService)
     {
         this.customerRepository = customerRepository;
+        this.orderRepository = orderRepository;
         this.sessionService = sessionService;
     }
 
@@ -124,8 +129,8 @@ public class CustomerController
         {
             return "redirect:/" + locale + "/login";
         }
-        // Order overview is not yet implemented with new model — placeholder
-        model.addAttribute("orders", java.util.List.of());
+        java.util.List<CatalogOrder> orders = orderRepository.findByCustomer_EmailOrderByOrderDateDesc(customer.getEmail());
+        model.addAttribute("orders", orders);
         model.addAttribute("customer", customer);
         return "customer/orderOverview";
     }

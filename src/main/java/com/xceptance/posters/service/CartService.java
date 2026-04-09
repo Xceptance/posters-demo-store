@@ -16,19 +16,22 @@ import com.xceptance.posters.entity.CatalogCart;
 import com.xceptance.posters.entity.CatalogCartRepository;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.LocalizedTextService;
 
 @Service
 public class CartService {
 
     private final CatalogCartRepository cartRepository;
     private final PostersProperties props;
+    private final LocalizedTextService localizedTextService;
 
     @PersistenceContext
     private EntityManager em;
 
-    public CartService(final CatalogCartRepository cartRepository, final PostersProperties props) {
+    public CartService(final CatalogCartRepository cartRepository, final PostersProperties props, final LocalizedTextService localizedTextService) {
         this.cartRepository = cartRepository;
         this.props = props;
+        this.localizedTextService = localizedTextService;
     }
 
     /**
@@ -77,13 +80,20 @@ public class CartService {
                 break;
             }
         }
+        
+        final BigDecimal currentPrice = lookupPrice(variantSku, currency);
+        final String productName = localizedTextService.getText(product.getNameTextId(), "en-US");
 
         if (existing != null) {
             existing.setQuantity(existing.getQuantity() + qtyToAdd);
+            existing.setUnitPrice(currentPrice); // update price to latest when modifying cart
+            existing.setProductName(productName);
         } else {
             final CartLineItem li = new CartLineItem();
             li.setSku(variantSku);
             li.setQuantity(qtyToAdd);
+            li.setUnitPrice(currentPrice);
+            li.setProductName(productName);
             cart.addLineItem(li);
         }
 
@@ -102,7 +112,7 @@ public class CartService {
     public void recalculateTotals(final CatalogCart cart, final String currency) {
         BigDecimal subTotal = BigDecimal.ZERO;
         for (final CartLineItem li : cart.getLineItems()) {
-            final BigDecimal unitPrice = lookupPrice(li.getSku(), currency);
+            final BigDecimal unitPrice = li.getUnitPrice() != null ? li.getUnitPrice() : lookupPrice(li.getSku(), currency);
             subTotal = subTotal.add(unitPrice.multiply(BigDecimal.valueOf(li.getQuantity())));
         }
         cart.setSubTotal(subTotal);

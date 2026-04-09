@@ -42,6 +42,14 @@ public class CartToOrderConverter {
         order.setOrderState("created");
         order.setPaymentState("authorized");
 
+        if (customerEmail != null) {
+            OrderCustomer orderCustomer = new OrderCustomer();
+            orderCustomer.setEmail(customerEmail);
+            orderCustomer.setFirstName(customerFirstName);
+            orderCustomer.setLastName(customerLastName);
+            order.setCustomer(orderCustomer);
+        }
+
         // Copy monetary totals
         order.setSubTotal(cart.getSubTotal());
         order.setShippingCosts(cart.getShippingCosts());
@@ -58,11 +66,14 @@ public class CartToOrderConverter {
         for (CartLineItem cartItem : cart.getLineItems()) {
             OrderLineItem orderItem = new OrderLineItem();
             orderItem.setSku(cartItem.getSku());
-            orderItem.setProductName(cartItem.getSku()); // placeholder — real impl would look up product name
             orderItem.setQuantity(cartItem.getQuantity());
-            // Price would be looked up from the price table in a real implementation
-            orderItem.setUnitPrice(java.math.BigDecimal.ZERO);
-            orderItem.setTotalPrice(java.math.BigDecimal.ZERO);
+            
+            // Map the persisted properties directly to the snapshot!
+            orderItem.setProductName(cartItem.getProductName() != null ? cartItem.getProductName() : cartItem.getSku());
+            java.math.BigDecimal unitPrice = cartItem.getUnitPrice() != null ? cartItem.getUnitPrice() : java.math.BigDecimal.ZERO;
+            orderItem.setUnitPrice(unitPrice);
+            orderItem.setTotalPrice(unitPrice.multiply(java.math.BigDecimal.valueOf(cartItem.getQuantity())));
+            
             order.addLineItem(orderItem);
         }
 
