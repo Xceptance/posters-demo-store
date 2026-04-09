@@ -17,6 +17,9 @@ Tests are organized into business domain directories (e.g., `account/`, `cart/`)
 - `search/`: Exact matches, broad terms, and result handling.
 - `images/`: Put all screenshot/reference images in this folder to keep your test cases clean. 
 
+> [!TIP]
+> **Out of Scope?** If a test scenario is proposed during planning but requires an aspirational feature or is too complex without test automation, **do not discard it**. Log it in [test-backlog.md](./test-backlog.md) to anchor it for the future without polluting the active test domains!
+
 ## Test Case Creation Protocol
 
 To ensure the highest enterprise quality, prevent aspirational testing, and guarantee alignment, all new domain test cases in this repository MUST be subjected to an exhaustive 9-step lifecycle during creation:
