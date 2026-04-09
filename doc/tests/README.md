@@ -112,8 +112,10 @@ Specify the locales and viewports the test should be executed against. Use check
 
 **Target Locales:**
 - [ ] EN-US
+- [ ] EN-GB
 - [ ] DE-DE
 - [ ] SV-SE
+- [ ] JP-JP
 
 **Target Viewports:**
 - [ ] Desktop (Large)
