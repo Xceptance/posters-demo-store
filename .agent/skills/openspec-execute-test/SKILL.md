@@ -22,11 +22,9 @@ Follow these instructions when the user wants to execute test cases or plan a ne
    ```markdown
    ## Execution Result
 
-   | Who | When | Result | Where |
-   | :--- | :--- | :--- | :--- |
-   | [Name/AI] | [YYYY-MM-DD] | `⏳ PENDING` | [Context/Browser] |
-
-   **Notes:** (Leave blank initially)
+   | Who | When | Result | Where | Comment |
+   | :--- | :--- | :--- | :--- | :--- |
+   | [Name/AI] | [YYYY-MM-DD] | `⏳ PENDING` | [Context/Browser] | |
    ```
 7. Populate the `run-plan.md` statistics and checklist.
 
