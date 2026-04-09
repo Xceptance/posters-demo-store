@@ -17,6 +17,20 @@ Tests are organized into business domain directories (e.g., `account/`, `cart/`)
 - `search/`: Exact matches, broad terms, and result handling.
 - `images/`: Put all screenshot/reference images in this folder to keep your test cases clean. 
 
+## Test Case Creation Protocol
+
+To ensure the highest enterprise quality, prevent aspirational testing, and guarantee alignment, all new domain test cases in this repository MUST be subjected to an exhaustive 9-step lifecycle during creation:
+
+1. **AI Suggests:** Present the baseline scenarios.
+2. **Joint Refinement:** Validate, refine, and change scenarios collaboratively.
+3. **AI Builds:** Write the initial markdown files.
+4. **ISTQB Validation:** Automatically run coverage grades against standard quality models.
+5. **Business Analyst Review:** Verify alignment to e-commerce business needs.
+6. **Senior Tester Review:** Verify boundary values, partitions, and edge cases.
+7. **Test Manager Review:** Verify coverage, traceability, and execution efficiency.
+8. **End Consumer Review:** Verify usability, clarity, and real-world alignment.
+9. **Finalize:** Explicit sign-off before merging or moving to the next domain.
+
 ## Test Case Format
 
 Each test case is written as a Markdown file and strictly follows a standard template to ensure consistency. Use the following structures when writing or updating tests.
