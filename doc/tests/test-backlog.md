@@ -4,6 +4,8 @@ This file serves as the official holding ground for test concepts, scenarios, an
 
 Instead of discarding great ideas during the "Joint Refinement" phase of test creation, log them here. This ensures they don't leak into the active manual suite (violating our strict "existing features only" rule) but remain anchored for future implementation or automation.
 
+*(Note: The categories below serve as a starting point. Feel free to introduce new zones or sub-categories as business needs evolve.)*
+
 ## 📥 Pending Automation
 *Log manual scenarios here that are far too tedious for human execution and should only be authored once an automated framework (e.g. Playwright) is introduced.*
 - *(Empty)*
@@ -14,4 +16,8 @@ Instead of discarding great ideas during the "Joint Refinement" phase of test cr
 
 ## 🧩 Deferred Edge Cases
 *Log extremely rare or complex edge cases that are technically possible now but deprioritized for initial manual testing velocity.*
+- *(Empty)*
+
+## 🗃️ Other Concepts & Exploratory Ideas
+*Log any other unrefined testing ideas, exploratory charters, or cross-cutting concerns that don't comfortably fit above.*
 - *(Empty)*
