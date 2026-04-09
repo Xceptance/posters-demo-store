@@ -33,3 +33,10 @@ The system SHALL return structured JSON error messages (e.g., {"success": false,
 #### Scenario: Missing required address data
 - **WHEN** the agent omits required fields (e.g., shipping state or country) from the JSON payload
 - **THEN** the system returns a descriptive JSON error specifying which required fields are missing
+
+### Requirement: Authenticated Customer Checkout Binding
+The system SHALL correctly bind authenticated customer identity and session details to the order during checkout. This guarantees that registered users can successfully complete checkout without errors, ensuring that stored addresses and customer details are automatically and robustly mapped to the final `CatalogOrder`.
+
+#### Scenario: Registered user completes checkout
+- **WHEN** an authenticated human user or agent initiates a checkout flow
+- **THEN** the system seamlessly retrieves their registered profile, bypassing manual reassignment, and successfully converts the cart into an order linked directly to their customer account.
