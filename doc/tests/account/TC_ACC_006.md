@@ -1,0 +1,89 @@
+# Login Navigation Link
+
+Verifies the 'Already have an account?' link directs the user to the login flow.
+
+## Metadata
+
+- **Test ID:** TC_ACC_006
+- **Version:** 1.1
+- **Software Version:** >= 1.0.0
+- **Domains:** Account
+- **Priority:** 🟢 Low
+- **Status:** 📝 Draft
+- **Execution Type:** Manual
+- **Suite:** 🧪 Full
+- **Requirements:**
+  - Registration
+- **Tags:** `registration`, `navigation`
+- **Author:** Antigravity (AI) (2026-04-09)
+- **Reviewers:**
+  - 
+
+## Comments
+
+> [!TIP]
+> *Example Screenshot:*
+> <!-- ![Create Account Form](../images/account/create-account.png) -->
+
+## Preconditions
+
+- The Posters Demo Store is running.
+- The user is on the Account Creation page.
+- The browser cart can be empty or have items.
+
+## Test Data
+
+| Field | Value |
+| :--- | :--- |
+| First Name | Jane |
+| Last Name | Doe |
+| Email | test_TC_ACC_006@posters.com |
+| Password | `S3cur3!P@ss` |
+
+## Execution Targets
+
+**Target Locales:**
+- [x] EN-US
+- [x] EN-GB
+- [x] DE-DE
+- [x] SV-SE
+
+**Target Viewports:**
+- [x] Desktop (Large)
+- [x] Mobile (Small)
+
+---
+
+## Steps
+
+### 1. Click Login Link
+- **Action:** Click the "Already have an account?" link below the button.
+- **Verify:** User is navigated away from the Create Account page to the Login page.
+
+---
+
+## Pass/Fail Criteria
+
+- **Pass:** Expected behavior matches the actual outcome for the scenario.
+- **Fail:** System crashes, unexpected error pages, or validation bypassed.
+
+---
+
+## Postconditions
+
+- Session state may be authenticated depending on success.
+
+---
+
+## Related Cases
+
+
+
+---
+
+## Change History
+
+| Date | Version | Author | Description |
+| :--- | :--- | :--- | :--- |
+| 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
+| 2026-04-09 | 1.1 | Antigravity (AI) | Added EN-GB and SV-SE to target locales |

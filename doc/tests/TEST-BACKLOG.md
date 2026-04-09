@@ -20,4 +20,15 @@ Instead of discarding great ideas during the "Joint Refinement" phase of test cr
 
 ## 🗃️ Other Concepts & Exploratory Ideas
 *Log any other unrefined testing ideas, exploratory charters, or cross-cutting concerns that don't comfortably fit above.*
-- *(Empty)*
+
+### Session Handling
+* **Session Expiry Timeout Checking:** Verify idle user experience (auto-logout after X minutes of inactivity).
+* **Account Lockout / Rate Limiting:** Verify brute-force protection logic (e.g. system locks account or triggers CAPTCHA after 5 failed login attempts in a short timeframe).
+
+### Account Domain (Pending Creation)
+* **Authentication:** Login flows (Happy path, invalid credentials, locked accounts) and Logout.
+* **Account Recovery:** Forgot Password / Password Reset flows.
+* **Profile Management:** Changing First/Last name or email address from within the account dashboard.
+* **Address Book:** Adding, editing, and deleting default shipping and billing addresses.
+* **Order History:** Ensuring registered users can view their past orders.
+* **Account Deletion:** Testing the ability for a user to delete their account (GDPR/privacy compliance).
