@@ -83,29 +83,29 @@ To ensure the highest enterprise quality, every domain below must be taken throu
 - [ ] 6.8 Review Localization test cases via an End Consumer persona.
 - [ ] 6.9 Finalize the Localization domain.
 
-## 7. Domain: Account Management
+## 7. Domain: Account Creation and Login
 
-- [ ] 7.1 AI suggests test scenarios for Account Management.
-- [ ] 7.2 Validate and refine the Account Management scenarios with the user.
+- [ ] 7.1 AI suggests test scenarios for Account Creation and Login.
+- [ ] 7.2 Validate and refine the scenarios with the user.
 - [ ] 7.3 AI builds and commits the initial ISTQB markdown test files.
 - [ ] 7.4 AI performs an automated ISTQB coverage validation run and provides feedback.
-- [ ] 7.5 Review Account Management cases via a Business Analyst persona.
-- [ ] 7.6 Review Account Management cases via a Senior Tester persona.
-- [ ] 7.7 Review Account Management cases via a Test Manager persona.
-- [ ] 7.8 Review Account Management cases via an End Consumer persona.
-- [ ] 7.9 Finalize the Account Management domain.
+- [ ] 7.5 Review Auth cases via a Business Analyst persona.
+- [ ] 7.6 Review Auth cases via a Senior Tester persona.
+- [ ] 7.7 Review Auth cases via a Test Manager persona.
+- [ ] 7.8 Review Auth cases via an End Consumer persona.
+- [ ] 7.9 Finalize the Auth domain.
 
-## 8. Domain: Account Creation and Login
+## 8. Domain: Account Management
 
-- [ ] 8.1 AI suggests test scenarios for Account Creation and Login.
-- [ ] 8.2 Validate and refine the scenarios with the user.
+- [ ] 8.1 AI suggests test scenarios for Account Management.
+- [ ] 8.2 Validate and refine the Account Management scenarios with the user.
 - [ ] 8.3 AI builds and commits the initial ISTQB markdown test files.
 - [ ] 8.4 AI performs an automated ISTQB coverage validation run and provides feedback.
-- [ ] 8.5 Review Auth cases via a Business Analyst persona.
-- [ ] 8.6 Review Auth cases via a Senior Tester persona.
-- [ ] 8.7 Review Auth cases via a Test Manager persona.
-- [ ] 8.8 Review Auth cases via an End Consumer persona.
-- [ ] 8.9 Finalize the Auth domain.
+- [ ] 8.5 Review Account Management cases via a Business Analyst persona.
+- [ ] 8.6 Review Account Management cases via a Senior Tester persona.
+- [ ] 8.7 Review Account Management cases via a Test Manager persona.
+- [ ] 8.8 Review Account Management cases via an End Consumer persona.
+- [ ] 8.9 Finalize the Account Management domain.
 
 ## 9. Domain: Order Management
 
