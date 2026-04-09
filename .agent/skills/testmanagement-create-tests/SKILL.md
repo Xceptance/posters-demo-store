@@ -21,7 +21,7 @@ Ask the user if they want to execute a **Light Flow** or a **Standard Flow** whe
 4. Read `doc/tests/README.md` to understand the domain layout and the 9-step creation process.
 5. Draft the new test case inside the appropriate domain directory (e.g., `doc/tests/checkout/TC_CHK_...`).
 6. Ensure Metadata, Preconditions, Steps, Execution Targets, and Change History are perfectly populated.
-7. Present the draft to the user and conduct a fast review round to refine and improve the test case before finalizing.
+7. Present the draft to the user and conduct a fast review round to refine and improve the test case. Once accepted, update the domain's `overview.md` with the new test item.
 
 ## Standard Flow
 
@@ -35,4 +35,4 @@ You must act as the orchestrator of the exact 9-step QA process specified in the
 6. **Senior Tester Review:** Act as a Senior Tester to verify boundary values, partitions, and edge cases.
 7. **Test Manager Review:** Act as a Test Manager to verify coverage, traceability, and execution efficiency.
 8. **End Consumer Review:** Act as an End Consumer to verify usability, clarity, and real-world alignment.
-9. **Finalize:** Require explicit sign-off from the user before concluding the domain creation.
+9. **Finalize:** Automatically update the domain's `overview.md` with the new test item, and require explicit sign-off from the user before concluding the domain creation.
