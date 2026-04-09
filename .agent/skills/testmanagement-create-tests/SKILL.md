@@ -30,7 +30,7 @@ You must act as the orchestrator of the exact 9-step QA process specified in the
 1. **AI Suggests:** Engage the user to define the domain and suggest baseline test scenarios.
 2. **Joint Refinement:** Validate, refine, and change the scenarios collaboratively with the user.
 3. **AI Builds:** Read `doc/tests/TEMPLATE.md` and write the initial markdown files into the appropriate directories. Ensure Metadata, Preconditions, Steps, Execution Targets, and Change History are perfectly populated, then explicitly inform the user.
-4. **ISTQB Validation:** Automatically run coverage grades against standard quality models and report back.
+4. **ISTQB Validation:** Automatically run coverage grades against standard quality models. Save or update this review report directly in the target domain folder (e.g., `doc/tests/DOMAIN/ISTQB_REVIEW.md`) and provide feedback to the user.
 5. **Business Analyst Review:** Act as a Business Analyst to review the test cases for e-commerce alignment.
 6. **Senior Tester Review:** Act as a Senior Tester to verify boundary values, partitions, and edge cases.
 7. **Test Manager Review:** Act as a Test Manager to verify coverage, traceability, and execution efficiency.
