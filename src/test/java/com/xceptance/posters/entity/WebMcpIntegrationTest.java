@@ -164,6 +164,47 @@ class WebMcpIntegrationTest {
     }
 
     @Test
+    void testJsonAddEndpointWithUnitsResolvesCorrectVariant() throws Exception {
+        // The AI strictly submits sizes with spatial dimensions attached (e.g. "24x18 in").
+        // This validates the underlying CartService perfectly normalizes it, avoiding default fallbacks.
+        final MockHttpSession session = new MockHttpSession();
+        final String jsonPayload = "{\"productId\": 1, \"quantity\": 1, \"size\": \"24x18 in\", \"finish\": \"matte\"}";
+        
+        mockMvc.perform(post("/api/v2/cart/add")
+                .session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonPayload))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.success").value(true));
+
+        // After registering, read the HTMX mini-cart natively to verify exactly which item was added
+        mockMvc.perform(get("/en-US/miniCart").session(session))
+            .andExpect(status().isOk())
+            // It MUST find the '24x18 in' dimension mapped correctly. 
+            // In the DB, the Grizzly Bear 24x18 dimension has a distinct $32.95 pricing footprint compared to the Default $17.00.
+            .andExpect(content().string(containsString("$32.95")));
+    }
+
+    @Test
+    void testJsonAddEndpointWithPaddedFinishResolvesCorrectly() throws Exception {
+        // The AI sometimes hallucinates whitespace formatting when mapping JSON attributes (e.g. " matte  ").
+        // This validates the underlying CartService safely trims strings guaranteeing precise Db evaluation constraints.
+        final MockHttpSession session = new MockHttpSession();
+        final String jsonPayload = "{\"productId\": 1, \"quantity\": 1, \"size\": \"24x18\", \"finish\": \" matte  \"}";
+
+        mockMvc.perform(post("/api/v2/cart/add")
+                .session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonPayload))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.success").value(true));
+
+        mockMvc.perform(get("/en-US/miniCart").session(session))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("$32.95")));
+    }
+
+    @Test
     void testJsonCheckoutEndpointHappyPath() throws Exception {
         final MockHttpSession session = new MockHttpSession();
 

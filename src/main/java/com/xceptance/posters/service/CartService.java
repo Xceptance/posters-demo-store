@@ -156,11 +156,19 @@ public class CartService {
                 final String attrName = av.getAttribute().getName().toLowerCase();
                 final String attrValue = av.getValue().toLowerCase();
 
-                if (attrName.contains("finish") && finish != null && attrValue.equalsIgnoreCase(finish)) {
+                if (attrName.contains("finish") && finish != null && attrValue.equalsIgnoreCase(finish.trim())) {
                     finishMatch = true;
                 }
-                if (attrName.contains("size") && size != null && attrValue.equalsIgnoreCase(size)) {
-                    sizeMatch = true;
+                if (attrName.contains("size") && size != null) {
+                    // AI Agents often supply size parameters with trailing metric/imperial measurement units 
+                    // (e.g. "24x18 in") sourced from the formatted distinctSizes labels. We aggressively strip 
+                    // out ' in', ' cm', and inner spacing variations to securely normalize equality against 
+                    // the raw DB dimensional constraints (e.g. "24x18").
+                    final String normalizedInput = size.toLowerCase().replace(" in", "").replace(" cm", "").replace(" x ", "x").trim();
+                    final String normalizedDb = attrValue.toLowerCase().replace(" in", "").replace(" cm", "").replace(" x ", "x").trim();
+                    if (normalizedDb.equalsIgnoreCase(normalizedInput)) {
+                        sizeMatch = true;
+                    }
                 }
             }
 
