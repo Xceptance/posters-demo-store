@@ -14,9 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import org.springframework.mock.web.MockHttpSession;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,14 +54,13 @@ class WebMcpIntegrationTest {
         final Pattern pattern = Pattern.compile("Example payload:\\s*(\\{.*?\\})\",");
         final Matcher matcher = pattern.matcher(htmlContent);
         
-        final ObjectMapper mapper = new ObjectMapper();
         int matches = 0;
         while (matcher.find()) {
             final String jsonPayload = matcher.group(1).replace("\\\"", "\"");
             try {
-                mapper.readTree(jsonPayload);
+                JsonPath.parse(jsonPayload);
                 matches++;
-            } catch (JsonProcessingException e) {
+            } catch (Exception e) {
                 fail("Found invalid JSON in tool example payload: " + jsonPayload, e);
             }
         }
@@ -89,13 +86,11 @@ class WebMcpIntegrationTest {
             .andExpect(status().isOk())
             .andReturn().getResponse().getContentAsString();
 
-        final ObjectMapper mapper = new ObjectMapper();
-        
         // 1. Search Catalog using the EXACT payload from the HTML documentation
         final String searchJson = extractExamplePayload(htmlContent, "search_catalog");
-        final JsonNode searchParams = mapper.readTree(searchJson);
+        final String queryValue = JsonPath.read(searchJson, "$.query").toString();
         mockMvc.perform(get("/api/v2/catalog/search")
-                .param("q", searchParams.get("query").asText())
+                .param("q", queryValue)
                 .param("locale", "en-US")
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
@@ -103,8 +98,7 @@ class WebMcpIntegrationTest {
 
         // 2. Fetch Details using EXACT payload (Grizzly Bear) natively ensuring sizes map properly
         final String detailsJson = extractExamplePayload(htmlContent, "get_product_details");
-        final JsonNode detailsParams = mapper.readTree(detailsJson);
-        final String targetProductId = detailsParams.get("productId").asText();
+        final String targetProductId = String.valueOf((Object) JsonPath.read(detailsJson, "$.productId"));
         mockMvc.perform(get("/api/v2/catalog/product/" + targetProductId)
                 .param("locale", "en-US")
                 .accept(MediaType.APPLICATION_JSON))

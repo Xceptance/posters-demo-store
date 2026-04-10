@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.mockito.Mockito;
 
 import java.math.BigDecimal;
@@ -31,9 +31,11 @@ class CheckoutServiceTest {
 
     @Autowired
     private CheckoutService checkoutService;
-
-    @MockBean
+    @MockitoBean
     private CartService cartService;
+
+    @MockitoBean
+    private com.xceptance.posters.jmx.OrderProcessingMetrics orderProcessingMetrics;
 
     private CatalogCart createAndPersistCart() {
         CatalogCart cart = new CatalogCart();
