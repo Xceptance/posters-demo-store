@@ -36,6 +36,7 @@ class WebMcpIntegrationTest {
             .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
             .andExpect(content().string(containsString("window.navigator.modelContext.registerTool")))
             .andExpect(content().string(containsString("name: \"search_catalog\"")))
+            .andExpect(content().string(containsString("name: \"get_product_details\"")))
             .andExpect(content().string(containsString("name: \"add_to_cart\"")))
             .andExpect(content().string(containsString("name: \"submit_checkout\"")));
     }
@@ -100,7 +101,21 @@ class WebMcpIntegrationTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isArray());
 
-        // 2. Add to Cart using the EXACT payload from the HTML documentation
+        // 2. Fetch Details using EXACT payload (Grizzly Bear) natively ensuring sizes map properly
+        final String detailsJson = extractExamplePayload(htmlContent, "get_product_details");
+        final JsonNode detailsParams = mapper.readTree(detailsJson);
+        final String targetProductId = detailsParams.get("productId").asText();
+        mockMvc.perform(get("/api/v2/catalog/product/" + targetProductId)
+                .param("locale", "en-US")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value(1))
+            .andExpect(jsonPath("$.name").value("Grizzly Bear"))
+            .andExpect(jsonPath("$.availableFinishes.length()").value(1))
+            .andExpect(jsonPath("$.distinctSizes.length()").value(2))
+            .andExpect(jsonPath("$.variants.length()").value(2));
+
+        // 3. Add to Cart using the EXACT payload from the HTML documentation
         final MockHttpSession session = new MockHttpSession();
         final String addCartJson = extractExamplePayload(htmlContent, "add_to_cart");
         mockMvc.perform(post("/api/v2/cart/add")
@@ -239,5 +254,62 @@ class WebMcpIntegrationTest {
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.success").value(false))
             .andExpect(jsonPath("$.errors", hasItem(containsString("cart:Cannot place an order for an empty cart."))));
+    }
+
+    @Test
+    void testJsonProductDetailsEndpointSecurity() throws Exception {
+        // Negative Number
+        mockMvc.perform(get("/api/v2/catalog/product/-1")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+
+        // Zero
+        mockMvc.perform(get("/api/v2/catalog/product/0")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+
+        // Malicious string
+        mockMvc.perform(get("/api/v2/catalog/product/NaN")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+
+        // Malicious encoded semicolon injection mapping
+        mockMvc.perform(get("/api/v2/catalog/product/1%3BSELECT")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testJsonProductDetailsEndpointForNonExistentProduct() throws Exception {
+        // ID that does not exist in DB
+        mockMvc.perform(get("/api/v2/catalog/product/99999")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testJsonProductDetailsEndpointLocaleCurrency() throws Exception {
+        // English (USD) - Validates native imperial units
+        mockMvc.perform(get("/api/v2/catalog/product/1")
+                .param("locale", "en-US")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.distinctSizes[0].label").value(containsString("in")));
+
+        // German (EUR) - Validates native metric unit transitions dynamically
+        mockMvc.perform(get("/api/v2/catalog/product/1")
+                .param("locale", "de-DE")
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.distinctSizes[0].label").value(containsString("cm")));
+    }
+
+    @Test
+    void testHtmlProductDetailBackwardsCompatibility() throws Exception {
+        // Ensure the HTML template still natively compiles using the extracted `buildProductDetailDto(...)`
+        mockMvc.perform(get("/en-US/product/grizzly-bear/1"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+            .andExpect(content().string(containsString("Grizzly Bear")));
     }
 }

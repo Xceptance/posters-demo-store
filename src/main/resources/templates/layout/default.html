@@ -58,6 +58,33 @@
                       }
                   }
               });
+
+              window.navigator.modelContext.registerTool({
+                  name: "get_product_details",
+                  description: "Retrieves granular details (sizes, finishes, minimum prices, and exact variants) for a specific product ID. Use this immediately after locating a product via search_catalog to determine valid size/finish permutations before adding to cart. Example payload: { \"productId\": 1 }",
+                  parameters: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The unique integer ID of the product (e.g., 1)."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/product/${params.productId}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      if (!response.ok) {
+                          throw new Error("Get Details failed with status " + response.status);
+                      }
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Failed to parse JSON response for Product Details.");
+                      }
+                  }
+              });
               
               window.navigator.modelContext.registerTool({
                   name: "add_to_cart",
