@@ -18,7 +18,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.containsString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -88,6 +90,8 @@ public class CustomerControllerUiTest
         item.setQuantity(2);
         item.setUnitPrice(new BigDecimal("50.00"));
         item.setTotalPrice(new BigDecimal("100.00"));
+        item.setImageUrl("https://legacy-cache/history-img.webp");
+        item.setVariantDescription("32x24, Wood");
         order.addLineItem(item);
 
         final com.xceptance.posters.entity.OrderCustomer orderCustomer = new com.xceptance.posters.entity.OrderCustomer();
@@ -101,10 +105,12 @@ public class CustomerControllerUiTest
         final MockHttpSession session = new MockHttpSession();
         sessionService.setCustomerId(session, customer.getId());
 
-        // Verify that the retrieved orders are properly populated into the model and rendered safely
+        // Verify that the retrieved orders are properly populated into the model using the OrderDto architecture and rendered safely
         mockMvc.perform(get("/en-US/orderOverview").session(session))
                .andExpect(status().isOk())
                .andExpect(view().name("customer/orderOverview"))
-               .andExpect(model().attribute("orders", hasSize(1)));
+               .andExpect(model().attribute("orderDtos", hasSize(1)))
+               .andExpect(content().string(containsString("https://legacy-cache/history-img.webp")))
+               .andExpect(content().string(containsString("32x24, Wood")));
     }
 }
