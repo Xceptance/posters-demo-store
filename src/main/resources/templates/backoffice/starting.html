@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3;url=/backoffice/login">
+    <title>Starting Up — Backoffice</title>
+    <link href="/assets/css/backoffice-fonts.css" rel="stylesheet">
+    <link href="/assets/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #0f0f1a;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .starting-card {
+            text-align: center;
+            padding: 3rem 4rem;
+        }
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a5b4fc;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em;
+        }
+        .spinner-ring {
+            width: 56px;
+            height: 56px;
+            border: 4px solid rgba(99, 102, 241, 0.2);
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .progress-bar-wrap {
+            width: 220px;
+            height: 4px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 2px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #a5b4fc);
+            border-radius: 2px;
+            animation: load 3s linear forwards;
+        }
+        @keyframes load { from { width: 0 } to { width: 100% } }
+    </style>
+</head>
+<body>
+    <div class="starting-card">
+        <div class="brand">⬡ Posters Backoffice</div>
+        <div class="spinner-ring"></div>
+        <h1>Starting Up</h1>
+        <p>Initializing the system, please wait…</p>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill"></div>
+        </div>
+    </div>
+</body>
+</html>

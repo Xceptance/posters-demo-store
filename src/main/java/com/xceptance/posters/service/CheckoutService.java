@@ -2,6 +2,8 @@ package com.xceptance.posters.service;
 
 import com.xceptance.posters.entity.*;
 import com.xceptance.posters.dto.*;
+import com.xceptance.posters.jmx.OrderProcessingMetrics;
+import com.xceptance.posters.jfr.OrderProcessingEvent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,17 +28,20 @@ public class CheckoutService {
     private final EntityManager entityManager;
     private final CreditCardValidator creditCardValidator;
     private final CartService cartService;
+    private final OrderProcessingMetrics orderProcessingMetrics;
 
     public CheckoutService(final CatalogCartRepository cartRepository,
                            final CatalogOrderRepository orderRepository,
                            final EntityManager entityManager,
                            final CreditCardValidator creditCardValidator,
-                           final CartService cartService) {
+                           final CartService cartService,
+                           final OrderProcessingMetrics orderProcessingMetrics) {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
         this.entityManager = entityManager;
         this.creditCardValidator = creditCardValidator;
         this.cartService = cartService;
+        this.orderProcessingMetrics = orderProcessingMetrics;
     }
 
     /**
@@ -230,23 +235,46 @@ public class CheckoutService {
                                   String customerEmail,
                                   String customerFirstName,
                                   String customerLastName) {
-        CatalogCart cart = cartRepository.findById(cartId)
-            .orElseThrow(() -> {
-                String msg = "ERROR: Cart not found for checkout: " + cartId;
-                log.error(msg);
-                return new RuntimeException(msg);
-            });
+        final OrderProcessingEvent jfrEvent = new OrderProcessingEvent();
+        jfrEvent.begin();
 
-        if (cart.getLineItems().isEmpty()) {
-            throw new IllegalStateException("Cannot place an order for an empty cart.");
-        }
+        try {
+            CatalogCart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> {
+                    String msg = "ERROR: Cart not found for checkout: " + cartId;
+                    log.error(msg);
+                    return new RuntimeException(msg);
+                });
 
-        final CartDto cartDto = cartService.toCartDto(cart, "en-US", "USD");
+            if (cart.getLineItems().isEmpty()) {
+                throw new IllegalStateException("Cannot place an order for an empty cart.");
+            }
 
-        CatalogOrder order = CartToOrderConverter.convert(cart, cartDto, "USD",
-            customerEmail, customerFirstName, customerLastName);
+            final CartDto cartDto = cartService.toCartDto(cart, "en-US", "USD");
 
-        orderRepository.save(order);
+            CatalogOrder order = CartToOrderConverter.convert(cart, cartDto, "USD",
+                customerEmail, customerFirstName, customerLastName);
+
+            orderRepository.save(order);
+
+            // JFR Data Population
+            jfrEvent.orderId = order.getOrderNumber();
+            jfrEvent.itemCount = order.getLineItems().stream().mapToInt(OrderLineItem::getQuantity).sum();
+            jfrEvent.totalAmount = order.getTotal() != null ? order.getTotal().doubleValue() : 0.0;
+            if (order.getCreditCard() != null) {
+                jfrEvent.creditCardVendor = order.getCreditCard().getVendor();
+            }
+
+            // JMX MBean Data Population
+            orderProcessingMetrics.recordOrder(
+                jfrEvent.orderId, 
+                jfrEvent.itemCount, 
+                jfrEvent.totalAmount, 
+                jfrEvent.creditCardVendor == null ? "" : jfrEvent.creditCardVendor
+            );
+
+            // Artificial demo delays
+            simulateProcessingDelay(jfrEvent.itemCount, jfrEvent.creditCardVendor);
 
         // 1. Clear FK references on cart so child rows can be deleted
         entityManager.createNativeQuery("UPDATE catalog_carts SET shipping_address_id = NULL, billing_address_id = NULL, credit_card_id = NULL WHERE id = :cid")
@@ -271,6 +299,9 @@ public class CheckoutService {
 
         log.info("Checkout complete: cart {} → order {}", cartId, order.getOrderNumber());
         return order;
+        } finally {
+            jfrEvent.commit();
+        }
     }
 
     /**
@@ -322,5 +353,26 @@ public class CheckoutService {
             order.getCreditCard(),
             items
         );
+    }
+
+    /**
+     * Injects delays for JFR demo purposes.
+     */
+    private void simulateProcessingDelay(final int itemCount, final String ccVendor) {
+        long delayMs = itemCount * 100L;
+        if (itemCount > 20) {
+            long extraItems = itemCount - 20;
+            delayMs += (long) (extraItems * extraItems * 4.53);
+        }
+        if ("Amex".equalsIgnoreCase(ccVendor)) {
+            delayMs += 1500 + new java.util.Random().nextInt(1000);
+        }
+        if (delayMs > 0) {
+            try {
+                Thread.sleep(delayMs);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }

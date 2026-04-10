@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Roles - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Roles</div>
+    <div layout:fragment="content">
+
+        <!-- Flash messages -->
+        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div></div>
+            <a th:href="@{/backoffice/security/roles/new}" class="btn btn-primary">
+                <span class="material-symbols-outlined me-1" style="vertical-align: middle; font-size: 18px;">add</span>
+                New Role
+            </a>
+        </div>
+
+        <!-- Roles table -->
+        <div class="bo-module-card p-0">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Modules</th>
+                        <th>Users</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="role : ${roles}">
+                        <td>
+                            <a th:if="${!role.builtIn}"
+                               th:href="@{/backoffice/security/roles/{id}/edit(id=${role.id})}"
+                               class="fw-semibold text-decoration-none" th:text="${role.name}"></a>
+                            <span th:if="${role.builtIn}" class="fw-semibold" th:text="${role.name}"></span>
+                            <span th:if="${role.builtIn}" class="badge bg-secondary ms-1">Built-in</span>
+                        </td>
+                        <td class="text-muted" th:text="${role.description}"></td>
+                        <td>
+                            <span th:each="moduleId : ${role.moduleIds}"
+                                  class="badge border border-primary text-primary me-1 mb-1"
+                                  th:text="${moduleDisplayNames[moduleId] ?: moduleId}"></span>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark" th:text="${userCounts[role.id] != null ? userCounts[role.id] : 0}"></span>
+                        </td>
+                        <td class="text-end">
+                            <!-- Edit button (custom roles only) -->
+                            <a th:if="${!role.builtIn}"
+                               th:href="@{/backoffice/security/roles/{id}/edit(id=${role.id})}"
+                               class="btn btn-sm btn-outline-secondary" title="Edit">
+                                <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                            </a>
+                            <!-- Delete button (custom roles only, shows modal) -->
+                            <button th:if="${!role.builtIn}"
+                                    type="button" class="btn btn-sm btn-outline-danger" title="Delete"
+                                    data-bs-toggle="modal"
+                                    th:data-bs-target="'#deleteModal-' + ${role.id}">
+                                <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr th:if="${roles.isEmpty()}">
+                        <td colspan="5" class="text-center text-muted py-4">No roles found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Delete confirmation modals -->
+        <div th:each="role : ${roles}" th:if="${!role.builtIn}">
+            <div class="modal fade" th:id="'deleteModal-' + ${role.id}" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete Role</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span th:if="${userCounts[role.id] != null && userCounts[role.id] > 0}">
+                                <p class="text-danger mb-0">
+                                    <span class="material-symbols-outlined me-1" style="vertical-align: middle; font-size: 18px;">warning</span>
+                                    Cannot delete role "<span th:text="${role.name}"></span>" because it is assigned to
+                                    <strong th:text="${userCounts[role.id]}"></strong> user(s).
+                                    Please reassign those users first.
+                                </p>
+                            </span>
+                            <span th:if="${userCounts[role.id] == null || userCounts[role.id] == 0}">
+                                <p>Are you sure you want to delete the role "<strong th:text="${role.name}"></strong>"?</p>
+                                <p class="text-muted mb-0">This action cannot be undone.</p>
+                            </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <form th:if="${userCounts[role.id] == null || userCounts[role.id] == 0}"
+                                  th:action="@{/backoffice/security/roles/{id}/delete(id=${role.id})}"
+                                  method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

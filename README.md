@@ -2,6 +2,21 @@
 
 *The Poster Demo Store*, or just *Posters*, is a simple e-commerce application for demoing load testing as well as test automation.
 
+## JFR Demo Purposes
+
+This application is built to demonstrate powerful Java Flight Recorder (JFR) functionality for business-level transactions. It contains custom `jdk.jfr.Event` integrations designed specifically for profiling eCommerce workflows. 
+
+For instance, the **Order Processing** function will emit custom events (`com.xceptance.posters.OrderProcessing`) encompassing parameters like `orderId`, `itemCount`, and `totalAmount`. It also deliberately injects exponentially increasing latency into large orders or specific credit card processors to show how JVM tooling (JMC) can be utilized to trace application-level business bottlenecks across millions of events.
+
+To ensure these events are recorded offline, launch the application with JFR enabled:
+
+```bash
+java -XX:StartFlightRecording=filename=recording.jfr,settings=profile -jar target/posters-demo-store-3.0.0-SNAPSHOT.jar
+```
+
+**Real-Time Event Streaming:**
+This demo also natively utilizes the **JFR Event Streaming API** (`jdk.jfr.consumer.RecordingStream`) via the `JfrEventStreamer` component. It continuously monitors the internal system for our custom `OrderProcessing` event in real-time, completely in-memory. If an order processing event exceeds 3 seconds (simulating an anomaly, such as placing an order with 10+ items using an Amex card), it automatically outputs a severe `[JFR ALERT]` directly to the application logs—perfectly fusing diagnostics with real-time alerting without generating massive log overhead.
+
 ## Features
 
 Posters comes with the basic functionality that you would expect from a typical online shop. This includes:
@@ -126,6 +141,23 @@ When Posters is started for the first time, it will populate its database with a
 * **Email**: `johndoe@example.com`
 * **Password**: `topsecret`
 
+### Test Credit Cards
+
+Luhn-valid card numbers for demo and testing use. These are **not real credit cards** — they are standard test numbers that pass the Luhn checksum.
+
+| Vendor           | Card Number         | CVV  | Expiry |
+|------------------|---------------------|------|--------|
+| Visa             | 4111 1111 1111 1111 | 123  | 12/30  |
+| Mastercard       | 5500 0000 0000 0004 | 123  | 12/30  |
+| American Express | 3400 000000 00009   | 1234 | 12/30  |
+| UnionPay         | 6200 0000 0000 0003 | 123  | 12/30  |
+| JCB              | 3530 1113 3330 0000 | 123  | 12/30  |
+| Discover         | 6011 0000 0000 0004 | 123  | 12/30  |
+| Diners Club      | 3056 930902 5904    | 123  | 12/30  |
+| Maestro          | 5018 0000 0009      | 123  | 12/30  |
+
+> **Note:** Amex cards are 15 digits and require a 4-digit CVV. All other vendors use a 3-digit CVV.
+
 ### Data Storage
 
 Posters stores its data in:
@@ -191,7 +223,7 @@ Posters ships with the H2 web console enabled. While the application is running,
 mvn test
 ```
 
-## Enabling Incorrect Behavior
+## Enabling Incorrect Behavior (currently not implemented)
 
 To activate or deactivate incorrect behavior or just to view the current status of this functionality go to one of two pages. The content on both pages is the same. The difference between the two designs is the sorting and style of the options:
 
@@ -228,4 +260,4 @@ The second design groups options below each other based on the site functionalit
 
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-Copyright (c) 2013-2024 [Xceptance Software Technologies GmbH](https://www.xceptance.com/)
+Copyright (c) 2013-2026 [Xceptance Software Technologies GmbH](https://www.xceptance.com/)

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Audit Log - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Audit Log</div>
+    <div layout:fragment="content">
+
+        <!-- Search/Filter -->
+        <form class="d-flex gap-2 mb-4" method="get" th:action="@{/backoffice/admin/audit-log}">
+            <input type="text" class="form-control" name="username" placeholder="Search by username..."
+                   th:value="${username}" style="width: 250px;">
+            <select class="form-select" name="action" style="width: 200px;">
+                <option value="">All Actions</option>
+                <option th:each="a : ${actions}" th:value="${a.name()}" th:text="${a.name()}"
+                        th:selected="${action != null && action == a.name()}"></option>
+            </select>
+            <button type="submit" class="btn btn-outline-secondary">
+                <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 18px;">search</span>
+            </button>
+        </form>
+
+        <!-- Audit log table -->
+        <div class="bo-module-card p-0">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Target</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="e : ${entries.content}">
+                        <td th:text="${#temporals.format(e.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${e.username}"></td>
+                        <td>
+                            <span class="badge bg-info" th:text="${e.action}"></span>
+                        </td>
+                        <td>
+                            <span th:if="${e.targetType}" th:text="${e.targetType + ' #' + e.targetId}"></span>
+                        </td>
+                        <td th:text="${e.details}"></td>
+                    </tr>
+                    <tr th:if="${entries.content.isEmpty()}">
+                        <td colspan="5" class="text-center text-muted py-4">No audit log entries found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav th:if="${entries.totalPages > 1}" class="mt-3">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${entries.first} ? 'disabled'">
+                    <a class="page-link" th:href="@{/backoffice/admin/audit-log(username=${username}, action=${action}, page=${entries.number - 1})}">Previous</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(0, entries.totalPages - 1)}"
+                    class="page-item" th:classappend="${i == entries.number} ? 'active'">
+                    <a class="page-link" th:href="@{/backoffice/admin/audit-log(username=${username}, action=${action}, page=${i})}" th:text="${i + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${entries.last} ? 'disabled'">
+                    <a class="page-link" th:href="@{/backoffice/admin/audit-log(username=${username}, action=${action}, page=${entries.number + 1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Users - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Users</div>
+    <div layout:fragment="content">
+
+        <!-- Flash messages -->
+        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <form class="d-flex gap-2"
+                  hx-get="/backoffice/security/users"
+                  hx-target="#user-results"
+                  hx-swap="outerHTML"
+                  hx-trigger="submit"
+                  hx-push-url="true">
+                <input type="text" class="form-control" name="search" placeholder="Search users..."
+                       th:value="${search}" style="width: 250px;"
+                       hx-get="/backoffice/security/users"
+                       hx-target="#user-results"
+                       hx-swap="outerHTML"
+                       hx-trigger="keyup changed delay:300ms"
+                       hx-push-url="true">
+                <select class="form-select" name="roleId" style="width: 180px;"
+                        hx-get="/backoffice/security/users"
+                        hx-target="#user-results"
+                        hx-swap="outerHTML"
+                        hx-trigger="change"
+                        hx-include="[name='search']"
+                        hx-push-url="true">
+                    <option value="">All Roles</option>
+                    <option th:each="r : ${allRoles}" th:value="${r.id}" th:text="${r.name}"
+                            th:selected="${roleId != null && roleId == r.id}"></option>
+                </select>
+                <button type="submit" class="btn btn-outline-secondary">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 18px;">search</span>
+                </button>
+            </form>
+            <a th:href="@{/backoffice/security/users/new}" class="btn btn-primary">
+                <span class="material-symbols-outlined me-1" style="vertical-align: middle; font-size: 18px;">person_add</span>
+                New User
+            </a>
+        </div>
+
+        <!-- User results (swapped by HTMX) -->
+        <div th:replace="~{backoffice/admin/users/results}"></div>
+
+    </div>
+</body>
+</html>

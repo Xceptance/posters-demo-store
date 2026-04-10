@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Backoffice</title>
+
+    <!-- Bootstrap 5 (local) -->
+    <link th:href="@{/assets/lib/bootstrap/bootstrap.min.css}" rel="stylesheet">
+    <!-- Local Fonts: Inter + Material Symbols -->
+    <link th:href="@{/assets/css/backoffice-fonts.css}" rel="stylesheet">
+    <!-- Backoffice CSS -->
+    <link th:href="@{/assets/css/backoffice.css}" rel="stylesheet">
+</head>
+<body class="bo-login-body">
+
+    <div class="bo-login-container">
+        <div class="bo-login-card">
+            <!-- Brand -->
+            <div class="bo-login-brand">
+                <span class="material-symbols-outlined bo-login-icon">storefront</span>
+                <h1 class="bo-login-title">Posters Backoffice</h1>
+                <p class="bo-login-subtitle">Sign in to manage your store</p>
+            </div>
+
+            <!-- Error / Logout messages -->
+            <div th:if="${param.error}" class="alert alert-danger d-flex align-items-center" role="alert">
+                <span class="material-symbols-outlined me-2">error</span>
+                <span>Invalid username or password</span>
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success d-flex align-items-center" role="alert">
+                <span class="material-symbols-outlined me-2">check_circle</span>
+                <span>You have been logged out</span>
+            </div>
+
+            <!-- Login form -->
+            <form th:action="@{/backoffice/login}" method="post" class="bo-login-form">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="bo-input-group">
+                        <span class="material-symbols-outlined bo-input-icon">person</span>
+                        <input type="text" id="username" name="username" class="form-control bo-input"
+                               placeholder="Enter your username" required autofocus autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="bo-input-group">
+                        <span class="material-symbols-outlined bo-input-icon">lock</span>
+                        <input type="password" id="password" name="password" class="form-control bo-input bo-input-password"
+                               placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="bo-password-toggle" onclick="togglePassword()" aria-label="Toggle password visibility">
+                            <span id="toggleIcon" class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn bo-login-btn w-100">
+                    <span class="material-symbols-outlined me-2">login</span>
+                    Sign In
+                </button>
+            </form>
+        </div>
+
+        <p class="bo-login-footer">Posters Demo Store &copy; 2024 Xceptance</p>
+    </div>
+
+<script>
+    function togglePassword() {
+        const input = document.getElementById('password');
+        const icon = document.getElementById('toggleIcon');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.textContent = 'visibility_off';
+        } else {
+            input.type = 'password';
+            icon.textContent = 'visibility';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title th:text="'Error ' + ${statusCode}">Error</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle" th:text="${statusCode} + ' — ' + ${statusText}">Error</div>
+
+    <div layout:fragment="content">
+        <div class="bo-welcome-banner mb-4" style="background: linear-gradient(135deg, #dc3545, #c82333);">
+            <h2 class="bo-welcome-title">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">error</span>
+                <span th:text="${statusCode} + ' — ' + ${statusText}">Error</span>
+            </h2>
+            <p class="bo-welcome-subtitle" th:text="${errorMessage}">An unexpected error occurred.</p>
+        </div>
+
+        <div class="bo-module-card" style="max-width: 600px;">
+            <dl style="margin: 0;">
+                <dt style="color: var(--bo-text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Request URI</dt>
+                <dd style="font-family: monospace; margin-bottom: 1rem;" th:text="${requestUri}">—</dd>
+
+                <dt th:if="${exceptionMessage}" style="color: var(--bo-text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Details</dt>
+                <dd th:if="${exceptionMessage}" style="font-family: monospace; color: #dc3545;" th:text="${exceptionMessage}">—</dd>
+            </dl>
+
+            <div class="mt-3">
+                <a th:href="@{/backoffice/}" class="btn btn-sm bo-btn-primary">
+                    <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle;">arrow_back</span>
+                    Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title th:text="${user.id != null ? 'Edit User' : 'New User'} + ' - Backoffice'">User Form - Backoffice</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle" th:text="${user.id != null ? 'Edit User' : 'New User'}">User Form</div>
+    <div layout:fragment="content">
+
+        <!-- Flash messages -->
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bo-module-card">
+                    <form method="post"
+                          th:action="${user.id != null
+                              ? '/backoffice/security/users/' + user.id + '/edit'
+                              : '/backoffice/security/users/new'}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="username"
+                                   th:value="${user.username}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Display Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="displayName"
+                                   th:value="${user.displayName}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="email"
+                                   th:value="${user.email}" required>
+                        </div>
+
+                        <div th:if="${user.id == null}" class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Password <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="password" id="newUserPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('newUserPassword', this)">
+                                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="confirmPassword" id="confirmUserPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('confirmUserPassword', this)">
+                                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Role <span class="text-danger">*</span></label>
+                            <div th:each="r : ${allRoles}" class="form-check">
+                                <input class="form-check-input" type="radio" name="roleId"
+                                       th:value="${r.id}"
+                                       th:id="'role-' + ${r.id}"
+                                       th:checked="${user.roles != null && user.roles.contains(r)}"
+                                       required>
+                                <label class="form-check-label" th:for="'role-' + ${r.id}">
+                                    <span th:text="${r.name}"></span>
+                                    <small class="text-muted" th:text="' — ' + ${r.description}"></small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <span th:text="${user.id != null ? 'Update User' : 'Create User'}"></span>
+                            </button>
+                            <a th:href="@{/backoffice/security/users}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Password Reset (edit only) -->
+                <div th:if="${user.id != null}" class="bo-module-card mt-4">
+                    <h5 class="mb-3">Reset Password</h5>
+                    <form method="post" th:action="@{/backoffice/security/users/{id}/reset-password(id=${user.id})}">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">New Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="newPassword" id="resetPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('resetPassword', this)">
+                                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Confirm Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="confirmPassword" id="resetConfirmPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('resetConfirmPassword', this)">
+                                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning mt-3">
+                            <span class="material-symbols-outlined me-1" style="vertical-align: middle; font-size: 18px;">lock_reset</span>
+                            Reset Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function togglePasswordVisibility(inputId, btn) {
+                var input = document.getElementById(inputId);
+                var icon = btn.querySelector('.material-symbols-outlined');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.textContent = 'visibility_off';
+                } else {
+                    input.type = 'password';
+                    icon.textContent = 'visibility';
+                }
+            }
+        </script>
+
+    </div>
+</body>
+</html>

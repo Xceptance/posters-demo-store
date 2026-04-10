@@ -1,0 +1,553 @@
+/* =========================================
+   Backoffice Design System
+   Fully independent from storefront styles
+   ========================================= */
+
+:root {
+    /* Design tokens */
+    --bo-sidebar-bg: #1e1e2f;
+    --bo-sidebar-hover: #2a2a40;
+    --bo-sidebar-active: #6366f1;
+    --bo-sidebar-text: #a0a3bd;
+    --bo-sidebar-text-active: #ffffff;
+    --bo-sidebar-width: 260px;
+
+    --bo-topbar-bg: #ffffff;
+    --bo-topbar-border: #e5e7eb;
+    --bo-topbar-height: 64px;
+
+    --bo-content-bg: #f5f6fa;
+
+    --bo-accent: #6366f1;
+    --bo-accent-hover: #5558e6;
+    --bo-accent-light: rgba(99, 102, 241, 0.1);
+
+    --bo-text-primary: #1e1e2f;
+    --bo-text-secondary: #6b7280;
+    --bo-text-muted: #9ca3af;
+
+    --bo-card-bg: #ffffff;
+    --bo-card-border: #e5e7eb;
+    --bo-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --bo-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    --bo-radius: 12px;
+    --bo-radius-sm: 8px;
+    --bo-transition: 0.2s ease;
+}
+
+/* ─── Global ─────────────────────────────── */
+
+.bo-body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bo-content-bg);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+}
+
+/* ─── Sidebar ────────────────────────────── */
+
+.bo-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--bo-sidebar-width);
+    height: 100vh;
+    background: var(--bo-sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.bo-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bo-brand-icon {
+    font-size: 28px;
+    color: var(--bo-accent);
+}
+
+.bo-brand-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+.bo-nav {
+    list-style: none;
+    padding: 16px 12px;
+    margin: 0;
+    flex: 1;
+}
+
+.bo-nav-item {
+    margin-bottom: 2px;
+}
+
+.bo-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--bo-radius-sm);
+    color: var(--bo-sidebar-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all var(--bo-transition);
+    cursor: pointer;
+}
+
+.bo-nav-item.active .bo-nav-link {
+    background: var(--bo-accent);
+    color: var(--bo-sidebar-text-active);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.bo-nav-item:not(.active):not(.disabled) .bo-nav-link:hover {
+    background: var(--bo-sidebar-hover);
+    color: var(--bo-sidebar-text-active);
+}
+
+.bo-nav-item.disabled .bo-nav-link {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.bo-nav-link .material-symbols-outlined {
+    font-size: 20px;
+}
+
+/* Collapsible sidebar groups */
+.bo-nav-toggle {
+    position: relative;
+}
+
+.bo-nav-chevron {
+    margin-left: auto;
+    font-size: 18px !important;
+    transition: transform var(--bo-transition);
+}
+
+.bo-nav-toggle[aria-expanded="true"] .bo-nav-chevron {
+    transform: rotate(180deg);
+}
+
+.bo-nav-group.active > .bo-nav-toggle {
+    color: var(--bo-sidebar-text-active);
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.bo-subnav {
+    padding: 4px 0 4px 16px !important;
+}
+
+.bo-subnav .bo-nav-link {
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.bo-subnav .bo-nav-link .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* Collapsible submodule list */
+.bo-nav-sub {
+    list-style: none;
+    padding: 2px 0 4px 12px;
+    margin: 0;
+}
+
+.bo-nav-sublink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    color: var(--bo-sidebar-text);
+    text-decoration: none;
+    font-size: 13px;
+    transition: background var(--bo-transition), color var(--bo-transition);
+    margin-bottom: 2px;
+}
+
+.bo-nav-sublink:hover {
+    background: var(--bo-sidebar-hover);
+    color: var(--bo-sidebar-text-active);
+}
+
+.bo-nav-sublink.active {
+    background: rgba(99, 102, 241, 0.18);
+    color: var(--bo-sidebar-text-active);
+    font-weight: 500;
+}
+
+.bo-nav-sublink .material-symbols-outlined {
+    font-size: 17px;
+    opacity: 0.8;
+}
+
+/* Chevron rotation when group is open */
+.bo-nav-group-toggle[aria-expanded="true"] .bo-nav-chevron {
+    transform: rotate(90deg);
+}
+
+.bo-sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bo-version {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Main Content Area ──────────────────── */
+
+.bo-main {
+    margin-left: var(--bo-sidebar-width);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ─── Top Bar ────────────────────────────── */
+
+.bo-topbar {
+    position: sticky;
+    top: 0;
+    height: var(--bo-topbar-height);
+    background: var(--bo-topbar-bg);
+    border-bottom: 1px solid var(--bo-topbar-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    z-index: 900;
+}
+
+.bo-topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.bo-page-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--bo-text-primary);
+    margin: 0;
+}
+
+.bo-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bo-admin-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bo-text-secondary);
+}
+
+.bo-logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--bo-radius-sm);
+    border: 1px solid var(--bo-topbar-border);
+    background: transparent;
+    color: var(--bo-text-secondary);
+    cursor: pointer;
+    transition: all var(--bo-transition);
+}
+
+.bo-logout-btn:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #ef4444;
+}
+
+.bo-logout-btn .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* ─── Content ────────────────────────────── */
+
+.bo-content {
+    padding: 32px;
+    flex: 1;
+}
+
+/* ─── Dashboard ──────────────────────────── */
+
+.bo-welcome-banner {
+    background: linear-gradient(135deg, var(--bo-accent) 0%, #818cf8 100%);
+    border-radius: var(--bo-radius);
+    padding: 32px;
+    color: #ffffff;
+}
+
+.bo-welcome-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.bo-welcome-subtitle {
+    font-size: 15px;
+    margin: 0;
+    opacity: 0.85;
+}
+
+/* ─── Module Cards ───────────────────────── */
+
+.bo-module-card {
+    background: var(--bo-card-bg);
+    border: 1px solid var(--bo-card-border);
+    border-radius: var(--bo-radius);
+    padding: 28px;
+    box-shadow: var(--bo-card-shadow);
+    transition: all var(--bo-transition);
+}
+
+.bo-module-card .table thead th {
+    background: #f8f9fa;
+    border-bottom: 2px solid var(--bo-card-border);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bo-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.bo-module-card .table td {
+    color: var(--bo-text-secondary);
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.bo-module-icon {
+    font-size: 32px;
+    color: var(--bo-accent);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.bo-module-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bo-text-primary);
+    margin: 0 0 8px 0;
+}
+
+.bo-module-desc {
+    font-size: 13px;
+    color: var(--bo-text-secondary);
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+}
+
+.bo-badge-soon {
+    background: var(--bo-accent-light);
+    color: var(--bo-accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ─── Login Page ─────────────────────────── */
+
+.bo-login-body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1e1e2f 0%, #2d2b55 50%, #1e1e2f 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.bo-login-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.bo-login-card {
+    background: #ffffff;
+    border-radius: var(--bo-radius);
+    padding: 40px 36px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.bo-login-brand {
+    margin-bottom: 32px;
+}
+
+.bo-login-icon {
+    font-size: 48px;
+    color: var(--bo-accent);
+    margin-bottom: 12px;
+}
+
+.bo-login-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bo-text-primary);
+    margin: 0 0 6px 0;
+}
+
+.bo-login-subtitle {
+    font-size: 14px;
+    color: var(--bo-text-secondary);
+    margin: 0;
+}
+
+.bo-login-form {
+    text-align: left;
+}
+
+.bo-login-form .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bo-text-primary);
+    margin-bottom: 6px;
+}
+
+.bo-input-group {
+    position: relative;
+}
+
+.bo-input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--bo-text-muted);
+    pointer-events: none;
+}
+
+.bo-input {
+    padding-left: 44px !important;
+    height: 46px;
+    border-radius: var(--bo-radius-sm);
+    border: 1px solid var(--bo-card-border);
+    font-size: 14px;
+    transition: all var(--bo-transition);
+}
+
+.bo-input:focus {
+    border-color: var(--bo-accent);
+    box-shadow: 0 0 0 3px var(--bo-accent-light);
+}
+
+.bo-input-password {
+    padding-right: 44px !important;
+}
+
+.bo-password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--bo-text-muted);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--bo-transition);
+}
+
+.bo-password-toggle:hover {
+    color: var(--bo-accent);
+}
+
+.bo-password-toggle .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.bo-login-btn {
+    background: var(--bo-accent);
+    color: #ffffff;
+    border: none;
+    height: 46px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--bo-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--bo-transition);
+}
+
+.bo-login-btn:hover {
+    background: var(--bo-accent-hover);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.bo-login-footer {
+    margin-top: 24px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ─── Responsive ─────────────────────────── */
+
+@media (max-width: 768px) {
+    .bo-sidebar {
+        width: 72px;
+    }
+
+    .bo-brand-text,
+    .bo-nav-link span:not(.material-symbols-outlined),
+    .bo-sidebar-footer {
+        display: none;
+    }
+
+    .bo-sidebar-brand {
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    .bo-nav {
+        padding: 16px 8px;
+    }
+
+    .bo-nav-link {
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .bo-main {
+        margin-left: 72px;
+    }
+
+    .bo-content {
+        padding: 20px;
+    }
+}

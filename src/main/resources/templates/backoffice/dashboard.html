@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Dashboard</div>
+
+    <div layout:fragment="content">
+
+        <!-- Welcome -->
+        <div class="bo-welcome-banner mb-4">
+            <h2 class="bo-welcome-title">
+                Welcome back, <span th:text="${adminDisplayName} ?: 'Admin'">Admin</span>!
+            </h2>
+            <p class="bo-welcome-subtitle">Here's an overview of your store management tools.</p>
+        </div>
+
+        <!-- Module cards -->
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <a th:href="@{/backoffice/security}" class="text-decoration-none">
+                    <div class="bo-module-card">
+                        <span class="material-symbols-outlined bo-module-icon">admin_panel_settings</span>
+                        <h5 class="bo-module-title">Security</h5>
+                        <p class="bo-module-desc">Manage users, roles, audit log, and access control.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <a th:href="@{/backoffice/catalog}" class="text-decoration-none">
+                    <div class="bo-module-card">
+                        <span class="material-symbols-outlined bo-module-icon">inventory_2</span>
+                        <h5 class="bo-module-title">Catalog</h5>
+                        <p class="bo-module-desc">Manage products, categories, pricing, and variations.</p>
+                        <span class="badge bo-badge-soon">Coming Soon</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <a th:href="@{/backoffice/customers}" class="text-decoration-none">
+                    <div class="bo-module-card">
+                        <span class="material-symbols-outlined bo-module-icon">group</span>
+                        <h5 class="bo-module-title">Customers</h5>
+                        <p class="bo-module-desc">View and manage customer accounts and profiles.</p>
+                        <span class="badge bo-badge-soon">Coming Soon</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <a th:href="@{/backoffice/orders}" class="text-decoration-none">
+                    <div class="bo-module-card">
+                        <span class="material-symbols-outlined bo-module-icon">receipt_long</span>
+                        <h5 class="bo-module-title">Orders</h5>
+                        <p class="bo-module-desc">Track and manage orders, update statuses, and export.</p>
+                        <span class="badge bo-badge-soon">Coming Soon</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
