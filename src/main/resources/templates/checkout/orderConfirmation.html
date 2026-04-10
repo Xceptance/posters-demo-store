@@ -31,14 +31,17 @@
                     </div>
                     <div class="card-body p-0 mt-3">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item p-4" th:each="op : ${order.lineItems}">
+                            <li class="list-group-item p-4" th:each="op : ${orderDto.lineItems}">
                                 <div class="row align-items-center g-3">
                                     <!-- Product Details -->
                                     <div class="col-12 col-sm-6 d-flex align-items-center mb-3 mb-sm-0">
-                                        <div class="ms-2 flex-grow-1">
+                                        <img th:src="@{${op.imageUrl != null ? op.imageUrl : '/images/placeholder.webp'}}" alt="Product Image" class="img-thumbnail border-0 bg-transparent p-0 me-3 shadow-sm" style="width: 64px; border-radius: 8px; object-fit: contain;">
+                                        <div class="flex-grow-1">
                                             <span class="text-dark fw-bold fs-5 d-block mb-1" th:text="${op.productName}">Product</span>
                                             <div class="text-muted small mb-0">
-                                                <span th:text="${op.sku}">SKU</span>
+                                                <span th:text="${op.variantDescription != null ? op.variantDescription : op.sku}">Variant or SKU</span>
+                                                <span class="mx-1" th:if="${op.variantDescription != null}">&bull;</span>
+                                                <strong th:if="${op.variantDescription != null}" th:text="${op.sku}" style="opacity: 0.7;">SKU</strong>
                                             </div>
                                         </div>
                                     </div>

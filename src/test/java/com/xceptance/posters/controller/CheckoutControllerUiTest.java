@@ -122,6 +122,8 @@ public class CheckoutControllerUiTest
         final OrderLineItem item = new OrderLineItem();
         item.setSku("MYPOSTER-1");
         item.setProductName("Test Poster Name");
+        item.setImageUrl("https://cdn.test.local/poster1.webp");
+        item.setVariantDescription("16x12, Glossy");
         item.setQuantity(2);
         item.setUnitPrice(new java.math.BigDecimal("50.00"));
         item.setTotalPrice(new java.math.BigDecimal("100.00"));
@@ -139,7 +141,9 @@ public class CheckoutControllerUiTest
                .andExpect(status().isOk())
                .andExpect(view().name("checkout/orderConfirmation"))
                .andExpect(content().string(containsString("ORD-TEST1234")))    // Should render the explicit order number (currently it renders UUID)
-               .andExpect(content().string(containsString("Test Poster Name"))); // Should render the product name (currently it renders SKU only)
+               .andExpect(content().string(containsString("Test Poster Name"))) // Should render the product name (currently it renders SKU only)
+               .andExpect(content().string(containsString("https://cdn.test.local/poster1.webp")))
+               .andExpect(content().string(containsString("16x12, Glossy")));
     }
 
     @Test

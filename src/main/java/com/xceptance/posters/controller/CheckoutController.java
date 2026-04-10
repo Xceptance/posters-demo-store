@@ -325,19 +325,21 @@ public class CheckoutController
     }
 
     @GetMapping("/{locale}/checkout/orderConfirmation")
-    public String orderConfirmation(@PathVariable String locale, HttpSession session, Model model)
+    public String orderConfirmation(final @PathVariable String locale, final HttpSession session, final Model model)
     {
-        UUID orderId = sessionService.getOrderId(session);
+        final UUID orderId = sessionService.getOrderId(session);
         if (orderId != null)
         {
             checkoutService.getOrder(orderId).ifPresent(order -> {
-                model.addAttribute("order", order);
+                final com.xceptance.posters.dto.OrderDto orderDto = checkoutService.toOrderDto(order);
+                model.addAttribute("order", order); // Preserve raw order reference for backwards compatibility
+                model.addAttribute("orderDto", orderDto);
 
                 // Add masked card number for display
-                if (order.getCreditCard() != null)
+                if (orderDto.creditCard() != null)
                 {
-                    model.addAttribute("maskedCardNumber", CreditCardMasker.mask(order.getCreditCard().getNumber()));
-                    model.addAttribute("cardVendor", order.getCreditCard().getVendor());
+                    model.addAttribute("maskedCardNumber", CreditCardMasker.mask(orderDto.creditCard().getNumber()));
+                    model.addAttribute("cardVendor", orderDto.creditCard().getVendor());
                 }
             });
         }

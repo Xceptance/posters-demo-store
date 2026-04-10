@@ -7,8 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.Mockito;
+
 import java.math.BigDecimal;
 import java.util.UUID;
+import java.util.Collections;
+import com.xceptance.posters.dto.CartDto;
+import com.xceptance.posters.dto.OrderDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,6 +32,9 @@ class CheckoutServiceTest {
     @Autowired
     private CheckoutService checkoutService;
 
+    @MockBean
+    private CartService cartService;
+
     private CatalogCart createAndPersistCart() {
         CatalogCart cart = new CatalogCart();
         cart.setSubTotal(new BigDecimal("49.95"));
@@ -33,6 +42,9 @@ class CheckoutServiceTest {
         cart.setTotal(new BigDecimal("53.57"));
         em.persist(cart);
         em.flush();
+        
+        Mockito.when(cartService.toCartDto(Mockito.any(), Mockito.anyString(), Mockito.anyString()))
+            .thenReturn(new CartDto(Collections.emptyList(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "0", 0));
 
         CartLineItem item = new CartLineItem();
         item.setSku("TEST-0001");
@@ -111,6 +123,21 @@ class CheckoutServiceTest {
         var found = checkoutService.getOrder(orderId);
         assertThat(found).isPresent();
         assertThat(found.get().getOrderNumber()).isEqualTo(order.getOrderNumber());
+    }
+
+    @Test
+    void testToOrderDto() {
+        CatalogCart cart = createAndPersistCart();
+        em.clear();
+
+        CatalogOrder order = checkoutService.checkout(cart.getId(), "test@user.com", "Test", "User");
+        OrderDto dto = checkoutService.toOrderDto(order);
+
+        assertThat(dto).isNotNull();
+        assertThat(dto.orderNumber()).isEqualTo(order.getOrderNumber());
+        assertThat(dto.lineItems()).hasSize(1);
+        assertThat(dto.lineItems().get(0).sku()).isEqualTo("TEST-0001");
+        assertThat(dto.lineItems().get(0).quantity()).isEqualTo(2);
     }
 
     @Test

@@ -2,3 +2,5 @@
 - Prefer Allman code style
 - Always comment code
 - If you use an open source library, write that into NOTICE.md including license references in doc/3rd-party-licenses
+- NEVER use Fully-Qualified Class Names (FQCN) in inline code; ALWAYS declare explicit imports at the top of the file instead.
+- Use `final` modifiers aggressively on variables, arguments, and fields wherever possible to enforce strict immutability.

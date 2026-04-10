@@ -1,6 +1,7 @@
 package com.xceptance.posters.service;
 
 import com.xceptance.posters.entity.*;
+import com.xceptance.posters.dto.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +25,18 @@ public class CheckoutService {
     private final CatalogOrderRepository orderRepository;
     private final EntityManager entityManager;
     private final CreditCardValidator creditCardValidator;
+    private final CartService cartService;
 
     public CheckoutService(final CatalogCartRepository cartRepository,
                            final CatalogOrderRepository orderRepository,
                            final EntityManager entityManager,
-                           final CreditCardValidator creditCardValidator) {
+                           final CreditCardValidator creditCardValidator,
+                           final CartService cartService) {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
         this.entityManager = entityManager;
         this.creditCardValidator = creditCardValidator;
+        this.cartService = cartService;
     }
 
     /**
@@ -237,7 +241,9 @@ public class CheckoutService {
             throw new IllegalStateException("Cannot place an order for an empty cart.");
         }
 
-        CatalogOrder order = CartToOrderConverter.convert(cart, "USD",
+        final CartDto cartDto = cartService.toCartDto(cart, "en-US", "USD");
+
+        CatalogOrder order = CartToOrderConverter.convert(cart, cartDto, "USD",
             customerEmail, customerFirstName, customerLastName);
 
         orderRepository.save(order);
@@ -281,5 +287,40 @@ public class CheckoutService {
     @Transactional(readOnly = true)
     public Optional<CatalogOrder> getOrderByNumber(String orderNumber) {
         return orderRepository.findByOrderNumber(orderNumber);
+    }
+
+    /**
+     * Converts a CatalogOrder into an OrderDto payload mapped structurally for presentation layouts.
+     * Identical representation of CartDto mapping but reads completely from snapshot database tables.
+     *
+     * @param order the target catalog order
+     * @return the mapped Data Transfer Object
+     */
+    public OrderDto toOrderDto(final CatalogOrder order) {
+        final java.util.List<OrderItemDto> items = order.getLineItems().stream()
+            .map(item -> new OrderItemDto(
+                item.getId() != null ? item.getId() : 0, 
+                item.getSku(), 
+                item.getProductName(), 
+                item.getImageUrl(), 
+                item.getVariantDescription(), 
+                item.getUnitPrice(), 
+                item.getQuantity(), 
+                item.getTotalPrice()))
+            .toList();
+
+        return new OrderDto(
+            order.getOrderNumber(),
+            order.getOrderDate(),
+            order.getSubTotal(),
+            order.getTotalTax(),
+            order.getTaxRate(),
+            order.getShippingCosts(),
+            order.getTotal(),
+            order.getShippingAddress(), // Preserves static addresses directly
+            order.getBillingAddress(),
+            order.getCreditCard(),
+            items
+        );
     }
 }

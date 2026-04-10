@@ -6,6 +6,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.math.BigDecimal;
+import java.util.List;
+import com.xceptance.posters.dto.CartDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -64,9 +66,8 @@ class CheckoutIntegrationTest {
         em.persistAndFlush(cart);
 
         // 5. Convert cart to order
-        CatalogOrder order = CartToOrderConverter.convert(
-            cart, "USD", "jane@example.com", "Jane", "Doe"
-        );
+        CartDto emptyCartDto = new CartDto(List.of(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "0", 0);
+        CatalogOrder order = CartToOrderConverter.convert(cart, emptyCartDto, "USD", "test@example.com", "Test", "User");
 
         // 6. Persist the order
         order = em.persistAndFlush(order);
