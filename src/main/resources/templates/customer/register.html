@@ -12,40 +12,48 @@
                 <form th:action="@{'/' + ${urlLocale} + '/register'}" method="post" id="register-form">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="firstName" class="form-label" th:text="#{labelFirstName}">First Name</label>
+                            <label for="firstName" class="form-label"><span th:text="#{labelFirstName}">First Name</span> <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="firstName" name="firstName" required/>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label" th:text="#{labelLastName}">Last Name</label>
+                            <label for="name" class="form-label"><span th:text="#{labelLastName}">Last Name</span> <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="name" name="name" required/>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label" th:text="#{labelEmail}">Email</label>
+                        <label for="email" class="form-label"><span th:text="#{labelEmail}">Email</span> <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="email" name="email" required/>
+                        <div id="email-format-error" class="text-danger mt-1" style="display: none;"
+                             th:text="#{errorValidEmail}">Please enter a valid email address.</div>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label" th:text="#{labelPassword}">Password</label>
+                        <label for="password" class="form-label"><span th:text="#{labelPassword}">Password</span> <span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <input type="password" class="form-control" id="password" name="password" required minlength="6"/>
-                            <button class="btn btn-outline-secondary" type="button" id="btn-toggle-password"
-                                    aria-label="Show password">
-                                <i class="bi bi-eye" id="icon-toggle-password"></i>
+                            <input type="password" class="form-control" id="password" name="password" required minlength="10"/>
+                            <button class="btn btn-outline-secondary" type="button" id="toggle-password"
+                                    aria-label="Toggle password visibility">
+                                <i class="bi bi-eye" id="toggle-password-icon"></i>
                             </button>
                         </div>
+                        <small class="form-text text-muted" th:text="#{hintPasswordRequirements}">Must be at least 10 characters with uppercase, lowercase, a number, and a special character. No spaces.</small>
+                        <div id="password-strength-error" class="text-danger mt-1" style="display: none;"
+                             th:text="#{errorPasswordTooWeak}">Password must be at least 10 characters and include uppercase, lowercase, a number, and a special character. Spaces are not allowed.</div>
                     </div>
-                    <script>
-                        document.getElementById('btn-toggle-password').addEventListener('click', function() {
-                            var input = document.getElementById('password');
-                            var icon = document.getElementById('icon-toggle-password');
-                            var isHidden = input.type === 'password';
-                            input.type = isHidden ? 'text' : 'password';
-                            icon.classList.toggle('bi-eye', !isHidden);
-                            icon.classList.toggle('bi-eye-slash', isHidden);
-                            this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
-                        });
-                    </script>
+                    <div class="mb-3">
+                        <label for="passwordConfirm" class="form-label"><span th:text="#{registrationPasswordAgain}">Confirm Password</span> <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" required minlength="10"/>
+                            <button class="btn btn-outline-secondary" type="button" id="toggle-password-confirm"
+                                    aria-label="Toggle confirm password visibility">
+                                <i class="bi bi-eye" id="toggle-password-confirm-icon"></i>
+                            </button>
+                        </div>
+                        <div id="password-mismatch-error" class="text-danger mt-1" style="display: none;"
+                             th:text="#{errorPasswordMatch}">The passwords you entered don't match. Please try again.</div>
+                    </div>
                     <button type="submit" class="btn btn-primary" id="btn-register" th:text="#{headerRegistration}">Register</button>
+                    <div id="fields-required-error" class="alert alert-danger mt-2" style="display: none;"
+                         th:text="#{errorFieldsRequired}">All fields are required. Please fill in all fields before submitting.</div>
                 </form>
                 <p class="mt-3" th:text="#{labelHaveAccount}">Already have an account?
                     <a th:href="@{'/' + ${urlLocale} + '/login'}" id="login-link" th:text="#{titleLogin}">Login</a>
@@ -53,6 +61,170 @@
             </div>
         </div>
     </div>
+
+    <script>
+        (function() {
+            /**
+             * Mirrors the server-side isEmailValid() check.
+             * No regex — plain string operations only.
+             */
+            function isEmailValid(email)
+            {
+                if (email.includes(' '))       return false;
+                var atIndex = email.indexOf('@');
+                if (atIndex < 1)               return false; // must have text before @
+                var domain = email.substring(atIndex + 1);
+                var dotIndex = domain.indexOf('.');
+                if (dotIndex < 1 || dotIndex >= domain.length - 1) return false; // dot in domain, not at edges
+                return true;
+            }
+
+            /**
+             * Mirrors the server-side isPasswordStrong() check.
+             * Each test is a single-class scan — O(n), no backtracking, no ReDoS risk.
+             */
+            function isPasswordStrong(pw)
+            {
+                if (pw.length < 10)              return false;
+                if (pw.includes(' '))            return false;
+                if (!/[a-z]/.test(pw))           return false;
+                if (!/[A-Z]/.test(pw))           return false;
+                if (!/[0-9]/.test(pw))           return false;
+                if (!/[^a-zA-Z0-9\s]/.test(pw)) return false;
+                return true;
+            }
+
+            // Toggle password visibility
+            function setupToggle(toggleBtnId, inputId, iconId) {
+                var btn = document.getElementById(toggleBtnId);
+                var input = document.getElementById(inputId);
+                var icon = document.getElementById(iconId);
+                if (btn && input && icon) {
+                    btn.addEventListener('click', function() {
+                        if (input.type === 'password') {
+                            input.type = 'text';
+                            icon.classList.remove('bi-eye');
+                            icon.classList.add('bi-eye-slash');
+                        } else {
+                            input.type = 'password';
+                            icon.classList.remove('bi-eye-slash');
+                            icon.classList.add('bi-eye');
+                        }
+                    });
+                }
+            }
+            setupToggle('toggle-password', 'password', 'toggle-password-icon');
+            setupToggle('toggle-password-confirm', 'passwordConfirm', 'toggle-password-confirm-icon');
+
+            // Client-side validation
+            var form = document.getElementById('register-form');
+            var fieldsRequiredErrorDiv = document.getElementById('fields-required-error');
+            var emailErrorDiv = document.getElementById('email-format-error');
+            var strengthErrorDiv = document.getElementById('password-strength-error');
+            var mismatchErrorDiv = document.getElementById('password-mismatch-error');
+            if (form && fieldsRequiredErrorDiv && emailErrorDiv && strengthErrorDiv && mismatchErrorDiv) {
+                form.addEventListener('submit', function(e) {
+                    var firstName = document.getElementById('firstName').value.trim();
+                    var lastName = document.getElementById('name').value.trim();
+                    var email = document.getElementById('email').value.trim();
+                    var pw = document.getElementById('password').value;
+                    var pwConfirm = document.getElementById('passwordConfirm').value;
+                    var hasError = false;
+
+                    // Check all fields are filled
+                    if (!firstName || !lastName || !email || !pw || !pwConfirm) {
+                        e.preventDefault();
+                        fieldsRequiredErrorDiv.style.display = 'block';
+                        hasError = true;
+                    } else {
+                        fieldsRequiredErrorDiv.style.display = 'none';
+                    }
+
+                    // Check email format
+                    if (email && !isEmailValid(email)) {
+                        e.preventDefault();
+                        emailErrorDiv.style.display = 'block';
+                        hasError = true;
+                    } else {
+                        emailErrorDiv.style.display = 'none';
+                    }
+
+                    // Check password strength
+                    if (!isPasswordStrong(pw)) {
+                        e.preventDefault();
+                        strengthErrorDiv.style.display = 'block';
+                        document.getElementById('password').focus();
+                        hasError = true;
+                    } else {
+                        strengthErrorDiv.style.display = 'none';
+                    }
+
+                    // Check password match
+                    if (pw !== pwConfirm) {
+                        e.preventDefault();
+                        mismatchErrorDiv.style.display = 'block';
+                        if (!hasError) {
+                            document.getElementById('passwordConfirm').focus();
+                        }
+                    } else {
+                        mismatchErrorDiv.style.display = 'none';
+                    }
+                });
+                // Validate email format on blur
+                document.getElementById('email').addEventListener('blur', function() {
+                    var val = this.value.trim();
+                    if (val.length > 0 && !isEmailValid(val)) {
+                        emailErrorDiv.style.display = 'block';
+                    } else {
+                        emailErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Clear email error as user types a valid address
+                document.getElementById('email').addEventListener('input', function() {
+                    if (isEmailValid(this.value.trim())) {
+                        emailErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Validate password strength on blur (tab away)
+                document.getElementById('password').addEventListener('blur', function() {
+                    var pw = this.value;
+                    if (pw.length > 0 && !isPasswordStrong(pw)) {
+                        strengthErrorDiv.style.display = 'block';
+                    } else {
+                        strengthErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Clear strength error as user types corrections
+                document.getElementById('password').addEventListener('input', function() {
+                    if (isPasswordStrong(this.value)) {
+                        strengthErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Validate mismatch on blur of confirm field (only when not empty)
+                document.getElementById('passwordConfirm').addEventListener('blur', function() {
+                    var pw = document.getElementById('password').value;
+                    var pwConfirm = this.value;
+                    if (pwConfirm.length > 0 && pw !== pwConfirm) {
+                        mismatchErrorDiv.style.display = 'block';
+                    } else {
+                        mismatchErrorDiv.style.display = 'none';
+                    }
+                });
+
+                // Clear mismatch error as user types corrections
+                document.getElementById('passwordConfirm').addEventListener('input', function() {
+                    var pw = document.getElementById('password').value;
+                    if (this.value === pw) {
+                        mismatchErrorDiv.style.display = 'none';
+                    }
+                });
+            }
+        })();
+    </script>
 </div>
 </body>
 </html>

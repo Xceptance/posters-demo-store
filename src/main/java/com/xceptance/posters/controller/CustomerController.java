@@ -1,7 +1,9 @@
 package com.xceptance.posters.controller;
 
+import java.util.Locale;
 import java.util.UUID;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,15 @@ public class CustomerController
 {
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
+    private final MessageSource messageSource;
 
     public CustomerController(CatalogCustomerRepository customerRepository,
-                              SessionService sessionService)
+                              SessionService sessionService,
+                              MessageSource messageSource)
     {
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
+        this.messageSource = messageSource;
     }
 
     @GetMapping("/{locale}/login")
@@ -69,18 +74,71 @@ public class CustomerController
         return "customer/register";
     }
 
+    private static boolean isPasswordStrong(String password)
+    {
+        if (password.length() < 10) return false;
+        if (password.contains(" ")) return false;
+        if (!password.chars().anyMatch(Character::isLowerCase)) return false;
+        if (!password.chars().anyMatch(Character::isUpperCase)) return false;
+        if (!password.chars().anyMatch(Character::isDigit)) return false;
+        if (password.chars().allMatch(c -> Character.isLetterOrDigit(c) || c == ' ')) return false;
+        return true;
+    }
+
+    private static boolean isEmailValid(String email)
+    {
+        if (email.contains(" ")) return false;
+        int atIndex = email.indexOf('@');
+        if (atIndex < 1) return false;                          // must have text before @
+        String domain = email.substring(atIndex + 1);
+        int dotIndex = domain.indexOf('.');
+        if (dotIndex < 1 || dotIndex >= domain.length() - 1) return false; // dot in domain, not at edges
+        return true;
+    }
+
     @PostMapping("/{locale}/register")
     public String register(@PathVariable String locale,
                            @RequestParam String email,
                            @RequestParam String password,
+                           @RequestParam String passwordConfirm,
                            @RequestParam String firstName,
                            @RequestParam String name,
                            HttpSession session,
                            RedirectAttributes redirectAttributes)
     {
+        Locale resolvedLocale = Locale.forLanguageTag(locale.replace("_", "-"));
+
+        if (firstName.isBlank() || name.isBlank() || email.isBlank()
+            || password.isBlank() || passwordConfirm.isBlank())
+        {
+            String msg = messageSource.getMessage("errorFieldsRequired", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
+
+        if (!isEmailValid(email))
+        {
+            String msg = messageSource.getMessage("errorValidEmail", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
+
+        if (!isPasswordStrong(password))
+        {
+            String msg = messageSource.getMessage("errorPasswordTooWeak", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
+        if (!password.equals(passwordConfirm))
+        {
+            String msg = messageSource.getMessage("errorPasswordMatch", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
+            return "redirect:/" + locale + "/register";
+        }
         if (customerRepository.existsByEmail(email))
         {
-            redirectAttributes.addFlashAttribute("error", "Email already in use.");
+            String msg = messageSource.getMessage("errorEmailInUse", null, resolvedLocale);
+            redirectAttributes.addFlashAttribute("error", msg);
             return "redirect:/" + locale + "/register";
         }
         CatalogCustomer customer = new CatalogCustomer();
