@@ -12,17 +12,18 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.CatalogService;
 import com.xceptance.posters.entity.Category;
 import com.xceptance.posters.entity.LocalizedTextService;
-import com.xceptance.posters.entity.Price;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.entity.Variant;
 import com.xceptance.posters.entity.VariationAttributeValue;
@@ -263,34 +264,80 @@ public class CatalogController
     // ─── Product detail ───
 
     @GetMapping("/{locale}/product/{name}/{productId}")
-    public String productDetail(@PathVariable("locale") String locale,
-                                @PathVariable("name") String name,
-                                @PathVariable("productId") int productId,
-                                Model model)
+    public String productDetail(@PathVariable("locale") final String locale,
+                                @PathVariable("name") final String name,
+                                @PathVariable("productId") final int productId,
+                                final Model model)
     {
-        Product entity = catalogService.getProductById(productId).orElse(null);
+        final Product entity = catalogService.getProductById(productId).orElse(null);
         if (entity == null)
         {
             return "redirect:/" + locale + "/";
         }
 
-        String currency = getCurrencyForLocale(locale);
-        String unitLength = (locale.startsWith("de") || locale.equals("en-GB") || locale.equals("sv-SE"))
-            ? "cm" : props.getUnitOfLength();
+        final String currency = getCurrencyForLocale(locale);
+        final ProductDetailDto dto = buildProductDetailDto(entity, locale, currency);
 
-        // Build variant DTOs
-        List<VariantDto> variantDtos = new ArrayList<>();
-        Set<String> finishSet = new TreeSet<>();
-        Set<String> sizeSet = new TreeSet<>();
+        model.addAttribute("product", dto);
+        model.addAttribute("unitLength", getUnitLength(locale));
+        return "catalog/product";
+    }
 
-        for (Variant v : entity.getVariants())
+    /**
+     * WebMCP JSON Gateway mapping identical variant arrays dynamically extracted from the database securely.
+     * Enforces rigid integer validations bouncing malicious string injections prior to DB loading arrays.
+     */
+    @GetMapping(value = "/api/v2/catalog/product/{productId}", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<ProductDetailDto> getProductDetailsJson(
+            @PathVariable("productId") final String productIdStr,
+            @RequestParam(value = "locale", defaultValue = "en-US") final String locale)
+    {
+        final int productId;
+        try
         {
-            BigDecimal varPrice = getVariantPrice(v, currency);
+            productId = Integer.parseInt(productIdStr);
+            if (productId <= 0)
+            {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        catch (final NumberFormatException e)
+        {
+            return ResponseEntity.badRequest().build();
+        }
+
+        final Product entity = catalogService.getProductById(productId).orElse(null);
+        if (entity == null)
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+        final String currency = getCurrencyForLocale(locale);
+        final ProductDetailDto dto = buildProductDetailDto(entity, locale, currency);
+
+        return ResponseEntity.ok(dto);
+    }
+
+    /**
+     * Extracts physical variations dynamically resolving them into strict DTO structures.
+     */
+    private ProductDetailDto buildProductDetailDto(final Product entity, final String locale, final String currency)
+    {
+        final String unitLength = getUnitLength(locale);
+
+        final List<VariantDto> variantDtos = new ArrayList<>();
+        final Set<String> finishSet = new TreeSet<>();
+        final Set<String> sizeSet = new TreeSet<>();
+
+        for (final Variant v : entity.getVariants())
+        {
+            final BigDecimal varPrice = getVariantPrice(v, currency);
             String finish = "";
             String size = "";
-            for (VariationAttributeValue vav : v.getAttributeValues())
+            for (final VariationAttributeValue vav : v.getAttributeValues())
             {
-                String attrName = vav.getAttribute().getName();
+                final String attrName = vav.getAttribute().getName();
                 if ("finish".equalsIgnoreCase(attrName))
                 {
                     finish = vav.getValue();
@@ -307,12 +354,11 @@ public class CatalogController
                 finish, varPrice));
         }
 
-        // Build distinct size list for the dropdown
-        List<SizeDto> distinctSizes = sizeSet.stream()
+        final List<SizeDto> distinctSizes = sizeSet.stream()
             .map(s -> new SizeDto(s, s + " " + unitLength))
             .collect(Collectors.toList());
 
-        ProductDetailDto dto = new ProductDetailDto(
+        return new ProductDetailDto(
             entity.getId(),
             textService.getText(entity.getNameTextId(), locale),
             textService.getText(entity.getDescriptionOverviewTextId(), locale),
@@ -323,10 +369,11 @@ public class CatalogController
             new ArrayList<>(finishSet),
             distinctSizes
         );
+    }
 
-        model.addAttribute("product", dto);
-        model.addAttribute("unitLength", unitLength);
-        return "catalog/product";
+    private String getUnitLength(final String locale) {
+        return (locale.startsWith("de") || locale.equals("en-GB") || locale.equals("sv-SE"))
+            ? "cm" : props.getUnitOfLength();
     }
 
     // ─── Helpers ───

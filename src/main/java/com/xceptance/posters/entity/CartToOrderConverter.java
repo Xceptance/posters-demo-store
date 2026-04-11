@@ -2,6 +2,9 @@ package com.xceptance.posters.entity;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.Objects;
+import java.math.BigDecimal;
+import com.xceptance.posters.dto.CartDto;
 
 /**
  * Converts a completed CatalogCart into an immutable CatalogOrder snapshot.
@@ -25,12 +28,13 @@ public class CartToOrderConverter {
      *
      * @param cart the completed cart with price table, addresses, credit card, and line items
      * @param currency the currency code (e.g. "USD", "EUR")
+     * @param cartDto the resolved Data Transfer Object holding dynamically evaluated properties
      * @param customerEmail the customer's email for the order snapshot
      * @param customerFirstName the customer's first name
      * @param customerLastName the customer's last name
      * @return a fully populated CatalogOrder (not yet persisted)
      */
-    public static CatalogOrder convert(CatalogCart cart, String currency,
+    public static CatalogOrder convert(CatalogCart cart, CartDto cartDto, String currency,
                                         String customerEmail,
                                         String customerFirstName,
                                         String customerLastName) {
@@ -41,6 +45,14 @@ public class CartToOrderConverter {
         order.setOrderDate(LocalDateTime.now());
         order.setOrderState("created");
         order.setPaymentState("authorized");
+
+        if (customerEmail != null) {
+            OrderCustomer orderCustomer = new OrderCustomer();
+            orderCustomer.setEmail(customerEmail);
+            orderCustomer.setFirstName(customerFirstName);
+            orderCustomer.setLastName(customerLastName);
+            order.setCustomer(orderCustomer);
+        }
 
         // Copy monetary totals
         order.setSubTotal(cart.getSubTotal());
@@ -58,11 +70,29 @@ public class CartToOrderConverter {
         for (CartLineItem cartItem : cart.getLineItems()) {
             OrderLineItem orderItem = new OrderLineItem();
             orderItem.setSku(cartItem.getSku());
-            orderItem.setProductName(cartItem.getSku()); // placeholder — real impl would look up product name
             orderItem.setQuantity(cartItem.getQuantity());
-            // Price would be looked up from the price table in a real implementation
-            orderItem.setUnitPrice(java.math.BigDecimal.ZERO);
-            orderItem.setTotalPrice(java.math.BigDecimal.ZERO);
+            
+            // Map the persisted properties directly to the snapshot!
+            orderItem.setProductName(cartItem.getProductName() != null ? cartItem.getProductName() : cartItem.getSku());
+            
+            Objects.requireNonNull(cartDto, "CartDto payload cannot be null during order creation to ensure visual snapshot integrity");
+
+            // Extract the dynamic image and variant properties from the resolved DTO format securely
+            cartDto.products().stream()
+                .filter(dto -> dto.sku().equals(cartItem.getSku()) && dto.lineItemId() == (cartItem.getId() != null ? cartItem.getId() : 0))
+                .findFirst()
+                .ifPresent(dto -> {
+                    orderItem.setImageUrl(dto.getImageURL());
+                    String finish = dto.finish() != null && !dto.finish().isEmpty() ? dto.finish() : "";
+                    String size = dto.sizeLabel() != null && !dto.sizeLabel().isEmpty() ? dto.sizeLabel() : "";
+                    String variantDesc = size + (size.isEmpty() || finish.isEmpty() ? "" : ", ") + finish;
+                    orderItem.setVariantDescription(variantDesc.trim().isEmpty() ? null : variantDesc.trim());
+                });
+
+            BigDecimal unitPrice = cartItem.getUnitPrice() != null ? cartItem.getUnitPrice() : BigDecimal.ZERO;
+            orderItem.setUnitPrice(unitPrice);
+            orderItem.setTotalPrice(unitPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+            
             order.addLineItem(orderItem);
         }
 

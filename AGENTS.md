@@ -11,7 +11,8 @@ Please adhere to the following rules when contributing to this repository:
 - **Documentation:** Always comment code thoroughly.
 - **AI Attribution:** If a file is exclusively created by AI, mark it in the class comment accordingly with the specific model you used.
 - **License Headers:** Always add an Apache license header to all new source code files.
-- **Final:** Prefer final for methods and fields in new code only.
+- **Final:** Use `final` modifiers aggressively on variables, arguments, methods, and fields wherever possible to enforce strict immutability.
+- **Imports:** NEVER use Fully-Qualified Class Names (FQCN) in inline code; ALWAYS declare explicit imports at the top of the file instead.
 - **Java Language Features:** Use JDK 21 features and syntax where appropriate.
 
 ## Third-Party Dependencies

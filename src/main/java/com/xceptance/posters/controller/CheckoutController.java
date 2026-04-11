@@ -5,25 +5,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xceptance.posters.entity.CartAddress;
-import com.xceptance.posters.entity.CartCreditCard;
 import com.xceptance.posters.entity.CatalogCart;
-import com.xceptance.posters.entity.CatalogCartRepository;
 import com.xceptance.posters.entity.CatalogOrder;
-import com.xceptance.posters.entity.CheckoutService;
 import com.xceptance.posters.entity.CatalogCustomer;
 import com.xceptance.posters.entity.CatalogCustomerRepository;
 import com.xceptance.posters.entity.CreditCardMasker;
-import com.xceptance.posters.entity.CreditCardValidator;
 import com.xceptance.posters.entity.CreditCardVendor;
+import com.xceptance.posters.service.CheckoutService;
 import com.xceptance.posters.service.SessionService;
+import com.xceptance.posters.service.CartService;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,23 +33,150 @@ import java.util.UUID;
 @Controller
 public class CheckoutController
 {
-    private final CatalogCartRepository cartRepository;
     private final CheckoutService checkoutService;
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
-    private final CreditCardValidator creditCardValidator;
+    private final CartService cartService;
 
-    public CheckoutController(CatalogCartRepository cartRepository,
-                              CheckoutService checkoutService,
+    public CheckoutController(CheckoutService checkoutService,
                               CatalogCustomerRepository customerRepository,
                               SessionService sessionService,
-                              CreditCardValidator creditCardValidator)
+                              CartService cartService)
     {
-        this.cartRepository = cartRepository;
         this.checkoutService = checkoutService;
         this.customerRepository = customerRepository;
         this.sessionService = sessionService;
-        this.creditCardValidator = creditCardValidator;
+        this.cartService = cartService;
+    }
+
+    // ─── DTOs for JSON Agents ──────────────────────────────────────────
+
+    public record CheckoutAddressDto(String name, String firstName, String company, String addressLine, String city, String state, String zip, String country) {}
+    public record CheckoutPaymentDto(String cardNumber, String name, String expiry, String cvv) {}
+    public record CheckoutCustomerDto(String email, String firstName, String lastName) {}
+
+    public record CheckoutRequestDto(
+        CheckoutAddressDto shippingAddress,
+        CheckoutAddressDto billingAddress,
+        CheckoutPaymentDto payment,
+        CheckoutCustomerDto customer
+    ) {}
+
+    public record CheckoutResponseDto(boolean success, java.util.List<String> errors, String orderNumber) {}
+
+    // ─── WebMCP Checkout JSON API ──────────────────────────────────────
+
+    /**
+     * Dedicated JSON endpoint for the AI agent (WebMCP) to perform a full checkout securely.
+     */
+    @PostMapping(value = "/api/v2/checkout", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public org.springframework.http.ResponseEntity<CheckoutResponseDto> apiCheckout(@RequestBody final CheckoutRequestDto payload,
+                                           final HttpSession session)
+    {
+        final java.util.List<String> errors = new java.util.ArrayList<>();
+        
+        if (payload.shippingAddress() == null) {
+            errors.add("shippingAddress:Missing required shipping information.");
+        } else {
+            if (payload.shippingAddress().name() == null) errors.add("shippingAddress.name:Missing field.");
+            if (payload.shippingAddress().firstName() == null) errors.add("shippingAddress.firstName:Missing field.");
+            if (payload.shippingAddress().addressLine() == null) errors.add("shippingAddress.addressLine:Missing field.");
+            if (payload.shippingAddress().city() == null) errors.add("shippingAddress.city:Missing field.");
+            if (payload.shippingAddress().state() == null) errors.add("shippingAddress.state:Missing field.");
+            if (payload.shippingAddress().zip() == null) errors.add("shippingAddress.zip:Missing field.");
+            if (payload.shippingAddress().country() == null) errors.add("shippingAddress.country:Missing field.");
+        }
+
+        if (payload.billingAddress() == null) {
+            errors.add("billingAddress:Missing required billing information.");
+        } else {
+            if (payload.billingAddress().name() == null) errors.add("billingAddress.name:Missing field.");
+            if (payload.billingAddress().firstName() == null) errors.add("billingAddress.firstName:Missing field.");
+            if (payload.billingAddress().addressLine() == null) errors.add("billingAddress.addressLine:Missing field.");
+            if (payload.billingAddress().city() == null) errors.add("billingAddress.city:Missing field.");
+            if (payload.billingAddress().state() == null) errors.add("billingAddress.state:Missing field.");
+            if (payload.billingAddress().zip() == null) errors.add("billingAddress.zip:Missing field.");
+            if (payload.billingAddress().country() == null) errors.add("billingAddress.country:Missing field.");
+        }
+
+        if (payload.payment() == null) {
+            errors.add("payment:Missing required payment information.");
+        } else {
+            if (payload.payment().cardNumber() == null) errors.add("payment.cardNumber:Missing field.");
+            if (payload.payment().name() == null) errors.add("payment.name:Missing field.");
+            if (payload.payment().expiry() == null) errors.add("payment.expiry:Missing field.");
+            if (payload.payment().cvv() == null) errors.add("payment.cvv:Missing field.");
+        }
+
+        if (!errors.isEmpty()) {
+            return org.springframework.http.ResponseEntity.badRequest().body(new CheckoutResponseDto(false, errors, null));
+        }
+
+        final CatalogCart cart = sessionService.getCart(session);
+
+        checkoutService.updateShippingAddress(cart,
+            payload.shippingAddress().name(),
+            payload.shippingAddress().firstName(),
+            payload.shippingAddress().company(),
+            payload.shippingAddress().addressLine(),
+            payload.shippingAddress().city(),
+            payload.shippingAddress().state(),
+            payload.shippingAddress().zip(),
+            payload.shippingAddress().country()
+        );
+
+        checkoutService.updateBillingAddress(cart,
+            payload.billingAddress().name(),
+            payload.billingAddress().firstName(),
+            payload.billingAddress().company(),
+            payload.billingAddress().addressLine(),
+            payload.billingAddress().city(),
+            payload.billingAddress().state(),
+            payload.billingAddress().zip(),
+            payload.billingAddress().country()
+        );
+
+        final java.util.List<String> paymentErrors = checkoutService.updatePayment(cart,
+            payload.payment().cardNumber(),
+            payload.payment().name(),
+            payload.payment().expiry(),
+            payload.payment().cvv()
+        );
+
+        if (!paymentErrors.isEmpty()) {
+            return org.springframework.http.ResponseEntity.badRequest().body(new CheckoutResponseDto(false, paymentErrors, null));
+        }
+
+        String email = "guest@example.com";
+        String fName = "Guest";
+        String lName = "Customer";
+
+        if (sessionService.isCustomerLoggedIn(session)) {
+            final UUID customerId = sessionService.getCustomerId(session);
+            final Optional<CatalogCustomer> customerOpt = customerRepository.findById(customerId);
+            if (customerOpt.isPresent()) {
+                final CatalogCustomer c = customerOpt.get();
+                email = c.getEmail();
+                fName = c.getFirstName();
+                lName = c.getLastName();
+            }
+        } else if (payload.customer() != null) {
+            email = payload.customer().email() != null ? payload.customer().email() : email;
+            fName = payload.customer().firstName() != null ? payload.customer().firstName() : fName;
+            lName = payload.customer().lastName() != null ? payload.customer().lastName() : lName;
+        }
+
+        try {
+            final CatalogOrder order = checkoutService.checkout(cart.getId(), email, fName, lName);
+            sessionService.setOrderId(session, order.getId());
+            sessionService.removeCartId(session);
+            return org.springframework.http.ResponseEntity.ok(new CheckoutResponseDto(true, java.util.List.of(), order.getOrderNumber()));
+        } catch (IllegalStateException e) {
+            return org.springframework.http.ResponseEntity.badRequest().body(new CheckoutResponseDto(false, java.util.List.of("cart:" + e.getMessage()), null));
+        } catch (Exception e) {
+            return org.springframework.http.ResponseEntity.badRequest().body(new CheckoutResponseDto(false, java.util.List.of("checkout:Failed to checkout - " + e.getMessage()), null));
+        }
     }
 
     @GetMapping("/{locale}/checkout/shippingAddress")
@@ -74,23 +199,7 @@ public class CheckoutController
                                         HttpSession session)
     {
         CatalogCart cart = sessionService.getCart(session);
-
-        CartAddress address = cart.getShippingAddress();
-        if (address == null)
-        {
-            address = new CartAddress();
-            address.setCart(cart);
-        }
-        address.setRecipientLastName(name);
-        address.setRecipientFirstName(firstName);
-        address.setCompany(company);
-        address.setAddressLine1(addressLine);
-        address.setCity(city);
-        address.setState(state);
-        address.setPostalCode(zip);
-        address.setCountry(country);
-        cart.setShippingAddress(address);
-        cartRepository.save(cart);
+        checkoutService.updateShippingAddress(cart, name, firstName, company, addressLine, city, state, zip, country);
 
         return "redirect:/" + locale + "/checkout/billingAddress";
     }
@@ -117,23 +226,7 @@ public class CheckoutController
                                        HttpSession session)
     {
         CatalogCart cart = sessionService.getCart(session);
-
-        CartAddress address = cart.getBillingAddress();
-        if (address == null)
-        {
-            address = new CartAddress();
-            address.setCart(cart);
-        }
-        address.setRecipientLastName(name);
-        address.setRecipientFirstName(firstName);
-        address.setCompany(company);
-        address.setAddressLine1(addressLine);
-        address.setCity(city);
-        address.setState(state);
-        address.setPostalCode(zip);
-        address.setCountry(country);
-        cart.setBillingAddress(address);
-        cartRepository.save(cart);
+        checkoutService.updateBillingAddress(cart, name, firstName, company, addressLine, city, state, zip, country);
 
         return "redirect:/" + locale + "/checkout/payment";
     }
@@ -154,91 +247,22 @@ public class CheckoutController
                                 HttpSession session,
                                 Model model)
     {
-        // Strip non-digits from card number (spaces from auto-formatting)
-        String digits = cardNumber.replaceAll("\\D", "");
-
-        // Auto-detect vendor from BIN prefix
-        CreditCardVendor vendor = CreditCardVendor.detect(digits);
-
-        // Parse MM/YY expiry
-        int month = 0;
-        int year = 0;
-        boolean expiryParsed = false;
-        if (expiry != null && expiry.matches("\\d{2}/\\d{2}"))
-        {
-            month = Integer.parseInt(expiry.substring(0, 2));
-            year = Integer.parseInt(expiry.substring(3, 5));
-            expiryParsed = true;
-        }
-
-        // Server-side validation
-        List<String> errors = new ArrayList<>();
-
-        if (digits.isEmpty())
-        {
-            errors.add("cardNumber:Please enter a card number.");
-        }
-        else
-        {
-            if (!creditCardValidator.isLuhnValid(digits))
-            {
-                errors.add("cardNumber:Please enter a valid credit card number.");
-            }
-            if (vendor != null && !creditCardValidator.isValidLength(digits, vendor))
-            {
-                errors.add("cardNumber:Card number length is invalid for " + vendor.getDisplayName() + ".");
-            }
-        }
-
-        if (name == null || name.isBlank())
-        {
-            errors.add("name:Please enter the cardholder name.");
-        }
-
-        if (!expiryParsed)
-        {
-            errors.add("expiry:Please enter expiry in MM/YY format.");
-        }
-        else if (!creditCardValidator.isExpiryValid(month, year))
-        {
-            errors.add("expiry:Card is expired or expiry date is invalid.");
-        }
-
-        if (!creditCardValidator.isCvvValid(cvv, vendor))
-        {
-            int expectedLen = vendor != null ? vendor.getCvvLength() : 3;
-            errors.add("cvv:CVV must be " + expectedLen + " digits.");
-        }
+        CatalogCart cart = sessionService.getCart(session);
+        List<String> errors = checkoutService.updatePayment(cart, cardNumber, name, expiry, cvv);
 
         // If validation fails, re-render with errors and masked card
         if (!errors.isEmpty())
         {
             addCustomerDataToModel(session, model);
             model.addAttribute("validationErrors", errors);
+            String digits = cardNumber == null ? "" : cardNumber.replaceAll("\\D", "");
             model.addAttribute("maskedCardNumber", CreditCardMasker.mask(digits));
             model.addAttribute("cardName", name);
             model.addAttribute("expiry", expiry);
+            CreditCardVendor vendor = CreditCardVendor.detect(digits);
             model.addAttribute("detectedVendor", vendor != null ? vendor.getDisplayName() : null);
             return "checkout/payment";
         }
-
-        // Save to cart
-        CatalogCart cart = sessionService.getCart(session);
-        CartCreditCard card = cart.getCreditCard();
-        if (card == null)
-        {
-            card = new CartCreditCard();
-            card.setCart(cart);
-        }
-        card.setNumber(digits);
-        card.setName(name);
-        card.setVendor(vendor != null ? vendor.getDisplayName() : "Unknown");
-        card.setExpMonth(month);
-        card.setExpYear(2000 + year);
-        cart.setCreditCard(card);
-        cartRepository.save(cart);
-
-        // CVV is intentionally NOT stored
 
         return "redirect:/" + locale + "/checkout/placeOrder";
     }
@@ -248,6 +272,9 @@ public class CheckoutController
     {
         CatalogCart cart = sessionService.getCart(session);
         model.addAttribute("cart", cart);
+
+        final String currency = cartService.getCurrencyForLocale(locale);
+        model.addAttribute("cartDto", cartService.toCartDto(cart, locale, currency));
 
         // Add masked card number for display
         if (cart.getCreditCard() != null)
@@ -283,29 +310,36 @@ public class CheckoutController
         }
 
         // Use CheckoutService to convert cart to order and persist
-        CatalogOrder order = checkoutService.checkout(cart.getId(), email, firstName, lastName);
-        sessionService.setOrderId(session, order.getId());
+        try {
+            CatalogOrder order = checkoutService.checkout(cart.getId(), email, firstName, lastName);
+            sessionService.setOrderId(session, order.getId());
 
-        // Create a new empty cart for the session
-        sessionService.removeCartId(session);
+            // Create a new empty cart for the session
+            sessionService.removeCartId(session);
 
-        return "redirect:/" + locale + "/checkout/orderConfirmation";
+            return "redirect:/" + locale + "/checkout/orderConfirmation";
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/" + locale + "/cart";
+        }
     }
 
     @GetMapping("/{locale}/checkout/orderConfirmation")
-    public String orderConfirmation(@PathVariable String locale, HttpSession session, Model model)
+    public String orderConfirmation(final @PathVariable String locale, final HttpSession session, final Model model)
     {
-        UUID orderId = sessionService.getOrderId(session);
+        final UUID orderId = sessionService.getOrderId(session);
         if (orderId != null)
         {
             checkoutService.getOrder(orderId).ifPresent(order -> {
-                model.addAttribute("order", order);
+                final com.xceptance.posters.dto.OrderDto orderDto = checkoutService.toOrderDto(order);
+                model.addAttribute("order", order); // Preserve raw order reference for backwards compatibility
+                model.addAttribute("orderDto", orderDto);
 
                 // Add masked card number for display
-                if (order.getCreditCard() != null)
+                if (orderDto.creditCard() != null)
                 {
-                    model.addAttribute("maskedCardNumber", CreditCardMasker.mask(order.getCreditCard().getNumber()));
-                    model.addAttribute("cardVendor", order.getCreditCard().getVendor());
+                    model.addAttribute("maskedCardNumber", CreditCardMasker.mask(orderDto.creditCard().getNumber()));
+                    model.addAttribute("cardVendor", orderDto.creditCard().getVendor());
                 }
             });
         }

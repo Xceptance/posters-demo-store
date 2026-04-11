@@ -37,7 +37,7 @@
           if (window.navigator && window.navigator.modelContext) {
               window.navigator.modelContext.registerTool({
                   name: "search_catalog",
-                  description: "Searches the store catalog for products matching a given query. Use this to find specific items, brands, or categories.",
+                  description: "Searches the store catalog for products matching a given query. Use this to find specific items, brands, or categories. Example payload: { \"query\": \"bear\" }",
                   parameters: {
                       type: "object",
                       properties: {
@@ -51,14 +51,44 @@
                   execute: async (params) => {
                       const url = `/api/v2/catalog/search?q=${encodeURIComponent(params.query)}`;
                       const response = await fetch(url, { headers: { "Accept": "application/json" } });
-                      if (!response.ok) throw new Error("Search failed with status " + response.status);
-                      return await response.json();
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Search failed with status " + response.status);
+                      }
+                  }
+              });
+
+              window.navigator.modelContext.registerTool({
+                  name: "get_product_details",
+                  description: "Retrieves granular details (sizes, finishes, minimum prices, and exact variants) for a specific product ID. Use this immediately after locating a product via search_catalog to determine valid size/finish permutations before adding to cart. Example payload: { \"productId\": 1 }",
+                  parameters: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The unique integer ID of the product (e.g., 1)."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/product/${params.productId}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      if (!response.ok) {
+                          throw new Error("Get Details failed with status " + response.status);
+                      }
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Failed to parse JSON response for Product Details.");
+                      }
                   }
               });
               
               window.navigator.modelContext.registerTool({
                   name: "add_to_cart",
-                  description: "Adds a specific product to the user's shopping cart.",
+                  description: "Adds a specific product to the user's shopping cart. Example payload: { \"productId\": 1, \"quantity\": 1, \"size\": \"16 x 12 in\", \"finish\": \"matte\" }",
                   parameters: {
                       type: "object",
                       properties: {
@@ -104,8 +134,95 @@
                               finish: params.finish
                           })
                       });
-                      if (!response.ok) throw new Error("Add to cart failed with status " + response.status);
-                      return await response.json();
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Add to cart failed with status " + response.status);
+                      }
+                  }
+              });
+
+              window.navigator.modelContext.registerTool({
+                  name: "submit_checkout",
+                  description: "Executes the final checkout process to securely convert the active shopping cart into a confirmed order. Requires complete shipping and billing addresses, and valid credit card payment details. Example payload: { \"shippingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"billingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"payment\": {\"cardNumber\":\"4242424242424242\",\"name\":\"John Doe\",\"expiry\":\"12/30\",\"cvv\":\"123\"}, \"customer\": {\"email\":\"john@example.com\",\"firstName\":\"John\",\"lastName\":\"Doe\"} }",
+                  parameters: {
+                      type: "object",
+                      properties: {
+                          shippingAddress: {
+                              type: "object",
+                              description: "Shipping address details.",
+                              properties: {
+                                  name: { type: "string" },
+                                  firstName: { type: "string" },
+                                  company: { type: "string" },
+                                  addressLine: { type: "string" },
+                                  city: { type: "string" },
+                                  state: { type: "string" },
+                                  zip: { type: "string" },
+                                  country: { type: "string" }
+                              },
+                              required: ["name", "firstName", "addressLine", "city", "state", "zip", "country"]
+                          },
+                          billingAddress: {
+                              type: "object",
+                              description: "Billing address details.",
+                              properties: {
+                                  name: { type: "string" },
+                                  firstName: { type: "string" },
+                                  company: { type: "string" },
+                                  addressLine: { type: "string" },
+                                  city: { type: "string" },
+                                  state: { type: "string" },
+                                  zip: { type: "string" },
+                                  country: { type: "string" }
+                              },
+                              required: ["name", "firstName", "addressLine", "city", "state", "zip", "country"]
+                          },
+                          payment: {
+                              type: "object",
+                              description: "Credit card details.",
+                              properties: {
+                                  cardNumber: { type: "string" },
+                                  name: { type: "string" },
+                                  expiry: { type: "string", description: "MM/YY format" },
+                                  cvv: { type: "string" }
+                              },
+                              required: ["cardNumber", "name", "expiry", "cvv"]
+                          },
+                          customer: {
+                              type: "object",
+                              description: "Customer contact info (optional if logged in).",
+                              properties: {
+                                  email: { type: "string" },
+                                  firstName: { type: "string" },
+                                  lastName: { type: "string" }
+                              }
+                          }
+                      },
+                      required: ["shippingAddress", "billingAddress", "payment"]
+                  },
+                  execute: async (params) => {
+                      const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+                      const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+                      
+                      const headers = { 
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json' 
+                      };
+                      if (csrfToken && csrfHeader) {
+                          headers[csrfHeader] = csrfToken;
+                      }
+
+                      const response = await fetch('/api/v2/checkout', {
+                          method: 'POST',
+                          headers: headers,
+                          body: JSON.stringify(params)
+                      });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Checkout failed with status " + response.status);
+                      }
                   }
               });
 

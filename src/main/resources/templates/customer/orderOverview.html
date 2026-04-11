@@ -7,25 +7,54 @@
 <div layout:fragment="content">
     <div class="container mt-4">
         <h1 th:text="#{titleOrderHistory}">Order History</h1>
-        <div th:if="${not #lists.isEmpty(orders)}">
-            <div class="card mb-3" th:each="order : ${orders}">
-                <div class="card-header d-flex justify-content-between">
-                    <span>Order <small th:text="${order.id}">uuid</small></span>
-                    <span th:text="${order.orderDate}">2024-01-01</span>
+        <div th:if="${not #lists.isEmpty(orderDtos)}">
+            <div class="card mb-4 shadow-sm border-0 bg-white" th:each="orderDto : ${orderDtos}" style="border-radius: 12px; overflow: hidden;">
+                <div class="card-header d-flex justify-content-between align-items-center bg-light border-bottom p-4">
+                    <h5 class="mb-0 text-primary fw-bold">Order <span class="text-dark">#</span><span class="text-dark" th:text="${orderDto.orderNumber}">uuid</span></h5>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2 fw-medium shadow-sm fs-6" th:text="${#temporals.format(orderDto.orderDate, 'MMM dd, yyyy HH:mm')}">Jan 01, 2024</span>
                 </div>
-                <div class="card-body">
-                    <table class="table table-sm">
-                        <tr th:each="op : ${order.products}">
-                            <td th:text="${op.product.name.getText(urlLocale)}">Product</td>
-                            <td th:text="${op.productCount}">1</td>
-                            <td><span th:text="${currency}">$</span><span th:text="${op.totalProductPriceAsString}">0.00</span></td>
-                        </tr>
-                    </table>
-                    <p><strong>Total: <span th:text="${currency}">$</span><span th:text="${order.totalCostsAsString}">0.00</span></strong></p>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-4" th:each="op : ${orderDto.lineItems}">
+                            <div class="row align-items-center g-3">
+                                <!-- Product Details -->
+                                <div class="col-12 col-sm-6 d-flex align-items-center mb-3 mb-sm-0">
+                                    <img th:src="@{${op.imageUrl != null ? op.imageUrl : '/images/placeholder.webp'}}" alt="Product Image" class="img-thumbnail border-0 bg-transparent p-0 me-3 shadow-sm" style="width: 64px; height: 64px; border-radius: 8px; object-fit: contain;">
+                                    <div class="flex-grow-1">
+                                        <span class="text-dark fw-bold fs-5 d-block mb-1" th:text="${op.productName}">Product</span>
+                                        <div class="text-muted small mb-0">
+                                            <span th:text="${op.variantDescription != null ? op.variantDescription : op.sku}">Variant or SKU</span>
+                                            <span class="mx-1" th:if="${op.variantDescription != null}">&bull;</span>
+                                            <strong th:if="${op.variantDescription != null}" th:text="${op.sku}" style="opacity: 0.7;">SKU</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Price -->
+                                <div class="col-4 col-sm-2 text-sm-center">
+                                    <div class="d-sm-none text-muted small mb-1" th:text="#{labelPrice}">Price</div>
+                                    <span class="fw-medium text-muted fs-6" th:text="${#numbers.formatCurrency(op.unitPrice)}">$0.00</span>
+                                </div>
+                                <!-- Quantity -->
+                                <div class="col-4 col-sm-2 text-center">
+                                    <div class="d-sm-none text-muted small mb-1" th:text="#{labelQuantity}">Qty</div>
+                                    <span class="fw-bold fs-6 text-dark bg-light rounded px-3 py-2 border shadow-sm" th:text="${op.quantity}">1</span>
+                                </div>
+                                <!-- Total -->
+                                <div class="col-4 col-sm-2 text-end">
+                                    <div class="d-sm-none text-muted small mb-1" th:text="#{labelTotal}">Total</div>
+                                    <span class="fw-bold text-success fs-5 shadow-sm px-2 py-1 bg-white border border-success border-opacity-25 rounded d-inline-block" th:text="${#numbers.formatCurrency(op.totalPrice)}">$0.00</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="card-footer bg-white border-top p-4 d-flex justify-content-between align-items-center">
+                        <span class="text-muted small text-uppercase fw-bold tracking-wider">Order Value</span>
+                        <h4 class="mb-0 fw-bold text-dark"><span th:text="${#numbers.formatCurrency(orderDto.total)}">$0.00</span></h4>
+                    </div>
                 </div>
             </div>
         </div>
-        <p th:if="${#lists.isEmpty(orders)}" th:text="#{labelNoOrders}">No orders yet.</p>
+        <p th:if="${#lists.isEmpty(orderDtos)}" th:text="#{labelNoOrders}">No orders yet.</p>
         <a th:href="@{'/' + ${urlLocale} + '/accountOverview'}" class="btn btn-outline-primary" th:text="#{labelBackToAccount}">Back to Account</a>
     </div>
 </div>

@@ -78,6 +78,9 @@ public class CatalogOrder {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderAddress> addresses = new ArrayList<>();
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private OrderCustomer customer;
+
     @PrePersist
     private void onCreate() {
         if (orderDate == null) orderDate = LocalDateTime.now();
@@ -146,4 +149,7 @@ public class CatalogOrder {
         return addresses.stream().filter(a -> "BILLING".equals(a.getType())).findFirst().orElse(null);
     }
     public void addPaymentHistoryEntry(OrderPaymentHistory entry) { paymentHistory.add(entry); entry.setOrder(this); }
+
+    public OrderCustomer getCustomer() { return customer; }
+    public void setCustomer(OrderCustomer customer) { this.customer = customer; customer.setOrder(this); }
 }

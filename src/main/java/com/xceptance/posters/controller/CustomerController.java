@@ -1,5 +1,6 @@
 package com.xceptance.posters.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xceptance.posters.entity.CatalogCustomer;
 import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.entity.CatalogOrder;
+import com.xceptance.posters.entity.CatalogOrderRepository;
+import com.xceptance.posters.service.CheckoutService;
 import com.xceptance.posters.service.SessionService;
+import com.xceptance.posters.dto.OrderDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,12 +30,18 @@ public class CustomerController
 {
     private final CatalogCustomerRepository customerRepository;
     private final SessionService sessionService;
+    private final CatalogOrderRepository orderRepository;
+    private final CheckoutService checkoutService;
 
     public CustomerController(CatalogCustomerRepository customerRepository,
-                              SessionService sessionService)
+                              CatalogOrderRepository orderRepository,
+                              SessionService sessionService,
+                              CheckoutService checkoutService)
     {
         this.customerRepository = customerRepository;
+        this.orderRepository = orderRepository;
         this.sessionService = sessionService;
+        this.checkoutService = checkoutService;
     }
 
     @GetMapping("/{locale}/login")
@@ -124,8 +135,13 @@ public class CustomerController
         {
             return "redirect:/" + locale + "/login";
         }
-        // Order overview is not yet implemented with new model — placeholder
-        model.addAttribute("orders", java.util.List.of());
+        List<CatalogOrder> orders = orderRepository.findByCustomer_EmailOrderByOrderDateDesc(customer.getEmail());
+        
+        final List<OrderDto> orderDtos = orders.stream()
+                .map(checkoutService::toOrderDto)
+                .toList();
+
+        model.addAttribute("orderDtos", orderDtos);
         model.addAttribute("customer", customer);
         return "customer/orderOverview";
     }

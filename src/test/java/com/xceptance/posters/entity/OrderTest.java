@@ -151,4 +151,43 @@ class OrderTest {
         assertThat(reShip.getType()).isEqualTo("SHIPPING");
         assertThat(reBill.getType()).isEqualTo("BILLING");
     }
+
+    @Test
+    void testDeleteOrderDoesNotDeleteCatalogCustomer() {
+        // 1. Create and persist an actual CatalogCustomer
+        final CatalogCustomer registeredUser = new CatalogCustomer();
+        registeredUser.setEmail("registered@example.com");
+        registeredUser.setFirstName("RegFirst");
+        registeredUser.setLastName("RegLast");
+        registeredUser.hashPassword("secret");
+        em.persistAndFlush(registeredUser);
+
+        // 2. Create the Order
+        final CatalogOrder order = createOrder("ORD-DEL-001");
+
+        // 3. Create the OrderCustomer snapshot
+        final OrderCustomer snapshot = new OrderCustomer();
+        snapshot.setOrder(order);
+        snapshot.setEmail(registeredUser.getEmail());
+        snapshot.setFirstName(registeredUser.getFirstName());
+        snapshot.setLastName(registeredUser.getLastName());
+        em.persistAndFlush(snapshot);
+        
+        em.clear();
+
+        // 4. Delete the Order
+        final CatalogOrder reloadedOrder = em.find(CatalogOrder.class, order.getId());
+        assertThat(reloadedOrder).isNotNull();
+        em.remove(reloadedOrder);
+        em.flush();
+        em.clear();
+
+        // 5. Verify the Order is gone
+        assertThat(em.find(CatalogOrder.class, order.getId())).isNull();
+
+        // 6. Verify the registered CatalogCustomer is STILL there!
+        final CatalogCustomer reloadedUser = em.find(CatalogCustomer.class, registeredUser.getId());
+        assertThat(reloadedUser).isNotNull();
+        assertThat(reloadedUser.getEmail()).isEqualTo("registered@example.com");
+    }
 }

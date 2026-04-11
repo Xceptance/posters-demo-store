@@ -3,6 +3,7 @@ package com.xceptance.posters.service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -14,21 +15,33 @@ import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.CartLineItem;
 import com.xceptance.posters.entity.CatalogCart;
 import com.xceptance.posters.entity.CatalogCartRepository;
+import com.xceptance.posters.entity.CatalogProductRepository;
+import com.xceptance.posters.dto.CartDto;
+import com.xceptance.posters.dto.CartItemDto;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.LocalizedTextService;
 
 @Service
 public class CartService {
 
     private final CatalogCartRepository cartRepository;
+    private final CatalogProductRepository catalogProductRepository;
     private final PostersProperties props;
+    private final LocalizedTextService localizedTextService;
 
     @PersistenceContext
     private EntityManager em;
 
-    public CartService(final CatalogCartRepository cartRepository, final PostersProperties props) {
+    public CartService(final CatalogCartRepository cartRepository, 
+                       final CatalogProductRepository catalogProductRepository, 
+                       final PostersProperties props, 
+                       final LocalizedTextService localizedTextService) 
+    {
         this.cartRepository = cartRepository;
+        this.catalogProductRepository = catalogProductRepository;
         this.props = props;
+        this.localizedTextService = localizedTextService;
     }
 
     /**
@@ -77,13 +90,20 @@ public class CartService {
                 break;
             }
         }
+        
+        final BigDecimal currentPrice = lookupPrice(variantSku, currency);
+        final String productName = localizedTextService.getText(product.getNameTextId(), "en-US");
 
         if (existing != null) {
             existing.setQuantity(existing.getQuantity() + qtyToAdd);
+            existing.setUnitPrice(currentPrice); // update price to latest when modifying cart
+            existing.setProductName(productName);
         } else {
             final CartLineItem li = new CartLineItem();
             li.setSku(variantSku);
             li.setQuantity(qtyToAdd);
+            li.setUnitPrice(currentPrice);
+            li.setProductName(productName);
             cart.addLineItem(li);
         }
 
@@ -102,7 +122,7 @@ public class CartService {
     public void recalculateTotals(final CatalogCart cart, final String currency) {
         BigDecimal subTotal = BigDecimal.ZERO;
         for (final CartLineItem li : cart.getLineItems()) {
-            final BigDecimal unitPrice = lookupPrice(li.getSku(), currency);
+            final BigDecimal unitPrice = li.getUnitPrice() != null ? li.getUnitPrice() : lookupPrice(li.getSku(), currency);
             subTotal = subTotal.add(unitPrice.multiply(BigDecimal.valueOf(li.getQuantity())));
         }
         cart.setSubTotal(subTotal);
@@ -136,11 +156,19 @@ public class CartService {
                 final String attrName = av.getAttribute().getName().toLowerCase();
                 final String attrValue = av.getValue().toLowerCase();
 
-                if (attrName.contains("finish") && finish != null && attrValue.equalsIgnoreCase(finish)) {
+                if (attrName.contains("finish") && finish != null && attrValue.equalsIgnoreCase(finish.trim())) {
                     finishMatch = true;
                 }
-                if (attrName.contains("size") && size != null && attrValue.equalsIgnoreCase(size)) {
-                    sizeMatch = true;
+                if (attrName.contains("size") && size != null) {
+                    // AI Agents often supply size parameters with trailing metric/imperial measurement units 
+                    // (e.g. "24x18 in") sourced from the formatted distinctSizes labels. We aggressively strip 
+                    // out ' in', ' cm', and inner spacing variations to securely normalize equality against 
+                    // the raw DB dimensional constraints (e.g. "24x18").
+                    final String normalizedInput = size.toLowerCase().replace(" in", "").replace(" cm", "").replace(" x ", "x").trim();
+                    final String normalizedDb = attrValue.toLowerCase().replace(" in", "").replace(" cm", "").replace(" x ", "x").trim();
+                    if (normalizedDb.equalsIgnoreCase(normalizedInput)) {
+                        sizeMatch = true;
+                    }
                 }
             }
 
@@ -190,5 +218,131 @@ public class CartService {
             // ignore
         }
         return BigDecimal.ZERO;
+    }
+
+    /**
+     * Converts a raw CatalogCart entity into a structured CartDto mapped for front-end templates.
+     * Extracts dynamic size and finish strings natively for consistent presentation in checkout flows.
+     * 
+     * @param cart     The active shopping cart to convert.
+     * @param locale   The current user's localization descriptor (e.g., "en-US").
+     * @param currency The system currency utilized for calculation checks.
+     * @return Formatted CartDto representing the order payload properties seamlessly.
+     */
+    public CartDto toCartDto(final CatalogCart cart, final String locale, final String currency) 
+    {
+        final List<CartItemDto> items = new ArrayList<>();
+        int totalQty = 0;
+
+        for (final CartLineItem li : cart.getLineItems()) 
+        {
+            final CartItemDto item = toCartItemDto(li, locale, currency);
+            items.add(item);
+            totalQty += li.getQuantity();
+        }
+
+        final BigDecimal taxRate = cart.getTaxRate() != null ? cart.getTaxRate() : props.getTax();
+        final String taxStr = taxRate.stripTrailingZeros().toPlainString();
+
+        return new CartDto(
+            items,
+            cart.getSubTotal() != null ? cart.getSubTotal() : BigDecimal.ZERO,
+            cart.getTotalTax() != null ? cart.getTotalTax() : BigDecimal.ZERO,
+            cart.getTotal() != null ? cart.getTotal() : BigDecimal.ZERO,
+            cart.getShippingCosts() != null ? cart.getShippingCosts() : props.getShippingCosts(),
+            taxStr,
+            totalQty
+        );
+    }
+
+    /**
+     * Coverts a single CartLineItem database segment into a presentation-layer DTO wrapper.
+     * Specifically executes product lookups to fetch explicit variant metadata not stored in raw carts.
+     * 
+     * @param li       The target cart line item to transpose.
+     * @param locale   Environment locale map.
+     * @param currency System pricing context.
+     * @return Generated CartItemDto enriched with the required UI elements like product image URIs.
+     */
+    private CartItemDto toCartItemDto(final CartLineItem li, final String locale, final String currency) 
+    {
+        final String sku = li.getSku();
+        final BigDecimal unitPrice = li.getUnitPrice() != null ? li.getUnitPrice() : lookupPrice(sku, currency);
+
+        final String productSku = sku.contains("-") ? sku.substring(0, sku.lastIndexOf('-')) : sku;
+
+        final Product product = catalogProductRepository.findBySku(productSku).orElse(null);
+        String name = li.getProductName() != null ? li.getProductName() : "Unknown Product";
+        String imageURL = "/images/placeholder.jpg";
+        int productId = 0;
+        String finish = "";
+        String sizeLabel = "";
+
+        if (product != null) 
+        {
+            productId = product.getId();
+            name = li.getProductName() != null ? li.getProductName() : localizedTextService.getText(product.getNameTextId(), locale);
+            imageURL = product.getMediumImageUrl();
+
+            for (final Variant v : product.getVariants()) 
+            {
+                if (v.getFullSku().equals(sku)) 
+                {
+                    for (final var av : v.getAttributeValues()) 
+                    {
+                        final String attrName = av.getAttribute().getName().toLowerCase();
+                        if (attrName.contains("finish")) 
+                        {
+                            finish = av.getValue();
+                        } 
+                        else if (attrName.contains("size")) 
+                        {
+                            sizeLabel = av.getValue();
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        return new CartItemDto(
+            li.getId() != null ? li.getId() : 0,
+            productId,
+            name,
+            imageURL,
+            finish,
+            sizeLabel,
+            unitPrice,
+            li.getQuantity(),
+            unitPrice.multiply(BigDecimal.valueOf(li.getQuantity())),
+            sku
+        );
+    }
+
+    /**
+     * Retrieves the mapped system currency for a given user locale sequence.
+     * 
+     * @param locale the regional identifier mapped bounds (e.g., "en-US")
+     * @return 3-letter currency code, defaults to "USD"
+     */
+    public String getCurrencyForLocale(final String locale) 
+    {
+        try 
+        {
+            final List<String> results = em.createQuery(
+                "SELECT s.currency FROM Site s WHERE s.mainLocale.locale = :locale", String.class)
+                .setParameter("locale", locale)
+                .getResultList();
+            if (!results.isEmpty()) return results.get(0);
+        } 
+        catch (final Exception e) 
+        {
+            // ignore explicit throws gracefully defaulting
+        }
+        
+        if (locale.startsWith("de")) return "EUR";
+        if (locale.equals("en-GB")) return "GBP";
+        if (locale.equals("sv-SE")) return "SEK";
+        return "USD";
     }
 }

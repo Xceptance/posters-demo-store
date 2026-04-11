@@ -25,12 +25,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="cp : ${cart.lineItems}">
-                                    <td class="fw-bold" th:text="${cp.sku}">Product</td>
-                                    <td th:text="'-'">16x12</td>
-                                    <td th:text="'-'">Matte</td>
-                                    <td class="text-center" th:text="${cp.quantity}">1</td>
-                                    <td class="text-end fw-bold" th:text="'-'">$0.00</td>
+                                <tr th:each="cp : ${cartDto.products}">
+                                    <td class="fw-bold">
+                                        <div class="d-flex align-items-center" style="gap: 12px;">
+                                            <img th:src="@{${cp.imageURL}}" alt="Product Image" class="img-thumbnail border-0 bg-transparent p-0" style="width: 48px; border-radius: 6px;">
+                                            <span th:text="${cp.productName}">Product</span>
+                                        </div>
+                                    </td>
+                                    <td th:text="${cp.sizeLabel}">16x12</td>
+                                    <td th:text="${cp.finish}">Matte</td>
+                                    <td class="text-center" th:text="${cp.productCount}">1</td>
+                                    <td class="text-end fw-bold" th:text="${#numbers.formatCurrency(cp.totalProductPrice)}">$0.00</td>
                                 </tr>
                             </tbody>
                         </table>
