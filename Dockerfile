@@ -20,13 +20,20 @@ RUN mkdir -p /app/db /app/log
 # Copy the built JAR file from the build stage
 COPY --from=build /app/target/posters-demo-store-*.jar app.jar
 
-# Expose the internal port
+## Expose the internal port
+# Application
 EXPOSE 8080
+# JMX
+EXPOSE 7091
 
 # Run the application
 ENTRYPOINT ["java", \
     "-XX:+UnlockDiagnosticVMOptions", \
     "-XX:+DebugNonSafepoints", \
+    "-Dcom.sun.management.jmxremote.port=7091", \
+    "-Dcom.sun.management.jmxremote.rmi.port=7091", \
+    "-Dcom.sun.management.jmxremote.authenticate=false", \
+    "-Dcom.sun.management.jmxremote.ssl=false", \
     "-Dcom.sun.management.jmxremote", \
-    "-Djava.rmi.server.hostname=127.0.0.1", \   
+    "-Djava.rmi.server.hostname=localhost", \   
     "-jar", "app.jar"]
