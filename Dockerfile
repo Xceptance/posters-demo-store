@@ -11,7 +11,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Run stage
-FROM eclipse-temurin:25-jre-jammy
+FROM eclipse-temurin:25-jdk-jammy
 WORKDIR /app
 
 # Ensure required directories exist for mounting
@@ -24,4 +24,9 @@ COPY --from=build /app/target/posters-demo-store-*.jar app.jar
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", \
+    "-XX:+UnlockDiagnosticVMOptions", \
+    "-XX:+DebugNonSafepoints", \
+    "-Dcom.sun.management.jmxremote", \
+    "-Djava.rmi.server.hostname=127.0.0.1", \   
+    "-jar", "app.jar"]
