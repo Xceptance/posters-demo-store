@@ -7,3 +7,6 @@
 - [ ] DEFECT-5: clearing a quantity field on the cart, breaks the cart page completely 
 - [ ] DEFECT-6: Account overview broken with template parsing error (`customer/accountOverview.html`)
 - [ ] DEFECT-7: Catalog import data only has one finish per product
+- [ ] DEFECT-8: Keyboard navigation (arrow keys) broken in type-ahead dropdown
+- [ ] DEFECT-9: Search box placeholder text is hardcoded to English
+- [ ] DEFECT-10: Stemming/partial matching fails on some words (e.g., "erdbeeren")
