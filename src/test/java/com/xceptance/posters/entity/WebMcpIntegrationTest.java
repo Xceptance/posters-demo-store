@@ -40,6 +40,16 @@ class WebMcpIntegrationTest {
     }
     
     @Test
+    void testWebMcpToolsUseInputSchema() throws Exception {
+        final String htmlContent = mockMvc.perform(get("/en-US/"))
+            .andExpect(status().isOk())
+            .andReturn().getResponse().getContentAsString();
+
+        assertTrue(htmlContent.contains("inputSchema: {"), "WebMCP tool registrations must use inputSchema");
+        assertFalse(htmlContent.contains("parameters: {"), "WebMCP tool registrations must NOT use parameters");
+    }
+
+    @Test
     void testToolDescriptionsHaveValidJsonExamples() throws Exception {
         // Fetch the HTML containing the WebMCP tool registrations
         final String htmlContent = mockMvc.perform(get("/en-US/"))

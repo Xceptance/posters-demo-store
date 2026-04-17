@@ -38,7 +38,7 @@
               window.navigator.modelContext.registerTool({
                   name: "search_catalog",
                   description: "Searches the store catalog for products matching a given query. Use this to find specific items, brands, or categories. Example payload: { \"query\": \"bear\" }",
-                  parameters: {
+                  inputSchema: {
                       type: "object",
                       properties: {
                           query: {
@@ -62,7 +62,7 @@
               window.navigator.modelContext.registerTool({
                   name: "get_product_details",
                   description: "Retrieves granular details (sizes, finishes, minimum prices, and exact variants) for a specific product ID. Use this immediately after locating a product via search_catalog to determine valid size/finish permutations before adding to cart. Example payload: { \"productId\": 1 }",
-                  parameters: {
+                  inputSchema: {
                       type: "object",
                       properties: {
                           productId: {
@@ -89,7 +89,7 @@
               window.navigator.modelContext.registerTool({
                   name: "add_to_cart",
                   description: "Adds a specific product to the user's shopping cart. Example payload: { \"productId\": 1, \"quantity\": 1, \"size\": \"16 x 12 in\", \"finish\": \"matte\" }",
-                  parameters: {
+                  inputSchema: {
                       type: "object",
                       properties: {
                           productId: {
@@ -145,7 +145,7 @@
               window.navigator.modelContext.registerTool({
                   name: "submit_checkout",
                   description: "Executes the final checkout process to securely convert the active shopping cart into a confirmed order. Requires complete shipping and billing addresses, and valid credit card payment details. Example payload: { \"shippingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"billingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"payment\": {\"cardNumber\":\"4242424242424242\",\"name\":\"John Doe\",\"expiry\":\"12/30\",\"cvv\":\"123\"}, \"customer\": {\"email\":\"john@example.com\",\"firstName\":\"John\",\"lastName\":\"Doe\"} }",
-                  parameters: {
+                  inputSchema: {
                       type: "object",
                       properties: {
                           shippingAddress: {
