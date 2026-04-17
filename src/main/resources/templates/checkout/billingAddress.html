@@ -6,6 +6,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
+        <div th:replace="~{fragments/checkout-indicator :: checkoutIndicator(2)}"></div>
         <h1 th:text="#{titleBillingAddress}">Billing Address</h1>
         <div class="form-check mb-3" th:if="${shippingAddress != null}">
             <input class="form-check-input" type="checkbox" id="sameAsShipping"

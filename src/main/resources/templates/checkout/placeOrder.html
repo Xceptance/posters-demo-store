@@ -6,6 +6,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4" th:if="${cart != null}">
+        <div th:replace="~{fragments/checkout-indicator :: checkoutIndicator(4)}"></div>
         <h1 class="mb-4" th:text="#{titleReviewOrder}">Review &amp; Place Order</h1>
         <div class="row g-4 align-items-start">
             <div class="col-lg-8">

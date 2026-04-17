@@ -6,6 +6,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4 mb-5">
+        <div th:replace="~{fragments/checkout-indicator :: checkoutIndicator(5)}"></div>
         <div class="row g-4 align-items-start">
             <!-- Left Column: Items and Success Alert -->
             <div class="col-lg-8">

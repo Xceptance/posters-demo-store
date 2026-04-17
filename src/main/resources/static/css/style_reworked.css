@@ -1101,3 +1101,74 @@
 /*  Status Page
 *   - End
 */
+
+/* Checkout Indicator Styles */
+.checkout-indicator {
+    padding: 20px 0;
+}
+
+.checkout-indicator .indicator-line {
+    height: 3px;
+    background-color: #e9ecef;
+    z-index: 0;
+    top: 18.5px; /* Aligns with the center of the 40px step-dot (20px - 1.5px) */
+    left: 10%; /* Center of the first step (which is 20% width) */
+    width: 80%; /* Spans exactly 4 of the 5 segments */
+}
+
+.checkout-indicator .step-wrapper {
+    z-index: 1;
+    width: 20%;
+}
+
+.checkout-indicator .step-dot {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 3px solid #e9ecef;
+    font-weight: bold;
+    color: transparent; /* Default for future */
+    transition: all 0.3s ease;
+}
+
+/* Future State (Border only, no text) */
+.checkout-indicator .future .step-dot {
+    background-color: #fff;
+    border-color: #dee2e6;
+    color: transparent;
+}
+
+/* Past State (Grayish dot) */
+.checkout-indicator .past .step-dot {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+.checkout-indicator .past .step-label {
+    color: #6c757d;
+}
+
+/* Active State (Blue dot) */
+.checkout-indicator .active .step-dot {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(44, 74, 110, 0.25); /* 0.25 opacity of var(--accent) */
+}
+.checkout-indicator .active .step-label {
+    color: var(--accent);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767.98px) {
+    .checkout-indicator .step-label {
+        font-size: 0.7rem;
+        display: none;
+    }
+    .checkout-indicator .active .step-label {
+        display: block;
+        position: absolute;
+        top: 45px;
+        width: 100px;
+    }
+}

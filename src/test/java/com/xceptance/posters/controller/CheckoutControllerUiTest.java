@@ -63,7 +63,8 @@ public class CheckoutControllerUiTest
         mockMvc.perform(get("/en-US/checkout/shippingAddress").session(session))
                .andExpect(status().isOk())
                .andExpect(view().name("checkout/shippingAddress"))
-               .andExpect(model().attributeExists("customer"));
+               .andExpect(model().attributeExists("customer"))
+               .andExpect(content().string(containsString("checkout-indicator")));
     }
     @Test
     public void testBillingAddressUiRendersWithoutCrashing() throws Exception 
@@ -80,7 +81,8 @@ public class CheckoutControllerUiTest
 
         mockMvc.perform(get("/en-US/checkout/billingAddress").session(session))
                .andExpect(status().isOk())
-               .andExpect(view().name("checkout/billingAddress"));
+               .andExpect(view().name("checkout/billingAddress"))
+               .andExpect(content().string(containsString("checkout-indicator")));
     }
 
     @Test
@@ -98,7 +100,8 @@ public class CheckoutControllerUiTest
 
         mockMvc.perform(get("/en-US/checkout/payment").session(session))
                .andExpect(status().isOk())
-               .andExpect(view().name("checkout/payment"));
+               .andExpect(view().name("checkout/payment"))
+               .andExpect(content().string(containsString("checkout-indicator")));
     }
 
     @Test
@@ -143,7 +146,8 @@ public class CheckoutControllerUiTest
                .andExpect(content().string(containsString("ORD-TEST1234")))    // Should render the explicit order number (currently it renders UUID)
                .andExpect(content().string(containsString("Test Poster Name"))) // Should render the product name (currently it renders SKU only)
                .andExpect(content().string(containsString("https://cdn.test.local/poster1.webp")))
-               .andExpect(content().string(containsString("16x12, Glossy")));
+               .andExpect(content().string(containsString("16x12, Glossy")))
+               .andExpect(content().string(containsString("checkout-indicator")));
     }
 
     @Test
@@ -178,6 +182,7 @@ public class CheckoutControllerUiTest
                .andExpect(model().attributeExists("cartDto"))
                .andExpect(content().string(containsString("<img ")))
                .andExpect(content().string(containsString("src=\"/images/placeholder.jpg\""))) // DTO will default to placeholder because product mock isn't in DB natively
-               .andExpect(content().string(containsString("Rich Item GUI Test")));
+               .andExpect(content().string(containsString("Rich Item GUI Test")))
+               .andExpect(content().string(containsString("checkout-indicator")));
     }
 }

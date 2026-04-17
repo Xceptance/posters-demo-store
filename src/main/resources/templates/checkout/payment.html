@@ -9,6 +9,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
+        <div th:replace="~{fragments/checkout-indicator :: checkoutIndicator(3)}"></div>
         <h1 th:text="#{titlePayment}">Payment</h1>
 
         <!-- Server-side validation errors (displayed if JS is disabled) -->

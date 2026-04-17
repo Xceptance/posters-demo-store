@@ -12,7 +12,9 @@ Instead of discarding great ideas during the "Joint Refinement" phase of test cr
 
 ## 🔮 Aspirational Capabilities
 *Log scenarios for features that do not exist yet in the codebase, but are anticipated in the product roadmap.*
-- *(Empty)*
+- **Checkout Error Handling (Payment Failure):** A user attempts to place an order with declined/invalid credit card details and receives appropriate error messaging. (Skipped for now as it's a demo store feature)
+- **Promo Codes / Discounts:** A user enters a valid discount code during checkout and the order total is reduced appropriately. (Currently unimplemented)
+- **Out of Stock Mid-Checkout:** A user attempts to purchase an item that goes out of stock while they are entering payment details. (Inventory management unimplemented)
 
 ## 🧩 Deferred Edge Cases
 *Log extremely rare or complex edge cases that are technically possible now but deprioritized for initial manual testing velocity.*

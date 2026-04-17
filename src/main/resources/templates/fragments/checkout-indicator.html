@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="checkoutIndicator(currentStep)" class="checkout-indicator container mb-5 mt-3 d-none d-md-block" aria-label="Checkout Progress">
+    <div class="row">
+        <!-- Steps -->
+        <div class="col d-flex justify-content-between position-relative">
+            <!-- Connecting Line -->
+            <div class="indicator-line position-absolute"></div>
+            
+            <!-- Step 1: Shipping -->
+            <div class="step-wrapper d-flex flex-column align-items-center position-relative" 
+                 th:classappend="${currentStep == 1 ? 'active' : (currentStep > 1 ? 'past' : 'future')}">
+                <div class="step-dot rounded-circle d-flex align-items-center justify-content-center" 
+                     th:text="${currentStep >= 1 ? '1' : ''}"
+                     th:attr="aria-current=${currentStep == 1 ? 'step' : null}"></div>
+                <div class="step-label mt-2 text-center small fw-bold" th:text="#{checkout.indicator.step.shipping}">Shipping</div>
+            </div>
+
+            <!-- Step 2: Billing -->
+            <div class="step-wrapper d-flex flex-column align-items-center position-relative" 
+                 th:classappend="${currentStep == 2 ? 'active' : (currentStep > 2 ? 'past' : 'future')}">
+                <div class="step-dot rounded-circle d-flex align-items-center justify-content-center" 
+                     th:text="${currentStep >= 2 ? '2' : ''}"
+                     th:attr="aria-current=${currentStep == 2 ? 'step' : null}"></div>
+                <div class="step-label mt-2 text-center small fw-bold" th:text="#{checkout.indicator.step.billing}">Billing</div>
+            </div>
+
+            <!-- Step 3: Payment -->
+            <div class="step-wrapper d-flex flex-column align-items-center position-relative" 
+                 th:classappend="${currentStep == 3 ? 'active' : (currentStep > 3 ? 'past' : 'future')}">
+                <div class="step-dot rounded-circle d-flex align-items-center justify-content-center" 
+                     th:text="${currentStep >= 3 ? '3' : ''}"
+                     th:attr="aria-current=${currentStep == 3 ? 'step' : null}"></div>
+                <div class="step-label mt-2 text-center small fw-bold" th:text="#{checkout.indicator.step.payment}">Payment</div>
+            </div>
+
+            <!-- Step 4: Overview -->
+            <div class="step-wrapper d-flex flex-column align-items-center position-relative" 
+                 th:classappend="${currentStep == 4 ? 'active' : (currentStep > 4 ? 'past' : 'future')}">
+                <div class="step-dot rounded-circle d-flex align-items-center justify-content-center" 
+                     th:text="${currentStep >= 4 ? '4' : ''}"
+                     th:attr="aria-current=${currentStep == 4 ? 'step' : null}"></div>
+                <div class="step-label mt-2 text-center small fw-bold" th:text="#{checkout.indicator.step.review}">Review</div>
+            </div>
+
+            <!-- Step 5: Confirmation -->
+            <div class="step-wrapper d-flex flex-column align-items-center position-relative" 
+                 th:classappend="${currentStep == 5 ? 'active' : (currentStep > 5 ? 'past' : 'future')}">
+                <div class="step-dot rounded-circle d-flex align-items-center justify-content-center" 
+                     th:text="${currentStep >= 5 ? '5' : ''}"
+                     th:attr="aria-current=${currentStep == 5 ? 'step' : null}"></div>
+                <div class="step-label mt-2 text-center small fw-bold" th:text="#{checkout.indicator.step.confirmation}">Confirmation</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
