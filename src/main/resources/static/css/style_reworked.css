@@ -49,10 +49,10 @@
 
     /* colors — muted navy palette */
     --accent: #2c4a6e;
-    --accent-light: #4a7ab5;
+  --accent-light: #A8C6E6;
     --accent-hover: #1e3550;
     --text-dark: #333333;
-    --text-muted: #777;
+  --text-muted: #666;
     --bg-warm: #f7f8fa;
     --bg-card: #ffffff;
     --dialog-box-bg: #f2f3f5;
@@ -738,12 +738,12 @@
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 1.5rem;
     margin-top: 2rem;
-    color: #888;
+  color: #999;
     font-size: var(--ts-xs);
   }
 
   .version-info {
-    color: #666;
+  color: #999;
     font-size: var(--ts-xs);
     margin-top: 0.5rem;
   }
