@@ -7,6 +7,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -26,6 +27,9 @@ public class CatalogOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Version
+    private Integer version;
 
     @Column(name = "order_number", nullable = false, unique = true)
     private String orderNumber;
@@ -152,4 +156,12 @@ public class CatalogOrder {
 
     public OrderCustomer getCustomer() { return customer; }
     public void setCustomer(OrderCustomer customer) { this.customer = customer; customer.setOrder(this); }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 }

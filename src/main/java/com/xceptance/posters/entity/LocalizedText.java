@@ -3,6 +3,7 @@ package com.xceptance.posters.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,6 +17,9 @@ public class LocalizedText {
     @Id
     @Column(name = "text_id")
     private Integer textId;
+
+    @Version
+    private Integer version;
 
     @Id
     @ManyToOne(optional = false)
@@ -47,5 +51,13 @@ public class LocalizedText {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

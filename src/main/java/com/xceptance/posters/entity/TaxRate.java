@@ -3,6 +3,7 @@ package com.xceptance.posters.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,6 +20,9 @@ public class TaxRate {
     @ManyToOne(optional = false)
     @JoinColumn(name = "tax_table_id", nullable = false)
     private TaxTable taxTable;
+
+    @Version
+    private Integer version;
 
     @Id
     @Column(nullable = false)
@@ -49,5 +53,13 @@ public class TaxRate {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

@@ -1,4 +1,5 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.repository;
+import com.xceptance.posters.entity.CatalogOrder;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

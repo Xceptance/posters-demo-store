@@ -1,4 +1,5 @@
 package com.xceptance.posters.config;
+import com.xceptance.posters.entity.AuditLogEntry;
 
 import com.xceptance.posters.entity.AuditLogEntry.Action;
 import com.xceptance.posters.service.AuditLogService;

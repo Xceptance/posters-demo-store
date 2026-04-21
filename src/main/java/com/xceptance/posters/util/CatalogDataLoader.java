@@ -1,4 +1,19 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.util;
+import com.xceptance.posters.entity.VariationAttributeValue;
+import com.xceptance.posters.entity.VariationAttribute;
+import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.TaxTable;
+import com.xceptance.posters.entity.SiteShippingMethod;
+import com.xceptance.posters.entity.Site;
+import com.xceptance.posters.entity.ShippingMethod;
+import com.xceptance.posters.entity.Product;
+import com.xceptance.posters.entity.PriceTable;
+import com.xceptance.posters.entity.Price;
+import com.xceptance.posters.entity.LocalizedText;
+import com.xceptance.posters.entity.Locale;
+import com.xceptance.posters.entity.InventoryTable;
+import com.xceptance.posters.entity.InventoryEntry;
+import com.xceptance.posters.entity.Category;
 
 import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;

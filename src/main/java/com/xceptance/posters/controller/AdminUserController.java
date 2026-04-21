@@ -2,7 +2,7 @@ package com.xceptance.posters.controller;
 
 import com.xceptance.posters.config.AdminUserPrincipal;
 import com.xceptance.posters.entity.AdminUser;
-import com.xceptance.posters.entity.RoleRepository;
+import com.xceptance.posters.repository.RoleRepository;
 import com.xceptance.posters.service.AdminUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -3,6 +3,7 @@ package com.xceptance.posters.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,6 +19,9 @@ public class Price {
     @Id
     @Column(nullable = false, length = 30)
     private String sku;
+
+    @Version
+    private Integer version;
 
     @Id
     @ManyToOne(optional = false)
@@ -49,5 +53,13 @@ public class Price {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

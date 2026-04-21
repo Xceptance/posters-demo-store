@@ -1,4 +1,5 @@
 package com.xceptance.posters.entity;
+import com.xceptance.posters.service.CatalogService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

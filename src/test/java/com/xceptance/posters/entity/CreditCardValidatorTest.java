@@ -1,4 +1,5 @@
 package com.xceptance.posters.entity;
+import com.xceptance.posters.util.CreditCardValidator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

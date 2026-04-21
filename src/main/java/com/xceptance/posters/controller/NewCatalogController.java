@@ -1,6 +1,6 @@
 package com.xceptance.posters.controller;
 
-import com.xceptance.posters.entity.CatalogService;
+import com.xceptance.posters.service.CatalogService;
 import com.xceptance.posters.entity.Category;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.entity.Variant;

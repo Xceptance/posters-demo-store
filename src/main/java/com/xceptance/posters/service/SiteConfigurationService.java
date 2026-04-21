@@ -1,7 +1,7 @@
 package com.xceptance.posters.service;
 
 import com.xceptance.posters.entity.Site;
-import com.xceptance.posters.entity.SiteRepository;
+import com.xceptance.posters.repository.SiteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

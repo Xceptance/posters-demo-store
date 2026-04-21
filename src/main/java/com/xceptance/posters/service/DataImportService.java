@@ -17,10 +17,10 @@ import org.w3c.dom.NodeList;
 
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.entity.CatalogCustomerRepository;
-import com.xceptance.posters.entity.CatalogDataLoader;
-import com.xceptance.posters.entity.CatalogImportParser;
-import com.xceptance.posters.entity.CatalogProductRepository;
+import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.util.CatalogDataLoader;
+import com.xceptance.posters.util.CatalogImportParser;
+import com.xceptance.posters.repository.CatalogProductRepository;
 
 /**
  * Imports initial data from XML files on application startup.

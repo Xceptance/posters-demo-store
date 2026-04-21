@@ -1,4 +1,15 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.util;
+import com.xceptance.posters.entity.OrderStateHistory;
+import com.xceptance.posters.entity.OrderPaymentHistory;
+import com.xceptance.posters.entity.OrderLineItem;
+import com.xceptance.posters.entity.OrderCustomer;
+import com.xceptance.posters.entity.OrderCreditCard;
+import com.xceptance.posters.entity.OrderAddress;
+import com.xceptance.posters.entity.CatalogOrder;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CartLineItem;
+import com.xceptance.posters.entity.CartCreditCard;
+import com.xceptance.posters.entity.CartAddress;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;

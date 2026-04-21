@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,8 +13,11 @@ import jakarta.persistence.Table;
 public class Locale {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+
+    @Version
+    private Integer version;
 
     @Column(nullable = false, unique = true)
     private String locale;
@@ -32,5 +36,13 @@ public class Locale {
 
     public void setLocale(String locale) {
         this.locale = locale;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

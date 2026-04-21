@@ -1,4 +1,8 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.util;
+import com.xceptance.posters.repository.RoleRepository;
+import com.xceptance.posters.repository.AdminUserRepository;
+import com.xceptance.posters.entity.Role;
+import com.xceptance.posters.entity.AdminUser;
 
 import com.xceptance.posters.config.BackofficeModule;
 import com.xceptance.posters.config.BackofficeReadinessService;

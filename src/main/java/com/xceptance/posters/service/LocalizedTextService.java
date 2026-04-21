@@ -1,4 +1,5 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.service;
+import com.xceptance.posters.entity.LocalizedText;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

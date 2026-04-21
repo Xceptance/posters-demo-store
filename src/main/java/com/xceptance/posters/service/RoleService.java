@@ -1,9 +1,9 @@
 package com.xceptance.posters.service;
 
 import com.xceptance.posters.config.BackofficeModule;
-import com.xceptance.posters.entity.AdminUserRepository;
+import com.xceptance.posters.repository.AdminUserRepository;
 import com.xceptance.posters.entity.Role;
-import com.xceptance.posters.entity.RoleRepository;
+import com.xceptance.posters.repository.RoleRepository;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

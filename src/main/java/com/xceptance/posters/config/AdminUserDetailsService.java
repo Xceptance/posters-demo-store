@@ -1,6 +1,6 @@
 package com.xceptance.posters.config;
 
-import com.xceptance.posters.entity.AdminUserRepository;
+import com.xceptance.posters.repository.AdminUserRepository;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

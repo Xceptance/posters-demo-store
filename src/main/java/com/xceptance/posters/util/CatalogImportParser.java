@@ -1,4 +1,9 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.util;
+import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.Site;
+import com.xceptance.posters.entity.ShippingMethod;
+import com.xceptance.posters.entity.Product;
+import com.xceptance.posters.entity.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

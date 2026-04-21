@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,8 +13,11 @@ import jakarta.persistence.Table;
 public class PriceTable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+
+    @Version
+    private Integer version;
 
     @Column(nullable = false)
     private String name;
@@ -54,5 +58,13 @@ public class PriceTable {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

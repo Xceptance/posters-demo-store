@@ -42,6 +42,10 @@ public class UrlLocaleResolver extends AbstractLocaleResolver
     public Locale resolveLocale(HttpServletRequest request)
     {
         String path = request.getRequestURI();
+        if (path.contains(";"))
+        {
+            path = path.substring(0, path.indexOf(';'));
+        }
         String[] segments = path.split("/");
         if (segments.length > 1)
         {

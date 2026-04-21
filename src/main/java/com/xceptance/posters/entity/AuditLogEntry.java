@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
@@ -27,8 +28,11 @@ public class AuditLogEntry {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Version
+    private Integer version;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime timestamp;
@@ -74,4 +78,12 @@ public class AuditLogEntry {
     public void setTargetId(Long targetId) { this.targetId = targetId; }
     public String getDetails() { return details; }
     public void setDetails(String details) { this.details = details; }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 }

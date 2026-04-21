@@ -14,11 +14,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.entity.CatalogService;
+import com.xceptance.posters.service.CatalogService;
 import com.xceptance.posters.entity.Category;
-import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.service.LocalizedTextService;
 import com.xceptance.posters.entity.CatalogCart;
-import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CatalogCustomerRepository;
 import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -68,6 +68,10 @@ public class CommonDataInterceptor implements HandlerInterceptor
 
         // Extract locale early (needed for category names)
         String requestPath = request.getRequestURI();
+        if (requestPath.contains(";"))
+        {
+            requestPath = requestPath.substring(0, requestPath.indexOf(';'));
+        }
         String[] segments = requestPath.split("/");
         String locale = segments.length > 1 ? segments[1] : "en-US";
 

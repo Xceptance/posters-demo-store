@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -17,8 +18,11 @@ import java.util.List;
 public class VariationAttribute {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+
+    @Version
+    private Integer version;
 
     @Column(nullable = false)
     private String name;
@@ -48,5 +52,13 @@ public class VariationAttribute {
 
     public void setValues(List<VariationAttributeValue> values) {
         this.values = values;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

@@ -1,4 +1,5 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.repository;
+import com.xceptance.posters.entity.Site;
 
 import java.util.Optional;
 

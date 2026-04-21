@@ -3,6 +3,7 @@ package com.xceptance.posters.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,6 +18,9 @@ public class InventoryEntry {
     @ManyToOne(optional = false)
     @JoinColumn(name = "inventory_table_id", nullable = false)
     private InventoryTable inventoryTable;
+
+    @Version
+    private Integer version;
 
     @Id
     @Column(nullable = false)
@@ -47,5 +51,13 @@ public class InventoryEntry {
 
     public void setAvailableQuantity(Integer availableQuantity) {
         this.availableQuantity = availableQuantity;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

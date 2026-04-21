@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.CatalogCart;
-import com.xceptance.posters.entity.CatalogCartRepository;
+import com.xceptance.posters.repository.CatalogCartRepository;
 
 import jakarta.servlet.http.HttpSession;
 

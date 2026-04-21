@@ -1,8 +1,9 @@
 package com.xceptance.posters.service;
+import com.xceptance.posters.repository.SiteRepository;
 
 import com.xceptance.posters.entity.Locale;
 import com.xceptance.posters.entity.Site;
-import com.xceptance.posters.entity.SiteRepository;
+import com.xceptance.posters.repository.SiteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

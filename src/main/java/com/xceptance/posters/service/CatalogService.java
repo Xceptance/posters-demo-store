@@ -1,4 +1,10 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.service;
+import com.xceptance.posters.repository.VariantRepository;
+import com.xceptance.posters.repository.CategoryRepository;
+import com.xceptance.posters.repository.CatalogProductRepository;
+import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.Product;
+import com.xceptance.posters.entity.Category;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,5 @@
 package com.xceptance.posters.controller;
+import com.xceptance.posters.util.AdminDataLoader;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

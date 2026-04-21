@@ -1,4 +1,6 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.repository;
+import com.xceptance.posters.entity.Role;
+import com.xceptance.posters.entity.AdminUser;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

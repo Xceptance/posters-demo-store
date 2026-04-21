@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -26,6 +27,9 @@ public class CatalogCustomer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Version
+    private Integer version;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -130,5 +134,13 @@ public class CatalogCustomer {
      */
     public boolean checkPassword(String plainPassword) {
         return this.password != null && BCrypt.checkpw(plainPassword, this.password);
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

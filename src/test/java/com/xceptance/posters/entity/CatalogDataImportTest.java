@@ -1,4 +1,6 @@
 package com.xceptance.posters.entity;
+import com.xceptance.posters.util.CatalogImportParser;
+import com.xceptance.posters.util.CatalogDataLoader;
 
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;

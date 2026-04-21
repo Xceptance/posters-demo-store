@@ -1,4 +1,15 @@
 package com.xceptance.posters.service;
+import com.xceptance.posters.entity.VariationAttributeValue;
+import com.xceptance.posters.entity.VariationAttribute;
+import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.Site;
+import com.xceptance.posters.entity.Product;
+import com.xceptance.posters.entity.PriceTable;
+import com.xceptance.posters.entity.Price;
+import com.xceptance.posters.entity.LocalizedText;
+import com.xceptance.posters.entity.Locale;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CartLineItem;
 
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.*;

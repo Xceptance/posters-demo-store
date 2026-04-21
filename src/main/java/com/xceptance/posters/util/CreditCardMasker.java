@@ -1,4 +1,4 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.util;
 
 /**
  * Masks credit card numbers using standard PAN format:

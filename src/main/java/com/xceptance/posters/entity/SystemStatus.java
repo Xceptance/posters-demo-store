@@ -3,6 +3,7 @@ package com.xceptance.posters.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import jakarta.persistence.Table;
 
 /**
@@ -16,6 +17,9 @@ public class SystemStatus {
     @Id
     @Column(name = "status_key", nullable = false)
     private String key;
+
+    @Version
+    private Integer version;
 
     @Column(name = "status_value", nullable = false)
     private String value;
@@ -32,4 +36,12 @@ public class SystemStatus {
 
     public String getValue() { return value; }
     public void setValue(String value) { this.value = value; }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 }

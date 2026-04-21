@@ -2,7 +2,7 @@ package com.xceptance.posters.service;
 
 import com.xceptance.posters.entity.AuditLogEntry;
 import com.xceptance.posters.entity.AuditLogEntry.Action;
-import com.xceptance.posters.entity.AuditLogRepository;
+import com.xceptance.posters.repository.AuditLogRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

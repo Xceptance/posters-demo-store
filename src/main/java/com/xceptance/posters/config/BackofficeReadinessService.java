@@ -1,7 +1,8 @@
 package com.xceptance.posters.config;
+import com.xceptance.posters.util.AdminDataLoader;
 
 import com.xceptance.posters.entity.SystemStatus;
-import com.xceptance.posters.entity.SystemStatusRepository;
+import com.xceptance.posters.repository.SystemStatusRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

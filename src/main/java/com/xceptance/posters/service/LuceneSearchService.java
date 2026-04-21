@@ -34,8 +34,8 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Service;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.entity.CatalogProductRepository;
-import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.repository.CatalogProductRepository;
+import com.xceptance.posters.service.LocalizedTextService;
 import com.xceptance.posters.entity.Product;
 
 /**

@@ -4,6 +4,9 @@
 
 server:
   port: 8080
+  servlet:
+    session:
+      tracking-modes: cookie
 
 # ----------------------------------------
 # Spring Data / JPA / H2
@@ -23,6 +26,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        jdbc.batch_size: 50
+        order_inserts: true
+        order_updates: true
   h2:
     console:
       enabled: true

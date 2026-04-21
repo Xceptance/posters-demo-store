@@ -1,4 +1,6 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.repository;
+import com.xceptance.posters.entity.Product;
+import com.xceptance.posters.entity.Category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

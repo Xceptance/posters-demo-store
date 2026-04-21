@@ -1,4 +1,6 @@
 package com.xceptance.posters.controller;
+import com.xceptance.posters.entity.CartCreditCard;
+import com.xceptance.posters.entity.CartAddress;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.xceptance.posters.entity.CatalogCart;
 import com.xceptance.posters.entity.CatalogOrder;
 import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.entity.CatalogCustomerRepository;
-import com.xceptance.posters.entity.CreditCardMasker;
+import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.util.CreditCardMasker;
 import com.xceptance.posters.entity.CreditCardVendor;
 import com.xceptance.posters.service.CheckoutService;
 import com.xceptance.posters.service.SessionService;

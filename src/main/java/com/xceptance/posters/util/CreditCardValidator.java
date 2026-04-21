@@ -1,4 +1,5 @@
-package com.xceptance.posters.entity;
+package com.xceptance.posters.util;
+import com.xceptance.posters.entity.CreditCardVendor;
 
 import java.time.LocalDate;
 

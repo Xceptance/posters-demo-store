@@ -1,4 +1,6 @@
 package com.xceptance.posters.service;
+import com.xceptance.posters.entity.Site;
+import com.xceptance.posters.entity.Price;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,13 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xceptance.posters.config.PostersProperties;
 import com.xceptance.posters.entity.CartLineItem;
 import com.xceptance.posters.entity.CatalogCart;
-import com.xceptance.posters.entity.CatalogCartRepository;
-import com.xceptance.posters.entity.CatalogProductRepository;
+import com.xceptance.posters.repository.CatalogCartRepository;
+import com.xceptance.posters.repository.CatalogProductRepository;
 import com.xceptance.posters.dto.CartDto;
 import com.xceptance.posters.dto.CartItemDto;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.entity.Variant;
-import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.service.LocalizedTextService;
 
 @Service
 public class CartService {

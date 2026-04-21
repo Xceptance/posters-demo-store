@@ -1,4 +1,7 @@
 package com.xceptance.posters.controller;
+import com.xceptance.posters.repository.CatalogOrderRepository;
+import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CatalogCartRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +11,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.mock.web.MockHttpSession;
 
 import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CatalogCustomerRepository;
 import com.xceptance.posters.entity.CatalogCart;
 import com.xceptance.posters.entity.CartLineItem;
 import com.xceptance.posters.entity.CatalogOrder;
 import com.xceptance.posters.entity.OrderLineItem;
-import com.xceptance.posters.entity.CatalogOrderRepository;
-import com.xceptance.posters.entity.CatalogCartRepository;
+import com.xceptance.posters.repository.CatalogOrderRepository;
+import com.xceptance.posters.repository.CatalogCartRepository;
 import com.xceptance.posters.service.SessionService;
 
 import org.springframework.beans.factory.BeanFactory;

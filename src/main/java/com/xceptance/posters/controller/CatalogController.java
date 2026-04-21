@@ -1,4 +1,6 @@
 package com.xceptance.posters.controller;
+import com.xceptance.posters.entity.Site;
+import com.xceptance.posters.entity.Price;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.entity.CatalogService;
+import com.xceptance.posters.service.CatalogService;
 import com.xceptance.posters.entity.Category;
-import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.service.LocalizedTextService;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.entity.Variant;
 import com.xceptance.posters.entity.VariationAttributeValue;

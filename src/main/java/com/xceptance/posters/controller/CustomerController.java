@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.entity.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CatalogCustomerRepository;
 import com.xceptance.posters.entity.CatalogOrder;
-import com.xceptance.posters.entity.CatalogOrderRepository;
+import com.xceptance.posters.repository.CatalogOrderRepository;
 import com.xceptance.posters.service.CheckoutService;
 import com.xceptance.posters.service.SessionService;
 import com.xceptance.posters.dto.OrderDto;

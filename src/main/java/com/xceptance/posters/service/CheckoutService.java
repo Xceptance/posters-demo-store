@@ -1,4 +1,14 @@
 package com.xceptance.posters.service;
+import com.xceptance.posters.util.CreditCardValidator;
+import com.xceptance.posters.util.CartToOrderConverter;
+import com.xceptance.posters.repository.CatalogOrderRepository;
+import com.xceptance.posters.repository.CatalogCartRepository;
+import com.xceptance.posters.entity.OrderLineItem;
+import com.xceptance.posters.entity.CreditCardVendor;
+import com.xceptance.posters.entity.CatalogOrder;
+import com.xceptance.posters.entity.CatalogCart;
+import com.xceptance.posters.entity.CartCreditCard;
+import com.xceptance.posters.entity.CartAddress;
 
 import com.xceptance.posters.entity.*;
 import com.xceptance.posters.dto.*;

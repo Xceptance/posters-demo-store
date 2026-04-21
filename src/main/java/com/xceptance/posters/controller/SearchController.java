@@ -1,4 +1,7 @@
 package com.xceptance.posters.controller;
+import com.xceptance.posters.entity.Variant;
+import com.xceptance.posters.entity.Site;
+import com.xceptance.posters.entity.Price;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xceptance.posters.entity.CatalogProductRepository;
-import com.xceptance.posters.entity.LocalizedTextService;
+import com.xceptance.posters.repository.CatalogProductRepository;
+import com.xceptance.posters.service.LocalizedTextService;
 import com.xceptance.posters.entity.Product;
 import com.xceptance.posters.service.LuceneSearchService;
 
