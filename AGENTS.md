@@ -4,6 +4,7 @@ Please adhere to the following rules when contributing to this repository:
 
 ## General Behavior
 - **Explicit Confirmation:** Do not implement anything unless told and confirmed by the user.
+- **Tooling Preference:** Prefer using Java for scripting and agent tasks (e.g., utility scripts) instead of Python or Bash, unless it's typical Unix tooling. If a non-Java tool is necessary, ask for permission first.
 
 ## Coding Standards
 - **Test-Driven Development (TDD):** Write unit and integration tests before implementing new functionality. Ensure comprehensive test coverage for all new code.
