@@ -11,6 +11,10 @@ metadata:
 
 Follow these instructions when the user wants to create a new manual functional test case through the `/test-create` workflow.
 
+## General Test Generation Rules
+
+- **Randomized Test Data**: Never use fixed or hardcoded test data (like specific product names, static URLs, or hardcoded dimensions) in the test case instructions unless explicitly required to test a unique edge case. Always instruct the tester to use `[Randomized]` or parametrical placeholders. This guarantees the drafted tests are durable and not brittle to future catalog or price changes.
+
 Ask the user if they want to execute a **Light Flow** or a **Standard Flow** when this skill is invoked.
 
 ## Light Flow
@@ -22,6 +26,7 @@ Ask the user if they want to execute a **Light Flow** or a **Standard Flow** whe
 5. Draft the new test case inside the appropriate domain directory (e.g., `doc/tests/checkout/TC_CHK_...`).
 6. Ensure Metadata, Preconditions, Steps, Execution Targets, and Change History are perfectly populated.
 7. Present the draft to the user and conduct a fast review round to refine and improve the test case. Once accepted, update the domain's `overview.md` with the new test item.
+8. **Optional Validation:** Ask the user if they want to validate the physical test case using the `browser_subagent` AND ask them to provide the target URL (e.g., localhost, staging). If they provide it, navigate to the URL and follow the drafted Markdown exactly to prove structural correctness.
 
 ## Standard Flow
 
@@ -36,3 +41,4 @@ You must act as the orchestrator of the exact 9-step QA process specified in the
 7. **Test Manager Review:** Act as a Test Manager to verify coverage, traceability, and execution efficiency.
 8. **End Consumer Review:** Act as an End Consumer to verify usability, clarity, and real-world alignment.
 9. **Finalize:** Automatically update the domain's `overview.md` with the new test item, and require explicit sign-off from the user before concluding the domain creation.
+10. **Optional Validation:** As a final phase, ask the user if they'd like to physically validate the test using the `browser_subagent`. If so, explicitly ask them for the target validation URL, then load the site and step through the test to formally ensure structural accuracy before considering the feature stable.
