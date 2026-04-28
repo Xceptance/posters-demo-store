@@ -104,6 +104,19 @@
     <div id="cc-aria-live" class="cc-sr-only" aria-live="polite" aria-atomic="true"></div>
 
     <!-- Credit card JS — loaded only on this page -->
+    <script th:inline="javascript">
+        window.CC_MESSAGES = {
+            cardNumberEmpty: /*[[#{errorMissingCardNumber}]]*/ 'Please enter a card number.',
+            cardNumberInvalid: /*[[#{errorWrongCreditCard}]]*/ 'Please enter a valid credit card number.',
+            cardNumberLength: /*[[#{errorInvalidCardLength}]]*/ 'Card number length is invalid for {0}.',
+            cardNameEmpty: /*[[#{errorMissingCardName}]]*/ 'Please enter the cardholder name.',
+            expiryFormat: /*[[#{errorExpiryFormat}]]*/ 'Please enter expiry in MM/YY format.',
+            expiryMonth: /*[[#{errorExpiryMonth}]]*/ 'Month must be between 01 and 12.',
+            expiryExpired: /*[[#{errorExpiryExpired}]]*/ 'Card is expired.',
+            expiryFuture: /*[[#{errorExpiryFuture}]]*/ 'Expiry date is too far in the future.',
+            cvvLength: /*[[#{errorCvvLength}]]*/ 'CVV must be {0} digits.'
+        };
+    </script>
     <script th:src="@{/assets/js/credit-card.js}"></script>
 </div>
 </body>

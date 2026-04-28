@@ -24,6 +24,9 @@ import jakarta.persistence.EntityManager;
 
 import java.util.Optional;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+
 /**
  * Service layer for checkout operations using the new entity model.
  * Handles cart management and cart-to-order conversion.
@@ -39,19 +42,22 @@ public class CheckoutService {
     private final CreditCardValidator creditCardValidator;
     private final CartService cartService;
     private final OrderProcessingMetrics orderProcessingMetrics;
+    private final MessageSource messageSource;
 
     public CheckoutService(final CatalogCartRepository cartRepository,
                            final CatalogOrderRepository orderRepository,
                            final EntityManager entityManager,
                            final CreditCardValidator creditCardValidator,
                            final CartService cartService,
-                           final OrderProcessingMetrics orderProcessingMetrics) {
+                           final OrderProcessingMetrics orderProcessingMetrics,
+                           final MessageSource messageSource) {
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
         this.entityManager = entityManager;
         this.creditCardValidator = creditCardValidator;
         this.cartService = cartService;
         this.orderProcessingMetrics = orderProcessingMetrics;
+        this.messageSource = messageSource;
     }
 
     /**
@@ -170,6 +176,7 @@ public class CheckoutService {
                                                 final String expiry,
                                                 final String cvv) {
         final java.util.List<String> errors = new java.util.ArrayList<>();
+        final java.util.Locale locale = LocaleContextHolder.getLocale();
         
         final String digits = cardNumber == null ? "" : cardNumber.replaceAll("\\D", "");
         final CreditCardVendor vendor = CreditCardVendor.detect(digits);
@@ -184,29 +191,29 @@ public class CheckoutService {
         }
 
         if (digits.isEmpty()) {
-            errors.add("cardNumber:Please enter a card number.");
+            errors.add("cardNumber:" + messageSource.getMessage("errorMissingCardNumber", null, "Please enter a card number.", locale));
         } else {
             if (!creditCardValidator.isLuhnValid(digits)) {
-                errors.add("cardNumber:Please enter a valid credit card number.");
+                errors.add("cardNumber:" + messageSource.getMessage("errorWrongCreditCard", null, "Please enter a valid credit card number.", locale));
             }
             if (vendor != null && !creditCardValidator.isValidLength(digits, vendor)) {
-                errors.add("cardNumber:Card number length is invalid for " + vendor.getDisplayName() + ".");
+                errors.add("cardNumber:" + messageSource.getMessage("errorInvalidCardLength", new Object[]{vendor.getDisplayName()}, "Card number length is invalid for " + vendor.getDisplayName() + ".", locale));
             }
         }
 
         if (name == null || name.isBlank()) {
-            errors.add("name:Please enter the cardholder name.");
+            errors.add("name:" + messageSource.getMessage("errorMissingCardName", null, "Please enter the cardholder name.", locale));
         }
 
         if (!expiryParsed) {
-            errors.add("expiry:Please enter expiry in MM/YY format.");
+            errors.add("expiry:" + messageSource.getMessage("errorExpiryFormat", null, "Please enter expiry in MM/YY format.", locale));
         } else if (!creditCardValidator.isExpiryValid(month, year)) {
-            errors.add("expiry:Card is expired or expiry date is invalid.");
+            errors.add("expiry:" + messageSource.getMessage("errorExpiryExpired", null, "Card is expired or expiry date is invalid.", locale));
         }
 
         if (!creditCardValidator.isCvvValid(cvv, vendor)) {
             int expectedLen = vendor != null ? vendor.getCvvLength() : 3;
-            errors.add("cvv:CVV must be " + expectedLen + " digits.");
+            errors.add("cvv:" + messageSource.getMessage("errorCvvLength", new Object[]{expectedLen}, "CVV must be " + expectedLen + " digits.", locale));
         }
 
         if (!errors.isEmpty()) {

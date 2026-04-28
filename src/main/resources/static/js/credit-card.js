@@ -249,22 +249,32 @@
             const id = input.id;
             const digits = (input.value || '').replace(/\D/g, '');
 
+            // Helper to get localized message
+            function getMsg(key, defaultMsg, param) {
+                const msgs = window.CC_MESSAGES || {};
+                let msg = msgs[key] || defaultMsg;
+                if (param !== undefined) {
+                    msg = msg.replace('{0}', param);
+                }
+                return msg;
+            }
+
             if (id === 'cardNumber') {
                 if (digits.length === 0) {
-                    return showFieldError(input, 'Please enter a card number.');
+                    return showFieldError(input, getMsg('cardNumberEmpty', 'Please enter a card number.'));
                 }
                 if (!isLuhnValid(digits)) {
-                    return showFieldError(input, 'Please enter a valid credit card number.');
+                    return showFieldError(input, getMsg('cardNumberInvalid', 'Please enter a valid credit card number.'));
                 }
                 const vendor = detectVendor(digits);
                 if (vendor && !vendor.lengths.includes(digits.length)) {
-                    return showFieldError(input, 'Card number length is invalid for ' + vendor.display + '.');
+                    return showFieldError(input, getMsg('cardNumberLength', 'Card number length is invalid for {0}.', vendor.display));
                 }
             }
 
             if (id === 'cardName') {
                 if (!input.value || input.value.trim() === '') {
-                    return showFieldError(input, 'Please enter the cardholder name.');
+                    return showFieldError(input, getMsg('cardNameEmpty', 'Please enter the cardholder name.'));
                 }
             }
 
@@ -272,21 +282,21 @@
                 const val = input.value || '';
                 const match = val.match(/^(\d{2})\/(\d{2})$/);
                 if (!match) {
-                    return showFieldError(input, 'Please enter expiry in MM/YY format.');
+                    return showFieldError(input, getMsg('expiryFormat', 'Please enter expiry in MM/YY format.'));
                 }
                 const month = parseInt(match[1], 10);
                 const year = parseInt(match[2], 10) + 2000;
                 if (month < 1 || month > 12) {
-                    return showFieldError(input, 'Month must be between 01 and 12.');
+                    return showFieldError(input, getMsg('expiryMonth', 'Month must be between 01 and 12.'));
                 }
                 const now = new Date();
                 const curYear = now.getFullYear();
                 const curMonth = now.getMonth() + 1;
                 if (year < curYear || (year === curYear && month < curMonth)) {
-                    return showFieldError(input, 'Card is expired.');
+                    return showFieldError(input, getMsg('expiryExpired', 'Card is expired.'));
                 }
                 if (year > curYear + 20) {
-                    return showFieldError(input, 'Expiry date is too far in the future.');
+                    return showFieldError(input, getMsg('expiryFuture', 'Expiry date is too far in the future.'));
                 }
             }
 
@@ -295,7 +305,7 @@
                 const vendor = detectVendor(cardDigits);
                 const expected = vendor ? vendor.cvv : 3;
                 if (digits.length !== expected) {
-                    return showFieldError(input, 'CVV must be ' + expected + ' digits.');
+                    return showFieldError(input, getMsg('cvvLength', 'CVV must be {0} digits.', expected));
                 }
             }
 
