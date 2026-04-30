@@ -2,7 +2,7 @@
 description: Create and scaffold new manual functional test cases.
 ---
 
-Help the user brainstorm and generate structured manual test cases in the `doc/tests/` directory.
+Help the user brainstorm and generate structured manual test cases in the `test-management/tests/` directory.
 
 When the user runs `/test-create`, I will:
 1. Ask them about the domain, feature requirements, and workflows they want to test.

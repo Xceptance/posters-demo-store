@@ -23,15 +23,19 @@ Posters is built with [Spring Boot 4](https://spring.io/projects/spring-boot) an
 ## Development Cycle
 
 1. Open a terminal window in the root of the Posters repository on your disk.
-1. Clean the project:
+2. Navigate to the core application directory:
+    ```bash
+    cd implementation
     ```
+3. Clean the project:
+    ```bash
     mvn clean
     ```
-1. Run the Posters application using the Spring Boot plugin:
-    ```
+4. Run the Posters application using the Spring Boot plugin:
+    ```bash
     mvn spring-boot:run
     ```
-1. Open http://localhost:8080/ in a Web browser.
-1. Start changing classes or templates in your IDE. Watch the terminal to see the application being reloaded once changes are compiled, and refresh the browser to see Thymeleaf template updates.
-1. Test your changes to the application in the Web browser.
+5. Open http://localhost:8080/ in a Web browser.
+6. Start changing classes or templates in your IDE. Watch the terminal to see the application being reloaded once changes are compiled, and refresh the browser to see Thymeleaf template updates.
+7. Test your changes to the application in the Web browser.
 

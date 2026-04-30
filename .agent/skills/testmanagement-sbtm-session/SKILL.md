@@ -13,7 +13,7 @@ Follow these instructions when the user invokes the `/sbtm-session` workflow to 
 
 1. **Initialize Session:**
    - Ask the user which Charter they want to execute.
-   - Read the selected Charter from `doc/sbtm/[coverage-area]/charters/`.
+   - Read the selected Charter from `test-management/sbtm/[coverage-area]/charters/`.
    - Ask the user for the intended timebox duration (e.g., 60 minutes) and start the session.
 
 2. **The Execution Loop (Copilot Mode):**
@@ -23,10 +23,10 @@ Follow these instructions when the user invokes the `/sbtm-session` workflow to 
 
 3. **Session Conclusion & T/B/S Automation:**
    - When the user says they are done, or the timebox expires, you must generate the Session Report.
-   - Read `doc/sbtm/SESSION_TEMPLATE.md` for formatting.
+   - Read `test-management/sbtm/SESSION_TEMPLATE.md` for formatting.
    - **Automatic Time Tracking:** You must calculate the T/B/S metrics (Test Execution, Bug Investigation, Setup/Admin) based on the flow of the conversation. Estimate the percentages of the timebox they spent on setup vs exploring vs bug logging. Do NOT ask the user to provide these percentages; do it for them.
    - Compile the **Coverage**, **Bugs & Issues**, and **Notes**.
    
 4. **Save the Report:**
-   - Save the completed report to `doc/sbtm/[coverage-area]/sessions/SESSION-[YYYYMMDD]-[CHARTER-ID].md`.
+   - Save the completed report to `test-management/sbtm/[coverage-area]/sessions/SESSION-[YYYYMMDD]-[CHARTER-ID].md`.
    - Instruct the user to run `/sbtm-review` with a Senior QA for debriefing.

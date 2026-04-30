@@ -11,8 +11,8 @@ metadata:
 
 Follow these instructions when the user invokes the `/sbtm-review` workflow to debrief a completed session.
 
-1. **Select Session:** Ask the user which Session Report they want to review. Read the report from `doc/sbtm/[coverage-area]/sessions/`.
-2. **Conduct the PROOF Debrief:** Act as a Senior QA Mentor and walk the user through the PROOF framework as defined in `doc/sbtm/GUIDELINES.md`:
+1. **Select Session:** Ask the user which Session Report they want to review. Read the report from `test-management/sbtm/[coverage-area]/sessions/`.
+2. **Conduct the PROOF Debrief:** Act as a Senior QA Mentor and walk the user through the PROOF framework as defined in `test-management/sbtm/GUIDELINES.md`:
    - **P (Past):** Did you stick to the charter's mission?
    - **R (Results):** Let's review the bugs and coverage. (Analyze if they missed any obvious edge cases based on their coverage notes).
    - **O (Outlook):** What's next? Do we need a follow-up charter?

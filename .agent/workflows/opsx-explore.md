@@ -105,9 +105,9 @@ Think freely. When insights crystallize, you might offer:
 If the user mentions a change or you detect one is relevant:
 
 1. **Read existing artifacts for context**
-   - `openspec/changes/<name>/proposal.md`
-   - `openspec/changes/<name>/design.md`
-   - `openspec/changes/<name>/tasks.md`
+   - `specifications/openspec/changes/<name>/proposal.md`
+   - `specifications/openspec/changes/<name>/design.md`
+   - `specifications/openspec/changes/<name>/tasks.md`
    - etc.
 
 2. **Reference them naturally in conversation**

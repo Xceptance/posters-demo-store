@@ -1,14 +1,9 @@
-/conf/*.conf
-/conf/*.xml
-/db/
-/log/
-/target/
-/*.sql
-logs/posters.log
+
 .project
 .settings/
 .classpath
 .vscode/
 .idea/
 *.iml
+*.log
 
