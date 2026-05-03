@@ -10,6 +10,10 @@ Instead of discarding great ideas during the "Joint Refinement" phase of test cr
 *Log manual scenarios here that are far too tedious for human execution and should only be authored once an automated framework (e.g. Playwright) is introduced.*
 - *(Empty)*
 
+## 🔍 Pending Manual Test Domains
+*Log planned test domains that have been identified but not yet authored as full test suites.*
+- **Search Suggestions (Type-Ahead):** The HTMX-powered search suggestion dropdown that appears as the user types in the header search bar. Should cover: suggestion appearance after typing delay, displaying up to 5 product results with thumbnails and prices, "View all N results →" link when more than 5 matches exist, suggestion disappearance on blur/clear, and navigation via suggestion click to PDP. (Deferred from Simple Search suite — will be its own test domain.)
+
 ## 🔮 Aspirational Capabilities
 *Log scenarios for features that do not exist yet in the codebase, but are anticipated in the product roadmap.*
 - **Checkout Error Handling (Payment Failure):** A user attempts to place an order with declined/invalid credit card details and receives appropriate error messaging. (Skipped for now as it's a demo store feature)

@@ -1,13 +1,13 @@
 # Storefront Features
 
-The storefront is a Spring Boot + Thymeleaf e-commerce demo store. It uses Bootstrap for the UI with localized content (English, German, Swedish).
+The storefront is a Spring Boot + Thymeleaf e-commerce demo store. It uses Bootstrap for the UI with localized content (English, German, Swedish, Japanese).
 
 ## Catalog
 
 - **Homepage** with featured products and category overview
 - **Category overview** with product grid and filter sidebar
 - **Product detail pages** with images, descriptions, and pricing
-- **Search** with instant suggestions (search-as-you-type fragment)
+- **Search** — full-text product search with per-language stemming (EN, DE, SV, JA), prefix matching, and instant suggestions (search-as-you-type)
 - **Product grid fragment** for AJAX-style filtering
 
 ## Shopping Cart
@@ -42,7 +42,7 @@ The storefront is a Spring Boot + Thymeleaf e-commerce demo store. It uses Boots
 
 ## Localization
 
-- **Multi-language support** — English, German, Swedish
+- **Multi-language support** — English, German, Swedish, Japanese
 - **Localized country names** in checkout dropdowns (rendered in selected locale)
 - **Localized disclaimer banner** using message keys
 
