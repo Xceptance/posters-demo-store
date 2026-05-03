@@ -23,7 +23,7 @@
                 <div class="card-footer">
                     <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.minimumPrice)}">$0.00</p>
                     <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name} + '/' + ${product.id}}"
-                       class="btn btn-primary" th:text="#{buttonBuyHere}">Buy Here</a>
+                       class="btn btn-primary" th:text="#{buttonShopNow}">Buy Here</a>
                 </div>
             </div>
         </div>

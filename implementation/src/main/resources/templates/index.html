@@ -38,7 +38,7 @@
             <h1 class="hero-title mb-4">Premium Vintage Posters.</h1>
             <p class="hero-subtitle lead mb-4 text-muted">Give your walls the art they deserve with our curated collection of high-quality prints.</p>
             <a th:href="@{'/' + ${urlLocale} + '/product/' + ${heroProduct.name} + '/' + ${heroProduct.id}}" 
-               class="btn btn-primary btn-lg px-5 py-3 shadow-sm hero-btn" th:text="#{buttonBuyHere}">Shop the Collection</a>
+               class="btn btn-primary btn-lg px-5 py-3 shadow-sm hero-btn" th:text="#{buttonShopNow}">Shop the Collection</a>
         </div>
         <!-- Image Side -->
         <div class="col-lg-6 offset-lg-1 col-md-6 position-relative hero-image-container">
@@ -117,7 +117,7 @@
                 <div class="card-footer">
                     <p class="card-text product-tile-price mb-2" th:text="${#numbers.formatCurrency(product.minimumPrice)}">$0.00</p>
                     <a th:href="@{'/' + ${urlLocale} + '/product/' + ${product.name} + '/' + ${product.id}}"
-                       class="btn btn-primary product-tile-btn-buy" th:text="#{buttonBuyHere}">Buy Here</a>
+                       class="btn btn-primary product-tile-btn-buy" th:text="#{buttonShopNow}">Buy Here</a>
                 </div>
             </div>
         </div>
