@@ -9,8 +9,11 @@ Verify that entering an incomplete word (prefix) into the search returns product
 - **Software Version:** >= 1.0.0
 - **Domains:** Search
 - **Priority:** 🟠 High
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_005_PrefixSearch.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_005_PrefixSearch.yaml)
 - **Suite:** 🔄 Regression, 🧪 Full
 - **Requirements:**
   - N/A

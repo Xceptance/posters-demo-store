@@ -1,0 +1,35 @@
+prompt: |
+  Open ${neodymium.url}
+  Switch to the ${locale} locale.
+  If the '${searchTerm}' is not empty, type '${searchTerm}' into the search field and submit.
+  If the '${searchTerm}' is empty, leave the search field empty and submit.
+  Verify the search results page loads without errors.
+  If '${expectEmpty}' is 'true', verify that no product tiles are rendered and a generic search results heading is shown.
+  If '${expectEmpty}' is 'false', verify that the results match a clean search for '${cleanTerm}' with no errors.
+
+data:
+  - testId: "tc_src_003_empty"
+    searchTerm: ""
+    cleanTerm: ""
+    expectEmpty: "true"
+    locale: "en-US"
+  - testId: "tc_src_003_single_space"
+    searchTerm: " "
+    cleanTerm: ""
+    expectEmpty: "true"
+    locale: "en-US"
+  - testId: "tc_src_003_leading_whitespace"
+    searchTerm: "  bear"
+    cleanTerm: "bear"
+    expectEmpty: "false"
+    locale: "en-US"
+  - testId: "tc_src_003_trailing_whitespace"
+    searchTerm: "bear  "
+    cleanTerm: "bear"
+    expectEmpty: "false"
+    locale: "en-US"
+  - testId: "tc_src_003_multiple_spaces"
+    searchTerm: "grizzly    bear"
+    cleanTerm: "grizzly bear"
+    expectEmpty: "false"
+    locale: "en-US"

@@ -1,0 +1,17 @@
+prompt: |
+  Open ${neodymium.url}
+  Click '${category}' in the main navigation menu.
+  Click on the first product on the page, click on the image.
+  Click the 'Add To Cart' button.
+  Verify the cart icon now shows "${initialCount}" item.
+  Click on the cart icon to open the mini cart.
+  Click on the 'View Cart' button in the mini cart.
+  Verify the cart page shows "${initialCount}" product with a price.
+  Update the quantity to "${newCount}" for that product.
+  Verify the cart page shows that product with a quantity of ${newCount}.
+
+data:
+  - testId: "addProductToCart_case1"
+    category: "World of Nature"
+    initialCount: "1"
+    newCount: "2"

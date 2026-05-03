@@ -9,8 +9,11 @@ Verify that search results are valid and correct: each rendered product tile gen
 - **Software Version:** >= 1.0.0
 - **Domains:** Search, Catalog
 - **Priority:** 🟠 High
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_007_ResultCorrectness.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_007_ResultCorrectness.yaml)
 - **Suite:** 🚀 Smoke, 🔄 Regression, 🧪 Full
 - **Requirements:**
   - N/A

@@ -1,0 +1,36 @@
+
+prompt: |
+  Open ${neodymium.url}
+  Click the 'Buy Here' button for North Boston
+  Click the Add To Cart button
+  Click the Cart icon with '1' item
+  Click the View Cart link
+  Click the 'Proceed To Checkout' button
+  Type '${lastName}' into the Last Name field
+  Type '${firstName}' into the First Name field
+  Type '${addressLine}' into the Street Address field
+  Type '${city}' into the City field
+  Type '${state}' into the State/Province field
+  Type '${zipCode}' into the ZIP/Postal Code field
+  Select '${countryCode}' from the Country dropdown
+  Click the Continue button
+  Type '${creditCardNumber}' into the Card Number field
+  Type '${cardholderName}' into the Cardholder's Name field
+  Select '${expirationMonth}' from the Expiration Date Month dropdown
+  Select '${expirationYear}' from the Expiration Date Year dropdown
+  Click the Continue button
+  Click the Order With Costs button
+
+data:
+  - testId: "placeGuestOrder"
+    lastName: "Doe"
+    firstName: "John"
+    addressLine: "123 Main St"
+    city: "Anytown"
+    state: "NY"
+    zipCode: "10001"
+    countryCode: "United States"
+    creditCardNumber: "4111111111111111"
+    cardholderName: "John Doe"
+    expirationMonth: "07"
+    expirationYear: "2027"

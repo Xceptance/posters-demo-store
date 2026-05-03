@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
+h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; }
+h3 { margin-top: 20px; color: #0056b3; }
+h4 { color: #555; }
+.instruction { background: #f8f9fa; padding: 15px; border-left: 4px solid #0056b3; margin-bottom: 20px; }
+.step { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.attempt { margin-left: 15px; border-left: 2px solid #ddd; padding-left: 15px; }
+details { background: #fdfdfd; padding: 10px; border: 1px solid #eee; border-radius: 4px; margin-bottom: 10px; }
+summary { font-weight: bold; cursor: pointer; }
+pre { white-space: pre-wrap; background: #272822; color: #f8f8f2; padding: 10px; border-radius: 4px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; }
+.actions { background: #e9ecef; padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+.actions ul { margin: 5px 0 0 0; }
+.reasoning { font-style: italic; color: #495057; margin-bottom: 10px; }
+.error { color: #dc3545; font-weight: bold; padding: 10px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 10px; }
+.warning { color: #856404; background: #fff3cd; padding: 10px; border: 1px solid #ffeeba; border-radius: 4px; margin-bottom: 10px; }
+.success { color: #155724; background: #d4edda; padding: 10px; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 10px; }
+.info { color: #0e566c; background: #d1ecf1; padding: 10px; border: 1px solid #bee5eb; border-radius: 4px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<h2>AI Agent Execution Log</h2>
+<div class="instruction"><strong>Instructions:</strong><br/>Open ${neodymium.url}<br/>Click the country selector button and switch to the country represented by locale &#39;${locale}&#39;.<br/>Verify that the flag icon is updated to the new locale.<br/>Type &#39;${searchTerm}&#39; into the search field and submit.<br/>Verify the search results page displays a heading with &quot;Results for &#39;${searchTerm}&#39;&quot;.<br/>Verify search results contain at least one product with &#39;${expectedProduct}&#39; in the product title.<br/>Verify the product description is in ${expectedDescriptionLanguage}.<br/>Verify the product price uses the &#39;${expectedCurrencySymbol}&#39; symbol.<br/>Verify there is a &quot;Buy Here&quot; action link/button for the product.<br/></div>
+<div class="step">
+<h3>Step [1/9]: Open http://localhost:8080/en-US/</h3>
+</div>
+<div class="step">
+<h3>Step [2/9]: Click the country selector button and switch to the country represented by locale &#39;de-DE&#39;.</h3>
+<div class="attempt">
+<h4>Initial Attempt</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction
+      Click the country selector button and switch to the country represented by locale &#39;de-DE&#39;.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/
+Page Title: Posters - Home
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 0&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 0&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 0&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 0&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Summer Sale - Up to 30% off!&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_4zobno&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Premium Vintage Posters. | Give your walls the art they deserve with our curated collection of high-quality prints. | Buy Here&#39; href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_ih9gcn&#39; selector=&#39;a&#39; 
+	[link] text=&#39;World of Nature&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_sbkwic&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Dining&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_ifni81&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Transportation&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_i1b7tc&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Panoramas&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_v966q2&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_nb3581&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Grizzly Bear | Bear looking tired. | $17.00 | Buy Here&#39; href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_181vpk&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Great Grey Owl/2&#39; data-neodymium-automation-id=&#39;xc_nb3581_1&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Great Grey Owl | A large grey owl in the woods. | $17.00 | Buy Here&#39; href=&#39;/en-US/product/Great Grey Owl/2&#39; data-neodymium-automation-id=&#39;xc_181vpk_1&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Swedish Moose/3&#39; data-neodymium-automation-id=&#39;xc_nb3581_2&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Swedish Moose | A mooze with antlers. | $9.30 | Buy Here&#39; href=&#39;/en-US/product/Swedish Moose/3&#39; data-neodymium-automation-id=&#39;xc_181vpk_2&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/European Hornet/4&#39; data-neodymium-automation-id=&#39;xc_nb3581_3&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;European Hornet | Close up shot of a hornet. | $15.64 | Buy Here&#39; href=&#39;/en-US/product/European Hornet/4&#39; data-neodymium-automation-id=&#39;xc_181vpk_3&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Roman Snail/5&#39; data-neodymium-automation-id=&#39;xc_nb3581_4&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Roman Snail | Close up of a snail sticking on the side of a tree. | $26.45 | Buy Here&#39; href=&#39;/en-US/product/Roman Snail/5&#39; data-neodymium-automation-id=&#39;xc_181vpk_4&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Blue Morpho Butterfly/6&#39; data-neodymium-automation-id=&#39;xc_nb3581_5&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Blue Morpho Butterfly | A beautiful blue and black butterfly on a leaf. | $20.69 | Buy Here&#39; href=&#39;/en-US/product/Blue Morpho Butterfly/6&#39; data-neodymium-automation-id=&#39;xc_181vpk_5&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Red Birdwing/7&#39; data-neodymium-automation-id=&#39;xc_nb3581_6&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Red Birdwing | Looking up at a butterfly sitting on a blossom. | $8.75 | Buy Here&#39; href=&#39;/en-US/product/Red Birdwing/7&#39; data-neodymium-automation-id=&#39;xc_181vpk_6&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Bird/8&#39; data-neodymium-automation-id=&#39;xc_nb3581_7&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Bird | A small black bird sitting on a gutter. | $22.99 | Buy Here&#39; href=&#39;/en-US/product/Bird/8&#39; data-neodymium-automation-id=&#39;xc_181vpk_7&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Red Domestic Cat/9&#39; data-neodymium-automation-id=&#39;xc_nb3581_8&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Red Domestic Cat | A red colored cat looking straight at you. | $17.99 | Buy Here&#39; href=&#39;/en-US/product/Red Domestic Cat/9&#39; data-neodymium-automation-id=&#39;xc_181vpk_8&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Brown Domestic Cat/10&#39; data-neodymium-automation-id=&#39;xc_nb3581_9&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Brown Domestic Cat | A brownish cat looking like its about to jump at you. | $20.58 | Buy Here&#39; href=&#39;/en-US/product/Brown Domestic Cat/10&#39; data-neodymium-automation-id=&#39;xc_181vpk_9&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Pink Dahlia/11&#39; data-neodymium-automation-id=&#39;xc_nb3581_10&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Pink Dahlia | A pink dhalia blossom close up. | $0.34 | Buy Here&#39; href=&#39;/en-US/product/Pink Dahlia/11&#39; data-neodymium-automation-id=&#39;xc_181vpk_10&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Cactus Dahlia Pink White/12&#39; data-neodymium-automation-id=&#39;xc_nb3581_11&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Cactus Dahlia Pink White | A pink and white dahlia blossom close up. | $4.00 | Buy Here&#39; href=&#39;/en-US/product/Cactus Dahlia Pink White/12&#39; data-neodymium-automation-id=&#39;xc_181vpk_11&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] text=&#39;Shop All Products&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_m6x0n6&#39; selector=&#39;a.btn.btn-primary.btn-shop-all&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[button] type=&#39;button&#39; aria-label=&#39;Slide 1&#39; data-neodymium-automation-id=&#39;xc_okdoo4&#39; selector=&#39;button.active&#39; 
+	[button] type=&#39;button&#39; aria-label=&#39;Slide 2&#39; data-neodymium-automation-id=&#39;xc_dxu2fc&#39; selector=&#39;button&#39; 
+	[button] type=&#39;button&#39; text=&#39;Previous&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_p6f1yz&#39; selector=&#39;button.carousel-control-prev&#39; 
+	[button] type=&#39;button&#39; text=&#39;Next&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_t1j54v&#39; selector=&#39;button.carousel-control-next&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+	[clickable] data-neodymium-automation-id=&#39;xc_udhwef&#39; selector=&#39;span.carousel-control-prev-icon&#39; 
+	[clickable] text=&#39;Previous&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_id1i16&#39; selector=&#39;span.visually-hidden&#39; 
+	[clickable] data-neodymium-automation-id=&#39;xc_if8lex&#39; selector=&#39;span.carousel-control-next-icon&#39; 
+	[clickable] text=&#39;Next&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_yen3os&#39; selector=&#39;span.visually-hidden&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;Premium Vintage Posters.&#39; data-neodymium-automation-id=&#39;xc_lqoe01&#39; selector=&#39;h1.hero-title.mb-4&#39; 
+	[heading] text=&#39;Trending Now&#39; data-neodymium-automation-id=&#39;xc_1t2u41&#39; selector=&#39;h2.trending-title.mb-2&#39; 
+	[heading] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_dyntey&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_5quh5j&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_ioe3dy&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_76tulc&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Grizzly Bear&#39; data-neodymium-automation-id=&#39;xc_6zjukp&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Great Grey Owl&#39; data-neodymium-automation-id=&#39;xc_eivk&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Swedish Moose&#39; data-neodymium-automation-id=&#39;xc_7nyl4e&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;European Hornet&#39; data-neodymium-automation-id=&#39;xc_7djgoz&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Roman Snail&#39; data-neodymium-automation-id=&#39;xc_9uhkfc&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Blue Morpho Butterfly&#39; data-neodymium-automation-id=&#39;xc_4br5xu&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Red Birdwing&#39; data-neodymium-automation-id=&#39;xc_j7ky2t&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Bird&#39; data-neodymium-automation-id=&#39;xc_a5y0ol&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Red Domestic Cat&#39; data-neodymium-automation-id=&#39;xc_j2bi3j&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Brown Domestic Cat&#39; data-neodymium-automation-id=&#39;xc_4n5u3w&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Pink Dahlia&#39; data-neodymium-automation-id=&#39;xc_4inczt&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Cactus Dahlia Pink White&#39; data-neodymium-automation-id=&#39;xc_pgaqb1&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Free Shipping&#39; data-neodymium-automation-id=&#39;xc_nrj2td&#39; selector=&#39;h4.trust-title&#39; 
+	[heading] text=&#39;Premium Quality&#39; data-neodymium-automation-id=&#39;xc_vnoc5h&#39; selector=&#39;h4.trust-title&#39; 
+	[heading] text=&#39;Easy Returns&#39; data-neodymium-automation-id=&#39;xc_3kle9u&#39; selector=&#39;h4.trust-title&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+
+
+      Analyze the page and return the JSON actions to fulfill the instruction.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>{
+  &quot;success&quot;: true,
+  &quot;actions&quot;: [
+    {
+      &quot;type&quot;: &quot;CLICK&quot;,
+      &quot;target&quot;: &quot;#show-locale-menu&quot;,
+      &quot;description&quot;: &quot;Click the country selector button to open the locale menu.&quot;,
+      &quot;elementDetails&quot;: &quot;Country selector button with current locale 🇺🇸&quot;
+    }
+  ],
+  &quot;done&quot;: false,
+  &quot;reasoning&quot;: &quot;The instruction requires clicking the country selector and then selecting &#39;de-DE&#39;. The first action is to click the country selector button. The options for &#39;de-DE&#39; are not yet visible in the DOM, so the next step will be to select &#39;de-DE&#39; once the menu is open.&quot;
+}</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> The instruction requires clicking the country selector and then selecting &#39;de-DE&#39;. The first action is to click the country selector button. The options for &#39;de-DE&#39; are not yet visible in the DOM, so the next step will be to select &#39;de-DE&#39; once the menu is open.</div>
+<div class="actions"><strong>Actions Executed:</strong><ul>
+<li>Click the country selector button to open the locale menu. (<strong>CLICK</strong>)</li>
+</ul></div>
+</div>
+</div>
+<div class="step">
+<h3>Step [3/9]: Verify that the flag icon is updated to the new locale.</h3>
+<div class="attempt">
+<h4>Initial Attempt</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction
+      Verify that the flag icon is updated to the new locale.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/
+Page Title: Posters - Home
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;loc-en-us&#39; text=&#39;🇺🇸
+English (United States)&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_7qwpf&#39; selector=&#39;#loc-en-us&#39; 
+	[link] id=&#39;loc-en-gb&#39; text=&#39;🇬🇧
+English (United Kingdom)&#39; href=&#39;/en-GB/&#39; data-neodymium-automation-id=&#39;xc_veoscu&#39; selector=&#39;#loc-en-gb&#39; 
+	[link] id=&#39;loc-de-de&#39; text=&#39;🇩🇪
+Deutsch (Deutschland)&#39; href=&#39;/de-DE/&#39; data-neodymium-automation-id=&#39;xc_q9k493&#39; selector=&#39;#loc-de-de&#39; 
+	[link] id=&#39;loc-sv-se&#39; text=&#39;🇸🇪
+svenska (Sverige)&#39; href=&#39;/sv-SE/&#39; data-neodymium-automation-id=&#39;xc_px3ora&#39; selector=&#39;#loc-sv-se&#39; 
+	[link] id=&#39;loc-ja-jp&#39; text=&#39;🇯🇵
+日本語 (日本)&#39; href=&#39;/ja-JP/&#39; data-neodymium-automation-id=&#39;xc_zhzslo&#39; selector=&#39;#loc-ja-jp&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Summer Sale - Up to 30% off!&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_4zobno&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Premium Vintage Posters. | Give your walls the art they deserve with our curated collection of high-quality prints. | Buy Here&#39; href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_ih9gcn&#39; selector=&#39;a&#39; 
+	[link] text=&#39;World of Nature&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_sbkwic&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Dining&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_ifni81&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Transportation&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_i1b7tc&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Panoramas&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_v966q2&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_nb3581&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Grizzly Bear | Bear looking tired. | $17.00 | Buy Here&#39; href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_181vpk&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Great Grey Owl/2&#39; data-neodymium-automation-id=&#39;xc_nb3581_1&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Great Grey Owl | A large grey owl in the woods. | $17.00 | Buy Here&#39; href=&#39;/en-US/product/Great Grey Owl/2&#39; data-neodymium-automation-id=&#39;xc_181vpk_1&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Swedish Moose/3&#39; data-neodymium-automation-id=&#39;xc_nb3581_2&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Swedish Moose | A mooze with antlers. | $9.30 | Buy Here&#39; href=&#39;/en-US/product/Swedish Moose/3&#39; data-neodymium-automation-id=&#39;xc_181vpk_2&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/European Hornet/4&#39; data-neodymium-automation-id=&#39;xc_nb3581_3&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;European Hornet | Close up shot of a hornet. | $15.64 | Buy Here&#39; href=&#39;/en-US/product/European Hornet/4&#39; data-neodymium-automation-id=&#39;xc_181vpk_3&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Roman Snail/5&#39; data-neodymium-automation-id=&#39;xc_nb3581_4&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Roman Snail | Close up of a snail sticking on the side of a tree. | $26.45 | Buy Here&#39; href=&#39;/en-US/product/Roman Snail/5&#39; data-neodymium-automation-id=&#39;xc_181vpk_4&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Blue Morpho Butterfly/6&#39; data-neodymium-automation-id=&#39;xc_nb3581_5&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Blue Morpho Butterfly | A beautiful blue and black butterfly on a leaf. | $20.69 | Buy Here&#39; href=&#39;/en-US/product/Blue Morpho Butterfly/6&#39; data-neodymium-automation-id=&#39;xc_181vpk_5&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Red Birdwing/7&#39; data-neodymium-automation-id=&#39;xc_nb3581_6&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Red Birdwing | Looking up at a butterfly sitting on a blossom. | $8.75 | Buy Here&#39; href=&#39;/en-US/product/Red Birdwing/7&#39; data-neodymium-automation-id=&#39;xc_181vpk_6&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Bird/8&#39; data-neodymium-automation-id=&#39;xc_nb3581_7&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Bird | A small black bird sitting on a gutter. | $22.99 | Buy Here&#39; href=&#39;/en-US/product/Bird/8&#39; data-neodymium-automation-id=&#39;xc_181vpk_7&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Red Domestic Cat/9&#39; data-neodymium-automation-id=&#39;xc_nb3581_8&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Red Domestic Cat | A red colored cat looking straight at you. | $17.99 | Buy Here&#39; href=&#39;/en-US/product/Red Domestic Cat/9&#39; data-neodymium-automation-id=&#39;xc_181vpk_8&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Brown Domestic Cat/10&#39; data-neodymium-automation-id=&#39;xc_nb3581_9&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Brown Domestic Cat | A brownish cat looking like its about to jump at you. | $20.58 | Buy Here&#39; href=&#39;/en-US/product/Brown Domestic Cat/10&#39; data-neodymium-automation-id=&#39;xc_181vpk_9&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Pink Dahlia/11&#39; data-neodymium-automation-id=&#39;xc_nb3581_10&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Pink Dahlia | A pink dhalia blossom close up. | $0.34 | Buy Here&#39; href=&#39;/en-US/product/Pink Dahlia/11&#39; data-neodymium-automation-id=&#39;xc_181vpk_10&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Cactus Dahlia Pink White/12&#39; data-neodymium-automation-id=&#39;xc_nb3581_11&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Cactus Dahlia Pink White | A pink and white dahlia blossom close up. | $4.00 | Buy Here&#39; href=&#39;/en-US/product/Cactus Dahlia Pink White/12&#39; data-neodymium-automation-id=&#39;xc_181vpk_11&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] text=&#39;Shop All Products&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_m6x0n6&#39; selector=&#39;a.btn.btn-primary.btn-shop-all&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[button] type=&#39;button&#39; aria-label=&#39;Slide 1&#39; data-neodymium-automation-id=&#39;xc_okdoo4&#39; selector=&#39;button.active&#39; 
+	[button] type=&#39;button&#39; aria-label=&#39;Slide 2&#39; data-neodymium-automation-id=&#39;xc_dxu2fc&#39; selector=&#39;button&#39; 
+	[button] type=&#39;button&#39; text=&#39;Previous&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_p6f1yz&#39; selector=&#39;button.carousel-control-prev&#39; 
+	[button] type=&#39;button&#39; text=&#39;Next&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_t1j54v&#39; selector=&#39;button.carousel-control-next&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+	[clickable] data-neodymium-automation-id=&#39;xc_udhwef&#39; selector=&#39;span.carousel-control-prev-icon&#39; 
+	[clickable] text=&#39;Previous&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_id1i16&#39; selector=&#39;span.visually-hidden&#39; 
+	[clickable] data-neodymium-automation-id=&#39;xc_if8lex&#39; selector=&#39;span.carousel-control-next-icon&#39; 
+	[clickable] text=&#39;Next&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_yen3os&#39; selector=&#39;span.visually-hidden&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;Premium Vintage Posters.&#39; data-neodymium-automation-id=&#39;xc_lqoe01&#39; selector=&#39;h1.hero-title.mb-4&#39; 
+	[heading] text=&#39;Trending Now&#39; data-neodymium-automation-id=&#39;xc_1t2u41&#39; selector=&#39;h2.trending-title.mb-2&#39; 
+	[heading] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_dyntey&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_5quh5j&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_ioe3dy&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_76tulc&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Grizzly Bear&#39; data-neodymium-automation-id=&#39;xc_6zjukp&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Great Grey Owl&#39; data-neodymium-automation-id=&#39;xc_eivk&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Swedish Moose&#39; data-neodymium-automation-id=&#39;xc_7nyl4e&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;European Hornet&#39; data-neodymium-automation-id=&#39;xc_7djgoz&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Roman Snail&#39; data-neodymium-automation-id=&#39;xc_9uhkfc&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Blue Morpho Butterfly&#39; data-neodymium-automation-id=&#39;xc_4br5xu&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Red Birdwing&#39; data-neodymium-automation-id=&#39;xc_j7ky2t&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Bird&#39; data-neodymium-automation-id=&#39;xc_a5y0ol&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Red Domestic Cat&#39; data-neodymium-automation-id=&#39;xc_j2bi3j&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Brown Domestic Cat&#39; data-neodymium-automation-id=&#39;xc_4n5u3w&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Pink Dahlia&#39; data-neodymium-automation-id=&#39;xc_4inczt&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Cactus Dahlia Pink White&#39; data-neodymium-automation-id=&#39;xc_pgaqb1&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Free Shipping&#39; data-neodymium-automation-id=&#39;xc_nrj2td&#39; selector=&#39;h4.trust-title&#39; 
+	[heading] text=&#39;Premium Quality&#39; data-neodymium-automation-id=&#39;xc_vnoc5h&#39; selector=&#39;h4.trust-title&#39; 
+	[heading] text=&#39;Easy Returns&#39; data-neodymium-automation-id=&#39;xc_3kle9u&#39; selector=&#39;h4.trust-title&#39; 
+
+=== Text Content (Validation Mode) ===
+	[text] id=&#39;top-demo-disclaimer&#39; text=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!&#39; data-neodymium-automation-id=&#39;xc_3jgvm9&#39; selector=&#39;#top-demo-disclaimer&#39; 
+	[text] text=&#39;Posters
+World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+🇺🇸
+English (United States)
+🇬🇧
+English (United Kingdom)
+🇩🇪
+Deutsch (Deutschland)
+🇸🇪
+svenska (Sverige)
+🇯🇵
+日本語 (日本)
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_l4bb3h&#39; selector=&#39;div.container.top-menu&#39; 
+	[text] id=&#39;header-navigation-elements&#39; text=&#39;World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+🇺🇸
+English (United States)
+🇬🇧
+English (United Kingdom)
+🇩🇪
+Deutsch (Deutschland)
+🇸🇪
+svenska (Sverige)
+🇯🇵
+日本語 (日本)
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_o0cs4s&#39; selector=&#39;#header-navigation-elements&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_p3ivjx&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_qu9zt6&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_y2yfvd&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_vwb8mr&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;🇺🇸
+🇺🇸
+English (United States)
+🇬🇧
+English (United Kingdom)
+🇩🇪
+Deutsch (Deutschland)
+🇸🇪
+svenska (Sverige)
+🇯🇵
+日本語 (日本)
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_3kxpoz&#39; selector=&#39;div&#39; 
+	[text] id=&#39;locale-switcher&#39; text=&#39;🇺🇸
+🇺🇸
+English (United States)
+🇬🇧
+English (United Kingdom)
+🇩🇪
+Deutsch (Deutschland)
+🇸🇪
+svenska (Sverige)
+🇯🇵
+日本語 (日本)&#39; data-neodymium-automation-id=&#39;xc_17u3cr&#39; selector=&#39;#locale-switcher&#39; 
+	[text] text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_my64kh&#39; selector=&#39;span.locale-flag&#39; 
+	[text] text=&#39;🇺🇸
+English (United States)&#39; data-neodymium-automation-id=&#39;xc_estx4f&#39; selector=&#39;li&#39; 
+	[text] text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_my64kh_1&#39; selector=&#39;span.locale-flag&#39; 
+	[text] text=&#39;English (United States)&#39; data-neodymium-automation-id=&#39;xc_n09s7s&#39; selector=&#39;span&#39; 
+	[text] text=&#39;🇬🇧
+English (United Kingdom)&#39; data-neodymium-automation-id=&#39;xc_1ys7qd&#39; selector=&#39;li&#39; 
+	[text] text=&#39;🇬🇧&#39; data-neodymium-automation-id=&#39;xc_my5ssi&#39; selector=&#39;span.locale-flag&#39; 
+	[text] text=&#39;English (United Kingdom)&#39; data-neodymium-automation-id=&#39;xc_81fvu5&#39; selector=&#39;span&#39; 
+	[text] text=&#39;🇩🇪
+Deutsch (Deutschland)&#39; data-neodymium-automation-id=&#39;xc_4kqvyg&#39; selector=&#39;li&#39; 
+	[text] text=&#39;🇩🇪&#39; data-neodymium-automation-id=&#39;xc_my5q9u&#39; selector=&#39;span.locale-flag&#39; 
+	[text] text=&#39;Deutsch (Deutschland)&#39; data-neodymium-automation-id=&#39;xc_w6r9ao&#39; selector=&#39;span&#39; 
+	[text] text=&#39;🇸🇪
+svenska (Sverige)&#39; data-neodymium-automation-id=&#39;xc_7v9b8o&#39; selector=&#39;li&#39; 
+	[text] text=&#39;🇸🇪&#39; data-neodymium-automation-id=&#39;xc_my62vl&#39; selector=&#39;span.locale-flag&#39; 
+	[text] text=&#39;svenska (Sverige)&#39; data-neodymium-automation-id=&#39;xc_b86nfl&#39; selector=&#39;span&#39; 
+	[text] text=&#39;🇯🇵
+日本語 (日本)&#39; data-neodymium-automation-id=&#39;xc_au2iyi&#39; selector=&#39;li&#39; 
+	[text] text=&#39;🇯🇵&#39; data-neodymium-automation-id=&#39;xc_my5vbn&#39; selector=&#39;span.locale-flag&#39; 
+	[text] text=&#39;日本語 (日本)&#39; data-neodymium-automation-id=&#39;xc_30st3l&#39; selector=&#39;span&#39; 
+	[text] id=&#39;mini-cart&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_32ld08&#39; selector=&#39;#mini-cart&#39; 
+	[text] id=&#39;header-cart-count&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_o85j9m&#39; selector=&#39;#header-cart-count&#39; 
+	[text] id=&#39;carousel-sale&#39; text=&#39;Summer Sale - Up to 30% off!
+Previous
+Next&#39; data-neodymium-automation-id=&#39;xc_8tjncd&#39; selector=&#39;#carousel-sale&#39; 
+	[text] text=&#39;Summer Sale - Up to 30% off!&#39; data-neodymium-automation-id=&#39;xc_ke3whd&#39; selector=&#39;div.carousel-inner&#39; 
+	[text] text=&#39;Summer Sale - Up to 30% off!&#39; data-neodymium-automation-id=&#39;xc_ure880&#39; selector=&#39;div.carousel-item.active&#39; 
+	[text] text=&#39;Previous&#39; data-neodymium-automation-id=&#39;xc_id1i16&#39; selector=&#39;span.visually-hidden&#39; 
+	[text] text=&#39;Next&#39; data-neodymium-automation-id=&#39;xc_yen3os&#39; selector=&#39;span.visually-hidden&#39; 
+	[text] text=&#39;Premium Vintage Posters.
+
+Give your walls the art they deserve with our curated collection of high-quality prints.
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_lycoc0&#39; selector=&#39;div.hero-section.container-fluid&#39; 
+	[text] text=&#39;Premium Vintage Posters.
+
+Give your walls the art they deserve with our curated collection of high-quality prints.
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_g2aryj&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Premium Vintage Posters.
+
+Give your walls the art they deserve with our curated collection of high-quality prints.
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_86knsn&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Give your walls the art they deserve with our curated collection of high-quality prints.&#39; data-neodymium-automation-id=&#39;xc_mnytcv&#39; selector=&#39;p&#39; 
+	[text] text=&#39;Free Shipping
+
+On all orders over $50
+
+Premium Quality
+
+Archival paper &amp; vivid inks
+
+Easy Returns
+
+30-day money-back guarantee&#39; data-neodymium-automation-id=&#39;xc_wi6cfk&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Free Shipping
+
+On all orders over $50
+
+Premium Quality
+
+Archival paper &amp; vivid inks
+
+Easy Returns
+
+30-day money-back guarantee&#39; data-neodymium-automation-id=&#39;xc_uxbr5o&#39; selector=&#39;div.container&#39; 
+	[text] text=&#39;Free Shipping
+
+On all orders over $50
+
+Premium Quality
+
+Archival paper &amp; vivid inks
+
+Easy Returns
+
+30-day money-back guarantee&#39; data-neodymium-automation-id=&#39;xc_aab1jx&#39; selector=&#39;div.row.g-4.justify-content-center&#39; 
+	[text] text=&#39;Free Shipping
+
+On all orders over $50&#39; data-neodymium-automation-id=&#39;xc_w439rm&#39; selector=&#39;div.col-md-4&#39; 
+	[text] text=&#39;On all orders over $50&#39; data-neodymium-automation-id=&#39;xc_y7r2zf&#39; selector=&#39;p.trust-text.text-muted.mb-0&#39; 
+	[text] text=&#39;Premium Quality
+
+Archival paper &amp; vivid inks&#39; data-neodymium-automation-id=&#39;xc_d727bh&#39; selector=&#39;div.col-md-4.border-md-start.border-md-end&#39; 
+	[text] text=&#39;Archival paper &amp; vivid inks&#39; data-neodymium-automation-id=&#39;xc_46580&#39; selector=&#39;p.trust-text.text-muted.mb-0&#39; 
+	[text] text=&#39;Easy Returns
+
+30-day money-back guarantee&#39; data-neodymium-automation-id=&#39;xc_7fqq44&#39; selector=&#39;div.col-md-4&#39; 
+	[text] text=&#39;30-day money-back guarantee&#39; data-neodymium-automation-id=&#39;xc_up5wh&#39; selector=&#39;p.trust-text.text-muted.mb-0&#39; 
+	[text] text=&#39;World of Nature
+Dining
+Transportation
+Panoramas&#39; data-neodymium-automation-id=&#39;xc_b30k03&#39; selector=&#39;div.container.mb-5&#39; 
+	[text] text=&#39;World of Nature
+Dining
+Transportation
+Panoramas&#39; data-neodymium-automation-id=&#39;xc_jk1qv1&#39; selector=&#39;div&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_61f4u4&#39; selector=&#39;div.col-md-4&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_9nuohd&#39; selector=&#39;div&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_6uq2fz&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_yl7iy1&#39; selector=&#39;div.col-md-4&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_jlqm9q&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_brxv58&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_ow7njs&#39; selector=&#39;div.col-md-4&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_8v0425&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_3e7uij&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_y1mp0y&#39; selector=&#39;div.col-md-4&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_ta0pt3&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_63wgwl&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Trending Now
+
+Our most popular prints this week.&#39; data-neodymium-automation-id=&#39;xc_g1mo6t&#39; selector=&#39;div&#39; 
+	[text] text=&#39;Our most popular prints this week.&#39; data-neodymium-automation-id=&#39;xc_p3iccr&#39; selector=&#39;p.text-muted.mb-0&#39; 
+	[text] text=&#39;Grizzly Bear
+
+Bear looking tired.
+
+$17.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_8mkraj&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Grizzly Bear
+
+Bear looking tired.
+
+$17.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_6jxsyx&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Grizzly Bear
+
+Bear looking tired.&#39; data-neodymium-automation-id=&#39;xc_pvjxus&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;Bear looking tired.&#39; data-neodymium-automation-id=&#39;xc_75tma5&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$17.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_9ms2gb&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$17.00&#39; data-neodymium-automation-id=&#39;xc_8kxi5s&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Great Grey Owl
+
+A large grey owl in the woods.
+
+$17.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_evr7am&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Great Grey Owl
+
+A large grey owl in the woods.
+
+$17.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_ct48z0&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Great Grey Owl
+
+A large grey owl in the woods.&#39; data-neodymium-automation-id=&#39;xc_64i7k5&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A large grey owl in the woods.&#39; data-neodymium-automation-id=&#39;xc_dln91d&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$17.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_9ms2gb_1&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$17.00&#39; data-neodymium-automation-id=&#39;xc_8kxi5s_1&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Swedish Moose
+
+A mooze with antlers.
+
+$9.30
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_tqqx0e&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Swedish Moose
+
+A mooze with antlers.
+
+$9.30
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_ro3yos&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Swedish Moose
+
+A mooze with antlers.&#39; data-neodymium-automation-id=&#39;xc_71mpok&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A mooze with antlers.&#39; data-neodymium-automation-id=&#39;xc_990eeg&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$9.30
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_65nwhr&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$9.30&#39; data-neodymium-automation-id=&#39;xc_4ki4is&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;European Hornet
+
+Close up shot of a hornet.
+
+$15.64
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_8algsa&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;European Hornet
+
+Close up shot of a hornet.
+
+$15.64
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_67yigo&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;European Hornet
+
+Close up shot of a hornet.&#39; data-neodymium-automation-id=&#39;xc_z1wi1d&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;Close up shot of a hornet.&#39; data-neodymium-automation-id=&#39;xc_i7zt3&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$15.64
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_soiflf&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$15.64&#39; data-neodymium-automation-id=&#39;xc_8kvyuw&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Roman Snail
+
+Close up of a snail sticking on the side of a tree.
+
+$26.45
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_oz6eba&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Roman Snail
+
+Close up of a snail sticking on the side of a tree.
+
+$26.45
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_mwjfzo&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Roman Snail
+
+Close up of a snail sticking on the side of a tree.&#39; data-neodymium-automation-id=&#39;xc_g7xekt&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;Close up of a snail sticking on the side of a tree.&#39; data-neodymium-automation-id=&#39;xc_qi7lup&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$26.45
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_t8eams&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$26.45&#39; data-neodymium-automation-id=&#39;xc_8lm5ll&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Blue Morpho Butterfly
+
+A beautiful blue and black butterfly on a leaf.
+
+$20.69
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_r5rd2l&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Blue Morpho Butterfly
+
+A beautiful blue and black butterfly on a leaf.
+
+$20.69
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_p34eqz&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Blue Morpho Butterfly
+
+A beautiful blue and black butterfly on a leaf.&#39; data-neodymium-automation-id=&#39;xc_ieidc4&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A beautiful blue and black butterfly on a leaf.&#39; data-neodymium-automation-id=&#39;xc_3tc836&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$20.69
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_yqma8k&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$20.69&#39; data-neodymium-automation-id=&#39;xc_8lhja1&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Red Birdwing
+
+Looking up at a butterfly sitting on a blossom.
+
+$8.75
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_5xiz2d&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Red Birdwing
+
+Looking up at a butterfly sitting on a blossom.
+
+$8.75
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_3uw0qr&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Red Birdwing
+
+Looking up at a butterfly sitting on a blossom.&#39; data-neodymium-automation-id=&#39;xc_wou0bg&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;Looking up at a butterfly sitting on a blossom.&#39; data-neodymium-automation-id=&#39;xc_bh9jsb&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$8.75
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_fyw09z&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$8.75&#39; data-neodymium-automation-id=&#39;xc_4khcwc&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Bird
+
+A small black bird sitting on a gutter.
+
+$22.99
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_1x22hm&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Bird
+
+A small black bird sitting on a gutter.
+
+$22.99
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_zcz55k&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Bird
+
+A small black bird sitting on a gutter.&#39; data-neodymium-automation-id=&#39;xc_sod3qp&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A small black bird sitting on a gutter.&#39; data-neodymium-automation-id=&#39;xc_z21mwr&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$22.99
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_1thsc9&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$22.99&#39; data-neodymium-automation-id=&#39;xc_8lj2ta&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Red Domestic Cat
+
+A red colored cat looking straight at you.
+
+$17.99
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_qbi8bl&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Red Domestic Cat
+
+A red colored cat looking straight at you.
+
+$17.99
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_o8v9zz&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Red Domestic Cat
+
+A red colored cat looking straight at you.&#39; data-neodymium-automation-id=&#39;xc_hk98l4&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A red colored cat looking straight at you.&#39; data-neodymium-automation-id=&#39;xc_2qp1xo&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$17.99
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_376wil&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$17.99&#39; data-neodymium-automation-id=&#39;xc_8kxiea&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Brown Domestic Cat
+
+A brownish cat looking like its about to jump at you.
+
+$20.58
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_nytiww&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Brown Domestic Cat
+
+A brownish cat looking like its about to jump at you.
+
+$20.58
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_lw6kla&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Brown Domestic Cat
+
+A brownish cat looking like its about to jump at you.&#39; data-neodymium-automation-id=&#39;xc_f7kj6f&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A brownish cat looking like its about to jump at you.&#39; data-neodymium-automation-id=&#39;xc_mbfzyd&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$20.58
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_jo3qgi&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$20.58&#39; data-neodymium-automation-id=&#39;xc_8lhj93&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Pink Dahlia
+
+A pink dhalia blossom close up.
+
+$0.34
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_shkmat&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Pink Dahlia
+
+A pink dhalia blossom close up.
+
+$0.34
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_qexnz7&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Pink Dahlia
+
+A pink dhalia blossom close up.&#39; data-neodymium-automation-id=&#39;xc_jqbmkc&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A pink dhalia blossom close up.&#39; data-neodymium-automation-id=&#39;xc_dsqogo&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$0.34
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_67kgii&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$0.34&#39; data-neodymium-automation-id=&#39;xc_4kb6yn&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Cactus Dahlia Pink White
+
+A pink and white dahlia blossom close up.
+
+$4.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_kn9f7w&#39; selector=&#39;div.col&#39; 
+	[text] text=&#39;Cactus Dahlia Pink White
+
+A pink and white dahlia blossom close up.
+
+$4.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_ikmgwa&#39; selector=&#39;div.card.h-100.product-tile&#39; 
+	[text] text=&#39;Cactus Dahlia Pink White
+
+A pink and white dahlia blossom close up.&#39; data-neodymium-automation-id=&#39;xc_bw0fhf&#39; selector=&#39;div.card-body&#39; 
+	[text] text=&#39;A pink and white dahlia blossom close up.&#39; data-neodymium-automation-id=&#39;xc_ejwace&#39; selector=&#39;p.card-text.product-tile-text&#39; 
+	[text] text=&#39;$4.00
+
+Buy Here&#39; data-neodymium-automation-id=&#39;xc_p9tng7&#39; selector=&#39;div.card-footer&#39; 
+	[text] text=&#39;$4.00&#39; data-neodymium-automation-id=&#39;xc_4ke9ss&#39; selector=&#39;p.card-text.product-tile-price.mb-2&#39; 
+	[text] text=&#39;Shop All Products&#39; data-neodymium-automation-id=&#39;xc_gwo5g0&#39; selector=&#39;div.container.text-center&#39; 
+	[text] id=&#39;footer-section-about&#39; text=&#39;About
+
+The Posters Demo Store is a demonstration web shop by Xceptance.
+
+GitHub:&#39; data-neodymium-automation-id=&#39;xc_lzeppo&#39; selector=&#39;#footer-section-about&#39; 
+	[text] text=&#39;The Posters Demo Store is a demonstration web shop by Xceptance.&#39; data-neodymium-automation-id=&#39;xc_13d5et&#39; selector=&#39;p.footer-text-about.footer-section-text&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+
+
+      Analyze the page and return the JSON actions to fulfill the instruction.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>{
+  &quot;success&quot;: true,
+  &quot;actions&quot;: [
+    {
+      &quot;type&quot;: &quot;ASSERT&quot;,
+      &quot;target&quot;: &quot;#show-locale-menu&quot;,
+      &quot;value&quot;: &quot;🇺🇸&quot;,
+      &quot;description&quot;: &quot;Verify that the flag icon is updated to the new locale (US flag).&quot;,
+      &quot;elementDetails&quot;: &quot;Flag icon for locale selection, currently showing US flag&quot;
+    }
+  ],
+  &quot;done&quot;: true,
+  &quot;reasoning&quot;: &quot;The instruction is to verify the flag icon is updated to the new locale. The current page URL is &#39;/en-US/&#39;, which corresponds to the US locale. The DOM shows a link with id &#39;show-locale-menu&#39; and text &#39;🇺🇸&#39;, which is the US flag. Therefore, an ASSERT action is used to check if this element contains the &#39;🇺🇸&#39; text.&quot;
+}</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> The instruction is to verify the flag icon is updated to the new locale. The current page URL is &#39;/en-US/&#39;, which corresponds to the US locale. The DOM shows a link with id &#39;show-locale-menu&#39; and text &#39;🇺🇸&#39;, which is the US flag. Therefore, an ASSERT action is used to check if this element contains the &#39;🇺🇸&#39; text.</div>
+<div class="actions"><strong>Actions Executed:</strong><ul>
+<li>Verify that the flag icon is updated to the new locale (US flag). (<strong>ASSERT</strong>)</li>
+</ul></div>
+</div>
+</div>
+<div class="step">
+<h3>Step [4/9]: Type &#39;Bär&#39; into the search field and submit.</h3>
+<div class="attempt">
+<h4>Initial Attempt</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction
+      Type &#39;Bär&#39; into the search field and submit.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/
+Page Title: Posters - Home
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; parentText=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data! | Posters | World of Nature | Dining | Transportation | Panoramas | 🇺🇸 | 🇺🇸 | English (Unite…&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;loc-en-us&#39; text=&#39;🇺🇸
+English (United States)&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_7qwpf&#39; selector=&#39;#loc-en-us&#39; 
+	[link] id=&#39;loc-en-gb&#39; text=&#39;🇬🇧
+English (United Kingdom)&#39; href=&#39;/en-GB/&#39; data-neodymium-automation-id=&#39;xc_veoscu&#39; selector=&#39;#loc-en-gb&#39; 
+	[link] id=&#39;loc-de-de&#39; text=&#39;🇩🇪
+Deutsch (Deutschland)&#39; href=&#39;/de-DE/&#39; data-neodymium-automation-id=&#39;xc_q9k493&#39; selector=&#39;#loc-de-de&#39; 
+	[link] id=&#39;loc-sv-se&#39; text=&#39;🇸🇪
+svenska (Sverige)&#39; href=&#39;/sv-SE/&#39; data-neodymium-automation-id=&#39;xc_px3ora&#39; selector=&#39;#loc-sv-se&#39; 
+	[link] id=&#39;loc-ja-jp&#39; text=&#39;🇯🇵
+日本語 (日本)&#39; href=&#39;/ja-JP/&#39; data-neodymium-automation-id=&#39;xc_zhzslo&#39; selector=&#39;#loc-ja-jp&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Summer Sale - Up to 30% off!&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_4zobno&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Premium Vintage Posters. | Give your walls the art they deserve with our curated collection of high-quality prints. | Buy Here&#39; href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_ih9gcn&#39; selector=&#39;a&#39; 
+	[link] text=&#39;World of Nature&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_sbkwic&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Dining&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_ifni81&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Transportation&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_i1b7tc&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] text=&#39;Panoramas&#39; parentText=&#39;World of Nature | Dining | Transportation | Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_v966q2&#39; selector=&#39;a.text-decoration-none&#39; 
+	[link] href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_nb3581&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Grizzly Bear | Bear looking tired. | $17.00 | Buy Here&#39; href=&#39;/en-US/product/Grizzly Bear/1&#39; data-neodymium-automation-id=&#39;xc_181vpk&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Great Grey Owl/2&#39; data-neodymium-automation-id=&#39;xc_nb3581_1&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Great Grey Owl | A large grey owl in the woods. | $17.00 | Buy Here&#39; href=&#39;/en-US/product/Great Grey Owl/2&#39; data-neodymium-automation-id=&#39;xc_181vpk_1&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Swedish Moose/3&#39; data-neodymium-automation-id=&#39;xc_nb3581_2&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Swedish Moose | A mooze with antlers. | $9.30 | Buy Here&#39; href=&#39;/en-US/product/Swedish Moose/3&#39; data-neodymium-automation-id=&#39;xc_181vpk_2&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/European Hornet/4&#39; data-neodymium-automation-id=&#39;xc_nb3581_3&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;European Hornet | Close up shot of a hornet. | $15.64 | Buy Here&#39; href=&#39;/en-US/product/European Hornet/4&#39; data-neodymium-automation-id=&#39;xc_181vpk_3&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Roman Snail/5&#39; data-neodymium-automation-id=&#39;xc_nb3581_4&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Roman Snail | Close up of a snail sticking on the side of a tree. | $26.45 | Buy Here&#39; href=&#39;/en-US/product/Roman Snail/5&#39; data-neodymium-automation-id=&#39;xc_181vpk_4&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Blue Morpho Butterfly/6&#39; data-neodymium-automation-id=&#39;xc_nb3581_5&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Blue Morpho Butterfly | A beautiful blue and black butterfly on a leaf. | $20.69 | Buy Here&#39; href=&#39;/en-US/product/Blue Morpho Butterfly/6&#39; data-neodymium-automation-id=&#39;xc_181vpk_5&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Red Birdwing/7&#39; data-neodymium-automation-id=&#39;xc_nb3581_6&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Red Birdwing | Looking up at a butterfly sitting on a blossom. | $8.75 | Buy Here&#39; href=&#39;/en-US/product/Red Birdwing/7&#39; data-neodymium-automation-id=&#39;xc_181vpk_6&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Bird/8&#39; data-neodymium-automation-id=&#39;xc_nb3581_7&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Bird | A small black bird sitting on a gutter. | $22.99 | Buy Here&#39; href=&#39;/en-US/product/Bird/8&#39; data-neodymium-automation-id=&#39;xc_181vpk_7&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Red Domestic Cat/9&#39; data-neodymium-automation-id=&#39;xc_nb3581_8&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Red Domestic Cat | A red colored cat looking straight at you. | $17.99 | Buy Here&#39; href=&#39;/en-US/product/Red Domestic Cat/9&#39; data-neodymium-automation-id=&#39;xc_181vpk_8&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Brown Domestic Cat/10&#39; data-neodymium-automation-id=&#39;xc_nb3581_9&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Brown Domestic Cat | A brownish cat looking like its about to jump at you. | $20.58 | Buy Here&#39; href=&#39;/en-US/product/Brown Domestic Cat/10&#39; data-neodymium-automation-id=&#39;xc_181vpk_9&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Pink Dahlia/11&#39; data-neodymium-automation-id=&#39;xc_nb3581_10&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Pink Dahlia | A pink dhalia blossom close up. | $0.34 | Buy Here&#39; href=&#39;/en-US/product/Pink Dahlia/11&#39; data-neodymium-automation-id=&#39;xc_181vpk_10&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] href=&#39;/en-US/product/Cactus Dahlia Pink White/12&#39; data-neodymium-automation-id=&#39;xc_nb3581_11&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Buy Here&#39; parentText=&#39;Cactus Dahlia Pink White | A pink and white dahlia blossom close up. | $4.00 | Buy Here&#39; href=&#39;/en-US/product/Cactus Dahlia Pink White/12&#39; data-neodymium-automation-id=&#39;xc_181vpk_11&#39; selector=&#39;a.btn.btn-primary.product-tile-btn-buy&#39; 
+	[link] text=&#39;Shop All Products&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_m6x0n6&#39; selector=&#39;a.btn.btn-primary.btn-shop-all&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[button] type=&#39;button&#39; aria-label=&#39;Slide 1&#39; data-neodymium-automation-id=&#39;xc_okdoo4&#39; selector=&#39;button.active&#39; 
+	[button] type=&#39;button&#39; aria-label=&#39;Slide 2&#39; data-neodymium-automation-id=&#39;xc_dxu2fc&#39; selector=&#39;button&#39; 
+	[button] type=&#39;button&#39; text=&#39;Previous&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_p6f1yz&#39; selector=&#39;button.carousel-control-prev&#39; 
+	[button] type=&#39;button&#39; text=&#39;Next&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_t1j54v&#39; selector=&#39;button.carousel-control-next&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+	[clickable] data-neodymium-automation-id=&#39;xc_udhwef&#39; selector=&#39;span.carousel-control-prev-icon&#39; 
+	[clickable] text=&#39;Previous&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_id1i16&#39; selector=&#39;span.visually-hidden&#39; 
+	[clickable] data-neodymium-automation-id=&#39;xc_if8lex&#39; selector=&#39;span.carousel-control-next-icon&#39; 
+	[clickable] text=&#39;Next&#39; parentText=&#39;Summer Sale - Up to 30% off! | Previous | Next&#39; data-neodymium-automation-id=&#39;xc_yen3os&#39; selector=&#39;span.visually-hidden&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;Premium Vintage Posters.&#39; data-neodymium-automation-id=&#39;xc_lqoe01&#39; selector=&#39;h1.hero-title.mb-4&#39; 
+	[heading] text=&#39;Trending Now&#39; data-neodymium-automation-id=&#39;xc_1t2u41&#39; selector=&#39;h2.trending-title.mb-2&#39; 
+	[heading] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_dyntey&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_5quh5j&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_ioe3dy&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_76tulc&#39; selector=&#39;h3.category-card-title.text-white.mb-0&#39; 
+	[heading] text=&#39;Grizzly Bear&#39; data-neodymium-automation-id=&#39;xc_6zjukp&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Great Grey Owl&#39; data-neodymium-automation-id=&#39;xc_eivk&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Swedish Moose&#39; data-neodymium-automation-id=&#39;xc_7nyl4e&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;European Hornet&#39; data-neodymium-automation-id=&#39;xc_7djgoz&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Roman Snail&#39; data-neodymium-automation-id=&#39;xc_9uhkfc&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Blue Morpho Butterfly&#39; data-neodymium-automation-id=&#39;xc_4br5xu&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Red Birdwing&#39; data-neodymium-automation-id=&#39;xc_j7ky2t&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Bird&#39; data-neodymium-automation-id=&#39;xc_a5y0ol&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Red Domestic Cat&#39; data-neodymium-automation-id=&#39;xc_j2bi3j&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Brown Domestic Cat&#39; data-neodymium-automation-id=&#39;xc_4n5u3w&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Pink Dahlia&#39; data-neodymium-automation-id=&#39;xc_4inczt&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;Cactus Dahlia Pink White&#39; data-neodymium-automation-id=&#39;xc_pgaqb1&#39; selector=&#39;h3.card-title&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Free Shipping&#39; data-neodymium-automation-id=&#39;xc_nrj2td&#39; selector=&#39;h4.trust-title&#39; 
+	[heading] text=&#39;Premium Quality&#39; data-neodymium-automation-id=&#39;xc_vnoc5h&#39; selector=&#39;h4.trust-title&#39; 
+	[heading] text=&#39;Easy Returns&#39; data-neodymium-automation-id=&#39;xc_3kle9u&#39; selector=&#39;h4.trust-title&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+
+
+      Analyze the page and return the JSON actions to fulfill the instruction.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>```json
+{
+  &quot;success&quot;: true,
+  &quot;actions&quot;: [
+    {
+      &quot;type&quot;: &quot;TYPE&quot;,
+      &quot;target&quot;: &quot;#header-search-text&quot;,
+      &quot;value&quot;: &quot;Bär&quot;,
+      &quot;description&quot;: &quot;Type &#39;Bär&#39; into the search field.&quot;,
+      &quot;elementDetails&quot;: &quot;Search input field with placeholder &#39;Search&#39;&quot;
+    },
+    {
+      &quot;type&quot;: &quot;KEY_PRESS&quot;,
+      &quot;value&quot;: &quot;ENTER&quot;,
+      &quot;description&quot;: &quot;Submit the search by pressing ENTER.&quot;,
+      &quot;elementDetails&quot;: &quot;Simulate pressing the ENTER key&quot;
+    }
+  ],
+  &quot;done&quot;: true,
+  &quot;reasoning&quot;: &quot;Identified the search input field by its ID &#39;header-search-text&#39; and typed the specified text. Then, simulated pressing the ENTER key to submit the search query.&quot;
+}
+```</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> Identified the search input field by its ID &#39;header-search-text&#39; and typed the specified text. Then, simulated pressing the ENTER key to submit the search query.</div>
+<div class="actions"><strong>Actions Executed:</strong><ul>
+<li>Type &#39;Bär&#39; into the search field. (<strong>TYPE</strong>)</li>
+<li>Submit the search by pressing ENTER. (<strong>KEY_PRESS</strong>)</li>
+</ul></div>
+</div>
+</div>
+<div class="step">
+<h3>Step [5/9]: Verify the search results page displays a heading with &quot;Results for &#39;Bär&#39;&quot;.</h3>
+<div class="attempt">
+<h4>Initial Attempt</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction
+      Verify the search results page displays a heading with &quot;Results for &#39;Bär&#39;&quot;.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/search?q=B%C3%A4r
+Page Title: Search Results
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Continue Shopping&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_s2qj3w&#39; selector=&#39;a&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;No products found.&#39; data-neodymium-automation-id=&#39;xc_3t0x9d&#39; selector=&#39;h2.h4.text-muted.mb-3&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_r2adar&#39; selector=&#39;h4&#39; 
+
+=== Text Content (Validation Mode) ===
+	[text] id=&#39;top-demo-disclaimer&#39; text=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!&#39; data-neodymium-automation-id=&#39;xc_3jgvm9&#39; selector=&#39;#top-demo-disclaimer&#39; 
+	[text] text=&#39;Posters
+World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_l4bb3h&#39; selector=&#39;div.container.top-menu&#39; 
+	[text] id=&#39;header-navigation-elements&#39; text=&#39;World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_o0cs4s&#39; selector=&#39;#header-navigation-elements&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_p3ivjx&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_qu9zt6&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_y2yfvd&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_vwb8mr&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_hhz4n1&#39; selector=&#39;div&#39; 
+	[text] id=&#39;locale-switcher&#39; text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_wogzk1&#39; selector=&#39;#locale-switcher&#39; 
+	[text] text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_my64kh&#39; selector=&#39;span.locale-flag&#39; 
+	[text] id=&#39;mini-cart&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_32ld08&#39; selector=&#39;#mini-cart&#39; 
+	[text] id=&#39;header-cart-count&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_o85j9m&#39; selector=&#39;#header-cart-count&#39; 
+	[text] id=&#39;main&#39; text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_383ych&#39; selector=&#39;#main&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v31ysa&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_edq5v3&#39; selector=&#39;div.container.mt-3.mb-5&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v2dbma&#39; selector=&#39;div.row&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_pfv9jo&#39; selector=&#39;div.col-lg-3.d-none.d-lg-block&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_w57389&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_mklxsm&#39; selector=&#39;div.filter-sidebar.mb-4&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_aj5aqq&#39; selector=&#39;div.col-lg-9.text-center&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_x1aggl&#39; selector=&#39;div.product-overview-heading.mb-4&#39; 
+	[text] id=&#39;title-search-text&#39; text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_yftx2q&#39; selector=&#39;#title-search-text&#39; 
+	[text] id=&#39;product-overview&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_2tloy4&#39; selector=&#39;#product-overview&#39; 
+	[text] id=&#39;no-results&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_88354x&#39; selector=&#39;#no-results&#39; 
+	[text] text=&#39;We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.&#39; data-neodymium-automation-id=&#39;xc_3lq35m&#39; selector=&#39;p.text-muted.mb-4&#39; 
+	[text] id=&#39;footer-section-about&#39; text=&#39;About
+
+The Posters Demo Store is a demonstration web shop by Xceptance.
+
+GitHub:&#39; data-neodymium-automation-id=&#39;xc_lzeppo&#39; selector=&#39;#footer-section-about&#39; 
+	[text] text=&#39;The Posters Demo Store is a demonstration web shop by Xceptance.&#39; data-neodymium-automation-id=&#39;xc_13d5et&#39; selector=&#39;p.footer-text-about.footer-section-text&#39; 
+	[text] text=&#39;GitHub:&#39; data-neodymium-automation-id=&#39;xc_vwpr34&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-support&#39; text=&#39;Support
+Contact Support&#39; data-neodymium-automation-id=&#39;xc_2gpmm4&#39; selector=&#39;#footer-section-support&#39; 
+	[text] text=&#39;Contact Support&#39; data-neodymium-automation-id=&#39;xc_xj477w&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-information&#39; text=&#39;Information
+Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_i9hnld&#39; selector=&#39;#footer-section-information&#39; 
+	[text] text=&#39;Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_ymnjqn&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-contact&#39; text=&#39;Contact
+Xceptance Software Technologies GmbH
+Leutragraben 2-4
+07743 Jena
+Germany
+E-Mail: kontakt@xceptance.de
+Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_egrfuj&#39; selector=&#39;#footer-section-contact&#39; 
+	[text] text=&#39;Xceptance Software Technologies GmbH&#39; data-neodymium-automation-id=&#39;xc_q7cjmf&#39; selector=&#39;li.footer-contact-company&#39; 
+	[text] text=&#39;Leutragraben 2-4
+07743 Jena
+Germany&#39; data-neodymium-automation-id=&#39;xc_egz8ab&#39; selector=&#39;li.footer-contact-adress&#39; 
+	[text] text=&#39;E-Mail: kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_vob4i2&#39; selector=&#39;li.footer-contact-e-mail&#39; 
+	[text] text=&#39;Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_yotagu&#39; selector=&#39;li.footer-contact-website&#39; 
+	[text] id=&#39;footer-copyright&#39; text=&#39;© 2013-2024 Xceptance Software Technologies GmbH
+Photo copyrights belong to their respective owners.&#39; data-neodymium-automation-id=&#39;xc_evttft&#39; selector=&#39;#footer-copyright&#39; 
+	[text] id=&#39;footer-version-information&#39; text=&#39;Version 3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_fdvs3c&#39; selector=&#39;#footer-version-information&#39; 
+	[text] text=&#39;3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_r5dhbi&#39; selector=&#39;span&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+	[form] id=&#39;filterForm&#39; action=&#39;&#39; data-neodymium-automation-id=&#39;xc_6b51q6&#39;
+
+
+      Analyze the page and return the JSON actions to fulfill the instruction.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>{
+  &quot;success&quot;: true,
+  &quot;actions&quot;: [
+    {
+      &quot;type&quot;: &quot;ASSERT&quot;,
+      &quot;target&quot;: &quot;#title-search-text&quot;,
+      &quot;value&quot;: &quot;Results for &#39;Bär&#39;&quot;,
+      &quot;description&quot;: &quot;Verify the search results page displays a heading with &#39;Results for &#39;Bär&#39;&#39;.&quot;,
+      &quot;elementDetails&quot;: &quot;Results for &#39;Bär&#39; (0 posters)&quot;
+    }
+  ],
+  &quot;done&quot;: true,
+  &quot;reasoning&quot;: &quot;The instruction is to verify a heading with specific text. I found an element with the id &#39;title-search-text&#39; that contains the exact text &#39;Results for &#39;Bär&#39; (0 posters)&#39;, which includes the required phrase. Therefore, an ASSERT action on this element with the specified value will fulfill the instruction.&quot;
+}</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> The instruction is to verify a heading with specific text. I found an element with the id &#39;title-search-text&#39; that contains the exact text &#39;Results for &#39;Bär&#39; (0 posters)&#39;, which includes the required phrase. Therefore, an ASSERT action on this element with the specified value will fulfill the instruction.</div>
+<div class="actions"><strong>Actions Executed:</strong><ul>
+<li>Verify the search results page displays a heading with &#39;Results for &#39;Bär&#39;&#39;. (<strong>ASSERT</strong>)</li>
+</ul></div>
+</div>
+</div>
+<div class="step">
+<h3>Step [6/9]: Verify search results contain at least one product with &#39;Grizzlybär&#39; in the product title.</h3>
+<div class="attempt">
+<h4>Initial Attempt</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction
+      Verify search results contain at least one product with &#39;Grizzlybär&#39; in the product title.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/search?q=B%C3%A4r
+Page Title: Search Results
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Continue Shopping&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_s2qj3w&#39; selector=&#39;a&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;No products found.&#39; data-neodymium-automation-id=&#39;xc_3t0x9d&#39; selector=&#39;h2.h4.text-muted.mb-3&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_r2adar&#39; selector=&#39;h4&#39; 
+
+=== Text Content (Validation Mode) ===
+	[text] id=&#39;top-demo-disclaimer&#39; text=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!&#39; data-neodymium-automation-id=&#39;xc_3jgvm9&#39; selector=&#39;#top-demo-disclaimer&#39; 
+	[text] text=&#39;Posters
+World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_l4bb3h&#39; selector=&#39;div.container.top-menu&#39; 
+	[text] id=&#39;header-navigation-elements&#39; text=&#39;World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_o0cs4s&#39; selector=&#39;#header-navigation-elements&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_p3ivjx&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_qu9zt6&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_y2yfvd&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_vwb8mr&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_hhz4n1&#39; selector=&#39;div&#39; 
+	[text] id=&#39;locale-switcher&#39; text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_wogzk1&#39; selector=&#39;#locale-switcher&#39; 
+	[text] text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_my64kh&#39; selector=&#39;span.locale-flag&#39; 
+	[text] id=&#39;mini-cart&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_32ld08&#39; selector=&#39;#mini-cart&#39; 
+	[text] id=&#39;header-cart-count&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_o85j9m&#39; selector=&#39;#header-cart-count&#39; 
+	[text] id=&#39;main&#39; text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_383ych&#39; selector=&#39;#main&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v31ysa&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_edq5v3&#39; selector=&#39;div.container.mt-3.mb-5&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v2dbma&#39; selector=&#39;div.row&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_pfv9jo&#39; selector=&#39;div.col-lg-3.d-none.d-lg-block&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_w57389&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_mklxsm&#39; selector=&#39;div.filter-sidebar.mb-4&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_aj5aqq&#39; selector=&#39;div.col-lg-9.text-center&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_x1aggl&#39; selector=&#39;div.product-overview-heading.mb-4&#39; 
+	[text] id=&#39;title-search-text&#39; text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_yftx2q&#39; selector=&#39;#title-search-text&#39; 
+	[text] id=&#39;product-overview&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_2tloy4&#39; selector=&#39;#product-overview&#39; 
+	[text] id=&#39;no-results&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_88354x&#39; selector=&#39;#no-results&#39; 
+	[text] text=&#39;We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.&#39; data-neodymium-automation-id=&#39;xc_3lq35m&#39; selector=&#39;p.text-muted.mb-4&#39; 
+	[text] id=&#39;footer-section-about&#39; text=&#39;About
+
+The Posters Demo Store is a demonstration web shop by Xceptance.
+
+GitHub:&#39; data-neodymium-automation-id=&#39;xc_lzeppo&#39; selector=&#39;#footer-section-about&#39; 
+	[text] text=&#39;The Posters Demo Store is a demonstration web shop by Xceptance.&#39; data-neodymium-automation-id=&#39;xc_13d5et&#39; selector=&#39;p.footer-text-about.footer-section-text&#39; 
+	[text] text=&#39;GitHub:&#39; data-neodymium-automation-id=&#39;xc_vwpr34&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-support&#39; text=&#39;Support
+Contact Support&#39; data-neodymium-automation-id=&#39;xc_2gpmm4&#39; selector=&#39;#footer-section-support&#39; 
+	[text] text=&#39;Contact Support&#39; data-neodymium-automation-id=&#39;xc_xj477w&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-information&#39; text=&#39;Information
+Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_i9hnld&#39; selector=&#39;#footer-section-information&#39; 
+	[text] text=&#39;Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_ymnjqn&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-contact&#39; text=&#39;Contact
+Xceptance Software Technologies GmbH
+Leutragraben 2-4
+07743 Jena
+Germany
+E-Mail: kontakt@xceptance.de
+Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_egrfuj&#39; selector=&#39;#footer-section-contact&#39; 
+	[text] text=&#39;Xceptance Software Technologies GmbH&#39; data-neodymium-automation-id=&#39;xc_q7cjmf&#39; selector=&#39;li.footer-contact-company&#39; 
+	[text] text=&#39;Leutragraben 2-4
+07743 Jena
+Germany&#39; data-neodymium-automation-id=&#39;xc_egz8ab&#39; selector=&#39;li.footer-contact-adress&#39; 
+	[text] text=&#39;E-Mail: kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_vob4i2&#39; selector=&#39;li.footer-contact-e-mail&#39; 
+	[text] text=&#39;Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_yotagu&#39; selector=&#39;li.footer-contact-website&#39; 
+	[text] id=&#39;footer-copyright&#39; text=&#39;© 2013-2024 Xceptance Software Technologies GmbH
+Photo copyrights belong to their respective owners.&#39; data-neodymium-automation-id=&#39;xc_evttft&#39; selector=&#39;#footer-copyright&#39; 
+	[text] id=&#39;footer-version-information&#39; text=&#39;Version 3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_fdvs3c&#39; selector=&#39;#footer-version-information&#39; 
+	[text] text=&#39;3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_r5dhbi&#39; selector=&#39;span&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+	[form] id=&#39;filterForm&#39; action=&#39;&#39; data-neodymium-automation-id=&#39;xc_6b51q6&#39;
+
+
+      Analyze the page and return the JSON actions to fulfill the instruction.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>{
+  &quot;success&quot;: false,
+  &quot;actions&quot;: [],
+  &quot;done&quot;: true,
+  &quot;error&quot;: &quot;The page indicates &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;, which means there are no products matching the search, and therefore no product titles containing &#39;Grizzlybär&#39;. The verification failed.&quot;,
+  &quot;reasoning&quot;: &quot;The instruction is to verify that search results contain at least one product with &#39;Grizzlybär&#39; in the product title. The current page state clearly shows &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;, indicating that no products were found for the search term &#39;Bär&#39;. Consequently, it&#39;s impossible for any product title to contain &#39;Grizzlybär&#39;. Therefore, the verification fails.&quot;
+}</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> The instruction is to verify that search results contain at least one product with &#39;Grizzlybär&#39; in the product title. The current page state clearly shows &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;, indicating that no products were found for the search term &#39;Bär&#39;. Consequently, it&#39;s impossible for any product title to contain &#39;Grizzlybär&#39;. Therefore, the verification fails.</div>
+<div class="error">Verification failed: The page indicates &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;, which means there are no products matching the search, and therefore no product titles containing &#39;Grizzlybär&#39;. The verification failed.</div>
+<div class="warning">Action failed: Verification failed: The page indicates &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;, which means there are no products matching the search, and therefore no product titles containing &#39;Grizzlybär&#39;. The verification failed.. Retrying...</div>
+</div>
+<div class="attempt">
+<h4>Retry (Error) 1</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction (RETRY)
+      Verify search results contain at least one product with &#39;Grizzlybär&#39; in the product title.
+
+      ## Previous Attempt Failed
+      The previous attempt failed with this error:
+      Verification failed: The page indicates &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;, which means there are no products matching the search, and therefore no product titles containing &#39;Grizzlybär&#39;. The verification failed.
+
+      ## How to recover
+      You MUST choose a DIFFERENT target or approach. Do NOT repeat the same target that failed.
+      Depending on the error above, try one of these strategies:
+      - If the click was **intercepted** (covered by another element): target the innermost, most
+        specific visible child element instead. Prefer a `data-neodymium-automation-id` or `id`
+        on the actual clickable element, not a parent container.
+      - If the element was **not interactable / not enabled**: the element may be disabled or
+        hidden. Look for a sibling, a label, or a wrapper that is actually clickable. Check the
+        DOM carefully for an alternative element that performs the same action.
+      - In both cases: prefer `data-neodymium-automation-id` or `id` attributes over broad CSS
+        selectors or text-based targets.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/search?q=B%C3%A4r
+Page Title: Search Results
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Continue Shopping&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_s2qj3w&#39; selector=&#39;a&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;No products found.&#39; data-neodymium-automation-id=&#39;xc_3t0x9d&#39; selector=&#39;h2.h4.text-muted.mb-3&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_r2adar&#39; selector=&#39;h4&#39; 
+
+=== Text Content (Validation Mode) ===
+	[text] id=&#39;top-demo-disclaimer&#39; text=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!&#39; data-neodymium-automation-id=&#39;xc_3jgvm9&#39; selector=&#39;#top-demo-disclaimer&#39; 
+	[text] text=&#39;Posters
+World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_l4bb3h&#39; selector=&#39;div.container.top-menu&#39; 
+	[text] id=&#39;header-navigation-elements&#39; text=&#39;World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_o0cs4s&#39; selector=&#39;#header-navigation-elements&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_p3ivjx&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_qu9zt6&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_y2yfvd&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_vwb8mr&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_hhz4n1&#39; selector=&#39;div&#39; 
+	[text] id=&#39;locale-switcher&#39; text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_wogzk1&#39; selector=&#39;#locale-switcher&#39; 
+	[text] text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_my64kh&#39; selector=&#39;span.locale-flag&#39; 
+	[text] id=&#39;mini-cart&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_32ld08&#39; selector=&#39;#mini-cart&#39; 
+	[text] id=&#39;header-cart-count&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_o85j9m&#39; selector=&#39;#header-cart-count&#39; 
+	[text] id=&#39;main&#39; text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_383ych&#39; selector=&#39;#main&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v31ysa&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_edq5v3&#39; selector=&#39;div.container.mt-3.mb-5&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v2dbma&#39; selector=&#39;div.row&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_pfv9jo&#39; selector=&#39;div.col-lg-3.d-none.d-lg-block&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_w57389&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_mklxsm&#39; selector=&#39;div.filter-sidebar.mb-4&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_aj5aqq&#39; selector=&#39;div.col-lg-9.text-center&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_x1aggl&#39; selector=&#39;div.product-overview-heading.mb-4&#39; 
+	[text] id=&#39;title-search-text&#39; text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_yftx2q&#39; selector=&#39;#title-search-text&#39; 
+	[text] id=&#39;product-overview&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_2tloy4&#39; selector=&#39;#product-overview&#39; 
+	[text] id=&#39;no-results&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_88354x&#39; selector=&#39;#no-results&#39; 
+	[text] text=&#39;We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.&#39; data-neodymium-automation-id=&#39;xc_3lq35m&#39; selector=&#39;p.text-muted.mb-4&#39; 
+	[text] id=&#39;footer-section-about&#39; text=&#39;About
+
+The Posters Demo Store is a demonstration web shop by Xceptance.
+
+GitHub:&#39; data-neodymium-automation-id=&#39;xc_lzeppo&#39; selector=&#39;#footer-section-about&#39; 
+	[text] text=&#39;The Posters Demo Store is a demonstration web shop by Xceptance.&#39; data-neodymium-automation-id=&#39;xc_13d5et&#39; selector=&#39;p.footer-text-about.footer-section-text&#39; 
+	[text] text=&#39;GitHub:&#39; data-neodymium-automation-id=&#39;xc_vwpr34&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-support&#39; text=&#39;Support
+Contact Support&#39; data-neodymium-automation-id=&#39;xc_2gpmm4&#39; selector=&#39;#footer-section-support&#39; 
+	[text] text=&#39;Contact Support&#39; data-neodymium-automation-id=&#39;xc_xj477w&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-information&#39; text=&#39;Information
+Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_i9hnld&#39; selector=&#39;#footer-section-information&#39; 
+	[text] text=&#39;Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_ymnjqn&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-contact&#39; text=&#39;Contact
+Xceptance Software Technologies GmbH
+Leutragraben 2-4
+07743 Jena
+Germany
+E-Mail: kontakt@xceptance.de
+Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_egrfuj&#39; selector=&#39;#footer-section-contact&#39; 
+	[text] text=&#39;Xceptance Software Technologies GmbH&#39; data-neodymium-automation-id=&#39;xc_q7cjmf&#39; selector=&#39;li.footer-contact-company&#39; 
+	[text] text=&#39;Leutragraben 2-4
+07743 Jena
+Germany&#39; data-neodymium-automation-id=&#39;xc_egz8ab&#39; selector=&#39;li.footer-contact-adress&#39; 
+	[text] text=&#39;E-Mail: kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_vob4i2&#39; selector=&#39;li.footer-contact-e-mail&#39; 
+	[text] text=&#39;Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_yotagu&#39; selector=&#39;li.footer-contact-website&#39; 
+	[text] id=&#39;footer-copyright&#39; text=&#39;© 2013-2024 Xceptance Software Technologies GmbH
+Photo copyrights belong to their respective owners.&#39; data-neodymium-automation-id=&#39;xc_evttft&#39; selector=&#39;#footer-copyright&#39; 
+	[text] id=&#39;footer-version-information&#39; text=&#39;Version 3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_fdvs3c&#39; selector=&#39;#footer-version-information&#39; 
+	[text] text=&#39;3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_r5dhbi&#39; selector=&#39;span&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+	[form] id=&#39;filterForm&#39; action=&#39;&#39; data-neodymium-automation-id=&#39;xc_6b51q6&#39;
+
+
+      Return updated JSON actions that use a DIFFERENT target and avoid the previous error.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>{
+  &quot;success&quot;: false,
+  &quot;actions&quot;: [],
+  &quot;done&quot;: true,
+  &quot;error&quot;: &quot;The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.&quot;,
+  &quot;reasoning&quot;: &quot;The instruction is to verify that search results contain &#39;Grizzlybär&#39; in a product title. However, the current page explicitly shows &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. This means there are no products on the page to check for the specified text. Thus, the instruction cannot be fulfilled on this page.&quot;
+}</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> The instruction is to verify that search results contain &#39;Grizzlybär&#39; in a product title. However, the current page explicitly shows &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. This means there are no products on the page to check for the specified text. Thus, the instruction cannot be fulfilled on this page.</div>
+<div class="error">Verification failed: The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.</div>
+<div class="warning">Action failed: Verification failed: The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.. Retrying...</div>
+</div>
+<div class="attempt">
+<h4>Retry (Error) 2</h4>
+<details><summary>AI Prompt (Includes DOM Context)</summary>
+<pre><code>      ## Current Instruction (RETRY)
+      Verify search results contain at least one product with &#39;Grizzlybär&#39; in the product title.
+
+      ## Previous Attempt Failed
+      The previous attempt failed with this error:
+      Verification failed: The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.
+
+      ## How to recover
+      You MUST choose a DIFFERENT target or approach. Do NOT repeat the same target that failed.
+      Depending on the error above, try one of these strategies:
+      - If the click was **intercepted** (covered by another element): target the innermost, most
+        specific visible child element instead. Prefer a `data-neodymium-automation-id` or `id`
+        on the actual clickable element, not a parent container.
+      - If the element was **not interactable / not enabled**: the element may be disabled or
+        hidden. Look for a sibling, a label, or a wrapper that is actually clickable. Check the
+        DOM carefully for an alternative element that performs the same action.
+      - In both cases: prefer `data-neodymium-automation-id` or `id` attributes over broad CSS
+        selectors or text-based targets.
+
+      ## Current Page State (DOM)
+      Page URL: http://localhost:8080/en-US/search?q=B%C3%A4r
+Page Title: Search Results
+
+=== Interactive Elements ===
+	[link] id=&#39;header-brand&#39; text=&#39;Posters&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_gsdm3w&#39; selector=&#39;#header-brand&#39; 
+	[link] text=&#39;World of Nature&#39; href=&#39;/en-US/topCategory/World of Nature?categoryId=1&#39; data-neodymium-automation-id=&#39;xc_svfbm3&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Dining&#39; href=&#39;/en-US/topCategory/Dining?categoryId=5&#39; data-neodymium-automation-id=&#39;xc_c96qe0&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Transportation&#39; href=&#39;/en-US/topCategory/Transportation?categoryId=9&#39; data-neodymium-automation-id=&#39;xc_blg4tj&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] text=&#39;Panoramas&#39; href=&#39;/en-US/topCategory/Panoramas?categoryId=13&#39; data-neodymium-automation-id=&#39;xc_ws0cap&#39; selector=&#39;a.nav-link.dropdown-toggle&#39; 
+	[link] id=&#39;show-locale-menu&#39; text=&#39;🇺🇸&#39; href=&#39;#&#39; data-neodymium-automation-id=&#39;xc_klnj96&#39; selector=&#39;#show-locale-menu&#39; 
+	[link] id=&#39;show-user-menu&#39; href=&#39;#&#39; title=&#39;Login&#39; data-neodymium-automation-id=&#39;xc_qqqd72&#39; selector=&#39;#show-user-menu&#39; 
+	[link] id=&#39;header-cart-overview&#39; text=&#39;0&#39; href=&#39;#miniCartOffcanvas&#39; title=&#39;Cart Overview&#39; data-neodymium-automation-id=&#39;xc_lw6jvb&#39; selector=&#39;#header-cart-overview&#39; 
+	[link] text=&#39;Continue Shopping&#39; href=&#39;/en-US/&#39; data-neodymium-automation-id=&#39;xc_s2qj3w&#39; selector=&#39;a&#39; 
+	[link] href=&#39;https://github.com/Xceptance/posters-demo-store&#39; data-neodymium-automation-id=&#39;xc_x5eilf&#39; selector=&#39;a&#39; 
+	[link] text=&#39;Contact Support&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_h9yd70&#39; selector=&#39;a&#39; 
+	[link] text=&#39;kontakt@xceptance.de&#39; href=&#39;mailto:kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_gdekup&#39; selector=&#39;a&#39; 
+	[link] text=&#39;https://www.xceptance.com&#39; href=&#39;https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_akeuq1&#39; selector=&#39;a&#39; 
+	[button] id=&#39;header-search-button&#39; type=&#39;submit&#39; data-neodymium-automation-id=&#39;xc_ialndr&#39; selector=&#39;#header-search-button&#39; 
+	[input] id=&#39;header-search-text&#39; name=&#39;q&#39; type=&#39;search&#39; placeholder=&#39;Search&#39; aria-label=&#39;Search&#39; title=&#39;Search&#39; autocomplete=&#39;off&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; selector=&#39;#header-search-text&#39; 
+
+=== Page Structure ===
+	[heading] text=&#39;No products found.&#39; data-neodymium-automation-id=&#39;xc_3t0x9d&#39; selector=&#39;h2.h4.text-muted.mb-3&#39; 
+	[heading] text=&#39;About&#39; data-neodymium-automation-id=&#39;xc_4xwz7i&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Support&#39; data-neodymium-automation-id=&#39;xc_p830e8&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Information&#39; data-neodymium-automation-id=&#39;xc_bau4i1&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;Contact&#39; data-neodymium-automation-id=&#39;xc_yq03jj&#39; selector=&#39;h3.footer-section-headline&#39; 
+	[heading] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_r2adar&#39; selector=&#39;h4&#39; 
+
+=== Text Content (Validation Mode) ===
+	[text] id=&#39;top-demo-disclaimer&#39; text=&#39;This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!&#39; data-neodymium-automation-id=&#39;xc_3jgvm9&#39; selector=&#39;#top-demo-disclaimer&#39; 
+	[text] text=&#39;Posters
+World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_l4bb3h&#39; selector=&#39;div.container.top-menu&#39; 
+	[text] id=&#39;header-navigation-elements&#39; text=&#39;World of Nature
+Dining
+Transportation
+Panoramas
+🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_o0cs4s&#39; selector=&#39;#header-navigation-elements&#39; 
+	[text] text=&#39;World of Nature&#39; data-neodymium-automation-id=&#39;xc_p3ivjx&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Dining&#39; data-neodymium-automation-id=&#39;xc_qu9zt6&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Transportation&#39; data-neodymium-automation-id=&#39;xc_y2yfvd&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;Panoramas&#39; data-neodymium-automation-id=&#39;xc_vwb8mr&#39; selector=&#39;li.nav-item.dropdown&#39; 
+	[text] text=&#39;🇺🇸
+ 
+0&#39; data-neodymium-automation-id=&#39;xc_hhz4n1&#39; selector=&#39;div&#39; 
+	[text] id=&#39;locale-switcher&#39; text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_wogzk1&#39; selector=&#39;#locale-switcher&#39; 
+	[text] text=&#39;🇺🇸&#39; data-neodymium-automation-id=&#39;xc_my64kh&#39; selector=&#39;span.locale-flag&#39; 
+	[text] id=&#39;mini-cart&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_32ld08&#39; selector=&#39;#mini-cart&#39; 
+	[text] id=&#39;header-cart-count&#39; text=&#39;0&#39; data-neodymium-automation-id=&#39;xc_o85j9m&#39; selector=&#39;#header-cart-count&#39; 
+	[text] id=&#39;main&#39; text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_383ych&#39; selector=&#39;#main&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v31ysa&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_edq5v3&#39; selector=&#39;div.container.mt-3.mb-5&#39; 
+	[text] text=&#39;FILTER
+Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_v2dbma&#39; selector=&#39;div.row&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_pfv9jo&#39; selector=&#39;div.col-lg-3.d-none.d-lg-block&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_w57389&#39; selector=&#39;div&#39; 
+	[text] text=&#39;FILTER&#39; data-neodymium-automation-id=&#39;xc_mklxsm&#39; selector=&#39;div.filter-sidebar.mb-4&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)
+No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_aj5aqq&#39; selector=&#39;div.col-lg-9.text-center&#39; 
+	[text] text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_x1aggl&#39; selector=&#39;div.product-overview-heading.mb-4&#39; 
+	[text] id=&#39;title-search-text&#39; text=&#39;Results for &#39;Bär&#39; (0 posters)&#39; data-neodymium-automation-id=&#39;xc_yftx2q&#39; selector=&#39;#title-search-text&#39; 
+	[text] id=&#39;product-overview&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_2tloy4&#39; selector=&#39;#product-overview&#39; 
+	[text] id=&#39;no-results&#39; text=&#39;No products found.
+
+We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.
+
+Continue Shopping&#39; data-neodymium-automation-id=&#39;xc_88354x&#39; selector=&#39;#no-results&#39; 
+	[text] text=&#39;We couldn&#39;t find anything matching your search. Try different keywords or browse our categories.&#39; data-neodymium-automation-id=&#39;xc_3lq35m&#39; selector=&#39;p.text-muted.mb-4&#39; 
+	[text] id=&#39;footer-section-about&#39; text=&#39;About
+
+The Posters Demo Store is a demonstration web shop by Xceptance.
+
+GitHub:&#39; data-neodymium-automation-id=&#39;xc_lzeppo&#39; selector=&#39;#footer-section-about&#39; 
+	[text] text=&#39;The Posters Demo Store is a demonstration web shop by Xceptance.&#39; data-neodymium-automation-id=&#39;xc_13d5et&#39; selector=&#39;p.footer-text-about.footer-section-text&#39; 
+	[text] text=&#39;GitHub:&#39; data-neodymium-automation-id=&#39;xc_vwpr34&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-support&#39; text=&#39;Support
+Contact Support&#39; data-neodymium-automation-id=&#39;xc_2gpmm4&#39; selector=&#39;#footer-section-support&#39; 
+	[text] text=&#39;Contact Support&#39; data-neodymium-automation-id=&#39;xc_xj477w&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-information&#39; text=&#39;Information
+Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_i9hnld&#39; selector=&#39;#footer-section-information&#39; 
+	[text] text=&#39;Terms and Conditions apply.&#39; data-neodymium-automation-id=&#39;xc_ymnjqn&#39; selector=&#39;li&#39; 
+	[text] id=&#39;footer-section-contact&#39; text=&#39;Contact
+Xceptance Software Technologies GmbH
+Leutragraben 2-4
+07743 Jena
+Germany
+E-Mail: kontakt@xceptance.de
+Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_egrfuj&#39; selector=&#39;#footer-section-contact&#39; 
+	[text] text=&#39;Xceptance Software Technologies GmbH&#39; data-neodymium-automation-id=&#39;xc_q7cjmf&#39; selector=&#39;li.footer-contact-company&#39; 
+	[text] text=&#39;Leutragraben 2-4
+07743 Jena
+Germany&#39; data-neodymium-automation-id=&#39;xc_egz8ab&#39; selector=&#39;li.footer-contact-adress&#39; 
+	[text] text=&#39;E-Mail: kontakt@xceptance.de&#39; data-neodymium-automation-id=&#39;xc_vob4i2&#39; selector=&#39;li.footer-contact-e-mail&#39; 
+	[text] text=&#39;Website: https://www.xceptance.com&#39; data-neodymium-automation-id=&#39;xc_yotagu&#39; selector=&#39;li.footer-contact-website&#39; 
+	[text] id=&#39;footer-copyright&#39; text=&#39;© 2013-2024 Xceptance Software Technologies GmbH
+Photo copyrights belong to their respective owners.&#39; data-neodymium-automation-id=&#39;xc_evttft&#39; selector=&#39;#footer-copyright&#39; 
+	[text] id=&#39;footer-version-information&#39; text=&#39;Version 3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_fdvs3c&#39; selector=&#39;#footer-version-information&#39; 
+	[text] text=&#39;3.0.0-SNAPSHOT&#39; data-neodymium-automation-id=&#39;xc_r5dhbi&#39; selector=&#39;span&#39; 
+
+=== Forms ===
+	[form] id=&#39;header-search-form&#39; action=&#39;/en-US/search&#39; data-neodymium-automation-id=&#39;xc_2p7s7j&#39;
+		[form-field] type=&#39;search&#39; name=&#39;q&#39; id=&#39;header-search-text&#39; data-neodymium-automation-id=&#39;xc_3903e1&#39; 
+	[form] id=&#39;filterForm&#39; action=&#39;&#39; data-neodymium-automation-id=&#39;xc_6b51q6&#39;
+
+
+      Return updated JSON actions that use a DIFFERENT target and avoid the previous error.
+</code></pre>
+</details>
+<details><summary>AI Response (JSON)</summary>
+<pre><code>{
+  &quot;success&quot;: false,
+  &quot;actions&quot;: [],
+  &quot;done&quot;: true,
+  &quot;error&quot;: &quot;Verification failed: The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.&quot;,
+  &quot;reasoning&quot;: &quot;The instruction is to verify that search results contain a product with &#39;Grizzlybär&#39;. However, the current page explicitly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. This indicates that there are no products on the page to check, making the verification impossible to fulfill successfully. Thus, the action fails.&quot;
+}</code></pre>
+</details>
+<div class="reasoning"><strong>Reasoning:</strong> The instruction is to verify that search results contain a product with &#39;Grizzlybär&#39;. However, the current page explicitly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. This indicates that there are no products on the page to check, making the verification impossible to fulfill successfully. Thus, the action fails.</div>
+<div class="error">Verification failed: Verification failed: The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.</div>
+<div class="warning">Action failed: Verification failed: Verification failed: The current page clearly states &#39;No products found.&#39; and &#39;Results for &#39;Bär&#39; (0 posters)&#39;. Therefore, it is impossible to verify that any product title contains &#39;Grizzlybär&#39; as no products are displayed.. Retrying...</div>
+<div class="error">Max retries for errors reached.</div>
+</div>
+</div>
+</body>
+</html>

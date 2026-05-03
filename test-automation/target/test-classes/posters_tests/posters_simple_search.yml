@@ -1,0 +1,19 @@
+prompt: |
+  Open ${neodymium.url}
+  Search for '${searchTerm}'.
+  Click the first product
+  Verify there is an add to cart button.
+  Verify the product name contains '${searchTerm}'
+  Click the 'Add To Cart' button.
+  Verify the cart count is "1".
+data:
+     - testId: searchCase1
+       searchTerm: "w50"
+     - testId: searchCase2
+       searchTerm: "cat"
+
+
+
+
+
+       

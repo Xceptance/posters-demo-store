@@ -1,0 +1,14 @@
+prompt: |
+  Open ${neodymium.url}
+  Hover over ${mainCartegory}.
+  Click on category ${categroy}.
+  Verify this is a product landing page.
+  Verify the product name contains '${categroy}'
+  
+data:
+     - testId: navigationCase1
+       mainCartegory: "World of Nature"
+       categroy: "Trees"
+     - testId: navigationCase2
+       mainCartegory: "Transportation"
+       categroy: "Railways"

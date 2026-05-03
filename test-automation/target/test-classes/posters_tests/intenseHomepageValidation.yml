@@ -1,0 +1,14 @@
+prompt: |
+  Open ${neodymium.url}
+  Verify the page title contains '${titleKeyword}'.
+  Verify the main navigation contains exactly four categories: ${categories}.
+  Verify the footer contains the copyright notice '${copyright}'.
+  Verify that the user menu contains is visible
+  Verify that we can see promotion products
+  Verify that there is a Contact link with a mail address in the footer
+
+data:
+  - testId: "intenseHomepageValidation_case1"
+    titleKeyword: "Poster"
+    categories: "'World of Nature', 'Dining', 'Transportation', and 'Panoramas'"
+    copyright: "Xceptance Software Technologies GmbH"

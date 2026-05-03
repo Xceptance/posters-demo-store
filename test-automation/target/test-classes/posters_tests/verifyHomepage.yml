@@ -1,0 +1,11 @@
+prompt: |
+  Open ${neodymium.url}
+  Verify the page title contains '${titlePattern}'.
+  Verify the navigation has categories: ${categories}.
+  Verify the cart shows that there are "${cartInitialCount}" items.
+
+data:
+  - testId: "verifyHomepage_case1"
+    titlePattern: "Poster"
+    categories: "World of Nature, Dining, Transportation, Panoramas"
+    cartInitialCount: "0"

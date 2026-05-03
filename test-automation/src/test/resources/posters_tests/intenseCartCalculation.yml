@@ -1,0 +1,25 @@
+prompt: |
+  Open ${neodymium.url}
+  Search for '${searchTerm}'.
+  Click the first product
+  Verify this is a product detail page.
+  Verify the product name contains '${productName}'
+  Click the 'Add To Cart' button.
+  Verify the cart count is "${initialCount}".
+  Go back to the homepage.
+  Click on category '${category}'.
+  Click on the first product
+  Click the 'Add To Cart' button.
+  Verify the cart count is now "${newCount}".
+  Open the cart page.
+  Verify two different products are listed in the cart table.
+  Verify that each product has a price and a quantity of "${itemQuantity}".
+
+data:
+  - testId: "intenseCartCalculation_case1"
+    searchTerm: "Massachussetts"
+    productName: "Massachussetts"
+    initialCount: "1"
+    category: "Dining"
+    newCount: "2"
+    itemQuantity: "1"

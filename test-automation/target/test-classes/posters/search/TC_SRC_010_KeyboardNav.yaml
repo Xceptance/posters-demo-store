@@ -1,0 +1,31 @@
+prompt: |
+  Open ${neodymium.url}
+  Switch to the ${locale} locale.
+  Using only keyboard navigation (Tab key), navigate to the search input field.
+  Verify the search input receives visible focus.
+  Type '${searchTerm}' into the search input.
+  Submit the search by pressing the Enter key on the keyboard.
+  Verify the search form submits and navigates to the search results page showing results for the term.
+  Return to the homepage.
+  Use the Tab key to navigate to the search input field and type the search term again.
+  Press the Tab key once more to navigate to the search button (magnifying glass icon).
+  Verify the search button receives visible focus.
+  While the search button is focused, press the Space bar or Enter key.
+  Verify the search form submits and navigates to the search results page.
+
+data:
+  - testId: "tc_src_010_en_US"
+    locale: "en-US"
+    searchTerm: "bear"
+  - testId: "tc_src_010_en_GB"
+    locale: "en-GB"
+    searchTerm: "bear"
+  - testId: "tc_src_010_de_DE"
+    locale: "de-DE"
+    searchTerm: "bear"
+  - testId: "tc_src_010_sv_SE"
+    locale: "sv-SE"
+    searchTerm: "bear"
+  - testId: "tc_src_010_ja_JP"
+    locale: "ja-JP"
+    searchTerm: "bear"

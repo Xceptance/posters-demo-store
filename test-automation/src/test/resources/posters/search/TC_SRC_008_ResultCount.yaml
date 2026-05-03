@@ -1,0 +1,37 @@
+prompt: |
+  Open ${neodymium.url}
+  Switch to the ${locale} locale.
+  Type '${searchTerm}' into the search field and submit.
+  Verify the search results heading correctly matches the format: "${expectedHeadingFormat}" where N is the number of results.
+  Count the visible product tiles on the page.
+  Verify that the number of visible product tiles exactly matches the count shown in the heading.
+
+data:
+  - testId: "tc_src_008_en_US_singular"
+    searchTerm: "Swedish Moose"
+    expectedHeadingFormat: "Results for 'Swedish Moose' (1 poster)"
+    locale: "en-US"
+  - testId: "tc_src_008_en_US_few"
+    searchTerm: "cat"
+    expectedHeadingFormat: "Results for 'cat' (N posters)"
+    locale: "en-US"
+  - testId: "tc_src_008_en_US_many"
+    searchTerm: "a"
+    expectedHeadingFormat: "Results for 'a' (N posters)"
+    locale: "en-US"
+  - testId: "tc_src_008_en_GB_singular"
+    searchTerm: "Swedish Moose"
+    expectedHeadingFormat: "Results for 'Swedish Moose' (1 poster)"
+    locale: "en-GB"
+  - testId: "tc_src_008_en_GB_few"
+    searchTerm: "cat"
+    expectedHeadingFormat: "Results for 'cat' (N posters)"
+    locale: "en-GB"
+  - testId: "tc_src_008_de_DE_singular"
+    searchTerm: "Schwedischer Elch"
+    expectedHeadingFormat: "Results for 'Schwedischer Elch' (1 poster)"
+    locale: "de-DE"
+  - testId: "tc_src_008_de_DE_few"
+    searchTerm: "Katze"
+    expectedHeadingFormat: "Results for 'Katze' (N posters)"
+    locale: "de-DE"

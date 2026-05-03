@@ -9,8 +9,11 @@ Verify that the search handles extreme and unusual input gracefully without serv
 - **Software Version:** >= 1.0.0
 - **Domains:** Search
 - **Priority:** 🟡 Medium
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_009_InputBoundary.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_009_InputBoundary.yaml)
 - **Suite:** 🧪 Full
 - **Requirements:**
   - N/A

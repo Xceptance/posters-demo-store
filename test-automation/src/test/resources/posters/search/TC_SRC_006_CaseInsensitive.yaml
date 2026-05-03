@@ -1,0 +1,38 @@
+prompt: |
+  Open ${neodymium.url}
+  Switch to the ${locale} locale.
+  Type '${baselineTerm}' into the search field and submit.
+  Note the result count and product names.
+  Clear the search input.
+  Type '${testTerm}' into the search field and submit.
+  Verify that the result count and product names match exactly with the baseline results.
+
+data:
+  - testId: "tc_src_006_en_upper"
+    locale: "en-US"
+    baselineTerm: "bear"
+    testTerm: "BEAR"
+  - testId: "tc_src_006_en_mixed"
+    locale: "en-US"
+    baselineTerm: "bear"
+    testTerm: "bEaR"
+  - testId: "tc_src_006_en_title"
+    locale: "en-US"
+    baselineTerm: "bear"
+    testTerm: "Bear"
+  - testId: "tc_src_006_de_upper"
+    locale: "de-DE"
+    baselineTerm: "Grizzlybär"
+    testTerm: "GRIZZLYBÄR"
+  - testId: "tc_src_006_de_lower"
+    locale: "de-DE"
+    baselineTerm: "Grizzlybär"
+    testTerm: "grizzlybär"
+  - testId: "tc_src_006_sv_upper"
+    locale: "sv-SE"
+    baselineTerm: "Grizzlybjörn"
+    testTerm: "GRIZZLYBJÖRN"
+  - testId: "tc_src_006_sv_lower"
+    locale: "sv-SE"
+    baselineTerm: "Grizzlybjörn"
+    testTerm: "grizzlybjörn"

@@ -1,0 +1,12 @@
+prompt: |
+  Open ${neodymium.url}
+  Hover over the navigation point "${navCategory}"
+  Click on the Category link "${subCategory}"
+  Verify that this is a Product Listing Page
+  Verify that the product "${productName}" is visible.
+
+data:
+  - testId: "categoryBrowsing_case1"
+    navCategory: "World of Nature"
+    subCategory: "Trees"
+    productName: "Indian Summer Red Beeches"

@@ -1,0 +1,43 @@
+prompt: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}'.
+  Verify that the flag icon is updated to the new locale.
+  Type '${searchTerm}' into the search field and submit.
+  Verify the search results page displays a heading with "Results for '${searchTerm}'".
+  Verify search results contain at least one product with '${expectedProduct}' in the product title.
+  Verify the product description is in ${expectedDescriptionLanguage}.
+  Verify the product price uses the '${expectedCurrencySymbol}' symbol.
+  Verify there is a "Buy Here" action link/button for the product.
+
+data:
+  - testId: "tc_src_001_en_GB"
+    searchTerm: "bear"
+    expectedProduct: "Grizzly Bear"
+    expectedCurrencySymbol: "£"
+    expectedDescriptionLanguage: "English"
+    locale: "en-GB"
+  - testId: "tc_src_001_en_US"
+    searchTerm: "bear"
+    expectedProduct: "Grizzly Bear"
+    expectedCurrencySymbol: "$"
+    expectedDescriptionLanguage: "English"
+    locale: "en-US"
+  - testId: "tc_src_001_de_DE"
+    searchTerm: "Bär"
+    expectedProduct: "Grizzlybär"
+    expectedCurrencySymbol: "€"
+    expectedDescriptionLanguage: "German"
+    locale: "de-DE"
+  - testId: "tc_src_001_sv_SE"
+    searchTerm: "björn"
+    expectedProduct: "Grizzlybjörn"
+    expectedCurrencySymbol: "kr"
+    expectedDescriptionLanguage: "Swedish"
+    locale: "sv-SE"
+  - testId: "tc_src_001_ja_JP"
+    searchTerm: "ダリア"
+    expectedProduct: "ピンクのダリア"
+    expectedCurrencySymbol: "￥"
+    expectedDescriptionLanguage: "Japanese"
+    locale: "ja-JP"

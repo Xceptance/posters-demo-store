@@ -9,8 +9,11 @@ Verify that the search engine uses AND as the default operator for multi-word qu
 - **Software Version:** >= 1.0.0
 - **Domains:** Search
 - **Priority:** 🔴 Critical
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_004_MultiWord.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_004_MultiWord.yaml)
 - **Suite:** 🔄 Regression, 🧪 Full
 - **Requirements:**
   - N/A

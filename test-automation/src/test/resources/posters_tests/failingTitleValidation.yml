@@ -1,0 +1,7 @@
+prompt: |
+  Open ${neodymium.url}
+  Verify the page title is '${expectedTitle}'.
+
+data:
+  - testId: "failingTitleValidation_case1"
+    expectedTitle: "Completely Wrong Title"

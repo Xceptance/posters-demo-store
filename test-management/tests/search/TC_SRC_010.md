@@ -9,8 +9,11 @@ Verify that a user can fully utilize the search functionality using only a keybo
 - **Software Version:** >= 1.0.0
 - **Domains:** Search, Accessibility
 - **Priority:** 🟠 High
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_010_KeyboardNav.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_010_KeyboardNav.yaml)
 - **Suite:** 🔄 Regression, 🧪 Full
 - **Requirements:**
   - WCAG 2.1 - 2.1.1 Keyboard

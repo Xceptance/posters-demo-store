@@ -9,8 +9,11 @@ Verify that entering a single known product-related search term returns relevant
 - **Software Version:** >= 1.0.0
 - **Domains:** Search, Catalog
 - **Priority:** 🔴 Critical
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_001_SingleTerm.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_001_SingleTerm.yaml)
 - **Suite:** 🚀 Smoke, 🔄 Regression, 🧪 Full
 - **Requirements:**
   - N/A

@@ -9,8 +9,11 @@ Verify that the search results heading accurately displays the search term and t
 - **Software Version:** >= 1.0.0
 - **Domains:** Search
 - **Priority:** 🟡 Medium
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Automated
+- **Execution Type:** Automated
+- **Automation:**
+  - [Java Class](../../../../test-automation/src/test/java/com/xceptance/posters/search/TC_SRC_008_ResultCount.java)
+  - [YAML Data](../../../../test-automation/src/test/resources/posters/search/TC_SRC_008_ResultCount.yaml)
 - **Suite:** 🔄 Regression, 🧪 Full
 - **Requirements:**
   - N/A

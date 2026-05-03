@@ -1,0 +1,40 @@
+prompt: |
+  Open ${neodymium.url}
+  Switch to the ${locale} locale.
+  Type '${searchTerm}' into the search field and submit.
+  Verify the search results page displays results and the product '${expectedProduct}' appears in the results.
+  If '${firstWordOnly}' is provided, perform a separate search for '${firstWordOnly}'.
+  Verify that this single-word search returns more or equal results compared to the original two-word search.
+
+data:
+  - testId: "tc_src_004_en_US"
+    searchTerm: "grizzly bear"
+    expectedProduct: "Grizzly Bear"
+    firstWordOnly: "grizzly"
+    locale: "en-US"
+  - testId: "tc_src_004_de_DE"
+    searchTerm: "Europäische Hornisse"
+    expectedProduct: "Europäische Hornisse"
+    firstWordOnly: "Europäische"
+    locale: "de-DE"
+  - testId: "tc_src_004_sv_SE"
+    searchTerm: "svensk älg"
+    expectedProduct: "Svensk älg"
+    firstWordOnly: "svensk"
+    locale: "sv-SE"
+  - testId: "tc_src_004_ja_JP"
+    searchTerm: "ブルーモルフォ蝶"
+    expectedProduct: "ブルーモルフォ蝶"
+    locale: "ja-JP"
+  - testId: "tc_src_004_en_reversed"
+    searchTerm: "bear grizzly"
+    expectedProduct: "Grizzly Bear"
+    locale: "en-US"
+  - testId: "tc_src_004_en_three_words"
+    searchTerm: "grey owl north"
+    expectedProduct: "Great Grey Owl"
+    locale: "en-US"
+  - testId: "tc_src_004_en_full_desc"
+    searchTerm: "Grizzly bears are severe predators and shouldn't be underestimated only because of their harmless and cute looks like this picture displays them"
+    expectedProduct: "Grizzly Bear"
+    locale: "en-US"
