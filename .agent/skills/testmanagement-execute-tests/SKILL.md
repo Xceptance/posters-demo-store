@@ -4,7 +4,7 @@ description: Execute a manual functional test case, updating its status dynamica
 license: MIT
 metadata:
   author: AI
-  version: "1.0"
+  version: "2.0"
 ---
 
 # Test Execution Workflow
@@ -40,4 +40,23 @@ Follow these instructions when the user wants to execute test cases or plan a ne
    - Update the `Execution Result` block in the test case markdown.
    - Update the Checklist in `run-plan.md` to indicate `✅ PASSED`, `❌ FAILED`, or `🚧 BLOCKED`.
    - Recalculate the `📊 Live Statistics` table perfectly in `run-plan.md`.
+   - **Append an entry to the `📝 Execution Log`** section in `run-plan.md` with a summary of the result, any observations, test data corrections made, and references to any defects or improvements logged (e.g., `BUS-BUG-15`).
 8. Proceed to the next pending test or yield back to the user.
+
+### During Execution — Capturing Findings
+
+- **Defects & Improvements:** When the user reports a bug or improvement idea during testing, log it immediately to the appropriate backlog (e.g., `specifications/backlog/BUSINESS_BACKLOG.md`) and note the backlog ID in the Execution Log entry for that test case.
+- **Test Data Corrections:** If test data in a template is found to be incorrect during execution (wrong locale term, wrong currency, etc.), update the **template** in `test-management/tests/` immediately and note the correction in the Execution Log.
+- **Scope Changes:** If new test cases are created during the run (e.g., a gap is discovered), add them to the `results/` directory with the Execution Result block, append them to the checklist with an ⚡ *Added during execution* annotation, and update the Total Scope count in the statistics table.
+
+### After Execution — Execution Report
+
+When all test cases in the checklist are completed:
+
+1. Set the run-plan status to `✅ Completed` and fill in the **Finished** timestamp.
+2. Create an `execution-report.md` in the test run directory based on `test-management/test-runs/TEMPLATE_EXECUTION_REPORT.md`.
+3. Populate the report by compiling data from:
+   - The `run-plan.md` statistics and execution log.
+   - The `Execution Result` blocks in each `results/` snapshot file.
+   - Any backlog items created during the run.
+4. The Execution Report is the **final deliverable** of a test run — a single document that captures the complete picture for stakeholders.

@@ -10,9 +10,12 @@ When the user runs `/test-execute`, I will:
 2. Guide the user through executing the tests step-by-step.
 3. Automatically update the specific step `[x]` checkboxes in the copied immutable files.
 4. Update the `run-plan.md` dashboard statistics continuously.
+5. Maintain the `📝 Execution Log` in `run-plan.md` — after each test case, append an entry noting the result, observations, test data corrections, and references to any defects or improvements logged to the backlog.
+6. When all tests are complete, generate an `execution-report.md` using `TEMPLATE_EXECUTION_REPORT.md` as the final deliverable.
 
 For specific behaviors and step-by-step logic, I must use the instructions in `.agent/skills/testmanagement-execute-tests/SKILL.md`.
 
 **Dependencies**:
 - `test-management/test-runs/README.md`
 - `test-management/test-runs/TEMPLATE_RUN_PLAN.md`
+- `test-management/test-runs/TEMPLATE_EXECUTION_REPORT.md`

@@ -2,12 +2,10 @@
 
 **Goal:** [Summary of what is being tested and why]
 **Context:** [Environment / Viewport / Locale]
-**Started:** [YYYY-MM-DD] | **Status:** `🔄 In Progress`
+**Tester:** [Name / AI]
+**Started:** [YYYY-MM-DD HH:MM] | **Finished:** — | **Status:** `🔄 In Progress`
 
 ## 📊 Live Statistics
-
-> [!TIP]
-> The AI or a specialized workflow updates this table as test results are logged.
 
 | Status | Count | Percentage |
 | :--- | :--- | :--- |
@@ -21,3 +19,16 @@
 
 [List tests to be run using the format below:]
 - [ ] `TC_EXAMPLE_001` - Test Title (`⏳ PENDING`)
+
+## 📝 Execution Log
+
+> [!TIP]
+> Append entries here as the run progresses. Each entry should note the test case, what happened, and any follow-up actions taken. This section is the source of truth for anything that deviated from the original plan.
+
+[Entries are added during execution in reverse chronological order:]
+
+<!-- Example entry:
+### TC_SRC_003 — ✅ PASSED
+- **Observation:** Empty query shows generic "Search Results" headline without count.
+- **Action:** Updated TC_SRC_003 template to document this as expected behavior.
+-->
