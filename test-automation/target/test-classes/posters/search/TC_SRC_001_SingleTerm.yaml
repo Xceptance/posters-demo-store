@@ -8,7 +8,7 @@ prompt: |
   Verify search results contain at least one product with '${expectedProduct}' in the product title.
   Verify the product description is in ${expectedDescriptionLanguage}.
   Verify the product price uses the '${expectedCurrencySymbol}' symbol.
-  Verify there is a "Buy Here" action link/button for the product.
+  Verify there is a "Shop Now" action link/button for the product.
 
 data:
   - testId: "tc_src_001_en_GB"

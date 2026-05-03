@@ -1,6 +1,6 @@
 # Simple Search — Single Term (Happy Path)
 
-Verify that entering a single known product-related search term returns relevant results with correctly localized product names, descriptions, images, prices, and a "Buy Here" action link. This is the primary search validation across all supported locales.
+Verify that entering a single known product-related search term returns relevant results with correctly localized product names, descriptions, images, prices, and a "Shop Now" action link. This is the primary search validation across all supported locales.
 
 ## Metadata
 
@@ -91,7 +91,7 @@ Verify that entering a single known product-related search term returns relevant
   - A product **name** displayed in the expected locale language.
   - A **description** text in the expected locale language.
   - A **price** displayed with the expected currency symbol from the Test Data table.
-  - A **"Buy Here"** button/link.
+  - A **"Shop Now"** button/link.
 
 ### 6. Verify Expected Product is Present
 
@@ -102,8 +102,8 @@ Verify that entering a single known product-related search term returns relevant
 
 ## Pass/Fail Criteria
 
-- **Pass:** Searching with a known single term returns at least one relevant result with correctly localized name, description, image, price (in the correct currency), and a "Buy Here" link, across all target locales.
-- **Fail:** No results are returned for a known valid term; results show the wrong language or currency; images are broken; the "Buy Here" link is missing; or the page returns an error.
+- **Pass:** Searching with a known single term returns at least one relevant result with correctly localized name, description, image, price (in the correct currency), and a "Shop Now" link, across all target locales.
+- **Fail:** No results are returned for a known valid term; results show the wrong language or currency; images are broken; the "Shop Now" link is missing; or the page returns an error.
 
 ---
 

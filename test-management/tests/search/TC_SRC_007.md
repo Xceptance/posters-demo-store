@@ -82,7 +82,7 @@ Verify that search results are valid and correct: each rendered product tile gen
   - A **product name** that is non-empty and in the expected locale language.
   - A **description text** that is non-empty and in the expected locale language.
   - A **price** that is a valid formatted number greater than $0.00 / €0.00 / kr 0.00.
-  - A **"Buy Here"** button/link.
+  - A **"Shop Now"** button/link.
 
 ### 5. Note Product Name and Image from a Result Tile
 
@@ -91,7 +91,7 @@ Verify that search results are valid and correct: each rendered product tile gen
 
 ### 6. Click the Product Tile to Navigate to PDP
 
-- **Action:** Click on the product image or the "Buy Here" button of the noted product.
+- **Action:** Click on the product image or the "Shop Now" button of the noted product.
 - **Verify:** The browser navigates to the Product Detail Page (PDP). The URL contains the product name and ID.
 
 ### 7. Verify PDP Consistency

@@ -1,7 +1,7 @@
 
 prompt: |
   Open ${neodymium.url}
-  Click the 'Buy Here' button for North Boston
+  Click the 'Shop Now' button for North Boston
   Click the Add To Cart button
   Click the Cart icon with '1' item
   Click the View Cart link
