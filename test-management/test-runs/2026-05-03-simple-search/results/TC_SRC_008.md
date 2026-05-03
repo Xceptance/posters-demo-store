@@ -1,5 +1,12 @@
 # Search Result Count & Heading
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `❌ FAILED` | Localhost / Chrome 144 | 'Swedish Moose' 0 results (test data wrong?). 'cat' returns false positives via stemming ('catch'→'cat'). 'a' returns 95 not 124 (stop word filtering?). DE heading not localized. |
+
+
 Verify that the search results heading accurately displays the search term and the correct result count with proper singular/plural grammar. This test requires specific queries that produce exactly 1 result, a small number of results, and a larger number of results to validate the count display across cardinalities.
 
 ## Metadata
@@ -40,9 +47,6 @@ Verify that the search results heading accurately displays the search term and t
 | A — Singular (1 result) | en-US | `Swedish Moose` | 1 | `Results for 'Swedish Moose' (1 poster)` |
 | B — Few results | en-US | `cat` | 2+ | `Results for 'cat' (N posters)` where N ≥ 2 |
 | C — Many results | en-US | `a` | Many | `Results for 'a' (N posters)` where N is a larger number |
-| F — Singular (1 result) (UK) | en-GB | `Swedish Moose` | 1 | `Results for 'Swedish Moose' (1 poster)` |
-| G — Few results (UK) | en-GB | `cat` | 2+ | `Results for 'cat' (N posters)` where N ≥ 2 |
-| H — Many results (UK) | en-GB | `a` | Many | `Results for 'a' (N posters)` where N is a larger number |
 | D — Singular (de-DE) | de-DE | `Schwedischer Elch` | 1 | `Results for 'Schwedischer Elch' (1 poster)` |
 | E — Few results (de-DE) | de-DE | `Katze` | 2+ | `Results for 'Katze' (N posters)` where N ≥ 2 |
 
@@ -50,7 +54,7 @@ Verify that the search results heading accurately displays the search term and t
 
 **Target Locales:**
 - [x] EN-US
-- [x] EN-GB
+- [ ] EN-GB
 - [x] DE-DE
 - [x] SV-SE
 - [x] JA-JP

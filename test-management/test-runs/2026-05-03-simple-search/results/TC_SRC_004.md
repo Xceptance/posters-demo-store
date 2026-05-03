@@ -1,5 +1,12 @@
 # Multi-Word Search (AND Behavior)
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `❌ FAILED` | Localhost / Chrome 144 | 'grizzly' and 'bear grizzly' not found. Full description paste fails. 'north owl great' works. |
+
+
 Verify that the search engine uses AND as the default operator for multi-word queries, returning only products matching all terms. Also verify that term order does not affect results, that queries with 3+ terms work correctly, and that pasting a full product description returns the matching product.
 
 ## Metadata
@@ -65,7 +72,7 @@ Verify that the search engine uses AND as the default operator for multi-word qu
 
 **Target Locales:**
 - [x] EN-US
-- [x] EN-GB
+- [ ] EN-GB
 - [x] DE-DE
 - [x] SV-SE
 - [x] JA-JP

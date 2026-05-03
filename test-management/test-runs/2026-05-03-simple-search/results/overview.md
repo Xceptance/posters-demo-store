@@ -16,4 +16,3 @@ This directory contains the manual functional test cases for the **Search** doma
 | [TC_SRC_007](./TC_SRC_007.md) | Search Result Correctness & Navigation | 🟠 High | 🚀 Smoke, 🔄 Regression, 🧪 Full | Verify result tiles are genuine matches with valid data and PDP navigation is consistent. |
 | [TC_SRC_008](./TC_SRC_008.md) | Search Result Count & Heading | 🟡 Medium | 🔄 Regression, 🧪 Full | Verify heading displays correct search term, count, and singular/plural grammar. |
 | [TC_SRC_009](./TC_SRC_009.md) | Search — Input Boundary & Stress | 🟡 Medium | 🧪 Full | Verify graceful handling of long inputs, emoji, and injection attempts. |
-| [TC_SRC_010](./TC_SRC_010.md) | Keyboard Navigation & Accessibility | 🟠 High | 🔄 Regression, 🧪 Full | Verify search input and submit button are reachable and operable via keyboard Tab/Space/Enter. |

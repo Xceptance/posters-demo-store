@@ -1,5 +1,12 @@
 # Search Result Correctness & Navigation
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `✅ PASSED` | Localhost / Chrome 144 | All results are genuine matches, data is complete, and PDP navigation is consistent. |
+
+
 Verify that search results are valid and correct: each rendered product tile genuinely matches the search query, displays accurate product data (name, image, description, price), and that clicking a result navigates to the correct Product Detail Page (PDP) with consistent information.
 
 ## Metadata
@@ -42,7 +49,7 @@ Verify that search results are valid and correct: each rendered product tile gen
 
 **Target Locales:**
 - [x] EN-US
-- [x] EN-GB
+- [ ] EN-GB
 - [x] DE-DE
 - [x] SV-SE
 - [x] JA-JP

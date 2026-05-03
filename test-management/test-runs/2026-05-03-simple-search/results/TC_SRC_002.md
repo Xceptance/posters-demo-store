@@ -1,5 +1,12 @@
 # Search — No Results
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `❌ FAILED` | Localhost / Chrome 144 | Empty state message not localized for DE, SV, JA. JA shows redundant 'Results for...' headline. |
+
+
 Verify that searching for a term that does not match any product in the catalog displays a user-friendly empty state with an appropriate message and a link to continue shopping.
 
 ## Metadata

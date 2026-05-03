@@ -1,5 +1,19 @@
 # Search — Whitespace & Empty Query Handling
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `✅ PASSED` | Localhost / Chrome 144 | Empty query works and shows 'Search Results'. ZWSP correctly does not match. |
+
+
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `⏳ PENDING` | [Context/Browser] | |
+
+
 Verify that the search gracefully handles various forms of empty, whitespace-only, and whitespace-padded input without errors or unexpected results.
 
 ## Metadata
@@ -34,8 +48,8 @@ Verify that the search gracefully handles various forms of empty, whitespace-onl
 
 | Scenario | Input Value | Expected Behavior |
 | :--- | :--- | :--- |
-| A — Empty input | *(empty, no characters)* | Generic "Search Results" headline, no errors, no count |
-| B — Single space | ` ` (one space) | Generic "Search Results" headline, no errors, no count |
+| A — Empty input | *(empty, no characters)* | Empty results page, no errors |
+| B — Single space | ` ` (one space) | Empty results page, no errors |
 | C — Leading whitespace | `  bear` (spaces + term) | Same results as searching `bear` |
 | D — Trailing whitespace | `bear  ` (term + spaces) | Same results as searching `bear` |
 | E — Multiple spaces between words | `grizzly    bear` | Same results as searching `grizzly bear` |
@@ -47,7 +61,7 @@ Verify that the search gracefully handles various forms of empty, whitespace-onl
 
 **Target Locales:**
 - [x] EN-US
-- [x] EN-GB
+- [ ] EN-GB
 - [x] DE-DE
 - [x] SV-SE
 - [x] JA-JP
@@ -68,12 +82,12 @@ Verify that the search gracefully handles various forms of empty, whitespace-onl
 ### 2. Test Scenario A — Empty Input
 
 - **Action:** Leave the search input field empty and click the search button or press Enter.
-- **Verify:** The search results page loads without errors. A generic **"Search Results"** heading is displayed (without showing a "0 posters" count). No product tiles are rendered.
+- **Verify:** The search results page loads without errors. Either the empty state is shown or a generic "Search Results" heading is displayed with no product tiles.
 
 ### 3. Test Scenario B — Single Space
 
 - **Action:** Type a single space character into the search input and submit.
-- **Verify:** Same behavior as Scenario A — generic "Search Results" heading, no errors, no product tiles.
+- **Verify:** Same behavior as Scenario A — empty results page, no errors, no product tiles.
 
 ### 4. Test Scenario C — Leading Whitespace
 

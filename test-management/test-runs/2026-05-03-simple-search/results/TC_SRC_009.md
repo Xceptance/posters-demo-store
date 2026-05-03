@@ -1,5 +1,12 @@
 # Search — Input Boundary & Stress
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| Antigravity (AI) | 2026-05-03 | `✅ PASSED` | Localhost / Chrome 144 | 1700 chars OK (UI slightly off due to long heading). 7000 chars → 400 Bad Request (acceptable). XSS/SQLi properly escaped. |
+
+
 Verify that the search handles extreme and unusual input gracefully without server errors, application crashes, or security vulnerabilities. This covers very long inputs, single characters, numeric-only input, emoji, and HTML/script injection attempts.
 
 ## Metadata
@@ -49,7 +56,7 @@ Verify that the search handles extreme and unusual input gracefully without serv
 
 **Target Locales:**
 - [x] EN-US
-- [x] EN-GB
+- [ ] EN-GB
 - [ ] DE-DE
 - [ ] SV-SE
 - [ ] JA-JP

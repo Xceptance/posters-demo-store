@@ -7,7 +7,7 @@ The storefront is a Spring Boot + Thymeleaf e-commerce demo store. It uses Boots
 - **Homepage** with featured products and category overview
 - **Category overview** with product grid and filter sidebar
 - **Product detail pages** with images, descriptions, and pricing
-- **Search** — full-text product search with per-language stemming (EN, DE, SV, JA), prefix matching, and instant suggestions (search-as-you-type)
+- **Search** — full-text product search with per-language stemming (EN, DE, SV, JA), prefix matching, and instant suggestions (search-as-you-type). Input should be limited to a reasonable maximum length (e.g., 200–500 characters) to prevent server 400 errors and heading overflow.
 - **Product grid fragment** for AJAX-style filtering
 
 ## Shopping Cart
