@@ -50,7 +50,7 @@
                                                    hx-trigger="change"
                                                    th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.lineItemId}}"
                                                    hx-target="#cart-content"
-                                                   hx-swap="innerHTML"
+                                                   hx-swap="outerHTML"
                                                    hx-include="this"/>
                                         </div>
 
@@ -62,7 +62,7 @@
                                                     th:hx-confirm="#{confirmRemoveFromCart}"
                                                     th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.lineItemId}}"
                                                     hx-target="#cart-content"
-                                                    hx-swap="innerHTML" title="Remove">
+                                                    hx-swap="outerHTML" title="Remove">
                                                 <i class="bi bi-trash3 me-1"></i> <small th:text="#{buttonRemove}">Remove</small>
                                             </button>
                                         </div>

@@ -139,10 +139,10 @@ Add JavaScript to automatically include CSRF tokens in all HTMX requests.
 Update all customer-related forms to use Thymeleaf's `th:action` for automatic CSRF token injection.
 
 ### Acceptance Criteria
-- [ ] Update login form in `customer/login.html`
-- [ ] Update registration form in `customer/register.html`
-- [ ] Update account form in `customer/accountOverview.html`
-- [ ] Replace hardcoded `action` attributes with `th:action`
+- [x] Update login form in `customer/login.html` (already uses th:action)
+- [x] Update registration form in `customer/register.html` (already uses th:action)
+- [x] Update account form in `customer/accountOverview.html` (already uses th:action)
+- [x] Replace hardcoded `action` attributes with `th:action` (already done)
 - [ ] Verify forms submit successfully
 - [ ] Verify CSRF tokens are present in form HTML
 
@@ -177,11 +177,11 @@ Update all customer-related forms to use Thymeleaf's `th:action` for automatic C
 Update all checkout-related forms to use Thymeleaf's `th:action` for automatic CSRF token injection.
 
 ### Acceptance Criteria
-- [ ] Update shipping address form in `checkout/shippingAddress.html`
-- [ ] Update billing address form in `checkout/billingAddress.html`
-- [ ] Update payment form in `checkout/payment.html`
-- [ ] Update place order form in `checkout/placeOrder.html`
-- [ ] Replace hardcoded `action` attributes with `th:action`
+- [x] Update shipping address form in `checkout/shippingAddress.html` (already uses th:action)
+- [x] Update billing address form in `checkout/billingAddress.html` (already uses th:action)
+- [x] Update payment form in `checkout/payment.html` (already uses th:action)
+- [x] Update place order form in `checkout/placeOrder.html` (already uses th:action)
+- [x] Replace hardcoded `action` attributes with `th:action` (already done)
 - [ ] Verify complete checkout flow works end-to-end
 
 ### Files to Modify
@@ -277,12 +277,12 @@ public String handleError(HttpServletRequest request, Model model) {
 Add mandatory CSRF requirements to AGENTS.md so all future AI coding sessions automatically enforce CSRF protection.
 
 ### Acceptance Criteria
-- [ ] Add new "Security Standards" section to AGENTS.md
-- [ ] Document CSRF requirements for all POST/PUT/DELETE/PATCH endpoints
-- [ ] Specify Thymeleaf form requirements (must use `th:action`)
-- [ ] Specify HTMX requirements (must include CSRF headers)
-- [ ] Add examples of correct and incorrect implementations
-- [ ] Require CSRF test coverage for new endpoints
+- [x] Add new "Security Standards" section to AGENTS.md
+- [x] Document CSRF requirements for all POST/PUT/DELETE/PATCH endpoints
+- [x] Specify Thymeleaf form requirements (must use `th:action`)
+- [x] Specify HTMX requirements (must include CSRF headers)
+- [x] Add examples of correct and incorrect implementations
+- [x] Require CSRF test coverage for new endpoints
 
 ### Implementation Details
 Add to `AGENTS.md`:
@@ -336,11 +336,11 @@ All state-changing HTTP operations MUST be protected against Cross-Site Request 
 Create a formal specification document that serves as the single source of truth for CSRF implementation.
 
 ### Acceptance Criteria
-- [ ] Create `openspec/specs/csrf-protection/spec.md`
-- [ ] Document all CSRF requirements
-- [ ] Include code examples
-- [ ] Reference from AGENTS.md
-- [ ] Link to security documentation
+- [x] Create `openspec/specs/csrf-protection/spec.md`
+- [x] Document all CSRF requirements
+- [x] Include code examples
+- [x] Reference from AGENTS.md
+- [x] Link to security documentation
 
 ### Files to Create
 - `openspec/specs/csrf-protection/spec.md`
@@ -365,13 +365,13 @@ Create a formal specification document that serves as the single source of truth
 Create comprehensive unit tests for CSRF protection configuration and behavior.
 
 ### Acceptance Criteria
-- [ ] Test CSRF enabled for storefront endpoints
-- [ ] Test CSRF disabled for `/api/v2/**` endpoints
-- [ ] Test CSRF token generation
-- [ ] Test CSRF token validation
-- [ ] Test invalid token rejection
-- [ ] Test missing token rejection
-- [ ] All tests pass with >80% coverage
+- [x] Test CSRF enabled for storefront endpoints
+- [x] Test CSRF disabled for `/api/v2/**` endpoints
+- [x] Test CSRF token generation
+- [x] Test CSRF token validation
+- [x] Test invalid token rejection
+- [x] Test missing token rejection
+- [x] All tests pass with >80% coverage
 
 ### Test Cases
 ```java

@@ -11,7 +11,7 @@
       th:text="${cart.productCount}">0</span>
 
 <!-- Main cart content (swapped into #cart-content) -->
-<div th:fragment="cartBody">
+<div id="cart-content" th:fragment="cartBody">
     <div th:if="${cart != null and not #lists.isEmpty(cart.products)}" class="row g-4 align-items-start">
         <!-- Left: Items -->
         <div class="col-lg-8">
@@ -54,7 +54,7 @@
                                            hx-trigger="change"
                                            th:hx-post="@{'/' + ${urlLocale} + '/updateProductCount?cartProductId=' + ${cp.lineItemId}}"
                                            hx-target="#cart-content"
-                                           hx-swap="innerHTML"
+                                           hx-swap="outerHTML"
                                            hx-include="this"/>
                                 </div>
 
@@ -66,7 +66,7 @@
                                             th:hx-confirm="#{confirmRemoveFromCart}"
                                             th:hx-post="@{'/' + ${urlLocale} + '/deleteFromCart?cartProductId=' + ${cp.lineItemId}}"
                                             hx-target="#cart-content"
-                                            hx-swap="innerHTML" title="Remove">
+                                            hx-swap="outerHTML" title="Remove">
                                         <i class="bi bi-trash3 me-1"></i> <small th:text="#{buttonRemove}">Remove</small>
                                     </button>
                                 </div>
