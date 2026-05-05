@@ -27,4 +27,42 @@ Please adhere to the following rules when contributing to this repository:
 ## Testing & Specifications
 - **Manual & Automated Tests:** You MUST create test cases as part of any specification process or implementation work.
 - **Maintenance:** You MUST review existing test cases and update them to reflect any logic, UI, or specification changes made during implementation.
+
+## Security Standards
+
+### CSRF Protection (MANDATORY)
+All state-changing HTTP operations MUST be protected against Cross-Site Request Forgery (CSRF) attacks.
+
+**Requirements:**
+
+1. **Thymeleaf Forms:** ALL forms with `method="post"` MUST use `th:action` instead of hardcoded `action` attributes
+   - ✅ Correct: `<form th:action="@{'/' + ${urlLocale} + '/login'}" method="post">`
+   - ❌ Incorrect: `<form action="/en/login" method="post">`
+   - Thymeleaf automatically injects CSRF tokens when using `th:action`
+
+2. **HTMX Requests:** ALL HTMX requests that modify state MUST include CSRF token headers
+   - Automatically handled by `htmx:configRequest` event listener in layout templates
+   - Verify meta tags are present: `<meta name="_csrf" th:content="${_csrf.token}"/>`
+   - No manual token management needed - configuration is in layout/default.html and layout/checkoutLayout.html
+
+3. **Controller Endpoints:** ALL POST/PUT/DELETE/PATCH endpoints are automatically protected by Spring Security
+   - Exception: Stateless APIs under `/api/v2/**` are excluded from CSRF validation
+   - If you need to exclude an endpoint, document the security justification in code comments and link to relevant specification
+
+4. **Testing:** ALL new state-changing endpoints MUST include CSRF test coverage
+   - Test with valid token → Success (200/302)
+   - Test without token → 403 Forbidden
+   - Test with invalid token → 403 Forbidden
+   - See `openspec/specs/csrf-protection/spec.md` for detailed testing requirements
+
+**Verification Checklist:**
+- [ ] All forms use `th:action` (no hardcoded `action` attributes)
+- [ ] HTMX configuration includes CSRF headers (check layout templates)
+- [ ] New endpoints have CSRF test coverage
+- [ ] Security exceptions are documented and justified
+
+**Reference:**
+- Full specification: `openspec/specs/csrf-protection/spec.md`
+- Security documentation: `specifications/security/SECURITY_AND_PCI.md` (SEC-007)
+- Implementation guide: `openspec/changes/storefront-csrf-protection/design.md`
 - **Format & Standards:** All functional test documentation MUST explicitly adhere to the standards outlined in `doc/tests/README.md`. When creating new test cases, you MUST use `doc/tests/TEMPLATE.md` as your starting point.
