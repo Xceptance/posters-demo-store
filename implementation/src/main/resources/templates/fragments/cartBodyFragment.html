@@ -6,7 +6,7 @@
 -->
 <body>
 <!-- Main cart content (swapped into #cart-content) -->
-<div id="cart-content">
+<div id="cart-content" th:fragment="cartBody">
     <!-- OOB: update header cart count -->
     <span id="header-cart-count" class="header-cart-product-count"
           hx-swap-oob="true"
