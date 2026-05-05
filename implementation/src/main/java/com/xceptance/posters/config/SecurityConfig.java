@@ -8,6 +8,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.InvalidCsrfTokenException;
+import org.springframework.security.web.csrf.MissingCsrfTokenException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Spring Security configuration with two isolated filter chains:
@@ -62,18 +68,40 @@ public class SecurityConfig {
     }
 
     /**
-     * Storefront security — permit everything, no CSRF (to avoid breaking existing forms).
+     * Storefront security — permit everything, CSRF protection enabled.
+     * Excludes stateless API endpoints (/api/v2/**) from CSRF validation.
      */
     @Bean
     @Order(2)
-    public SecurityFilterChain storefrontFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain storefrontFilterChain(final HttpSecurity http) throws Exception {
         http
             .securityMatcher("/**")
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
             )
-            .csrf(csrf -> csrf.disable());
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .ignoringRequestMatchers("/api/v2/**")
+            )
+            .exceptionHandling(ex -> ex
+                .accessDeniedHandler(csrfAccessDeniedHandler())
+            );
 
         return http.build();
+    }
+
+    /**
+     * Custom access denied handler for CSRF validation failures.
+     * Provides user-friendly error messages for session timeouts.
+     */
+    private AccessDeniedHandler csrfAccessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            if (accessDeniedException instanceof MissingCsrfTokenException ||
+                accessDeniedException instanceof InvalidCsrfTokenException) {
+                response.sendRedirect(request.getContextPath() + "/error?reason=session-expired");
+            } else {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            }
+        };
     }
 }
