@@ -5,13 +5,12 @@
     Also includes OOB swap for the header cart counter.
 -->
 <body>
-<!-- OOB: update header cart count -->
-<span id="header-cart-count" class="header-cart-product-count"
-      hx-swap-oob="true"
-      th:text="${cart.productCount}">0</span>
-
 <!-- Main cart content (swapped into #cart-content) -->
-<div id="cart-content" th:fragment="cartBody">
+<div id="cart-content">
+    <!-- OOB: update header cart count -->
+    <span id="header-cart-count" class="header-cart-product-count"
+          hx-swap-oob="true"
+          th:text="${cart.productCount}">0</span>
     <div th:if="${cart != null and not #lists.isEmpty(cart.products)}" class="row g-4 align-items-start">
         <!-- Left: Items -->
         <div class="col-lg-8">
