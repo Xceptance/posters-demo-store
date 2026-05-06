@@ -14,7 +14,7 @@ Enable CSRF protection in the storefront security filter chain by removing the `
 - [x] Exclude `/api/v2/**` endpoints from CSRF validation using `.ignoringRequestMatchers()`
 - [x] Add custom `AccessDeniedHandler` for CSRF-specific error messages
 - [x] Verify backoffice filter chain remains unchanged
-- [ ] Unit tests pass for `SecurityConfig`
+- [x] Unit tests pass for `SecurityConfig`
 
 ### Implementation Details
 ```java
@@ -64,8 +64,8 @@ Add CSRF token meta tags to the main layout templates so they're available to al
 - [x] Add `<meta name="_csrf">` tag to `layout/default.html`
 - [x] Add `<meta name="_csrf_header">` tag to `layout/default.html`
 - [x] Add same meta tags to `layout/checkoutLayout.html`
-- [ ] Verify meta tags render with actual token values
-- [ ] Verify `_csrf` model attribute is automatically provided by Spring Security
+- [x] Verify meta tags render with actual token values
+- [x] Verify `_csrf` model attribute is automatically provided by Spring Security
 
 ### Implementation Details
 ```html
@@ -101,8 +101,8 @@ Add JavaScript to automatically include CSRF tokens in all HTMX requests.
 - [x] Add `htmx:configRequest` event listener to `layout/default.html`
 - [x] Event listener reads token from meta tag
 - [x] Event listener adds token to request headers
-- [ ] Verify HTMX cart operations work correctly
-- [ ] Verify HTMX requests include `X-CSRF-TOKEN` header
+- [x] Verify HTMX cart operations work correctly
+- [x] Verify HTMX requests include `X-CSRF-TOKEN` header
 
 ### Implementation Details
 ```html
@@ -143,8 +143,8 @@ Update all customer-related forms to use Thymeleaf's `th:action` for automatic C
 - [x] Update registration form in `customer/register.html` (already uses th:action)
 - [x] Update account form in `customer/accountOverview.html` (already uses th:action)
 - [x] Replace hardcoded `action` attributes with `th:action` (already done)
-- [ ] Verify forms submit successfully
-- [ ] Verify CSRF tokens are present in form HTML
+- [x] Verify forms submit successfully
+- [x] Verify CSRF tokens are present in form HTML
 
 ### Implementation Pattern
 ```html
@@ -182,7 +182,7 @@ Update all checkout-related forms to use Thymeleaf's `th:action` for automatic C
 - [x] Update payment form in `checkout/payment.html` (already uses th:action)
 - [x] Update place order form in `checkout/placeOrder.html` (already uses th:action)
 - [x] Replace hardcoded `action` attributes with `th:action` (already done)
-- [ ] Verify complete checkout flow works end-to-end
+- [x] Verify complete checkout flow works end-to-end
 
 ### Files to Modify
 - `implementation/src/main/resources/templates/checkout/shippingAddress.html` (line 11)
@@ -207,12 +207,12 @@ Update all checkout-related forms to use Thymeleaf's `th:action` for automatic C
 Verify that backoffice forms already use `th:action` and have CSRF protection working correctly.
 
 ### Acceptance Criteria
-- [ ] Verify backoffice login form uses `th:action`
-- [ ] Verify user management forms use `th:action`
-- [ ] Verify role management forms use `th:action`
-- [ ] Test backoffice login
-- [ ] Test user CRUD operations
-- [ ] Test role CRUD operations
+- [x] Verify backoffice login form uses `th:action`
+- [x] Verify user management forms use `th:action`
+- [x] Verify role management forms use `th:action`
+- [x] Test backoffice login
+- [x] Test user CRUD operations
+- [x] Test role CRUD operations
 
 ### Files to Verify
 - `implementation/src/main/resources/templates/backoffice/login.html`
@@ -236,11 +236,11 @@ Verify that backoffice forms already use `th:action` and have CSRF protection wo
 Add user-friendly error handling for CSRF validation failures, especially session timeouts.
 
 ### Acceptance Criteria
-- [ ] Update `CustomErrorController` to handle `session-expired` reason
-- [ ] Create error template with helpful message
-- [ ] Add "refresh page" button to error page
-- [ ] Test session timeout scenario
-- [ ] Verify error message is user-friendly
+- [x] Update `CustomErrorController` to handle `session-expired` reason
+- [x] Create error template with helpful message
+- [x] Add "refresh page" button to error page
+- [x] Test session timeout scenario
+- [x] Verify error message is user-friendly
 
 ### Implementation Details
 ```java
@@ -416,12 +416,12 @@ void backofficeCSRFStillEnabled() {
 Create integration tests that verify CSRF protection works correctly across the entire application.
 
 ### Acceptance Criteria
-- [ ] Test complete checkout flow with CSRF
-- [ ] Test cart operations with CSRF
-- [ ] Test account operations with CSRF
-- [ ] Test HTMX requests with CSRF
-- [ ] Test session timeout handling
-- [ ] All integration tests pass
+- [x] Test complete checkout flow with CSRF
+- [x] Test cart operations with CSRF
+- [x] Test account operations with CSRF
+- [x] Test HTMX requests with CSRF
+- [x] Test session timeout handling
+- [x] All integration tests pass
 
 ### Test Scenarios
 1. **Happy Path Checkout**
@@ -464,12 +464,12 @@ Create integration tests that verify CSRF protection works correctly across the 
 Create comprehensive manual test cases following the project's test documentation standards.
 
 ### Acceptance Criteria
-- [ ] Create test cases in `test-management/tests/security/` directory
-- [ ] Follow `test-management/tests/TEMPLATE.md` format
-- [ ] Cover all CSRF scenarios
-- [ ] Include positive and negative test cases
-- [ ] Create overview document
-- [ ] Link to ISTQB review document
+- [x] Create test cases in `test-management/tests/security/` directory
+- [x] Follow `test-management/tests/TEMPLATE.md` format
+- [x] Cover all CSRF scenarios
+- [x] Include positive and negative test cases
+- [x] Create overview document
+- [x] Link to ISTQB review document
 
 ### Test Cases to Create
 1. `TC_SEC_001.md` - CSRF Protection on Login
@@ -502,11 +502,11 @@ Create comprehensive manual test cases following the project's test documentatio
 Update project documentation to reflect CSRF protection implementation.
 
 ### Acceptance Criteria
-- [ ] Update `README.md` with security features
-- [ ] Update `SECURITY_AND_PCI.md` to mark SEC-007 as implemented
-- [ ] Add developer guide for CSRF in new forms
-- [ ] Update API documentation for excluded endpoints
-- [ ] Add troubleshooting section
+- [x] Update `README.md` with security features
+- [x] Update `SECURITY_AND_PCI.md` to mark SEC-007 as implemented
+- [x] Add developer guide for CSRF in new forms
+- [x] Update API documentation for excluded endpoints
+- [x] Add troubleshooting section
 
 ### Files to Modify
 - `implementation/README.md`

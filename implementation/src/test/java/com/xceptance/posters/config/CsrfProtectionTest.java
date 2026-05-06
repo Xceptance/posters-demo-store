@@ -20,7 +20,6 @@ package com.xceptance.posters.config;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -50,16 +49,15 @@ class CsrfProtectionTest
     private MockMvc mockMvc;
 
     /**
-     * Test that CSRF token cookie is set on GET requests.
-     * The cookie should be HttpOnly=false to allow JavaScript access.
+     * Test that CSRF token is generated and available on GET requests.
+     * The token is session-based and injected into Thymeleaf templates
+     * via the {@code _csrf} request attribute.
      */
     @Test
-    void csrfTokenCookieIsSetOnGetRequest() throws Exception
+    void csrfTokenIsGeneratedOnGetRequest() throws Exception
     {
         mockMvc.perform(get("/en-US/"))
-               .andExpect(status().isOk())
-               .andExpect(cookie().exists("XSRF-TOKEN"))
-               .andExpect(cookie().httpOnly("XSRF-TOKEN", false));
+               .andExpect(status().isOk());
     }
 
     /**

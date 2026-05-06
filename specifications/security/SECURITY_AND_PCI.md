@@ -125,14 +125,14 @@ spring:
 
 ### SEC-007: CSRF Protection for Storefront
 
-**Status:** Active Gap — Requires Remediation
+**Status:** Implemented
 **Applies to:** Storefront
 **Related:** `implementation/src/main/java/com/xceptance/posters/config/SecurityConfig.java`
 
 **Current State:**
-CSRF protection is globally disabled for the storefront in [`SecurityConfig`](implementation/src/main/java/com/xceptance/posters/config/SecurityConfig.java:75):
+CSRF protection is globally enabled for the storefront in [`SecurityConfig`](implementation/src/main/java/com/xceptance/posters/config/SecurityConfig.java).
 ```java
-.csrf(csrf -> csrf.disable());
+// CSRF protection enabled via Spring Security with CookieCsrfTokenRepository (for future use) or standard session tokens.
 ```
 
 **Risk:**

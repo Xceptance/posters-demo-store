@@ -33,19 +33,22 @@
         </style>
     </th:block>
     <!-- HTMX -->
+    <script th:src="@{/assets/js/htmx.min.js}"></script>
     
-    <!-- HTMX CSRF Configuration -->
+    <!-- HTMX CSRF Configuration (must be after HTMX is loaded) -->
     <script>
         // Configure HTMX to include CSRF token in all requests
-        document.body.addEventListener('htmx:configRequest', function(evt) {
-            const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
-            const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
-            if (token && header) {
-                evt.detail.headers[header] = token;
-            }
+        // Wait for DOM to be ready before attaching event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('htmx:configRequest', function(evt) {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                if (token && header) {
+                    evt.detail.headers[header] = token;
+                }
+            });
         });
     </script>
-    <script th:src="@{/assets/js/htmx.min.js}"></script>
 
     <!-- WebMCP: Browser Native Agent API Registry -->
     <script>

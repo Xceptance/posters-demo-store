@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>Session Expired</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center p-5">
+                        <!-- Icon -->
+                        <div class="mb-4">
+                            <i class="bi bi-clock-history text-warning" style="font-size: 4rem;"></i>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h1 class="h3 mb-3" th:text="${errorTitle} ?: 'Session Expired'">Session Expired</h1>
+                        
+                        <!-- Message -->
+                        <p class="text-muted mb-4" th:text="${errorMessage} ?: 'Your session has expired for security reasons. Please refresh the page and try again.'">
+                            Your session has expired for security reasons. Please refresh the page and try again.
+                        </p>
+                        
+                        <!-- Actions -->
+                        <div class="d-flex gap-3 justify-content-center">
+                            <button onclick="window.location.reload()" class="btn btn-primary">
+                                <i class="bi bi-arrow-clockwise me-2"></i>
+                                Refresh Page
+                            </button>
+                            <a th:href="@{'/' + ${urlLocale} + '/'}" class="btn btn-outline-secondary">
+                                <i class="bi bi-house me-2"></i>
+                                Go to Homepage
+                            </a>
+                        </div>
+                        
+                        <!-- Help Text -->
+                        <div class="mt-4 pt-4 border-top">
+                            <p class="small text-muted mb-0">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Sessions expire after 30 minutes of inactivity for your security.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
