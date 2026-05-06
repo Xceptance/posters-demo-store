@@ -47,6 +47,8 @@
 - [ ] BUS-BUG-18: Stemmer over-stemming causes false positives in search. Searching for "cat" also matches products containing "catch" (e.g., "Jerusalem Artichoke" description). The English stemmer reduces "catch" → "cat".
 - [ ] BUS-BUG-19: Search results heading is not localized for DE, SV, JA. It always shows `Results for '...' (N posters)` in English regardless of locale.
 - [ ] BUS-BUG-20: PDP has un-localized English text in JA locale: "All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish."
+- [ ] BUS-BUG-21: Usability issue with credit card input — Auto-fill or rapid entry (e.g. holding down '1') in the CC number field overflows into adjacent fields instead of stopping at the character limit. (Low priority)
+- [ ] BUS-BUG-22: Search for "Hornisse" fails in de-DE locale. It returns no results or incorrect results. Expected product "Europäische Hornisse" is missing.
 - [ ] BUS-IMPR-15: Searching for "a" returns 95 of 124 products. Single-letter stop words appear to be filtered by the English analyzer, preventing a full catalog search. Consider whether single-letter queries should bypass stop word filtering.
 - [ ] BUS-TASK-1: Formatting: Japanese address checkout routing (Prefecture → City → Block)
 - [ ] BUS-TASK-2: Logic: Yen-specific UI formatting and backend tax calculators

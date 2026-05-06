@@ -18,6 +18,7 @@
 
 ## Bugs
 - [ ] TECH-BUG-1: Cart quantity update causes page-in-page rendering — HTMX cart update (updateProductCount) returns full cart fragment but targets #cart-content with innerHTML swap, causing nested rendering. Fragment should either: (a) return only the inner content without wrapper div, or (b) use outerHTML swap strategy. Affects cart.html line 52 and cartBodyFragment.html structure.
+- [ ] TECH-BUG-2: Logout session termination incomplete — After logging out, clicking the browser's "Back" button successfully loads the authenticated account overview page. A subsequent refresh correctly forces a login screen. Indicates a critical caching or state mismatch issue, potentially architectural.
 
 ## Tasks
 *(None scheduled currently)*

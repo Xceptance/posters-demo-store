@@ -1,5 +1,11 @@
 # Simple Search — Single Term (Happy Path)
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| AI Copilot | 2026-05-06 | `❌ FAILED` | Local Environment | Fails in de-DE (logged BUS-BUG-22). Other locales passed. JP correctly uses Yen (updated test data). |
+
 Verify that entering a single known product-related search term returns relevant results with correctly localized product names, descriptions, images, prices, and a "Shop Now" action link. This is the primary search validation across all supported locales.
 
 ## Metadata
@@ -59,28 +65,28 @@ Verify that entering a single known product-related search term returns relevant
 
 ## Steps
 
-### 1. Navigate to the Store in the Target Locale
+### [x] 1. Navigate to the Store in the Target Locale
 
 - **Action:** Open the Posters Demo Store homepage in the target locale (e.g., `/{locale}/`).
 - **Verify:** The store loads in the correct locale. The header, navigation, and disclaimer banner are displayed in the expected language.
 
-### 2. Enter a Search Term
+### [x] 2. Enter a Search Term
 
 - **Action:** Locate the search input field in the header navigation bar (`#header-search-text`). Type the **Search Term** from the Test Data table for the current locale.
 - **Data:** Use the `Search Term` column for the current locale.
 - **Verify:** The search input field accepts the text without errors. Ignore any search suggestion dropdown — it is out of scope for this test.
 
-### 3. Submit the Search
+### [x] 3. Submit the Search
 
 - **Action:** Click the search button (`#header-search-button`) or press Enter to submit the search form.
 - **Verify:** The browser navigates to the search results page (`/{locale}/search?q=...`).
 
-### 4. Verify Search Results Heading
+### [x] 4. Verify Search Results Heading
 
 - **Action:** Observe the heading area on the search results page.
 - **Verify:** The heading displays `Results for '{Search Term}' (N posters)` where N is greater than 0.
 
-### 5. Verify Product Tiles
+### [x] 5. Verify Product Tiles
 
 - **Action:** Examine the product tiles in the results grid.
 - **Verify:** At least one product tile is visible. Each tile contains:
@@ -90,7 +96,7 @@ Verify that entering a single known product-related search term returns relevant
   - A **price** displayed with the expected currency symbol from the Test Data table.
   - A **"Shop Now"** button/link.
 
-### 6. Verify Expected Product is Present
+### [x] 6. Verify Expected Product is Present
 
 - **Action:** Scan the result tiles for the **Expected Product** from the Test Data table.
 - **Verify:** The expected product appears in the search results with its localized name matching the Test Data value.
