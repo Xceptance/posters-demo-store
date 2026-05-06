@@ -28,7 +28,7 @@
 - [ ] BUS-IMPR-3: Styling pagination including colors
 - [ ] BUS-IMPR-4: Show rest count when refining
 - [ ] BUS-IMPR-5: Double password when setting account
-- [ ] BUS-IMPR-6: Cart should not close when mouse hovers over it and stay open longer
+- [x] BUS-IMPR-6: Cart should not close when mouse hovers over it and stay open longer
 - [ ] BUS-IMPR-7: Close X for enlarged images needs contrast
 - [ ] BUS-IMPR-8: Add "progress" indicator for the storefront while the server starts
 - [ ] BUS-IMPR-9: Search results pagination — The search results page renders all matches up to a hard limit of 100 with no pagination. Category browsing pages already have pagination. Consider adding consistent pagination to search results.
