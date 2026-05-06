@@ -7,3 +7,7 @@
 *.iml
 *.log
 
+
+test-automation/allure-results/
+test-automation/build/
+test-automation/target/
