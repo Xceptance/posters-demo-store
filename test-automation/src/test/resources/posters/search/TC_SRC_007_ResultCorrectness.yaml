@@ -1,12 +1,13 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   Type '${searchTerm}' into the search field and submit.
   Verify the search results page loads with at least 2 results.
   Verify that every rendered product tile is a genuine match (the search term appears in the product name or description).
-  Verify that each tile displays a valid product image, non-empty product name, non-empty description, a price greater than 0, and a "Shop Now" action link.
+  Verify that each tile displays a valid product image, non-empty product name, non-empty description, a price greater than 0, and a CTA button.
   Find the product with name '${knownMatch1}'. Note its exact displayed name, image, and price.
-  Click on the product image or "Shop Now" link for '${knownMatch1}'.
+  Click on the product image or CTA button for '${knownMatch1}'.
   Verify the browser navigates to the Product Detail Page (PDP).
   Verify that the product name, image, and price on the PDP match exactly the ones noted from the search results.
 

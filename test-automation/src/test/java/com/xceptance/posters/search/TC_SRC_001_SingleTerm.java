@@ -5,6 +5,7 @@ import com.xceptance.neodymium.common.testdata.DataFile;
 import com.xceptance.neodymium.junit5.NeodymiumTest;
 import com.xceptance.neodymium.util.Neodymium;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
@@ -24,6 +25,14 @@ import io.qameta.allure.SeverityLevel;
 @Tag("full")
 public class TC_SRC_001_SingleTerm
 {
+
+    @BeforeAll
+    public static void setup()
+    {
+        // can be set in properties, just here so it's directly visible
+        // System.setProperty("neodymium.ai.interactive", "true");
+    }
+
     @NeodymiumTest
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that entering a single known product-related search term returns relevant results with correctly localized product names, descriptions, images, prices, and a 'Buy Here' action link.")

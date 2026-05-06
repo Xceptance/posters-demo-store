@@ -1,6 +1,7 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   Using only keyboard navigation (Tab key), navigate to the search input field.
   Verify the search input receives visible focus.
   Type '${searchTerm}' into the search input.
