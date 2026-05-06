@@ -8,6 +8,7 @@
 - [ ] BUS-EPIC-1: Backoffice
 - [ ] BUS-EPIC-2: Coupons
 - [ ] BUS-EPIC-3: Inventory
+- [ ] BUS-EPIC-4: PCI Compliance Guidelines — Establish strict guidelines for PCI handling across all areas (storefront and backoffice) to ensure credit card numbers are never exposed in server memory or stored unencrypted.
 
 ## Features
 - [x] BUS-FEAT-1: Footer checkout
@@ -17,6 +18,9 @@
 - [ ] BUS-FEAT-5: Refinements for search — Currently, all user input is sanitized via `MultiFieldQueryParser.escape()` before Lucene parsing, which neutralizes query syntax characters (`-`, `"`, `+`, `:`, etc.). This means advanced search features like negation (`-term`), exact phrase matching (`"exact phrase"`), and boolean operators are **not available** to end users. Consider selectively allowing safe Lucene syntax (e.g., quoted phrases for exact matching, `-` for exclusion) while still protecting against injection.
 - [ ] BUS-FEAT-6: Markdown styling of product and other texts
 - [ ] BUS-FEAT-7: SKU search — Product SKU codes (e.g., `P001-GRIBEA-V1M`) are not included in the Lucene search index. Adding SKU as a searchable field would enable support/backoffice lookup scenarios directly from the storefront search bar.
+- [ ] BUS-FEAT-8: Password requirements — No password validation exists for storefront registration or admin user creation. Passwords of any length/complexity are accepted and hashed. Add basic requirements (e.g., minimum length, complexity rules) for both storefront customers and backoffice admin users.
+- [ ] BUS-FEAT-9: Storefront password change — The storefront does not currently offer a password-change flow for logged-in customers. Adding this would allow `CustomerProfile.lastPasswordChange` to be updated at runtime.
+- [x] ~~BUS-FEAT-10: Backoffice password reset~~ — **INVALIDATED**: Not needed. Customers can reset their own passwords via the storefront (`BUS-FEAT-9`). Admin-triggered resets are unnecessary overhead.
 
 ## Improvements
 - [ ] BUS-IMPR-1: Localization of messages such as "this is a demo store", also the homepage message
@@ -43,6 +47,8 @@
 - [ ] BUS-BUG-18: Stemmer over-stemming causes false positives in search. Searching for "cat" also matches products containing "catch" (e.g., "Jerusalem Artichoke" description). The English stemmer reduces "catch" → "cat".
 - [ ] BUS-BUG-19: Search results heading is not localized for DE, SV, JA. It always shows `Results for '...' (N posters)` in English regardless of locale.
 - [ ] BUS-BUG-20: PDP has un-localized English text in JA locale: "All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish."
+- [ ] BUS-BUG-21: Usability issue with credit card input — Auto-fill or rapid entry (e.g. holding down '1') in the CC number field overflows into adjacent fields instead of stopping at the character limit. (Low priority)
+- [ ] BUS-BUG-22: Search for "Hornisse" fails in de-DE locale. It returns no results or incorrect results. Expected product "Europäische Hornisse" is missing.
 - [ ] BUS-IMPR-15: Searching for "a" returns 95 of 124 products. Single-letter stop words appear to be filtered by the English analyzer, preventing a full catalog search. Consider whether single-letter queries should bypass stop word filtering.
 - [ ] BUS-TASK-1: Formatting: Japanese address checkout routing (Prefecture → City → Block)
 - [ ] BUS-TASK-2: Logic: Yen-specific UI formatting and backend tax calculators

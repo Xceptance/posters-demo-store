@@ -27,9 +27,6 @@ Verify that entering a single known product-related search term returns relevant
 > [!TIP]
 > This test implicitly verifies that per-locale Lucene analyzers and stemmers are working correctly. If results appear in one locale but not another for the equivalent term, it indicates a language-specific indexing or analyzer issue.
 
-> [!CAUTION]
-> The ja-JP locale uses USD as its currency (it runs on the "Posters US" site). Do not expect Yen formatting.
-
 ## Preconditions
 
 - The Posters Demo Store is running.
@@ -42,7 +39,7 @@ Verify that entering a single known product-related search term returns relevant
 | :--- | :--- | :--- | :--- | :--- |
 | Search Term | `bear` | `Hornisse` | `björn` | `ダリア` |
 | Expected Product (contains) | `Grizzly Bear` | `Europäische Hornisse` | `Grizzlybjörn` | `ピンクのダリア` |
-| Expected Currency Symbol | `$` | `€` | `kr` | `$` |
+| Expected Currency Symbol | `$` | `€` | `kr` | `¥` |
 | Expected Description Language | English | German | Swedish | Japanese |
 
 ## Execution Targets

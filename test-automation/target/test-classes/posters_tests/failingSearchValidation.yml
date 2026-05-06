@@ -1,8 +1,0 @@
-prompt: |
-  Open ${neodymium.url}
-  Search for '${searchTerm}'.
-  Verify that at least one product is displayed in the search results.
-
-data:
-  - testId: "failingSearchValidation_case1"
-    searchTerm: "NonExistentProduct123456789"

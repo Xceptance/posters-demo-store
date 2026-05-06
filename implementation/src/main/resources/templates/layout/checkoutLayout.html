@@ -7,6 +7,10 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+    <!-- CSRF Token for JavaScript and HTMX -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="utf-8"/>
 
     <!-- Bootstrap Icons -->
@@ -18,11 +22,27 @@
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap-reboot.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap-utilities.css}"/>
 
+    
     <!-- Theme style  -->
     <link rel="stylesheet" th:href="@{/assets/css/style_reworked.css}"/>
 
     <!-- HTMX -->
     <script th:src="@{/assets/js/htmx.min.js}"></script>
+    
+    <!-- HTMX CSRF Configuration (must be after HTMX is loaded) -->
+    <script>
+        // Configure HTMX to include CSRF token in all requests
+        // Wait for DOM to be ready before attaching event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('htmx:configRequest', function(evt) {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                if (token && header) {
+                    evt.detail.headers[header] = token;
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>

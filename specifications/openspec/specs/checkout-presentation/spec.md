@@ -19,7 +19,10 @@ The final step of the checkout flow ("Review & Place Order") must render the exa
 - **Documentation**: All new service methods, configuration objects, and DTOs MUST contain formal Javadoc headers explaining their structural behaviors. 
 - **Formatting**: The system MUST adhere to Allman brace styles.
 
-### 2.4. Testing Requirements
+### 2.4. Checkout Indicator Integration
+- **Include Checkout Indicator**: All checkout step templates (shipping, billing, payment, overview, and confirmation) MUST incorporate the `checkout-indicator` fragment above the primary checkout content and pass the correct current step identifier to the fragment.
+
+### 2.5. Testing Requirements
 - The DTO generation engine MUST have explicit unit coverage ensuring image mappings don't fail for newly added catalog items `CartServiceTest`.
 - The presentation layer MUST undergo an end-to-end integration test asserting DOM presence of image references within the Checkout stage `CheckoutControllerUiTest`.
 - Refactored `CartController` endpoints must be asserted via regression testing to ensure the DTO extraction does not inherently break the mini-cart or primary cart layouts.
