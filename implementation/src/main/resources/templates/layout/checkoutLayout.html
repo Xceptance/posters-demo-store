@@ -182,15 +182,23 @@
 
             // After HTMX swaps mini-cart content (e.g. add-to-cart), open the
             // Bootstrap offcanvas briefly so the user sees the update.
+            var miniCartTimeout;
             var miniCartContent = document.getElementById('mini-cart-content');
-            if (miniCartContent) {
-                miniCartContent.addEventListener('htmx:afterSwap', function() {
-                    var offcanvasEl = document.getElementById('miniCartOffcanvas');
-                    if (offcanvasEl) {
+            var offcanvasEl = document.getElementById('miniCartOffcanvas');
+            
+            if (miniCartContent && offcanvasEl) {
+                miniCartContent.addEventListener('htmx:afterSwap', function(e) {
+                    var path = e.detail.requestConfig ? e.detail.requestConfig.path : '';
+                    if (path.indexOf('addToCartSlider') !== -1) {
                         var oc = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
                         oc.show();
-                        setTimeout(function() { oc.hide(); }, 2000);
+                        if (miniCartTimeout) clearTimeout(miniCartTimeout);
+                        miniCartTimeout = setTimeout(function() { oc.hide(); }, 3000);
                     }
+                });
+                
+                offcanvasEl.addEventListener('mouseenter', function() {
+                    if (miniCartTimeout) clearTimeout(miniCartTimeout);
                 });
             }
 
