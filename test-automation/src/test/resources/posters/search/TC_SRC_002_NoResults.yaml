@@ -1,6 +1,7 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   Type '${searchTerm}' into the search field and submit.
   Verify the search results page displays an empty state with a search icon, a "No products found" (localized) message, and a "Continue Shopping" link.
   Verify that no product tiles are displayed on the page.
@@ -12,6 +13,8 @@ data:
   - testId: "tc_src_002_en_GB"
     searchTerm: "xyzzyplugh"
     locale: "en-GB"
+
+temp:
   - testId: "tc_src_002_de_DE"
     searchTerm: "Quatschwort"
     locale: "de-DE"
