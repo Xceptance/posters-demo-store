@@ -1,6 +1,7 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   Type '${partialTerm}' into the search field and submit.
   Verify the search results page loads without errors.
   Verify that at least ${minExpectedResults} product tiles are displayed.

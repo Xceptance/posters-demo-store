@@ -1,6 +1,7 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   Type '${searchTerm}' into the search field and submit.
   Verify the search results heading correctly matches the format: "${expectedHeadingFormat}" where N is the number of results.
   Count the visible product tiles on the page.

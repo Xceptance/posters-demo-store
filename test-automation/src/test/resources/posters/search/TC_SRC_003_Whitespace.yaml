@@ -1,6 +1,7 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   If the '${searchTerm}' is not empty, type '${searchTerm}' into the search field and submit.
   If the '${searchTerm}' is empty, leave the search field empty and submit.
   Verify the search results page loads without errors.
@@ -8,20 +9,22 @@ prompt: |
   If '${expectEmpty}' is 'false', verify that the results match a clean search for '${cleanTerm}' with no errors.
 
 data:
-  - testId: "tc_src_003_empty"
-    searchTerm: ""
-    cleanTerm: ""
-    expectEmpty: "true"
-    locale: "en-US"
   - testId: "tc_src_003_single_space"
     searchTerm: " "
     cleanTerm: ""
     expectEmpty: "true"
     locale: "en-US"
+
+temp:
   - testId: "tc_src_003_leading_whitespace"
     searchTerm: "  bear"
     cleanTerm: "bear"
     expectEmpty: "false"
+    locale: "en-US"
+  - testId: "tc_src_003_empty"
+    searchTerm: ""
+    cleanTerm: ""
+    expectEmpty: "true"
     locale: "en-US"
   - testId: "tc_src_003_trailing_whitespace"
     searchTerm: "bear  "

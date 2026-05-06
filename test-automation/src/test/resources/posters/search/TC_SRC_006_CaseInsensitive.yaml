@@ -1,6 +1,7 @@
 prompt: |
   Open ${neodymium.url}
-  Switch to the ${locale} locale.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
   Type '${baselineTerm}' into the search field and submit.
   Note the result count and product names.
   Clear the search input.
