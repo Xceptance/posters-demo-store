@@ -1,0 +1,640 @@
+{
+  "id": "com.xceptance.posters.checkout.TC_CHK_001_GuestCheckout :: executePosterTest :: tc_chk_001_de_DE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the DOM, the element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is identified as the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027de-DE\u0027 in the opened dialog",
+      "reasoning": "The instruction is to click the country represented by locale \u0027de-DE\u0027. The DOM shows a link with id \u0027loc-de-de\u0027 and text \u0027Deutsch (Deutschland)\u0027 which corresponds to the \u0027de-DE\u0027 locale.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-de-de",
+          "description": "Click the link for Deutsch (Deutschland) locale",
+          "elementDetails": "🇩🇪 Deutsch (Deutschland)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇩🇪\nDeutsch (Deutschland)",
+            "id": "loc-de-de",
+            "href": "http://localhost:8080/de-DE/",
+            "tagName": "a"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Navigate to the product detail page for any product.",
+      "reasoning": "The instruction is to navigate to a product detail page. The DOM shows several product tiles with \u0027Jetzt Shoppen\u0027 buttons that link directly to product detail pages. I chose to click the \u0027Jetzt Shoppen\u0027 button for the \u0027Grizzlybär\u0027 product.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_yeepnm",
+          "description": "Click on the \u0027Jetzt Shoppen\u0027 button for the \u0027Grizzlybär\u0027 product to navigate to its detail page.",
+          "elementDetails": "Jetzt Shoppen button for Grizzlybär",
+          "elementContext": {
+            "classes": "btn btn-primary product-tile-btn-buy",
+            "text": "Jetzt Shoppen",
+            "href": "http://localhost:8080/de-DE/product/Grizzlyb%C3%A4r/1",
+            "tagName": "a"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Select a size and style and click the Add to Cart button.",
+      "reasoning": "The instruction requires selecting a size, a style, and then clicking the \u0027Add to Cart\u0027 button. I identified the dropdown for size selection, the radio button for style, and the \u0027Add to Cart\u0027 button using their respective IDs and text. I chose \u002724x18 cm\u0027 for size and clicked the \u0027Matt\u0027 radio button for style, then clicked \u0027In Den Warenkorb\u0027.",
+      "actions": [
+        {
+          "type": "SELECT",
+          "target": "#product-detail-form-size-selection",
+          "value": [
+            "24x18 cm"
+          ],
+          "description": "Select size \u002724x18 cm\u0027 from the dropdown.",
+          "elementDetails": "size selection dropdown",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "size",
+            "text": "16x12 cm",
+            "id": "product-detail-form-size-selection",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "CLICK",
+          "target": "#finish-matte",
+          "description": "Select the \u0027Matt\u0027 finish style.",
+          "elementDetails": "radio button for Matt finish",
+          "elementContext": {
+            "classes": "form-check-input",
+            "name": "finish",
+            "id": "finish-matte",
+            "tagName": "input",
+            "type": "radio"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "CLICK",
+          "target": "#btn-add-to-cart",
+          "description": "Click the \u0027In Den Warenkorb\u0027 (Add to Cart) button.",
+          "elementDetails": "Add to Cart button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "In Den Warenkorb",
+            "id": "btn-add-to-cart",
+            "tagName": "button",
+            "type": "button"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the count shown next to the cart icon is  \u00271\u0027.",
+      "reasoning": "The instruction is to verify the count next to the cart icon is \u00271\u0027. I found an element with id \u0027header-cart-count\u0027 and text content \u00271\u0027, which directly matches the instruction.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#header-cart-count",
+          "value": [
+            "1"
+          ],
+          "description": "Verify the count shown next to the cart icon is \u00271\u0027.",
+          "elementDetails": "Cart count display with text \u00271\u0027",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Open the mini-cart and click translate(\"View Cart\").",
+      "reasoning": "The previous attempt failed because the \u0027View Cart\u0027 link (\u0027Warenkorb Ansehen\u0027) was likely not visible as the mini-cart was not open. The first action is to click the \u0027Cart Overview\u0027 icon to open the mini-cart. The second action is to then click the \u0027Warenkorb Ansehen\u0027 link, which should now be visible within the opened mini-cart.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#header-cart-overview",
+          "description": "Open the mini-cart by clicking the cart overview icon.",
+          "elementDetails": "Cart Overview link with text \u00271\u0027",
+          "elementContext": {
+            "classes": "nav-link",
+            "text": "  1",
+            "id": "header-cart-overview",
+            "href": "http://localhost:8080/de-DE/product/Grizzlyb%C3%A4r/1#miniCartOffcanvas",
+            "tagName": "a"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "Warenkorb Ansehen",
+          "description": "Click the \u0027View Cart\u0027 link inside the mini-cart.",
+          "elementDetails": "Link with text \u0027Warenkorb Ansehen\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary form-control go-to-cart",
+            "text": "Warenkorb Ansehen",
+            "href": "http://localhost:8080/de-DE/cart",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click \"Checkout\".",
+      "reasoning": "The instruction is to click \u0027Checkout\u0027. I found a link with the id \u0027btn-checkout\u0027 and the text \u0027Zur Kasse\u0027, which translates to \u0027Checkout\u0027 in German. This is the correct element to click.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-checkout",
+          "description": "Clicking the \u0027Zur Kasse\u0027 (Checkout) button.",
+          "elementDetails": "Zur Kasse button",
+          "elementContext": {
+            "classes": "btn btn-primary w-100 btn-lg mt-3",
+            "text": "Zur Kasse",
+            "id": "btn-checkout",
+            "href": "http://localhost:8080/de-DE/checkout/shippingAddress",
+            "tagName": "a"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is taken into the checkout.",
+      "reasoning": "The current URL \u0027http://localhost:8080/de-DE/checkout/shippingAddress\u0027 clearly indicates that the user is in the checkout process, specifically on the shipping address step. The page title and heading also confirm this.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "checkout"
+          ],
+          "description": "Verify the current URL contains \u0027checkout\u0027 to confirm being in the checkout process.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is presented with the Shipping Address form.",
+      "reasoning": "The instruction is to verify the user is presented with the Shipping Address form. I found a form with id \u0027shipping-form\u0027 and a heading \u0027Lieferadresse\u0027 (Shipping Address) on the page, confirming the presence of the form.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#shipping-form",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the shipping address form is visible.",
+          "elementDetails": "shipping-form",
+          "elementContext": {},
+          "replay": "(Replay)"
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neodymium-automation-id\u003d\u0027xc_dv732f\u0027]",
+          "value": [
+            "Lieferadresse"
+          ],
+          "description": "Verify the heading \u0027Lieferadresse\u0027 (Shipping Address) is present.",
+          "elementDetails": "Lieferadresse heading",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Fill out the shipping address form using: First Name \u0027Hans\u0027, Last Name \u0027Müller\u0027, Company \u0027Beispiel GmbH\u0027, Address \u0027Musterstraße 1\u0027, City \u0027Berlin\u0027, State \u0027Berlin\u0027, Zip \u002710115\u0027, Country \u0027Deutschland\u0027.",
+      "reasoning": "All specified fields for the shipping address form were found in the DOM and corresponding TYPE and SELECT actions have been generated to fill them with the provided data.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#firstName",
+          "value": [
+            "Hans"
+          ],
+          "description": "Type \u0027Hans\u0027 into the First Name field.",
+          "elementDetails": "First Name input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "firstName",
+            "id": "firstName",
+            "placeholder": "First Name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#name",
+          "value": [
+            "Müller"
+          ],
+          "description": "Type \u0027Müller\u0027 into the Last Name field.",
+          "elementDetails": "Last Name input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "name",
+            "placeholder": "Last Name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#company",
+          "value": [
+            "Beispiel GmbH"
+          ],
+          "description": "Type \u0027Beispiel GmbH\u0027 into the Company field.",
+          "elementDetails": "Company input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "company",
+            "id": "company",
+            "placeholder": "Company",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#addressLine",
+          "value": [
+            "Musterstraße 1"
+          ],
+          "description": "Type \u0027Musterstraße 1\u0027 into the Address field.",
+          "elementDetails": "Address input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "addressLine",
+            "id": "addressLine",
+            "placeholder": "Address",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#city",
+          "value": [
+            "Berlin"
+          ],
+          "description": "Type \u0027Berlin\u0027 into the City field.",
+          "elementDetails": "City input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "city",
+            "id": "city",
+            "placeholder": "City",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#state",
+          "value": [
+            "Berlin"
+          ],
+          "description": "Type \u0027Berlin\u0027 into the State field.",
+          "elementDetails": "State input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "state",
+            "id": "state",
+            "placeholder": "State",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#zip",
+          "value": [
+            "10115"
+          ],
+          "description": "Type \u002710115\u0027 into the ZIP field.",
+          "elementDetails": "ZIP input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "zip",
+            "id": "zip",
+            "placeholder": "ZIP",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "SELECT",
+          "target": "#country",
+          "value": [
+            "Deutschland"
+          ],
+          "description": "Select \u0027Deutschland\u0027 from the Country dropdown.",
+          "elementDetails": "Country dropdown",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "country",
+            "text": "Vereinigte Staaten",
+            "id": "country",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Submit the shipping address form.",
+      "reasoning": "The instruction is to submit the shipping address form. I identified the submit button for the shipping form by its ID \u0027btn-submit-shipping\u0027 and its text \u0027Weiter Zur Rechnung\u0027 (Continue to Invoice).",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-shipping",
+          "description": "Click the \u0027Weiter Zur Rechnung\u0027 button to submit the shipping address form.",
+          "elementDetails": "Button with text \u0027Weiter Zur Rechnung\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "Weiter Zur Rechnung",
+            "id": "btn-submit-shipping",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the billing address form is displayed.",
+      "reasoning": "The instruction is to verify the billing address form is displayed. I found a form element with id \u0027billing-form\u0027 in the DOM, which contains all the billing address fields. Asserting its visibility confirms the form is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#billing-form",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the billing address form is displayed.",
+          "elementDetails": "billing-form",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Select \"Use shipping address for billing\" and submit the form.",
+      "reasoning": "The instruction requires selecting the \u0027Use shipping address for billing\u0027 checkbox and then submitting the form. I identified the checkbox by its id \u0027sameAsShipping\u0027 and the submit button by its id \u0027btn-submit-billing\u0027 and text \u0027Weiter Zur Zahlung\u0027.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#sameAsShipping",
+          "description": "Select \u0027Use shipping address for billing\u0027 checkbox",
+          "elementDetails": "Checkbox with id \u0027sameAsShipping\u0027 and text \u0027Gleich wie Lieferadresse\u0027",
+          "elementContext": {
+            "classes": "form-check-input",
+            "id": "sameAsShipping",
+            "tagName": "input",
+            "type": "checkbox"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-billing",
+          "description": "Submit the billing address form",
+          "elementDetails": "Button with id \u0027btn-submit-billing\u0027 and text \u0027Weiter Zur Zahlung\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "Weiter Zur Zahlung",
+            "id": "btn-submit-billing",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the Payment method or Order Review step is displayed.",
+      "reasoning": "The current page URL and title indicate the \u0027Payment\u0027 step. The \u0027Zahlung\u0027 heading and the highlighted \u00273 Zahlung\u0027 in the checkout progress bar confirm that the Payment method step is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "h1",
+          "value": [
+            "Zahlung"
+          ],
+          "description": "Verify the \u0027Zahlung\u0027 (Payment) heading is displayed, indicating the Payment method step.",
+          "elementDetails": "Heading with text \u0027Zahlung\u0027",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Select credit card as the payment method, enter the card details: Name \u0027Hans Müller\u0027, Card \u00271111222233334444\u0027, Exp Month \u002712\u0027, Exp Year \u00272030\u0027, CVV \u0027112\u0027 and proceed.",
+      "reasoning": "The instruction requires filling out credit card details and then proceeding. I identified the input fields for card name, card number, expiry date, and CVV using their respective IDs. The expiry month and year were combined into the MM/YY format for the \u0027expiry\u0027 field. Finally, I added an action to click the \u0027Weiter Zur Übersicht\u0027 button to proceed.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cardName",
+          "value": [
+            "Hans Müller"
+          ],
+          "description": "Enter cardholder name \u0027Hans Müller\u0027",
+          "elementDetails": "Input field with id \u0027cardName\u0027 and placeholder \u0027Name on Card\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "cardName",
+            "placeholder": "Name on Card",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#cardNumber",
+          "value": [
+            "1111222233334444"
+          ],
+          "description": "Enter credit card number \u00271111222233334444\u0027",
+          "elementDetails": "Input field with id \u0027cardNumber\u0027 and placeholder \u00274111 1111 1111 1111\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "cardNumber",
+            "id": "cardNumber",
+            "placeholder": "4111 1111 1111 1111",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#expiry",
+          "value": [
+            "12/30"
+          ],
+          "description": "Enter expiry date \u002712/30\u0027",
+          "elementDetails": "Input field with id \u0027expiry\u0027 and placeholder \u0027MM/YY\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "expiry",
+            "id": "expiry",
+            "placeholder": "MM/YY",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "TYPE",
+          "target": "#cvv",
+          "value": [
+            "112"
+          ],
+          "description": "Enter CVV \u0027112\u0027",
+          "elementDetails": "Input field with id \u0027cvv\u0027 and placeholder \u0027123\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "cvv",
+            "id": "cvv",
+            "placeholder": "123",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "(Replay)"
+        },
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-payment",
+          "description": "Click \u0027Weiter Zur Übersicht\u0027 button to proceed",
+          "elementDetails": "Button with id \u0027btn-submit-payment\u0027 and text \u0027Weiter Zur Übersicht\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "Weiter Zur Übersicht",
+            "id": "btn-submit-payment",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the Order Review/Summary page is displayed.",
+      "reasoning": "The instruction is to verify the Order Review/Summary page. The page title is \u0027Review Order\u0027 and the main heading \u0027Überprüfen \u0026 Bestellen\u0027 (Review \u0026 Order) is clearly visible in the DOM, confirming the correct page is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "h1.mb-4",
+          "value": [
+            "Überprüfen \u0026 Bestellen"
+          ],
+          "description": "Verify the main heading \u0027Überprüfen \u0026 Bestellen\u0027 is displayed, indicating the Order Review/Summary page.",
+          "elementDetails": "Heading \u0027Überprüfen \u0026 Bestellen\u0027",
+          "elementContext": {},
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Review the totals and click \"Place Order\".",
+      "reasoning": "The instruction is to review totals and click \u0027Place Order\u0027. The DOM shows a button with id \u0027btn-place-order\u0027 and text \u0027Bestellung Platzieren\u0027, which is the German translation for \u0027Place Order\u0027. I will click this button.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-place-order",
+          "description": "Click the \u0027Place Order\u0027 button after reviewing totals.",
+          "elementDetails": "Bestellung Platzieren button",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg w-100 mt-3",
+            "text": "Bestellung Platzieren",
+            "id": "btn-place-order",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "(Replay)"
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is redirected to the Order Confirmation page, and an order number is displayed.",
+      "reasoning": "The current URL confirms the user is on the Order Confirmation page. I found a specific element containing the order number \u0027ORD-1778108030942\u0027 and will assert that it contains \u0027ORD-\u0027. This addresses the previous failure by targeting the actual order number element instead of its label.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/de-DE/checkout/orderConfirmation"
+          ],
+          "description": "Verify the user is on the Order Confirmation page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neodymium-automation-id\u003d\u0027xc_uuzmep\u0027]",
+          "value": [
+            "ORD-"
+          ],
+          "description": "Verify an order number is displayed.",
+          "elementDetails": "Order ID number",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

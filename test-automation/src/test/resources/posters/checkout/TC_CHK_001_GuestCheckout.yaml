@@ -1,0 +1,99 @@
+context: >
+  If you cannot find an element or make sense our of names, try to translate the user supplied data into the language behind ${locale}. 
+  Additionally all user translatable data is formatted like this translate('NAME').
+
+prompt: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Navigate to the product detail page for any product.
+  Select a size and style and click the Add to Cart button.
+  Close the mini-cart if it is open.
+  Verify the count shown next to the cart icon is  '1'.
+  Open the mini-cart and click translate("View Cart"). 
+  Click translate("Checkout").
+  Verify the user is taken into the checkout.
+  Verify the user is presented with the Shipping Address form.
+  Fill out the shipping address form using: First Name '${firstName}', Last Name '${lastName}', Company '${company}', Address '${address}', City '${city}', State '${state}', Zip '${zip}', Country translate('${country})'.
+  Submit the shipping address form.
+  Verify the billing address form is displayed.
+  Select "Use shipping address for billing" and submit the form.
+  Verify the Payment method or Order Review step is displayed.
+  Select credit card as the payment method, enter the card details: Name '${firstName} ${lastName}', Card '${creditCard}', Exp Month '${expMonth}', Exp Year '${expYear}', CVV '112' and proceed.
+  Verify the Order Review/Summary page is displayed.
+  Review the totals and click "Place Order".
+  Verify the user is redirected to the Order Confirmation page, and an order number is displayed.
+
+data:
+  - testId: "tc_chk_001_en_GB"
+    locale: "en-GB"
+    firstName: "James"
+    lastName: "Smith"
+    company: "British Industries"
+    address: "456 High St"
+    city: "London"
+    state: "London"
+    zip: "W1D 1BS"
+    country: "United Kingdom"
+    email: "james.smith@example.co.uk"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030"
+
+temp:    
+  - testId: "tc_chk_001_de_DE"
+    locale: "de-DE"
+    firstName: "Hans"
+    lastName: "Müller"
+    company: "Beispiel GmbH"
+    address: "Musterstraße 1"
+    city: "Berlin"
+    state: "Berlin"
+    zip: "10115"
+    country: "Deutschland"
+    email: "hans.mueller@example.de"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030"
+  - testId: "tc_chk_001_sv_SE"
+    locale: "sv-SE"
+    firstName: "Erik"
+    lastName: "Johansson"
+    company: "Svensk AB"
+    address: "Storgatan 1"
+    city: "Stockholm"
+    state: "Stockholms län"
+    zip: "111 20"
+    country: "Sweden"
+    email: "erik.johansson@example.se"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030"
+  - testId: "tc_chk_001_ja_JP"
+    locale: "ja-JP"
+    firstName: "太郎"
+    lastName: "山田"
+    company: "株式会社サンプル"
+    address: "渋谷区渋谷1-1-1"
+    city: "東京"
+    state: "東京都"
+    zip: "150-0002"
+    country: "Japan"
+    email: "taro.yamada@example.co.jp"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030"
+  - testId: "tc_chk_001_en_US"
+    locale: "en-US"
+    firstName: "John"
+    lastName: "Doe"
+    company: "Acme Corp"
+    address: "123 Main St"
+    city: "Austin"
+    state: "Texas"
+    zip: "78701"
+    country: "United States"
+    email: "john.doe@example.com"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030"
