@@ -20,9 +20,9 @@ import java.util.UUID;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-@Entity(name = "CatalogCustomer")
+@Entity(name = "Customer")
 @Table(name = "customers")
-public class CatalogCustomer {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -30,6 +30,10 @@ public class CatalogCustomer {
 
     @Version
     private Integer version;
+
+    @Column(name = "customer_number", insertable = false, updatable = false, columnDefinition = "bigint auto_increment")
+    @org.hibernate.annotations.Generated
+    private Long customerNumber;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -72,6 +76,14 @@ public class CatalogCustomer {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Long getCustomerNumber() {
+        return customerNumber;
+    }
+
+    public void setCustomerNumber(Long customerNumber) {
+        this.customerNumber = customerNumber;
     }
 
     public String getEmail() {

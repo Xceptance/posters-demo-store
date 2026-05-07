@@ -1,6 +1,8 @@
 package com.xceptance.posters.service;
 
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,8 +18,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.xceptance.posters.config.PostersProperties;
-import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.entity.Customer;
+import com.xceptance.posters.entity.CustomerProfile;
+import com.xceptance.posters.repository.CustomerRepository;
+import com.xceptance.posters.repository.CustomerProfileRepository;
 import com.xceptance.posters.util.CatalogDataLoader;
 import com.xceptance.posters.util.CatalogImportParser;
 import com.xceptance.posters.repository.CatalogProductRepository;
@@ -33,19 +37,25 @@ public class DataImportService implements CommandLineRunner
     private static final Logger log = LoggerFactory.getLogger(DataImportService.class);
 
     private final CatalogProductRepository catalogProductRepository;
-    private final CatalogCustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomerProfileRepository customerProfileRepository;
+    private final CustomerSearchService customerSearchService;
     private final PostersProperties props;
     private final LuceneSearchService luceneSearchService;
     private final CatalogDataLoader catalogDataLoader;
 
     public DataImportService(CatalogProductRepository catalogProductRepository,
-                             CatalogCustomerRepository customerRepository,
+                             CustomerRepository customerRepository,
+                             CustomerProfileRepository customerProfileRepository,
+                             CustomerSearchService customerSearchService,
                              PostersProperties props,
                              LuceneSearchService luceneSearchService,
                              CatalogDataLoader catalogDataLoader)
     {
         this.catalogProductRepository = catalogProductRepository;
         this.customerRepository = customerRepository;
+        this.customerProfileRepository = customerProfileRepository;
+        this.customerSearchService = customerSearchService;
         this.props = props;
         this.luceneSearchService = luceneSearchService;
         this.catalogDataLoader = catalogDataLoader;
@@ -73,7 +83,10 @@ public class DataImportService implements CommandLineRunner
         }
 
         // Build Lucene search index from catalog products
-        luceneSearchService.buildIndex(java.util.Set.of("en-US", "de-DE", "sv-SE", "ja-JP"));
+        luceneSearchService.buildIndex(Set.of("en-US", "de-DE", "sv-SE", "ja-JP"));
+
+        // Trigger async search indexer for customers after XML import
+        customerSearchService.triggerFullIndex();
 
         log.info("Data import complete.");
     }
@@ -108,13 +121,20 @@ public class DataImportService implements CommandLineRunner
                 continue;
             }
 
-            CatalogCustomer customer = new CatalogCustomer();
+            Customer customer = new Customer();
             customer.setEmail(email);
             customer.hashPassword(getTextContent(custEl, "password"));
             customer.setLastName(getTextContent(custEl, "name"));
             customer.setFirstName(getTextContent(custEl, "firstName"));
 
-            customerRepository.save(customer);
+            customer = customerRepository.save(customer);
+
+            final CustomerProfile profile = new CustomerProfile();
+            profile.setCustomer(customer);
+            profile.setPassword(customer.getPassword());
+            profile.setLastPasswordChange(LocalDateTime.now());
+            customerProfileRepository.save(profile);
+
             log.info("Imported demo customer: {}", email);
         }
     }

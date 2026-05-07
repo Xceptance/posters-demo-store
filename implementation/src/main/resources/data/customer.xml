@@ -5,31 +5,59 @@
 		<password>topsecret</password>
 		<name>Doe</name>
 		<firstName>John</firstName>
-		<shippingAddress>
-			<delName>Doe</delName>
-			<delFirstName>John</delFirstName>
-			<delCompany>John Doe Inc.</delCompany>
-			<delAddressLine>5-7 John Doe street</delAddressLine>
-			<delCity>New York</delCity>
-			<delState>NY</delState>
-			<delCountry>United States</delCountry>
-			<delZip>12345</delZip>
-		</shippingAddress>
-		<billingAddress>
-			<billName>Doe</billName>
-			<billFirstName>John</billFirstName>
-			<billCompany>John Doe Inc.</billCompany>
-			<billAddressLine>5-7 John Doe street</billAddressLine>
-			<billCity>New York</billCity>
-			<billState>NY</billState>
-			<billCountry>United States</billCountry>
-			<billZip>12345</billZip>
-		</billingAddress>
-		<paymentMethod>
-			<paymentName>John Doe</paymentName>
-			<cardNumber>4111111111111111</cardNumber>
-			<month>08</month>
-			<year>2024</year>
-		</paymentMethod>
+	</customer>
+	<customer>
+		<email>janedoe@example.com</email>
+		<password>topsecret</password>
+		<name>Doe</name>
+		<firstName>Jane</firstName>
+	</customer>
+	<customer>
+		<email>alice.smith@example.com</email>
+		<password>topsecret</password>
+		<name>Smith</name>
+		<firstName>Alice</firstName>
+	</customer>
+	<customer>
+		<email>bob.jones@example.com</email>
+		<password>topsecret</password>
+		<name>Jones</name>
+		<firstName>Bob</firstName>
+	</customer>
+	<customer>
+		<email>carol.white@example.com</email>
+		<password>topsecret</password>
+		<name>White</name>
+		<firstName>Carol</firstName>
+	</customer>
+	<customer>
+		<email>dave.brown@example.com</email>
+		<password>topsecret</password>
+		<name>Brown</name>
+		<firstName>Dave</firstName>
+	</customer>
+	<customer>
+		<email>eve.black@example.com</email>
+		<password>topsecret</password>
+		<name>Black</name>
+		<firstName>Eve</firstName>
+	</customer>
+	<customer>
+		<email>frank.green@example.com</email>
+		<password>topsecret</password>
+		<name>Green</name>
+		<firstName>Frank</firstName>
+	</customer>
+	<customer>
+		<email>grace.hall@example.com</email>
+		<password>topsecret</password>
+		<name>Hall</name>
+		<firstName>Grace</firstName>
+	</customer>
+	<customer>
+		<email>heidi.king@example.com</email>
+		<password>topsecret</password>
+		<name>King</name>
+		<firstName>Heidi</firstName>
 	</customer>
 </customers>

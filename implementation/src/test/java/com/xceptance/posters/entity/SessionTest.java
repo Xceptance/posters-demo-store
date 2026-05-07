@@ -15,8 +15,8 @@ class SessionTest {
     @Autowired
     private TestEntityManager em;
 
-    private CatalogCustomer createCustomer(String email) {
-        CatalogCustomer c = new CatalogCustomer();
+    private Customer createCustomer(String email) {
+        Customer c = new Customer();
         c.setEmail(email);
         c.setFirstName("Test");
         c.setLastName("User");
@@ -37,7 +37,7 @@ class SessionTest {
 
     @Test
     void testIdentifiedSession() {
-        CatalogCustomer c = createCustomer("identified@example.com");
+        Customer c = createCustomer("identified@example.com");
 
         CatalogSession session = new CatalogSession();
         session.setId(UUID.randomUUID().toString());
@@ -56,7 +56,7 @@ class SessionTest {
 
     @Test
     void testAuthenticatedSession() {
-        CatalogCustomer c = createCustomer("auth@example.com");
+        Customer c = createCustomer("auth@example.com");
 
         CatalogSession session = new CatalogSession();
         session.setId(UUID.randomUUID().toString());
@@ -75,7 +75,7 @@ class SessionTest {
 
     @Test
     void testTransitionAnonymousToAuthenticated() {
-        CatalogCustomer c = createCustomer("transition@example.com");
+        Customer c = createCustomer("transition@example.com");
 
         CatalogSession session = new CatalogSession();
         session.setId(UUID.randomUUID().toString());

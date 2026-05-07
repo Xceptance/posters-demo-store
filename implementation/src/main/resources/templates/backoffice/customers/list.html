@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Customers</div>
+
+    <div layout:fragment="pageActions">
+    </div>
+
+    <div layout:fragment="content">
+        <div class="bo-card">
+            <!-- Search Bar -->
+            <div class="bo-card-header d-flex justify-content-between align-items-center">
+                <form th:action="@{/backoffice/customers}" method="get" class="d-flex w-50">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <span class="material-symbols-outlined fs-5">search</span>
+                        </span>
+                        <input type="text" name="q" class="form-control border-start-0 ps-0" 
+                               placeholder="Search by exact match, email, or name..." th:value="${q}">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="bo-card-body p-0">
+                <div th:if="${result.items.empty}" class="p-5 text-center text-muted">
+                    <span class="material-symbols-outlined fs-1 mb-3">group_off</span>
+                    <h5>No customers found</h5>
+                    <p th:if="${not #strings.isEmpty(q)}">Try adjusting your search criteria.</p>
+                </div>
+                
+                <div th:unless="${result.items.empty}" class="table-responsive">
+                    <table class="table bo-table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Customer Number</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Order Count</th>
+                                <th>Last Login</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item : ${result.items}">
+                                <td>
+                                    <span class="badge bg-light text-dark border" th:text="${item.customer.customerNumber}">1001</span>
+                                </td>
+                                <td>
+                                    <div class="fw-bold" th:text="${item.customer.firstName + ' ' + item.customer.lastName}">John Doe</div>
+                                </td>
+                                <td>
+                                    <span th:text="${item.customer.email}">john@example.com</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info text-white rounded-pill" th:text="${item.orderCount}">5</span>
+                                </td>
+                                <td>
+                                    <span th:if="${item.profile != null and item.profile.lastLogin != null}" 
+                                          th:text="${#temporals.format(item.profile.lastLogin, 'MMM dd, yyyy HH:mm')}">Oct 12, 2023 14:30</span>
+                                    <span th:unless="${item.profile != null and item.profile.lastLogin != null}" class="text-muted">Never</span>
+                                </td>
+                                <td class="text-end">
+                                    <a th:href="@{/backoffice/customers/{id}(id=${item.customer.id})}" class="btn btn-sm btn-outline-primary">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="bo-card-footer" th:if="${result.totalPages > 1}">
+                <nav>
+                    <ul class="pagination bo-pagination justify-content-end mb-0">
+                        <li class="page-item" th:classappend="${result.page == 0} ? 'disabled'">
+                            <a class="page-link" th:href="@{/backoffice/customers(q=${q}, page=${result.page - 1}, size=${result.size})}">Previous</a>
+                        </li>
+                        <li class="page-item" th:each="p : ${#numbers.sequence(0, result.totalPages - 1)}" 
+                            th:classappend="${p == result.page} ? 'active'">
+                            <a class="page-link" th:href="@{/backoffice/customers(q=${q}, page=${p}, size=${result.size})}" th:text="${p + 1}">1</a>
+                        </li>
+                        <li class="page-item" th:classappend="${result.page == result.totalPages - 1} ? 'disabled'">
+                            <a class="page-link" th:href="@{/backoffice/customers(q=${q}, page=${result.page + 1}, size=${result.size})}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

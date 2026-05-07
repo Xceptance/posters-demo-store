@@ -63,7 +63,7 @@ public class AdminDataLoader implements ApplicationRunner {
         }
 
         createRoles();
-        log.info("Seeded 4 default roles: System Admin, Business Admin, Catalog User, Order User");
+        log.info("Seeded 5 default roles: System Admin, Business Admin, Customer Admin, Catalog User, Order User");
     }
 
     private void createRoles() {
@@ -89,6 +89,10 @@ public class AdminDataLoader implements ApplicationRunner {
         // Order User — dashboard + orders
         createRole("Order User", "Access to order management",
                 Set.of("dashboard", "orders"));
+
+        // Customer Admin — customers only
+        createRole("Customer Admin", "Access to customer management",
+                Set.of("customers"));
     }
 
     private void reseedRoleModules() {
@@ -108,10 +112,18 @@ public class AdminDataLoader implements ApplicationRunner {
                         Set.of("dashboard", "catalog"));
                 case "Order User" -> role.setModuleIds(
                         Set.of("dashboard", "orders"));
+                case "Customer Admin" -> role.setModuleIds(
+                        Set.of("customers"));
                 default -> log.warn("Unknown role '{}' during migration, clearing module IDs", role.getName());
             }
             roleRepository.save(role);
         });
+
+        if (roleRepository.findByName("Customer Admin").isEmpty()) {
+            createRole("Customer Admin", "Access to customer management", Set.of("customers"));
+            log.info("Created missing Customer Admin role during migration");
+        }
+
         log.info("Re-seeded role_modules with updated module IDs");
     }
 

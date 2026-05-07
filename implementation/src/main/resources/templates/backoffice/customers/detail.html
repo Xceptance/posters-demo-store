@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Customer Details</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">
+        Customer <span th:text="${detail.customer.customerNumber}"></span>
+    </div>
+
+    <div layout:fragment="pageActions">
+        <a th:href="@{/backoffice/customers}" class="btn btn-outline-secondary">
+            <span class="material-symbols-outlined align-middle me-1">arrow_back</span>
+            Back to List
+        </a>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row g-4">
+            <!-- Profile Section -->
+            <div class="col-lg-4">
+                <div class="bo-card h-100">
+                    <div class="bo-card-header">
+                        <h5 class="mb-0">Profile Summary</h5>
+                    </div>
+                    <div class="bo-card-body">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4 text-muted">Name</dt>
+                            <dd class="col-sm-8" th:text="${detail.customer.firstName + ' ' + detail.customer.lastName}"></dd>
+
+                            <dt class="col-sm-4 text-muted">Email</dt>
+                            <dd class="col-sm-8" th:text="${detail.customer.email}"></dd>
+
+                            <dt class="col-sm-4 text-muted">Created</dt>
+                            <dd class="col-sm-8" th:text="${#temporals.format(detail.customer.createdAt, 'MMM dd, yyyy')}"></dd>
+
+                            <th:block th:if="${detail.profile != null}">
+                                <dt class="col-sm-4 text-muted mt-3">Last Login</dt>
+                                <dd class="col-sm-8 mt-3">
+                                    <span th:if="${detail.profile.lastLogin != null}" 
+                                          th:text="${#temporals.format(detail.profile.lastLogin, 'MMM dd, yyyy HH:mm')}"></span>
+                                    <span th:unless="${detail.profile.lastLogin != null}" class="text-muted">Never</span>
+                                </dd>
+                            </th:block>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Addresses Section -->
+            <div class="col-lg-8">
+                <div class="bo-card mb-4">
+                    <div class="bo-card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Addresses</h5>
+                    </div>
+                    <div class="bo-card-body p-0">
+                        <div th:if="${detail.addresses.empty}" class="p-4 text-center text-muted border-bottom">
+                            No addresses on file.
+                        </div>
+                        <ul class="list-group list-group-flush" th:unless="${detail.addresses.empty}">
+                            <li class="list-group-item p-3" th:each="address : ${detail.addresses}">
+                                <div class="fw-bold" th:text="${address.firstName + ' ' + address.lastName}"></div>
+                                <div th:if="${address.company != null}" th:text="${address.company}"></div>
+                                <div th:text="${address.addressLine}"></div>
+                                <div>
+                                    <span th:text="${address.city}"></span>, 
+                                    <span th:text="${address.state}"></span> 
+                                    <span th:text="${address.zip}"></span>
+                                </div>
+                                <div th:text="${address.country}"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Credit Cards Section -->
+                <div class="bo-card">
+                    <div class="bo-card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Credit Cards</h5>
+                    </div>
+                    <div class="bo-card-body p-0">
+                        <div th:if="${detail.customer.creditCards.empty}" class="p-4 text-center text-muted">
+                            No credit cards on file.
+                        </div>
+                        <ul class="list-group list-group-flush" th:unless="${detail.customer.creditCards.empty}">
+                            <li class="list-group-item p-3 d-flex justify-content-between align-items-center" 
+                                th:each="card : ${detail.customer.creditCards}">
+                                <div>
+                                    <div class="fw-bold" th:text="${card.name}"></div>
+                                    <div class="text-muted font-monospace">
+                                        •••• •••• •••• <span th:text="${card.cardNumber}"></span>
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                                    Exp: <span th:text="${card.month + '/' + card.year}"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

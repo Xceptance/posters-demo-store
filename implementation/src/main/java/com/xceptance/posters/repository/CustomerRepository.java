@@ -1,5 +1,5 @@
 package com.xceptance.posters.repository;
-import com.xceptance.posters.entity.CatalogCustomer;
+import com.xceptance.posters.entity.Customer;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -8,12 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository for CatalogCustomer entities.
+ * Repository for Customer entities.
  */
 @Repository
-public interface CatalogCustomerRepository extends JpaRepository<CatalogCustomer, UUID>
+public interface CustomerRepository extends JpaRepository<Customer, UUID>
 {
-    Optional<CatalogCustomer> findByEmail(String email);
+    Optional<Customer> findByEmail(String email);
 
     boolean existsByEmail(String email);
 }

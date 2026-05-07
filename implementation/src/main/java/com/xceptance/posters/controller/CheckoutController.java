@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xceptance.posters.entity.CatalogCart;
 import com.xceptance.posters.entity.CatalogOrder;
-import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.entity.Customer;
+import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.util.CreditCardMasker;
 import com.xceptance.posters.entity.CreditCardVendor;
 import com.xceptance.posters.service.CheckoutService;
@@ -36,12 +36,12 @@ import java.util.UUID;
 public class CheckoutController
 {
     private final CheckoutService checkoutService;
-    private final CatalogCustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
     private final SessionService sessionService;
     private final CartService cartService;
 
     public CheckoutController(CheckoutService checkoutService,
-                              CatalogCustomerRepository customerRepository,
+                              CustomerRepository customerRepository,
                               SessionService sessionService,
                               CartService cartService)
     {
@@ -156,9 +156,9 @@ public class CheckoutController
 
         if (sessionService.isCustomerLoggedIn(session)) {
             final UUID customerId = sessionService.getCustomerId(session);
-            final Optional<CatalogCustomer> customerOpt = customerRepository.findById(customerId);
+            final Optional<Customer> customerOpt = customerRepository.findById(customerId);
             if (customerOpt.isPresent()) {
-                final CatalogCustomer c = customerOpt.get();
+                final Customer c = customerOpt.get();
                 email = c.getEmail();
                 fName = c.getFirstName();
                 lName = c.getLastName();
@@ -301,10 +301,10 @@ public class CheckoutController
         if (sessionService.isCustomerLoggedIn(session))
         {
             UUID customerId = sessionService.getCustomerId(session);
-            Optional<CatalogCustomer> customerOpt = customerRepository.findById(customerId);
+            Optional<Customer> customerOpt = customerRepository.findById(customerId);
             if (customerOpt.isPresent())
             {
-                CatalogCustomer c = customerOpt.get();
+                Customer c = customerOpt.get();
                 email = c.getEmail();
                 firstName = c.getFirstName();
                 lastName = c.getLastName();

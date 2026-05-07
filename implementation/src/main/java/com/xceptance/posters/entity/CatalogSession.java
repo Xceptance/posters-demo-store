@@ -25,7 +25,7 @@ public class CatalogSession {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private CatalogCustomer customer;
+    private Customer customer;
 
     @Column(nullable = false)
     private Boolean anonymous = true;
@@ -55,7 +55,7 @@ public class CatalogSession {
     /**
      * Transition from Anonymous to Identified (customer known but not authenticated).
      */
-    public void identify(CatalogCustomer customer) {
+    public void identify(Customer customer) {
         this.customer = customer;
         this.anonymous = false;
     }
@@ -63,7 +63,7 @@ public class CatalogSession {
     /**
      * Transition from any state to Authenticated.
      */
-    public void authenticate(CatalogCustomer customer) {
+    public void authenticate(Customer customer) {
         this.customer = customer;
         this.anonymous = false;
         this.authenticated = true;
@@ -75,8 +75,8 @@ public class CatalogSession {
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public CatalogCustomer getCustomer() { return customer; }
-    public void setCustomer(CatalogCustomer customer) { this.customer = customer; }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
     public Boolean getAnonymous() { return anonymous; }
     public void setAnonymous(Boolean anonymous) { this.anonymous = anonymous; }

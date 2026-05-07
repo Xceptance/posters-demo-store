@@ -1,5 +1,6 @@
 package com.xceptance.posters.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.entity.Customer;
+import com.xceptance.posters.entity.CustomerProfile;
+import com.xceptance.posters.repository.CustomerRepository;
+import com.xceptance.posters.repository.CustomerProfileRepository;
 import com.xceptance.posters.entity.CatalogOrder;
 import com.xceptance.posters.repository.CatalogOrderRepository;
 import com.xceptance.posters.service.CheckoutService;
@@ -23,22 +26,25 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * Handles customer registration, login, logout, account page, and order history.
- * Uses the new entity model (CatalogCustomer).
+ * Uses the new entity model (Customer).
  */
 @Controller
 public class CustomerController
 {
-    private final CatalogCustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomerProfileRepository customerProfileRepository;
     private final SessionService sessionService;
     private final CatalogOrderRepository orderRepository;
     private final CheckoutService checkoutService;
 
-    public CustomerController(CatalogCustomerRepository customerRepository,
+    public CustomerController(CustomerRepository customerRepository,
+                              CustomerProfileRepository customerProfileRepository,
                               CatalogOrderRepository orderRepository,
                               SessionService sessionService,
                               CheckoutService checkoutService)
     {
         this.customerRepository = customerRepository;
+        this.customerProfileRepository = customerProfileRepository;
         this.orderRepository = orderRepository;
         this.sessionService = sessionService;
         this.checkoutService = checkoutService;
@@ -57,10 +63,19 @@ public class CustomerController
                         HttpSession session,
                         RedirectAttributes redirectAttributes)
     {
-        CatalogCustomer customer = customerRepository.findByEmail(email).orElse(null);
+        Customer customer = customerRepository.findByEmail(email).orElse(null);
         if (customer != null && customer.checkPassword(password))
         {
             sessionService.setCustomerId(session, customer.getId());
+            
+            // Update lastLogin in CustomerProfile
+            final CustomerProfile profile = customerProfileRepository.findByCustomer_Id(customer.getId()).orElse(null);
+            if (profile != null)
+            {
+                profile.setLastLogin(LocalDateTime.now());
+                customerProfileRepository.save(profile);
+            }
+            
             return "redirect:/" + locale + "/";
         }
         redirectAttributes.addFlashAttribute("error", "Invalid email or password.");
@@ -94,12 +109,20 @@ public class CustomerController
             redirectAttributes.addFlashAttribute("error", "Email already in use.");
             return "redirect:/" + locale + "/register";
         }
-        CatalogCustomer customer = new CatalogCustomer();
+        Customer customer = new Customer();
         customer.setEmail(email);
         customer.hashPassword(password);
         customer.setFirstName(firstName);
         customer.setLastName(name);
         customer = customerRepository.save(customer);
+
+        // Create CustomerProfile
+        final CustomerProfile profile = new CustomerProfile();
+        profile.setCustomer(customer);
+        profile.setPassword(customer.getPassword());
+        profile.setLastPasswordChange(LocalDateTime.now());
+        customerProfileRepository.save(profile);
+
         sessionService.setCustomerId(session, customer.getId());
         return "redirect:/" + locale + "/";
     }
@@ -112,7 +135,7 @@ public class CustomerController
             return "redirect:/" + locale + "/login";
         }
         UUID customerId = sessionService.getCustomerId(session);
-        CatalogCustomer customer = customerRepository.findById(customerId).orElse(null);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
         if (customer == null)
         {
             sessionService.removeCustomerId(session);
@@ -130,7 +153,7 @@ public class CustomerController
             return "redirect:/" + locale + "/login";
         }
         UUID customerId = sessionService.getCustomerId(session);
-        CatalogCustomer customer = customerRepository.findById(customerId).orElse(null);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
         if (customer == null)
         {
             return "redirect:/" + locale + "/login";
@@ -159,7 +182,7 @@ public class CustomerController
             return "redirect:/" + locale + "/login";
         }
         UUID customerId = sessionService.getCustomerId(session);
-        CatalogCustomer customer = customerRepository.findById(customerId).orElse(null);
+        Customer customer = customerRepository.findById(customerId).orElse(null);
         if (customer != null)
         {
             customer.setFirstName(firstName);

@@ -30,7 +30,7 @@
             </li>
 
             <!-- Catalog -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('catalog')}">
                 <a href="#nav-catalog" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/catalog')}">
                     <span class="material-symbols-outlined">inventory_2</span>
@@ -56,7 +56,7 @@
             </li>
 
             <!-- Customers -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('customers')}">
                 <a href="#nav-customers" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/customers')}">
                     <span class="material-symbols-outlined">group</span>
@@ -76,7 +76,7 @@
             </li>
 
             <!-- Orders -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('orders')}">
                 <a href="#nav-orders" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/orders')}">
                     <span class="material-symbols-outlined">receipt_long</span>
@@ -94,7 +94,7 @@
             </li>
 
             <!-- Security -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('security')}">
                 <a href="#nav-security" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/security')}">
                     <span class="material-symbols-outlined">admin_panel_settings</span>

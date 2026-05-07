@@ -15,12 +15,12 @@ class CustomerTest {
 
     @Test
     void testCreateCustomer() {
-        CatalogCustomer c = new CatalogCustomer();
+        Customer c = new Customer();
         c.setEmail("john@example.com");
         c.setFirstName("John");
         c.setLastName("Doe");
 
-        CatalogCustomer saved = em.persistAndFlush(c);
+        Customer saved = em.persistAndFlush(c);
 
         assertThat(saved.getId()).isNotNull();
         assertThat(saved.getEmail()).isEqualTo("john@example.com");
@@ -29,7 +29,7 @@ class CustomerTest {
 
     @Test
     void testCreateCustomerProfile() {
-        CatalogCustomer c = new CatalogCustomer();
+        Customer c = new Customer();
         c.setEmail("jane@example.com");
         c.setFirstName("Jane");
         c.setLastName("Smith");
@@ -47,7 +47,7 @@ class CustomerTest {
 
     @Test
     void testCustomerWithOptionalMiddleName() {
-        CatalogCustomer c = new CatalogCustomer();
+        Customer c = new Customer();
         c.setEmail("bob@example.com");
         c.setFirstName("Robert");
         c.setMiddleName("James");
@@ -59,7 +59,7 @@ class CustomerTest {
 
     @Test
     void testCustomerProfileLoginTracking() {
-        CatalogCustomer c = new CatalogCustomer();
+        Customer c = new Customer();
         c.setEmail("track@example.com");
         c.setFirstName("Track");
         c.setLastName("User");

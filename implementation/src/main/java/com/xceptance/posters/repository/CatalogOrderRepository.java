@@ -18,4 +18,6 @@ public interface CatalogOrderRepository extends JpaRepository<CatalogOrder, java
     Optional<CatalogOrder> findByOrderNumber(String orderNumber);
 
     java.util.List<CatalogOrder> findByCustomer_EmailOrderByOrderDateDesc(String email);
+
+    long countByCustomer_Id(java.util.UUID customerId);
 }

@@ -18,7 +18,7 @@ import com.xceptance.posters.service.CatalogService;
 import com.xceptance.posters.entity.Category;
 import com.xceptance.posters.service.LocalizedTextService;
 import com.xceptance.posters.entity.CatalogCart;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.service.SessionService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,13 +34,13 @@ public class CommonDataInterceptor implements HandlerInterceptor
 {
     private final CatalogService catalogService;
     private final LocalizedTextService textService;
-    private final CatalogCustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
     private final SessionService sessionService;
     private final PostersProperties props;
 
     public CommonDataInterceptor(CatalogService catalogService,
                                   LocalizedTextService textService,
-                                  CatalogCustomerRepository customerRepository,
+                                  CustomerRepository customerRepository,
                                   SessionService sessionService,
                                   PostersProperties props)
     {

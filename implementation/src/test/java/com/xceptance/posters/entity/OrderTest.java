@@ -153,9 +153,9 @@ class OrderTest {
     }
 
     @Test
-    void testDeleteOrderDoesNotDeleteCatalogCustomer() {
-        // 1. Create and persist an actual CatalogCustomer
-        final CatalogCustomer registeredUser = new CatalogCustomer();
+    void testDeleteOrderDoesNotDeleteCustomer() {
+        // 1. Create and persist an actual Customer
+        final Customer registeredUser = new Customer();
         registeredUser.setEmail("registered@example.com");
         registeredUser.setFirstName("RegFirst");
         registeredUser.setLastName("RegLast");
@@ -185,8 +185,8 @@ class OrderTest {
         // 5. Verify the Order is gone
         assertThat(em.find(CatalogOrder.class, order.getId())).isNull();
 
-        // 6. Verify the registered CatalogCustomer is STILL there!
-        final CatalogCustomer reloadedUser = em.find(CatalogCustomer.class, registeredUser.getId());
+        // 6. Verify the registered Customer is STILL there!
+        final Customer reloadedUser = em.find(Customer.class, registeredUser.getId());
         assertThat(reloadedUser).isNotNull();
         assertThat(reloadedUser.getEmail()).isEqualTo("registered@example.com");
     }

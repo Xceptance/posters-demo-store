@@ -1,6 +1,6 @@
 package com.xceptance.posters.controller;
 import com.xceptance.posters.repository.CatalogOrderRepository;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.entity.OrderCustomer;
 
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.entity.Customer;
+import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.entity.CatalogOrder;
 import com.xceptance.posters.repository.CatalogOrderRepository;
 import com.xceptance.posters.entity.OrderLineItem;
@@ -39,7 +39,7 @@ public class CustomerControllerUiTest
     private MockMvc mockMvc;
 
     @Autowired
-    private CatalogCustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private CatalogOrderRepository orderRepository;
@@ -51,7 +51,7 @@ public class CustomerControllerUiTest
     public void testAccountOverviewUiRendersWithoutCrashing() throws Exception 
     {
         // Setup simple customer
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-account@example.com");
         customer.setFirstName("AccFirst");
         customer.setLastName("AccLast");
@@ -71,7 +71,7 @@ public class CustomerControllerUiTest
     public void testOrderOverviewUiRendersWithOrdersWithoutCrashing() throws Exception 
     {
         // Setup simple customer
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-order-history@example.com");
         customer.setFirstName("HistFirst");
         customer.setLastName("HistLast");

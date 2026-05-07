@@ -11,9 +11,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity(name = "CatalogAddress")
+@Entity(name = "CustomerAddress")
 @Table(name = "addresses")
-public class CatalogAddress {
+public class CustomerAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,7 +24,7 @@ public class CatalogAddress {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
-    private CatalogCustomer customer;
+    private Customer customer;
 
     @Column(name = "recipient_first_name", nullable = false)
     private String recipientFirstName;
@@ -61,8 +61,8 @@ public class CatalogAddress {
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
-    public CatalogCustomer getCustomer() { return customer; }
-    public void setCustomer(CatalogCustomer customer) { this.customer = customer; }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
     public String getRecipientFirstName() { return recipientFirstName; }
     public void setRecipientFirstName(String recipientFirstName) { this.recipientFirstName = recipientFirstName; }
