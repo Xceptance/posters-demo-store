@@ -151,6 +151,8 @@ public class CustomerSearchService
                 {
                     writer.commit();
                 }
+                // The index was just created, so schedule a bulk rebuild from the database
+                needsBulkRebuild.set(true);
             }
             refreshReader();
         }

@@ -141,5 +141,34 @@
         </main>
     </div>
 
+    <!-- Global Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="bo-toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="bo-toast-body">
+                    <!-- Toast Message -->
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTMX Event Listeners -->
+    <script>
+        document.body.addEventListener("show-toast", function(evt) {
+            const toastEl = document.getElementById('bo-toast');
+            const toastBody = document.getElementById('bo-toast-body');
+            
+            // Set message
+            toastBody.textContent = evt.detail.message;
+            
+            // Set type (e.g., success, danger, warning, info)
+            toastEl.className = 'toast align-items-center border-0 text-bg-' + (evt.detail.type || 'primary');
+            
+            // Show toast
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toast.show();
+        });
+    </script>
 </body>
 </html>

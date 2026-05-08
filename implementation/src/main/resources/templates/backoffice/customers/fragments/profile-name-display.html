@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Read-only display of the customer's name with an Edit button -->
+<div th:fragment="profile-name-display" id="profile-name-container" class="mb-3 d-flex justify-content-between align-items-start">
+    <div>
+        <dt class="text-muted">Name</dt>
+        <dd class="mb-0 fs-5" th:text="${customer.firstName + (customer.middleName != null and !customer.middleName.isEmpty() ? ' ' + customer.middleName : '') + ' ' + customer.lastName}"></dd>
+    </div>
+    <button class="btn btn-sm btn-outline-primary"
+            th:hx-get="@{/backoffice/customers/{id}/edit-name(id=${customer.id})}"
+            hx-target="#profile-name-container"
+            hx-swap="outerHTML">
+        <span class="material-symbols-outlined align-middle" style="font-size: 1.1rem;">edit</span>
+        Edit
+    </button>
+</div>
+</html>

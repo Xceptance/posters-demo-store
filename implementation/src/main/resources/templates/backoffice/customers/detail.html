@@ -26,10 +26,10 @@
                         <h5 class="mb-0">Profile Summary</h5>
                     </div>
                     <div class="bo-card-body">
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4 text-muted">Name</dt>
-                            <dd class="col-sm-8" th:text="${detail.customer.firstName + ' ' + detail.customer.lastName}"></dd>
+                        <!-- Profile Name Fragment -->
+                        <div th:replace="~{backoffice/customers/fragments/profile-name-display :: profile-name-display(customer=${detail.customer})}"></div>
 
+                        <dl class="row mb-0">
                             <dt class="col-sm-4 text-muted">Email</dt>
                             <dd class="col-sm-8" th:text="${detail.customer.email}"></dd>
 

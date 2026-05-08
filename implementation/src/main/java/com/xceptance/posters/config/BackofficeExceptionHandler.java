@@ -23,6 +23,15 @@ public class BackofficeExceptionHandler {
     public String handleException(Exception ex, Model model) {
         log.error("Backoffice error: {}", ex.getMessage(), ex);
 
+        org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof com.xceptance.posters.config.AdminUserPrincipal principal) {
+            model.addAttribute("adminDisplayName", principal.getDisplayName());
+            model.addAttribute("permittedModules", principal.getPermittedModuleIds());
+        } else {
+            model.addAttribute("adminDisplayName", "Admin");
+            model.addAttribute("permittedModules", java.util.Collections.emptySet());
+        }
+
         model.addAttribute("statusCode", 500);
         model.addAttribute("statusText", "Internal Server Error");
         model.addAttribute("errorMessage", ex.getMessage() != null ? ex.getMessage() : "An unexpected error occurred.");

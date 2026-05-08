@@ -106,8 +106,8 @@ class BackofficeCustomerServiceTest
         when(customerRepository.findById(id2)).thenReturn(Optional.of(c2));
         when(profileRepository.findByCustomer_Id(id1)).thenReturn(Optional.of(p1));
         when(profileRepository.findByCustomer_Id(id2)).thenReturn(Optional.empty());
-        when(orderRepository.countByCustomer_Id(id1)).thenReturn(5L);
-        when(orderRepository.countByCustomer_Id(id2)).thenReturn(0L);
+        when(orderRepository.countByCustomer_Email("alice@example.com")).thenReturn(5L);
+        when(orderRepository.countByCustomer_Email("bob@example.com")).thenReturn(0L);
 
         // Act
         final PaginatedCustomerResult result = customerService.searchCustomers("alice", 0, 25);
@@ -163,7 +163,7 @@ class BackofficeCustomerServiceTest
             .thenReturn(new CustomerSearchResult(51, List.of(id)));
         when(customerRepository.findById(id)).thenReturn(Optional.of(customer));
         when(profileRepository.findByCustomer_Id(id)).thenReturn(Optional.empty());
-        when(orderRepository.countByCustomer_Id(id)).thenReturn(0L);
+        when(orderRepository.countByCustomer_Email("page@example.com")).thenReturn(0L);
 
         // Act
         final PaginatedCustomerResult result = customerService.searchCustomers("", 2, 25);
@@ -259,6 +259,68 @@ class BackofficeCustomerServiceTest
         assertThat(detail.profile()).isNull();
         assertThat(detail.addresses()).isEmpty();
         verify(auditLogRepository).save(any(AuditLogEntry.class));
+    }
+
+    // ------------------------------------------------------------------
+    // updateCustomerNames
+    // ------------------------------------------------------------------
+
+    /**
+     * Verifies that updating customer names applies changes, saves the customer,
+     * triggers search re-indexing, and logs an audit event.
+     */
+    @Test
+    void updateCustomerNamesSuccessfully()
+    {
+        // Arrange
+        final UUID customerId = UUID.randomUUID();
+        final Customer customer = createCustomer(customerId, "update@example.com", "OldFirst", "OldLast", 123L);
+        customer.setVersion(1);
+
+        when(customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
+        when(customerRepository.saveAndFlush(any(Customer.class))).thenAnswer(i -> i.getArgument(0));
+
+        // Act
+        final Customer updated = customerService.updateCustomerNames(
+            customerId, "NewFirst", "NewMiddle", "NewLast", 1, 99L, "SuperAdmin");
+
+        // Assert - Data updated
+        assertThat(updated.getFirstName()).isEqualTo("NewFirst");
+        assertThat(updated.getMiddleName()).isEqualTo("NewMiddle");
+        assertThat(updated.getLastName()).isEqualTo("NewLast");
+        assertThat(updated.getVersion()).isEqualTo(1);
+
+        // Assert - Re-indexing triggered
+        verify(searchService).indexCustomerAsync(customerId);
+
+        // Assert - Audit log created
+        final ArgumentCaptor<AuditLogEntry> auditCaptor = ArgumentCaptor.forClass(AuditLogEntry.class);
+        verify(auditLogRepository).save(auditCaptor.capture());
+
+        final AuditLogEntry audit = auditCaptor.getValue();
+        assertThat(audit.getAction()).isEqualTo(AuditLogEntry.Action.CUSTOMER_UPDATED);
+        assertThat(audit.getUserId()).isEqualTo(99L);
+        assertThat(audit.getUsername()).isEqualTo("SuperAdmin");
+        assertThat(audit.getTargetType()).isEqualTo("Customer");
+        assertThat(audit.getTargetId()).isEqualTo(123L);
+        assertThat(audit.getDetails()).contains("inline edit");
+    }
+
+    /**
+     * Verifies that attempting to update a non-existent customer throws an exception.
+     */
+    @Test
+    void updateCustomerNamesThrowsForUnknownCustomer()
+    {
+        // Arrange
+        final UUID unknownId = UUID.randomUUID();
+        when(customerRepository.findById(unknownId)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThatThrownBy(() -> customerService.updateCustomerNames(
+            unknownId, "First", null, "Last", 1, 1L, "Admin"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(unknownId.toString());
     }
 
     // ------------------------------------------------------------------

@@ -23,11 +23,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.xceptance.posters.config.AdminUserPrincipal;
 import com.xceptance.posters.controller.AbstractBackofficeController;
+import com.xceptance.posters.entity.Customer;
 import com.xceptance.posters.service.backoffice.CustomerService;
 import com.xceptance.posters.service.backoffice.CustomerService.CustomerDetail;
 import com.xceptance.posters.service.backoffice.CustomerService.PaginatedCustomerResult;
@@ -70,7 +76,7 @@ public class CustomersModuleController extends AbstractBackofficeController
      * @param model Spring MVC model
      * @return the customer list view
      */
-    @GetMapping
+    @GetMapping({"", "/", "/list"})
     public String listCustomers(
             @RequestParam(required = false, defaultValue = "") final String q,
             @RequestParam(required = false, defaultValue = "0") final int page,
@@ -114,6 +120,85 @@ public class CustomersModuleController extends AbstractBackofficeController
         model.addAttribute("detail", detail);
 
         return "backoffice/customers/detail";
+    }
+
+    // ------------------------------------------------------------------
+    // Profile Editing
+    // ------------------------------------------------------------------
+
+    /**
+     * Returns the inline edit form for the customer's name.
+     */
+    @GetMapping("/{id}/edit-name")
+    public String editNameForm(@PathVariable final UUID id, final Model model)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        final CustomerDetail detail = customerService.getCustomerDetails(id, adminId, adminName);
+        model.addAttribute("customer", detail.customer());
+
+        return "backoffice/customers/fragments/profile-name-form :: profile-name-form";
+    }
+
+    /**
+     * Processes the inline edit form submission, updates the customer,
+     * and returns the read-only display fragment with a success toast.
+     */
+    @PostMapping("/{id}/edit-name")
+    public String updateName(@PathVariable final UUID id,
+                             @RequestParam final String firstName,
+                             @RequestParam(required = false) final String middleName,
+                             @RequestParam final String lastName,
+                             @RequestParam final Integer version,
+                             final Model model,
+                             final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        final Customer updatedCustomer = customerService.updateCustomerNames(
+            id, firstName, middleName, lastName, version, adminId, adminName);
+
+        model.addAttribute("customer", updatedCustomer);
+
+        // Add HX-Trigger header for the success toast
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Customer updated successfully\", \"type\": \"success\"}}");
+
+        return "backoffice/customers/fragments/profile-name-display :: profile-name-display";
+    }
+
+    /**
+     * Handles concurrent modification exceptions globally for this controller.
+     * Re-renders the form with an inline conflict warning and a danger toast.
+     */
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    public String handleOptimisticLockingFailure(
+        final ObjectOptimisticLockingFailureException ex,
+        final HttpServletResponse response,
+        final Model model)
+    {
+        // Extract the customer ID from the exception if possible, or we could pass it differently.
+        // For simplicity, we can return an alert fragment, or just let the user refresh.
+        // The best UX is to tell them to refresh the page.
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Data was modified by someone else. Please refresh.\", \"type\": \"danger\"}}");
+        
+        // Return a generic error fragment
+        return "backoffice/customers/fragments/profile-name-form :: conflict-error";
     }
 
     // ------------------------------------------------------------------

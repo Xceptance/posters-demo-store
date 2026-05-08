@@ -126,8 +126,7 @@ public class CustomerService
 
         final CustomerProfile profile = profileRepository
             .findByCustomer_Id(customerId).orElse(null);
-
-        final long orderCount = orderRepository.countByCustomer_Id(customerId);
+        final long orderCount = orderRepository.countByCustomer_Email(customer.getEmail());
 
         return new CustomerListItem(customer, profile, orderCount);
     }
@@ -172,6 +171,65 @@ public class CustomerService
         auditLogRepository.save(audit);
 
         return new CustomerDetail(customer, profile, addresses);
+    }
+
+    // ------------------------------------------------------------------
+    // Profile Editing
+    // ------------------------------------------------------------------
+
+    /**
+     * Updates the first, middle, and last name of a customer. Uses JPA's optimistic
+     * locking (@Version) to prevent concurrent modification overwrites.
+     *
+     * @param customerId UUID of the customer to update
+     * @param firstName  the new first name
+     * @param middleName the new middle name (may be null)
+     * @param lastName   the new last name
+     * @param version    the expected current version for optimistic locking
+     * @param adminId    ID of the admin user making the change
+     * @param adminName  display name of the admin user
+     * @return the updated customer
+     * @throws IllegalArgumentException if the customer is not found
+     * @throws org.springframework.orm.ObjectOptimisticLockingFailureException if the version does not match
+     */
+    @Transactional
+    public Customer updateCustomerNames(final UUID customerId,
+                                        final String firstName,
+                                        final String middleName,
+                                        final String lastName,
+                                        final Integer version,
+                                        final Long adminId,
+                                        final String adminName)
+    {
+        final Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException(
+                "Customer not found: " + customerId));
+
+        if (!customer.getVersion().equals(version))
+        {
+            throw new org.springframework.orm.ObjectOptimisticLockingFailureException(Customer.class, customerId);
+        }
+
+        customer.setFirstName(firstName);
+        customer.setMiddleName(middleName);
+        customer.setLastName(lastName);
+
+        final Customer updatedCustomer = customerRepository.saveAndFlush(customer);
+
+        // Async re-index for Lucene search
+        searchService.indexCustomerAsync(customerId);
+
+        // Audit: log update event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_UPDATED);
+        audit.setTargetType("Customer");
+        audit.setTargetId(customer.getCustomerNumber());
+        audit.setDetails("Customer names updated via inline edit");
+        auditLogRepository.save(audit);
+
+        return updatedCustomer;
     }
 
     // ------------------------------------------------------------------

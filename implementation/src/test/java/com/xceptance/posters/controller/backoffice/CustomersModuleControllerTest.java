@@ -17,6 +17,8 @@ package com.xceptance.posters.controller.backoffice;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -145,6 +147,88 @@ class CustomersModuleControllerTest
             .andExpect(status().isOk())
             .andExpect(view().name("backoffice/customers/detail"))
             .andExpect(model().attributeExists("detail"));
+    }
+
+    // ------------------------------------------------------------------
+    // Authenticated access – inline profile editing
+    // ------------------------------------------------------------------
+
+    /**
+     * Verifies that the inline edit form renders correctly via HTMX.
+     */
+    @Test
+    void canAccessInlineEditForm() throws Exception
+    {
+        final Customer customer = new Customer();
+        customer.setEmail("edit-test@example.com");
+        customer.setFirstName("Old");
+        customer.setLastName("Name");
+        customer.hashPassword("secret");
+        final Customer saved = customerRepository.saveAndFlush(customer);
+
+        mockMvc.perform(get("/backoffice/customers/" + saved.getId() + "/edit-name")
+                .with(user("admin").roles("ADMIN")))
+            .andExpect(status().isOk())
+            .andExpect(view().name("backoffice/customers/fragments/profile-name-form :: profile-name-form"))
+            .andExpect(model().attributeExists("customer"));
+    }
+
+    /**
+     * Verifies that updating the customer name returns the display fragment and a success toast.
+     */
+    @Test
+    void updateNameReturnsDisplayFragmentAndSuccessToast() throws Exception
+    {
+        final Customer customer = new Customer();
+        customer.setEmail("update-test@example.com");
+        customer.setFirstName("Old");
+        customer.setLastName("Name");
+        customer.hashPassword("secret");
+        customer.setVersion(0);
+        final Customer saved = customerRepository.saveAndFlush(customer);
+
+        mockMvc.perform(post("/backoffice/customers/" + saved.getId() + "/edit-name")
+                .with(user("admin").roles("ADMIN"))
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf())
+                .param("firstName", "New")
+                .param("middleName", "M")
+                .param("lastName", "Name")
+                .param("version", "0"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(view().name("backoffice/customers/fragments/profile-name-display :: profile-name-display"))
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header().exists("HX-Trigger"))
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header().string("HX-Trigger", org.hamcrest.Matchers.containsString("success")));
+    }
+
+    /**
+     * Verifies that submitting an outdated version triggers the optimistic locking
+     * exception handler, returning the form fragment with a danger toast.
+     */
+    @Test
+    void concurrentUpdateTriggersOptimisticLockingFailure() throws Exception
+    {
+        final Customer customer = new Customer();
+        customer.setEmail("conflict-test@example.com");
+        customer.setFirstName("Old");
+        customer.setLastName("Name");
+        customer.hashPassword("secret");
+        final Customer saved = customerRepository.saveAndFlush(customer);
+        
+        // Modify and save again to increment the version in the DB (version becomes 1)
+        saved.setFirstName("Modified by someone else");
+        customerRepository.saveAndFlush(saved);
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/backoffice/customers/" + saved.getId() + "/edit-name")
+                .with(user("admin").roles("ADMIN"))
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf())
+                .param("firstName", "New")
+                .param("lastName", "Name")
+                .param("version", "0")) // Submit with stale version 0
+            .andExpect(status().isOk())
+            .andExpect(view().name("backoffice/customers/fragments/profile-name-form :: conflict-error"))
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header().exists("HX-Trigger"))
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header().string("HX-Trigger", org.hamcrest.Matchers.containsString("danger")));
     }
 
     // ------------------------------------------------------------------

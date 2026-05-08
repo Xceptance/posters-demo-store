@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Inline form for editing the customer's name -->
+<div th:fragment="profile-name-form" id="profile-name-container" class="mb-3 p-3 border rounded bg-light">
+    
+    <div th:fragment="conflict-error">
+        <div th:if="${error != null}" class="alert alert-danger py-2 mb-3">
+            <span class="material-symbols-outlined align-middle me-1" style="font-size: 1.2rem;">warning</span>
+            <span th:text="${error}">An error occurred</span>
+        </div>
+    </div>
+    
+    <form th:hx-post="@{/backoffice/customers/{id}/edit-name(id=${customer.id})}"
+          hx-target="#profile-name-container"
+          hx-swap="outerHTML"
+          class="mb-0">
+          
+        <!-- Hidden Version Field for Optimistic Locking -->
+        <input type="hidden" name="version" th:value="${customer.version}" />
+        
+        <div class="row g-2 mb-3">
+            <div class="col-md-4">
+                <label for="firstName" class="form-label form-label-sm text-muted">First Name</label>
+                <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" th:value="${customer.firstName}" required>
+            </div>
+            <div class="col-md-4">
+                <label for="middleName" class="form-label form-label-sm text-muted">Middle Name <small>(Optional)</small></label>
+                <input type="text" class="form-control form-control-sm" id="middleName" name="middleName" th:value="${customer.middleName}">
+            </div>
+            <div class="col-md-4">
+                <label for="lastName" class="form-label form-label-sm text-muted">Last Name</label>
+                <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" th:value="${customer.lastName}" required>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    th:hx-get="@{/backoffice/customers/{id}(id=${customer.id})}"
+                    hx-select="#profile-name-container"
+                    hx-target="#profile-name-container"
+                    hx-swap="outerHTML">
+                Cancel
+            </button>
+            <button type="submit" class="btn btn-sm btn-primary">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+</html>

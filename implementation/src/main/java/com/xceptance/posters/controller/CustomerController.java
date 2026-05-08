@@ -19,6 +19,7 @@ import com.xceptance.posters.repository.CustomerProfileRepository;
 import com.xceptance.posters.entity.CatalogOrder;
 import com.xceptance.posters.repository.CatalogOrderRepository;
 import com.xceptance.posters.service.CheckoutService;
+import com.xceptance.posters.service.CustomerSearchService;
 import com.xceptance.posters.service.SessionService;
 import com.xceptance.posters.dto.OrderDto;
 
@@ -36,18 +37,21 @@ public class CustomerController
     private final SessionService sessionService;
     private final CatalogOrderRepository orderRepository;
     private final CheckoutService checkoutService;
+    private final CustomerSearchService customerSearchService;
 
     public CustomerController(CustomerRepository customerRepository,
                               CustomerProfileRepository customerProfileRepository,
                               CatalogOrderRepository orderRepository,
                               SessionService sessionService,
-                              CheckoutService checkoutService)
+                              CheckoutService checkoutService,
+                              CustomerSearchService customerSearchService)
     {
         this.customerRepository = customerRepository;
         this.customerProfileRepository = customerProfileRepository;
         this.orderRepository = orderRepository;
         this.sessionService = sessionService;
         this.checkoutService = checkoutService;
+        this.customerSearchService = customerSearchService;
     }
 
     @GetMapping("/{locale}/login")
@@ -122,6 +126,8 @@ public class CustomerController
         profile.setPassword(customer.getPassword());
         profile.setLastPasswordChange(LocalDateTime.now());
         customerProfileRepository.save(profile);
+
+        customerSearchService.indexCustomerAsync(customer.getId());
 
         sessionService.setCustomerId(session, customer.getId());
         return "redirect:/" + locale + "/";
