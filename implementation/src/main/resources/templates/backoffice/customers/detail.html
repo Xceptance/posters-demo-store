@@ -54,24 +54,14 @@
                 <div class="bo-card mb-4">
                     <div class="bo-card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Addresses</h5>
+                        <button class="btn btn-sm btn-outline-primary" 
+                                th:hx-get="@{/backoffice/customers/{id}/addresses/new(id=${detail.customer.id})}" 
+                                hx-target="#address-form-container" 
+                                hx-swap="innerHTML">Add Address</button>
                     </div>
                     <div class="bo-card-body p-0">
-                        <div th:if="${detail.addresses.empty}" class="p-4 text-center text-muted border-bottom">
-                            No addresses on file.
-                        </div>
-                        <ul class="list-group list-group-flush" th:unless="${detail.addresses.empty}">
-                            <li class="list-group-item p-3" th:each="address : ${detail.addresses}">
-                                <div class="fw-bold" th:text="${address.firstName + ' ' + address.lastName}"></div>
-                                <div th:if="${address.company != null}" th:text="${address.company}"></div>
-                                <div th:text="${address.addressLine}"></div>
-                                <div>
-                                    <span th:text="${address.city}"></span>, 
-                                    <span th:text="${address.state}"></span> 
-                                    <span th:text="${address.zip}"></span>
-                                </div>
-                                <div th:text="${address.country}"></div>
-                            </li>
-                        </ul>
+                        <div id="address-form-container"></div>
+                        <div id="address-list-container" th:replace="~{backoffice/customers/fragments/address-list :: address-list}"></div>
                     </div>
                 </div>
 
@@ -79,25 +69,15 @@
                 <div class="bo-card">
                     <div class="bo-card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Credit Cards</h5>
+                        <button class="btn btn-sm btn-outline-primary" 
+                                th:hx-get="@{/backoffice/customers/{id}/credit-cards/new(id=${detail.customer.id})}" 
+                                hx-target="#credit-card-form-container" 
+                                hx-swap="innerHTML">Add Credit Card</button>
                     </div>
                     <div class="bo-card-body p-0">
-                        <div th:if="${detail.customer.creditCards.empty}" class="p-4 text-center text-muted">
-                            No credit cards on file.
-                        </div>
-                        <ul class="list-group list-group-flush" th:unless="${detail.customer.creditCards.empty}">
-                            <li class="list-group-item p-3 d-flex justify-content-between align-items-center" 
-                                th:each="card : ${detail.customer.creditCards}">
-                                <div>
-                                    <div class="fw-bold" th:text="${card.name}"></div>
-                                    <div class="text-muted font-monospace">
-                                        •••• •••• •••• <span th:text="${card.cardNumber}"></span>
-                                    </div>
-                                </div>
-                                <div class="text-muted">
-                                    Exp: <span th:text="${card.month + '/' + card.year}"></span>
-                                </div>
-                            </li>
-                        </ul>
+                        <div id="credit-card-form-container"></div>
+                        <div id="credit-card-list-container" th:replace="~{backoffice/customers/fragments/credit-card-list :: credit-card-list}"></div>
+                    </div>
                     </div>
                 </div>
             </div>

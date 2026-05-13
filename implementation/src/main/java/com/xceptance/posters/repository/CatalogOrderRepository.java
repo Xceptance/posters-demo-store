@@ -20,4 +20,6 @@ public interface CatalogOrderRepository extends JpaRepository<CatalogOrder, java
     java.util.List<CatalogOrder> findByCustomer_EmailOrderByOrderDateDesc(String email);
 
     long countByCustomer_Email(String email);
+
+    long countByOrderDateAfter(java.time.LocalDateTime date);
 }

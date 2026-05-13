@@ -1,0 +1,44 @@
+<div th:fragment="credit-card-form" class="p-4 border-bottom bg-light">
+    <h6 class="mb-3">Add New Credit Card</h6>
+    <form th:hx-post="@{/backoffice/customers/{id}/credit-cards/new(id=${customer.id})}" 
+          hx-target="#credit-card-list-container" 
+          hx-swap="outerHTML"
+          hx-on::after-request="if(event.detail.successful) this.closest('#credit-card-form-container').innerHTML=''">
+        
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <label class="form-label required">Name on Card</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label required">Card Vendor</label>
+                <select name="vendor" class="form-select" required>
+                    <option value="" selected disabled>Select Vendor...</option>
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="Amex">American Express</option>
+                    <option value="Discover">Discover</option>
+                </select>
+            </div>
+            
+            <div class="col-md-12">
+                <label class="form-label required">Card Number</label>
+                <input type="text" name="number" class="form-control" placeholder="16-digit card number" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label required">Expiration Month</label>
+                <input type="number" name="expMonth" class="form-control" min="1" max="12" placeholder="MM" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label required">Expiration Year</label>
+                <input type="number" name="expYear" class="form-control" min="2020" max="2050" placeholder="YYYY" required>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary" onclick="this.closest('#credit-card-form-container').innerHTML=''">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Credit Card</button>
+        </div>
+    </form>
+</div>

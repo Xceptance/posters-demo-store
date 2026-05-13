@@ -1,0 +1,65 @@
+<div th:fragment="address-form" class="p-4 border-bottom bg-light">
+    <h6 class="mb-3" th:text="${address != null ? 'Edit Address' : 'Add New Address'}">Add New Address</h6>
+    <form th:with="actionUrl=${address != null ? '/backoffice/customers/' + customer.id + '/addresses/' + address.id + '/edit' : '/backoffice/customers/' + customer.id + '/addresses/new'}"
+          th:hx-post="@{${actionUrl}}" 
+          hx-target="#address-list-container" 
+          hx-swap="outerHTML"
+          hx-on::after-request="if(event.detail.successful) this.closest('#address-form-container').innerHTML=''">
+        
+        <div class="row g-3 mb-3">
+            <div class="col-md-12">
+                <label class="form-label">Address Name (e.g. Home, Office)</label>
+                <input type="text" name="name" class="form-control" placeholder="Optional" th:value="${address?.name}">
+            </div>
+            
+            <div class="col-md-6">
+                <label class="form-label required">First Name</label>
+                <input type="text" name="recipientFirstName" class="form-control" required th:value="${address?.recipientFirstName}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label required">Last Name</label>
+                <input type="text" name="recipientLastName" class="form-control" required th:value="${address?.recipientLastName}">
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Company</label>
+                <input type="text" name="company" class="form-control" placeholder="Optional" th:value="${address?.company}">
+            </div>
+
+            <div class="col-12">
+                <label class="form-label required">Address Line 1</label>
+                <input type="text" name="addressLine1" class="form-control" required th:value="${address?.addressLine1}">
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Address Line 2</label>
+                <input type="text" name="addressLine2" class="form-control" placeholder="Optional" th:value="${address?.addressLine2}">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label required">City</label>
+                <input type="text" name="city" class="form-control" required th:value="${address?.city}">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label required">State/Province</label>
+                <input type="text" name="state" class="form-control" required th:value="${address?.state}">
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label required">ZIP/Postal Code</label>
+                <input type="text" name="postalCode" class="form-control" required th:value="${address?.postalCode}">
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label required">Country</label>
+                <input type="text" name="country" class="form-control" required th:value="${address?.country}">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary" onclick="this.closest('#address-form-container').innerHTML=''">Cancel</button>
+            <button type="submit" class="btn btn-primary" th:text="${address != null ? 'Update Address' : 'Save Address'}">Save Address</button>
+        </div>
+    </form>
+</div>

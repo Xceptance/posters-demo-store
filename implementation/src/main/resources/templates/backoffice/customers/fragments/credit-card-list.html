@@ -1,0 +1,27 @@
+<div th:fragment="credit-card-list">
+    <div th:if="${detail.customer.creditCards.empty}" class="p-4 text-center text-muted border-bottom">
+        No credit cards on file.
+    </div>
+    <ul class="list-group list-group-flush" th:unless="${detail.customer.creditCards.empty}">
+        <li class="list-group-item p-3 d-flex justify-content-between align-items-center" 
+            th:each="card : ${detail.customer.creditCards}">
+            <div>
+                <div class="fw-bold" th:text="${card.name}"></div>
+                <div class="text-muted font-monospace">
+                    <span class="badge bg-secondary me-2" th:text="${card.vendor}"></span>
+                    <span th:text="${card.number}"></span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="text-muted">
+                    Exp: <span th:text="${card.expMonth + '/' + card.expYear}"></span>
+                </div>
+                <button class="btn btn-sm btn-outline-danger"
+                        th:hx-delete="@{/backoffice/customers/{id}/credit-cards/{cardId}(id=${detail.customer.id}, cardId=${card.id})}"
+                        hx-target="#credit-card-list-container"
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure you want to delete this credit card?">Delete</button>
+            </div>
+        </li>
+    </ul>
+</div>

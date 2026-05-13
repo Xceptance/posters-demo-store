@@ -41,33 +41,33 @@
 
 ## 6. Customer Profile Editing
 
-- [ ] 6.1 Implement optimistic locking (@Version) for CustomerProfile
-- [ ] 6.2 Add HTMX-based inline editing for first, last, and middle names
-- [ ] 6.3 Handle OptimisticLockingFailureException gracefully with UI alerts
-- [ ] 6.4 Log CUSTOMER_UPDATED event in audit log on profile edit
+- [x] 6.1 Implement optimistic locking (@Version) for CustomerProfile
+- [x] 6.2 Add HTMX-based inline editing for first, last, and middle names
+- [x] 6.3 Handle OptimisticLockingFailureException gracefully with UI alerts
+- [x] 6.4 Log CUSTOMER_UPDATED event in audit log on profile edit
 
 ## 7. Address Management - View and Add
 
-- [ ] 7.1 Add 'name' field to CustomerAddress entity
-- [ ] 7.2 Display list of addresses on customer detail page
-- [ ] 7.3 Implement 'Add Address' functionality in Controller and UI
-- [ ] 7.4 Log CUSTOMER_ADDRESS_CREATED event in audit log
+- [x] 7.1 Add 'name' field to CustomerAddress entity
+- [x] 7.2 Display list of addresses on customer detail page
+- [x] 7.3 Implement 'Add Address' functionality in Controller and UI
+- [x] 7.4 Log CUSTOMER_ADDRESS_CREATED event in audit log
 
 ## 8. Address Management - Edit and Delete
 
-- [ ] 8.1 Implement 'Edit Address' functionality in Controller and UI
-- [ ] 8.2 Implement 'Delete Address' functionality with Bootstrap popover confirmation
-- [ ] 8.3 Log CUSTOMER_ADDRESS_UPDATED and CUSTOMER_ADDRESS_DELETED events in audit log
+- [x] 8.1 Implement 'Edit Address' functionality in Controller and UI
+- [x] 8.2 Implement 'Delete Address' functionality with Bootstrap popover confirmation
+- [x] 8.3 Log CUSTOMER_ADDRESS_UPDATED and CUSTOMER_ADDRESS_DELETED events in audit log
 
 ## 9. Credit Card Lifecycle
 
-- [ ] 9.1 Implement 'Add Credit Card' functionality with validation and formatting
-- [ ] 9.2 Implement masked storage for credit cards in backend
-- [ ] 9.3 Implement 'Delete Credit Card' functionality with confirmation
-- [ ] 9.4 Log CUSTOMER_CARD_ADDED and CUSTOMER_CARD_DELETED events in audit log
+- [x] 9.1 Implement 'Add Credit Card' functionality with validation and formatting
+- [x] 9.2 Implement masked storage for credit cards in backend
+- [x] 9.3 Implement 'Delete Credit Card' functionality with confirmation
+- [x] 9.4 Log CUSTOMER_CARD_ADDED and CUSTOMER_CARD_DELETED events in audit log
 
 ## 10. Customer Module Dashboard
 
-- [ ] 10.1 Create dashboard endpoint at /backoffice/customers/dashboard
-- [ ] 10.2 Implement metrics queries (total count, created 24h, orders 24h)
-- [ ] 10.3 Build dashboard UI with tiles and EChart visualization
+- [x] 10.1 Create dashboard endpoint at /backoffice/customers/dashboard
+- [x] 10.2 Implement metrics queries (total count, created 24h, orders 24h)
+- [x] 10.3 Build dashboard UI with tiles and EChart visualization

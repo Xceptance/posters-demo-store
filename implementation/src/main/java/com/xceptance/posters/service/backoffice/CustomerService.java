@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xceptance.posters.entity.AuditLogEntry;
 import com.xceptance.posters.entity.Customer;
 import com.xceptance.posters.entity.CustomerAddress;
+import com.xceptance.posters.entity.CatalogCreditCard;
 import com.xceptance.posters.entity.CustomerProfile;
 import com.xceptance.posters.repository.AuditLogRepository;
 import com.xceptance.posters.repository.CatalogOrderRepository;
@@ -233,8 +234,224 @@ public class CustomerService
     }
 
     // ------------------------------------------------------------------
+    // Address Management
+    // ------------------------------------------------------------------
+
+    @Transactional
+    public CustomerAddress addAddress(final UUID customerId,
+                                      final String name,
+                                      final String recipientFirstName,
+                                      final String recipientLastName,
+                                      final String company,
+                                      final String addressLine1,
+                                      final String addressLine2,
+                                      final String city,
+                                      final String state,
+                                      final String postalCode,
+                                      final String country,
+                                      final Long adminId,
+                                      final String adminName)
+    {
+        final Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customerId));
+
+        final CustomerAddress address = new CustomerAddress();
+        address.setCustomer(customer);
+        address.setName(name);
+        address.setRecipientFirstName(recipientFirstName);
+        address.setRecipientLastName(recipientLastName);
+        address.setCompany(company);
+        address.setAddressLine1(addressLine1);
+        address.setAddressLine2(addressLine2);
+        address.setCity(city);
+        address.setState(state);
+        address.setPostalCode(postalCode);
+        address.setCountry(country);
+
+        final CustomerAddress savedAddress = addressRepository.saveAndFlush(address);
+
+        // Audit: log creation event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_ADDRESS_CREATED);
+        audit.setTargetType("CustomerAddress");
+        audit.setTargetId(customer.getCustomerNumber());
+        audit.setDetails("Added address '" + (name != null && !name.isBlank() ? name : city) + "'");
+        auditLogRepository.save(audit);
+
+        return savedAddress;
+    }
+
+    @Transactional
+    public CustomerAddress updateAddress(final UUID customerId,
+                                         final Integer addressId,
+                                         final String name,
+                                         final String recipientFirstName,
+                                         final String recipientLastName,
+                                         final String company,
+                                         final String addressLine1,
+                                         final String addressLine2,
+                                         final String city,
+                                         final String state,
+                                         final String postalCode,
+                                         final String country,
+                                         final Long adminId,
+                                         final String adminName)
+    {
+        final CustomerAddress address = addressRepository.findById(addressId)
+            .orElseThrow(() -> new IllegalArgumentException("Address not found: " + addressId));
+
+        if (!address.getCustomer().getId().equals(customerId)) {
+            throw new IllegalArgumentException("Address does not belong to customer");
+        }
+
+        address.setName(name);
+        address.setRecipientFirstName(recipientFirstName);
+        address.setRecipientLastName(recipientLastName);
+        address.setCompany(company);
+        address.setAddressLine1(addressLine1);
+        address.setAddressLine2(addressLine2);
+        address.setCity(city);
+        address.setState(state);
+        address.setPostalCode(postalCode);
+        address.setCountry(country);
+
+        final CustomerAddress savedAddress = addressRepository.saveAndFlush(address);
+
+        // Audit: log update event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_ADDRESS_UPDATED);
+        audit.setTargetType("CustomerAddress");
+        audit.setTargetId(address.getCustomer().getCustomerNumber());
+        audit.setDetails("Updated address '" + (name != null && !name.isBlank() ? name : city) + "'");
+        auditLogRepository.save(audit);
+
+        return savedAddress;
+    }
+
+    @Transactional
+    public void deleteAddress(final UUID customerId, final Integer addressId, final Long adminId, final String adminName)
+    {
+        final CustomerAddress address = addressRepository.findById(addressId)
+            .orElseThrow(() -> new IllegalArgumentException("Address not found: " + addressId));
+
+        if (!address.getCustomer().getId().equals(customerId)) {
+            throw new IllegalArgumentException("Address does not belong to customer");
+        }
+
+        final String addressLabel = address.getName() != null && !address.getName().isBlank() ? address.getName() : address.getCity();
+        final Long customerNumber = address.getCustomer().getCustomerNumber();
+
+        addressRepository.delete(address);
+        addressRepository.flush();
+
+        // Audit: log deletion event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_ADDRESS_DELETED);
+        audit.setTargetType("CustomerAddress");
+        audit.setTargetId(customerNumber);
+        audit.setDetails("Deleted address '" + addressLabel + "'");
+        auditLogRepository.save(audit);
+    }
+
+    // ------------------------------------------------------------------
+    // Credit Card Management
+    // ------------------------------------------------------------------
+
+    @Transactional
+    public CatalogCreditCard addCreditCard(final UUID customerId,
+                                           final String number,
+                                           final String vendor,
+                                           final String name,
+                                           final Integer expMonth,
+                                           final Integer expYear,
+                                           final Long adminId,
+                                           final String adminName)
+    {
+        final Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customerId));
+
+        final CatalogCreditCard card = new CatalogCreditCard();
+        
+        // Mask the credit card number
+        final String cleanNumber = number.replaceAll("[^0-9]", "");
+        final String maskedNumber = cleanNumber.length() >= 4 
+            ? "*".repeat(cleanNumber.length() - 4) + cleanNumber.substring(cleanNumber.length() - 4)
+            : "****";
+            
+        card.setNumber(maskedNumber);
+        card.setVendor(vendor);
+        card.setName(name);
+        card.setExpMonth(expMonth);
+        card.setExpYear(expYear);
+
+        customer.getCreditCards().add(card);
+        customerRepository.saveAndFlush(customer);
+
+        // Audit: log creation event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_CARD_ADDED);
+        audit.setTargetType("CatalogCreditCard");
+        audit.setTargetId(customer.getCustomerNumber());
+        audit.setDetails("Added credit card ending in " + (cleanNumber.length() >= 4 ? cleanNumber.substring(cleanNumber.length() - 4) : ""));
+        auditLogRepository.save(audit);
+
+        return customer.getCreditCards().stream()
+            .max((c1, c2) -> Integer.compare(c1.getId() != null ? c1.getId() : 0, c2.getId() != null ? c2.getId() : 0))
+            .orElse(card);
+    }
+
+    @Transactional
+    public void deleteCreditCard(final UUID customerId, final Integer cardId, final Long adminId, final String adminName)
+    {
+        final Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customerId));
+
+        final CatalogCreditCard cardToRemove = customer.getCreditCards().stream()
+            .filter(c -> c.getId().equals(cardId))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Credit card not found: " + cardId));
+
+        final String maskedNumber = cardToRemove.getNumber();
+        final Long customerNumber = customer.getCustomerNumber();
+
+        customer.getCreditCards().remove(cardToRemove);
+        customerRepository.saveAndFlush(customer);
+
+        // Audit: log deletion event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_CARD_DELETED);
+        audit.setTargetType("CatalogCreditCard");
+        audit.setTargetId(customerNumber);
+        audit.setDetails("Deleted credit card " + maskedNumber);
+        auditLogRepository.save(audit);
+    }
+
+    @Transactional(readOnly = true)
+    public DashboardMetrics getDashboardMetrics()
+    {
+        final long totalCustomers = customerRepository.count();
+        final java.time.LocalDateTime yesterday = java.time.LocalDateTime.now().minusHours(24);
+        final long customers24h = customerRepository.countByCreatedAtAfter(yesterday);
+        final long orders24h = orderRepository.countByOrderDateAfter(yesterday);
+
+        return new DashboardMetrics(totalCustomers, customers24h, orders24h);
+    }
+
+    // ------------------------------------------------------------------
     // DTOs (immutable records)
     // ------------------------------------------------------------------
+
+    public record DashboardMetrics(long totalCustomers, long customers24h, long orders24h) {}
 
     /**
      * Full customer detail aggregate for the detail view.

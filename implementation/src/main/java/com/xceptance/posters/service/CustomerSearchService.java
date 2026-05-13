@@ -355,7 +355,7 @@ public class CustomerSearchService
     private Document createDocument(final Customer customer)
     {
         final Document doc = new Document();
-        doc.add(new StoredField(FIELD_ID, customer.getId().toString()));
+        doc.add(new StringField(FIELD_ID, customer.getId().toString(), Field.Store.YES));
 
         if (customer.getCustomerNumber() != null)
         {

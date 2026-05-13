@@ -26,6 +26,9 @@ public class CustomerAddress {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @Column(name = "address_name")
+    private String name;
+
     @Column(name = "recipient_first_name", nullable = false)
     private String recipientFirstName;
 
@@ -57,6 +60,9 @@ public class CustomerAddress {
     private String phone;
 
     // Getters and Setters
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

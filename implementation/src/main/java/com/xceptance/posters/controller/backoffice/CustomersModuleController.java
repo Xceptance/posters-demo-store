@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.xceptance.posters.config.AdminUserPrincipal;
 import com.xceptance.posters.controller.AbstractBackofficeController;
 import com.xceptance.posters.entity.Customer;
+import com.xceptance.posters.entity.CustomerAddress;
 import com.xceptance.posters.service.backoffice.CustomerService;
 import com.xceptance.posters.service.backoffice.CustomerService.CustomerDetail;
 import com.xceptance.posters.service.backoffice.CustomerService.PaginatedCustomerResult;
@@ -202,6 +204,199 @@ public class CustomersModuleController extends AbstractBackofficeController
     }
 
     // ------------------------------------------------------------------
+    // Address Management
+    // ------------------------------------------------------------------
+
+    @GetMapping("/{id}/addresses/new")
+    public String addAddressForm(@PathVariable final UUID id, final Model model)
+    {
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("customer", detail.customer());
+        return "backoffice/customers/fragments/address-form :: address-form";
+    }
+
+    @PostMapping("/{id}/addresses/new")
+    public String addAddress(@PathVariable final UUID id,
+                             @RequestParam(required = false) final String name,
+                             @RequestParam final String recipientFirstName,
+                             @RequestParam final String recipientLastName,
+                             @RequestParam(required = false) final String company,
+                             @RequestParam final String addressLine1,
+                             @RequestParam(required = false) final String addressLine2,
+                             @RequestParam final String city,
+                             @RequestParam final String state,
+                             @RequestParam final String postalCode,
+                             @RequestParam final String country,
+                             final Model model,
+                             final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        customerService.addAddress(id, name, recipientFirstName, recipientLastName, company,
+            addressLine1, addressLine2, city, state, postalCode, country, adminId, adminName);
+
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("detail", detail);
+
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Address added successfully\", \"type\": \"success\"}}");
+
+        return "backoffice/customers/fragments/address-list :: address-list";
+    }
+
+    @GetMapping("/{id}/addresses/{addressId}/edit")
+    public String editAddressForm(@PathVariable final UUID id, @PathVariable final Integer addressId, final Model model)
+    {
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        final CustomerAddress address = detail.addresses().stream()
+            .filter(a -> a.getId().equals(addressId))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Address not found"));
+            
+        model.addAttribute("customer", detail.customer());
+        model.addAttribute("address", address);
+        return "backoffice/customers/fragments/address-form :: address-form";
+    }
+
+    @PostMapping("/{id}/addresses/{addressId}/edit")
+    public String editAddress(@PathVariable final UUID id,
+                              @PathVariable final Integer addressId,
+                              @RequestParam(required = false) final String name,
+                              @RequestParam final String recipientFirstName,
+                              @RequestParam final String recipientLastName,
+                              @RequestParam(required = false) final String company,
+                              @RequestParam final String addressLine1,
+                              @RequestParam(required = false) final String addressLine2,
+                              @RequestParam final String city,
+                              @RequestParam final String state,
+                              @RequestParam final String postalCode,
+                              @RequestParam final String country,
+                              final Model model,
+                              final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        customerService.updateAddress(id, addressId, name, recipientFirstName, recipientLastName, company,
+            addressLine1, addressLine2, city, state, postalCode, country, adminId, adminName);
+
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("detail", detail);
+
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Address updated successfully\", \"type\": \"success\"}}");
+
+        return "backoffice/customers/fragments/address-list :: address-list";
+    }
+
+    @DeleteMapping("/{id}/addresses/{addressId}")
+    public String deleteAddress(@PathVariable final UUID id,
+                                @PathVariable final Integer addressId,
+                                final Model model,
+                                final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        customerService.deleteAddress(id, addressId, adminId, adminName);
+
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("detail", detail);
+
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Address deleted successfully\", \"type\": \"success\"}}");
+
+        return "backoffice/customers/fragments/address-list :: address-list";
+    }
+
+    // ------------------------------------------------------------------
+    // Credit Card Management
+    // ------------------------------------------------------------------
+
+    @GetMapping("/{id}/credit-cards/new")
+    public String addCreditCardForm(@PathVariable final UUID id, final Model model)
+    {
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("customer", detail.customer());
+        return "backoffice/customers/fragments/credit-card-form :: credit-card-form";
+    }
+
+    @PostMapping("/{id}/credit-cards/new")
+    public String addCreditCard(@PathVariable final UUID id,
+                                @RequestParam final String number,
+                                @RequestParam final String vendor,
+                                @RequestParam final String name,
+                                @RequestParam final Integer expMonth,
+                                @RequestParam final Integer expYear,
+                                final Model model,
+                                final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        customerService.addCreditCard(id, number, vendor, name, expMonth, expYear, adminId, adminName);
+
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("detail", detail);
+
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Credit card added successfully\", \"type\": \"success\"}}");
+
+        return "backoffice/customers/fragments/credit-card-list :: credit-card-list";
+    }
+
+    @DeleteMapping("/{id}/credit-cards/{cardId}")
+    public String deleteCreditCard(@PathVariable final UUID id,
+                                   @PathVariable final Integer cardId,
+                                   final Model model,
+                                   final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        customerService.deleteCreditCard(id, cardId, adminId, adminName);
+
+        final CustomerService.CustomerDetail detail = getCustomerDetail(id);
+        model.addAttribute("detail", detail);
+
+        response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Credit card deleted successfully\", \"type\": \"success\"}}");
+
+        return "backoffice/customers/fragments/credit-card-list :: credit-card-list";
+    }
+
+    // ------------------------------------------------------------------
     // Placeholder sub-modules (to be implemented in future changes)
     // ------------------------------------------------------------------
 
@@ -216,7 +411,8 @@ public class CustomersModuleController extends AbstractBackofficeController
     {
         model.addAttribute("moduleTitle", "Customers Dashboard");
         model.addAttribute("moduleIcon", "dashboard");
-        return "backoffice/placeholder";
+        model.addAttribute("metrics", customerService.getDashboardMetrics());
+        return "backoffice/customers/dashboard";
     }
 
     /**
@@ -245,5 +441,19 @@ public class CustomersModuleController extends AbstractBackofficeController
         model.addAttribute("moduleTitle", "Customers Settings");
         model.addAttribute("moduleIcon", "settings");
         return "backoffice/placeholder";
+    }
+
+    private CustomerService.CustomerDetail getCustomerDetail(final UUID id)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+        return customerService.getCustomerDetails(id, adminId, adminName);
     }
 }
