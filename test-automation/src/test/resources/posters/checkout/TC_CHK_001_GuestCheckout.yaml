@@ -1,58 +1,43 @@
-context: >
-  If you cannot find an element or make sense our of names, try to translate the user supplied data into the language behind ${locale}. 
-  Additionally all user translatable data is formatted like this translate('NAME').
+context: |
+  * You are testing a localized version of the posters web shop indicated by ${locale}. 
+  * If you cannot find an element or make sense out of names, try to translate supplied data.
+  * Additionally all translatable data is hinted by translate('NAME') but not necessarily always so. 
+  * CRITICAL RULE: NEVER assert that the 'body' contains English text (like 'Review Order' or 'Summary') when testing localized pages. For page verification, rely ONLY on the current URL, specific form elements, or the exact translated headings you can visually confirm in the provided DOM snippet.
 
 prompt: |
+  # Homepage
   Open ${neodymium.url}.
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
+  # PDP
   Navigate to the product detail page for any product.
+  # Mini Cart
   Select a size and style and click the Add to Cart button.
-  Close the mini-cart when it is open.
+  If the mini-cart is open then close it.
   Verify the count shown next to the cart icon is  '1'.
   Open the mini-cart and click translate("View Cart"). 
   Click translate("Checkout").
+  # Checkout
   Verify the user is taken into the checkout.
   Verify the user is presented with the Shipping Address form.
-  Fill out the shipping address form using: First Name '${firstName}', Last Name '${lastName}', Company '${company}', Address '${address}', City '${city}', State '${state}', Zip '${zip}', Country translate('${country}').
+  Fill out the shipping address form using: First Name '${firstName}', Last Name '${lastName}'.
+  Fill out the shipping address form using:  Company '${company}', Address '${address}', City '${city}', State '${state}', Zip '${zip}'.
+  Select the country translate('${country}') from the country dropdown.
   Submit the shipping address form.
+  # Billing Address
   Verify the billing address form is displayed.
-  Select "Use shipping address for billing" and submit the form.
-  Verify the Payment method or Order Review step is displayed.
-  Select credit card as the payment method, enter the card details: Name '${firstName} ${lastName}', Card '${creditCard}', Exp Month '${expMonth}', Exp Year '${expYear}', CVV '112' and proceed.
-  Verify the Order Review/Summary page is displayed.
-  Review the totals and click "Place Order".
-  Verify the user is redirected to the Order Confirmation page, and an order number is displayed.
+  Select translate("Use shipping address for billing") and submit the form.
+  # Payment
+  Verify the payment form is displayed.
+  Select translate("Credit Card") as the payment method if needed.
+  Fill out the payment form using: Name '${firstName} ${lastName}', Card '${creditCard}', Exp Month '${expMonth}', Exp Year '${expYear}', CVV '112' and proceed.
+  # Order Review
+  Verify that an order review page is displayed.
+  Review the totals and click translate("Place Order").
+  # Order Confirmation
+  Verify that an order confirmation page is displayed, and an order number is shown.
 
 data:
-  - testId: "tc_chk_001_de_DE"
-    locale: "de-DE"
-    firstName: "Hans"
-    lastName: "Müller"
-    company: "Beispiel GmbH"
-    address: "Musterstraße 1"
-    city: "Berlin"
-    state: "Berlin"
-    zip: "10115"
-    country: "Deutschland"
-    email: "hans.mueller@example.de"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030"
-  - testId: "tc_chk_001_en_GB"
-    locale: "en-GB"
-    firstName: "James"
-    lastName: "Smith"
-    company: "British Industries"
-    address: "456 High St"
-    city: "London"
-    state: "London"
-    zip: "W1D 1BS"
-    country: "United Kingdom"
-    email: "james.smith@example.co.uk"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030" 
   - testId: "tc_chk_001_sv_SE"
     locale: "sv-SE"
     firstName: "Erik"
@@ -95,3 +80,31 @@ data:
     creditCard: "1111222233334444"
     expMonth: "12"
     expYear: "2030"
+  - testId: "tc_chk_001_de_DE"
+    locale: "de-DE"
+    firstName: "Hans"
+    lastName: "Müller"
+    company: "Beispiel GmbH"
+    address: "Musterstraße 1"
+    city: "Berlin"
+    state: "Berlin"
+    zip: "10115"
+    country: "Deutschland"
+    email: "hans.mueller@example.de"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030"
+  - testId: "tc_chk_001_en_GB"
+    locale: "en-GB"
+    firstName: "James"
+    lastName: "Smith"
+    company: "British Industries"
+    address: "456 High St"
+    city: "London"
+    state: "London"
+    zip: "W1D 1BS"
+    country: "United Kingdom"
+    email: "james.smith@example.co.uk"
+    creditCard: "1111222233334444"
+    expMonth: "12"
+    expYear: "2030" 
