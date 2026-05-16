@@ -239,12 +239,13 @@ class CustomersModuleControllerTest
      * Verifies that the dashboard placeholder renders for authenticated admins.
      */
     @Test
-    void dashboardPlaceholderRendersForAdmin() throws Exception
+    void dashboardRendersForAdmin() throws Exception
     {
         mockMvc.perform(get("/backoffice/customers/dashboard")
                 .with(user("admin").roles("ADMIN")))
             .andExpect(status().isOk())
-            .andExpect(view().name("backoffice/placeholder"));
+            .andExpect(model().attributeExists("metrics"))
+            .andExpect(view().name("backoffice/customers/dashboard"));
     }
 
     /**

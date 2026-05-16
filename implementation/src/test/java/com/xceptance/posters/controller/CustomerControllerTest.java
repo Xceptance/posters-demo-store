@@ -44,6 +44,7 @@ import com.xceptance.posters.repository.CatalogOrderRepository;
 import com.xceptance.posters.repository.CustomerProfileRepository;
 import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.service.CheckoutService;
+import com.xceptance.posters.service.CustomerSearchService;
 import com.xceptance.posters.service.SessionService;
 
 /**
@@ -71,6 +72,9 @@ class CustomerControllerTest
 
     @Mock
     private CheckoutService checkoutService;
+
+    @Mock
+    private CustomerSearchService customerSearchService;
 
     @InjectMocks
     private CustomerController customerController;
