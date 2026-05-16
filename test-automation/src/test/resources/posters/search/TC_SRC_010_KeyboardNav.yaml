@@ -4,17 +4,25 @@ prompt: |
   Click the country represented by locale '${locale}' in the opened dialog.
   Using only keyboard navigation (Tab key), navigate to the search input field.
   Verify the search input receives visible focus.
-  Type '${searchTerm}' into the search input.
+  Type '${searchTerm}' into the search input (hint: ${searchInput}).
   Submit the search by pressing the Enter key on the keyboard.
-  Verify the search form submits and navigates to the search results page showing results for the term.
+  # Verify the search form submits and navigates to the search results page showing results for the term.
+  Verify that we are on the search results page and that there are search results for the search term. At least one.
   Return to the homepage.
-  Use the Tab key to navigate to the search input field and type the search term again.
+  Use the Tab key to navigate to the search input field and type '${searchTerm}'.
   Press the Tab key once more to navigate to the search button (magnifying glass icon).
   Verify the search button receives visible focus.
-  While the search button is focused, press the Space bar or Enter key.
-  Verify the search form submits and navigates to the search results page.
+  While the search button is focused, press the Space bar or Enter key (hint: ${searchButton}).
+  Verify the search form submits and navigates to the search results page showing results for the term.
+
+hints:
+  searchButton: "#header-search-button"
+  searchInput: "#header-search-text"
 
 data:
+  - testId: "tc_src_010_ja_JP"
+    locale: "ja-JP"
+    searchTerm: "ハイイログマ"
   - testId: "tc_src_010_en_US"
     locale: "en-US"
     searchTerm: "bear"
@@ -23,10 +31,8 @@ data:
     searchTerm: "bear"
   - testId: "tc_src_010_de_DE"
     locale: "de-DE"
-    searchTerm: "bear"
+    searchTerm: "bär"
   - testId: "tc_src_010_sv_SE"
     locale: "sv-SE"
-    searchTerm: "bear"
-  - testId: "tc_src_010_ja_JP"
-    locale: "ja-JP"
-    searchTerm: "bear"
+    searchTerm: "björn"
+
