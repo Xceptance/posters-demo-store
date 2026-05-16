@@ -25,16 +25,27 @@
                     </td>
                     <td th:text="${#temporals.format(u.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
                     <td class="text-end">
-                        <a th:href="@{/backoffice/security/users/{id}/edit(id=${u.id})}"
-                           class="btn btn-sm btn-outline-secondary" title="Edit">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
-                        </a>
-                        <button th:if="${u.id != currentUserId}"
-                                type="button" class="btn btn-sm btn-outline-danger" title="Delete"
-                                data-bs-toggle="modal"
-                                th:data-bs-target="'#deleteUserModal-' + ${u.id}">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
-                        </button>
+                        <div class="d-flex justify-content-end gap-1">
+                            <a th:href="@{/backoffice/security/users/{id}/edit(id=${u.id})}"
+                               class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" title="Edit" style="width: 32px; height: 32px; padding: 0;">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                            </a>
+                            <div class="dropdown" th:if="${u.id != currentUserId}">
+                                <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" style="width: 32px; height: 32px; padding: 0;" title="More Actions">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">more_vert</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                    <li>
+                                        <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                                data-bs-toggle="modal"
+                                                th:data-bs-target="'#deleteUserModal-' + ${u.id}">
+                                            <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                                            Delete
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr th:if="${users.content.isEmpty()}">
