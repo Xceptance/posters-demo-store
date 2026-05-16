@@ -27,7 +27,7 @@ public class TC_CHK_001_GuestCheckout
     @BeforeAll
     public static void setup()
     {
-        System.setProperty("neodymium.ai.interactive", "true");
+        System.setProperty("neodymium.ai.interactive", "false");
     }
 
     @NeodymiumTest
