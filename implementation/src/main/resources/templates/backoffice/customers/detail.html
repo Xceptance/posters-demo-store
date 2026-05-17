@@ -10,74 +10,76 @@
         Customer <span th:text="${detail.customer.customerNumber}"></span>
     </div>
 
-    <div layout:fragment="pageActions">
-        <a th:href="@{/backoffice/customers}" class="btn btn-outline-secondary">
-            <span class="material-symbols-outlined align-middle me-1">arrow_back</span>
-            Back to List
-        </a>
-    </div>
-
     <div layout:fragment="content">
+        <div class="mb-4">
+            <a th:href="@{/backoffice/customers}" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                <span class="material-symbols-outlined fs-6 me-1">arrow_back</span>
+                Back to List
+            </a>
+        </div>
         <div class="row g-4">
             <!-- Profile Section -->
             <div class="col-lg-4">
-                <div class="bo-card h-100">
-                    <div class="bo-card-header">
-                        <h5 class="mb-0">Profile Summary</h5>
-                    </div>
-                    <div class="bo-card-body">
+                <div class="bo-module-card h-100">
+                    <h5 class="bo-module-title mb-4">Profile Summary</h5>
+                    <div class="bo-card-body p-0">
                         <!-- Profile Name Fragment -->
                         <div th:replace="~{backoffice/customers/fragments/profile-name-display :: profile-name-display(customer=${detail.customer})}"></div>
 
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4 text-muted">Email</dt>
-                            <dd class="col-sm-8" th:text="${detail.customer.email}"></dd>
+                        <div class="p-4 pt-0 mt-3">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4 text-muted fw-normal">Email</dt>
+                                <dd class="col-sm-8 fw-semibold" th:text="${detail.customer.email}"></dd>
 
-                            <dt class="col-sm-4 text-muted">Created</dt>
-                            <dd class="col-sm-8" th:text="${#temporals.format(detail.customer.createdAt, 'MMM dd, yyyy')}"></dd>
+                                <dt class="col-sm-4 text-muted fw-normal mt-2">Created</dt>
+                                <dd class="col-sm-8 fw-semibold mt-2" th:text="${#temporals.format(detail.customer.createdAt, 'MMM dd, yyyy')}"></dd>
 
-                            <th:block th:if="${detail.profile != null}">
-                                <dt class="col-sm-4 text-muted mt-3">Last Login</dt>
-                                <dd class="col-sm-8 mt-3">
-                                    <span th:if="${detail.profile.lastLogin != null}" 
-                                          th:text="${#temporals.format(detail.profile.lastLogin, 'MMM dd, yyyy HH:mm')}"></span>
-                                    <span th:unless="${detail.profile.lastLogin != null}" class="text-muted">Never</span>
-                                </dd>
-                            </th:block>
-                        </dl>
+                                <th:block th:if="${detail.profile != null}">
+                                    <dt class="col-sm-4 text-muted fw-normal mt-2">Last Login</dt>
+                                    <dd class="col-sm-8 fw-semibold mt-2">
+                                        <span th:if="${detail.profile.lastLogin != null}" 
+                                              th:text="${#temporals.format(detail.profile.lastLogin, 'MMM dd, yyyy HH:mm')}"></span>
+                                        <span th:unless="${detail.profile.lastLogin != null}" class="text-muted fw-normal">Never</span>
+                                    </dd>
+                                </th:block>
+                            </dl>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Addresses Section -->
             <div class="col-lg-8">
-                <div class="bo-card mb-4">
-                    <div class="bo-card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Addresses</h5>
-                        <button class="btn btn-sm btn-outline-primary" 
+                <div class="bo-module-card mb-4 p-0">
+                    <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
+                        <h5 class="bo-module-title mb-0">Addresses</h5>
+                        <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center" 
                                 th:hx-get="@{/backoffice/customers/{id}/addresses/new(id=${detail.customer.id})}" 
                                 hx-target="#address-form-container" 
-                                hx-swap="innerHTML">Add Address</button>
+                                hx-swap="innerHTML">
+                            <span class="material-symbols-outlined fs-6 me-1">add</span> Add Address
+                        </button>
                     </div>
-                    <div class="bo-card-body p-0">
+                    <div>
                         <div id="address-form-container"></div>
                         <div id="address-list-container" th:replace="~{backoffice/customers/fragments/address-list :: address-list}"></div>
                     </div>
                 </div>
 
                 <!-- Credit Cards Section -->
-                <div class="bo-card">
-                    <div class="bo-card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Credit Cards</h5>
-                        <button class="btn btn-sm btn-outline-primary" 
+                <div class="bo-module-card p-0">
+                    <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
+                        <h5 class="bo-module-title mb-0">Credit Cards</h5>
+                        <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center" 
                                 th:hx-get="@{/backoffice/customers/{id}/credit-cards/new(id=${detail.customer.id})}" 
                                 hx-target="#credit-card-form-container" 
-                                hx-swap="innerHTML">Add Credit Card</button>
+                                hx-swap="innerHTML">
+                            <span class="material-symbols-outlined fs-6 me-1">add</span> Add Credit Card
+                        </button>
                     </div>
-                    <div class="bo-card-body p-0">
+                    <div>
                         <div id="credit-card-form-container"></div>
                         <div id="credit-card-list-container" th:replace="~{backoffice/customers/fragments/credit-card-list :: credit-card-list}"></div>
-                    </div>
                     </div>
                 </div>
             </div>
