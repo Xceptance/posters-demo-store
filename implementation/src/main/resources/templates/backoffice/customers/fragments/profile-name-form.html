@@ -19,15 +19,15 @@
         
         <div class="row g-2 mb-3">
             <div class="col-md-4">
-                <label for="firstName" class="form-label form-label-sm text-muted">First Name</label>
+                <label for="firstName" class="form-label form-label-sm text-muted">First Name *</label>
                 <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" th:value="${customer.firstName}" required>
             </div>
             <div class="col-md-4">
-                <label for="middleName" class="form-label form-label-sm text-muted">Middle Name <small>(Optional)</small></label>
-                <input type="text" class="form-control form-control-sm" id="middleName" name="middleName" th:value="${customer.middleName}">
+                <label for="middleName" class="form-label form-label-sm text-muted">Middle Name</label>
+                <input type="text" class="form-control form-control-sm" id="middleName" name="middleName" placeholder="Optional" th:value="${customer.middleName}">
             </div>
             <div class="col-md-4">
-                <label for="lastName" class="form-label form-label-sm text-muted">Last Name</label>
+                <label for="lastName" class="form-label form-label-sm text-muted">Last Name *</label>
                 <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" th:value="${customer.lastName}" required>
             </div>
         </div>

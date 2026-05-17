@@ -13,11 +13,11 @@
             </div>
             
             <div class="col-md-6">
-                <label class="form-label required">First Name</label>
+                <label class="form-label required">First Name *</label>
                 <input type="text" name="recipientFirstName" class="form-control" required th:value="${address?.recipientFirstName}">
             </div>
             <div class="col-md-6">
-                <label class="form-label required">Last Name</label>
+                <label class="form-label required">Last Name *</label>
                 <input type="text" name="recipientLastName" class="form-control" required th:value="${address?.recipientLastName}">
             </div>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="col-12">
-                <label class="form-label required">Address Line 1</label>
+                <label class="form-label required">Address Line 1 *</label>
                 <input type="text" name="addressLine1" class="form-control" required th:value="${address?.addressLine1}">
             </div>
 
@@ -37,22 +37,22 @@
             </div>
 
             <div class="col-md-6">
-                <label class="form-label required">City</label>
+                <label class="form-label required">City *</label>
                 <input type="text" name="city" class="form-control" required th:value="${address?.city}">
             </div>
 
             <div class="col-md-4">
-                <label class="form-label required">State/Province</label>
+                <label class="form-label required">State/Province *</label>
                 <input type="text" name="state" class="form-control" required th:value="${address?.state}">
             </div>
 
             <div class="col-md-2">
-                <label class="form-label required">ZIP/Postal Code</label>
+                <label class="form-label required">ZIP/Postal Code *</label>
                 <input type="text" name="postalCode" class="form-control" required th:value="${address?.postalCode}">
             </div>
 
             <div class="col-md-12">
-                <label class="form-label required">Country</label>
+                <label class="form-label required">Country *</label>
                 <input type="text" name="country" class="form-control" required th:value="${address?.country}">
             </div>
         </div>
