@@ -1,0 +1,50 @@
+context: |
+  * You are testing a localized version of the posters web shop indicated by ${locale}.
+  * If you cannot find an element or make sense out of names, try to translate supplied data.
+  * Additionally all translatable data is hinted by translate('NAME') but not necessarily always so.
+  * CRITICAL RULE: NEVER assert that the 'body' contains English text when testing localized pages. For page verification, rely ONLY on the current URL, specific element IDs, or visually confirmed translated headings.
+
+prompt: |
+  # Homepage
+  Open ${neodymium.url}.
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  # PDP
+  Navigate to the product detail page for any product.
+  Record the product price displayed on the PDP as "productPrice" (hint: #product-detail-form-price).
+  # Add to Cart
+  Select a size and style and click the Add to Cart button.
+  If the mini-cart is open then close it.
+  Verify the count shown next to the cart icon is '1'.
+  # Cart Page
+  Open the mini-cart and click translate("View Cart").
+  Verify the cart page is displayed and contains one line item.
+  Capture the line item price shown in the line item row. Save it as variable 'unitPrice'.
+  Check that 'unitPrice' equals 'productPrice'.
+  # Subtotal
+  Capture the subtotal amount from element '#cart-subtotal'. Save it as variable 'subtotal'.
+  Verify that the subtotal element '#cart-subtotal' contains the text ${unitPrice}.
+  # Tax Rate Format
+  Capture the tax rate label shown next to the Tax row in the cart summary.
+  Verify that the tax rate is displayed in the exact format '${taxRate}' (two decimal places with percent sign). FAIL if the format is different (e.g. '6.0%' is not acceptable). Note: known defect BUS-BUG-24.
+  # Row Display Order
+  Verify that the cart summary rows appear in this exact order: Subtotal, then Shipping, then Tax, then Total. FAIL if Tax appears before Shipping. Note: known defect BUS-BUG-25.
+  # Tax Amount
+  Capture the tax amount from element '#cart-tax'. Save it as variable 'tax'.
+  Capture the shipping amount from the Shipping row in the cart summary. Save it as variable 'shipping'.
+  Verify that the shipping amount equals '${shippingCost}'.
+  Compute expected tax as (subtotal + shipping) multiplied by the numeric tax rate (e.g. 6% = 0.06).
+  Verify that the displayed tax amount equals the expected tax (allow +-$0.02 for rounding). FAIL if incorrect. Note: known defect BUS-BUG-23.
+  # Total
+  Capture the total amount from element '#cart-total'. Save it as variable 'total'.
+  Verify that the total equals subtotal plus shipping plus tax (allow +-$0.02 for rounding).
+
+data:
+  - testId: "tc_crt_001_en_US"
+    locale: "en-US"
+    taxRate: "6.00%"
+    shippingCost: "$7.00"
+  - testId: "tc_crt_001_de_DE"
+    locale: "de-DE"
+    taxRate: "6.00%"
+    shippingCost: "$7.00"
