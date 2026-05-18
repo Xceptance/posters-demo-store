@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Form Accessibility Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="mb-4">Accessible Form Patterns</h1>
+    <p class="lead mb-5">
+      Examples demonstrating proper ARIA attributes, help text connections,
+      and accessible validation patterns.
+    </p>
+
+    <!-- Pattern 1: Help Text with aria-describedby -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h2 class="h5 mb-0">1. Help Text with aria-describedby</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Use <code>aria-describedby</code> to connect help text to inputs.
+              Screen readers announce help text when the input receives focus.
+            </p>
+            <form>
+              <div class="mb-3">
+                <label for="password1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password1"
+                       aria-describedby="password1Help" required>
+                <div id="password1Help" class="form-text">
+                  Must be 8+ characters with one uppercase letter and one number.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="username1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username1"
+                       aria-describedby="username1Help" required>
+                <div id="username1Help" class="form-text">
+                  3-20 characters, letters and numbers only.
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 2: Multiple Descriptions -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h2 class="h5 mb-0">2. Multiple Descriptions</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Space-separate multiple IDs in <code>aria-describedby</code>.
+              Screen readers announce them in order.
+            </p>
+            <form>
+              <div class="mb-3">
+                <label for="date1" class="form-label">Date of Birth</label>
+                <input type="text" class="form-control" id="date1"
+                       aria-describedby="dateFormat datePrivacy"
+                       placeholder="MM/DD/YYYY">
+                <div id="dateFormat" class="form-text">Format: MM/DD/YYYY</div>
+                <div id="datePrivacy" class="form-text text-muted">
+                  <small>Used only for age verification. Never shared.</small>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 3: Combined Help Text and Validation -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h2 class="h5 mb-0">3. Help Text + Validation Feedback</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              When validation fails, reference both help text and error message in
+              <code>aria-describedby</code>. Add <code>aria-invalid="true"</code>
+              to indicate the invalid state.
+            </p>
+            <form>
+              <!-- Valid state -->
+              <div class="mb-3">
+                <label for="emailValid" class="form-label">
+                  Email (valid state)
+                </label>
+                <input type="email" class="form-control is-valid" id="emailValid"
+                       aria-describedby="emailValidHelp" value="user@example.com">
+                <div id="emailValidHelp" class="form-text">
+                  We'll never share your email.
+                </div>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <!-- Invalid state -->
+              <div class="mb-3">
+                <label for="emailInvalid" class="form-label">
+                  Email (invalid state)
+                </label>
+                <input type="email" class="form-control is-invalid" id="emailInvalid"
+                       aria-invalid="true" aria-describedby="emailInvalidHelp emailInvalidError"
+                       value="invalid-email">
+                <div id="emailInvalidHelp" class="form-text">
+                  We'll never share your email.
+                </div>
+                <div id="emailInvalidError" class="invalid-feedback">
+                  Please enter a valid email address (e.g., user@example.com).
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 4: Required Fields -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-warning text-dark">
+            <h2 class="h5 mb-0">4. Required Fields with Visual + ARIA Indicators</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Use both <code>required</code> and <code>aria-required="true"</code>.
+              Add a visual indicator (asterisk) for sighted users.
+            </p>
+            <form>
+              <p class="text-muted"><span class="text-danger">*</span> Required fields</p>
+              <div class="mb-3">
+                <label for="fullName" class="form-label">
+                  Full Name <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <input type="text" class="form-control" id="fullName"
+                       required aria-required="true">
+              </div>
+              <div class="mb-3">
+                <label for="company" class="form-label">Company (optional)</label>
+                <input type="text" class="form-control" id="company">
+              </div>
+              <div class="mb-3">
+                <label for="phone2" class="form-label">
+                  Phone <span class="text-danger" aria-hidden="true">*</span>
+                </label>
+                <input type="tel" class="form-control" id="phone2"
+                       required aria-required="true" aria-describedby="phone2Help">
+                <div id="phone2Help" class="form-text">Format: (555) 123-4567</div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 5: Fieldset with Legend -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-info text-white">
+            <h2 class="h5 mb-0">5. Grouped Controls with Fieldset/Legend</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Use <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> to group
+              related controls. Screen readers announce the legend with each control.
+            </p>
+            <form>
+              <fieldset class="mb-4">
+                <legend class="fs-6 fw-semibold">Notification Preferences</legend>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifEmail">
+                  <label class="form-check-label" for="notifEmail">
+                    Email notifications
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifSms">
+                  <label class="form-check-label" for="notifSms">
+                    SMS notifications
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifPush">
+                  <label class="form-check-label" for="notifPush">
+                    Push notifications
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="mb-4">
+                <legend class="fs-6 fw-semibold">Contact Method</legend>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="contactMethod"
+                         id="contactEmail" value="email" checked>
+                  <label class="form-check-label" for="contactEmail">
+                    Email
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="contactMethod"
+                         id="contactPhone" value="phone">
+                  <label class="form-check-label" for="contactPhone">
+                    Phone
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="contactMethod"
+                         id="contactMail" value="mail">
+                  <label class="form-check-label" for="contactMail">
+                    Postal mail
+                  </label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 6: Switch with role="switch" -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-success text-white">
+            <h2 class="h5 mb-0">6. Accessible Switches</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Add <code>role="switch"</code> to switch controls so screen readers
+              announce them as switches rather than checkboxes.
+            </p>
+            <form>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" role="switch"
+                       id="darkMode" aria-describedby="darkModeHelp">
+                <label class="form-check-label" for="darkMode">
+                  Enable dark mode
+                </label>
+                <div id="darkModeHelp" class="form-text">
+                  Reduces eye strain in low-light environments.
+                </div>
+              </div>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" role="switch"
+                       id="autoSave" checked>
+                <label class="form-check-label" for="autoSave">
+                  Auto-save documents
+                </label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch"
+                       id="twoFactor">
+                <label class="form-check-label" for="twoFactor">
+                  Two-factor authentication
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 7: Visually Hidden Labels -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-dark text-white">
+            <h2 class="h5 mb-0">7. Visually Hidden Labels</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              When hiding labels visually, use <code>.visually-hidden</code>
+              (not <code>display: none</code>) so screen readers still announce them.
+            </p>
+
+            <!-- Search form with hidden label -->
+            <form class="mb-4">
+              <label for="searchInput" class="visually-hidden">Search</label>
+              <div class="input-group">
+                <input type="search" class="form-control" id="searchInput"
+                       placeholder="Search..." aria-describedby="searchButton">
+                <button class="btn btn-outline-primary" type="submit" id="searchButton">
+                  Search
+                </button>
+              </div>
+            </form>
+
+            <!-- Newsletter with hidden label -->
+            <form class="row g-3 align-items-center">
+              <div class="col-auto flex-grow-1">
+                <label for="newsletterEmail" class="visually-hidden">Email</label>
+                <input type="email" class="form-control" id="newsletterEmail"
+                       placeholder="Enter your email">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 8: Error Announcement Region -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-danger text-white">
+            <h2 class="h5 mb-0">8. Live Error Announcements</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Use <code>aria-live</code> regions to announce validation errors
+              to screen readers when the form is submitted.
+            </p>
+            <form id="liveErrorForm" class="needs-validation" novalidate>
+              <!-- Error summary region -->
+              <div id="errorSummary" role="alert" aria-live="assertive"
+                   class="alert alert-danger d-none mb-3">
+              </div>
+
+              <div class="mb-3">
+                <label for="liveEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="liveEmail"
+                       aria-describedby="liveEmailError" required>
+                <div id="liveEmailError" class="invalid-feedback">
+                  Please enter a valid email address.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="livePassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="livePassword"
+                       minlength="8" aria-describedby="livePasswordError" required>
+                <div id="livePasswordError" class="invalid-feedback">
+                  Password must be at least 8 characters.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-danger">Submit Form</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern 9: Focus Management -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-purple text-white" style="background-color: #6f42c1;">
+            <h2 class="h5 mb-0">9. Focus Management on Error</h2>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              On validation error, move focus to the first invalid field.
+              This helps keyboard and screen reader users find errors quickly.
+            </p>
+            <form id="focusForm" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="focusFirst" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="focusFirst" required>
+                <div class="invalid-feedback">Please enter your first name.</div>
+              </div>
+              <div class="mb-3">
+                <label for="focusLast" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="focusLast" required>
+                <div class="invalid-feedback">Please enter your last name.</div>
+              </div>
+              <div class="mb-3">
+                <label for="focusEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="focusEmail" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <small class="text-muted ms-2">Try submitting with empty fields</small>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // Pattern 8: Live Error Announcements
+    document.getElementById('liveErrorForm').addEventListener('submit', function(event) {
+      const form = event.target;
+      const errorSummary = document.getElementById('errorSummary');
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Collect errors
+        const errors = [];
+        form.querySelectorAll(':invalid').forEach(function(input) {
+          const label = form.querySelector('label[for="' + input.id + '"]');
+          const labelText = label ? label.textContent : input.name;
+          errors.push(labelText + ': ' + input.validationMessage);
+
+          // Add aria-invalid
+          input.setAttribute('aria-invalid', 'true');
+        });
+
+        // Show error summary using safe DOM methods (avoids XSS)
+        errorSummary.classList.remove('d-none');
+        errorSummary.textContent = '';  // Clear existing content
+
+        var strong = document.createElement('strong');
+        strong.textContent = errors.length + ' error(s) found:';
+        errorSummary.appendChild(strong);
+
+        var ul = document.createElement('ul');
+        ul.className = 'mb-0 mt-2';
+        errors.forEach(function(e) {
+          var li = document.createElement('li');
+          li.textContent = e;  // textContent safely escapes HTML
+          ul.appendChild(li);
+        });
+        errorSummary.appendChild(ul);
+      } else {
+        errorSummary.classList.add('d-none');
+        // Clear aria-invalid from all inputs
+        form.querySelectorAll('[aria-invalid]').forEach(function(input) {
+          input.removeAttribute('aria-invalid');
+        });
+      }
+
+      form.classList.add('was-validated');
+    });
+
+    // Pattern 9: Focus Management
+    document.getElementById('focusForm').addEventListener('submit', function(event) {
+      const form = event.target;
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Find first invalid input and focus it
+        const firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) {
+          firstInvalid.focus();
+          firstInvalid.setAttribute('aria-invalid', 'true');
+
+          // Scroll into view smoothly
+          firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Mark all invalid inputs
+        form.querySelectorAll(':invalid').forEach(function(input) {
+          input.setAttribute('aria-invalid', 'true');
+        });
+      }
+
+      form.classList.add('was-validated');
+    });
+  </script>
+</body>
+</html>

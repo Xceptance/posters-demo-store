@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Popovers & Tooltips Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Popovers & Tooltips Patterns</h1>
+
+    <!-- Required Initialization -->
+    <section class="mb-4">
+      <div class="alert alert-warning">
+        <h5 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>Required JavaScript Initialization</h5>
+        <p class="mb-2">Tooltips and popovers <strong>will not work</strong> without explicit JavaScript initialization. Unlike modals, data attributes alone are not sufficient.</p>
+        <hr>
+        <p class="mb-0"><strong>See the script at the bottom of this page for the required initialization code.</strong></p>
+      </div>
+    </section>
+
+    <!-- Basic Tooltips -->
+    <section class="mb-4">
+      <h2>Basic Tooltips</h2>
+      <p class="text-muted">Tooltips provide contextual information on hover or focus.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-title="Default tooltip">
+          Hover me
+        </button>
+        <a href="#" data-bs-toggle="tooltip" data-bs-title="Tooltip on link">Link with tooltip</a>
+        <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-title="Tooltip on disabled button">
+          <button class="btn btn-primary" type="button" disabled>Disabled button</button>
+        </span>
+      </div>
+    </section>
+
+    <!-- Tooltip Placement -->
+    <section class="mb-4">
+      <h2>Tooltip Placement</h2>
+      <p class="text-muted">Control tooltip position with <code>data-bs-placement</code>.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
+          Top
+        </button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+          Right
+        </button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
+          Bottom
+        </button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Tooltip on left">
+          Left
+        </button>
+      </div>
+    </section>
+
+    <!-- HTML Tooltips -->
+    <section class="mb-4">
+      <h2>HTML Content in Tooltips</h2>
+      <p class="text-muted">Enable HTML with <code>data-bs-html="true"</code>.</p>
+
+      <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-html="true"
+        data-bs-title="<strong>Bold</strong> and <em>italic</em> text">
+        Tooltip with HTML
+      </button>
+    </section>
+
+    <!-- Basic Popovers -->
+    <section class="mb-4">
+      <h2>Basic Popovers</h2>
+      <p class="text-muted">Popovers are larger tooltips with a title and content body.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover"
+          data-bs-title="Popover title"
+          data-bs-content="This is the popover body content. It can contain more text than a tooltip.">
+          Click to toggle popover
+        </button>
+      </div>
+    </section>
+
+    <!-- Popover Placement -->
+    <section class="mb-4">
+      <h2>Popover Placement</h2>
+      <p class="text-muted">Control popover position with <code>data-bs-placement</code>.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="top"
+          data-bs-title="Top Popover" data-bs-content="Content for top popover.">
+          Top
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="right"
+          data-bs-title="Right Popover" data-bs-content="Content for right popover.">
+          Right
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="bottom"
+          data-bs-title="Bottom Popover" data-bs-content="Content for bottom popover.">
+          Bottom
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover" data-bs-placement="left"
+          data-bs-title="Left Popover" data-bs-content="Content for left popover.">
+          Left
+        </button>
+      </div>
+    </section>
+
+    <!-- Popover Triggers -->
+    <section class="mb-4">
+      <h2>Popover Triggers</h2>
+      <p class="text-muted">Change trigger behavior with <code>data-bs-trigger</code>: click, hover, focus, or combinations.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-trigger="click"
+          data-bs-title="Click Trigger" data-bs-content="Click to show, click again to hide.">
+          Click
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-trigger="hover"
+          data-bs-title="Hover Trigger" data-bs-content="Appears on hover, disappears when mouse leaves.">
+          Hover
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-trigger="focus"
+          data-bs-title="Focus Trigger" data-bs-content="Appears on focus, disappears on blur.">
+          Focus
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-trigger="hover focus"
+          data-bs-title="Hover + Focus" data-bs-content="Appears on hover or focus.">
+          Hover + Focus
+        </button>
+      </div>
+    </section>
+
+    <!-- Dismissible Popovers -->
+    <section class="mb-4">
+      <h2>Dismissible Popovers</h2>
+      <p class="text-muted">Dismiss by clicking anywhere outside with <code>data-bs-trigger="focus"</code>.</p>
+
+      <a tabindex="0" class="btn btn-warning" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+        data-bs-title="Dismissible popover"
+        data-bs-content="Click anywhere outside this popover to dismiss it.">
+        Dismissible popover
+      </a>
+    </section>
+
+    <!-- HTML Content in Popovers -->
+    <section class="mb-4">
+      <h2>HTML Content in Popovers</h2>
+      <p class="text-muted">Enable rich content with <code>data-bs-html="true"</code>.</p>
+
+      <button type="button" class="btn btn-success" data-bs-toggle="popover" data-bs-html="true"
+        data-bs-title="<i class='bi bi-star-fill text-warning'></i> Rich Content"
+        data-bs-content="<p>This popover has <strong>HTML</strong> content.</p><ul><li>List item 1</li><li>List item 2</li></ul>">
+        Popover with HTML
+      </button>
+    </section>
+
+    <!-- Custom Tooltip/Popover Classes -->
+    <section class="mb-4">
+      <h2>Custom Styling</h2>
+      <p class="text-muted">Add custom classes with <code>data-bs-custom-class</code>.</p>
+
+      <button type="button" class="btn btn-dark" data-bs-toggle="tooltip"
+        data-bs-custom-class="bg-primary" data-bs-title="Custom styled tooltip">
+        Custom tooltip class
+      </button>
+    </section>
+
+    <!-- Icon Tooltips Pattern -->
+    <section class="mb-4">
+      <h2>Icon with Tooltip Pattern</h2>
+      <p class="text-muted">Common pattern for adding help text to icons.</p>
+
+      <form>
+        <label for="email" class="form-label">
+          Email address
+          <i class="bi bi-question-circle text-muted" data-bs-toggle="tooltip"
+            data-bs-title="We'll never share your email with anyone else."></i>
+        </label>
+        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+      </form>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // REQUIRED: Initialize all tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+
+    // REQUIRED: Initialize all popovers
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = [...popoverTriggerList].map(el => new bootstrap.Popover(el));
+  </script>
+</body>
+</html>

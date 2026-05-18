@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="delete-confirm-modal" class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger d-flex align-items-center" id="deleteConfirmModalLabel">
+                    <span class="material-symbols-outlined me-2">warning</span>
+                    <span th:text="${title}">Confirm Delete</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form method="post" th:hx-delete="${deleteUrl}"
+                  th:hx-target="${hxTarget}"
+                  hx-swap="outerHTML"
+                  hx-on::after-request="if(event.detail.successful) bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide()">
+                <div class="modal-body">
+                    <p th:utext="${message}">Are you sure?</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger" th:text="${confirmLabel ?: 'Delete'}">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        (function() {
+            var modalEl = document.getElementById('deleteConfirmModal');
+            var modal = new bootstrap.Modal(modalEl);
+            modal.show();
+            modalEl.addEventListener('hidden.bs.modal', function () {
+                modalEl.remove();
+            });
+        })();
+    </script>
+</div>
+</html>

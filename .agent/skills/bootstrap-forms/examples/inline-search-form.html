@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Inline Form Examples</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="mb-4">Inline Form Examples</h1>
+
+    <!-- Section 1: Simple Navbar Search -->
+    <section class="mb-5">
+      <h2>Navbar Search Form</h2>
+      <p class="text-muted">Compact search form for navigation bars using d-flex and flexbox utilities.</p>
+
+      <nav class="navbar navbar-expand-lg bg-body-tertiary rounded mb-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Brand</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSearch">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+              <button class="btn btn-outline-primary" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="alert alert-info">
+        <strong>Key pattern:</strong> <code>d-flex</code> with <code>role="search"</code> for accessible inline forms.
+      </div>
+    </section>
+
+    <!-- Section 2: Input Group with Button -->
+    <section class="mb-5">
+      <h2>Input Group Search</h2>
+      <p class="text-muted">Search form using input groups for a connected appearance.</p>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <form>
+            <div class="input-group input-group-lg">
+              <span class="input-group-text bg-white">
+                <i class="bi bi-search text-muted"></i>
+              </span>
+              <input type="search" class="form-control" placeholder="Search articles, topics, or authors..." aria-label="Search">
+              <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> <code>input-group</code> with <code>input-group-text</code> for icons and attached buttons.
+      </div>
+    </section>
+
+    <!-- Section 3: Row Columns Auto Layout -->
+    <section class="mb-5">
+      <h2>Filter Form (row-cols-lg-auto)</h2>
+      <p class="text-muted">Inline filter form that stacks vertically on mobile and aligns horizontally on larger screens.</p>
+
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row row-cols-lg-auto g-3 align-items-center">
+              <div class="col-12">
+                <label class="visually-hidden" for="filterCategory">Category</label>
+                <select class="form-select" id="filterCategory">
+                  <option selected>All Categories</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="books">Books</option>
+                  <option value="home">Home & Garden</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="visually-hidden" for="filterPrice">Price Range</label>
+                <select class="form-select" id="filterPrice">
+                  <option selected>Any Price</option>
+                  <option value="0-25">Under $25</option>
+                  <option value="25-50">$25 - $50</option>
+                  <option value="50-100">$50 - $100</option>
+                  <option value="100+">Over $100</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="visually-hidden" for="filterSort">Sort By</label>
+                <select class="form-select" id="filterSort">
+                  <option selected>Sort by: Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="newest">Newest First</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="inStock">
+                  <label class="form-check-label" for="inStock">In Stock Only</label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-funnel me-1"></i>Apply Filters
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> <code>row-cols-lg-auto</code> creates inline layout on large screens, stacks on mobile.
+      </div>
+    </section>
+
+    <!-- Section 4: Newsletter Subscription -->
+    <section class="mb-5">
+      <h2>Newsletter Signup</h2>
+      <p class="text-muted">Common email subscription pattern with input group.</p>
+
+      <div class="bg-dark text-white p-4 rounded">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h3><i class="bi bi-envelope-paper me-2"></i>Stay Updated</h3>
+            <p class="text-white-50">Get the latest news and exclusive offers delivered to your inbox.</p>
+            <form>
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email address" required>
+                <button class="btn btn-warning" type="submit">Subscribe</button>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="weeklyDigest" checked>
+                <label class="form-check-label text-white-50" for="weeklyDigest">Weekly digest</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="productUpdates">
+                <label class="form-check-label text-white-50" for="productUpdates">Product updates</label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> <code>form-check-inline</code> for horizontal checkbox alignment.
+      </div>
+    </section>
+
+    <!-- Section 5: Quick Actions Toolbar -->
+    <section class="mb-5">
+      <h2>Toolbar with Inline Controls</h2>
+      <p class="text-muted">Mixed form controls for admin dashboards and data tables.</p>
+
+      <div class="card">
+        <div class="card-header bg-white">
+          <form>
+            <div class="row g-2 align-items-center">
+              <div class="col-auto">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text"><i class="bi bi-search"></i></span>
+                  <input type="search" class="form-control" placeholder="Search users..." style="width: 200px;">
+                </div>
+              </div>
+              <div class="col-auto">
+                <select class="form-select form-select-sm" style="width: 140px;">
+                  <option selected>All Roles</option>
+                  <option value="admin">Admin</option>
+                  <option value="editor">Editor</option>
+                  <option value="viewer">Viewer</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <select class="form-select form-select-sm" style="width: 140px;">
+                  <option selected>All Status</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="pending">Pending</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <div class="btn-group btn-group-sm">
+                  <button type="button" class="btn btn-outline-secondary">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    <i class="bi bi-plus"></i> Add User
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-0">Table content would appear here...</p>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> <code>col-auto</code> for natural width columns, <code>form-select-sm</code> for compact controls.
+      </div>
+    </section>
+
+    <!-- Section 6: Date Range Filter -->
+    <section class="mb-5">
+      <h2>Date Range Filter</h2>
+      <p class="text-muted">Inline date inputs for filtering by date range.</p>
+
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <div class="row row-cols-lg-auto g-3 align-items-center">
+              <div class="col-12">
+                <div class="input-group">
+                  <span class="input-group-text">From</span>
+                  <input type="date" class="form-control" id="dateFrom" aria-label="Start date">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="input-group">
+                  <span class="input-group-text">To</span>
+                  <input type="date" class="form-control" id="dateTo" aria-label="End date">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-secondary btn-sm">Today</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm">This Week</button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm">This Month</button>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-calendar-check me-1"></i>Apply
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> Combine <code>input-group</code> with <code>row-cols-lg-auto</code> for labeled inline date inputs.
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

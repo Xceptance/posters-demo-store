@@ -59,19 +59,29 @@
                             <span class="badge bg-light text-dark" th:text="${userCounts[role.id] != null ? userCounts[role.id] : 0}"></span>
                         </td>
                         <td class="text-end">
-                            <!-- Edit button (custom roles only) -->
-                            <a th:if="${!role.builtIn}"
-                               th:href="@{/backoffice/security/roles/{id}/edit(id=${role.id})}"
-                               class="btn btn-sm btn-outline-secondary" title="Edit">
-                                <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
-                            </a>
-                            <!-- Delete button (custom roles only, shows modal) -->
-                            <button th:if="${!role.builtIn}"
-                                    type="button" class="btn btn-sm btn-outline-danger" title="Delete"
-                                    data-bs-toggle="modal"
-                                    th:data-bs-target="'#deleteModal-' + ${role.id}">
-                                <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
-                            </button>
+                            <div class="d-flex justify-content-end gap-1" th:if="${!role.builtIn}">
+                                <!-- Edit button (custom roles only) -->
+                                <a th:href="@{/backoffice/security/roles/{id}/edit(id=${role.id})}"
+                                   class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" title="Edit" style="width: 32px; height: 32px; padding: 0;">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                                </a>
+                                <!-- Dropdown menu for additional actions -->
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" style="width: 32px; height: 32px; padding: 0;" title="More Actions">
+                                        <span class="material-symbols-outlined" style="font-size: 18px;">more_vert</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                        <li>
+                                            <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                                    data-bs-toggle="modal"
+                                                    th:data-bs-target="'#deleteModal-' + ${role.id}">
+                                                <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                                                Delete
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <tr th:if="${roles.isEmpty()}">

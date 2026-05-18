@@ -1,6 +1,6 @@
 package com.xceptance.posters.controller;
 import com.xceptance.posters.repository.CatalogOrderRepository;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.repository.CatalogCartRepository;
 
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.mock.web.MockHttpSession;
 
-import com.xceptance.posters.entity.CatalogCustomer;
-import com.xceptance.posters.repository.CatalogCustomerRepository;
+import com.xceptance.posters.entity.Customer;
+import com.xceptance.posters.repository.CustomerRepository;
 import com.xceptance.posters.entity.CatalogCart;
 import com.xceptance.posters.entity.CartLineItem;
 import com.xceptance.posters.entity.CatalogOrder;
@@ -41,7 +41,7 @@ public class CheckoutControllerUiTest
     private MockMvc mockMvc;
 
     @Autowired
-    private CatalogCustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private SessionService sessionService;
@@ -50,7 +50,7 @@ public class CheckoutControllerUiTest
     public void testShippingAddressUiRendersWithoutCrashing() throws Exception 
     {
         // Setup simple customer
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-shipping@example.com");
         customer.setFirstName("TddFirst");
         customer.setLastName("TddLast");
@@ -72,7 +72,7 @@ public class CheckoutControllerUiTest
     @Test
     public void testBillingAddressUiRendersWithoutCrashing() throws Exception 
     {
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-billing@example.com");
         customer.setFirstName("TddFirst");
         customer.setLastName("TddLast");
@@ -91,7 +91,7 @@ public class CheckoutControllerUiTest
     @Test
     public void testPaymentUiRendersWithoutCrashing() throws Exception 
     {
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-payment@example.com");
         customer.setFirstName("TddFirst");
         customer.setLastName("TddLast");
@@ -110,7 +110,7 @@ public class CheckoutControllerUiTest
     @Test
     public void testOrderConfirmationUiRendersCorrectOrderNumber() throws Exception 
     {
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-confirmation@example.com");
         customer.setFirstName("TddFirst");
         customer.setLastName("TddLast");
@@ -156,7 +156,7 @@ public class CheckoutControllerUiTest
     @Test
     public void testPlaceOrderRendersRichCartItems() throws Exception 
     {
-        final CatalogCustomer customer = new CatalogCustomer();
+        final Customer customer = new Customer();
         customer.setEmail("tdd-placeorder@example.com");
         customer.setFirstName("TddFirst");
         customer.setLastName("TddLast");

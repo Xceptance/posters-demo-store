@@ -20,12 +20,12 @@ class CustomerSessionIntegrationTest {
     @Autowired
     private TestEntityManager em;
 
-    private CatalogCustomer customer;
+    private Customer customer;
     private CustomerProfile profile;
 
     @BeforeEach
     void setUp() {
-        customer = new CatalogCustomer();
+        customer = new Customer();
         customer.setEmail("integration@example.com");
         customer.setFirstName("Inga");
         customer.setLastName("Tester");
@@ -41,7 +41,7 @@ class CustomerSessionIntegrationTest {
 
     @Test
     void testCustomerRegistrationCreatesProfile() {
-        CatalogCustomer c = em.find(CatalogCustomer.class, customer.getId());
+        Customer c = em.find(Customer.class, customer.getId());
         assertThat(c).isNotNull();
         assertThat(c.getEmail()).isEqualTo("integration@example.com");
         assertThat(c.getCreatedAt()).isNotNull();
@@ -58,7 +58,7 @@ class CustomerSessionIntegrationTest {
         assertThat(session.getCustomer()).isNull();
 
         // Authenticate
-        CatalogCustomer c = em.find(CatalogCustomer.class, customer.getId());
+        Customer c = em.find(Customer.class, customer.getId());
         session.authenticate(c);
         em.persistAndFlush(session);
         em.clear();
@@ -70,9 +70,9 @@ class CustomerSessionIntegrationTest {
 
     @Test
     void testCustomerWithAddressAndCard() {
-        CatalogCustomer c = em.find(CatalogCustomer.class, customer.getId());
+        Customer c = em.find(Customer.class, customer.getId());
 
-        CatalogAddress addr = new CatalogAddress();
+        CustomerAddress addr = new CustomerAddress();
         addr.setCustomer(c);
         addr.setRecipientFirstName("Inga");
         addr.setRecipientLastName("Tester");
@@ -95,7 +95,7 @@ class CustomerSessionIntegrationTest {
         em.persistAndFlush(c);
         em.clear();
 
-        CatalogCustomer reloaded = em.find(CatalogCustomer.class, c.getId());
+        Customer reloaded = em.find(Customer.class, c.getId());
         assertThat(reloaded.getCreditCards()).hasSize(1);
     }
 

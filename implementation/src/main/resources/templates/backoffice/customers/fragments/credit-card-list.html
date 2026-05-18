@@ -1,0 +1,38 @@
+<div th:fragment="credit-card-list">
+    <div th:if="${detail.customer.creditCards.empty}" class="p-4 text-center text-muted border-bottom">
+        No credit cards on file.
+    </div>
+    <ul class="list-group list-group-flush" th:unless="${detail.customer.creditCards.empty}">
+        <li class="list-group-item p-3 d-flex justify-content-between align-items-center" 
+            th:each="card : ${detail.customer.creditCards}">
+            <div>
+                <div class="fw-bold" th:text="${card.name}"></div>
+                <div class="text-muted font-monospace">
+                    <span class="badge bg-secondary me-2" th:text="${card.vendor}"></span>
+                    <span th:text="${card.number}"></span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="text-muted">
+                    Exp: <span th:text="${card.expMonth + '/' + card.expYear}"></span>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" style="width: 32px; height: 32px; padding: 0;" title="More Actions">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">more_vert</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                        <li>
+                            <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                    th:hx-get="@{/backoffice/customers/{id}/credit-cards/{cardId}/delete(id=${detail.customer.id}, cardId=${card.id})}"
+                                    hx-target="#dialog-container"
+                                    hx-swap="innerHTML">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                                Delete
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

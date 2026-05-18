@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Helpers - Position &amp; Layout Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+    /* Demo styling to visualize layout items */
+    .demo-item {
+      background-color: var(--bs-primary-bg-subtle);
+      border: 1px solid var(--bs-primary-border-subtle);
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+    }
+    .demo-scroll-container {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 0.25rem;
+    }
+    .demo-content {
+      height: 600px;
+      background: linear-gradient(to bottom, var(--bs-light), var(--bs-secondary-bg));
+    }
+    /* Offset for fixed position demos to prevent overlap */
+    .fixed-demo-container {
+      position: relative;
+      height: 150px;
+      border: 2px dashed var(--bs-border-color);
+      border-radius: 0.25rem;
+      overflow: hidden;
+    }
+    .fixed-demo-container .fixed-top,
+    .fixed-demo-container .fixed-bottom {
+      position: absolute;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Position &amp; Layout Patterns</h1>
+
+    <!-- Important Note About Fixed Positioning -->
+    <div class="alert alert-info mb-5" role="alert">
+      <strong>Note:</strong> Fixed and sticky positioning examples are demonstrated in contained areas
+      for this reference. In production, <code>.fixed-top</code> and <code>.fixed-bottom</code>
+      position elements relative to the viewport and require body padding to prevent content overlap.
+    </div>
+
+    <!-- ============================================
+         FIXED POSITION
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Fixed Position</h2>
+      <p class="text-muted">
+        Fixed elements are removed from normal document flow and positioned relative to the viewport.
+        They remain visible at their position regardless of scrolling.
+      </p>
+
+      <!-- Important Warning -->
+      <div class="alert alert-warning mb-4" role="alert">
+        <strong>Important:</strong> When using <code>.fixed-top</code> or <code>.fixed-bottom</code>,
+        add padding to your <code>&lt;body&gt;</code> to prevent content from being hidden behind
+        the fixed element. Example: <code>body { padding-top: 60px; padding-bottom: 60px; }</code>
+      </div>
+
+      <!-- Fixed Top Demo -->
+      <h3 class="h5 mt-4 mb-3">Fixed Top Header</h3>
+      <p class="text-muted">
+        Use <code>.fixed-top</code> to keep an element at the top of the viewport.
+      </p>
+      <div class="fixed-demo-container mb-3">
+        <header class="fixed-top bg-dark text-white p-3 text-center">
+          Fixed Header - Always visible at top
+        </header>
+        <div class="p-5 mt-5 text-center text-muted">
+          Page content area (would scroll behind header)
+        </div>
+      </div>
+
+      <!-- Fixed Bottom Demo -->
+      <h3 class="h5 mt-4 mb-3">Fixed Bottom Footer</h3>
+      <p class="text-muted">
+        Use <code>.fixed-bottom</code> to keep an element at the bottom of the viewport.
+      </p>
+      <div class="fixed-demo-container mb-3">
+        <div class="p-4 text-center text-muted">
+          Page content area (would scroll above footer)
+        </div>
+        <footer class="fixed-bottom bg-dark text-white p-3 text-center">
+          Fixed Footer - Always visible at bottom
+        </footer>
+      </div>
+
+      <!-- Code Example -->
+      <h3 class="h5 mt-4 mb-3">Production Code Example</h3>
+      <div class="bg-body-tertiary p-3 rounded">
+        <pre class="mb-0"><code>&lt;!-- Add to your stylesheet or &lt;style&gt; tag --&gt;
+&lt;style&gt;
+  body {
+    padding-top: 60px;    /* Height of fixed header */
+    padding-bottom: 60px; /* Height of fixed footer */
+  }
+&lt;/style&gt;
+
+&lt;!-- Fixed header --&gt;
+&lt;header class="fixed-top bg-dark text-white p-3"&gt;
+  Fixed Header
+&lt;/header&gt;
+
+&lt;!-- Fixed footer --&gt;
+&lt;footer class="fixed-bottom bg-dark text-white p-3"&gt;
+  Fixed Footer
+&lt;/footer&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- ============================================
+         STICKY POSITION
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Sticky Position</h2>
+      <p class="text-muted">
+        Sticky elements toggle between relative and fixed positioning. They scroll with content
+        until reaching a threshold, then "stick" in place. Unlike fixed, they remain in document flow.
+      </p>
+
+      <!-- Basic Sticky Top -->
+      <h3 class="h5 mt-4 mb-3">Basic Sticky Navigation</h3>
+      <p class="text-muted">
+        Use <code>.sticky-top</code> to make an element stick to the top when scrolling past it.
+      </p>
+      <div class="demo-scroll-container">
+        <div class="p-3 text-muted">Scroll down to see sticky behavior...</div>
+        <nav class="sticky-top bg-primary text-white p-3">
+          Sticky Navigation - Sticks to top when scrolling
+        </nav>
+        <div class="demo-content p-3">
+          <p>Content continues below the sticky nav...</p>
+          <p>Keep scrolling to see the nav stay fixed at top.</p>
+        </div>
+      </div>
+
+      <!-- Responsive Sticky Breakpoints -->
+      <h3 class="h5 mt-4 mb-3">Responsive Sticky Breakpoints</h3>
+      <p class="text-muted">
+        Apply sticky behavior only at certain breakpoints using <code>.sticky-{breakpoint}-top</code>.
+      </p>
+      <div class="vstack gap-2">
+        <div class="demo-item"><code>.sticky-sm-top</code> - Sticky on sm (576px) and up</div>
+        <div class="demo-item"><code>.sticky-md-top</code> - Sticky on md (768px) and up</div>
+        <div class="demo-item"><code>.sticky-lg-top</code> - Sticky on lg (992px) and up</div>
+        <div class="demo-item"><code>.sticky-xl-top</code> - Sticky on xl (1200px) and up</div>
+        <div class="demo-item"><code>.sticky-xxl-top</code> - Sticky on xxl (1400px) and up</div>
+      </div>
+
+      <!-- Sticky Bottom -->
+      <h3 class="h5 mt-4 mb-3">Sticky Bottom</h3>
+      <p class="text-muted">
+        Use <code>.sticky-bottom</code> to stick elements to the bottom of their container.
+      </p>
+      <div class="demo-scroll-container">
+        <div class="demo-content p-3">
+          <p>Scroll down to see sticky bottom behavior...</p>
+        </div>
+        <div class="sticky-bottom bg-warning text-dark p-3 text-center">
+          Sticky Bottom Element
+        </div>
+      </div>
+
+      <!-- Sticky Sidebar Pattern -->
+      <h3 class="h5 mt-4 mb-3">Sticky Sidebar Pattern</h3>
+      <p class="text-muted">
+        Common pattern: sticky sidebar that remains visible while main content scrolls.
+        Add custom <code>top</code> offset with inline style or utility class.
+      </p>
+      <div class="demo-scroll-container">
+        <div class="row g-0 h-100">
+          <div class="col-8 p-3">
+            <h4>Main Content</h4>
+            <p>This content scrolls normally. The sidebar stays visible as you scroll.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>More content to enable scrolling...</p>
+            <p>Even more content here...</p>
+          </div>
+          <div class="col-4 p-3">
+            <div class="sticky-top" style="top: 1rem;">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Sticky Sidebar</h5>
+                  <p class="card-text">Stays visible while scrolling main content.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CLEARFIX
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Clearfix</h2>
+      <p class="text-muted">
+        Use <code>.clearfix</code> to clear floated content within a container.
+        This ensures the parent container wraps around floated children properly.
+      </p>
+
+      <!-- With Clearfix (Correct) -->
+      <h3 class="h5 mt-4 mb-3">With Clearfix (Correct)</h3>
+      <p class="text-muted">
+        The container properly expands to contain the floated buttons.
+      </p>
+      <div class="clearfix bg-success-subtle p-3 rounded mb-2">
+        <button type="button" class="btn btn-secondary float-start">Float Start</button>
+        <button type="button" class="btn btn-secondary float-end">Float End</button>
+      </div>
+      <p class="text-success">This paragraph correctly appears below the container.</p>
+
+      <!-- Without Clearfix (Broken) -->
+      <h3 class="h5 mt-4 mb-3">Without Clearfix (Broken Layout)</h3>
+      <p class="text-muted">
+        Without clearfix, the container collapses and subsequent content wraps around floats.
+      </p>
+      <div class="bg-danger-subtle p-3 rounded mb-2">
+        <button type="button" class="btn btn-secondary float-start">Float Start</button>
+        <button type="button" class="btn btn-secondary float-end">Float End</button>
+      </div>
+      <p class="text-danger">Without clearfix, this text wraps around the floats incorrectly!</p>
+      <div class="clearfix"></div>
+
+      <!-- Image Float Pattern -->
+      <h3 class="h5 mt-4 mb-3">Image Float Pattern</h3>
+      <p class="text-muted">
+        Classic pattern: float an image with text wrapping around it.
+      </p>
+      <div class="clearfix border rounded p-3">
+        <img src="https://via.placeholder.com/120x80" class="float-start me-3 mb-2 rounded" alt="Floated placeholder image">
+        <p class="mb-0">Text wraps around the floated image. The clearfix ensures the container properly encompasses both the floated image and the text content. This is a common pattern for article layouts with inline images.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         TEXT TRUNCATION
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Text Truncation</h2>
+      <p class="text-muted">
+        Use <code>.text-truncate</code> to truncate long text with an ellipsis.
+        Requires <code>display: block</code> or <code>display: inline-block</code> and a defined width.
+      </p>
+
+      <!-- Block Level Truncation -->
+      <h3 class="h5 mt-4 mb-3">Block Level Truncation</h3>
+      <p class="text-muted">
+        Block elements truncate when they have a constrained width.
+      </p>
+      <div class="text-truncate demo-item" style="max-width: 300px;">
+        This is a very long text that will be truncated with an ellipsis when it exceeds the container width.
+      </div>
+
+      <!-- Inline Truncation -->
+      <h3 class="h5 mt-4 mb-3">Inline Truncation</h3>
+      <p class="text-muted">
+        Inline elements require <code>.d-inline-block</code> for truncation to work.
+      </p>
+      <p>
+        Status:
+        <span class="d-inline-block text-truncate align-middle" style="max-width: 150px;">
+          This is a very long inline status message
+        </span>
+      </p>
+
+      <!-- Table Cell Truncation -->
+      <h3 class="h5 mt-4 mb-3">Table Cell Truncation</h3>
+      <p class="text-muted">
+        For table cells, use <code>table-layout: fixed</code> and define column widths.
+      </p>
+      <table class="table" style="table-layout: fixed;">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Name</th>
+            <th style="width: 75%;">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-truncate">Product Alpha</td>
+            <td class="text-truncate">This is a very long product description that demonstrates text truncation within a table cell. It will be cut off with an ellipsis.</td>
+          </tr>
+          <tr>
+            <td class="text-truncate">Another Product with Long Name</td>
+            <td class="text-truncate">Short description.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Card with Truncated Content -->
+      <h3 class="h5 mt-4 mb-3">Card with Truncated Content</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-truncate">Very Long Card Title That Gets Truncated When Too Wide</h5>
+              <p class="card-text text-truncate">This card description is also truncated with an ellipsis for consistent card heights.</p>
+              <a href="#" class="btn btn-primary btn-sm">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         VERTICAL RULE
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Vertical Rule</h2>
+      <p class="text-muted">
+        Use <code>.vr</code> to create vertical dividers. Works best in flex containers
+        where it automatically inherits the container height.
+      </p>
+
+      <!-- Basic Vertical Rule -->
+      <h3 class="h5 mt-4 mb-3">Basic Vertical Rule</h3>
+      <p class="text-muted">
+        In a flex container, <code>.vr</code> automatically stretches to match sibling height.
+      </p>
+      <div class="d-flex align-items-center" style="height: 60px;">
+        <span class="demo-item">Left</span>
+        <div class="vr mx-3"></div>
+        <span class="demo-item">Right</span>
+      </div>
+
+      <!-- Vertical Divider Between Items -->
+      <h3 class="h5 mt-4 mb-3">Vertical Divider Between Items</h3>
+      <div class="d-flex align-items-center gap-3">
+        <span>Item 1</span>
+        <div class="vr"></div>
+        <span>Item 2</span>
+        <div class="vr"></div>
+        <span>Item 3</span>
+      </div>
+
+      <!-- In Button Toolbar -->
+      <h3 class="h5 mt-4 mb-3">Button Toolbar with Vertical Rule</h3>
+      <p class="text-muted">
+        Use vertical rules to separate button groups within a toolbar.
+      </p>
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-primary">1</button>
+          <button type="button" class="btn btn-primary">2</button>
+          <button type="button" class="btn btn-primary">3</button>
+        </div>
+        <div class="vr me-2"></div>
+        <div class="btn-group me-2" role="group" aria-label="Second group">
+          <button type="button" class="btn btn-secondary">4</button>
+          <button type="button" class="btn btn-secondary">5</button>
+        </div>
+        <div class="vr me-2"></div>
+        <div class="btn-group" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-outline-danger">X</button>
+        </div>
+      </div>
+
+      <!-- Vertical Rule in Navigation -->
+      <h3 class="h5 mt-4 mb-3">Navigation with Vertical Dividers</h3>
+      <nav class="d-flex align-items-center gap-3 bg-body-tertiary p-3 rounded">
+        <a href="#" class="text-decoration-none">Home</a>
+        <div class="vr"></div>
+        <a href="#" class="text-decoration-none">Products</a>
+        <div class="vr"></div>
+        <a href="#" class="text-decoration-none">About</a>
+        <div class="vr"></div>
+        <a href="#" class="text-decoration-none">Contact</a>
+      </nav>
+
+      <!-- Colored Vertical Rule -->
+      <h3 class="h5 mt-4 mb-3">Styled Vertical Rule</h3>
+      <p class="text-muted">
+        Customize with background color and opacity utilities.
+      </p>
+      <div class="d-flex align-items-center gap-3">
+        <span>Default</span>
+        <div class="vr"></div>
+        <span>Primary</span>
+        <div class="vr bg-primary"></div>
+        <span>Success (50% opacity)</span>
+        <div class="vr bg-success opacity-50"></div>
+        <span>Danger</span>
+        <div class="vr bg-danger"></div>
+        <span>End</span>
+      </div>
+    </section>
+
+    <!-- ============================================
+         COLOR & BACKGROUND HELPERS
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Color &amp; Background Helpers</h2>
+      <p class="text-muted">
+        Use <code>.text-bg-{color}</code> to set both background and contrasting text color
+        automatically. This ensures proper color contrast for accessibility.
+      </p>
+
+      <!-- All Text-BG Variants -->
+      <h3 class="h5 mt-4 mb-3">All Color Variants</h3>
+      <div class="vstack gap-2">
+        <div class="text-bg-primary p-3 rounded">
+          <strong>.text-bg-primary</strong> - White text on primary blue background
+        </div>
+        <div class="text-bg-secondary p-3 rounded">
+          <strong>.text-bg-secondary</strong> - White text on secondary gray background
+        </div>
+        <div class="text-bg-success p-3 rounded">
+          <strong>.text-bg-success</strong> - White text on success green background
+        </div>
+        <div class="text-bg-danger p-3 rounded">
+          <strong>.text-bg-danger</strong> - White text on danger red background
+        </div>
+        <div class="text-bg-warning p-3 rounded">
+          <strong>.text-bg-warning</strong> - Dark text on warning yellow background
+        </div>
+        <div class="text-bg-info p-3 rounded">
+          <strong>.text-bg-info</strong> - Dark text on info cyan background
+        </div>
+        <div class="text-bg-light p-3 rounded">
+          <strong>.text-bg-light</strong> - Dark text on light gray background
+        </div>
+        <div class="text-bg-dark p-3 rounded">
+          <strong>.text-bg-dark</strong> - White text on dark background
+        </div>
+      </div>
+
+      <!-- Use in Badges -->
+      <h3 class="h5 mt-4 mb-3">Badges with Color Helpers</h3>
+      <p class="text-muted">
+        Apply to badges for consistent, accessible color combinations.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge text-bg-primary">Primary</span>
+        <span class="badge text-bg-secondary">Secondary</span>
+        <span class="badge text-bg-success">Success</span>
+        <span class="badge text-bg-danger">Danger</span>
+        <span class="badge text-bg-warning">Warning</span>
+        <span class="badge text-bg-info">Info</span>
+        <span class="badge text-bg-light">Light</span>
+        <span class="badge text-bg-dark">Dark</span>
+      </div>
+
+      <!-- Alert-like Pattern -->
+      <h3 class="h5 mt-4 mb-3">Custom Alert Pattern</h3>
+      <p class="text-muted">
+        Create alert-like components with guaranteed color contrast.
+      </p>
+      <div class="text-bg-warning p-3 rounded mb-2">
+        <strong>Warning!</strong> This custom alert ensures proper text contrast automatically.
+      </div>
+      <div class="text-bg-danger p-3 rounded mb-2">
+        <strong>Error!</strong> Critical message with accessible color combination.
+      </div>
+      <div class="text-bg-success p-3 rounded">
+        <strong>Success!</strong> Operation completed successfully.
+      </div>
+
+      <!-- Card Headers -->
+      <h3 class="h5 mt-4 mb-3">Card Headers with Color Helpers</h3>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-bg-primary">Primary Header</div>
+            <div class="card-body">Card content here.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-bg-success">Success Header</div>
+            <div class="card-body">Card content here.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header text-bg-dark">Dark Header</div>
+            <div class="card-body">Card content here.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

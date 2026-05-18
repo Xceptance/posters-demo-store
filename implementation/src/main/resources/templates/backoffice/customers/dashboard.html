@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Customers Dashboard</title>
+    <!-- Include ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div layout:fragment="pageTitle">
+        Customers Dashboard
+    </div>
+
+    <div layout:fragment="content">
+        <!-- Metrics Tiles -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="bo-card h-100 bg-primary text-white text-center p-4">
+                    <h6 class="text-white-50 text-uppercase tracking-wide mb-2">Total Customers</h6>
+                    <h2 class="display-5 fw-bold mb-0" th:text="${metrics.totalCustomers}">0</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bo-card h-100 bg-success text-white text-center p-4">
+                    <h6 class="text-white-50 text-uppercase tracking-wide mb-2">New Customers (24h)</h6>
+                    <h2 class="display-5 fw-bold mb-0" th:text="${metrics.customers24h}">0</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bo-card h-100 bg-info text-white text-center p-4">
+                    <h6 class="text-white-50 text-uppercase tracking-wide mb-2">Orders Placed (24h)</h6>
+                    <h2 class="display-5 fw-bold mb-0" th:text="${metrics.orders24h}">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row g-4">
+            <div class="col-md-12">
+                <div class="bo-card h-100">
+                    <div class="bo-card-header">
+                        <h5 class="mb-0">Customer Growth Overview</h5>
+                    </div>
+                    <div class="bo-card-body p-4">
+                        <div id="growthChart" style="height: 400px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Initialization Script -->
+    <th:block layout:fragment="pageScripts">
+        <script th:inline="javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                var chartDom = document.getElementById('growthChart');
+                var myChart = echarts.init(chartDom);
+                
+                // Static demo data for visualization since we don't have historical metrics tracking yet
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['New Customers', 'Orders']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name: 'New Customers',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: { color: '#198754' },
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: 'rgba(25,135,84,0.5)' },
+                                    { offset: 1, color: 'rgba(25,135,84,0.1)' }
+                                ])
+                            },
+                            data: [5, 12, 8, 15, 20, 25, 30]
+                        },
+                        {
+                            name: 'Orders',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: { color: '#0dcaf0' },
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: 'rgba(13,202,240,0.5)' },
+                                    { offset: 1, color: 'rgba(13,202,240,0.1)' }
+                                ])
+                            },
+                            data: [12, 18, 14, 25, 32, 40, 55]
+                        }
+                    ]
+                };
+
+                option && myChart.setOption(option);
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    myChart.resize();
+                });
+            });
+        </script>
+    </th:block>
+</body>
+</html>

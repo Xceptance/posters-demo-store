@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Utilities - Card Layout Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="bg-body-tertiary p-4">
+  <div class="container">
+    <h1 class="mb-4">Card Layout Utility Patterns</h1>
+    <p class="lead text-muted mb-5">
+      Demonstrating spacing, shadows, borders, and other utilities on card layouts.
+    </p>
+
+    <!-- ============================================
+         BASIC CARD WITH UTILITIES
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Basic Card Styling</h2>
+
+      <!-- Shadow Variations -->
+      <h3 class="h5 mt-4 mb-3">Shadow Utilities</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card shadow-none">
+            <div class="card-body">
+              <h5 class="card-title">No Shadow</h5>
+              <p class="card-text text-muted"><code>.shadow-none</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Small Shadow</h5>
+              <p class="card-text text-muted"><code>.shadow-sm</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title">Regular Shadow</h5>
+              <p class="card-text text-muted"><code>.shadow</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-lg">
+            <div class="card-body">
+              <h5 class="card-title">Large Shadow</h5>
+              <p class="card-text text-muted"><code>.shadow-lg</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Border Variations -->
+      <h3 class="h5 mt-5 mb-3">Border Utilities</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card border-primary">
+            <div class="card-body">
+              <h5 class="card-title text-primary">Primary Border</h5>
+              <p class="card-text text-muted"><code>.border-primary</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-success border-2">
+            <div class="card-body">
+              <h5 class="card-title text-success">Success Border (2px)</h5>
+              <p class="card-text text-muted"><code>.border-success .border-2</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-danger border-3">
+            <div class="card-body">
+              <h5 class="card-title text-danger">Danger Border (3px)</h5>
+              <p class="card-text text-muted"><code>.border-danger .border-3</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Border Radius Variations -->
+      <h3 class="h5 mt-5 mb-3">Border Radius Utilities</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card rounded-0">
+            <div class="card-body">
+              <h5 class="card-title">No Radius</h5>
+              <p class="card-text text-muted"><code>.rounded-0</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card rounded-3">
+            <div class="card-body">
+              <h5 class="card-title">Large Radius</h5>
+              <p class="card-text text-muted"><code>.rounded-3</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card rounded-4">
+            <div class="card-body">
+              <h5 class="card-title">XL Radius</h5>
+              <p class="card-text text-muted"><code>.rounded-4</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SPACING PATTERNS
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Spacing Patterns</h2>
+
+      <!-- Card with Internal Spacing -->
+      <h3 class="h5 mt-4 mb-3">Internal Padding Variations</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body p-2">
+              <h5 class="card-title">Compact</h5>
+              <p class="card-text text-muted mb-0"><code>.p-2</code> (0.5rem)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body p-4">
+              <h5 class="card-title">Spacious</h5>
+              <p class="card-text text-muted mb-0"><code>.p-4</code> (1.5rem)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body px-4 py-5">
+              <h5 class="card-title">Custom</h5>
+              <p class="card-text text-muted mb-0"><code>.px-4 .py-5</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Grid with Gap -->
+      <h3 class="h5 mt-5 mb-3">Card Grid with Gap Utilities</h3>
+      <p class="text-muted">Using <code>.row</code> with <code>.g-*</code> gap utilities.</p>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <span class="fs-1">1</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <span class="fs-1">2</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <span class="fs-1">3</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <span class="fs-1">4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         BACKGROUND AND COLOR PATTERNS
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Background and Color Patterns</h2>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card bg-primary text-white">
+            <div class="card-body">
+              <h5 class="card-title">Primary Card</h5>
+              <p class="card-text opacity-75"><code>.bg-primary .text-white</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-dark text-white">
+            <div class="card-body">
+              <h5 class="card-title">Dark Card</h5>
+              <p class="card-text opacity-75"><code>.bg-dark .text-white</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-body-secondary">
+            <div class="card-body">
+              <h5 class="card-title">Subtle Card</h5>
+              <p class="card-text text-muted"><code>.bg-body-secondary</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gradient Background -->
+      <h3 class="h5 mt-5 mb-3">Gradient Backgrounds</h3>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card bg-primary bg-gradient text-white">
+            <div class="card-body">
+              <h5 class="card-title">Gradient Primary</h5>
+              <p class="card-text opacity-75"><code>.bg-primary .bg-gradient</code></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-success bg-gradient text-white">
+            <div class="card-body">
+              <h5 class="card-title">Gradient Success</h5>
+              <p class="card-text opacity-75"><code>.bg-success .bg-gradient</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         COMBINED REAL-WORLD PATTERNS
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Real-World Card Patterns</h2>
+
+      <!-- Pricing Card -->
+      <h3 class="h5 mt-4 mb-3">Pricing Card</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="card shadow border-primary border-2 rounded-4">
+            <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+              <span class="badge bg-white text-primary mb-2">Most Popular</span>
+              <h4 class="mb-0">Pro Plan</h4>
+            </div>
+            <div class="card-body text-center p-4">
+              <h2 class="card-title mb-0">$29</h2>
+              <p class="text-muted">/month</p>
+              <ul class="list-unstyled mt-3 mb-4 text-start">
+                <li class="mb-2">Unlimited projects</li>
+                <li class="mb-2">Priority support</li>
+                <li class="mb-2">Advanced analytics</li>
+              </ul>
+              <button class="btn btn-primary w-100">Get Started</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Card -->
+      <h3 class="h5 mt-5 mb-3">Profile Card</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 64px; height: 64px;">
+                  <span class="fs-4 fw-bold">JD</span>
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="card-title mb-1">Jane Doe</h5>
+                  <p class="text-muted mb-0">Senior Developer</p>
+                </div>
+                <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2">Online</span>
+              </div>
+              <p class="card-text text-muted mb-3">
+                Building great products with Bootstrap and modern web technologies.
+              </p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary btn-sm flex-grow-1">Message</button>
+                <button class="btn btn-outline-secondary btn-sm flex-grow-1">Profile</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification Card -->
+      <h3 class="h5 mt-5 mb-3">Notification Card</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card border-start border-warning border-4 shadow-sm">
+            <div class="card-body d-flex align-items-start p-3">
+              <div class="bg-warning bg-opacity-10 rounded p-2 me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-warning" viewBox="0 0 16 16">
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </svg>
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="card-title mb-1">System Update Required</h6>
+                <p class="card-text text-muted small mb-0">Please update to the latest version for security improvements.</p>
+              </div>
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

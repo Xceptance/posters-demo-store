@@ -26,7 +26,7 @@ public class CustomerProfile {
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false, unique = true)
-    private CatalogCustomer customer;
+    private Customer customer;
 
     @Column(nullable = false)
     private String password;
@@ -53,11 +53,11 @@ public class CustomerProfile {
         this.id = id;
     }
 
-    public CatalogCustomer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(CatalogCustomer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 

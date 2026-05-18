@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Add New Customer</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle" th:text="${moduleTitle}">Add New Customer</div>
+
+    <div layout:fragment="content">
+        <div class="mb-4">
+            <a th:href="@{/backoffice/customers}" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                <span class="material-symbols-outlined fs-6 me-1">arrow_back</span>
+                Back to List
+            </a>
+        </div>
+
+        <div class="bo-module-card p-4">
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            
+            <form th:action="@{/backoffice/customers/new}" method="post">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label required">First Name *</label>
+                        <input type="text" name="firstName" class="form-control" required th:value="${firstName}">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Middle Name</label>
+                        <input type="text" name="middleName" class="form-control" th:value="${middleName}">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label required">Last Name *</label>
+                        <input type="text" name="lastName" class="form-control" required th:value="${lastName}">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label required">Email *</label>
+                        <input type="email" name="email" class="form-control" required th:value="${email}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label required">Initial Password *</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-primary">Create Customer</button>
+                        <a th:href="@{/backoffice/customers}" class="btn btn-outline-secondary ms-2">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

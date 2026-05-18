@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Figure Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="py-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap 5.3 Figure Patterns</h1>
+
+    <!-- Basic Figure -->
+    <section class="mb-5">
+      <h2>Basic Figure with Caption</h2>
+      <figure class="figure">
+        <svg class="figure-img img-fluid rounded" width="400" height="300" role="img" aria-label="Basic figure demo">
+          <rect width="100%" height="100%" fill="#6c757d"></rect>
+          <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">400x300</text>
+        </svg>
+        <figcaption class="figure-caption">A caption for the above image.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Right-aligned Caption -->
+    <section class="mb-5">
+      <h2>Right-aligned Caption</h2>
+      <figure class="figure">
+        <svg class="figure-img img-fluid rounded" width="400" height="300" role="img" aria-label="Right-aligned caption demo">
+          <rect width="100%" height="100%" fill="#6c757d"></rect>
+          <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">400x300</text>
+        </svg>
+        <figcaption class="figure-caption text-end">A right-aligned caption.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Center-aligned Caption -->
+    <section class="mb-5">
+      <h2>Center-aligned Caption</h2>
+      <figure class="figure d-block text-center">
+        <svg class="figure-img img-fluid rounded" width="400" height="300" role="img" aria-label="Center-aligned caption demo">
+          <rect width="100%" height="100%" fill="#6c757d"></rect>
+          <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">400x300</text>
+        </svg>
+        <figcaption class="figure-caption">A centered caption.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Figure with Different Rounded Styles -->
+    <section class="mb-5">
+      <h2>Figure with Different Rounded Styles</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded" width="300" height="200" role="img" aria-label="Rounded figure">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">.rounded</text>
+            </svg>
+            <figcaption class="figure-caption">Rounded corners</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded-3" width="300" height="200" role="img" aria-label="Rounded-3 figure">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">.rounded-3</text>
+            </svg>
+            <figcaption class="figure-caption">Larger rounded corners</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded-0" width="300" height="200" role="img" aria-label="No rounding figure">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">.rounded-0</text>
+            </svg>
+            <figcaption class="figure-caption">No rounded corners</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figure in Card -->
+    <section class="mb-5">
+      <h2>Figure in Card Context</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <figure class="figure mb-0">
+              <svg class="figure-img img-fluid card-img-top" width="500" height="300" role="img" aria-label="Figure in card">
+                <rect width="100%" height="100%" fill="#6c757d"></rect>
+                <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">Card Image</text>
+              </svg>
+              <figcaption class="figure-caption p-3">
+                <strong>Image Title</strong><br>
+                This figure is used inside a card component, with the caption serving as the card body.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiple Figures in Grid -->
+    <section class="mb-5">
+      <h2>Multiple Figures in Grid</h2>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded" width="300" height="200" role="img" aria-label="Gallery image 1">
+              <rect width="100%" height="100%" fill="#0d6efd"></rect>
+              <text x="50%" y="50%" fill="white" dy=".3em" text-anchor="middle">Image 1</text>
+            </svg>
+            <figcaption class="figure-caption">First image caption</figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded" width="300" height="200" role="img" aria-label="Gallery image 2">
+              <rect width="100%" height="100%" fill="#198754"></rect>
+              <text x="50%" y="50%" fill="white" dy=".3em" text-anchor="middle">Image 2</text>
+            </svg>
+            <figcaption class="figure-caption">Second image caption</figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded" width="300" height="200" role="img" aria-label="Gallery image 3">
+              <rect width="100%" height="100%" fill="#dc3545"></rect>
+              <text x="50%" y="50%" fill="white" dy=".3em" text-anchor="middle">Image 3</text>
+            </svg>
+            <figcaption class="figure-caption">Third image caption</figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded" width="300" height="200" role="img" aria-label="Gallery image 4">
+              <rect width="100%" height="100%" fill="#ffc107"></rect>
+              <text x="50%" y="50%" fill="black" dy=".3em" text-anchor="middle">Image 4</text>
+            </svg>
+            <figcaption class="figure-caption">Fourth image caption</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figure with Long Caption -->
+    <section class="mb-5">
+      <h2>Figure with Detailed Caption</h2>
+      <figure class="figure">
+        <svg class="figure-img img-fluid rounded" width="600" height="400" role="img" aria-label="Figure with detailed caption">
+          <rect width="100%" height="100%" fill="#6c757d"></rect>
+          <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">600x400</text>
+        </svg>
+        <figcaption class="figure-caption">
+          <strong>Figure 1:</strong> This is a more detailed caption that might include additional context about the image.
+          It can span multiple sentences and provide useful information to the viewer.
+          <a href="#">Learn more about this topic.</a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Figures with Thumbnail Images -->
+    <section class="mb-5">
+      <h2>Figures with Thumbnail Style</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-thumbnail" width="300" height="200" role="img" aria-label="Thumbnail figure 1">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">Thumbnail 1</text>
+            </svg>
+            <figcaption class="figure-caption">Thumbnail style image</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-thumbnail" width="300" height="200" role="img" aria-label="Thumbnail figure 2">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">Thumbnail 2</text>
+            </svg>
+            <figcaption class="figure-caption">Another thumbnail image</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-thumbnail" width="300" height="200" role="img" aria-label="Thumbnail figure 3">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">Thumbnail 3</text>
+            </svg>
+            <figcaption class="figure-caption">Third thumbnail image</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figure with Shadow -->
+    <section class="mb-5">
+      <h2>Figure with Shadow Effects</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded shadow-sm" width="300" height="200" role="img" aria-label="Small shadow">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">.shadow-sm</text>
+            </svg>
+            <figcaption class="figure-caption">Small shadow</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded shadow" width="300" height="200" role="img" aria-label="Regular shadow">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">.shadow</text>
+            </svg>
+            <figcaption class="figure-caption">Regular shadow</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <svg class="figure-img img-fluid rounded shadow-lg" width="300" height="200" role="img" aria-label="Large shadow">
+              <rect width="100%" height="100%" fill="#6c757d"></rect>
+              <text x="50%" y="50%" fill="#dee2e6" dy=".3em" text-anchor="middle">.shadow-lg</text>
+            </svg>
+            <figcaption class="figure-caption">Large shadow</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

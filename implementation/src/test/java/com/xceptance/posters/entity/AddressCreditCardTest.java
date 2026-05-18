@@ -13,8 +13,8 @@ class AddressCreditCardTest {
     @Autowired
     private TestEntityManager em;
 
-    private CatalogCustomer createCustomer(String email) {
-        CatalogCustomer c = new CatalogCustomer();
+    private Customer createCustomer(String email) {
+        Customer c = new Customer();
         c.setEmail(email);
         c.setFirstName("Test");
         c.setLastName("User");
@@ -23,9 +23,9 @@ class AddressCreditCardTest {
 
     @Test
     void testCreateAddress() {
-        CatalogCustomer c = createCustomer("addr@example.com");
+        Customer c = createCustomer("addr@example.com");
 
-        CatalogAddress addr = new CatalogAddress();
+        CustomerAddress addr = new CustomerAddress();
         addr.setCustomer(c);
         addr.setRecipientFirstName("John");
         addr.setRecipientLastName("Doe");
@@ -42,7 +42,7 @@ class AddressCreditCardTest {
 
     @Test
     void testCreateCreditCard() {
-        CatalogCustomer c = createCustomer("cc@example.com");
+        Customer c = createCustomer("cc@example.com");
 
         CatalogCreditCard card = new CatalogCreditCard();
         card.setNumber("411111******1111");
@@ -56,15 +56,15 @@ class AddressCreditCardTest {
         em.persistAndFlush(c);
         em.clear();
 
-        CatalogCustomer reloaded = em.find(CatalogCustomer.class, c.getId());
+        Customer reloaded = em.find(Customer.class, c.getId());
         assertThat(reloaded.getCreditCards()).hasSize(1);
     }
 
     @Test
     void testCustomerMultipleAddresses() {
-        CatalogCustomer c = createCustomer("multi@example.com");
+        Customer c = createCustomer("multi@example.com");
 
-        CatalogAddress billing = new CatalogAddress();
+        CustomerAddress billing = new CustomerAddress();
         billing.setCustomer(c);
         billing.setRecipientFirstName("Jane");
         billing.setRecipientLastName("Doe");
@@ -75,7 +75,7 @@ class AddressCreditCardTest {
         billing.setCountry("US");
         em.persist(billing);
 
-        CatalogAddress shipping = new CatalogAddress();
+        CustomerAddress shipping = new CustomerAddress();
         shipping.setCustomer(c);
         shipping.setRecipientFirstName("Jane");
         shipping.setRecipientLastName("Doe");

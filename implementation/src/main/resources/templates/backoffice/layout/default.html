@@ -5,11 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title layout:title-pattern="$CONTENT_TITLE - Backoffice">Backoffice</title>
+    
+    <!-- CSRF Token for JavaScript and HTMX -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
     <link th:href="@{/assets/css/backoffice-fonts.css}" rel="stylesheet">
     <link th:href="@{/assets/css/backoffice.css}" rel="stylesheet">
     <link th:href="@{/assets/lib/bootstrap/bootstrap.min.css}" rel="stylesheet">
     <script th:src="@{/assets/lib/htmx.min.js}" defer></script>
     <script th:src="@{/assets/lib/bootstrap/bootstrap.bundle.min.js}" defer></script>
+    
+    <!-- HTMX CSRF Configuration (must be after HTMX is loaded) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('htmx:configRequest', function(evt) {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                if (token && header) {
+                    evt.detail.headers[header] = token;
+                }
+            });
+        });
+    </script>
 </head>
 <body class="bo-body">
 
@@ -30,7 +48,7 @@
             </li>
 
             <!-- Catalog -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('catalog')}">
                 <a href="#nav-catalog" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/catalog')}">
                     <span class="material-symbols-outlined">inventory_2</span>
@@ -56,7 +74,7 @@
             </li>
 
             <!-- Customers -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('customers')}">
                 <a href="#nav-customers" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/customers')}">
                     <span class="material-symbols-outlined">group</span>
@@ -76,7 +94,7 @@
             </li>
 
             <!-- Orders -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('orders')}">
                 <a href="#nav-orders" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/orders')}">
                     <span class="material-symbols-outlined">receipt_long</span>
@@ -94,7 +112,7 @@
             </li>
 
             <!-- Security -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('security')}">
                 <a href="#nav-security" class="bo-nav-link bo-nav-group-toggle" data-bs-toggle="collapse"
                    th:attr="aria-expanded=${#strings.startsWith(uri,'/backoffice/security')}">
                     <span class="material-symbols-outlined">admin_panel_settings</span>
@@ -141,5 +159,34 @@
         </main>
     </div>
 
+    <!-- Global Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="bo-toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="bo-toast-body">
+                    <!-- Toast Message -->
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTMX Event Listeners -->
+    <script>
+        document.body.addEventListener("show-toast", function(evt) {
+            const toastEl = document.getElementById('bo-toast');
+            const toastBody = document.getElementById('bo-toast-body');
+            
+            // Set message
+            toastBody.textContent = evt.detail.message;
+            
+            // Set type (e.g., success, danger, warning, info)
+            toastEl.className = 'toast align-items-center border-0 text-bg-' + (evt.detail.type || 'primary');
+            
+            // Show toast
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toast.show();
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{backoffice/layout/default}">
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <div layout:fragment="pageTitle">Customers</div>
+
+    <div layout:fragment="pageActions">
+        <a th:href="@{/backoffice/customers/new}" class="btn btn-primary d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined fs-6">add</span> New Customer
+        </a>
+    </div>
+
+    <div layout:fragment="content">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <form th:action="@{/backoffice/customers}" method="get" class="d-flex gap-2">
+                <input type="text" name="q" class="form-control" 
+                       placeholder="Search by exact match, email, or name..." th:value="${q}" style="width: 350px;">
+                <button type="submit" class="btn btn-outline-secondary">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 18px;">search</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="bo-module-card p-0">
+            <div th:if="${result.items.empty}" class="p-5 text-center text-muted">
+                <span class="material-symbols-outlined fs-1 mb-3">group_off</span>
+                <h5>No customers found</h5>
+                <p th:if="${not #strings.isEmpty(q)}">Try adjusting your search criteria.</p>
+            </div>
+            
+            <div th:unless="${result.items.empty}" class="table-responsive">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">
+                                <a th:href="@{/backoffice/customers(q=${q}, sort='number', dir=${sort == 'number' and dir == 'asc' ? 'desc' : 'asc'})}" 
+                                   class="text-decoration-none text-dark d-flex align-items-center">
+                                    # <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'number'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a th:href="@{/backoffice/customers(q=${q}, sort='name', dir=${sort == 'name' and dir == 'asc' ? 'desc' : 'asc'})}" 
+                                   class="text-decoration-none text-dark d-flex align-items-center">
+                                    Name <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'name'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a th:href="@{/backoffice/customers(q=${q}, sort='email', dir=${sort == 'email' and dir == 'asc' ? 'desc' : 'asc'})}" 
+                                   class="text-decoration-none text-dark d-flex align-items-center">
+                                    Email <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'email'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
+                                </a>
+                            </th>
+                            <th>Order Count</th>
+                            <th>Last Login</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${result.items}">
+                            <td>
+                                <span class="badge bg-light text-dark border" th:text="${item.customer.customerNumber}">1001</span>
+                            </td>
+                            <td>
+                                <a th:href="@{/backoffice/customers/{id}(id=${item.customer.id})}"
+                                   class="fw-semibold text-decoration-none" th:text="${item.customer.firstName + ' ' + item.customer.lastName}">John Doe</a>
+                            </td>
+                            <td>
+                                <span th:text="${item.customer.email}">john@example.com</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info text-white rounded-pill" th:text="${item.orderCount}">5</span>
+                            </td>
+                            <td>
+                                <span th:if="${item.profile != null and item.profile.lastLogin != null}" 
+                                      th:text="${#temporals.format(item.profile.lastLogin, 'MMM dd, yyyy HH:mm')}">Oct 12, 2023 14:30</span>
+                                <span th:unless="${item.profile != null and item.profile.lastLogin != null}" class="text-muted">Never</span>
+                            </td>
+                            <td class="text-end">
+                                <div class="d-flex justify-content-end gap-1">
+                                    <a th:href="@{/backoffice/customers/{id}(id=${item.customer.id})}" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center justify-content-center" title="Edit Details" style="width: 32px; height: 32px; padding: 0;">
+                                        <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                                    </a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" style="width: 32px; height: 32px; padding: 0;" title="More Actions">
+                                            <span class="material-symbols-outlined" style="font-size: 18px;">more_vert</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                            <li>
+                                                <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                                        th:hx-get="@{/backoffice/customers/{id}/delete(id=${item.customer.id})}"
+                                                        hx-target="#dialog-container"
+                                                        hx-swap="innerHTML">
+                                                    <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                                                    Delete
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <nav th:if="${result.totalPages > 1}" class="mt-3">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${result.page == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/backoffice/customers(q=${q}, page=${result.page - 1}, size=${result.size})}">Previous</a>
+                </li>
+                <li class="page-item" th:each="p : ${#numbers.sequence(0, result.totalPages - 1)}" 
+                    th:classappend="${p == result.page} ? 'active'">
+                    <a class="page-link" th:href="@{/backoffice/customers(q=${q}, page=${p}, size=${result.size})}" th:text="${p + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${result.page == result.totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/backoffice/customers(q=${q}, page=${result.page + 1}, size=${result.size})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Modal Injection Point -->
+        <div id="dialog-container"></div>
+    </div>
+</body>
+</html>

@@ -19,8 +19,10 @@ public abstract class AbstractBackofficeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getPrincipal() instanceof AdminUserPrincipal principal) {
             model.addAttribute("adminDisplayName", principal.getDisplayName());
+            model.addAttribute("permittedModules", principal.getPermittedModuleIds());
         } else {
             model.addAttribute("adminDisplayName", "Admin");
+            model.addAttribute("permittedModules", java.util.Collections.emptySet());
         }
         model.addAttribute("currentUri", request.getRequestURI());
     }

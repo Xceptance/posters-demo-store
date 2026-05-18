@@ -113,6 +113,9 @@ public class LuceneSearchService implements DisposableBean
      * Each base language gets its own sub-directory under the index base.
      * Texts are resolved via LocalizedTextService using locale codes like "en-US", "de-DE", "sv-SE".
      *
+     * <p>All localized texts are bulk-prefetched in a single DB query to avoid
+     * the N+1 problem (~1,500 individual queries replaced by 1).</p>
+     *
      * @param localeCodes  the locale codes to build indices for (e.g. {"en-US", "de-DE", "sv-SE"})
      */
     public void buildIndex(Set<String> localeCodes) throws IOException
@@ -130,6 +133,10 @@ public class LuceneSearchService implements DisposableBean
         baseLangToLocale.putIfAbsent("en", "en-US");
 
         log.info("Building Lucene index for languages: {} ({} products)", baseLangToLocale.keySet(), products.size());
+
+        // Bulk-prefetch ALL localized texts for the requested locales in one query
+        Map<Integer, Map<String, String>> textCache =
+            textService.getAllTextsForLocales(baseLangToLocale.values());
 
         // Close any previously open readers
         closeReaders();
@@ -156,10 +163,10 @@ public class LuceneSearchService implements DisposableBean
                     // Stored field for retrieval
                     doc.add(new StoredField(FIELD_PRODUCT_ID, product.getId()));
 
-                    // Resolve text for this locale via LocalizedTextService
-                    String name = resolveText(product.getNameTextId(), locale);
-                    String descOverview = resolveText(product.getDescriptionOverviewTextId(), locale);
-                    String descDetail = resolveText(product.getDescriptionDetailTextId(), locale);
+                    // Look up texts from the prefetched cache instead of individual DB queries
+                    String name = lookupText(textCache, product.getNameTextId(), locale);
+                    String descOverview = lookupText(textCache, product.getDescriptionOverviewTextId(), locale);
+                    String descDetail = lookupText(textCache, product.getDescriptionDetailTextId(), locale);
 
                     if (name != null && !name.isBlank())
                     {
@@ -186,12 +193,27 @@ public class LuceneSearchService implements DisposableBean
     }
 
     /**
-     * Resolves text for a text ID using the LocalizedTextService.
+     * Looks up a localized text from the prefetched cache, falling back to
+     * en-US if the requested locale is not available.
+     *
+     * @param textCache the bulk-prefetched text map (textId → localeCode → text)
+     * @param textId    the text ID to look up (may be null)
+     * @param locale    the preferred locale code
+     * @return the resolved text, or null if not found
      */
-    private String resolveText(Integer textId, String locale)
+    private String lookupText(Map<Integer, Map<String, String>> textCache,
+                              Integer textId, String locale)
     {
         if (textId == null) return null;
-        return textService.getText(textId, locale);
+
+        Map<String, String> byLocale = textCache.get(textId);
+        if (byLocale == null) return null;
+
+        String text = byLocale.get(locale);
+        if (text != null) return text;
+
+        // Fallback to en-US
+        return byLocale.get("en-US");
     }
 
     // ---------------------------------------------------------------

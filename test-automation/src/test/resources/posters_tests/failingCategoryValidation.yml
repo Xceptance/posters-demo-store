@@ -1,7 +1,0 @@
-prompt: |
-  Open ${neodymium.url}
-  Verify that the navigation contains a category named '${expectedCategory}'.
-
-data:
-  - testId: "failingCategoryValidation_case1"
-    expectedCategory: "Electronics"

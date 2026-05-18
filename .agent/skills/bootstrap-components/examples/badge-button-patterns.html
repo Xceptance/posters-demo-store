@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Badge &amp; Button Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Badge &amp; Button Patterns</h1>
+
+    <!-- Basic Badges -->
+    <section class="mb-5">
+      <h2>Basic Badges</h2>
+      <p class="text-muted">Contextual badge variants using <code>.badge</code> with background utilities.</p>
+
+      <span class="badge text-bg-primary">Primary</span>
+      <span class="badge text-bg-secondary">Secondary</span>
+      <span class="badge text-bg-success">Success</span>
+      <span class="badge text-bg-danger">Danger</span>
+      <span class="badge text-bg-warning">Warning</span>
+      <span class="badge text-bg-info">Info</span>
+      <span class="badge text-bg-light">Light</span>
+      <span class="badge text-bg-dark">Dark</span>
+    </section>
+
+    <!-- Pill Badges -->
+    <section class="mb-5">
+      <h2>Pill Badges</h2>
+      <p class="text-muted">Use <code>.rounded-pill</code> for fully rounded badges.</p>
+
+      <span class="badge rounded-pill text-bg-primary">Primary</span>
+      <span class="badge rounded-pill text-bg-secondary">Secondary</span>
+      <span class="badge rounded-pill text-bg-success">Success</span>
+      <span class="badge rounded-pill text-bg-danger">Danger</span>
+      <span class="badge rounded-pill text-bg-warning">Warning</span>
+      <span class="badge rounded-pill text-bg-info">Info</span>
+      <span class="badge rounded-pill text-bg-light">Light</span>
+      <span class="badge rounded-pill text-bg-dark">Dark</span>
+    </section>
+
+    <!-- Badges in Headings -->
+    <section class="mb-5">
+      <h2>Badges in Headings</h2>
+      <p class="text-muted">Badges scale to match the size of their parent element.</p>
+
+      <h1>Example heading <span class="badge text-bg-secondary">New</span></h1>
+      <h2>Example heading <span class="badge text-bg-secondary">New</span></h2>
+      <h3>Example heading <span class="badge text-bg-secondary">New</span></h3>
+      <h4>Example heading <span class="badge text-bg-secondary">New</span></h4>
+      <h5>Example heading <span class="badge text-bg-secondary">New</span></h5>
+      <h6>Example heading <span class="badge text-bg-secondary">New</span></h6>
+    </section>
+
+    <!-- Button Badges -->
+    <section class="mb-5">
+      <h2>Badges on Buttons</h2>
+      <p class="text-muted">Use badges as counters or indicators within buttons.</p>
+
+      <button type="button" class="btn btn-primary">
+        Notifications <span class="badge text-bg-secondary">4</span>
+      </button>
+      <button type="button" class="btn btn-success">
+        Messages <span class="badge text-bg-light">12</span>
+      </button>
+      <button type="button" class="btn btn-outline-primary">
+        Cart <span class="badge text-bg-primary">3</span>
+      </button>
+      <button type="button" class="btn btn-dark">
+        Updates <span class="badge text-bg-warning">!</span>
+      </button>
+    </section>
+
+    <!-- Positioned Badges -->
+    <section class="mb-5">
+      <h2>Positioned Notification Badges</h2>
+      <p class="text-muted">Use positioning utilities for notification-style badges. Include <code>.visually-hidden</code> text for accessibility.</p>
+
+      <div class="d-flex gap-4 flex-wrap">
+        <!-- Standard positioned badge -->
+        <button type="button" class="btn btn-primary position-relative">
+          Inbox
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+            99+
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </button>
+
+        <!-- Badge with icon -->
+        <button type="button" class="btn btn-secondary position-relative">
+          <i class="bi bi-bell"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+            5
+            <span class="visually-hidden">notifications</span>
+          </span>
+        </button>
+
+        <!-- Dot indicator -->
+        <button type="button" class="btn btn-outline-primary position-relative">
+          Profile
+          <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+            <span class="visually-hidden">New alerts</span>
+          </span>
+        </button>
+
+        <!-- Icon button with badge -->
+        <button type="button" class="btn btn-light position-relative">
+          <i class="bi bi-cart3 fs-5"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-success">
+            3
+            <span class="visually-hidden">items in cart</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Status Badges -->
+    <section class="mb-5">
+      <h2>Status Badges</h2>
+      <p class="text-muted">Common patterns for status indicators.</p>
+
+      <div class="d-flex gap-2 flex-wrap mb-3">
+        <span class="badge text-bg-success"><i class="bi bi-check-circle me-1"></i>Active</span>
+        <span class="badge text-bg-warning"><i class="bi bi-clock me-1"></i>Pending</span>
+        <span class="badge text-bg-danger"><i class="bi bi-x-circle me-1"></i>Inactive</span>
+        <span class="badge text-bg-info"><i class="bi bi-arrow-repeat me-1"></i>Processing</span>
+        <span class="badge text-bg-secondary"><i class="bi bi-archive me-1"></i>Archived</span>
+      </div>
+
+      <!-- Status in a list -->
+      <ul class="list-group" style="max-width: 400px;">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Order #1234
+          <span class="badge text-bg-success rounded-pill">Shipped</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Order #1235
+          <span class="badge text-bg-warning rounded-pill">Processing</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Order #1236
+          <span class="badge text-bg-danger rounded-pill">Cancelled</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Basic Buttons -->
+    <section class="mb-5">
+      <h2>Basic Buttons</h2>
+      <p class="text-muted">Solid button variants using <code>.btn</code> with contextual classes.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+        <button type="button" class="btn btn-link">Link</button>
+      </div>
+    </section>
+
+    <!-- Outline Buttons -->
+    <section class="mb-5">
+      <h2>Outline Buttons</h2>
+      <p class="text-muted">Use <code>.btn-outline-*</code> for transparent background buttons.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-outline-primary">Primary</button>
+        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+        <button type="button" class="btn btn-outline-success">Success</button>
+        <button type="button" class="btn btn-outline-danger">Danger</button>
+        <button type="button" class="btn btn-outline-warning">Warning</button>
+        <button type="button" class="btn btn-outline-info">Info</button>
+        <button type="button" class="btn btn-outline-light">Light</button>
+        <button type="button" class="btn btn-outline-dark">Dark</button>
+      </div>
+    </section>
+
+    <!-- Button Sizes -->
+    <section class="mb-5">
+      <h2>Button Sizes</h2>
+      <p class="text-muted">Use <code>.btn-lg</code> or <code>.btn-sm</code> for size variants.</p>
+
+      <div class="d-flex gap-2 align-items-center flex-wrap mb-3">
+        <button type="button" class="btn btn-primary btn-lg">Large button</button>
+        <button type="button" class="btn btn-primary">Default button</button>
+        <button type="button" class="btn btn-primary btn-sm">Small button</button>
+      </div>
+
+      <div class="d-flex gap-2 align-items-center flex-wrap">
+        <button type="button" class="btn btn-outline-secondary btn-lg">Large button</button>
+        <button type="button" class="btn btn-outline-secondary">Default button</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm">Small button</button>
+      </div>
+    </section>
+
+    <!-- Block Buttons -->
+    <section class="mb-5">
+      <h2>Block Buttons</h2>
+      <p class="text-muted">Use <code>.d-grid</code> wrapper for full-width block buttons.</p>
+
+      <div class="d-grid gap-2" style="max-width: 400px;">
+        <button type="button" class="btn btn-primary">Block button</button>
+        <button type="button" class="btn btn-secondary">Block button</button>
+      </div>
+
+      <h5 class="mt-4">Responsive Block Buttons</h5>
+      <p class="text-muted">Block at mobile, inline at larger breakpoints.</p>
+      <div class="d-grid gap-2 d-md-flex" style="max-width: 400px;">
+        <button type="button" class="btn btn-primary">Button</button>
+        <button type="button" class="btn btn-secondary">Button</button>
+      </div>
+    </section>
+
+    <!-- Button States -->
+    <section class="mb-5">
+      <h2>Button States</h2>
+      <p class="text-muted">Active, disabled, and toggle states.</p>
+
+      <h5>Active State</h5>
+      <div class="d-flex gap-2 flex-wrap mb-3">
+        <button type="button" class="btn btn-primary active" aria-pressed="true">Active Primary</button>
+        <button type="button" class="btn btn-secondary active" aria-pressed="true">Active Secondary</button>
+      </div>
+
+      <h5>Disabled State</h5>
+      <div class="d-flex gap-2 flex-wrap mb-3">
+        <button type="button" class="btn btn-primary" disabled>Disabled Primary</button>
+        <button type="button" class="btn btn-secondary" disabled>Disabled Secondary</button>
+        <button type="button" class="btn btn-outline-primary" disabled>Disabled Outline</button>
+      </div>
+
+      <h5>Links as Buttons (Disabled)</h5>
+      <p class="text-muted">Links require <code>.disabled</code> class and <code>aria-disabled="true"</code>.</p>
+      <div class="d-flex gap-2 flex-wrap">
+        <a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">Disabled Link</a>
+        <a href="#" class="btn btn-secondary disabled" role="button" aria-disabled="true">Disabled Link</a>
+      </div>
+    </section>
+
+    <!-- Icon Buttons -->
+    <section class="mb-5">
+      <h2>Icon Buttons</h2>
+      <p class="text-muted">Combine Bootstrap Icons with buttons.</p>
+
+      <div class="d-flex gap-2 flex-wrap mb-3">
+        <button type="button" class="btn btn-primary">
+          <i class="bi bi-download me-1"></i>Download
+        </button>
+        <button type="button" class="btn btn-success">
+          <i class="bi bi-check-lg me-1"></i>Save
+        </button>
+        <button type="button" class="btn btn-danger">
+          <i class="bi bi-trash me-1"></i>Delete
+        </button>
+        <button type="button" class="btn btn-secondary">
+          <i class="bi bi-gear me-1"></i>Settings
+        </button>
+      </div>
+
+      <h5>Icon-Only Buttons</h5>
+      <p class="text-muted">Include <code>aria-label</code> for accessibility.</p>
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-primary" aria-label="Edit">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button type="button" class="btn btn-danger" aria-label="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
+        <button type="button" class="btn btn-secondary" aria-label="Settings">
+          <i class="bi bi-gear"></i>
+        </button>
+        <button type="button" class="btn btn-outline-primary" aria-label="Share">
+          <i class="bi bi-share"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Button Groups -->
+    <section class="mb-5">
+      <h2>Button Groups</h2>
+      <p class="text-muted">Group related buttons with <code>.btn-group</code>. Include <code>role="group"</code> and <code>aria-label</code>.</p>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary">Left</button>
+        <button type="button" class="btn btn-primary">Middle</button>
+        <button type="button" class="btn btn-primary">Right</button>
+      </div>
+
+      <h5 class="mt-4">Mixed Styles</h5>
+      <div class="btn-group" role="group" aria-label="Button group with mixed styles">
+        <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+        <button type="button" class="btn btn-warning"><i class="bi bi-pencil"></i></button>
+        <button type="button" class="btn btn-success"><i class="bi bi-check-lg"></i></button>
+      </div>
+
+      <h5 class="mt-4">Outlined Group</h5>
+      <div class="btn-group" role="group" aria-label="Outlined button group">
+        <button type="button" class="btn btn-outline-primary">Left</button>
+        <button type="button" class="btn btn-outline-primary">Middle</button>
+        <button type="button" class="btn btn-outline-primary">Right</button>
+      </div>
+
+      <h5 class="mt-4">Checkbox Button Group</h5>
+      <div class="btn-group" role="group" aria-label="Checkbox button group">
+        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck1">Bold</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck2">Italic</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck3">Underline</label>
+      </div>
+
+      <h5 class="mt-4">Radio Button Group</h5>
+      <div class="btn-group" role="group" aria-label="Radio button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-success" for="btnradio1">Day</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-success" for="btnradio2">Week</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label class="btn btn-outline-success" for="btnradio3">Month</label>
+      </div>
+
+      <h5 class="mt-4">Vertical Button Group</h5>
+      <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <button type="button" class="btn btn-primary">Top</button>
+        <button type="button" class="btn btn-primary">Middle</button>
+        <button type="button" class="btn btn-primary">Bottom</button>
+      </div>
+    </section>
+
+    <!-- Button Toolbar -->
+    <section class="mb-5">
+      <h2>Button Toolbar</h2>
+      <p class="text-muted">Combine button groups into a toolbar with <code>.btn-toolbar</code>.</p>
+
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-primary"><i class="bi bi-type-bold"></i></button>
+          <button type="button" class="btn btn-primary"><i class="bi bi-type-italic"></i></button>
+          <button type="button" class="btn btn-primary"><i class="bi bi-type-underline"></i></button>
+        </div>
+        <div class="btn-group me-2" role="group" aria-label="Second group">
+          <button type="button" class="btn btn-secondary"><i class="bi bi-text-left"></i></button>
+          <button type="button" class="btn btn-secondary"><i class="bi bi-text-center"></i></button>
+          <button type="button" class="btn btn-secondary"><i class="bi bi-text-right"></i></button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Third group">
+          <button type="button" class="btn btn-outline-secondary"><i class="bi bi-link-45deg"></i></button>
+          <button type="button" class="btn btn-outline-secondary"><i class="bi bi-image"></i></button>
+        </div>
+      </div>
+
+      <h5 class="mt-4">Toolbar with Input</h5>
+      <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with input group">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-outline-secondary">1</button>
+          <button type="button" class="btn btn-outline-secondary">2</button>
+          <button type="button" class="btn btn-outline-secondary">3</button>
+          <button type="button" class="btn btn-outline-secondary">4</button>
+        </div>
+        <div class="input-group">
+          <div class="input-group-text" id="btnGroupAddon">@</div>
+          <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon">
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Buttons -->
+    <section class="mb-5">
+      <h2>Loading Button States</h2>
+      <p class="text-muted">Combine spinners with buttons for loading states.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span role="status">Loading...</span>
+        </button>
+
+        <button class="btn btn-secondary" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+          <span role="status">Loading...</span>
+        </button>
+
+        <button class="btn btn-success" type="button" disabled>
+          <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+          <span role="status">Saving...</span>
+        </button>
+
+        <button class="btn btn-danger" type="button" disabled>
+          <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+          <span role="status">Deleting...</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Close Button -->
+    <section class="mb-5">
+      <h2>Close Button</h2>
+      <p class="text-muted">Generic close button with <code>.btn-close</code>. Always include <code>aria-label</code>.</p>
+
+      <div class="d-flex gap-4 flex-wrap align-items-center">
+        <div>
+          <h6>Default</h6>
+          <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+
+        <div>
+          <h6>Disabled</h6>
+          <button type="button" class="btn-close" disabled aria-label="Close"></button>
+        </div>
+
+        <div class="p-3 bg-dark rounded">
+          <h6 class="text-white">White variant</h6>
+          <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

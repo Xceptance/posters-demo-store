@@ -1,0 +1,272 @@
+// =============================================================================
+// Bootstrap Layout Sass Customization Examples
+// =============================================================================
+// This file demonstrates common customizations for Bootstrap's layout system.
+// Each example can be used independently or combined.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// SETUP: Required Bootstrap imports
+// -----------------------------------------------------------------------------
+// Always import functions first, then set your customizations, then import
+// the rest of Bootstrap.
+
+@import "bootstrap/scss/functions";
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 1: Custom Breakpoint Configuration
+// -----------------------------------------------------------------------------
+// Add a custom xxxl breakpoint for ultra-wide displays
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1800px // Custom ultra-wide breakpoint
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  xxxl: 1600px // Container width for ultra-wide
+);
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 2: Custom Grid Configuration
+// -----------------------------------------------------------------------------
+// Use a 16-column grid for finer control
+
+$grid-columns: 16;
+$grid-gutter-width: 1rem; // Tighter gutters (16px vs default 24px)
+$grid-row-columns: 8; // Allow row-cols-* up to 8
+
+// Enable CSS Grid support (disabled by default)
+$enable-cssgrid: true;
+
+// -----------------------------------------------------------------------------
+// Import Bootstrap after customizations
+// -----------------------------------------------------------------------------
+
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/grid";
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 3: Media Query Mixins
+// -----------------------------------------------------------------------------
+// Use Bootstrap's media query mixins for consistent responsive styles
+
+// Mobile-first: styles apply at breakpoint and UP
+.hero-section {
+  padding: 2rem 1rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 4rem 2rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: 6rem 4rem;
+  }
+}
+
+// Desktop-first: styles apply BELOW the breakpoint
+.mobile-navigation {
+  display: none;
+
+  @include media-breakpoint-down(lg) {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+// Range: styles apply only BETWEEN two breakpoints
+.tablet-sidebar {
+  @include media-breakpoint-between(md, xl) {
+    width: 200px;
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+// Single breakpoint: styles apply ONLY at that breakpoint
+.md-highlight {
+  @include media-breakpoint-only(md) {
+    background-color: rgba(255, 255, 0, 0.1);
+    border: 1px dashed #ccc;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 4: Semantic Grid with Mixins
+// -----------------------------------------------------------------------------
+// Create a semantic grid layout without utility classes in HTML
+
+// Blog layout with sidebar
+.blog-container {
+  @include make-container();
+}
+
+.blog-layout {
+  @include make-row();
+}
+
+.blog-main {
+  @include make-col-ready();
+  @include make-col(16); // Full width on mobile (16-column grid)
+
+  @include media-breakpoint-up(lg) {
+    @include make-col(11); // ~69% on large screens
+  }
+}
+
+.blog-sidebar {
+  @include make-col-ready();
+  @include make-col(16); // Full width on mobile
+
+  @include media-breakpoint-up(lg) {
+    @include make-col(5); // ~31% on large screens
+  }
+}
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 5: Product Grid with Semantic Classes
+// -----------------------------------------------------------------------------
+// E-commerce product grid that adapts to screen size
+
+.product-grid {
+  @include make-row();
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 2rem;
+}
+
+.product-card {
+  @include make-col-ready();
+
+  // 1 column on mobile (xs)
+  @include make-col(16);
+
+  // 2 columns on small screens
+  @include media-breakpoint-up(sm) {
+    @include make-col(8);
+  }
+
+  // 4 columns on medium screens
+  @include media-breakpoint-up(md) {
+    @include make-col(4);
+  }
+
+  // 4 columns on large (unchanged)
+  @include media-breakpoint-up(lg) {
+    @include make-col(4);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 6: Dashboard Layout
+// -----------------------------------------------------------------------------
+// Complex dashboard with collapsible sidebar
+
+.dashboard {
+  @include make-container($padding-x: 0);
+  max-width: 100%;
+}
+
+.dashboard-row {
+  @include make-row();
+  --bs-gutter-x: 0;
+  flex-wrap: nowrap;
+}
+
+.dashboard-sidebar {
+  @include make-col-ready();
+  width: 280px;
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+
+  @include media-breakpoint-down(lg) {
+    width: 80px; // Collapsed on smaller screens
+
+    &.expanded {
+      width: 280px;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    position: fixed;
+    left: -280px;
+    height: 100vh;
+    z-index: 1050;
+
+    &.expanded {
+      left: 0;
+    }
+  }
+}
+
+.dashboard-content {
+  @include make-col-ready();
+  flex-grow: 1;
+  min-width: 0; // Prevent flex item overflow
+}
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 7: Centered Content Layout
+// -----------------------------------------------------------------------------
+// Article layout with centered content column
+
+.article-container {
+  @include make-container();
+}
+
+.article-row {
+  @include make-row();
+}
+
+.article-content {
+  @include make-col-ready();
+  @include make-col(16); // Full width on mobile
+
+  @include media-breakpoint-up(md) {
+    @include make-col(12); // 75% on medium
+    @include make-col-offset(2); // Centered
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include make-col(10); // ~62% on large
+    @include make-col-offset(3); // Centered
+  }
+}
+
+// -----------------------------------------------------------------------------
+// EXAMPLE 8: Custom Container Variants
+// -----------------------------------------------------------------------------
+// Create custom container sizes for specific use cases
+
+.container-narrow {
+  @include make-container();
+  max-width: 680px; // Optimal reading width
+}
+
+.container-wide {
+  @include make-container();
+  max-width: 1800px; // Extra wide for dashboards
+
+  @include media-breakpoint-up(xxxl) {
+    max-width: 2000px;
+  }
+}
+
+.container-full-bleed {
+  @include make-container($padding-x: 0);
+  max-width: 100%;
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Typography Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="py-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap 5.3 Typography Patterns</h1>
+
+    <!-- Headings -->
+    <section class="mb-5">
+      <h2>Headings</h2>
+      <h1>h1. Bootstrap heading</h1>
+      <h2>h2. Bootstrap heading</h2>
+      <h3>h3. Bootstrap heading</h3>
+      <h4>h4. Bootstrap heading</h4>
+      <h5>h5. Bootstrap heading</h5>
+      <h6>h6. Bootstrap heading</h6>
+
+      <h3 class="h5 mt-4">Heading Classes on Other Elements</h3>
+      <p class="h1">Paragraph styled as h1</p>
+      <p class="h3">Paragraph styled as h3</p>
+      <span class="h4">Span styled as h4</span>
+    </section>
+
+    <!-- Display Headings -->
+    <section class="mb-5">
+      <h2>Display Headings</h2>
+      <h1 class="display-1">Display 1</h1>
+      <h1 class="display-2">Display 2</h1>
+      <h1 class="display-3">Display 3</h1>
+      <h1 class="display-4">Display 4</h1>
+      <h1 class="display-5">Display 5</h1>
+      <h1 class="display-6">Display 6</h1>
+    </section>
+
+    <!-- Customized Headings -->
+    <section class="mb-5">
+      <h2>Customized Headings with Secondary Text</h2>
+      <h3>
+        Fancy display heading
+        <small class="text-body-secondary">With faded secondary text</small>
+      </h3>
+      <h1 class="display-4">
+        Display heading
+        <small class="text-body-secondary">Secondary text</small>
+      </h1>
+    </section>
+
+    <!-- Lead Paragraph -->
+    <section class="mb-5">
+      <h2>Lead Paragraph</h2>
+      <p class="lead">
+        This is a lead paragraph. It stands out from regular paragraphs with larger font size and lighter weight.
+      </p>
+      <p>This is a regular paragraph for comparison. Notice how the lead paragraph above has more visual prominence.</p>
+    </section>
+
+    <!-- Inline Text Elements -->
+    <section class="mb-5">
+      <h2>Inline Text Elements</h2>
+      <p><mark>Highlighted text</mark> using the mark element.</p>
+      <p><del>Deleted text</del> using the del element.</p>
+      <p><s>Strikethrough text</s> (no longer accurate) using the s element.</p>
+      <p><ins>Inserted text</ins> using the ins element.</p>
+      <p><u>Underlined text</u> using the u element.</p>
+      <p><small>Fine print</small> using the small element.</p>
+      <p><strong>Bold text</strong> using the strong element.</p>
+      <p><em>Italicized text</em> using the em element.</p>
+    </section>
+
+    <!-- Font Size Utilities -->
+    <section class="mb-5">
+      <h2>Font Size Utilities</h2>
+      <p class="fs-1">.fs-1 text (2.5rem)</p>
+      <p class="fs-2">.fs-2 text (2rem)</p>
+      <p class="fs-3">.fs-3 text (1.75rem)</p>
+      <p class="fs-4">.fs-4 text (1.5rem)</p>
+      <p class="fs-5">.fs-5 text (1.25rem)</p>
+      <p class="fs-6">.fs-6 text (1rem)</p>
+    </section>
+
+    <!-- Font Weight and Style -->
+    <section class="mb-5">
+      <h2>Font Weight and Style</h2>
+      <p class="fw-bold">Bold text (.fw-bold)</p>
+      <p class="fw-bolder">Bolder text (.fw-bolder)</p>
+      <p class="fw-semibold">Semibold text (.fw-semibold)</p>
+      <p class="fw-medium">Medium text (.fw-medium)</p>
+      <p class="fw-normal">Normal weight text (.fw-normal)</p>
+      <p class="fw-light">Light weight text (.fw-light)</p>
+      <p class="fw-lighter">Lighter text (.fw-lighter)</p>
+      <p class="fst-italic">Italic text (.fst-italic)</p>
+      <p class="fst-normal">Normal style text (.fst-normal)</p>
+    </section>
+
+    <!-- Line Height -->
+    <section class="mb-5">
+      <h2>Line Height</h2>
+      <p class="lh-1 mb-3" style="max-width: 300px;">Line height 1 (.lh-1). This paragraph has very tight line spacing which can be useful for certain design situations.</p>
+      <p class="lh-sm mb-3" style="max-width: 300px;">Small line height (.lh-sm, 1.25). This paragraph has slightly reduced line spacing.</p>
+      <p class="lh-base mb-3" style="max-width: 300px;">Base line height (.lh-base, 1.5). This is the default line height in Bootstrap.</p>
+      <p class="lh-lg mb-3" style="max-width: 300px;">Large line height (.lh-lg, 2). This paragraph has increased line spacing for better readability.</p>
+    </section>
+
+    <!-- Text Alignment -->
+    <section class="mb-5">
+      <h2>Text Alignment</h2>
+      <p class="text-start">Start aligned text (left in LTR).</p>
+      <p class="text-center">Center aligned text.</p>
+      <p class="text-end">End aligned text (right in LTR).</p>
+
+      <h3 class="h5 mt-4">Responsive Alignment</h3>
+      <p class="text-start text-md-center text-lg-end bg-light p-2">
+        Start on mobile, center on md, end on lg+
+      </p>
+    </section>
+
+    <!-- Text Transform -->
+    <section class="mb-5">
+      <h2>Text Transform</h2>
+      <p class="text-lowercase">LOWERCASED TEXT (.text-lowercase)</p>
+      <p class="text-uppercase">uppercased text (.text-uppercase)</p>
+      <p class="text-capitalize">capitalized text (.text-capitalize)</p>
+    </section>
+
+    <!-- Text Decoration -->
+    <section class="mb-5">
+      <h2>Text Decoration</h2>
+      <p class="text-decoration-underline">Underlined text</p>
+      <p class="text-decoration-line-through">Line-through text</p>
+      <a href="#" class="text-decoration-none">Link with no decoration</a>
+    </section>
+
+    <!-- Text Wrapping -->
+    <section class="mb-5">
+      <h2>Text Wrapping and Overflow</h2>
+      <div class="bg-light p-2 mb-2" style="width: 200px;">
+        <p class="text-wrap mb-0">This text will wrap normally within its container.</p>
+      </div>
+      <div class="bg-light p-2 mb-2" style="width: 200px; overflow: hidden;">
+        <p class="text-nowrap mb-0">This text will not wrap and will overflow.</p>
+      </div>
+      <div class="bg-light p-2 mb-2" style="width: 200px;">
+        <p class="text-truncate mb-0">This very long text will be truncated with an ellipsis when it overflows.</p>
+      </div>
+      <div class="bg-light p-2" style="width: 200px;">
+        <p class="text-break mb-0">mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+      </div>
+    </section>
+
+    <!-- Monospace -->
+    <section class="mb-5">
+      <h2>Monospace Font</h2>
+      <p class="font-monospace">This text is in a monospace font family.</p>
+    </section>
+
+    <!-- Text Reset -->
+    <section class="mb-5">
+      <h2>Text Reset</h2>
+      <p class="text-body-secondary">
+        Muted text with a <a href="#" class="text-reset">reset link</a> that inherits the parent color.
+      </p>
+    </section>
+
+    <!-- Blockquotes -->
+    <section class="mb-5">
+      <h2>Blockquotes</h2>
+      <figure>
+        <blockquote class="blockquote">
+          <p>A well-known quote, contained in a blockquote element.</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          Someone famous in <cite title="Source Title">Source Title</cite>
+        </figcaption>
+      </figure>
+
+      <h3 class="h5 mt-4">Center Aligned Blockquote</h3>
+      <figure class="text-center">
+        <blockquote class="blockquote">
+          <p>A centered blockquote.</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          Another source
+        </figcaption>
+      </figure>
+
+      <h3 class="h5 mt-4">Right Aligned Blockquote</h3>
+      <figure class="text-end">
+        <blockquote class="blockquote">
+          <p>A right-aligned blockquote.</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          Final source
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Lists -->
+    <section class="mb-5">
+      <h2>Lists</h2>
+
+      <h3 class="h5">Unstyled List</h3>
+      <ul class="list-unstyled">
+        <li>This is a list without bullets</li>
+        <li>It can contain any content</li>
+        <li>Nested lists are not affected:
+          <ul>
+            <li>Nested item with bullet</li>
+            <li>Another nested item</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 class="h5 mt-4">Inline List</h3>
+      <ul class="list-inline">
+        <li class="list-inline-item">First item</li>
+        <li class="list-inline-item">Second item</li>
+        <li class="list-inline-item">Third item</li>
+      </ul>
+
+      <h3 class="h5 mt-4">Description List</h3>
+      <dl class="row">
+        <dt class="col-sm-3">Term</dt>
+        <dd class="col-sm-9">Definition for the term above.</dd>
+
+        <dt class="col-sm-3">Another term</dt>
+        <dd class="col-sm-9">Another definition with more detailed explanation.</dd>
+
+        <dt class="col-sm-3">Long term that wraps</dt>
+        <dd class="col-sm-9">Definition that aligns properly with the grid system.</dd>
+
+        <dt class="col-sm-3 text-truncate">Very long truncated term</dt>
+        <dd class="col-sm-9">Definition for truncated term.</dd>
+      </dl>
+    </section>
+
+  </div>
+</body>
+</html>

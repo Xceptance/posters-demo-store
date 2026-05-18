@@ -1,0 +1,9 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Read-only display of the customer's name -->
+<div th:fragment="profile-name-display" id="profile-name-container" class="p-4 border-bottom">
+    <dl class="mb-0">
+        <dt class="text-muted fw-normal">Name</dt>
+        <dd class="mb-0 fs-5 fw-semibold" th:text="${customer.firstName + (customer.middleName != null and !customer.middleName.isEmpty() ? ' ' + customer.middleName : '') + ' ' + customer.lastName}"></dd>
+    </dl>
+</div>
+</html>

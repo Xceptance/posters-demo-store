@@ -1,0 +1,82 @@
+<div th:fragment="address-form" class="modal fade" id="addressFormModal" tabindex="-1" aria-labelledby="addressFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addressFormModalLabel" th:text="${address != null ? 'Edit Address' : 'Add New Address'}">Add New Address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" th:hx-post="${address != null} ? @{/backoffice/customers/{id}/addresses/{addressId}/edit(id=${customer.id}, addressId=${address?.id})} : @{/backoffice/customers/{id}/addresses/new(id=${customer.id})}" 
+                  hx-target="#address-list-container" 
+                  hx-swap="outerHTML"
+                  hx-on::after-request="if(event.detail.successful) bootstrap.Modal.getInstance(document.getElementById('addressFormModal')).hide()">
+                <div class="modal-body">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label">Address Name (e.g. Home, Office)</label>
+                            <input type="text" name="name" class="form-control" placeholder="Optional" th:value="${address?.name}">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label required">First Name *</label>
+                            <input type="text" name="recipientFirstName" class="form-control" required th:value="${address?.recipientFirstName}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Last Name *</label>
+                            <input type="text" name="recipientLastName" class="form-control" required th:value="${address?.recipientLastName}">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Company</label>
+                            <input type="text" name="company" class="form-control" placeholder="Optional" th:value="${address?.company}">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label required">Address Line 1 *</label>
+                            <input type="text" name="addressLine1" class="form-control" required th:value="${address?.addressLine1}">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Address Line 2</label>
+                            <input type="text" name="addressLine2" class="form-control" placeholder="Optional" th:value="${address?.addressLine2}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label required">City *</label>
+                            <input type="text" name="city" class="form-control" required th:value="${address?.city}">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label required">State/Province *</label>
+                            <input type="text" name="state" class="form-control" required th:value="${address?.state}">
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label required">ZIP/Postal Code *</label>
+                            <input type="text" name="postalCode" class="form-control" required th:value="${address?.postalCode}">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label required">Country *</label>
+                            <input type="text" name="country" class="form-control" required th:value="${address?.country}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" th:text="${address != null ? 'Update Address' : 'Save Address'}">Save Address</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        (function() {
+            var modalEl = document.getElementById('addressFormModal');
+            var modal = new bootstrap.Modal(modalEl);
+            modal.show();
+            // Clean up DOM when hidden
+            modalEl.addEventListener('hidden.bs.modal', function () {
+                modalEl.remove();
+            });
+        })();
+    </script>
+</div>

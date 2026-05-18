@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Table Examples</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="py-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap 5.3 Table Examples</h1>
+
+    <!-- Basic Table -->
+    <section class="mb-5">
+      <h2>Basic Table</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Striped Table -->
+    <section class="mb-5">
+      <h2>Striped Rows</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Widget</td>
+            <td>$19.99</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Gadget</td>
+            <td>$29.99</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Gizmo</td>
+            <td>$9.99</td>
+            <td>200</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Hoverable + Bordered -->
+    <section class="mb-5">
+      <h2>Hoverable + Bordered</h2>
+      <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1001</th>
+            <td>Project Alpha</td>
+            <td><span class="badge bg-success">Active</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">1002</th>
+            <td>Project Beta</td>
+            <td><span class="badge bg-warning text-dark">Pending</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+          <tr class="table-active">
+            <th scope="row">1003</th>
+            <td>Project Gamma (Active Row)</td>
+            <td><span class="badge bg-danger">Inactive</span></td>
+            <td>
+              <button class="btn btn-sm btn-primary">Edit</button>
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb-5">
+      <h2>Row Color Variants</h2>
+      <table class="table">
+        <tbody>
+          <tr class="table-primary">
+            <td>Primary</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-secondary">
+            <td>Secondary</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-success">
+            <td>Success</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-danger">
+            <td>Danger</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-warning">
+            <td>Warning</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-info">
+            <td>Info</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-light">
+            <td>Light</td>
+            <td>Example row</td>
+          </tr>
+          <tr class="table-dark">
+            <td>Dark</td>
+            <td>Example row</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Small Table -->
+    <section class="mb-5">
+      <h2>Small (Compact) Table</h2>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Item</th>
+            <th scope="col">Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">1</th><td>Item A</td><td>10</td></tr>
+          <tr><th scope="row">2</th><td>Item B</td><td>20</td></tr>
+          <tr><th scope="row">3</th><td>Item C</td><td>30</td></tr>
+          <tr><th scope="row">4</th><td>Item D</td><td>40</td></tr>
+          <tr><th scope="row">5</th><td>Item E</td><td>50</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Responsive Table -->
+    <section class="mb-5">
+      <h2>Responsive Table</h2>
+      <p class="text-muted">Scroll horizontally on smaller screens</p>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Column 1</th>
+              <th>Column 2</th>
+              <th>Column 3</th>
+              <th>Column 4</th>
+              <th>Column 5</th>
+              <th>Column 6</th>
+              <th>Column 7</th>
+              <th>Column 8</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Data</td>
+              <td>Data</td>
+              <td>Data</td>
+              <td>Data</td>
+              <td>Data</td>
+              <td>Data</td>
+              <td>Data</td>
+              <td>Data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Vertical Alignment -->
+    <section class="mb-5">
+      <h2>Vertical Alignment</h2>
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Heading</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>This cell contains a lot of text to demonstrate vertical alignment in Bootstrap tables when cells have varying content heights.</td>
+            <td>Aligned middle (default)</td>
+            <td class="align-top">Aligned top</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Table with Caption -->
+    <section class="mb-5">
+      <h2>Table with Caption</h2>
+      <table class="table">
+        <caption>List of registered users</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>John Doe</td>
+            <td>john@example.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Caption Top -->
+    <section class="mb-5">
+      <h2>Caption Top</h2>
+      <table class="table caption-top">
+        <caption>List of registered users (caption on top)</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Jane Smith</td>
+            <td>jane@example.com</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Bob Johnson</td>
+            <td>bob@example.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Table Head Variants -->
+    <section class="mb-5">
+      <h2>Table Head Variants</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="h5">Light Header</h3>
+          <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Alice</td>
+                <td>Developer</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Bob</td>
+                <td>Designer</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <h3 class="h5">Dark Header</h3>
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Charlie</td>
+                <td>Manager</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Diana</td>
+                <td>Analyst</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Group Divider -->
+    <section class="mb-5">
+      <h2>Table Group Divider</h2>
+      <p class="text-muted">Use <code>.table-group-divider</code> to add a thicker border between sections.</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <th scope="row">1</th>
+            <td>Widget A</td>
+            <td>$25.00</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Widget B</td>
+            <td>$30.00</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Widget C</td>
+            <td>$15.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Table with Footer -->
+    <section class="mb-5">
+      <h2>Table with Footer</h2>
+      <table class="table">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Product A</td>
+            <td>2</td>
+            <td>$10.00</td>
+            <td>$20.00</td>
+          </tr>
+          <tr>
+            <td>Product B</td>
+            <td>1</td>
+            <td>$25.00</td>
+            <td>$25.00</td>
+          </tr>
+          <tr>
+            <td>Product C</td>
+            <td>3</td>
+            <td>$5.00</td>
+            <td>$15.00</td>
+          </tr>
+        </tbody>
+        <tfoot class="table-group-divider">
+          <tr>
+            <th scope="row" colspan="3">Subtotal</th>
+            <td>$60.00</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Tax (10%)</th>
+            <td>$6.00</td>
+          </tr>
+          <tr class="table-dark">
+            <th scope="row" colspan="3">Grand Total</th>
+            <td><strong>$66.00</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <!-- Nested Tables -->
+    <section class="mb-5">
+      <h2>Nested Tables</h2>
+      <p class="text-muted">Nested tables do not inherit parent styles.</p>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Items</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Electronics</th>
+            <td>
+              <table class="table table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Laptop</td>
+                    <td>$999</td>
+                  </tr>
+                  <tr>
+                    <td>Phone</td>
+                    <td>$699</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Accessories</th>
+            <td>
+              <table class="table table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Keyboard</td>
+                    <td>$79</td>
+                  </tr>
+                  <tr>
+                    <td>Mouse</td>
+                    <td>$49</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</body>
+</html>

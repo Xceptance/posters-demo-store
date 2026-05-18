@@ -107,12 +107,14 @@ create table localized_price (
 
 create table customer (
   id                            uuid not null,
+  customer_number               bigint auto_increment,
   email                         varchar(255),
   password                      varchar(255),
   name                          varchar(255),
   first_name                    varchar(255),
   cart_id                       uuid,
   constraint uq_customer_email unique (email),
+  constraint uq_customer_number unique (customer_number),
   constraint uq_customer_cart_id unique (cart_id),
   constraint pk_customer primary key (id)
 );

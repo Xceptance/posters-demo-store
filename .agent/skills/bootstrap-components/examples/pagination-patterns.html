@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Pagination Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Pagination Patterns</h1>
+
+    <!-- Basic Pagination -->
+    <section class="mb-5">
+      <h2>Basic Pagination</h2>
+      <p class="text-muted">Wrap pagination in <code>&lt;nav&gt;</code> with <code>aria-label</code>. Mark current page with <code>.active</code> and <code>aria-current="page"</code>.</p>
+
+      <nav aria-label="Basic pagination example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Pagination with Icons -->
+    <section class="mb-5">
+      <h2>Pagination with Icons</h2>
+      <p class="text-muted">Use icons for prev/next. Include <code>aria-hidden="true"</code> on icons and <code>aria-label</code> on links.</p>
+
+      <nav aria-label="Pagination with icons">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h5 class="mt-4">With Bootstrap Icons</h5>
+      <nav aria-label="Pagination with Bootstrap Icons">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="First">
+              <i class="bi bi-chevron-double-left" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <i class="bi bi-chevron-left" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <i class="bi bi-chevron-right" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Last">
+              <i class="bi bi-chevron-double-right" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Disabled and Active States -->
+    <section class="mb-5">
+      <h2>Disabled and Active States</h2>
+      <p class="text-muted">Use <code>.disabled</code> for unavailable pages. Include <code>aria-disabled="true"</code> and <code>tabindex="-1"</code>.</p>
+
+      <nav aria-label="Pagination with disabled state">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h5 class="mt-4">Last Page Example</h5>
+      <nav aria-label="Pagination at last page">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">8</a></li>
+          <li class="page-item"><a class="page-link" href="#">9</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">10</a></li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Pagination Sizes -->
+    <section class="mb-5">
+      <h2>Pagination Sizes</h2>
+      <p class="text-muted">Use <code>.pagination-lg</code> or <code>.pagination-sm</code> for size variants.</p>
+
+      <h5>Large</h5>
+      <nav aria-label="Large pagination">
+        <ul class="pagination pagination-lg">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <h5>Default</h5>
+      <nav aria-label="Default pagination">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <h5>Small</h5>
+      <nav aria-label="Small pagination">
+        <ul class="pagination pagination-sm">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Pagination Alignment -->
+    <section class="mb-5">
+      <h2>Pagination Alignment</h2>
+      <p class="text-muted">Use flexbox utilities for alignment.</p>
+
+      <h5>Start (Default)</h5>
+      <nav aria-label="Left-aligned pagination">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <h5>Center</h5>
+      <nav aria-label="Center-aligned pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <h5>End</h5>
+      <nav aria-label="Right-aligned pagination">
+        <ul class="pagination justify-content-end">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Pagination with Ellipsis -->
+    <section class="mb-5">
+      <h2>Pagination with Ellipsis</h2>
+      <p class="text-muted">Use ellipsis (...) for large page ranges. Keep current page visible with surrounding pages.</p>
+
+      <h5>Middle of Range</h5>
+      <nav aria-label="Pagination with ellipsis">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">5</a></li>
+          <li class="page-item"><a class="page-link" href="#">6</a></li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item"><a class="page-link" href="#">20</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h5>Near Start</h5>
+      <nav aria-label="Pagination near start">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item"><a class="page-link" href="#">20</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h5>Near End</h5>
+      <nav aria-label="Pagination near end">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item"><a class="page-link" href="#">16</a></li>
+          <li class="page-item"><a class="page-link" href="#">17</a></li>
+          <li class="page-item"><a class="page-link" href="#">18</a></li>
+          <li class="page-item"><a class="page-link" href="#">19</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">20</a></li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Simple Previous/Next -->
+    <section class="mb-5">
+      <h2>Simple Previous/Next Navigation</h2>
+      <p class="text-muted">For simpler navigation without page numbers.</p>
+
+      <nav aria-label="Simple navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#">
+              <i class="bi bi-arrow-left me-1"></i>Previous
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              Next<i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h5 class="mt-4">Justified</h5>
+      <nav aria-label="Justified navigation">
+        <ul class="pagination justify-content-between">
+          <li class="page-item">
+            <a class="page-link" href="#">
+              <i class="bi bi-arrow-left me-1"></i>Previous Article
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              Next Article<i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Pagination with Info -->
+    <section class="mb-5">
+      <h2>Pagination with Info Text</h2>
+      <p class="text-muted">Common pattern showing total items and current range.</p>
+
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div class="text-muted">
+          Showing <strong>1</strong> to <strong>10</strong> of <strong>97</strong> results
+        </div>
+        <nav aria-label="Table pagination">
+          <ul class="pagination mb-0">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                <i class="bi bi-chevron-left"></i>
+              </a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="my-4">
+
+      <h5>With Items Per Page Selector</h5>
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div class="d-flex align-items-center gap-2">
+          <label for="itemsPerPage" class="text-muted text-nowrap">Items per page:</label>
+          <select class="form-select form-select-sm" id="itemsPerPage" style="width: auto;">
+            <option value="10" selected>10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <div class="text-muted">
+          Showing <strong>1-10</strong> of <strong>97</strong>
+        </div>
+        <nav aria-label="Pagination with selector">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Pagination in Cards -->
+    <section class="mb-5">
+      <h2>Pagination in Card Footer</h2>
+      <p class="text-muted">Common pattern for data tables or lists within cards.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <i class="bi bi-table me-2"></i>Users List
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td><span class="badge text-bg-success">Active</span></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td><span class="badge text-bg-success">Active</span></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Bob Wilson</td>
+                <td>bob@example.com</td>
+                <td><span class="badge text-bg-warning">Pending</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <span class="text-muted small">Showing 1-3 of 45 users</span>
+          <nav aria-label="User table pagination">
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                  <i class="bi bi-chevron-left"></i>
+                </a>
+              </li>
+              <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+              <li class="page-item"><a class="page-link" href="#">15</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <i class="bi bi-chevron-right"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page Jump Input -->
+    <section class="mb-5">
+      <h2>Pagination with Page Jump</h2>
+      <p class="text-muted">Allow users to jump directly to a specific page.</p>
+
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <nav aria-label="Pagination with page jump">
+          <ul class="pagination mb-0">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item"><a class="page-link" href="#">50</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="d-flex align-items-center gap-2">
+          <span class="text-muted">Go to page:</span>
+          <input type="number" class="form-control form-control-sm" style="width: 70px;" min="1" max="50" value="1">
+          <button type="button" class="btn btn-outline-primary btn-sm">Go</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsive Pagination -->
+    <section class="mb-5">
+      <h2>Responsive Pagination</h2>
+      <p class="text-muted">Hide page numbers on small screens, show on larger screens.</p>
+
+      <nav aria-label="Responsive pagination">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="d-none d-sm-inline ms-1">Previous</span>
+            </a>
+          </li>
+          <li class="page-item d-none d-md-block"><a class="page-link" href="#">1</a></li>
+          <li class="page-item d-none d-md-block"><a class="page-link" href="#">2</a></li>
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">3</a></li>
+          <li class="page-item d-none d-md-block"><a class="page-link" href="#">4</a></li>
+          <li class="page-item d-none d-md-block"><a class="page-link" href="#">5</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span class="d-none d-sm-inline me-1">Next</span>
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <p class="text-muted small"><em>Resize browser window to see responsive behavior</em></p>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

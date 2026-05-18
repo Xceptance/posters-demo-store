@@ -1,0 +1,51 @@
+<div th:fragment="address-list">
+    <div th:if="${detail.addresses.empty}" class="p-4 text-center text-muted border-bottom">
+        No addresses on file.
+    </div>
+    <ul class="list-group list-group-flush" th:unless="${detail.addresses.empty}">
+        <li class="list-group-item p-3" th:each="address : ${detail.addresses}">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div>
+                        <span th:if="${address.name != null and !address.name.empty}" class="badge bg-secondary me-2" th:text="${address.name}"></span>
+                        <strong th:text="${address.recipientFirstName + ' ' + address.recipientLastName}"></strong>
+                    </div>
+                    <div th:if="${address.company != null and !address.company.empty}" class="text-muted" th:text="${address.company}"></div>
+                    <div th:text="${address.addressLine1}"></div>
+                    <div th:if="${address.addressLine2 != null and !address.addressLine2.empty}" th:text="${address.addressLine2}"></div>
+                    <div>
+                        <span th:text="${address.city}"></span>, 
+                        <span th:text="${address.state}"></span> 
+                        <span th:text="${address.postalCode}"></span>
+                    </div>
+                    <div th:text="${address.country}"></div>
+                </div>
+                <div class="d-flex justify-content-end gap-1">
+                    <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center justify-content-center"
+                            title="Edit Address" style="width: 32px; height: 32px; padding: 0;"
+                            th:hx-get="@{/backoffice/customers/{id}/addresses/{addressId}/edit(id=${detail.customer.id}, addressId=${address.id})}"
+                            hx-target="#dialog-container"
+                            hx-swap="innerHTML">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center justify-content-center" type="button" data-bs-toggle="dropdown" style="width: 32px; height: 32px; padding: 0;" title="More Actions">
+                            <span class="material-symbols-outlined" style="font-size: 18px;">more_vert</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                            <li>
+                                <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                        th:hx-get="@{/backoffice/customers/{id}/addresses/{addressId}/delete(id=${detail.customer.id}, addressId=${address.id})}"
+                                        hx-target="#dialog-container"
+                                        hx-swap="innerHTML">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                                    Delete
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

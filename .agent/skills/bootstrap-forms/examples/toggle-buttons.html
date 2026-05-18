@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Toggle Buttons Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="mb-4">Toggle Buttons</h1>
+    <p class="lead mb-5">Button-styled checkboxes and radios using the <code>.btn-check</code> class.</p>
+
+    <!-- Checkbox Toggle Buttons -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Checkbox Toggle Buttons</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">Use checkbox toggles for independent on/off options.</p>
+        <input type="checkbox" class="btn-check" id="btn-check-1" autocomplete="off">
+        <label class="btn btn-primary" for="btn-check-1">Single toggle</label>
+
+        <input type="checkbox" class="btn-check" id="btn-check-2" checked autocomplete="off">
+        <label class="btn btn-primary" for="btn-check-2">Checked</label>
+
+        <input type="checkbox" class="btn-check" id="btn-check-3" disabled autocomplete="off">
+        <label class="btn btn-primary" for="btn-check-3">Disabled</label>
+      </div>
+    </div>
+
+    <!-- Radio Toggle Buttons -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Radio Toggle Buttons</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">Use radio toggles for mutually exclusive options. Group with the <code>name</code> attribute.</p>
+        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+        <label class="btn btn-secondary" for="option1">Checked</label>
+
+        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+        <label class="btn btn-secondary" for="option2">Radio</label>
+
+        <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off">
+        <label class="btn btn-secondary" for="option3">Radio</label>
+
+        <input type="radio" class="btn-check" name="options" id="option4" disabled autocomplete="off">
+        <label class="btn btn-secondary" for="option4">Disabled</label>
+      </div>
+    </div>
+
+    <!-- Outlined Styles -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Outlined Styles</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">Use <code>.btn-outline-*</code> classes for a lighter, bordered appearance.</p>
+        <div class="mb-3">
+          <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btn-check-outlined">Toggle primary</label>
+
+          <input type="checkbox" class="btn-check" id="btn-check-outlined-2" checked autocomplete="off">
+          <label class="btn btn-outline-secondary" for="btn-check-outlined-2">Checked secondary</label>
+        </div>
+        <div>
+          <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+          <label class="btn btn-outline-success" for="success-outlined">Success radio</label>
+
+          <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+          <label class="btn btn-outline-danger" for="danger-outlined">Danger radio</label>
+
+          <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off">
+          <label class="btn btn-outline-warning" for="warning-outlined">Warning radio</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practical Example: Segmented Control -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Practical Example: View Selector</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">A segmented control for selecting a view mode, commonly used in toolbars.</p>
+        <div class="btn-group" role="group" aria-label="View mode selector">
+          <input type="radio" class="btn-check" name="viewMode" id="listView" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="listView">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+            </svg>
+            List
+          </label>
+
+          <input type="radio" class="btn-check" name="viewMode" id="gridView" autocomplete="off">
+          <label class="btn btn-outline-primary" for="gridView">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid" viewBox="0 0 16 16">
+              <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+            </svg>
+            Grid
+          </label>
+
+          <input type="radio" class="btn-check" name="viewMode" id="compactView" autocomplete="off">
+          <label class="btn btn-outline-primary" for="compactView">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-stacked" viewBox="0 0 16 16">
+              <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+            </svg>
+            Compact
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practical Example: Multi-Select Filters -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Practical Example: Filter Tags</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-3">Multiple checkbox toggles for filtering content by category.</p>
+        <div class="d-flex flex-wrap gap-2">
+          <input type="checkbox" class="btn-check" id="filter-all" autocomplete="off" checked>
+          <label class="btn btn-outline-dark" for="filter-all">All</label>
+
+          <input type="checkbox" class="btn-check" id="filter-design" autocomplete="off">
+          <label class="btn btn-outline-dark" for="filter-design">Design</label>
+
+          <input type="checkbox" class="btn-check" id="filter-development" autocomplete="off">
+          <label class="btn btn-outline-dark" for="filter-development">Development</label>
+
+          <input type="checkbox" class="btn-check" id="filter-marketing" autocomplete="off">
+          <label class="btn btn-outline-dark" for="filter-marketing">Marketing</label>
+
+          <input type="checkbox" class="btn-check" id="filter-analytics" autocomplete="off">
+          <label class="btn btn-outline-dark" for="filter-analytics">Analytics</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accessibility Note -->
+    <div class="alert alert-info" role="alert">
+      <h6 class="alert-heading">Accessibility Note</h6>
+      <p class="mb-0">Toggle buttons are announced by screen readers as "checked"/"not checked" since they are fundamentally checkboxes or radios. This differs from button plugin toggles which are announced as "button"/"button pressed".</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

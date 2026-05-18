@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="delete-customer-modal" class="modal fade" id="deleteCustomerModal" tabindex="-1" aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger d-flex align-items-center" id="deleteCustomerModalLabel">
+                    <span class="material-symbols-outlined me-2">warning</span>
+                    Delete Customer
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <form method="post" th:hx-delete="@{/backoffice/customers/{id}(id=${customer.id})}"
+                  hx-on::after-request="if(event.detail.successful) { bootstrap.Modal.getInstance(document.getElementById('deleteCustomerModal')).hide(); setTimeout(() => window.location.reload(), 100); }">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete customer <strong><span th:text="${customer.firstName + ' ' + customer.lastName}">Name</span></strong>?</p>
+                    <p class="mb-0 text-muted small">This action cannot be undone and will remove all associated addresses and credit cards.</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete Customer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        (function() {
+            var modalEl = document.getElementById('deleteCustomerModal');
+            var modal = new bootstrap.Modal(modalEl);
+            modal.show();
+            // Clean up DOM when hidden
+            modalEl.addEventListener('hidden.bs.modal', function () {
+                modalEl.remove();
+            });
+        })();
+    </script>
+</div>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Card Grid Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+  <style>
+    /* Placeholder images */
+    .card-img-placeholder {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Card Grid Patterns</h1>
+
+    <!-- Basic Card Grid -->
+    <section class="mb-5">
+      <h2>Basic Card Grid</h2>
+      <p class="text-muted">Responsive grid using <code>.row-cols-*</code> classes. Cards automatically arrange based on breakpoint.</p>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col">
+          <div class="card">
+            <div class="card-img-placeholder bg-primary text-white">Image</div>
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Some quick example text to build on the card title.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-img-placeholder bg-success text-white">Image</div>
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Some quick example text to build on the card title.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-img-placeholder bg-info text-white">Image</div>
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Some quick example text to build on the card title.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Classes used:</strong>
+        <code>.row-cols-1</code> (1 column on mobile) |
+        <code>.row-cols-md-2</code> (2 columns on medium) |
+        <code>.row-cols-lg-3</code> (3 columns on large) |
+        <code>.g-4</code> (gutter spacing)
+      </div>
+    </section>
+
+    <!-- Equal Height Cards -->
+    <section class="mb-5">
+      <h2>Equal Height Cards</h2>
+      <p class="text-muted">Use <code>.h-100</code> on cards to ensure equal heights regardless of content length.</p>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-warning text-dark">Image</div>
+            <div class="card-body">
+              <h5 class="card-title">Short Content</h5>
+              <p class="card-text">Brief text.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-danger text-white">Image</div>
+            <div class="card-body">
+              <h5 class="card-title">Medium Content</h5>
+              <p class="card-text">This card has a bit more content than the first one, demonstrating how equal height works with varying content.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-secondary text-white">Image</div>
+            <div class="card-body">
+              <h5 class="card-title">Long Content</h5>
+              <p class="card-text">This card has significantly more content than the others. Without <code>.h-100</code>, the cards would have different heights. With it, all cards stretch to match the tallest card in the row, creating a clean, aligned grid layout.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card with Stretched Link -->
+    <section class="mb-5">
+      <h2>Cards with Stretched Links</h2>
+      <p class="text-muted">Use <code>.stretched-link</code> to make the entire card clickable.</p>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-primary text-white">
+              <i class="bi bi-rocket-takeoff fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Getting Started</h5>
+              <p class="card-text">Learn the basics and get up and running quickly.</p>
+              <a href="#" class="stretched-link">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-success text-white">
+              <i class="bi bi-book fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Documentation</h5>
+              <p class="card-text">Comprehensive guides and API references.</p>
+              <a href="#" class="stretched-link">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-info text-white">
+              <i class="bi bi-code-slash fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Examples</h5>
+              <p class="card-text">Real-world code examples and templates.</p>
+              <a href="#" class="stretched-link">Read more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning mt-3">
+        <strong>Note:</strong> The <code>.stretched-link</code> class makes the containing block clickable. Ensure the card has <code>position: relative</code> (default for <code>.card</code>).
+      </div>
+    </section>
+
+    <!-- Horizontal Cards -->
+    <section class="mb-5">
+      <h2>Horizontal Card Layout</h2>
+      <p class="text-muted">Use grid classes inside cards for horizontal image-content layouts.</p>
+
+      <div class="row row-cols-1 row-cols-lg-2 g-4">
+        <div class="col">
+          <div class="card">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <div class="card-img-placeholder bg-primary text-white h-100 rounded-start">Image</div>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Horizontal Card</h5>
+                  <p class="card-text">This card uses nested grid classes to place the image beside the content.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <div class="card-img-placeholder bg-success text-white h-100 rounded-start">Image</div>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Another Horizontal</h5>
+                  <p class="card-text">Use <code>.g-0</code> on the row to remove gutters between image and content.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 5 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card Groups -->
+    <section class="mb-5">
+      <h2>Card Groups</h2>
+      <p class="text-muted">Use <code>.card-group</code> to render cards as a single, attached element with equal width and height columns.</p>
+
+      <div class="card-group">
+        <div class="card">
+          <div class="card-img-placeholder bg-primary text-white">Image</div>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-placeholder bg-success text-white">Image</div>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-placeholder bg-danger text-white">Image</div>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Note:</strong> Card groups attach cards together without gaps. For separated cards with consistent heights, use <code>.row-cols-*</code> with <code>.h-100</code> instead.
+      </div>
+    </section>
+
+    <!-- Product Card Pattern -->
+    <section class="mb-5">
+      <h2>Product Card Pattern</h2>
+      <p class="text-muted">Common e-commerce product card layout with price, rating, and actions.</p>
+
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <span class="badge bg-danger position-absolute top-0 end-0 m-2">Sale</span>
+            <div class="card-img-placeholder bg-light text-secondary">
+              <i class="bi bi-laptop fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Laptop Pro 15"</h6>
+              <div class="mb-2">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-half text-warning"></i>
+                <small class="text-muted">(128)</small>
+              </div>
+              <p class="card-text">
+                <span class="text-decoration-line-through text-muted">$1,299</span>
+                <span class="text-danger fw-bold ms-2">$999</span>
+              </p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-primary btn-sm w-100">
+                <i class="bi bi-cart-plus me-1"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-light text-secondary">
+              <i class="bi bi-headphones fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Wireless Headphones</h6>
+              <div class="mb-2">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star text-warning"></i>
+                <small class="text-muted">(89)</small>
+              </div>
+              <p class="card-text fw-bold">$149</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-primary btn-sm w-100">
+                <i class="bi bi-cart-plus me-1"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <span class="badge bg-success position-absolute top-0 end-0 m-2">New</span>
+            <div class="card-img-placeholder bg-light text-secondary">
+              <i class="bi bi-smartwatch fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Smart Watch Series 5</h6>
+              <div class="mb-2">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <small class="text-muted">(256)</small>
+              </div>
+              <p class="card-text fw-bold">$399</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-primary btn-sm w-100">
+                <i class="bi bi-cart-plus me-1"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-light text-secondary">
+              <i class="bi bi-keyboard fs-1"></i>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">Mechanical Keyboard</h6>
+              <div class="mb-2">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-half text-warning"></i>
+                <i class="bi bi-star text-warning"></i>
+                <small class="text-muted">(45)</small>
+              </div>
+              <p class="card-text fw-bold">$89</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-outline-primary btn-sm w-100">
+                <i class="bi bi-cart-plus me-1"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog/Article Cards -->
+    <section class="mb-5">
+      <h2>Blog/Article Card Pattern</h2>
+      <p class="text-muted">Content-focused cards for blog posts or articles.</p>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-gradient bg-primary text-white">Featured Image</div>
+            <div class="card-body">
+              <div class="d-flex gap-2 mb-2">
+                <span class="badge bg-primary-subtle text-primary">Technology</span>
+                <span class="badge bg-secondary-subtle text-secondary">Tutorial</span>
+              </div>
+              <h5 class="card-title">Getting Started with Bootstrap 5</h5>
+              <p class="card-text text-muted">Learn how to quickly set up Bootstrap in your projects and start building responsive layouts.</p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                  <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="ms-2">
+                  <small class="fw-bold d-block">John Doe</small>
+                  <small class="text-muted">Dec 10, 2024</small>
+                </div>
+                <small class="ms-auto text-muted"><i class="bi bi-clock me-1"></i>5 min read</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-gradient bg-success text-white">Featured Image</div>
+            <div class="card-body">
+              <div class="d-flex gap-2 mb-2">
+                <span class="badge bg-success-subtle text-success">Design</span>
+              </div>
+              <h5 class="card-title">UI Design Best Practices</h5>
+              <p class="card-text text-muted">Discover the key principles that make user interfaces intuitive and engaging.</p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                  <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="ms-2">
+                  <small class="fw-bold d-block">Jane Smith</small>
+                  <small class="text-muted">Dec 8, 2024</small>
+                </div>
+                <small class="ms-auto text-muted"><i class="bi bi-clock me-1"></i>8 min read</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-img-placeholder bg-gradient bg-warning text-dark">Featured Image</div>
+            <div class="card-body">
+              <div class="d-flex gap-2 mb-2">
+                <span class="badge bg-warning-subtle text-warning">JavaScript</span>
+                <span class="badge bg-info-subtle text-info">Advanced</span>
+              </div>
+              <h5 class="card-title">Modern JavaScript Patterns</h5>
+              <p class="card-text text-muted">Explore advanced patterns and techniques for writing clean, maintainable code.</p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <div class="d-flex align-items-center">
+                <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                  <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="ms-2">
+                  <small class="fw-bold d-block">Alex Johnson</small>
+                  <small class="text-muted">Dec 5, 2024</small>
+                </div>
+                <small class="ms-auto text-muted"><i class="bi bi-clock me-1"></i>12 min read</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="mb-5">
+      <h2>Pricing Card Pattern</h2>
+      <p class="text-muted">SaaS-style pricing comparison cards.</p>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header text-center py-3">
+              <h5 class="mb-0">Basic</h5>
+            </div>
+            <div class="card-body text-center">
+              <h2 class="card-title">
+                <span class="display-4 fw-bold">$9</span>
+                <span class="text-muted fs-6">/month</span>
+              </h2>
+              <ul class="list-unstyled my-4">
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>5 Projects</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>10 GB Storage</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Email Support</li>
+                <li class="py-2 text-muted"><i class="bi bi-x-circle me-2"></i>Analytics</li>
+                <li class="py-2 text-muted"><i class="bi bi-x-circle me-2"></i>API Access</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-4">
+              <button class="btn btn-outline-primary w-100">Get Started</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 border-primary">
+            <div class="card-header text-center py-3 bg-primary text-white">
+              <h5 class="mb-0">Pro <span class="badge bg-warning text-dark ms-2">Popular</span></h5>
+            </div>
+            <div class="card-body text-center">
+              <h2 class="card-title">
+                <span class="display-4 fw-bold">$29</span>
+                <span class="text-muted fs-6">/month</span>
+              </h2>
+              <ul class="list-unstyled my-4">
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>25 Projects</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>100 GB Storage</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Priority Support</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Analytics</li>
+                <li class="py-2 text-muted"><i class="bi bi-x-circle me-2"></i>API Access</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-4">
+              <button class="btn btn-primary w-100">Get Started</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header text-center py-3">
+              <h5 class="mb-0">Enterprise</h5>
+            </div>
+            <div class="card-body text-center">
+              <h2 class="card-title">
+                <span class="display-4 fw-bold">$99</span>
+                <span class="text-muted fs-6">/month</span>
+              </h2>
+              <ul class="list-unstyled my-4">
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Unlimited Projects</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>1 TB Storage</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>24/7 Phone Support</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Advanced Analytics</li>
+                <li class="py-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Full API Access</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-4">
+              <button class="btn btn-outline-primary w-100">Contact Sales</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

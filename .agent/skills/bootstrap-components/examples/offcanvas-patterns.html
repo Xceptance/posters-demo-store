@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Offcanvas Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Offcanvas Patterns</h1>
+
+    <!-- Start (Left) Offcanvas -->
+    <section class="mb-5">
+      <h2>Start (Left) Offcanvas</h2>
+      <p class="text-muted">Default position, slides in from the left.</p>
+
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasStart" aria-controls="offcanvasStart">
+        <i class="bi bi-arrow-bar-right me-1"></i>Open Left
+      </button>
+
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasStart" aria-labelledby="offcanvasStartLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasStartLabel">Left Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>This offcanvas slides in from the left side of the screen.</p>
+          <p>Use <code>.offcanvas-start</code> for this position.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- End (Right) Offcanvas -->
+    <section class="mb-5">
+      <h2>End (Right) Offcanvas</h2>
+      <p class="text-muted">Slides in from the right side.</p>
+
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
+        <i class="bi bi-arrow-bar-left me-1"></i>Open Right
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasEndLabel">Right Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>This offcanvas slides in from the right side of the screen.</p>
+          <p>Use <code>.offcanvas-end</code> for this position.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Offcanvas -->
+    <section class="mb-5">
+      <h2>Top Offcanvas</h2>
+      <p class="text-muted">Slides down from the top.</p>
+
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+        <i class="bi bi-arrow-bar-down me-1"></i>Open Top
+      </button>
+
+      <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasTopLabel">Top Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>This offcanvas slides down from the top. Use <code>.offcanvas-top</code> for this position.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Offcanvas -->
+    <section class="mb-5">
+      <h2>Bottom Offcanvas</h2>
+      <p class="text-muted">Slides up from the bottom.</p>
+
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+        <i class="bi bi-arrow-bar-up me-1"></i>Open Bottom
+      </button>
+
+      <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasBottomLabel">Bottom Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>This offcanvas slides up from the bottom. Use <code>.offcanvas-bottom</code> for this position.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Static Backdrop -->
+    <section class="mb-5">
+      <h2>Static Backdrop</h2>
+      <p class="text-muted">Click outside won't close. Use <code>data-bs-backdrop="static"</code>.</p>
+
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasStatic" aria-controls="offcanvasStatic">
+        Open Static Offcanvas
+      </button>
+
+      <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="offcanvasStatic" aria-labelledby="offcanvasStaticLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasStaticLabel">Static Backdrop</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>This offcanvas won't close when clicking outside. You must click the close button.</p>
+          <p>Options:</p>
+          <ul>
+            <li><code>data-bs-backdrop="static"</code> - No dismiss on click</li>
+            <li><code>data-bs-backdrop="false"</code> - No backdrop at all</li>
+            <li><code>data-bs-scroll="true"</code> - Allow body scroll</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsive Offcanvas -->
+    <section class="mb-5">
+      <h2>Responsive Offcanvas</h2>
+      <p class="text-muted">Offcanvas on small screens, visible content on larger screens.</p>
+
+      <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+        Toggle Offcanvas (&lt; lg)
+      </button>
+
+      <div class="alert alert-secondary d-none d-lg-block">
+        <strong>Large screens:</strong> The content below is visible inline. Resize to see the offcanvas behavior.
+      </div>
+
+      <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Responsive Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>This content is:</p>
+          <ul>
+            <li>An <strong>offcanvas</strong> on screens smaller than <code>lg</code></li>
+            <li><strong>Visible inline</strong> on <code>lg</code> screens and up</li>
+          </ul>
+          <p>Use <code>.offcanvas-{sm|md|lg|xl|xxl}</code> for responsive behavior.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offcanvas with Navigation -->
+    <section class="mb-5">
+      <h2>Offcanvas with Navigation</h2>
+      <p class="text-muted">Common pattern for mobile navigation menus.</p>
+
+      <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
+        <i class="bi bi-list me-1"></i>Menu
+      </button>
+
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+        <div class="offcanvas-header bg-dark text-white">
+          <h5 class="offcanvas-title" id="offcanvasNavLabel">
+            <i class="bi bi-bootstrap me-2"></i>My App
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <nav class="nav flex-column">
+            <a class="nav-link active px-4 py-3 border-bottom" aria-current="page" href="#">
+              <i class="bi bi-house me-2"></i>Home
+            </a>
+            <a class="nav-link px-4 py-3 border-bottom" href="#">
+              <i class="bi bi-speedometer2 me-2"></i>Dashboard
+            </a>
+            <a class="nav-link px-4 py-3 border-bottom" href="#">
+              <i class="bi bi-table me-2"></i>Products
+            </a>
+            <a class="nav-link px-4 py-3 border-bottom" href="#">
+              <i class="bi bi-people me-2"></i>Customers
+            </a>
+            <a class="nav-link px-4 py-3 border-bottom" href="#">
+              <i class="bi bi-gear me-2"></i>Settings
+            </a>
+          </nav>
+          <div class="p-4">
+            <h6 class="text-muted">Account</h6>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary">
+                <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+              </button>
+              <button class="btn btn-primary">
+                <i class="bi bi-person-plus me-1"></i>Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

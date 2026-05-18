@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Breadcrumb Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Breadcrumb Patterns</h1>
+
+    <!-- Basic Breadcrumb -->
+    <section class="mb-5">
+      <h2>Basic Breadcrumb</h2>
+      <p class="text-muted">Standard breadcrumb navigation showing page hierarchy.</p>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+    </section>
+
+    <!-- Custom Dividers -->
+    <section class="mb-5">
+      <h2>Custom Dividers</h2>
+      <p class="text-muted">Use <code>--bs-breadcrumb-divider</code> CSS variable to customize the separator.</p>
+
+      <h5>Arrow Divider</h5>
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Products</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Electronics</li>
+        </ol>
+      </nav>
+
+      <h5>Bullet Divider</h5>
+      <nav style="--bs-breadcrumb-divider: '•';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Category</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Item</li>
+        </ol>
+      </nav>
+
+      <h5>Pipe Divider</h5>
+      <nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="#">Settings</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Profile</li>
+        </ol>
+      </nav>
+
+      <h5>No Divider</h5>
+      <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#" class="badge bg-primary text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item"><a href="#" class="badge bg-secondary text-decoration-none">Products</a></li>
+          <li class="breadcrumb-item"><span class="badge bg-dark">Current</span></li>
+        </ol>
+      </nav>
+    </section>
+
+    <!-- SVG Icon Divider -->
+    <section class="mb-5">
+      <h2>SVG Icon Divider</h2>
+      <p class="text-muted">Use an embedded SVG as the divider using url-encoded SVG.</p>
+
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Components</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Breadcrumb</li>
+        </ol>
+      </nav>
+    </section>
+
+    <!-- With Icons -->
+    <section class="mb-5">
+      <h2>Breadcrumb with Icons</h2>
+      <p class="text-muted">Add Bootstrap Icons to breadcrumb items for visual context.</p>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#"><i class="bi bi-house-door-fill me-1"></i>Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#"><i class="bi bi-folder-fill me-1"></i>Documents</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <i class="bi bi-file-earmark-text me-1"></i>Report.pdf
+          </li>
+        </ol>
+      </nav>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#"><i class="bi bi-shop me-1"></i>Store</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#"><i class="bi bi-tag me-1"></i>Electronics</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#"><i class="bi bi-phone me-1"></i>Phones</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <i class="bi bi-apple me-1"></i>iPhone 15
+          </li>
+        </ol>
+      </nav>
+    </section>
+
+    <!-- Styled Breadcrumbs -->
+    <section class="mb-5">
+      <h2>Styled Breadcrumbs</h2>
+      <p class="text-muted">Apply background colors and padding for different visual styles.</p>
+
+      <h5>Light Background</h5>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light p-3 rounded">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Library</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+
+      <h5>Primary Background</h5>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-primary bg-opacity-10 p-3 rounded">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Products</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Details</li>
+        </ol>
+      </nav>
+
+      <h5>Dark Background</h5>
+      <nav aria-label="breadcrumb" data-bs-theme="dark">
+        <ol class="breadcrumb bg-dark p-3 rounded">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Admin</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+      </nav>
+    </section>
+
+    <!-- E-commerce Pattern -->
+    <section class="mb-5">
+      <h2>E-commerce Pattern</h2>
+      <p class="text-muted">Common breadcrumb pattern for product pages.</p>
+
+      <div class="card">
+        <div class="card-body">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-3">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Electronics</a></li>
+              <li class="breadcrumb-item"><a href="#">Computers</a></li>
+              <li class="breadcrumb-item"><a href="#">Laptops</a></li>
+              <li class="breadcrumb-item active" aria-current="page">MacBook Pro 14"</li>
+            </ol>
+          </nav>
+          <h3>MacBook Pro 14"</h3>
+          <p class="text-muted">Apple M3 Pro chip, 18GB RAM, 512GB SSD</p>
+          <p class="h4 text-primary">$1,999.00</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard Pattern -->
+    <section class="mb-5">
+      <h2>Admin Dashboard Pattern</h2>
+      <p class="text-muted">Breadcrumb integrated with page header.</p>
+
+      <div class="bg-light p-4 rounded">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-1">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+              </ol>
+            </nav>
+            <h4 class="mb-0">Edit User Profile</h4>
+          </div>
+          <div>
+            <button class="btn btn-outline-secondary me-2">Cancel</button>
+            <button class="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsive Breadcrumb -->
+    <section class="mb-5">
+      <h2>Responsive Breadcrumb</h2>
+      <p class="text-muted">Hide middle items on smaller screens to save space.</p>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb flex-nowrap overflow-auto">
+          <li class="breadcrumb-item text-nowrap"><a href="#">Home</a></li>
+          <li class="breadcrumb-item text-nowrap d-none d-md-inline"><a href="#">Category</a></li>
+          <li class="breadcrumb-item text-nowrap d-none d-md-inline"><a href="#">Subcategory</a></li>
+          <li class="breadcrumb-item text-nowrap d-none d-lg-inline"><a href="#">Section</a></li>
+          <li class="breadcrumb-item text-nowrap active" aria-current="page">Current Page</li>
+        </ol>
+      </nav>
+
+      <div class="alert alert-info mt-3">
+        <strong>Tip:</strong> Use <code>.d-none .d-md-inline</code> to hide middle breadcrumb items on mobile devices.
+      </div>
+    </section>
+
+    <!-- Accessibility Notes -->
+    <section class="mb-5">
+      <h2>Accessibility Notes</h2>
+      <div class="alert alert-warning">
+        <h5><i class="bi bi-universal-access me-2"></i>Accessibility Requirements</h5>
+        <ul class="mb-0">
+          <li>Always wrap breadcrumbs in a <code>&lt;nav&gt;</code> element with <code>aria-label="breadcrumb"</code></li>
+          <li>Use <code>&lt;ol&gt;</code> (ordered list) to indicate sequence</li>
+          <li>Add <code>aria-current="page"</code> to the last item to indicate current page</li>
+          <li>Ensure sufficient color contrast for links and text</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
