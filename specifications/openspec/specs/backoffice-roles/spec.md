@@ -33,7 +33,7 @@ The system SHALL maintain a registry of all backoffice modules. Each module has 
 
 ### Requirement: Default Roles SHALL Be Seeded with Correct Module IDs
 
-The default roles SHALL be seeded on first startup using top-level module IDs. The `AdminDataLoader` SHALL detect and re-seed `role_modules` entries if they contain outdated module IDs (i.e. if the `security` module ID is absent from all role entries).
+The default roles SHALL be seeded on first startup using top-level module IDs. The `AdminDataLoader` SHALL detect and re-seed `role_modules` entries if they contain outdated module IDs (i.e. if the `security` module ID is absent from all role entries). A new built-in "Customer Admin" role is included.
 
 #### Default Role Definitions
 
@@ -41,6 +41,7 @@ The default roles SHALL be seeded on first startup using top-level module IDs. T
 |---|---|
 | System Admin | `dashboard`, `security`, `catalog`, `customers`, `orders` |
 | Business Admin | `dashboard`, `catalog`, `customers`, `orders` |
+| Customer Admin | `customers` |
 | Catalog User | `dashboard`, `catalog` |
 | Order User | `dashboard`, `orders` |
 

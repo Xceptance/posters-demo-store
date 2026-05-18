@@ -17,81 +17,108 @@
                 Back to List
             </a>
         </div>
+        
         <div class="row g-4">
-            <!-- Profile Section -->
-            <div class="col-lg-4">
-                <div class="bo-module-card h-100 p-0">
+            <!-- Row 1: Profile Section (Full Width Horizontal Card) -->
+            <div class="col-12">
+                <div class="bo-module-card p-0">
                     <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
                         <h5 class="bo-module-title mb-0">Profile Summary</h5>
                         <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center"
                                 th:hx-get="@{/backoffice/customers/{id}/edit-name(id=${detail.customer.id})}"
-                                hx-target="#profile-name-container"
-                                hx-swap="outerHTML">
+                                hx-target="#dialog-container"
+                                hx-swap="innerHTML">
                             <span class="material-symbols-outlined fs-6 me-1">edit</span> Edit
                         </button>
                     </div>
-                    <div>
-                        <!-- Profile Name Fragment -->
-                        <div th:replace="~{backoffice/customers/fragments/profile-name-display :: profile-name-display(customer=${detail.customer})}"></div>
+                    <div class="p-4">
+                        <div class="row align-items-center">
+                            <!-- Avatar / Name -->
+                            <div class="col-md-5 d-flex align-items-center border-end pe-4">
+                                <!-- Profile Name Fragment -->
+                                <div class="w-100">
+                                    <div th:replace="~{backoffice/customers/fragments/profile-name-display :: profile-name-display(customer=${detail.customer})}"></div>
+                                </div>
+                            </div>
+                            <!-- Key Stats -->
+                            <div class="col-md-7 ps-4">
+                                <dl class="row mb-0">
+                                    <dt class="col-sm-3 text-muted fw-normal">Email</dt>
+                                    <dd class="col-sm-9 fw-semibold" th:text="${detail.customer.email}"></dd>
 
-                        <div class="p-4">
-                            <dl class="row mb-0">
-                                <dt class="col-sm-4 text-muted fw-normal">Email</dt>
-                                <dd class="col-sm-8 fw-semibold" th:text="${detail.customer.email}"></dd>
+                                    <dt class="col-sm-3 text-muted fw-normal mt-2">Created</dt>
+                                    <dd class="col-sm-9 fw-semibold mt-2" th:text="${#temporals.format(detail.customer.createdAt, 'MMM dd, yyyy')}"></dd>
 
-                                <dt class="col-sm-4 text-muted fw-normal mt-2">Created</dt>
-                                <dd class="col-sm-8 fw-semibold mt-2" th:text="${#temporals.format(detail.customer.createdAt, 'MMM dd, yyyy')}"></dd>
-
-                                <th:block th:if="${detail.profile != null}">
-                                    <dt class="col-sm-4 text-muted fw-normal mt-2">Last Login</dt>
-                                    <dd class="col-sm-8 fw-semibold mt-2">
-                                        <span th:if="${detail.profile.lastLogin != null}" 
-                                              th:text="${#temporals.format(detail.profile.lastLogin, 'MMM dd, yyyy HH:mm')}"></span>
-                                        <span th:unless="${detail.profile.lastLogin != null}" class="text-muted fw-normal">Never</span>
-                                    </dd>
-                                </th:block>
-                            </dl>
+                                    <th:block th:if="${detail.profile != null}">
+                                        <dt class="col-sm-3 text-muted fw-normal mt-2">Last Login</dt>
+                                        <dd class="col-sm-9 fw-semibold mt-2">
+                                            <span th:if="${detail.profile.lastLogin != null}" 
+                                                  th:text="${#temporals.format(detail.profile.lastLogin, 'MMM dd, yyyy HH:mm')}"></span>
+                                            <span th:unless="${detail.profile.lastLogin != null}" class="text-muted fw-normal">Never</span>
+                                        </dd>
+                                    </th:block>
+                                </dl>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Row 2: Addresses and Credit Cards -->
             <!-- Addresses Section -->
-            <div class="col-lg-8">
-                <div class="bo-module-card mb-4 p-0">
+            <div class="col-12">
+                <div class="bo-module-card p-0">
                     <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
                         <h5 class="bo-module-title mb-0">Addresses</h5>
                         <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center" 
                                 th:hx-get="@{/backoffice/customers/{id}/addresses/new(id=${detail.customer.id})}" 
-                                hx-target="#address-form-container" 
+                                hx-target="#dialog-container" 
                                 hx-swap="innerHTML">
                             <span class="material-symbols-outlined fs-6 me-1">add</span> Add Address
                         </button>
                     </div>
                     <div>
-                        <div id="address-form-container"></div>
                         <div id="address-list-container" th:replace="~{backoffice/customers/fragments/address-list :: address-list}"></div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Credit Cards Section -->
+            <!-- Credit Cards Section -->
+            <div class="col-12">
                 <div class="bo-module-card p-0">
                     <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
                         <h5 class="bo-module-title mb-0">Credit Cards</h5>
                         <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center" 
                                 th:hx-get="@{/backoffice/customers/{id}/credit-cards/new(id=${detail.customer.id})}" 
-                                hx-target="#credit-card-form-container" 
+                                hx-target="#dialog-container" 
                                 hx-swap="innerHTML">
                             <span class="material-symbols-outlined fs-6 me-1">add</span> Add Credit Card
                         </button>
                     </div>
                     <div>
-                        <div id="credit-card-form-container"></div>
                         <div id="credit-card-list-container" th:replace="~{backoffice/customers/fragments/credit-card-list :: credit-card-list}"></div>
                     </div>
                 </div>
             </div>
+
+            <!-- Row 3: Orders Placeholder -->
+            <div class="col-12">
+                <div class="bo-module-card p-0">
+                    <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
+                        <h5 class="bo-module-title mb-0">Orders</h5>
+                    </div>
+                    <div class="p-5 text-center text-muted">
+                        <span class="material-symbols-outlined fs-1 mb-3 text-secondary" style="opacity: 0.5;">shopping_bag</span>
+                        <h5>Orders Module Coming Soon</h5>
+                        <p>Order history will be displayed here once the Orders module is implemented.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        
+        <!-- Dialog Container -->
+        <div id="dialog-container"></div>
     </div>
 </body>
 </html>

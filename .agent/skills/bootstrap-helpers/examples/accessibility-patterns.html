@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Helpers - Accessibility Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+  <style>
+    /* Demo styling to visualize visually-hidden elements */
+    .demo-section {
+      background-color: var(--bs-body-tertiary-bg);
+      padding: 1rem;
+      border-radius: 0.375rem;
+    }
+    .demo-box {
+      border: 2px dashed var(--bs-border-color);
+      padding: 1rem;
+      border-radius: 0.25rem;
+    }
+    /* Highlight skip links when focused for demo */
+    .visually-hidden-focusable:focus {
+      z-index: 1050;
+    }
+  </style>
+</head>
+<body class="p-4">
+
+  <!-- Skip Link (first element in body - demonstrates proper placement) -->
+  <a class="visually-hidden-focusable position-absolute top-0 start-0 p-3 bg-primary text-white" href="#main-content">
+    Skip to main content
+  </a>
+
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Accessibility Patterns</h1>
+    <p class="lead text-muted mb-5">
+      Accessibility helpers enable inclusive web experiences. Use <code>.visually-hidden</code>
+      to hide content visually while keeping it accessible to screen readers, and
+      <code>.visually-hidden-focusable</code> for skip links that appear on focus.
+    </p>
+
+    <!-- Important Note -->
+    <div class="alert alert-info mb-5" role="alert">
+      <strong>Accessibility First:</strong> These patterns help create inclusive interfaces.
+      Always test with actual screen readers (NVDA, VoiceOver, JAWS) to verify accessibility.
+    </div>
+
+    <!-- ============================================
+         SKIP NAVIGATION LINKS
+         ============================================ -->
+    <section class="mb-5" id="skip-links">
+      <h2 class="mb-3">Skip Navigation Links</h2>
+      <p class="text-muted">
+        Skip links help keyboard users bypass repetitive content. Use
+        <code>.visually-hidden-focusable</code> to show the link only when focused.
+        Place skip links as the first focusable element in the document.
+      </p>
+
+      <!-- Basic Skip Link -->
+      <h3 class="h5 mt-4 mb-3">Basic Skip Link</h3>
+      <p class="text-muted">
+        Tab into this demo area to see the skip link appear.
+      </p>
+      <div class="demo-section position-relative" style="min-height: 100px;">
+        <a class="visually-hidden-focusable position-absolute top-0 start-0 p-2 bg-dark text-white rounded" href="#main-content">
+          Skip to main content
+        </a>
+        <p class="pt-5 text-muted">Press Tab to reveal the skip link above.</p>
+      </div>
+
+      <!-- Multiple Skip Targets -->
+      <h3 class="h5 mt-4 mb-3">Multiple Skip Targets</h3>
+      <p class="text-muted">
+        Large applications may offer multiple skip destinations.
+      </p>
+      <div class="demo-section position-relative" style="min-height: 120px;">
+        <div class="visually-hidden-focusable d-flex gap-2 p-2 bg-dark position-absolute top-0 start-0 w-100">
+          <a href="#main-content" class="text-white">Skip to main content</a>
+          <a href="#navigation" class="text-white">Skip to navigation</a>
+          <a href="#footer" class="text-white">Skip to footer</a>
+        </div>
+        <p class="pt-5 text-muted">Tab to reveal multiple skip link options.</p>
+      </div>
+
+      <!-- Skip Target Setup -->
+      <h3 class="h5 mt-4 mb-3">Skip Target Configuration</h3>
+      <div class="alert alert-warning" role="alert">
+        <strong>Important:</strong> Add <code>tabindex="-1"</code> to skip targets
+        to ensure focus moves correctly when the skip link is activated.
+      </div>
+      <div class="demo-box">
+        <code>&lt;main id="main-content" tabindex="-1"&gt;...&lt;/main&gt;</code>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SCREEN READER ONLY TEXT
+         ============================================ -->
+    <section class="mb-5" id="sr-only">
+      <h2 class="mb-3">Screen Reader Only Text</h2>
+      <p class="text-muted">
+        Use <code>.visually-hidden</code> to provide context for screen reader users
+        without affecting the visual layout. Essential for icon-only buttons, price formatting,
+        and hidden document structure.
+      </p>
+
+      <!-- Hidden Headings for Document Structure -->
+      <h3 class="h5 mt-4 mb-3">Hidden Headings for Document Structure</h3>
+      <p class="text-muted">
+        Add hidden headings to improve navigation for screen reader users.
+      </p>
+      <div class="demo-section">
+        <h4 class="visually-hidden">Product Features Section</h4>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <i class="bi bi-lightning-charge fs-1 text-warning" aria-hidden="true"></i>
+                <h5 class="card-title mt-2">Fast</h5>
+                <p class="card-text small">Lightning quick performance.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <i class="bi bi-shield-check fs-1 text-success" aria-hidden="true"></i>
+                <h5 class="card-title mt-2">Secure</h5>
+                <p class="card-text small">Enterprise-grade security.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <i class="bi bi-phone fs-1 text-primary" aria-hidden="true"></i>
+                <h5 class="card-title mt-2">Mobile</h5>
+                <p class="card-text small">Works on any device.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Context for Icon-Only Buttons -->
+      <h3 class="h5 mt-4 mb-3">Context for Icon-Only Buttons</h3>
+      <p class="text-muted">
+        Provide accessible names for buttons that only display icons.
+      </p>
+      <div class="demo-section hstack gap-2">
+        <button type="button" class="btn btn-danger btn-sm">
+          <i class="bi bi-trash" aria-hidden="true"></i>
+          <span class="visually-hidden">Delete item</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm">
+          <i class="bi bi-pencil" aria-hidden="true"></i>
+          <span class="visually-hidden">Edit item</span>
+        </button>
+        <button type="button" class="btn btn-success btn-sm">
+          <i class="bi bi-plus-lg" aria-hidden="true"></i>
+          <span class="visually-hidden">Add new item</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm">
+          <i class="bi bi-three-dots-vertical" aria-hidden="true"></i>
+          <span class="visually-hidden">More options</span>
+        </button>
+      </div>
+
+      <!-- Additional Context for Links -->
+      <h3 class="h5 mt-4 mb-3">Additional Context for Links</h3>
+      <p class="text-muted">
+        Add context to generic link text like "Read more" or "Learn more".
+      </p>
+      <div class="demo-section">
+        <div class="card" style="max-width: 300px;">
+          <div class="card-body">
+            <h5 class="card-title">Widget Pro</h5>
+            <p class="card-text">Our flagship product with advanced features.</p>
+            <a href="#" class="btn btn-primary">
+              Learn more
+              <span class="visually-hidden">about Widget Pro</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Price Context -->
+      <h3 class="h5 mt-4 mb-3">Price and Data Context</h3>
+      <p class="text-muted">
+        Make abbreviated content understandable for screen readers.
+      </p>
+      <div class="demo-section">
+        <div class="hstack gap-4">
+          <div>
+            <span class="visually-hidden">Price: </span>
+            <strong class="fs-3">$29.99</strong>
+            <span class="visually-hidden">per month</span>
+            <span class="text-muted" aria-hidden="true">/mo</span>
+          </div>
+          <div>
+            <span class="visually-hidden">Rating: </span>
+            <span class="text-warning">
+              <i class="bi bi-star-fill" aria-hidden="true"></i>
+              <i class="bi bi-star-fill" aria-hidden="true"></i>
+              <i class="bi bi-star-fill" aria-hidden="true"></i>
+              <i class="bi bi-star-fill" aria-hidden="true"></i>
+              <i class="bi bi-star-half" aria-hidden="true"></i>
+            </span>
+            <span class="visually-hidden">4.5 out of 5 stars</span>
+            <span class="ms-1" aria-hidden="true">(4.5)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         ACCESSIBLE ICON BUTTONS
+         ============================================ -->
+    <section class="mb-5" id="icon-buttons">
+      <h2 class="mb-3">Accessible Icon Buttons</h2>
+      <p class="text-muted">
+        Icon-only buttons require accessible labels. Use <code>.visually-hidden</code>
+        spans or <code>aria-label</code> attributes to provide context.
+      </p>
+
+      <!-- Icon Button with Visually Hidden Label -->
+      <h3 class="h5 mt-4 mb-3">Icon Button with Visually Hidden Label</h3>
+      <div class="demo-section hstack gap-2">
+        <button type="button" class="btn btn-primary">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <span class="visually-hidden">Search</span>
+        </button>
+        <button type="button" class="btn btn-secondary">
+          <i class="bi bi-gear" aria-hidden="true"></i>
+          <span class="visually-hidden">Settings</span>
+        </button>
+        <button type="button" class="btn btn-info">
+          <i class="bi bi-bell" aria-hidden="true"></i>
+          <span class="visually-hidden">Notifications</span>
+        </button>
+      </div>
+
+      <!-- Icon Button Group -->
+      <h3 class="h5 mt-4 mb-3">Icon Button Group (Text Formatting)</h3>
+      <p class="text-muted">
+        Use <code>role="group"</code> and <code>aria-label</code> on the container.
+      </p>
+      <div class="demo-section">
+        <div class="btn-group" role="group" aria-label="Text formatting options">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-type-bold" aria-hidden="true"></i>
+            <span class="visually-hidden">Bold</span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-type-italic" aria-hidden="true"></i>
+            <span class="visually-hidden">Italic</span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-type-underline" aria-hidden="true"></i>
+            <span class="visually-hidden">Underline</span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="bi bi-type-strikethrough" aria-hidden="true"></i>
+            <span class="visually-hidden">Strikethrough</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Close Button -->
+      <h3 class="h5 mt-4 mb-3">Bootstrap Close Button</h3>
+      <p class="text-muted">
+        Bootstrap's <code>.btn-close</code> uses <code>aria-label</code> by default.
+      </p>
+      <div class="demo-section">
+        <div class="alert alert-dismissible alert-success" role="alert">
+          <strong>Success!</strong> Your changes have been saved.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+
+      <!-- Social Media Buttons -->
+      <h3 class="h5 mt-4 mb-3">Social Media Icon Links</h3>
+      <div class="demo-section hstack gap-2">
+        <a href="#" class="btn btn-outline-dark">
+          <i class="bi bi-github" aria-hidden="true"></i>
+          <span class="visually-hidden">GitHub profile</span>
+        </a>
+        <a href="#" class="btn btn-outline-primary">
+          <i class="bi bi-twitter-x" aria-hidden="true"></i>
+          <span class="visually-hidden">X (formerly Twitter) profile</span>
+        </a>
+        <a href="#" class="btn btn-outline-info">
+          <i class="bi bi-linkedin" aria-hidden="true"></i>
+          <span class="visually-hidden">LinkedIn profile</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FORM ACCESSIBILITY
+         ============================================ -->
+    <section class="mb-5" id="forms">
+      <h2 class="mb-3">Form Accessibility</h2>
+      <p class="text-muted">
+        Forms require careful attention to accessibility. Use visible labels when possible;
+        reserve <code>.visually-hidden</code> labels for compact layouts where context is clear.
+      </p>
+
+      <!-- Visually Hidden Label (Search) -->
+      <h3 class="h5 mt-4 mb-3">Search Field with Hidden Label</h3>
+      <p class="text-muted">
+        Search fields often use placeholder text, but always include a proper label.
+      </p>
+      <div class="demo-section" style="max-width: 400px;">
+        <label for="search-input" class="visually-hidden">Search</label>
+        <div class="input-group">
+          <input type="search" id="search-input" class="form-control" placeholder="Search...">
+          <button class="btn btn-primary" type="button">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <span class="visually-hidden">Submit search</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Required Field Indicator -->
+      <h3 class="h5 mt-4 mb-3">Required Field Indicators</h3>
+      <p class="text-muted">
+        Provide clear required field indicators for both visual and screen reader users.
+      </p>
+      <div class="demo-section" style="max-width: 400px;">
+        <div class="mb-3">
+          <label for="email-required" class="form-label">
+            Email
+            <span class="visually-hidden">(required)</span>
+            <span class="text-danger" aria-hidden="true">*</span>
+          </label>
+          <input type="email" id="email-required" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone-optional" class="form-label">
+            Phone
+            <span class="text-muted small">(optional)</span>
+          </label>
+          <input type="tel" id="phone-optional" class="form-control">
+        </div>
+      </div>
+
+      <!-- Error Message Association -->
+      <h3 class="h5 mt-4 mb-3">Error Messages with aria-describedby</h3>
+      <p class="text-muted">
+        Associate error messages with inputs using <code>aria-describedby</code>
+        and <code>aria-invalid</code>.
+      </p>
+      <div class="demo-section" style="max-width: 400px;">
+        <div class="mb-3">
+          <label for="username-error" class="form-label">Username</label>
+          <input type="text" id="username-error" class="form-control is-invalid"
+                 aria-describedby="username-error-msg" aria-invalid="true"
+                 value="ab">
+          <div id="username-error-msg" class="invalid-feedback">
+            Username must be at least 3 characters long.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email-valid" class="form-label">Email</label>
+          <input type="email" id="email-valid" class="form-control is-valid"
+                 aria-describedby="email-valid-msg"
+                 value="user@example.com">
+          <div id="email-valid-msg" class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+      </div>
+
+      <!-- Fieldset and Legend -->
+      <h3 class="h5 mt-4 mb-3">Grouped Fields with Fieldset</h3>
+      <p class="text-muted">
+        Group related fields with <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code>.
+      </p>
+      <div class="demo-section">
+        <fieldset>
+          <legend class="fs-6 fw-semibold">Notification Preferences</legend>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="notify-email" checked>
+            <label class="form-check-label" for="notify-email">Email notifications</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="notify-sms">
+            <label class="form-check-label" for="notify-sms">SMS notifications</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="notify-push" checked>
+            <label class="form-check-label" for="notify-push">Push notifications</label>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FOCUSABLE CONTAINER PATTERN
+         ============================================ -->
+    <section class="mb-5" id="focusable">
+      <h2 class="mb-3">Focusable Container Pattern</h2>
+      <p class="text-muted">
+        Use <code>.visually-hidden-focusable</code> on containers to show content
+        when any child element receives focus. Useful for toolbar panels and quick actions.
+      </p>
+
+      <!-- Basic Focusable Container -->
+      <h3 class="h5 mt-4 mb-3">Panel Appears on Focus</h3>
+      <p class="text-muted">
+        Tab into this section to reveal the hidden panel.
+      </p>
+      <div class="demo-section position-relative" style="min-height: 100px;">
+        <div class="visually-hidden-focusable p-3 bg-warning-subtle border border-warning rounded position-absolute top-0 start-0 w-100">
+          <p class="mb-2 fw-semibold">Quick Actions Panel</p>
+          <div class="hstack gap-2">
+            <a href="#" class="btn btn-sm btn-warning">Action 1</a>
+            <a href="#" class="btn btn-sm btn-warning">Action 2</a>
+            <a href="#" class="btn btn-sm btn-outline-warning">Action 3</a>
+          </div>
+        </div>
+        <p class="pt-5 text-muted">Press Tab to reveal the quick actions panel.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         LIVE REGION ANNOUNCEMENTS
+         ============================================ -->
+    <section class="mb-5" id="live-regions">
+      <h2 class="mb-3">Live Region Announcements</h2>
+      <p class="text-muted">
+        Live regions announce dynamic content changes to screen readers. Use
+        <code>role="status"</code> for non-urgent updates and <code>role="alert"</code>
+        for important announcements.
+      </p>
+
+      <!-- Status Messages -->
+      <h3 class="h5 mt-4 mb-3">Status Messages (Polite)</h3>
+      <p class="text-muted">
+        Use <code>aria-live="polite"</code> for updates that don't interrupt the user.
+      </p>
+      <div class="demo-section">
+        <div class="mb-3">
+          <button type="button" class="btn btn-primary" id="save-btn">
+            Save Changes
+          </button>
+        </div>
+        <!-- Visible status for demo; in production this might be visually-hidden -->
+        <div role="status" aria-live="polite" id="save-status" class="text-success">
+          <i class="bi bi-check-circle" aria-hidden="true"></i>
+          Changes saved successfully.
+        </div>
+        <p class="text-muted small mt-2">
+          In production, wrap status in <code>.visually-hidden</code> if visual feedback
+          is provided elsewhere.
+        </p>
+      </div>
+
+      <!-- Alert Messages -->
+      <h3 class="h5 mt-4 mb-3">Alert Messages (Assertive)</h3>
+      <p class="text-muted">
+        Use <code>aria-live="assertive"</code> for urgent announcements that interrupt.
+      </p>
+      <div class="demo-section">
+        <div role="alert" aria-live="assertive" class="alert alert-danger">
+          <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+          <strong>Error:</strong> Your session has expired. Please log in again.
+        </div>
+      </div>
+
+      <!-- Hidden Live Region Setup -->
+      <h3 class="h5 mt-4 mb-3">Hidden Live Region Pattern</h3>
+      <p class="text-muted">
+        Create hidden live regions for JavaScript-driven announcements.
+      </p>
+      <div class="demo-box">
+        <pre class="mb-0"><code>&lt;!-- Hidden status announcer --&gt;
+&lt;div class="visually-hidden"
+     role="status"
+     aria-live="polite"
+     id="status-announcer"&gt;
+  &lt;!-- Updated via JavaScript --&gt;
+&lt;/div&gt;
+
+&lt;!-- Hidden alert announcer --&gt;
+&lt;div class="visually-hidden"
+     role="alert"
+     aria-live="assertive"
+     id="alert-announcer"&gt;
+  &lt;!-- Urgent announcements --&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- ============================================
+         DECORATIVE VS INFORMATIVE CONTENT
+         ============================================ -->
+    <section class="mb-5" id="decorative">
+      <h2 class="mb-3">Decorative vs Informative Content</h2>
+      <p class="text-muted">
+        Distinguish between decorative elements (hidden from assistive technology)
+        and informative elements (described for screen readers).
+      </p>
+
+      <!-- Decorative Images -->
+      <h3 class="h5 mt-4 mb-3">Decorative Images</h3>
+      <p class="text-muted">
+        Use empty <code>alt=""</code> and <code>aria-hidden="true"</code> for decorative images.
+      </p>
+      <div class="demo-section">
+        <div class="card" style="max-width: 300px;">
+          <img src="https://picsum.photos/300/150" class="card-img-top" alt="" aria-hidden="true">
+          <div class="card-body">
+            <h5 class="card-title">Product Card</h5>
+            <p class="card-text">The decorative banner image above is hidden from screen readers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informative Icons -->
+      <h3 class="h5 mt-4 mb-3">Informative Icons with Labels</h3>
+      <p class="text-muted">
+        When icons convey meaning, provide accessible labels.
+      </p>
+      <div class="demo-section">
+        <div class="hstack gap-4">
+          <span>
+            <i class="bi bi-exclamation-triangle-fill text-warning fs-4" role="img" aria-label="Warning"></i>
+          </span>
+          <span>
+            <i class="bi bi-check-circle-fill text-success fs-4" role="img" aria-label="Success"></i>
+          </span>
+          <span>
+            <i class="bi bi-x-circle-fill text-danger fs-4" role="img" aria-label="Error"></i>
+          </span>
+          <span>
+            <i class="bi bi-info-circle-fill text-info fs-4" role="img" aria-label="Information"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Icon with Adjacent Text -->
+      <h3 class="h5 mt-4 mb-3">Icons with Adjacent Descriptive Text</h3>
+      <p class="text-muted">
+        When text describes the icon, hide the icon from assistive technology.
+      </p>
+      <div class="demo-section vstack gap-2">
+        <span>
+          <i class="bi bi-clock me-1" aria-hidden="true"></i>
+          Last updated 5 minutes ago
+        </span>
+        <span>
+          <i class="bi bi-geo-alt me-1" aria-hidden="true"></i>
+          New York, NY
+        </span>
+        <span>
+          <i class="bi bi-envelope me-1" aria-hidden="true"></i>
+          contact@example.com
+        </span>
+        <span>
+          <i class="bi bi-telephone me-1" aria-hidden="true"></i>
+          (555) 123-4567
+        </span>
+      </div>
+
+      <!-- Status Badges with Context -->
+      <h3 class="h5 mt-4 mb-3">Status Indicators</h3>
+      <p class="text-muted">
+        Combine visual indicators with screen reader context.
+      </p>
+      <div class="demo-section hstack gap-3">
+        <span class="badge text-bg-success">
+          <i class="bi bi-circle-fill me-1 small" aria-hidden="true"></i>
+          Online
+        </span>
+        <span class="badge text-bg-warning">
+          <i class="bi bi-circle-fill me-1 small" aria-hidden="true"></i>
+          Away
+        </span>
+        <span class="badge text-bg-secondary">
+          <i class="bi bi-circle-fill me-1 small" aria-hidden="true"></i>
+          Offline
+        </span>
+      </div>
+    </section>
+
+    <!-- ============================================
+         BEST PRACTICES SUMMARY
+         ============================================ -->
+    <section class="mb-5" id="best-practices">
+      <h2 class="mb-3">Best Practices Summary</h2>
+
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading h6">
+          <i class="bi bi-check-circle-fill me-1" aria-hidden="true"></i>
+          Do
+        </h4>
+        <ul class="mb-0">
+          <li>Use <code>.visually-hidden</code> for screen reader only content</li>
+          <li>Use <code>.visually-hidden-focusable</code> for skip links</li>
+          <li>Add <code>aria-hidden="true"</code> to decorative icons</li>
+          <li>Associate form errors with <code>aria-describedby</code></li>
+          <li>Test with actual screen readers</li>
+        </ul>
+      </div>
+
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading h6">
+          <i class="bi bi-x-circle-fill me-1" aria-hidden="true"></i>
+          Avoid
+        </h4>
+        <ul class="mb-0">
+          <li>Using <code>display: none</code> to hide content from screen readers (it hides from everyone)</li>
+          <li>Icon-only buttons without accessible labels</li>
+          <li>Color as the only indicator of state</li>
+          <li>Hiding labels for form fields unless context is very clear</li>
+          <li>Overusing <code>aria-live="assertive"</code> (can be disruptive)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Main Content Target (for skip link demonstration) -->
+    <main id="main-content" tabindex="-1">
+      <!-- This is the skip link target -->
+    </main>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Utilities - Flexbox Centering Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+    .demo-container {
+      background-color: var(--bs-body-secondary);
+      border: 2px dashed var(--bs-border-color);
+      min-height: 200px;
+    }
+    .demo-box {
+      background-color: var(--bs-primary);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+    }
+    .demo-box-outline {
+      border: 2px solid var(--bs-primary);
+      color: var(--bs-primary);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Flexbox Centering Patterns</h1>
+    <p class="lead text-muted mb-5">
+      Common centering patterns using Bootstrap's flexbox utilities.
+    </p>
+
+    <!-- ============================================
+         HORIZONTAL CENTERING
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Horizontal Centering</h2>
+
+      <!-- justify-content-center -->
+      <h3 class="h5 mt-4 mb-3">Using justify-content-center</h3>
+      <div class="demo-container d-flex justify-content-center align-items-start p-3 rounded mb-2">
+        <div class="demo-box">Centered</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .justify-content-center</code>
+      </p>
+
+      <!-- mx-auto with flex -->
+      <h3 class="h5 mt-4 mb-3">Using mx-auto</h3>
+      <div class="demo-container d-flex p-3 rounded mb-2">
+        <div class="demo-box mx-auto">Centered with mx-auto</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex</code> with child <code>.mx-auto</code>
+      </p>
+
+      <!-- Multiple items centered -->
+      <h3 class="h5 mt-4 mb-3">Multiple Items Centered</h3>
+      <div class="demo-container d-flex justify-content-center gap-3 p-3 rounded mb-2">
+        <div class="demo-box">One</div>
+        <div class="demo-box">Two</div>
+        <div class="demo-box">Three</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .justify-content-center .gap-3</code>
+      </p>
+    </section>
+
+    <!-- ============================================
+         VERTICAL CENTERING
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Vertical Centering</h2>
+
+      <!-- align-items-center -->
+      <h3 class="h5 mt-4 mb-3">Using align-items-center</h3>
+      <div class="demo-container d-flex align-items-center p-3 rounded mb-2">
+        <div class="demo-box">Vertically Centered</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .align-items-center</code> (container needs height)
+      </p>
+
+      <!-- my-auto -->
+      <h3 class="h5 mt-4 mb-3">Using my-auto</h3>
+      <div class="demo-container d-flex flex-column p-3 rounded mb-2">
+        <div class="demo-box my-auto">my-auto in flex-column</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .flex-column</code> with child <code>.my-auto</code>
+      </p>
+    </section>
+
+    <!-- ============================================
+         PERFECT CENTERING (BOTH AXES)
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Perfect Centering (Both Axes)</h2>
+
+      <!-- justify + align -->
+      <h3 class="h5 mt-4 mb-3">Method 1: justify-content + align-items</h3>
+      <div class="demo-container d-flex justify-content-center align-items-center p-3 rounded mb-2">
+        <div class="demo-box">Perfectly Centered</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .justify-content-center .align-items-center</code>
+      </p>
+
+      <!-- m-auto -->
+      <h3 class="h5 mt-4 mb-3">Method 2: m-auto</h3>
+      <div class="demo-container d-flex p-3 rounded mb-2">
+        <div class="demo-box m-auto">m-auto</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex</code> with child <code>.m-auto</code>
+      </p>
+
+      <!-- Full viewport height -->
+      <h3 class="h5 mt-4 mb-3">Full Viewport Centering</h3>
+      <div class="bg-dark text-white d-flex justify-content-center align-items-center rounded" style="height: 300px;">
+        <div class="text-center">
+          <h4>Hero Section</h4>
+          <p class="mb-0 opacity-75">Centered in viewport</p>
+        </div>
+      </div>
+      <p class="text-muted mt-2">
+        <code>.d-flex .justify-content-center .align-items-center .min-vh-100</code>
+      </p>
+    </section>
+
+    <!-- ============================================
+         SPACE DISTRIBUTION
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Space Distribution</h2>
+
+      <!-- space-between -->
+      <h3 class="h5 mt-4 mb-3">Space Between</h3>
+      <div class="demo-container d-flex justify-content-between align-items-center p-3 rounded mb-2">
+        <div class="demo-box">Left</div>
+        <div class="demo-box">Right</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .justify-content-between</code>
+      </p>
+
+      <!-- space-around -->
+      <h3 class="h5 mt-4 mb-3">Space Around</h3>
+      <div class="demo-container d-flex justify-content-around align-items-center p-3 rounded mb-2">
+        <div class="demo-box-outline">A</div>
+        <div class="demo-box-outline">B</div>
+        <div class="demo-box-outline">C</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .justify-content-around</code>
+      </p>
+
+      <!-- space-evenly -->
+      <h3 class="h5 mt-4 mb-3">Space Evenly</h3>
+      <div class="demo-container d-flex justify-content-evenly align-items-center p-3 rounded mb-2">
+        <div class="demo-box-outline">A</div>
+        <div class="demo-box-outline">B</div>
+        <div class="demo-box-outline">C</div>
+      </div>
+      <p class="text-muted">
+        <code>.d-flex .justify-content-evenly</code>
+      </p>
+    </section>
+
+    <!-- ============================================
+         ALIGN SELF
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Individual Item Alignment</h2>
+
+      <!-- align-self -->
+      <h3 class="h5 mt-4 mb-3">Using align-self</h3>
+      <div class="demo-container d-flex justify-content-around p-3 rounded mb-2">
+        <div class="demo-box-outline align-self-start">Start</div>
+        <div class="demo-box-outline align-self-center">Center</div>
+        <div class="demo-box-outline align-self-end">End</div>
+      </div>
+      <p class="text-muted">
+        <code>.align-self-start</code>, <code>.align-self-center</code>, <code>.align-self-end</code>
+      </p>
+
+      <!-- Mixed with auto margin -->
+      <h3 class="h5 mt-4 mb-3">Auto Margins for Alignment</h3>
+      <div class="demo-container d-flex align-items-center p-3 rounded mb-2">
+        <div class="demo-box-outline">Left</div>
+        <div class="demo-box-outline ms-auto">Pushed Right</div>
+      </div>
+      <p class="text-muted">
+        <code>.ms-auto</code> pushes item to the right
+      </p>
+
+      <div class="demo-container d-flex flex-column p-3 rounded mb-2">
+        <div class="demo-box-outline">Top</div>
+        <div class="demo-box-outline mt-auto">Pushed to Bottom</div>
+      </div>
+      <p class="text-muted">
+        <code>.mt-auto</code> pushes item to the bottom in flex-column
+      </p>
+    </section>
+
+    <!-- ============================================
+         PRACTICAL PATTERNS
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Practical Centering Patterns</h2>
+
+      <!-- Centered Modal/Dialog -->
+      <h3 class="h5 mt-4 mb-3">Centered Dialog Pattern</h3>
+      <div class="bg-dark bg-opacity-50 d-flex justify-content-center align-items-center rounded" style="height: 300px;">
+        <div class="bg-white rounded shadow-lg p-4 text-center" style="max-width: 400px;">
+          <h5>Confirm Action</h5>
+          <p class="text-muted">Are you sure you want to proceed?</p>
+          <div class="d-flex gap-2 justify-content-center">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Card Centered -->
+      <h3 class="h5 mt-5 mb-3">Centered Login Form</h3>
+      <div class="bg-body-secondary d-flex justify-content-center align-items-center rounded p-4" style="min-height: 350px;">
+        <div class="card shadow" style="width: 100%; max-width: 350px;">
+          <div class="card-body p-4">
+            <h4 class="card-title text-center mb-4">Sign In</h4>
+            <form>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Footer Layout -->
+      <h3 class="h5 mt-5 mb-3">Sticky Footer Pattern</h3>
+      <div class="border rounded d-flex flex-column" style="height: 300px;">
+        <header class="bg-dark text-white p-3">Header</header>
+        <main class="flex-grow-1 p-3 d-flex justify-content-center align-items-center">
+          <p class="text-muted mb-0">Main content area (flex-grow-1)</p>
+        </main>
+        <footer class="bg-body-secondary p-3 mt-auto">Footer (mt-auto)</footer>
+      </div>
+      <p class="text-muted mt-2">
+        <code>.d-flex .flex-column</code> with <code>.flex-grow-1</code> on main content
+      </p>
+
+      <!-- Navigation with Centered Logo -->
+      <h3 class="h5 mt-5 mb-3">Navigation with Centered Logo</h3>
+      <nav class="d-flex align-items-center justify-content-between bg-body-secondary rounded p-3">
+        <div class="d-flex gap-3">
+          <a href="#" class="text-decoration-none">Home</a>
+          <a href="#" class="text-decoration-none">About</a>
+        </div>
+        <div class="position-absolute start-50 translate-middle-x">
+          <span class="fw-bold fs-4">LOGO</span>
+        </div>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-decoration-none">Contact</a>
+          <a href="#" class="text-decoration-none">Blog</a>
+        </div>
+      </nav>
+      <p class="text-muted mt-2">
+        Logo uses <code>.position-absolute .start-50 .translate-middle-x</code>
+      </p>
+
+      <!-- Icon + Text Alignment -->
+      <h3 class="h5 mt-5 mb-3">Icon and Text Alignment</h3>
+      <div class="d-flex flex-column gap-3">
+        <div class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-success" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+          </svg>
+          <span>Icon aligned with text using align-items-center</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-primary rounded-pill">99+</span>
+          <span>Badge aligned with text</span>
+        </div>
+        <button class="btn btn-outline-primary d-inline-flex align-items-center gap-2" style="width: fit-content;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+          Button with Icon
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

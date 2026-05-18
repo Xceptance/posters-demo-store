@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Reboot Element Examples</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="py-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap 5.3 Reboot Element Examples</h1>
+
+    <!-- Inline Code -->
+    <section class="mb-5">
+      <h2>Inline Code</h2>
+      <p>Use <code>&lt;code&gt;</code> for inline code snippets.</p>
+      <p>For example, use <code>&lt;section&gt;</code> to define sections and <code>&lt;article&gt;</code> for independent content.</p>
+      <p>The CSS property <code>display: flex;</code> enables flexbox layout.</p>
+    </section>
+
+    <!-- Code Blocks -->
+    <section class="mb-5">
+      <h2>Code Blocks</h2>
+      <p>Use <code>&lt;pre&gt;&lt;code&gt;</code> for multi-line code:</p>
+      <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Column 1&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Column 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <!-- Variables -->
+    <section class="mb-5">
+      <h2>Variables</h2>
+      <p>Use <code>&lt;var&gt;</code> for mathematical or programming variables:</p>
+      <p>The quadratic formula: <var>x</var> = (-<var>b</var> &plusmn; &radic;(<var>b</var><sup>2</sup> - 4<var>a</var><var>c</var>)) / 2<var>a</var></p>
+      <p>Calculate: <var>y</var> = <var>m</var><var>x</var> + <var>b</var></p>
+    </section>
+
+    <!-- User Input (Keyboard) -->
+    <section class="mb-5">
+      <h2>User Input (kbd)</h2>
+      <p>Use <code>&lt;kbd&gt;</code> for keyboard input:</p>
+      <p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy selected text.</p>
+      <p>Press <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste from clipboard.</p>
+      <p>Save your work with <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p>
+
+      <h3 class="h5 mt-4">Nested kbd for Combinations</h3>
+      <p>Open command palette: <kbd><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></kbd></p>
+      <p>Quick switch: <kbd><kbd>Alt</kbd> + <kbd>Tab</kbd></kbd></p>
+
+      <h3 class="h5 mt-4">Terminal Commands</h3>
+      <p>Type <kbd>cd</kbd> to change directory.</p>
+      <p>Use <kbd>ls -la</kbd> to list all files with details.</p>
+      <p>Run <kbd>npm install</kbd> to install dependencies.</p>
+    </section>
+
+    <!-- Sample Output -->
+    <section class="mb-5">
+      <h2>Sample Output (samp)</h2>
+      <p>Use <code>&lt;samp&gt;</code> for sample output from programs:</p>
+      <p>The command returned: <samp>Hello, World!</samp></p>
+      <p>Error message: <samp>Error: File not found at /path/to/file.txt</samp></p>
+      <p>Build status: <samp>Build completed successfully in 2.3s</samp></p>
+    </section>
+
+    <!-- Address -->
+    <section class="mb-5">
+      <h2>Address Elements</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="h5">Business Address</h3>
+          <address>
+            <strong>Acme Corporation</strong><br>
+            123 Main Street<br>
+            Suite 456<br>
+            San Francisco, CA 94102<br>
+            <abbr title="Phone">P:</abbr> (415) 555-1234
+          </address>
+        </div>
+        <div class="col-md-6">
+          <h3 class="h5">Contact Information</h3>
+          <address>
+            <strong>Jane Doe</strong><br>
+            <a href="mailto:jane@example.com">jane@example.com</a><br>
+            <a href="tel:+14155551234">(415) 555-1234</a>
+          </address>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horizontal Rules -->
+    <section class="mb-5">
+      <h2>Horizontal Rules</h2>
+
+      <h3 class="h5">Basic Horizontal Rule</h3>
+      <p>Content above the rule.</p>
+      <hr>
+      <p>Content below the rule.</p>
+
+      <h3 class="h5 mt-4">Styled with Border Utilities</h3>
+      <p>Danger style (red, thicker, semi-transparent):</p>
+      <hr class="border border-danger border-2 opacity-50">
+
+      <p>Primary style (blue, thick, more opaque):</p>
+      <hr class="border border-primary border-3 opacity-75">
+
+      <p>Success style (green):</p>
+      <hr class="border border-success border-2 opacity-75">
+
+      <h3 class="h5 mt-4">With Spacing</h3>
+      <p>Large vertical margins:</p>
+      <hr class="my-5">
+      <p>Content after large spacing.</p>
+    </section>
+
+    <!-- Abbreviations -->
+    <section class="mb-5">
+      <h2>Abbreviations</h2>
+      <p>Use <code>&lt;abbr&gt;</code> with a title attribute for abbreviations:</p>
+      <p><abbr title="HyperText Markup Language">HTML</abbr> is the standard markup language for web pages.</p>
+      <p><abbr title="Cascading Style Sheets">CSS</abbr> is used for styling HTML documents.</p>
+      <p>The <abbr title="World Wide Web Consortium">W3C</abbr> maintains web standards.</p>
+
+      <h3 class="h5 mt-4">Initialisms</h3>
+      <p>Use <code>.initialism</code> for slightly smaller text:</p>
+      <p><abbr title="Application Programming Interface" class="initialism">API</abbr> - A set of protocols for building software.</p>
+      <p><abbr title="Representational State Transfer" class="initialism">REST</abbr> - An architectural style for web services.</p>
+      <p><abbr title="JavaScript Object Notation" class="initialism">JSON</abbr> - A lightweight data interchange format.</p>
+    </section>
+
+    <!-- Combined Example -->
+    <section class="mb-5">
+      <h2>Combined Example: Documentation Style</h2>
+      <div class="bg-light p-4 rounded">
+        <h3 class="h5">Installation Instructions</h3>
+        <p>To install the package, open your terminal and run:</p>
+        <pre><code>npm install bootstrap@5.3.8</code></pre>
+        <p>Then import it in your <abbr title="JavaScript">JS</abbr> file:</p>
+        <pre><code>import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';</code></pre>
+        <p>Expected output: <samp>added 2 packages in 1.2s</samp></p>
+        <hr class="my-4">
+        <p><strong>Keyboard shortcut:</strong> Press <kbd><kbd>Ctrl</kbd> + <kbd>`</kbd></kbd> to open the integrated terminal.</p>
+        <address class="mt-3 mb-0">
+          <strong>Need help?</strong><br>
+          <a href="mailto:support@example.com">support@example.com</a>
+        </address>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

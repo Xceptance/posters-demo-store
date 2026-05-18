@@ -24,7 +24,7 @@
                     <button class="btn btn-sm btn-outline-primary d-inline-flex align-items-center justify-content-center"
                             title="Edit Address" style="width: 32px; height: 32px; padding: 0;"
                             th:hx-get="@{/backoffice/customers/{id}/addresses/{addressId}/edit(id=${detail.customer.id}, addressId=${address.id})}"
-                            hx-target="#address-form-container"
+                            hx-target="#dialog-container"
                             hx-swap="innerHTML">
                         <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
                     </button>
@@ -35,10 +35,9 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                             <li>
                                 <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
-                                        th:hx-delete="@{/backoffice/customers/{id}/addresses/{addressId}(id=${detail.customer.id}, addressId=${address.id})}"
-                                        hx-target="#address-list-container"
-                                        hx-swap="outerHTML"
-                                        hx-confirm="Are you sure you want to delete this address?">
+                                        th:hx-get="@{/backoffice/customers/{id}/addresses/{addressId}/delete(id=${detail.customer.id}, addressId=${address.id})}"
+                                        hx-target="#dialog-container"
+                                        hx-swap="innerHTML">
                                     <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
                                     Delete
                                 </button>

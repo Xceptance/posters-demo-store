@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Alert Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Alert Patterns</h1>
+
+    <!-- Basic Alerts -->
+    <section class="mb-5">
+      <h2>Basic Alerts</h2>
+      <p class="text-muted">Contextual alerts for feedback messages. Use <code>role="alert"</code> for accessibility.</p>
+
+      <div class="alert alert-primary" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>A primary alert—check it out!
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <i class="bi bi-info-circle me-2"></i>A secondary alert—check it out!
+      </div>
+      <div class="alert alert-success" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>A success alert—check it out!
+      </div>
+      <div class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>A danger alert—check it out!
+      </div>
+      <div class="alert alert-warning" role="alert">
+        <i class="bi bi-exclamation-circle-fill me-2"></i>A warning alert—check it out!
+      </div>
+      <div class="alert alert-info" role="alert">
+        <i class="bi bi-lightbulb-fill me-2"></i>An info alert—check it out!
+      </div>
+      <div class="alert alert-light" role="alert">
+        A light alert—check it out!
+      </div>
+      <div class="alert alert-dark" role="alert">
+        A dark alert—check it out!
+      </div>
+    </section>
+
+    <!-- Alerts with Links -->
+    <section class="mb-5">
+      <h2>Alerts with Links</h2>
+      <p class="text-muted">Use <code>.alert-link</code> for properly styled links within alerts.</p>
+
+      <div class="alert alert-primary" role="alert">
+        A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+      </div>
+      <div class="alert alert-success" role="alert">
+        Your profile was updated. <a href="#" class="alert-link">View your profile</a> to see the changes.
+      </div>
+      <div class="alert alert-danger" role="alert">
+        Payment failed. Please <a href="#" class="alert-link">update your payment method</a> to continue.
+      </div>
+    </section>
+
+    <!-- Alerts with Additional Content -->
+    <section class="mb-5">
+      <h2>Alerts with Additional Content</h2>
+      <p class="text-muted">Use <code>.alert-heading</code> and standard HTML for structured content.</p>
+
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading"><i class="bi bi-check-circle-fill me-2"></i>Well done!</h4>
+        <p>You successfully completed the registration process. Your account is now active and ready to use.</p>
+        <hr>
+        <p class="mb-0">Whenever you need to, check out our <a href="#" class="alert-link">getting started guide</a>.</p>
+      </div>
+
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading"><i class="bi bi-exclamation-octagon-fill me-2"></i>Error!</h4>
+        <p>There was a problem processing your request. Please review the following issues:</p>
+        <ul class="mb-0">
+          <li>Email address is already registered</li>
+          <li>Password must be at least 8 characters</li>
+          <li>Please accept the terms and conditions</li>
+        </ul>
+      </div>
+
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading"><i class="bi bi-info-circle-fill me-2"></i>Scheduled Maintenance</h4>
+        <p>Our system will undergo scheduled maintenance on Saturday, December 14th from 2:00 AM to 6:00 AM EST.</p>
+        <hr>
+        <p class="mb-0">During this time, some features may be temporarily unavailable. We apologize for any inconvenience.</p>
+      </div>
+    </section>
+
+    <!-- Dismissible Alerts -->
+    <section class="mb-5">
+      <h2>Dismissible Alerts</h2>
+      <p class="text-muted">Add <code>.alert-dismissible</code> and a close button with <code>data-bs-dismiss="alert"</code>.</p>
+
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>Warning!</strong> Your session will expire in 5 minutes.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <strong>Success!</strong> Your changes have been saved.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-megaphone-fill me-2"></i>
+        <strong>New Feature!</strong> Check out our redesigned dashboard with improved analytics.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-shield-exclamation me-2"></i>Security Alert</h5>
+        <p>We detected a login attempt from an unrecognized device. If this wasn't you, please change your password immediately.</p>
+        <hr>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-danger btn-sm">Change Password</button>
+          <button type="button" class="btn btn-outline-danger btn-sm">It Was Me</button>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </section>
+
+    <!-- Alert with Form -->
+    <section class="mb-5">
+      <h2>Alert with Form Elements</h2>
+      <p class="text-muted">Combine alerts with form elements for inline actions.</p>
+
+      <div class="alert alert-warning" role="alert">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-envelope-exclamation-fill fs-4 me-3"></i>
+          <div class="flex-grow-1">
+            <strong>Email not verified!</strong>
+            <p class="mb-2">Please verify your email address to access all features.</p>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-warning btn-sm">Resend Verification Email</button>
+              <button type="button" class="btn btn-outline-warning btn-sm">Update Email</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" role="alert">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <i class="bi bi-newspaper fs-1"></i>
+          </div>
+          <div class="col">
+            <strong>Subscribe to our newsletter</strong>
+            <p class="mb-2">Get the latest updates delivered to your inbox.</p>
+            <div class="input-group">
+              <input type="email" class="form-control form-control-sm" placeholder="Enter your email">
+              <button class="btn btn-info btn-sm" type="button">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Region Alerts -->
+    <section class="mb-5">
+      <h2>Live Region Pattern</h2>
+      <p class="text-muted">Dynamically inject alerts into a live region for screen reader announcements.</p>
+
+      <div class="d-flex gap-2 mb-3">
+        <button type="button" class="btn btn-success" onclick="showLiveAlert('success', 'Operation completed successfully!')">
+          Show Success
+        </button>
+        <button type="button" class="btn btn-danger" onclick="showLiveAlert('danger', 'An error occurred. Please try again.')">
+          Show Error
+        </button>
+        <button type="button" class="btn btn-warning" onclick="showLiveAlert('warning', 'Please review your input before continuing.')">
+          Show Warning
+        </button>
+      </div>
+
+      <div id="liveAlertPlaceholder" aria-live="polite" aria-atomic="true"></div>
+    </section>
+
+    <!-- Contextual Usage Examples -->
+    <section class="mb-5">
+      <h2>Contextual Usage Examples</h2>
+      <p class="text-muted">Common real-world alert patterns.</p>
+
+      <!-- Form Validation Summary -->
+      <h5>Form Validation Summary</h5>
+      <div class="alert alert-danger" role="alert">
+        <h6 class="alert-heading"><i class="bi bi-x-circle-fill me-2"></i>Please fix the following errors:</h6>
+        <ul class="mb-0 ps-3">
+          <li>First name is required</li>
+          <li>Email format is invalid</li>
+          <li>Password must contain at least one number</li>
+        </ul>
+      </div>
+
+      <!-- Cookie Consent -->
+      <h5 class="mt-4">Cookie Consent Banner</h5>
+      <div class="alert alert-secondary alert-dismissible" role="alert">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+          <div>
+            <i class="bi bi-cookie me-2"></i>
+            We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+            <a href="#" class="alert-link">Learn more</a>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="alert">Accept All</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">Customize</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Status -->
+      <h5 class="mt-4">System Status</h5>
+      <div class="alert alert-success d-flex align-items-center" role="alert">
+        <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+        <div>
+          <strong>All systems operational</strong>
+          <br><small class="text-body-secondary">Last checked: 2 minutes ago</small>
+        </div>
+      </div>
+
+      <!-- Trial Expiration -->
+      <h5 class="mt-4">Trial Expiration Notice</h5>
+      <div class="alert alert-warning d-flex align-items-center justify-content-between" role="alert">
+        <div>
+          <i class="bi bi-clock-history me-2"></i>
+          <strong>Your free trial expires in 3 days.</strong> Upgrade now to keep access to all features.
+        </div>
+        <button type="button" class="btn btn-warning btn-sm">Upgrade Now</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // Live alert pattern - dynamically creates dismissible alerts
+    function showLiveAlert(type, message) {
+      const placeholder = document.getElementById('liveAlertPlaceholder');
+      const icons = {
+        success: 'bi-check-circle-fill',
+        danger: 'bi-exclamation-triangle-fill',
+        warning: 'bi-exclamation-circle-fill',
+        info: 'bi-info-circle-fill'
+      };
+
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          <i class="bi ${icons[type]} me-2"></i>${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+
+      placeholder.append(wrapper);
+
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        const alert = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
+        alert.close();
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

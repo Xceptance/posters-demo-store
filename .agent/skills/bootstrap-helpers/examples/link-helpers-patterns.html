@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Helpers - Link Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+  <style>
+    /* Demo styling for visibility */
+    .demo-section {
+      background-color: var(--bs-body-tertiary-bg);
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+    .demo-link-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .demo-card-container {
+      max-width: 320px;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Link Helper Patterns</h1>
+    <p class="lead text-muted mb-5">
+      Comprehensive examples of Bootstrap 5.3's link styling helpers including colored links,
+      opacity, underlines, focus rings, icon links, and stretched links.
+    </p>
+
+    <!-- ============================================
+         COLORED LINKS
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Colored Links</h2>
+      <p class="text-muted">
+        Use <code>.link-*</code> classes to apply theme colors to links with hover darkening.
+        All 9 color variants automatically adjust on hover.
+      </p>
+
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-primary">Primary link</a>
+        <a href="#" class="link-secondary">Secondary link</a>
+        <a href="#" class="link-success">Success link</a>
+        <a href="#" class="link-danger">Danger link</a>
+        <a href="#" class="link-warning">Warning link</a>
+        <a href="#" class="link-info">Info link</a>
+        <a href="#" class="link-light">Light link</a>
+        <a href="#" class="link-dark">Dark link</a>
+        <a href="#" class="link-body-emphasis">Body emphasis link</a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         LINK OPACITY
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Link Opacity</h2>
+      <p class="text-muted">
+        Control link transparency with <code>.link-opacity-*</code> classes.
+        Combine with <code>-hover</code> suffix for interactive effects.
+      </p>
+
+      <!-- Static Opacity -->
+      <h3 class="h5 mt-4 mb-3">Static Opacity Levels</h3>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-primary link-opacity-10">10% opacity</a>
+        <a href="#" class="link-primary link-opacity-25">25% opacity</a>
+        <a href="#" class="link-primary link-opacity-50">50% opacity</a>
+        <a href="#" class="link-primary link-opacity-75">75% opacity</a>
+        <a href="#" class="link-primary link-opacity-100">100% opacity</a>
+      </div>
+
+      <!-- Opacity on Hover -->
+      <h3 class="h5 mt-4 mb-3">Opacity Change on Hover</h3>
+      <p class="text-muted">
+        Use <code>.link-opacity-*-hover</code> to change opacity on hover.
+        Combine with static opacity for reveal effects.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-primary link-opacity-50 link-opacity-100-hover">
+          Faded link brightens on hover
+        </a>
+        <a href="#" class="link-success link-opacity-25 link-opacity-75-hover">
+          Very faded to medium on hover
+        </a>
+        <a href="#" class="link-danger link-opacity-100 link-opacity-50-hover">
+          Full opacity fades on hover
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         LINK UNDERLINE UTILITIES
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Link Underline Utilities</h2>
+      <p class="text-muted">
+        Fine-tune link underlines with color, opacity, and offset utilities.
+      </p>
+
+      <!-- Underline Colors -->
+      <h3 class="h5 mt-4 mb-3">Underline Colors</h3>
+      <p class="text-muted">
+        Apply theme colors to underlines with <code>.link-underline-*</code> classes.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-underline-primary">Primary underline</a>
+        <a href="#" class="link-underline-secondary">Secondary underline</a>
+        <a href="#" class="link-underline-success">Success underline</a>
+        <a href="#" class="link-underline-danger">Danger underline</a>
+        <a href="#" class="link-underline-warning">Warning underline</a>
+        <a href="#" class="link-underline-info">Info underline</a>
+      </div>
+
+      <!-- Underline Opacity -->
+      <h3 class="h5 mt-4 mb-3">Underline Opacity</h3>
+      <p class="text-muted">
+        <strong>Important:</strong> Underline opacity utilities require the base
+        <code>.link-underline</code> class to function properly.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-underline link-underline-opacity-0">No underline (0%)</a>
+        <a href="#" class="link-underline link-underline-opacity-10">10% underline</a>
+        <a href="#" class="link-underline link-underline-opacity-25">25% underline</a>
+        <a href="#" class="link-underline link-underline-opacity-50">50% underline</a>
+        <a href="#" class="link-underline link-underline-opacity-75">75% underline</a>
+        <a href="#" class="link-underline link-underline-opacity-100">100% underline</a>
+      </div>
+
+      <!-- Underline Hover Pattern -->
+      <h3 class="h5 mt-4 mb-3">Underline Reveal on Hover</h3>
+      <p class="text-muted">
+        Combine <code>.link-underline-opacity-0</code> with <code>.link-underline-opacity-*-hover</code>
+        to reveal underlines on hover.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">
+          Underline appears on hover
+        </a>
+        <a href="#" class="link-primary link-underline link-underline-primary link-underline-opacity-0 link-underline-opacity-75-hover">
+          Colored underline reveals on hover
+        </a>
+      </div>
+
+      <!-- Underline Offset -->
+      <h3 class="h5 mt-4 mb-3">Underline Offset</h3>
+      <p class="text-muted">
+        Adjust the distance between text and underline with <code>.link-offset-*</code> classes.
+        Values range from 1 (closest) to 3 (furthest).
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-offset-1">Small offset (1)</a>
+        <a href="#" class="link-offset-2">Medium offset (2)</a>
+        <a href="#" class="link-offset-3">Large offset (3)</a>
+      </div>
+
+      <!-- Offset Change on Hover -->
+      <h3 class="h5 mt-4 mb-3">Offset Change on Hover</h3>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-offset-1 link-offset-3-hover">
+          Offset grows on hover (1 to 3)
+        </a>
+        <a href="#" class="link-offset-3 link-offset-1-hover">
+          Offset shrinks on hover (3 to 1)
+        </a>
+      </div>
+
+      <!-- Combined Underline Styling -->
+      <h3 class="h5 mt-4 mb-3">Combined Underline Styling</h3>
+      <p class="text-muted">
+        Combine multiple underline utilities for custom effects.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="link-success link-underline-success link-underline-opacity-25 link-offset-2 link-underline-opacity-100-hover">
+          Success link with subtle underline that strengthens on hover
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FOCUS RING
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Focus Ring</h2>
+      <p class="text-muted">
+        Customize focus indicators with <code>.focus-ring</code> utilities.
+        Tab through elements below to see focus rings in action.
+      </p>
+
+      <!-- Default Focus Ring -->
+      <h3 class="h5 mt-4 mb-3">Default Focus Ring</h3>
+      <p class="text-muted">
+        The base <code>.focus-ring</code> class applies a subtle focus indicator.
+      </p>
+      <div class="demo-section">
+        <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2">
+          Default focus ring (tab to see)
+        </a>
+      </div>
+
+      <!-- Colored Focus Rings -->
+      <h3 class="h5 mt-4 mb-3">Colored Focus Rings</h3>
+      <p class="text-muted">
+        Apply theme colors with <code>.focus-ring-*</code> classes.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="d-inline-flex focus-ring focus-ring-primary py-1 px-2 text-decoration-none border rounded">
+          Primary
+        </a>
+        <a href="#" class="d-inline-flex focus-ring focus-ring-secondary py-1 px-2 text-decoration-none border rounded">
+          Secondary
+        </a>
+        <a href="#" class="d-inline-flex focus-ring focus-ring-success py-1 px-2 text-decoration-none border rounded">
+          Success
+        </a>
+        <a href="#" class="d-inline-flex focus-ring focus-ring-danger py-1 px-2 text-decoration-none border rounded">
+          Danger
+        </a>
+        <a href="#" class="d-inline-flex focus-ring focus-ring-warning py-1 px-2 text-decoration-none border rounded">
+          Warning
+        </a>
+        <a href="#" class="d-inline-flex focus-ring focus-ring-info py-1 px-2 text-decoration-none border rounded">
+          Info
+        </a>
+      </div>
+
+      <!-- Custom Focus Ring via CSS Variable -->
+      <h3 class="h5 mt-4 mb-3">Custom Focus Ring Colors</h3>
+      <p class="text-muted">
+        Use the <code>--bs-focus-ring-color</code> CSS variable for custom colors.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded"
+           style="--bs-focus-ring-color: rgba(255, 193, 7, 0.5);">
+          Custom yellow ring
+        </a>
+        <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded"
+           style="--bs-focus-ring-color: rgba(111, 66, 193, 0.5);">
+          Custom purple ring
+        </a>
+        <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded"
+           style="--bs-focus-ring-color: rgba(255, 107, 107, 0.75);">
+          Custom coral ring (75% opacity)
+        </a>
+      </div>
+
+      <!-- Focus Ring on Buttons -->
+      <h3 class="h5 mt-4 mb-3">Focus Ring on Buttons</h3>
+      <p class="text-muted">
+        Override button focus styles by combining <code>.focus-ring</code> with buttons.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <button type="button" class="btn btn-primary focus-ring focus-ring-light">
+          Primary with light focus
+        </button>
+        <button type="button" class="btn btn-dark focus-ring focus-ring-warning">
+          Dark with warning focus
+        </button>
+        <button type="button" class="btn btn-outline-secondary focus-ring"
+                style="--bs-focus-ring-color: rgba(25, 135, 84, 0.5);">
+          Custom green focus ring
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================
+         ICON LINK
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Icon Link</h2>
+      <p class="text-muted">
+        Combine icons with text using <code>.icon-link</code>.
+        Add <code>.icon-link-hover</code> for animated effects on hover.
+      </p>
+
+      <!-- Icon Before Text -->
+      <h3 class="h5 mt-4 mb-3">Icon Before Text</h3>
+      <div class="demo-section demo-link-grid">
+        <a class="icon-link" href="#">
+          <i class="bi bi-box-seam" aria-hidden="true"></i>
+          Icon before text
+        </a>
+        <a class="icon-link" href="#">
+          <i class="bi bi-house" aria-hidden="true"></i>
+          Home
+        </a>
+        <a class="icon-link" href="#">
+          <i class="bi bi-gear" aria-hidden="true"></i>
+          Settings
+        </a>
+      </div>
+
+      <!-- Icon After Text -->
+      <h3 class="h5 mt-4 mb-3">Icon After Text</h3>
+      <div class="demo-section demo-link-grid">
+        <a class="icon-link" href="#">
+          Read more
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+        <a class="icon-link" href="#">
+          External link
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+        </a>
+        <a class="icon-link" href="#">
+          Download
+          <i class="bi bi-download" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Icon Link with Hover Animation -->
+      <h3 class="h5 mt-4 mb-3">Hover Animation</h3>
+      <p class="text-muted">
+        Add <code>.icon-link-hover</code> to animate the icon on hover.
+        The icon moves slightly in its natural direction.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a class="icon-link icon-link-hover" href="#">
+          Animated on hover
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+        <a class="icon-link icon-link-hover" href="#">
+          <i class="bi bi-chevron-left" aria-hidden="true"></i>
+          Back
+        </a>
+        <a class="icon-link icon-link-hover" href="#">
+          Continue
+          <i class="bi bi-chevron-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Custom Transform Direction -->
+      <h3 class="h5 mt-4 mb-3">Custom Transform Direction</h3>
+      <p class="text-muted">
+        Override the animation direction with <code>--bs-icon-link-transform</code>.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a class="icon-link icon-link-hover" href="#"
+           style="--bs-icon-link-transform: translate3d(0, -0.125rem, 0);">
+          <i class="bi bi-clipboard" aria-hidden="true"></i>
+          Moves up on hover
+        </a>
+        <a class="icon-link icon-link-hover" href="#"
+           style="--bs-icon-link-transform: translate3d(0, 0.125rem, 0);">
+          Moves down on hover
+          <i class="bi bi-caret-down-fill" aria-hidden="true"></i>
+        </a>
+        <a class="icon-link icon-link-hover" href="#"
+           style="--bs-icon-link-transform: rotate(45deg);">
+          <i class="bi bi-plus-lg" aria-hidden="true"></i>
+          Icon rotates on hover
+        </a>
+      </div>
+
+      <!-- Colored Icon Links -->
+      <h3 class="h5 mt-4 mb-3">Colored Icon Links</h3>
+      <p class="text-muted">
+        Combine with link color and underline utilities for themed icon links.
+      </p>
+      <div class="demo-section demo-link-grid">
+        <a class="icon-link icon-link-hover link-success link-underline-success link-underline-opacity-25" href="#">
+          Success styled
+          <i class="bi bi-check-circle" aria-hidden="true"></i>
+        </a>
+        <a class="icon-link icon-link-hover link-danger link-underline-danger link-underline-opacity-25" href="#">
+          <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+          Warning action
+        </a>
+        <a class="icon-link icon-link-hover link-primary link-underline-opacity-0 link-underline-opacity-100-hover" href="#">
+          Underline on hover
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         STRETCHED LINK
+         ============================================ -->
+    <section class="mb-5">
+      <h2 class="mb-3">Stretched Link</h2>
+      <p class="text-muted">
+        Make an entire container clickable by adding <code>.stretched-link</code> to a nested link.
+        The parent container must have <code>position: relative</code>.
+      </p>
+
+      <!-- Card with Stretched Link -->
+      <h3 class="h5 mt-4 mb-3">Card with Stretched Link</h3>
+      <p class="text-muted">
+        Cards already have <code>position: relative</code>, so stretched links work out of the box.
+      </p>
+      <div class="demo-card-container">
+        <div class="card">
+          <img src="https://via.placeholder.com/320x180/6c757d/ffffff?text=Card+Image" class="card-img-top" alt="Card placeholder image">
+          <div class="card-body">
+            <h5 class="card-title">Card with stretched link</h5>
+            <p class="card-text">The entire card is clickable. Hover to see cursor change.</p>
+            <a href="#" class="stretched-link">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row Layout with Stretched Link -->
+      <h3 class="h5 mt-4 mb-3">Row Layout with Stretched Link</h3>
+      <p class="text-muted">
+        Add <code>.position-relative</code> to the clickable container.
+      </p>
+      <div class="row g-0 bg-body-secondary position-relative rounded overflow-hidden" style="max-width: 600px;">
+        <div class="col-md-5">
+          <img src="https://via.placeholder.com/300x200/0d6efd/ffffff?text=Feature" class="w-100 h-100 object-fit-cover" alt="Feature placeholder image">
+        </div>
+        <div class="col-md-7 p-4">
+          <h5 class="mt-0">Columns with stretched link</h5>
+          <p class="mb-3">Entire row is clickable. This pattern is great for featured content sections.</p>
+          <a href="#" class="stretched-link">Read more</a>
+        </div>
+      </div>
+
+      <!-- Custom Container -->
+      <h3 class="h5 mt-4 mb-3">Custom Container</h3>
+      <p class="text-muted">
+        Any element works as long as it has <code>.position-relative</code>.
+      </p>
+      <div class="position-relative bg-body-tertiary p-4 rounded border" style="max-width: 400px;">
+        <h5>Custom clickable container</h5>
+        <p class="mb-2">Add <code>position-relative</code> to the parent element to define the clickable area.</p>
+        <a href="#" class="stretched-link text-decoration-none">
+          Click anywhere <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Multiple Cards with Stretched Links -->
+      <h3 class="h5 mt-4 mb-3">Card Grid with Stretched Links</h3>
+      <p class="text-muted">
+        Each card is independently clickable.
+      </p>
+      <div class="row row-cols-1 row-cols-md-3 g-4" style="max-width: 900px;">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">First card</h5>
+              <p class="card-text">Click this entire card.</p>
+              <a href="#" class="stretched-link">Link 1</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Second card</h5>
+              <p class="card-text">Each card is separate.</p>
+              <a href="#" class="stretched-link">Link 2</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Third card</h5>
+              <p class="card-text">Independent click targets.</p>
+              <a href="#" class="stretched-link">Link 3</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stretched Link Gotchas -->
+      <h3 class="h5 mt-4 mb-3">Important Considerations</h3>
+      <div class="alert alert-info" role="alert">
+        <strong>Tips for Stretched Links:</strong>
+        <ul class="mb-0 mt-2">
+          <li>Parent must have <code>position: relative</code> (cards have this by default)</li>
+          <li>Only one <code>.stretched-link</code> per container</li>
+          <li>Other links/buttons inside won't be clickable unless they have <code>position: relative</code> and higher <code>z-index</code></li>
+          <li>Screen readers only announce the link text, so make it descriptive</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

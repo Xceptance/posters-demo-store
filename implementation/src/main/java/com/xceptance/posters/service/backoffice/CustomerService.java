@@ -98,13 +98,16 @@ public class CustomerService
      */
     public PaginatedCustomerResult searchCustomers(final String query,
                                                    final int page,
-                                                   final int size)
+                                                   final int size,
+                                                   final String sort,
+                                                   final String dir)
     {
         final int offset = page * size;
-        final CustomerSearchResult searchResult = searchService.search(query, offset, size);
+        final CustomerSearchResult searchResult = searchService.search(query, offset, size, sort, dir);
 
         final List<CustomerListItem> items = searchResult.customerIds().stream()
             .map(this::toListItem)
+            .filter(item -> item != null)
             .toList();
 
         return new PaginatedCustomerResult(items, searchResult.totalHits(), page, size);
@@ -114,16 +117,21 @@ public class CustomerService
      * Converts a customer UUID into an enriched list item by loading the
      * customer, their profile, and their order count.
      *
+     * <p>Returns {@code null} for stale index entries (customer deleted from DB
+     * but not yet removed from the async Lucene index).</p>
+     *
      * @param customerId UUID of the customer
-     * @return enriched list item
-     * @throws IllegalStateException if the customer exists in the index but
-     *                               not in the database (stale index)
+     * @return enriched list item, or {@code null} if the customer no longer exists
      */
     private CustomerListItem toListItem(final UUID customerId)
     {
         final Customer customer = customerRepository.findById(customerId)
-            .orElseThrow(() -> new IllegalStateException(
-                "Customer in index not found in DB: " + customerId));
+            .orElse(null);
+
+        if (customer == null)
+        {
+            return null;
+        }
 
         final CustomerProfile profile = profileRepository
             .findByCustomer_Id(customerId).orElse(null);
@@ -135,6 +143,30 @@ public class CustomerService
     // ------------------------------------------------------------------
     // Detail view
     // ------------------------------------------------------------------
+
+    /**
+     * Loads customer detail data without recording an audit event.
+     * Use this for non-interactive lookups (e.g. modal pre-population)
+     * where an audit trail is not required.
+     *
+     * @param customerId UUID of the customer to load
+     * @return customer detail aggregate
+     * @throws IllegalArgumentException if the customer does not exist
+     */
+    public CustomerDetail getCustomerDetailNoAudit(final UUID customerId)
+    {
+        final Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException(
+                "Customer not found: " + customerId));
+
+        final CustomerProfile profile = profileRepository
+            .findByCustomer_Id(customerId).orElse(null);
+
+        final List<CustomerAddress> addresses = addressRepository
+            .findByCustomer_Id(customerId);
+
+        return new CustomerDetail(customer, profile, addresses);
+    }
 
     /**
      * Loads a full customer detail view (profile, addresses) and logs a
@@ -151,15 +183,7 @@ public class CustomerService
                                              final Long adminId,
                                              final String adminName)
     {
-        final Customer customer = customerRepository.findById(customerId)
-            .orElseThrow(() -> new IllegalArgumentException(
-                "Customer not found: " + customerId));
-
-        final CustomerProfile profile = profileRepository
-            .findByCustomer_Id(customerId).orElse(null);
-
-        final List<CustomerAddress> addresses = addressRepository
-            .findByCustomer_Id(customerId);
+        final CustomerDetail detail = getCustomerDetailNoAudit(customerId);
 
         // Audit: log view event
         final AuditLogEntry audit = new AuditLogEntry();
@@ -167,16 +191,70 @@ public class CustomerService
         audit.setUsername(adminName);
         audit.setAction(AuditLogEntry.Action.CUSTOMER_VIEWED);
         audit.setTargetType("Customer");
-        audit.setTargetId(customer.getCustomerNumber());
+        audit.setTargetId(detail.customer().getCustomerNumber());
         audit.setDetails("Customer details viewed");
         auditLogRepository.save(audit);
 
-        return new CustomerDetail(customer, profile, addresses);
+        return detail;
     }
 
     // ------------------------------------------------------------------
-    // Profile Editing
+    // Profile Editing / Creation
     // ------------------------------------------------------------------
+
+    /**
+     * Creates a new customer with the given details, including a profile.
+     * Logs a {@code CUSTOMER_CREATED} audit event.
+     */
+    @Transactional
+    public Customer createCustomer(final String firstName,
+                                   final String middleName,
+                                   final String lastName,
+                                   final String email,
+                                   final String plainPassword,
+                                   final Long adminId,
+                                   final String adminName)
+    {
+        if (customerRepository.findByEmail(email).isPresent()) {
+            throw new IllegalArgumentException("Email already exists: " + email);
+        }
+
+        final Customer customer = new Customer();
+        customer.setFirstName(firstName);
+        customer.setMiddleName(middleName);
+        customer.setLastName(lastName);
+        customer.setEmail(email);
+        customer.hashPassword(plainPassword);
+
+        final Customer savedCustomer = customerRepository.saveAndFlush(customer);
+
+        final CustomerProfile profile = new CustomerProfile();
+        profile.setCustomer(savedCustomer);
+        profile.setPassword(savedCustomer.getPassword());
+        profile.setLastPasswordChange(java.time.LocalDateTime.now());
+        profileRepository.saveAndFlush(profile);
+
+        // Async re-index for Lucene search
+        searchService.indexCustomerAsync(savedCustomer.getId());
+
+        // Audit: log creation event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        // Using a generic CUSTOMER_UPDATED action as CUSTOMER_CREATED is not in enum. Wait, let me check the enum. I'll just use CUSTOMER_UPDATED or add CUSTOMER_CREATED if needed.
+        // The spec said "Add customer-related action types...".
+        // Let's assume CUSTOMER_UPDATED for now, but I should probably add CUSTOMER_CREATED. Wait, the spec says "Add customer-related action types...". I'll use CUSTOMER_UPDATED and we can add CUSTOMER_CREATED to AuditLogEntry.Action later if needed. But the prompt said it's pre-registered. 
+        // I will use CUSTOMER_CREATED. 
+        // Let me check AuditLogEntry.Action first.
+        
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_CREATED);
+        audit.setTargetType("Customer");
+        audit.setTargetId(savedCustomer.getCustomerNumber());
+        audit.setDetails("Customer created via backoffice");
+        auditLogRepository.save(audit);
+
+        return savedCustomer;
+    }
 
     /**
      * Updates the first, middle, and last name of a customer. Uses JPA's optimistic
@@ -231,6 +309,49 @@ public class CustomerService
         auditLogRepository.save(audit);
 
         return updatedCustomer;
+    }
+
+    /**
+     * Deletes a customer and their associated profile, addresses, and credit cards.
+     * Logs a {@code CUSTOMER_DELETED} audit event.
+     */
+    @Transactional
+    public void deleteCustomer(final UUID customerId,
+                               final Long adminId,
+                               final String adminName)
+    {
+        final Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customerId));
+
+        final Long customerNumber = customer.getCustomerNumber();
+
+        // Remove addresses
+        final List<CustomerAddress> addresses = addressRepository.findByCustomer_Id(customerId);
+        addressRepository.deleteAll(addresses);
+
+        // Remove profile
+        profileRepository.findByCustomer_Id(customerId).ifPresent(profileRepository::delete);
+
+        // Credit cards are cascaded via orphanRemoval/ManyToMany logic, but let's clear them explicitly
+        customer.getCreditCards().clear();
+        customerRepository.saveAndFlush(customer);
+
+        // Delete customer
+        customerRepository.delete(customer);
+        customerRepository.flush();
+
+        // Async re-index for Lucene search (it will remove if not found)
+        searchService.indexCustomerAsync(customerId);
+
+        // Audit: log deletion event
+        final AuditLogEntry audit = new AuditLogEntry();
+        audit.setUserId(adminId);
+        audit.setUsername(adminName);
+        audit.setAction(AuditLogEntry.Action.CUSTOMER_DELETED);
+        audit.setTargetType("Customer");
+        audit.setTargetId(customerNumber);
+        audit.setDetails("Customer deleted");
+        auditLogRepository.save(audit);
     }
 
     // ------------------------------------------------------------------

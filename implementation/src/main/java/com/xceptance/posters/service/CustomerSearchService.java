@@ -406,7 +406,9 @@ public class CustomerSearchService
      */
     public CustomerSearchResult search(final String queryText,
                                        final int offset,
-                                       final int limit)
+                                       final int limit,
+                                       final String sortField,
+                                       final String sortDir)
     {
         if (searcher == null)
         {
@@ -429,9 +431,28 @@ public class CustomerSearchService
                 query = parser.parse(escaped + "*");
             }
 
-            // Sort by customer number descending (newest first)
-            final Sort sort = new Sort(
-                new SortField(FIELD_NUMBER, SortField.Type.LONG, true));
+            // Determine sort field and direction
+            final boolean reverse = "desc".equalsIgnoreCase(sortDir);
+            final String luceneField;
+            final SortField.Type sortType;
+
+            switch (sortField != null ? sortField.toLowerCase() : "") {
+                case "name":
+                    luceneField = FIELD_LAST_NAME; // Sort by last name
+                    sortType = SortField.Type.STRING;
+                    break;
+                case "email":
+                    luceneField = FIELD_EMAIL;
+                    sortType = SortField.Type.STRING;
+                    break;
+                case "number":
+                default:
+                    luceneField = FIELD_NUMBER;
+                    sortType = SortField.Type.LONG;
+                    break;
+            }
+
+            final Sort sort = new Sort(new SortField(luceneField, sortType, reverse));
 
             final int maxDocs = Math.max(1, offset + limit);
             final TopFieldDocs topDocs = searcher.search(query, maxDocs, sort);

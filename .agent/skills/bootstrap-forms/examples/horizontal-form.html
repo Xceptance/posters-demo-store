@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Horizontal Form Examples</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h1 class="mb-4">Horizontal Form Examples</h1>
+
+    <!-- Section 1: Basic Horizontal Form -->
+    <section class="mb-5">
+      <h2>Basic Horizontal Layout</h2>
+      <p class="text-muted">Traditional label-input alignment using col-form-label and grid columns.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-person-gear me-2"></i>Account Settings</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row mb-3">
+              <label for="displayName" class="col-sm-3 col-form-label">Display Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="displayName" value="John Doe">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="username" class="col-sm-3 col-form-label">Username</label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <span class="input-group-text">@</span>
+                  <input type="text" class="form-control" id="username" value="johndoe">
+                </div>
+                <div class="form-text">Your unique username cannot be changed.</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="email" class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="email" value="john.doe@example.com">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="bio" class="col-sm-3 col-form-label">Bio</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+              </div>
+            </div>
+
+            <!-- Offset button alignment -->
+            <div class="row">
+              <div class="col-sm-9 offset-sm-3">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-outline-secondary ms-2">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> <code>col-form-label</code> vertically centers labels with inputs. Use <code>offset-sm-3</code> to align buttons.
+      </div>
+    </section>
+
+    <!-- Section 2: Horizontal Radio and Checkbox Groups -->
+    <section class="mb-5">
+      <h2>Horizontal Radio and Checkbox Groups</h2>
+      <p class="text-muted">Organizing radios and checkboxes in horizontal form layouts.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-bell me-2"></i>Notification Preferences</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <!-- Horizontal Radios -->
+            <fieldset class="row mb-3">
+              <legend class="col-form-label col-sm-3 pt-0">Email Frequency</legend>
+              <div class="col-sm-9">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="emailFrequency" id="freqImmediate" value="immediate" checked>
+                  <label class="form-check-label" for="freqImmediate">Immediate</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="emailFrequency" id="freqDaily" value="daily">
+                  <label class="form-check-label" for="freqDaily">Daily Digest</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="emailFrequency" id="freqWeekly" value="weekly">
+                  <label class="form-check-label" for="freqWeekly">Weekly Summary</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="emailFrequency" id="freqNone" value="none">
+                  <label class="form-check-label" for="freqNone">No Emails</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Inline Radios in Horizontal Form -->
+            <fieldset class="row mb-3">
+              <legend class="col-form-label col-sm-3 pt-0">Theme</legend>
+              <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="theme" id="themeLight" value="light" checked>
+                  <label class="form-check-label" for="themeLight">Light</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="theme" id="themeDark" value="dark">
+                  <label class="form-check-label" for="themeDark">Dark</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="theme" id="themeAuto" value="auto">
+                  <label class="form-check-label" for="themeAuto">Auto</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Horizontal Checkboxes -->
+            <fieldset class="row mb-3">
+              <legend class="col-form-label col-sm-3 pt-0">Notify Me About</legend>
+              <div class="col-sm-9">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifyComments" checked>
+                  <label class="form-check-label" for="notifyComments">Comments on my posts</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifyMentions" checked>
+                  <label class="form-check-label" for="notifyMentions">Mentions of my name</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifyFollows">
+                  <label class="form-check-label" for="notifyFollows">New followers</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="notifyUpdates">
+                  <label class="form-check-label" for="notifyUpdates">Product updates</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Switches in Horizontal Form -->
+            <div class="row mb-3">
+              <label class="col-form-label col-sm-3">Quick Settings</label>
+              <div class="col-sm-9">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="pushEnabled" checked>
+                  <label class="form-check-label" for="pushEnabled">Enable push notifications</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="soundEnabled">
+                  <label class="form-check-label" for="soundEnabled">Notification sounds</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-9 offset-sm-3">
+                <button type="submit" class="btn btn-primary">Save Preferences</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> Use <code>fieldset</code> with <code>legend.col-form-label</code> for grouped radios/checkboxes. Add <code>pt-0</code> to remove top padding.
+      </div>
+    </section>
+
+    <!-- Section 3: Sizing Variations -->
+    <section class="mb-5">
+      <h2>Horizontal Form Sizing</h2>
+      <p class="text-muted">Different label and input sizes for horizontal forms.</p>
+
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <!-- Large -->
+            <div class="row mb-3">
+              <label for="inputLg" class="col-sm-3 col-form-label col-form-label-lg">Large Label</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-control-lg" id="inputLg" placeholder="Large input">
+              </div>
+            </div>
+
+            <!-- Default -->
+            <div class="row mb-3">
+              <label for="inputDefault" class="col-sm-3 col-form-label">Default Label</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="inputDefault" placeholder="Default input">
+              </div>
+            </div>
+
+            <!-- Small -->
+            <div class="row mb-3">
+              <label for="inputSm" class="col-sm-3 col-form-label col-form-label-sm">Small Label</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" id="inputSm" placeholder="Small input">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> Match <code>col-form-label-lg</code> with <code>form-control-lg</code> for consistent vertical alignment.
+      </div>
+    </section>
+
+    <!-- Section 4: Responsive Breakpoints -->
+    <section class="mb-5">
+      <h2>Responsive Horizontal Forms</h2>
+      <p class="text-muted">Forms that switch from stacked to horizontal at different breakpoints.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-building me-2"></i>Company Information</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <!-- Horizontal on md and up -->
+            <div class="row mb-3">
+              <label for="companyName" class="col-md-4 col-lg-3 col-form-label">Company Name</label>
+              <div class="col-md-8 col-lg-9">
+                <input type="text" class="form-control" id="companyName" placeholder="Acme Corporation">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="industry" class="col-md-4 col-lg-3 col-form-label">Industry</label>
+              <div class="col-md-8 col-lg-9">
+                <select class="form-select" id="industry">
+                  <option selected>Select industry...</option>
+                  <option value="tech">Technology</option>
+                  <option value="finance">Finance</option>
+                  <option value="healthcare">Healthcare</option>
+                  <option value="retail">Retail</option>
+                  <option value="manufacturing">Manufacturing</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="employees" class="col-md-4 col-lg-3 col-form-label">Company Size</label>
+              <div class="col-md-8 col-lg-9">
+                <select class="form-select" id="employees">
+                  <option selected>Select size...</option>
+                  <option value="1-10">1-10 employees</option>
+                  <option value="11-50">11-50 employees</option>
+                  <option value="51-200">51-200 employees</option>
+                  <option value="201-500">201-500 employees</option>
+                  <option value="500+">500+ employees</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="website" class="col-md-4 col-lg-3 col-form-label">Website</label>
+              <div class="col-md-8 col-lg-9">
+                <div class="input-group">
+                  <span class="input-group-text">https://</span>
+                  <input type="text" class="form-control" id="website" placeholder="www.example.com">
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+              <div class="col-md-8 col-lg-9">
+                <textarea class="form-control" id="address" rows="2" placeholder="Street address, City, State, ZIP"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 col-lg-9 offset-md-4 offset-lg-3">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-check-lg me-1"></i>Save Company
+                </button>
+                <button type="reset" class="btn btn-outline-secondary ms-2">Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> Use <code>col-md-4 col-lg-3</code> for label width that adjusts at breakpoints. Match offsets for button alignment.
+      </div>
+    </section>
+
+    <!-- Section 5: Readonly and Plaintext -->
+    <section class="mb-5">
+      <h2>Readonly and Plaintext Display</h2>
+      <p class="text-muted">Displaying form data as plaintext while maintaining horizontal alignment.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-person-badge me-2"></i>Profile Summary (View Only)</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="Jane Smith">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="jane.smith@company.com">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Department</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="Engineering">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Member Since</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="January 15, 2023">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-9 offset-sm-3">
+                <a href="#" class="btn btn-outline-primary">
+                  <i class="bi bi-pencil me-1"></i>Edit Profile
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Key pattern:</strong> <code>form-control-plaintext</code> displays value without input styling while maintaining alignment.
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

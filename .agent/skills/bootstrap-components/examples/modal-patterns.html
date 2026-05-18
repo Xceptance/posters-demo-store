@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Modal Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Modal Patterns</h1>
+
+    <!-- Basic Modal -->
+    <section class="mb-4">
+      <h2>Basic Modal</h2>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+        Open Basic Modal
+      </button>
+
+      <div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="basicModalLabel">Basic Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>This is a basic modal with header, body, and footer.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrollable Modal -->
+    <section class="mb-4">
+      <h2>Scrollable Modal</h2>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scrollableModal">
+        Open Scrollable Modal
+      </button>
+
+      <div class="modal fade" id="scrollableModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Scrollable Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <p>This is scrollable content.</p>
+              <p style="height: 1000px;">Long content here...</p>
+              <p>End of content.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Centered Modal -->
+    <section class="mb-4">
+      <h2>Vertically Centered Modal</h2>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#centeredModal">
+        Open Centered Modal
+      </button>
+
+      <div class="modal fade" id="centeredModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Centered Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <p>This modal is vertically centered in the viewport.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Static Backdrop Modal -->
+    <section class="mb-4">
+      <h2>Static Backdrop (No Dismiss on Click)</h2>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticModal">
+        Open Static Modal
+      </button>
+
+      <div class="modal fade" id="staticModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Static Backdrop</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <p>You must click a button to close this modal. Clicking outside won't work.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Size Variants -->
+    <section class="mb-4">
+      <h2>Size Variants</h2>
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#smModal">Small</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#lgModal">Large</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#xlModal">Extra Large</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#fullModal">Fullscreen</button>
+      </div>
+
+      <!-- Small Modal -->
+      <div class="modal fade" id="smModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Small Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">Small modal content.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Large Modal -->
+      <div class="modal fade" id="lgModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Large Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">Large modal content.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Large Modal -->
+      <div class="modal fade" id="xlModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Extra Large Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">Extra large modal content.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fullscreen Modal -->
+      <div class="modal fade" id="fullModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Fullscreen Modal</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">Fullscreen modal content.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Confirm Dialog Pattern -->
+    <section class="mb-4">
+      <h2>Confirm Dialog Pattern</h2>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">
+        Delete Item
+      </button>
+
+      <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header border-0">
+              <h1 class="modal-title fs-5 text-danger">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>Confirm Delete
+              </h1>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer border-0">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Modal Pattern -->
+    <section class="mb-4">
+      <h2>Form Modal Pattern</h2>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">
+        Add New Item
+      </button>
+
+      <div class="modal fade" id="formModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Add New Item</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="itemName" class="form-label">Item Name</label>
+                  <input type="text" class="form-control" id="itemName" required>
+                </div>
+                <div class="mb-3">
+                  <label for="itemDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="itemDescription" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="itemCategory" class="form-label">Category</label>
+                  <select class="form-select" id="itemCategory">
+                    <option value="">Select category...</option>
+                    <option value="1">Category 1</option>
+                    <option value="2">Category 2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success">Add Item</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

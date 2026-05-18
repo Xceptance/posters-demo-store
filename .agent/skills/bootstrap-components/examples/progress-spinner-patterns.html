@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Progress &amp; Spinner Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Progress &amp; Spinner Patterns</h1>
+
+    <!-- ==================== PROGRESS BARS ==================== -->
+    <h2 class="border-bottom pb-2 mb-4"><i class="bi bi-bar-chart-fill me-2"></i>Progress Bars</h2>
+
+    <!-- Basic Progress -->
+    <section class="mb-5">
+      <h3>Basic Progress</h3>
+      <p class="text-muted">Set width using inline style or utility classes.</p>
+
+      <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 0%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 25%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 75%"></div>
+      </div>
+      <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 100%"></div>
+      </div>
+    </section>
+
+    <!-- Progress with Labels -->
+    <section class="mb-5">
+      <h3>Progress with Labels</h3>
+      <p class="text-muted">Display percentage inside the progress bar.</p>
+
+      <div class="progress mb-3" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 25px;">
+        <div class="progress-bar" style="width: 25%">25%</div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-label="Example with label" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 25px;">
+        <div class="progress-bar" style="width: 50%">50%</div>
+      </div>
+      <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 25px;">
+        <div class="progress-bar" style="width: 75%">75%</div>
+      </div>
+    </section>
+
+    <!-- Height Variants -->
+    <section class="mb-5">
+      <h3>Height Variants</h3>
+      <p class="text-muted">Control height with inline styles or CSS variables.</p>
+
+      <div class="progress mb-3" role="progressbar" aria-label="Thin progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 4px;">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-label="Default progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-label="Medium progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 20px;">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+      <div class="progress" role="progressbar" aria-label="Thick progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 30px;">
+        <div class="progress-bar" style="width: 50%">50%</div>
+      </div>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb-5">
+      <h3>Color Variants</h3>
+      <p class="text-muted">Apply background utilities for different colors.</p>
+
+      <div class="progress mb-3" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-success" style="width: 25%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-info" style="width: 50%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-warning" style="width: 75%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-danger" style="width: 100%"></div>
+      </div>
+      <div class="progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-dark" style="width: 60%"></div>
+      </div>
+    </section>
+
+    <!-- Striped Progress -->
+    <section class="mb-5">
+      <h3>Striped Progress</h3>
+      <p class="text-muted">Add <code>.progress-bar-striped</code> for striped pattern.</p>
+
+      <div class="progress mb-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped" style="width: 40%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped bg-success" style="width: 50%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped bg-info" style="width: 60%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped bg-warning" style="width: 70%"></div>
+      </div>
+      <div class="progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped bg-danger" style="width: 80%"></div>
+      </div>
+    </section>
+
+    <!-- Animated Stripes -->
+    <section class="mb-5">
+      <h3>Animated Stripes</h3>
+      <p class="text-muted">Add <code>.progress-bar-animated</code> for moving stripes.</p>
+
+      <div class="progress mb-3" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+      </div>
+      <div class="progress mb-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 50%"></div>
+      </div>
+      <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" style="width: 100%"></div>
+      </div>
+    </section>
+
+    <!-- Stacked Progress -->
+    <section class="mb-5">
+      <h3>Stacked (Multiple Bars)</h3>
+      <p class="text-muted">Include multiple progress bars in a stacked container.</p>
+
+      <div class="progress-stacked mb-3">
+        <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+          <div class="progress-bar"></div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+          <div class="progress-bar bg-success"></div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+          <div class="progress-bar bg-info"></div>
+        </div>
+      </div>
+
+      <h5>Storage Usage Example</h5>
+      <div class="progress-stacked mb-2" style="height: 25px;">
+        <div class="progress" role="progressbar" aria-label="Documents" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+          <div class="progress-bar bg-primary">Documents</div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Photos" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%">
+          <div class="progress-bar bg-success">Photos</div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Videos" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+          <div class="progress-bar bg-warning">Videos</div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between small text-muted">
+        <span>80 GB used of 100 GB</span>
+        <span>20 GB free</span>
+      </div>
+    </section>
+
+    <!-- File Upload Progress Pattern -->
+    <section class="mb-5">
+      <h3>File Upload Progress Pattern</h3>
+      <p class="text-muted">Common pattern for file upload interfaces.</p>
+
+      <div class="card" style="max-width: 400px;">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-file-earmark-pdf text-danger fs-4 me-2"></i>
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between">
+                <span class="fw-medium">document.pdf</span>
+                <span class="text-muted small">75%</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 6px;">
+                <div class="progress-bar" style="width: 75%"></div>
+              </div>
+              <small class="text-muted">2.4 MB of 3.2 MB</small>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-file-earmark-image text-primary fs-4 me-2"></i>
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between">
+                <span class="fw-medium">photo.jpg</span>
+                <span class="text-success small"><i class="bi bi-check-circle-fill"></i> Complete</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height: 6px;">
+                <div class="progress-bar bg-success" style="width: 100%"></div>
+              </div>
+              <small class="text-muted">1.8 MB</small>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <i class="bi bi-file-earmark-zip text-warning fs-4 me-2"></i>
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between">
+                <span class="fw-medium">archive.zip</span>
+                <span class="text-muted small">Pending</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 6px;">
+                <div class="progress-bar" style="width: 0%"></div>
+              </div>
+              <small class="text-muted">5.1 MB</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skill/Rating Progress Pattern -->
+    <section class="mb-5">
+      <h3>Skills/Rating Progress Pattern</h3>
+      <p class="text-muted">Common pattern for skills or rating displays.</p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>HTML/CSS</span>
+              <span>95%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar bg-success" style="width: 95%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>JavaScript</span>
+              <span>85%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar bg-info" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Python</span>
+              <span>70%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar bg-warning" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span>Go</span>
+              <span>40%</span>
+            </div>
+            <div class="progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" style="width: 40%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SPINNERS ==================== -->
+    <h2 class="border-bottom pb-2 mb-4 mt-5"><i class="bi bi-arrow-repeat me-2"></i>Spinners</h2>
+
+    <!-- Border Spinner -->
+    <section class="mb-5">
+      <h3>Border Spinner</h3>
+      <p class="text-muted">Lightweight spinner using border animation.</p>
+
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </section>
+
+    <!-- Growing Spinner -->
+    <section class="mb-5">
+      <h3>Growing Spinner</h3>
+      <p class="text-muted">Pulsing/growing animation style.</p>
+
+      <div class="spinner-grow" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb-5">
+      <h3>Spinner Color Variants</h3>
+      <p class="text-muted">Apply text color utilities to spinners.</p>
+
+      <div class="mb-3">
+        <h5>Border Spinners</h5>
+        <div class="spinner-border text-primary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-secondary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-success me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-danger me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-warning me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-info me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-light me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>
+      </div>
+
+      <div>
+        <h5>Growing Spinners</h5>
+        <div class="spinner-grow text-primary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-secondary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-success me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-danger me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-warning me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-info me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-light me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow text-dark" role="status"><span class="visually-hidden">Loading...</span></div>
+      </div>
+    </section>
+
+    <!-- Size Variants -->
+    <section class="mb-5">
+      <h3>Spinner Size Variants</h3>
+      <p class="text-muted">Small spinners for buttons, or custom sizes via CSS.</p>
+
+      <div class="mb-3">
+        <h5>Small Spinners</h5>
+        <div class="spinner-border spinner-border-sm me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow spinner-grow-sm me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+      </div>
+
+      <div class="mb-3">
+        <h5>Default Size</h5>
+        <div class="spinner-border me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+      </div>
+
+      <div>
+        <h5>Custom Size (via inline style)</h5>
+        <div class="spinner-border me-2" style="width: 3rem; height: 3rem;" role="status"><span class="visually-hidden">Loading...</span></div>
+        <div class="spinner-grow me-2" style="width: 3rem; height: 3rem;" role="status"><span class="visually-hidden">Loading...</span></div>
+      </div>
+    </section>
+
+    <!-- Spinners in Buttons -->
+    <section class="mb-5">
+      <h3>Spinners in Buttons</h3>
+      <p class="text-muted">Common pattern for loading state buttons.</p>
+
+      <div class="d-flex flex-wrap gap-3">
+        <!-- Spinner only -->
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span class="visually-hidden" role="status">Loading...</span>
+        </button>
+
+        <!-- Spinner with text -->
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+          Loading...
+        </button>
+
+        <!-- Growing spinner with text -->
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm me-2" aria-hidden="true"></span>
+          Loading...
+        </button>
+
+        <!-- Different button styles -->
+        <button class="btn btn-success" type="button" disabled>
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+          Saving...
+        </button>
+
+        <button class="btn btn-danger" type="button" disabled>
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+          Deleting...
+        </button>
+
+        <button class="btn btn-outline-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+          Processing...
+        </button>
+      </div>
+    </section>
+
+    <!-- Loading Card Pattern -->
+    <section class="mb-5">
+      <h3>Loading Card Pattern</h3>
+      <p class="text-muted">Spinner overlay for card loading states.</p>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card position-relative">
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex align-items-center justify-content-center" style="z-index: 10;">
+              <div class="text-center">
+                <div class="spinner-border text-primary mb-2" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="small text-muted">Loading data...</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Card Title</h5>
+              <p class="card-text">Some quick example text to build on the card title.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full Page Loading -->
+    <section class="mb-5">
+      <h3>Full Page Loading Pattern</h3>
+      <p class="text-muted">Centered spinner for page-level loading states.</p>
+
+      <div class="border rounded p-5 bg-light" style="min-height: 200px;">
+        <div class="d-flex flex-column align-items-center justify-content-center h-100">
+          <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <h5>Loading...</h5>
+          <p class="text-muted">Please wait while we load your content.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Progress Demo -->
+    <section class="mb-5">
+      <h3>Interactive Progress Demo</h3>
+      <p class="text-muted">Click the button to simulate progress.</p>
+
+      <div class="mb-3">
+        <button class="btn btn-primary" id="startProgressBtn">
+          Start Progress
+        </button>
+        <button class="btn btn-secondary" id="resetProgressBtn">
+          Reset
+        </button>
+      </div>
+
+      <div class="progress mb-2" role="progressbar" aria-label="Animated progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="demoProgress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" id="demoProgressBar" style="width: 0%"></div>
+      </div>
+      <div class="text-center" id="progressStatus">Click "Start Progress" to begin</div>
+    </section>
+
+    <!-- Accessibility Notes -->
+    <section class="mb-5">
+      <h2>Accessibility Notes</h2>
+      <div class="alert alert-warning">
+        <h5><i class="bi bi-universal-access me-2"></i>Accessibility Requirements</h5>
+        <ul class="mb-0">
+          <li><strong>Progress bars:</strong> Include <code>role="progressbar"</code>, <code>aria-valuenow</code>, <code>aria-valuemin</code>, <code>aria-valuemax</code>, and <code>aria-label</code></li>
+          <li><strong>Spinners:</strong> Include <code>role="status"</code> and <code>.visually-hidden</code> text describing the loading state</li>
+          <li><strong>Button spinners:</strong> Use <code>aria-hidden="true"</code> on spinner if visible text is present</li>
+          <li>Update <code>aria-valuenow</code> dynamically when progress changes</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // Interactive Progress Demo
+    const startBtn = document.getElementById('startProgressBtn');
+    const resetBtn = document.getElementById('resetProgressBtn');
+    const progressBar = document.getElementById('demoProgressBar');
+    const progressContainer = document.getElementById('demoProgress');
+    const statusText = document.getElementById('progressStatus');
+    let progress = 0;
+    let interval = null;
+
+    startBtn.addEventListener('click', () => {
+      if (interval) return;
+      startBtn.disabled = true;
+      
+      interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          interval = null;
+          startBtn.disabled = false;
+          statusText.textContent = 'Complete!';
+          progressBar.classList.remove('progress-bar-animated');
+          progressBar.classList.add('bg-success');
+        } else {
+          statusText.textContent = `Progress: ${Math.round(progress)}%`;
+        }
+        progressBar.style.width = progress + '%';
+        progressContainer.setAttribute('aria-valuenow', Math.round(progress));
+      }, 300);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+      progress = 0;
+      progressBar.style.width = '0%';
+      progressBar.classList.remove('bg-success');
+      progressBar.classList.add('progress-bar-animated');
+      progressContainer.setAttribute('aria-valuenow', 0);
+      statusText.textContent = 'Click "Start Progress" to begin';
+      startBtn.disabled = false;
+    });
+  </script>
+</body>
+</html>

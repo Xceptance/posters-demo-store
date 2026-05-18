@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Form Validation Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Registration Form</h4>
+          </div>
+          <div class="card-body">
+            <form class="needs-validation" novalidate>
+              <!-- Name Row -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">First name</label>
+                  <input type="text" class="form-control" id="firstName" required>
+                  <div class="valid-feedback">Looks good!</div>
+                  <div class="invalid-feedback">Please enter your first name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last name</label>
+                  <input type="text" class="form-control" id="lastName" required>
+                  <div class="valid-feedback">Looks good!</div>
+                  <div class="invalid-feedback">Please enter your last name.</div>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">@</span>
+                  <input type="email" class="form-control" id="email" required>
+                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+
+              <!-- Password -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" minlength="8" required>
+                  <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="confirmPassword" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" required>
+                  <div class="invalid-feedback">Please confirm your password.</div>
+                </div>
+              </div>
+
+              <!-- Address -->
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                <div class="invalid-feedback">Please enter your address.</div>
+              </div>
+
+              <!-- City, State, Zip -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="city" required>
+                  <div class="invalid-feedback">Please enter a city.</div>
+                </div>
+                <div class="col-md-4">
+                  <label for="state" class="form-label">State</label>
+                  <select class="form-select" id="state" required>
+                    <option value="">Choose...</option>
+                    <option value="CA">California</option>
+                    <option value="NY">New York</option>
+                    <option value="TX">Texas</option>
+                  </select>
+                  <div class="invalid-feedback">Please select a state.</div>
+                </div>
+                <div class="col-md-2">
+                  <label for="zip" class="form-label">Zip</label>
+                  <input type="text" class="form-control" id="zip" pattern="[0-9]{5}" required>
+                  <div class="invalid-feedback">Please enter a valid zip code.</div>
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone (optional)</label>
+                <input type="tel" class="form-control" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+                <div class="form-text">Format: 123-456-7890</div>
+              </div>
+
+              <!-- Account Type -->
+              <div class="mb-3">
+                <label class="form-label">Account Type</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="accountType" id="personal" value="personal" required>
+                  <label class="form-check-label" for="personal">Personal</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="accountType" id="business" value="business" required>
+                  <label class="form-check-label" for="business">Business</label>
+                </div>
+                <div class="invalid-feedback">Please select an account type.</div>
+              </div>
+
+              <!-- Interests -->
+              <div class="mb-3">
+                <label class="form-label">Interests (select all that apply)</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="interest1">
+                  <label class="form-check-label" for="interest1">Technology</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="interest2">
+                  <label class="form-check-label" for="interest2">Design</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="interest3">
+                  <label class="form-check-label" for="interest3">Marketing</label>
+                </div>
+              </div>
+
+              <!-- Newsletter -->
+              <div class="mb-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="newsletter">
+                  <label class="form-check-label" for="newsletter">Subscribe to newsletter</label>
+                </div>
+              </div>
+
+              <!-- Terms -->
+              <div class="mb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="terms" required>
+                  <label class="form-check-label" for="terms">
+                    I agree to the <a href="#">terms and conditions</a>
+                  </label>
+                  <div class="invalid-feedback">You must agree before submitting.</div>
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Validation Tooltips Example -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Validation Tooltips Example</h4>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              Use <code>.valid-tooltip</code> and <code>.invalid-tooltip</code> for positioned
+              validation messages. Parent elements require <code>position-relative</code>.
+            </p>
+            <form class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-4 position-relative">
+                  <label for="tooltipFirstName" class="form-label">First name</label>
+                  <input type="text" class="form-control" id="tooltipFirstName" value="John" required>
+                  <div class="valid-tooltip">Looks good!</div>
+                  <div class="invalid-tooltip">Please enter your first name.</div>
+                </div>
+                <div class="col-md-4 position-relative">
+                  <label for="tooltipLastName" class="form-label">Last name</label>
+                  <input type="text" class="form-control" id="tooltipLastName" value="Doe" required>
+                  <div class="valid-tooltip">Looks good!</div>
+                  <div class="invalid-tooltip">Please enter your last name.</div>
+                </div>
+                <div class="col-md-4 position-relative">
+                  <label for="tooltipCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="tooltipCity" required>
+                  <div class="valid-tooltip">Looks good!</div>
+                  <div class="invalid-tooltip">Please provide a valid city.</div>
+                </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-secondary" type="submit">Validate with Tooltips</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Group with Floating Labels and Validation -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Input Group + Floating Labels + Validation</h4>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">
+              When combining input groups with floating labels and validation, use
+              <code>.has-validation</code> on the input group and place feedback
+              outside <code>.form-floating</code> but inside <code>.input-group</code>.
+            </p>
+            <form class="needs-validation" novalidate>
+              <div class="input-group has-validation mb-3">
+                <span class="input-group-text">@</span>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="floatingValidationUsername"
+                         placeholder="Username" required>
+                  <label for="floatingValidationUsername">Username</label>
+                </div>
+                <div class="invalid-feedback">Please choose a username.</div>
+              </div>
+              <button class="btn btn-info" type="submit">Check Username</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // Bootstrap validation script
+    (function () {
+      'use strict'
+
+      // Fetch all forms that need validation
+      const forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+</body>
+</html>

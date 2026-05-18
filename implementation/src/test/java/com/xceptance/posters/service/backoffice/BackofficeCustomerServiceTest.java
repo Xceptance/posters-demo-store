@@ -100,7 +100,7 @@ class BackofficeCustomerServiceTest
         final CustomerProfile p1 = new CustomerProfile();
         p1.setCustomer(c1);
 
-        when(searchService.search("alice", 0, 25))
+        when(searchService.search("alice", 0, 25, "number", "desc"))
             .thenReturn(new CustomerSearchResult(2, List.of(id1, id2)));
         when(customerRepository.findById(id1)).thenReturn(Optional.of(c1));
         when(customerRepository.findById(id2)).thenReturn(Optional.of(c2));
@@ -110,7 +110,7 @@ class BackofficeCustomerServiceTest
         when(orderRepository.countByCustomer_Email("bob@example.com")).thenReturn(0L);
 
         // Act
-        final PaginatedCustomerResult result = customerService.searchCustomers("alice", 0, 25);
+        final PaginatedCustomerResult result = customerService.searchCustomers("alice", 0, 25, "number", "desc");
 
         // Assert
         assertThat(result.items()).hasSize(2);
@@ -136,11 +136,11 @@ class BackofficeCustomerServiceTest
     void searchCustomersReturnsEmptyResultGracefully()
     {
         // Arrange
-        when(searchService.search("nonexistent", 0, 25))
+        when(searchService.search("nonexistent", 0, 25, "number", "desc"))
             .thenReturn(new CustomerSearchResult(0, List.of()));
 
         // Act
-        final PaginatedCustomerResult result = customerService.searchCustomers("nonexistent", 0, 25);
+        final PaginatedCustomerResult result = customerService.searchCustomers("nonexistent", 0, 25, "number", "desc");
 
         // Assert
         assertThat(result.items()).isEmpty();
@@ -159,14 +159,14 @@ class BackofficeCustomerServiceTest
         final UUID id = UUID.randomUUID();
         final Customer customer = createCustomer(id, "page@example.com", "Page", "Test", 1001L);
 
-        when(searchService.search("", 50, 25))
+        when(searchService.search("", 50, 25, "number", "desc"))
             .thenReturn(new CustomerSearchResult(51, List.of(id)));
         when(customerRepository.findById(id)).thenReturn(Optional.of(customer));
         when(profileRepository.findByCustomer_Id(id)).thenReturn(Optional.empty());
         when(orderRepository.countByCustomer_Email("page@example.com")).thenReturn(0L);
 
         // Act
-        final PaginatedCustomerResult result = customerService.searchCustomers("", 2, 25);
+        final PaginatedCustomerResult result = customerService.searchCustomers("", 2, 25, "number", "desc");
 
         // Assert
         assertThat(result.page()).isEqualTo(2);

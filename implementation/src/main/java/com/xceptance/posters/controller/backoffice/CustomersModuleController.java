@@ -83,12 +83,16 @@ public class CustomersModuleController extends AbstractBackofficeController
             @RequestParam(required = false, defaultValue = "") final String q,
             @RequestParam(required = false, defaultValue = "0") final int page,
             @RequestParam(required = false, defaultValue = "25") final int size,
+            @RequestParam(required = false, defaultValue = "number") final String sort,
+            @RequestParam(required = false, defaultValue = "desc") final String dir,
             final Model model)
     {
-        final PaginatedCustomerResult result = customerService.searchCustomers(q, page, size);
+        final PaginatedCustomerResult result = customerService.searchCustomers(q, page, size, sort, dir);
 
         model.addAttribute("result", result);
         model.addAttribute("q", q);
+        model.addAttribute("sort", sort);
+        model.addAttribute("dir", dir);
 
         return "backoffice/customers/list";
     }
@@ -122,6 +126,82 @@ public class CustomersModuleController extends AbstractBackofficeController
         model.addAttribute("detail", detail);
 
         return "backoffice/customers/detail";
+    }
+
+    // ------------------------------------------------------------------
+    // Create Customer
+    // ------------------------------------------------------------------
+
+    @GetMapping("/new")
+    public String createCustomerForm(final Model model)
+    {
+        model.addAttribute("moduleTitle", "Add New Customer");
+        return "backoffice/customers/create";
+    }
+
+    @PostMapping("/new")
+    public String createCustomer(@RequestParam final String firstName,
+                                 @RequestParam(required = false) final String middleName,
+                                 @RequestParam final String lastName,
+                                 @RequestParam final String email,
+                                 @RequestParam final String password,
+                                 final Model model,
+                                 final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        try {
+            final Customer customer = customerService.createCustomer(
+                firstName, middleName, lastName, email, password, adminId, adminName);
+            
+            return "redirect:/backoffice/customers/" + customer.getId();
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("firstName", firstName);
+            model.addAttribute("middleName", middleName);
+            model.addAttribute("lastName", lastName);
+            model.addAttribute("email", email);
+            return "backoffice/customers/create";
+        }
+    }
+
+    // ------------------------------------------------------------------
+    // Delete Customer
+    // ------------------------------------------------------------------
+
+    @GetMapping("/{id}/delete")
+    public String deleteCustomerForm(@PathVariable final UUID id, final Model model)
+    {
+        final CustomerService.CustomerDetail detail = customerService.getCustomerDetailNoAudit(id);
+        model.addAttribute("customer", detail.customer());
+        return "backoffice/customers/fragments/delete-customer-modal :: delete-customer-modal";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCustomer(@PathVariable final UUID id,
+                                 final HttpServletResponse response)
+    {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long adminId = null;
+        String adminName = "System";
+
+        if (auth != null && auth.getPrincipal() instanceof final AdminUserPrincipal principal)
+        {
+            adminId = principal.getUserId();
+            adminName = principal.getDisplayName();
+        }
+
+        customerService.deleteCustomer(id, adminId, adminName);
+        response.setHeader("HX-Redirect", "/backoffice/customers");
+        return "backoffice/placeholder"; // Never rendered due to HX-Redirect
     }
 
     // ------------------------------------------------------------------
@@ -302,6 +382,18 @@ public class CustomersModuleController extends AbstractBackofficeController
         return "backoffice/customers/fragments/address-list :: address-list";
     }
 
+    @GetMapping("/{id}/addresses/{addressId}/delete")
+    public String deleteAddressForm(@PathVariable final UUID id,
+                                    @PathVariable final Integer addressId,
+                                    final Model model)
+    {
+        model.addAttribute("title", "Delete Address");
+        model.addAttribute("message", "Are you sure you want to delete this address? This action cannot be undone.");
+        model.addAttribute("deleteUrl", "/backoffice/customers/" + id + "/addresses/" + addressId);
+        model.addAttribute("hxTarget", "#address-list-container");
+        return "backoffice/fragments/delete-confirm-modal :: delete-confirm-modal";
+    }
+
     @DeleteMapping("/{id}/addresses/{addressId}")
     public String deleteAddress(@PathVariable final UUID id,
                                 @PathVariable final Integer addressId,
@@ -342,11 +434,9 @@ public class CustomersModuleController extends AbstractBackofficeController
 
     @PostMapping("/{id}/credit-cards/new")
     public String addCreditCard(@PathVariable final UUID id,
-                                @RequestParam final String number,
-                                @RequestParam final String vendor,
                                 @RequestParam final String name,
-                                @RequestParam final Integer expMonth,
-                                @RequestParam final Integer expYear,
+                                @RequestParam final String cardNumber,
+                                @RequestParam final String expiry,
                                 final Model model,
                                 final HttpServletResponse response)
     {
@@ -360,7 +450,23 @@ public class CustomersModuleController extends AbstractBackofficeController
             adminName = principal.getDisplayName();
         }
 
-        customerService.addCreditCard(id, number, vendor, name, expMonth, expYear, adminId, adminName);
+        final String cleanNumber = cardNumber.replaceAll("\\D", "");
+        final com.xceptance.posters.entity.CreditCardVendor vendorEnum = com.xceptance.posters.entity.CreditCardVendor.detect(cleanNumber);
+        final String vendorName = vendorEnum != null ? vendorEnum.getDisplayName() : "Unknown";
+
+        int expMonth = 0;
+        int expYear = 0;
+        if (expiry != null && expiry.contains("/")) {
+            final String[] parts = expiry.split("/");
+            if (parts.length == 2) {
+                try {
+                    expMonth = Integer.parseInt(parts[0].trim());
+                    expYear = 2000 + Integer.parseInt(parts[1].trim());
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+
+        customerService.addCreditCard(id, cleanNumber, vendorName, name, expMonth, expYear, adminId, adminName);
 
         final CustomerService.CustomerDetail detail = getCustomerDetail(id);
         model.addAttribute("detail", detail);
@@ -368,6 +474,18 @@ public class CustomersModuleController extends AbstractBackofficeController
         response.setHeader("HX-Trigger", "{\"show-toast\": {\"message\": \"Credit card added successfully\", \"type\": \"success\"}}");
 
         return "backoffice/customers/fragments/credit-card-list :: credit-card-list";
+    }
+
+    @GetMapping("/{id}/credit-cards/{cardId}/delete")
+    public String deleteCreditCardForm(@PathVariable final UUID id,
+                                       @PathVariable final Integer cardId,
+                                       final Model model)
+    {
+        model.addAttribute("title", "Delete Credit Card");
+        model.addAttribute("message", "Are you sure you want to delete this credit card? This action cannot be undone.");
+        model.addAttribute("deleteUrl", "/backoffice/customers/" + id + "/credit-cards/" + cardId);
+        model.addAttribute("hxTarget", "#credit-card-list-container");
+        return "backoffice/fragments/delete-confirm-modal :: delete-confirm-modal";
     }
 
     @DeleteMapping("/{id}/credit-cards/{cardId}")

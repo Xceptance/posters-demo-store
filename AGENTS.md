@@ -12,6 +12,10 @@
 - **Headers:** Add Apache license header to all new source files.
 - **Strict Java:** Aggressive `final` modifiers (variables, args, methods, fields). NO inline FQCNs; use explicit top imports.
 
+## UI Standards
+- **Backoffice UI:** Strictly follow `.agent/guides/backoffice-ui-patterns.md` when building or updating backoffice templates.
+
+
 ## Dependencies & Git
 - **Dependencies:** ALWAYS ask permission before adding. Document in `NOTICE.md` and `doc/3rd-party-licenses/`.
 - **Git:** No fast-forward merges. Ask before stashing. Branch naming: `(feat|fix|chore|docs)/kebab-case`.

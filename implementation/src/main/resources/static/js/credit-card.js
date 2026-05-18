@@ -125,11 +125,15 @@
     }
 
     // ---------------------------------------------------------------
-    // DOM Ready
+    // DOM Ready / HTMX Load
     // ---------------------------------------------------------------
-    document.addEventListener('DOMContentLoaded', function () {
+    function initCreditCard() {
         const form = document.getElementById('payment-form');
         if (!form) return;
+
+        // Prevent double binding
+        if (form.dataset.ccInitialized) return;
+        form.dataset.ccInitialized = 'true';
 
         const cardNumberInput = document.getElementById('cardNumber');
         const expiryInput = document.getElementById('expiry');
@@ -370,5 +374,13 @@
                 }
             });
         }
-    });
+    }
+
+    document.addEventListener('DOMContentLoaded', initCreditCard);
+    document.addEventListener('htmx:load', initCreditCard);
+
+    // Auto-init if the form is already in the DOM (e.g., when injected dynamically via HTMX)
+    if (document.readyState !== 'loading') {
+        initCreditCard();
+    }
 })();

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Toast Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Toast Patterns</h1>
+
+    <!-- Required Initialization -->
+    <section class="mb-4">
+      <div class="alert alert-warning">
+        <h5 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>Required JavaScript Initialization</h5>
+        <p class="mb-2">Toasts <strong>will not show</strong> without explicit JavaScript initialization. They are hidden by default and must be programmatically shown.</p>
+        <hr>
+        <p class="mb-0"><strong>See the script at the bottom of this page for the required initialization code.</strong></p>
+      </div>
+    </section>
+
+    <!-- Basic Toast -->
+    <section class="mb-4">
+      <h2>Basic Toast</h2>
+      <p class="text-muted">Click the button to show a basic toast notification.</p>
+
+      <button type="button" class="btn btn-primary" id="showBasicToast">Show Basic Toast</button>
+
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="basicToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <i class="bi bi-bell-fill text-primary me-2"></i>
+            <strong class="me-auto">Notification</strong>
+            <small>just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            This is a basic toast message.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Positions -->
+    <section class="mb-4">
+      <h2>Toast Positioning</h2>
+      <p class="text-muted">Position toasts using utility classes on the container. Common positions:</p>
+
+      <div class="row g-2">
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="top-0 start-0">Top Left</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="top-0 start-50 translate-middle-x">Top Center</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="top-0 end-0">Top Right</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="top-50 start-0 translate-middle-y">Middle Left</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="top-50 start-50 translate-middle">Center</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="top-50 end-0 translate-middle-y">Middle Right</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="bottom-0 start-0">Bottom Left</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="bottom-0 start-50 translate-middle-x">Bottom Center</button>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-secondary" data-position="bottom-0 end-0">Bottom Right</button>
+        </div>
+      </div>
+
+      <div id="positionToastContainer" class="toast-container position-fixed p-3 bottom-0 end-0">
+        <div id="positionToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Position Demo</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">Toast at this position!</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stacking Toasts -->
+    <section class="mb-4">
+      <h2>Stacking Multiple Toasts</h2>
+      <p class="text-muted">Multiple toasts stack vertically within the same container.</p>
+
+      <button type="button" class="btn btn-info" id="showStackedToasts">Show Multiple Toasts</button>
+
+      <div class="toast-container position-fixed top-0 end-0 p-3" id="stackContainer">
+        <div class="toast" role="alert" id="stackToast1">
+          <div class="toast-header">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>
+            <strong class="me-auto">Success</strong>
+            <small>1 sec ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">First toast message.</div>
+        </div>
+        <div class="toast" role="alert" id="stackToast2">
+          <div class="toast-header">
+            <i class="bi bi-info-circle-fill text-info me-2"></i>
+            <strong class="me-auto">Info</strong>
+            <small>2 sec ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">Second toast message.</div>
+        </div>
+        <div class="toast" role="alert" id="stackToast3">
+          <div class="toast-header">
+            <i class="bi bi-exclamation-circle-fill text-warning me-2"></i>
+            <strong class="me-auto">Warning</strong>
+            <small>3 sec ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">Third toast message.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb-4">
+      <h2>Color Variants</h2>
+      <p class="text-muted">Use background utilities for different toast types.</p>
+
+      <div class="d-flex gap-2 flex-wrap mb-3">
+        <button type="button" class="btn btn-success" data-toast-color="success">Success</button>
+        <button type="button" class="btn btn-danger" data-toast-color="danger">Error</button>
+        <button type="button" class="btn btn-warning" data-toast-color="warning">Warning</button>
+        <button type="button" class="btn btn-info" data-toast-color="info">Info</button>
+        <button type="button" class="btn btn-dark" data-toast-color="dark">Dark</button>
+      </div>
+
+      <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+        <div id="colorToast" class="toast align-items-center border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body" id="colorToastBody">Message here</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Auto-hide Configuration -->
+    <section class="mb-4">
+      <h2>Auto-hide Configuration</h2>
+      <p class="text-muted">Control auto-hide behavior with <code>data-bs-autohide</code> and <code>data-bs-delay</code>.</p>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-outline-primary" id="showAutoHideToast">Auto-hide (3s)</button>
+        <button type="button" class="btn btn-outline-primary" id="showNoAutoHideToast">No Auto-hide</button>
+      </div>
+
+      <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+        <div id="autoHideToast" class="toast" role="alert" data-bs-delay="3000">
+          <div class="toast-header">
+            <strong class="me-auto">Auto-hide Toast</strong>
+            <small>3 second delay</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">This toast will auto-hide after 3 seconds.</div>
+        </div>
+        <div id="noAutoHideToast" class="toast" role="alert" data-bs-autohide="false">
+          <div class="toast-header">
+            <strong class="me-auto">Persistent Toast</strong>
+            <small>No auto-hide</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">This toast must be manually dismissed.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Simple Toast (No Header) -->
+    <section class="mb-4">
+      <h2>Simple Toast (No Header)</h2>
+      <p class="text-muted">Compact toast without header for simple notifications.</p>
+
+      <button type="button" class="btn btn-secondary" id="showSimpleToast">Show Simple Toast</button>
+
+      <div class="toast-container position-fixed bottom-0 start-0 p-3">
+        <div id="simpleToast" class="toast align-items-center" role="alert">
+          <div class="d-flex">
+            <div class="toast-body">
+              <i class="bi bi-check2 me-2"></i>Changes saved successfully.
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Toast Example -->
+    <section class="mb-4">
+      <h2>Live Toast Pattern</h2>
+      <p class="text-muted">Common pattern for showing toasts in response to user actions.</p>
+
+      <form id="demoForm" class="row g-2 align-items-center">
+        <div class="col-auto">
+          <input type="text" class="form-control" placeholder="Enter something..." required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="formToast" class="toast align-items-center text-bg-success border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body">
+              <i class="bi bi-check-circle-fill me-2"></i>Form submitted successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // REQUIRED: Toasts must be initialized and shown programmatically
+
+    // Basic toast
+    const basicToast = new bootstrap.Toast(document.getElementById('basicToast'));
+    document.getElementById('showBasicToast').addEventListener('click', () => {
+      basicToast.show();
+    });
+
+    // Position toast demo
+    const positionToast = new bootstrap.Toast(document.getElementById('positionToast'));
+    const positionContainer = document.getElementById('positionToastContainer');
+    document.querySelectorAll('[data-position]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Reset container position classes
+        positionContainer.className = 'toast-container position-fixed p-3 ' + btn.dataset.position;
+        positionToast.show();
+      });
+    });
+
+    // Stacked toasts
+    const stackedToasts = [
+      new bootstrap.Toast(document.getElementById('stackToast1')),
+      new bootstrap.Toast(document.getElementById('stackToast2')),
+      new bootstrap.Toast(document.getElementById('stackToast3'))
+    ];
+    document.getElementById('showStackedToasts').addEventListener('click', () => {
+      stackedToasts.forEach((toast, i) => {
+        setTimeout(() => toast.show(), i * 200);
+      });
+    });
+
+    // Color variant toasts
+    const colorToast = new bootstrap.Toast(document.getElementById('colorToast'));
+    const colorToastEl = document.getElementById('colorToast');
+    const colorToastBody = document.getElementById('colorToastBody');
+    const colorMessages = {
+      success: 'Operation completed successfully!',
+      danger: 'An error occurred. Please try again.',
+      warning: 'Please review your input.',
+      info: 'Here is some helpful information.',
+      dark: 'Dark theme notification.'
+    };
+    document.querySelectorAll('[data-toast-color]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = btn.dataset.toastColor;
+        colorToastEl.className = `toast align-items-center border-0 text-bg-${color}`;
+        colorToastBody.textContent = colorMessages[color];
+        colorToast.show();
+      });
+    });
+
+    // Auto-hide toasts
+    const autoHideToast = new bootstrap.Toast(document.getElementById('autoHideToast'));
+    const noAutoHideToast = new bootstrap.Toast(document.getElementById('noAutoHideToast'));
+    document.getElementById('showAutoHideToast').addEventListener('click', () => autoHideToast.show());
+    document.getElementById('showNoAutoHideToast').addEventListener('click', () => noAutoHideToast.show());
+
+    // Simple toast
+    const simpleToast = new bootstrap.Toast(document.getElementById('simpleToast'));
+    document.getElementById('showSimpleToast').addEventListener('click', () => simpleToast.show());
+
+    // Form submission toast
+    const formToast = new bootstrap.Toast(document.getElementById('formToast'));
+    document.getElementById('demoForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      formToast.show();
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

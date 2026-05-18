@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Placeholder Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Placeholder Patterns</h1>
+
+    <!-- Basic Placeholders -->
+    <section class="mb-5">
+      <h2>Basic Placeholders</h2>
+      <p class="text-muted">Simple placeholder elements using column width classes.</p>
+
+      <p aria-hidden="true">
+        <span class="placeholder col-6"></span>
+      </p>
+      <p aria-hidden="true">
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-2"></span>
+      </p>
+      <p aria-hidden="true">
+        <span class="placeholder col-7"></span>
+        <span class="placeholder col-3"></span>
+      </p>
+    </section>
+
+    <!-- Size Variants -->
+    <section class="mb-5">
+      <h2>Size Variants</h2>
+      <p class="text-muted">Different height options for placeholders.</p>
+
+      <div class="d-flex flex-column gap-2" aria-hidden="true">
+        <span class="placeholder col-12 placeholder-lg"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12 placeholder-sm"></span>
+        <span class="placeholder col-12 placeholder-xs"></span>
+      </div>
+
+      <div class="mt-3">
+        <p><code>.placeholder-lg</code> - Large (taller)</p>
+        <p><code>.placeholder</code> - Default</p>
+        <p><code>.placeholder-sm</code> - Small</p>
+        <p><code>.placeholder-xs</code> - Extra small</p>
+      </div>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb-5">
+      <h2>Color Variants</h2>
+      <p class="text-muted">Apply background color utilities to placeholders.</p>
+
+      <div class="d-flex flex-column gap-2" aria-hidden="true">
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12 bg-primary"></span>
+        <span class="placeholder col-12 bg-secondary"></span>
+        <span class="placeholder col-12 bg-success"></span>
+        <span class="placeholder col-12 bg-danger"></span>
+        <span class="placeholder col-12 bg-warning"></span>
+        <span class="placeholder col-12 bg-info"></span>
+        <span class="placeholder col-12 bg-light"></span>
+        <span class="placeholder col-12 bg-dark"></span>
+      </div>
+    </section>
+
+    <!-- Animation Styles -->
+    <section class="mb-5">
+      <h2>Animation Styles</h2>
+      <p class="text-muted">Add <code>.placeholder-glow</code> or <code>.placeholder-wave</code> for loading animations.</p>
+
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <h5>Glow Animation</h5>
+          <p class="placeholder-glow" aria-hidden="true">
+            <span class="placeholder col-12"></span>
+            <span class="placeholder col-8"></span>
+            <span class="placeholder col-10"></span>
+            <span class="placeholder col-6"></span>
+          </p>
+        </div>
+        <div class="col-md-6 mb-4">
+          <h5>Wave Animation</h5>
+          <p class="placeholder-wave" aria-hidden="true">
+            <span class="placeholder col-12"></span>
+            <span class="placeholder col-8"></span>
+            <span class="placeholder col-10"></span>
+            <span class="placeholder col-6"></span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card Skeleton -->
+    <section class="mb-5">
+      <h2>Card Skeleton</h2>
+      <p class="text-muted">Common pattern for loading card content.</p>
+
+      <div class="row">
+        <!-- Actual Card -->
+        <div class="col-md-6 mb-4">
+          <h5 class="mb-3">Loaded Card</h5>
+          <div class="card">
+            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Card image">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skeleton Card -->
+        <div class="col-md-6 mb-4">
+          <h5 class="mb-3">Loading Skeleton</h5>
+          <div class="card" aria-hidden="true">
+            <div class="card-img-top bg-secondary" style="height: 200px;"></div>
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+              <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- List Skeleton -->
+    <section class="mb-5">
+      <h2>List Skeleton</h2>
+      <p class="text-muted">Loading state for list content.</p>
+
+      <div class="row">
+        <!-- Actual List -->
+        <div class="col-md-6 mb-4">
+          <h5 class="mb-3">Loaded List</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex align-items-center">
+              <img src="https://via.placeholder.com/40" alt="Avatar" class="rounded-circle me-3" width="40" height="40">
+              <div>
+                <strong>John Doe</strong>
+                <div class="text-muted small">john@example.com</div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <img src="https://via.placeholder.com/40" alt="Avatar" class="rounded-circle me-3" width="40" height="40">
+              <div>
+                <strong>Jane Smith</strong>
+                <div class="text-muted small">jane@example.com</div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <img src="https://via.placeholder.com/40" alt="Avatar" class="rounded-circle me-3" width="40" height="40">
+              <div>
+                <strong>Bob Johnson</strong>
+                <div class="text-muted small">bob@example.com</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Skeleton List -->
+        <div class="col-md-6 mb-4">
+          <h5 class="mb-3">Loading Skeleton</h5>
+          <ul class="list-group" aria-hidden="true">
+            <li class="list-group-item d-flex align-items-center placeholder-glow">
+              <span class="placeholder rounded-circle me-3" style="width: 40px; height: 40px;"></span>
+              <div class="flex-grow-1">
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6 placeholder-sm d-block mt-1"></span>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center placeholder-glow">
+              <span class="placeholder rounded-circle me-3" style="width: 40px; height: 40px;"></span>
+              <div class="flex-grow-1">
+                <span class="placeholder col-5"></span>
+                <span class="placeholder col-7 placeholder-sm d-block mt-1"></span>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center placeholder-glow">
+              <span class="placeholder rounded-circle me-3" style="width: 40px; height: 40px;"></span>
+              <div class="flex-grow-1">
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-5 placeholder-sm d-block mt-1"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Skeleton -->
+    <section class="mb-5">
+      <h2>Article Skeleton</h2>
+      <p class="text-muted">Loading state for blog posts or article content.</p>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <article aria-hidden="true">
+            <!-- Title -->
+            <div class="placeholder-glow mb-3">
+              <span class="placeholder col-8 placeholder-lg"></span>
+            </div>
+
+            <!-- Meta info -->
+            <div class="placeholder-glow mb-4 d-flex align-items-center gap-2">
+              <span class="placeholder rounded-circle" style="width: 32px; height: 32px;"></span>
+              <span class="placeholder col-2 placeholder-sm"></span>
+              <span class="placeholder col-2 placeholder-sm"></span>
+            </div>
+
+            <!-- Featured image -->
+            <div class="placeholder bg-secondary rounded mb-4" style="height: 300px;"></div>
+
+            <!-- Paragraphs -->
+            <div class="placeholder-glow mb-3">
+              <span class="placeholder col-12"></span>
+              <span class="placeholder col-11"></span>
+              <span class="placeholder col-12"></span>
+              <span class="placeholder col-10"></span>
+            </div>
+
+            <div class="placeholder-glow mb-3">
+              <span class="placeholder col-11"></span>
+              <span class="placeholder col-12"></span>
+              <span class="placeholder col-9"></span>
+            </div>
+
+            <div class="placeholder-glow">
+              <span class="placeholder col-12"></span>
+              <span class="placeholder col-10"></span>
+              <span class="placeholder col-8"></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Skeleton -->
+    <section class="mb-5">
+      <h2>Form Skeleton</h2>
+      <p class="text-muted">Loading state for forms.</p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card" aria-hidden="true">
+            <div class="card-body placeholder-glow">
+              <!-- Form title -->
+              <span class="placeholder col-4 placeholder-lg mb-4 d-block"></span>
+
+              <!-- Input field 1 -->
+              <span class="placeholder col-3 placeholder-sm mb-2 d-block"></span>
+              <span class="placeholder col-12 mb-3 d-block" style="height: 38px;"></span>
+
+              <!-- Input field 2 -->
+              <span class="placeholder col-4 placeholder-sm mb-2 d-block"></span>
+              <span class="placeholder col-12 mb-3 d-block" style="height: 38px;"></span>
+
+              <!-- Textarea -->
+              <span class="placeholder col-3 placeholder-sm mb-2 d-block"></span>
+              <span class="placeholder col-12 mb-3 d-block" style="height: 100px;"></span>
+
+              <!-- Button -->
+              <span class="placeholder col-4 d-block" style="height: 38px;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Skeleton -->
+    <section class="mb-5">
+      <h2>Table Skeleton</h2>
+      <p class="text-muted">Loading state for tabular data.</p>
+
+      <div class="table-responsive">
+        <table class="table" aria-hidden="true">
+          <thead>
+            <tr>
+              <th class="placeholder-glow"><span class="placeholder col-6"></span></th>
+              <th class="placeholder-glow"><span class="placeholder col-8"></span></th>
+              <th class="placeholder-glow"><span class="placeholder col-5"></span></th>
+              <th class="placeholder-glow"><span class="placeholder col-4"></span></th>
+            </tr>
+          </thead>
+          <tbody class="placeholder-wave">
+            <tr>
+              <td><span class="placeholder col-8"></span></td>
+              <td><span class="placeholder col-10"></span></td>
+              <td><span class="placeholder col-6"></span></td>
+              <td><span class="placeholder col-5"></span></td>
+            </tr>
+            <tr>
+              <td><span class="placeholder col-7"></span></td>
+              <td><span class="placeholder col-9"></span></td>
+              <td><span class="placeholder col-5"></span></td>
+              <td><span class="placeholder col-6"></span></td>
+            </tr>
+            <tr>
+              <td><span class="placeholder col-9"></span></td>
+              <td><span class="placeholder col-8"></span></td>
+              <td><span class="placeholder col-7"></span></td>
+              <td><span class="placeholder col-4"></span></td>
+            </tr>
+            <tr>
+              <td><span class="placeholder col-6"></span></td>
+              <td><span class="placeholder col-11"></span></td>
+              <td><span class="placeholder col-5"></span></td>
+              <td><span class="placeholder col-7"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Product Grid Skeleton -->
+    <section class="mb-5">
+      <h2>Product Grid Skeleton</h2>
+      <p class="text-muted">Loading state for e-commerce product grids.</p>
+
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" aria-hidden="true">
+        <div class="col">
+          <div class="card h-100">
+            <div class="bg-secondary" style="height: 180px;"></div>
+            <div class="card-body placeholder-glow">
+              <span class="placeholder col-8 mb-2 d-block"></span>
+              <span class="placeholder col-5 placeholder-sm mb-3 d-block"></span>
+              <span class="placeholder col-4 placeholder-lg d-block"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="bg-secondary" style="height: 180px;"></div>
+            <div class="card-body placeholder-wave">
+              <span class="placeholder col-7 mb-2 d-block"></span>
+              <span class="placeholder col-6 placeholder-sm mb-3 d-block"></span>
+              <span class="placeholder col-3 placeholder-lg d-block"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="bg-secondary" style="height: 180px;"></div>
+            <div class="card-body placeholder-glow">
+              <span class="placeholder col-9 mb-2 d-block"></span>
+              <span class="placeholder col-4 placeholder-sm mb-3 d-block"></span>
+              <span class="placeholder col-5 placeholder-lg d-block"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="bg-secondary" style="height: 180px;"></div>
+            <div class="card-body placeholder-wave">
+              <span class="placeholder col-6 mb-2 d-block"></span>
+              <span class="placeholder col-7 placeholder-sm mb-3 d-block"></span>
+              <span class="placeholder col-4 placeholder-lg d-block"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="mb-5">
+      <h2>Interactive Loading Demo</h2>
+      <p class="text-muted">Toggle between loading and loaded states.</p>
+
+      <button class="btn btn-primary mb-4" id="toggleLoadingBtn">
+        <i class="bi bi-arrow-repeat me-1"></i>Toggle Loading State
+      </button>
+
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Loading State -->
+          <div id="loadingState" class="card" aria-hidden="true">
+            <div class="bg-secondary" style="height: 150px;"></div>
+            <div class="card-body placeholder-glow">
+              <span class="placeholder col-6 placeholder-lg mb-3 d-block"></span>
+              <span class="placeholder col-10 mb-2 d-block"></span>
+              <span class="placeholder col-8 mb-2 d-block"></span>
+              <span class="placeholder col-11 mb-3 d-block"></span>
+              <span class="btn btn-primary disabled placeholder col-4"></span>
+            </div>
+          </div>
+
+          <!-- Loaded State -->
+          <div id="loadedState" class="card d-none">
+            <img src="https://via.placeholder.com/400x150" class="card-img-top" alt="Product image">
+            <div class="card-body">
+              <h5 class="card-title">Product Name</h5>
+              <p class="card-text">This is the actual loaded content that appears after the loading state is complete.</p>
+              <a href="#" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility Notes -->
+    <section class="mb-5">
+      <h2>Accessibility Notes</h2>
+      <div class="alert alert-warning">
+        <h5><i class="bi bi-universal-access me-2"></i>Accessibility Requirements</h5>
+        <ul class="mb-0">
+          <li>Add <code>aria-hidden="true"</code> to placeholder containers to hide from screen readers</li>
+          <li>Provide alternative loading announcements using <code>aria-live</code> regions</li>
+          <li>Replace placeholders with actual content once loaded</li>
+          <li>Consider users who prefer reduced motion (animations respect <code>prefers-reduced-motion</code>)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5>Screen Reader Example</h5>
+          <pre class="bg-light p-3 rounded"><code>&lt;!-- Hidden placeholder --&gt;
+&lt;div aria-hidden="true"&gt;
+  &lt;span class="placeholder col-6"&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Live region for announcements --&gt;
+&lt;div aria-live="polite" class="visually-hidden"&gt;
+  Loading content...
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // Interactive Demo
+    const toggleBtn = document.getElementById('toggleLoadingBtn');
+    const loadingState = document.getElementById('loadingState');
+    const loadedState = document.getElementById('loadedState');
+
+    toggleBtn.addEventListener('click', () => {
+      loadingState.classList.toggle('d-none');
+      loadedState.classList.toggle('d-none');
+    });
+  </script>
+</body>
+</html>

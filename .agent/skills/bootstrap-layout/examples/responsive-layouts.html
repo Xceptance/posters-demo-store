@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Responsive Layout Examples</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+    .demo-col {
+      background-color: rgba(13, 110, 253, 0.15);
+      border: 1px solid rgba(13, 110, 253, 0.3);
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    section { margin-bottom: 3rem; }
+  </style>
+</head>
+<body class="py-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap 5.3 Layout Examples</h1>
+
+    <!-- Basic Grid -->
+    <section>
+      <h2>Basic Equal-Width Columns</h2>
+      <div class="row">
+        <div class="col"><div class="demo-col">1 of 3</div></div>
+        <div class="col"><div class="demo-col">2 of 3</div></div>
+        <div class="col"><div class="demo-col">3 of 3</div></div>
+      </div>
+    </section>
+
+    <!-- Specific Widths -->
+    <section>
+      <h2>Specific Column Widths</h2>
+      <div class="row">
+        <div class="col-3"><div class="demo-col">col-3</div></div>
+        <div class="col-6"><div class="demo-col">col-6</div></div>
+        <div class="col-3"><div class="demo-col">col-3</div></div>
+      </div>
+    </section>
+
+    <!-- Responsive Columns -->
+    <section>
+      <h2>Responsive Columns (Stack on Mobile)</h2>
+      <p class="text-muted">Resize browser to see effect</p>
+      <div class="row">
+        <div class="col-12 col-md-4"><div class="demo-col">col-12 col-md-4</div></div>
+        <div class="col-12 col-md-4"><div class="demo-col">col-12 col-md-4</div></div>
+        <div class="col-12 col-md-4"><div class="demo-col">col-12 col-md-4</div></div>
+      </div>
+    </section>
+
+    <!-- Row Columns -->
+    <section>
+      <h2>Row Columns (Automatic Grid)</h2>
+      <p class="text-muted">1 column on xs, 2 on sm, 3 on md, 4 on lg</p>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        <div class="col"><div class="demo-col">Item 1</div></div>
+        <div class="col"><div class="demo-col">Item 2</div></div>
+        <div class="col"><div class="demo-col">Item 3</div></div>
+        <div class="col"><div class="demo-col">Item 4</div></div>
+        <div class="col"><div class="demo-col">Item 5</div></div>
+        <div class="col"><div class="demo-col">Item 6</div></div>
+      </div>
+    </section>
+
+    <!-- Gutters -->
+    <section>
+      <h2>Custom Gutters</h2>
+
+      <h5>No Gutters (g-0)</h5>
+      <div class="row g-0 mb-3">
+        <div class="col"><div class="demo-col">No gutter</div></div>
+        <div class="col"><div class="demo-col">No gutter</div></div>
+        <div class="col"><div class="demo-col">No gutter</div></div>
+      </div>
+
+      <h5>Large Gutters (g-5)</h5>
+      <div class="row g-5">
+        <div class="col"><div class="demo-col">Large gutter</div></div>
+        <div class="col"><div class="demo-col">Large gutter</div></div>
+        <div class="col"><div class="demo-col">Large gutter</div></div>
+      </div>
+    </section>
+
+    <!-- Alignment -->
+    <section>
+      <h2>Vertical Alignment</h2>
+      <div class="row align-items-center" style="height: 150px; background: #f8f9fa;">
+        <div class="col"><div class="demo-col">Centered</div></div>
+        <div class="col"><div class="demo-col">Centered</div></div>
+        <div class="col"><div class="demo-col">Centered</div></div>
+      </div>
+    </section>
+
+    <!-- Horizontal Justification -->
+    <section>
+      <h2>Horizontal Justification</h2>
+
+      <h5>justify-content-center</h5>
+      <div class="row justify-content-center mb-3">
+        <div class="col-3"><div class="demo-col">Centered</div></div>
+        <div class="col-3"><div class="demo-col">Centered</div></div>
+      </div>
+
+      <h5>justify-content-between</h5>
+      <div class="row justify-content-between mb-3">
+        <div class="col-3"><div class="demo-col">Left</div></div>
+        <div class="col-3"><div class="demo-col">Right</div></div>
+      </div>
+
+      <h5>justify-content-evenly</h5>
+      <div class="row justify-content-evenly">
+        <div class="col-3"><div class="demo-col">Even</div></div>
+        <div class="col-3"><div class="demo-col">Even</div></div>
+      </div>
+    </section>
+
+    <!-- Ordering -->
+    <section>
+      <h2>Column Ordering</h2>
+      <div class="row">
+        <div class="col order-3"><div class="demo-col">First in DOM, order-3</div></div>
+        <div class="col order-1"><div class="demo-col">Second in DOM, order-1</div></div>
+        <div class="col order-2"><div class="demo-col">Third in DOM, order-2</div></div>
+      </div>
+    </section>
+
+    <!-- Offset -->
+    <section>
+      <h2>Column Offset</h2>
+      <div class="row">
+        <div class="col-md-4 offset-md-4"><div class="demo-col">Centered with offset</div></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><div class="demo-col">Left</div></div>
+        <div class="col-md-4 offset-md-4"><div class="demo-col">Offset right</div></div>
+      </div>
+    </section>
+
+    <!-- Nesting -->
+    <section>
+      <h2>Nested Columns</h2>
+      <div class="row">
+        <div class="col-9">
+          <div class="demo-col">
+            Level 1: col-9
+            <div class="row mt-2">
+              <div class="col-6"><div class="demo-col">Nested col-6</div></div>
+              <div class="col-6"><div class="demo-col">Nested col-6</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="demo-col">Level 1: col-3</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sidebar Layout -->
+    <section>
+      <h2>Sidebar Layout</h2>
+      <div class="row">
+        <aside class="col-md-3 col-lg-2">
+          <div class="demo-col" style="min-height: 200px;">Sidebar</div>
+        </aside>
+        <main class="col-md-9 col-lg-10">
+          <div class="demo-col" style="min-height: 200px;">Main Content</div>
+        </main>
+      </div>
+    </section>
+
+    <!-- Card Grid -->
+    <section>
+      <h2>Responsive Card Grid</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Card 1</h5>
+              <p class="card-text">This is a card in a responsive grid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Card 2</h5>
+              <p class="card-text">Equal height cards using h-100.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Card 3</h5>
+              <p class="card-text">Grid uses row-cols for automatic layout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CSS Grid (Experimental) -->
+    <section>
+      <h2>CSS Grid (Experimental)</h2>
+      <p class="text-muted">Bootstrap's CSS Grid is opt-in and requires Sass configuration to enable.</p>
+
+      <h5>Basic CSS Grid (6 columns each)</h5>
+      <div class="grid text-center mb-3">
+        <div class="g-col-6"><div class="demo-col">g-col-6</div></div>
+        <div class="g-col-6"><div class="demo-col">g-col-6</div></div>
+      </div>
+
+      <h5>Mixed Column Widths</h5>
+      <div class="grid text-center mb-3">
+        <div class="g-col-4"><div class="demo-col">g-col-4</div></div>
+        <div class="g-col-8"><div class="demo-col">g-col-8</div></div>
+      </div>
+
+      <h5>Three Columns</h5>
+      <div class="grid text-center mb-3">
+        <div class="g-col-4"><div class="demo-col">g-col-4</div></div>
+        <div class="g-col-4"><div class="demo-col">g-col-4</div></div>
+        <div class="g-col-4"><div class="demo-col">g-col-4</div></div>
+      </div>
+
+      <h5>Custom Column Count (3 columns)</h5>
+      <div class="grid text-center" style="--bs-columns: 3;">
+        <div class="g-col-1"><div class="demo-col">1/3</div></div>
+        <div class="g-col-2"><div class="demo-col">2/3</div></div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

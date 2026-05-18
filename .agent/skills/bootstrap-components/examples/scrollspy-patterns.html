@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Scrollspy Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+  <style>
+    /* Scrollspy demo containers */
+    .scrollspy-example {
+      height: 300px;
+      overflow-y: scroll;
+      position: relative;
+    }
+    .scrollspy-example-full {
+      height: 400px;
+      overflow-y: scroll;
+      position: relative;
+    }
+    /* Smooth scroll for demos */
+    .scrollspy-example, .scrollspy-example-full {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Scrollspy Patterns</h1>
+
+    <!-- Basic Scrollspy with Navbar -->
+    <section class="mb-5">
+      <h2>Basic Scrollspy with Navbar</h2>
+      <p class="text-muted">Automatically update navbar links based on scroll position.</p>
+
+      <nav id="navbar-example1" class="navbar bg-body-tertiary px-3 mb-3 rounded">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspy-item-1">First</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspy-item-2">Second</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#scrollspy-item-3">Third</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example1" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded" tabindex="0">
+        <h4 id="scrollspy-item-1">First heading</h4>
+        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisi porta lorem mollis aliquam ut porttitor leo. Facilisis mauris sit amet massa vitae tortor condimentum lacinia quis.</p>
+        <p>Donec massa sapien faucibus et molestie ac feugiat sed lectus. Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar.</p>
+
+        <h4 id="scrollspy-item-2">Second heading</h4>
+        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+        <p>Volutpat commodo sed egestas egestas fringilla phasellus faucibus. Amet cursus sit amet dictum sit amet justo donec enim.</p>
+        <p>Nunc sed id semper risus in hendrerit gravida rutrum. Non nisi est sit amet facilisis magna etiam tempor orci.</p>
+
+        <h4 id="scrollspy-item-3">Third heading</h4>
+        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
+        <p>Ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim. Suspendisse interdum consectetur libero id faucibus nisl tincidunt.</p>
+        <p>Adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum. Nibh tellus molestie nunc non blandit massa enim nec dui.</p>
+      </div>
+    </section>
+
+    <!-- Scrollspy with Nested Nav -->
+    <section class="mb-5">
+      <h2>Scrollspy with Nested Nav</h2>
+      <p class="text-muted">Works with nested navigation structures including dropdowns.</p>
+
+      <nav id="navbar-nested" class="navbar bg-body-tertiary px-3 mb-3 rounded">
+        <a class="navbar-brand" href="#">Docs</a>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="#nested-intro">Intro</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Chapters</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#nested-chapter1">Chapter 1</a></li>
+              <li><a class="dropdown-item" href="#nested-chapter2">Chapter 2</a></li>
+              <li><a class="dropdown-item" href="#nested-chapter3">Chapter 3</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#nested-conclusion">Conclusion</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div data-bs-spy="scroll" data-bs-target="#navbar-nested" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded" tabindex="0">
+        <h4 id="nested-intro">Introduction</h4>
+        <p>Welcome to this documentation. Scroll through to see the nested navigation update as you read different sections.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero sed cursus ante dapibus diam.</p>
+
+        <h4 id="nested-chapter1">Chapter 1: Getting Started</h4>
+        <p>This chapter covers the basics of getting started with the framework. We'll walk through installation, configuration, and your first project.</p>
+        <p>Sed nisi lacus sed viverra tellus in hac habitasse platea. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt.</p>
+
+        <h4 id="nested-chapter2">Chapter 2: Core Concepts</h4>
+        <p>Understanding the core concepts is essential for effective use. This section explains the fundamental principles and patterns.</p>
+        <p>Feugiat nibh sed pulvinar proin gravida hendrerit lectus. Amet consectetur adipiscing elit pellentesque habitant morbi tristique.</p>
+
+        <h4 id="nested-chapter3">Chapter 3: Advanced Topics</h4>
+        <p>Once you've mastered the basics, dive into these advanced topics to take your skills to the next level.</p>
+        <p>Vitae sapien pellentesque habitant morbi tristique senectus et netus. Sit amet risus nullam eget felis eget nunc lobortis.</p>
+
+        <h4 id="nested-conclusion">Conclusion</h4>
+        <p>Thank you for reading this documentation. We hope it has been helpful in understanding the framework.</p>
+        <p>Massa placerat duis ultricies lacus sed turpis tincidunt id aliquet. Congue eu consequat ac felis donec et odio pellentesque.</p>
+      </div>
+    </section>
+
+    <!-- Scrollspy with List Group -->
+    <section class="mb-5">
+      <h2>Scrollspy with List Group</h2>
+      <p class="text-muted">Use a list group for sidebar-style navigation.</p>
+
+      <div class="row">
+        <div class="col-4">
+          <div id="list-example" class="list-group sticky-top" style="top: 20px;">
+            <a class="list-group-item list-group-item-action" href="#list-item-1">Item 1</a>
+            <a class="list-group-item list-group-item-action" href="#list-item-2">Item 2</a>
+            <a class="list-group-item list-group-item-action" href="#list-item-3">Item 3</a>
+            <a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>
+          </div>
+        </div>
+        <div class="col-8">
+          <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded" tabindex="0">
+            <h4 id="list-item-1">Item 1</h4>
+            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted in the list group.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+
+            <h4 id="list-item-2">Item 2</h4>
+            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted in the list group.</p>
+            <p>Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla.</p>
+
+            <h4 id="list-item-3">Item 3</h4>
+            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted in the list group.</p>
+            <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+
+            <h4 id="list-item-4">Item 4</h4>
+            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted in the list group.</p>
+            <p>Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrollspy with Simple Anchors -->
+    <section class="mb-5">
+      <h2>Scrollspy with Simple Anchors</h2>
+      <p class="text-muted">Works with any navigation element that contains anchor links.</p>
+
+      <nav id="simple-nav" class="nav nav-pills mb-3">
+        <a class="nav-link" href="#simple-fat">@fat</a>
+        <a class="nav-link" href="#simple-mdo">@mdo</a>
+        <a class="nav-link" href="#simple-one">one</a>
+        <a class="nav-link" href="#simple-two">two</a>
+        <a class="nav-link" href="#simple-three">three</a>
+      </nav>
+
+      <div data-bs-spy="scroll" data-bs-target="#simple-nav" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded" tabindex="0">
+        <h4 id="simple-fat">@fat</h4>
+        <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever.</p>
+        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</p>
+
+        <h4 id="simple-mdo">@mdo</h4>
+        <p>Veniam marfa mustache skateboard, adipisicing fugiat velit pitchfork beard. Freegan beard aliqua cupidatat mcsweeney's vero.</p>
+        <p>Cupidatat vinyl cillum PBR&B, locavore selfies tumblr williamsburg et church-key nisi dolor qui seitan pork belly.</p>
+
+        <h4 id="simple-one">one</h4>
+        <p>Occaecat commodo aliqua delectus. Fap craft beer deserunt skateboard ea. Lomo bicycle rights adipisicing banh mi, velit ea sunt next level locavore.</p>
+        <p>Single-origin coffee wayfarers sriracha, literally tofu etsy vegan echo park.</p>
+
+        <h4 id="simple-two">two</h4>
+        <p>In incididunt echo park, officia deserunt mcsweeney's proident master cleanse thundercats sapiente veniam.</p>
+        <p>Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer.</p>
+
+        <h4 id="simple-three">three</h4>
+        <p>Tousled lo-fi viral, tattooed lomo fanny pack asymmetrical readymade 90's vinyl authentic wayfarers neutra.</p>
+        <p>Pour-over ethical gentrify selvage, labore plaid tumblr thundercats seitan.</p>
+      </div>
+    </section>
+
+    <!-- Documentation Page Pattern -->
+    <section class="mb-5">
+      <h2>Documentation Page Pattern</h2>
+      <p class="text-muted">Common pattern for documentation pages with sidebar table of contents.</p>
+
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card sticky-top" style="top: 20px;">
+            <div class="card-header">
+              <strong>On This Page</strong>
+            </div>
+            <nav id="doc-nav" class="list-group list-group-flush">
+              <a class="list-group-item list-group-item-action" href="#doc-overview">Overview</a>
+              <a class="list-group-item list-group-item-action" href="#doc-installation">Installation</a>
+              <a class="list-group-item list-group-item-action" href="#doc-usage">Usage</a>
+              <a class="list-group-item list-group-item-action" href="#doc-api">API Reference</a>
+              <a class="list-group-item list-group-item-action" href="#doc-examples">Examples</a>
+              <a class="list-group-item list-group-item-action" href="#doc-faq">FAQ</a>
+            </nav>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div data-bs-spy="scroll" data-bs-target="#doc-nav" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example-full bg-body-tertiary p-4 rounded" tabindex="0">
+            <h3 id="doc-overview">Overview</h3>
+            <p class="lead">Welcome to the comprehensive documentation for our component library.</p>
+            <p>This documentation covers everything you need to know to get started with our framework. We'll walk through installation, configuration, usage patterns, and advanced topics.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <hr>
+
+            <h3 id="doc-installation">Installation</h3>
+            <p>Install the package using your preferred package manager:</p>
+            <pre class="bg-dark text-light p-3 rounded"><code>npm install @example/component-library</code></pre>
+            <p>Or using yarn:</p>
+            <pre class="bg-dark text-light p-3 rounded"><code>yarn add @example/component-library</code></pre>
+            <p>After installation, import the library in your project's entry point.</p>
+            <hr>
+
+            <h3 id="doc-usage">Usage</h3>
+            <p>Basic usage is straightforward. Import the components you need:</p>
+            <pre class="bg-dark text-light p-3 rounded"><code>import { Button, Card, Modal } from '@example/component-library';</code></pre>
+            <p>Then use them in your application:</p>
+            <pre class="bg-dark text-light p-3 rounded"><code>&lt;Button variant="primary"&gt;Click me&lt;/Button&gt;</code></pre>
+            <p>All components accept a variety of props for customization.</p>
+            <hr>
+
+            <h3 id="doc-api">API Reference</h3>
+            <p>Each component exposes a consistent API. Common props include:</p>
+            <ul>
+              <li><code>className</code> - Additional CSS classes</li>
+              <li><code>style</code> - Inline styles object</li>
+              <li><code>variant</code> - Visual variant (primary, secondary, etc.)</li>
+              <li><code>size</code> - Size variant (sm, md, lg)</li>
+            </ul>
+            <p>See individual component documentation for specific props.</p>
+            <hr>
+
+            <h3 id="doc-examples">Examples</h3>
+            <p>Here are some common usage examples:</p>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6>Example 1: Basic Button</h6>
+                <button class="btn btn-primary">Primary Button</button>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6>Example 2: Button Group</h6>
+                <div class="btn-group">
+                  <button class="btn btn-outline-primary">Left</button>
+                  <button class="btn btn-outline-primary">Middle</button>
+                  <button class="btn btn-outline-primary">Right</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <h3 id="doc-faq">FAQ</h3>
+            <div class="accordion" id="faqAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    How do I customize the theme?
+                  </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    You can customize the theme by overriding CSS custom properties or using the theming API.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    Is TypeScript supported?
+                  </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Yes! The library is written in TypeScript and includes type definitions out of the box.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript Initialization -->
+    <section class="mb-5">
+      <h2>JavaScript Initialization</h2>
+      <p class="text-muted">While scrollspy works via data attributes, you can also initialize or refresh it via JavaScript.</p>
+
+      <div class="card">
+        <div class="card-body">
+          <h5>Initialize via JavaScript</h5>
+          <pre class="bg-dark text-light p-3 rounded"><code>const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+  target: '#navbar-example',
+  rootMargin: '0px 0px -40%',
+  smoothScroll: true
+});</code></pre>
+
+          <h5 class="mt-4">Refresh after DOM changes</h5>
+          <pre class="bg-dark text-light p-3 rounded"><code>// When adding/removing elements dynamically
+scrollSpy.refresh();</code></pre>
+
+          <h5 class="mt-4">Using data attributes</h5>
+          <pre class="bg-dark text-light p-3 rounded"><code>&lt;div data-bs-spy="scroll"
+     data-bs-target="#navbar-example"
+     data-bs-root-margin="0px 0px -40%"
+     data-bs-smooth-scroll="true"
+     tabindex="0"&gt;
+  ...
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Configuration Options -->
+    <section class="mb-5">
+      <h2>Configuration Options</h2>
+      <p class="text-muted">Key data attributes for configuring scrollspy behavior.</p>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data-bs-spy="scroll"</code></td>
+              <td>Enables scrollspy on the element</td>
+              <td>Required on scrollable container</td>
+            </tr>
+            <tr>
+              <td><code>data-bs-target</code></td>
+              <td>CSS selector of navigation to update</td>
+              <td><code>#navbar-example</code></td>
+            </tr>
+            <tr>
+              <td><code>data-bs-root-margin</code></td>
+              <td>Intersection Observer rootMargin for activation threshold</td>
+              <td><code>0px 0px -40%</code></td>
+            </tr>
+            <tr>
+              <td><code>data-bs-smooth-scroll</code></td>
+              <td>Enable smooth scrolling when clicking nav links</td>
+              <td><code>true</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Accessibility Notes -->
+    <section class="mb-5">
+      <h2>Accessibility Notes</h2>
+      <div class="alert alert-warning">
+        <h5><i class="bi bi-universal-access me-2"></i>Accessibility Requirements</h5>
+        <ul class="mb-0">
+          <li>Add <code>tabindex="0"</code> to the scrollable container for keyboard accessibility</li>
+          <li>Ensure section headings have unique <code>id</code> attributes matching navigation <code>href</code> values</li>
+          <li>Navigation links should use proper anchor syntax (<code>href="#section-id"</code>)</li>
+          <li>Consider users who navigate with keyboard - they should be able to tab to and scroll the container</li>
+          <li>The <code>data-bs-smooth-scroll</code> option respects <code>prefers-reduced-motion</code> automatically</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

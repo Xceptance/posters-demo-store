@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Collapse Patterns</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h1 class="mb-4">Bootstrap Collapse Patterns</h1>
+
+    <!-- Basic Collapse -->
+    <section class="mb-5">
+      <h2>Basic Collapse</h2>
+      <p class="text-muted">Toggle visibility of content with a button or link.</p>
+
+      <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Link with href
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Button with data-bs-target
+        </button>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          This content is hidden by default. Click either button above to toggle visibility. The collapse component uses smooth CSS transitions for the show/hide animation.
+        </div>
+      </div>
+    </section>
+
+    <!-- Initially Shown -->
+    <section class="mb-5">
+      <h2>Initially Shown</h2>
+      <p class="text-muted">Add <code>.show</code> class to display content by default.</p>
+
+      <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseShown" aria-expanded="true" aria-controls="collapseShown">
+        Toggle Content (Initially Visible)
+      </button>
+      <div class="collapse show mt-3" id="collapseShown">
+        <div class="card card-body">
+          This content is visible by default because of the <code>.show</code> class. Note that <code>aria-expanded="true"</code> is set on the trigger button.
+        </div>
+      </div>
+    </section>
+
+    <!-- Horizontal Collapse -->
+    <section class="mb-5">
+      <h2>Horizontal Collapse</h2>
+      <p class="text-muted">Use <code>.collapse-horizontal</code> to collapse width instead of height.</p>
+
+      <p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHorizontal" aria-expanded="false" aria-controls="collapseHorizontal">
+          Toggle Horizontal Collapse
+        </button>
+      </p>
+      <div style="min-height: 120px;">
+        <div class="collapse collapse-horizontal" id="collapseHorizontal">
+          <div class="card card-body" style="width: 300px;">
+            This content collapses horizontally. The width animates from 0 to 300px. Useful for sidebars or side panels.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiple Targets -->
+    <section class="mb-5">
+      <h2>Multiple Targets</h2>
+      <p class="text-muted">Toggle multiple elements at once using a class selector.</p>
+
+      <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseOne" role="button" aria-expanded="false" aria-controls="multiCollapseOne">
+          Toggle First
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseTwo" aria-expanded="false" aria-controls="multiCollapseTwo">
+          Toggle Second
+        </button>
+        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseOne multiCollapseTwo">
+          Toggle Both
+        </button>
+      </p>
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseOne">
+            <div class="card card-body bg-primary text-white">
+              First collapsible content. Has <code>.multi-collapse</code> class.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseTwo">
+            <div class="card card-body bg-secondary text-white">
+              Second collapsible content. Also has <code>.multi-collapse</code> class.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Read More Pattern -->
+    <section class="mb-5">
+      <h2>Read More Pattern</h2>
+      <p class="text-muted">Common pattern for truncating long text with expand option.</p>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Article Title</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          </p>
+          <div class="collapse" id="readMoreCollapse">
+            <p class="card-text">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p class="card-text">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
+          <a class="btn btn-link p-0" data-bs-toggle="collapse" href="#readMoreCollapse" role="button" aria-expanded="false">
+            <span class="read-more-text">Read more <i class="bi bi-chevron-down"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Panel Pattern -->
+    <section class="mb-5">
+      <h2>Filter Panel Pattern</h2>
+      <p class="text-muted">Collapsible filter sections for e-commerce or search pages.</p>
+
+      <div class="card" style="max-width: 300px;">
+        <div class="card-header">
+          <i class="bi bi-funnel me-2"></i>Filters
+        </div>
+        <div class="card-body p-0">
+          <!-- Price Filter -->
+          <div class="border-bottom">
+            <button class="btn btn-link text-decoration-none w-100 text-start d-flex justify-content-between align-items-center p-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#filterPrice" aria-expanded="true">
+              <span><strong>Price Range</strong></span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="collapse show" id="filterPrice">
+              <div class="px-3 pb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="price1">
+                  <label class="form-check-label" for="price1">Under $25</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="price2">
+                  <label class="form-check-label" for="price2">$25 - $50</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="price3">
+                  <label class="form-check-label" for="price3">$50 - $100</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="price4">
+                  <label class="form-check-label" for="price4">Over $100</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand Filter -->
+          <div class="border-bottom">
+            <button class="btn btn-link text-decoration-none w-100 text-start d-flex justify-content-between align-items-center p-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#filterBrand" aria-expanded="false">
+              <span><strong>Brand</strong></span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="collapse" id="filterBrand">
+              <div class="px-3 pb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="brand1">
+                  <label class="form-check-label" for="brand1">Apple</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="brand2">
+                  <label class="form-check-label" for="brand2">Samsung</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="brand3">
+                  <label class="form-check-label" for="brand3">Sony</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rating Filter -->
+          <div>
+            <button class="btn btn-link text-decoration-none w-100 text-start d-flex justify-content-between align-items-center p-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#filterRating" aria-expanded="false">
+              <span><strong>Rating</strong></span>
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="collapse" id="filterRating">
+              <div class="px-3 pb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="rating4">
+                  <label class="form-check-label" for="rating4">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    & Up
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="rating3">
+                  <label class="form-check-label" for="rating3">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    & Up
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sidebar Navigation Pattern -->
+    <section class="mb-5">
+      <h2>Sidebar Navigation Pattern</h2>
+      <p class="text-muted">Collapsible navigation menu with nested sections.</p>
+
+      <div class="card" style="max-width: 280px;">
+        <div class="card-body p-0">
+          <nav class="nav flex-column">
+            <a class="nav-link" href="#">
+              <i class="bi bi-house me-2"></i>Dashboard
+            </a>
+
+            <!-- Products Section -->
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#navProducts" aria-expanded="true">
+              <span><i class="bi bi-box me-2"></i>Products</span>
+              <i class="bi bi-chevron-down small"></i>
+            </a>
+            <div class="collapse show" id="navProducts">
+              <nav class="nav flex-column ms-4">
+                <a class="nav-link py-1" href="#">All Products</a>
+                <a class="nav-link py-1" href="#">Add New</a>
+                <a class="nav-link py-1" href="#">Categories</a>
+                <a class="nav-link py-1" href="#">Inventory</a>
+              </nav>
+            </div>
+
+            <!-- Orders Section -->
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#navOrders" aria-expanded="false">
+              <span><i class="bi bi-cart me-2"></i>Orders</span>
+              <i class="bi bi-chevron-down small"></i>
+            </a>
+            <div class="collapse" id="navOrders">
+              <nav class="nav flex-column ms-4">
+                <a class="nav-link py-1" href="#">All Orders</a>
+                <a class="nav-link py-1" href="#">Pending</a>
+                <a class="nav-link py-1" href="#">Completed</a>
+                <a class="nav-link py-1" href="#">Refunds</a>
+              </nav>
+            </div>
+
+            <!-- Users Section -->
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#navUsers" aria-expanded="false">
+              <span><i class="bi bi-people me-2"></i>Users</span>
+              <i class="bi bi-chevron-down small"></i>
+            </a>
+            <div class="collapse" id="navUsers">
+              <nav class="nav flex-column ms-4">
+                <a class="nav-link py-1" href="#">All Users</a>
+                <a class="nav-link py-1" href="#">Add User</a>
+                <a class="nav-link py-1" href="#">Roles</a>
+              </nav>
+            </div>
+
+            <a class="nav-link" href="#">
+              <i class="bi bi-gear me-2"></i>Settings
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript Control -->
+    <section class="mb-5">
+      <h2>JavaScript Control</h2>
+      <p class="text-muted">Programmatic control of collapse elements.</p>
+
+      <div class="mb-3">
+        <button class="btn btn-primary" id="showBtn">Show</button>
+        <button class="btn btn-secondary" id="hideBtn">Hide</button>
+        <button class="btn btn-outline-primary" id="toggleBtn">Toggle</button>
+      </div>
+
+      <div class="collapse" id="jsControlCollapse">
+        <div class="card card-body">
+          This collapse is controlled via JavaScript. Use the buttons above to show, hide, or toggle.
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>Events:</strong> Listen for <code>show.bs.collapse</code>, <code>shown.bs.collapse</code>, <code>hide.bs.collapse</code>, and <code>hidden.bs.collapse</code> events.
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    // JavaScript Control Demo
+    const collapseEl = document.getElementById('jsControlCollapse');
+    const collapse = new bootstrap.Collapse(collapseEl, { toggle: false });
+
+    document.getElementById('showBtn').addEventListener('click', () => collapse.show());
+    document.getElementById('hideBtn').addEventListener('click', () => collapse.hide());
+    document.getElementById('toggleBtn').addEventListener('click', () => collapse.toggle());
+
+    // Event listeners
+    collapseEl.addEventListener('shown.bs.collapse', () => console.log('Collapse shown'));
+    collapseEl.addEventListener('hidden.bs.collapse', () => console.log('Collapse hidden'));
+  </script>
+</body>
+</html>

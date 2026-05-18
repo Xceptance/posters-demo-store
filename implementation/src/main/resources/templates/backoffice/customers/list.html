@@ -9,6 +9,9 @@
     <div layout:fragment="pageTitle">Customers</div>
 
     <div layout:fragment="pageActions">
+        <a th:href="@{/backoffice/customers/new}" class="btn btn-primary d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined fs-6">add</span> New Customer
+        </a>
     </div>
 
     <div layout:fragment="content">
@@ -34,9 +37,24 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead>
                         <tr>
-                            <th style="width: 80px;">#</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th style="width: 80px;">
+                                <a th:href="@{/backoffice/customers(q=${q}, sort='number', dir=${sort == 'number' and dir == 'asc' ? 'desc' : 'asc'})}" 
+                                   class="text-decoration-none text-dark d-flex align-items-center">
+                                    # <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'number'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a th:href="@{/backoffice/customers(q=${q}, sort='name', dir=${sort == 'name' and dir == 'asc' ? 'desc' : 'asc'})}" 
+                                   class="text-decoration-none text-dark d-flex align-items-center">
+                                    Name <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'name'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a th:href="@{/backoffice/customers(q=${q}, sort='email', dir=${sort == 'email' and dir == 'asc' ? 'desc' : 'asc'})}" 
+                                   class="text-decoration-none text-dark d-flex align-items-center">
+                                    Email <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'email'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
+                                </a>
+                            </th>
                             <th>Order Count</th>
                             <th>Last Login</th>
                             <th class="text-end">Actions</th>
@@ -73,7 +91,10 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                                             <li>
-                                                <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2">
+                                                <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
+                                                        th:hx-get="@{/backoffice/customers/{id}/delete(id=${item.customer.id})}"
+                                                        hx-target="#dialog-container"
+                                                        hx-swap="innerHTML">
                                                     <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
                                                     Delete
                                                 </button>
@@ -103,6 +124,9 @@
                 </li>
             </ul>
         </nav>
+        
+        <!-- Modal Injection Point -->
+        <div id="dialog-container"></div>
     </div>
 </body>
 </html>

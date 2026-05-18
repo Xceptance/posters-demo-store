@@ -23,10 +23,9 @@
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                         <li>
                             <button type="button" class="dropdown-item text-danger d-flex align-items-center gap-2"
-                                    th:hx-delete="@{/backoffice/customers/{id}/credit-cards/{cardId}(id=${detail.customer.id}, cardId=${card.id})}"
-                                    hx-target="#credit-card-list-container"
-                                    hx-swap="outerHTML"
-                                    hx-confirm="Are you sure you want to delete this credit card?">
+                                    th:hx-get="@{/backoffice/customers/{id}/credit-cards/{cardId}/delete(id=${detail.customer.id}, cardId=${card.id})}"
+                                    hx-target="#dialog-container"
+                                    hx-swap="innerHTML">
                                 <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
                                 Delete
                             </button>
