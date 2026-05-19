@@ -1,30 +1,45 @@
 prompt: |
-  Open ${neodymium.url}
+  # Homepage
+  Open '${neodymium.url}'.
+  # Select the proper language
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
+  # Search for the given search term
   Type '${searchTerm}' into the search field and submit.
   Verify the search results page loads with at least 2 results.
   Verify that every rendered product tile is a genuine match (the search term appears in the product name or description).
   Verify that each tile displays a valid product image, non-empty product name, non-empty description, a price greater than 0, and a CTA button.
   Find the product with name '${knownMatch1}'. Note its exact displayed name, image, and price.
+  Verify that we see also a product with name '${knownMatch2}'.
+  # PDP
   Click on the product image or CTA button for '${knownMatch1}'.
   Verify the browser navigates to the Product Detail Page (PDP).
   Verify that the product name, image, and price on the PDP match exactly the ones noted from the search results.
 
 data:
-  - testId: "tc_src_007_en_US"
-    locale: "en-US"
-    searchTerm: "cat"
-    knownMatch1: "Red Domestic Cat"
-  - testId: "tc_src_007_de_DE"
-    locale: "de-DE"
-    searchTerm: "Katze"
-    knownMatch1: "Hauskatze mit beige-braunem Fell"
-  - testId: "tc_src_007_sv_SE"
-    locale: "sv-SE"
-    searchTerm: "katt"
-    knownMatch1: "Röd huskatt"
   - testId: "tc_src_007_ja_JP"
     locale: "ja-JP"
     searchTerm: "猫"
     knownMatch1: "赤い飼い猫"
+    knownMatch2: "茶色の飼い猫"
+  - testId: "tc_src_007_en_US"
+    locale: "en-US"
+    searchTerm: "cat"
+    knownMatch1: "Red Domestic Cat"
+    knownMatch2: "Brown Domestic Cat"
+  - testId: "tc_src_007_en_GB"
+    locale: "en-GB"
+    searchTerm: "cat"
+    knownMatch1: "Red Domestic Cat"
+    knownMatch2: "Brown Domestic Cat"
+  - testId: "tc_src_007_de_DE"
+    locale: "de-DE"
+    searchTerm: "Katze"
+    knownMatch1: "Hauskatze mit beige-braunem Fell"
+    knownMatch2: "Hauskatze mit braun-schwarzem Fell"
+  - testId: "tc_src_007_sv_SE"
+    locale: "sv-SE"
+    searchTerm: "katt"
+    knownMatch1: "Röd huskatt"
+    knownMatch2: "Brun huskatt"
+

@@ -68,7 +68,7 @@ public class SearchController
         }
 
         String currency = getCurrencyForLocale(locale);
-        List<SearchProductDto> results = findByLucene(searchText, locale, currency, 100);
+        List<SearchProductDto> results = findByLucene(searchText, locale, currency, 100, false);
         model.addAttribute("products", results);
         model.addAttribute("searchText", searchText);
         model.addAttribute("totalCount", results.size());
@@ -89,7 +89,7 @@ public class SearchController
         }
 
         String currency = getCurrencyForLocale(locale);
-        return findByLucene(searchText, locale, currency, 100);
+        return findByLucene(searchText, locale, currency, 100, false);
     }
 
     /**
@@ -108,7 +108,7 @@ public class SearchController
         }
 
         String currency = getCurrencyForLocale(locale);
-        List<SearchProductDto> allResults = findByLucene(searchText, locale, currency, 100);
+        List<SearchProductDto> allResults = findByLucene(searchText, locale, currency, 100, true);
         List<SearchProductDto> suggestions = allResults.stream().limit(SUGGEST_LIMIT).toList();
 
         model.addAttribute("suggestions", suggestions);
@@ -120,9 +120,9 @@ public class SearchController
     /**
      * Searches the Lucene index and returns resolved DTOs in score order.
      */
-    private List<SearchProductDto> findByLucene(String searchText, String locale, String currency, int max)
+    private List<SearchProductDto> findByLucene(String searchText, String locale, String currency, int max, boolean isSuggest)
     {
-        List<Integer> productIds = luceneSearchService.search(searchText, locale, max);
+        List<Integer> productIds = luceneSearchService.search(searchText, locale, max, isSuggest);
         if (productIds.isEmpty())
         {
             return List.of();

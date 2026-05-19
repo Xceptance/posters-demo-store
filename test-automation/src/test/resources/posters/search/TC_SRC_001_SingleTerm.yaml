@@ -17,8 +17,6 @@ data:
     expectedCurrencySymbol: "£"
     expectedDescriptionLanguage: "English"
     locale: "en-GB"
-
-temp:
   - testId: "tc_src_001_en_US"
     searchTerm: "bear"
     expectedProduct: "Grizzly Bear"

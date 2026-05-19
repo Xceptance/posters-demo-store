@@ -1,11 +1,18 @@
 prompt: |
+  # Homepage
   Open ${neodymium.url}
+  # Switch Language
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
+  # Search 1
   Type '${searchTerm}' into the search field and submit.
   Verify the search results page displays results and the product '${expectedProduct}' appears in the results.
-  If '${firstWordOnly}' is provided, perform a separate search for '${firstWordOnly}'.
-  Verify that this single-word search returns more or equal results compared to the original two-word search.
+  Capture the number of results in a variable 'resultCount1'.
+  # Search 2
+  Type '${firstWordOnly}' into the search field and submit.
+  Capture the number of results in a variable 'resultCount2'.
+  # Verification
+  Verify that '${resultCount1}' is less than or equal to '${resultCount2}'.
 
 data:
   - testId: "tc_src_004_sv_SE"
@@ -13,8 +20,6 @@ data:
     expectedProduct: "Svensk älg"
     firstWordOnly: "svensk"
     locale: "sv-SE"
-
-temp:
   - testId: "tc_src_004_en_US"
     searchTerm: "grizzly bear"
     expectedProduct: "Grizzly Bear"

@@ -23,14 +23,8 @@ prompt: |
   # Checkout
   Verify the user is taken into the checkout.
   Verify the user is presented with the Shipping Address form.
-  Enter '${firstName}' into the First Name field of the shipping address form.
-  Enter '${lastName}' into the Last Name field of the shipping address form.
-  Enter '${company}' into the Company field.
-  Enter '${address}' into the Address field.
-  Enter '${city}' into the City field.
-  Enter '${state}' into the State field.
-  Enter '${zip}' into the Zip field.
-  Select the country translate('${country}') from the country dropdown.
+  Fill out the shipping address form using: First Name '${firstName}', Last Name '${lastName}', Company '${company}', Address '${address}', City '${city}', State '${state}', Zip '${zip}'.
+  Select the country translate('${country}') from the country dropdown in the shipping address form.
   Submit the shipping address form.
   # Billing Address
   Verify the billing address form is displayed.
