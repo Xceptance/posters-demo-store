@@ -2,6 +2,7 @@ context: |
   * You are testing a localized version of the posters web shop indicated by ${locale}. 
   * If you cannot find an element or make sense out of names, try to translate supplied data.
   * Additionally all translatable data is hinted by translate('NAME') but not necessarily always so. 
+  * All numbers are formatted according to the locale (currency, decimal separator, etc.).
   * CRITICAL RULE: NEVER assert that the 'body' contains English text (like 'Review Order' or 'Summary') when testing localized pages. For page verification, rely ONLY on the current URL, specific form elements, or the exact translated headings you can visually confirm in the provided DOM snippet.
 
 prompt: |
@@ -17,13 +18,18 @@ prompt: |
   Verify the count shown next to the cart icon is  '1'.
   Open the mini-cart and click translate("View Cart"). 
   # Cart Page
-  Verify the tax rate is displayed in the cart summary. FAIL the test if the tax rate is not displayed in the exact format '${taxRate}' (two decimal places required).
+  Verify the tax rate is displayed in the cart summary. FAIL the test if the tax rate is not displayed in the exact format '${taxRate}' (two decimal places required). The decimal separator depends on the locale.
   Click translate("Checkout").
   # Checkout
   Verify the user is taken into the checkout.
   Verify the user is presented with the Shipping Address form.
-  Fill out the shipping address form using: First Name '${firstName}', Last Name '${lastName}'.
-  Fill out the shipping address form using:  Company '${company}', Address '${address}', City '${city}', State '${state}', Zip '${zip}'.
+  Enter '${firstName}' into the First Name field of the shipping address form.
+  Enter '${lastName}' into the Last Name field of the shipping address form.
+  Enter '${company}' into the Company field.
+  Enter '${address}' into the Address field.
+  Enter '${city}' into the City field.
+  Enter '${state}' into the State field.
+  Enter '${zip}' into the Zip field.
   Select the country translate('${country}') from the country dropdown.
   Submit the shipping address form.
   # Billing Address
