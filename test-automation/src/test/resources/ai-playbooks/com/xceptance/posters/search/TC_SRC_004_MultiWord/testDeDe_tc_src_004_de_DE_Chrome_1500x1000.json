@@ -1,0 +1,183 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_004_MultiWord :: testDeDe :: tc_src_004_de_DE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the DOM, the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027de-DE\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027de-DE\u0027. I found a link with id \u0027loc-de-de\u0027 and text \u0027🇩🇪 Deutsch (Deutschland)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-de-de",
+          "description": "Click the link for Deutsch (Deutschland)",
+          "elementDetails": "🇩🇪 Deutsch (Deutschland)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇩🇪\nDeutsch (Deutschland)",
+            "id": "loc-de-de",
+            "href": "http://localhost:8080/de-DE/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027Europäische Hornisse\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027#header-search-text\u0027 and typed the specified text. Then, submitted the search by pressing ENTER, which is a common way to submit search forms.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Europäische Hornisse"
+          ],
+          "description": "Type \u0027Europäische Hornisse\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Submit the search query by pressing ENTER.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page displays results and the product \u0027Europäische Hornisse\u0027 appears in the results.",
+      "reasoning": "The instruction asks to verify that the search results page displays results and specifically the product \u0027Europäische Hornisse\u0027. The DOM shows a heading with the text \u0027Europäische Hornisse\u0027 and data-neo-ref \u0027xc_rcuwnu\u0027, which confirms the product is present and thus results are displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_rcuwnu\u0027]",
+          "value": [
+            "Europäische Hornisse"
+          ],
+          "description": "Verify the product \u0027Europäische Hornisse\u0027 appears in the search results.",
+          "elementDetails": "Heading with text \u0027Europäische Hornisse\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If \u0027Europäische\u0027 is provided, perform a separate search for \u0027Europäische\u0027.",
+      "reasoning": "The instruction is to perform a separate search for \u0027Europäische\u0027. I have identified the search input field and the search button on the page. The actions will type the term into the search field and then click the search button.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Europäische"
+          ],
+          "description": "Type \u0027Europäische\u0027 into the search bar.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to perform the search.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that this single-word search returns more or equal results compared to the original two-word search.",
+      "reasoning": "",
+      "actions": [
+        {
+          "type": "STORE",
+          "target": "#title-search-text",
+          "value": [
+            "originalResultString"
+          ],
+          "description": "Store the original search result string to extract the count for the two-word search.",
+          "elementDetails": "Results for \u0027Europäische Hornisse\u0027 (1 poster)",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Hornisse"
+          ],
+          "description": "Type the single-word search term \u0027Hornisse\u0027 into the search input field.",
+          "elementDetails": "Search input field with placeholder",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

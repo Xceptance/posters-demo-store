@@ -292,7 +292,7 @@ public class LuceneSearchService implements DisposableBean
      * @param maxResults  max number of results to return
      * @return list of product IDs ordered by relevance, empty list on error or no match
      */
-    public List<Integer> search(String queryText, String locale, int maxResults)
+    public List<Integer> search(String queryText, String locale, int maxResults, boolean isSuggest)
     {
         String lang = baseLang(locale);
         IndexSearcher searcher = searchers.get(lang);
@@ -316,8 +316,8 @@ public class LuceneSearchService implements DisposableBean
                 return List.of();
             }
 
-            // Use prefix query to support partial matching (type-ahead)
-            Query query = parser.parse(escaped + "*");
+            // Use prefix query for type-ahead if requested, otherwise exact/stemmed
+            Query query = parser.parse(isSuggest ? escaped + "*" : escaped);
 
             TopDocs topDocs = searcher.search(query, maxResults);
 

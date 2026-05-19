@@ -1,0 +1,142 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_002_NoResults :: testEnGb :: tc_src_002_en_GB :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-GB\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-GB\u0027. I found a link with id \u0027loc-en-gb\u0027 and text \u0027🇬🇧 English (United Kingdom)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-gb",
+          "description": "Click the \u0027English (United Kingdom)\u0027 link to select the en-GB locale.",
+          "elementDetails": "🇬🇧 English (United Kingdom) link",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇬🇧\nEnglish (United Kingdom)",
+            "id": "loc-en-gb",
+            "href": "http://localhost:8080/en-GB/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027xyzzyplugh\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. Performed a TYPE action to enter the text and then a CLICK action to submit the search.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "xyzzyplugh"
+          ],
+          "description": "Type \u0027xyzzyplugh\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search submit button.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page displays an empty state with a search icon, a \"No products found\" (localized) message, and a \"Continue Shopping\" link.",
+      "reasoning": "The instruction asks to verify the presence of an empty state message and a \u0027Continue Shopping\u0027 link. I found both \u0027No products found.\u0027 heading and \u0027Continue Shopping\u0027 link in the DOM and created ASSERT actions for them. The search icon is not explicitly present in the LEAN DOM, so I\u0027m verifying the text elements which are present.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify \u0027No products found\u0027 message is displayed.",
+          "elementDetails": "Heading with text \u0027No products found.\u0027",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_s2qj3w\u0027]",
+          "value": [
+            "Continue Shopping"
+          ],
+          "description": "Verify \u0027Continue Shopping\u0027 link is displayed.",
+          "elementDetails": "Link with text \u0027Continue Shopping\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that no product tiles are displayed on the page.",
+      "reasoning": "The instruction is to verify that no product tiles are displayed. The presence of the \u0027No products found.\u0027 heading on the page confirms this condition. Therefore, an ASSERT action is used to check for the visibility of this heading.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the \u0027No products found.\u0027 message is displayed, indicating no product tiles are present.",
+          "elementDetails": "Heading \u0027No products found.\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

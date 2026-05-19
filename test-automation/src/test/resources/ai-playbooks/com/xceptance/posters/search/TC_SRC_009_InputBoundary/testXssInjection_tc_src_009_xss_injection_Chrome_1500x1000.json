@@ -1,0 +1,170 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_009_InputBoundary :: testXssInjection :: tc_src_009_xss_injection :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the DOM, the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-US\u0027. I found a link with id \u0027loc-en-us\u0027 and text \u0027🇺🇸 English (United States)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-us",
+          "description": "Click the \u0027English (United States)\u0027 link to select the en-US locale.",
+          "elementDetails": "🇺🇸 English (United States)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027\u003cscript\u003ealert(1)\u003c/script\u003e\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. The actions are to type the provided script into the input and then click the button to submit.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "\u003cscript\u003ealert(1)\u003c/script\u003e"
+          ],
+          "description": "Type \u0027\u003cscript\u003ealert(1)\u003c/script\u003e\u0027 into the search field",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search completes without a server error (no 500 error page or stack trace) and without timing out.",
+      "reasoning": "The instruction asks to verify the search completes without server errors or timeouts. The current page displays \u0027Search Results\u0027 as the title and \u0027No products found.\u0027 as a heading, which indicates a successful completion of the search request, even if no products matched the query. This confirms that no 500 error page, stack trace, or timeout occurred, as those would typically prevent the display of a normal search results page.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-US/search?q\u003d%3Cscript%3Ealert%281%29%3C%2Fscript%3E"
+          ],
+          "description": "Verify the current URL indicates a search results page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "document.title",
+          "value": [
+            "Search Results"
+          ],
+          "description": "Verify the page title is \u0027Search Results\u0027, indicating a successful search page load.",
+          "elementDetails": "Page Title",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify the \u0027No products found.\u0027 heading is present, confirming the search completed and rendered a result page without error.",
+          "elementDetails": "Heading \u0027No products found.\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the results page loads properly.",
+      "reasoning": "The instruction is to verify the results page loads properly. Since the search query was for \u0027\u003cscript\u003ealert(1)\u003c/script\u003e\u0027, it\u0027s expected that no products would be found. The presence of the \u0027No products found.\u0027 heading confirms the page loaded and processed the search query as expected.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify \u0027No products found.\u0027 heading is visible, indicating the search results page loaded correctly.",
+          "elementDetails": "No products found. heading",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If the input contains script tags, verify that no JavaScript alert dialog appears and that the page renders normally with the input escaped/sanitized in the heading.",
+      "reasoning": "The instruction asks to verify that no JavaScript alert appears (which is implicitly handled by the test continuing) and that the input is escaped in the heading. I found the element with id \u0027title-search-text\u0027 which contains the literal string \u0027\u003cscript\u003ealert(1)\u003c/script\u003e\u0027, confirming that the input was sanitized and rendered as text, not executed as JavaScript.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "Results for \u0027\u003cscript\u003ealert(1)\u003c/script\u003e\u0027 (0 posters)"
+          ],
+          "description": "Verify that the search query with script tags is rendered as escaped text in the heading, indicating no script execution.",
+          "elementDetails": "Heading displaying search results for the input with script tags",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

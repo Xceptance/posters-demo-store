@@ -1,0 +1,208 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_006_CaseInsensitive :: testSvLower :: tc_src_006_sv_lower :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027sv-SE\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027sv-SE\u0027. I found a link with id \u0027loc-sv-se\u0027 and text \u0027🇸🇪 svenska (Sverige)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-sv-se",
+          "description": "Click the link for \u0027sv-SE\u0027 locale",
+          "elementDetails": "🇸🇪 svenska (Sverige)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇸🇪\nsvenska (Sverige)",
+            "id": "loc-sv-se",
+            "href": "http://localhost:8080/sv-SE/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027Grizzlybjörn\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027#header-search-text\u0027 and typed the specified text. Then, simulated pressing ENTER to submit the search query, as is common practice for search fields.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Grizzlybjörn"
+          ],
+          "description": "Type \u0027Grizzlybjörn\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Submit the search by pressing ENTER.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Note the result count and product names.",
+      "reasoning": "I have identified the elements containing the result count and the product name. I will use STORE actions to capture these values for later use.",
+      "actions": [
+        {
+          "type": "STORE",
+          "target": "#title-search-text",
+          "value": [
+            "resultCount"
+          ],
+          "description": "Note the result count from the search results heading.",
+          "elementDetails": "Results for \u0027Grizzlybjörn\u0027 (1 poster)",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "STORE",
+          "target": "h3.card-title",
+          "value": [
+            "productName"
+          ],
+          "description": "Note the product name.",
+          "elementDetails": "Grizzlybjörn",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Clear the search input.",
+      "reasoning": "The instruction is to clear the search input. I identified the search input field by its ID \u0027header-search-text\u0027 and used the CLEAR action on it.",
+      "actions": [
+        {
+          "type": "CLEAR",
+          "target": "#header-search-text",
+          "description": "Clear the search input field.",
+          "elementDetails": "Search input field with current value \u0027Grizzlybjörn\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027grizzlybjörn\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search submit button by its ID \u0027header-search-button\u0027. The actions are to type the specified text into the input and then click the submit button.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "grizzlybjörn"
+          ],
+          "description": "Type \u0027grizzlybjörn\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the result count and product names match exactly with the baseline results.",
+      "reasoning": "The instruction is to verify the result count and product names. I have identified the elements containing this information and created ASSERT actions to check if they match the expected baseline results (1 poster and \u0027Grizzlybjörn\u0027).",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "Results for \u0027grizzlybjörn\u0027 (1 poster)"
+          ],
+          "description": "Verify the result count matches the baseline.",
+          "elementDetails": "Text displaying search results count",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_8b3o4x\u0027]",
+          "value": [
+            "Grizzlybjörn"
+          ],
+          "description": "Verify the product name matches the baseline.",
+          "elementDetails": "Product title \u0027Grizzlybjörn\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

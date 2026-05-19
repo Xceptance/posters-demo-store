@@ -84,12 +84,12 @@
                             <span th:text="${#numbers.formatCurrency(order.subTotal)}">$0.00</span>
                         </div>
                         <div class="cart-summary-row border-0 py-1">
-                            <span class="text-muted">Tax (<span th:if="${order.taxRate != null}" th:text="${#numbers.formatDecimal(order.taxRate * 100, 1, 1)}">6.0</span>%)</span>
-                            <span th:text="${#numbers.formatCurrency(order.totalTax)}">$0.00</span>
-                        </div>
-                        <div class="cart-summary-row border-0 pt-1 pb-3">
                             <span class="text-muted" th:text="#{labelShipping}">Shipping</span>
                             <span th:text="${#numbers.formatCurrency(order.shippingCosts)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-row border-0 pt-1 pb-3">
+                            <span class="text-muted">Tax (<span th:if="${order.taxRate != null}" th:text="${#numbers.formatDecimal(order.taxRate * 100, 1, 2)}">6.00</span>%)</span>
+                            <span th:text="${#numbers.formatCurrency(order.totalTax)}">$0.00</span>
                         </div>
                         <div class="cart-summary-total border-top pt-3 mb-4">
                             <span class="fw-bold fs-5">Total paid</span>

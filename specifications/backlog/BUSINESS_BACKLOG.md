@@ -21,6 +21,11 @@
 - [ ] BUS-FEAT-8: Password requirements — No password validation exists for storefront registration or admin user creation. Passwords of any length/complexity are accepted and hashed. Add basic requirements (e.g., minimum length, complexity rules) for both storefront customers and backoffice admin users.
 - [ ] BUS-FEAT-9: Storefront password change — The storefront does not currently offer a password-change flow for logged-in customers. Adding this would allow `CustomerProfile.lastPasswordChange` to be updated at runtime.
 - [x] ~~BUS-FEAT-10: Backoffice password reset~~ — **INVALIDATED**: Not needed. Customers can reset their own passwords via the storefront (`BUS-FEAT-9`). Admin-triggered resets are unnecessary overhead.
+- [ ] BUS-FEAT-11: Shipping Methods — Allow administrators to define multiple named shipping options (e.g., Standard, Express, Overnight) with configurable costs and estimated delivery windows. The storefront checkout flow must present these options between Shipping Address and Payment so the customer can select a method; the selected method's cost must be reflected in the order totals. The backoffice (Checkout / Shipping module) must provide CRUD management of shipping methods (name, description, cost, estimated delivery days, enabled/disabled toggle). This feature touches:
+  - **Storefront checkout**: new "Select Shipping Method" step (Step 2 of 5, between Shipping Address and Billing, or as a distinct step), persisted to session/order.
+  - **Backoffice — Checkout module**: new `Shipping Methods` submodule under a top-level `Checkout` module for administrators to manage available shipping options.
+  - **Order model**: `Order` and `Cart` entities must store the selected shipping method name and cost.
+  - **Localization**: method names and descriptions should support the existing locale system.
 
 ## Improvements
 - [ ] BUS-IMPR-1: Localization of messages such as "this is a demo store", also the homepage message
@@ -39,6 +44,7 @@
 - [ ] BUS-IMPR-14: Localize the search empty state message ("No products found", "We couldn't find anything...", "Continue Shopping") for DE, SV, and JA locales.
 - [ ] BUS-IMPR-16: Add a `maxlength` attribute to the search input field to prevent excessively long queries. A reasonable limit (e.g., 200–500 characters) would prevent the 400 Bad Request at ~7000 chars and the UI layout breakage at ~1700 chars.
 - [ ] BUS-IMPR-17: Long search queries (1700+ chars) cause the heading text to overflow and break the page layout. Truncate or ellipsis the displayed query in the heading.
+- [ ] BUS-IMPR-18: Checkout summary column — The cart/order summary panel (subtotal, tax, shipping, total) currently only appears on the Review & Place Order page (`placeOrder.html`). It should be visible as a persistent right-hand column on all checkout steps: Shipping Address, Billing Address, and Payment. This gives customers a constant view of what they are paying throughout the checkout flow, matching e-commerce best practices (e.g., Shopify, Amazon).
 
 ## Tasks
 - [ ] BUS-BUG-15: Search fails to find "Grizzly Bear" when searching for the exact partial term "grizzly" or reversed "bear grizzly", yet it finds it for "grizzly bear". (Stemmer/Analyzer defect).
@@ -49,6 +55,9 @@
 - [ ] BUS-BUG-20: PDP has un-localized English text in JA locale: "All posters are printed on premium, archival-quality paper with a smooth, matte or glossy finish."
 - [ ] BUS-BUG-21: Usability issue with credit card input — Auto-fill or rapid entry (e.g. holding down '1') in the CC number field overflows into adjacent fields instead of stopping at the character limit. (Low priority)
 - [ ] BUS-BUG-22: Search for "Hornisse" fails in de-DE locale. It returns no results or incorrect results. Expected product "Europäische Hornisse" is missing.
+- [x] BUS-BUG-23: Tax calculation result is wrong — displayed value is $0.01 instead of the correct $1.44. Formula must be `tax = (subtotal + shipping) × taxRate`. Example from TC_CHK_001 execution (2026-05-18): subtotal $17.00 + shipping $7.00 = $24.00 base × 6% = **$1.44** tax → total **$25.44**. Current system shows $0.01 tax and $24.01 total. Root cause likely in the `Cart`/`Order` tax calculation service.
+- [x] BUS-BUG-24: Tax rate display format is inconsistent across the checkout flow — all three pages render the rate differently and none use the required `6.00%` (two decimal places) format. Current formats: Cart page uses `${cart.taxAsString}%` (format unknown, method-driven); Order Review uses `${cart.taxRate * 100 + '%'}` (raw Java double → `6.0%`); Order Confirmation uses `#{numbers.formatDecimal(order.taxRate * 100, 1, 1)}%` (forced 1 decimal → `6.0%`). All three must be standardized to display as `6.00%` (two decimal places).
+- [x] BUS-BUG-25: Tax line item display order is incorrect. Tax is correctly applied to `(subtotal + shipping)`, but because Tax is displayed *before* Shipping in the summary (`Subtotal → Tax → Shipping → Total`), it visually implies tax is calculated before shipping is known, which is misleading and technically wrong. The correct display order must be `Subtotal → Shipping → Tax → Total`, making it clear that tax is levied on the combined gross. Example: Subtotal $17.00 + Shipping $7.00 → Tax 6% = $1.44 → Total $25.44.
 - [ ] BUS-IMPR-15: Searching for "a" returns 95 of 124 products. Single-letter stop words appear to be filtered by the English analyzer, preventing a full catalog search. Consider whether single-letter queries should bypass stop word filtering.
 - [ ] BUS-TASK-1: Formatting: Japanese address checkout routing (Prefecture → City → Block)
 - [ ] BUS-TASK-2: Logic: Yen-specific UI formatting and backend tax calculators

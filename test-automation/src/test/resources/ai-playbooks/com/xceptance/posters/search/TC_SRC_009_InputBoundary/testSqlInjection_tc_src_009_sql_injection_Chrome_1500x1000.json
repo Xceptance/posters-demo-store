@@ -1,0 +1,166 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_009_InputBoundary :: testSqlInjection :: tc_src_009_sql_injection :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the DOM, the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-US\u0027. I found a link with id \u0027loc-en-us\u0027 and text \u0027🇺🇸 English (United States)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-us",
+          "description": "Click the \u0027English (United States)\u0027 link to select the en-US locale.",
+          "elementDetails": "🇺🇸 English (United States)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027\u0027; DROP TABLE products; --\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID and used the TYPE action to enter the specified text. Then, used KEY_PRESS to simulate pressing ENTER to submit the search.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "\u0027; DROP TABLE products; --"
+          ],
+          "description": "Type the SQL injection string into the search field.",
+          "elementDetails": "Search input field with id \u0027header-search-text\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Submit the search by pressing ENTER.",
+          "elementDetails": "Simulate pressing ENTER key",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search completes without a server error (no 500 error page or stack trace) and without timing out.",
+      "reasoning": "The instruction is to verify the search completed without a server error or timeout. The current page URL and title indicate a successful search results page, even with a malicious query. The presence of the \u0027No products found.\u0027 heading further confirms that the application handled the query gracefully and rendered a valid response, rather than an error page. Therefore, asserting the URL, page title, and the specific \u0027No products found.\u0027 message confirms the successful completion of the search without errors.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-US/search?q\u003d%27%3B+DROP+TABLE+products%3B+--"
+          ],
+          "description": "Verify the URL is correct, indicating no redirect to an error page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "document.title",
+          "value": [
+            "Search Results"
+          ],
+          "description": "Verify the page title is \u0027Search Results\u0027, indicating a successful search page.",
+          "elementDetails": "Page Title",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify the \u0027No products found.\u0027 message is displayed, confirming a valid search result page without server errors.",
+          "elementDetails": "Heading with text \u0027No products found.\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the results page loads properly.",
+      "reasoning": "The instruction is to verify the results page loads properly. I\u0027ve asserted the current URL matches the expected search results URL and that the \u0027No products found.\u0027 message is present, which is the expected behavior for the given search query, indicating the page loaded and processed the search correctly.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-US/search?q\u003d%27%3B+DROP+TABLE+products%3B+--"
+          ],
+          "description": "Verify the current URL is the search results page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "h2.h4.text-muted.mb-3",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify the \u0027No products found.\u0027 message is displayed, indicating the search was processed.",
+          "elementDetails": "No products found. heading",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If the input contains script tags, verify that no JavaScript alert dialog appears and that the page renders normally with the input escaped/sanitized in the heading.",
+      "reasoning": "The instruction is conditional: \u0027If the input contains script tags\u0027. The current URL\u0027s query parameter \u0027q\u0027 contains a SQL injection payload (\u0027%27%3B+DROP+TABLE+products%3B+--\u0027), not script tags. Therefore, the condition is not met, and no actions are required.",
+      "actions": []
+    }
+  ]
+}

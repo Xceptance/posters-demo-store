@@ -1,0 +1,225 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_005_PrefixSearch :: testEnDah :: tc_src_005_en_dah :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-US\u0027. The DOM shows a link with id \u0027loc-en-us\u0027 and text \u0027🇺🇸 English (United States)\u0027, which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-us",
+          "description": "Click the \u0027English (United States)\u0027 link to select the en-US locale.",
+          "elementDetails": "🇺🇸 English (United States)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027dah\u0027 into the search field and wait for the search suggestions to appear.",
+      "reasoning": "Identified the search input field by its ID and used the TYPE action to enter \u0027dah\u0027. Since search suggestions are dynamic and not present in the initial DOM, a WAIT action is used to allow time for them to appear.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "dah"
+          ],
+          "description": "Type \u0027dah\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "WAIT",
+          "value": [
+            "1000"
+          ],
+          "description": "Wait for search suggestions to appear.",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the suggestions dropdown loads without errors.",
+      "reasoning": "The instruction is to verify that the suggestions dropdown loads without errors. The presence and visibility of the \u0027#search-suggestions\u0027 element, which contains the suggested products, indicates that the dropdown has loaded successfully. Therefore, an ASSERT action to check the visibility of this element is appropriate.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#search-suggestions",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the search suggestions dropdown is visible.",
+          "elementDetails": "Search suggestions dropdown",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that at least 2 product suggestions are displayed in the dropdown.",
+      "reasoning": "The instruction asks to verify that at least 2 product suggestions are displayed. I identified several product suggestion links in the DOM and asserted the presence of the first two to fulfill the \u0027at least 2\u0027 condition.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_5nw1sy\u0027]",
+          "value": [
+            "Cactus Dahlia Pink White $4.00"
+          ],
+          "description": "Verify the first product suggestion is displayed.",
+          "elementDetails": "Cactus Dahlia Pink White $4.00 link",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_2ujrf1\u0027]",
+          "value": [
+            "Cactus Dahlia, Yellow/Pink $17.10"
+          ],
+          "description": "Verify the second product suggestion is displayed.",
+          "elementDetails": "Cactus Dahlia, Yellow/Pink $17.10 link",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the products \u0027Pink Dahlia\u0027 and \u0027Cactus Dahlia Pink White\u0027 appear in the suggestions, if provided.",
+      "reasoning": "The instruction asks to verify the presence of \u0027Pink Dahlia\u0027 and \u0027Cactus Dahlia Pink White\u0027 in the suggestions. The DOM shows specific link elements for both products, which are likely the suggestions. I am using ASSERT actions to check for the visibility and text content of these elements.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_dmtpdt\u0027]",
+          "value": [
+            "Pink Dahlia $0.34"
+          ],
+          "description": "Verify \u0027Pink Dahlia\u0027 appears in suggestions.",
+          "elementDetails": "Pink Dahlia $0.34 link",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_5nw1sy\u0027]",
+          "value": [
+            "Cactus Dahlia Pink White $4.00"
+          ],
+          "description": "Verify \u0027Cactus Dahlia Pink White\u0027 appears in suggestions.",
+          "elementDetails": "Cactus Dahlia Pink White $4.00 link",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If \u0027${testSingleChar}\u0027 is \u0027true\u0027, type \u0027b\u0027 into the search field, wait for suggestions, and verify they appear without errors.",
+      "reasoning": "The instruction is conditional. A BRANCH action is used to check if the variable \u0027testSingleChar\u0027 is \u0027true\u0027. If it is, \u0027b\u0027 is typed into the search field, a wait is performed for suggestions to load, and then the visibility of the search suggestions dropdown is asserted to confirm they appear without errors.",
+      "actions": [
+        {
+          "type": "BRANCH",
+          "description": "Conditionally type \u0027b\u0027 into search field and verify suggestions",
+          "elementContext": {},
+          "replay": "",
+          "condition": [
+            {
+              "type": "ASSERT",
+              "target": "${testSingleChar}",
+              "value": [
+                "true"
+              ],
+              "description": "Check if testSingleChar is true",
+              "elementDetails": "Variable testSingleChar",
+              "elementContext": {},
+              "replay": ""
+            }
+          ],
+          "then": [
+            {
+              "type": "TYPE",
+              "target": "#header-search-text",
+              "value": [
+                "b"
+              ],
+              "description": "Type \u0027b\u0027 into the search field",
+              "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "WAIT",
+              "value": [
+                "1000"
+              ],
+              "description": "Wait for search suggestions to appear",
+              "elementDetails": "Wait for 1 second",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "ASSERT",
+              "target": "#search-suggestions",
+              "value": [
+                "visible"
+              ],
+              "description": "Verify that the suggestions dropdown loads without errors and is visible",
+              "elementDetails": "Search suggestions dropdown",
+              "elementContext": {},
+              "replay": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

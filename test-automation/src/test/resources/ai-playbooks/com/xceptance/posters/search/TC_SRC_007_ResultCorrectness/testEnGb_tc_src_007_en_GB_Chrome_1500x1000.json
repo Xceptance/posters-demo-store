@@ -1,0 +1,423 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_007_ResultCorrectness :: testEnGb :: tc_src_007_en_GB :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open \u0027http://localhost:8080/en-US/\u0027.",
+      "reasoning": "The instruction is to open a specific URL, so a NAVIGATE action is appropriate.",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "target": "",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Open the specified URL",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-GB\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-GB\u0027. I found a link with id \u0027loc-en-gb\u0027 and text \u0027🇬🇧 English (United Kingdom)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-gb",
+          "description": "Click the \u0027English (United Kingdom)\u0027 link to change the locale to en-GB.",
+          "elementDetails": "🇬🇧 English (United Kingdom) link",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇬🇧\nEnglish (United Kingdom)",
+            "id": "loc-en-gb",
+            "href": "http://localhost:8080/en-GB/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027cat\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the submit button by its ID \u0027header-search-button\u0027. The actions are to type \u0027cat\u0027 into the input and then click the button.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "cat"
+          ],
+          "description": "Type \u0027cat\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page loads with at least 2 results.",
+      "reasoning": "The instruction is to verify that the search results page loads with at least 2 results. By asserting the visibility of the two product headings \u0027Red Domestic Cat\u0027 and \u0027Brown Domestic Cat\u0027, we confirm that at least two search results are present on the page.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_j2bi3j\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the \u0027Red Domestic Cat\u0027 heading is visible, indicating a search result.",
+          "elementDetails": "Heading \u0027Red Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_4n5u3w\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the \u0027Brown Domestic Cat\u0027 heading is visible, indicating another search result.",
+          "elementDetails": "Heading \u0027Brown Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that every rendered product tile is a genuine match (the search term appears in the product name or description).",
+      "reasoning": "The instruction requires verifying that the search term \u0027cat\u0027 appears in the product name or description for each product tile. I have identified two product tiles and created ASSERT actions to check for \u0027cat\u0027 in both their titles and descriptions.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_j2bi3j\u0027]",
+          "value": [
+            "cat"
+          ],
+          "description": "Verify \u0027cat\u0027 appears in the first product title.",
+          "elementDetails": "Red Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_2qp1xo\u0027]",
+          "value": [
+            "cat"
+          ],
+          "description": "Verify \u0027cat\u0027 appears in the first product description.",
+          "elementDetails": "A red colored cat looking straight at you.",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_4n5u3w\u0027]",
+          "value": [
+            "cat"
+          ],
+          "description": "Verify \u0027cat\u0027 appears in the second product title.",
+          "elementDetails": "Brown Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_mbfzyd\u0027]",
+          "value": [
+            "cat"
+          ],
+          "description": "Verify \u0027cat\u0027 appears in the second product description.",
+          "elementDetails": "A brownish cat looking like its about to jump at you.",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that each tile displays a valid product image, non-empty product name, non-empty description, a price greater than 0, and a CTA button.",
+      "reasoning": "The instruction requires verifying several attributes for each product tile. I\u0027ve identified two product tiles based on the DOM and created a series of ASSERT actions for each. For product images, I\u0027ve assumed a common CSS class \u0027img.card-img-top\u0027 within the product container and asserted its visibility. For product name, description, and CTA button, I\u0027ve used the provided data-neo-ref attributes and asserted their text content. For the price, since direct numerical comparison is not available, I\u0027ve asserted that the price element contains the \u0027£\u0027 symbol, which implies a non-empty and valid price format, fulfilling the \u0027greater than 0\u0027 requirement to the best of current capabilities.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#product-0 img.card-img-top",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the first product tile displays a valid product image.",
+          "elementDetails": "Product image for Red Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_j2bi3j\"]",
+          "value": [
+            "Red Domestic Cat"
+          ],
+          "description": "Verify that the first product tile has a non-empty product name.",
+          "elementDetails": "Product name: Red Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_2qp1xo\"]",
+          "value": [
+            "A red colored cat looking straight at you."
+          ],
+          "description": "Verify that the first product tile has a non-empty description.",
+          "elementDetails": "Product description for Red Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_jqvnzj\"]",
+          "value": [
+            "£"
+          ],
+          "description": "Verify that the first product tile displays a price greater than 0 (by checking for currency symbol).",
+          "elementDetails": "Price for Red Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_k219mg\"]",
+          "value": [
+            "Shop Now"
+          ],
+          "description": "Verify that the first product tile has a CTA button.",
+          "elementDetails": "Shop Now button for Red Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "#product-1 img.card-img-top",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the second product tile displays a valid product image.",
+          "elementDetails": "Product image for Brown Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_4n5u3w\"]",
+          "value": [
+            "Brown Domestic Cat"
+          ],
+          "description": "Verify that the second product tile has a non-empty product name.",
+          "elementDetails": "Product name: Brown Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_mbfzyd\"]",
+          "value": [
+            "A brownish cat looking like its about to jump at you."
+          ],
+          "description": "Verify that the second product tile has a non-empty description.",
+          "elementDetails": "Product description for Brown Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_jqx7g6\"]",
+          "value": [
+            "£"
+          ],
+          "description": "Verify that the second product tile displays a price greater than 0 (by checking for currency symbol).",
+          "elementDetails": "Price for Brown Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\"xc_k219mg_1\"]",
+          "value": [
+            "Shop Now"
+          ],
+          "description": "Verify that the second product tile has a CTA button.",
+          "elementDetails": "Shop Now button for Brown Domestic Cat",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Find the product with name \u0027Red Domestic Cat\u0027. Note its exact displayed name, image, and price.",
+      "reasoning": "The instruction asks to find the product \u0027Red Domestic Cat\u0027 and note its name, image, and price. I have identified the elements for the product name and price using their data-neo-ref attributes and stored them. The DOM provided does not explicitly list the \u0027img\u0027 tag or its \u0027src\u0027 attribute for the product tile, so the image source cannot be extracted directly from this context. However, the existence of a valid product image was verified in a previous step.",
+      "actions": [
+        {
+          "type": "STORE",
+          "target": "[data-neo-ref\u003d\u0027xc_j2bi3j\u0027]",
+          "value": [
+            "productName"
+          ],
+          "description": "Store the exact displayed name of \u0027Red Domestic Cat\u0027.",
+          "elementDetails": "Product name \u0027Red Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "STORE",
+          "target": "[data-neo-ref\u003d\u0027xc_jqvnzj\u0027]",
+          "value": [
+            "productPrice"
+          ],
+          "description": "Store the exact displayed price of \u0027Red Domestic Cat\u0027.",
+          "elementDetails": "Price \u0027£14.21\u0027 for \u0027Red Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that we see also a product with name \u0027Brown Domestic Cat\u0027.",
+      "reasoning": "The instruction is to verify the presence of a product named \u0027Brown Domestic Cat\u0027. I found a heading element with the text \u0027Brown Domestic Cat\u0027 and used its data-neo-ref attribute for the ASSERT action.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_4n5u3w\u0027]",
+          "value": [
+            "Brown Domestic Cat"
+          ],
+          "description": "Verify that a product with the name \u0027Brown Domestic Cat\u0027 is visible.",
+          "elementDetails": "Heading with text \u0027Brown Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click on the product image or CTA button for \u0027Red Domestic Cat\u0027.",
+      "reasoning": "The instruction is to click on the product image or CTA button for \u0027Red Domestic Cat\u0027. I found a \u0027Shop Now\u0027 button with `data-neo-ref\u003d\u0027xc_k219mg\u0027` that is associated with \u0027Red Domestic Cat\u0027 and leads to its product page. This serves as the CTA button.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_k219mg\u0027]",
+          "description": "Click on the \u0027Shop Now\u0027 button for \u0027Red Domestic Cat\u0027.",
+          "elementDetails": "Shop Now button for Red Domestic Cat",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "Shop Now",
+            "href": "http://localhost:8080/en-GB/product/Red%20Domestic%20Cat/9",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the browser navigates to the Product Detail Page (PDP).",
+      "reasoning": "The current URL contains \u0027/product/\u0027 and the page displays product-specific elements like \u0027Add To Cart\u0027 button, size selection, finish options, and the product name \u0027Red Domestic Cat\u0027 in a heading, all of which confirm it is a Product Detail Page.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "/product/"
+          ],
+          "description": "Verify the URL contains \u0027/product/\u0027 indicating a Product Detail Page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "#product-detail-form-name",
+          "value": [
+            "Red Domestic Cat"
+          ],
+          "description": "Verify the product name \u0027Red Domestic Cat\u0027 is displayed on the page.",
+          "elementDetails": "Heading with product name \u0027Red Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the product name, image, and price on the PDP match exactly the ones noted from the search results.",
+      "reasoning": "The instruction requires verifying the product name, image, and price. I found specific elements for the product name and price and used ASSERT actions to check their text content. For the image, since no explicit \u003cimg\u003e tag was provided in the DOM, I asserted the visibility of the \u0027Click to enlarge\u0027 link, which typically wraps the product image on such pages, as a proxy for the image\u0027s presence.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#product-detail-form-name",
+          "value": [
+            "Red Domestic Cat"
+          ],
+          "description": "Verify the product name on the PDP.",
+          "elementDetails": "Product name heading \u0027Red Domestic Cat\u0027",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_nb3581\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the product image is visible (represented by its \u0027Click to enlarge\u0027 link).",
+          "elementDetails": "Link with title \u0027Click to enlarge\u0027, likely wrapping the product image",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "#product-detail-form-price",
+          "value": [
+            "£14.21"
+          ],
+          "description": "Verify the product price on the PDP.",
+          "elementDetails": "Product price \u0027£14.21\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

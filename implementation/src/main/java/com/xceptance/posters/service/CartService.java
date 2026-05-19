@@ -129,12 +129,14 @@ public class CartService {
         }
         cart.setSubTotal(subTotal);
 
+        final BigDecimal shipping = cart.getShippingCosts() != null ? cart.getShippingCosts() : props.getShippingCosts();
+        cart.setShippingCosts(shipping);
+
         final BigDecimal taxRate = cart.getTaxRate() != null ? cart.getTaxRate() : props.getTax();
-        final BigDecimal tax = subTotal.multiply(taxRate).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        final BigDecimal tax = subTotal.add(shipping).multiply(taxRate).setScale(2, RoundingMode.HALF_UP);
         cart.setTotalTax(tax);
 
-        final BigDecimal shipping = cart.getShippingCosts() != null ? cart.getShippingCosts() : props.getShippingCosts();
-        cart.setTotal(subTotal.add(tax).add(shipping));
+        cart.setTotal(subTotal.add(shipping).add(tax));
     }
 
     /**
@@ -244,7 +246,6 @@ public class CartService {
         }
 
         final BigDecimal taxRate = cart.getTaxRate() != null ? cart.getTaxRate() : props.getTax();
-        final String taxStr = taxRate.stripTrailingZeros().toPlainString();
 
         return new CartDto(
             items,
@@ -252,7 +253,7 @@ public class CartService {
             cart.getTotalTax() != null ? cart.getTotalTax() : BigDecimal.ZERO,
             cart.getTotal() != null ? cart.getTotal() : BigDecimal.ZERO,
             cart.getShippingCosts() != null ? cart.getShippingCosts() : props.getShippingCosts(),
-            taxStr,
+            taxRate,
             totalQty
         );
     }

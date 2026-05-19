@@ -1,0 +1,162 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_004_MultiWord :: testSvSe :: tc_src_004_sv_SE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027sv-SE\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027sv-SE\u0027. I found a link with id \u0027loc-sv-se\u0027 and the text \u0027🇸🇪 svenska (Sverige)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-sv-se",
+          "description": "Click the country represented by locale \u0027sv-SE\u0027",
+          "elementDetails": "🇸🇪 svenska (Sverige) link",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇸🇪\nsvenska (Sverige)",
+            "id": "loc-sv-se",
+            "href": "http://localhost:8080/sv-SE/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027svensk älg\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID and typed the specified text. Then, simulated pressing ENTER to submit the search query, which is a common way to submit search forms.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "svensk älg"
+          ],
+          "description": "Type \u0027svensk älg\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Submit the search by pressing ENTER.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page displays results and the product \u0027Svensk älg\u0027 appears in the results.",
+      "reasoning": "The instruction asks to verify that the search results page displays results and specifically that \u0027Svensk älg\u0027 appears. The DOM shows a heading with `data-neo-ref\u003d\u0027xc_86jfl1\u0027` and text \u0027Svensk älg\u0027, confirming the product is displayed. The presence of this product implies that results are displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_86jfl1\u0027]",
+          "value": [
+            "Svensk älg"
+          ],
+          "description": "Verify the product \u0027Svensk älg\u0027 appears in the search results.",
+          "elementDetails": "Heading with text \u0027Svensk älg\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If \u0027svensk\u0027 is provided, perform a separate search for \u0027svensk\u0027.",
+      "reasoning": "The instruction is to perform a search for \u0027svensk\u0027 if \u0027svensk\u0027 is provided. Assuming \u0027svensk\u0027 is provided, I will type \u0027svensk\u0027 into the search input field and then press ENTER to submit the search.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "svensk"
+          ],
+          "description": "Type \u0027svensk\u0027 into the search bar.",
+          "elementDetails": "Search input field with current value \u0027svensk älg\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Press ENTER to submit the search.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that this single-word search returns more or equal results compared to the original two-word search.",
+      "reasoning": "The instruction is to verify that the single-word search (\u0027svensk\u0027) returns more or equal results compared to the original two-word search (\u0027svensk älg\u0027). From the previous step, the two-word search returned 1 result. The current page shows \u0027Results for \u0027svensk\u0027 (3 posters)\u0027, indicating 3 results. Since 3 is greater than or equal to 1, the condition is met. An ASSERT action is used to confirm the presence of \u00273 posters\u0027 in the results title.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "Results for \u0027svensk\u0027 (3 posters)"
+          ],
+          "description": "Verify that the search for \u0027svensk\u0027 returns 3 posters, which is more than the 1 poster from the \u0027svensk älg\u0027 search.",
+          "elementDetails": "Text element displaying search results count",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

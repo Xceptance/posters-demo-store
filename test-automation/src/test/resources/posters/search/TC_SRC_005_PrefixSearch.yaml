@@ -2,13 +2,19 @@ prompt: |
   Open ${neodymium.url}
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
-  Type '${partialTerm}' into the search field and submit.
-  Verify the search results page loads without errors.
-  Verify that at least ${minExpectedResults} product tiles are displayed.
-  Verify that the products '${expectedProduct1}' and '${expectedProduct2}' appear in the results, if provided.
-  If '${testSingleChar}' is 'true', type 'b' into the search field and submit, and verify the search returns results without errors.
+  Type '${partialTerm}' into the search field and wait for the search suggestions to appear.
+  Verify that the suggestions dropdown loads without errors.
+  Verify that at least ${minExpectedResults} product suggestions are displayed in the dropdown.
+  Verify that the products '${expectedProduct1}' and '${expectedProduct2}' appear in the suggestions, if provided.
+  If '${testSingleChar}' is 'true', type 'b' into the search field, wait for suggestions, and verify they appear without errors.
 
 data:
+  - testId: "tc_src_005_en_but"
+    partialTerm: "but"
+    expectedProduct1: "Blue Morpho Butterfly"
+    expectedProduct2: ""
+    minExpectedResults: "1"
+    locale: "en-US"
   - testId: "tc_src_005_en_griz"
     partialTerm: "griz"
     expectedProduct1: "Grizzly Bear"
@@ -16,12 +22,6 @@ data:
     minExpectedResults: "1"
     locale: "en-US"
     testSingleChar: "true"
-  - testId: "tc_src_005_en_but"
-    partialTerm: "but"
-    expectedProduct1: "Blue Morpho Butterfly"
-    expectedProduct2: ""
-    minExpectedResults: "1"
-    locale: "en-US"
   - testId: "tc_src_005_en_dah"
     partialTerm: "dah"
     expectedProduct1: "Pink Dahlia"

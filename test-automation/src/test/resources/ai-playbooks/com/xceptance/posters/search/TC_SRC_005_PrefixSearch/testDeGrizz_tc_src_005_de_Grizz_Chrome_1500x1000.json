@@ -1,0 +1,205 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_005_PrefixSearch :: testDeGrizz :: tc_src_005_de_Grizz :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027de-DE\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027de-DE\u0027. I found a link with id \u0027loc-de-de\u0027 and text \u0027🇩🇪 Deutsch (Deutschland)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-de-de",
+          "description": "Click the link for Deutsch (Deutschland) locale.",
+          "elementDetails": "🇩🇪 Deutsch (Deutschland)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇩🇪\nDeutsch (Deutschland)",
+            "id": "loc-de-de",
+            "href": "http://localhost:8080/de-DE/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027Grizz\u0027 into the search field and wait for the search suggestions to appear.",
+      "reasoning": "Identified the search input field by its ID and used the TYPE action to enter \u0027Grizz\u0027. Added a WAIT action to allow time for search suggestions to appear, as requested by the instruction.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Grizz"
+          ],
+          "description": "Type \u0027Grizz\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "WAIT",
+          "value": [
+            "1000"
+          ],
+          "description": "Wait for search suggestions to appear.",
+          "elementDetails": "N/A",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the suggestions dropdown loads without errors.",
+      "reasoning": "The instruction is to verify that the suggestions dropdown loads without errors. The DOM shows an element with id \u0027search-suggestions\u0027 which contains the text \u0027Grizzlybär 14,96 €\u0027, indicating that the suggestions have loaded successfully. An ASSERT action is used to check for the visibility of this element.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#search-suggestions",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the search suggestions dropdown is visible.",
+          "elementDetails": "Search suggestions dropdown with text \u0027Grizzlybär 14,96 €\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that at least 1 product suggestions are displayed in the dropdown.",
+      "reasoning": "The instruction is to verify that at least one product suggestion is displayed. The DOM shows a list item with the text \u0027Grizzlybär 14,96 €\u0027 inside the search suggestions dropdown, which confirms a product suggestion is present.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_lepl2i\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that at least one product suggestion (Grizzlybär) is displayed in the dropdown.",
+          "elementDetails": "Grizzlybär 14,96 €",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the products \u0027Grizzlybär\u0027 and \u0027\u0027 appear in the suggestions, if provided.",
+      "reasoning": "The instruction asks to verify if \u0027Grizzlybär\u0027 and \u0027\u0027 appear in suggestions, if provided. \u0027Grizzlybär\u0027 is present as a link on the page, so an ASSERT action is used to verify its text content. The empty string \u0027\u0027 cannot be verified as it does not correspond to any visible element or text.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_fratxe\u0027]",
+          "value": [
+            "Grizzlybär"
+          ],
+          "description": "Verify \u0027Grizzlybär\u0027 appears in suggestions.",
+          "elementDetails": "Grizzlybär 14,96 € link",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If \u0027${testSingleChar}\u0027 is \u0027true\u0027, type \u0027b\u0027 into the search field, wait for suggestions, and verify they appear without errors.",
+      "reasoning": "The instruction is conditional. A BRANCH action is used to check the value of \u0027${testSingleChar}\u0027. If true, \u0027b\u0027 is typed into the search field, a wait is performed, and the search suggestions dropdown is asserted to be visible, indicating no errors.",
+      "actions": [
+        {
+          "type": "BRANCH",
+          "description": "",
+          "reasoning": "Conditionally typing \u0027b\u0027 into the search field, waiting for suggestions, and verifying their appearance based on the \u0027${testSingleChar}\u0027 variable.",
+          "elementContext": {},
+          "replay": "",
+          "condition": [
+            {
+              "type": "ASSERT",
+              "target": "JAVA_METHOD",
+              "value": [
+                "isTrue(${testSingleChar})"
+              ],
+              "description": "Check if testSingleChar is true",
+              "elementDetails": "Java method call",
+              "elementContext": {},
+              "replay": ""
+            }
+          ],
+          "then": [
+            {
+              "type": "TYPE",
+              "target": "#header-search-text",
+              "value": [
+                "b"
+              ],
+              "description": "Type \u0027b\u0027 into the search field",
+              "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "WAIT",
+              "value": [
+                "1000"
+              ],
+              "description": "Wait for search suggestions to appear",
+              "elementDetails": "Wait for 1 second",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "ASSERT",
+              "target": "#search-suggestions",
+              "value": [
+                "visible"
+              ],
+              "description": "Verify that the suggestions dropdown appears without errors",
+              "elementDetails": "Search suggestions dropdown",
+              "elementContext": {},
+              "replay": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

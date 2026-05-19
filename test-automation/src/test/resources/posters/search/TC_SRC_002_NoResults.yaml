@@ -13,8 +13,6 @@ data:
   - testId: "tc_src_002_en_GB"
     searchTerm: "xyzzyplugh"
     locale: "en-GB"
-
-temp:
   - testId: "tc_src_002_de_DE"
     searchTerm: "Quatschwort"
     locale: "de-DE"

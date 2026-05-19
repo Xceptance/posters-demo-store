@@ -1,0 +1,159 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_008_ResultCount :: testEnGbFew :: tc_src_008_en_GB_few :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-GB\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-GB\u0027. I found a link with id \u0027loc-en-gb\u0027 and text \u0027🇬🇧 English (United Kingdom)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-gb",
+          "description": "Click the \u0027English (United Kingdom)\u0027 link to select the en-GB locale.",
+          "elementDetails": "🇬🇧 English (United Kingdom) link",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇬🇧\nEnglish (United Kingdom)",
+            "id": "loc-en-gb",
+            "href": "http://localhost:8080/en-GB/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027cat\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the submit button by its ID \u0027header-search-button\u0027. Performed a TYPE action for \u0027cat\u0027 and then a CLICK action to submit.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "cat"
+          ],
+          "description": "Type \u0027cat\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results heading correctly matches the format: \"Results for \u0027cat\u0027 (N posters)\" where N is the number of results.",
+      "reasoning": "The instruction asks to verify the search results heading. I found the element with id \u0027title-search-text\u0027 which contains the text \u0027Results for \u0027cat\u0027 (2 posters)\u0027, matching the specified format. An ASSERT action is used to verify this text.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "Results for \u0027cat\u0027 (2 posters)"
+          ],
+          "description": "Verify the search results heading matches the expected format and content.",
+          "elementDetails": "Heading displaying search results for \u0027cat\u0027 with 2 posters",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Count the visible product tiles on the page.",
+      "reasoning": "The instruction is to count the visible product tiles. Based on the previous step and the page heading \u0027Results for \u0027cat\u0027 (2 posters)\u0027, we expect two product tiles. I have identified two product tiles with IDs \u0027product-0\u0027 and \u0027product-1\u0027 in the DOM. The actions assert that both of these product tiles are visible, thereby confirming the count of 2 visible product tiles.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#product-0",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the first product tile is visible.",
+          "elementDetails": "Red Domestic Cat product tile",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "#product-1",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the second product tile is visible.",
+          "elementDetails": "Brown Domestic Cat product tile",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the number of visible product tiles exactly matches the count shown in the heading.",
+      "reasoning": "The instruction requires verifying that the number of visible product tiles exactly matches the count shown in the heading. I have analyzed the DOM and found two distinct product tiles (identified by `id\u003d\u0027product-0\u0027` and `id\u003d\u0027product-1\u0027`). The heading element with `id\u003d\u0027title-search-text\u0027` displays \u0027Results for \u0027cat\u0027 (2 posters)\u0027. Since both the actual count of visible product tiles (2) and the count displayed in the heading (2) are identical, the verification is successful. The ASSERT action confirms that the heading text contains the expected count.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "(2 posters)"
+          ],
+          "description": "Verify the search results heading indicates \u00272 posters\u0027, which matches the 2 visible product tiles on the page.",
+          "elementDetails": "Search results heading",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

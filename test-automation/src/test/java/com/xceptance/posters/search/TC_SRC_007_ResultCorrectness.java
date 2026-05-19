@@ -2,6 +2,7 @@ package com.xceptance.posters.search;
 
 import com.xceptance.neodymium.common.browser.Browser;
 import com.xceptance.neodymium.common.testdata.DataFile;
+import com.xceptance.neodymium.common.testdata.DataSet;
 import com.xceptance.neodymium.junit5.NeodymiumTest;
 import com.xceptance.neodymium.util.Neodymium;
 
@@ -25,11 +26,58 @@ import io.qameta.allure.SeverityLevel;
 @Tag("full")
 public class TC_SRC_007_ResultCorrectness
 {
-    @NeodymiumTest
-    @Severity(SeverityLevel.CRITICAL)
-    @Description("Verify that search results are valid and correct: each rendered product tile genuinely matches the search query and navigates correctly.")
-    void executePosterTest() throws Throwable
+    /**
+     * Common execution logic for the test.
+     * @throws Throwable if an error occurs
+     */
+    private final void executeTest() throws Throwable
     {
         Neodymium.ai().execute();
     }
+
+    @NeodymiumTest
+    @DataSet(id = "tc_src_007_en_GB")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that search results are valid and correct: each rendered product tile genuinely matches the search query and navigates correctly.")
+    final void testEnGb() throws Throwable
+    {
+        executeTest();
+    }
+    
+    @NeodymiumTest
+    @DataSet(id = "tc_src_007_en_US")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that search results are valid and correct: each rendered product tile genuinely matches the search query and navigates correctly.")
+    final void testEnUs() throws Throwable
+    {
+        executeTest();
+    }
+
+    @NeodymiumTest
+    @DataSet(id = "tc_src_007_de_DE")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that search results are valid and correct: each rendered product tile genuinely matches the search query and navigates correctly.")
+    final void testDeDe() throws Throwable
+    {
+        executeTest();
+    }
+
+    @NeodymiumTest
+    @DataSet(id = "tc_src_007_sv_SE")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that search results are valid and correct: each rendered product tile genuinely matches the search query and navigates correctly.")
+    final void testSvSe() throws Throwable
+    {
+        executeTest();
+    }
+
+    @NeodymiumTest
+    @DataSet(id = "tc_src_007_ja_JP")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that search results are valid and correct: each rendered product tile genuinely matches the search query and navigates correctly.")
+    final void testJaJp() throws Throwable
+    {
+        executeTest();
+    }
+
 }

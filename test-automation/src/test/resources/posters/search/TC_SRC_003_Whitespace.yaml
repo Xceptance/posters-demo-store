@@ -14,8 +14,6 @@ data:
     cleanTerm: ""
     expectEmpty: "true"
     locale: "en-US"
-
-temp:
   - testId: "tc_src_003_leading_whitespace"
     searchTerm: "  bear"
     cleanTerm: "bear"

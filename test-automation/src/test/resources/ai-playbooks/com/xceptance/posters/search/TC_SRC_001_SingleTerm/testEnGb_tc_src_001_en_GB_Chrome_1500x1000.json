@@ -1,9 +1,9 @@
 {
-  "id": "com.xceptance.posters.search.AllSearchTests :: executePosterTest :: tc_src_001_en_GB :: Browser Chrome_1500x1000",
+  "id": "com.xceptance.posters.search.TC_SRC_001_SingleTerm :: testEnGb :: tc_src_001_en_GB :: Browser Chrome_1500x1000",
   "steps": [
     {
       "promptLine": "Open http://localhost:8080/en-US/",
-      "reasoning": "directly parsed",
+      "reasoning": "directly parsed or local validation succeeded",
       "actions": [
         {
           "type": "NAVIGATE",
@@ -18,7 +18,7 @@
     },
     {
       "promptLine": "Click the country selector button.",
-      "reasoning": "The instruction is to click the country selector button. I identified the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 as the country selector and created a CLICK action for it.",
+      "reasoning": "The instruction is to click the country selector button. I identified the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 as the country selector button.",
       "actions": [
         {
           "type": "CLICK",
@@ -38,12 +38,12 @@
     },
     {
       "promptLine": "Click the country represented by locale \u0027en-GB\u0027 in the opened dialog.",
-      "reasoning": "The instruction is to click the country represented by locale \u0027en-GB\u0027. The DOM shows a link with id \u0027loc-en-gb\u0027 and text \u0027🇬🇧 English (United Kingdom)\u0027, which directly corresponds to the instruction.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-GB\u0027. I found a link with id \u0027loc-en-gb\u0027 and text \u0027🇬🇧 English (United Kingdom)\u0027 which directly corresponds to the instruction.",
       "actions": [
         {
           "type": "CLICK",
           "target": "#loc-en-gb",
-          "description": "Click the English (United Kingdom) locale link",
+          "description": "Click the \u0027English (United Kingdom)\u0027 link to select the en-GB locale.",
           "elementDetails": "🇬🇧 English (United Kingdom) link",
           "elementContext": {
             "classes": "dropdown-item locale-item",
@@ -58,7 +58,7 @@
     },
     {
       "promptLine": "Verify that the flag icon is updated to the new locale.",
-      "reasoning": "The instruction is to verify the flag icon is updated to the new locale. The current page URL is \u0027/en-GB/\u0027 and the flag icon element with id \u0027show-locale-menu\u0027 displays \u0027🇬🇧\u0027, which matches the British locale. Therefore, an ASSERT action is used to confirm this.",
+      "reasoning": "The instruction is to verify the flag icon is updated to the new locale. Based on the current URL \u0027/en-GB/\u0027 and the DOM, the locale flag is \u0027🇬🇧\u0027. I am asserting that the element with id \u0027show-locale-menu\u0027 contains this text.",
       "actions": [
         {
           "type": "ASSERT",
@@ -66,8 +66,8 @@
           "value": [
             "🇬🇧"
           ],
-          "description": "Verify that the flag icon is updated to the British locale.",
-          "elementDetails": "🇬🇧 flag icon",
+          "description": "Verify that the flag icon is updated to the new locale (🇬🇧).",
+          "elementDetails": "Flag icon for locale selection",
           "elementContext": {},
           "replay": ""
         }
@@ -75,7 +75,7 @@
     },
     {
       "promptLine": "Type \u0027bear\u0027 into the search field and submit.",
-      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and typed \u0027bear\u0027. Then, simulated an ENTER key press to submit the search, as per the instruction.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. Performed a TYPE action to enter \u0027bear\u0027 and then a CLICK action to submit the search.",
       "actions": [
         {
           "type": "TYPE",
@@ -96,20 +96,23 @@
           "replay": ""
         },
         {
-          "type": "KEY_PRESS",
-          "value": [
-            "ENTER"
-          ],
-          "description": "Submit the search by pressing Enter.",
-          "elementDetails": "Simulating Enter key press to submit the search form",
-          "elementContext": {},
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
           "replay": ""
         }
       ]
     },
     {
       "promptLine": "Verify the search results page displays a heading with \"Results for \u0027bear\u0027\".",
-      "reasoning": "The instruction is to verify a heading with specific text. I found an element with id \u0027title-search-text\u0027 that contains \u0027Results for \u0027bear\u0027 (3 posters)\u0027, which satisfies the requirement.",
+      "reasoning": "The instruction is to verify a heading with specific text. I found an element with id \u0027title-search-text\u0027 that contains the exact text \u0027Results for \u0027bear\u0027 (3 posters)\u0027, which satisfies the condition \u0027Results for \u0027bear\u0027\u0027. Therefore, an ASSERT action is used to check its content.",
       "actions": [
         {
           "type": "ASSERT",
@@ -126,15 +129,15 @@
     },
     {
       "promptLine": "Verify search results contain at least one product with \u0027Grizzly Bear\u0027 in the product title.",
-      "reasoning": "The instruction is to verify that at least one product title contains \u0027Grizzly Bear\u0027. The DOM shows a heading element with the text \u0027Grizzly Bear\u0027 and data-neodymium-automation-id\u003d\u0027xc_6zjukp\u0027, which directly fulfills the requirement.",
+      "reasoning": "The instruction is to verify that search results contain at least one product with \u0027Grizzly Bear\u0027 in the product title. The DOM shows a heading element with the text \u0027Grizzly Bear\u0027 and data-neo-ref \u0027xc_6zjukp\u0027, which directly matches the requirement. An ASSERT action is used to confirm its presence and text content.",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_6zjukp\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_6zjukp\u0027]",
           "value": [
             "Grizzly Bear"
           ],
-          "description": "Verify search results contain \u0027Grizzly Bear\u0027 in a product title.",
+          "description": "Verify that a product with \u0027Grizzly Bear\u0027 in the title is present in the search results.",
           "elementDetails": "Heading with text \u0027Grizzly Bear\u0027",
           "elementContext": {},
           "replay": ""
@@ -143,38 +146,38 @@
     },
     {
       "promptLine": "Verify that all product descriptions are in English.",
-      "reasoning": "Identified all product descriptions on the page and asserted that their text content matches the expected English phrases.",
+      "reasoning": "",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_75tma5\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_75tma5\u0027]",
           "value": [
             "Bear looking tired."
           ],
           "description": "Verify the description for \u0027Grizzly Bear\u0027 is in English.",
-          "elementDetails": "Product description \u0027Bear looking tired.\u0027",
+          "elementDetails": "Product description: Bear looking tired.",
           "elementContext": {},
           "replay": ""
         },
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_fynzqx\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_fynzqx\u0027]",
           "value": [
             "Every child loves these."
           ],
           "description": "Verify the description for \u0027Gummy Bears in Bowl\u0027 is in English.",
-          "elementDetails": "Product description \u0027Every child loves these.\u0027",
+          "elementDetails": "Product description: Every child loves these.",
           "elementContext": {},
           "replay": ""
         },
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_jmkpgs\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_jmkpgs\u0027]",
           "value": [
             "Pimp your office!"
           ],
           "description": "Verify the description for \u0027Gummy Bears on Keyboard\u0027 is in English.",
-          "elementDetails": "Product description \u0027Pimp your office!\u0027",
+          "elementDetails": "Product description: Pimp your office!",
           "elementContext": {},
           "replay": ""
         }
@@ -182,37 +185,37 @@
     },
     {
       "promptLine": "Verify that all product prices use the \u0027£\u0027 symbol.",
-      "reasoning": "Identified all product price elements on the page and created ASSERT actions to verify that each price contains the \u0027£\u0027 symbol as requested.",
+      "reasoning": "Identified all product price elements on the page using their data-neo-ref attributes and asserted that each one contains the \u0027£\u0027 symbol as requested.",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_jquwb6\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_jquwb6\u0027]",
           "value": [
             "£"
           ],
-          "description": "Verify the price for \u0027Grizzly Bear\u0027 uses the \u0027£\u0027 symbol.",
+          "description": "Verify the first product price uses the \u0027£\u0027 symbol.",
           "elementDetails": "Price for Grizzly Bear: £13.43",
           "elementContext": {},
           "replay": ""
         },
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_jqvnzj\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_jqvnzj\u0027]",
           "value": [
             "£"
           ],
-          "description": "Verify the price for \u0027Gummy Bears in Bowl\u0027 uses the \u0027£\u0027 symbol.",
+          "description": "Verify the second product price uses the \u0027£\u0027 symbol.",
           "elementDetails": "Price for Gummy Bears in Bowl: £14.21",
           "elementContext": {},
           "replay": ""
         },
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_jqvnzj_1\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_jqvnzj_1\u0027]",
           "value": [
             "£"
           ],
-          "description": "Verify the price for \u0027Gummy Bears on Keyboard\u0027 uses the \u0027£\u0027 symbol.",
+          "description": "Verify the third product price uses the \u0027£\u0027 symbol.",
           "elementDetails": "Price for Gummy Bears on Keyboard: £14.21",
           "elementContext": {},
           "replay": ""
@@ -221,37 +224,37 @@
     },
     {
       "promptLine": "Verify there are CTA buttons for the products.",
-      "reasoning": "The instruction is to verify the presence of CTA buttons for the products. I identified three \u0027Shop Now\u0027 buttons, one for each product listed on the page, and created ASSERT actions to check their visibility using their unique data-neodymium-automation-id.",
+      "reasoning": "The instruction is to verify the presence of CTA buttons for products. I found three \u0027Shop Now\u0027 buttons, which serve as CTA buttons for the listed products. I\u0027ve created ASSERT actions for each of these buttons to confirm their visibility and text content.",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_k219mg\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_k219mg\u0027]",
           "value": [
-            "visible"
+            "Shop Now"
           ],
-          "description": "Verify \u0027Shop Now\u0027 CTA button for Grizzly Bear is visible.",
+          "description": "Verify the \u0027Shop Now\u0027 CTA button for Grizzly Bear is visible.",
           "elementDetails": "Shop Now button for Grizzly Bear",
           "elementContext": {},
           "replay": ""
         },
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_k219mg_1\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_k219mg_1\u0027]",
           "value": [
-            "visible"
+            "Shop Now"
           ],
-          "description": "Verify \u0027Shop Now\u0027 CTA button for Gummy Bears in Bowl is visible.",
+          "description": "Verify the \u0027Shop Now\u0027 CTA button for Gummy Bears in Bowl is visible.",
           "elementDetails": "Shop Now button for Gummy Bears in Bowl",
           "elementContext": {},
           "replay": ""
         },
         {
           "type": "ASSERT",
-          "target": "[data-neodymium-automation-id\u003d\u0027xc_k219mg_2\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_k219mg_2\u0027]",
           "value": [
-            "visible"
+            "Shop Now"
           ],
-          "description": "Verify \u0027Shop Now\u0027 CTA button for Gummy Bears on Keyboard is visible.",
+          "description": "Verify the \u0027Shop Now\u0027 CTA button for Gummy Bears on Keyboard is visible.",
           "elementDetails": "Shop Now button for Gummy Bears on Keyboard",
           "elementContext": {},
           "replay": ""
