@@ -1,0 +1,209 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_004_MultiWord :: testEnUs :: tc_src_004_en_US :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the DOM, the element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is identified as the country selector. Therefore, a CLICK action on this element is appropriate.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-US\u0027. I found a link with id \u0027loc-en-us\u0027 and text \u0027🇺🇸 English (United States)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-us",
+          "description": "Click the \u0027🇺🇸 English (United States)\u0027 link for en-US locale.",
+          "elementDetails": "🇺🇸 English (United States) link",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027grizzly bear\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID and typed the specified text. Then, used KEY_PRESS ENTER to submit the search query as per the instruction.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "grizzly bear"
+          ],
+          "description": "Type \u0027grizzly bear\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Submit the search by pressing ENTER.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page displays results and the product \u0027Grizzly Bear\u0027 appears in the results.",
+      "reasoning": "The instruction asks to verify that the search results page displays results and that \u0027Grizzly Bear\u0027 appears. The presence of the \u0027Grizzly Bear\u0027 heading (`h3.card-title`) with `data-neo-ref\u003d\u0027xc_6zjukp\u0027` confirms both conditions.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_6zjukp\u0027]",
+          "value": [
+            "Grizzly Bear"
+          ],
+          "description": "Verify the product \u0027Grizzly Bear\u0027 appears in the search results.",
+          "elementDetails": "Heading with text \u0027Grizzly Bear\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Capture the number of results in a variable \u0027resultCount1\u0027.",
+      "reasoning": "The instruction is to capture the number of results. The element with id \u0027title-search-text\u0027 contains the text \u0027Results for \u0027grizzly bear\u0027 (1 poster)\u0027, which includes the result count. Using the STORE action on this element will capture the relevant text into the specified variable \u0027resultCount1\u0027.",
+      "actions": [
+        {
+          "type": "STORE",
+          "target": "#title-search-text",
+          "value": [
+            "resultCount1"
+          ],
+          "description": "Capture the text containing the number of search results.",
+          "elementDetails": "Results for \u0027grizzly bear\u0027 (1 poster)",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027grizzly\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. Performed a TYPE action on the input and then a CLICK action on the button to submit the search.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "grizzly"
+          ],
+          "description": "Type \u0027grizzly\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search submit button.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Capture the number of results in a variable \u0027resultCount2\u0027.",
+      "reasoning": "The instruction is to capture the number of results. The element with id \u0027title-search-text\u0027 contains the text \u0027Results for \u0027grizzly\u0027 (1 poster)\u0027, which includes the result count. I will use this element to store its text content into the variable \u0027resultCount2\u0027.",
+      "actions": [
+        {
+          "type": "STORE",
+          "target": "#title-search-text",
+          "value": [
+            "resultCount2"
+          ],
+          "description": "Capture the number of results into \u0027resultCount2\u0027",
+          "elementDetails": "Text element displaying \u0027Results for \u0027grizzly\u0027 (1 poster)\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that \u0027resultCount1\u0027 is less than or equal to \u0027resultCount2\u0027.",
+      "reasoning": "The instruction is to verify a numerical comparison between two previously stored variables. A BRANCH action with a JAVA_METHOD condition \u0027verifyLessOrEqual\u0027 is used to perform this comparison. The variables are passed as a JSON array to the method.",
+      "actions": [
+        {
+          "type": "BRANCH",
+          "description": "Verify that \u0027resultCount1\u0027 is less than or equal to \u0027resultCount2\u0027",
+          "elementContext": {},
+          "replay": "",
+          "condition": [
+            {
+              "type": "JAVA_METHOD",
+              "target": "verifyLessOrEqual",
+              "value": [
+                "[\"Results for \u0027grizzly bear\u0027 (1 poster)\", \"Results for \u0027grizzly\u0027 (1 poster)\"]"
+              ],
+              "description": "Verify that resultCount1 is less than or equal to resultCount2",
+              "elementDetails": "Java method call for comparison",
+              "elementContext": {},
+              "replay": ""
+            }
+          ],
+          "then": [],
+          "else": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_008_ResultCount :: testEnUsSingular :: tc_src_008_en_US_singular :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-US\u0027. I found a link with id \u0027loc-en-us\u0027 and text \u0027🇺🇸 English (United States)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-us",
+          "description": "Click the \u0027English (United States)\u0027 link to select the en-US locale.",
+          "elementDetails": "🇺🇸 English (United States)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027Swedish Moose\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID and typed the specified text. Then, simulated pressing ENTER to submit the search query.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Swedish Moose"
+          ],
+          "description": "Type \u0027Swedish Moose\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Submit the search by pressing ENTER.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results heading correctly matches the format: \"Results for \u0027Swedish Moose\u0027 (1 poster)\" where N is the number of results.",
+      "reasoning": "The instruction is to verify the search results heading. I found an element with id \u0027title-search-text\u0027 that contains the exact text \u0027Results for \u0027Swedish Moose\u0027 (1 poster)\u0027, which matches the required format. An ASSERT action is used to verify this.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "Results for \u0027Swedish Moose\u0027 (1 poster)"
+          ],
+          "description": "Verify the search results heading matches the expected format.",
+          "elementDetails": "Search results heading with text \u0027Results for \u0027Swedish Moose\u0027 (1 poster)\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Count the visible product tiles on the page.",
+      "reasoning": "Based on the provided DOM, there is one visible product tile identified by the \u0027h3.card-title\u0027 element with the text \u0027Swedish Moose\u0027.",
+      "actions": []
+    },
+    {
+      "promptLine": "Verify that the number of visible product tiles exactly matches the count shown in the heading.",
+      "reasoning": "The instruction requires verifying that the number of visible product tiles matches the count in the heading. The heading, identified by `id\u003d\u0027title-search-text\u0027`, explicitly states \u0027(1 poster)\u0027. The DOM shows only one product tile with `id\u003d\u0027product-0\u0027`. Therefore, two ASSERT actions are used: one to confirm the heading text contains \u0027(1 poster)\u0027 and another to confirm that the product tile `id\u003d\u0027product-0\u0027` is visible. This confirms that exactly one product tile is displayed, matching the count in the heading.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "(1 poster)"
+          ],
+          "description": "Verify the heading indicates 1 poster.",
+          "elementDetails": "Heading for search results",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "#product-0",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the single product tile is visible.",
+          "elementDetails": "Product tile for Swedish Moose",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

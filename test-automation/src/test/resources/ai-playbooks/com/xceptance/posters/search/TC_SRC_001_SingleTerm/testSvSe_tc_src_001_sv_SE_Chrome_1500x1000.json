@@ -1,0 +1,199 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_001_SingleTerm :: testSvSe :: tc_src_001_sv_SE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027sv-SE\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027sv-SE\u0027. I found a link with id \u0027loc-sv-se\u0027 and the text \u0027🇸🇪 svenska (Sverige)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-sv-se",
+          "description": "Click the link for \u0027sv-SE\u0027 locale",
+          "elementDetails": "🇸🇪 svenska (Sverige)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇸🇪\nsvenska (Sverige)",
+            "id": "loc-sv-se",
+            "href": "http://localhost:8080/sv-SE/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the flag icon is updated to the new locale.",
+      "reasoning": "The instruction is to verify the flag icon is updated to the new locale. The current URL is `/sv-SE/` and the locale menu link shows \u0027🇸🇪\u0027, which is the Swedish flag. An ASSERT action is used to check if the element with id \u0027show-locale-menu\u0027 contains the text \u0027🇸🇪\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#show-locale-menu",
+          "value": [
+            "🇸🇪"
+          ],
+          "description": "Verify that the flag icon is updated to the Swedish locale.",
+          "elementDetails": "Flag icon for locale selection, currently showing Swedish flag",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027björn\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the submit button by its ID \u0027header-search-button\u0027. Performed a TYPE action for the search term and then a CLICK action for the submit button.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "björn"
+          ],
+          "description": "Type \u0027björn\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page displays a heading with \"Results for \u0027björn\u0027\".",
+      "reasoning": "The instruction is to verify a heading with specific text. I found an element with id \u0027title-search-text\u0027 that contains \u0027Results for \u0027björn\u0027 (1 poster)\u0027, which includes the required text. Therefore, an ASSERT action on this element with the expected value is appropriate.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#title-search-text",
+          "value": [
+            "Results for \u0027björn\u0027"
+          ],
+          "description": "Verify the search results page displays a heading with \u0027Results for \u0027björn\u0027\u0027.",
+          "elementDetails": "Heading with search results text",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify search results contain at least one product with \u0027Grizzlybjörn\u0027 in the product title.",
+      "reasoning": "The instruction is to verify that the search results contain at least one product with \u0027Grizzlybjörn\u0027 in the product title. The DOM shows an h3 element with data-neo-ref\u003d\u0027xc_8b3o4x\u0027 and text \u0027Grizzlybjörn\u0027, which is identified as a product title. An ASSERT action is used to confirm its presence and text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_8b3o4x\u0027]",
+          "value": [
+            "Grizzlybjörn"
+          ],
+          "description": "Verify search results contain \u0027Grizzlybjörn\u0027 in a product title.",
+          "elementDetails": "Product title \u0027Grizzlybjörn\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that all product descriptions are in Swedish.",
+      "reasoning": "The instruction is to verify that all product descriptions are in Swedish. On the current page, there is one product displayed with the description \u0027En trött björn.\u0027, which is Swedish. An ASSERT action is used to confirm this text.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "p.card-text.product-tile-text",
+          "value": [
+            "En trött björn."
+          ],
+          "description": "Verify the product description is in Swedish.",
+          "elementDetails": "Product description text \u0027En trött björn.\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that all product prices use the \u0027kr\u0027 symbol.",
+      "reasoning": "The instruction is to verify that all product prices use the \u0027kr\u0027 symbol. I found one product price on the page, \u0027185,30 kr\u0027, and asserted that it contains \u0027kr\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_rlsn40\u0027]",
+          "value": [
+            "kr"
+          ],
+          "description": "Verify that the product price uses the \u0027kr\u0027 symbol.",
+          "elementDetails": "Product price \u0027185,30 kr\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify there are CTA buttons for the products.",
+      "reasoning": "The instruction asks to verify the presence of CTA buttons for products. I found a \u0027Handla Nu\u0027 (Shop Now) button which serves as a Call To Action for a product. I am asserting its existence and text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_wxn0gl\u0027]",
+          "value": [
+            "Handla Nu"
+          ],
+          "description": "Verify the \u0027Handla Nu\u0027 CTA button exists for a product.",
+          "elementDetails": "Handla Nu button",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}

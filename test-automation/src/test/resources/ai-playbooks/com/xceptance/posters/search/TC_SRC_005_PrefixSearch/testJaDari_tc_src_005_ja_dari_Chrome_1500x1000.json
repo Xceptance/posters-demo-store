@@ -1,0 +1,236 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_005_PrefixSearch :: testJaDari :: tc_src_005_ja_dari :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the DOM, the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is clearly the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027ja-JP\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027ja-JP\u0027. I found a link with id \u0027loc-ja-jp\u0027 and text \u0027🇯🇵 日本語 (日本)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-ja-jp",
+          "description": "Click the link for Japanese locale",
+          "elementDetails": "🇯🇵 日本語 (日本)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇯🇵\n日本語 (日本)",
+            "id": "loc-ja-jp",
+            "href": "http://localhost:8080/ja-JP/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027ダリ\u0027 into the search field and wait for the search suggestions to appear.",
+      "reasoning": "Identified the search input field by its ID and used the TYPE action to enter the text. Added a WAIT action to allow time for search suggestions to appear, as requested.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "ダリ"
+          ],
+          "description": "Type \u0027ダリ\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "WAIT",
+          "value": [
+            "1000"
+          ],
+          "description": "Wait for search suggestions to appear.",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the suggestions dropdown loads without errors.",
+      "reasoning": "The instruction is to verify that the suggestions dropdown loads without errors. I found the \u0027search-suggestions\u0027 element in the DOM, which contains the suggested products. I will assert that this element is visible and contains some of the expected text to confirm it loaded correctly and without errors.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#search-suggestions",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the search suggestions dropdown is visible.",
+          "elementDetails": "Search suggestions dropdown",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "#search-suggestions",
+          "value": [
+            "ピンクのダリア"
+          ],
+          "description": "Verify that the search suggestions dropdown contains expected text.",
+          "elementDetails": "Search suggestions dropdown with text \u0027ピンクのダリア ￥0 サボテン ダリア ピンク ホワイト ￥4 サボテンダリア、イエロー/ピンク ￥17 シルバーダリア ￥12 青い星と金色のダリア ￥24\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that at least 1 product suggestions are displayed in the dropdown.",
+      "reasoning": "The instruction asks to verify that at least one product suggestion is displayed. I identified several product suggestion links in the DOM, such as \u0027ピンクのダリア ￥0\u0027. I will assert that this specific link is visible, which fulfills the condition of at least one suggestion being displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_j2ynbc\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that at least one product suggestion link is displayed in the dropdown.",
+          "elementDetails": "ピンクのダリア ￥0",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the products \u0027ピンクのダリア\u0027 and \u0027サボテン ダリア ピンク ホワイト\u0027 appear in the suggestions, if provided.",
+      "reasoning": "The instruction asks to verify if two product names appear in suggestions. Based on the DOM, there are link elements that contain these product names, which are likely the suggestions. I\u0027m using ASSERT actions to check for the presence of these texts within their respective link elements.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "a[href\u003d\u0027/ja-JP/product/ピンクのダリア/11\u0027]",
+          "value": [
+            "ピンクのダリア"
+          ],
+          "description": "Verify \u0027ピンクのダリア\u0027 appears in suggestions.",
+          "elementDetails": "Link for \u0027ピンクのダリア\u0027",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "a[href\u003d\u0027/ja-JP/product/サボテン ダリア ピンク ホワイト/12\u0027]",
+          "value": [
+            "サボテン ダリア ピンク ホワイト"
+          ],
+          "description": "Verify \u0027サボテン ダリア ピンク ホワイト\u0027 appears in suggestions.",
+          "elementDetails": "Link for \u0027サボテン ダリア ピンク ホワイト\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "If \u0027${testSingleChar}\u0027 is \u0027true\u0027, type \u0027b\u0027 into the search field, wait for suggestions, and verify they appear without errors.",
+      "reasoning": "The instruction is conditional. A BRANCH action is used to check if the variable \u0027${testSingleChar}\u0027 is \u0027true\u0027. If it is, \u0027b\u0027 is typed into the search field, a short wait is added for suggestions to load, and then the visibility of the \u0027#search-suggestions\u0027 element is asserted, along with checking for a specific product suggestion to ensure no errors and proper loading.",
+      "actions": [
+        {
+          "type": "BRANCH",
+          "description": "Conditionally type \u0027b\u0027 into search and verify suggestions",
+          "elementContext": {},
+          "replay": "",
+          "condition": [
+            {
+              "type": "ASSERT",
+              "target": "${testSingleChar}",
+              "value": [
+                "true"
+              ],
+              "description": "Check if testSingleChar is \u0027true\u0027",
+              "elementDetails": "Variable testSingleChar",
+              "elementContext": {},
+              "replay": ""
+            }
+          ],
+          "then": [
+            {
+              "type": "TYPE",
+              "target": "#header-search-text",
+              "value": [
+                "b"
+              ],
+              "description": "Type \u0027b\u0027 into the search field",
+              "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "WAIT",
+              "value": [
+                "500"
+              ],
+              "description": "Wait for search suggestions to appear",
+              "elementDetails": "Wait for 500ms",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "ASSERT",
+              "target": "#search-suggestions",
+              "value": [
+                "visible"
+              ],
+              "description": "Verify search suggestions appear",
+              "elementDetails": "Search suggestions dropdown",
+              "elementContext": {},
+              "replay": ""
+            },
+            {
+              "type": "ASSERT",
+              "target": "#search-suggestions",
+              "value": [
+                "ピンクのダリア"
+              ],
+              "description": "Verify \u0027ピンクのダリア\u0027 appears in suggestions",
+              "elementDetails": "Search suggestions dropdown",
+              "elementContext": {},
+              "replay": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

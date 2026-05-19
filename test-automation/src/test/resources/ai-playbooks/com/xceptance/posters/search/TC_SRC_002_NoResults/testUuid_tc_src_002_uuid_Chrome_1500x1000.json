@@ -1,0 +1,142 @@
+{
+  "id": "com.xceptance.posters.search.TC_SRC_002_NoResults :: testUuid :: tc_src_002_uuid :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. I identified the link with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 as the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button (🇺🇸)",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-US\u0027. I found a link with id \u0027loc-en-us\u0027 and text \u0027🇺🇸 English (United States)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-us",
+          "description": "Click the \u0027English (United States)\u0027 link to select the en-US locale.",
+          "elementDetails": "🇺🇸 English (United States)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Type \u0027123e4567-e89b-12d3-a456-426614174000\u0027 into the search field and submit.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the submit button by its ID \u0027header-search-button\u0027. Performed a TYPE action followed by a CLICK action to submit the search.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "123e4567-e89b-12d3-a456-426614174000"
+          ],
+          "description": "Type \u0027123e4567-e89b-12d3-a456-426614174000\u0027 into the search field.",
+          "elementDetails": "Search input field with placeholder \u0027Search\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": ""
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button to submit the query.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the search results page displays an empty state with a search icon, a \"No products found\" (localized) message, and a \"Continue Shopping\" link.",
+      "reasoning": "The instruction requested to verify the presence of a \u0027No products found\u0027 message and a \u0027Continue Shopping\u0027 link on the search results page. Both elements were found in the provided DOM and verified. The \u0027search icon\u0027 was not explicitly present as a DOM element in the LEAN context, so only the verifiable text and link elements were asserted.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify \u0027No products found\u0027 message is displayed.",
+          "elementDetails": "Heading with text \u0027No products found.\u0027",
+          "elementContext": {},
+          "replay": ""
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_s2qj3w\u0027]",
+          "value": [
+            "Continue Shopping"
+          ],
+          "description": "Verify \u0027Continue Shopping\u0027 link is displayed.",
+          "elementDetails": "Link with text \u0027Continue Shopping\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that no product tiles are displayed on the page.",
+      "reasoning": "The instruction is to verify that no product tiles are displayed. The page explicitly shows a heading \u0027No products found.\u0027 with data-neo-ref\u003d\u0027xc_3t0x9d\u0027. Asserting the presence and text of this heading directly confirms that no products are displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_3t0x9d\u0027]",
+          "value": [
+            "No products found."
+          ],
+          "description": "Verify that the \u0027No products found.\u0027 message is displayed.",
+          "elementDetails": "Heading with text \u0027No products found.\u0027",
+          "elementContext": {},
+          "replay": ""
+        }
+      ]
+    }
+  ]
+}
