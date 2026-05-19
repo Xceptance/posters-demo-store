@@ -12,10 +12,12 @@ prompt: |
   # PDP
   Navigate to the product detail page for any product.
   # Mini Cart
-  Select a size and style and click the Add to Cart button.
+  Select a size and style and click the Add to Cart button (hint: #btn-add-to-cart).
   If the mini-cart is open then close it.
   Verify the count shown next to the cart icon is  '1'.
   Open the mini-cart and click translate("View Cart"). 
+  # Cart Page
+  Verify the tax rate is displayed in the cart summary. FAIL the test if the tax rate is not displayed in the exact format '${taxRate}' (two decimal places required).
   Click translate("Checkout").
   # Checkout
   Verify the user is taken into the checkout.
@@ -29,13 +31,29 @@ prompt: |
   Select translate("Use shipping address for billing") and submit the form.
   # Payment
   Verify the payment form is displayed.
-  Select translate("Credit Card") as the payment method if needed.
-  Fill out the payment form using: Name '${firstName} ${lastName}', Card '${creditCard}', Exp Month '${expMonth}', Exp Year '${expYear}', CVV '112' and proceed.
+  Enter '${creditCard}' into the card number field.
+  Enter '${firstName} ${lastName}' into the cardholder name field.
+  Enter '${expiry}' into the expiry field (MM/YY format).
+  Enter '${cvv}' into the CVV field.
+  Submit the payment form.
   # Order Review
   Verify that an order review page is displayed.
-  Review the totals and click translate("Place Order").
+  Capture the displayed subtotal amount.
+  Verify that the subtotal is greater than $0.00.
+  Capture the displayed tax rate percentage.
+  Capture the displayed tax amount.
+  Verify that the tax amount is mathematically consistent with the subtotal, shipping, and tax rate: tax must equal (subtotal + shipping) multiplied by the tax rate (allow +-$0.02 for rounding).
+  Verify that the shipping amount is shown and greater than or equal to $0.00.
+  Verify that the total equals subtotal plus tax plus shipping (allow +-$0.02 for rounding).
+  Verify that the tax rate displayed on the review page is in the exact format '${taxRate}' (two decimal places). FAIL if the format differs.
+  Verify that a translate("Place Order") button is visible.
+  Click translate("Place Order").
   # Order Confirmation
-  Verify that an order confirmation page is displayed, and an order number is shown.
+  Verify that an order confirmation page is displayed.
+  Verify that a non-empty order ID is shown (format: ORD-XXXXXXXXXXXX).
+  Capture the confirmation page subtotal, tax, shipping, and total paid amounts.
+  Verify that the confirmation page totals match the review page totals.
+  Verify that the tax rate displayed on the confirmation page is in the exact format '${taxRate}' (two decimal places). FAIL if the format differs.
 
 data:
   - testId: "tc_chk_001_sv_SE"
@@ -49,9 +67,10 @@ data:
     zip: "111 20"
     country: "Sweden"
     email: "erik.johansson@example.se"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030"
+    creditCard: "4111111111111111"
+    expiry: "12/30"
+    cvv: "123"
+    taxRate: "6,00%"
   - testId: "tc_chk_001_ja_JP"
     locale: "ja-JP"
     firstName: "太郎"
@@ -63,9 +82,10 @@ data:
     zip: "150-0002"
     country: "Japan"
     email: "taro.yamada@example.co.jp"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030"
+    creditCard: "4111111111111111"
+    expiry: "12/30"
+    cvv: "123"
+    taxRate: "6.00%"
   - testId: "tc_chk_001_en_US"
     locale: "en-US"
     firstName: "John"
@@ -77,9 +97,10 @@ data:
     zip: "78701"
     country: "United States"
     email: "john.doe@example.com"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030"
+    creditCard: "4111111111111111"
+    expiry: "12/30"
+    cvv: "123"
+    taxRate: "6.00%"
   - testId: "tc_chk_001_de_DE"
     locale: "de-DE"
     firstName: "Hans"
@@ -91,9 +112,10 @@ data:
     zip: "10115"
     country: "Deutschland"
     email: "hans.mueller@example.de"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030"
+    creditCard: "4111111111111111"
+    expiry: "12/30"
+    cvv: "123"
+    taxRate: "6,00%"
   - testId: "tc_chk_001_en_GB"
     locale: "en-GB"
     firstName: "James"
@@ -105,6 +127,7 @@ data:
     zip: "W1D 1BS"
     country: "United Kingdom"
     email: "james.smith@example.co.uk"
-    creditCard: "1111222233334444"
-    expMonth: "12"
-    expYear: "2030" 
+    creditCard: "4111111111111111"
+    expiry: "12/30"
+    cvv: "123"
+    taxRate: "6.00%"

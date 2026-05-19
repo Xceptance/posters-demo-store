@@ -246,7 +246,6 @@ public class CartService {
         }
 
         final BigDecimal taxRate = cart.getTaxRate() != null ? cart.getTaxRate() : props.getTax();
-        final String taxStr = taxRate.multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP).toPlainString();
 
         return new CartDto(
             items,
@@ -254,7 +253,7 @@ public class CartService {
             cart.getTotalTax() != null ? cart.getTotalTax() : BigDecimal.ZERO,
             cart.getTotal() != null ? cart.getTotal() : BigDecimal.ZERO,
             cart.getShippingCosts() != null ? cart.getShippingCosts() : props.getShippingCosts(),
-            taxStr,
+            taxRate,
             totalQty
         );
     }

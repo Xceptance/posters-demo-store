@@ -57,7 +57,7 @@
                             <span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span>
                         </div>
                         <div class="cart-summary-row">
-                            <span class="text-muted">Tax (<span th:text="${cartDto.taxAsString} + '%'">6.00%</span>)</span>
+                            <span class="text-muted">Tax (<span th:if="${cartDto.taxRate != null}" th:text="${#numbers.formatDecimal(cartDto.taxRate * 100, 1, 2)}">6.00</span>%)</span>
                             <span th:text="${#numbers.formatCurrency(cart.totalTax)}">$0.00</span>
                         </div>
                         <div class="cart-summary-total align-items-center">

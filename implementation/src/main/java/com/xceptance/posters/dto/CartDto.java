@@ -15,7 +15,7 @@ public record CartDto
     BigDecimal totalTaxPrice,
     BigDecimal totalPrice,
     BigDecimal shippingCosts,
-    String taxAsString,
+    BigDecimal taxRate,
     int productCount
 )
 {

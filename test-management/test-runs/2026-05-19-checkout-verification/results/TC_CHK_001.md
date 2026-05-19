@@ -1,5 +1,11 @@
 # Guest Checkout (Happy Path)
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| AI | 2026-05-19 | `✅ PASSED` | Desktop/Chrome | |
+
 A new guest user adds an item to the cart, proceeds to checkout, enters shipping and billing details, provides credit card payment, reviews the order, and successfully places it.
 
 ## Metadata
