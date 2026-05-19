@@ -53,12 +53,12 @@
                             <span th:text="${#numbers.formatCurrency(cart.subTotal)}">$0.00</span>
                         </div>
                         <div class="cart-summary-row">
-                            <span class="text-muted">Tax (<span th:text="${cart.taxRate * 100 + '%'}">6.0%</span>)</span>
-                            <span th:text="${#numbers.formatCurrency(cart.totalTax)}">$0.00</span>
-                        </div>
-                        <div class="cart-summary-row">
                             <span class="text-muted" th:text="#{labelShipping}">Shipping</span>
                             <span th:text="${#numbers.formatCurrency(cart.shippingCosts)}">$0.00</span>
+                        </div>
+                        <div class="cart-summary-row">
+                            <span class="text-muted">Tax (<span th:text="${cartDto.taxAsString} + '%'">6.00%</span>)</span>
+                            <span th:text="${#numbers.formatCurrency(cart.totalTax)}">$0.00</span>
                         </div>
                         <div class="cart-summary-total align-items-center">
                             <span class="fw-bold">Total</span>
