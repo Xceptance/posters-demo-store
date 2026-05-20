@@ -1,0 +1,1042 @@
+{
+  "id": "com.xceptance.posters.checkout.TC_CHK_001_GuestCheckout_Fixed :: testGuestCheckoutJaJP :: tc_chk_001_fixed_ja_JP :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/.",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is identified as the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027ja-JP\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027ja-JP\u0027. The DOM shows a link with id \u0027loc-ja-jp\u0027 and text \u0027🇯🇵 日本語 (日本)\u0027, which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-ja-jp",
+          "description": "Click the country represented by locale \u0027ja-JP\u0027",
+          "elementDetails": "🇯🇵 日本語 (日本)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇯🇵\n日本語 (日本)",
+            "id": "loc-ja-jp",
+            "href": "http://localhost:8080/ja-JP/",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Search for \u0027ハイイログマ\u0027 using the search bar.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. The actions are to type the search query into the input and then click the button.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "ハイイログマ"
+          ],
+          "description": "Type \u0027ハイイログマ\u0027 into the search bar.",
+          "elementDetails": "Search input field with id \u0027header-search-text\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button.",
+          "elementDetails": "Search button with id \u0027header-search-button\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click on \u0027ハイイログマ\u0027 from the search results to open the product details page.",
+      "reasoning": "The instruction is to click on \u0027ハイイログマ\u0027 from the search results. I found a link with data-neo-ref\u003d\u0027xc_wzr11x\u0027 that has an href pointing to the product details page for \u0027ハイイログマ\u0027. This is the most appropriate element to click.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_wzr11x\u0027]",
+          "description": "Click on \u0027ハイイログマ\u0027 link to open the product details page.",
+          "elementDetails": "Link to product details page for \u0027ハイイログマ\u0027",
+          "elementContext": {
+            "href": "http://localhost:8080/ja-JP/product/%E3%83%8F%E3%82%A4%E3%82%A4%E3%83%AD%E3%82%B0%E3%83%9E/1",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Select size \u002716x12\u0027 and finish \u0027マット\u0027.",
+      "reasoning": "The instruction requested to select a size and a finish. I identified the \u0027select\u0027 element for size and the \u0027radio\u0027 input for finish based on the provided DOM and translated the finish name \u0027マット\u0027 to match the element ID \u0027finish-matte\u0027.",
+      "actions": [
+        {
+          "type": "SELECT",
+          "target": "#product-detail-form-size-selection",
+          "value": [
+            "16x12 in"
+          ],
+          "description": "Select size \u002716x12 in\u0027 from the dropdown.",
+          "elementDetails": "size selection dropdown with options \u002716x12 in, 24x18 in\u0027",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "size",
+            "text": "16x12 in",
+            "id": "product-detail-form-size-selection",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "#finish-matte",
+          "description": "Select finish \u0027マット\u0027.",
+          "elementDetails": "radio button for finish \u0027マット\u0027",
+          "elementContext": {
+            "classes": "form-check-input",
+            "name": "finish",
+            "id": "finish-matte",
+            "tagName": "input",
+            "type": "radio"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the Add to Cart button (hint: #btn-add-to-cart).",
+      "reasoning": "The instruction explicitly provided a hint for the \u0027Add to Cart\u0027 button, so a CLICK action is generated using that target.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-add-to-cart",
+          "description": "Click the Add to Cart button",
+          "elementDetails": "Add to Cart button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "カートに追加",
+            "id": "btn-add-to-cart",
+            "tagName": "button",
+            "type": "button"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "If the mini-cart is open then close it.",
+      "reasoning": "The mini-cart appears to be open as indicated by the \u0027Shopping Cart\u0027 heading and a \u0027Close\u0027 button. Clicking the close button will close it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_c4a0xf\u0027]",
+          "description": "Close the mini-cart",
+          "elementDetails": "Close button for mini-cart",
+          "elementContext": {
+            "classes": "btn-close",
+            "tagName": "button",
+            "type": "button"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the count shown next to the cart icon is \u00271\u0027.",
+      "reasoning": "The instruction is to verify the cart count. The element with id \u0027header-cart-overview\u0027 has the text \u00271\u0027, which matches the expected value.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#header-cart-overview",
+          "value": [
+            "1"
+          ],
+          "description": "Verify the count shown next to the cart icon is \u00271\u0027.",
+          "elementDetails": "Cart Overview link with text \u00271\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Open the mini-cart and click translate(\"View Cart\").",
+      "reasoning": "The instruction requires opening the mini-cart and then clicking \u0027View Cart\u0027. The element with id \u0027header-cart-overview\u0027 is used to open the mini-cart. Assuming the mini-cart will open and display a \u0027View Cart\u0027 button, its Japanese translation \u0027カートを見る\u0027 is used as the target for the subsequent click action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#header-cart-overview",
+          "description": "Open the mini-cart by clicking the cart overview icon.",
+          "elementDetails": "Cart Overview link with count \u00271\u0027",
+          "elementContext": {
+            "classes": "nav-link",
+            "text": "  1",
+            "id": "header-cart-overview",
+            "href": "http://localhost:8080/ja-JP/product/%E3%83%8F%E3%82%A4%E3%82%A4%E3%83%AD%E3%82%B0%E3%83%9E/1#miniCartOffcanvas",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "カートを見る",
+          "description": "Click the \u0027View Cart\u0027 button in the mini-cart.",
+          "elementDetails": "View Cart button (translated to Japanese)",
+          "elementContext": {
+            "classes": "btn btn-primary form-control go-to-cart",
+            "text": "カートを見る",
+            "href": "http://localhost:8080/ja-JP/cart",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the tax rate is displayed in the cart summary. FAIL the test if the tax rate is not displayed in the exact format \u00276.00%\u0027 (two decimal places required). The decimal separator depends on the locale.",
+      "reasoning": "The instruction requires verifying the tax rate format. I found the element with data-neo-ref\u003d\u0027xc_g6014n_2\u0027 which contains the text \u0027Tax (6.00%)\u0027, matching the required format. An ASSERT action is used to check this text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
+          "value": [
+            "Tax (6.00%)"
+          ],
+          "description": "Verify the tax rate is displayed in the cart summary in the exact format \u00276.00%\u0027.",
+          "elementDetails": "Text element containing \u0027Tax (6.00%)\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click translate(\"Checkout\").",
+      "reasoning": "The instruction is to click \u0027Checkout\u0027. The DOM shows a link with id \u0027btn-checkout\u0027 and text \u0027チェックアウト\u0027, which is the Japanese translation for Checkout. This element is the correct target.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-checkout",
+          "description": "Click the Checkout button",
+          "elementDetails": "link with text \u0027チェックアウト\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary w-100 btn-lg mt-3",
+            "text": "チェックアウト",
+            "id": "btn-checkout",
+            "href": "http://localhost:8080/ja-JP/checkout/shippingAddress",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is taken into the checkout.",
+      "reasoning": "The current URL \u0027http://localhost:8080/ja-JP/checkout/shippingAddress\u0027 clearly indicates that the user is in the checkout process, specifically on the shipping address step. An ASSERT action on the current URL containing \u0027checkout\u0027 will confirm this.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "checkout"
+          ],
+          "description": "Verify the current URL contains \u0027checkout\u0027 to confirm being in the checkout process.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is presented with the Shipping Address form.",
+      "reasoning": "The instruction is to verify the user is presented with the Shipping Address form. I\u0027ve asserted the current URL, the main heading \u0027配送先住所\u0027 (Shipping Address), and the presence of the form element with id \u0027shipping-form\u0027 to confirm this.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/ja-JP/checkout/shippingAddress"
+          ],
+          "description": "Verify the current URL is the shipping address page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "h1[data-neo-ref\u003d\u0027xc_22a9yl\u0027]",
+          "value": [
+            "配送先住所"
+          ],
+          "description": "Verify the page heading indicates \u0027Shipping Address\u0027.",
+          "elementDetails": "Heading with text \u0027配送先住所\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#shipping-form",
+          "description": "Verify the shipping address form is present.",
+          "elementDetails": "Shipping Address Form",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Fill out the shipping address form using: First Name \u0027太郎\u0027, Last Name \u0027山田\u0027, Company \u0027株式会社サンプル\u0027, Address \u0027渋谷区渋谷1-1-1\u0027, City \u0027東京\u0027, State \u0027東京都\u0027, Zip \u0027150-0002\u0027.",
+      "reasoning": "All specified shipping address fields have been identified and actions to fill them with the provided data have been generated. The country \u0027日本\u0027 has been selected from the dropdown.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#firstName",
+          "value": [
+            "太郎"
+          ],
+          "description": "Type \u0027太郎\u0027 into the First Name field.",
+          "elementDetails": "input with id \u0027firstName\u0027 and placeholder \u0027First Name\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "firstName",
+            "id": "firstName",
+            "placeholder": "First Name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#name",
+          "value": [
+            "山田"
+          ],
+          "description": "Type \u0027山田\u0027 into the Last Name field.",
+          "elementDetails": "input with id \u0027name\u0027 and placeholder \u0027Last Name\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "name",
+            "placeholder": "Last Name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#company",
+          "value": [
+            "株式会社サンプル"
+          ],
+          "description": "Type \u0027株式会社サンプル\u0027 into the Company field.",
+          "elementDetails": "input with id \u0027company\u0027 and placeholder \u0027Company\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "company",
+            "id": "company",
+            "placeholder": "Company",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#addressLine",
+          "value": [
+            "渋谷区渋谷1-1-1"
+          ],
+          "description": "Type \u0027渋谷区渋谷1-1-1\u0027 into the Address field.",
+          "elementDetails": "input with id \u0027addressLine\u0027 and placeholder \u0027Address\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "addressLine",
+            "id": "addressLine",
+            "placeholder": "Address",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#city",
+          "value": [
+            "東京"
+          ],
+          "description": "Type \u0027東京\u0027 into the City field.",
+          "elementDetails": "input with id \u0027city\u0027 and placeholder \u0027City\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "city",
+            "id": "city",
+            "placeholder": "City",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#state",
+          "value": [
+            "東京都"
+          ],
+          "description": "Type \u0027東京都\u0027 into the State field.",
+          "elementDetails": "input with id \u0027state\u0027 and placeholder \u0027State\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "state",
+            "id": "state",
+            "placeholder": "State",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#zip",
+          "value": [
+            "150-0002"
+          ],
+          "description": "Type \u0027150-0002\u0027 into the ZIP field.",
+          "elementDetails": "input with id \u0027zip\u0027 and placeholder \u0027ZIP\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "zip",
+            "id": "zip",
+            "placeholder": "ZIP",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "SELECT",
+          "target": "#country",
+          "value": [
+            "日本"
+          ],
+          "description": "Select \u0027日本\u0027 from the Country dropdown.",
+          "elementDetails": "select with id \u0027country\u0027",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "country",
+            "text": "アメリカ合衆国",
+            "id": "country",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Select the country translate(\u0027Japan\u0027) from the country dropdown in the shipping address form.",
+      "reasoning": "The instruction is to select \u0027Japan\u0027 from the country dropdown. The DOM shows a select element with id \u0027country\u0027 and an option \u0027日本\u0027 (Japan). A SELECT action is used to choose this option.",
+      "actions": [
+        {
+          "type": "SELECT",
+          "target": "#country",
+          "value": [
+            "日本"
+          ],
+          "description": "Select \u0027Japan\u0027 from the country dropdown.",
+          "elementDetails": "Country dropdown with id \u0027country\u0027",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "country",
+            "text": "日本",
+            "id": "country",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Submit the shipping address form.",
+      "reasoning": "The instruction is to submit the shipping address form. The DOM shows a submit button with id \u0027btn-submit-shipping\u0027 and text \u0027請求先に進む\u0027 (Proceed to billing), which is the appropriate action to take.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-shipping",
+          "description": "Click the \u0027Proceed to billing\u0027 button to submit the shipping address form.",
+          "elementDetails": "button with text \u0027請求先に進む\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "請求先に進む",
+            "id": "btn-submit-shipping",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the billing address form is displayed.",
+      "reasoning": "The instruction is to verify the billing address form is displayed. The DOM shows an h1 heading with the text \u0027請求先住所\u0027 (Billing Address), which confirms the form is present on the page.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "h1",
+          "value": [
+            "請求先住所"
+          ],
+          "description": "Verify the billing address form is displayed by checking the heading.",
+          "elementDetails": "Heading with text \u0027請求先住所\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Select translate(\"Use shipping address for billing\") and submit the form.",
+      "reasoning": "The instruction asks to select \u0027Use shipping address for billing\u0027 and submit the form. I identified the checkbox with id \u0027sameAsShipping\u0027 for the first part and the submit button with id \u0027btn-submit-billing\u0027 for the second part.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#sameAsShipping",
+          "description": "Select \u0027Use shipping address for billing\u0027 checkbox",
+          "elementDetails": "checkbox with id \u0027sameAsShipping\u0027",
+          "elementContext": {
+            "classes": "form-check-input",
+            "id": "sameAsShipping",
+            "tagName": "input",
+            "type": "checkbox"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-billing",
+          "description": "Submit the billing address form",
+          "elementDetails": "button with text \u0027支払いに進む\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "支払いに進む",
+            "id": "btn-submit-billing",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the payment form is displayed.",
+      "reasoning": "The instruction is to verify the payment form is displayed. The DOM shows a form with id \u0027payment-form\u0027 which is the main payment form. Asserting its visibility confirms it is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#payment-form",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the payment form is displayed.",
+          "elementDetails": "Payment form",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u00274111111111111111\u0027 into the card number field.",
+      "reasoning": "The instruction is to enter text into the card number field. I identified the input field by its ID \u0027cardNumber\u0027 and created a TYPE action to input the specified value.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cardNumber",
+          "value": [
+            "4111111111111111"
+          ],
+          "description": "Enter \u00274111111111111111\u0027 into the card number field.",
+          "elementDetails": "input with id \u0027cardNumber\u0027 and placeholder \u00274111 1111 1111 1111\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "cardNumber",
+            "id": "cardNumber",
+            "placeholder": "4111 1111 1111 1111",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u0027太郎 山田\u0027 into the cardholder name field.",
+      "reasoning": "The instruction is to enter text into the cardholder name field. I identified the input field with id \u0027cardName\u0027 and aria-label \u0027Cardholder name\u0027 as the correct target and created a TYPE action with the provided text.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cardName",
+          "value": [
+            "太郎 山田"
+          ],
+          "description": "Enter \u0027太郎 山田\u0027 into the cardholder name field.",
+          "elementDetails": "input with id \u0027cardName\u0027 and aria-label \u0027Cardholder name\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "cardName",
+            "placeholder": "Name on Card",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u002712/30\u0027 into the expiry field (MM/YY format).",
+      "reasoning": "The instruction is to enter \u002712/30\u0027 into the expiry field. The DOM shows an input field with id \u0027expiry\u0027 which is suitable for this action.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#expiry",
+          "value": [
+            "12/30"
+          ],
+          "description": "Enter \u002712/30\u0027 into the expiry field.",
+          "elementDetails": "Expiry date input field with placeholder \u0027MM/YY\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "expiry",
+            "id": "expiry",
+            "placeholder": "MM/YY",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u0027123\u0027 into the CVV field.",
+      "reasoning": "The instruction is to enter \u0027123\u0027 into the CVV field. I found the input element with id \u0027cvv\u0027 and used the TYPE action to input the value.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cvv",
+          "value": [
+            "123"
+          ],
+          "description": "Enter \u0027123\u0027 into the CVV field.",
+          "elementDetails": "input with id \u0027cvv\u0027 and aria-label \u0027Security code\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "cvv",
+            "id": "cvv",
+            "placeholder": "123",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Submit the payment form.",
+      "reasoning": "The instruction is to submit the payment form. The DOM shows a submit button with id \u0027btn-submit-payment\u0027 and text \u0027確認に進む\u0027 which is appropriate for submitting the payment details.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-payment",
+          "description": "Click the \u0027確認に進む\u0027 button to submit the payment form.",
+          "elementDetails": "button with text \u0027確認に進む\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "確認に進む",
+            "id": "btn-submit-payment",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that an order review page is displayed.",
+      "reasoning": "The instruction is to verify that an order review page is displayed. I am asserting the current URL and the main heading text \u0027注文の確認と確定\u0027 (Order Confirmation and Review) which confirms the page context.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/ja-JP/checkout/placeOrder"
+          ],
+          "description": "Verify the current URL is the order review page URL.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_i6sxel\u0027]",
+          "value": [
+            "注文の確認と確定"
+          ],
+          "description": "Verify the main heading indicates an order review page.",
+          "elementDetails": "Heading with text \u0027注文の確認と確定\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed subtotal is \u0027￥17\u0027.",
+      "reasoning": "The instruction is to verify the subtotal. I found the element with data-neo-ref\u003d\u0027xc_afza12_1\u0027 which contains the text \u0027￥17\u0027 and is clearly identified as the subtotal value in the DOM structure.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_1\u0027]",
+          "value": [
+            "￥17"
+          ],
+          "description": "Verify that the displayed subtotal is \u0027￥17\u0027.",
+          "elementDetails": "Text element displaying the subtotal price",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed shipping is \u0027￥7\u0027.",
+      "reasoning": "Found the element displaying \u0027送料 ￥7\u0027 and specifically targeted the \u0027￥7\u0027 part to verify the shipping cost.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_2\u0027]",
+          "value": [
+            "￥7"
+          ],
+          "description": "Verify that the displayed shipping is \u0027￥7\u0027.",
+          "elementDetails": "Text element displaying \u0027￥7\u0027 for shipping",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed tax rate is \u00276.00%\u0027.",
+      "reasoning": "The instruction asks to verify the tax rate is \u00276.00%\u0027. I found an element with data-neo-ref\u003d\u0027xc_g6014n_2\u0027 that contains the exact text \u0027Tax (6.00%)\u0027, which fulfills the requirement.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
+          "value": [
+            "Tax (6.00%)"
+          ],
+          "description": "Verify that the displayed tax rate is \u00276.00%\u0027.",
+          "elementDetails": "Text element displaying \u0027Tax (6.00%)\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed tax is \u0027￥1\u0027.",
+      "reasoning": "Found the element displaying the tax amount \u0027￥1\u0027 and created an ASSERT action to verify its text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_3\u0027]",
+          "value": [
+            "￥1"
+          ],
+          "description": "Verify that the displayed tax is \u0027￥1\u0027.",
+          "elementDetails": "Tax amount \u0027￥1\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed total is \u0027￥25\u0027.",
+      "reasoning": "The instruction is to verify the displayed total. I found the element with data-neo-ref\u003d\u0027xc_ynqnau\u0027 which contains the text \u0027￥25\u0027 and created an ASSERT action for it.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_ynqnau\u0027]",
+          "value": [
+            "￥25"
+          ],
+          "description": "Verify that the displayed total is \u0027￥25\u0027.",
+          "elementDetails": "Total price \u0027￥25\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that a translate(\"Place Order\") button is visible.",
+      "reasoning": "The instruction asks to verify the visibility of a \u0027Place Order\u0027 button. In the provided DOM for the ja-JP locale, the button with id \u0027btn-place-order\u0027 has the text \u0027注文を確定する\u0027, which is the Japanese translation for \u0027Place Order\u0027. Therefore, an ASSERT action is used to check its visibility.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#btn-place-order",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the \u0027Place Order\u0027 button (注文を確定する) is visible.",
+          "elementDetails": "button with text \u0027注文を確定する\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click translate(\"Place Order\").",
+      "reasoning": "The instruction is to click \u0027Place Order\u0027. On the ja-JP page, this translates to \u0027注文を確定する\u0027, which corresponds to the button with id \u0027btn-place-order\u0027.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-place-order",
+          "description": "Click the \u0027Place Order\u0027 button.",
+          "elementDetails": "button with text \u0027注文を確定する\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg w-100 mt-3",
+            "text": "注文を確定する",
+            "id": "btn-place-order",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that an order confirmation page is displayed.",
+      "reasoning": "The instruction is to verify the order confirmation page. I am asserting the current URL and the presence of the main confirmation heading \u0027注文が確定しました！\u0027 which indicates a successful order confirmation.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/ja-JP/checkout/orderConfirmation"
+          ],
+          "description": "Verify the current URL is the order confirmation page URL.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_739oos\u0027]",
+          "value": [
+            "注文が確定しました！"
+          ],
+          "description": "Verify the order confirmation heading is displayed.",
+          "elementDetails": "Heading with text \u0027注文が確定しました！\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that a non-empty order ID is shown (format: ORD-[0-9]{10,15}).",
+      "reasoning": "The instruction asks to verify the order ID format. I found the order ID element using its data-neo-ref attribute and used an ASSERT action with the provided regex pattern to confirm its format.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_b1cj0h\u0027]",
+          "value": [
+            "^ORD-[0-9]{10,15}$"
+          ],
+          "description": "Verify that a non-empty order ID is shown with the correct format.",
+          "elementDetails": "Order ID text \u0027ORD-1779265279612\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the subtotal shown on the confirmation page is \u0027￥17\u0027.",
+      "reasoning": "Found the element displaying the subtotal with the text \u0027￥17\u0027 and created an ASSERT action to verify its content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_1\u0027]",
+          "value": [
+            "￥17"
+          ],
+          "description": "Verify that the subtotal shown on the confirmation page is \u0027￥17\u0027.",
+          "elementDetails": "Subtotal price \u0027￥17\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the tax shown on the confirmation page is \u0027￥1\u0027.",
+      "reasoning": "Found the element displaying the tax amount \u0027￥1\u0027 using its data-neo-ref attribute and asserted its text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_3\u0027]",
+          "value": [
+            "￥1"
+          ],
+          "description": "Verify that the tax shown on the confirmation page is \u0027￥1\u0027.",
+          "elementDetails": "Tax amount \u0027￥1\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the shipping shown on the confirmation page is \u0027￥7\u0027.",
+      "reasoning": "Found the element displaying \u0027￥7\u0027 which corresponds to the shipping cost on the confirmation page and asserted its value.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_2\u0027]",
+          "value": [
+            "￥7"
+          ],
+          "description": "Verify that the shipping shown on the confirmation page is \u0027￥7\u0027.",
+          "elementDetails": "Text element displaying \u0027￥7\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the total shown on the confirmation page is \u0027￥25\u0027.",
+      "reasoning": "The instruction is to verify the total on the confirmation page. I found the element with data-neo-ref\u003d\u0027xc_v7ggtj\u0027 which contains the text \u0027￥25\u0027 and used it for the ASSERT action.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_v7ggtj\u0027]",
+          "value": [
+            "￥25"
+          ],
+          "description": "Verify that the total shown on the confirmation page is \u0027￥25\u0027.",
+          "elementDetails": "Total paid price \u0027￥25\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the tax rate displayed on the confirmation page is \u00276.00%\u0027.",
+      "reasoning": "Found the element displaying \u0027Tax (6.00%)\u0027 and asserted its text content to match the expected tax rate.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
+          "value": [
+            "6.00%"
+          ],
+          "description": "Verify that the tax rate displayed on the confirmation page is \u00276.00%\u0027.",
+          "elementDetails": "Text element containing \u0027Tax (6.00%)\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "com.xceptance.posters.freeform.TC_FF_001_FreeformTest :: testFreeform :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that you see an ecommerce store homepage, which sells posters.",
+      "reasoning": "The instruction asks to verify an e-commerce store homepage selling posters. I\u0027ve asserted the current URL to confirm it\u0027s the homepage, checked the brand link and a prominent heading for \u0027Posters\u0027 to confirm the product type, and verified the presence of a cart overview to confirm it\u0027s an e-commerce store.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Verify current URL is the homepage.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#header-brand",
+          "value": [
+            "Posters"
+          ],
+          "description": "Verify the brand name is \u0027Posters\u0027.",
+          "elementDetails": "Posters brand link",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "h1.hero-title.mb-4",
+          "value": [
+            "Premium Vintage Posters."
+          ],
+          "description": "Verify the main heading indicates posters.",
+          "elementDetails": "Premium Vintage Posters. heading",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#header-cart-overview",
+          "description": "Verify the cart overview element exists, indicating an e-commerce store.",
+          "elementDetails": "Cart Overview link",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that a brown bear photo is show on the right side of the homepage (visual).",
+      "reasoning": "The screenshot clearly shows a brown bear photo positioned on the right side of the homepage, matching the instruction.",
+      "actions": []
+    },
+    {
+      "promptLine": "Check that the page is mainly white and blue (visual).",
+      "reasoning": "The screenshot shows that the page prominently features a white background for the main content area and a dark blue color for the header, the \u0027Summer Sale\u0027 banner, and interactive elements like the \u0027Shop Now\u0027 button. This aligns with the instruction that the page is mainly white and blue.",
+      "actions": []
+    }
+  ]
+}
