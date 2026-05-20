@@ -5,9 +5,9 @@ import com.xceptance.neodymium.junit5.NeodymiumTest;
 import com.xceptance.neodymium.util.Neodymium;
 
 /**
- * Prompt defined directly in Java.
+ * Steps defined directly in Java.
  * No data file is used. The AI agent executes the provided string.
- * Demonstrates the use of the fluent API for before/after/system context and the prompt itself.
+ * Demonstrates the use of the fluent API for before/after/system context and the steps themselves.
  */
 @Browser("Chrome_1500x1000")
 public class InlinePromptShowcaseTest
@@ -21,7 +21,7 @@ public class InlinePromptShowcaseTest
                      - There is a bug on the page. After adding a product to the cart ALWAYS use a REFRESH action.
                      """)
             .before("Navigate to ${neodymium.url}")
-                 .prompt("Verify the site contains 'Posters'")
+                 .steps("Verify the site contains 'Posters'")
             .after("Clear cookies")
             .execute();
     }
@@ -29,12 +29,12 @@ public class InlinePromptShowcaseTest
     @NeodymiumTest
     void testPromptInJavaWithDynamicData() throws Throwable
     {
-        // You can push data to Neodymium's context so it can be resolved in the prompt.
+        // You can push data to Neodymium's context so it can be resolved in the steps.
         Neodymium.getData().put("dynamicSearchTerm", "car");
         
         Neodymium.ai()
                  .before("Navigate to ${neodymium.url}")
-            .prompt(
+            .steps(
                 """
                 Type '${dynamicSearchTerm}' into the search bar
                 Click the search button

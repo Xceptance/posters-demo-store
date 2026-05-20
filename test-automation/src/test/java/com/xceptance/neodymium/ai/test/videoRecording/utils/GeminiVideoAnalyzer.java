@@ -46,7 +46,7 @@ public class GeminiVideoAnalyzer {
         System.out.println("Received analysis from AI.");
 
         StringBuilder yaml = new StringBuilder();
-        yaml.append("prompt: |\n");
+        yaml.append("steps: |\n");
         yaml.append("  Open ${neodymium.url}\n");
 
         java.util.List<String> consolidatedSteps = new java.util.ArrayList<>();
@@ -138,7 +138,7 @@ public class GeminiVideoAnalyzer {
         }
 
         Files.writeString(outputPath, yaml.toString());
-        System.out.println("Written step-by-step YAML prompt to: " + outputPath.toAbsolutePath());
+        System.out.println("Written step-by-step YAML steps to: " + outputPath.toAbsolutePath());
 
         if (com.xceptance.neodymium.util.Neodymium.aiConfiguration().aiGenerateV2DiagnosticLogs()) {
             Path rawLogPath = Paths.get(outputPathStr.replace(".yaml", ".raw.txt").replace(".yml", ".raw.txt"));

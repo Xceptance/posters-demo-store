@@ -103,8 +103,8 @@ A new guest user adds an item to the cart, proceeds to checkout, enters shipping
   - The order items table lists the correct product, size, finish, quantity, and price.
   - The summary panel shows a non-zero Subtotal, Tax, Shipping, and Total.
   - The tax rate label reads the localized equivalent of **`6.00%`** (e.g., `6,00 %`). It must have two decimal places. `6.0%` is not acceptable. *(BUS-BUG-24)*
-  - The calculated tax is exactly `(Subtotal + Shipping) * 6.00%`. *(BUS-BUG-23)*
-  - The total sum is exactly `Subtotal + Shipping + Tax`.
+  - The calculated tax is exactly `(Subtotal + Shipping) * 6.00%`, applying precision-aware rounding to the display precision of the subtotal (e.g., rounded to an integer for zero-decimal currencies like JPY: `¥17 + ¥7 = ¥24 * 0.06 = ¥1.44` → rounds to `¥1`). *(BUS-BUG-23)*
+  - The total sum is exactly `Subtotal + Shipping + Tax`, also applying display-precision rounding.
   - The masked card number and card vendor are displayed in the Payment Method section.
   - A "Place Order" button (`#btn-place-order`) is visible.
 
@@ -112,7 +112,7 @@ A new guest user adds an item to the cart, proceeds to checkout, enters shipping
 
 - **Action:** Click "Place Order".
 - **Data:** N/A
-- **Verify:** The user is redirected to the Order Confirmation page (Step 5). An "Order Confirmed!" success banner is displayed. A non-empty **Order ID** (format: `ORD-XXXXXXXXXXXX`) is displayed. The order summary shows Subtotal, Tax, Shipping, and Total paid. The tax rate label reads the localized equivalent of **`6.00%`** (two decimal places) *(BUS-BUG-24)*. Verify the calculated tax is `(Subtotal + Shipping) * 6.00%` and the Total paid equals `Subtotal + Shipping + Tax`. The shipping and billing addresses match the entered data.
+- **Verify:** The user is redirected to the Order Confirmation page (Step 5). An "Order Confirmed!" success banner is displayed. A non-empty **Order ID** (format: `ORD-XXXXXXXXXXXX`) is displayed. The order summary shows Subtotal, Tax, Shipping, and Total paid. The tax rate label reads the localized equivalent of **`6.00%`** (two decimal places) *(BUS-BUG-24)*. Verify the calculated tax is `(Subtotal + Shipping) * 6.00%` and the Total paid equals `Subtotal + Shipping + Tax`, applying precision-aware rounding to the display precision of the subtotal (e.g., rounded to an integer for zero-decimal currencies like JPY). The shipping and billing addresses match the entered data.
 
 ---
 
@@ -152,3 +152,4 @@ A new guest user adds an item to the cart, proceeds to checkout, enters shipping
 | 2026-05-18 | 1.3 | Antigravity (Claude Sonnet 4.6) | Fixed Order ID description in Step 7 and Pass/Fail: Order ID is `ORD-XXXXXXXXXXXX` format by design, not UUID. |
 | 2026-05-18 | 1.4 | Antigravity (Claude Sonnet 4.6) | Added tax rate format verification (`6.00%`) to Steps 2, 6, and 7 for cart, review, and confirmation pages respectively. References BUS-BUG-24. |
 | 2026-05-19 | 1.5 | Antigravity (AI) | Added explicit verification for sum and tax calculations (`(Subtotal + Shipping) * 6.00%`) in Steps 6 and 7. References BUS-BUG-23. |
+| 2026-05-20 | 1.6 | Antigravity (AI) | Updated manual calculation verifications to use precision-aware rounding (e.g., rounding calculations to integers for zero-decimal currencies like JPY) to match storefront display behavior. |

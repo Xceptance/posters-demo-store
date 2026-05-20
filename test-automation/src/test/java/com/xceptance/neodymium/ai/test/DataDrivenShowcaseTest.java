@@ -6,8 +6,8 @@ import com.xceptance.neodymium.junit5.NeodymiumTest;
 import com.xceptance.neodymium.util.Neodymium;
 
 /**
- * SHOWCASE 1: Data and prompt completely defined in one file.
- * The file must contain a 'prompt' property. It can optionally contain 'before', 'after', 
+ * SHOWCASE 1: Data and steps completely defined in one file.
+ * The file must contain a 'steps' property. It can optionally contain 'before', 'after', 
  * and 'context' (system context) properties which will be automatically executed.
  */
 @Browser("Chrome_1500x1000")

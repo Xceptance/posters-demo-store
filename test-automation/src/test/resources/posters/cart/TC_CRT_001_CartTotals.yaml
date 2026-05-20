@@ -4,26 +4,27 @@ context: |
   * Additionally all translatable data is hinted by translate('NAME') but not necessarily always so.
   * CRITICAL RULE: NEVER assert that the 'body' contains English text when testing localized pages. For page verification, rely ONLY on the current URL, specific element IDs, or visually confirmed translated headings.
 
-prompt: |
+steps: |
   # Homepage
   Open ${neodymium.url}.
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
   # PDP
   Navigate to the product detail page for any product.
-  Record the product price displayed on the PDP as "productPrice" (hint: #product-detail-form-price).
+  Select a size and style.
+  Capture the product price of the selected product as variable 'productPrice' (hint: #product-detail-form-price).
   # Add to Cart
-  Select a size and style and click the Add to Cart button.
+  Click the Add to Cart button.
   If the mini-cart is open then close it.
   Verify the count shown next to the cart icon is '1'.
   # Cart Page
   Open the mini-cart and click translate("View Cart").
   Verify the cart page is displayed and contains one line item.
-  Capture the line item price shown in the line item row. Save it as variable 'unitPrice'.
+  Capture the unit price shown in the line item row. Save it as variable 'unitPrice'.
   Check that 'unitPrice' equals 'productPrice'.
   # Subtotal
   Capture the subtotal amount from element '#cart-subtotal'. Save it as variable 'subtotal'.
-  Verify that the subtotal element '#cart-subtotal' contains the text ${unitPrice}.
+  Verify that the subtotal matches the unit price (hint: verifyCalculation(${subtotal} = ${unitPrice})).
   # Tax Rate Format
   Capture the tax rate label shown next to the Tax row in the cart summary.
   Verify that the tax rate is displayed in the exact format '${taxRate}' (two decimal places with percent sign). FAIL if the format is different (e.g. '6.0%' is not acceptable). Note: known defect BUS-BUG-24.

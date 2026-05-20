@@ -1,4 +1,4 @@
-prompt: |
+steps: |
   # Homepage
   Open '${neodymium.url}'.
   # Select the proper language

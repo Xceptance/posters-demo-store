@@ -1,4 +1,4 @@
-prompt: |
+steps: |
   Open ${neodymium.url}
   Click the country selector button.
   Click the country represented by locale 'en-US' in the opened dialog.
