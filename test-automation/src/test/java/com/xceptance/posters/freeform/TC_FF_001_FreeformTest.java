@@ -49,15 +49,25 @@ public class TC_FF_001_FreeformTest
     @NeodymiumTest
     final void testFreeform() throws Throwable
     {
-        Neodymium.ai().steps("""
-                # This is just a freeform test for some simple features of the automation.
-                # It is not intended to test any business functionality as defined in our test cases.
-                Open ${neodymium.url}
-                # This comes up with a verification for some critereria, it is not visual!
-                Verify that you see an ecommerce store homepage, which sells posters.
-                # Try to check for the bear.
-                Verify that a brown bear photo is show on the right side of the homepage (visual).
-                Check that the page is mainly white and blue (visual).
-                """).execute();
+        Neodymium.ai()
+                .steps("""
+                        # This is just a freeform test for some simple features of the automation.
+                        # It is not intended to test any business functionality as defined in our test cases.
+                        Open ${neodymium.url}
+                        # This comes up with a verification for some critereria, it is not visual!
+                        Verify that you see an ecommerce store homepage, which sells posters.
+                        # Try to check for the bear.
+                        Verify that a brown bear photo is show on the right side of the homepage (visual).
+                        Check that the page is mainly white and blue (visual).
+                        Top left, we can see a red X next to the text Posters (visual).
+                        # Search and visual identify the search button
+                        Type 'bear' into the search box.
+                        Click the blue button next to the input box (visual).
+                        # Visually verify the bears
+                        Verify that the result page shows a brown bear, a picture with gummy bears, and a picture with metallic shiny gummy bears on a notebook keyboard (visual).
+                        # Flag
+                        Store the color of the animal shown on the second result image in the variable 'animalColor' (visual).
+                        """)
+                .execute();
     }
 }
