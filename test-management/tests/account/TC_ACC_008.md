@@ -5,11 +5,11 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 ## Metadata
 
 - **Test ID:** TC_ACC_008
-- **Version:** 1.1
+- **Version:** 1.2
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🟠 High
-- **Status:** 📝 Draft
+- **Status:** 👀 To Be Reviewed
 - **Execution Type:** Manual
 - **Suite:** 🔄 Regression
 - **Requirements:**
@@ -17,7 +17,7 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 - **Tags:** `registration`, `validation`, `email`, `edge-case`, `localization`, `punycode`
 - **Author:** Antigravity (AI) (2026-04-09)
 - **Reviewers:**
-  - 
+  - Antigravity (AI) (2026-05-21)
 
 ## Comments
 
@@ -35,6 +35,8 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 | :--- | :--- |
 | First Name | Emma |
 | Last Name | Watson |
+| First Name with Spaces | `  Emma  ` |
+| Last Name with Spaces | `  Watson  ` |
 | Email with Spaces | ` emma@posters.com ` |
 | Email Case Variation | `Emma@posters.com` |
 | Valid Password | `S3cureP@ss!` |
@@ -74,12 +76,19 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 - **Data:** `First Name` = 太郎, `Last Name` = 山田, `Email` = `user@xn--zckzah.com`
 - **Verify:** Registration is successful. The user's name is correctly displayed as 太郎 山田 without character encoding artifacts (Mojibake), and the Punycode email is accepted as valid.
 
+### 4. Register with Space-Padded Names
+- **Action:** Fill all form fields with valid data, using the space-padded First Name and Last Name values. Submit the form.
+- **Data:** `First Name` = `  Emma  `, `Last Name` = `  Watson  `, `Email` = `emma_trimmed@posters.com`, `Password` = `S3cureP@ss!`
+- **Verify:** Registration is successful.
+- **Verify:** The user's first and last names are correctly trimmed (whitespaces removed) before being saved in the system.
+- **Verify:** The homepage header greeting displays exactly "Hello, Emma" (with no leading or trailing spaces) rather than "Hello,   Emma   ".
+
 ---
 
 ## Pass/Fail Criteria
 
-- **Pass:** The system trims spaces, treats case consistently, correctly processes and renders double-byte Japanese characters (without encoding errors), and accepts Punycode domains.
-- **Fail:** Accounts with trailing spaces are saved literally, multiple accounts can be created differing only by case, Japanese characters break the form or are stored incorrectly as `???`, or Punycode emails are flagged as invalid.
+- **Pass:** The system trims spaces from both names and email, treats case consistently, correctly processes and renders double-byte Japanese characters (without encoding errors), and accepts Punycode domains.
+- **Fail:** Accounts with leading/trailing spaces in email or name fields are saved literally (causing greeting spacing or visual layout issues), multiple accounts can be created differing only by case, Japanese characters break the form or are stored incorrectly as `???`, or Punycode emails are flagged as invalid.
 
 ---
 
@@ -101,3 +110,4 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 | :--- | :--- | :--- | :--- |
 | 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
 | 2026-04-09 | 1.1 | Antigravity (AI) | Added test steps and data for Japanese character localization and Punycode emails |
+| 2026-05-21 | 1.2 | Antigravity (AI) | Added test step and data for space-padded First Name and Last Name trimming verification, and set status to To Be Reviewed. |

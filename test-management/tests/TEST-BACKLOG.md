@@ -22,7 +22,9 @@ Instead of discarding great ideas during the "Joint Refinement" phase of test cr
 
 ## 🧩 Deferred Edge Cases
 *Log extremely rare or complex edge cases that are technically possible now but deprioritized for initial manual testing velocity.*
-- *(Empty)*
+- **Cart Merge and Session Persistence on Login:**
+  * **Scenario A (Cart Merge):** A user adds items to their anonymous guest cart. Upon logging in, if their registered account already has items in its persistent cart, verify that the guest cart items are merged with the persistent account cart items (correctly updating quantities for duplicate items and appending new items) rather than overwriting or discarding either.
+  * **Scenario B (Anonymous to Persistent Cart Restore):** A user starts with an empty anonymous guest cart. Upon logging in, verify that any cart items left open from their previous registered session are successfully restored and visible in their active cart.
 
 ## 🗃️ Other Concepts & Exploratory Ideas
 *Log any other unrefined testing ideas, exploratory charters, or cross-cutting concerns that don't comfortably fit above.*
