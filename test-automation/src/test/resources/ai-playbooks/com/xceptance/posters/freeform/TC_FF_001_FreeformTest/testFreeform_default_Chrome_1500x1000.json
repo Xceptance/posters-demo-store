@@ -1,0 +1,51 @@
+{
+  "id": "com.xceptance.posters.freeform.TC_FF_001_FreeformTest :: testFreeform :: default :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the page is loaded.",
+      "reasoning": "The instruction is to verify the page is loaded. I am asserting the current URL and the visibility of a prominent heading on the page to confirm it has loaded correctly.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Verify the current URL is the home page URL.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_2d2m3e\u0027]",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the main heading \u0027Premium Vintage Posters.\u0027 is visible, indicating the page has loaded.",
+          "elementDetails": "Heading with text \u0027Premium Vintage Posters.\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    }
+  ]
+}

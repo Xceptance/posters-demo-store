@@ -1,0 +1,1068 @@
+{
+  "id": "com.xceptance.posters.checkout.TC_CHK_001_GuestCheckout_Fixed :: testGuestCheckoutEnGB :: tc_chk_001_fixed_en_GB :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/.",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is identified as the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-locale-menu",
+          "description": "Click the country selector button",
+          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-GB\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027en-GB\u0027. The DOM shows a link with id \u0027loc-en-gb\u0027 and text \u0027🇬🇧 English (United Kingdom)\u0027 which directly corresponds to the instruction.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#loc-en-gb",
+          "description": "Click the \u0027English (United Kingdom)\u0027 link to change the locale to en-GB.",
+          "elementDetails": "🇬🇧 English (United Kingdom)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇬🇧\nEnglish (United Kingdom)",
+            "id": "loc-en-gb",
+            "href": "http://localhost:8080/en-GB/",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Search for \u0027Grizzly Bear\u0027 using the search bar.",
+      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. Performed a TYPE action to enter the search term and then a CLICK action to submit the search.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#header-search-text",
+          "value": [
+            "Grizzly Bear"
+          ],
+          "description": "Type \u0027Grizzly Bear\u0027 into the search bar.",
+          "elementDetails": "Search input field with id \u0027header-search-text\u0027",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the search button.",
+          "elementDetails": "Search button with id \u0027header-search-button\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click on \u0027Grizzly Bear\u0027 from the search results to open the product details page.",
+      "reasoning": "The instruction is to click on \u0027Grizzly Bear\u0027 from the search results. I identified a link with `data-neo-ref\u003d\u0027xc_wzr11x\u0027` that has an `href` pointing to the \u0027Grizzly Bear\u0027 product details page, which is the most appropriate element to click.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_wzr11x\u0027]",
+          "description": "Click on the \u0027Grizzly Bear\u0027 product link to open its details page.",
+          "elementDetails": "Link to Grizzly Bear product page",
+          "elementContext": {
+            "href": "http://localhost:8080/en-GB/product/Grizzly%20Bear/1",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Select size \u002716x12\u0027 and finish \u0027Matte\u0027.",
+      "reasoning": "The instruction requested to select a specific size and finish. I identified the \u0027product-detail-form-size-selection\u0027 dropdown for the size and the \u0027finish-matte\u0027 radio button for the finish based on their IDs and attributes in the DOM.",
+      "actions": [
+        {
+          "type": "SELECT",
+          "target": "#product-detail-form-size-selection",
+          "value": [
+            "16x12 cm"
+          ],
+          "description": "Select size \u002716x12 cm\u0027 from the dropdown.",
+          "elementDetails": "size selection dropdown",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "size",
+            "text": "16x12 cm",
+            "id": "product-detail-form-size-selection",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "#finish-matte",
+          "description": "Select finish \u0027Matte\u0027.",
+          "elementDetails": "Matte radio button",
+          "elementContext": {
+            "classes": "form-check-input",
+            "name": "finish",
+            "id": "finish-matte",
+            "tagName": "input",
+            "type": "radio"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click the Add to Cart button (hint: #btn-add-to-cart).",
+      "reasoning": "The instruction explicitly provided a hint for the \u0027Add to Cart\u0027 button, which was used as the target for the CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-add-to-cart",
+          "description": "Click the Add to Cart button",
+          "elementDetails": "Add to Cart button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "Add To Cart",
+            "id": "btn-add-to-cart",
+            "tagName": "button",
+            "type": "button"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "If the mini-cart is open then close it.",
+      "reasoning": "The instruction is to close the mini-cart if it\u0027s open. I\u0027ve created a BRANCH action to first check if the mini-cart label (\u0027Shopping Cart\u0027) is visible, indicating it\u0027s open. If it is, the \u0027then\u0027 block contains an action to click the \u0027Close\u0027 button associated with the mini-cart.",
+      "actions": [
+        {
+          "type": "BRANCH",
+          "description": "If the mini-cart is open, close it",
+          "elementContext": {},
+          "replay": "",
+          "condition": [
+            {
+              "type": "ASSERT",
+              "target": "#miniCartOffcanvasLabel",
+              "value": [
+                "visible"
+              ],
+              "description": "Check if the mini-cart is open by verifying its label is visible",
+              "elementDetails": "Shopping Cart heading",
+              "elementContext": {},
+              "replay": "",
+              "adjust": false
+            }
+          ],
+          "then": [
+            {
+              "type": "CLICK",
+              "target": "[data-neo-ref\u003d\u0027xc_c4a0xf\u0027]",
+              "description": "Close the mini-cart",
+              "elementDetails": "Close button for mini-cart",
+              "elementContext": {},
+              "replay": "",
+              "adjust": false
+            }
+          ],
+          "else": [],
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the count shown next to the cart icon is \u00271\u0027.",
+      "reasoning": "The instruction is to verify the cart count. The DOM shows a link with id \u0027header-cart-overview\u0027 and text \u00271\u0027, which matches the requirement.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#header-cart-overview",
+          "value": [
+            "1"
+          ],
+          "description": "Verify the count shown next to the cart icon is \u00271\u0027.",
+          "elementDetails": "Cart Overview link with text \u00271\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Open the mini-cart and click translate(\"View Cart\").",
+      "reasoning": "The instruction requires opening the mini-cart and then clicking \u0027View Cart\u0027. The \u0027header-cart-overview\u0027 element is used to open the mini-cart. After that, a \u0027View Cart\u0027 link is expected to appear within the mini-cart, which will then be clicked.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#header-cart-overview",
+          "description": "Open the mini-cart by clicking the cart overview link.",
+          "elementDetails": "Cart Overview link with text \u00271\u0027",
+          "elementContext": {
+            "classes": "nav-link",
+            "text": "  1",
+            "id": "header-cart-overview",
+            "href": "http://localhost:8080/en-GB/product/Grizzly%20Bear/1#miniCartOffcanvas",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "View Cart",
+          "description": "Click the \u0027View Cart\u0027 link inside the mini-cart.",
+          "elementDetails": "Link with text \u0027View Cart\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary form-control go-to-cart",
+            "text": "View Cart",
+            "href": "http://localhost:8080/en-GB/cart",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the tax rate is displayed in the cart summary. FAIL the test if the tax rate is not displayed in the exact format \u00276.00%\u0027 (two decimal places required). The decimal separator depends on the locale.",
+      "reasoning": "The instruction requires verifying the tax rate format \u00276.00%\u0027. I found a text element with data-neo-ref\u003d\u0027xc_g6014n_2\u0027 that contains \u0027Tax (6.00%)\u0027, which includes the specified format. An ASSERT action is used to check if this element\u0027s text contains \u00276.00%\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
+          "value": [
+            "6.00%"
+          ],
+          "description": "Verify the tax rate is displayed in the cart summary in the exact format \u00276.00%\u0027.",
+          "elementDetails": "Text element containing \u0027Tax (6.00%)\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click translate(\"Checkout\").",
+      "reasoning": "The instruction is to click \u0027Checkout\u0027. An element with id \u0027btn-checkout\u0027 and text \u0027Checkout\u0027 was found in the DOM, which is the most appropriate target.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-checkout",
+          "description": "Clicking the Checkout button",
+          "elementDetails": "Checkout button",
+          "elementContext": {
+            "classes": "btn btn-primary w-100 btn-lg mt-3",
+            "text": "Checkout",
+            "id": "btn-checkout",
+            "href": "http://localhost:8080/en-GB/checkout/shippingAddress",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is taken into the checkout.",
+      "reasoning": "The instruction is to verify the user is in the checkout. The current URL \u0027http://localhost:8080/en-GB/checkout/shippingAddress\u0027 clearly indicates the \u0027checkout\u0027 path. An ASSERT action on the current URL containing \u0027checkout\u0027 is appropriate for this verification.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "checkout"
+          ],
+          "description": "Verify the current URL contains \u0027checkout\u0027 to confirm being in the checkout process.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the user is presented with the Shipping Address form.",
+      "reasoning": "The instruction is to verify the user is presented with the Shipping Address form. I\u0027ve asserted the current URL, the \u0027Shipping Address\u0027 heading, and the presence of the form itself to confirm this.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-GB/checkout/shippingAddress"
+          ],
+          "description": "Verify the current URL is the shipping address page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#xc_22a9yl",
+          "value": [
+            "Shipping Address"
+          ],
+          "description": "Verify the \u0027Shipping Address\u0027 heading is present.",
+          "elementDetails": "Heading \u0027Shipping Address\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#shipping-form",
+          "description": "Verify the shipping address form exists.",
+          "elementDetails": "Shipping Address Form",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Fill out the shipping address form using: First Name \u0027James\u0027, Last Name \u0027Smith\u0027, Company \u0027British Industries\u0027, Address \u0027456 High St\u0027, City \u0027London\u0027, State \u0027London\u0027, Zip \u0027W1D 1BS\u0027.",
+      "reasoning": "All shipping address fields were identified and filled according to the instructions, and \u0027United Kingdom\u0027 was selected for the country.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#firstName",
+          "value": [
+            "James"
+          ],
+          "description": "Fill out the first name field with \u0027James\u0027",
+          "elementDetails": "First Name input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "firstName",
+            "id": "firstName",
+            "placeholder": "First Name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#name",
+          "value": [
+            "Smith"
+          ],
+          "description": "Fill out the last name field with \u0027Smith\u0027",
+          "elementDetails": "Last Name input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "name",
+            "placeholder": "Last Name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#company",
+          "value": [
+            "British Industries"
+          ],
+          "description": "Fill out the company field with \u0027British Industries\u0027",
+          "elementDetails": "Company input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "company",
+            "id": "company",
+            "placeholder": "Company",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#addressLine",
+          "value": [
+            "456 High St"
+          ],
+          "description": "Fill out the address field with \u0027456 High St\u0027",
+          "elementDetails": "Address input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "addressLine",
+            "id": "addressLine",
+            "placeholder": "Address",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#city",
+          "value": [
+            "London"
+          ],
+          "description": "Fill out the city field with \u0027London\u0027",
+          "elementDetails": "City input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "city",
+            "id": "city",
+            "placeholder": "City",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#state",
+          "value": [
+            "London"
+          ],
+          "description": "Fill out the state field with \u0027London\u0027",
+          "elementDetails": "State input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "state",
+            "id": "state",
+            "placeholder": "State",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "#zip",
+          "value": [
+            "W1D 1BS"
+          ],
+          "description": "Fill out the zip code field with \u0027W1D 1BS\u0027",
+          "elementDetails": "ZIP input field",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "zip",
+            "id": "zip",
+            "placeholder": "ZIP",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "SELECT",
+          "target": "#country",
+          "value": [
+            "United Kingdom"
+          ],
+          "description": "Select \u0027United Kingdom\u0027 from the country dropdown",
+          "elementDetails": "Country dropdown",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "country",
+            "text": "United States",
+            "id": "country",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Select the country translate(\u0027United Kingdom\u0027) from the country dropdown in the shipping address form.",
+      "reasoning": "The instruction is to select \u0027United Kingdom\u0027 from the country dropdown. The DOM provides a select element with id \u0027country\u0027 and \u0027United Kingdom\u0027 is available in its options.",
+      "actions": [
+        {
+          "type": "SELECT",
+          "target": "#country",
+          "value": [
+            "United Kingdom"
+          ],
+          "description": "Select \u0027United Kingdom\u0027 from the country dropdown.",
+          "elementDetails": "Country dropdown with id \u0027country\u0027",
+          "elementContext": {
+            "classes": "form-select",
+            "name": "country",
+            "text": "United Kingdom",
+            "id": "country",
+            "tagName": "select",
+            "type": "select-one"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Submit the shipping address form.",
+      "reasoning": "The instruction is to submit the shipping address form. The DOM shows a submit button with id \u0027btn-submit-shipping\u0027 and text \u0027Continue To Billing\u0027 which is the appropriate action to take.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-shipping",
+          "description": "Submit the shipping address form by clicking the \u0027Continue To Billing\u0027 button.",
+          "elementDetails": "button with text \u0027Continue To Billing\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "Continue To Billing",
+            "id": "btn-submit-shipping",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the billing address form is displayed.",
+      "reasoning": "The instruction is to verify the billing address form is displayed. The DOM shows a form with id \u0027billing-form\u0027 which contains all the relevant billing address fields. Asserting its visibility confirms the form is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#billing-form",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify the billing address form is displayed.",
+          "elementDetails": "billing-form",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Select translate(\"Use shipping address for billing\") and submit the form.",
+      "reasoning": "The instruction asks to select \u0027Use shipping address for billing\u0027 which corresponds to the checkbox with id \u0027sameAsShipping\u0027, and then submit the form using the \u0027Continue To Payment\u0027 button with id \u0027btn-submit-billing\u0027.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#sameAsShipping",
+          "description": "Select \u0027Use shipping address for billing\u0027 checkbox",
+          "elementDetails": "input with id \u0027sameAsShipping\u0027",
+          "elementContext": {
+            "classes": "form-check-input",
+            "id": "sameAsShipping",
+            "tagName": "input",
+            "type": "checkbox"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-billing",
+          "description": "Submit the form by clicking \u0027Continue To Payment\u0027 button",
+          "elementDetails": "button with id \u0027btn-submit-billing\u0027 and text \u0027Continue To Payment\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "Continue To Payment",
+            "id": "btn-submit-billing",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify the payment form is displayed.",
+      "reasoning": "The instruction is to verify the payment form is displayed. The DOM clearly shows a form with id \u0027payment-form\u0027 and several credit card related input fields like \u0027cardNumber\u0027, \u0027cardName\u0027, \u0027expiry\u0027, and \u0027cvv\u0027. Asserting the presence of the form and one of its key input fields confirms the payment form is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#payment-form",
+          "description": "Verify the payment form is displayed by checking for its existence.",
+          "elementDetails": "Payment form",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#cardNumber",
+          "description": "Verify the credit card number input field is displayed as part of the payment form.",
+          "elementDetails": "Credit card number input field",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u00274111111111111111\u0027 into the card number field.",
+      "reasoning": "The instruction was to enter a specific card number into the card number field. I identified the input field by its ID \u0027cardNumber\u0027 and created a TYPE action to input the provided value.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cardNumber",
+          "value": [
+            "4111111111111111"
+          ],
+          "description": "Enter \u00274111111111111111\u0027 into the card number field.",
+          "elementDetails": "Credit card number input field with id \u0027cardNumber\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "cardNumber",
+            "id": "cardNumber",
+            "placeholder": "4111 1111 1111 1111",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u0027James Smith\u0027 into the cardholder name field.",
+      "reasoning": "The instruction is to enter text into the cardholder name field. I identified the input field with id \u0027cardName\u0027 and aria-label \u0027Cardholder name\u0027 as the correct target and created a TYPE action for it.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cardName",
+          "value": [
+            "James Smith"
+          ],
+          "description": "Enter \u0027James Smith\u0027 into the cardholder name field.",
+          "elementDetails": "input with id \u0027cardName\u0027 and aria-label \u0027Cardholder name\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "cardName",
+            "placeholder": "Name on Card",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u002712/30\u0027 into the expiry field (MM/YY format).",
+      "reasoning": "The instruction is to enter \u002712/30\u0027 into the expiry field. The DOM shows an input field with id \u0027expiry\u0027 and placeholder \u0027MM/YY\u0027, which is the correct target for this action.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#expiry",
+          "value": [
+            "12/30"
+          ],
+          "description": "Enter \u002712/30\u0027 into the expiry field.",
+          "elementDetails": "Expiry date input field with placeholder MM/YY",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "expiry",
+            "id": "expiry",
+            "placeholder": "MM/YY",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Enter \u0027123\u0027 into the CVV field.",
+      "reasoning": "The instruction is to enter \u0027123\u0027 into the CVV field. The DOM provides an input element with id \u0027cvv\u0027 which is suitable for this action.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "#cvv",
+          "value": [
+            "123"
+          ],
+          "description": "Enter \u0027123\u0027 into the CVV field.",
+          "elementDetails": "input with id \u0027cvv\u0027 and placeholder \u0027123\u0027",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "cvv",
+            "id": "cvv",
+            "placeholder": "123",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Submit the payment form.",
+      "reasoning": "The instruction is to submit the payment form. The DOM shows a submit button with id \u0027btn-submit-payment\u0027 and text \u0027Continue To Review\u0027, which is the appropriate action to take.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-submit-payment",
+          "description": "Click the \u0027Continue To Review\u0027 button to submit the payment form.",
+          "elementDetails": "button with text \u0027Continue To Review\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg px-5 shadow-sm",
+            "text": "Continue To Review",
+            "id": "btn-submit-payment",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that an order review page is displayed.",
+      "reasoning": "The instruction is to verify that an order review page is displayed. I am asserting the current URL matches the expected order review URL and that the main heading \u0027Review \u0026 Place Order\u0027 is present on the page, which confirms the page context.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-GB/checkout/placeOrder"
+          ],
+          "description": "Verify the current URL is the order review page URL.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_i6sxel\u0027]",
+          "value": [
+            "Review \u0026 Place Order"
+          ],
+          "description": "Verify the main heading \u0027Review \u0026 Place Order\u0027 is displayed.",
+          "elementDetails": "Heading with text \u0027Review \u0026 Place Order\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed subtotal is \u0027£13.43\u0027.",
+      "reasoning": "The instruction is to verify the subtotal. I found the element displaying the subtotal \u0027£13.43\u0027 using its data-neo-ref attribute and created an ASSERT action to check its text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_1\u0027]",
+          "value": [
+            "£13.43"
+          ],
+          "description": "Verify that the displayed subtotal is \u0027£13.43\u0027.",
+          "elementDetails": "Subtotal price",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed shipping is \u0027£7.00\u0027.",
+      "reasoning": "The instruction is to verify the displayed shipping cost. I found the element with data-neo-ref\u003d\u0027xc_afza12_2\u0027 which contains the text \u0027£7.00\u0027 and used an ASSERT action to verify its value.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_2\u0027]",
+          "value": [
+            "£7.00"
+          ],
+          "description": "Verify that the displayed shipping is \u0027£7.00\u0027.",
+          "elementDetails": "Shipping cost displayed as £7.00",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed tax rate is \u00276.00%\u0027.",
+      "reasoning": "The instruction is to verify the displayed tax rate is \u00276.00%\u0027. I found an element with data-neo-ref\u003d\u0027xc_g6014n_2\u0027 that contains the text \u0027Tax (6.00%)\u0027, which includes the required tax rate. An ASSERT action is used to check if this element\u0027s text contains \u00276.00%\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
+          "value": [
+            "6.00%"
+          ],
+          "description": "Verify that the displayed tax rate is \u00276.00%\u0027.",
+          "elementDetails": "Text element containing \u0027Tax (6.00%)\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed tax is \u0027£1.23\u0027.",
+      "reasoning": "Found the element displaying the tax amount with data-neo-ref \u0027xc_afza12_3\u0027 and asserted its text content matches \u0027£1.23\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_3\u0027]",
+          "value": [
+            "£1.23"
+          ],
+          "description": "Verify that the displayed tax is \u0027£1.23\u0027.",
+          "elementDetails": "Tax amount \u0027£1.23\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the displayed total is \u0027£21.66\u0027.",
+      "reasoning": "The instruction is to verify the displayed total. I found the element with data-neo-ref\u003d\u0027xc_ynqnau\u0027 which contains the text \u0027£21.66\u0027 and created an ASSERT action for it.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_ynqnau\u0027]",
+          "value": [
+            "£21.66"
+          ],
+          "description": "Verify that the displayed total is \u0027£21.66\u0027.",
+          "elementDetails": "Total price \u0027£21.66\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that a translate(\"Place Order\") button is visible.",
+      "reasoning": "The instruction was to verify the visibility of a \u0027Place Order\u0027 button. I found a button with id \u0027btn-place-order\u0027 and text \u0027Place Order\u0027 in the DOM, which matches the requirement. An ASSERT action was created to check its visibility and text content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#btn-place-order",
+          "value": [
+            "Place Order"
+          ],
+          "description": "Verify that the \u0027Place Order\u0027 button is visible and contains the correct text.",
+          "elementDetails": "button with text \u0027Place Order\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Click translate(\"Place Order\").",
+      "reasoning": "The instruction is to click \u0027Place Order\u0027. I found a button with id \u0027btn-place-order\u0027 and text \u0027Place Order\u0027 in the DOM and created a CLICK action for it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#btn-place-order",
+          "description": "Click the \u0027Place Order\u0027 button.",
+          "elementDetails": "button with text \u0027Place Order\u0027",
+          "elementContext": {
+            "classes": "btn btn-primary btn-lg w-100 mt-3",
+            "text": "Place Order",
+            "id": "btn-place-order",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that an order confirmation page is displayed.",
+      "reasoning": "The current URL and the presence of the \u0027Order Confirmed!\u0027 heading confirm that an order confirmation page is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-GB/checkout/orderConfirmation"
+          ],
+          "description": "Verify the current URL is the order confirmation page.",
+          "elementDetails": "Current URL",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_739oos\u0027]",
+          "value": [
+            "Order Confirmed!"
+          ],
+          "description": "Verify the \u0027Order Confirmed!\u0027 heading is displayed.",
+          "elementDetails": "Heading with text \u0027Order Confirmed!\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that a non-empty order ID is shown (format: ORD-[0-9]{10,15}).",
+      "reasoning": "The instruction asks to verify the order ID format. I found the order ID element using its data-neo-ref attribute and used an ASSERT action with a regular expression to validate its format.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_b1cj0h\u0027]",
+          "value": [
+            "^ORD-[0-9]{10,15}$"
+          ],
+          "description": "Verify that a non-empty order ID is shown and matches the specified format.",
+          "elementDetails": "Order ID: ORD-1779265279610",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the subtotal shown on the confirmation page is \u0027£13.43\u0027.",
+      "reasoning": "The instruction is to verify the subtotal. I found the element with data-neo-ref\u003d\u0027xc_afza12_1\u0027 which contains the text \u0027£13.43\u0027 and asserted its value.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_1\u0027]",
+          "value": [
+            "£13.43"
+          ],
+          "description": "Verify that the displayed subtotal is \u0027£13.43\u0027.",
+          "elementDetails": "Subtotal price",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the tax shown on the confirmation page is \u0027£1.23\u0027.",
+      "reasoning": "Found the element displaying the tax amount with data-neo-ref\u003d\u0027xc_afza12_3\u0027 and asserted its text content matches \u0027£1.23\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_3\u0027]",
+          "value": [
+            "£1.23"
+          ],
+          "description": "Verify that the tax shown on the confirmation page is \u0027£1.23\u0027.",
+          "elementDetails": "Tax amount \u0027£1.23\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the shipping shown on the confirmation page is \u0027£7.00\u0027.",
+      "reasoning": "Found the element displaying the shipping cost on the order confirmation page and asserted its text content matches \u0027£7.00\u0027.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12_2\u0027]",
+          "value": [
+            "£7.00"
+          ],
+          "description": "Verify that the shipping shown on the confirmation page is \u0027£7.00\u0027.",
+          "elementDetails": "Shipping amount \u0027£7.00\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the total shown on the confirmation page is \u0027£21.66\u0027.",
+      "reasoning": "The instruction is to verify the total on the confirmation page. I located the element with data-neo-ref\u003d\u0027xc_v7ggtj\u0027 which contains the text \u0027£21.66\u0027 and created an ASSERT action to verify its content.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_v7ggtj\u0027]",
+          "value": [
+            "£21.66"
+          ],
+          "description": "Verify that the total shown on the confirmation page is \u0027£21.66\u0027.",
+          "elementDetails": "Total paid amount",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    },
+    {
+      "promptLine": "Verify that the tax rate displayed on the confirmation page is \u00276.00%\u0027.",
+      "reasoning": "The instruction is to verify the tax rate. I found the element with data-neo-ref \u0027xc_g6014n_2\u0027 which contains the text \u0027Tax (6.00%)\u0027, matching the expected value.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
+          "value": [
+            "Tax (6.00%)"
+          ],
+          "description": "Verify that the tax rate displayed on the confirmation page is \u00276.00%\u0027.",
+          "elementDetails": "Text element containing \u0027Tax (6.00%)\u0027",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ]
+    }
+  ]
+}
