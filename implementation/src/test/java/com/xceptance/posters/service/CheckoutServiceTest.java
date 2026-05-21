@@ -51,7 +51,7 @@ class CheckoutServiceTest {
         em.flush();
         
         Mockito.when(cartService.toCartDto(Mockito.any(), Mockito.anyString(), Mockito.anyString()))
-            .thenReturn(new CartDto(Collections.emptyList(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "0", 0));
+            .thenReturn(new CartDto(Collections.emptyList(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 0));
 
         CartLineItem item = new CartLineItem();
         item.setSku("TEST-0001");
