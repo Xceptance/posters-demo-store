@@ -1,0 +1,31 @@
+{
+  "id": "com.xceptance.posters.freeform.TC_FF_002_ShouldFail_Bug_Feature :: assertionFailVisualBug :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Verify that the screen is mostly black and white (visual).",
+      "reasoning": "Expected failure recorded for bug: unspecified",
+      "actions": [],
+      "screenshotHash": "00000000000000000198019801d8018801ac01f8019481f0018801ac01800000",
+      "expectedFailure": true,
+      "expectedErrorType": "com.xceptance.neodymium.ai.action.ActionExecutor$ActionExecutionException",
+      "expectedErrorMessage": "Verification failed: Visual verification failed: The screen is not mostly black and white. There are prominent colors such as dark blue in the header and banner, red in the logo, and various colors (brown, green, grey) in the main image of the bear."
+    }
+  ]
+}

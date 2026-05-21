@@ -1,0 +1,30 @@
+{
+  "id": "com.xceptance.posters.freeform.TC_FF_002_ShouldFail_Bug_Feature :: assertionFailBug :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Verify that the minicart shows two items .",
+      "reasoning": "Expected failure recorded for bug: unspecified",
+      "actions": [],
+      "expectedFailure": true,
+      "expectedErrorType": "com.xceptance.neodymium.ai.action.ActionExecutor$ActionExecutionException",
+      "expectedErrorMessage": "Verification failed: The minicart currently shows \u00270\u0027 items, but the instruction expected \u00272\u0027 items."
+    }
+  ]
+}
