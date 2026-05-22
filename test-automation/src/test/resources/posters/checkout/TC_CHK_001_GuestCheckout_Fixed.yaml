@@ -1,3 +1,5 @@
+skipReplay: true
+
 context: |
   * You are testing a localized version of the posters web shop indicated by ${locale}. 
   * If you cannot find an element or make sense out of names, try to translate supplied data.

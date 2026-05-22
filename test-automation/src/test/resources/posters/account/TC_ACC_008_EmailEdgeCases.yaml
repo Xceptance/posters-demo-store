@@ -1,0 +1,63 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_008
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  
+  # Step 1: Register with Space-Padded Email
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+  Type 'Emma' into the First Name field.
+  Type 'Watson' into the Last Name field.
+  Type '${paddedEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that you are redirected to the homepage and the header displays "Hello, Emma".
+  Click 'Logout'.
+  
+  # Step 2: Verify Case Variation Duplicate
+  Click the profile/sign-in icon at the top right, then navigate to the Registration page.
+  Type 'Emma' into the First Name field.
+  Type 'Watson' into the Last Name field.
+  Type '${caseVariationEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and shows an error alert stating that the email already exists or is in use.
+
+  # Step 3: Register with Japanese Characters and Punycode
+  Click the profile/sign-in icon at the top right, then navigate to the Registration page.
+  Type '太郎' into the First Name field.
+  Type '山田' into the Last Name field.
+  Type '${punycodeEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that you are redirected to the homepage and the header greeting displays "Hello, 太郎".
+  Click 'Logout'.
+
+  # Step 4: Register with Space-Padded Names
+  Click the profile/sign-in icon at the top right, then navigate to the Registration page.
+  Type '  Emma  ' into the First Name field.
+  Type '  Watson  ' into the Last Name field.
+  Type '${trimmedTestEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that you are redirected to the homepage and the header greeting displays exactly "Hello, Emma" without leading or trailing spaces in the name.
+  Click 'Logout'.
+
+data:
+  - testId: "tc_acc_008_en_US"
+    password: "S3cureP@ss!"
+    locale: "en-US"
+  - testId: "tc_acc_008_en_GB"
+    password: "S3cureP@ss!"
+    locale: "en-GB"
+  - testId: "tc_acc_008_de_DE"
+    password: "S3cureP@ss!"
+    locale: "de-DE"
+  - testId: "tc_acc_008_sv_SE"
+    password: "S3cureP@ss!"
+    locale: "sv-SE"
+  - testId: "tc_acc_008_ja_JP"
+    password: "S3cureP@ss!"
+    locale: "ja-JP"

@@ -1,0 +1,77 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_002
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+  
+  # Step 1: Submit Empty Form
+  Click the 'Create Account' button without entering any data.
+  Verify that the form is not submitted.
+  Verify that a browser validation error popup/tooltip pointing to the First Name field is shown with message containing "Please fill out this field" or localized equivalent.
+
+  # Step 2: Test Single Field Omissions (First Name blank)
+  Refresh the page or clear the fields.
+  Type '${lastName}' into the Last Name field.
+  Type '${email}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the First Name field is shown.
+
+  # Step 2: Test Single Field Omissions (Last Name blank)
+  Refresh the page or clear the fields.
+  Type '${firstName}' into the First Name field.
+  Type '${email}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Last Name field is shown.
+
+  # Step 2: Test Single Field Omissions (Email blank)
+  Refresh the page or clear the fields.
+  Type '${firstName}' into the First Name field.
+  Type '${lastName}' into the Last Name field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Email field is shown.
+
+  # Step 2: Test Single Field Omissions (Password blank)
+  Refresh the page or clear the fields.
+  Type '${firstName}' into the First Name field.
+  Type '${lastName}' into the Last Name field.
+  Type '${email}' into the Email field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Password field is shown.
+
+data:
+  - testId: "tc_acc_002_en_US"
+    firstName: "Jane"
+    lastName: "Doe"
+    email: "test_TC_ACC_002_en_US@posters.com"
+    password: "S3cur3!P@ss"
+    locale: "en-US"
+  - testId: "tc_acc_002_en_GB"
+    firstName: "Jane"
+    lastName: "Doe"
+    email: "test_TC_ACC_002_en_GB@posters.com"
+    password: "S3cur3!P@ss"
+    locale: "en-GB"
+  - testId: "tc_acc_002_de_DE"
+    firstName: "Jane"
+    lastName: "Doe"
+    email: "test_TC_ACC_002_de_DE@posters.com"
+    password: "S3cur3!P@ss"
+    locale: "de-DE"
+  - testId: "tc_acc_002_sv_SE"
+    firstName: "Jane"
+    lastName: "Doe"
+    email: "test_TC_ACC_002_sv_SE@posters.com"
+    password: "S3cur3!P@ss"
+    locale: "sv-SE"
+  - testId: "tc_acc_002_ja_JP"
+    firstName: "Jane"
+    lastName: "Doe"
+    email: "test_TC_ACC_002_ja_JP@posters.com"
+    password: "S3cur3!P@ss"
+    locale: "ja-JP"

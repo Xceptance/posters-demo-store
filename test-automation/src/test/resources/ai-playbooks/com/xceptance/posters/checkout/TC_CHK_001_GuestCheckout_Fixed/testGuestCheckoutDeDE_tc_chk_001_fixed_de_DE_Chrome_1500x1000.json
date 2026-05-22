@@ -15,17 +15,18 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false
     },
     {
       "promptLine": "Click the country selector button.",
-      "reasoning": "The instruction is to click the country selector button. The element with id \u0027show-locale-menu\u0027 and text \u0027🇺🇸\u0027 is identified as the country selector.",
+      "reasoning": "Identified the country selector button by its \u0027🇺🇸\u0027 name and data-neo-ref attribute in the AXTree and created a CLICK action.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#show-locale-menu",
+          "target": "[data-neo-ref\u003d\u0027xc_www8d0\u0027]",
           "description": "Click the country selector button",
-          "elementDetails": "Link with text \u0027🇺🇸\u0027 and id \u0027show-locale-menu\u0027",
+          "elementDetails": "Button with name \u0027🇺🇸\u0027",
           "elementContext": {
             "classes": "nav-link dropdown-toggle locale-trigger",
             "text": "🇺🇸",
@@ -36,16 +37,18 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Click the country represented by locale \u0027de-DE\u0027 in the opened dialog.",
-      "reasoning": "The instruction is to click the country represented by locale \u0027de-DE\u0027. The DOM shows a link with id \u0027loc-de-de\u0027 and text \u0027🇩🇪 Deutsch (Deutschland)\u0027 which corresponds to the requested locale.",
+      "reasoning": "The instruction asks to click the country represented by locale \u0027de-DE\u0027. I found a link with the text \u0027🇩🇪 Deutsch (Deutschland)\u0027 and data-neo-ref \u0027xc_cvruw6\u0027 which matches the requirement. A CLICK action is generated for this element.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#loc-de-de",
-          "description": "Click the link for Deutsch (Deutschland)",
+          "target": "[data-neo-ref\u003d\u0027xc_cvruw6\u0027]",
+          "description": "Click the \u0027🇩🇪 Deutsch (Deutschland)\u0027 link to select the de-DE locale.",
           "elementDetails": "🇩🇪 Deutsch (Deutschland)",
           "elementContext": {
             "classes": "dropdown-item locale-item",
@@ -57,20 +60,22 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Search for \u0027Grizzlybär\u0027 using the search bar.",
-      "reasoning": "Identified the search input field by its ID \u0027header-search-text\u0027 and the search button by its ID \u0027header-search-button\u0027. Performed a TYPE action to enter the search term and then a CLICK action to submit the search.",
+      "reasoning": "Identified the search input field by its data-neo-ref and typed the search query, then pressed ENTER to submit.",
       "actions": [
         {
           "type": "TYPE",
-          "target": "#header-search-text",
+          "target": "[data-neo-ref\u003d\u0027xc_pxekgd\u0027]",
           "value": [
             "Grizzlybär"
           ],
           "description": "Type \u0027Grizzlybär\u0027 into the search bar.",
-          "elementDetails": "Search input field with id \u0027header-search-text\u0027",
+          "elementDetails": "Search input field with name \u0027Search\u0027",
           "elementContext": {
             "classes": "form-control me-2",
             "name": "q",
@@ -83,30 +88,29 @@
           "adjust": false
         },
         {
-          "type": "CLICK",
-          "target": "#header-search-button",
-          "description": "Click the search button to submit the query.",
-          "elementDetails": "Search button with id \u0027header-search-button\u0027",
-          "elementContext": {
-            "classes": "btn btn-primary",
-            "id": "header-search-button",
-            "tagName": "button",
-            "type": "submit"
-          },
+          "type": "KEY_PRESS",
+          "value": [
+            "ENTER"
+          ],
+          "description": "Press ENTER to submit the search.",
+          "elementDetails": "Keyboard action",
+          "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Click on \u0027Grizzlybär\u0027 from the search results to open the product details page.",
-      "reasoning": "The instruction is to click on \u0027Grizzlybär\u0027 from the search results. The DOM shows a link with `data-neo-ref\u003d\u0027xc_wzr11x\u0027` that has an `href` pointing to `/de-DE/product/Grizzlybär/1`, which is the product details page for \u0027Grizzlybär\u0027. This is the most appropriate element to click to fulfill the instruction.",
+      "reasoning": "The instruction is to click on \u0027Grizzlybär\u0027 to open the product details page. In the provided AXTree, there is a link with data-neo-ref \u0027xc_wzr11x\u0027 and name \u0027picture of Grizzlybär\u0027. This is the most appropriate interactive element to click to navigate to a product details page, as headings are typically not clickable.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "[data-neo-ref\u003d\u0027xc_wzr11x\u0027]",
-          "description": "Click on the link for \u0027Grizzlybär\u0027 to open the product details page.",
-          "elementDetails": "Link to Grizzlybär product page",
+          "target": "xc_wzr11x",
+          "description": "Click on the \u0027picture of Grizzlybär\u0027 link to open the product details page.",
+          "elementDetails": "picture of Grizzlybär link",
           "elementContext": {
             "href": "http://localhost:8080/de-DE/product/Grizzlyb%C3%A4r/1",
             "tagName": "a"
@@ -114,20 +118,22 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Select size \u002716x12\u0027 and finish \u0027Matte\u0027.",
-      "reasoning": "The instruction requested to select a specific size and finish. I found the corresponding select element for size and the radio button for finish in the DOM and created actions to interact with them.",
+      "reasoning": "The instruction asks to select \u002716x12\u0027 for size and \u0027Matte\u0027 for finish. The \u0027size selection\u0027 combobox (data-neo-ref\u003d\u0027xc_z6eajx\u0027) has an option \u002716x12 cm\u0027 which matches the requested size. The \u0027Matt\u0027 radio button (data-neo-ref\u003d\u0027xc_8y1ptl\u0027) is already checked, fulfilling the \u0027Matte\u0027 finish requirement without further action.",
       "actions": [
         {
           "type": "SELECT",
-          "target": "#product-detail-form-size-selection",
+          "target": "xc_z6eajx",
           "value": [
             "16x12 cm"
           ],
           "description": "Select size \u002716x12 cm\u0027 from the dropdown.",
-          "elementDetails": "size selection dropdown with options \u002716x12 cm, 24x18 cm\u0027",
+          "elementDetails": "size selection combobox",
           "elementContext": {
             "classes": "form-select",
             "name": "size",
@@ -138,33 +144,20 @@
           },
           "replay": "",
           "adjust": false
-        },
-        {
-          "type": "CLICK",
-          "target": "#finish-matte",
-          "description": "Select finish \u0027Matte\u0027.",
-          "elementDetails": "radio button for Matte finish",
-          "elementContext": {
-            "classes": "form-check-input",
-            "name": "finish",
-            "id": "finish-matte",
-            "tagName": "input",
-            "type": "radio"
-          },
-          "replay": "",
-          "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Click the Add to Cart button (hint: #btn-add-to-cart).",
-      "reasoning": "The instruction explicitly provided a hint for the \u0027Add to Cart\u0027 button, so a CLICK action is generated using that target.",
+      "reasoning": "The instruction is to click the \u0027Add to Cart\u0027 button. The hint provided is \u0027#btn-add-to-cart\u0027. I will use this as the target. The AXTree shows a button named \u0027In Den Warenkorb\u0027 which translates to \u0027Add to Cart\u0027, confirming the element\u0027s purpose.",
       "actions": [
         {
           "type": "CLICK",
           "target": "#btn-add-to-cart",
           "description": "Click the Add to Cart button",
-          "elementDetails": "Add to Cart button",
+          "elementDetails": "Button with text \u0027In Den Warenkorb\u0027",
           "elementContext": {
             "classes": "btn btn-primary",
             "text": "In Den Warenkorb",
@@ -175,34 +168,54 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "If the mini-cart is open then close it.",
-      "reasoning": "The instruction is to close the mini-cart if it is open. Based on the provided DOM, there is no indication that the mini-cart offcanvas is currently open (e.g., no visible offcanvas element or close button). Therefore, the condition is not met, and no actions are required.",
-      "actions": []
+      "reasoning": "The mini-cart is identified as open by the presence of \u0027miniCartOffcanvas\u0027 and \u0027miniCartOffcanvasLabel\u0027. The instruction is to close it if open, so clicking the close button with aria-label \u0027Close\u0027 is the appropriate action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_c4a0xf\u0027]",
+          "description": "Close the mini-cart",
+          "elementDetails": "Close button for mini-cart",
+          "elementContext": {
+            "classes": "btn-close",
+            "tagName": "button",
+            "type": "button"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify the count shown next to the cart icon is \u00271\u0027.",
-      "reasoning": "The instruction is to verify the cart count. The DOM shows a link with id \u0027header-cart-overview\u0027 and text \u00271\u0027, which matches the requirement.",
+      "reasoning": "The instruction is to verify the cart count is \u00271\u0027. I found an element with id \u0027header-cart-count\u0027 that contains the text \u00271\u0027, which directly corresponds to the instruction.",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "#header-cart-overview",
+          "target": "#header-cart-count",
           "value": [
             "1"
           ],
           "description": "Verify the count shown next to the cart icon is \u00271\u0027.",
-          "elementDetails": "Cart Overview link with text \u00271\u0027",
+          "elementDetails": "Cart count display with text \u00271\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Open the mini-cart and click translate(\"View Cart\").",
-      "reasoning": "The instruction requires opening the mini-cart and then clicking \u0027View Cart\u0027. I identified the cart icon by its ID and text to open the mini-cart. For \u0027View Cart\u0027, I used the German translation \u0027Warenkorb ansehen\u0027 as the target, assuming it will appear once the mini-cart is open.",
+      "reasoning": "The instruction requires opening the mini-cart and then clicking \u0027View Cart\u0027. The cart icon with id \u0027header-cart-overview\u0027 is used to open the mini-cart. Assuming \u0027View Cart\u0027 translates to \u0027Warenkorb ansehen\u0027 in German, a click action is planned for this text after the mini-cart is opened.",
       "actions": [
         {
           "type": "CLICK",
@@ -222,7 +235,7 @@
         {
           "type": "CLICK",
           "target": "Warenkorb ansehen",
-          "description": "Click \u0027View Cart\u0027 (translated to German) in the mini-cart.",
+          "description": "Click \u0027View Cart\u0027 (translated to \u0027Warenkorb ansehen\u0027) in the mini-cart.",
           "elementDetails": "Link or button with text \u0027Warenkorb ansehen\u0027",
           "elementContext": {
             "classes": "btn btn-primary form-control go-to-cart",
@@ -233,11 +246,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify the tax rate is displayed in the cart summary. FAIL the test if the tax rate is not displayed in the exact format \u00276,00%\u0027 (two decimal places required). The decimal separator depends on the locale.",
-      "reasoning": "The instruction requires verifying the tax rate format. I found the element \u0027Tax (6,00%)\u0027 using its data-neo-ref and asserted its exact text content to match the required format.",
+      "reasoning": "The instruction is to verify the tax rate format. I found the element containing \u0027Tax (6,00%)\u0027 and created an ASSERT action to check its text content.",
       "actions": [
         {
           "type": "ASSERT",
@@ -245,23 +260,25 @@
           "value": [
             "Tax (6,00%)"
           ],
-          "description": "Verify the tax rate is displayed in the cart summary in the exact format \u00276,00%\u0027.",
-          "elementDetails": "Text element displaying \u0027Tax (6,00%)\u0027",
+          "description": "Verify the tax rate is displayed in the cart summary in the exact format \u00276,00%\u0027",
+          "elementDetails": "Text element \u0027Tax (6,00%)\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Click translate(\"Checkout\").",
-      "reasoning": "The instruction is to click \u0027Checkout\u0027. The DOM shows a link with id \u0027btn-checkout\u0027 and text \u0027Zur Kasse\u0027, which is the German translation for \u0027Checkout\u0027. This element is the correct target.",
+      "reasoning": "The instruction is to click \u0027Checkout\u0027. In the German context, \u0027Zur Kasse\u0027 is the correct translation for \u0027Checkout\u0027. An element with data-neo-ref\u003d\u0027xc_5mzeb3\u0027 and name\u003d\u0027Zur Kasse\u0027 was found in the DOM, so a CLICK action is performed on it.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#btn-checkout",
-          "description": "Click the \u0027Zur Kasse\u0027 (Checkout) button.",
-          "elementDetails": "link with text \u0027Zur Kasse\u0027",
+          "target": "[data-neo-ref\u003d\u0027xc_5mzeb3\u0027]",
+          "description": "Click the \u0027Zur Kasse\u0027 (Checkout) link.",
+          "elementDetails": "Link with text \u0027Zur Kasse\u0027",
           "elementContext": {
             "classes": "btn btn-primary w-100 btn-lg mt-3",
             "text": "Zur Kasse",
@@ -272,29 +289,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Verify the user is taken into the checkout.",
-      "reasoning": "The current URL contains \u0027/checkout/\u0027, which confirms the user is in the checkout process as requested by the instruction.",
-      "actions": [
-        {
-          "type": "ASSERT",
-          "target": "currentUrl",
-          "value": [
-            "checkout"
-          ],
-          "description": "Verify the user is on a checkout page by checking the URL.",
-          "elementDetails": "Current URL",
-          "elementContext": {},
-          "replay": "",
-          "adjust": false
-        }
-      ]
-    },
-    {
-      "promptLine": "Verify the user is presented with the Shipping Address form.",
-      "reasoning": "The instruction is to verify the user is presented with the Shipping Address form. I\u0027ve asserted the current URL, the main heading \u0027Lieferadresse\u0027 (Shipping Address), and the presence of the form with id \u0027shipping-form\u0027 to confirm this.",
+      "reasoning": "The current URL clearly indicates that the user is in the checkout process, specifically at the shipping address step. An ASSERT action on the current URL confirms this.",
       "actions": [
         {
           "type": "ASSERT",
@@ -302,20 +303,28 @@
           "value": [
             "http://localhost:8080/de-DE/checkout/shippingAddress"
           ],
-          "description": "Verify the current URL is the shipping address page.",
+          "description": "Verify the user is on the shipping address page of the checkout.",
           "elementDetails": "Current URL",
           "elementContext": {},
           "replay": "",
           "adjust": false
-        },
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Verify the user is presented with the Shipping Address form.",
+      "reasoning": "The instruction is to verify the user is presented with the Shipping Address form. I found the heading \u0027Lieferadresse\u0027 (Shipping Address) and the form with id \u0027shipping-form\u0027 which contains all the expected fields for a shipping address.",
+      "actions": [
         {
           "type": "ASSERT",
-          "target": "h1",
+          "target": "#xc_22a9yl",
           "value": [
             "Lieferadresse"
           ],
-          "description": "Verify the page heading indicates \u0027Shipping Address\u0027.",
-          "elementDetails": "Heading with text \u0027Lieferadresse\u0027",
+          "description": "Verify the heading \u0027Lieferadresse\u0027 (Shipping Address) is present.",
+          "elementDetails": "Heading \u0027Lieferadresse\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
@@ -324,25 +333,27 @@
           "type": "ASSERT",
           "target": "#shipping-form",
           "description": "Verify the shipping address form is present.",
-          "elementDetails": "Shipping address form",
+          "elementDetails": "Shipping Address Form",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Fill out the shipping address form using: First Name \u0027Hans\u0027, Last Name \u0027Müller\u0027, Company \u0027Beispiel GmbH\u0027, Address \u0027Musterstraße 1\u0027, City \u0027Berlin\u0027, State \u0027Berlin\u0027, Zip \u002710115\u0027.",
-      "reasoning": "The instruction is to fill out the shipping address form. I have identified the input fields by their IDs and will use the TYPE action to enter the specified values into each corresponding field.",
+      "reasoning": "The instruction requires filling out the shipping address form. I have identified the corresponding input fields using their data-neo-ref attributes and German names from the AXTree and created TYPE actions for each piece of information provided.",
       "actions": [
         {
           "type": "TYPE",
-          "target": "#firstName",
+          "target": "xc_yttfnh",
           "value": [
             "Hans"
           ],
-          "description": "Type \u0027Hans\u0027 into the First Name field.",
-          "elementDetails": "input with id \u0027firstName\u0027 and placeholder \u0027First Name\u0027",
+          "description": "Type \u0027Hans\u0027 into the First Name field",
+          "elementDetails": "textbox with name \u0027Vorname\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "firstName",
@@ -356,12 +367,12 @@
         },
         {
           "type": "TYPE",
-          "target": "#name",
+          "target": "xc_kk9wi5",
           "value": [
             "Müller"
           ],
-          "description": "Type \u0027Müller\u0027 into the Last Name field.",
-          "elementDetails": "input with id \u0027name\u0027 and placeholder \u0027Last Name\u0027",
+          "description": "Type \u0027Müller\u0027 into the Last Name field",
+          "elementDetails": "textbox with name \u0027Nachname\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "name",
@@ -375,12 +386,12 @@
         },
         {
           "type": "TYPE",
-          "target": "#company",
+          "target": "xc_v3n2e1",
           "value": [
             "Beispiel GmbH"
           ],
-          "description": "Type \u0027Beispiel GmbH\u0027 into the Company field.",
-          "elementDetails": "input with id \u0027company\u0027 and placeholder \u0027Company\u0027",
+          "description": "Type \u0027Beispiel GmbH\u0027 into the Company field",
+          "elementDetails": "textbox with name \u0027Unternehmen (optional)\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "company",
@@ -394,12 +405,12 @@
         },
         {
           "type": "TYPE",
-          "target": "#addressLine",
+          "target": "xc_1e0ah3",
           "value": [
             "Musterstraße 1"
           ],
-          "description": "Type \u0027Musterstraße 1\u0027 into the Address field.",
-          "elementDetails": "input with id \u0027addressLine\u0027 and placeholder \u0027Address\u0027",
+          "description": "Type \u0027Musterstraße 1\u0027 into the Address field",
+          "elementDetails": "textbox with name \u0027Adresse\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "addressLine",
@@ -413,12 +424,12 @@
         },
         {
           "type": "TYPE",
-          "target": "#city",
+          "target": "xc_osqj5p",
           "value": [
             "Berlin"
           ],
-          "description": "Type \u0027Berlin\u0027 into the City field.",
-          "elementDetails": "input with id \u0027city\u0027 and placeholder \u0027City\u0027",
+          "description": "Type \u0027Berlin\u0027 into the City field",
+          "elementDetails": "textbox with name \u0027Ort\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "city",
@@ -432,12 +443,12 @@
         },
         {
           "type": "TYPE",
-          "target": "#state",
+          "target": "xc_4s49t9",
           "value": [
             "Berlin"
           ],
-          "description": "Type \u0027Berlin\u0027 into the State field.",
-          "elementDetails": "input with id \u0027state\u0027 and placeholder \u0027State\u0027",
+          "description": "Type \u0027Berlin\u0027 into the State field",
+          "elementDetails": "textbox with name \u0027Bundesland\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "state",
@@ -451,12 +462,12 @@
         },
         {
           "type": "TYPE",
-          "target": "#zip",
+          "target": "xc_lrlr81",
           "value": [
             "10115"
           ],
-          "description": "Type \u002710115\u0027 into the ZIP field.",
-          "elementDetails": "input with id \u0027zip\u0027 and placeholder \u0027ZIP\u0027",
+          "description": "Type \u002710115\u0027 into the Zip field",
+          "elementDetails": "textbox with name \u0027Postleitzahl\u0027",
           "elementContext": {
             "classes": "form-control",
             "name": "zip",
@@ -468,20 +479,22 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Select the country translate(\u0027Deutschland\u0027) from the country dropdown in the shipping address form.",
-      "reasoning": "The instruction is to select \u0027Deutschland\u0027 from the country dropdown. The DOM shows a select element with id \u0027country\u0027 and \u0027Deutschland\u0027 as one of its options. A SELECT action is used to perform this.",
+      "reasoning": "The instruction is to select \u0027Deutschland\u0027 from the country dropdown. I identified the combobox with data-neo-ref \u0027xc_i2vm65\u0027 and name \u0027Land\u0027 as the target and \u0027Deutschland\u0027 as the value to select.",
       "actions": [
         {
           "type": "SELECT",
-          "target": "#country",
+          "target": "xc_i2vm65",
           "value": [
             "Deutschland"
           ],
           "description": "Select \u0027Deutschland\u0027 from the country dropdown.",
-          "elementDetails": "Country dropdown with id \u0027country\u0027",
+          "elementDetails": "combobox with name \u0027Land\u0027",
           "elementContext": {
             "classes": "form-select",
             "name": "country",
@@ -493,17 +506,19 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Submit the shipping address form.",
-      "reasoning": "The instruction is to submit the shipping address form. The DOM shows a submit button with id \u0027btn-submit-shipping\u0027 and text \u0027Weiter Zur Rechnung\u0027 which is the appropriate action to take.",
+      "reasoning": "The instruction is to submit the shipping address form. The button \u0027Weiter Zur Rechnung\u0027 (Continue to Invoice) is the appropriate element to click to proceed with the checkout process after filling out the shipping address.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#btn-submit-shipping",
+          "target": "xc_r2cthu",
           "description": "Click the \u0027Weiter Zur Rechnung\u0027 button to submit the shipping address form.",
-          "elementDetails": "button with text \u0027Weiter Zur Rechnung\u0027",
+          "elementDetails": "Button with name \u0027Weiter Zur Rechnung\u0027",
           "elementContext": {
             "classes": "btn btn-primary btn-lg px-5 shadow-sm",
             "text": "Weiter Zur Rechnung",
@@ -514,32 +529,36 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Verify the billing address form is displayed.",
-      "reasoning": "The instruction is to verify the billing address form is displayed. The DOM clearly shows a form with id \u0027billing-form\u0027 which is a direct indicator of the form\u0027s presence. An ASSERT action targeting this form is appropriate.",
+      "reasoning": "The instruction is to verify the billing address form is displayed. I found a form element with id \u0027billing-form\u0027 which is clearly the billing address form based on its id, action, and contained input fields. An ASSERT action is used to check for its existence.",
       "actions": [
         {
           "type": "ASSERT",
           "target": "#billing-form",
-          "description": "Verify the billing address form is displayed.",
-          "elementDetails": "form with id \u0027billing-form\u0027",
+          "description": "Verify the billing address form is displayed by checking for its presence.",
+          "elementDetails": "Billing address form",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Select translate(\"Use shipping address for billing\") and submit the form.",
-      "reasoning": "The instruction asks to select \u0027Use shipping address for billing\u0027 which corresponds to the \u0027sameAsShipping\u0027 checkbox, and then submit the form using the \u0027Weiter Zur Zahlung\u0027 button.",
+      "reasoning": "The instruction asks to select the checkbox \u0027Use shipping address for billing\u0027 which translates to \u0027Gleich wie Lieferadresse\u0027 in German, and then submit the form by clicking the \u0027Weiter Zur Zahlung\u0027 button. Both elements were found in the AXTREE.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#sameAsShipping",
-          "description": "Select \u0027Use shipping address for billing\u0027 checkbox",
-          "elementDetails": "checkbox with id \u0027sameAsShipping\u0027",
+          "target": "[data-neo-ref\u003d\u0027xc_vx4p9f\u0027]",
+          "description": "Select \u0027Gleich wie Lieferadresse\u0027 checkbox",
+          "elementDetails": "Checkbox with name \u0027Gleich wie Lieferadresse\u0027",
           "elementContext": {
             "classes": "form-check-input",
             "id": "sameAsShipping",
@@ -551,9 +570,9 @@
         },
         {
           "type": "CLICK",
-          "target": "#btn-submit-billing",
-          "description": "Submit the form",
-          "elementDetails": "button with text \u0027Weiter Zur Zahlung\u0027",
+          "target": "[data-neo-ref\u003d\u0027xc_2cp2j5\u0027]",
+          "description": "Click \u0027Weiter Zur Zahlung\u0027 button to submit the form",
+          "elementDetails": "Button with name \u0027Weiter Zur Zahlung\u0027",
           "elementContext": {
             "classes": "btn btn-primary btn-lg px-5 shadow-sm",
             "text": "Weiter Zur Zahlung",
@@ -564,11 +583,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Verify the payment form is displayed.",
-      "reasoning": "The instruction is to verify the payment form is displayed. The DOM shows a form with id \u0027payment-form\u0027 which is a clear indicator. Asserting its visibility confirms the instruction.",
+      "reasoning": "The instruction is to verify the payment form is displayed. I found a form element with id \u0027payment-form\u0027 in the DOM, which is a clear indicator of the payment form. I am asserting its visibility.",
       "actions": [
         {
           "type": "ASSERT",
@@ -577,25 +598,27 @@
             "visible"
           ],
           "description": "Verify the payment form is displayed.",
-          "elementDetails": "Payment form",
+          "elementDetails": "Payment form with id \u0027payment-form\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Enter \u00274111111111111111\u0027 into the card number field.",
-      "reasoning": "The instruction is to enter a card number. I identified the input field with id \u0027cardNumber\u0027 and used the TYPE action to input the specified value.",
+      "reasoning": "The instruction is to enter a card number into the card number field. I identified the \u0027Credit card number\u0027 textbox by its data-neo-ref and name, and created a TYPE action for it.",
       "actions": [
         {
           "type": "TYPE",
-          "target": "#cardNumber",
+          "target": "xc_c4oglt",
           "value": [
             "4111111111111111"
           ],
-          "description": "Enter \u00274111111111111111\u0027 into the card number field.",
-          "elementDetails": "input with id \u0027cardNumber\u0027 and placeholder \u00274111 1111 1111 1111\u0027",
+          "description": "Enter \u00274111111111111111\u0027 into the credit card number field.",
+          "elementDetails": "Credit card number textbox",
           "elementContext": {
             "classes": "form-control",
             "name": "cardNumber",
@@ -607,20 +630,22 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Enter \u0027Hans Müller\u0027 into the cardholder name field.",
-      "reasoning": "The instruction is to enter text into the cardholder name field. I identified the input field with id \u0027cardName\u0027 and aria-label \u0027Cardholder name\u0027 as the correct target and created a TYPE action for it.",
+      "reasoning": "Identified the \u0027Cardholder name\u0027 textbox by its data-neo-ref and name attribute from the AXTREE and generated a TYPE action to input the specified text.",
       "actions": [
         {
           "type": "TYPE",
-          "target": "#cardName",
+          "target": "xc_f349bb",
           "value": [
             "Hans Müller"
           ],
           "description": "Enter \u0027Hans Müller\u0027 into the cardholder name field.",
-          "elementDetails": "input with id \u0027cardName\u0027 and aria-label \u0027Cardholder name\u0027",
+          "elementDetails": "Cardholder name textbox",
           "elementContext": {
             "classes": "form-control",
             "name": "name",
@@ -632,20 +657,22 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Enter \u002712/30\u0027 into the expiry field (MM/YY format).",
-      "reasoning": "The instruction was to enter \u002712/30\u0027 into the expiry field. The DOM clearly shows an input field with id \u0027expiry\u0027 and placeholder \u0027MM/YY\u0027, which matches the requirement. A TYPE action is used to input the value.",
+      "reasoning": "The instruction is to enter \u002712/30\u0027 into the expiry field. I identified the expiry date textbox using its \u0027data-neo-ref\u0027 attribute and its accessible name \u0027Expiry date in MM/YY format\u0027 from the provided AXTREE. A TYPE action is used to input the value.",
       "actions": [
         {
           "type": "TYPE",
-          "target": "#expiry",
+          "target": "[data-neo-ref\u003d\u0027xc_yy8avh\u0027]",
           "value": [
             "12/30"
           ],
-          "description": "Enter \u002712/30\u0027 into the expiry field.",
-          "elementDetails": "input with id \u0027expiry\u0027 and placeholder \u0027MM/YY\u0027",
+          "description": "Enter \u002712/30\u0027 into the expiry date field.",
+          "elementDetails": "Expiry date in MM/YY format textbox",
           "elementContext": {
             "classes": "form-control",
             "name": "expiry",
@@ -657,20 +684,22 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Enter \u0027123\u0027 into the CVV field.",
-      "reasoning": "The instruction is to enter \u0027123\u0027 into the CVV field. The DOM provides an input element with id \u0027cvv\u0027 which is suitable for this action.",
+      "reasoning": "The instruction is to enter \u0027123\u0027 into the CVV field. The AXTREE shows a textbox with \u0027Security code\u0027 as its name and \u0027xc_baj1zd\u0027 as its data-neo-ref, which is the correct element for CVV. A TYPE action is used to input the value.",
       "actions": [
         {
           "type": "TYPE",
-          "target": "#cvv",
+          "target": "xc_baj1zd",
           "value": [
             "123"
           ],
           "description": "Enter \u0027123\u0027 into the CVV field.",
-          "elementDetails": "input with id \u0027cvv\u0027 and placeholder \u0027123\u0027",
+          "elementDetails": "Security code textbox",
           "elementContext": {
             "classes": "form-control",
             "name": "cvv",
@@ -682,17 +711,19 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Submit the payment form.",
-      "reasoning": "The instruction is to submit the payment form. The DOM shows a submit button with id \u0027btn-submit-payment\u0027 and text \u0027Weiter Zur Übersicht\u0027, which is the appropriate action to take.",
+      "reasoning": "The instruction is to submit the payment form. The button \u0027Weiter Zur Übersicht\u0027 (Continue to Overview) is the appropriate element to click to proceed after filling out the payment details.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#btn-submit-payment",
+          "target": "[data-neo-ref\u003d\u0027xc_lkxfpq\u0027]",
           "description": "Click the \u0027Weiter Zur Übersicht\u0027 button to submit the payment form.",
-          "elementDetails": "button with text \u0027Weiter Zur Übersicht\u0027",
+          "elementDetails": "Button with name \u0027Weiter Zur Übersicht\u0027",
           "elementContext": {
             "classes": "btn btn-primary btn-lg px-5 shadow-sm",
             "text": "Weiter Zur Übersicht",
@@ -703,11 +734,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Verify that an order review page is displayed.",
-      "reasoning": "The current URL and the main heading \u0027Überprüfen \u0026 Bestellen\u0027 both confirm that an order review page is displayed.",
+      "reasoning": "The instruction is to verify that an order review page is displayed. I have asserted the current URL and the main heading \u0027Überprüfen \u0026 Bestellen\u0027 which clearly indicates the order review page in the German locale.",
       "actions": [
         {
           "type": "ASSERT",
@@ -727,17 +760,19 @@
           "value": [
             "Überprüfen \u0026 Bestellen"
           ],
-          "description": "Verify the main heading confirms the order review page.",
+          "description": "Verify the main heading \u0027Überprüfen \u0026 Bestellen\u0027 is displayed.",
           "elementDetails": "Heading \u0027Überprüfen \u0026 Bestellen\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the displayed subtotal is \u002714,96 €\u0027.",
-      "reasoning": "The instruction is to verify the subtotal. I found the element displaying \u002714,96 €\u0027 with data-neo-ref\u003d\u0027xc_afza12_1\u0027 and created an ASSERT action to check its text content.",
+      "reasoning": "The instruction is to verify the subtotal. I found the element with data-neo-ref\u003d\u0027xc_afza12_1\u0027 which contains the text \u002714,96 €\u0027 and is associated with \u0027Zwischensumme\u0027 (Subtotal) in the DOM. An ASSERT action is used to check its text content.",
       "actions": [
         {
           "type": "ASSERT",
@@ -746,12 +781,14 @@
             "14,96 €"
           ],
           "description": "Verify that the displayed subtotal is \u002714,96 €\u0027.",
-          "elementDetails": "Subtotal price \u002714,96 €\u0027",
+          "elementDetails": "Text element displaying the subtotal",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the displayed shipping is \u00277,00 €\u0027.",
@@ -769,11 +806,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the displayed tax rate is \u00276,00%\u0027.",
-      "reasoning": "Found the element displaying \u0027Tax (6,00%)\u0027 and asserted its text content to match the expected \u00276,00%\u0027.",
+      "reasoning": "Found the element displaying \u0027Tax (6,00%)\u0027 and asserted that it contains \u00276,00%\u0027.",
       "actions": [
         {
           "type": "ASSERT",
@@ -782,16 +821,18 @@
             "6,00%"
           ],
           "description": "Verify that the displayed tax rate is \u00276,00%\u0027",
-          "elementDetails": "Text element containing \u0027Tax (6,00%)\u0027",
+          "elementDetails": "Tax (6,00%)",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the displayed tax is \u00271,32 €\u0027.",
-      "reasoning": "Found the element displaying the tax amount \u00271,32 €\u0027 using its data-neo-ref attribute and asserted its text content.",
+      "reasoning": "Found the element displaying the tax amount \u00271,32 €\u0027 using its data-neo-ref attribute and created an ASSERT action to verify its text content.",
       "actions": [
         {
           "type": "ASSERT",
@@ -805,15 +846,17 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the displayed total is \u002723,28 €\u0027.",
-      "reasoning": "The instruction is to verify the displayed total. I found the element with data-neo-ref\u003d\u0027xc_ynqnau\u0027 which contains the text \u002723,28 €\u0027 and used it for an ASSERT action.",
+      "reasoning": "The instruction is to verify the displayed total. I found the element with data-neo-ref \u0027xc_ynqnau\u0027 which contains the text \u002723,28 €\u0027 and used it for an ASSERT action.",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "[data-neo-ref\u003d\u0027xc_ynqnau\u0027]",
+          "target": "xc_ynqnau",
           "value": [
             "23,28 €"
           ],
@@ -823,11 +866,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that a translate(\"Place Order\") button is visible.",
-      "reasoning": "The instruction asks to verify the visibility of a \u0027Place Order\u0027 button. Given the de-DE locale, I identified the button with the translated text \u0027Bestellung Platzieren\u0027 and its ID \u0027btn-place-order\u0027 in the DOM. An ASSERT action is used to check its visibility.",
+      "reasoning": "The instruction asks to verify the visibility of a \u0027Place Order\u0027 button. The DOM shows a button with id \u0027btn-place-order\u0027 and text \u0027Bestellung Platzieren\u0027, which is the German translation for \u0027Place Order\u0027. An ASSERT action is used to check its visibility.",
       "actions": [
         {
           "type": "ASSERT",
@@ -841,17 +886,19 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Click translate(\"Place Order\").",
-      "reasoning": "The instruction is to click \u0027Place Order\u0027. The DOM shows a button with id \u0027btn-place-order\u0027 and text \u0027Bestellung Platzieren\u0027, which is the German translation for \u0027Place Order\u0027. This button is the correct target.",
+      "reasoning": "The instruction is to click \u0027Place Order\u0027. In the provided AXTREE, \u0027Bestellung Platzieren\u0027 is the German translation for \u0027Place Order\u0027 and is associated with a button element. Therefore, the action is to click this button.",
       "actions": [
         {
           "type": "CLICK",
-          "target": "#btn-place-order",
-          "description": "Click the \u0027Place Order\u0027 button",
-          "elementDetails": "button with text \u0027Bestellung Platzieren\u0027",
+          "target": "[data-neo-ref\u003d\u0027xc_f1kirr\u0027]",
+          "description": "Click the \u0027Bestellung Platzieren\u0027 button, which translates to \u0027Place Order\u0027.",
+          "elementDetails": "Button with name \u0027Bestellung Platzieren\u0027",
           "elementContext": {
             "classes": "btn btn-primary btn-lg w-100 mt-3",
             "text": "Bestellung Platzieren",
@@ -862,11 +909,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
     },
     {
       "promptLine": "Verify that an order confirmation page is displayed.",
-      "reasoning": "The instruction is to verify that an order confirmation page is displayed. I am asserting the current URL matches the expected order confirmation URL and that the main heading \u0027Bestellung bestätigt!\u0027 (Order confirmed!) is present on the page, which confirms the page state.",
+      "reasoning": "The instruction is to verify the order confirmation page. I am asserting the current URL and the main German heading \u0027Bestellung bestätigt!\u0027 which clearly indicates an order confirmation page, adhering to the localization rules.",
       "actions": [
         {
           "type": "ASSERT",
@@ -882,21 +931,23 @@
         },
         {
           "type": "ASSERT",
-          "target": "[data-neo-ref\u003d\u0027xc_739oos\u0027]",
+          "target": "#order-confirmation",
           "value": [
             "Bestellung bestätigt!"
           ],
-          "description": "Verify the \u0027Bestellung bestätigt!\u0027 heading is displayed.",
-          "elementDetails": "Heading with text \u0027Bestellung bestätigt!\u0027",
+          "description": "Verify the main order confirmation heading is displayed.",
+          "elementDetails": "Text \u0027Bestellung bestätigt! Thank you for your order. It has been placed successfully.\u0027 with id \u0027order-confirmation\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that a non-empty order ID is shown (format: ORD-[0-9]{10,15}).",
-      "reasoning": "The order ID was found using its data-neo-ref attribute and stored. Then, a JAVA_METHOD was used to assert that the stored order ID matches the specified regex format.",
+      "reasoning": "The order ID was found in the DOM and extracted. A JAVA_METHOD action is used to assert that the extracted order ID matches the specified regex format.",
       "actions": [
         {
           "type": "STORE",
@@ -905,7 +956,7 @@
             "orderId"
           ],
           "description": "Store the order ID.",
-          "elementDetails": "Order ID text \u0027ORD-1779265279609\u0027",
+          "elementDetails": "Order ID: ORD-1779265279618",
           "elementContext": {},
           "replay": "",
           "adjust": false
@@ -914,7 +965,7 @@
           "type": "JAVA_METHOD",
           "target": "assertMatchesRegex",
           "value": [
-            "[\"ORD-1779265279609\", \"^ORD-[0-9]{10,15}$\"]"
+            "[\"ORD-1779265279618\", \"^ORD-[0-9]{10,15}$\"]"
           ],
           "description": "Verify that the order ID matches the expected format.",
           "elementDetails": "Order ID format verification",
@@ -922,11 +973,13 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the subtotal shown on the confirmation page is \u002714,96 €\u0027.",
-      "reasoning": "Found the element displaying the subtotal with data-neo-ref\u003d\u0027xc_afza12_1\u0027 and asserted its text content matches \u002714,96 €\u0027.",
+      "reasoning": "Found the element displaying the subtotal \u002714,96 €\u0027 using its data-neo-ref attribute and created an ASSERT action to verify its text content.",
       "actions": [
         {
           "type": "ASSERT",
@@ -940,29 +993,33 @@
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the tax shown on the confirmation page is \u00271,32 €\u0027.",
-      "reasoning": "Found the element displaying the tax value \u00271,32 €\u0027 using its data-neo-ref attribute and asserted its text content.",
+      "reasoning": "The instruction is to verify the tax amount. I found the element with data-neo-ref \u0027xc_6mrz00\u0027 which contains the text \u0027Tax (6,00%) 1,32 €\u0027 and asserted that it contains \u00271,32 €\u0027.",
       "actions": [
         {
           "type": "ASSERT",
-          "target": "[data-neo-ref\u003d\u0027xc_afza12_3\u0027]",
+          "target": "[data-neo-ref\u003d\u0027xc_6mrz00\u0027]",
           "value": [
             "1,32 €"
           ],
           "description": "Verify that the tax shown on the confirmation page is \u00271,32 €\u0027.",
-          "elementDetails": "Tax value \u00271,32 €\u0027",
+          "elementDetails": "Tax (6,00%) 1,32 €",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the shipping shown on the confirmation page is \u00277,00 €\u0027.",
-      "reasoning": "Found the element displaying \u00277,00 €\u0027 for shipping on the order confirmation page and created an ASSERT action to verify its text content.",
+      "reasoning": "The instruction is to verify the shipping cost. I found the element with data-neo-ref\u003d\u0027xc_afza12_2\u0027 which contains the text \u00277,00 €\u0027 and used it as the target for an ASSERT action with the expected value.",
       "actions": [
         {
           "type": "ASSERT",
@@ -970,17 +1027,19 @@
           "value": [
             "7,00 €"
           ],
-          "description": "Verify that the displayed shipping is \u00277,00 €\u0027 on the confirmation page.",
-          "elementDetails": "Text element displaying shipping cost",
+          "description": "Verify that the shipping shown on the confirmation page is \u00277,00 €\u0027.",
+          "elementDetails": "Text element displaying \u00277,00 €\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the total shown on the confirmation page is \u002723,28 €\u0027.",
-      "reasoning": "Found the element displaying the total price on the confirmation page and asserted its text content matches the expected value \u002723,28 €\u0027.",
+      "reasoning": "The instruction is to verify the total amount on the confirmation page. I located the element displaying the total price using its \u0027data-neo-ref\u0027 attribute and created an ASSERT action to check its text content against the expected value \u002723,28 €\u0027.",
       "actions": [
         {
           "type": "ASSERT",
@@ -989,30 +1048,34 @@
             "23,28 €"
           ],
           "description": "Verify that the total shown on the confirmation page is \u002723,28 €\u0027.",
-          "elementDetails": "Total paid price",
+          "elementDetails": "Total paid amount \u002723,28 €\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     },
     {
       "promptLine": "Verify that the tax rate displayed on the confirmation page is \u00276,00%\u0027.",
-      "reasoning": "Found the element displaying \u0027Tax (6,00%)\u0027 and asserted its text content to match the expected tax rate.",
+      "reasoning": "The instruction is to verify the tax rate. I found an element with data-neo-ref\u003d\u0027xc_g6014n_2\u0027 that contains the text \u0027Tax (6,00%)\u0027, which includes the requested tax rate. An ASSERT action is used to check if this element contains \u00276,00%\u0027.",
       "actions": [
         {
           "type": "ASSERT",
           "target": "[data-neo-ref\u003d\u0027xc_g6014n_2\u0027]",
           "value": [
-            "Tax (6,00%)"
+            "6,00%"
           ],
-          "description": "Verify that the tax rate displayed on the confirmation page is \u00276,00%\u0027",
+          "description": "Verify that the tax rate displayed on the confirmation page is \u00276,00%\u0027.",
           "elementDetails": "Text element containing \u0027Tax (6,00%)\u0027",
           "elementContext": {},
           "replay": "",
           "adjust": false
         }
-      ]
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
     }
   ]
 }

@@ -1,0 +1,51 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_001
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Verify that the flag icon is updated to the new locale.
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+  Verify that the registration form is horizontally centered, styled as a white card-style container, and contains fields for First Name, Last Name, Email, and Password.
+  Type '${firstName}' into the First Name field.
+  Type '${lastName}' into the Last Name field.
+  Type '${randomEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click the 'Create Account' button.
+  Verify that you are redirected to the homepage.
+  Verify that a success alert is shown indicating your account has been created.
+  Verify that the header displays 'Hello, ${firstName}' and the 'Logout' option is visible.
+  Click the 'Logout' button.
+  Click the profile/sign-in icon at the top right to go to the Sign In page.
+  Type '${randomEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click the 'Sign In' button.
+  Verify that you are logged in successfully and the header displays 'Hello, ${firstName}'.
+
+data:
+  - testId: "tc_acc_001_en_US"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "en-US"
+  - testId: "tc_acc_001_en_GB"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "en-GB"
+  - testId: "tc_acc_001_de_DE"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "de-DE"
+  - testId: "tc_acc_001_sv_SE"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "sv-SE"
+  - testId: "tc_acc_001_ja_JP"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "ja-JP"
