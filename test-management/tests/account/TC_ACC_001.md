@@ -5,16 +5,16 @@ Verifies that a new user can successfully create an account when all fields are 
 ## Metadata
 
 - **Test ID:** TC_ACC_001
-- **Version:** 1.5
+- **Version:** 1.7
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🔴 Critical
 - **Status:** ✅ Active
-- **Execution Type:** Manual
+- **Execution Type:** Automated
 - **Suite:** 🚀 Smoke, 🔄 Regression
 - **Requirements:**
   - Registration
-- **Tags:** `account`, `registration`, `happy-path`, `tobeautomated`
+- **Tags:** `account`, `registration`, `happy-path`
 - **Author:** Antigravity (AI) (2026-04-09)
 - **Reviewers:**
   - Antigravity (AI) (2026-05-21)
@@ -47,6 +47,7 @@ Verifies that a new user can successfully create an account when all fields are 
 - [x] EN-GB
 - [x] DE-DE
 - [x] SV-SE
+- [x] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -115,3 +116,5 @@ Verifies that a new user can successfully create an account when all fields are 
 | 2026-05-21 | 1.3 | Antigravity (AI) | Added layout verification for centering, card style, "already has account" link, and right-aligned buttons in Step 1. |
 | 2026-05-21 | 1.4 | Antigravity (AI) | Refined email test data format to be dynamic, separated visual from functional verifications, marked as Automated, and added a Logout-Login persistence cross-check step. |
 | 2026-05-21 | 1.5 | Antigravity (AI) | Corrected execution type back to Manual and labelled with 'tobeautomated' tag as requested. |
+| 2026-05-21 | 1.6 | Gemini 2.5 Pro | Automated the test case and removed tobeautomated tag |
+| 2026-05-21 | 1.7 | Gemini 3.5 Flash | Added JA-JP locale |

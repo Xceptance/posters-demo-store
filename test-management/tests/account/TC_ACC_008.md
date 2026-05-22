@@ -5,12 +5,12 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 ## Metadata
 
 - **Test ID:** TC_ACC_008
-- **Version:** 1.2
+- **Version:** 1.5
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🟠 High
-- **Status:** 👀 To Be Reviewed
-- **Execution Type:** Manual
+- **Status:** ✅ Active
+- **Execution Type:** Automated
 - **Suite:** 🔄 Regression
 - **Requirements:**
   - Registration
@@ -111,3 +111,6 @@ Verifies that the registration form handles edge-cases for user inputs. This inc
 | 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
 | 2026-04-09 | 1.1 | Antigravity (AI) | Added test steps and data for Japanese character localization and Punycode emails |
 | 2026-05-21 | 1.2 | Antigravity (AI) | Added test step and data for space-padded First Name and Last Name trimming verification, and set status to To Be Reviewed. |
+| 2026-05-21 | 1.3 | Antigravity (AI) | Added 'tobeautomated' tag and promoted to Active status. |
+| 2026-05-21 | 1.4 | Gemini 2.5 Pro | Automated the test case and removed tobeautomated tag |
+| 2026-05-21 | 1.5 | Gemini 3.5 Flash | Added JA-JP locale |

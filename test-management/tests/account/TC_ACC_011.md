@@ -5,12 +5,12 @@ Verifies that a user can successfully log in using a valid, registered email and
 ## Metadata
 
 - **Test ID:** TC_ACC_011
-- **Version:** 1.0
+- **Version:** 1.2
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🔴 Critical
 - **Status:** ✅ Active
-- **Execution Type:** Manual
+- **Execution Type:** Automated
 - **Suite:** 🚀 Smoke, 🔄 Regression, 🧪 Full
 - **Requirements:**
   - Login Flow
@@ -44,6 +44,7 @@ Verifies that a user can successfully log in using a valid, registered email and
 - [x] EN-GB
 - [x] DE-DE
 - [x] SV-SE
+- [x] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -91,3 +92,5 @@ Verifies that a user can successfully log in using a valid, registered email and
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
+| 2026-05-21 | 1.1 | Gemini 2.5 Pro | Automated the test case and removed tobeautomated tag |
+| 2026-05-21 | 1.2 | Gemini 3.5 Flash | Added JA-JP locale |
