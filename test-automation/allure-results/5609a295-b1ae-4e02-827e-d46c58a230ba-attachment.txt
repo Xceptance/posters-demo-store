@@ -1,6 +1,0 @@
-Token Usage Summary
-
-Input Tokens:  50543
-Output Tokens: 1598
-Total Tokens:  52141
-Total Calls:   8

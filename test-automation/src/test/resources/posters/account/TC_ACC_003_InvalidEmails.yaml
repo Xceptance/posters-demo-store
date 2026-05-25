@@ -1,0 +1,69 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_003
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+  
+  # Step 1: Fill Valid Form Names & Password
+  Type '${firstName}' into the First Name field.
+  Type '${lastName}' into the Last Name field.
+  Type '${password}' into the Password field.
+
+  # Step 2: Enter and Verify Invalid Emails (Missing @)
+  Type 'janedoeposters.com' into the Email field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Email field is shown.
+
+  # Step 2: Enter and Verify Invalid Emails (Missing local part)
+  Clear the Email field.
+  Type '@posters.com' into the Email field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Email field is shown.
+
+  # Step 2: Enter and Verify Invalid Emails (Missing domain)
+  Clear the Email field.
+  Type 'jane@' into the Email field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Email field is shown.
+
+  # Step 2: Enter and Verify Invalid Emails (Multiple @ symbols)
+  Clear the Email field.
+  Type 'jane@@posters.com' into the Email field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Email field is shown.
+
+  # Step 2: Enter and Verify Invalid Emails (Invalid domain characters)
+  Clear the Email field.
+  Type 'jane@post#ers.com' into the Email field.
+  Click 'Create Account'.
+  Verify that the form is not submitted and a browser validation error popup/tooltip pointing to the Email field is shown.
+
+data:
+  - testId: "tc_acc_003_en_US"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "en-US"
+  - testId: "tc_acc_003_en_GB"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "en-GB"
+  - testId: "tc_acc_003_de_DE"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "de-DE"
+  - testId: "tc_acc_003_sv_SE"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "sv-SE"
+  - testId: "tc_acc_003_ja_JP"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "ja-JP"

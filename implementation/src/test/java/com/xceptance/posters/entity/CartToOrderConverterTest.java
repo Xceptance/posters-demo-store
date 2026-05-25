@@ -22,7 +22,7 @@ class CartToOrderConverterTest {
 
     @BeforeEach
     void setUp() {
-        emptyCartDto = new CartDto(List.of(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "0", 0);
+        emptyCartDto = new CartDto(List.of(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 0);
         cart = new CatalogCart();
         cart.setSubTotal(new BigDecimal("49.98"));
         cart.setShippingCosts(new BigDecimal("5.99"));
@@ -92,7 +92,7 @@ class CartToOrderConverterTest {
             "", "", BigDecimal.ZERO, 1, BigDecimal.ZERO, "POSTER02-0003"
         );
         CartDto cartDto = new CartDto(
-            List.of(item1, item2), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "0", 2
+            List.of(item1, item2), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 2
         );
 
         CatalogOrder order = CartToOrderConverter.convert(cart, cartDto, "USD", "test@example.com", "Test", "User");

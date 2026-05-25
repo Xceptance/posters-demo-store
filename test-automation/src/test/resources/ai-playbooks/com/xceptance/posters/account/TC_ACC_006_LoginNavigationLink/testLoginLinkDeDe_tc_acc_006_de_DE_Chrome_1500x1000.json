@@ -1,0 +1,121 @@
+{
+  "id": "com.xceptance.posters.account.TC_ACC_006_LoginNavigationLink :: testLoginLinkDeDe :: tc_acc_006_de_DE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "The instruction is to click the country selector button. Based on the AXTREE, the button with data-neo-ref \u0027xc_www8d0\u0027 and name \u0027🇺🇸\u0027 is identified as the country selector.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_www8d0",
+          "description": "Click the country selector button.",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027de-DE\u0027 in the opened dialog.",
+      "reasoning": "The instruction is to click the country represented by locale \u0027de-DE\u0027. I found a link with the text \u0027🇩🇪 Deutsch (Deutschland)\u0027 and data-neo-ref \u0027xc_cvruw6\u0027 which matches the requirement.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_cvruw6",
+          "description": "Click the country represented by locale \u0027de-DE\u0027",
+          "elementDetails": "🇩🇪 Deutsch (Deutschland)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇩🇪\nDeutsch (Deutschland)",
+            "id": "loc-de-de",
+            "href": "http://localhost:8080/de-DE/",
+            "tagName": "a"
+          },
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the profile/sign-in icon at the top right.",
+      "reasoning": "The instruction asks to click the profile/sign-in icon. I identified the element with data-neo-ref \u0027xc_i12vf6\u0027 and name \u0027Person Icon\u0027 as the most appropriate target for this action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_i12vf6",
+          "description": "Click the profile/sign-in icon",
+          "elementDetails": "Person Icon",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/de-DE/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click \u0027Create Account\u0027 to navigate to Create Account page.",
+      "reasoning": "Found the link \u0027Benutzerkonto Erstellen\u0027 which translates to \u0027Create Account\u0027 and generated a CLICK action for it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_utv3am\u0027]",
+          "description": "Click \u0027Create Account\u0027 to navigate to Create Account page.",
+          "elementDetails": "Benutzerkonto Erstellen",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Benutzerkonto Erstellen",
+            "id": "go-to-registration",
+            "href": "http://localhost:8080/de-DE/register",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the \u0027Don\u0027t have an account?\u0027 link to navigate to the Registration page .",
+      "reasoning": "Expected failure recorded for bug: unspecified",
+      "actions": [],
+      "expectedFailure": true,
+      "expectedErrorType": "com.xceptance.neodymium.ai.action.ActionExecutor$ActionExecutionException",
+      "expectedErrorMessage": "Verification failed: Could not find a link with the text \u0027Don\u0027t have an account?\u0027 on the page. The current page is already the registration page."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
+h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; }
+h3 { margin-top: 20px; color: #0056b3; }
+h4 { color: #555; }
+.instruction { background: #f8f9fa; padding: 15px; border-left: 4px solid #0056b3; margin-bottom: 20px; }
+.step { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.attempt { margin-left: 15px; border-left: 2px solid #ddd; padding-left: 15px; }
+details { background: #fdfdfd; padding: 10px; border: 1px solid #eee; border-radius: 4px; margin-bottom: 10px; }
+summary { font-weight: bold; cursor: pointer; }
+pre { white-space: pre-wrap; background: #272822; color: #f8f8f2; padding: 10px; border-radius: 4px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; }
+.actions { background: #e9ecef; padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+.actions ul { margin: 5px 0 0 0; }
+.reasoning { font-style: italic; color: #495057; margin-bottom: 10px; }
+.error { color: #dc3545; font-weight: bold; padding: 10px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 10px; }
+.warning { color: #856404; background: #fff3cd; padding: 10px; border: 1px solid #ffeeba; border-radius: 4px; margin-bottom: 10px; }
+.success { color: #155724; background: #d4edda; padding: 10px; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 10px; }
+.info { color: #0e566c; background: #d1ecf1; padding: 10px; border: 1px solid #bee5eb; border-radius: 4px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<h2>AI Agent Execution Log</h2>
+<div class="instruction"><strong>Instructions:</strong><br/># This is just a freeform test for some simple features of the automation.<br/># It is not intended to test any business functionality as defined in our test cases.<br/>Open ${neodymium.url}<br/># This comes up with a verification for some critereria, it is not visual!<br/>Verify that you see an ecommerce store homepage, which sells posters.<br/># Try to check for the bear.<br/>Verify that a brown bear photo is show on the right side of the homepage (visual).<br/>Check that the page is mainly white and blue (visual).<br/>Top left, we can see a red X next to the text Posters (visual).<br/># Search and visual identify the search button<br/>Type &#39;bear&#39; into the search box.<br/>Click the blue button next to the input box (visual).<br/># Visually verify the bears<br/>Verify that the result page shows a brown bear, a picture with gummy bears, and a picture with metallic shiny gummy bears on a notebook keyboard (visual).<br/># Flag<br/>Store the color of the animal shown on the second result image in the variable &#39;animalColor&#39; (visual).<br/></div>
+<div class="step">
+<h3>Step [1/9]: Open http://localhost:8080/en-US/</h3>
+<div class="info">Replaying actions from playbook.</div>
+</div>
+<div class="step">
+<h3>Step [2/9]: Verify that you see an ecommerce store homepage, which sells posters.</h3>
+<div class="info">Replaying actions from playbook.</div>
+</div>
+<div class="step">
+<h3>Step [3/9]: Verify that a brown bear photo is show on the right side of the homepage (visual).</h3>
+<div class="info">Replaying actions from playbook (visual match succeeded, Hamming distance: 0).</div>
+</div>
+<div class="step">
+<h3>Step [4/9]: Check that the page is mainly white and blue (visual).</h3>
+<div class="info">Replaying actions from playbook (visual match succeeded, Hamming distance: 0).</div>
+</div>
+<div class="step">
+<h3>Step [5/9]: Top left, we can see a red X next to the text Posters (visual).</h3>
+<div class="info">Replaying actions from playbook (visual match succeeded, Hamming distance: 0).</div>
+</div>
+<div class="step">
+<h3>Step [6/9]: Type &#39;bear&#39; into the search box.</h3>
+<div class="info">Replaying actions from playbook.</div>
+</div>
+<div class="step">
+<h3>Step [7/9]: Click the blue button next to the input box (visual).</h3>
+<div class="info">Replaying actions from playbook (visual match succeeded, Hamming distance: 6).</div>
+</div>
+<div class="step">
+<h3>Step [8/9]: Verify that the result page shows a brown bear, a picture with gummy bears, and a picture with metallic shiny gummy bears on a notebook keyboard (visual).</h3>
+<div class="info">Replaying actions from playbook (visual match succeeded, Hamming distance: 0).</div>
+</div>
+<div class="step">
+<h3>Step [9/9]: Store the color of the animal shown on the second result image in the variable &#39;animalColor&#39; (visual).</h3>
+<div class="info">Replaying actions from playbook (visual match succeeded, Hamming distance: 0).</div>
+</div>
+</body>
+</html>

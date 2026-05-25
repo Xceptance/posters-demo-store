@@ -1,0 +1,59 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_004
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  
+  # Register the account first to establish the precondition
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+  Type '${firstName}' into the First Name field.
+  Type '${lastName}' into the Last Name field.
+  Type '${existingEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click the 'Create Account' button.
+  Verify that you are registered successfully and logged in.
+  
+  # Log out the first user
+  Click the 'Logout' button.
+  
+  # Attempt duplicate registration
+  Click the profile/sign-in icon at the top right to go to the Sign In page.
+  Click the 'Don't have an account?' link to navigate to the Registration page.
+  Type '${firstName}' into the First Name field.
+  Type '${lastName}' into the Last Name field.
+  Type '${existingEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click the 'Create Account' button.
+  
+  # Verify registration is blocked with a validation error
+  Verify that the form is not submitted.
+  Verify that the page shows an error alert containing "An account with this email address already exists" or localized equivalent.
+
+data:
+  - testId: "tc_acc_004_en_US"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "en-US"
+  - testId: "tc_acc_004_en_GB"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "en-GB"
+  - testId: "tc_acc_004_de_DE"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "de-DE"
+  - testId: "tc_acc_004_sv_SE"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "sv-SE"
+  - testId: "tc_acc_004_ja_JP"
+    firstName: "Jane"
+    lastName: "Doe"
+    password: "S3cur3!P@ss"
+    locale: "ja-JP"

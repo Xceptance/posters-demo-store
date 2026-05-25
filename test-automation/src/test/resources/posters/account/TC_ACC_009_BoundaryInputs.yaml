@@ -1,0 +1,56 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_009
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  
+  # Step 1: Test First/Last Name Boundary Limits (255 characters - Pass)
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+  Type '${name255}' into the First Name field.
+  Type '${name255}' into the Last Name field.
+  Type '${nameTestEmail}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that you are registered successfully and redirected to the homepage.
+  Click 'Logout'.
+
+  # Step 1: Test First/Last Name Boundary Limits (256 characters - UI blocks or Server blocks cleanly)
+  Click the profile/sign-in icon at the top right, then navigate to the Registration page.
+  Type '${name256}' into the First Name field.
+  Verify that the First Name field value length is either capped at 255 characters (due to HTML5 maxlength="255") OR, if it allows typing 256 characters, submitting it rejects the form gracefully with a clean validation error without crashing the server.
+
+  # Step 2: Test Email Address Boundary Limits (255 characters - Pass)
+  Clear all fields or refresh the page.
+  Type 'Jane' into the First Name field.
+  Type 'Doe' into the Last Name field.
+  Type '${email255}' into the Email field.
+  Type '${password}' into the Password field.
+  Click 'Create Account'.
+  Verify that you are registered successfully and redirected to the homepage.
+  Click 'Logout'.
+
+  # Step 2: Test Email Address Boundary Limits (256 characters - UI blocks or Server blocks cleanly)
+  Click the profile/sign-in icon at the top right, then navigate to the Registration page.
+  Type 'Jane' into the First Name field.
+  Type 'Doe' into the Last Name field.
+  Type '${email256}' into the Email field.
+  Verify that the Email field value length is either capped at 255 characters (due to HTML5 maxlength="255") OR, if it allows typing 256 characters, submitting it rejects the form gracefully with a clean validation error without crashing the server.
+
+data:
+  - testId: "tc_acc_009_en_US"
+    password: "S3cureP@ss!"
+    locale: "en-US"
+  - testId: "tc_acc_009_en_GB"
+    password: "S3cureP@ss!"
+    locale: "en-GB"
+  - testId: "tc_acc_009_de_DE"
+    password: "S3cureP@ss!"
+    locale: "de-DE"
+  - testId: "tc_acc_009_sv_SE"
+    password: "S3cureP@ss!"
+    locale: "sv-SE"
+  - testId: "tc_acc_009_ja_JP"
+    password: "S3cureP@ss!"
+    locale: "ja-JP"

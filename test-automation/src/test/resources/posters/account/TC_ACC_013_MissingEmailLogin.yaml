@@ -1,0 +1,33 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_013
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Click the profile/sign-in icon at the top right to open the user menu.
+  Click 'Sign In' to navigate to the Sign In page.
+  
+  # Step 1: Input only Password and click Sign In
+  Type '${password}' into the Password field.
+  Click the 'Sign In' button.
+  
+  # Step 2: Verify native browser overlay pointing to Email
+  Verify that the form is not submitted.
+  Verify that a browser validation error popup/tooltip pointing to the Email field is shown with message containing "Please fill out this field" or localized equivalent.
+
+data:
+  - testId: "tc_acc_013_en_US"
+    password: "S3cur3!P@ss"
+    locale: "en-US"
+  - testId: "tc_acc_013_en_GB"
+    password: "S3cur3!P@ss"
+    locale: "en-GB"
+  - testId: "tc_acc_013_de_DE"
+    password: "S3cur3!P@ss"
+    locale: "de-DE"
+  - testId: "tc_acc_013_sv_SE"
+    password: "S3cur3!P@ss"
+    locale: "sv-SE"
+  - testId: "tc_acc_013_ja_JP"
+    password: "S3cur3!P@ss"
+    locale: "ja-JP"

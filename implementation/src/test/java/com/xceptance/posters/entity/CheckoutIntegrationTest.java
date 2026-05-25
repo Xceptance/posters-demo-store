@@ -67,7 +67,7 @@ class CheckoutIntegrationTest {
         em.persistAndFlush(cart);
 
         // 5. Convert cart to order
-        CartDto emptyCartDto = new CartDto(List.of(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, "0", 0);
+        CartDto emptyCartDto = new CartDto(List.of(), BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, 0);
         CatalogOrder order = CartToOrderConverter.convert(cart, emptyCartDto, "USD", "test@example.com", "Test", "User");
 
         // 6. Persist the order

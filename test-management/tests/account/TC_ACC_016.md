@@ -5,12 +5,12 @@ Verifies that clicking the eye icon in the password field toggles the input visi
 ## Metadata
 
 - **Test ID:** TC_ACC_016
-- **Version:** 1.0
+- **Version:** 1.2
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🟢 Low
 - **Status:** ✅ Active
-- **Execution Type:** Manual
+- **Execution Type:** Automated
 - **Suite:** 🧪 Full, ♿ Accessibility
 - **Requirements:**
   - Login UI/UX Options
@@ -42,6 +42,7 @@ Verifies that clicking the eye icon in the password field toggles the input visi
 - [x] EN-GB
 - [x] DE-DE
 - [x] SV-SE
+- [x] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -56,17 +57,17 @@ Verifies that clicking the eye icon in the password field toggles the input visi
 
 - **Action:** Locate the password field. Type a password.
 - **Data:** `Password` = `S3cur3!P@ss`
-- **Verify:** The characters are masked (shown as dots or asterisks). The eye icon (or similar toggle) indicates a 'hidden' state.
+- **Verify:** The characters are masked (shown as dots or asterisks). The eye icon is an open eye icon (visual).
 
 ### 2. Toggle Visibility On
 
 - **Action:** Click the password visibility toggle icon.
-- **Verify:** The password characters become visible in plain text as `S3cur3!P@ss`. The toggle icon visually changes to indicate a 'visible' state (e.g., eye with a slash).
+- **Verify:** The password characters become visible in plain text as `S3cur3!P@ss`. The toggle icon visually changes to a strike-through eye icon (visual).
 
 ### 3. Toggle Visibility Off
 
 - **Action:** Click the password visibility toggle icon again.
-- **Verify:** The password characters are masked again. The toggle icon reverts to its original 'hidden' state.
+- **Verify:** The password characters are masked again. The toggle icon reverts to an open eye icon (visual).
 
 ---
 
@@ -94,3 +95,5 @@ Verifies that clicking the eye icon in the password field toggles the input visi
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
+| 2026-05-21 | 1.1 | Gemini 2.5 Pro | Automated the test case and removed tobeautomated tag |
+| 2026-05-21 | 1.2 | Gemini 3.5 Flash | Added JA-JP locale and visual eye icon validation steps |

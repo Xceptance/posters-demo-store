@@ -1,0 +1,905 @@
+<html lang="de-DE"><head>
+    
+    <title>Posters - Home</title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- CSRF Token for JavaScript and HTMX -->
+    <meta name="_csrf" content="ZUnCOK0qYJ189jam6X1uMzTwlqWdCk36XxaCsVFKwci-65x7UiuhCpobUP5RkFSXilBaVlGUu8f-Oy7XOiWxgDR58_yLj_1N">
+    <meta name="_csrf_header" content="X-CSRF-TOKEN">
+    <meta charset="utf-8">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.min.css">
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-utilities.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/assets/css/style_reworked.css">
+
+    <!-- Japanese font fallback (conditionally loaded) -->
+    
+    <!-- HTMX -->
+    <script src="/assets/js/htmx.min.js"></script>
+    
+    <!-- HTMX CSRF Configuration (must be after HTMX is loaded) -->
+    <script>
+        // Configure HTMX to include CSRF token in all requests
+        // Wait for DOM to be ready before attaching event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('htmx:configRequest', function(evt) {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                if (token && header) {
+                    evt.detail.headers[header] = token;
+                }
+            });
+        });
+    </script>
+
+    <!-- WebMCP: Browser Native Agent API Registry -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          if (window.navigator && window.navigator.modelContext) {
+              window.navigator.modelContext.registerTool({
+                  name: "search_catalog",
+                  description: "Searches the store catalog for products matching a given query. Use this to find specific items, brands, or categories. Example payload: { \"query\": \"bear\" }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          query: {
+                              type: "string",
+                              description: "The search term to look for, e.g., 'laptop' or 'shoes'"
+                          }
+                      },
+                      required: ["query"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/search?q=${encodeURIComponent(params.query)}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Search failed with status " + response.status);
+                      }
+                  }
+              });
+
+              window.navigator.modelContext.registerTool({
+                  name: "get_product_details",
+                  description: "Retrieves granular details (sizes, finishes, minimum prices, and exact variants) for a specific product ID. Use this immediately after locating a product via search_catalog to determine valid size/finish permutations before adding to cart. Example payload: { \"productId\": 1 }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The unique integer ID of the product (e.g., 1)."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/product/${params.productId}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      if (!response.ok) {
+                          throw new Error("Get Details failed with status " + response.status);
+                      }
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Failed to parse JSON response for Product Details.");
+                      }
+                  }
+              });
+              
+              window.navigator.modelContext.registerTool({
+                  name: "add_to_cart",
+                  description: "Adds a specific product to the user's shopping cart. Example payload: { \"productId\": 1, \"quantity\": 1, \"size\": \"16 x 12 in\", \"finish\": \"matte\" }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The ID of the product to add to the cart (obtained from search_catalog)."
+                          },
+                          quantity: {
+                              type: "number",
+                              description: "The optional amount to add (defaults to 1)."
+                          },
+                          size: {
+                              type: "string",
+                              description: "The optional physical size of the product (e.g., '16 x 12 in', '36 x 24 in')."
+                          },
+                          finish: {
+                              type: "string",
+                              description: "The optional finish style (e.g., 'matte' or 'gloss')."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      // Dynamically detect CSRF tokens if Spring Security is enabled in the future
+                      const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+                      const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+                      
+                      const headers = { 
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json' 
+                      };
+                      if (csrfToken && csrfHeader) {
+                          headers[csrfHeader] = csrfToken;
+                      }
+
+                      const response = await fetch('/api/v2/cart/add', {
+                          method: 'POST',
+                          headers: headers,
+                          body: JSON.stringify({ 
+                              productId: params.productId, 
+                              quantity: params.quantity,
+                              size: params.size,
+                              finish: params.finish
+                          })
+                      });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Add to cart failed with status " + response.status);
+                      }
+                  }
+              });
+
+              window.navigator.modelContext.registerTool({
+                  name: "submit_checkout",
+                  description: "Executes the final checkout process to securely convert the active shopping cart into a confirmed order. Requires complete shipping and billing addresses, and valid credit card payment details. Example payload: { \"shippingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"billingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"payment\": {\"cardNumber\":\"4242424242424242\",\"name\":\"John Doe\",\"expiry\":\"12/30\",\"cvv\":\"123\"}, \"customer\": {\"email\":\"john@example.com\",\"firstName\":\"John\",\"lastName\":\"Doe\"} }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          shippingAddress: {
+                              type: "object",
+                              description: "Shipping address details.",
+                              properties: {
+                                  name: { type: "string" },
+                                  firstName: { type: "string" },
+                                  company: { type: "string" },
+                                  addressLine: { type: "string" },
+                                  city: { type: "string" },
+                                  state: { type: "string" },
+                                  zip: { type: "string" },
+                                  country: { type: "string" }
+                              },
+                              required: ["name", "firstName", "addressLine", "city", "state", "zip", "country"]
+                          },
+                          billingAddress: {
+                              type: "object",
+                              description: "Billing address details.",
+                              properties: {
+                                  name: { type: "string" },
+                                  firstName: { type: "string" },
+                                  company: { type: "string" },
+                                  addressLine: { type: "string" },
+                                  city: { type: "string" },
+                                  state: { type: "string" },
+                                  zip: { type: "string" },
+                                  country: { type: "string" }
+                              },
+                              required: ["name", "firstName", "addressLine", "city", "state", "zip", "country"]
+                          },
+                          payment: {
+                              type: "object",
+                              description: "Credit card details.",
+                              properties: {
+                                  cardNumber: { type: "string" },
+                                  name: { type: "string" },
+                                  expiry: { type: "string", description: "MM/YY format" },
+                                  cvv: { type: "string" }
+                              },
+                              required: ["cardNumber", "name", "expiry", "cvv"]
+                          },
+                          customer: {
+                              type: "object",
+                              description: "Customer contact info (optional if logged in).",
+                              properties: {
+                                  email: { type: "string" },
+                                  firstName: { type: "string" },
+                                  lastName: { type: "string" }
+                              }
+                          }
+                      },
+                      required: ["shippingAddress", "billingAddress", "payment"]
+                  },
+                  execute: async (params) => {
+                      const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+                      const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+                      
+                      const headers = { 
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json' 
+                      };
+                      if (csrfToken && csrfHeader) {
+                          headers[csrfHeader] = csrfToken;
+                      }
+
+                      const response = await fetch('/api/v2/checkout', {
+                          method: 'POST',
+                          headers: headers,
+                          body: JSON.stringify(params)
+                      });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Checkout failed with status " + response.status);
+                      }
+                  }
+              });
+
+              console.log("🤖 WebMCP tools registered for AI agents.");
+          }
+      });
+    </script>
+    
+<style>.htmx-indicator{opacity:0;visibility: hidden} .htmx-request .htmx-indicator, .htmx-request.htmx-indicator{opacity:1;visibility: visible;transition: opacity 200ms ease-in}</style></head>
+
+<body>
+    <!-- header -->
+    <header data-neo-ref="xc_ynkv7s">
+        <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center" data-neo-ref="xc_t2gi6q">Dies ist eine Demo Applikation. Bestellungen werden nicht bearbeitet. Geben sie auf keinen Fall sensible oder persönliche Daten ein!</div>
+
+        <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary" data-neo-ref="xc_uonfpx">
+            <div class="container top-menu" data-neo-ref="xc_thwy6p">
+                <a id="header-brand" class="navbar-brand" href="/de-DE/" data-neo-ref="xc_lieijk">
+                    <img id="header-brand-logo" class="shop-logo" src="/assets/img/xceptanceLogo.png" title="Posters Demo Store" alt="Posters Demo Store">
+                    Posters
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-navigation-elements" aria-controls="header-navigation-elements" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="header-navigation-elements" class="collapse navbar-collapse" data-neo-ref="xc_vw1pbo">
+                    <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown" data-neo-ref="xc_i0y8t1">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/de-DE/topCategory/Welt der Natur?categoryId=1" data-neo-ref="xc_3fxaar">Welt der Natur</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/de-DE/topCategory/Welt der Natur?categoryId=1">Show All Welt der Natur</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Tiere?categoryId=2" title="Tiere">Tiere</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Blumen?categoryId=3" title="Blumen">Blumen</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Bäume?categoryId=4" title="Bäume">Bäume</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" data-neo-ref="xc_i0y8t1_1">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/de-DE/topCategory/Essen?categoryId=5" data-neo-ref="xc_3fxaar_1">Essen</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/de-DE/topCategory/Essen?categoryId=5">Show All Essen</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Aufschnitt?categoryId=6" title="Aufschnitt">Aufschnitt</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Hauptgerichte?categoryId=7" title="Hauptgerichte">Hauptgerichte</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Süßes?categoryId=8" title="Süßes">Süßes</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" data-neo-ref="xc_i0y8t1_2">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/de-DE/topCategory/Verkehr?categoryId=9" data-neo-ref="xc_3fxaar_2">Verkehr</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/de-DE/topCategory/Verkehr?categoryId=9">Show All Verkehr</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Luftverkehr?categoryId=10" title="Luftverkehr">Luftverkehr</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Kraftfahrzeuge?categoryId=11" title="Kraftfahrzeuge">Kraftfahrzeuge</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Schienenverkehr?categoryId=12" title="Schienenverkehr">Schienenverkehr</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" data-neo-ref="xc_i0y8t1_3">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/de-DE/topCategory/Panoramen?categoryId=13" data-neo-ref="xc_3fxaar_3">Panoramen</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/de-DE/topCategory/Panoramen?categoryId=13">Show All Panoramen</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Architektur?categoryId=14" title="Architektur">Architektur</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Feuerwerk?categoryId=15" title="Feuerwerk">Feuerwerk</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Landschaften?categoryId=16" title="Landschaften">Landschaften</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/de-DE/category/Extragroße Panoramen?categoryId=17" title="Extragroße Panoramen">Extragroße Panoramen</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="header-actions me-0 ms-auto d-flex" data-neo-ref="xc_3peopf">
+                        <form id="header-search-form" class="d-flex position-relative" role="search" action="/de-DE/search" method="get" data-neo-ref="xc_jgc90z">
+                            <input id="header-search-text" name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" title="Search" autocomplete="off" hx-get="/de-DE/searchSuggest" hx-trigger="keyup changed delay:300ms, search" hx-target="#search-suggestions" hx-swap="outerHTML" data-neo-ref="xc_pxekgd">
+                            <button id="header-search-button" class="btn btn-primary" type="submit" data-neo-ref="xc_m2u8xv">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <div id="search-suggestions" class="search-suggestions-container"></div>
+                        </form>
+                        <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
+                            <!-- Locale switcher -->
+                            <li id="locale-switcher" class="nav-item dropdown" data-neo-ref="xc_d6ogjf">
+                                <a id="show-locale-menu" class="nav-link dropdown-toggle locale-trigger" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-neo-ref="xc_www8d0">
+                                    <span class="locale-flag" data-neo-ref="xc_92uwkb">🇩🇪</span>
+                                </a>
+                                <ul id="locale-menu" class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-en-us" href="/en-US/">
+                                            <span class="locale-flag">🇺🇸</span>
+                                            <span>English (United States)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-en-gb" href="/en-GB/">
+                                            <span class="locale-flag">🇬🇧</span>
+                                            <span>English (United Kingdom)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item active" id="loc-de-de" href="/de-DE/">
+                                            <span class="locale-flag">🇩🇪</span>
+                                            <span>Deutsch (Deutschland)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-sv-se" href="/sv-SE/">
+                                            <span class="locale-flag">🇸🇪</span>
+                                            <span>svenska (Sverige)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-ja-jp" href="/ja-JP/">
+                                            <span class="locale-flag">🇯🇵</span>
+                                            <span>日本語 (日本)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- User menu -->
+                            <li id="user" class="nav-item dropdown" data-neo-ref="xc_r7qh4k">
+                                <!-- Not logged in -->
+                                
+                                    <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="Login" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-neo-ref="xc_i12vf6">
+                                        <span class="bi bi-person" data-neo-ref="xc_6khrjy"></span>
+                                    </a>
+                                    <ul id="user-menu" class="dropdown-menu">
+                                        <li class="header-user-menu-heading mb-2" data-neo-ref="xc_itcs15">Willkommen</li>
+                                        <li class="header-user-menu-content mb-2" data-neo-ref="xc_sft7f8">
+                                            <a href="/de-DE/register" id="go-to-registration" class="btn btn-primary header-user-menu-button" title="Register" data-neo-ref="xc_utv3am">
+                                                <span class="bi bi-person-plus" data-neo-ref="xc_pov20f"></span>
+                                                <span data-neo-ref="xc_hnigck">Benutzerkonto erstellen</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-user-menu-content" data-neo-ref="xc_c67rqe">
+                                            <a href="/de-DE/login" id="go-to-login" class="btn btn-primary header-user-menu-button" title="Login" data-neo-ref="xc_splg8c">
+                                                <span class="bi bi-box-arrow-in-right" data-neo-ref="xc_vu5hlj"></span>
+                                                <span data-neo-ref="xc_hnigck_1">Anmelden</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                
+                                <!-- Logged in -->
+                                
+                            </li>
+                            <!-- Mini cart -->
+                            <li id="mini-cart" class="nav-item" data-neo-ref="xc_nxv4z0">
+                                <a id="header-cart-overview" class="nav-link" data-bs-toggle="offcanvas" href="#miniCartOffcanvas" role="button" aria-controls="miniCartOffcanvas" title="Cart Overview" hx-trigger="click once" hx-get="/de-DE/miniCart" hx-target="#mini-cart-content" hx-swap="innerHTML" data-neo-ref="xc_dhm1pn">
+                                    <span class="bi bi-cart3" data-neo-ref="xc_hx2nk4"></span> &nbsp;
+                                    <span id="header-cart-count" class="header-cart-product-count" data-neo-ref="xc_z6fxge">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- main/content -->
+    <main data-neo-ref="xc_jhuuro">
+        <!-- message: no java script -->
+        <noscript>
+            <div class="section">
+                <div class="container">
+                    <div class="noscriptmsg card">
+                        <p>Please enable JavaScript to use this site.</p>
+                    </div>
+                </div>
+            </div>
+        </noscript>
+
+        <!-- messages -->
+        <div id="alert-placeholder">
+            
+            
+        </div>
+
+        <!-- body -->
+        <div id="main" data-neo-ref="xc_4koibi">
+            <div data-neo-ref="xc_hgylw7">
+
+<!-- Sale Carousel -->
+<div id="carousel-sale" class="carousel slide" data-bs-ride="true" data-neo-ref="xc_tns9h2">
+    <div class="carousel-indicators" data-neo-ref="xc_avq9o2">
+        <button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" data-neo-ref="xc_qknpgo"></button>
+        <button type="button" data-bs-target="#carousel-sale" data-bs-slide-to="1" aria-label="Slide 2" data-neo-ref="xc_ly38b0"></button>
+    </div>
+    <div class="carousel-inner" data-neo-ref="xc_9emvby">
+        <div class="carousel-item active" data-bs-interval="5000" data-neo-ref="xc_nexsx9">
+            <a class="carousel-content-text text-center d-block w-100" href="#" data-neo-ref="xc_o4ac5t">Summer Sale - Up to 30% off!</a>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <a class="carousel-content-text text-center d-block w-100" href="#">Free shipping on orders over $50!</a>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sale" data-bs-slide="prev" data-neo-ref="xc_mzkvnm">
+        <span class="carousel-control-prev-icon" aria-hidden="true" data-neo-ref="xc_swheuj"></span>
+        <span class="visually-hidden" data-neo-ref="xc_8k31v5">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-sale" data-bs-slide="next" data-neo-ref="xc_f7poys">
+        <span class="carousel-control-next-icon" aria-hidden="true" data-neo-ref="xc_fmikp9"></span>
+        <span class="visually-hidden" data-neo-ref="xc_8k31v5_1">Next</span>
+    </button>
+</div>
+
+<!-- Hero Section -->
+<div class="hero-section container-fluid" data-neo-ref="xc_5hhp8r">
+    <div class="row align-items-center min-vh-50 container mx-auto" data-neo-ref="xc_ua3k3q">
+        <!-- Text Side -->
+        <div class="col-lg-5 col-md-6 text-center text-md-start mb-5 mb-md-0 hero-text-container" data-neo-ref="xc_x2ectu">
+            <h1 class="hero-title mb-4" data-neo-ref="xc_2d2m3e">Premium Vintage Posters.</h1>
+            <p class="hero-subtitle lead mb-4 text-muted" data-neo-ref="xc_rmh2bm">Give your walls the art they deserve with our curated collection of high-quality prints.</p>
+            <a href="/de-DE/product/Grizzlybär/1" class="btn btn-primary btn-lg px-5 py-3 shadow-sm hero-btn" data-neo-ref="xc_6zh2v">Jetzt shoppen</a>
+        </div>
+        <!-- Image Side -->
+        <div class="col-lg-6 offset-lg-1 col-md-6 position-relative hero-image-container" data-neo-ref="xc_cw0s5k">
+            <div class="hero-image-bg" data-neo-ref="xc_tf57rf"></div>
+            <img src="/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-large.webp" alt="Grizzlybär" class="img-fluid rounded shadow-lg position-relative z-1 hero-image">
+        </div>
+    </div>
+</div>
+
+<!-- Trust Band -->
+<div class="trust-band container-fluid py-5 mb-5 text-center" data-neo-ref="xc_mur19q">
+    <div class="container" data-neo-ref="xc_g9q7ay">
+        <div class="row g-4 justify-content-center" data-neo-ref="xc_izkw57">
+            <div class="col-md-4" data-neo-ref="xc_6vr6z8">
+                <i class="bi bi-truck trust-icon mb-3 d-block"></i>
+                <h4 class="trust-title" data-neo-ref="xc_7z2qv5">Free Shipping</h4>
+                <p class="trust-text text-muted mb-0" data-neo-ref="xc_5eb6yd">On all orders over $50</p>
+            </div>
+            <div class="col-md-4 border-md-start border-md-end" data-neo-ref="xc_l7l6x7">
+                <i class="bi bi-award trust-icon mb-3 d-block"></i>
+                <h4 class="trust-title" data-neo-ref="xc_7z2qv5_1">Premium Quality</h4>
+                <p class="trust-text text-muted mb-0" data-neo-ref="xc_5eb6yd_1">Archival paper &amp; vivid inks</p>
+            </div>
+            <div class="col-md-4" data-neo-ref="xc_6vr6z8_1">
+                <i class="bi bi-arrow-return-left trust-icon mb-3 d-block"></i>
+                <h4 class="trust-title" data-neo-ref="xc_7z2qv5_2">Easy Returns</h4>
+                <p class="trust-text text-muted mb-0" data-neo-ref="xc_5eb6yd_2">30-day money-back guarantee</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category tiles -->
+<div class="container mb-5" data-neo-ref="xc_e2pjzf">
+    <div class="row g-4 justify-content-center category-display-case" data-neo-ref="xc_ipqntx">
+        <div class="col-md-4" data-neo-ref="xc_6vr6z8_2">
+            <a href="/de-DE/topCategory/Welt der Natur?categoryId=1" class="text-decoration-none" data-neo-ref="xc_ohd94c">
+                <div class="category-card position-relative overflow-hidden rounded shadow-sm" data-neo-ref="xc_edhop5">
+                    <img src="/assets/img/category/nature.webp" alt="Welt der Natur category image" class="category-card-img w-100" id="category-picture-0">
+                    <div class="category-card-overlay d-flex align-items-center justify-content-center" data-neo-ref="xc_l9j99z">
+                        <h3 class="category-card-title text-white mb-0" data-neo-ref="xc_81mu0y">Welt der Natur</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4" data-neo-ref="xc_6vr6z8_3">
+            <a href="/de-DE/topCategory/Essen?categoryId=5" class="text-decoration-none" data-neo-ref="xc_ohd94c_1">
+                <div class="category-card position-relative overflow-hidden rounded shadow-sm" data-neo-ref="xc_edhop5_1">
+                    <img src="/assets/img/category/dining.webp" alt="Essen category image" class="category-card-img w-100" id="category-picture-1">
+                    <div class="category-card-overlay d-flex align-items-center justify-content-center" data-neo-ref="xc_l9j99z_1">
+                        <h3 class="category-card-title text-white mb-0" data-neo-ref="xc_81mu0y_1">Essen</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4" data-neo-ref="xc_6vr6z8_4">
+            <a href="/de-DE/topCategory/Verkehr?categoryId=9" class="text-decoration-none" data-neo-ref="xc_ohd94c_2">
+                <div class="category-card position-relative overflow-hidden rounded shadow-sm" data-neo-ref="xc_edhop5_2">
+                    <img src="/assets/img/category/transportation.webp" alt="Verkehr category image" class="category-card-img w-100" id="category-picture-2">
+                    <div class="category-card-overlay d-flex align-items-center justify-content-center" data-neo-ref="xc_l9j99z_2">
+                        <h3 class="category-card-title text-white mb-0" data-neo-ref="xc_81mu0y_2">Verkehr</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4" data-neo-ref="xc_6vr6z8_5">
+            <a href="/de-DE/topCategory/Panoramen?categoryId=13" class="text-decoration-none" data-neo-ref="xc_ohd94c_3">
+                <div class="category-card position-relative overflow-hidden rounded shadow-sm" data-neo-ref="xc_edhop5_3">
+                    <img src="/assets/img/category/panoramas.webp" alt="Panoramen category image" class="category-card-img w-100" id="category-picture-3">
+                    <div class="category-card-overlay d-flex align-items-center justify-content-center" data-neo-ref="xc_l9j99z_3">
+                        <h3 class="category-card-title text-white mb-0" data-neo-ref="xc_81mu0y_3">Panoramen</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Hot Products heading -->
+<div class="product-display-heading container-fluid trending-header-band text-center py-5 mb-5" data-neo-ref="xc_9v1uv2">
+    <h2 class="trending-title mb-2" data-neo-ref="xc_4kdz8m">Trending Now</h2>
+    <p class="text-muted mb-0" data-neo-ref="xc_y0kxy9">Our most popular prints this week.</p>
+</div>
+
+<!-- Product tiles -->
+<div class="container text-center" data-neo-ref="xc_99o2r1">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 product-display-case" data-neo-ref="xc_xv0q6c">
+        <div class="col" data-neo-ref="xc_yj4lo5">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb">
+                <a href="/de-DE/product/Grizzlybär/1" data-neo-ref="xc_wzr11x">
+                    <img src="/assets/img/products/flora_and_fauna/animals/grizzly-bear/grizzly-bear-medium.webp" alt="picture of Grizzlybär" class="card-img-top" id="product-picture-1">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw">Grizzlybär</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam">Ein müder Bär lehnt sich auf einen Stein.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru">14,96&nbsp;€</p>
+                    <a href="/de-DE/product/Grizzlybär/1" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_1">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_1">
+                <a href="/de-DE/product/Bartkauz/2" data-neo-ref="xc_wzr11x_1">
+                    <img src="/assets/img/products/flora_and_fauna/animals/great-grey-owl/great-grey-owl-medium.webp" alt="picture of Bartkauz" class="card-img-top" id="product-picture-2">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_1">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_1">Bartkauz</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_1">Eine große Eule im Wald.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_1">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_1">14,96&nbsp;€</p>
+                    <a href="/de-DE/product/Bartkauz/2" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_1">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_2">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_2">
+                <a href="/de-DE/product/Schwedischer Elch/3" data-neo-ref="xc_wzr11x_2">
+                    <img src="/assets/img/products/flora_and_fauna/animals/swedish-moose/swedish-moose-medium.webp" alt="picture of Schwedischer Elch" class="card-img-top" id="product-picture-3">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_2">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_2">Schwedischer Elch</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_2">Ein Elchbulle mit mittelgroßem Geweih.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_2">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_2">8,18&nbsp;€</p>
+                    <a href="/de-DE/product/Schwedischer Elch/3" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_2">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_3">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_3">
+                <a href="/de-DE/product/Europäische Hornisse/4" data-neo-ref="xc_wzr11x_3">
+                    <img src="/assets/img/products/flora_and_fauna/animals/european-hornet/european-hornet-medium.webp" alt="picture of Europäische Hornisse" class="card-img-top" id="product-picture-4">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_3">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_3">Europäische Hornisse</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_3">Nahaufnahme einer Hornisse.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_3">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_3">13,76&nbsp;€</p>
+                    <a href="/de-DE/product/Europäische Hornisse/4" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_3">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_4">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_4">
+                <a href="/de-DE/product/Weinbergschnecke/5" data-neo-ref="xc_wzr11x_4">
+                    <img src="/assets/img/products/flora_and_fauna/animals/roman-snail/roman-snail-medium.webp" alt="picture of Weinbergschnecke" class="card-img-top" id="product-picture-5">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_4">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_4">Weinbergschnecke</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_4">Nahaufnahme einer Schnecke an der Seite eines Baumes.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_4">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_4">23,28&nbsp;€</p>
+                    <a href="/de-DE/product/Weinbergschnecke/5" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_4">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_5">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_5">
+                <a href="/de-DE/product/Blauer Morphofalter/6" data-neo-ref="xc_wzr11x_5">
+                    <img src="/assets/img/products/flora_and_fauna/animals/blue-morpho-butterfly/blue-morpho-butterfly-medium.webp" alt="picture of Blauer Morphofalter" class="card-img-top" id="product-picture-6">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_5">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_5">Blauer Morphofalter</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_5">Ein hübscher, blau-schwarzer Schmetterling auf einem Blatt.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_5">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_5">18,20&nbsp;€</p>
+                    <a href="/de-DE/product/Blauer Morphofalter/6" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_5">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_6">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_6">
+                <a href="/de-DE/product/Schmetterling auf blauer Blüte/7" data-neo-ref="xc_wzr11x_6">
+                    <img src="/assets/img/products/flora_and_fauna/animals/red-birdwing/red-birdwing-medium.webp" alt="picture of Schmetterling auf blauer Blüte" class="card-img-top" id="product-picture-7">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_6">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_6">Schmetterling auf blauer Blüte</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_6">Blick von unten auf einen Schmetterling auf einer Blüte.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_6">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_6">7,70&nbsp;€</p>
+                    <a href="/de-DE/product/Schmetterling auf blauer Blüte/7" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_6">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_7">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_7">
+                <a href="/de-DE/product/Amsel/8" data-neo-ref="xc_wzr11x_7">
+                    <img src="/assets/img/products/flora_and_fauna/animals/bird/bird-medium.webp" alt="picture of Amsel" class="card-img-top" id="product-picture-8">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_7">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_7">Amsel</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_7">Eine kleine Amsel auf einer Regenrinne.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_7">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_7">20,23&nbsp;€</p>
+                    <a href="/de-DE/product/Amsel/8" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_7">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_8">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_8">
+                <a href="/de-DE/product/Hauskatze mit beige-braunem Fell/9" data-neo-ref="xc_wzr11x_8">
+                    <img src="/assets/img/products/flora_and_fauna/animals/red-domestic-cat/red-domestic-cat-medium.webp" alt="picture of Hauskatze mit beige-braunem Fell" class="card-img-top" id="product-picture-9">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_8">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_8">Hauskatze mit beige-braunem Fell</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_8">Eine beige und braun getigerte Hauskatze, die den Betrachter beobachtet.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_8">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_8">15,83&nbsp;€</p>
+                    <a href="/de-DE/product/Hauskatze mit beige-braunem Fell/9" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_8">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_9">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_9">
+                <a href="/de-DE/product/Hauskatze mit braun-schwarzem Fell/10" data-neo-ref="xc_wzr11x_9">
+                    <img src="/assets/img/products/flora_and_fauna/animals/brown-domestic-cat/brown-domestic-cat-medium.webp" alt="picture of Hauskatze mit braun-schwarzem Fell" class="card-img-top" id="product-picture-10">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_9">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_9">Hauskatze mit braun-schwarzem Fell</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_9">Diese Katze sieht aus als setze sie zum Sprung an.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_9">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_9">18,11&nbsp;€</p>
+                    <a href="/de-DE/product/Hauskatze mit braun-schwarzem Fell/10" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_9">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_10">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_10">
+                <a href="/de-DE/product/Pinke Schmuckdahlie/11" data-neo-ref="xc_wzr11x_10">
+                    <img src="/assets/img/products/flora_and_fauna/flowers/pink-dahlia/pink-dahlia-medium.webp" alt="picture of Pinke Schmuckdahlie" class="card-img-top" id="product-picture-11">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_10">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_10">Pinke Schmuckdahlie</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_10">Nahaufnahme einer pinken Dahlienblüte.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_10">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_10">0,30&nbsp;€</p>
+                    <a href="/de-DE/product/Pinke Schmuckdahlie/11" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_10">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+        <div class="col" data-neo-ref="xc_yj4lo5_11">
+            <div class="card h-100 product-tile" data-neo-ref="xc_e0ouyb_11">
+                <a href="/de-DE/product/Pink-weiße Kaktus-Dahlie/12" data-neo-ref="xc_wzr11x_11">
+                    <img src="/assets/img/products/flora_and_fauna/flowers/cactus-dahlia-pink-white/cactus-dahlia-pink-white-medium.webp" alt="picture of Pink-weiße Kaktus-Dahlie" class="card-img-top" id="product-picture-12">
+                </a>
+                <div class="card-body" data-neo-ref="xc_7l7r3g_11">
+                    <h3 class="card-title" data-neo-ref="xc_u2nhyw_11">Pink-weiße Kaktus-Dahlie</h3>
+                    <p class="card-text product-tile-text" data-neo-ref="xc_114qam_11">Nahaufnahme einer Kaktus-Dahlie in pink und weiß.</p>
+                </div>
+                <div class="card-footer" data-neo-ref="xc_c10tl9_11">
+                    <p class="card-text product-tile-price mb-2" data-neo-ref="xc_2xd9ru_11">3,52&nbsp;€</p>
+                    <a href="/de-DE/product/Pink-weiße Kaktus-Dahlie/12" class="btn btn-primary product-tile-btn-buy" data-neo-ref="xc_ec8o9k_11">Jetzt shoppen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center" data-neo-ref="xc_99o2r1_1">
+    <a class="btn btn-primary btn-shop-all" href="#" role="button" data-neo-ref="xc_2wcw9r">Alle Produkte</a>
+</div>
+
+</div>
+        </div>
+
+        <div id="js-top" class="go-to-top" style="display: none;">
+            <a onclick="toTopFunction()" id="js-gotop"><i class="bi bi-arrow-up"></i></a>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer id="footer" class="footer" data-neo-ref="xc_9zagdo">
+        <div class="container mb-3" data-neo-ref="xc_fqrn4l">
+            <div class="row row-pb-md" data-neo-ref="xc_c119pg">
+                <div id="footer-section-about" class="col" data-neo-ref="xc_jui4su">
+                    <h3 class="footer-section-headline" data-neo-ref="xc_eshvmv">About</h3>
+                    <p class="footer-text-about footer-section-text" data-neo-ref="xc_f7rj8w">
+                        The Posters Demo Store is a demonstration web shop by Xceptance.
+                    </p>
+                    <ul class="footer-social-icons">
+                        <li data-neo-ref="xc_vdn5on">GitHub: <a href="https://github.com/Xceptance/posters-demo-store" data-neo-ref="xc_w7qrlz"><i aria-label="GitHub" class="bi bi-github"></i></a></li>
+                    </ul>
+                </div>
+                <div id="footer-section-support" class="col" data-neo-ref="xc_5k6hlc">
+                    <h3 class="footer-section-headline" data-neo-ref="xc_eshvmv_1">Support</h3>
+                    <ul class="footer-support">
+                        <li data-neo-ref="xc_vdn5on_1"><a href="mailto:kontakt@xceptance.de" data-neo-ref="xc_w7qrlz_1">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div id="footer-section-information" class="col" data-neo-ref="xc_cz3cgp">
+                    <h3 class="footer-section-headline" data-neo-ref="xc_eshvmv_2">Information</h3>
+                    <ul class="footer-info">
+                        <li data-neo-ref="xc_vdn5on_2">Terms and Conditions apply.</li>
+                    </ul>
+                </div>
+                <div id="footer-section-contact" class="col" data-neo-ref="xc_3xhxfj">
+                    <h3 class="footer-section-headline" data-neo-ref="xc_eshvmv_3">Contact</h3>
+                    <ul class="footer-contact">
+                        <li class="footer-contact-company" data-neo-ref="xc_emfecz">Xceptance Software Technologies GmbH</li>
+                        <li class="footer-contact-adress" data-neo-ref="xc_y0vs9q">Leutragraben 2-4<br>07743 Jena<br>Germany</li>
+                        <li class="footer-contact-e-mail" data-neo-ref="xc_b5ywr5">E-Mail: <a href="mailto:kontakt@xceptance.de" data-neo-ref="xc_w7qrlz_2">kontakt@xceptance.de</a></li>
+                        <li class="footer-contact-website" data-neo-ref="xc_17mdjj">Website: <a href="https://www.xceptance.com" data-neo-ref="xc_w7qrlz_3">https://www.xceptance.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mini Cart Offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="miniCartOffcanvas" aria-labelledby="miniCartOffcanvasLabel">
+            <div class="offcanvas-header bg-light border-bottom">
+                <h5 class="offcanvas-title" id="miniCartOffcanvasLabel">Shopping Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-0" id="mini-cart-content">
+                <!-- loaded via HTMX on first open -->
+                <div class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="footer-copyright" class="footer-copyright text-center" data-neo-ref="xc_u3wv4">
+            © 2013-2024 Xceptance Software Technologies GmbH<br>
+            Photo copyrights belong to their respective owners.
+        </div>
+        <div id="footer-version-information" class="version-info text-center" data-neo-ref="xc_p3nj6y">
+            Version <span data-neo-ref="xc_afza12">3.0.0-SNAPSHOT</span>
+        </div>
+    </footer>
+
+    <!-- Confirmation modal (replaces native confirm() for hx-confirm) -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Bestätigung</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="confirmModalBody">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalYes">Entfernen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle (v5.3.2 including popper)-->
+    <script src="/assets/js/bootstrap.bundle.js"></script>
+
+    <!-- Scroll to top + HTMX integrations -->
+    <script>
+        function toTopFunction() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        (function() {
+            var top = document.getElementById('js-top');
+            if (top) {
+                window.addEventListener('scroll', function() {
+                    top.style.display = (document.documentElement.scrollTop > 200) ? 'block' : 'none';
+                });
+            }
+
+            // After HTMX swaps mini-cart content (e.g. add-to-cart), open the
+            // Bootstrap offcanvas briefly so the user sees the update.
+            var miniCartTimeout;
+            var miniCartContent = document.getElementById('mini-cart-content');
+            var offcanvasEl = document.getElementById('miniCartOffcanvas');
+            
+            if (miniCartContent && offcanvasEl) {
+                miniCartContent.addEventListener('htmx:afterSwap', function(e) {
+                    var path = e.detail.requestConfig ? e.detail.requestConfig.path : '';
+                    if (path.indexOf('addToCartSlider') !== -1) {
+                        var oc = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                        oc.show();
+                        if (miniCartTimeout) clearTimeout(miniCartTimeout);
+                        miniCartTimeout = setTimeout(function() { oc.hide(); }, 3000);
+                    }
+                });
+                
+                offcanvasEl.addEventListener('mouseenter', function() {
+                    if (miniCartTimeout) clearTimeout(miniCartTimeout);
+                });
+            }
+
+            // Intercept htmx:confirm to show Bootstrap modal instead of native confirm()
+            // Only intercept when hx-confirm is set (detail.question is non-empty)
+            document.body.addEventListener('htmx:confirm', function(e) {
+                if (!e.detail.question) return;  // no hx-confirm attr → let request proceed
+                e.preventDefault();
+                var modalEl = document.getElementById('confirmModal');
+                var bodyEl = document.getElementById('confirmModalBody');
+                var yesBtn = document.getElementById('confirmModalYes');
+                bodyEl.textContent = e.detail.question;
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                // Remove any old click handler
+                var newYes = yesBtn.cloneNode(true);
+                yesBtn.parentNode.replaceChild(newYes, yesBtn);
+                newYes.addEventListener('click', function() {
+                    modal.hide();
+                    e.detail.issueRequest(true);
+                });
+                modal.show();
+            });
+        })();
+    </script>
+
+
+</body></html>

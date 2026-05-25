@@ -1,0 +1,496 @@
+{
+  "id": "com.xceptance.posters.account.TC_ACC_004_DuplicateEmail :: testDuplicateEmailDeDe :: tc_acc_004_de_DE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "Identified the country selector button by its flag emoji name and data-neo-ref attribute.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_www8d0\u0027]",
+          "description": "Click the country selector button",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027de-DE\u0027 in the opened dialog.",
+      "reasoning": "The instruction asks to click the country represented by locale \u0027de-DE\u0027. I found a link with the text \u0027🇩🇪 Deutsch (Deutschland)\u0027 and data-neo-ref \u0027xc_cvruw6\u0027 which matches the requirement.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_cvruw6",
+          "description": "Click the country represented by locale \u0027de-DE\u0027",
+          "elementDetails": "🇩🇪 Deutsch (Deutschland)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item",
+            "text": "🇩🇪\nDeutsch (Deutschland)",
+            "id": "loc-de-de",
+            "href": "http://localhost:8080/de-DE/",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the profile/sign-in icon at the top right, then click \u0027Sign In\u0027 or \u0027Registration\u0027 to navigate to the Login or Create Account page.",
+      "reasoning": "The instruction asks to click the profile/sign-in icon first. The element with id \u0027show-user-menu\u0027 and title \u0027Login\u0027 is identified as the profile/sign-in icon. The subsequent \u0027Sign In\u0027 or \u0027Registration\u0027 links are not present in the current DOM, implying they appear after clicking this icon. Therefore, only the click on the profile/sign-in icon is performed in this step.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#show-user-menu",
+          "description": "Click the profile/sign-in icon",
+          "elementDetails": "Login link",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/de-DE/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "If not already on the Registration page, click the \u0027Don\u0027t have an account?\u0027 link to navigate to the Registration page.",
+      "reasoning": "The current page is not the Registration page. I identified \u0027Benutzerkonto Erstellen\u0027 as the link to create an account, which is equivalent to \u0027Don\u0027t have an account?\u0027 and will lead to the registration page.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_utv3am\u0027]",
+          "description": "Click the \u0027Benutzerkonto Erstellen\u0027 link to navigate to the Registration page.",
+          "elementDetails": "Benutzerkonto Erstellen",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Benutzerkonto Erstellen",
+            "id": "go-to-registration",
+            "href": "http://localhost:8080/de-DE/register",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027Jane\u0027 into the First Name field.",
+      "reasoning": "Identified the \u0027Vorname\u0027 textbox using its data-neo-ref attribute and generated a TYPE action to input \u0027Jane\u0027.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "xc_yttfnh",
+          "value": [
+            "Jane"
+          ],
+          "description": "Type \u0027Jane\u0027 into the First Name field.",
+          "elementDetails": "Vorname textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "firstName",
+            "id": "firstName",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027Doe\u0027 into the Last Name field.",
+      "reasoning": "Identified the \u0027Nachname\u0027 textbox by its data-neo-ref attribute and generated a TYPE action to input \u0027Doe\u0027.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_kk9wi5\u0027]",
+          "value": [
+            "Doe"
+          ],
+          "description": "Type \u0027Doe\u0027 into the Last Name field.",
+          "elementDetails": "Nachname",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027test_TC_ACC_004_1779455835714@posters.com\u0027 into the Email field.",
+      "reasoning": "Identified the \u0027E-Mail\u0027 textbox by its data-neo-ref \u0027xc_2w0ata\u0027 and generated a TYPE action to input the provided email address.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "xc_2w0ata",
+          "value": [
+            "test_TC_ACC_004_1779455835714@posters.com"
+          ],
+          "description": "Type \u0027test_TC_ACC_004_1779455835714@posters.com\u0027 into the Email field.",
+          "elementDetails": "E-Mail textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "email",
+            "id": "email",
+            "tagName": "input",
+            "type": "email"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027S3cur3!P@ss\u0027 into the Password field.",
+      "reasoning": "Identified the password input field by its \u0027Passwort\u0027 name and data-neo-ref attribute and generated a TYPE action to enter the specified password.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "xc_k5vm5b",
+          "value": [
+            "S3cur3!P@ss"
+          ],
+          "description": "Type \u0027S3cur3!P@ss\u0027 into the Password field",
+          "elementDetails": "Passwort textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "password",
+            "id": "password",
+            "tagName": "input",
+            "type": "password"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the \u0027Create Account\u0027 button.",
+      "reasoning": "Found the button with the text \u0027Benutzerkonto Erstellen\u0027 which translates to \u0027Create Account\u0027 and clicked it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_7f08o4\u0027]",
+          "description": "Click the \u0027Create Account\u0027 button",
+          "elementDetails": "Benutzerkonto Erstellen",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "Benutzerkonto Erstellen",
+            "id": "btn-register",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that you are registered successfully and logged in.",
+      "reasoning": "The presence of the user menu icon (`#show-user-menu`) typically indicates that a user is logged in. I am asserting its visibility to confirm successful login.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#show-user-menu",
+          "value": [
+            "visible"
+          ],
+          "description": "Verify that the user menu icon is visible, indicating a logged-in state.",
+          "elementDetails": "User menu icon",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Click the \u0027Logout\u0027 button.",
+      "reasoning": "The \u0027Logout\u0027 button was identified by its ID \u0027go-to-logout\u0027 and a CLICK action was generated.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#go-to-logout",
+          "description": "Click the \u0027Logout\u0027 button.",
+          "elementDetails": "Logout link",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Logout",
+            "id": "go-to-logout",
+            "href": "http://localhost:8080/de-DE/logout",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "screenshotHash": "00000002000800080198019801d8018801ac01f8019481f0018801ac01800000",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    },
+    {
+      "promptLine": "Click the profile/sign-in icon at the top right to go to the Sign In page.",
+      "reasoning": "The \u0027Person Icon\u0027 button (data-neo-ref: xc_i12vf6) was identified as the profile/sign-in icon based on its name and typical placement.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_i12vf6",
+          "description": "Click the profile/sign-in icon",
+          "elementDetails": "Person Icon",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/de-DE/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the \u0027Don\u0027t have an account?\u0027 link to navigate to the Registration page.",
+      "reasoning": "The instruction asks to click a link to navigate to the registration page. I found a link with the text \u0027Benutzerkonto Erstellen\u0027 which translates to \u0027Create Account\u0027, fitting the description of a registration link.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_utv3am\u0027]",
+          "description": "Click the \u0027Benutzerkonto Erstellen\u0027 link to navigate to the Registration page.",
+          "elementDetails": "Benutzerkonto Erstellen",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Benutzerkonto Erstellen",
+            "id": "go-to-registration",
+            "href": "http://localhost:8080/de-DE/register",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027Jane\u0027 into the First Name field.",
+      "reasoning": "Identified the \u0027Vorname\u0027 textbox using its data-neo-ref attribute and generated a TYPE action to enter \u0027Jane\u0027.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_yttfnh\u0027]",
+          "value": [
+            "Jane"
+          ],
+          "description": "Type \u0027Jane\u0027 into the First Name field.",
+          "elementDetails": "Vorname textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "firstName",
+            "id": "firstName",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027Doe\u0027 into the Last Name field.",
+      "reasoning": "Identified the \u0027Nachname\u0027 textbox by its data-neo-ref attribute and generated a TYPE action to input \u0027Doe\u0027.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_kk9wi5\u0027]",
+          "value": [
+            "Doe"
+          ],
+          "description": "Type \u0027Doe\u0027 into the Last Name field.",
+          "elementDetails": "Nachname",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027test_TC_ACC_004_1779455835714@posters.com\u0027 into the Email field.",
+      "reasoning": "Identified the \u0027E-Mail\u0027 textbox by its data-neo-ref \u0027xc_2w0ata\u0027 and generated a TYPE action to input the provided email address.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "xc_2w0ata",
+          "value": [
+            "test_TC_ACC_004_1779455835714@posters.com"
+          ],
+          "description": "Type \u0027test_TC_ACC_004_1779455835714@posters.com\u0027 into the Email field.",
+          "elementDetails": "E-Mail textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "email",
+            "id": "email",
+            "tagName": "input",
+            "type": "email"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027S3cur3!P@ss\u0027 into the Password field.",
+      "reasoning": "Typed the provided password into the \u0027Passwort\u0027 field identified by its data-neo-ref attribute.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_k5vm5b\u0027]",
+          "value": [
+            "S3cur3!P@ss"
+          ],
+          "description": "Type \u0027S3cur3!P@ss\u0027 into the Password field.",
+          "elementDetails": "Passwort textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "password",
+            "id": "password",
+            "tagName": "input",
+            "type": "password"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the \u0027Create Account\u0027 button.",
+      "reasoning": "Found the button with the text \u0027Benutzerkonto Erstellen\u0027 which translates to \u0027Create Account\u0027 and clicked it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_7f08o4\u0027]",
+          "description": "Click the \u0027Create Account\u0027 button",
+          "elementDetails": "Benutzerkonto Erstellen",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "Benutzerkonto Erstellen",
+            "id": "btn-register",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that the form is not submitted.",
+      "reasoning": "The presence of the \u0027Email already in use.\u0027 alert message indicates that the form submission was not successful, thus verifying that the form was not submitted.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#alert-placeholder",
+          "value": [
+            "Email already in use."
+          ],
+          "description": "Verify that the form is not submitted by checking for an error message.",
+          "elementDetails": "Email already in use.",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Verify that the page shows an error alert containing \"An account with this email address already exists\" or localized equivalent.",
+      "reasoning": "Found an alert element with id \u0027alert-placeholder\u0027 containing the localized error message \u0027Email already in use.\u0027, which matches the instruction.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#alert-placeholder",
+          "value": [
+            "Email already in use."
+          ],
+          "description": "Verify that the page shows an error alert containing \u0027Email already in use.\u0027.",
+          "elementDetails": "alert-placeholder",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    }
+  ]
+}

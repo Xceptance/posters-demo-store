@@ -1,0 +1,25 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_017
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Click the profile/sign-in icon at the top right to go to the Sign In page.
+
+  # Step 1: Click the registration navigation link on the Login form
+  Click the 'Don't have an account?' or 'Register now' link at the bottom of the login form.
+
+  # Step 2: Verify that we navigated to the Account Registration / Create Account page
+  Verify that the registration page is loaded (URL contains '/registration' or '/create-account' or header shows 'Create Account').
+
+data:
+  - testId: "tc_acc_017_en_US"
+    locale: "en-US"
+  - testId: "tc_acc_017_en_GB"
+    locale: "en-GB"
+  - testId: "tc_acc_017_de_DE"
+    locale: "de-DE"
+  - testId: "tc_acc_017_sv_SE"
+    locale: "sv-SE"
+  - testId: "tc_acc_017_ja_JP"
+    locale: "ja-JP"

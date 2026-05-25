@@ -25,8 +25,6 @@
 package com.xceptance.posters.freeform;
 
 import com.xceptance.neodymium.common.browser.Browser;
-import com.xceptance.neodymium.common.testdata.DataFile;
-import com.xceptance.neodymium.common.testdata.DataSet;
 import com.xceptance.neodymium.junit5.NeodymiumTest;
 import com.xceptance.neodymium.util.Neodymium;
 

@@ -5,24 +5,24 @@ Verifies that the registration form fields enforce maximum character length limi
 ## Metadata
 
 - **Test ID:** TC_ACC_009
-- **Version:** 1.0
+- **Version:** 1.3
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🟡 Medium
-- **Status:** 📝 Draft
-- **Execution Type:** Manual
+- **Status:** ✅ Active
+- **Execution Type:** Automated
 - **Suite:** 🔄 Regression, 🔒 Security
 - **Requirements:**
   - Registration boundaries
 - **Tags:** `registration`, `validation`, `security`, `boundary`
 - **Author:** Antigravity (AI) (2026-04-09)
 - **Reviewers:**
-  - 
+  - Antigravity (AI) (2026-05-21)
 
 ## Comments
 
-> [!TIP]
-> Most standard e-commerce DB schemas limit Emails to 255 chars, and names to 50 or 100 chars. We test boundaries exceeding 255 chars.
+> [!NOTE]
+> Database columns for `firstName`, `lastName`, and `email` default to VARCHAR(255). This test verifies that input lengths are limited gracefully at the boundary to prevent database truncation errors or system crashes.
 
 ## Preconditions
 
@@ -33,8 +33,10 @@ Verifies that the registration form fields enforce maximum character length limi
 
 | Field | Value |
 | :--- | :--- |
-| Extremely Long String | 300 character string of letter "A" |
-| Extremely Long Email | 250 character prefix + `@posters.com` |
+| **Name Pass Boundary** | String of exactly 255 characters |
+| **Name Fail Boundary** | String of exactly 256 characters |
+| **Email Pass Boundary** | Total 255 characters (e.g. prefix `a...a` [243 chars] + `@posters.com` [12 chars]) |
+| **Email Fail Boundary** | Total 256 characters (e.g. prefix `a...a` [244 chars] + `@posters.com` [12 chars]) |
 
 ## Execution Targets
 
@@ -43,6 +45,7 @@ Verifies that the registration form fields enforce maximum character length limi
 - [x] EN-GB
 - [x] DE-DE
 - [x] SV-SE
+- [x] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -51,26 +54,30 @@ Verifies that the registration form fields enforce maximum character length limi
 
 ## Steps
 
-### 1. Exceed First/Last Name Limits
-- **Action:** Paste an extremely long string (300+ chars) into the First Name and Last Name fields.
-- **Verify:** The UI prevents entering all 300 characters (max-length attribute), or upon submission, an appropriate validation message prevents crashing the backend.
+### 1. Test First/Last Name Boundary Limits
+- **Action:** Enter a string of exactly 255 characters into the First Name and Last Name fields, fill other fields with valid data, and submit.
+- **Verify:** Registration is successful without truncation or database exceptions.
+- **Action:** Repeat registration using a string of exactly 256 characters in either the First Name or Last Name field.
+- **Verify:** The UI prevents typing the 256th character (if `maxlength="255"` is present), OR upon submission, the UI displays a clean validation error. The server must not return an HTTP 500 error page.
 
-### 2. Exceed Email Limit
-- **Action:** Paste an extremely long string into the Email field.
-- **Verify:** The field enforces a max length, or the backend returns a clean validation error indicating the email is too long.
+### 2. Test Email Address Boundary Limits
+- **Action:** Register with a valid email address that is exactly 255 characters long.
+- **Verify:** Registration completes successfully.
+- **Action:** Attempt to register with an email address that is exactly 256 characters long.
+- **Verify:** The UI blocks typing past 255 characters OR rejects the submission with a clean validation error indicating the email is too long. The application must not crash or display SQL errors.
 
 ---
 
 ## Pass/Fail Criteria
 
-- **Pass:** The application successfully stops oversized inputs gracefully without HTTP 500 errors or database exceptions.
-- **Fail:** Entering long strings causes application crashes, blank error screens, or SQL truncation warnings.
+- **Pass:** The system gracefully handles maximum boundaries (255 chars) and blocks or rejects inputs exceeding 255 characters without database exceptions or HTTP 500 errors.
+- **Fail:** System crashes, SQL truncation errors are exposed, or inputs exceeding 255 characters are saved literally.
 
 ---
 
 ## Postconditions
 
-- No side-effects.
+- Test accounts are created for passing cases.
 
 ---
 
@@ -85,3 +92,7 @@ Verifies that the registration form fields enforce maximum character length limi
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
+| 2026-05-21 | 1.1 | Antigravity (AI) | Refined with precise 255/256-character BVA inputs, specified graceful error requirements, added 'tobeautomated' tag, and promoted to Active. |
+| 2026-05-21 | 1.2 | Gemini 2.5 Pro | Automated the test case and removed tobeautomated tag |
+| 2026-05-21 | 1.3 | Gemini 3.5 Flash | Added JA-JP locale |
+

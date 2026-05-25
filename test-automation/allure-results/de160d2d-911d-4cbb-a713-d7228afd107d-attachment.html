@@ -1,0 +1,633 @@
+<html lang="en-US"><head>
+    
+    <title>Login</title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- CSRF Token for JavaScript and HTMX -->
+    <meta name="_csrf" content="iZqpVzgv-GiTNFyR44CrP0ivDJOqW2qtEFsSv8Z75e2u2OoF7fvKNFtJnV6-BGmp262fXX6cIaqeYlOAI213h_Udh4ud7osy">
+    <meta name="_csrf_header" content="X-CSRF-TOKEN">
+    <meta charset="utf-8">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.min.css">
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-utilities.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/assets/css/style_reworked.css">
+
+    <!-- Japanese font fallback (conditionally loaded) -->
+    
+    <!-- HTMX -->
+    <script src="/assets/js/htmx.min.js"></script>
+    
+    <!-- HTMX CSRF Configuration (must be after HTMX is loaded) -->
+    <script>
+        // Configure HTMX to include CSRF token in all requests
+        // Wait for DOM to be ready before attaching event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('htmx:configRequest', function(evt) {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                if (token && header) {
+                    evt.detail.headers[header] = token;
+                }
+            });
+        });
+    </script>
+
+    <!-- WebMCP: Browser Native Agent API Registry -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          if (window.navigator && window.navigator.modelContext) {
+              window.navigator.modelContext.registerTool({
+                  name: "search_catalog",
+                  description: "Searches the store catalog for products matching a given query. Use this to find specific items, brands, or categories. Example payload: { \"query\": \"bear\" }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          query: {
+                              type: "string",
+                              description: "The search term to look for, e.g., 'laptop' or 'shoes'"
+                          }
+                      },
+                      required: ["query"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/search?q=${encodeURIComponent(params.query)}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Search failed with status " + response.status);
+                      }
+                  }
+              });
+
+              window.navigator.modelContext.registerTool({
+                  name: "get_product_details",
+                  description: "Retrieves granular details (sizes, finishes, minimum prices, and exact variants) for a specific product ID. Use this immediately after locating a product via search_catalog to determine valid size/finish permutations before adding to cart. Example payload: { \"productId\": 1 }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The unique integer ID of the product (e.g., 1)."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      const url = `/api/v2/catalog/product/${params.productId}`;
+                      const response = await fetch(url, { headers: { "Accept": "application/json" } });
+                      if (!response.ok) {
+                          throw new Error("Get Details failed with status " + response.status);
+                      }
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Failed to parse JSON response for Product Details.");
+                      }
+                  }
+              });
+              
+              window.navigator.modelContext.registerTool({
+                  name: "add_to_cart",
+                  description: "Adds a specific product to the user's shopping cart. Example payload: { \"productId\": 1, \"quantity\": 1, \"size\": \"16 x 12 in\", \"finish\": \"matte\" }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          productId: {
+                              type: "number",
+                              description: "The ID of the product to add to the cart (obtained from search_catalog)."
+                          },
+                          quantity: {
+                              type: "number",
+                              description: "The optional amount to add (defaults to 1)."
+                          },
+                          size: {
+                              type: "string",
+                              description: "The optional physical size of the product (e.g., '16 x 12 in', '36 x 24 in')."
+                          },
+                          finish: {
+                              type: "string",
+                              description: "The optional finish style (e.g., 'matte' or 'gloss')."
+                          }
+                      },
+                      required: ["productId"]
+                  },
+                  execute: async (params) => {
+                      // Dynamically detect CSRF tokens if Spring Security is enabled in the future
+                      const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+                      const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+                      
+                      const headers = { 
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json' 
+                      };
+                      if (csrfToken && csrfHeader) {
+                          headers[csrfHeader] = csrfToken;
+                      }
+
+                      const response = await fetch('/api/v2/cart/add', {
+                          method: 'POST',
+                          headers: headers,
+                          body: JSON.stringify({ 
+                              productId: params.productId, 
+                              quantity: params.quantity,
+                              size: params.size,
+                              finish: params.finish
+                          })
+                      });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Add to cart failed with status " + response.status);
+                      }
+                  }
+              });
+
+              window.navigator.modelContext.registerTool({
+                  name: "submit_checkout",
+                  description: "Executes the final checkout process to securely convert the active shopping cart into a confirmed order. Requires complete shipping and billing addresses, and valid credit card payment details. Example payload: { \"shippingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"billingAddress\": {\"name\":\"Doe\",\"firstName\":\"John\",\"addressLine\":\"123 Main\",\"city\":\"Anytown\",\"state\":\"NY\",\"zip\":\"12345\",\"country\":\"USA\"}, \"payment\": {\"cardNumber\":\"4242424242424242\",\"name\":\"John Doe\",\"expiry\":\"12/30\",\"cvv\":\"123\"}, \"customer\": {\"email\":\"john@example.com\",\"firstName\":\"John\",\"lastName\":\"Doe\"} }",
+                  inputSchema: {
+                      type: "object",
+                      properties: {
+                          shippingAddress: {
+                              type: "object",
+                              description: "Shipping address details.",
+                              properties: {
+                                  name: { type: "string" },
+                                  firstName: { type: "string" },
+                                  company: { type: "string" },
+                                  addressLine: { type: "string" },
+                                  city: { type: "string" },
+                                  state: { type: "string" },
+                                  zip: { type: "string" },
+                                  country: { type: "string" }
+                              },
+                              required: ["name", "firstName", "addressLine", "city", "state", "zip", "country"]
+                          },
+                          billingAddress: {
+                              type: "object",
+                              description: "Billing address details.",
+                              properties: {
+                                  name: { type: "string" },
+                                  firstName: { type: "string" },
+                                  company: { type: "string" },
+                                  addressLine: { type: "string" },
+                                  city: { type: "string" },
+                                  state: { type: "string" },
+                                  zip: { type: "string" },
+                                  country: { type: "string" }
+                              },
+                              required: ["name", "firstName", "addressLine", "city", "state", "zip", "country"]
+                          },
+                          payment: {
+                              type: "object",
+                              description: "Credit card details.",
+                              properties: {
+                                  cardNumber: { type: "string" },
+                                  name: { type: "string" },
+                                  expiry: { type: "string", description: "MM/YY format" },
+                                  cvv: { type: "string" }
+                              },
+                              required: ["cardNumber", "name", "expiry", "cvv"]
+                          },
+                          customer: {
+                              type: "object",
+                              description: "Customer contact info (optional if logged in).",
+                              properties: {
+                                  email: { type: "string" },
+                                  firstName: { type: "string" },
+                                  lastName: { type: "string" }
+                              }
+                          }
+                      },
+                      required: ["shippingAddress", "billingAddress", "payment"]
+                  },
+                  execute: async (params) => {
+                      const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+                      const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+                      
+                      const headers = { 
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json' 
+                      };
+                      if (csrfToken && csrfHeader) {
+                          headers[csrfHeader] = csrfToken;
+                      }
+
+                      const response = await fetch('/api/v2/checkout', {
+                          method: 'POST',
+                          headers: headers,
+                          body: JSON.stringify(params)
+                      });
+                      try {
+                          return await response.json();
+                      } catch (e) {
+                          throw new Error("Checkout failed with status " + response.status);
+                      }
+                  }
+              });
+
+              console.log("🤖 WebMCP tools registered for AI agents.");
+          }
+      });
+    </script>
+    
+<style>.htmx-indicator{opacity:0;visibility: hidden} .htmx-request .htmx-indicator, .htmx-request.htmx-indicator{opacity:1;visibility: visible;transition: opacity 200ms ease-in}</style></head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div id="top-demo-disclaimer" class="demo-disclaimer container-fluid text-center">This is a demo application. Orders will not be fulfilled. Do not enter ANY personal and sensitive data!</div>
+
+        <nav id="header-navigation-bar" class="header-navigation-bar navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container top-menu">
+                <a id="header-brand" class="navbar-brand" href="/en-US/">
+                    <img id="header-brand-logo" class="shop-logo" src="/assets/img/xceptanceLogo.png" title="Posters Demo Store" alt="Posters Demo Store">
+                    Posters
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-navigation-elements" aria-controls="header-navigation-elements" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="header-navigation-elements" class="collapse navbar-collapse">
+                    <ul id="header-categories" class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/en-US/topCategory/World of Nature?categoryId=1">World of Nature</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/en-US/topCategory/World of Nature?categoryId=1">Show All World of Nature</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Animals?categoryId=2" title="Animals">Animals</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Flowers?categoryId=3" title="Flowers">Flowers</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Trees?categoryId=4" title="Trees">Trees</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/en-US/topCategory/Dining?categoryId=5">Dining</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/en-US/topCategory/Dining?categoryId=5">Show All Dining</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Cold Cuts?categoryId=6" title="Cold Cuts">Cold Cuts</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Main Dishes?categoryId=7" title="Main Dishes">Main Dishes</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Sweets?categoryId=8" title="Sweets">Sweets</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/en-US/topCategory/Transportation?categoryId=9">Transportation</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/en-US/topCategory/Transportation?categoryId=9">Show All Transportation</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Air Travel?categoryId=10" title="Air Travel">Air Travel</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Classic Cars?categoryId=11" title="Classic Cars">Classic Cars</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Railways?categoryId=12" title="Railways">Railways</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" href="/en-US/topCategory/Panoramas?categoryId=13">Panoramas</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item fw-bold" href="/en-US/topCategory/Panoramas?categoryId=13">Show All Panoramas</a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Architecture?categoryId=14" title="Architecture">Architecture</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Fireworks?categoryId=15" title="Fireworks">Fireworks</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/Landscapes?categoryId=16" title="Landscapes">Landscapes</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/en-US/category/XXL Panoramas?categoryId=17" title="XXL Panoramas">XXL Panoramas</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="header-actions me-0 ms-auto d-flex">
+                        <form id="header-search-form" class="d-flex position-relative" role="search" action="/en-US/search" method="get">
+                            <input id="header-search-text" name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" title="Search" autocomplete="off" hx-get="/en-US/searchSuggest" hx-trigger="keyup changed delay:300ms, search" hx-target="#search-suggestions" hx-swap="outerHTML">
+                            <button id="header-search-button" class="btn btn-primary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <div id="search-suggestions" class="search-suggestions-container"></div>
+                        </form>
+                        <ul id="header-customer-menus" class="navbar-nav mb-2 mb-lg-0">
+                            <!-- Locale switcher -->
+                            <li id="locale-switcher" class="nav-item dropdown">
+                                <a id="show-locale-menu" class="nav-link dropdown-toggle locale-trigger" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="locale-flag">🇺🇸</span>
+                                </a>
+                                <ul id="locale-menu" class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item locale-item active" id="loc-en-us" href="/en-US/">
+                                            <span class="locale-flag">🇺🇸</span>
+                                            <span>English (United States)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-en-gb" href="/en-GB/">
+                                            <span class="locale-flag">🇬🇧</span>
+                                            <span>English (United Kingdom)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-de-de" href="/de-DE/">
+                                            <span class="locale-flag">🇩🇪</span>
+                                            <span>Deutsch (Deutschland)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-sv-se" href="/sv-SE/">
+                                            <span class="locale-flag">🇸🇪</span>
+                                            <span>svenska (Sverige)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item locale-item" id="loc-ja-jp" href="/ja-JP/">
+                                            <span class="locale-flag">🇯🇵</span>
+                                            <span>日本語 (日本)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- User menu -->
+                            <li id="user" class="nav-item dropdown">
+                                <!-- Not logged in -->
+                                
+                                    <a id="show-user-menu" class="nav-link dropdown-toggle" href="#" title="Login" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="bi bi-person"></span>
+                                    </a>
+                                    <ul id="user-menu" class="dropdown-menu">
+                                        <li class="header-user-menu-heading mb-2">Welcome</li>
+                                        <li class="header-user-menu-content mb-2">
+                                            <a href="/en-US/register" id="go-to-registration" class="btn btn-primary header-user-menu-button" title="Register">
+                                                <span class="bi bi-person-plus"></span>
+                                                <span>Create Account</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-user-menu-content">
+                                            <a href="/en-US/login" id="go-to-login" class="btn btn-primary header-user-menu-button" title="Login">
+                                                <span class="bi bi-box-arrow-in-right"></span>
+                                                <span>Sign In</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                
+                                <!-- Logged in -->
+                                
+                            </li>
+                            <!-- Mini cart -->
+                            <li id="mini-cart" class="nav-item">
+                                <a id="header-cart-overview" class="nav-link" data-bs-toggle="offcanvas" href="#miniCartOffcanvas" role="button" aria-controls="miniCartOffcanvas" title="Cart Overview" hx-trigger="click once" hx-get="/en-US/miniCart" hx-target="#mini-cart-content" hx-swap="innerHTML">
+                                    <span class="bi bi-cart3"></span> &nbsp;
+                                    <span id="header-cart-count" class="header-cart-product-count">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- main/content -->
+    <main>
+        <!-- message: no java script -->
+        <noscript>
+            <div class="section">
+                <div class="container">
+                    <div class="noscriptmsg card">
+                        <p>Please enable JavaScript to use this site.</p>
+                    </div>
+                </div>
+            </div>
+        </noscript>
+
+        <!-- messages -->
+        <div id="alert-placeholder">
+            
+            
+        </div>
+
+        <!-- body -->
+        <div id="main">
+            <div>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Login</h1>
+                <form action="/en-US/login" method="post" id="login-form"><input type="hidden" name="_csrf" value="iZqpVzgv-GiTNFyR44CrP0ivDJOqW2qtEFsSv8Z75e2u2OoF7fvKNFtJnV6-BGmp262fXX6cIaqeYlOAI213h_Udh4ud7osy">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" required="">
+                            <button class="btn btn-outline-secondary" type="button" id="btn-toggle-password" aria-label="Show password">
+                                <i class="bi bi-eye" id="icon-toggle-password"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <script>
+                        document.getElementById('btn-toggle-password').addEventListener('click', function() {
+                            var input = document.getElementById('password');
+                            var icon = document.getElementById('icon-toggle-password');
+                            var isHidden = input.type === 'password';
+                            input.type = isHidden ? 'text' : 'password';
+                            icon.classList.toggle('bi-eye', !isHidden);
+                            icon.classList.toggle('bi-eye-slash', isHidden);
+                            this.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+                        });
+                    </script>
+                    <button type="submit" class="btn btn-primary" id="btn-login">Login</button>
+                </form>
+                <p class="mt-3">Don''t have an account?</p>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div id="js-top" class="go-to-top" style="display: none;">
+            <a onclick="toTopFunction()" id="js-gotop"><i class="bi bi-arrow-up"></i></a>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer id="footer" class="footer">
+        <div class="container mb-3">
+            <div class="row row-pb-md">
+                <div id="footer-section-about" class="col">
+                    <h3 class="footer-section-headline">About</h3>
+                    <p class="footer-text-about footer-section-text">
+                        The Posters Demo Store is a demonstration web shop by Xceptance.
+                    </p>
+                    <ul class="footer-social-icons">
+                        <li>GitHub: <a href="https://github.com/Xceptance/posters-demo-store"><i aria-label="GitHub" class="bi bi-github"></i></a></li>
+                    </ul>
+                </div>
+                <div id="footer-section-support" class="col">
+                    <h3 class="footer-section-headline">Support</h3>
+                    <ul class="footer-support">
+                        <li><a href="mailto:kontakt@xceptance.de">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div id="footer-section-information" class="col">
+                    <h3 class="footer-section-headline">Information</h3>
+                    <ul class="footer-info">
+                        <li>Terms and Conditions apply.</li>
+                    </ul>
+                </div>
+                <div id="footer-section-contact" class="col">
+                    <h3 class="footer-section-headline">Contact</h3>
+                    <ul class="footer-contact">
+                        <li class="footer-contact-company">Xceptance Software Technologies GmbH</li>
+                        <li class="footer-contact-adress">Leutragraben 2-4<br>07743 Jena<br>Germany</li>
+                        <li class="footer-contact-e-mail">E-Mail: <a href="mailto:kontakt@xceptance.de">kontakt@xceptance.de</a></li>
+                        <li class="footer-contact-website">Website: <a href="https://www.xceptance.com">https://www.xceptance.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mini Cart Offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="miniCartOffcanvas" aria-labelledby="miniCartOffcanvasLabel">
+            <div class="offcanvas-header bg-light border-bottom">
+                <h5 class="offcanvas-title" id="miniCartOffcanvasLabel">Shopping Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-0" id="mini-cart-content">
+                <!-- loaded via HTMX on first open -->
+                <div class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="footer-copyright" class="footer-copyright text-center">
+            © 2013-2024 Xceptance Software Technologies GmbH<br>
+            Photo copyrights belong to their respective owners.
+        </div>
+        <div id="footer-version-information" class="version-info text-center">
+            Version <span>3.0.0-SNAPSHOT</span>
+        </div>
+    </footer>
+
+    <!-- Confirmation modal (replaces native confirm() for hx-confirm) -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="confirmModalBody">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalYes">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle (v5.3.2 including popper)-->
+    <script src="/assets/js/bootstrap.bundle.js"></script>
+
+    <!-- Scroll to top + HTMX integrations -->
+    <script>
+        function toTopFunction() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        (function() {
+            var top = document.getElementById('js-top');
+            if (top) {
+                window.addEventListener('scroll', function() {
+                    top.style.display = (document.documentElement.scrollTop > 200) ? 'block' : 'none';
+                });
+            }
+
+            // After HTMX swaps mini-cart content (e.g. add-to-cart), open the
+            // Bootstrap offcanvas briefly so the user sees the update.
+            var miniCartTimeout;
+            var miniCartContent = document.getElementById('mini-cart-content');
+            var offcanvasEl = document.getElementById('miniCartOffcanvas');
+            
+            if (miniCartContent && offcanvasEl) {
+                miniCartContent.addEventListener('htmx:afterSwap', function(e) {
+                    var path = e.detail.requestConfig ? e.detail.requestConfig.path : '';
+                    if (path.indexOf('addToCartSlider') !== -1) {
+                        var oc = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                        oc.show();
+                        if (miniCartTimeout) clearTimeout(miniCartTimeout);
+                        miniCartTimeout = setTimeout(function() { oc.hide(); }, 3000);
+                    }
+                });
+                
+                offcanvasEl.addEventListener('mouseenter', function() {
+                    if (miniCartTimeout) clearTimeout(miniCartTimeout);
+                });
+            }
+
+            // Intercept htmx:confirm to show Bootstrap modal instead of native confirm()
+            // Only intercept when hx-confirm is set (detail.question is non-empty)
+            document.body.addEventListener('htmx:confirm', function(e) {
+                if (!e.detail.question) return;  // no hx-confirm attr → let request proceed
+                e.preventDefault();
+                var modalEl = document.getElementById('confirmModal');
+                var bodyEl = document.getElementById('confirmModalBody');
+                var yesBtn = document.getElementById('confirmModalYes');
+                bodyEl.textContent = e.detail.question;
+                var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                // Remove any old click handler
+                var newYes = yesBtn.cloneNode(true);
+                yesBtn.parentNode.replaceChild(newYes, yesBtn);
+                newYes.addEventListener('click', function() {
+                    modal.hide();
+                    e.detail.issueRequest(true);
+                });
+                modal.show();
+            });
+        })();
+    </script>
+
+
+</body></html>

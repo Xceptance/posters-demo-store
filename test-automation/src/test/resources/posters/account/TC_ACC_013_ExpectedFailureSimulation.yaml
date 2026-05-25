@@ -1,0 +1,19 @@
+# Neodymium AI Playbook
+# Simulation of Expected Failure abort in the middle
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Click the profile/sign-in icon at the top right to open the user menu.
+  Click 'Sign In' to navigate to the Sign In page.
+  
+  # Fails in the middle by design!
+  Click the 'Non-existent button' element. (bug: APP-TEST)
+  
+  # This step should NOT be run
+  Type '${password}' into the Password field.
+
+data:
+  - testId: "tc_acc_013_bug_sim"
+    password: "S3cur3!P@ss"
+    locale: "en-US"

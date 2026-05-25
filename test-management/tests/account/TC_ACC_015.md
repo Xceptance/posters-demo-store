@@ -5,12 +5,12 @@ Verifies that the login fails cleanly when a user accidentally swaps their email
 ## Metadata
 
 - **Test ID:** TC_ACC_015
-- **Version:** 1.0
+- **Version:** 1.2
 - **Software Version:** >= 1.0.0
 - **Domains:** Account
 - **Priority:** 🟡 Medium
 - **Status:** ✅ Active
-- **Execution Type:** Manual
+- **Execution Type:** Automated
 - **Suite:** 🔄 Regression, 🧪 Full
 - **Requirements:**
   - Login Field Validation
@@ -43,6 +43,7 @@ Verifies that the login fails cleanly when a user accidentally swaps their email
 - [x] EN-GB
 - [x] DE-DE
 - [x] SV-SE
+- [x] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -90,3 +91,5 @@ Verifies that the login fails cleanly when a user accidentally swaps their email
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-04-09 | 1.0 | Antigravity (AI) | Initial creation |
+| 2026-05-21 | 1.1 | Gemini 2.5 Pro | Automated the test case and removed tobeautomated tag |
+| 2026-05-21 | 1.2 | Gemini 3.5 Flash | Added JA-JP locale |

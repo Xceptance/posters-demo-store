@@ -1,0 +1,64 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_ACC_010
+steps: |
+  Open ${neodymium.url}
+  Click the country selector button.
+  Click the country represented by locale '${locale}' in the opened dialog.
+  Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.
+  If not already on the Registration page, click the 'Don't have an account?' link to navigate to the Registration page.
+
+  # Step 1 & 2: Focus and Keyboard input sequence
+  Click the First Name input field to initialize focus.
+  Type '${firstName}' into the focused input field.
+  
+  Press the Tab key on the keyboard to move focus.
+  Verify that the Last Name input field now has active focus.
+  Type '${lastName}' into the focused input field.
+
+  Press the Tab key on the keyboard to move focus.
+  Verify that the Email input field now has active focus.
+  Type '${randomEmail}' into the focused input field.
+
+  Press the Tab key on the keyboard to move focus.
+  Verify that the Password input field now has active focus.
+  Type '${password}' into the focused input field.
+
+  Press the Tab key on the keyboard to move focus.
+  Verify that the Password visibility toggle (eye icon button) now has active focus.
+  Press the Enter or Space key on the keyboard.
+  Verify that the password input element has type attribute equal to "text".
+  Press the Enter or Space key on the keyboard again.
+  Verify that the password input element has type attribute equal to "password".
+
+  # Step 3: Keyboard Submission
+  Press the Tab key on the keyboard to move focus.
+  Verify that the "Create Account" submit button now has active focus.
+  Press the Enter key on the keyboard to submit the form.
+  Verify that you are registered successfully and redirected to the homepage.
+
+data:
+  - testId: "tc_acc_010_en_US"
+    firstName: "Taro"
+    lastName: "Yamada"
+    password: "S3cureP@ss!"
+    locale: "en-US"
+  - testId: "tc_acc_010_en_GB"
+    firstName: "Taro"
+    lastName: "Yamada"
+    password: "S3cureP@ss!"
+    locale: "en-GB"
+  - testId: "tc_acc_010_de_DE"
+    firstName: "Taro"
+    lastName: "Yamada"
+    password: "S3cureP@ss!"
+    locale: "de-DE"
+  - testId: "tc_acc_010_sv_SE"
+    firstName: "Taro"
+    lastName: "Yamada"
+    password: "S3cureP@ss!"
+    locale: "sv-SE"
+  - testId: "tc_acc_010_ja_JP"
+    firstName: "Taro"
+    lastName: "Yamada"
+    password: "S3cureP@ss!"
+    locale: "ja-JP"
