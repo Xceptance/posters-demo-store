@@ -14,19 +14,18 @@
             </thead>
             <tbody>
                 <tr th:each="u : ${users.content}">
-                    <td>
+                    <td class="bo-table-truncate">
                         <a th:href="@{/backoffice/security/users/{id}/edit(id=${u.id})}"
                            class="fw-semibold text-decoration-none d-inline-block text-truncate"
-                           style="max-width: 150px;"
                            th:title="${u.username}"
                            th:text="${u.username}"></a>
                     </td>
-                    <td>
-                        <span class="d-inline-block text-truncate" style="max-width: 150px;"
+                    <td class="bo-table-truncate">
+                        <span class="d-inline-block text-truncate"
                               th:title="${u.displayName}" th:text="${u.displayName}"></span>
                     </td>
-                    <td>
-                        <span class="d-inline-block text-truncate" style="max-width: 180px;"
+                    <td class="bo-table-truncate">
+                        <span class="d-inline-block text-truncate"
                               th:title="${u.email}" th:text="${u.email}"></span>
                     </td>
                     <td>

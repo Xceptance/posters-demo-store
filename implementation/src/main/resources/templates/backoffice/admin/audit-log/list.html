@@ -38,8 +38,8 @@
                 <tbody>
                     <tr th:each="e : ${entries.content}">
                         <td th:text="${#temporals.format(e.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                        <td>
-                            <span class="d-inline-block text-truncate" style="max-width: 150px;"
+                        <td class="bo-table-truncate">
+                            <span class="d-inline-block text-truncate"
                                   th:title="${e.username}" th:text="${e.username}"></span>
                         </td>
                         <td>
@@ -48,8 +48,8 @@
                         <td>
                             <span th:if="${e.targetType}" th:text="${e.targetType + ' #' + e.targetId}"></span>
                         </td>
-                        <td>
-                            <span class="d-inline-block text-truncate" style="max-width: 400px;"
+                        <td class="bo-table-truncate">
+                            <span class="d-inline-block text-truncate"
                                   th:title="${e.details}" th:text="${e.details}"></span>
                         </td>
                     </tr>

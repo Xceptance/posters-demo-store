@@ -42,19 +42,18 @@
                 </thead>
                 <tbody>
                     <tr th:each="role : ${roles}">
-                        <td>
+                        <td class="bo-table-truncate">
                             <a th:if="${!role.builtIn}"
                                th:href="@{/backoffice/security/roles/{id}/edit(id=${role.id})}"
                                class="fw-semibold text-decoration-none d-inline-block text-truncate"
-                               style="max-width: 150px;"
                                th:title="${role.name}"
                                th:text="${role.name}"></a>
-                            <span th:if="${role.builtIn}" class="fw-semibold d-inline-block text-truncate" style="max-width: 150px;"
+                            <span th:if="${role.builtIn}" class="fw-semibold d-inline-block text-truncate"
                                   th:title="${role.name}" th:text="${role.name}"></span>
                             <span th:if="${role.builtIn}" class="badge bg-secondary ms-1">Built-in</span>
                         </td>
-                        <td class="text-muted">
-                            <span class="d-inline-block text-truncate" style="max-width: 350px;"
+                        <td class="text-muted bo-table-truncate">
+                            <span class="d-inline-block text-truncate"
                                   th:title="${role.description}" th:text="${role.description}"></span>
                         </td>
                         <td>

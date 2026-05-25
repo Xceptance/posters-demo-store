@@ -65,16 +65,14 @@
                             <td>
                                 <span class="badge bg-light text-dark border" th:text="${item.customer.customerNumber}">1001</span>
                             </td>
-                            <td>
+                            <td class="bo-table-truncate">
                                 <a th:href="@{/backoffice/customers/{id}(id=${item.customer.id})}"
                                    class="fw-semibold text-decoration-none d-inline-block text-truncate"
-                                   style="max-width: 200px;"
                                    th:title="${item.customer.firstName + ' ' + item.customer.lastName}"
                                    th:text="${item.customer.firstName + ' ' + item.customer.lastName}">John Doe</a>
                             </td>
-                            <td>
+                            <td class="bo-table-truncate">
                                 <span class="d-inline-block text-truncate"
-                                      style="max-width: 200px;"
                                       th:title="${item.customer.email}"
                                       th:text="${item.customer.email}">john@example.com</span>
                             </td>
