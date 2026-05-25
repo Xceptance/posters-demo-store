@@ -38,14 +38,20 @@
                 <tbody>
                     <tr th:each="e : ${entries.content}">
                         <td th:text="${#temporals.format(e.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                        <td th:text="${e.username}"></td>
+                        <td>
+                            <span class="d-inline-block text-truncate" style="max-width: 150px;"
+                                  th:title="${e.username}" th:text="${e.username}"></span>
+                        </td>
                         <td>
                             <span class="badge bg-info" th:text="${e.action}"></span>
                         </td>
                         <td>
                             <span th:if="${e.targetType}" th:text="${e.targetType + ' #' + e.targetId}"></span>
                         </td>
-                        <td th:text="${e.details}"></td>
+                        <td>
+                            <span class="d-inline-block text-truncate" style="max-width: 400px;"
+                                  th:title="${e.details}" th:text="${e.details}"></span>
+                        </td>
                     </tr>
                     <tr th:if="${entries.content.isEmpty()}">
                         <td colspan="5" class="text-center text-muted py-4">No audit log entries found</td>
