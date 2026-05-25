@@ -1,0 +1,169 @@
+{
+  "id": "com.xceptance.posters.freeform.TC_FF_001_FreeformTest :: testFreeform :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/en-US/",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Navigate to http://localhost:8080/en-US/",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Verify that you see an ecommerce store homepage, which sells posters.",
+      "reasoning": "The page title, brand name, main heading, and presence of \u0027Shop Now\u0027 buttons confirm it\u0027s an e-commerce store homepage selling posters.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#header-brand",
+          "value": [
+            "Posters"
+          ],
+          "description": "Verify the brand name is \u0027Posters\u0027.",
+          "elementDetails": "Posters",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "h1.hero-title.mb-4",
+          "value": [
+            "Premium Vintage Posters."
+          ],
+          "description": "Verify the main heading indicates \u0027Premium Vintage Posters\u0027.",
+          "elementDetails": "Premium Vintage Posters.",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "body",
+          "value": [
+            "Shop Now"
+          ],
+          "description": "Verify there is a \u0027Shop Now\u0027 button, indicating a store.",
+          "elementDetails": "Shop Now",
+          "elementContext": {},
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Verify that a brown bear photo is show on the right side of the homepage (visual).",
+      "reasoning": "The screenshot clearly shows a brown bear photo positioned on the right side of the homepage, fulfilling the visual verification requirement.",
+      "actions": [],
+      "screenshotHash": "00000000000000000198019801d8018801ac01f8019481f0018801ac01800000",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    },
+    {
+      "promptLine": "Check that the page is mainly white and blue (visual).",
+      "reasoning": "The screenshot shows that the page is predominantly white in the main content areas and footer, with significant blue elements in the header, navigation bar, and buttons. Therefore, the page is mainly white and blue.",
+      "actions": [],
+      "screenshotHash": "00000000000000000198019801d8018801ac01f8019481f0018801ac01800000",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    },
+    {
+      "promptLine": "Top left, we can see a red X next to the text Posters (visual).",
+      "reasoning": "The screenshot clearly shows a red \u0027X\u0027 icon positioned to the left of the \u0027Posters\u0027 text in the top left corner of the page, matching the instruction for visual verification.",
+      "actions": [],
+      "screenshotHash": "00000000000000000198019801d8018801ac01f8019481f0018801ac01800000",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    },
+    {
+      "promptLine": "Type \u0027bear\u0027 into the search box.",
+      "reasoning": "Identified the search box using its data-neo-ref attribute and created a TYPE action to enter \u0027bear\u0027.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_pxekgd\u0027]",
+          "value": [
+            "bear"
+          ],
+          "description": "Type \u0027bear\u0027 into the search box.",
+          "elementDetails": "Search",
+          "elementContext": {
+            "classes": "form-control me-2",
+            "name": "q",
+            "id": "header-search-text",
+            "placeholder": "Search",
+            "tagName": "input",
+            "type": "search"
+          },
+          "replay": "(Replay)",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the blue button next to the input box (visual).",
+      "reasoning": "Identified the search button by its ID attribute, which is a robust locator, and confirmed it\u0027s the blue button next to the search input as per the instruction and screenshot.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "#header-search-button",
+          "description": "Click the blue search button next to the input box.",
+          "elementDetails": "Search button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "id": "header-search-button",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "screenshotHash": "00000040000400040184019801d8018801ac01f8019481f0018801ac01800000",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    },
+    {
+      "promptLine": "Verify that the result page shows a brown bear, a picture with gummy bears, and a picture with metallic shiny gummy bears on a notebook keyboard (visual).",
+      "reasoning": "The screenshot clearly shows all three requested images: a brown grizzly bear, a bowl of gummy bears, and gummy bears on a keyboard. All visual conditions are met.",
+      "actions": [],
+      "screenshotHash": "00000000010000000ece0ac60adc0a9a01010545010105490880000000000400",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    },
+    {
+      "promptLine": "Store the color of the animal shown on the second result image in the variable \u0027animalColor\u0027 (visual).",
+      "reasoning": "The instruction asks to visually identify and store the color of the animal in the second result image. The second image shows gummy bears, which are multi-colored (red, orange, yellow). I am storing \u0027multi-colored\u0027 as the value for \u0027animalColor\u0027.",
+      "actions": [
+        {
+          "type": "STORE",
+          "value": [
+            "animalColor",
+            "multi-colored"
+          ],
+          "description": "Store the color of the animal shown on the second result image (Gummy Bears in Bowl) as \u0027multi-colored\u0027 in the variable \u0027animalColor\u0027.",
+          "elementDetails": "Second result image: Gummy Bears in Bowl",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "screenshotHash": "00000000010000000ece0ac60adc0a9a01010545010105490880000000000400",
+      "expectedFailure": false,
+      "healedContextLevel": "VISUAL"
+    }
+  ]
+}

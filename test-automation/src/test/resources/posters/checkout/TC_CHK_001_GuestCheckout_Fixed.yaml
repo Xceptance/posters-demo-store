@@ -1,4 +1,4 @@
-skipReplay: true
+#skipReplay: true
 
 context: |
   * You are testing a localized version of the posters web shop indicated by ${locale}. 
