@@ -58,7 +58,6 @@
 		<junit.vintage.version>5.11.4</junit.vintage.version>
 		<selenium.version>4.27.0</selenium.version>
 		<webdrivermanager.version>5.9.2</webdrivermanager.version>
-		<langchain4j.version>1.0.0-beta1</langchain4j.version>
 		<gson.version>2.11.0</gson.version>
 		<junit.version>5.11.3</junit.version>
 		<logback.version>1.5.12</logback.version>
@@ -153,22 +152,6 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j2-impl</artifactId>
 			<version>${log4j.version}</version>
-		</dependency>
-
-
-
-		<!-- LangChain4j Core -->
-		<dependency>
-			<groupId>dev.langchain4j</groupId>
-			<artifactId>langchain4j</artifactId>
-			<version>${langchain4j.version}</version>
-		</dependency>
-
-		<!-- LangChain4j Google Gemini Provider -->
-		<dependency>
-			<groupId>dev.langchain4j</groupId>
-			<artifactId>langchain4j-google-ai-gemini</artifactId>
-			<version>${langchain4j.version}</version>
 		</dependency>
 
 		<!-- JSON parsing -->
