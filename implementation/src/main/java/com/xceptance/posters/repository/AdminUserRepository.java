@@ -17,7 +17,7 @@ public interface AdminUserRepository extends JpaRepository<AdminUser, Long> {
 
     Optional<AdminUser> findByUsername(String username);
 
-    @Query("SELECT u FROM AdminUser u WHERE LOWER(u.username) LIKE :search OR LOWER(u.displayName) LIKE :search")
+    @Query("SELECT u FROM AdminUser u WHERE LOWER(u.username) LIKE :search OR LOWER(u.displayName) LIKE :search OR LOWER(u.email) LIKE :search")
     Page<AdminUser> findBySearch(@Param("search") String search, Pageable pageable);
 
     @Query("SELECT COUNT(u) FROM AdminUser u JOIN u.roles r WHERE r = :role")
