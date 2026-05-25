@@ -1,6 +1,0 @@
-Token Usage Summary
-
-Input Tokens:  0
-Output Tokens: 0
-Total Tokens:  0
-Total Calls:   0

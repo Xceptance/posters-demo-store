@@ -1,0 +1,144 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Error 500 - Backoffice</title>
+    
+    <!-- CSRF Token for JavaScript and HTMX -->
+    <meta name="_csrf" content="2ywTjLcsEYkbw5tny3mD_Qns-4clMI_gufO1uvUHHab7zWrP40p3vYBOKeo296lf_FS3xT2P1uZHAezN25KE2JQ_ecXJq1Kp">
+    <meta name="_csrf_header" content="X-CSRF-TOKEN">
+    
+    <link href="/assets/css/backoffice-fonts.css" rel="stylesheet">
+    <link href="/assets/css/backoffice.css" rel="stylesheet">
+    <link href="/assets/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="/assets/lib/htmx.min.js" defer=""></script>
+    <script src="/assets/lib/bootstrap/bootstrap.bundle.min.js" defer=""></script>
+    
+    <!-- HTMX CSRF Configuration (must be after HTMX is loaded) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('htmx:configRequest', function(evt) {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                if (token && header) {
+                    evt.detail.headers[header] = token;
+                }
+            });
+        });
+    </script>
+    
+<style>      .htmx-indicator{opacity:0}      .htmx-request .htmx-indicator{opacity:1; transition: opacity 200ms ease-in;}      .htmx-request.htmx-indicator{opacity:1; transition: opacity 200ms ease-in;}      </style></head>
+<body class="bo-body">
+
+    <!-- Sidebar -->
+    <nav class="bo-sidebar" data-neo-ref="xc_7c9uyk">
+        <div class="bo-sidebar-brand" data-neo-ref="xc_bcwg1x">
+            <span class="material-symbols-outlined bo-brand-icon" data-neo-ref="xc_uvzp4n">storefront</span>
+            <span class="bo-brand-text" data-neo-ref="xc_een9st">Posters</span>
+        </div>
+        <ul class="bo-nav">
+
+            <!-- Dashboard -->
+            <li class="bo-nav-item" data-neo-ref="xc_fcakx2">
+                <a href="/backoffice/" class="bo-nav-link" data-neo-ref="xc_18eyrp">
+                    <span class="material-symbols-outlined" data-neo-ref="xc_kbp12y">dashboard</span>
+                    <span data-neo-ref="xc_hnigck">Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Catalog -->
+            
+
+            <!-- Customers -->
+            
+
+            <!-- Orders -->
+            
+
+            <!-- Security -->
+            
+
+        </ul>
+        <div class="bo-sidebar-footer" data-neo-ref="xc_xvu4h9">
+            <span class="bo-version" data-neo-ref="xc_1g15my">v3.0.0</span>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="bo-main" data-neo-ref="xc_ajfrut">
+        <header class="bo-topbar" data-neo-ref="xc_2teqdf">
+            <div class="bo-topbar-left" data-neo-ref="xc_bv44l7">
+                <div class="bo-page-title" data-neo-ref="xc_62fhj5">500 — Internal Server Error</div>
+            </div>
+            <div class="bo-topbar-right" data-neo-ref="xc_zeyz2m">
+                <span class="bo-admin-name" data-neo-ref="xc_kh1ddn">Admin</span>
+                <form action="/backoffice/logout" method="post" class="d-inline" data-neo-ref="xc_g97soo"><input type="hidden" name="_csrf" value="2ywTjLcsEYkbw5tny3mD_Qns-4clMI_gufO1uvUHHab7zWrP40p3vYBOKeo296lf_FS3xT2P1uZHAezN25KE2JQ_ecXJq1Kp">
+                    <button type="submit" class="bo-logout-btn" title="Logout" data-neo-ref="xc_2wjcke">
+                        <span class="material-symbols-outlined" data-neo-ref="xc_7x2xrp">logout</span>
+                    </button>
+                </form>
+            </div>
+        </header>
+        <main class="bo-content" data-neo-ref="xc_xy25bm">
+            <div data-neo-ref="xc_dyl7mh">
+        <div class="bo-welcome-banner mb-4" style="background: linear-gradient(135deg, #dc3545, #c82333);" data-neo-ref="xc_6s78l0">
+            <h2 class="bo-welcome-title" data-neo-ref="xc_25cjqf">
+                <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;" data-neo-ref="xc_vg15xv">error</span>
+                <span data-neo-ref="xc_eb47q5">500 — Internal Server Error</span>
+            </h2>
+            <p class="bo-welcome-subtitle" data-neo-ref="xc_vlahhj">could not execute statement [Value too long for column "FIRST_NAME CHARACTER VARYING(255)": "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... (256)"; SQL statement:
+insert into customers (created_at,email,first_name,last_name,middle_name,password,version,id) values (?,?,?,?,?,?,?,?) [22001-240]] [insert into customers (created_at,email,first_name,last_name,middle_name,password,version,id) values (?,?,?,?,?,?,?,?)]; SQL [insert into customers (created_at,email,first_name,last_name,middle_name,password,version,id) values (?,?,?,?,?,?,?,?)]</p>
+        </div>
+
+        <div class="bo-module-card" style="max-width: 600px;" data-neo-ref="xc_dbgkea">
+            <dl style="margin: 0;">
+                <dt style="color: var(--bo-text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Request URI</dt>
+                <dd style="font-family: monospace; margin-bottom: 1rem;"></dd>
+
+                <dt style="color: var(--bo-text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Details</dt>
+                <dd style="font-family: monospace; color: #dc3545;">DataIntegrityViolationException</dd>
+            </dl>
+
+            <div class="mt-3" data-neo-ref="xc_764jbs">
+                <a href="/backoffice/" class="btn btn-sm bo-btn-primary" data-neo-ref="xc_k4ksvx">
+                    <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle;" data-neo-ref="xc_kbp12y_1">arrow_back</span>
+                    Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+        </main>
+    </div>
+
+    <!-- Global Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" data-neo-ref="xc_31tkat">
+        <div id="bo-toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="bo-toast-body">
+                    <!-- Toast Message -->
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTMX Event Listeners -->
+    <script>
+        document.body.addEventListener("show-toast", function(evt) {
+            const toastEl = document.getElementById('bo-toast');
+            const toastBody = document.getElementById('bo-toast-body');
+            
+            // Set message
+            toastBody.textContent = evt.detail.message;
+            
+            // Set type (e.g., success, danger, warning, info)
+            toastEl.className = 'toast align-items-center border-0 text-bg-' + (evt.detail.type || 'primary');
+            
+            // Show toast
+            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            toast.show();
+        });
+    </script>
+
+
+</body></html>

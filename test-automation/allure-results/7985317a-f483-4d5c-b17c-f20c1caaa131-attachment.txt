@@ -1,0 +1,34 @@
+Token Usage Summary
+
+LLM Standard:
+  Input Tokens:  127453 (Cached: 3593, Efficiency: 2.8%)
+  Output Tokens: 2829
+  Total Tokens:  130282
+  Total Calls:   19
+
+PESAP:
+  Input Tokens:  1721 (Cached: 0, Efficiency: 0.0%)
+  Output Tokens: 175
+  Total Tokens:  1896
+  Total Calls:   2
+
+Total:
+  Input Tokens:  129174 (Cached: 3593, Efficiency: 2.8%)
+  Output Tokens: 3004
+  Total Tokens:  132178
+  Total Calls:   21
+
+Execution Statistics
+
+Context Levels Used:
+  HINT:      0
+  AXTREE:    5
+  LEAN:      3
+  STANDARD:  3
+  VISUAL_LEAN: 0
+  VISUAL:    8
+
+Escalations:     8  (LLM-requested: 0, Error-triggered: 8)
+Retries:         5  (Error: 5, No-Actions: 0)
+Replays:         0
+Direct Parses:   1

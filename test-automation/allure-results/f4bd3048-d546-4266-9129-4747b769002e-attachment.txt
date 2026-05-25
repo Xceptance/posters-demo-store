@@ -1,0 +1,34 @@
+Token Usage Summary
+
+LLM Standard:
+  Input Tokens:  0 (Cached: 0, Efficiency: 0.0%)
+  Output Tokens: 0
+  Total Tokens:  0
+  Total Calls:   0
+
+PESAP:
+  Input Tokens:  0 (Cached: 0, Efficiency: 0.0%)
+  Output Tokens: 0
+  Total Tokens:  0
+  Total Calls:   0
+
+Total:
+  Input Tokens:  0 (Cached: 0, Efficiency: 0.0%)
+  Output Tokens: 0
+  Total Tokens:  0
+  Total Calls:   0
+
+Execution Statistics
+
+Context Levels Used:
+  HINT:      0
+  AXTREE:    0
+  LEAN:      0
+  STANDARD:  0
+  VISUAL_LEAN: 0
+  VISUAL:    0
+
+Escalations:     0  (LLM-requested: 0, Error-triggered: 0)
+Retries:         0  (Error: 0, No-Actions: 0)
+Replays:         9
+Direct Parses:   0
