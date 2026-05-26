@@ -22,5 +22,3 @@ steps: |
   # Step 5: Verify Logout Security
   Open ${posters.backoffice.url}
   Verify that you are blocked and redirected back to the login page at '/backoffice/login'.
-
-

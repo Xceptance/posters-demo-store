@@ -5,7 +5,7 @@ Verifies that the customer creation form blocks submissions with invalid formats
 ## Metadata
 
 - **Test ID:** TC_BFC_004
-- **Version:** 1.0
+- **Version:** 1.1
 - **Software Version:** >= 1.0.0
 - **Domains:** Backoffice
 - **Priority:** 🟠 High
@@ -101,3 +101,4 @@ Verifies that the customer creation form blocks submissions with invalid formats
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-25 | 1.0 | Gemini (AI) | Initial creation |
+| 2026-05-26 | 1.1 | Antigravity (AI) | Relocated to nested backoffice/customers directory |

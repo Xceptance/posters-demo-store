@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xceptance.posters.backoffice;
+package com.xceptance.posters.backoffice.users;
 
 import com.xceptance.neodymium.common.browser.Browser;
 import com.xceptance.neodymium.common.testdata.DataFile;
@@ -31,10 +31,10 @@ import io.qameta.allure.SeverityLevel;
  * Verifies that an administrative user can log into the backoffice successfully,
  * reload to verify session persistence, and log out securely.
  *
- * AI-generated: Gemini 3.5 Flash (High)
+ * AI-generated: Gemini 3.5 Flash (Medium)
  */
 @Browser("Chrome_1500x1000")
-@DataFile("posters/backoffice/TC_BFC_001_Login_Logout.yaml")
+@DataFile("posters/backoffice/users/TC_BFC_001_Login_Logout.yaml")
 @Tag("backoffice")
 @Tag("security")
 @Tag("login")

@@ -6,7 +6,6 @@ This directory contains manual test cases for verifying the Backoffice Customers
 
 | ID | Title | Priority | Target |
 | :--- | :--- | :--- | :--- |
-| [TC_BFC_001](./TC_BFC_001_Login_Logout.md) | Backoffice Login and Logout | 🔴 Critical | Backoffice |
 | [TC_BFC_002](./TC_BFC_002_Role_Based_Access.md) | Role-Based Access for Customers Module | 🔴 Critical | Backoffice |
 | [TC_BFC_003](./TC_BFC_003_Create_Customer_Success.md) | Create Customer with Valid Fields | 🔴 Critical | Backoffice |
 | [TC_BFC_004](./TC_BFC_004_Create_Customer_Validation_Errors.md) | Create Customer Validation Errors | 🟠 High | Backoffice |

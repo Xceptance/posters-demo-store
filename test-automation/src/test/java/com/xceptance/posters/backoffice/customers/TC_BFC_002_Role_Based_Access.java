@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xceptance.posters.backoffice;
+package com.xceptance.posters.backoffice.customers;
 
 import com.xceptance.neodymium.common.browser.Browser;
 import com.xceptance.neodymium.common.testdata.DataFile;
@@ -34,10 +34,10 @@ import io.qameta.allure.SeverityLevel;
  * the Customers module, and that unauthorized roles like "Catalog User"
  * are blocked from the Customers module.
  *
- * AI-generated: Gemini 3.5 Flash (High)
+ * AI-generated: Gemini 3.5 Flash (Medium)
  */
 @Browser("Chrome_1500x1000")
-@DataFile("posters/backoffice/TC_BFC_002_Role_Based_Access.yaml")
+@DataFile("posters/backoffice/customers/TC_BFC_002_Role_Based_Access.yaml")
 @Tag("backoffice")
 @Tag("security")
 @Tag("rbac")

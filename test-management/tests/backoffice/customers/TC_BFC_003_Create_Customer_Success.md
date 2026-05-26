@@ -5,7 +5,7 @@ Verifies that an administrator can successfully create a new active customer wit
 ## Metadata
 
 - **Test ID:** TC_BFC_003
-- **Version:** 1.0
+- **Version:** 1.1
 - **Software Version:** >= 1.0.0
 - **Domains:** Backoffice
 - **Priority:** 🔴 Critical
@@ -94,7 +94,7 @@ Verifies that an administrator can successfully create a new active customer wit
 
 ## Related Cases
 
-- [TC_BFC_001: Backoffice Login and Logout](./TC_BFC_001_Login_Logout.md)
+- [TC_BFC_001: Backoffice Login and Logout](../users/TC_BFC_001_Login_Logout.md)
 - [TC_BFC_004: Create Customer Validation Errors](./TC_BFC_004_Create_Customer_Validation_Errors.md)
 
 ---
@@ -104,3 +104,4 @@ Verifies that an administrator can successfully create a new active customer wit
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-25 | 1.0 | Gemini (AI) | Initial creation with dynamic data instructions |
+| 2026-05-26 | 1.1 | Antigravity (AI) | Relocated to nested backoffice/customers directory and updated relative link |
