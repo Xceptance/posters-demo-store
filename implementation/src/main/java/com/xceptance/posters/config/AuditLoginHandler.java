@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Records LOGIN and LOGOUT actions to the audit log,
@@ -42,17 +43,45 @@ public class AuditLoginHandler
 
     /** Called after successful form login. */
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
-        if (authentication.getPrincipal() instanceof AdminUserPrincipal principal) {
+    public void onAuthenticationSuccess(
+        final HttpServletRequest request,
+        final HttpServletResponse response,
+        final Authentication authentication
+    ) throws IOException, ServletException
+    {
+        if (authentication.getPrincipal() instanceof AdminUserPrincipal principal)
+        {
             auditLogService.log(
-                    principal.getUserId(),
-                    principal.getUsername(),
-                    Action.LOGIN,
-                    null, null,
-                    "Login from " + request.getRemoteAddr()
+                principal.getUserId(),
+                principal.getUsername(),
+                Action.LOGIN,
+                null, null,
+                "Login from " + request.getRemoteAddr()
             );
+
+            // Dynamically compute redirect target URL based on user roles
+            String targetUrl = "/backoffice/";
+            final Set<String> modules = principal.getPermittedModuleIds();
+            if (!modules.contains("dashboard"))
+            {
+                if (modules.contains("customers"))
+                {
+                    targetUrl = "/backoffice/customers";
+                }
+                else if (modules.contains("catalog"))
+                {
+                    targetUrl = "/backoffice/catalog";
+                }
+                else if (modules.contains("orders"))
+                {
+                    targetUrl = "/backoffice/orders";
+                }
+                else if (modules.contains("security"))
+                {
+                    targetUrl = "/backoffice/security/users";
+                }
+            }
+            loginDelegate.setDefaultTargetUrl(targetUrl);
         }
         loginDelegate.onAuthenticationSuccess(request, response, authentication);
     }

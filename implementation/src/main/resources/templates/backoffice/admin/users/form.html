@@ -19,9 +19,9 @@
             <div class="col-lg-8">
                 <div class="bo-module-card">
                     <form method="post"
-                          th:action="${user.id != null
+                          th:action="${user.id != null}
                               ? @{/backoffice/security/users/{id}/edit(id=${user.id})}
-                              : @{/backoffice/security/users/new}}">
+                              : @{/backoffice/security/users/new}">
 
                         <div class="mb-3">
                             <label class="form-label">Username <span class="text-danger">*</span></label>
