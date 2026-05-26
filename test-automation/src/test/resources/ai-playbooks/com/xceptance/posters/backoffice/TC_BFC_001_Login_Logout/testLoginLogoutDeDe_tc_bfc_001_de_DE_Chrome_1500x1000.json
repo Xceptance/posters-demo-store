@@ -1,0 +1,307 @@
+{
+  "id": "com.xceptance.posters.backoffice.TC_BFC_001_Login_Logout :: testLoginLogoutDeDe :: tc_bfc_001_de_DE :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/backoffice/login",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/backoffice/login"
+          ],
+          "description": "Navigate to http://localhost:8080/backoffice/login",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Verify that the backoffice login page is displayed with username and password fields.",
+      "reasoning": "Verified the current URL and the presence of both username and password input fields on the page.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/backoffice/login"
+          ],
+          "description": "Verify current URL is the backoffice login page",
+          "elementDetails": "currentUrl",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#username",
+          "description": "Verify username field is displayed",
+          "elementDetails": "username input field",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#password",
+          "description": "Verify password field is displayed",
+          "elementDetails": "password input field",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Type \u0027admin\u0027 into the username input field.",
+      "reasoning": "Identified the username input field by its data-neo-ref attribute and generated a TYPE action to enter \u0027admin\u0027.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_vdjtll\u0027]",
+          "value": [
+            "admin"
+          ],
+          "description": "Type \u0027admin\u0027 into the username input field.",
+          "elementDetails": "Username textbox",
+          "elementContext": {
+            "classes": "form-control bo-input",
+            "name": "username",
+            "id": "username",
+            "placeholder": "Enter your username",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027admin-2026!\u0027 into the password input field.",
+      "reasoning": "Identified the password input field by its data-neo-ref attribute and generated a TYPE action to enter the specified text.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_ivx5uj\u0027]",
+          "value": [
+            "admin-2026!"
+          ],
+          "description": "Type \u0027admin-2026!\u0027 into the password input field.",
+          "elementDetails": "Password input field",
+          "elementContext": {
+            "classes": "form-control bo-input bo-input-password",
+            "name": "password",
+            "id": "password",
+            "placeholder": "Enter your password",
+            "tagName": "input",
+            "type": "password"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click \u0027Sign In\u0027.",
+      "reasoning": "Found a button with \u0027Sign In\u0027 in its name and data-neo-ref attribute, which is the most reliable locator.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_41bhna\u0027]",
+          "description": "Click \u0027Sign In\u0027 button",
+          "elementDetails": "login Sign In",
+          "elementContext": {
+            "classes": "btn bo-login-btn w-100",
+            "text": "login\nSign In",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that you are authenticated and redirected to the global backoffice dashboard at \u0027/backoffice\u0027.",
+      "reasoning": "Verified the current URL matches \u0027/backoffice\u0027 and the \u0027Welcome back, Administrator!\u0027 text is present, confirming authentication and redirection to the dashboard.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/backoffice/"
+          ],
+          "description": "Verify current URL is the backoffice dashboard.",
+          "elementDetails": "currentUrl",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#xc_25cjqf",
+          "value": [
+            "Welcome back, Administrator!"
+          ],
+          "description": "Verify \u0027Welcome back, Administrator!\u0027 text is visible, indicating authentication.",
+          "elementDetails": "Welcome back, Administrator!",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Reload the page.",
+      "reasoning": "The instruction is to reload the page, so a REFRESH action is appropriate.",
+      "actions": [
+        {
+          "type": "REFRESH",
+          "description": "Reload the page.",
+          "elementDetails": "Current page",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that you remain logged in and the dashboard is still visible.",
+      "reasoning": "Verified that the \u0027Administrator\u0027 text is present, indicating the user is logged in, and that the \u0027Welcome back, Administrator!\u0027 heading is visible, confirming the dashboard is displayed.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "#xc_kh1ddn",
+          "value": [
+            "Administrator"
+          ],
+          "description": "Verify that the \u0027Administrator\u0027 text is visible, indicating the user is logged in.",
+          "elementDetails": "Administrator",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "#xc_25cjqf",
+          "value": [
+            "Welcome back, Administrator!"
+          ],
+          "description": "Verify that the dashboard title \u0027Welcome back, Administrator!\u0027 is visible.",
+          "elementDetails": "Welcome back, Administrator!",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Click the logout button at the top right of the page (with the \u0027logout\u0027 icon).",
+      "reasoning": "Found the logout button by its data-neo-ref and name attribute in the AXTREE and created a CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_2wjcke\u0027]",
+          "description": "Click the logout button",
+          "elementDetails": "logout button",
+          "elementContext": {
+            "classes": "bo-logout-btn",
+            "text": "logout",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that you are logged out, redirected back to \u0027/backoffice/login\u0027, and a success message is displayed.",
+      "reasoning": "Verified the current URL and the presence of the \u0027You have been logged out\u0027 success message, confirming the logged-out state.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "/backoffice/login"
+          ],
+          "description": "Verify current URL is /backoffice/login",
+          "elementDetails": "currentUrl",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_afza12\u0027]",
+          "value": [
+            "You have been logged out"
+          ],
+          "description": "Verify success message \u0027You have been logged out\u0027 is displayed",
+          "elementDetails": "You have been logged out",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Open http://localhost:8080/backoffice",
+      "reasoning": "directly parsed or local validation succeeded",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "value": [
+            "http://localhost:8080/backoffice"
+          ],
+          "description": "Navigate to http://localhost:8080/backoffice",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false
+    },
+    {
+      "promptLine": "Verify that you are blocked and redirected back to the login page at \u0027/backoffice/login\u0027.",
+      "reasoning": "The current URL matches the expected login page URL, confirming the redirection.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "/backoffice/login"
+          ],
+          "description": "Verify that the current URL is the login page.",
+          "elementDetails": "currentUrl",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    }
+  ]
+}
