@@ -53,7 +53,7 @@ public class TC_FF_002_ShouldFail_Bug_Feature
         Neodymium.ai()
                 .steps("""
                         # Homepage
-                        Open ${neodymium.url}
+                        Open ${posters.storefront.url}
                         # Verify something that is not true aka a defect and we know that
                         # Sure this is not a true bug, just made up for this test.
                         Verify that the minicart shows two items (bug).
@@ -76,7 +76,7 @@ public class TC_FF_002_ShouldFail_Bug_Feature
             Neodymium.ai()
                     .steps("""
                             # Homepage
-                            Open ${neodymium.url}
+                            Open ${posters.storefront.url}
                             # Verify something that is not true aka a defect and we know that
                             # Sure this is not a true bug, just made up for this test.
                             Verify that the minicart shows 0 items (bug).
@@ -98,7 +98,7 @@ public class TC_FF_002_ShouldFail_Bug_Feature
         Neodymium.ai()
                 .steps("""
                         # Homepage
-                        Open ${neodymium.url}
+                        Open ${posters.storefront.url}
                         # Verify something that is not true aka a defect and we know that
                         # Sure this is not a true bug, just made up for this test.
                         Verify that the screen is mostly black and white (bug) (visual).
@@ -121,7 +121,7 @@ public class TC_FF_002_ShouldFail_Bug_Feature
             Neodymium.ai()
                     .steps("""
                             # Homepage
-                            Open ${neodymium.url}
+                            Open ${posters.storefront.url}
                             # Verify something that is not true aka a defect and we know that
                             # Sure this is not a true bug, just made up for this test.
                             Verify that the screen is mostly blue and white (bug) (visual).

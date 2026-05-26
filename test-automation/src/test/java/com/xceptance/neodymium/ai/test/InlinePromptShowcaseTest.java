@@ -20,7 +20,7 @@ public class InlinePromptShowcaseTest
                      - On the page the 'Buy here' buttons are only to OPEN a product detail page, NOT to add it to the cart.
                      - There is a bug on the page. After adding a product to the cart ALWAYS use a REFRESH action.
                      """)
-            .before("Navigate to ${neodymium.url}")
+            .before("Navigate to ${posters.storefront.url}")
                  .steps("Verify the site contains 'Posters'")
             .after("Clear cookies")
             .execute();
@@ -33,7 +33,7 @@ public class InlinePromptShowcaseTest
         Neodymium.getData().put("dynamicSearchTerm", "car");
         
         Neodymium.ai()
-                 .before("Navigate to ${neodymium.url}")
+                 .before("Navigate to ${posters.storefront.url}")
             .steps(
                 """
                 Type '${dynamicSearchTerm}' into the search bar

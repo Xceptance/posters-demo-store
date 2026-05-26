@@ -20,7 +20,7 @@ public class HybridPromptShowcaseTest
         // Note: the test will fail if 'searchTerm' is not defined in the loaded YAML/JSON
         Neodymium.ai().execute(
             """
-            Open ${neodymium.url}
+            Open ${posters.storefront.url}
             Type '${searchTerm}' into the search bar
             Click the search button
             Verify that the search results are displayed
