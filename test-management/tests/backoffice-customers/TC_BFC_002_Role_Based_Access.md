@@ -5,7 +5,7 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 ## Metadata
 
 - **Test ID:** TC_BFC_002
-- **Version:** 1.0
+- **Version:** 1.1
 - **Software Version:** >= 1.0.0
 - **Domains:** Backoffice
 - **Priority:** 🔴 Critical
@@ -36,6 +36,10 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 
 **Target Locales:**
 - [x] EN-US
+- [ ] EN-GB
+- [ ] DE-DE
+- [ ] SV-SE
+- [ ] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -99,3 +103,4 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-07 | 1.0 | AI Agent | Initial creation |
+| 2026-05-25 | 1.1 | Gemini (AI) | Added standard locales including JA-JP to Target Locales list |

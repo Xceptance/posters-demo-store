@@ -5,7 +5,7 @@ Verifies that an administrative user can log into the backoffice successfully, n
 ## Metadata
 
 - **Test ID:** TC_BFC_001
-- **Version:** 1.0
+- **Version:** 1.1
 - **Software Version:** >= 1.0.0
 - **Domains:** Backoffice
 - **Priority:** 🔴 Critical
@@ -38,6 +38,7 @@ Verifies that an administrative user can log into the backoffice successfully, n
 - [x] EN-GB
 - [x] DE-DE
 - [x] SV-SE
+- [ ] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -91,3 +92,4 @@ Verifies that an administrative user can log into the backoffice successfully, n
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-07 | 1.0 | AI Agent | Initial creation |
+| 2026-05-25 | 1.1 | Gemini (AI) | Added JA-JP locale to Target Locales list |

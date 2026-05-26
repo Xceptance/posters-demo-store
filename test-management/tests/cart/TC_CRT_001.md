@@ -5,7 +5,7 @@ A user adds a single product to the cart and verifies that the cart summary pane
 ## Metadata
 
 - **Test ID:** TC_CRT_001
-- **Version:** 1.0
+- **Version:** 1.1
 - **Software Version:** >= 1.0.0
 - **Domains:** Cart
 - **Priority:** 🔴 Critical
@@ -51,6 +51,8 @@ A user adds a single product to the cart and verifies that the cart summary pane
 - [x] EN-US
 - [ ] EN-GB
 - [x] DE-DE
+- [ ] SV-SE
+- [ ] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -144,3 +146,4 @@ A user adds a single product to the cart and verifies that the cart summary pane
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-18 | 1.0 | Antigravity (AI) | Initial creation — covers BUS-BUG-23, BUS-BUG-24, BUS-BUG-25 |
+| 2026-05-25 | 1.1 | Gemini (AI) | Added JA-JP locale to Target Locales list |
