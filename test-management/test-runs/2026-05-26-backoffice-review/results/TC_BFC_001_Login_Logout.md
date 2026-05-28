@@ -1,5 +1,11 @@
 # Backoffice Login and Logout
 
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| AI & User | 2026-05-26 | `✅ PASSED` | Localhost / Chrome | Redirects to /backoffice/login?logout |
+
 Verifies that an administrative user can log into the backoffice successfully, navigate the dashboard, and log out securely.
 
 ## Metadata
@@ -42,28 +48,28 @@ Verifies that an administrative user can log into the backoffice successfully, n
 
 ### 1. Access Backoffice Login
 
-- **Action:** Navigate to `/backoffice/login` in the browser.
-- **Verify:** The backoffice login page is displayed with username and password fields.
+- [x] **Action:** Navigate to `/backoffice/login` in the browser.
+- [x] **Verify:** The backoffice login page is displayed with username and password fields.
 
 ### 2. Enter Valid Credentials
 
-- **Action:** Enter the `admin` username and `admin-2026!` password, then click "Sign In".
-- **Verify:** The user is authenticated and redirected to the global backoffice dashboard (`/backoffice`).
+- [x] **Action:** Enter the `admin` username and `admin-2026!` password, then click "Sign In".
+- [x] **Verify:** The user is authenticated and redirected to the global backoffice dashboard (`/backoffice`).
 
 ### 3. Verify Session
 
-- **Action:** Reload the page.
-- **Verify:** The user remains logged in and the dashboard is still visible.
+- [x] **Action:** Reload the page.
+- [x] **Verify:** The user remains logged in and the dashboard is still visible.
 
 ### 4. Logout
 
-- **Action:** Click on the user profile dropdown in the header and select "Log out".
-- **Verify:** The user is logged out, redirected back to `/backoffice/login?logout`, and a success message is displayed.
+- [x] **Action:** Click on the user profile dropdown in the header and select "Log out".
+- [x] **Verify:** The user is logged out, redirected back to `/backoffice/login?logout`, and a success message is displayed.
 
 ### 5. Verify Logout Security
 
-- **Action:** Attempt to navigate directly to `/backoffice` without logging in.
-- **Verify:** The user is blocked and redirected back to the login page.
+- [x] **Action:** Attempt to navigate directly to `/backoffice` without logging in.
+- [x] **Verify:** The user is blocked and redirected back to the login page.
 
 ---
 
