@@ -1,7 +1,7 @@
 # Neodymium AI Playbook
 # Automated from manual test: TC_ACC_003
 steps: |
-  Open ${neodymium.url}
+  Open ${posters.storefront.url}
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
   Click the profile/sign-in icon at the top right, then click 'Sign In' or 'Registration' to navigate to the Login or Create Account page.

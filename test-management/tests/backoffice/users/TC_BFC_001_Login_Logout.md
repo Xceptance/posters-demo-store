@@ -5,7 +5,7 @@ Verifies that an administrative user can log into the backoffice successfully, n
 ## Metadata
 
 - **Test ID:** TC_BFC_001
-- **Version:** 1.0
+- **Version:** 1.5
 - **Software Version:** >= 1.0.0
 - **Domains:** Backoffice
 - **Priority:** 🔴 Critical
@@ -33,12 +33,6 @@ Verifies that an administrative user can log into the backoffice successfully, n
 
 ## Execution Targets
 
-**Target Locales:**
-- [x] EN-US
-- [x] EN-GB
-- [x] DE-DE
-- [x] SV-SE
-
 **Target Viewports:**
 - [x] Desktop (Large)
 
@@ -64,7 +58,7 @@ Verifies that an administrative user can log into the backoffice successfully, n
 ### 4. Logout
 
 - **Action:** Click on the user profile dropdown in the header and select "Log out".
-- **Verify:** The user is logged out, redirected back to `/backoffice/login`, and a success message is displayed.
+- **Verify:** The user is logged out, redirected back to `/backoffice/login?logout`, and a success message is displayed.
 
 ### 5. Verify Logout Security
 
@@ -91,3 +85,8 @@ Verifies that an administrative user can log into the backoffice successfully, n
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-07 | 1.0 | AI Agent | Initial creation |
+| 2026-05-25 | 1.1 | Gemini (AI) | Added JA-JP locale to Target Locales list |
+| 2026-05-26 | 1.2 | Antigravity (AI) | Relocated to backoffice-users directory |
+| 2026-05-26 | 1.3 | Antigravity (AI) | Relocated to nested backoffice/users directory |
+| 2026-05-26 | 1.4 | Antigravity (AI) | Updated Step 4 verification redirect to /backoffice/login?logout |
+| 2026-05-26 | 1.5 | Antigravity (AI) | Removed Target Locales from Execution Targets |

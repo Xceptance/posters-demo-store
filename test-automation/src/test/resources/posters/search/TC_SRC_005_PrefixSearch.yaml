@@ -1,5 +1,5 @@
 steps: |
-  Open ${neodymium.url}
+  Open ${posters.storefront.url}
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
   Type '${partialTerm}' into the search field and wait for the search suggestions to appear.

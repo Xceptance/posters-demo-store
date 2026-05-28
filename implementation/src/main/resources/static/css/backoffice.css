@@ -340,6 +340,15 @@
     vertical-align: middle;
 }
 
+/* Dynamic column truncation */
+.bo-table-truncate {
+    max-width: 0;
+}
+
+.bo-table-truncate .text-truncate {
+    max-width: 100%;
+}
+
 .bo-module-icon {
     font-size: 32px;
     color: var(--bo-accent);

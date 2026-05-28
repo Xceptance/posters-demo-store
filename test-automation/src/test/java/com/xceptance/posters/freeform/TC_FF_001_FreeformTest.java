@@ -51,7 +51,7 @@ public class TC_FF_001_FreeformTest
                 .steps("""
                         # This is just a freeform test for some simple features of the automation.
                         # It is not intended to test any business functionality as defined in our test cases.
-                        Open ${neodymium.url}
+                        Open ${posters.storefront.url}
                         # This comes up with a verification for some critereria, it is not visual!
                         Verify that you see an ecommerce store homepage, which sells posters.
                         # Try to check for the bear.

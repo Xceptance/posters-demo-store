@@ -1,0 +1,78 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_BFC_002
+steps: |
+  # Step 1: Login as Admin / System Admin
+  Open ${posters.backoffice.url}
+  Type 'admin' into the username input.
+  Type 'admin-2026!' into the password input.
+  Click 'Sign In'.
+  Verify that you are on the dashboard page '/backoffice'.
+
+  # Step 2: Navigate to User management and create Customer Admin user
+  Click the 'Security' sidebar group
+  Click 'Users'
+  Click 'New User'.
+  Type '${custAdminUsername}' into the username field.
+  Type '${custAdminDisplayName}' into the display name field.
+  Type '${custAdminEmail}' into the email field.
+  Type '${custAdminPassword}' into the password field.
+  Type '${custAdminPassword}' into the password confirmation field.
+  Check role 'Customer Admin'
+  Click 'Create User'.
+  Verify that the message 'User created successfully' is displayed.
+  
+  # Step 2B: Search user by Email
+  Type '${custAdminEmail}' into the search field and hit enter.
+  A single user is display in the user table.
+  Click the user.
+  The page will display ${custAdminEmail}'.
+
+  # Step 3: Logout
+  Click the logout button at the top right of the page (with the 'logout' icon).
+
+  # Step 4: Login as newly created Customer Admin
+  Type '${custAdminUsername}' into the username input on the login page.
+  Type '${custAdminPassword}' into the password input.
+  Click 'Sign In'.
+  Verify that you are authenticated and redirected directly to the Customers module at '/backoffice/customers' (since you have no access to the global dashboard).
+
+  # Step 5: Verify Sidebar navigation
+  Verify that only 'Customers' is visible in the sidebar navigation with the submenu-items 'Dashboard', 'Customers', 'Import / Export', and 'Settings
+  Verify that 'Dashboard', 'Security', 'Catalog', and 'Orders' are NOT visible in the sidebar.
+
+  # Step 6: Verify Access Restriction
+  Open ${posters.backoffice.url}security/users
+  Verify that you are blocked or see an access denied / forbidden message (such as a 403 error).
+
+  # Step 7: Logout as Customer Admin
+  Click the logout button at the top right.
+
+  # Step 8: Login back as Admin to create Catalog User
+  Type 'admin' into the username input.
+  Type 'admin-2026!' into the password input.
+  Click 'Sign In'.
+  Navigate to '${posters.backoffice.url}security/users'.
+  Click 'New User'.
+  Type '${catalogUserUsername}' into the username field.
+  Type '${catalogUserDisplayName}' into the display name field.
+  Type '${catalogUserEmail}' into the email field.
+  Type '${catalogUserPassword}' into the password field.
+  Check the 'Catalog User' radio button in the roles list.
+  Click 'Save'.
+  Verify that the user '${catalogUserUsername}' is listed in the users table.
+
+  # Step 9: Logout
+  Click the logout button at the top right.
+
+  # Step 10: Login as Catalog User
+  Type '${catalogUserUsername}' into the username input.
+  Type '${catalogUserPassword}' into the password input.
+  Click 'Sign In'.
+  Verify that you are authenticated and logged in.
+
+  # Step 11: Verify Catalog User is blocked from Customers module
+  Open ${posters.backoffice.url}customers
+  Verify that you are blocked or see an access denied / forbidden message (such as a 403 error).
+  
+  # Step 12: Logout
+  Click the logout button at the top right.

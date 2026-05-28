@@ -47,6 +47,7 @@
 - [ ] EN-GB
 - [ ] DE-DE
 - [ ] SV-SE
+- [ ] JA-JP
 
 **Target Viewports:**
 - [ ] Desktop (Large)

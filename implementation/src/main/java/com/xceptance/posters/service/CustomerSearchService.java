@@ -91,7 +91,7 @@ public class CustomerSearchService
     /** Fields queried by the multi-field parser. */
     private static final String[] SEARCH_FIELDS =
     {
-        FIELD_NUMBER_STR, FIELD_EMAIL_TEXT, FIELD_FIRST_NAME, FIELD_LAST_NAME
+        FIELD_NUMBER_STR, FIELD_EMAIL, FIELD_EMAIL_TEXT, FIELD_FIRST_NAME, FIELD_LAST_NAME
     };
 
     /** Maximum number of pending index updates before falling back to bulk rebuild. */

@@ -14,12 +14,20 @@
             </thead>
             <tbody>
                 <tr th:each="u : ${users.content}">
-                    <td>
+                    <td class="bo-table-truncate">
                         <a th:href="@{/backoffice/security/users/{id}/edit(id=${u.id})}"
-                           class="fw-semibold text-decoration-none" th:text="${u.username}"></a>
+                           class="fw-semibold text-decoration-none d-inline-block text-truncate"
+                           th:title="${u.username}"
+                           th:text="${u.username}"></a>
                     </td>
-                    <td th:text="${u.displayName}"></td>
-                    <td th:text="${u.email}"></td>
+                    <td class="bo-table-truncate">
+                        <span class="d-inline-block text-truncate"
+                              th:title="${u.displayName}" th:text="${u.displayName}"></span>
+                    </td>
+                    <td class="bo-table-truncate">
+                        <span class="d-inline-block text-truncate"
+                              th:title="${u.email}" th:text="${u.email}"></span>
+                    </td>
                     <td>
                         <span th:each="r : ${u.roles}" class="badge bg-primary me-1" th:text="${r.name}"></span>
                     </td>

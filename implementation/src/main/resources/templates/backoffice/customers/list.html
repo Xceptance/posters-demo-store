@@ -37,7 +37,7 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead>
                         <tr>
-                            <th style="width: 80px;">
+                            <th style="width: 5rem;">
                                 <a th:href="@{/backoffice/customers(q=${q}, sort='number', dir=${sort == 'number' and dir == 'asc' ? 'desc' : 'asc'})}" 
                                    class="text-decoration-none text-dark d-flex align-items-center">
                                     # <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'number'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
@@ -55,9 +55,9 @@
                                     Email <span class="material-symbols-outlined fs-6 ms-1" th:if="${sort == 'email'}" th:text="${dir == 'asc' ? 'arrow_upward' : 'arrow_downward'}"></span>
                                 </a>
                             </th>
-                            <th>Order Count</th>
-                            <th>Last Login</th>
-                            <th class="text-end">Actions</th>
+                            <th style="width: 8.75rem;">Order Count</th>
+                            <th style="width: 11.25rem;">Last Login</th>
+                            <th class="text-end" style="width: 6.25rem;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,12 +65,16 @@
                             <td>
                                 <span class="badge bg-light text-dark border" th:text="${item.customer.customerNumber}">1001</span>
                             </td>
-                            <td>
+                            <td class="bo-table-truncate">
                                 <a th:href="@{/backoffice/customers/{id}(id=${item.customer.id})}"
-                                   class="fw-semibold text-decoration-none" th:text="${item.customer.firstName + ' ' + item.customer.lastName}">John Doe</a>
+                                   class="fw-semibold text-decoration-none d-inline-block text-truncate"
+                                   th:title="${item.customer.firstName + ' ' + item.customer.lastName}"
+                                   th:text="${item.customer.firstName + ' ' + item.customer.lastName}">John Doe</a>
                             </td>
-                            <td>
-                                <span th:text="${item.customer.email}">john@example.com</span>
+                            <td class="bo-table-truncate">
+                                <span class="d-inline-block text-truncate"
+                                      th:title="${item.customer.email}"
+                                      th:text="${item.customer.email}">john@example.com</span>
                             </td>
                             <td>
                                 <span class="badge bg-info text-white rounded-pill" th:text="${item.orderCount}">5</span>

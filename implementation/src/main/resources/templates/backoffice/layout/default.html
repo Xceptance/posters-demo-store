@@ -40,7 +40,7 @@
         <ul class="bo-nav" th:with="uri=${currentUri}">
 
             <!-- Dashboard -->
-            <li class="bo-nav-item">
+            <li class="bo-nav-item" th:if="${permittedModules.contains('dashboard')}">
                 <a th:href="@{/backoffice/}" class="bo-nav-link">
                     <span class="material-symbols-outlined">dashboard</span>
                     <span>Dashboard</span>

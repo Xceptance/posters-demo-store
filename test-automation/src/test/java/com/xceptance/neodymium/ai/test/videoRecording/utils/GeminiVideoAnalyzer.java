@@ -47,7 +47,7 @@ public class GeminiVideoAnalyzer {
 
         StringBuilder yaml = new StringBuilder();
         yaml.append("steps: |\n");
-        yaml.append("  Open ${neodymium.url}\n");
+        yaml.append("  Open ${posters.storefront.url}\n");
 
         java.util.List<String> consolidatedSteps = new java.util.ArrayList<>();
         String ongoingTypeTarget = null;

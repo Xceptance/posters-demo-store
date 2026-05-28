@@ -1,0 +1,114 @@
+# Role-Based Access for Customers Module
+
+## Execution Result
+
+| Who | When | Result | Where | Comment |
+| :--- | :--- | :--- | :--- | :--- |
+| AI & User | 2026-05-26 | `❌ FAILED` | Localhost / Chrome | Fails in Step 3/7: landing page dashboard (/backoffice/) displays welcome cards for all four modules (e.g. Catalog, Security, Orders, Customers) regardless of permissions, allowing unauthorized user redirection (BUS-BUG-26). Button labeled "New User" in Step 2. |
+
+Verifies that the new "Customer Admin" role grants access to the Customers module while blocking access to the global dashboard and other modules, and that other roles are appropriately restricted.
+
+## Metadata
+
+- **Test ID:** TC_BFC_002
+- **Version:** 1.3
+- **Software Version:** >= 1.0.0
+- **Domains:** Backoffice
+- **Priority:** 🔴 Critical
+- **Status:** ✅ Active
+- **Execution Type:** Manual
+- **Suite:** 🚀 Smoke
+- **Requirements:**
+  - BUS-EPIC-1: Backoffice
+- **Tags:** `backoffice`, `security`, `rbac`, `customers`
+- **Author:** AI Agent (2026-05-07)
+- **Reviewers:**
+  - AI Agent (2026-05-07)
+
+## Preconditions
+
+- The Posters Demo Store is running.
+- Default roles are seeded in the database.
+- A user with "System Admin" role exists.
+
+## Test Data
+
+| Field | Value |
+| :--- | :--- |
+| Customer Admin Role | `customers` module only |
+| Catalog User Role | `dashboard`, `catalog` modules |
+
+## Execution Targets
+
+**Target Locales:**
+- [x] EN-US
+- [ ] EN-GB
+- [ ] DE-DE
+- [ ] SV-SE
+- [ ] JA-JP
+
+**Target Viewports:**
+- [x] Desktop (Large)
+
+---
+
+## Steps
+
+### 1. Login as System Admin
+
+- [x] **Action:** Log into the backoffice as a System Admin.
+- [x] **Verify:** The user is logged in and can access the User management section.
+
+### 2. Create Customer Admin User
+
+- [x] **Action:** Navigate to Security -> Users, click the "New User" button, create a new user, and assign ONLY the "Customer Admin" role. Log out.
+- [x] **Verify:** The user is created successfully.
+
+### 3. Login as Customer Admin
+
+- [x] **Action:** Log in using the newly created Customer Admin credentials.
+- [ ] **Verify:** The user is authenticated. Since they lack access to the global dashboard, they should be redirected to `/backoffice/customers` (or see an access denied message if they try to access `/backoffice` directly). [FAILED: Welcome page displays all four module cards; should only display Customers card]
+
+### 4. Verify Customer Admin Sidebar
+
+- [x] **Action:** Inspect the sidebar navigation.
+- [x] **Verify:** ONLY the "Customers" module is visible. Global Dashboard, Security, Catalog, and Orders are NOT visible.
+
+### 5. Verify Customer Admin Access Restriction
+
+- [x] **Action:** Attempt to manually navigate to `/backoffice/catalog` or `/backoffice/security/users`.
+- [x] **Verify:** The request is blocked by the ModuleAccessInterceptor (e.g., returns 403 Forbidden or redirects with an error).
+
+### 6. Create Catalog User
+
+- [x] **Action:** Log back in as System Admin. Create a new user with ONLY the "Catalog User" role. Log out.
+- [x] **Verify:** The user is created successfully.
+
+### 7. Login as Catalog User and Verify Restrictions
+
+- [x] **Action:** Log in as the Catalog User. Attempt to navigate to `/backoffice/customers`.
+- [ ] **Verify:** The request is blocked by the ModuleAccessInterceptor. The Customers section is NOT visible in the sidebar navigation. [FAILED: Dashboard displays all cards including Customers welcome card, letting Catalog User see unauthorized modules on welcome page]
+
+---
+
+## Pass/Fail Criteria
+
+- **Pass:** The Customer Admin role restricts access solely to the customers module. Users without the Customer Admin (or Business/System Admin) role cannot access the customers module.
+- **Fail:** Users can bypass module restrictions by directly navigating to URLs or see unauthorized links in the sidebar.
+
+---
+
+## Postconditions
+
+- Test users created during execution exist in the database.
+
+---
+
+## Change History
+
+| Date | Version | Author | Description |
+| :--- | :--- | :--- | :--- |
+| 2026-05-07 | 1.0 | AI Agent | Initial creation |
+| 2026-05-25 | 1.1 | Gemini (AI) | Added standard locales including JA-JP to Target Locales list |
+| 2026-05-26 | 1.2 | Antigravity (AI) | Relocated to nested backoffice/customers directory |
+| 2026-05-26 | 1.3 | Antigravity (AI) | Updated Step 2 action button to "New User" and logged bug for Step 3/7 landing page RBAC flaw |

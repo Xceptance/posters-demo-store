@@ -26,9 +26,10 @@ public class ModuleAccessInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // Dashboard is always accessible
-        BackofficeModule module = BackofficeModule.fromPath(path);
-        if (module == null || module == BackofficeModule.DASHBOARD) {
+        // Dashboard is only accessible if user has explicit permission
+        final BackofficeModule module = BackofficeModule.fromPath(path);
+        if (module == null)
+        {
             return true;
         }
 

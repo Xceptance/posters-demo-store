@@ -1,6 +1,6 @@
 steps: |
   # Homepage
-  Open '${neodymium.url}'.
+  Open '${posters.storefront.url}'.
   # Select the proper language
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.

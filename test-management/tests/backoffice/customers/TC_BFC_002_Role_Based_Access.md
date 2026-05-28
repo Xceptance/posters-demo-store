@@ -5,7 +5,7 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 ## Metadata
 
 - **Test ID:** TC_BFC_002
-- **Version:** 1.0
+- **Version:** 1.3
 - **Software Version:** >= 1.0.0
 - **Domains:** Backoffice
 - **Priority:** 🔴 Critical
@@ -36,6 +36,10 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 
 **Target Locales:**
 - [x] EN-US
+- [ ] EN-GB
+- [ ] DE-DE
+- [ ] SV-SE
+- [ ] JA-JP
 
 **Target Viewports:**
 - [x] Desktop (Large)
@@ -51,7 +55,7 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 
 ### 2. Create Customer Admin User
 
-- **Action:** Navigate to Security -> Users, create a new user, and assign ONLY the "Customer Admin" role. Log out.
+- **Action:** Navigate to Security -> Users, click the "New User" button, create a new user, and assign ONLY the "Customer Admin" role. Log out.
 - **Verify:** The user is created successfully.
 
 ### 3. Login as Customer Admin
@@ -99,3 +103,6 @@ Verifies that the new "Customer Admin" role grants access to the Customers modul
 | Date | Version | Author | Description |
 | :--- | :--- | :--- | :--- |
 | 2026-05-07 | 1.0 | AI Agent | Initial creation |
+| 2026-05-25 | 1.1 | Gemini (AI) | Added standard locales including JA-JP to Target Locales list |
+| 2026-05-26 | 1.2 | Antigravity (AI) | Relocated to nested backoffice/customers directory |
+| 2026-05-26 | 1.3 | Antigravity (AI) | Updated Step 2 action button to "New User" and logged bug for Step 3/7 landing page RBAC flaw |

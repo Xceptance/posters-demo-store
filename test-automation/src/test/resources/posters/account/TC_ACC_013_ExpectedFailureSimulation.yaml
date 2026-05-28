@@ -1,7 +1,7 @@
 # Neodymium AI Playbook
 # Simulation of Expected Failure abort in the middle
 steps: |
-  Open ${neodymium.url}
+  Open ${posters.storefront.url}
   Click the country selector button.
   Click the country represented by locale '${locale}' in the opened dialog.
   Click the profile/sign-in icon at the top right to open the user menu.

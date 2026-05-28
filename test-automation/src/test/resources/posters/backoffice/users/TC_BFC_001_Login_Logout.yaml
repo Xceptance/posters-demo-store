@@ -1,0 +1,24 @@
+# Neodymium AI Playbook
+# Automated from manual test: TC_BFC_001
+steps: |
+  # Step 1: Open Backoffice Login
+  Open ${posters.backoffice.url}
+  Verify that the backoffice login page is displayed with username and password fields.
+
+  # Step 2: Enter Valid Credentials
+  Type 'admin' into the username input field.
+  Type 'admin-2026!' into the password input field.
+  Click 'Sign In'.
+  Verify that you are authenticated and redirected to the global backoffice dashboard at '/backoffice'.
+
+  # Step 3: Verify Session Persistence
+  Reload the page.
+  Verify that you remain logged in and the dashboard is still visible.
+
+  # Step 4: Logout
+  Click the logout button at the top right of the page (with the 'logout' icon).
+  Verify that you are logged out, redirected back to '/backoffice/login', and a success message is displayed.
+
+  # Step 5: Verify Logout Security
+  Open ${posters.backoffice.url}
+  Verify that you are blocked and redirected back to the login page at '/backoffice/login'.
