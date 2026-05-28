@@ -50,7 +50,8 @@ public class TC_BFC_002_Role_Based_Access
     public static void setup()
     {
         // can be set in properties, just here so it's directly visible
-        System.setProperty("neodymium.ai.interactive", "false");
+        System.setProperty("neodymium.ai.interactive", "true");
+        System.setProperty("neodymium.ai.interactive", "true");
     }
 
     @NeodymiumTest
