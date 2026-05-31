@@ -11,7 +11,9 @@
 - **Priority:** [🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low]
 - **Status:** [📝 Draft / 👀 To Be Reviewed / ✅ Active / 🗄️ Deprecated]
 - **Execution Type:** Manual
-- **Suite:** [🚀 Smoke / 🔄 Regression / 🧠 Sanity / 🧪 Full / ⚡ Performance / 🔒 Security / ♿ Accessibility]
+- **Suite:** [🚀 Smoke / 🔄 Regression / 🧠 Sanity / 🧪 Full]
+- **Recommended Viewports:** Desktop (Large), Mobile (Small)
+- **Recommended Browsers:** Chrome, Firefox
 - **Requirements:**
   - [REQ-ID or link to backlog item]
 - **Tags:** `tag1`, `tag2`
@@ -32,27 +34,26 @@
 - The Posters Demo Store is running.
 - [Additional system or user states required...]
 
-## Test Data
+## Test Data (Common Constants)
 
-[List any generic data or create a table if data is locale-specific.]
+These values are constant across all test profiles. Define any sensitive fields using explicit parenthetical suffix notation like `(sensitive)` or `(private)` and inline mock stand-ins `(mock: ...)`.
 
 | Field | Value |
 | :--- | :--- |
-| [Key] | [Value] |
+| First Name | `John` |
+| Password (private) | `Secret123!` (mock: `mockPassword_abc`) | <!-- Sensitive field with inline mock stand-in -->
 
-## Execution Targets
+---
 
-**Target Locales:**
-- [ ] EN-US
-- [ ] EN-GB
-- [ ] DE-DE
-- [ ] SV-SE
-- [ ] JA-JP
+## Test Profiles (Logical Scenarios)
 
-**Target Viewports:**
-- [ ] Desktop (Large)
-- [ ] Tablet (Medium)
-- [ ] Mobile (Small)
+> Each checked profile represents a distinct logical dataset to execute. You can toggle checkboxes to filter which profiles run.
+
+| Run | ID | Locale | Subtotal | Expected Total |
+| :---: | :--- | :---: | :--- | :--- |
+| - [x] | `Guest-US` | `en-US` | `$17.00` | `$25.44` |
+| - [x] | `Guest-DE` | `de-DE` | `14,96 €` | `23,28 €` |
+| - [ ] | `Guest-JP` | `ja-JP` | `￥17` | `￥25` |
 
 ---
 

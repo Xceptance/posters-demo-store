@@ -43,11 +43,11 @@ Each test case is written as a Markdown file and strictly follows a standard tem
 The document should flow in the following order:
 
 1. **Title (**`#`**)** & Description paragraph.
-2. `## Metadata`
+2. `## Metadata` (containing Recommended Viewports and Recommended Browsers)
 3. `## Comments`
 4. `## Preconditions`
-5. `## Test Data`
-6. `## Execution Targets`
+5. `## Test Data (Common Constants)`
+6. `## Test Profiles (Logical Scenarios)`
 7. `## Steps`
 8. `## Pass/Fail Criteria`
 9. `## Postconditions`
@@ -104,26 +104,26 @@ The state the application or the session must be in before step 1 can begin. Thi
 - e.g., "The browser cart is empty."
 - e.g., "Test case TC_ACC_001 must be completed first to create the user account."
 
-### 4. Test Data
+### 4. Test Data (Common Constants)
 
-List any required input data (e.g. search terms, product prices). Parametrize data if needed across locales (e.g., `$10.00` or `100 kr`) using a Markdown table as the single source of truth.
+Define the baseline variables that remain constant across all execution iterations.
+*   **Sensitive / Private Data:** To prevent leakage of credentials or PII to external AI/LLM logging services, suffix the key name with `(sensitive)` or `(private)` (e.g. `Password (private)`).
+*   **Semantic Stand-in Data:** Provide a realistic anonymized mock value inline using parenthetical mock syntax (e.g. `realPassword123 (mock: mockPassword_abc)`). The compiler automatically uses the mock value for external AI prompts and terminal logging, but uses the raw value for browser execution (the Dual-Context Resolution Guard).
 
-### 5. Execution Targets
+### 5. Test Profiles (Logical Scenarios)
 
-Specify the locales and viewports the test should be executed against. Use checkboxes `- [x]` to indicate targets.
+Define a Markdown table where each row represents a logical data variation (e.g. locale-specific expected subtotals and currency symbols) to execute:
+*   **ID Column:** Every table row must have an `ID` column containing a unique scenario identifier (e.g., `Guest-US`).
+*   **Active Toggle (Run):** The first column must be named `Run` and contain standard markdown checkboxes (e.g. `- [x]` or `- [ ]`). Unchecking a row filters it out of execution.
+*   **Step Variable Mapping:** In step descriptions, place variables inside placeholders `${var}` (e.g., `${subtotal}`) where the name matches the column header key.
 
-**Target Locales:**
-- [ ] EN-US
-- [ ] EN-GB
-- [ ] DE-DE
-- [ ] SV-SE
-- [ ] JP-JP
+### 6. Execution Environment (External Multiplier)
 
-**Target Viewports:**
-- [ ] Desktop (Large)
-- [ ] Mobile (Small)
+The environment parameters (target browsers, viewports) are **external multipliers** and should not be hardcoded in execution targets tables. Instead:
+- Document them under the `## Metadata` section as recommended options: e.g. `- **Recommended Viewports:** Desktop (Large), Mobile (Small)` and `- **Recommended Browsers:** Chrome, Safari`.
+- This ensures the test case stays clean and environmentally independent. At runtime, the Neodymium runner cross-multiplies the active Test Profiles with the active environment parameters based on the priority hierarchy: Command-Line (`-D...`) > Project Defaults (`neodymium.properties`) > Local MD Recommendations.
 
-### 6. Steps
+### 7. Steps
 
 A structured set of headings and bullet points using the `Action`, `Verify`, and `Data` flags. Test Data properties should be referenced from the Test Data table to keep the file DRY, unless the value is heavily used, then an `e.g.,` value is acceptable. Ensure step numbers are present.
 
