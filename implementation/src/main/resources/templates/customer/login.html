@@ -37,7 +37,8 @@
                     </script>
                     <button type="submit" class="btn btn-primary" id="btn-login" th:text="#{titleLogin}">Login</button>
                 </form>
-                <p class="mt-3" th:text="#{labelNoAccount}">Don't have an account?
+                <p class="mt-3">
+                    <span th:text="#{labelNoAccount}">Don't have an account?</span>
                     <a th:href="@{'/' + ${urlLocale} + '/register'}" id="register-link" th:text="#{headerRegistration}">Register</a>
                 </p>
             </div>
