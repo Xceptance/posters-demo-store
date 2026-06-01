@@ -21,6 +21,8 @@ import com.xceptance.neodymium.common.testdata.DataFile;
 import com.xceptance.neodymium.common.testdata.DataSet;
 import com.xceptance.neodymium.junit5.NeodymiumTest;
 import com.xceptance.neodymium.util.Neodymium;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
@@ -42,6 +44,12 @@ import io.qameta.allure.SeverityLevel;
 @Tag("regression")
 public class TC_ACC_011_SuccessfulLogin
 {
+    @BeforeAll
+    public static void setup()
+    {
+        // can be set in properties, just here so it's directly visible
+        // System.setProperty("neodymium.ai.interactive", "true");
+    }
 
     /**
      * Executes the main AI-driven test scenario, injecting a unique email.

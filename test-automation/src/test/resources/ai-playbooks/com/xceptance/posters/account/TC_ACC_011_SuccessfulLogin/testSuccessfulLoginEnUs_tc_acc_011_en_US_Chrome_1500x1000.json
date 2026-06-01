@@ -1,0 +1,460 @@
+{
+  "id": "com.xceptance.posters.account.TC_ACC_011_SuccessfulLogin :: testSuccessfulLoginEnUs :: tc_acc_011_en_US :: Browser Chrome_1500x1000",
+  "steps": [
+    {
+      "promptLine": "Open http://localhost:8080/",
+      "reasoning": "The instruction is to open a specific URL, so a NAVIGATE action is appropriate.",
+      "actions": [
+        {
+          "type": "NAVIGATE",
+          "target": "",
+          "value": [
+            "http://localhost:8080/"
+          ],
+          "description": "Navigate to http://localhost:8080/",
+          "elementDetails": "http://localhost:8080/",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the country selector button.",
+      "reasoning": "Identified the country selector button by its flag emoji name and data-neo-ref attribute.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_klnj96",
+          "description": "Click the country selector button",
+          "elementDetails": "🇺🇸",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle locale-trigger",
+            "text": "🇺🇸",
+            "id": "show-locale-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the country represented by locale \u0027en-US\u0027 in the opened dialog.",
+      "reasoning": "",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_jte4te",
+          "description": "Click the country represented by locale \u0027en-US\u0027",
+          "elementDetails": "🇺🇸 English (United States)",
+          "elementContext": {
+            "classes": "dropdown-item locale-item active",
+            "text": "🇺🇸\nEnglish (United States)",
+            "id": "loc-en-us",
+            "href": "http://localhost:8080/en-US/",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the profile icon at the top right, then click \u0027Create Account\u0027 below the welcome text in the just opened drop down.",
+      "reasoning": "Clicked the profile icon and then clicked \u0027Create Account\u0027 as instructed.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_qqqd72\u0027]",
+          "description": "Click the profile icon",
+          "elementDetails": "Person Icon",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "CLICK",
+          "target": "Create Account",
+          "description": "Click \u0027Create Account\u0027 in the dropdown",
+          "elementDetails": "Create Account",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Create Account",
+            "id": "go-to-registration",
+            "href": "http://localhost:8080/en-US/register",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027Jane\u0027 into the First Name field, type \u0027Doe\u0027 into the Last Name field, type \u0027test_TC_ACC_011_1780341500917@posters.com\u0027 into the Email field, and type \u0027S3cur3!P@ss\u0027 into the Password field.",
+      "reasoning": "Identified the First Name, Last Name, Email, and Password input fields by their data-neo-ref attributes and created TYPE actions for each with the specified values.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "xc_cu6h09",
+          "value": [
+            "Jane"
+          ],
+          "description": "Type \u0027Jane\u0027 into the First Name field",
+          "elementDetails": "First Name textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "firstName",
+            "id": "firstName",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "xc_3si9yh",
+          "value": [
+            "Doe"
+          ],
+          "description": "Type \u0027Doe\u0027 into the Last Name field",
+          "elementDetails": "Last Name textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "name",
+            "id": "name",
+            "tagName": "input",
+            "type": "text"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "xc_ob5uyi",
+          "value": [
+            "test_TC_ACC_011_1780341500917@posters.com"
+          ],
+          "description": "Type \u0027test_TC_ACC_011_1780341500917@posters.com\u0027 into the Email field",
+          "elementDetails": "Email textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "email",
+            "id": "email",
+            "tagName": "input",
+            "type": "email"
+          },
+          "replay": "",
+          "adjust": false
+        },
+        {
+          "type": "TYPE",
+          "target": "xc_q3yt6j",
+          "value": [
+            "S3cur3!P@ss"
+          ],
+          "description": "Type \u0027S3cur3!P@ss\u0027 into the Password field",
+          "elementDetails": "Password textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "password",
+            "id": "password",
+            "tagName": "input",
+            "type": "password"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the \u0027Create Account\u0027 button.",
+      "reasoning": "Found the \u0027Create Account\u0027 button using its data-neo-ref attribute and created a CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "xc_4zauu9",
+          "description": "Click the \u0027Create Account\u0027 button",
+          "elementDetails": "Create Account",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "Create Account",
+            "id": "btn-register",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the profile icon at the top right.",
+      "reasoning": "Identified the \u0027Person Icon\u0027 button by its data-neo-ref attribute and generated a CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_qqqd72\u0027]",
+          "description": "Click the profile icon at the top right",
+          "elementDetails": "Person Icon",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that the welcome header in the menu shows \"Welcome: Jane\".",
+      "reasoning": "Found the element with data-neo-ref \u0027xc_jdevl5\u0027 containing the text \u0027Welcome: Jane\u0027 and created an ASSERT action.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_jdevl5\u0027]",
+          "value": [
+            "Welcome: Jane"
+          ],
+          "description": "Verify that the welcome header shows \"Welcome: Jane\".",
+          "elementDetails": "Welcome: Jane",
+          "elementContext": {},
+          "replay": "",
+          "frameId": "A1543765575DC86084FBF4320017B0F2:main",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Click the \u0027Logout\u0027 button.",
+      "reasoning": "Found the \u0027Logout\u0027 link by its data-neo-ref attribute and created a CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_p38kdf\u0027]",
+          "description": "Click the \u0027Logout\u0027 button.",
+          "elementDetails": "Logout",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Logout",
+            "id": "go-to-logout",
+            "href": "http://localhost:8080/en-US/logout",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the profile icon at the top right.",
+      "reasoning": "Identified the \u0027Person Icon\u0027 button by its data-neo-ref attribute and generated a CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_qqqd72\u0027]",
+          "description": "Click the profile icon at the top right",
+          "elementDetails": "Person Icon",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click \u0027Sign In\u0027 to navigate to the Sign In page.",
+      "reasoning": "Found a link with the name \u0027Sign In\u0027 and data-neo-ref \u0027xc_arbb2o\u0027 and created a CLICK action for it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_arbb2o\u0027]",
+          "description": "Click \u0027Sign In\u0027 to navigate to the Sign In page.",
+          "elementDetails": "Sign In",
+          "elementContext": {
+            "classes": "btn btn-primary header-user-menu-button",
+            "text": "Sign In",
+            "id": "go-to-login",
+            "href": "http://localhost:8080/en-US/login",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027test_TC_ACC_011_1780341500917@posters.com\u0027 into the Email field.",
+      "reasoning": "The \u0027Email\u0027 textbox was identified by its data-neo-ref attribute and the provided email address will be typed into it.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_ob5uyi\u0027]",
+          "value": [
+            "test_TC_ACC_011_1780341500917@posters.com"
+          ],
+          "description": "Type \u0027test_TC_ACC_011_1780341500917@posters.com\u0027 into the Email field.",
+          "elementDetails": "Email textbox",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "email",
+            "id": "email",
+            "tagName": "input",
+            "type": "email"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Type \u0027S3cur3!P@ss\u0027 into the Password field.",
+      "reasoning": "Identified the password input field by its data-neo-ref attribute and generated a TYPE action to enter the specified password.",
+      "actions": [
+        {
+          "type": "TYPE",
+          "target": "[data-neo-ref\u003d\u0027xc_q3yt6j\u0027]",
+          "value": [
+            "S3cur3!P@ss"
+          ],
+          "description": "Type \u0027S3cur3!P@ss\u0027 into the Password field.",
+          "elementDetails": "Password",
+          "elementContext": {
+            "classes": "form-control",
+            "name": "password",
+            "id": "password",
+            "tagName": "input",
+            "type": "password"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Click the \u0027Sign In\u0027 button.",
+      "reasoning": "The instruction asks to click \u0027Sign In\u0027. The AXTREE shows a button with the name \u0027Login\u0027 and data-neo-ref \u0027xc_bc0fkd\u0027. Assuming \u0027Login\u0027 is the intended \u0027Sign In\u0027 button, I have generated a CLICK action for it.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_bc0fkd\u0027]",
+          "description": "Click the \u0027Login\u0027 button, which is semantically equivalent to \u0027Sign In\u0027.",
+          "elementDetails": "Login button",
+          "elementContext": {
+            "classes": "btn btn-primary",
+            "text": "Login",
+            "id": "btn-login",
+            "tagName": "button",
+            "type": "submit"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that you are redirected to the homepage.",
+      "reasoning": "The current URL matches the expected homepage URL, confirming the redirection.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "currentUrl",
+          "value": [
+            "http://localhost:8080/en-US/"
+          ],
+          "description": "Verify that the current URL is the homepage URL.",
+          "elementDetails": "currentUrl",
+          "elementContext": {},
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    },
+    {
+      "promptLine": "Click the profile icon at the top right.",
+      "reasoning": "Identified the \u0027Person Icon\u0027 button by its data-neo-ref attribute and generated a CLICK action.",
+      "actions": [
+        {
+          "type": "CLICK",
+          "target": "[data-neo-ref\u003d\u0027xc_qqqd72\u0027]",
+          "description": "Click the profile icon at the top right",
+          "elementDetails": "Person Icon",
+          "elementContext": {
+            "classes": "nav-link dropdown-toggle",
+            "id": "show-user-menu",
+            "href": "http://localhost:8080/en-US/#",
+            "tagName": "a"
+          },
+          "replay": "",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "AXTREE"
+    },
+    {
+      "promptLine": "Verify that the welcome header in the menu shows \"Welcome: Jane\".",
+      "reasoning": "Found the element with data-neo-ref \u0027xc_jdevl5\u0027 containing the text \u0027Welcome: Jane\u0027 and created an ASSERT action.",
+      "actions": [
+        {
+          "type": "ASSERT",
+          "target": "[data-neo-ref\u003d\u0027xc_jdevl5\u0027]",
+          "value": [
+            "Welcome: Jane"
+          ],
+          "description": "Verify that the welcome header in the menu shows \"Welcome: Jane\".",
+          "elementDetails": "Welcome: Jane",
+          "elementContext": {},
+          "replay": "",
+          "frameId": "A1543765575DC86084FBF4320017B0F2:main",
+          "adjust": false
+        }
+      ],
+      "expectedFailure": false,
+      "healedContextLevel": "STANDARD"
+    }
+  ]
+}
