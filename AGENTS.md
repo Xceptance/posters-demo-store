@@ -8,9 +8,9 @@
 ## Coding Standards
 - **TDD:** Write unit/integration tests before implementing new functionality. Ensure full coverage.
 - **Style:** Allman code style (new line braces), document non-obvious logic and all public API, JDK 21 features.
-- **Attribution:** Mark exclusively AI-created files with the model name in class comments (e.g. `// AI-generated: Gemini 2.5 Pro`).
+- **Attribution:** Mark exclusively AI-created files with the model name in class comments (e.g. `// AI-generated: <Model Name in use>`). Dynamically detect and expose the actual model name in use (e.g., `Gemini 2.5 Flash` or `Gemini 2.5 Pro`).
 - **Headers:** Add Apache License 2.0 header to all new source files.
-- **Strict Java:** Aggressive `final` modifiers (variables, args, methods, fields). NO inline FQCNs; use explicit top imports.
+- **Strict Java:** Aggressive `final` modifiers (variables, args, methods, fields). NO inline FQCNs; use explicit top imports. Unused imports and variables are strictly prohibited (completely out of the question).
 
 ## UI Standards
 - **Backoffice UI:** Strictly follow `.agent/guides/backoffice-ui-patterns.md` when building or updating backoffice templates.
